@@ -9,8 +9,8 @@ namespace PvfCode.Controls;
 public class PvfCommentManagementPanel : Border
 {
 	private readonly TextBox titleEditor;
-	private readonly TextBox officialEditor;
-	private readonly MarkdownDocumentViewer preview;
+	private readonly MarkdownEditorPreview commentEditor;
+	private readonly MarkdownEditorPreview officialEditor;
 	private readonly TextBlock targetLabel;
 	private ViewTabCommentViewModel viewModel;
 	private PvfCommentDto target;
@@ -22,40 +22,39 @@ public class PvfCommentManagementPanel : Border
 		BorderBrush = System.Windows.Media.Brushes.Gray;
 		Padding = new Thickness(10);
 		Grid root = new();
-		root.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
-		root.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
-		Grid editor = new() { Margin = new Thickness(0, 0, 12, 0) };
-		editor.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		editor.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		editor.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		editor.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		editor.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		editor.RowDefinitions.Add(new RowDefinition());
+		root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+		root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+		root.RowDefinitions.Add(new RowDefinition());
 		targetLabel = new TextBlock { Margin = new Thickness(0, 0, 0, 6), FontWeight = FontWeights.SemiBold };
-		editor.Children.Add(targetLabel);
+		root.Children.Add(targetLabel);
 		Label titleLabel = new() { Content = "Title" };
 		Grid.SetRow(titleLabel, 1);
-		editor.Children.Add(titleLabel);
+		root.Children.Add(titleLabel);
 		titleEditor = new TextBox { Margin = new Thickness(0, 0, 0, 8) };
 		titleEditor.TextChanged += (_, _) =>
 		{
 			if (!updating && target != null)
 			{
 				target.Title = titleEditor.Text;
+				commentEditor.PreviewTitle = titleEditor.Text;
 			}
 		};
-		Grid.SetRow(titleEditor, 2);
-		editor.Children.Add(titleEditor);
-		Label officialLabel = new() { Content = "Official Description (Markdown)" };
-		Grid.SetRow(officialLabel, 3);
-		editor.Children.Add(officialLabel);
-		officialEditor = new TextBox
+		Grid.SetRow(titleEditor, 1);
+		titleEditor.Margin = new Thickness(48, 0, 0, 8);
+		root.Children.Add(titleEditor);
+
+		TabControl tabs = new() { Margin = new Thickness(0, 4, 0, 0) };
+		commentEditor = new MarkdownEditorPreview();
+		commentEditor.TextChanged += (_, _) =>
 		{
-			AcceptsReturn = true,
-			AcceptsTab = true,
-			TextWrapping = TextWrapping.Wrap,
-			VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+			if (!updating && target != null)
+			{
+				target.Comment = commentEditor.Text;
+			}
 		};
+		tabs.Items.Add(new TabItem { Header = "Comment Markdown", Content = commentEditor });
+
+		officialEditor = new MarkdownEditorPreview();
 		officialEditor.TextChanged += (_, _) =>
 		{
 			if (!updating && target != null)
@@ -63,13 +62,9 @@ public class PvfCommentManagementPanel : Border
 				target.OfficialDescription = officialEditor.Text;
 			}
 		};
-		Grid.SetRow(officialEditor, 4);
-		editor.Children.Add(officialEditor);
-		root.Children.Add(editor);
-		preview = new MarkdownDocumentViewer();
-		GroupBox previewGroup = new() { Header = "Markdown preview", Content = preview };
-		Grid.SetColumn(previewGroup, 1);
-		root.Children.Add(previewGroup);
+		tabs.Items.Add(new TabItem { Header = "Official Markdown", Content = officialEditor });
+		Grid.SetRow(tabs, 2);
+		root.Children.Add(tabs);
 		Child = root;
 		DataContextChanged += OnDataContextChanged;
 	}
@@ -120,10 +115,9 @@ public class PvfCommentManagementPanel : Border
 		updating = true;
 		targetLabel.Text = target == null ? string.Empty : $"{target.FileType}: [{target.Section}]";
 		titleEditor.Text = target?.Title ?? string.Empty;
+		commentEditor.PreviewTitle = target?.Title ?? string.Empty;
+		commentEditor.Text = target?.Comment ?? string.Empty;
 		officialEditor.Text = target?.OfficialDescription ?? string.Empty;
-		preview.Title = target?.Title ?? string.Empty;
-		preview.Markdown = target?.Comment ?? string.Empty;
-		preview.OfficialDescription = target?.OfficialDescription ?? string.Empty;
 		updating = false;
 	}
 }

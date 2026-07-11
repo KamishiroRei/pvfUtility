@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -57,11 +58,161 @@ public class ServicePvfTabComment
 			{
 				CopyBundledDefaults();
 			}
+			else
+			{
+				MergeBundledDefaults();
+			}
 		}
 		catch (Exception ex)
 		{
 			AppSetting.Instance.GetIlogger()?.Error("旧版 PVF 注释迁移失败：" + ex.Message);
 		}
+	}
+
+	private static void MergeBundledDefaults()
+	{
+		string sourceDirectory = Path.Combine(AppContext.BaseDirectory, "Defaults", "Options", "PvfComments");
+		if (!Directory.Exists(sourceDirectory))
+		{
+			return;
+		}
+		foreach (string sourcePath in Directory.EnumerateFiles(sourceDirectory, "*.json"))
+		{
+			string targetPath = Path.Combine(CommentsDirectory, Path.GetFileName(sourcePath));
+			if (!File.Exists(targetPath))
+			{
+				File.Copy(sourcePath, targetPath);
+				continue;
+			}
+			List<PvfCommentDto> defaults = LoadJsonFile(sourcePath);
+			if (defaults.Count == 0)
+			{
+				continue;
+			}
+			List<PvfCommentDto> current = LoadJsonFile(targetPath);
+			bool changed = false;
+			foreach (PvfCommentDto defaultItem in defaults)
+			{
+				PvfCommentDto previous = current.FirstOrDefault(item => SameKey(item, defaultItem));
+				if (previous == null)
+				{
+					current.Add(defaultItem.CloneData());
+					changed = true;
+					continue;
+				}
+				if (FillMissingDefaultFields(previous, defaultItem))
+				{
+					changed = true;
+				}
+			}
+			if (changed)
+			{
+				SaveFile(GetFileTypeFromPath(sourcePath) ?? defaults.FirstOrDefault()?.FileType, current);
+			}
+		}
+	}
+
+	private static bool FillMissingDefaultFields(PvfCommentDto target, PvfCommentDto defaults)
+	{
+		bool changed = false;
+		if (string.IsNullOrWhiteSpace(target.Title) && !string.IsNullOrWhiteSpace(defaults.Title))
+		{
+			target.Title = defaults.Title;
+			changed = true;
+		}
+		if (string.IsNullOrWhiteSpace(target.Comment) && !string.IsNullOrWhiteSpace(defaults.Comment))
+		{
+			target.Comment = defaults.Comment;
+			changed = true;
+		}
+		if (MergeOfficialDescription(target, defaults))
+		{
+			changed = true;
+		}
+		if (string.IsNullOrWhiteSpace(target.Authors) && !string.IsNullOrWhiteSpace(defaults.Authors))
+		{
+			target.Authors = defaults.Authors;
+			changed = true;
+		}
+		if (!target.Closing && defaults.Closing)
+		{
+			target.Closing = true;
+			changed = true;
+		}
+		return changed;
+	}
+
+	private static bool MergeOfficialDescription(PvfCommentDto target, PvfCommentDto defaults)
+	{
+		if (string.IsNullOrWhiteSpace(defaults.OfficialDescription))
+		{
+			return false;
+		}
+		if (string.IsNullOrWhiteSpace(target.OfficialDescription))
+		{
+			target.OfficialDescription = defaults.OfficialDescription;
+			return true;
+		}
+		List<string> missingSections = SplitOfficialExampleSections(defaults.OfficialDescription)
+			.Where(section => !ContainsOfficialSection(target.OfficialDescription, section))
+			.ToList();
+		if (missingSections.Count == 0)
+		{
+			return false;
+		}
+		target.OfficialDescription = NormalizeMarkdown(target.OfficialDescription).TrimEnd() + "\n\n" + string.Join("\n\n", missingSections);
+		return true;
+	}
+
+	private static List<string> SplitOfficialExampleSections(string markdown)
+	{
+		string normalized = NormalizeMarkdown(markdown).Trim();
+		if (string.IsNullOrWhiteSpace(normalized))
+		{
+			return new List<string>();
+		}
+		MatchCollection matches = Regex.Matches(
+			normalized,
+			@"(?ms)^#{1,6}\s+官方示例:\s+.+?(?=^#{1,6}\s+官方示例:\s+|\z)");
+		if (matches.Count == 0)
+		{
+			return new List<string> { normalized };
+		}
+		return matches.Cast<Match>().Select(match => match.Value.Trim()).Where(section => section.Length > 0).ToList();
+	}
+
+	private static bool ContainsOfficialSection(string targetMarkdown, string defaultSection)
+	{
+		string target = NormalizeMarkdown(targetMarkdown);
+		string identity = GetOfficialSectionIdentity(defaultSection);
+		return target.IndexOf(identity, StringComparison.OrdinalIgnoreCase) >= 0 ||
+			target.IndexOf(NormalizeMarkdown(defaultSection).Trim(), StringComparison.OrdinalIgnoreCase) >= 0;
+	}
+
+	private static string GetOfficialSectionIdentity(string markdown)
+	{
+		using StringReader reader = new(NormalizeMarkdown(markdown));
+		string line;
+		while ((line = reader.ReadLine()) != null)
+		{
+			line = line.Trim();
+			if (line.Length > 0)
+			{
+				return line;
+			}
+		}
+		return NormalizeMarkdown(markdown).Trim();
+	}
+
+	private static string NormalizeMarkdown(string markdown)
+	{
+		return (markdown ?? string.Empty).Replace("\r\n", "\n").Replace('\r', '\n');
+	}
+
+	private static PvfFileType? GetFileTypeFromPath(string path)
+	{
+		string suffix = Path.GetFileNameWithoutExtension(path);
+		return Enum.TryParse(suffix, ignoreCase: true, out PvfFileType fileType) ? fileType : null;
 	}
 
 	private static void CopyBundledDefaults()

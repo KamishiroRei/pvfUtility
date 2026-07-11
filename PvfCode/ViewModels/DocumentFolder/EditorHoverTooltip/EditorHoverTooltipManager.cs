@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Threading;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Rendering;
@@ -36,6 +37,10 @@ internal class EditorHoverTooltipManager : IDisposable
 
 	private bool Np9yp01jy7;
 
+	private readonly DispatcherTimer tooltipCloseTimer;
+
+	private bool keepOpenWhenEditorIsHovered;
+
 	private TextDocument Document => Editor.Document;
 
 	private PvfGroup Pvf => AppCore.ViewModelBase.PVF;
@@ -48,6 +53,11 @@ internal class EditorHoverTooltipManager : IDisposable
 		Editor.TextArea.TextView.MouseHoverStopped += WDoysb9I3D;
 		Editor.TextArea.TextView.MouseLeftButtonDown += mKxy18IUB2;
 		Editor.Unloaded += Rxyy6hXjyq;
+		tooltipCloseTimer = new DispatcherTimer(DispatcherPriority.Input)
+		{
+			Interval = TimeSpan.FromMilliseconds(500.0)
+		};
+		tooltipCloseTimer.Tick += TooltipCloseTimer_Tick;
 		ToolTip = new GeneralHoverTooltip(null);
 		ToolTip.MouseLeave += aENyoWbWyi;
 		ToolTip.MouseEnter += wh4ywjdSjh;
@@ -71,16 +81,14 @@ internal class EditorHoverTooltipManager : IDisposable
 
 	private void wh4ywjdSjh(object P_0, MouseEventArgs P_1)
 	{
+		tooltipCloseTimer.Stop();
 		Np9yp01jy7 = true;
 	}
 
 	private void aENyoWbWyi(object P_0, MouseEventArgs P_1)
 	{
-		if (!Editor.TextArea.TextView.IsMouseOver)
-		{
-			m4Py0Vy1J0();
-		}
 		Np9yp01jy7 = false;
+		ScheduleTooltipClose(keepOpenOverEditor: true);
 	}
 
 	private void WDoysb9I3D(object P_0, MouseEventArgs P_1)
@@ -90,10 +98,31 @@ internal class EditorHoverTooltipManager : IDisposable
 			VisualLineElement visualLineElementFromPosition = Editor.TextArea.TextView.GetVisualLineElementFromPosition(P_1.GetPosition(Editor.TextArea.TextView) + Editor.TextArea.TextView.ScrollOffset);
 			if (ToolTip.hYbiDkDyis != visualLineElementFromPosition)
 			{
-				m4Py0Vy1J0();
+				ScheduleTooltipClose(keepOpenOverEditor: false);
 			}
 			P_1.Handled = true;
 		}
+	}
+
+	private void ScheduleTooltipClose(bool keepOpenOverEditor)
+	{
+		keepOpenWhenEditorIsHovered = keepOpenOverEditor;
+		tooltipCloseTimer.Stop();
+		tooltipCloseTimer.Start();
+	}
+
+	private void TooltipCloseTimer_Tick(object? sender, EventArgs e)
+	{
+		tooltipCloseTimer.Stop();
+		if (ToolTip == null || !ToolTip.IsOpen || ToolTip.IsMouseOver)
+		{
+			return;
+		}
+		if (keepOpenWhenEditorIsHovered && Editor.TextArea.TextView.IsMouseOver)
+		{
+			return;
+		}
+		m4Py0Vy1J0();
 	}
 
 	private void YBWyL20Hlt(object P_0, MouseEventArgs P_1)
@@ -747,6 +776,7 @@ internal class EditorHoverTooltipManager : IDisposable
 
 	private void m4Py0Vy1J0()
 	{
+		tooltipCloseTimer.Stop();
 		if (ToolTip == null || ((int)Keyboard.Modifiers & 2) == 2)
 		{
 			return;
@@ -774,6 +804,8 @@ internal class EditorHoverTooltipManager : IDisposable
 		Editor.Unloaded -= Rxyy6hXjyq;
 		ToolTip.MouseLeave -= aENyoWbWyi;
 		ToolTip.MouseEnter -= wh4ywjdSjh;
+		tooltipCloseTimer.Stop();
+		tooltipCloseTimer.Tick -= TooltipCloseTimer_Tick;
 		Application.Current.MainWindow.Deactivated -= vB8ygbr7b2;
 		ToolTip.DataContext = null;
 		ToolTip = null;

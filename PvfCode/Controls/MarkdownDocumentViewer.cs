@@ -1,9 +1,28 @@
 using System;
-using System.Text.RegularExpressions;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using Markdig;
+using Markdig.Extensions.Tables;
+using Markdig.Extensions.TaskLists;
+using Markdig.Syntax;
+using Markdig.Syntax.Inlines;
+using MdBlock = Markdig.Syntax.Block;
+using MdTable = Markdig.Extensions.Tables.Table;
+using MdTableCell = Markdig.Extensions.Tables.TableCell;
+using MdTableColumnDefinition = Markdig.Extensions.Tables.TableColumnDefinition;
+using MdTableRow = Markdig.Extensions.Tables.TableRow;
+using WpfBlock = System.Windows.Documents.Block;
+using WpfHyperlink = System.Windows.Documents.Hyperlink;
+using WpfList = System.Windows.Documents.List;
+using WpfListItem = System.Windows.Documents.ListItem;
+using WpfTable = System.Windows.Documents.Table;
+using WpfTableCell = System.Windows.Documents.TableCell;
+using WpfTableRow = System.Windows.Documents.TableRow;
+using WpfTableRowGroup = System.Windows.Documents.TableRowGroup;
 
 namespace PvfCode.Controls;
 
@@ -18,9 +37,19 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 	public static readonly DependencyProperty OfficialDescriptionProperty = DependencyProperty.Register(
 		nameof(OfficialDescription), typeof(string), typeof(MarkdownDocumentViewer), new PropertyMetadata(string.Empty, OnMarkdownChanged));
 
-	private static readonly Regex InlineTokens = new(
-		@"(`[^`]+`|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_|\[[^\]]+\]\([^\)]+\))",
-		RegexOptions.Compiled);
+	private static readonly MarkdownPipeline Pipeline = new MarkdownPipelineBuilder()
+		.UseAdvancedExtensions()
+		.Build();
+
+	private static readonly FontFamily CodeFontFamily = new("Consolas");
+	private static readonly SolidColorBrush ViewerBackground = CreateFrozenBrush("#424242");
+	private static readonly SolidColorBrush DefaultForeground = CreateFrozenBrush("#F2F2F2");
+	private static readonly SolidColorBrush MutedForeground = CreateFrozenBrush("#BDBDBD");
+	private static readonly SolidColorBrush LinkForeground = CreateFrozenBrush("#8EC5FF");
+	private static readonly SolidColorBrush CodeBackground = CreateFrozenBrush("#303030");
+	private static readonly SolidColorBrush TableHeaderBackground = CreateFrozenBrush("#4A4A4A");
+	private static readonly SolidColorBrush TableBorderBrush = CreateFrozenBrush("#686868");
+	private static readonly SolidColorBrush QuoteBorderBrush = CreateFrozenBrush("#8A8A8A");
 
 	public string Title
 	{
@@ -46,8 +75,46 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 		HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
 		Padding = new Thickness(12);
-		Background = Brushes.Transparent;
+		Background = ViewerBackground;
+		Foreground = DefaultForeground;
 		RebuildDocument();
+	}
+
+	public static FlowDocument RenderDocument(
+		string title,
+		string markdown,
+		string officialDescription,
+		FontFamily fontFamily = null,
+		double fontSize = 12,
+		Brush foreground = null)
+	{
+		FlowDocument document = new()
+		{
+			PagePadding = new Thickness(0),
+			FontFamily = fontFamily ?? SystemFonts.MessageFontFamily,
+			FontSize = fontSize,
+			Foreground = foreground ?? DefaultForeground,
+			Background = ViewerBackground,
+			TextAlignment = TextAlignment.Left
+		};
+		if (!string.IsNullOrWhiteSpace(title))
+		{
+			Paragraph titleParagraph = CreateParagraph(title.Trim());
+			titleParagraph.FontSize = Math.Max(fontSize + 6, 20);
+			titleParagraph.FontWeight = FontWeights.SemiBold;
+			titleParagraph.Margin = new Thickness(0, 0, 0, 10);
+			document.Blocks.Add(titleParagraph);
+		}
+		AppendMarkdown(document.Blocks, markdown);
+		if (!string.IsNullOrWhiteSpace(officialDescription))
+		{
+			if (document.Blocks.Count > 0)
+			{
+				document.Blocks.Add(CreateThematicBreak());
+			}
+			AppendMarkdown(document.Blocks, officialDescription);
+		}
+		return document;
 	}
 
 	private static void OnMarkdownChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
@@ -57,184 +124,409 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 
 	private void RebuildDocument()
 	{
-		FlowDocument document = new()
-		{
-			PagePadding = new Thickness(0),
-			FontFamily = FontFamily,
-			FontSize = FontSize,
-			Foreground = Foreground,
-			TextAlignment = TextAlignment.Left
-		};
-		if (!string.IsNullOrWhiteSpace(Title))
-		{
-			Paragraph title = CreateParagraph(Title.Trim());
-			title.FontSize = 20;
-			title.FontWeight = FontWeights.SemiBold;
-			title.Margin = new Thickness(0, 0, 0, 10);
-			document.Blocks.Add(title);
-		}
-		AppendMarkdown(document, Markdown);
-		if (!string.IsNullOrWhiteSpace(OfficialDescription))
-		{
-			Paragraph heading = new(new Run("Official Description"))
-			{
-				FontSize = 14,
-				FontWeight = FontWeights.SemiBold,
-				Margin = new Thickness(0, 14, 0, 6)
-			};
-			document.Blocks.Add(heading);
-			AppendMarkdown(document, OfficialDescription);
-		}
-		Document = document;
+		Document = RenderDocument(Title, Markdown, OfficialDescription, FontFamily, FontSize, Foreground);
 	}
 
-	private static void AppendMarkdown(FlowDocument document, string markdown)
+	private static void AppendMarkdown(BlockCollection blocks, string markdown)
 	{
 		if (string.IsNullOrWhiteSpace(markdown))
 		{
 			return;
 		}
-		string[] lines = markdown.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
-		bool inCodeBlock = false;
-		Paragraph codeBlock = null;
-		foreach (string rawLine in lines)
+		MarkdownDocument document = Markdig.Markdown.Parse(markdown, Pipeline);
+		AppendBlocks(blocks, document);
+	}
+
+	private static void AppendBlocks(BlockCollection blocks, ContainerBlock container)
+	{
+		foreach (MdBlock block in container)
 		{
-			string line = rawLine ?? string.Empty;
-			if (line.TrimStart().StartsWith("```", StringComparison.Ordinal))
-			{
-				if (inCodeBlock && codeBlock != null)
-				{
-					document.Blocks.Add(codeBlock);
-					codeBlock = null;
-				}
-				inCodeBlock = !inCodeBlock;
-				if (inCodeBlock)
-				{
-					codeBlock = CreateCodeBlock();
-				}
-				continue;
-			}
-			if (inCodeBlock)
-			{
-				if (codeBlock.Inlines.Count > 0)
-				{
-					codeBlock.Inlines.Add(new LineBreak());
-				}
-				codeBlock.Inlines.Add(new Run(line));
-				continue;
-			}
-			if (string.IsNullOrWhiteSpace(line))
-			{
-				continue;
-			}
-			string trimmed = line.TrimStart();
-			if (trimmed == "---" || trimmed == "***")
-			{
-				document.Blocks.Add(new BlockUIContainer(new Border { Height = 1, Margin = new Thickness(0, 8, 0, 8), Background = Brushes.Gray }));
-				continue;
-			}
-			int headingLevel = CountHeadingPrefix(trimmed);
-			if (headingLevel > 0)
-			{
-				Paragraph heading = CreateParagraph(trimmed[(headingLevel + 1)..]);
-				heading.FontSize = Math.Max(14, 24 - headingLevel * 2);
-				heading.FontWeight = FontWeights.SemiBold;
-				heading.Margin = new Thickness(0, 8, 0, 4);
-				document.Blocks.Add(heading);
-				continue;
-			}
-			bool quote = trimmed.StartsWith("> ", StringComparison.Ordinal);
-			bool bullet = trimmed.StartsWith("- ", StringComparison.Ordinal) || trimmed.StartsWith("* ", StringComparison.Ordinal) || trimmed.StartsWith("+ ", StringComparison.Ordinal);
-			Match ordered = Regex.Match(trimmed, @"^\d+\.\s+");
-			string prefix = string.Empty;
-			if (quote)
-			{
-				trimmed = trimmed[2..];
-				prefix = "| ";
-			}
-			else if (bullet)
-			{
-				trimmed = trimmed[2..];
-				prefix = "• ";
-			}
-			else if (ordered.Success)
-			{
-				prefix = ordered.Value.Trim() + " ";
-				trimmed = trimmed[ordered.Length..];
-			}
-			Paragraph paragraph = CreateParagraph(prefix + trimmed);
-			paragraph.Margin = new Thickness((bullet || ordered.Success) ? 12 : 0, 2, 0, 4);
-			if (quote)
-			{
-				paragraph.FontStyle = FontStyles.Italic;
-				paragraph.Foreground = Brushes.Gray;
-			}
-			document.Blocks.Add(paragraph);
-		}
-		if (codeBlock != null)
-		{
-			document.Blocks.Add(codeBlock);
+			AppendBlock(blocks, block);
 		}
 	}
 
-	private static Paragraph CreateParagraph(string text)
+	private static void AppendBlock(BlockCollection blocks, MdBlock block)
 	{
-		Paragraph paragraph = new() { Margin = new Thickness(0, 2, 0, 4) };
-		int offset = 0;
-		foreach (Match match in InlineTokens.Matches(text))
+		switch (block)
 		{
-			if (match.Index > offset)
+		case ParagraphBlock paragraph:
+			if (paragraph.Inline != null)
 			{
-				paragraph.Inlines.Add(new Run(text[offset..match.Index]));
+				blocks.Add(CreateParagraph(paragraph.Inline));
 			}
-			string token = match.Value;
-			Inline inline;
-			if (token.StartsWith("`", StringComparison.Ordinal))
+			break;
+		case HeadingBlock heading:
+			blocks.Add(CreateHeading(heading));
+			break;
+		case ThematicBreakBlock:
+			blocks.Add(CreateThematicBreak());
+			break;
+		case QuoteBlock quote:
+			blocks.Add(CreateQuote(quote));
+			break;
+		case ListBlock list:
+			blocks.Add(CreateList(list));
+			break;
+		case MdTable table:
+			blocks.Add(CreateTable(table));
+			break;
+		case CodeBlock code:
+			blocks.Add(CreateCodeBlock(code));
+			break;
+		case HtmlBlock html:
+			blocks.Add(CreateCodeBlock(html));
+			break;
+		case ContainerBlock container:
+			Section section = new() { Margin = new Thickness(0, 2, 0, 4) };
+			AppendBlocks(section.Blocks, container);
+			if (section.Blocks.Count > 0)
 			{
-				inline = new Run(token[1..^1]) { FontFamily = new FontFamily("Consolas"), Background = Brushes.DimGray, Foreground = Brushes.White };
+				blocks.Add(section);
 			}
-			else if (token.StartsWith("**", StringComparison.Ordinal) || token.StartsWith("__", StringComparison.Ordinal))
+			break;
+		case LeafBlock leaf when leaf.Inline != null:
+			blocks.Add(CreateParagraph(leaf.Inline));
+			break;
+		default:
+			string fallback = block.ToString();
+			if (!string.IsNullOrWhiteSpace(fallback))
 			{
-				inline = new Bold(new Run(token[2..^2]));
+				blocks.Add(CreateParagraph(fallback));
 			}
-			else if (token.StartsWith("[", StringComparison.Ordinal))
-			{
-				int end = token.IndexOf("](", StringComparison.Ordinal);
-				inline = new Underline(new Run(end > 0 ? token[1..end] : token));
-			}
-			else
-			{
-				inline = new Italic(new Run(token[1..^1]));
-			}
-			paragraph.Inlines.Add(inline);
-			offset = match.Index + match.Length;
+			break;
 		}
-		if (offset < text.Length)
+	}
+
+	private static Paragraph CreateHeading(HeadingBlock heading)
+	{
+		Paragraph paragraph = CreateParagraph(heading.Inline);
+		paragraph.FontSize = Math.Max(14, 26 - heading.Level * 2);
+		paragraph.FontWeight = FontWeights.SemiBold;
+		paragraph.Margin = new Thickness(0, heading.Level <= 2 ? 12 : 8, 0, 6);
+		return paragraph;
+	}
+
+	private static Section CreateQuote(QuoteBlock quote)
+	{
+		Section section = new()
 		{
-			paragraph.Inlines.Add(new Run(text[offset..]));
+			Margin = new Thickness(0, 6, 0, 6),
+			Padding = new Thickness(10, 2, 0, 2),
+			BorderThickness = new Thickness(3, 0, 0, 0),
+			BorderBrush = QuoteBorderBrush,
+			Foreground = MutedForeground
+		};
+		AppendBlocks(section.Blocks, quote);
+		return section;
+	}
+
+	private static WpfList CreateList(ListBlock listBlock)
+	{
+		WpfList list = new()
+		{
+			MarkerStyle = listBlock.IsOrdered ? TextMarkerStyle.Decimal : TextMarkerStyle.Disc,
+			Margin = new Thickness(18, 4, 0, 6),
+			Padding = new Thickness(14, 0, 0, 0)
+		};
+		foreach (ListItemBlock itemBlock in listBlock.OfType<ListItemBlock>())
+		{
+			WpfListItem item = new() { Margin = new Thickness(0, 1, 0, 2) };
+			AppendBlocks(item.Blocks, itemBlock);
+			if (item.Blocks.Count == 0)
+			{
+				item.Blocks.Add(new Paragraph());
+			}
+			list.ListItems.Add(item);
+		}
+		return list;
+	}
+
+	private static WpfTable CreateTable(MdTable tableBlock)
+	{
+		WpfTable table = new()
+		{
+			CellSpacing = 0,
+			Margin = new Thickness(0, 8, 0, 10)
+		};
+		int columns = Math.Max(
+			tableBlock.ColumnDefinitions?.Count ?? 0,
+			tableBlock.OfType<MdTableRow>().Select(row => row.OfType<MdTableCell>().Count()).DefaultIfEmpty(0).Max());
+		for (int i = 0; i < Math.Max(columns, 1); i++)
+		{
+			table.Columns.Add(new TableColumn());
+		}
+		WpfTableRowGroup group = new();
+		foreach (MdTableRow sourceRow in tableBlock.OfType<MdTableRow>())
+		{
+			WpfTableRow row = new();
+			foreach (MdTableCell sourceCell in sourceRow.OfType<MdTableCell>())
+			{
+				WpfTableCell cell = new()
+				{
+					BorderBrush = TableBorderBrush,
+					BorderThickness = new Thickness(1),
+					Padding = new Thickness(8, 5, 8, 5),
+					ColumnSpan = Math.Max(1, sourceCell.ColumnSpan)
+				};
+				if (sourceRow.IsHeader)
+				{
+					cell.Background = TableHeaderBackground;
+					cell.FontWeight = FontWeights.SemiBold;
+				}
+				AppendBlocks(cell.Blocks, sourceCell);
+				if (cell.Blocks.Count == 0)
+				{
+					cell.Blocks.Add(new Paragraph());
+				}
+				FormatTableCellBlocks(tableBlock, sourceCell, cell.Blocks);
+				row.Cells.Add(cell);
+			}
+			group.Rows.Add(row);
+		}
+		table.RowGroups.Add(group);
+		return table;
+	}
+
+	private static void FormatTableCellBlocks(MdTable table, MdTableCell cell, BlockCollection blocks)
+	{
+		foreach (WpfBlock block in blocks)
+		{
+			FormatTableCellBlock(table, cell, block);
+		}
+	}
+
+	private static void FormatTableCellBlock(MdTable table, MdTableCell cell, WpfBlock block)
+	{
+		switch (block)
+		{
+		case Paragraph paragraph:
+			paragraph.Margin = new Thickness(0);
+			SetTableCellAlignment(table, cell, paragraph);
+			break;
+		case Section section:
+			section.Margin = new Thickness(0);
+			FormatTableCellBlocks(table, cell, section.Blocks);
+			break;
+		case WpfList list:
+			list.Margin = new Thickness(18, 0, 0, 0);
+			foreach (WpfListItem item in list.ListItems)
+			{
+				FormatTableCellBlocks(table, cell, item.Blocks);
+			}
+			break;
+		}
+	}
+
+	private static void SetTableCellAlignment(MdTable table, MdTableCell cell, Paragraph paragraph)
+	{
+		MdTableColumnDefinition definition = null;
+		if (table.ColumnDefinitions != null &&
+			cell.ColumnIndex >= 0 &&
+			cell.ColumnIndex < table.ColumnDefinitions.Count)
+		{
+			definition = table.ColumnDefinitions[cell.ColumnIndex];
+		}
+		paragraph.TextAlignment = definition?.Alignment switch
+		{
+			TableColumnAlign.Center => TextAlignment.Center,
+			TableColumnAlign.Right => TextAlignment.Right,
+			_ => TextAlignment.Left
+		};
+	}
+
+	private static Paragraph CreateCodeBlock(LeafBlock code)
+	{
+		Paragraph paragraph = new()
+		{
+			FontFamily = CodeFontFamily,
+			Background = CodeBackground,
+			Foreground = Brushes.White,
+			Padding = new Thickness(9),
+			Margin = new Thickness(0, 7, 0, 8)
+		};
+		string text = code.Lines.ToString().TrimEnd('\r', '\n');
+		string[] lines = text.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
+		for (int i = 0; i < lines.Length; i++)
+		{
+			if (i > 0)
+			{
+				paragraph.Inlines.Add(new LineBreak());
+			}
+			paragraph.Inlines.Add(new Run(lines[i]));
 		}
 		return paragraph;
 	}
 
-	private static Paragraph CreateCodeBlock()
+	private static BlockUIContainer CreateThematicBreak()
 	{
-		return new Paragraph
+		return new BlockUIContainer(new Border
 		{
-			FontFamily = new FontFamily("Consolas"),
-			Background = Brushes.DimGray,
-			Foreground = Brushes.White,
-			Padding = new Thickness(8),
-			Margin = new Thickness(0, 6, 0, 6)
+			Height = 1,
+			Margin = new Thickness(0, 10, 0, 10),
+			Background = TableBorderBrush
+		});
+	}
+
+	private static Paragraph CreateParagraph(ContainerInline inline)
+	{
+		Paragraph paragraph = CreateParagraph();
+		AppendInlines(paragraph.Inlines, inline);
+		return paragraph;
+	}
+
+	private static Paragraph CreateParagraph(string text)
+	{
+		Paragraph paragraph = CreateParagraph();
+		paragraph.Inlines.Add(new Run(text ?? string.Empty));
+		return paragraph;
+	}
+
+	private static Paragraph CreateParagraph()
+	{
+		return new Paragraph { Margin = new Thickness(0, 2, 0, 5) };
+	}
+
+	private static void AppendInlines(InlineCollection target, ContainerInline container)
+	{
+		if (container == null)
+		{
+			return;
+		}
+		for (Markdig.Syntax.Inlines.Inline inline = container.FirstChild; inline != null; inline = inline.NextSibling)
+		{
+			AppendInline(target, inline);
+		}
+	}
+
+	private static void AppendInline(InlineCollection target, Markdig.Syntax.Inlines.Inline inline)
+	{
+		switch (inline)
+		{
+		case LiteralInline literal:
+			target.Add(new Run(literal.Content.ToString()));
+			break;
+		case CodeInline code:
+			target.Add(new Run(code.Content)
+			{
+				FontFamily = CodeFontFamily,
+				Background = CodeBackground,
+				Foreground = Brushes.White
+			});
+			break;
+		case EmphasisInline emphasis:
+			target.Add(CreateEmphasis(emphasis));
+			break;
+		case LinkInline link:
+			target.Add(CreateLink(link));
+			break;
+		case AutolinkInline autolink:
+			target.Add(CreateAutolink(autolink));
+			break;
+		case LineBreakInline:
+			target.Add(new LineBreak());
+			break;
+		case HtmlEntityInline entity:
+			target.Add(new Run(entity.Transcoded.ToString()));
+			break;
+		case HtmlInline html:
+			target.Add(new Run(html.Tag));
+			break;
+		case TaskList task:
+			target.Add(new Run(task.Checked ? "[x] " : "[ ] ")
+			{
+				FontFamily = CodeFontFamily,
+				Foreground = MutedForeground
+			});
+			break;
+		case ContainerInline nested:
+			AppendInlines(target, nested);
+			break;
+		default:
+			string fallback = inline.ToString();
+			if (!string.IsNullOrEmpty(fallback))
+			{
+				target.Add(new Run(fallback));
+			}
+			break;
+		}
+	}
+
+	private static Span CreateEmphasis(EmphasisInline emphasis)
+	{
+		Span span;
+		if (emphasis.DelimiterChar == '~')
+		{
+			span = new Span { TextDecorations = TextDecorations.Strikethrough };
+		}
+		else if (emphasis.DelimiterCount >= 2)
+		{
+			span = new Bold();
+		}
+		else
+		{
+			span = new Italic();
+		}
+		AppendInlines(span.Inlines, emphasis);
+		return span;
+	}
+
+	private static Span CreateLink(LinkInline link)
+	{
+		if (link.IsImage)
+		{
+			Span imageText = new();
+			imageText.Inlines.Add(new Run("Image: ") { Foreground = MutedForeground });
+			AppendInlines(imageText.Inlines, link);
+			if (!string.IsNullOrWhiteSpace(link.Url))
+			{
+				imageText.Inlines.Add(new Run(" (" + link.Url + ")") { Foreground = MutedForeground });
+			}
+			return imageText;
+		}
+		WpfHyperlink hyperlink = new() { Foreground = LinkForeground };
+		AppendInlines(hyperlink.Inlines, link);
+		if (hyperlink.Inlines.Count == 0 && !string.IsNullOrWhiteSpace(link.Url))
+		{
+			hyperlink.Inlines.Add(new Run(link.Url));
+		}
+		AttachNavigation(hyperlink, link.Url);
+		return hyperlink;
+	}
+
+	private static Span CreateAutolink(AutolinkInline autolink)
+	{
+		string urlText = autolink.Url.ToString();
+		WpfHyperlink hyperlink = new(new Run(urlText)) { Foreground = LinkForeground };
+		string url = autolink.IsEmail ? "mailto:" + urlText : urlText;
+		AttachNavigation(hyperlink, url);
+		return hyperlink;
+	}
+
+	private static void AttachNavigation(WpfHyperlink hyperlink, string url)
+	{
+		if (!Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
+		{
+			return;
+		}
+		hyperlink.NavigateUri = uri;
+		hyperlink.RequestNavigate += (_, args) =>
+		{
+			try
+			{
+				Process.Start(new ProcessStartInfo(args.Uri.AbsoluteUri) { UseShellExecute = true });
+				args.Handled = true;
+			}
+			catch
+			{
+				args.Handled = true;
+			}
 		};
 	}
 
-	private static int CountHeadingPrefix(string value)
+	private static SolidColorBrush CreateFrozenBrush(string color)
 	{
-		int count = 0;
-		while (count < value.Length && value[count] == '#' && count < 6)
-		{
-			count++;
-		}
-		return count > 0 && count < value.Length && value[count] == ' ' ? count : 0;
+		SolidColorBrush brush = new((Color)ColorConverter.ConvertFromString(color));
+		brush.Freeze();
+		return brush;
 	}
 }

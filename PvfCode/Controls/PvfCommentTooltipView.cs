@@ -79,16 +79,17 @@ public class PvfCommentTooltipView : Border
 		Label commentLabel = new() { Content = "Comment (Markdown)" };
 		Grid.SetRow(commentLabel, 2);
 		panel.Children.Add(commentLabel);
-		TextBox comment = CreateMarkdownEditor();
-		comment.SetBinding(TextBox.TextProperty, EditBinding("Document.Text"));
+		MarkdownEditorPreview comment = new() { MinHeight = 150 };
+		comment.SetBinding(MarkdownEditorPreview.TextProperty, EditBinding("Document.Text"));
+		comment.SetBinding(MarkdownEditorPreview.PreviewTitleProperty, new Binding("Comment.Title"));
 		Grid.SetRow(comment, 3);
 		panel.Children.Add(comment);
 		Label officialLabel = new() { Content = "Official Description (Markdown)" };
 		Grid.SetRow(officialLabel, 4);
 		panel.Children.Add(officialLabel);
-		TextBox official = CreateMarkdownEditor();
+		MarkdownEditorPreview official = new() { MinHeight = 150 };
 		official.Margin = new Thickness(0, 8, 0, 8);
-		official.SetBinding(TextBox.TextProperty, EditBinding("Comment.OfficialDescription"));
+		official.SetBinding(MarkdownEditorPreview.TextProperty, EditBinding("Comment.OfficialDescription"));
 		Grid.SetRow(official, 5);
 		panel.Children.Add(official);
 		StackPanel actions = new() { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
@@ -107,18 +108,6 @@ public class PvfCommentTooltipView : Border
 		Grid.SetRow(actions, 6);
 		panel.Children.Add(actions);
 		return panel;
-	}
-
-	private static TextBox CreateMarkdownEditor()
-	{
-		return new TextBox
-		{
-			AcceptsReturn = true,
-			AcceptsTab = true,
-			MinHeight = 130,
-			TextWrapping = TextWrapping.Wrap,
-			VerticalScrollBarVisibility = ScrollBarVisibility.Auto
-		};
 	}
 
 	private static Binding EditBinding(string path)
