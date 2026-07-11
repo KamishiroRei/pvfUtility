@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:allsearchresultdir="clr-namespace:PvfCode.ViewModels.DocumentFolder.SearchViewModels.AllSearchResultDir;assembly=pvfUtility" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:local="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" x:Name="use1">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <bars:ToolBarControl FrameworkElement.Name="toolbarControl" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+      <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource CodeEditor_FindResult_ClearFindKeyWord}" bars:BarItem.Glyph="{DynamicResource ClearWindowContent}">
+      </bars:BarButtonItem>
+    </bars:ToolBarControl>
+    <local:AllSearchResultTreeView local:AllSearchResultTreeView.Name="treeList" Grid.Row="1" x:Name="treeList" />
+  </Grid>
+</UserControl>

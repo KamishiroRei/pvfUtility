@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxmvvm="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:dxmvvm1="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:local="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:treefolder="clr-namespace:PvfCode.ViewModels.TreeFolder;assembly=pvfUtility" x:Name="treeGroup" AllowDrop="True">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height=" *" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <Grid Row="0" Visibility="{Binding TreeGroupData.Loading, Converter={StaticResource ConvertBoolenToVisibility}, Mode=OneWay}">
+      <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+      </Grid.RowDefinitions>
+      <Label Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="#FF808080" Content="{Binding TreeGroupData.LoadingTitle, Mode=OneWay}" />
+      <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" />
+    </Grid>
+    <editors:TextEdit Grid.Row="1" FrameworkElement.Style="{StaticResource treeListTopCurrentFilePathInput}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+    <Grid Row="2" IsEnabled="{Binding TreeGroupData.Loading, Converter={StaticResource ConverterBoolenToFalse}}" Visibility="{Binding SearchPanelVisibility, Converter={StaticResource ConvertBoolenToVisibility}}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+      <editors:PopupBaseEdit FrameworkElement.Name="findKeywordText" FrameworkElement.Style="{StaticResource treeListSearchPopupBaseEdit}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+        <editors:PopupBaseEdit.Buttons>
+          <editors:ButtonInfo xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonInfoBase.Margin="0" editors:ButtonInfoBase.Padding="0" editors:ButtonInfoBase.BorderThickness="0" editors:ButtonInfo.GlyphKind="Cancel" editors:ButtonInfoBase.IsDefaultButton="False" editors:ButtonInfoBase.IsLeft="False" FrameworkContentElement.ToolTip="{DynamicResource TreeListControl_ClearFindKeyWord}" editors:CommandButtonInfo.Command="{Binding ClearSearchKeywordCommand}" editors:ButtonInfoBase.Visibility="{Binding SearchKeyword.IsEmpty, Converter={StaticResource ConvertBoolenFalseToVisibility}}" />
+          <editors:ButtonInfo editors:ButtonInfoBase.BorderThickness="0" editors:ButtonInfoBase.IsLeft="True" FrameworkContentElement.ToolTip="{DynamicResource TreeListControl_StartFind}" editors:CommandButtonInfo.Command="{Binding OnSearchTreeFileListCommand}">
+            <editors:ButtonInfo.Content>
+              <Image Width="16" Height="16" Source="{DynamicResource SearchIcon}" Stretch="Fill" />
+            </editors:ButtonInfo.Content>
+          </editors:ButtonInfo>
+          <editors:ButtonInfo editors:ButtonInfo.GlyphKind="DropDown" editors:ButtonInfoBase.IsDefaultButton="True" FrameworkContentElement.ToolTip="{DynamicResource TreeListControl_ChangeFindOption}" />
+        </editors:PopupBaseEdit.Buttons>
+      </editors:PopupBaseEdit>
+      <bars:ToolBarControl FrameworkElement.Name="ToolBarCloseSearchPane" Grid.Column="1" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+        <bars:BarButtonItem bars:BarItem.CommandParameter="false" bars:BarItem.Foreground="#FFFF0000" bars:BarItem.Glyph="{DynamicResource Close}" FrameworkContentElement.ToolTip="{DynamicResource TreeListControl_CloseFindPanel}" bars:BarItem.Command="{Binding OnShowSearchPanelCommand}" />
+      </bars:ToolBarControl>
+    </Grid>
+    <local:PvfTreeView Grid.Row="3" Control.BorderThickness="0" x:Name="treeListControlEx" />
+  </Grid>
+</UserControl>

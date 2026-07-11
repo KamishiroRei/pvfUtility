@@ -1,0 +1,676 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "skl",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "name",
+                         "Title":  "在游戏中所显示的第1个名字",
+                         "Comment":  "在游戏中所显示的第1个名字",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[name] // 指定技能名称的标签，通常与\u003c12:: \u003e Skill.kor.str文件链接。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "name2",
+                         "Title":  "装备、物品的别名",
+                         "Comment":  "装备、物品的别名\n\n在一些 dnf.exe 程序中会显示出该标签。\n\n* 通常是该装备、物品的英文名。",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[name2] // 指定技能的英文名或汉字名的标签。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "basic explain",
+                         "Title":  "简单说明",
+                         "Comment":  "简单说明\n\n装备中显示的蓝色文本说明，和 [detail explain] 关联的，此时在游戏中按 F4(默认键) 可切换简单/详细说明。\n\n* 通常在装备上使用。",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[basic explain] // 指定技能基本说明的标签。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "explain",
+                         "Title":  "附加内容",
+                         "Comment":  "附加内容\n\n* 在装备和道具类所展示的蓝色文本内容。\n\n* 在副本(.dgn)里展示该副本的描述内容。\n\n* 在 QP 商店里展示的属性内容。\n\n* 在活动(.evt)里展示活动的描述内容。\n\n* 在技能(.skl)里展示技能的描述内容。",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[explain] // 指定技能详细说明的标签。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "purchase cost",
+                         "Title":  "学得此技能所需的sp点",
+                         "Comment":  "学得此技能所需的sp点\n\n在数字的右边跟一个灰箭头即可设置下一级所需sp点\n你也可以只设置1个数字来统一技能每一级所需sp点",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[purchase cost] // 各级别购买所需的SP。此数值的数量即成为最大等级的数量。\n100 // 获得等级1所需的SP。\n200 // 获得等级1后获得等级2所需的SP。\n200 // 若中途截断，则之后均使用该值。\n[/purchase cost] // 必须用此标签闭合。\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "special purchase cost",
+                         "Title":  "学得此技能所需的tp点",
+                         "Comment":  "学得此技能所需的tp点\n\n在数字的右边跟一个灰箭头即可设置下一级所需tp点\n你也可以只设置1个数字来统一技能每一级所需tp点",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[special purchase cost] // 若有此标签，则购买需要TP而非SP。\n1 // 各级别购买所需的TP数值。\n[/special purchase cost]\n```",
+                         "Closing":  true,
+                         "Authors":  "666|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "required level",
+                         "Title":  "学习等级",
+                         "Comment":  "最低学得等级",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[required level] 10 // 学习技能所需角色的最低等级。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "required level range",
+                         "Title":  "等级间隔",
+                         "Comment":  "技能升级间隔\n\n2代表每2级可通过sp点或tp点升1级",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[required level range] 3 // 需求等级的区间。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "pre required skill",
+                         "Title":  "学得所需的前置技能",
+                         "Comment":  "学得所需的前置技能\n\n左边前置技能编号    右边等级需求\n\n//若设定不止一个前置技能，则按照\n`左、右、左、右`\n的顺序来赋予前置技能",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[pre required skill] // 学习技能前必须先学习的技能列表。\n3 2 // 依次为技能索引，等级。\n11 1\n[/pre required skill] // 必须用此标签闭合。\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "type",
+                         "Title":  "类型",
+                         "Comment":  "技能类型 \n 示例 \n `[active]` \n `[passive]`",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[type] `[active]` // 技能的类型。可选择 `[active]` 和 `[passive]` 之一。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "skill class",
+                         "Title":  "技能类",
+                         "Comment":  "技能类",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[skill class] 1 // 将类似技能归为一组的技能系列索引 [例: 街头, 魔法, 体术 ]。\n```",
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "maximum level",
+                         "Title":  "最高等级",
+                         "Comment":  "拥有此词条对象为技能时，限制绝对的最大可学得等级，也就是不止通过sp点（比如装备、卡片、称号等等）可以提升的最大等级",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[maximum level] 10 // 通过所有手段可提升的最大等级（包含物品、Buff等）。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "growtype maximum level",
+                         "Title":  "每个职业可通过sp点或tp点学得此技能的最高等级",
+                         "Comment":  "每个职业可通过sp点或tp点学得此技能的最高等级，比如\n[growtype maximum level]\n\t0\t2\t0\t0\t0\n代表只有剑魂能把这个技能学到2级\n\n1男鬼剑士 2剑魂            3鬼泣         4狂战士      5阿修罗\n1女格斗     2女气功        3女散打     4女街霸      5女柔道家\n1女魔法师 2元素师        3召唤师     4战斗法师  5魔道学者\n1男圣职者 2男圣骑士     3蓝拳圣使 4男驱魔师   5复仇者\n1神枪手     2漫游枪手     3枪炮师    4机械师       5弹药专家\n1暗夜使者 2刺客            3死灵术士  4忍者         5影舞者\n1男魔法师 2元素爆破师 3冰结师\n\n//赋予技能等级之后，还需要将技能加入目标职业的技能树坐标\nsp技能树路径：clientonly/skilltree/职业_sp.co\ntp技能树路径：clientonly/skilltree/职业_tp.co",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[growtype maximum level] 2 2 2 3 // 通过技能购买可获得的最高等级。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "skill fitness growtype",
+                         "Title":  "为职业赋予这个技能",
+                         "Comment":  "为职业赋予这个技能，需搭配代码：[growtype maximum level]\n                                    //不然的话就光是有技能而无法学得技能\n\n比如【崩山击】\n[skill fitness growtype]\n\t0\t1\t2\t3\t4\n[/skill fitness growtype]\n代表鬼剑士全部职业都可以学得\n\n再比如，还是【崩山击】\n[skill fitness growtype]\n\t0\t2\t4\n[/skill fitness growtype]\n代表只有鬼剑士、鬼泣、阿修罗可以学得\n\n输入数字可为职业赋予此技能\n- 0男鬼剑士 1剑魂            2鬼泣         3狂战士      4阿修罗\n- 0女格斗     1女气功        2女散打     3女街霸      4女柔道家\n- 0女魔法师 1女元素师     2召唤师     3战斗法师  4魔道学者\n- 0男圣职者 1男圣骑士     2蓝拳圣使 3男驱魔师   4复仇者\n- 0神枪手     1漫游枪手     2枪炮师     3机械师      4弹药专家\n- 0暗夜使者 1刺客            2死灵术士  3忍者         4影舞者\n\n//赋予技能之后，还需要将技能加入目标职业的技能树坐标\nsp技能树路径：clientonly/skilltree/职业_sp.co\ntp技能树路径：clientonly/skilltree/职业_tp.co",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[skill fitness growtype] // 注册可正式学习技能的成长类型编号。\n3\n[/skill fitness growtype]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "consume MP",
+                         "Title":  "MP 消耗",
+                         "Comment":  "使用技能时消耗的魔法值\n左边最低等级消耗     右边最高等级消耗\n\n//示例：\n\t[consume MP]\n\t\t7723\t1123\n\n以上示例代表1级消耗7723魔法值，并随等级逐渐减少需消耗的魔法值，满级消耗1123魔法值",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[consume MP] 10.0 300.0 // 每次消耗的MP。等级1和最高等级时的值。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "maintain MP",
+                         "Title":  "20.0 600.0",
+                         "Comment":  "[maintain MP] 20.0 600.0\t// 每秒MP消耗。 仅用于持续消耗MP的技能",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[maintain MP] 20.0 600.0 // 每秒消耗的MP。仅在具有持续MP消耗的技能中使用。\n```",
+                         "Closing":  false,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "consume item",
+                         "Title":  "第一个是释放技能要消耗的物品代码",
+                         "Comment":  "第一个是释放技能要消耗的物品代码\n第二个是最低等级的消耗\n第三个是最高等级的消耗\n\n示例：\n\t3037\t1\t5\n代表最低等级将消耗1个无色小晶块，并随等级逐渐增加消耗数量，最高等级将消耗5个无色小晶块",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[consume item] // 使用技能所需的物品。\n1001 1 1 // 物品索引，等级1时的消耗数，最高等级时的消耗数（通常登记无色小晶块）。\n1002 2 5\n[/consume item]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "limit count",
+                         "Title":  "每副本限制次数",
+                         "Comment":  "每副本限制次数",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[limit count] // 每个地城的次数限制。若为0或不写则为无限。\n1 // 按等级填写。\n2\n3\n4\n5\n6\n[/limit count] // 若中途截断，则之后均使用该值。\n```",
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "cool time",
+                         "Title":  "冷却时间",
+                         "Comment":  "换装和道具冷却时间\n\n赋予词条对象为技能时，左边最低等级冷却，右边最高等级冷却\n\n1000=1秒",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[cool time] 1000 2000 // 使用后阻止主动技能和消耗品使用的时间。毫秒单位，仅对主动技能有效。\n// 等级1，满级。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "icon",
+                         "Title":  "图标与帧索引列表",
+                         "Comment":  "图标与帧索引列表",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[icon]\n`SkillIcon.img` 0 // 图标图像文件和帧索引。\n`SkillIcon.img` 1 // 禁用图标图像文件和帧索引。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "command",
+                         "Title":  "技能指令",
+                         "Comment":  "技能指令，比如“←→+Z”以默认的手搓指令释放鬼剑士的【十字斩】等等\n↑=`(UP)`\n↓=`(DOWN)`\n←=`(LEFT)`\n→=`(RIGHT)`\nZ=`(SKILL)`\n普攻=`(ATTACK)`\n跳跃=`(JUMP)`\n空格键=`(BUFF)`\n\n{6=`(键位)`} 是需要按的键位\n{8=`,`} 是衔接下一个按键的代码\n{8=`\u0026`} 是按住方向键之后按指令键的代码\n\n比如：\n\t{6=`(RIGHT)`}\n\t{8=`,`}\n\t{6=`(BUFF)`}\n为按一下前进+空格键以默认的手搓指令释放鬼剑士的【刀魂之卡赞】\n\n再比如：\n\t{6=`(UP)`}\n\t{8=`\u0026`}\n\t{6=`(SKILL)`}\n为按住上+Z以默认的手搓指令释放鬼剑士的【鬼斩】，\n//需要注意的是按住类手搓指令只能绑一个移动键\n//以及，若本身就有指令的技能是无法通过PVF修改按住类指令的",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[command] // 操作方法。\n(SKILL) (ATTACK) \u0026 // 写入按下时需要按住的键，最后用\u0026结束。没有则不写也可以。\n(LEFT) 100, (DOWN)! (RIGHT) // 由键列表中键的组合和延迟时间构成一个输入。\n`DOWN` // 输入之间用 !（150ms）、（300ms）~（1000ms）之一分隔。\n// 检查类型可选择 `DOWN` `DOWN ONCE` `UP` `UP ONCE` 之一。\n// 可输入的指令：(LEFT) (RIGHT) (UP) (DOWN) (SKILL) (ATTACK) (JUMP) (CREATURE) (BUFF)。\n[/command]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "static data",
+                         "Title":  "静态数据",
+                         "Comment":  "静态数据\n无法随等级提升的技能数据，修改此数据可以影响到实战，你也可以把动态数据[level info]全改成一个数据来达到伪静态数据的结果（笑）\n\n//通用：\n有些技能的静态数据比如鬼泣的[封印解除]是可以把别的技能编号补充进去以达到用被动增强主动的效果\n以及[攻击类型转换]，将其他主动技能编号写入即可在游戏内切换转职后技能的伤害加成\n\n//魔法师：\n`召唤师`、`魔道学者`的召唤物静态数据里会出现的怪物编号\n[比如魔道学者用变异苍蝇拍击杀怪物后，以大成功召唤出变异牛头巨兽，静态数据里第8位正好有61154编号，对应怪物编号61154的变异牛头巨兽]\n这代表此技能将生效于召唤物，所以这也是为什么召唤物的面板和技能是分开写的\n\n//机械师：\n机械师的机器人比较特殊，生效信息并没有写在静态数据里，但是可以通过\nmonster/gunner/robot\n的路径查看机器人面板信息\n\n//示例：\n[level property]\n\t1\t99                                          ←1级到99级显示\n`鬼印珠多段攻击间隔 : \u003cfloat2\u003e秒`    ←技能属性(添加\u003c\u003e以调用下方\n                                                                                3个数值为1组的数据)\n\t1\t1\t0.001                               ←调用静态数据从左往右数的第1位\n[/level property]\n静态数据从左往右数就是[level property]会使用\u003cint\u003e、\u003cfloat1\u003e、\u003cfloat2\u003e\n按照0、1、2、3的位置调用的数值",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[static data] // 硬编码中使用的固定资料集合（技能等级提升也不改变的值）。\n1\n10\n100\n300\n300\n400\n[/static data]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "level info",
+                         "Title":  "级别信息/动态数据",
+                         "Comment":  "级别信息/动态数据\n可以随技能等级提升的数据，修改此数据可以影响到实战，而无法随等级提升的是静态数据[static data]\n\n第1横排的内容是会生效的动态数据的数量，不计入该技能的第1级，所以可以算第0级\n第1横排的内容为4时，代表从第2横排开始左往右能生效4个动态数据，所以第2横排才能算作此技能的第1级\n—————————————————————————————\n每个等级从左往右数就是[level property]会使用\u003cint\u003e、\u003cfloat1\u003e、\u003cfloat2\u003e\n按照0、1、2、3的位置调用的数值\n//示例：\n[level property]\n\t1\t99                               ←1级显示到99级\n\t`银弹装弹数 : \u003cint\u003e发`      ←技能属性(添加\u003c\u003e以调用下方3个数值\n\t                                                                                    为1组的数据)\n\t-1\t0\t1.0                        ←调用动态数据从左往右数的第0位\n[/level property]\n—————————————————————————————\n技能从1级升到2级后就会调用第3横排的数据，5级升到6级后就会调用第7横排的数据，以此类推",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[level info] // 硬编码中使用的各级别资料集合（技能等级不同值也不同的资料）。\n2 // 各级别资料的数量。\n// 资料1 资料2\n1 20 // 第一行为等级1。依次写下资料1和2。\n2 30 // 重复至满级。\n4 40\n6 50\n8 60\n[/level info]\n```\n\n#### 官方示例: skillscriptmoduleseparationsample.skl\n\n```pvf\n[level info]\n2\n// 0.攻击力% 1.浮空力：修改时需修改 [level property]。\n100 350\n106 368\n111 387\n117 405\n122 424\n128 442\n133 461\n139 479\n145 497\n150 516\n156 534\n161 553\n167 571\n173 589\n178 608\n184 626\n189 645\n195 663\n200 682\n206 700\n[/level info]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "level property",
+                         "Title":  "游戏内的技能属性",
+                         "Comment":  "游戏内的技能属性\n\n修改此标签里的内容仅影响显示，需搭配能影响实战的\n[level info]（动态数据）或者[static data]（静态数据）使用\n—————————————————————————————\n//示例1：\n[level property]\n\t1\t99                               ←1级显示到99级\n\t`银弹装弹数 : \u003cint\u003e发`      ←技能属性(添加\u003c\u003e以调用下方3个数值\n\t                                                                                    为1组的数据)\n\t-1\t0\t1.0                        ←调用动态数据从左往右数的第0位\n[/level property]\n—————————————————————————————\n//示例2：\n[level property]\n\t1\t99                                          ←1级显示到99级\n\t`鬼印珠多段攻击间隔 : \u003cfloat2\u003e秒`    ←技能属性(添加\u003c\u003e以调用下方\n                                                                                3个数值为1组的数据)\n\t1\t1\t0.001                               ←调用静态数据从左往右数的第1位\n[/level property]\n—————————————————————————————\n示例第二排引号后边的内容可以自己编辑，也可以打上\n\u003cint\u003e、\u003cfloat1\u003e、\u003cfloat2\u003e来调用1.0、0.1、0.01、0.001的内容，\n有一个\u003c\u003e就会调用一组数据，\n比如膝撞的`物理攻击力 : \u003cint\u003e%% + \u003cint\u003e`在游戏里只会显示一排，但在PVF里会调用两组动/静态数据\n\n\u003cint\u003e：特殊效果的等级、数量、技能倍率、技能固伤、穿刺力、吸收伤害、减少延迟、范围、异常抗性、增加面板、技能大小\n\n\u003cfloat1\u003e：特殊效果的概率、命中率、浮空力、发动速度、暴击率、持续时间、前摇、攻击间隔、增加速度、激活使用技能的时间、蓄力时间\n\n\u003cfloat2\u003e：同\u003cfloat1\u003e\n//提示：\u003cfloat2\u003e相比\u003cfloat1\u003e可以显示更详细的数值，\u003cfloat1\u003e在部分情况遇到小数点时会取整，显示大概的数值\n—————————————————————————————\n//示例第三排的3个数值为1组的内容分别为\n第1个 : 为正数时调用静态数据（与第2个数字写一样的）\n            为负数时调用动态数据\n     -2 = 固伤伤害\n     -3 = 中毒伤害\n     -4 = 出血伤害\n     -5 = 灼伤伤害\n     -6 = 感电伤害\n\n第2个 : 动/静态数据位置，0是从左往右数第1个，1是从左往右数第2个，以此类推\n\n第3个 : 调用动/静态数据后在游戏内技能属性显示出来的数值：\n     `1.0（或与1.0相近的）：范围、数量、技能倍率、技能固伤、速度、穿刺力、发动速度、特殊效果的等级、增加面板、技能大小`\n\n     `0.1（或与0.1相近的）：浮空力、命中率、暴击率、特殊效果的概率`\n\n     `0.001（或与0.001相近的）：持续时间`\n\n//1.0=显示100%内容（比如倍率、数量等）\n//0.1=显示10%内容（比如概率的200在游戏内是20%）\n//0.001=显示0.1%内容（持续时间的1000在游戏内是1秒）",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[level property] // 技能特性说明。\n1 10 // 适用的等级区间。\n`以\u003c整数\u003e%概率格挡\u003c小数1\u003e%的物理攻击。` // 说明。放置参数的部分选择\u003c整数\u003e \u003c小数1\u003e \u003c小数2\u003e之一填写。\n// \u003c小数1\u003e显示小数点后1位，\u003c小数2\u003e显示小数点后2位。\n0 1 1.0 // 第二个要放入的参数的整数资料索引。等级1~满级，相乘的值。下同重复。\n2 3 1.0 // 第二个要放入的参数的整数资料索引。等级1~满级，相乘的值。下同重复，最多5行。\n-1 0 1.0 // 第一个值为-1则从[level info]读取。第二个值是参考第几个资料。\n// -1 百分比伤害。\n// -2 独立。\n// -3 中毒。\n// -4 出血。\n// -5 灼伤。\n// -6 感电。\n// -7 石化。\n[/level property]\n```\n\n```pvf\n[level property] // 技能特性说明。\n11 99 // 适用的等级区间。\n`以\u003c整数\u003e%概率格挡\u003c小数1\u003e%的物理攻击，以\u003c整数\u003e%概率格挡\u003c小数2\u003e%的魔法攻击。`\n0 1 1.0 // 第一个要放入的参数的整数资料索引。等级1~满级，相乘的值。\n2 3 1.0 // 第二个要放入的参数的整数资料索引。等级1~满级，相乘的值。下同重复。\n0 1 1.0\n4 5 1.0\n[/level property]\n```\n\n#### 官方示例: skillscriptmoduleseparationsample.skl\n\n```pvf\n[level property]\n1 99\n\u003c12::antiair_upper_level_property\u003e\n-1 1 0.285714285714 // 0.285714285714 : 100 / 1级时的浮空力。\n-1 0 1.0\n[/level property]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "skill preloading image",
+                         "Title":  "预加载图片路径列表",
+                         "Comment":  "预加载图片路径列表",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[skill preloading image] // 预先想要加载的文件写在此处。（例如枪手的凝固汽油弹的情况）。\n`Character/Gunner/Effect/NapalmBombShoot.img`\n`Character/Gunner/Effect/NapalmBombExplosionNormal.img`\n`Character/Gunner/Effect/NapalmBombExplosionDodge.img`\n`Character/Gunner/Effect/NapalmBombAreaFire2.img`\n`Character/Gunner/Effect/NapalmBombAreaFire1.img`\n`Character/Gunner/Effect/NapalmBombArea.img`\n[/skill preloading image]\n```",
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "basic explain ex",
+                         "Title":  "EX 被动技能的简短说明",
+                         "Comment":  "EX 被动技能的简短说明",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[basic explain ex] // 指定ex被动技能基本说明的标签。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "explain ex",
+                         "Title":  "EX 被动技能的详细说明",
+                         "Comment":  "EX 被动技能的详细说明",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[explain ex] // 指定ex被动技能详细说明的标签。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "feature skill type",
+                         "Title":  "是否为特性技能(1",
+                         "Comment":  "是否为特性技能(1=是)",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[feature skill type] 1 // 决定特性技能的标签，1则为特性，0或没有此标签则为普通技能。\n```\n\n```pvf\n[feature skill type] 1 // 是特性技能还是普通技能（0:普通技能 1:特性技能）。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "feature skill index",
+                         "Title":  "相关特性技能索引",
+                         "Comment":  "相关特性技能索引",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[feature skill index] 140 // 指定关联的特性被动技能的标签，后面写索引。140号成为与此技能联动的特性技能。\n```\n\n```pvf\n[feature skill index] 140 // 若该技能存在特性技能，则指定特性技能索引。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "active",
+                         "Title":  "技能释放类型",
+                         "Comment":  "技能释放类型",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "绝"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "passive",
+                         "Title":  "被动技能",
+                         "Comment":  "被动技能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "executable states",
+                         "Title":  "可在哪种状态下施放",
+                         "Comment":  "可在哪种状态下施放，状态常量枚举 \n示例：\n 0 8 14 //站立、普通攻击、奔跑",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "growtype fitness",
+                         "Title":  "成长型适合度",
+                         "Comment":  "成长型适合度",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[growtype fitness] 0 0 0 10 // 按成长类型的适应度。0为一般，30则只需70%的SP（几乎？完全？未使用）。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "durability decrease rate",
+                         "Title":  "使用技能所消耗的耐久",
+                         "Comment":  "使用技能所消耗的耐久",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "second growtype fitness",
+                         "Title":  "第二成长型适合度",
+                         "Comment":  "第二成长型适合度",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n// - 与原有的[growtype fitness]用法相同 [目前没有使用的地方]。\n// 可学习技能的适应成长类型。\n[second growtype fitness] 0 0 1 0 0 0 0 0 0 0\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "second growtype maximum level",
+                         "Title":  "觉醒之后可学得的最高等级",
+                         "Comment":  "觉醒之后可学得的最高等级\n搭配[skill fitness second growtype]使用\n\n移除此标签和[skill fitness second growtype]标签即可解除觉醒限制\n\n//示例：\n[second growtype maximum level]\n\t0\t0\t2\t0\t0\t0\t0\t0\t0\t0\t0\t0\n//以上代表只有花花能把这个技能学到2级\n\n与[growtype maximum level]不同，添加觉醒限制之后的技能要扩充最高学得等级需在等级右边追加一个0，要是看不懂的话按下面的序号从左往右数并按照职业位置赋予等级即可：\n1男鬼剑士 3剑魂            5鬼泣         7狂战士      9阿修罗\n1女格斗     3女气功        5女散打     7女街霸      9女柔道家\n1女魔法师 3元素师        5召唤师     7战斗法师   9魔道学者\n1男圣职者 3男圣骑士     5蓝拳圣使 7男驱魔师   9复仇者\n1神枪手     3漫游枪手    5枪炮师      7机械师      9弹药专家\n1男魔法师 3元素爆破师 5冰结师",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n// - 与原有的[growtype maximum level]用法相同（在此指定觉醒技能。1次、2次觉醒）。\n[second growtype maximum level] 0 0 1 0 0 0 0 0 0 0\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "skill fitness second growtype",
+                         "Title":  "这个标签可为此技能添加觉醒限制",
+                         "Comment":  "这个标签可为此技能添加觉醒限制\n\n搭配[second growtype maximum level]使用\n\n移除此标签和[second growtype maximum level]标签即可解除觉醒限制",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n// - 与原有的[skill fitness growtype]用法相同。\n[skill fitness second growtype]\n2\n[/skill fitness second growtype]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "shake screen",
+                         "Title":  "释放技能在部分时候的屏幕抖动效果",
+                         "Comment":  "释放技能在部分时候的屏幕抖动效果\n比如狂战士释放技能【暴走】在读条结束之后会抖动屏幕\n左边对应抖动强度      右边对应抖动时间，100=0.1秒",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[shake screen] 2 200 // 在特定情况下震动屏幕。\n// 2 == 屏幕震动强度。\n// 200 == 屏幕震动时间。\n// 注意：屏幕震动是硬编码，因此。\n// 若输入了此值，必须告知程序员。\n// 在何种情况下需要震动屏幕。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "casting time",
+                         "Title":  "施法时间",
+                         "Comment":  "施法时间\n100=0.1秒",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[casting time] 1000 500 // 咏唱时间。毫秒单位。等级1，最终等级。\n```",
+                         "Closing":  false,
+                         "Authors":  "梦幻物语|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "seal enable",
+                         "Title":  "是否可被封印(技能图标上的on/off)",
+                         "Comment":  "是否可被封印(技能图标上的on/off)",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[seal enable] 1 // 技能是否可被功能封印。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "auto limit count reduce",
+                         "Title":  "自动减少限制次数标志",
+                         "Comment":  "自动减少限制次数标志",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[auto limit count reduce] 0 // 是否自动减少限制次数。1为默认值。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "skill under cooltime effect",
+                         "Title":  "施放过后会一同进入冷却时间的技能",
+                         "Comment":  "施放过后会一同进入冷却时间的技能，\n将其他技能编号写入即可设置",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n// 等级1，满级。\n[skill under cooltime effect] // 此技能发动时，同时进入冷却时间的技能列表。\n12\n11\n[/skill under cooltime effect]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "auto cooltime apply",
+                         "Title":  "自动应用冷却标志",
+                         "Comment":  "自动应用冷却标志",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[auto cooltime apply] 0 // 是否自动应用冷却时间。1为默认值，0则需硬编码应用冷却时间，-1则需硬编码应用冷却时间，且在手动应用前技能将处于Disable状态。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "weapon effect type",
+                         "Title":  "伤害类型",
+                         "Comment":  "伤害类型\n物理伤害：`[physical]`\n魔法伤害：`[magical]`",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[weapon effect type] `[none]` // MP、冷却时间将跟随武器的哪种参数。可选择 `[none]` `[physical]` `[magical]` 之一。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "none",
+                         "Title":  "值",
+                         "Comment":  "值: none",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "physical",
+                         "Title":  "物理伤害",
+                         "Comment":  "物理伤害",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "magical",
+                         "Title":  "魔法伤害",
+                         "Comment":  "魔法伤害",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "command key explain",
+                         "Title":  "手搓指令的释放介绍",
+                         "Comment":  "手搓指令的释放介绍",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[command key explain] `指令: → ← ⓩ` // 指定指令说明的标签。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "skill command advantage",
+                         "Title":  "以手搓指令而不是快捷键释放技能时所获得的收益",
+                         "Comment":  "以手搓指令而不是快捷键释放技能时所获得的收益\n\n左边若为20将减少最大冷却时间2%\t 右边若为50将减少魔法值消耗5%\n\n同时会在职业的头上显示你搓了哪些指令",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[skill command advantage] 10 20 // 冷却时间减少比率（0.1%单位），MP消耗量减少比率（0.1%单位） // 通过指令输入技能时可获得的增益。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "start cool time",
+                         "Title":  "开始冷却",
+                         "Comment":  "对局开始时的冷却时间限制\n20000代表对局开始时有20秒禁用时间\n\n1000=1秒",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[start cool time] 10000 // 若希望决斗场、死亡之塔、战争区域等一开始就处于冷却时间，在此输入大于0的数字。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "special level up",
+                         "Title":  "TP技能属性规则",
+                         "Comment":  "TP技能属性规则",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[special level up]\n-1 0 `+` 50 // 0: 若为-1则为level info，其余为static info。\n1 1 `-` 50 // 1: 第几个数据 2: 运算符 3: 运算数值。\n2 2 `%` 150\n[/special level up]\n```",
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "dungeon",
+                         "Title":  "地下城中的效果",
+                         "Comment":  "#### 官方示例: skillsample.skl\n\n```pvf\n[dungeon]\n// 此标签内的数值仅在地城中适用。若没有此类标签，则默认在地城中适用。\n[/dungeon]\n```",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[dungeon]\n// 此标签内的数值仅在地城中适用。若没有此类标签，则默认在地城中适用。\n[/dungeon]\n```",
+                         "Closing":  true,
+                         "Authors":  "白糖-193284563|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "pvp",
+                         "Title":  "决斗场中的效果",
+                         "Comment":  "#### 官方示例: skillsample.skl\n\n```pvf\n[pvp]\n// 此标签内的数值仅在决斗场中适用。\n[/pvp]\n```",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[pvp]\n// 此标签内的数值仅在决斗场中适用。\n[/pvp]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "death tower",
+                         "Title":  "死亡之塔中的效果",
+                         "Comment":  "#### 官方示例: skillsample.skl\n\n```pvf\n[death tower]\n// 此标签内的数值在死亡之塔中适用。\n[/death tower]\n```",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[death tower]\n// 此标签内的数值在死亡之塔中适用。\n[/death tower]\n```",
+                         "Closing":  true,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "warroom",
+                         "Title":  "战场中的效果",
+                         "Comment":  "#### 官方示例: skillsample.skl\n\n```pvf\n[warroom]\n// 此标签内的数值仅在战争房间中适用。\n[/warroom]\n```",
+                         "OfficialDescription":  "#### 官方示例: skillsample.skl\n\n```pvf\n[warroom]\n// 此标签内的数值仅在战争房间中适用。\n[/warroom]\n```",
+                         "Closing":  true,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "static basic skill",
+                         "Title":  "技能静态数据",
+                         "Comment":  "技能静态数据",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "暖阳"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "physical magical change",
+                         "Title":  "物理、魔法伤害转换",
+                         "Comment":  "物理、魔法伤害转换",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "league ban",
+                         "Title":  "添加此代码可以在PVP对局中禁用此技能",
+                         "Comment":  "添加此代码可以在PVP对局中禁用此技能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "attackinfo",
+                         "Title":  "攻击数据信息",
+                         "Comment":  "攻击数据信息",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "skill under cooltime effect each",
+                         "Title":  "冷却时间中的技能",
+                         "Comment":  "冷却时间中的技能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "(DOWN)",
+                         "Title":  "下",
+                         "Comment":  "下",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "(SKILL)",
+                         "Title":  "Z（可以单独作为一个手搓指令）",
+                         "Comment":  "Z（可以单独作为一个手搓指令）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "(ATTACK)",
+                         "Title":  "普攻",
+                         "Comment":  "普攻",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "(BUFF)",
+                         "Title":  "空格键（可以单独作为一个手搓指令）",
+                         "Comment":  "空格键（可以单独作为一个手搓指令）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "(RIGHT)",
+                         "Title":  "右（同时也对应手搓指令的向前移动）",
+                         "Comment":  "右（同时也对应手搓指令的向前移动）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "(LEFT)",
+                         "Title":  "左（同时也对应手搓指令的向后移动）",
+                         "Comment":  "左（同时也对应手搓指令的向后移动）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "skl",
+                         "Section":  "(UP)",
+                         "Title":  "上",
+                         "Comment":  "上",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     }
+                 ]
+}

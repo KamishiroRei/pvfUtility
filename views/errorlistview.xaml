@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:local="clr-namespace:PvfCode.Views;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" DataContext="{Binding Source={x:Static root:AppCore.Logger}}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <bars:BarContainerControl Grid.Row="0" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+      <bars:Bar xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:Bar.AllowCustomizationMenu="False" bars:Bar.AllowQuickCustomization="False" bars:Bar.ShowDragWidget="True">
+        <bars:BarButtonItem BarItem.Content="{DynamicResource ErrorListView_Button_ClearAll}" BarItem.Glyph="{DynamicResource ClearWindowContent}" bars:BarItem.Command="{Binding ClearErrorListCommand}" />
+      </bars:Bar>
+    </bars:BarContainerControl>
+    <GridControl Grid.Row="1" xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid:DataControlBase.SelectionMode="Row" grid:DataControlBase.ItemsSource="{Binding ErrorItems}" xmlns="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+      <grid1:GridControl.Columns xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+        <grid1:GridColumn grid:BaseColumn.Width="*" grid:ColumnBase.FieldName="Description" grid:BaseColumn.Header="{DynamicResource ErrorListView_GridColumn_Description}" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" />
+        <grid1:GridColumn grid:BaseColumn.Width="*" grid:ColumnBase.FieldName="FilePath" grid:BaseColumn.Header="{DynamicResource ErrorListView_GridColumn_File}" />
+        <grid1:GridColumn grid:BaseColumn.Width="auto" grid:ColumnBase.FieldName="Line" grid:BaseColumn.Header="{DynamicResource ErrorListView_GridColumn_Line}" />
+        <grid1:GridColumn grid:BaseColumn.Width="auto" grid:ColumnBase.FieldName="Input" grid:BaseColumn.Header="{DynamicResource ErrorListView_GridColumn_Code}" />
+      </grid1:GridControl.Columns>
+      <GridControl.View>
+        <grid1:TableView FrameworkElement.Name="view" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid1:TableView.AllowBandMoving="False" grid1:TableView.AllowBandMultiRow="False" grid1:TableView.AllowBandResizing="False" grid1:TableView.AllowBestFit="False" grid1:TableView.AllowCascadeUpdate="False" grid:DataViewBase.AllowColumnFiltering="False" grid:DataViewBase.AllowEditing="False" grid1:TableView.AllowHorizontalScrollingVirtualization="True" grid:DataViewBase.EnableSelectedRowAppearance="True" grid1:TableView.HorizontalScrollbarVisibility="Auto" grid:DataViewBase.NavigationStyle="Row" grid:DataViewBase.ScrollingMode="Smart" grid1:TableView.ShowAutoFilterRow="False" grid1:TableView.ShowBandsInCustomizationForm="False" grid1:TableView.ShowBandsPanel="False" grid:DataViewBase.ShowColumnHeaders="True" grid1:TableView.ShowDataNavigator="False" grid:DataViewBase.ShowEmptyText="False" grid:DataViewBase.ShowFilterPanelMode="Never" grid1:GridViewBase.ShowGroupPanel="False" grid1:TableView.ShowHorizontalLines="True" grid1:TableView.ShowIndicator="True" grid:DataViewBase.ShowSearchPanelMode="Never" grid:DataViewBase.ShowSelectionRectangle="True" grid1:TableView.ShowVerticalLines="True" grid1:TableView.UseEvenRowBackground="False" grid1:TableView.VerticalScrollbarVisibility="Auto">
+          <bars:BarManager.DXContextMenu xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+            <bars:PopupMenu>
+              <bars:PopupMenu.Items xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                <bars:BarButtonItem bars:BarItem.Content="{DynamicResource ErrorListView_ContextMenu_CopyValue}" bars:BarItem.Glyph="{DynamicResource CopyIcon}" bars:BarItem.KeyGesture="Ctrl+C" bars:BarItem.Command="{Binding OnCopyErrorSelectedStringCommand}" bars:BarItem.CommandParameter="{Binding ElementName=view, Path=FocusedRow}" />
+              </bars:PopupMenu.Items>
+            </bars:PopupMenu>
+          </bars:BarManager.DXContextMenu>
+        </grid1:TableView>
+      </GridControl.View>
+    </GridControl>
+  </Grid>
+</UserControl>

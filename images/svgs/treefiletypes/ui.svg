@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<svg x="0px" y="0px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" xml:space="preserve" id="Layer_1">
+  <style type="text/css">
+	.Black{fill:#727272;}
+</style>
+  <circle cx="9" cy="13" r="5" fill="#727272" class="Black" />
+  <polygon points="16,30 2,30 2,20 6,20 9,23 12,20 16,20 " fill="#727272" class="Black" />
+  <path d="M8,2v3.7c0.7,0,1.4,0.1,2,0.3V4h18v16H18v2h12V2H8z" fill="#727272" class="Black" />
+</svg>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns:flyoutNative="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:BatchOperation="clr-namespace:PvfCode.Views.BatchOperation;assembly=pvfUtility" xmlns:PvfEnums="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:codecompletion="clr-namespace:PvfCode.ViewModels.DocumentFolder.CodeCompletion;assembly=pvfUtility" xmlns:converts="clr-namespace:PvfCode.Converts;assembly=pvfUtility" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxmvvm="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:dxmvvm1="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:enums="clr-namespace:PvfCode.Models.Options.Enums;assembly=PvfCode.Models" xmlns:enums1="clr-namespace:PvfCode.Dot.Desktop.Enums;assembly=PvfCode.Dot" xmlns:korelementgenerator="clr-namespace:PvfCode.ViewModels.DocumentFolder.KorElementGenerator;assembly=pvfUtility" xmlns:macro="clr-namespace:PvfCode.Views.Macro;assembly=pvfUtility" xmlns:models="clr-namespace:PvfCode.ViewModels.BookMarkEdit.Models;assembly=pvfUtility" xmlns:pvfEnums="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:search="clr-namespace:PvfCode.Converts.Search;assembly=pvfUtility" xmlns:searchModel="clr-namespace:PvfCode.Services.SearchModel;assembly=PvfCode.Services" xmlns:services="clr-namespace:PvfCode;assembly=PvfCode.Services" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:themeEnums="clr-namespace:PvfCode.Models.Enums;assembly=PvfCode.Models">
+  <converts:ConvertEnumToVisibility x:Key="ConvertEnumToVisibility" />
+  <converts:ConvertBoolenToVisibility x:Key="ConvertBoolenToVisibility" />
+  <converts:ConvertBoolenFalseToVisibility x:Key="ConvertBoolenFalseToVisibility" />
+  <converts:ConvertNullToVisibility x:Key="ConvertNullToVisibility" />
+  <converts:ConvertEnumToBoolen x:Key="ConvertEnumToBoolen" />
+  <converts:ConverterBoolenToFalse x:Key="ConverterBoolenToFalse" />
+  <converts:ConverterIsNullOrEmptyToFalse x:Key="ConverterIsNullOrEmptyToFalse" />
+  <search:ConvertFileTypeHasSet x:Key="ConvertFileTypeHasSet" />
+  <search:ConverterFileTypeKeepOrExcludeSelectItem x:Key="ConverterFileTypeKeepOrExcludeSelectItem" />
+  <models:BookMarkTreeNodeImageSelector x:Key="BookMarkTreeNodeImageSelector" />
+  <converts:ConverterUrlToImageSource x:Key="ConverterUrlToImageSource" />
+  <converts:ConverterNullToIsVisibilityBoolen x:Key="ConverterNullToIsVisibilityBoolen" />
+  <converts:ConvertBoolVisibility x:Key="ConvertBoolVisibility" />
+  <converts:ConverterStringIsemptyToVisibility x:Key="ConverterStringIsemptyToVisibility" />
+  <converts:ConverterEnumToVisibility x:Key="ConverterEnumToVisibility" />
+  <converts:MultiBindingConverter x:Key="MultiBindingConverter" />
+  <converts:ConverterIsNull x:Key="ConverterIsNull" />
+  <converts:ConverterEditValueToIsEnabled x:Key="ConverterEditValueToIsEnabled" />
+  <converts:ConverterGreaterThan_0_ToBoolen x:Key="ConverterGreaterThan_0_ToBoolen" />
+  <converts:ConverterGreaterThan_1_ToVisibility x:Key="ConverterGreaterThan_1_ToVisibility" />
+  <converts:ConverterFontSizeAdd x:Key="ConverterFontSizeAdd" />
+  <converts:ConvertFontSizeReduction x:Key="ConvertFontSizeReduction" />
+  <converts:ConverterNotNull x:Key="ConverterNotNull" />
+  <converts:EventArgsConverterSenderAndArgs x:Key="EventArgsConverterSenderAndArgs" />
+  <Style x:Key="{x:Type editors:ButtonInfo}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type editors:ButtonInfo}">
+    <Setter Property="ToolTipService.InitialShowDelay" Value="50" />
+  </Style>
+  <Style x:Key="TextBlockCenter" TargetType="{x:Type TextBlock}">
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style x:Key="BarAddNewSearchResult" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type bars:BarButtonItem}">
+    <Setter Property="bars:BarItem.Content" Value="{DynamicResource mainWin_bar_Main_subItem_Search_CreateFileSetInFindView}" />
+    <Setter Property="bars:BarItem.Glyph" Value="{DynamicResource NewFile_16x}" />
+    <Setter Property="bars:BarItem.Command" Value="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=SearchResultViewModel.OnShowAddNewSearchResultViewCommand}" />
+  </Style>
+  <Style x:Key="BarOnTxtImportFileList" TargetType="{x:Type dxb:BarButtonItem}">
+    <Setter Property="dxb:BarItem.Content" Value="{DynamicResource mainWin_bar_Main_subItem_Search_ImportFindResultFromTxt}" />
+    <Setter Property="dxb:BarItem.Glyph" Value="{DynamicResource ImportText}" />
+    <Setter Property="ContentElement.IsEnabled" Value="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+    <Setter Property="dxb:BarItem.Command" Value="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=SearchResultViewModel.OnTxtImportFileListCommand}" />
+  </Style>
+  <macro:MacroBarItemTemplateSelector x:Key="MacroBarItemTemplateSelector" ButtonItemTemplateKey="MacroBarButtonItem" SubItemTemplateKey="MacroSubItem" />
+  <DataTemplate x:Key="MacroBarButtonItem">
+    <ContentControl>
+      <BarButtonItem p28:BarItem.Glyph="{DynamicResource MacroIcon}" p28:BarItem.Command="{Binding Source={x:Static root:MacroHelper.Instance}, Path=OnRunCommand}" p28:BarItem.CommandParameter="{Binding}" p28:BarItem.Content="{Binding Key}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}" xmlns:p28="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+    </ContentControl>
+  </DataTemplate>
+  <DataTemplate x:Key="MacroSubItem">
+    <ContentControl>
+      <BarSubItem p28:BarSubItem.ItemTemplateSelector="{StaticResource MacroBarItemTemplateSelector}" p28:BarItem.Content="{Binding Key}" p28:BarItem.Glyph="{Binding Source={x:Static root:Res.Instance}, Path=TreeFiles.FolderClosed}" p28:BarSubItem.ItemLinksSource="{Binding Value.Children}" xmlns:p28="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+    </ContentControl>
+  </DataTemplate>
+  <Style x:Key="批处理宏_SubItem" TargetType="{x:Type dxb:BarSubItem}">
+    <Setter Property="dxb:BarItem.Content" Value="{DynamicResource mainWin_bar_Main_subItem_Macro_BatchProcessMacro}" />
+    <Setter Property="dxb:BarItem.Glyph" Value="{DynamicResource CollapseGroup_16x}" />
+    <Setter Property="dxb:BarSubItem.ItemLinksSource" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=MacroGroup.批量处理}" />
+    <Setter Property="dxb:BarSubItem.ItemTemplateSelector" Value="{StaticResource MacroBarItemTemplateSelector}" />
+  </Style>
+  <Style x:Key="全局搜索宏_SubItem" TargetType="{x:Type dxb:BarSubItem}">
+    <Setter Property="dxb:BarItem.Content" Value="{DynamicResource mainWin_bar_Main_subItem_Macro_GlobalSearchMacro}" />
+    <Setter Property="dxb:BarItem.Glyph" Value="{DynamicResource FindinFiles_16x}" />
+    <Setter Property="dxb:BarSubItem.ItemLinksSource" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=MacroGroup.全局搜索}" />
+    <Setter Property="dxb:BarSubItem.ItemTemplateSelector" Value="{StaticResource MacroBarItemTemplateSelector}" />
+  </Style>
+  <Style x:Key="BarCheckItemSaveAppsettingStyle" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type bars:BarCheckItem}">
+  </Style>
+  <macro:MacroBarItemTemplateSelector x:Key="MacroBarItemTemplateSelectorNow" ButtonItemTemplateKey="MacroBarButtonItemNow" SubItemTemplateKey="MacroSubItemNow" />
+  <DataTemplate x:Key="MacroBarButtonItemNow">
+    <ContentControl>
+      <BarButtonItem p28:BarItem.Glyph="{DynamicResource MacroIcon}" p28:BarItem.Command="{Binding Path=DataContext.SelectedMacroCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=BatchOperation:BatchOperationView}}" p28:BarItem.CommandParameter="{Binding}" p28:BarItem.Content="{Binding Key}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}" xmlns:p28="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+    </ContentControl>
+  </DataTemplate>
+  <DataTemplate x:Key="MacroSubItemNow">
+    <ContentControl>
+      <BarSubItem p28:BarSubItem.ItemTemplateSelector="{StaticResource MacroBarItemTemplateSelectorNow}" p28:BarItem.Content="{Binding Key}" p28:BarItem.Glyph="{Binding Source={x:Static root:Res.Instance}, Path=TreeFiles.FolderClosed}" p28:BarSubItem.ItemLinksSource="{Binding Value.Children}" xmlns:p28="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+    </ContentControl>
+  </DataTemplate>
+  <Style x:Key="批处理宏_SubItemNow" TargetType="{x:Type dxb:BarSubItem}">
+    <Setter Property="dxb:BarItem.Content" Value="批量处理 宏" />
+    <Setter Property="dxb:BarItem.Glyph" Value="{DynamicResource CollapseGroup_16x}" />
+    <Setter Property="dxb:BarSubItem.ItemLinksSource" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=MacroGroup.批量处理}" />
+    <Setter Property="dxb:BarSubItem.ItemTemplateSelector" Value="{StaticResource MacroBarItemTemplateSelectorNow}" />
+  </Style>
+  <ObjectDataProvider x:Key="KeyRemoveOrKeepFileType" MethodName="GetNames" xmlns:system="clr-namespace:System;assembly=System.Runtime" ObjectType="{x:Type system:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="pvfEnums:RemoveOrKeepFileType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="ValueRemoveOrKeepFileType" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="pvfEnums:RemoveOrKeepFileType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="PvfEncodingTypeList" MethodName="GetNames" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="PvfEnums:EncodingType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="ValueEncodingType" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="PvfEnums:EncodingType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="ThemeTypeList" MethodName="GetNames" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="themeEnums:ThemeType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="ValueThemeType" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="themeEnums:ThemeType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="KeyCommentType" MethodName="GetNames" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="enums1:PvfCommentType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="ValueCommentType" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="enums1:PvfCommentType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="HoverTooltipModeList" MethodName="GetNames" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="enums:HoverTooltipMode" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="ValueHoverTooltipMode" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="enums:HoverTooltipMode" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <Style x:Key="LinkButton" TargetType="{x:Type Button}">
+    <Setter Property="Width" Value="Auto" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <ContentPresenter VerticalAlignment="Center" Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}">
+            <FrameworkElement.Resources>
+              <ResourceDictionary>
+                <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                  <Style.Triggers>
+                    <Trigger Property="UIElement.IsMouseOver" Value="true">
+                      <Setter Property="TextDecorations" Value="Underline" />
+                    </Trigger>
+                  </Style.Triggers>
+                </Style>
+              </ResourceDictionary>
+            </FrameworkElement.Resources>
+          </ContentPresenter>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Foreground" Value="#007acc" />
+    <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+    <Style.Triggers>
+      <Trigger Property="UIElement.IsMouseOver" Value="true">
+        <Setter Property="Foreground" Value="#007acc" />
+      </Trigger>
+      <Trigger Property="IsPressed" Value="True">
+        <Setter Property="Foreground" Value="#1e8ac7" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <DataTemplate x:Key="KorFileQuoteTreeCellChildrenTemplate">
+    <StackPanel Orientation="Horizontal" ToolTip="{DynamicResource mess_DoubleClickOpenDocument}" ToolTipService.InitialShowDelay="50" DataContext="{Binding Row}">
+      <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.FilePath, Mode=OneTime}" Text="{Binding FileName}" />
+      <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.Digits, Mode=OneTime}" Text="{Binding Count}" />
+      <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Text="{DynamicResource mess_References}" TextTrimming="CharacterEllipsis" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.Digits, Mode=OneTime}" />
+    </StackPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="KorFileToolTipContentTemplate">
+    <Grid MinWidth="100" MinHeight="50" MaxWidth="800" MaxHeight="400">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
+      <Grid Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}">
+        <Grid.RowDefinitions>
+          <RowDefinition />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="{DynamicResource mess_Loading}" Foreground="#FF808080" />
+        <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" FontSize="35" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" />
+      </Grid>
+      <grid:GridControl FrameworkElement.MinHeight="10" FrameworkElement.Margin="10" xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid:GridControl.BorderThickness="0" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid1:DataControlBase.SelectionMode="Row" grid1:DataControlBase.ShowBorder="False" grid:GridControl.BorderBrush="{x:Null}" grid1:DataControlBase.ItemsSource="{Binding Root.CollectionView}" UIElement.Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+        <grid:GridControl.Columns>
+          <grid:GridColumn grid1:BaseColumn.Width="auto" grid1:ColumnBase.AllowEditing="false" grid1:ColumnBase.FieldName="FilePath" grid1:BaseColumn.Header="{DynamicResource mess_FileName}" grid1:ColumnBase.CellTemplate="{StaticResource KorFileQuoteTreeCellChildrenTemplate}" />
+        </grid:GridControl.Columns>
+        <grid:GridControl.View>
+          <grid:TableView grid:TableView.AllowBandMoving="False" grid:TableView.AllowBandMultiRow="False" grid:TableView.AllowBandResizing="False" grid:TableView.AllowBestFit="False" grid:TableView.AllowCascadeUpdate="False" grid1:DataViewBase.AllowColumnFiltering="False" grid1:DataViewBase.AllowColumnMoving="False" grid1:DataViewBase.AllowEditing="True" grid:TableView.AllowHorizontalScrollingVirtualization="True" grid1:DataViewBase.EnableImmediatePosting="True" grid1:DataViewBase.EnableSelectedRowAppearance="True" grid:TableView.HorizontalScrollbarVisibility="Auto" grid1:DataViewBase.NavigationStyle="Cell" grid1:DataViewBase.ScrollingMode="Smart" grid:TableView.ShowAutoFilterRow="False" grid:TableView.ShowBandsInCustomizationForm="False" grid:TableView.ShowBandsPanel="False" grid1:DataViewBase.ShowColumnHeaders="False" grid:TableView.ShowDataNavigator="False" grid1:DataViewBase.ShowEmptyText="False" grid1:DataViewBase.ShowFilterPanelMode="Never" grid:GridViewBase.ShowGroupPanel="False" grid:TableView.ShowHorizontalLines="False" grid:TableView.ShowIndicator="False" grid1:DataViewBase.ShowSearchPanelMode="Never" grid1:DataViewBase.ShowSelectionRectangle="True" grid:TableView.ShowVerticalLines="True" grid:TableView.UseEvenRowBackground="False" grid:TableView.VerticalScrollbarVisibility="Auto" grid:TableView.RowDoubleClickCommand="{Binding NodeDoubleClickCommand}" />
+        </grid:GridControl.View>
+      </grid:GridControl>
+      <StackPanel Grid.Row="1" Height="22" Margin="0,0,0,0" Background="{DynamicResource KorStrFileQuoteTooltipBottomBackBrush}" Orientation="Horizontal">
+        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.Section, Mode=OneTime}" Text="{Binding Key}" />
+        <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.Digits, Mode=OneTime}" Text="{Binding Count}" />
+        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Text="{DynamicResource mess_References}" TextTrimming="CharacterEllipsis" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.Digits, Mode=OneTime}" />
+      </StackPanel>
+    </Grid>
+  </DataTemplate>
+  <ControlTemplate x:Key="KorFileQuoteButtonContentTemplate">
+    <TextBlock>
+      <ContentPresenter />
+      <FrameworkElement.Style>
+        <Style TargetType="{x:Type TextBlock}">
+          <Style.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="true">
+              <Setter Property="TextDecorations" Value="Underline" />
+            </Trigger>
+          </Style.Triggers>
+          <Setter Property="Text" Value="{Binding Text, Mode=OneWay}" />
+        </Style>
+      </FrameworkElement.Style>
+    </TextBlock>
+  </ControlTemplate>
+  <Style x:Key="KorFileQuoteButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.LstItemNameForeBrush, Mode=OneWay}" />
+    <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+    <Setter Property="Margin" Value="50,0,0,-10" />
+    <Setter Property="Padding" Value="0" />
+    <Style.Triggers>
+      <Trigger Property="UIElement.IsMouseOver" Value="true">
+        <Setter Property="Foreground" Value="#007acc" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="KorFileQuoteFlyoutControlStyle" xmlns:flyout="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type flyout:FlyoutControl}">
+    <Setter Property="FrameworkElement.MaxHeight" Value="400" />
+    <Setter Property="Control.Padding" Value="0" />
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="FrameworkElement.Height" Value="auto" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.BorderBrush" Value="#92caf4" />
+    <Setter Property="FrameworkElement.FlowDirection" Value="LeftToRight" />
+    <Setter xmlns:native="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" Property="native:FlyoutBase.StaysOpen" Value="False" />
+    <Setter Property="flyoutNative:FlyoutBase.Settings">
+      <Setter.Value>
+        <flyout:FlyoutSettings flyout:FlyoutSettings.IndicatorVerticalAlignment="Bottom" flyout:FlyoutSettings.Placement="Top" flyout:FlyoutSettings.ShowIndicator="True" />
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

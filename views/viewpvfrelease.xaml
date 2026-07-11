@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl cs:Class="PvfCode.Views.ViewPvfRelease" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:cs="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:enums="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:local="clr-namespace:PvfCode.Views;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:pvfrelease="clr-namespace:PvfCode.Converts.PvfRelease;assembly=pvfUtility" IsEnabled="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConverterBoolenToFalse}}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <pvfrelease:ConverterPvfRelease_TargetType cs:Key="ConverterPvfRelease_TargetType" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
+      <Border CornerRadius="5">
+        <Grid Height="70" Margin="10" Background="{DynamicResource PvfReleasePanelBackbrush}">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+          </Grid.ColumnDefinitions>
+          <Image Width="30" Height="30" Margin="10,0,0,0" VerticalAlignment="Center" Source="{DynamicResource FolderClosed_16x}" />
+          <editors:ButtonEdit Grid.Column="1" FrameworkElement.Height="24" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.AllowDefaultButton="False" editors:BaseEdit.IsReadOnly="True" editors:BaseEdit.NullText="{DynamicResource ViewPvfRelease_Button_BrowseDirectoryNullText}" editors:TextEditBase.Text="{Binding TargetFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <editors:ButtonEdit.Buttons>
+              <editors:ButtonInfo ButtonInfo.Content="{DynamicResource ViewPvfRelease_Button_BrowseDirectory}" editors:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource ViewPvfRelease_Button_BrowseDirectory}" editors:CommandButtonInfo.Command="{Binding OnSelectTargetPathCommand}" />
+            </editors:ButtonEdit.Buttons>
+          </editors:ButtonEdit>
+          <core:SimpleButton Grid.Column="2" FrameworkElement.Width="90" FrameworkElement.Height="50" FrameworkElement.Margin="10,0,10,0" FrameworkElement.VerticalAlignment="Center" ContentControl.Content="{DynamicResource ViewPvfRelease_Button_Release}" SimpleButton.Glyph="{DynamicResource PvfRelease}" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" core:SimpleButton.GlyphAlignment="Left" core:SimpleButton.GlyphHeight="30" core:SimpleButton.GlyphToContentOffset="15" core:SimpleButton.GlyphWidth="30" ButtonBase.Command="{Binding OnStartCommand}" />
+        </Grid>
+      </Border>
+      <Border Grid.Row="1" Margin="10">
+        <Grid>
+          <Grid Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+            <Border Background="{DynamicResource PvfReleaseStatusPanelBackBrush}" BorderBrush="{DynamicResource PvfReleaseStatusPanelBorderBrush}" BorderThickness="1" Visibility="{Binding Source={x:Static appsetting:AppSetting.Instance}, Mode=OneWay, Path=PvfConfig.ReleaseLog.LastReleaseType, Converter={StaticResource ConvertNullToVisibility}}">
+              <Grid Margin="10">
+                <Grid Visibility="{Binding Source={x:Static appsetting:AppSetting.Instance}, Mode=OneWay, Path=PvfConfig.ReleaseLog.LastLog.IsSuccess, Converter={StaticResource ConvertBoolenToVisibility}}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                  </Grid.RowDefinitions>
+                  <Image Margin="0,0,5,0" Source="{DynamicResource StatusOK_16x}" />
+                  <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Label Content="{DynamicResource ViewPvfRelease_Label_AlreadyIn}" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static appsetting:AppSetting.Instance}, Mode=OneWay, Path=PvfConfig.ReleaseLog.LastLog.Time, StringFormat=yyyy-MM-dd HH:mm:ss}" />
+                    <Label Margin="5,0,0,0" Content="{DynamicResource ViewPvfRelease_Label_As}" />
+                    <Label Margin="5,0,5,0" Content="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.ReleaseLog.LastReleaseType}" />
+                    <Label Content="{DynamicResource ViewPvfRelease_Label_Mode}" />
+                  </StackPanel>
+                  <editors:HyperlinkEdit Grid.Row="1" Grid.Column="1" FrameworkElement.Margin="-5,0,0,0" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" editors:BaseEdit.EditValue="{DynamicResource ViewPvfRelease_Button_OpenDirectory}" editors:HyperlinkEdit.Command="{Binding OnOpenTargetFolderCommand}" FrameworkElement.ToolTip="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.ReleaseLog.LastLog.TargetPath, Mode=OneWay}" />
+                </Grid>
+                <Grid Visibility="{Binding Source={x:Static appsetting:AppSetting.Instance}, Mode=OneWay, Path=PvfConfig.ReleaseLog.LastLog.IsSuccess, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                  </Grid.RowDefinitions>
+                  <Image Margin="0,0,5,0" Source="{DynamicResource StatusInvalidOutline_16x}" />
+                  <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Label Content="{DynamicResource ViewPvfRelease_Label_AlreadyIn}" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static appsetting:AppSetting.Instance}, Mode=OneWay, Path=PvfConfig.ReleaseLog.LastLog.Time, StringFormat=yyyy-MM-dd HH:mm:ss}" />
+                    <Label Grid.Row="1" Grid.Column="1" Margin="5,0,0,0" Foreground="#FFFF0000">Error：</Label>
+                  </StackPanel>
+                  <Grid Row="1" Column="1">
+                    <TextBox BorderThickness="0" Foreground="#FFFF0000" IsReadOnly="True" TextWrapping="Wrap" Text="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.ReleaseLog.ClientLog.Error}" />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Border>
+          </Grid>
+          <Grid Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}">
+            <Border Background="{DynamicResource PvfReleaseStatusPanelBackBrush}" BorderBrush="{DynamicResource PvfReleaseStatusPanelBorderBrush}" BorderThickness="1">
+              <core:WaitIndicator FrameworkElement.HorizontalAlignment="Left" Control.Background="#00FFFFFF" Control.BorderBrush="#00FFFFFF" Control.BorderThickness="0" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" core:WaitIndicator.DeferedVisibility="True" ContentControl.Content="{Binding WaitIndicatorContent, Mode=OneWay}" />
+            </Border>
+          </Grid>
+        </Grid>
+      </Border>
+      <Border Grid.Row="2" Margin="10" Background="{DynamicResource PvfReleasePanelBackbrush}" CornerRadius="8">
+        <Grid Margin="15">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto " />
+            <RowDefinition Height="auto " />
+            <RowDefinition Height="auto " />
+            <RowDefinition Height="auto " />
+            <RowDefinition Height="auto " />
+            <RowDefinition Height="auto " />
+            <RowDefinition Height="auto " />
+            <RowDefinition Height="auto " />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Label Grid.ColumnSpan="2" Content="{DynamicResource ViewPvfRelease_GroupBox_ReleaseOptions}" />
+          <Label Grid.Row="1" Margin="0,10,0,0" Content="{DynamicResource ViewPvfRelease_Label_ReleaseDirectory}" />
+          <ButtonEdit Grid.Row="1" Grid.Column="1" FrameworkElement.Margin="0,10,0,0" p16:ButtonEdit.AllowDefaultButton="False" p16:BaseEdit.IsReadOnly="True" p16:BaseEdit.NullText="发布目标路径..." p16:TextEditBase.Text="{Binding TargetFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p16="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+            <p16:ButtonEdit.Buttons>
+              <p16:ButtonInfo p16:ButtonInfo.Content="选择发布目录" p16:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="选择发布目录" p16:CommandButtonInfo.Command="{Binding OnSelectTargetPathCommand}" />
+            </p16:ButtonEdit.Buttons>
+          </ButtonEdit>
+          <Label Grid.Row="2" Margin="0,10,0,0" Content="{DynamicResource ViewPvfRelease_Label_TargetFramework}" />
+          <editors:ComboBoxEdit Grid.Row="2" Grid.Column="1" FrameworkElement.Margin="0,10,0,0" editors:ButtonEdit.IsTextEditable="False" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:BaseEdit.EditValue="{Binding TargetType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterPvfRelease_TargetType}}">
+            <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewPvfRelease_TargetType_Client}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+            <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewPvfRelease_TargetType_Server}" />
+          </editors:ComboBoxEdit>
+          <Label Grid.Row="4" Grid.Column="1" Margin="0,12,0,0" Content="{DynamicResource ViewPvfRelease_Label_Tips}" Foreground="#FF808080" Visibility="{Binding TargetType, Mode=OneWay, Converter={StaticResource ConverterEnumToVisibility}, ConverterParameter={x:Static enums:PvfReleaseType.客户端}}" />
+          <Label Grid.Row="5" Grid.Column="1" Margin="0,12,0,0" Content="{DynamicResource ViewPvfRelease_Label_Tips2}" Foreground="#FF808080" Visibility="{Binding TargetType, Mode=OneWay, Converter={StaticResource ConverterEnumToVisibility}, ConverterParameter={x:Static enums:PvfReleaseType.服务端}}" />
+          <Label Grid.Row="6" Grid.Column="1" Margin="0,20,0,0" Content="{DynamicResource ViewPvfRelease_Label_Tips3}" Foreground="#caba57" />
+        </Grid>
+      </Border>
+      <Border Grid.Row="3" Margin="10" Background="{DynamicResource PvfReleasePanelBackbrush}" CornerRadius="8" Visibility="{Binding TargetType, Mode=OneWay, Converter={StaticResource ConverterEnumToVisibility}, ConverterParameter={x:Static enums:PvfReleaseType.客户端}}">
+        <Grid Margin="15">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto " />
+            <RowDefinition Height="auto " />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Label Content="{DynamicResource ViewPvfRelease_GroupBox_ProjectSelection}" />
+            <HyperlinkEdit FrameworkElement.Margin="20,0,0,0" FrameworkElement.VerticalAlignment="Center" p17:HyperlinkEdit.AllowAutoNavigate="True" p17:HyperlinkEdit.CommandParameter="True" p17:BaseEdit.EditValue="{DynamicResource ViewPvfRelease_Button_SelectAll}" p17:HyperlinkEdit.Command="{Binding OnSelectallCommand}" xmlns:p17="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+            <HyperlinkEdit FrameworkElement.Margin="20,0,0,0" FrameworkElement.VerticalAlignment="Center" p17:HyperlinkEdit.AllowAutoNavigate="True" p17:HyperlinkEdit.CommandParameter="False" p17:BaseEdit.EditValue="{DynamicResource ViewPvfRelease_Button_InvertSelection}" p17:HyperlinkEdit.Command="{Binding OnSelectallCommand}" xmlns:p17="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+          </StackPanel>
+          <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,10,0,0" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.ReleaseLog.ClientReleaseOptions}">
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_ClearDropFiles}" IsChecked="{Binding SetDropFileBlank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_DeleteCreationRate}" IsChecked="{Binding DeleteEquCreationRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_AddBomb}" IsChecked="{Binding AddGiftBomb, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_ClearMonsterRewardItem}" IsChecked="{Binding ClearQuestMonsterRewardItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_DeleteClearRewardItem}" IsChecked="{Binding DeleteQuestClearRewardItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_DeleteEnemyRewardItem}" IsChecked="{Binding DeleteQuestEnemyRewardItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_DeleteDungeon}" IsChecked="{Binding DeleteMapDungeon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_SetMonsterCode1}" IsChecked="{Binding SetMapMonsterCode1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_SetAiCharacterRandomApcId}" IsChecked="{Binding SetMapAiCharacterCodeRandomApcId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_SetLotteryMachineProbability1000}" IsChecked="{Binding SetLotteryRate1000, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_DeleteCommonChampionDropItem}" IsChecked="{Binding DeleteMobCommonChampionDropItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_DeleteItem}" IsChecked="{Binding DeleteMobItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_DeleteDesign}" IsChecked="{Binding DeletePackageSections, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_ReplaceRandomList}" IsChecked="{Binding ReplaceMoboxRandomList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_DeleteOutputIndex}" IsChecked="{Binding DeletePetEggOutputIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_ClearRefillItem}" IsChecked="{Binding ClearEtcRefillItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_DeleteMapSpecification}" IsChecked="{Binding DeleteDungeonMapSpecification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_ConfuseMiniCrate}" IsChecked="{Binding ConfusePetCanItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_SetEmancipateOutput}" IsChecked="{Binding SetEquEmancipateOutput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ViewPvfRelease_Options_SetDesignOutput}" IsChecked="{Binding SetPackageOutput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          </StackPanel>
+        </Grid>
+      </Border>
+    </Grid>
+  </ScrollViewer>
+</UserControl>

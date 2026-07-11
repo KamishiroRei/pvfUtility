@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<importviews:ImportFilesOptionsDialog xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" FrameworkElement.Name="win" Window.Title="导入文件" FrameworkElement.Width="350" FrameworkElement.Height="200" ThemedWindow.Icon="{DynamicResource ImportFilesIcon}" xmlns:importviews="clr-namespace:PvfCode.Views.ImportViews;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <TextBlock Name="TextMessage" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">
+    </TextBlock>
+    <StackPanel Grid.Row="1" Height="1" Margin="0,10,0,10" Background="{Binding ElementName=win, Path=BorderBrush}" />
+    <StackPanel Grid.Row="2" Margin="0,8,0,8" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+      <FrameworkElement.Resources>
+        <ResourceDictionary>
+          <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+          </Style>
+        </ResourceDictionary>
+      </FrameworkElement.Resources>
+      <Button Name="BtnImport" Content="导入">
+      </Button>
+      <Button Name="BtnCancel" Content="取消">
+      </Button>
+      <Button Name="BtnChangedOptions" Content="更改选项...">
+      </Button>
+    </StackPanel>
+  </Grid>
+</importviews:ImportFilesOptionsDialog>

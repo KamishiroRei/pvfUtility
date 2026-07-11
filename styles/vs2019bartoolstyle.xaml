@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:viewModels="clr-namespace:PvfCode.ViewModels.Bars;assembly=pvfUtility">
+  <DataTemplate x:Key="checkItemTemplate">
+    <ContentControl>
+      <bars:BarCheckItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarItem.GlyphAlignment="Top" bars:BarItem.BarItemDisplayMode="{Binding DisplayMode}" bars:BarItem.Command="{Binding Command}" bars:BarItem.Content="{Binding DisplayName}" bars:BarItem.Glyph="{Binding Glyph}" bars:BarCheckItem.IsChecked="{Binding Owner.IsOpened}" />
+    </ContentControl>
+  </DataTemplate>
+  <DataTemplate x:Key="itemTemplate">
+    <ContentControl>
+      <bars:BarButtonItem ToolTipService.ShowOnDisabled="True" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarItem.BarItemDisplayMode="{Binding DisplayMode}" bars:BarItem.Command="{Binding Command}" bars:BarItem.Content="{Binding DisplayName}" bars:BarItem.Glyph="{Binding Glyph}" ContentElement.IsEnabled="{Binding IsEnabled, Mode=TwoWay}" bars:BarItem.KeyGesture="{Binding KeyGesture}" />
+    </ContentControl>
+  </DataTemplate>
+  <DataTemplate x:Key="subItemTemplate">
+    <ContentControl>
+      <BarSubItem p9:BarItem.BarItemDisplayMode="ContentAndGlyph" p9:BarItem.GlyphAlignment="Left" BarSubItem.ItemTemplateSelector="{DynamicResource VS2019BarItemTemplateSelector}" p9:BarItem.Command="{Binding Command}" p9:BarItem.Content="{Binding DisplayName}" p9:BarItem.Glyph="{Binding Glyph}" p9:BarSubItem.ItemLinksSource="{Binding Commands}" xmlns:p9="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+    </ContentControl>
+  </DataTemplate>
+  <DataTemplate x:Key="comboItemTemplate">
+    <ContentControl>
+      <bars:BarEditItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarEditItem.EditWidth="66">
+        <bars:BarEditItem.EditStyle>
+          <Style xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type editors:ComboBoxEdit}">
+            <Setter Property="Control.Padding" Value="0" />
+            <Setter Property="FrameworkElement.Height" Value="21" />
+          </Style>
+        </bars:BarEditItem.EditStyle>
+        <bars:BarEditItem.EditSettings>
+          <settings:ComboBoxEditSettings xmlns:settings="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" settings:LookUpEditSettingsBase.DisplayMember="DisplayName" settings:ButtonEditSettings.IsTextEditable="False" settings:LookUpEditSettingsBase.ValueMember="DisplayName" settings:LookUpEditSettingsBase.ItemsSource="{Binding Commands}" />
+        </bars:BarEditItem.EditSettings>
+      </bars:BarEditItem>
+    </ContentControl>
+  </DataTemplate>
+  <DataTemplate x:Key="separatorTemplate">
+    <ContentControl>
+      <bars:BarItemSeparator xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+    </ContentControl>
+  </DataTemplate>
+  <viewModels:BarItemTemplateSelector x:Key="VS2019BarItemTemplateSelector" BarCheckItemTemplate="{StaticResource checkItemTemplate}" BarComboBoxTemplate="{StaticResource comboItemTemplate}" BarItemSeparatorTemplate="{StaticResource separatorTemplate}" BarItemTemplate="{StaticResource itemTemplate}" BarSubItemTemplate="{StaticResource subItemTemplate}" />
+  <DataTemplate x:Key="VS2019MainMenuSubItemTemplate">
+    <ContentControl>
+      <BarSubItem p9:BarItem.BarItemDisplayMode="ContentAndGlyph" p9:BarItem.GlyphAlignment="Left" p9:BarSubItem.ItemTemplateSelector="{StaticResource VS2019BarItemTemplateSelector}" p9:BarItem.Command="{Binding Command}" p9:BarItem.Content="{Binding DisplayName}" p9:BarItem.Glyph="{Binding Glyph}" p9:BarSubItem.ItemLinksSource="{Binding Commands}" xmlns:p9="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+    </ContentControl>
+  </DataTemplate>
+  <DataTemplate x:Key="VS2019MainMenuTemplate">
+    <ContentControl Margin="0" Padding="0">
+      <bars:Bar xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:MergingProperties.ElementMergingBehavior="All" bars:Bar.Caption="{Binding DisplayName}" bars:Bar.IsMainMenu="{Binding IsMainMenu}">
+        <bars:BarLinkContainerItem bars:BarLinkContainerItem.ItemTemplate="{StaticResource VS2019MainMenuSubItemTemplate}" bars:BarLinkContainerItem.ItemLinksSource="{Binding Commands}" />
+      </bars:Bar>
+    </ContentControl>
+  </DataTemplate>
+  <DataTemplate x:Key="VS2019ToobarTemplate">
+    <ContentControl Margin="0" Padding="0">
+      <Bar p9:Bar.AllowCustomizationMenu="False" p9:Bar.AllowQuickCustomization="False" p9:BarItemLinkHolderBase.ItemTemplateSelector="{StaticResource VS2019BarItemTemplateSelector}" p9:Bar.Caption="{Binding DisplayName}" p9:BarItemLinkHolderBase.ItemLinksSource="{Binding Commands}" xmlns:p9="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+    </ContentControl>
+  </DataTemplate>
+  <viewModels:BarTemplateSelector x:Key="VS2019BarTemplateSelector" MainMenuTemplate="{StaticResource VS2019MainMenuTemplate}" ToolbarTemplate="{StaticResource VS2019ToobarTemplate}" />
+</ResourceDictionary>

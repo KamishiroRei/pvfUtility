@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" xmlns:local="clr-namespace:PvfCode.Views.ImportViews;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:pvfEnums="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.EventName="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding LoadedCommand}" />
+  </interactivity:Interaction.Behaviors>
+  <docking:DockLayoutManager xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:DockLayoutManager.Name="DemoDockContainer" Grid.Row="0" Grid.ColumnSpan="2" FrameworkElement.Margin="0,0,0,3" docking:DockLayoutManager.DockingStyle="VS2010" docking:DockLayoutManager.FloatingDocumentContainer="DocumentHost" docking:DockLayoutManager.FloatingMode="Desktop" UIElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}">
+    <docking:LayoutGroup FrameworkElement.Name="Root">
+      <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource WinImportFile_FileExplorerCaption}" docking:BaseLayoutItem.ItemWidth="1.5*">
+        <Grid IsEnabled="{Binding TreeViewModel.TreeGroupData.Loading, Converter={StaticResource ConverterBoolenToFalse}, Mode=OneWay}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+          <bars:ToolBarControl FrameworkElement.Name="toolbarControl" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+            <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.CommandParameter="true" bars:BarItem.Content="{DynamicResource WinImportFile_BrowseLocalFileBtnName}" bars:BarItem.Glyph="/images/svgs/groupselectcursor_16x.svg" bars:BarItem.Command="{Binding SelectDiskFilesCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+            <bars:BarItemSeparator />
+            <bars:BarStaticItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource WinImportFile_ImportFrom7z}">
+              <bars:BarItem.ContentTemplate>
+                <DataTemplate>
+                  <CheckBox Content="{DynamicResource WinImportFile_ImportFrom7z}" IsChecked="{Binding Path=DataContext.Is7zip, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=dxb:ToolBarControl}}" />
+                </DataTemplate>
+              </bars:BarItem.ContentTemplate>
+            </bars:BarStaticItem>
+            <bars:BarItemSeparator />
+            <bars:BarButtonItem bars:BarItem.Content="{DynamicResource WinImportFile_ClearAllFileBtnName}" bars:BarItem.Glyph="{DynamicResource ClearWindowContent}" bars:BarItem.Command="{Binding OnClearAllFilesCommand}" />
+          </bars:ToolBarControl>
+          <controls:PvfTreeViewGroup x:Name="TreeGroupPanel" Grid.Row="1" DataContext="{Binding TreeViewModel}" TreeAllowDrop="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+          <bars:StatusBarControl Grid.Row="2" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" Control.Background="{Binding ElementName=toolbarControl, Path=Background}">
+            <bars:BarStaticItem>
+              <bars:BarItem.ContentTemplate>
+                <DataTemplate>
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource BatchOperationView_FileCount}" />
+                    <TextBlock Text="{Binding Path=DataContext.TreeViewModel.TreeGroupData.FileCount, Mode=OneWay, RelativeSource={RelativeSource AncestorType=dxb:StatusBarControl}}" />
+                  </StackPanel>
+                </DataTemplate>
+              </bars:BarItem.ContentTemplate>
+            </bars:BarStaticItem>
+          </bars:StatusBarControl>
+        </Grid>
+      </docking:LayoutPanel>
+      <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource WinImportFile_ImportOptionCaption}" docking:BaseLayoutItem.ItemWidth="2*">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <GroupBox Margin="0,10,0,0" Header="{DynamicResource WinImportFile_Options_ImportDirCaption}">
+              <Grid IsEnabled="{Binding TreeViewModel.TreeGroupData.Loading, Converter={StaticResource ConverterBoolenToFalse}, Mode=OneWay}">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="{DynamicResource WinImportFile_Options_ImportTo_Label}" />
+                <editors:ButtonEdit FrameworkElement.Name="textTargetPath" Grid.Column="1" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.AllowDefaultButton="False" BaseEdit.NullText="{DynamicResource WinImportFile_Options_ImportTo_NullText}" editors:BaseEdit.EditValue="{Binding Config.TargetPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" UIElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}">
+                  <editors:BaseEdit.EditValueChanged>
+                    <dxbinding:DXEventExtension xmlns:dxbinding="clr-namespace:DevExpress.Xpf.DXBinding;assembly=DevExpress.Xpf.Core.v24.1" dxbinding:DXEventExtension.Handler="TargetPath_EditValueChanged(@sender,@args)" />
+                  </editors:BaseEdit.EditValueChanged>
+                  <editors:ButtonEdit.Buttons>
+                    <editors:ButtonInfo FrameworkContentElement.Cursor="Hand" editors:ButtonInfo.GlyphKind="Cancel" FrameworkContentElement.ToolTip="{DynamicResource WinImportFile_Options_ClearImportDir}" Click="cM0QYAffYd" />
+                    <editors:ButtonInfo FrameworkContentElement.Cursor="Hand" editors:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource WinImportFile_Options_ImportDirFromPvf}" editors:CommandButtonInfo.Command="{Binding OnSelectTargetCommand}" />
+                  </editors:ButtonEdit.Buttons>
+                </editors:ButtonEdit>
+              </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Margin="0,10,0,0" Header="{DynamicResource WinImportFile_Options_Caption_ImportOption}">
+              <WrapPanel Orientation="Vertical">
+                <CheckBox Content="{DynamicResource WinImportFile_Options_CheckBox_CompileScript}" IsChecked="{Binding Config.CompileScript, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="{DynamicResource WinImportFile_Options_CheckBox_CompileAni}" IsChecked="{Binding Config.CompileBinaryAni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="{DynamicResource WinImportFile_Options_CheckBox_ConvertToTraditionalChinese}" IsChecked="{Binding Config.ConvertToTraditionalChinese, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <StackPanel Height="1" Margin="0,10,0,10" Background="#FF808080" />
+                <CheckBox Content="{DynamicResource WinImportFile_Options_CheckBox_CompileChina70PlusPvfScript}" ToolTip="{DynamicResource WinImportFile_Options_CheckBox_CompileChina70PlusPvfScript_ToolTip}" IsChecked="{Binding Config.CompileChinaPvfScriptFile}" />
+                <CheckBox Content="{DynamicResource WinImportFile_Options_CheckBox_CompileChina70PlusPvfAni}" IsChecked="{Binding Config.CompileChinaAni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              </WrapPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="2" Margin="0,10,0,0" Header="{DynamicResource WinImportFile_Options_Caption_FileConflict}">
+              <WrapPanel Orientation="Vertical">
+                <RadioButton Content="{DynamicResource WinImportFile_Options_RadioButton_Overwrite}" IsChecked="{Binding Config.Operation, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static pvfEnums:FileOperation.Cover}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Content="{DynamicResource WinImportFile_Options_RadioButton_Rename}" IsChecked="{Binding Config.Operation, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static pvfEnums:FileOperation.Rename}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Content="{DynamicResource WinImportFile_Options_RadioButton_Skip}" IsChecked="{Binding Config.Operation, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static pvfEnums:FileOperation.Skip}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Content="{DynamicResource WinImportFile_Options_RadioButton_Stop}" IsChecked="{Binding Config.Operation, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static pvfEnums:FileOperation.Cancel}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              </WrapPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="3" Margin="0,10,0,0" Header="{DynamicResource WinImportFile_Options_Caption_FilterFileType}">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <editors:ComboBoxEdit editors:ButtonEdit.IsTextEditable="False" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:BaseEdit.EditValue="{Binding Config.RemoveOrKeepFileType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterFileTypeKeepOrExcludeSelectItem}}">
+                  <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource GlobalSearchWindow_FileTypeOption_Keep}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource GlobalSearchWindow_FileTypeOption_Exclude}" />
+                </editors:ComboBoxEdit>
+                <ComboBoxEdit FrameworkElement.Name="comboBoxEditFileTypesString" Grid.Column="1" p23:ButtonEdit.AllowDefaultButton="False" p23:ButtonEdit.IsTextEditable="True" p23:BaseEdit.NullText="{DynamicResource WinImportFile_Options_FilterFileType_NullText}" p23:BaseEdit.EditValue="{Binding Config.FileTypes, Converter={StaticResource ConvertFileTypeHasSet}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" p23:LookUpEditBase.ItemsSource="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.FileTypes}" xmlns:p23="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                  <p23:ButtonEdit.Buttons>
+                    <p23:ButtonInfo p23:ButtonInfo.GlyphKind="Cancel" FrameworkContentElement.ToolTip="{DynamicResource WinImportFile_Options_ClearFilterFileType}" Click="ycGQCGHLHR" />
+                    <editors:ButtonInfo editors:ButtonInfo.GlyphKind="DropDown" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonInfoBase.IsDefaultButton="True" FrameworkContentElement.ToolTip="{DynamicResource WinImportFile_Options_SelectFilterFileType}" />
+                  </p23:ButtonEdit.Buttons>
+                  <p23:BaseEdit.StyleSettings>
+                    <editors:CheckedComboBoxStyleSettings xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  </p23:BaseEdit.StyleSettings>
+                </ComboBoxEdit>
+              </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="4" Margin="0,10,0,0" Header="{DynamicResource WinImportFile_Options_Caption_Execute}">
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+                  <CheckBox Margin="0,0,10,0" Content="{DynamicResource WinImportFile_Options_CheckBox_AddAllFilesToSearchView}" IsChecked="{Binding Config.ImportSuccessFilePathListAddToSearchPanel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  <Button Width="90" Height="30" VerticalAlignment="Top" Content="{DynamicResource WinImportFile_Options_StartImport}" Cursor="Hand" Command="{Binding OnImportStartCommand}" IsEnabled="{Binding TreeViewModel.TreeGroupData.Loading, Converter={StaticResource ConverterBoolenToFalse}, Mode=OneWay}" />
+                </StackPanel>
+              </Grid>
+            </GroupBox>
+          </Grid>
+        </ScrollViewer>
+      </docking:LayoutPanel>
+    </docking:LayoutGroup>
+  </docking:DockLayoutManager>
+</UserControl>

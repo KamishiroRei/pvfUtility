@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<userviews:WindowLogin xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:login="clr-namespace:PvfCode.Converts.Login" FrameworkElement.MinWidth="350" Control.Padding="10" Window.ResizeMode="NoResize" Window.SizeToContent="WidthAndHeight" xmlns:userviews="clr-namespace:PvfCode.Views.UserViews" Window.Title="{Binding Title}" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}" UIElement.IsEnabled="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConverterBoolenToFalse}}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <login:ConverterLoginViewVisibility x:Key="ConverterLoginViewVisibility" />
+      <login:ConverterHyperlinkEditVisibility x:Key="ConverterHyperlinkEditVisibility" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <Grid>
+      <Grid Name="loginView" Visibility="{Binding ViewType, Converter={StaticResource ConverterLoginViewVisibility}, ConverterParameter=Login}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Image Grid.RowSpan="2" Width="50" Margin="0,0,20,0" Source="{DynamicResource VisualStudioBlendLogo2015Pre}" Stretch="Fill" />
+        <controls:EditBox Grid.Column="1" Caption="{DynamicResource WindowLogin_Title}" NullText="{DynamicResource WindowLogin_TextBox_UserName_Placeholder}" Value="{Binding LoginModel.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Grid Row="1" Column="1" Margin="0,10,0,0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Label Content="{DynamicResource WindowLogin_Label_Password}" />
+          <editors:PasswordBoxEdit Grid.Column="1" BaseEdit.NullText="{DynamicResource WindowLogin_PasswordBox_Password_Placeholder}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:BaseEdit.EditValue="{Binding LoginModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+        <!--Unknown connection ID: 2-->
+      </Grid>
+      <Grid Name="Reg" Visibility="{Binding ViewType, Converter={StaticResource ConverterLoginViewVisibility}, ConverterParameter=Register}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Image Grid.RowSpan="2" Width="50" Margin="0,0,20,0" Source="{DynamicResource VisualStudioBlendLogo2015Pre}" Stretch="Fill" />
+        <controls:EditBox Grid.Column="1" Caption="{DynamicResource WindowLogin_Title}" NullText="{DynamicResource WindowLogin_TextBox_UserName_Placeholder}" Value="{Binding RegIsteredModel.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <controls:EditBox Grid.Row="1" Grid.Column="1" Margin="0,10,0,0" Caption="{DynamicResource WindowLogin_Label_NickName}" NullText="{DynamicResource WindowLogin_TextBox_NickName_Placeholder}" Visibility="{Binding NickNameEditBoxVisibility, Converter={StaticResource ConvertBoolenToVisibility}}" Value="{Binding RegIsteredModel.NickName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Grid Row="2" Column="1" Margin="0,10,0,0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Label Content="{DynamicResource WindowLogin_Label_Password}" />
+          <PasswordBoxEdit Grid.Column="1" p13:BaseEdit.NullText="{DynamicResource WindowLogin_PasswordBox_Password_Placeholder}" p13:BaseEdit.EditValue="{Binding RegIsteredModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p13="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+        </Grid>
+        <Grid Row="3" Column="1" Margin="0,10,0,0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Label Content="{DynamicResource WindowLogin_Label_ConfirmPassword}" />
+          <PasswordBoxEdit Grid.Column="1" p13:BaseEdit.NullText="{DynamicResource WindowLogin_PasswordBox_ConfirmPassword_Placeholder}" p13:BaseEdit.EditValue="{Binding RegIsteredModel.Password2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p13="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+        </Grid>
+        <controls:EditBox Grid.Row="4" Grid.Column="1" Margin="0,10,0,0" Caption="{DynamicResource WindowEditUserInfo_Label_PhoneNumber}" NullText="{DynamicResource WindowLogin_TextBox_PhoneNumber_Placeholder}" Value="{Binding RegIsteredModel.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <!--Unknown connection ID: 3-->
+      </Grid>
+    </Grid>
+    <StackPanel Grid.Row="1" Height="1" Margin="0,10,0,10" Background="#FF808080" />
+    <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
+      <editors:HyperlinkEdit FrameworkElement.Margin="0,0,10,0" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" editors:HyperlinkEdit.CommandParameter="Register" editors:BaseEdit.EditValue="{DynamicResource WindowLogin_Button_Register}" editors:HyperlinkEdit.Command="{Binding OnChangedViewTypeCommand}" UIElement.Visibility="{Binding ViewType, Converter={StaticResource ConverterHyperlinkEditVisibility}, ConverterParameter=Register}" />
+      <HyperlinkEdit FrameworkElement.Margin="0,0,20,0" FrameworkElement.VerticalAlignment="Center" p11:HyperlinkEdit.AllowAutoNavigate="True" p11:HyperlinkEdit.CommandParameter="ForgetPassword" p11:BaseEdit.EditValue="{DynamicResource WindowLogin_Button_FindPassword}" p11:HyperlinkEdit.Command="{Binding OnChangedViewTypeCommand}" UIElement.Visibility="{Binding ViewType, Converter={StaticResource ConverterHyperlinkEditVisibility}, ConverterParameter=ForgetPassword}" xmlns:p11="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+      <HyperlinkEdit FrameworkElement.VerticalAlignment="Center" p11:HyperlinkEdit.AllowAutoNavigate="True" p11:HyperlinkEdit.CommandParameter="Login" p11:BaseEdit.EditValue="{DynamicResource WindowLogin_Button_Login}" p11:HyperlinkEdit.Command="{Binding OnChangedViewTypeCommand}" UIElement.Visibility="{Binding ViewType, Converter={StaticResource ConverterHyperlinkEditVisibility}, ConverterParameter=Login}" xmlns:p11="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+      <Button Width="90" Height="24" Margin="20,0,0,0" Cursor="Hand" Command="{Binding OnLoginCommand}" Content="{Binding Title}" />
+    </StackPanel>
+  </Grid>
+  <!--Unknown connection ID: 1-->
+</userviews:WindowLogin>

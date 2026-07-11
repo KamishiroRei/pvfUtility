@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="Comment" xml:space="preserve"><value>文本编辑器 =&gt; 代码智能提示
+    此功能由：@半斤橙子 构思并协助编写配置文件！
+                            by:@美国的华莱士 2022.8.6 
+    独立掉落的：[independent drop] 副本接口的：副本接口解析 不用编写 由程序自动完成
+    参数说明：
+    File="要处理的文件名" *.xxx=此类扩展名的所有文件 XXX/XXX.XXX表示仅处理该文件
+    SectionName="要处理的代码所属标签" 
+    ParentSectionName="当前代码所属标签的父标签" 例如：↓↓↓↓
+    LstFileName="当前代码所属.lst名称 非文件名 打开lst管理器 左侧列表的名称就是 多个lst使用,隔开" 
+    Description="描述 说明"
+    IgnoreItemCode="要忽略的代码 例：0,1 则忽略代码0和1" 
+    Index="当前代码的列索引位置" 行： 5888 6888 7888 //Index="1" 则表示只处理 6888  //Index="0,2"则表示只处理5888 7888 
+    StartIndex="从开始位置起到结束" StartIndex 必须使用：&lt;SectionRange /&gt;
+    CurrentLine="True"  代表验证当前行</value></data>
+  </root>

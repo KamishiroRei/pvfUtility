@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit" xmlns:converters="clr-namespace:TextEditLib.Converters" xmlns:editing="clr-namespace:ICSharpCode.AvalonEdit.Editing;assembly=ICSharpCode.AvalonEdit" xmlns:folding="clr-namespace:ICSharpCode.AvalonEdit.Folding;assembly=ICSharpCode.AvalonEdit" xmlns:local="clr-namespace:TextEditLib" xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering;assembly=ICSharpCode.AvalonEdit" xmlns:unit="clr-namespace:UnitComboLib;assembly=UnitComboLib">
+  <converters:ConverterEditorTypeToVisibility x:Key="ConverterEditorTypeToVisibility" />
+  <converters:ConverterVerticalScrollBarVisibility x:Key="ConverterVerticalScrollBarVisibility" />
+  <converters:ConverterBottomControlVisibility x:Key="ConverterBottomControlVisibility" />
+  <Style x:Key="{x:Type local:TextEdit}" TargetType="{x:Type local:TextEdit}">
+    <Setter Property="FlowDirection" Value="LeftToRight" />
+    <Setter Property="folding:FoldingMargin.FoldingMarkerBackgroundBrush" Value="{DynamicResource EditorFoldingMarkerBackgroundBrush}" />
+    <Setter Property="folding:FoldingMargin.SelectedFoldingMarkerBackgroundBrush" Value="{DynamicResource EditorSelectedFoldingMarkerBackgroundBrush}" />
+    <Setter Property="folding:FoldingMargin.FoldingMarkerBrush" Value="{DynamicResource EditorFoldingMarkerBrush}" />
+    <Setter Property="folding:FoldingMargin.SelectedFoldingMarkerBrush" Value="{DynamicResource EditorSelectedFoldingMarkerBrush}" />
+    <Setter Property="Background" Value="{DynamicResource EditorBackground}" />
+    <Setter Property="Foreground" Value="{DynamicResource EditorForeground}" />
+    <Setter Property="avalonEdit:TextEditor.LineNumbersForeground" Value="{DynamicResource EditorLineNumbersForeground}" />
+    <Setter Property="local:TextEdit.EditorCurrentLineBackground" Value="{DynamicResource EditorCurrentLineBackgroundBrushKey}" />
+    <Setter Property="local:TextEdit.EditorCurrentLineBorder" Value="{DynamicResource EditorCurrentLineBorderBrushKey}" />
+    <Setter Property="local:TextEdit.EditorCurrentLineBorderThickness" Value="3" />
+    <Setter Property="FrameworkElement.ContextMenu">
+      <Setter.Value>
+        <ContextMenu>
+          <MenuItem Command="Cut" Header="Cut">
+            <MenuItem.Icon>
+              <Image Height="16" SnapsToDevicePixels="True" Source="{DynamicResource Image_Cut}" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Command="Copy" Header="Copy">
+            <MenuItem.Icon>
+              <Image Height="16" SnapsToDevicePixels="True" Source="{DynamicResource Image_Copy}" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Command="Paste" Header="Paste">
+            <MenuItem.Icon>
+              <Image Height="16" SnapsToDevicePixels="True" Source="{DynamicResource Image_Paste}" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator />
+          <MenuItem Command="Undo" Header="Undo">
+            <MenuItem.Icon>
+              <Image Height="16" SnapsToDevicePixels="True" Source="{DynamicResource Image_Undo}" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Command="Redo" Header="Redo">
+            <MenuItem.Icon>
+              <Image Height="16" SnapsToDevicePixels="True" Source="{DynamicResource Image_Redo}" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </ContextMenu>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type local:TextEdit}">
+          <FrameworkTemplate.Resources>
+            <ResourceDictionary>
+              <Style x:Key="{x:Type rendering:TextView}" TargetType="{x:Type rendering:TextView}">
+                <Setter Property="rendering:TextView.NonPrintableCharacterBrush" Value="{DynamicResource EditorNonPrintableCharacterBrush}" />
+                <Setter Property="rendering:TextView.LinkTextForegroundBrush" Value="{DynamicResource EditorLinkTextForegroundBrush}" />
+                <Setter Property="rendering:TextView.LinkTextBackgroundBrush" Value="{DynamicResource EditorLinkTextBackgroundBrush}" />
+              </Style>
+              <Style x:Key="{x:Type editing:TextArea}" TargetType="{x:Type editing:TextArea}">
+                <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="editing:TextArea.SelectionBrush" Value="{DynamicResource EditorSelectionBrush}" />
+                <Setter Property="editing:TextArea.SelectionBorder">
+                  <Setter.Value>
+                    <Pen Brush="{DynamicResource EditorSelectionBorder}" Thickness="1" />
+                  </Setter.Value>
+                </Setter>
+                <Setter Property="editing:TextArea.SelectionCornerRadius" Value="0" />
+                <Setter Property="editing:TextArea.SelectionForeground" Value="{x:Null}" />
+                <Setter Property="Template">
+                  <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type editing:TextArea}">
+                      <DockPanel Focusable="False">
+                        <ItemsControl Padding="2,0,2,0" DockPanel.Dock="Left" Focusable="False" ItemsSource="{Binding Path=LeftMargins, RelativeSource={RelativeSource TemplatedParent}}">
+                          <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                              <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                          </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <ContentPresenter Panel.ZIndex="-1" Focusable="False" Margin="{Binding Path=ContentMargin, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}}" Content="{Binding Path=TextView, RelativeSource={RelativeSource TemplatedParent}}" />
+                      </DockPanel>
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </ResourceDictionary>
+          </FrameworkTemplate.Resources>
+          <Border Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}">
+            <ScrollViewer Name="PART_ScrollViewer" Padding="{TemplateBinding Control.Padding}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" CanContentScroll="True" Focusable="False" HorizontalScrollBarVisibility="{TemplateBinding avalonEdit:TextEditor.HorizontalScrollBarVisibility}" VerticalScrollBarVisibility="{TemplateBinding avalonEdit:TextEditor.VerticalScrollBarVisibility}" Content="{Binding Path=TextArea, RelativeSource={RelativeSource TemplatedParent}}">
+              <Control.Template>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                  <Border Padding="0" HorizontalAlignment="{TemplateBinding FrameworkElement.HorizontalAlignment}" VerticalAlignment="{TemplateBinding FrameworkElement.VerticalAlignment}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}">
+                    <Grid HorizontalAlignment="{TemplateBinding FrameworkElement.HorizontalAlignment}" VerticalAlignment="{TemplateBinding FrameworkElement.VerticalAlignment}" Background="{TemplateBinding Control.Background}">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                      </Grid.ColumnDefinitions>
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                      </Grid.RowDefinitions>
+                      <ScrollContentPresenter Grid.Row="0" Grid.Column="0" CanContentScroll="True" CanHorizontallyScroll="True" CanVerticallyScroll="True" KeyboardNavigation.DirectionalNavigation="Local" Content="{Binding Path=TextArea, RelativeSource={RelativeSource AncestorType={x:Type local:TextEdit}}}" />
+                      <ScrollBar Name="PART_VerticalScrollBar" Grid.Column="1" Maximum="{TemplateBinding ScrollViewer.ScrollableHeight}" ViewportSize="{TemplateBinding ScrollViewer.ViewportHeight}" Value="{TemplateBinding ScrollViewer.VerticalOffset}" Visibility="{Binding Path=VerticalScrollBarVisibilityEx, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}}" />
+                      <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0,1,0,0" BorderBrush="{Binding ElementName=PART_VerticalScrollBar, Path=BorderBrush}" Visibility="{Binding Path=EditorType, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}, Converter={StaticResource ConverterBottomControlVisibility}}">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                          </Grid.ColumnDefinitions>
+                          <unit:UnitCombobox Grid.Column="0" Height="17" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" BorderBrush="#00FFFFFF" BorderThickness="0" FontSize="12" IsEditable="True" DataContext="{Binding Path=SizeUnitLabel, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}}" ItemsSource="{Binding SelectedItem.DefaultValues}" ToolTip="{Binding ValueTip}" Visibility="{Binding Path=EditorType, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}, Converter={StaticResource ConverterEditorTypeToVisibility}}" Text="{Binding Mode=TwoWay, Path=StringValue, ValidatesOnDataErrors=True}" />
+                          <ScrollBar Name="PART_HorizontalScrollBar" Grid.Column="1" Height="17" BorderThickness="0" Maximum="{TemplateBinding ScrollViewer.ScrollableWidth}" Orientation="Horizontal" ViewportSize="{TemplateBinding ScrollViewer.ViewportWidth}" Visibility="Visible" Value="{TemplateBinding ScrollViewer.HorizontalOffset}" BorderBrush="{x:Null}" />
+                          <StackPanel Grid.Column="2" Orientation="Horizontal" Background="{Binding ElementName=PART_HorizontalScrollBar, Path=Background}" Visibility="{Binding Path=EditorType, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}, Converter={StaticResource ConverterEditorTypeToVisibility}}">
+                            <FrameworkElement.Resources>
+                              <ResourceDictionary>
+                                <Style x:Key="caption" TargetType="{x:Type TextBlock}">
+                                  <Setter Property="VerticalAlignment" Value="Center" />
+                                  <Setter Property="Margin" Value="10,0,0,0" />
+                                  <Setter Property="HorizontalAlignment" Value="Center" />
+                                  <Setter Property="FontSize" Value="10" />
+                                  <Setter Property="TextBlock.Padding" Value="2" />
+                                </Style>
+                                <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                                  <Setter Property="VerticalAlignment" Value="Center" />
+                                  <Setter Property="HorizontalAlignment" Value="Center" />
+                                  <Setter Property="FontSize" Value="10" />
+                                  <Setter Property="TextBlock.Padding" Value="2" />
+                                </Style>
+                              </ResourceDictionary>
+                            </FrameworkElement.Resources>
+                            <ComboBox Height="17" Margin="5,0,0,0" Padding="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" ItemsSource="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.PvfEncodingList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=PvfEncodingType, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}}" />
+                            <TextBlock Text="行：" Style="{StaticResource caption}" />
+                            <TextBlock Text="{Binding Path=Line, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}}" />
+                            <TextBlock Text="列：" Style="{StaticResource caption}" />
+                            <TextBlock Text="{Binding Path=Column, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}}" />
+                            <TextBlock Text="字符：" Style="{StaticResource caption}" />
+                            <TextBlock Text="{Binding Path=LineTextLight, RelativeSource={RelativeSource AncestorType=local:TextEdit, Mode=FindAncestor}}" />
+                          </StackPanel>
+                        </Grid>
+                      </Border>
+                    </Grid>
+                  </Border>
+                </ControlTemplate>
+              </Control.Template>
+            </ScrollViewer>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="avalonEdit:TextEditor.WordWrap" Value="True">
+              <Setter TargetName="PART_ScrollViewer" Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

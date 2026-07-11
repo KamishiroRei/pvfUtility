@@ -1,0 +1,3126 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "equ",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "packagable",
+                         "Title":  "可打包/邮寄标记",
+                         "Comment":  "可打包/邮寄标记: 0=不可寄送(默认可)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "avatar select ability",
+                         "Title":  "时装",
+                         "Comment":  "时装：可选择能力\n//待补充\n[ELEMENT_TOLERANCE_FIRE]火属性抗性\n[ELEMENT_TOLERANCE_WATER]冰属性抗性\n[ELEMENT_TOLERANCE_DARK]暗属性抗性\n[ELEMENT_TOLERANCE_LIGHT]光属性抗性\n[ACTIVESTATUS_TOLERANCE_STUCK]回避率\n[INVENTORY_MAX_WEIGHT]最大负重\n[PHYSICAL_ATTACK]力量\n[PHYSICAL_DEFENSE]体力\n[MAGICAL_ATTACK]智力\n[MAGICAL_DEFENSE]精神\n[HP MAX]HP最大值\n[MP MAX]MP最大值\n[HP_REGENRATE]每分钟恢复HP\n[MP_REGENRATE]每分钟恢复MP\n[ATTACK_SPEED]攻击速度\n[CAST_SPEED]施放速度\n[MOVE_SPEED]移动速度\n[HIT_RECOVERY]硬直\n[JUMP_POWER]跳跃力\n[EQUIPMENT_PHYSICAL_DEFENSE]物理防御力\n[EQUIPMENT_MAGICAL_DEFENSE]魔法防御力\n[ACTIVESTATUS_TOLERANCE_ALL]所有异常状态抗性\n[PHYSICAL ABSOLUTE DEFENSE]物理伤害追加减少\n[MAGICAL ABSOLUTE DEFENSE]魔法伤害追加减少",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "PHYSICAL_ATTACK",
+                         "Title":  "力量",
+                         "Comment":  "力量",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "PHYSICAL_DEFENSE",
+                         "Title":  "体力",
+                         "Comment":  "体力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "MAGICAL_ATTACK",
+                         "Title":  "智力",
+                         "Comment":  "智力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "MAGICAL_DEFENSE",
+                         "Title":  "精神",
+                         "Comment":  "精神",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "EQUIPMENT_PHYSICAL_ATTACK",
+                         "Title":  "物理攻击加成",
+                         "Comment":  "物理攻击加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "EQUIPMENT_PHYSICAL_DEFENSE",
+                         "Title":  "物理防御加成",
+                         "Comment":  "物理防御加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "EQUIPMENT_MAGICAL_ATTACK",
+                         "Title":  "魔法攻击加成",
+                         "Comment":  "魔法攻击加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "EQUIPMENT_MAGICAL_DEFENSE",
+                         "Title":  "魔法防御加成",
+                         "Comment":  "魔法防御加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ELEMENT_TOLERANCE_FIRE",
+                         "Title":  "火属性抗性",
+                         "Comment":  "火属性抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ELEMENT_TOLERANCE_WATER",
+                         "Title":  "冰属性抗性",
+                         "Comment":  "冰属性抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ELEMENT_TOLERANCE_DARK",
+                         "Title":  "暗属性抗性",
+                         "Comment":  "暗属性抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ELEMENT_TOLERANCE_LIGHT",
+                         "Title":  "光属性抗性",
+                         "Comment":  "光属性抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ELEMENT_TOLERANCE_ALL",
+                         "Title":  "所有属性抗性加成",
+                         "Comment":  "所有属性抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_SLOW",
+                         "Title":  "减速抗性加成",
+                         "Comment":  "减速抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_FREEZE",
+                         "Title":  "冰冻抗性加成",
+                         "Comment":  "冰冻抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_POISON",
+                         "Title":  "中毒抗性加成",
+                         "Comment":  "中毒抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_STUN",
+                         "Title":  "眩晕抗性加成",
+                         "Comment":  "眩晕抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_CURSE",
+                         "Title":  "诅咒抗性加成",
+                         "Comment":  "诅咒抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_BLIND",
+                         "Title":  "失明抗性加成",
+                         "Comment":  "失明抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_LIGHTNING",
+                         "Title":  "感电抗性加成",
+                         "Comment":  "感电抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_STONE",
+                         "Title":  "石化抗性加成",
+                         "Comment":  "石化抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_SLEEP",
+                         "Title":  "睡眠抗性加成",
+                         "Comment":  "睡眠抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_DEELEMENT",
+                         "Title":  "元素剥离抗性加成",
+                         "Comment":  "元素剥离抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_DEADLYSTRIKE",
+                         "Title":  "致命打击抗性加成",
+                         "Comment":  "致命打击抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_BLEEDING",
+                         "Title":  "出血抗性加成",
+                         "Comment":  "出血抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_PIERCE",
+                         "Title":  "贯通抗性加成",
+                         "Comment":  "贯通抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_STUCK",
+                         "Title":  "回避率",
+                         "Comment":  "回避率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_CONFUSE",
+                         "Title":  "混乱抗性加成",
+                         "Comment":  "混乱抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_HOLD",
+                         "Title":  "束缚抗性加成",
+                         "Comment":  "束缚抗性加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ACTIVESTATUS_TOLERANCE_ALL",
+                         "Title":  "所有异常状态抗性",
+                         "Comment":  "所有异常状态抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "INVENTORY_MAX_WEIGHT",
+                         "Title":  "最大负重",
+                         "Comment":  "最大负重",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "HP_REGENRATE",
+                         "Title":  "每分钟恢复生命值",
+                         "Comment":  "每分钟恢复生命值",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "MP_REGENRATE",
+                         "Title":  "每分钟恢复魔法值",
+                         "Comment":  "每分钟恢复魔法值",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "MP_REGENRATE_PERCENT_UP",
+                         "Title":  "MP 回复速度百分比加成",
+                         "Comment":  "MP 回复速度百分比加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "MOVE_SPEED",
+                         "Title":  "移动速度加成",
+                         "Comment":  "移动速度加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ATTACK_SPEED",
+                         "Title":  "攻击速度",
+                         "Comment":  "攻击速度",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "CAST_SPEED",
+                         "Title":  "施放速度",
+                         "Comment":  "施放速度",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "HIT_RECOVERY",
+                         "Title":  "硬直",
+                         "Comment":  "硬直",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "JUMP_POWER",
+                         "Title":  "跳跃力",
+                         "Comment":  "跳跃力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "CRITICAL",
+                         "Title":  "暴击率加成",
+                         "Comment":  "暴击率加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "SKILL_LEVEL",
+                         "Title":  "技能",
+                         "Comment":  "技能\n[avatar select ability]\n\t`[SKILL_LEVEL]`\n\t`[swordman]`\t38\t1\n[/avatar select ability]\n\n鬼剑士38号技能破极兵刃技能+1",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "usable job",
+                         "Title":  "可使用职业",
+                         "Comment":  "`[swordman]`\n`[fighter]`\n`[at fighter]`\n`[demonic swordman]`\n`[creatormage]`\n`[gunner]`\n`[at gunner]`\n`[mage]`\n`[at mage]`\n`[priest]`\n`[all]`",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "swordman",
+                         "Title":  "鬼剑士(男)",
+                         "Comment":  "鬼剑士(男)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "fighter",
+                         "Title":  "格斗家(女)",
+                         "Comment":  "格斗家(女)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "at fighter",
+                         "Title":  "格斗家(男)",
+                         "Comment":  "格斗家(男)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "demonic swordman",
+                         "Title":  "黑暗武士",
+                         "Comment":  "黑暗武士",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "creatormage",
+                         "Title":  "缔造者",
+                         "Comment":  "缔造者",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "gunner",
+                         "Title":  "神枪手(男)",
+                         "Comment":  "神枪手(男)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "at gunner",
+                         "Title":  "神枪手(女)",
+                         "Comment":  "神枪手(女)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "mage",
+                         "Title":  "魔法师(女)",
+                         "Comment":  "魔法师(女)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "at mage",
+                         "Title":  "魔法师(男)",
+                         "Comment":  "魔法师(男)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "priest",
+                         "Title":  "圣职者",
+                         "Comment":  "圣职者",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "all",
+                         "Title":  "所有职业",
+                         "Comment":  "所有职业",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "minimum level",
+                         "Title":  "等级限制",
+                         "Comment":  "使用所需最低等级",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "required skill",
+                         "Title":  "需要掌握的技能",
+                         "Comment":  "需要掌握的技能\n\n佩戴装备时需要掌握的技能，填写技能 ID。\n\n* 通常用在武器里，比如“光剑”、“拳套”",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "custom animation",
+                         "Title":  "自定义动画(.ani)文件列表",
+                         "Comment":  "自定义动画(.ani)文件列表，仅用于称号",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "usable even peace",
+                         "Title":  "和平/待机区域也触发特殊效果 (1 开启)",
+                         "Comment":  "和平/待机区域也触发特殊效果 (1 开启)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "equipment type",
+                         "Title":  "装备类型",
+                         "Comment":  "|字段|意义|\n|---|---|\n|[title name] | 称号|\n|[weapon] |武器|\n|[coat] | 上装|\n|[pants] | 下装|\n|[shoulder] | 护肩|\n|[waist] | 腰带|\n|[shoes] | 鞋子|\n|[amulet] | 项链|\n|[wrist] | 手镯|\n|[ring] | 戒指|\n|[support] | 辅助装备|\n|[aurora avatar] | 光环|\n|[magic stone] | 魔法石|\n|[hat] | 帽子|\n|---|---|\n|[creature]|宠物|\n|[artifact red] | 宠物装备 红|\n|[artifact blue] | 宠物装备 蓝|\n|[artifact green] | 宠物装备 绿|\n|---|---|\n|[skin avatar] | 皮肤时装|\n|[face avatar] | 脸部时装|\n|[pants avatar] | 下衣时装|",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "pvf|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "weapon",
+                         "Title":  "武器",
+                         "Comment":  "武器",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "hat avatar",
+                         "Title":  "帽子(时装)",
+                         "Comment":  "帽子(时装)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "hair avatar",
+                         "Title":  "发型(时装)",
+                         "Comment":  "发型(时装)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "breast avatar",
+                         "Title":  "上衣(时装)",
+                         "Comment":  "上衣(时装)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "face avatar",
+                         "Title":  "脸部(时装)",
+                         "Comment":  "脸部(时装)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "waist avatar",
+                         "Title":  "腰带(时装)",
+                         "Comment":  "腰带(时装)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "coat avatar",
+                         "Title":  "外套(时装)",
+                         "Comment":  "外套(时装)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "pants avatar",
+                         "Title":  "裤子(时装)",
+                         "Comment":  "裤子(时装)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "shoes avatar",
+                         "Title":  "鞋子(时装)",
+                         "Comment":  "鞋子(时装)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "title name",
+                         "Title":  "称号",
+                         "Comment":  "称号",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "coat",
+                         "Title":  "外套",
+                         "Comment":  "外套",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "shoulder",
+                         "Title":  "肩部",
+                         "Comment":  "肩部",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "pants",
+                         "Title":  "裤子",
+                         "Comment":  "裤子",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "shoes",
+                         "Title":  "鞋子",
+                         "Comment":  "鞋子",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "waist",
+                         "Title":  "腰带",
+                         "Comment":  "腰带",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "amulet",
+                         "Title":  "项链",
+                         "Comment":  "项链",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "wrist",
+                         "Title":  "手镯",
+                         "Comment":  "手镯",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ring",
+                         "Title":  "戒指",
+                         "Comment":  "戒指",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "hide equipment",
+                         "Title":  "穿戴时需要隐藏的其他装备部位",
+                         "Comment":  "穿戴时需要隐藏的其他装备部位",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "hide layer",
+                         "Title":  "需隐藏图层编号列表",
+                         "Comment":  "需隐藏图层编号列表",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "sub type",
+                         "Title":  "子类型/子分类",
+                         "Comment":  "武器细分或特殊用途",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "durability",
+                         "Title":  "耐久度",
+                         "Comment":  "耐久度",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "by：黑桃K"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "price",
+                         "Title":  "价格",
+                         "Comment":  "基础价格",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "value",
+                         "Title":  "出售价格",
+                         "Comment":  "[value] 售出价格，   实际出售价为标写的1/5\n通过移除此标签可取消售出价格，即游戏内售出不会获得金币\n\n//装备里为增加的数量\n\n//以及：\n[price]                 金币购买\n[cash]                  点券购买\n[need material]   道具购买（左道具编号，右道具数量）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "repair price",
+                         "Title":  "维修价格",
+                         "Comment":  "维修价格",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "by：黑桃K"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "need material",
+                         "Title":  "购买所需道具",
+                         "Comment":  " - 添加到 NPC 商店时购买所需道具\n - 每行第一个数是道具ID，第二个数是所需数量\n***\n - [price]      金币购买\n - [value]     售出价格（左道具编号，右道具数量）\n - [cash]       点券购买",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "cash",
+                         "Title":  "点券/现金价格",
+                         "Comment":  "点券/现金价格",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "medal",
+                         "Title":  "勋章价格",
+                         "Comment":  "勋章价格",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "finish point price",
+                         "Title":  "FP 价格",
+                         "Comment":  "FP 价格",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "cool time",
+                         "Title":  "装备整体冷却",
+                         "Comment":  "单位：ms",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "icon",
+                         "Title":  "图标位置",
+                         "Comment":  "主图标文件 + 帧",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "icon mark",
+                         "Title":  "图标边框",
+                         "Comment":  "- 62 白装 \n- 63 蓝装 \n- 64 紫装 \n- 65 勇者 \n- 66 神器\n- 67 传说 \n- 68 史诗",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "by：小小白|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "extra icon",
+                         "Title":  "额外/复制态图标文件 + 帧",
+                         "Comment":  "额外/复制态图标文件 + 帧",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "field image",
+                         "Title":  "掉落图标",
+                         "Comment":  "掉落图标\n该路径下img的第几帧",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "by：黑桃K"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "custom wav",
+                         "Title":  "自定义音效列表",
+                         "Comment":  "自定义音效列表",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "move wav",
+                         "Title":  "掉落、移动、使用音效",
+                         "Comment":  "|字段|音效类型|\n|---|---|\n|`POTION_TOUCH`| 药水|\n|**饰品**||\n|`NECKLACE_TOUCH`|  项链|\n|`BRACELET_TOUCH`| 手镯|\n|`RING_TOUCH`|戒指|\n|**防具**||\n|`BONE_TOUCH`   |   轻甲|\n|`SCRAP_TOUCH`  |  板甲|\n|`CLOTH_TOUCH`  |  布甲|\n|`CLOTH_TOUCH`  |  皮甲同布甲|\n|**武器**||\n|`MINERALSWD_TOUCH`  |   短剑|",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "use wav",
+                         "Title":  "使用时播放的音效",
+                         "Comment":  "使用时播放的音效。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "expand ani",
+                         "Title":  "扩展/替换部位动画块",
+                         "Comment":  "扩展/替换部位动画块，含变体、路径与自定义 wav",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "expand path",
+                         "Title":  "拓展路径",
+                         "Comment":  "拓展路径",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "慧慧"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "animation job",
+                         "Title":  "职业动画",
+                         "Comment":  "### 职业动画\n\n| 字段 | 职业 |\n| --- | --- |\n| [swordman] | 鬼剑士 |\n| [demonic swordman] | 黑暗武士 |\n| [fighter] | 格斗家(女) |\n| [at fighter] | 格斗家(男) |\n| [gunner] | 神枪手(男) |\n| [at gunner] | 神枪手(女) |\n| [mage] | 魔法师(女) |\n| [at mage] | 魔法师(男) |\n| [thief] | 暗夜使者 |\n| [at swordman] | 女鬼剑 |",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544|Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "variation",
+                         "Title":  "武器文件的贴图编号",
+                         "Comment":  "武器文件的贴图编号，可用这个编号查找到此武器的外观所对应的npk文件内的img文件。（-号代表制表符）\n-1-2意思就是0102\n\n-0-0意思就是0000\n\n-13-9意思就是1309\n那么这个编号有什么用？\n\n以（阿甘左的浪人巨剑）为例，（阿甘左的浪人人巨剑）的贴图编号是-1-2那么编号转换一下就是0102\n\n那么它的对应的img文件路径就是\nCharacter/Swordman/E",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "layer variation",
+                         "Title":  "数字的意思是图层",
+                         "Comment":  "- 数字的意思是图层，数字越大图层就越显示在前面。\n- 数字下面的英文意思是会调用同文件夹下这个英文名称的文件夹内所有ani文件。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "王良一-85431480|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "equipment ani script",
+                         "Title":  "武器的lay文件",
+                         "Comment":  "武器的lay文件\nlay文件就是根据一定算法，这个算法需要结合[layer variation]与[variation]这两个标签下面的代码对武器进行贴图的匹配\nlay文件不需要修改。\n如果武器的文件目录下没有lay文件，那么武器就会没有贴图，很多人新建一个武器文件没有贴图就是因为没有相应的lay文件\nlay文件解释结合[layer variation]和[variatio",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "name",
+                         "Title":  "装备名称",
+                         "Comment":  "装备中文名称索引",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "name2",
+                         "Title":  "装备、物品的别名",
+                         "Comment":  "装备、物品的别名\n\n在一些 dnf.exe 程序中会显示出该标签。\n\n* 通常是该装备、物品的英文名。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "basic explain",
+                         "Title":  "装备说明",
+                         "Comment":  "- 装备中显示的蓝色文本说明，和 [detail explain] 关联的，此时在游戏中按 F4(默认键) 可切换简单/详细说明。\n\n- 通常在装备上使用。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "detail explain",
+                         "Title":  "详细说明",
+                         "Comment":  "- 装备中显示的蓝色文本说明，和 [basic explain] 关联的，此时在游戏中按 F4(默认键) 可切换简单/详细说明。\n- 通常在装备上使用。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "flavor text",
+                         "Title":  "装备、物品等底部灰色描述文本",
+                         "Comment":  "装备、物品等底部灰色描述文本。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "grade",
+                         "Title":  "装备实际等级",
+                         "Comment":  "- 影响增幅强化所加的具体数值，与增幅强化的数值成正比 \n- 在装备、道具中为**掉落等级**，史诗装备则为对应等级的深渊\n\u003e掉落区间为±5级，也就是说写10时，有概率从击杀的5—15级怪物身上掉落\n1. [深渊派对文件](etc/hellparty.etc)\n2. [深渊怪物爆率的文件路径](etc/itemdropinfo_monster_hell.etc)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "spectrum",
+                         "Title":  "残影",
+                         "Comment":  "残影\n\n跟传承武器一样，走路有拖影\n\n代码前面三个数字就是控制颜色，打开【开始】【所有程序】【附件】【画图】【编辑颜色】左下角那三个值，你选择好自己要的颜色，把数值换到刚刚的代码写入装备即可\n\n前面三个值是颜色，至于后面那两个，应该是残影的产生间隔和残影残留时间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "By：短腿猫不吃鱼-694326115"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "attach type",
+                         "Title":  "绑定类型",
+                         "Comment":  "|字段|意义|\n|---|---|\n|`[trade]`|无法交易|\n|`[free]` |自由交易 |\n|`[sealing]` |封装 |\n|`[trade delete]` |无法删除|",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "creation rate",
+                         "Title":  "掉落概率",
+                         "Comment":  "掉落概率\n\t0\t代表永不掉落",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "rarity",
+                         "Title":  "稀有度",
+                         "Comment":  "0.普通 \n1.高级 \n2.稀有 \n3.神器 \n4.史诗 \n5.勇者 \n6.传说 \n7.神话",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "圣心语\u0026老王|老夫|Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "anti evil",
+                         "Title":  "抗魔值",
+                         "Comment":  "抗魔值",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "weight",
+                         "Title":  "重量",
+                         "Comment":  "重量(g)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "HP MAX",
+                         "Title":  "HP 最大值",
+                         "Comment":  "最大生命值",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "思持c|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "MP MAX",
+                         "Title":  "MP 最大值",
+                         "Comment":  "最大魔法值",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "beinao|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "physical attack",
+                         "Title":  "力量",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "physical defense",
+                         "Title":  "体力",
+                         "Comment":  "体力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "magical attack",
+                         "Title":  "智力",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "magical defense",
+                         "Title":  "精神",
+                         "Comment":  "精神",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "equipment physical attack",
+                         "Title":  "物理攻击力",
+                         "Comment":  "装备物理攻击",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "equipment physical defense",
+                         "Title":  "物理防御力",
+                         "Comment":  "装备物理防御力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "equipment magical attack",
+                         "Title":  "魔法攻击力",
+                         "Comment":  "装备魔法攻击",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "equipment magical defense",
+                         "Title":  "魔法防御力",
+                         "Comment":  "装备魔法防御力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "physical absolute damage",
+                         "Title":  "物理绝对伤害",
+                         "Comment":  "物理绝对伤害",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "physical damage reduce",
+                         "Title":  "物理伤害修正",
+                         "Comment":  "物理伤害修正",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "physical absolute defense",
+                         "Title":  "物理伤害追加减少",
+                         "Comment":  "物理伤害追加减少",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "magical absolute damage",
+                         "Title":  "魔法绝对伤害",
+                         "Comment":  "魔法绝对伤害",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "magical damage reduce",
+                         "Title":  "魔法伤害修正",
+                         "Comment":  "魔法伤害修正",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "magical absolute defense",
+                         "Title":  "魔法伤害追加减少",
+                         "Comment":  "魔法伤害追加减少",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "fire resistance",
+                         "Title":  "火属性抗性",
+                         "Comment":  "火属性抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "water resistance",
+                         "Title":  "冰属性抗性",
+                         "Comment":  "冰属性抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "dark resistance",
+                         "Title":  "暗属性抗性",
+                         "Comment":  "暗属性抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "light resistance",
+                         "Title":  "光属性抗性",
+                         "Comment":  "光属性抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "all elemental resistance",
+                         "Title":  "所有属性抗性",
+                         "Comment":  "所有属性抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "fire attack",
+                         "Title":  "火属性强化",
+                         "Comment":  "火属性强化",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "water attack",
+                         "Title":  "冰属性强化",
+                         "Comment":  "冰属性强化\n光属性强化\n[light attack]\n火属性强化\n[fire attack]\n水属性强化\n[water attack]\n暗属性强化\n[dark attack]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|大狮纸q1925229848"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "dark attack",
+                         "Title":  "暗属性强化",
+                         "Comment":  "暗属性强化\n光属性强化\n[light attack]\n火属性强化\n[fire attack]\n水属性强化\n[water attack]\n暗属性强化\n[dark attack]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|大狮纸q1925229848"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "light attack",
+                         "Title":  "光属性强化",
+                         "Comment":  "增加光属性强化",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|大狮纸q1925229848|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "slow resistance",
+                         "Title":  "减速抗性",
+                         "Comment":  "减速抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "同创"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "freeze resistance",
+                         "Title":  "冰冻抗性",
+                         "Comment":  "冰冻抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "poison resistance",
+                         "Title":  "中毒抗性",
+                         "Comment":  "中毒异常抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "stun resistance",
+                         "Title":  "眩晕抗性",
+                         "Comment":  "眩晕抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "curse resistance",
+                         "Title":  "诅咒抗性",
+                         "Comment":  "诅咒抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "blind resistance",
+                         "Title":  "失明抗性",
+                         "Comment":  "失明抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "lightning resistance",
+                         "Title":  "感电抗性",
+                         "Comment":  "感电抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "stone resistance",
+                         "Title":  "石化抗性",
+                         "Comment":  "石化抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "sleep resistance",
+                         "Title":  "睡眠抗性",
+                         "Comment":  "睡眠抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "bleeding resistance",
+                         "Title":  "出血抗性",
+                         "Comment":  "出血异常抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "confuse resistance",
+                         "Title":  "混乱抗性",
+                         "Comment":  "混乱抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "hold resistance",
+                         "Title":  "束缚抗性",
+                         "Comment":  "束缚抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "burn resistance",
+                         "Title":  "灼伤抗性",
+                         "Comment":  "灼伤抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "weapon break resistance",
+                         "Title":  "武器破坏抗性",
+                         "Comment":  "武器破坏抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "armor break resistance",
+                         "Title":  "防具破坏抗性",
+                         "Comment":  "防具破坏抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "deelement resistance",
+                         "Title":  "元素剥离抗性(未使用)",
+                         "Comment":  "元素剥离抗性(未使用)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "deadlystrike resistance",
+                         "Title":  "致命打击抗性(未使用)",
+                         "Comment":  "致命打击抗性(未使用)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "all activestatus resistance",
+                         "Title":  "所有异常状态抗性",
+                         "Comment":  "所有异常状态抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "piercing resistance",
+                         "Title":  "贯通抗性",
+                         "Comment":  "贯通/穿刺抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "stuck resistance",
+                         "Title":  "回避率",
+                         "Comment":  "回避率\n\n* 100 = 10%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "active status control info",
+                         "Title":  "状态控制收益配置",
+                         "Comment":  "状态控制收益配置: 名称 概率 提升 持续 额外参数\n`bleeding` 10 20 30 n //流血几率增加（10%）等级增加（20）持续时间增加（30%）其他信息（对于流血的情况，伤害增加率 n%）\n",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "inventory limit",
+                         "Title":  "负重上限",
+                         "Comment":  "增加负重\n\n* 10000 = 10kg",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "HP regen speed",
+                         "Title":  "HP 回复速度",
+                         "Comment":  "HP恢复速度\n游戏中\n【写100=每分钟恢复60HP(实际效果230左右)】",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "MP regen speed",
+                         "Title":  "MP 回复速度",
+                         "Comment":  "魔法回复速度\n游戏中\n【写100=每分钟恢复300MP(实际效果1070左右)】",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BieNao"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "MP regen speed rate",
+                         "Title":  "MP 回复速度百分比加成",
+                         "Comment":  "MP 回复速度百分比加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "move speed",
+                         "Title":  "移动速度",
+                         "Comment":  "单位：0.1%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "x move dash speed",
+                         "Title":  "横向冲刺速度倍率",
+                         "Comment":  "横向冲刺速度倍率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "y move dash speed",
+                         "Title":  "纵向冲刺速度倍率",
+                         "Comment":  "纵向冲刺速度倍率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "attack speed",
+                         "Title":  "攻击速度",
+                         "Comment":  "单位：0.1%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "等风来|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "cast speed",
+                         "Title":  "施放速度",
+                         "Comment":  "单位：0.1%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544|Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "hit recovery",
+                         "Title":  "硬直",
+                         "Comment":  "硬直恢复/Hit Recovery",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "rigidity",
+                         "Title":  "僵直",
+                         "Comment":  "僵直",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "jump power",
+                         "Title":  "跳跃力",
+                         "Comment":  "跳跃力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "room list move speed rate",
+                         "Title":  "城镇内移动速度",
+                         "Comment":  "- 增加城镇内移动速度\n- 单位：100%，即 0.4 代表 +40% 城镇内移动速度",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "elemental property",
+                         "Title":  "赋予元素属性",
+                         "Comment":  "赋予元素属性 \n`[no element]`\n`[fire element]`\n`[water element]`\n`[dark element]`\n`[light element]`",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "item aura",
+                         "Title":  "装备光环",
+                         "Comment":  "装备光环: 元素方式 + 数值 + 范围",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "active status",
+                         "Title":  "旧式状态异常设置(已弃用)",
+                         "Comment":  "旧式状态异常设置(已弃用)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "push aside",
+                         "Title":  "击退强度",
+                         "Comment":  "击退强度",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "lift up",
+                         "Title":  "浮空强度",
+                         "Comment":  "浮空强度",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "physical critical hit",
+                         "Title":  "物理暴击率",
+                         "Comment":  " - 增加物理暴击率\n - 单位：1%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "magical critical hit",
+                         "Title":  "魔法暴击率",
+                         "Comment":  " - 增加魔法暴击率\n - 单位：1%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "stuck",
+                         "Title":  "命中率",
+                         "Comment":  " - 命中修正\n - 负数表示增加\n - 单位：1%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ignore defense",
+                         "Title":  "忽略防御(未使用时可忽略)",
+                         "Comment":  "忽略防御(未使用时可忽略)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "human damage rate",
+                         "Title":  "对人型伤害比率(%).",
+                         "Comment":  "对人型伤害比率(%).",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "fort damage rate",
+                         "Title":  "对要塞/破坏物伤害比率(%).",
+                         "Comment":  "对要塞/破坏物伤害比率(%).",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "monster damage rate",
+                         "Title":  "对怪物伤害比率(%).",
+                         "Comment":  "对怪物伤害比率(%).",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "HP drain",
+                         "Title":  "HP 吸收",
+                         "Comment":  "HP 吸收",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "MP drain",
+                         "Title":  "MP 吸收",
+                         "Comment":  "MP 吸收",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "skill data up",
+                         "Title":  "技能加成——主要出现在异界或者侍魂装备中",
+                         "Comment":  "技能加成——主要出现在异界或者侍魂装备中",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "牧野-QQ1320113373"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "skill levelup",
+                         "Title":  "技能等级提升",
+                         "Comment":  "每一行由3列组成：\n1. 使用职业\n2. 职业技能ID\n3. 提升等级数",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "if",
+                         "Title":  "如果",
+                         "Comment":  "如果\n\n作为特效或效果的某种触发条件使用",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "牧野1320113373|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "cooltime",
+                         "Title":  "冷却时间",
+                         "Comment":  "冷却时间\n10000*10",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "attack success",
+                         "Title":  "攻击成功",
+                         "Comment":  "攻击成功",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "then",
+                         "Title":  "然后",
+                         "Comment":  "然后\n\n与[if]词条搭配使用\n\n[if]词条作为前置词条，也就是触发条件\n\n[then]作为触发效果",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "target",
+                         "Title":  "效果目标 (myself 等)",
+                         "Comment":  "效果目标 (myself 等)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "duration",
+                         "Title":  "持续时间",
+                         "Comment":  "持续时间\n10000*10",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "probability",
+                         "Title":  "可能性 触发几率",
+                         "Comment":  "可能性 触发几率\n100*100",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "stat",
+                         "Title":  "状态修改",
+                         "Comment":  "状态修改: 名称 `+|%` 数值",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "character name y revision",
+                         "Title":  "角色名称 Y 坐标修正",
+                         "Comment":  "角色名称 Y 坐标修正",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "effect",
+                         "Title":  "效果块",
+                         "Comment":  "效果块：可多次；内部: attach target/type/pos/index/option/module/file name",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "attach target",
+                         "Title":  "effect 内附着目标 (delegator/target)",
+                         "Comment":  "effect 内附着目标 (delegator/target)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "type",
+                         "Title":  "type",
+                         "Comment":  "effect 类型 (animation/particle/range)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "attach pos",
+                         "Title":  "附着位置 (bottom/middle/top)",
+                         "Comment":  "附着位置 (bottom/middle/top)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "z revision",
+                         "Title":  "Z 高度修正",
+                         "Comment":  "Z 高度修正",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "index",
+                         "Title":  "对应城镇.twn的区域",
+                         "Comment":  "对应城镇.twn的区域：\n\n[area]\n    0-------------对应这个区域\n    `xxxxxxxx.map`\n    `[gate]`\n[/area]\n鸣谢：Cai - 263007544\n-------\n城镇索引，对应Town.lst中的城镇编号。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "option",
+                         "Title":  "effect 可选项列表块",
+                         "Comment":  "effect 可选项列表块",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "module",
+                         "Title":  "限定出现模块(room list等)",
+                         "Comment":  "限定出现模块(room list等)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "file name",
+                         "Title":  "效果资源路径 (.ani)",
+                         "Comment":  "效果资源路径 (.ani)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "item category",
+                         "Title":  "物品分类标记块",
+                         "Comment":  "物品分类标记块: monster card / cannot bind / boss drop",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "limit upgradable level",
+                         "Title":  "强化/增幅/精炼 等等级限制定义块",
+                         "Comment":  "强化/增幅/精炼 等等级限制定义块",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "level linear ability",
+                         "Title":  "装备属性成长等级范围例如",
+                         "Comment":  "装备属性成长等级范围例如\n1→99\n1级到99级为有效等级",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "陌梦轩"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "level section ability",
+                         "Title":  "等级分段成长能力块",
+                         "Comment":  "等级分段成长能力块",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "level section ani",
+                         "Title":  "等级/职业条件的动画覆盖块",
+                         "Comment":  "等级/职业条件的动画覆盖块",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "set name",
+                         "Title":  "设置套装的名字",
+                         "Comment":  "设置套装的名字\n\n[set name]\n\t`秒天·秒地·秒空气  套装`\n\n* 与 [set item] 和 [set ability] 搭配，完成套装属性设置。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "set item",
+                         "Title":  "设置套装",
+                         "Comment":  "设置套装\n\n[set item]\n\t10537\t12534\t14524\t16523\t18533\n[/set item]\n\n* 由装备代码组成，一个代码代表一件装备。首个装备代码和后面的装备代码组成父子关系，在后面的装备代码中需要使用 [set item master] 填写父装备代码。\n\n* 与 [set name] 和 [set ability] 搭配，完成套装属性设置。",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "set item master",
+                         "Title":  "套装属性",
+                         "Comment":  "套装属性 - 父装备代码",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "set ability",
+                         "Title":  "设置套装的属性",
+                         "Comment":  "设置套装的属性\n\n[set ability]\n\t[magical attack]\n\t\t250\n/[set ability]\n\n* 与 [set name] 和 [set ability] 搭配，完成套装属性设置。",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "fullset basic explain",
+                         "Title":  "在套装属性中",
+                         "Comment":  "在套装属性中，蓝色文字描述。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "fullset detail explain",
+                         "Title":  "全套详细描述",
+                         "Comment":  "全套详细描述",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "piece set ability",
+                         "Title":  "套装属性内容",
+                         "Comment":  "套装属性内容",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "137735017"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "parameter basic explain",
+                         "Title":  "参数基本解释",
+                         "Comment":  "参数基本解释",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "parameter detail explain",
+                         "Title":  "部分套装详细描述",
+                         "Comment":  "部分套装详细描述",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "part set index",
+                         "Title":  "套装属性",
+                         "Comment":  "套装属性 - 套装ID",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "hardcoding cooltime",
+                         "Title":  "硬编码额外冷却",
+                         "Comment":  "硬编码额外冷却",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "int data",
+                         "Title":  "整型数据列表",
+                         "Comment":  "整型数据列表",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "string data",
+                         "Title":  "字符串数据列表",
+                         "Comment":  "字符串数据列表",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "attack info",
+                         "Title":  "附加攻击信息(.atk)",
+                         "Comment":  "附加攻击信息(.atk)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "change type ultimateSkillCurScene",
+                         "Title":  "觉醒技能 CutScene 类型设置",
+                         "Comment":  "觉醒技能 CutScene 类型设置",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "item group name",
+                         "Title":  "具体装备类型",
+                         "Comment":  "|字段|意义|\n|---|---|\n|武器|---|\n|`ssword`|短剑|\n|`totem`|图腾|\n|`axe`|巨斧|\n|`katana`|太刀|\n|`automatic`|自动步枪|\n|`club`|钝器|\n|`lswd`|巨剑|\n|`beamswd`|光剑|\n|`knuckle`|手套|\n|`claw`|爪|\n|`tonfa`|东方棍|\n|`gauntlet`|臂铠|\n|`hcannon`|手炮|\n|首饰|---|\n|`amulet`|项链|\n|`wrist`|手镯|\n|`lacoat`|上衣|\n|`ltpants`|褲子|\n|`lawaist`|腰帶|\n|`magicstone`|魔法石|\n|板甲|---|\n|`mtpants`|板甲下装|\n|`mtwaist`|板甲腰带|\n|`mtcoat`|板甲上衣|\n|`mtshoes`|板甲鞋子|\n|`mtshoulder`|板甲护肩|\n|皮甲|---|\n|`hapants`|重甲下装|\n|`hawaist`|重甲腰带|\n|`hacoat`|重甲上衣|\n|`hashoes`|重甲鞋子|\n|`hashoulder`|重甲护肩|\n|武器|---|\n|`ltpants`|皮甲下装|\n|`ltwaist`|皮甲腰带|\n|`ltcoat`|皮甲上衣|\n|`ltshoes`|皮甲鞋子|\n|`ltshoulder`|皮甲护肩|\n|轻甲|---|\n|`lapants`|轻甲下装|\n|`lawaist`|轻甲腰带|\n|`lacoat`|轻甲上衣|\n|`lashoes`|轻甲鞋子|\n|`lashoulder`|轻甲护肩|\n|布甲|---|\n|`clpants`|布甲下装|\n|`clwaist`|布甲腰带|\n|`clcoat`|布甲上衣|\n|`clshoes`|布甲鞋子|\n|`clshoulder`|布甲护肩|",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "囫囵|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "Force Result Item Rule",
+                         "Title":  "强制结果物品规则块",
+                         "Comment":  "强制结果物品规则块：内部定义特定条件下产出/合成/升级的结果物品条目",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "separate attack",
+                         "Title":  "独立攻击力",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "subtype",
+                         "Title":  "子类型标签的无空格形式",
+                         "Comment":  "子类型标签的无空格形式；在 [level section ani] 内使用功能同 \u0027sub type\u0027",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "dungeon check",
+                         "Title":  "地下城检查?",
+                         "Comment":  "地下城检查?",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "change status",
+                         "Title":  "改变状态",
+                         "Comment":  "改变状态",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "stat by condition",
+                         "Title":  "按条件调整状态",
+                         "Comment":  "按条件调整状态",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "multiple then",
+                         "Title":  "多个 then 块",
+                         "Comment":  "多个 then 块",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "then probability",
+                         "Title":  "then 块内的概率",
+                         "Comment":  "then 块内的概率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "passive object",
+                         "Title":  "被调用的特效obj文件",
+                         "Comment":  "被调用的特效obj文件\n48118\t0\t0\t0\t0\t0\t`特效名字`",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "牧野1320113373"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "impossible contents",
+                         "Title":  "无法进行",
+                         "Comment":  "这个标签下的动作不能进行\nupgrade   强化\namplify upgrade  增幅\ndisjoint  分解\ngift  赠送\nseparate upgrade  锻造\ncharac cargo  仓库存储",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "乐乐-QQ906127695|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "target active status",
+                         "Title":  "目标状态异常",
+                         "Comment":  "目标状态异常",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "add absolute damage",
+                         "Title":  "增加绝对伤害",
+                         "Comment":  "增加绝对伤害",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "disjoint",
+                         "Title":  "分解",
+                         "Comment":  "分解",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "gift",
+                         "Title":  "不能进行的操作-送礼",
+                         "Comment":  "不能进行的操作-送礼",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "upgrade",
+                         "Title":  "不能进行的操作-强化",
+                         "Comment":  "不能进行的操作-强化",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "amplify upgrade",
+                         "Title":  "不能进行的操作-强化",
+                         "Comment":  "不能进行的操作-强化",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "separate upgrade",
+                         "Title":  "不能进行的操作-锻造",
+                         "Comment":  "不能进行的操作-锻造",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "charac cargo",
+                         "Title":  "不能进行的操作-角色仓库",
+                         "Comment":  "不能进行的操作-角色仓库",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "possible kiri protect",
+                         "Title":  "可以使用凯莉的保护券",
+                         "Comment":  "可以使用凯莉的保护券",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "reduce probability to human armor at pvp module",
+                         "Title":  "在 PVP 模块中减少对人型防具的概率",
+                         "Comment":  "在 PVP 模块中减少对人型防具的概率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "routing priority",
+                         "Title":  "优先显示",
+                         "Comment":  "优先显示",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "pvp",
+                         "Title":  "决斗场属性",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "not amplify",
+                         "Title":  "not amplify",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "attack condition",
+                         "Title":  "攻击条件",
+                         "Comment":  "攻击条件",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "event attack success",
+                         "Title":  "事件进攻成功",
+                         "Comment":  "事件进攻成功\n\n可以理解某某攻击或触发成功",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "increase damage",
+                         "Title":  "增加伤害",
+                         "Comment":  "增加伤害 \n示例 \n `%`  14 //增加14%伤害",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "skill",
+                         "Title":  "使用技能时(if块内)",
+                         "Comment":  "使用技能时(if块内) \n示例 \n `demonic swordman`  72 //黑暗武士使用id为72的技能",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "aura active",
+                         "Title":  "equipment magical defense 防御减少",
+                         "Comment":  "equipment magical defense 防御减少",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "upgrade prob increase",
+                         "Title":  "强化增幅几率增加",
+                         "Comment":  "强化增幅几率增加",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "小小白"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "upgrade cost discount",
+                         "Title":  "强化增幅费用折扣",
+                         "Comment":  "强化增幅费用折扣",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "小小白"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "use skill",
+                         "Title":  "使用技能",
+                         "Comment":  "使用技能\n`swordman`\n73 \t职业+技能编号",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "牧野1320113373"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "hit",
+                         "Title":  "被击中",
+                         "Comment":  "被击中",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "creature species",
+                         "Title":  "宠物 ID",
+                         "Comment":  "链接到宠物所在 ID，宠物属性所在。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "character item check",
+                         "Title":  "检查可否精炼异界气息",
+                         "Comment":  "检查可否精炼异界气息\n\n[character item check]\n\t0\t1\t`waist`\n[/character item check]\n\n三个数据为一组：\n\n* 第一个为角色编号；\n\n* 第二个为角色职业(非数据库中的17、18、19、20，而是使用 1 到 4 来代表)。\n\n* 第三个为装备部位，参考 [equipment type]。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "aurora graphic effects",
+                         "Title":  "极光图形效果",
+                         "Comment":  "极光图形效果\n示例：\n[aurora graphic effects]\n    1（调用ani的数量）\t0（这里没有怎么搞懂，有写1的有写0的）\n    `ani路径`     0（0表示图层在人物模型后，1表示覆盖人物模型）\n[/aurora graphic effects]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "内脏没坏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "aura hud icon",
+                         "Title":  "光环HUD图标",
+                         "Comment":  "光环HUD图标\nsprite/interface2/aura/aura_icon.img\n[aura hud icon]\n具体数字就是img序号",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "all elemental element",
+                         "Title":  "所有属性抵抗",
+                         "Comment":  "所有属性抵抗",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "emancipate",
+                         "Title":  "解除魔法封印",
+                         "Comment":  "解除魔法封印",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "explain",
+                         "Title":  "装备说明",
+                         "Comment":  "* 在装备和道具类所展示的蓝色文本内容。\n\n* 在副本(.dgn)里展示该副本的描述内容。\n\n* 在 QP 商店里展示的属性内容。\n\n* 在活动(.evt)里展示活动的描述内容。\n\n* 在技能(.skl)里展示技能的描述内容。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "equipment duration",
+                         "Title":  "效果续时间",
+                         "Comment":  "效果续时间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "effect part set index",
+                         "Title":  "套装特效",
+                         "Comment":  "套装特效",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "avatar func filter",
+                         "Title":  "0",
+                         "Comment":  "0 - 无法分解\n2  -可以分解",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "add stat at once",
+                         "Title":  "一次添加统计",
+                         "Comment":  "一次添加统计",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "casting",
+                         "Title":  "铸件",
+                         "Comment":  "铸件\n釋放技能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "party death",
+                         "Title":  "队友死亡",
+                         "Comment":  "队友死亡",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "春秋"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "[explain]",
+                         "Title":  "附加内容",
+                         "Comment":  "附加内容\n\n* 在装备和道具类所展示的蓝色文本内容。\n\n* 在副本(.dgn)里展示该副本的描述内容。\n\n* 在 QP 商店里展示的属性内容。\n\n* 在活动(.evt)里展示活动的描述内容。\n\n* 在技能(.skl)里展示技能的描述内容。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "[basic explain]",
+                         "Title":  "简单说明",
+                         "Comment":  "简单说明\n\n装备中显示的蓝色文本说明，和 [detail explain] 关联的，此时在游戏中按 F4(默认键) 可切换简单/详细说明。\n\n* 通常在装备上使用。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "npc gift disallowance",
+                         "Title":  "不可赠送给npc",
+                         "Comment":  "不可赠送给npc，用于npc好感度系统，无用",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "output",
+                         "Title":  "产量",
+                         "Comment":  "产量",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "avatar type select",
+                         "Title":  "控制时装天数、价格",
+                         "Comment":  "控制时装天数、价格\n==============================\n时效(天)                               价格:（点券）\n7\t0\t0\t1000\t0\n30\t0\t0\t2000\t0\n0\t0\t0\t4000\t0\n0\t0\t0\t4500\t2\n(第一个数值为0表示无期限时装的价格)\n==============================\n`[",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "菜菜"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "usable period",
+                         "Title":  "可用时间",
+                         "Comment":  "//可用时间，以天为单位，从获得这个装备开始计算时间\n[usable period]\n\t7      //代表可以用7天",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "乐乐-QQ906127695"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "daily delete item",
+                         "Title":  "每天6点删除",
+                         "Comment":  "每天6点删除",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "By:小小白：770141757"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "add absolute defense percent",
+                         "Title":  "添加绝对防御百分比",
+                         "Comment":  "添加绝对防御百分比\n免伤",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "replace avatar ani",
+                         "Title":  "更换头像ANI",
+                         "Comment":  "更换头像ANI",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "stuck 100",
+                         "Title":  "命中",
+                         "Comment":  "命中",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "zed"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "emblem socket default",
+                         "Title":  "默认开启镶嵌槽",
+                         "Comment":  "默认开启镶嵌槽",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "zed"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "event use skill",
+                         "Title":  "使用技能",
+                         "Comment":  "使用技能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "奶甜味儿的小颜颜"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "vent use skill",
+                         "Title":  "释放技能",
+                         "Comment":  "释放技能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "奶甜味儿的小颜颜"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "all elemental attack",
+                         "Title":  "所有属性强化",
+                         "Comment":  "所有属性强化\n\t1\t就代表1",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "separate attack 80 80",
+                         "Title":  "separate attack 80 80",
+                         "Comment":  "待翻译，请编辑！",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "独立攻击力"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "expertjob only",
+                         "Title":  "仅限副职业等级操作",
+                         "Comment":  "仅限副职业等级操作\n例如：\n’disjointer‘\t11\ndisjointer为分解师  11为副职业等级",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "雨雾"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "upper bound level",
+                         "Title":  "宠物等级上限",
+                         "Comment":  "宠物等级上限",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "等风来"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "prof compound rate",
+                         "Title":  "副职业制作物品成功概率",
+                         "Comment":  "副职业制作物品成功概率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "prof material variation",
+                         "Title":  "副职业材料改变",
+                         "Comment":  "副职业材料改变",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "summon monster",
+                         "Title":  "召唤怪物",
+                         "Comment":  "召唤怪物\n怪物编号-怪物等级-怪物至数",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "oppser"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "creature magical critical hit",
+                         "Title":  "命中率",
+                         "Comment":  "命中率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "落雪哥哥"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "creature stuck",
+                         "Title":  "闪避",
+                         "Comment":  "闪避",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "落雪哥哥"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "myself",
+                         "Title":  "自己",
+                         "Comment":  "自己",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "奶茶Bot QQ8002263"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "equipment/character/atfighter/weapon/boxglove/",
+                         "Title":  "武器外观指向文件夹路径",
+                         "Comment":  "武器外观指向文件夹路径",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "墨白"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "camoflage",
+                         "Title":  "伪装",
+                         "Comment":  "伪装",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "卧底"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "superarmor",
+                         "Title":  "霸体",
+                         "Comment":  "霸体",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "卧底"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "skill cool time",
+                         "Title":  "技能冷却的时间",
+                         "Comment":  "技能冷却的时间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "卧底"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "solo teleport",
+                         "Title":  "单人传送 后面数字是时间 毫秒计算",
+                         "Comment":  "单人传送  后面数字是时间 毫秒计算",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "一只鱼2"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "party teleport",
+                         "Title":  "组队传送 后面数字是时间 毫秒计算",
+                         "Comment":  "组队传送  后面数字是时间 毫秒计算",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "一只鱼2"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "M socket",
+                         "Title":  "彩色槽",
+                         "Comment":  "彩色槽",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "zed"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "trade",
+                         "Title":  "不可交易",
+                         "Comment":  "不可交易",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "诗仙"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "enemy",
+                         "Title":  "敌人",
+                         "Comment":  "敌人",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "all enemy",
+                         "Title":  "所有敌人",
+                         "Comment":  "所有敌人",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "麻豆传媒"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "mt waist",
+                         "Title":  "板甲腰带",
+                         "Comment":  "板甲腰带",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "random enemy",
+                         "Title":  "随机敌人",
+                         "Comment":  "随机敌人",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "stun",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：眩晕",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "ice attack",
+                         "Title":  "冰属性强化",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "preview"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "equ",
+                         "Section":  "creature",
+                         "Title":  "宠物",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Lancarus"
+                     }
+                 ]
+}

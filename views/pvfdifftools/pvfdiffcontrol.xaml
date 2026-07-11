@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:local="clr-namespace:PvfCode.Views.PvfDiffTools;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:pvfdiff="clr-namespace:PvfCode.Converts.PvfDiff;assembly=pvfUtility" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Name="win" Background="{DynamicResource EditorBackground}" IsEnabled="{Binding IsLoading, Converter={StaticResource ConverterBoolenToFalse}}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <pvfdiff:ConverterPvfDiffShowMode x:Key="ConverterPvfDiffShowMode" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <bars:BarContainerControl Grid.Row="0" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+      <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControl.ShowDragWidget="True" bars:ToolBarControl.UseWholeRow="True">
+        <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource PvfDiffControl_OpenPvf}" bars:BarItem.Command="{Binding OnOpenPvfCommand}" bars:BarItem.Glyph="{Binding Source={x:Static root:Res.Instance}, Path=OpenFolder_16x}" ContentElement.IsEnabled="{Binding Path=Pvf.PvfIsOpen, Converter={StaticResource ConverterBoolenToFalse}, Mode=OneWay}" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource PvfDiffControl_StartDiff}" bars:BarItem.Glyph="{DynamicResource RunIcon}" bars:BarItem.Command="{Binding OnStartPvfDiffCommand}" ContentElement.IsEnabled="{Binding Path=Pvf.PvfIsOpen, Mode=OneWay}" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource PvfDiffControl_Reset}" bars:BarItem.Glyph="{DynamicResource ClearWindowContent}" bars:BarItem.Command="{Binding ClearCommand}" ContentElement.IsEnabled="{Binding Path=Pvf.PvfIsOpen, Mode=OneWay}" />
+        <bars:BarItemSeparator />
+        <bars:BarEditItem bars:BarItem.Content="{DynamicResource PvfDiffControl_ShowMode}" bars:BarEditItem.EditValue="{Binding PvfDiffTreeShowFilesType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterPvfDiffShowMode}}">
+          <bars:BarEditItem.EditStyle>
+            <Style xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type editors:ComboBoxEdit}">
+              <Setter Property="Control.Padding" Value="0" />
+              <Setter Property="FrameworkElement.Height" Value="21" />
+            </Style>
+          </bars:BarEditItem.EditStyle>
+          <bars:BarEditItem.EditSettings>
+            <settings:ComboBoxEditSettings xmlns:settings="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" settings:ButtonEditSettings.IsTextEditable="False">
+              <settings:ComboBoxEditSettings.Items>
+                <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource PvfDiffControl_ShowMode_PathDiff}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                <ComboBoxEditItem ContentControl.Content="{DynamicResource PvfDiffControl_ShowMode_FileContentDiff}" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                <ComboBoxEditItem ContentControl.Content="{DynamicResource PvfDiffControl_ShowMode_PathAndFileDiff}" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                <ComboBoxEditItem ContentControl.Content="{DynamicResource PvfDiffControl_ShowMode_AllFile}" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+              </settings:ComboBoxEditSettings.Items>
+            </settings:ComboBoxEditSettings>
+          </bars:BarEditItem.EditSettings>
+        </bars:BarEditItem>
+        <bars:BarItemSeparator />
+        <bars:BarCheckItem bars:BarItem.Content="{DynamicResource PvfDiffControl_SyncSelect}" bars:BarCheckItem.IsChecked="{Binding SelectedSynchronization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <bars:BarCheckItem bars:BarItem.Content="{DynamicResource PvfDiffControl_DisableScrollBarHighlight}" bars:BarItem.IsVisible="False" FrameworkContentElement.ToolTip="{DynamicResource PvfDiffControl_DisableScrollBarHighlight_ToolTip}" bars:BarCheckItem.IsChecked="{Binding ForbidVerticalScrollBarAnnotation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <bars:BarButtonItem bars:BarItem.Content="同步礼包-时装 称号 宠物 name" bars:BarItem.Command="{Binding ConverterPvfDiffShowModeCommand}" />
+      </bars:ToolBarControl>
+    </bars:BarContainerControl>
+    <StackPanel Grid.Row="1" Height="1" Background="#007acc" />
+    <Grid Row="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
+      <BarContainerControl Grid.Row="0" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+        <ToolBarControl p15:ToolBarControlBase.AllowCustomizationMenu="False" p15:ToolBarControl.AllowQuickCustomization="False" p15:ToolBarControl.ShowDragWidget="True" p15:ToolBarControl.UseWholeRow="True" xmlns:p15="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+          <p15:BarButtonItem p15:BarItem.BarItemDisplayMode="ContentAndGlyph" p15:BarItem.CommandParameter="True" p15:BarItem.Content="{DynamicResource common_SavePack}" p15:BarItem.Glyph="{DynamicResource Save_16x}" p15:BarItem.Command="{Binding SavePvfPackCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+          <p15:BarItemSeparator />
+          <p15:BarButtonItem p15:BarItem.BarItemDisplayMode="ContentAndGlyph" p15:BarItem.Content="{DynamicResource common_SavePackAs}" p15:BarItem.Glyph="{DynamicResource SaveAs_16x}" p15:BarItem.Command="{Binding SaveAsPvfPackCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}">
+            <p15:BarItem.CommandParameter>
+              <MultiBinding Converter="{StaticResource MultiBindingConverter}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <Binding ElementName="win" />
+                <Binding>
+                  <Binding.Source>
+                    <system:Boolean xmlns:system="clr-namespace:System;assembly=System.Private.CoreLib">True</system:Boolean>
+                  </Binding.Source>
+                </Binding>
+              </MultiBinding>
+            </p15:BarItem.CommandParameter>
+          </p15:BarButtonItem>
+          <p15:BarItemSeparator />
+          <bars:BarStaticItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarItem.Content="{Binding}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}">
+            <bars:BarItem.ContentTemplate>
+              <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{DynamicResource PvfDiffControl_DiffCount}" />
+                  <TextBlock Text="{Binding LeftDiffCount}" />
+                </StackPanel>
+              </DataTemplate>
+            </bars:BarItem.ContentTemplate>
+          </bars:BarStaticItem>
+          <p15:BarItemSeparator />
+          <p15:BarButtonItem p15:BarItem.BarItemDisplayMode="ContentAndGlyph" p15:BarItem.CommandParameter="true" p15:BarItem.Content="{DynamicResource PvfDiffControl_ExtractSelectedDiffFiles}" p15:BarItem.Glyph="{DynamicResource ExtractFilesIcon}" p15:BarItem.IsVisible="False" FrameworkContentElement.ToolTip="{DynamicResource PvfDiffControl_SelectAllToolTip}" p15:BarItem.Command="{Binding OnExtractCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+        </ToolBarControl>
+      </BarContainerControl>
+      <controls:PvfTreeViewGroup Grid.Row="1" DataContext="{Binding TreeViewModelLeft}" />
+      <BarContainerControl Grid.Row="0" Grid.Column="2" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+        <ToolBarControl p15:ToolBarControlBase.AllowCustomizationMenu="False" p15:ToolBarControl.AllowQuickCustomization="False" p15:ToolBarControl.ShowDragWidget="True" p15:ToolBarControl.UseWholeRow="True" xmlns:p15="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+          <p15:BarButtonItem p15:BarItem.BarItemDisplayMode="ContentAndGlyph" p15:BarItem.CommandParameter="False" p15:BarItem.Content="{DynamicResource common_SavePack}" p15:BarItem.Glyph="{DynamicResource Save_16x}" p15:BarItem.Command="{Binding SavePvfPackCommand}" ContentElement.IsEnabled="{Binding Pvf.PvfIsOpen, Mode=OneWay}" />
+          <p15:BarItemSeparator />
+          <p15:BarButtonItem p15:BarItem.BarItemDisplayMode="ContentAndGlyph" p15:BarItem.Content="{DynamicResource common_SavePackAs}" p15:BarItem.Glyph="{DynamicResource SaveAs_16x}" p15:BarItem.Command="{Binding SaveAsPvfPackCommand}" ContentElement.IsEnabled="{Binding Pvf.PvfIsOpen, Mode=OneWay}">
+            <p15:BarItem.CommandParameter>
+              <MultiBinding Converter="{StaticResource MultiBindingConverter}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <Binding ElementName="win" />
+                <Binding>
+                  <Binding.Source>
+                    <Boolean xmlns="clr-namespace:System;assembly=System.Private.CoreLib">False</Boolean>
+                  </Binding.Source>
+                </Binding>
+              </MultiBinding>
+            </p15:BarItem.CommandParameter>
+          </p15:BarButtonItem>
+          <p15:BarItemSeparator />
+          <p15:BarStaticItem p15:BarItem.Content="{Binding}" ContentElement.IsEnabled="{Binding Pvf.PvfIsOpen, Mode=OneWay}">
+            <p15:BarItem.ContentTemplate>
+              <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{DynamicResource PvfDiffControl_DiffCount}" />
+                  <TextBlock Text="{Binding LeftDiffCount}" />
+                </StackPanel>
+              </DataTemplate>
+            </p15:BarItem.ContentTemplate>
+          </p15:BarStaticItem>
+          <p15:BarItemSeparator />
+          <p15:BarButtonItem p15:BarItem.BarItemDisplayMode="ContentAndGlyph" p15:BarItem.CommandParameter="true" p15:BarItem.Content="{DynamicResource PvfDiffControl_ExtractSelectedDiffFiles}" p15:BarItem.Glyph="{DynamicResource ExtractFilesIcon}" p15:BarItem.IsVisible="False" FrameworkContentElement.ToolTip="{DynamicResource PvfDiffControl_SelectAllToolTip}" p15:BarItem.Command="{Binding OnExtractCommand}" ContentElement.IsEnabled="{Binding Pvf.PvfIsOpen, Mode=OneWay}" />
+        </ToolBarControl>
+      </BarContainerControl>
+      <BarContainerControl Grid.Row="2" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+        <ToolBarControl p15:ToolBarControlBase.AllowCustomizationMenu="False" p15:ToolBarControl.AllowQuickCustomization="False" p15:ToolBarControl.ShowDragWidget="True" p15:ToolBarControl.UseWholeRow="True" xmlns:p15="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+          <p15:BarButtonItem p15:BarItem.CommandParameter="True" FrameworkContentElement.ToolTip="{DynamicResource MainWin_Bar_Main_SubItem_CurrentPvfPackFilePathToolTip}" p15:BarItem.Command="{Binding OnGotoFilePathCommand}" p15:BarItem.Content="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfPackFilePath, Mode=OneWay}" />
+        </ToolBarControl>
+      </BarContainerControl>
+      <GridSplitter Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Width="5" Padding="0" HorizontalAlignment="Stretch" />
+      <controls:PvfTreeViewGroup Grid.Row="1" Grid.Column="2" DataContext="{Binding TreeViewModelRight}" />
+      <BarContainerControl Grid.Row="2" Grid.Column="2" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+        <ToolBarControl p15:ToolBarControlBase.AllowCustomizationMenu="False" p15:ToolBarControl.AllowQuickCustomization="False" p15:ToolBarControl.ShowDragWidget="True" p15:ToolBarControl.UseWholeRow="True" xmlns:p15="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+          <p15:BarButtonItem p15:BarItem.CommandParameter="False" FrameworkContentElement.ToolTip="{DynamicResource MainWin_Bar_Main_SubItem_CurrentPvfPackFilePathToolTip}" p15:BarItem.Command="{Binding OnGotoFilePathCommand}" p15:BarItem.Content="{Binding Pvf.PvfPackFilePath, Mode=OneWay}" />
+        </ToolBarControl>
+      </BarContainerControl>
+    </Grid>
+  </Grid>
+</UserControl>

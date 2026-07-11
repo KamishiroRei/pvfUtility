@@ -1,0 +1,1061 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="privatekey.pem" xml:space="preserve"><value>-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEA4h+XKJKOks9CJOusbztyJvfRUKb8YN0ot2sIgJSo0XmV3ZCl
+UG9EAeDzuK7rQeNwtV/RB4rGNKp3Plb53P/N0Xt4qnb7hsIVx1WeQolJd2Bb24wd
+lr5142IAqo2JwVfDPvOKZn7NzndPI73MbKndzA/ubCMnDvQwq4/eaHOPBe6U0NSZ
+lIAWtAvluRQzAOkHAGXdcrhF6OEpwN9Xs1DWl4nSxJIkv6yd6o5LT2lfFydLwCbT
+N1MpIbmcSkwsulkFYcNqCdlX11qESuRYy8XX1gk1unpMej53sxnIh/N+AtWH8OH6
+lhf67wt+4EJ3h9ionA6tLdCVUvTFU5+xpCepVQIDAQABAoIBAH7uJLfNrOKUHRkE
+ggLeZ7GgIosXcUweWSC8oEUtLaaIjauV6nZAPvifAbCF3+FYfogRhRCqwaAGoHEJ
++bAol6wjlxR5Pa/jer4uPWw0DF1KZcXT3TglKZ+9/4m9cbpqPVs08leejoB7UJ1L
+iVjl8W7+8mMZSG+Ie1mSpNIVLA+zUqCrtJx7AsdK4mLtj61Mp8YbwYE8uXVoMzD6
+1xtfjdgaheNaT07GZG6f3MaJ4JGUUrc8X7hOsp7AG7zisdQ3J7RiEFZYzGff0Skj
+6xeTY0dtI4No7Ige8RmjyImcQakUg8eO++pJOHohCHvI6P+5Hn2ba+2wUnmMwp+v
+tava6PECgYEA/qzR5s8uNaHS3roq97ypVzocWOrHgpqsMPjr5F/NH4wodmPd2/ob
+prZQGfjjYHQ6ciOIUYzN8RmnAsk3sz/wPeaZ4P9d2hWJuEXM2N/BXLQ12UPOn9Uw
+pcahXMGAoyzwVaVK/h65JhYkR3gVAv9eZR+ZATH166lzdHTUmGgCmz8CgYEA40y+
+t0deTH+2+EIiIuQTcvacv14d1k1VHgQsEQ19lTMD2ULV8kCkO6vnfYixFvfYFTzf
+XqUMQTUB6LdXdHKUrQNY7v+QJ1MAlS2Ofk+fTuHpxp+AcmDjq0jSQfwjHLZJiUeX
+EsgAQZNxpn3LuHJOWichrrQ0ZvS/uJvcg5F7umsCgYEA96Q3C1gk1/P+Z6PhyjpC
+9FXGYNQTorUigRBb2RsrC+UvJ0ge4RvILYkURN0WxKDggEJ6+MmRLEPEedoN9phS
+1O5abUYEDd9ppq0A71ZM4Qc/YYAk+JjGkDygheCHZKR7ItzzGj3nzdgz+OcUj3Cg
+anaaQmZBeqGwaep9G6Hv/uMCgYEAzEN4lF5HiPmw5RMReEd8jvC+Vl9u8toWJt5a
+94wnEkCBMeqVN5oNvS4z3yVK97gM8LD+jyBFjgfjyk2RAy3BHGYIsubpld1KhcUl
+668EHDB7FKrcFG2ry46qnO/IYhISrZKvWgpv6H5nQNaFkCDw9qV56HU7Lla+QFmY
+5oeEKDcCgYBzE9tBKHd4FiLUrqpaT0w49ocbMmKkQr/dt/q22f5tB6+iGZGHdCzl
+WEHvqGDK+OQe5/pnGYpebq5ko5E3EFhlHAzijQR+cqbCx+kAX9xnHHWR5XBgH8IZ
++VLiJT5rjchQvCkTWCKAf6Gn2sqBn7qQIFwPkgOJlviqFOVWw1HyOg==
+-----END RSA PRIVATE KEY-----</value></data>
+  <data name="publickey.pem" xml:space="preserve"><value>-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4h+XKJKOks9CJOusbzty
+JvfRUKb8YN0ot2sIgJSo0XmV3ZClUG9EAeDzuK7rQeNwtV/RB4rGNKp3Plb53P/N
+0Xt4qnb7hsIVx1WeQolJd2Bb24wdlr5142IAqo2JwVfDPvOKZn7NzndPI73MbKnd
+zA/ubCMnDvQwq4/eaHOPBe6U0NSZlIAWtAvluRQzAOkHAGXdcrhF6OEpwN9Xs1DW
+l4nSxJIkv6yd6o5LT2lfFydLwCbTN1MpIbmcSkwsulkFYcNqCdlX11qESuRYy8XX
+1gk1unpMej53sxnIh/N+AtWH8OH6lhf67wt+4EJ3h9ionA6tLdCVUvTFU5+xpCep
+VQIDAQAB
+-----END PUBLIC KEY-----</value></data>
+  <data name="PraseInfo" xml:space="preserve"><value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root&gt;
+    &lt;!-- 
+        开放此配置的目的是为了收集并完善PVF文档格式 希望大家能尽量提交到云端并允许作者合并
+        待完善后，该功能可能会关闭！因为统一文档格式是有必要的！
+    --&gt;
+    &lt;File FileName="etc/independentdrop"&gt;
+        &lt;Section SectionName="[list]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="*.tbl"&gt;
+        &lt;Section SectionName="[easy]" GroupLength="14" /&gt;
+        &lt;Section SectionName="[medium]" GroupLength="14" /&gt;
+        &lt;Section SectionName="[hard]" GroupLength="14" /&gt;
+        &lt;Section SectionName="[ultimate]" GroupLength="14" /&gt;
+        &lt;Section SectionName="[hero]" GroupLength="14" /&gt;
+        &lt;Section SectionName="[normal]" GroupLength="2" ParentSectionName="[mesmerization damage balance]" Description="" /&gt;
+        &lt;Section SectionName="[named]" GroupLength="2" ParentSectionName="[mesmerization damage balance]" Description="" /&gt;
+        &lt;Section SectionName="[boss]" GroupLength="2" ParentSectionName="[mesmerization damage balance]" Description="" /&gt;
+        &lt;Section SectionName="[named]" GroupLength="3" ParentSectionName="[limit slowdown]" Description="" /&gt;
+        &lt;Section SectionName="[boss]" GroupLength="3" ParentSectionName="[limit slowdown]" Description="" /&gt;
+        &lt;Section SectionName="[Revision Table]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="15"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+    &lt;/File&gt;
+    &lt;File FileName="*.npc"&gt;
+        &lt;Section SectionName="[favor]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[prefer item]" GroupLength="4" Description="" /&gt;
+        &lt;Section SectionName="[prefer item group]" GroupLength="4" Description="" /&gt;
+        &lt;Section SectionName="[unprefer item group]" GroupLength="3" Description="" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="*.map" Description="地图文件格式化"&gt;
+        &lt;Section SectionName="[animation]" Description="地图相关动画文件" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive object]" Description="地图相关被动对象" GroupLength="4" /&gt;
+        &lt;Section SectionName="[monster]" Description="怪物" GroupLength="10" /&gt;
+        &lt;Section SectionName="[monster condition]" Description="地图相关动画文件" GroupLength="10" /&gt;
+        &lt;Section SectionName="[NPC]" Description="NPC" GroupLength="5" /&gt;
+        &lt;Section SectionName="[ai character]" Description="APC" GroupLength="8" /&gt;
+        &lt;Section SectionName="[event monster position]" Description="怪物" GroupLength="3" /&gt;
+        &lt;Section SectionName="[town movable area]" Description="城镇与城镇之间连接" GroupLength="6" /&gt;
+        &lt;Section SectionName="[virtual movable area]" Description="城镇与城镇之间连接" GroupLength="4" /&gt;
+        &lt;Section SectionName="[pvp start area]" Description="pvp起始点定义" GroupLength="4" /&gt;
+        &lt;Section SectionName="[special passive object]" Description="" GroupLength="11" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="*.til"&gt;
+        &lt;Section SectionName="[pass type]" Description="" GroupLength="14" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="*.wdm"&gt;
+        &lt;Section SectionName="[hell freepass item]" Description="免邀请函门票" GroupLength="2" /&gt;
+        &lt;Section SectionName="[dungeon]" Description="地下城" GroupLength="2" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="*.mob"&gt;
+        &lt;Section SectionName="[ability category]" Description="能力目录" GroupLength="3" /&gt;
+        &lt;Section SectionName="[speech on situation]" Description="条件发言" GroupLength="4" /&gt;
+        &lt;Section SectionName="[attack kind]" Description="攻击类型" GroupLength="12" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="*.equ"&gt;
+        &lt;Section SectionName="[skill data up]" Description="技能提升数据" GroupLength="7" /&gt;
+        &lt;Section SectionName="[passive object]" GroupLength="7" /&gt;
+        &lt;Section SectionName="[avatar type select]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[avatar select ability]" GroupLength="3" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="*.stk"&gt;
+        &lt;Section SectionName="[avatar]" ParentSectionName="[booster select category]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[creature]" ParentSectionName="[booster select category]" GroupLength="2" /&gt;
+        &lt;!-- &lt;Section SectionName="[default select]" ParentSectionName="[booster select category]" GroupLength="2" /&gt; --&gt;
+        &lt;Section SectionName="[special avatar]" ParentSectionName="[booster info]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="5"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+        &lt;Section SectionName="[avatar]" ParentSectionName="[booster info]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="5"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[creature]" ParentSectionName="[booster info]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+                &lt;Section SectionName="[emblem]" ParentSectionName="[booster info]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[equipment]" ParentSectionName="[booster info]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[package data]" Description="包裹数据" GroupLength="2" /&gt;
+        &lt;Section SectionName="[random list]" Description=""&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="4"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+        &lt;Section SectionName="[skill]" ParentSectionName="[3choro enchant]" Description=""&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="7"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+
+        &lt;Section SectionName="[default list]" Description=""&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="4"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+        &lt;Section SectionName="[cera]" Description=""&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+        &lt;Section SectionName="[etc]" ParentSectionName="[booster info]" Description=""&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[etc]" ParentSectionName="[booster select category]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" ParentSectionName="[booster select category]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[stackable]" ParentSectionName="[booster info]" Description=""&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+        &lt;Section SectionName="[stackable]" ParentSectionName="[booster select category]" GroupLength="2" /&gt;
+
+
+    &lt;/File&gt;
+
+    &lt;File FileName="*.aic"&gt;
+        &lt;Section SectionName="[equipment]" Description="aic" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" Description="aic" GroupLength="2" /&gt;
+        &lt;Section SectionName="[quick skill]" Description="aic" GroupLength="2" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="*.shp"&gt;
+        &lt;Section SectionName="[display avatar list]" Description="头像列表" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar list]" Description="头像列表" GroupLength="5" /&gt;
+        &lt;Section SectionName="[neck avatar ability list]" Description="头像列表" GroupLength="5" /&gt;
+        &lt;Section SectionName="[swordman]" Description="头像列表" GroupLength="12" /&gt;
+        &lt;Section SectionName="[fighter]" Description="头像列表" GroupLength="12" /&gt;
+        &lt;Section SectionName="[gunner]" Description="头像列表" GroupLength="12" /&gt;
+        &lt;Section SectionName="[mage]" Description="头像列表" GroupLength="12" /&gt;
+        &lt;Section SectionName="[priest]" Description="头像列表" GroupLength="12" /&gt;
+        &lt;Section SectionName="[at gunner]" Description="头像列表" GroupLength="12" /&gt;
+        &lt;Section SectionName="[thief]" Description="头像列表" GroupLength="12" /&gt;
+        &lt;Section SectionName="[at fighter]" Description="头像列表" GroupLength="12" /&gt;
+
+    &lt;/File&gt;
+
+    &lt;File FileName="*.exj"&gt;
+        &lt;Section SectionName="[disjoint result]" Description="disjoint result" GroupLength="8" /&gt;
+        &lt;Section SectionName="[additional result]" Description="additional result" GroupLength="6" /&gt;
+        &lt;Section SectionName="[big win result]" Description="big win result" GroupLength="6" /&gt;
+        &lt;Section SectionName="[items]" Description="items" GroupLength="4" /&gt;
+        &lt;Section SectionName="[expertness exp]" Description="expertness exp" GroupLength="3" /&gt;
+        &lt;Section SectionName="[upgrade cost]" Description="upgrade cost" GroupLength="2" /&gt;
+        &lt;Section SectionName="[endurance repair cost]" Description="endurance repair cost" GroupLength="2" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="*.qst"&gt;
+        &lt;Section SectionName="[monster reward item]" Description="当接取该任务后可以让指定怪物掉落指定物品" GroupLength="7" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="*.skl"&gt;
+        &lt;Section SectionName="[AutoSkill]" GroupLength="20" /&gt;
+
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/itemdropinfo_common.etc"&gt;
+        &lt;Section SectionName="[gold drop ref table]" Description="金币" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="event/eventserver/eventserverworlddrop.evt"&gt;
+        &lt;Section SectionName="[world drop]" Description="掉落" GroupLength="12" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/itemdictionary/(r)baseitemdictionarytable.etc"&gt;
+
+        &lt;Section SectionName="[base table]" Description="词典" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/itemdictionary/(r)recipelistmakeequip.etc"&gt;
+        &lt;Section SectionName="[equipRecipe list]" Description="词典" GroupLength="8" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/upgrade.etc"&gt;
+        &lt;Section SectionName="[table]" Description="强化表" GroupLength="17" /&gt;
+        &lt;Section SectionName="[cost weight by upgrade level]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[upgrade machine frame rate]" GroupLength="6" /&gt;
+
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/upgrade_separate.etc"&gt;
+        &lt;Section SectionName="[item weights by grade]" Description="_" GroupLength="3" /&gt;
+
+        &lt;Section SectionName="[separate upgrade effect]" Description="__" GroupLength="6" /&gt;
+        &lt;Section SectionName="[table]" Description="__" GroupLength="4" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/worlddropwararea.etc"&gt;
+
+        &lt;Section SectionName="[world drop]" Description="世界掉落" GroupLength="7" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/worlddropwarareapcroom.etc"&gt;
+
+        &lt;Section SectionName="[world drop]" Description="世界掉落" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/towerofdespair.etc"&gt;
+        &lt;Section SectionName="[each layer matching dungeon]" Description="绝望之塔的副本数据" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/itemdropinfo_monster_hell.etc"&gt;
+        &lt;Section SectionName="[item drop ref table]" GroupLength="3" /&gt;
+
+        &lt;Section SectionName="[basis of rarity dicision]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="6"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+    &lt;/File&gt;
+    &lt;File FileName="*.etc"&gt;
+        &lt;Section SectionName="[key value index]" Description="绝望之塔的副本数据" GroupLength="2" /&gt;
+        &lt;Section SectionName="[gold card cost table]" Description="通关结算翻牌爆率-金币" GroupLength="2" /&gt;
+        &lt;Section SectionName="[item drop ref table]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[gold card blank item]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[basis of rarity dicision]" GroupLength="6" /&gt;
+
+        &lt;Section SectionName="[reward item rate per map max count]" GroupLength="2" /&gt;
+
+        &lt;Section SectionName="[action point user message]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[action point system message]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[action point medal reward]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[action point today reward]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[item]" ParentSectionName="[level]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[skill]" ParentSectionName="[level]" GroupLength="2" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_atfighter.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_atgunner.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_atmage.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_creator_mage.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_demonic_swordman.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_fighter.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_gunner.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_mage.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_priest.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_swordman.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundavatar_thief.etc"&gt;
+        &lt;Section SectionName="[hat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[hair rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[face rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[neck rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[coat rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pants rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[belt rare avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[shoes rare avatar]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;!--  商城  --&gt;
+    &lt;File FileName="etc/newcashshop.etc"&gt;
+        &lt;Section SectionName="[avatar]" Description="时装" GroupLength="12" /&gt;
+        &lt;Section SectionName="[coin]" Description="时装" GroupLength="9" /&gt;
+      
+       
+        &lt;Section SectionName="[creature]" Description="时装" GroupLength="9" /&gt;
+    
+        &lt;Section SectionName="[mileage item]" Description="时装" GroupLength="9" /&gt;
+        &lt;Section SectionName="[avatar coin]" Description="时装" GroupLength="9" /&gt;
+        &lt;Section SectionName="[category event tag]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[not stackable buy]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[max gift count]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[gift only]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[cerapoint disallowance]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[gift disallowance]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[cart disallowance]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[npc info]" Description="时装" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/newcashshop_restrict.etc"&gt;
+        &lt;Section SectionName="[account restrict]" Description="商城账号购买限制" GroupLength="12" /&gt;
+        &lt;Section SectionName="[character restrict]" Description="商城角色购买限制" GroupLength="12" /&gt;
+    &lt;/File&gt;
+    &lt;!--  cerashop_first --&gt;
+    &lt;File FileName="etc/cerashop_first.etc"&gt;
+        &lt;Section SectionName="[avatar]" Description="时装" GroupLength="14" /&gt;
+        &lt;Section SectionName="[coin]" Description="时装" GroupLength="10" /&gt;
+        &lt;Section SectionName="[item]" Description="时装" GroupLength="10" /&gt;
+        &lt;Section SectionName="[premium]" Description="时装" GroupLength="10" /&gt;
+        &lt;Section SectionName="[creature]" Description="时装" GroupLength="10" /&gt;
+        &lt;Section SectionName="[package]" Description="时装" GroupLength="10" /&gt;
+        &lt;Section SectionName="[gift only]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[cerapoint disallowance]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[gift disallowance]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[cart disallowance]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[max gift count]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[category event tag]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[not stackable buy]" Description="时装" GroupLength="1" /&gt;
+        &lt;Section SectionName="[recommended avatar list]" Description="时装" GroupLength="11" /&gt;
+        &lt;Section SectionName="[dont trade avatar]" Description="时装" GroupLength="8" /&gt;
+    &lt;/File&gt;
+
+    &lt;!-- 全局爆率 --&gt;
+    &lt;File FileName="etc/worlddrop.etc"&gt;
+        &lt;Section SectionName="[world drop]" Description="全局爆率" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/accountcargo.etc"&gt;
+        &lt;Section SectionName="[upgrade info]" Description="账号金库" GroupLength="4" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/amplifyupgrade.etc"&gt;
+        &lt;Section SectionName="[amplification const]" Description="amplification const" GroupLength="4" /&gt;
+        &lt;Section SectionName="[table]" Description="amplification const" GroupLength="17" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/bloodclearreward.etc"&gt;
+        &lt;Section SectionName="[ultimate reward prob]" Description="终极奖励" GroupLength="3" /&gt;
+    &lt;/File&gt;
+
+
+    &lt;!--  工会  --&gt;
+    &lt;File FileName="etc/guild.etc"&gt;
+        &lt;Section SectionName="[guild levelup cost]" Description="升级经验" GroupLength="3" /&gt;
+        &lt;Section SectionName="[guild levelup price]" Description="升级所需金币" GroupLength="18" /&gt;
+        &lt;Section SectionName="[guild exp book]" Description="升级所需金币" GroupLength="2" /&gt;
+        &lt;Section SectionName="[agit upgrade info]" Description="升级所需金币" GroupLength="4" /&gt;
+
+
+    &lt;/File&gt;
+
+
+
+    &lt;File FileName="etc/itemdropinfo_control.etc"&gt;
+        &lt;Section SectionName="[control of gold drop amount rate per level]" Description="每级金币掉落速率的控制" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/labyrinth.etc"&gt;
+        &lt;Section SectionName="[character exp table]" Description="character exp table" GroupLength="2" /&gt;
+        &lt;Section SectionName="[monster fp exp point]" Description="monster fp exp point" GroupLength="3" /&gt;
+        &lt;Section SectionName="[barrack fp exp point]" Description="barrack fp exp point" GroupLength="3" /&gt;
+        &lt;Section SectionName="[tower fp exp point]" Description="tower fp exp point" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/mercenary.etc"&gt;
+        &lt;Section SectionName="[item index]" Description="索引" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/mileageshop.etc"&gt;
+        &lt;Section SectionName="[recommended avatar list]" Description="recommended avatar list" GroupLength="12"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="11"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[coin]" Description="coin" GroupLength="10" /&gt;
+        &lt;Section SectionName="[premium]" Description="premium" GroupLength="10" /&gt;
+        &lt;Section SectionName="[item]" Description="item" GroupLength="10" /&gt;
+        &lt;Section SectionName="[creature]" Description="creature" GroupLength="10" /&gt;
+        &lt;Section SectionName="[not stackable buy]" Description="creature" GroupLength="1" /&gt;
+
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/pcbangrentalservice.etc"&gt;
+        &lt;Section SectionName="[package selection]" Description="package selection" GroupLength="4" /&gt;
+        &lt;Section SectionName="[section]" GroupLength="5" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/pcroom.vm"&gt;
+        &lt;Section SectionName="[output]" Description="抽奖机" GroupLength="4" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/pcroom3.vm"&gt;
+        &lt;Section SectionName="[output]" Description="抽奖机" GroupLength="4" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/pcroom4.vm"&gt;
+        &lt;Section SectionName="[output]" Description="抽奖机" GroupLength="4" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/premiumserviceeffect.etc"&gt;
+        &lt;Section SectionName="[add selectAble equipment list]" Description="add selectAble equipment list" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/pvp_ref.etc"&gt;
+        &lt;Section SectionName="[pvp experience]" Description="PVP经验" GroupLength="2" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/pvppracticeailist.etc"&gt;
+        &lt;Section SectionName="[AI LIST]" Description="ai列表" GroupLength="6" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/questpiece.etc"&gt;
+        &lt;Section SectionName="[piece quest list]" Description="piece quest list" GroupLength="2" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/quickparty.etc"&gt;
+        &lt;Section SectionName="[increase gold card]" Description="increase gold card" GroupLength="3" /&gt;
+        &lt;Section SectionName="[reward]" Description="reward" GroupLength="11" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/ranksysteminfo.etc"&gt;
+
+        &lt;Section SectionName="[dungeon clear time average]" Description="dungeon clear time average"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="7"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[combo interval boundaries]" Description="combo interval boundaries" GroupLength="4" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/ridableevent.etc"&gt;
+
+        &lt;Section SectionName="[ridable quest world drop]"&gt;
+            &lt;GroupLength Value="10"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="4"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+    &lt;/File&gt;
+
+
+    &lt;File FileName="etc/serverparameter.etc"&gt;
+        &lt;Section SectionName="[drop prob]" Description="light server notice" GroupLength="3" /&gt;
+        &lt;Section SectionName="[result reward prob]" Description="light server notice" GroupLength="3" /&gt;
+        &lt;Section SectionName="[collect dungeon statistic server]" Description="light server notice" GroupLength="2" /&gt;
+        &lt;Section SectionName="[burning fatigue event param]" Description="light server notice" GroupLength="10" /&gt;
+        &lt;Section SectionName="[fatigue event param]" Description="light server notice" GroupLength="10" /&gt;
+        &lt;Section SectionName="[emblem compound info]" Description="light server notice" GroupLength="7" /&gt;
+        &lt;Section SectionName="[recipe amplify table]" Description="light server notice" GroupLength="33" /&gt;
+        &lt;Section SectionName="[recipe upgrade table]" Description="light server notice" GroupLength="33" /&gt;
+        &lt;Section SectionName="[recipe upgrade table 2nd]" Description="light server notice" GroupLength="33" /&gt;
+        &lt;Section SectionName="[recipe amplify table 2nd]" Description="light server notice" GroupLength="33" /&gt;
+        &lt;Section SectionName="[full level reward]" Description="light server notice" GroupLength="2" /&gt;
+        &lt;Section SectionName="[pvp exp penalty revision]" Description="light server notice" GroupLength="2" /&gt;
+        &lt;Section SectionName="[usable items]" Description="light server notice" GroupLength="2" /&gt;
+        &lt;Section SectionName="[premium card drop]" Description="light server notice" GroupLength="4" /&gt;
+
+
+        &lt;Section SectionName="[light server notice]" Description="light server notice" GroupLength="4" /&gt;
+        &lt;Section SectionName="[protect of upgrade down]" Description="强化保护券" GroupLength="4" /&gt;
+        &lt;Section SectionName="[training first give]" Description="training first give" GroupLength="6" /&gt;
+        &lt;Section SectionName="[drop bonus of dungeon level increase]" Description="drop bonus of dungeon level increase" GroupLength="4" /&gt;
+
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/sptable.etc"&gt;
+        &lt;Section SectionName="[sp table]" Description="SP表" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/timelimiteditemslist_jpn.etc"&gt;
+        &lt;Section SectionName="[entry]" Description="entry" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/timelimiteditemslist.etc"&gt;
+        &lt;Section SectionName="[entry]" Description="entry" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/at_fighter.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="4" /&gt;
+        &lt;Section SectionName="[tutorial notice]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive skill]" GroupLength="5" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/at_gunner.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/globaltutorialinfo/at_mage.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/globaltutorialinfo/fighter.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/gunner.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/mage.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/preist.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/swordman.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/thief.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/avatar_roulette_jar.etc"&gt;
+        &lt;Section SectionName="[swordman]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[fighter]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[gunner]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[mage]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[priest]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[at_gunner]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[thief]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[at_fighter]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[at_mage]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[DemonicSwordman]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[creator mage]" GroupLength="10" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/avatarcolorvariation.etc"&gt;
+        &lt;Section SectionName="[avatar color map]" GroupLength="5" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/chn_dblogitem.etc"&gt;
+        &lt;Section SectionName="[dblog getitem]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[dblog getitem]" GroupLength="5" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/chn_server_limititemusageinfo.etc"&gt;
+        &lt;Section SectionName="[refill item]" GroupLength="3" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/chn_timesystemmessage.etc"&gt;
+        &lt;Section SectionName="[system message time]" GroupLength="6" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/craneminigameitem.etc"&gt;
+        &lt;Section SectionName="[need material]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/bloodwar.etc"&gt;
+        &lt;Section SectionName="[BP TABLE]" GroupLength="10" /&gt;
+        &lt;Section SectionName="[BGM]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/broadcastitem.etc"&gt;
+        &lt;Section SectionName="[common items]" GroupLength="1" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/chaosfpshop.etc"&gt;
+        &lt;Section SectionName="[consume items]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[fairy items]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[improve items]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[special items]" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/compoundcreaturejpn.etc"&gt;
+        &lt;Section SectionName="[Creature]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[Rare Creature]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/dialogwindowimageindex.etc"&gt;
+        &lt;Section SectionName="[npc image index pair]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[apc image index pair]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[monster image index pair]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/emotionexpressiondata.etc"&gt;
+        &lt;Section SectionName="[EMOTION ICON INFO]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[EMOTION INFO]" GroupLength="10" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/emoticontypetags.etc"&gt;
+        &lt;Section SectionName="[emoticon animation info]" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/equipmentpartset.etc"&gt;
+        &lt;Section SectionName="[equipment part set]"&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="4"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/eventupgradejar.etc"&gt;
+        &lt;Section SectionName="[fortune fail rate]" GroupLength="3"&gt;&lt;/Section&gt;
+
+        &lt;Section SectionName="[event upgrade table]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/exchangeitemnpc.etc"&gt;
+        &lt;Section SectionName="[random exchange item]" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/fairpvpequipment.etc"&gt;
+        &lt;Section SectionName="[package selection]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/goldlimitbylevel.etc"&gt;
+        &lt;Section SectionName="[gold limit from level]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/growthpowerrewardbuff.etc"&gt;
+        &lt;Section SectionName="[package selection]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/hellparty.etc"&gt;
+        &lt;Section SectionName="[group]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/uniquerewardforallusers.etc"&gt;
+        &lt;Section SectionName="[package selection]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="event/dimensionactivationevent.evt"&gt;
+        &lt;Section SectionName="[package selection]" GroupLength="4" ParentSectionName="[select group]" /&gt;
+        &lt;Section SectionName="[package selection]" ParentSectionName="[give group]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[section]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/itemmakingskill.etc"&gt;
+        &lt;Section SectionName="[upgrade with compound]" GroupLength="7" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/leagueavatarbalance.etc"&gt;
+        &lt;Section SectionName="[avatar select ability]" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/onlinequest.etc"&gt;
+        &lt;Section SectionName="[online quest]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/power.etc"&gt;
+        &lt;Section SectionName="[straight victory penalty]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[straight victory break bonus]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[power war channel]" GroupLength="2" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/questshop.etc"&gt;
+        &lt;Section SectionName="[level info]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[quest status info]" GroupLength="3" /&gt;
+
+
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/secretshop.etc"&gt;
+        &lt;Section SectionName="[dungeon npc]" GroupLength="7" /&gt;
+        &lt;Section SectionName="[level section]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[level npc]" GroupLength="7" /&gt;
+        &lt;Section SectionName="[level]"&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="6"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[dungeon]"&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="6"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/titleballooninfo.etc"&gt;
+        &lt;Section SectionName="[title balloon info]" GroupLength="6" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/ultimatedungeonlist.etc"&gt;
+        &lt;Section SectionName="[apply ultimate]" GroupLength="4" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/unlimitchallenge.etc"&gt;
+        &lt;Section SectionName="[swordman]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[fighter]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[gunner]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[mage]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[priest]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[atgunner]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[thief]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[message]" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/villageattacked.etc"&gt;
+        &lt;Section SectionName="[attacked map info]" GroupLength="4" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/warroomequalize.tbl"&gt;
+        &lt;Section SectionName="[equalization]"&gt;
+            &lt;GroupLength Value="4"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="11"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/whiteipportlist.etc"&gt;
+        &lt;Section SectionName="[white ip]"&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+
+        &lt;/Section&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/worlddroppcroom.etc"&gt;
+        &lt;Section SectionName="[world drop]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/worlddroppcroom2.etc"&gt;
+        &lt;Section SectionName="[world drop]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/advancealtar/advancealtarconfig.etc"&gt;
+        &lt;Section SectionName="[gage up rate]" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/advancealtar/advancealtarmode.etc"&gt;
+        &lt;Section SectionName="[ridable list]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[action]" GroupLength="3" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/advancealtar/advancealtarshop.etc"&gt;
+        &lt;Section SectionName="[star reset fee gold]" GroupLength="2" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/advancealtar/advancealtarsummondata.etc"&gt;
+        &lt;Section SectionName="[summon object]" GroupLength="9" /&gt;
+        &lt;Section SectionName="[normal]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="4"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/emblemrenewal/avatar_convert_jpn.etc"&gt;
+        &lt;Section SectionName="[rare avatar convert result]"&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[special avatar convert result]"&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[avatar convert result]"&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/emblemrenewal/emblem_compound_jpn.etc"&gt;
+        &lt;Section SectionName="[emblem compound cost]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[emblem compound result]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[emblem list]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/at_gunner.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="4" /&gt;
+        &lt;Section SectionName="[tutorial notice]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive skill]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/at_mage.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="4" /&gt;
+        &lt;Section SectionName="[tutorial notice]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive skill]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/fighter.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="4" /&gt;
+        &lt;Section SectionName="[tutorial notice]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive skill]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/gunner.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="4" /&gt;
+        &lt;Section SectionName="[tutorial notice]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive skill]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/mage.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="4" /&gt;
+        &lt;Section SectionName="[tutorial notice]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive skill]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/preist.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="4" /&gt;
+        &lt;Section SectionName="[tutorial notice]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive skill]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/swordman.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="4" /&gt;
+        &lt;Section SectionName="[tutorial notice]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive skill]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/globaltutorialinfo/thief.etc"&gt;
+        &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="4" /&gt;
+        &lt;Section SectionName="[tutorial notice]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[equipment]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[skill]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[passive skill]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/itemdictionary/(r)dungeon_name.etc"&gt;
+        &lt;Section SectionName="[dungeon name]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="6"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/itemdictionary/(r)dungeondropinfo.etc"&gt;
+
+        &lt;Section SectionName="[normal table]"&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[hell table]"&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/itemdictionary/(r)independentdropinfo.etc"&gt;
+        &lt;Section SectionName="[monster table]" GroupLength="10" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="*.rep"&gt;
+        &lt;Section SectionName="[skill]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[quick skill expend]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[quick skill]" GroupLength="4" /&gt;
+        &lt;!-- &lt;Section SectionName="[normal key]" &gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="12"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt; --&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/linksystem/charactermanage.etc"&gt;
+        &lt;Section SectionName="[point bonus]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[exp bonus]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[manage option]" GroupLength="2" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/linksystem/striker.etc"&gt;
+        &lt;Section SectionName="[striker level penalty]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[striker skill macro]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[striker skill]" GroupLength="6" /&gt;
+
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/randomoption/optiongrouping.etc"&gt;
+        &lt;Section SectionName="[option group]" GroupLength="3"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/randomoption/optiongroupselection.etc"&gt;
+        &lt;Section SectionName="[choose option group]" GroupLength="12" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/randomoption/optionquantity.etc"&gt;
+        &lt;Section SectionName="[quantity ratio]" GroupLength="2" /&gt;
+        &lt;Section SectionName="[option quantity]" GroupLength="6" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/randomoption/optiontext.etc"&gt;
+        &lt;Section SectionName="[option text]" GroupLength="3" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/randomoption/partselection.etc"&gt;
+        &lt;Section SectionName="[part type]" GroupLength="3" /&gt;
+
+    &lt;/File&gt;
+    &lt;File FileName="etc/randomoption/randomizedoptionoverall1.etc"&gt;
+        &lt;Section SectionName="[random application]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[level limit]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[base item]" GroupLength="6" /&gt;
+        &lt;Section SectionName="[option type]" GroupLength="6" /&gt;
+        &lt;Section SectionName="[modified option type]" GroupLength="6" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/randomoption/randomizedoptionoverall2.etc"&gt;
+        &lt;Section SectionName="[break seal cost]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[different weight]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[choose postfix]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[option modification]" GroupLength="3" /&gt;
+        &lt;Section SectionName="[postfix grade modification]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[postfix grade modification]" GroupLength="5" /&gt;
+        &lt;Section SectionName="[gradeless postfix]" GroupLength="2" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/randomoption/regenerationrandomoption.etc"&gt;
+        &lt;Section SectionName="[adjust quantity ratio]" GroupLength="5" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/chaosequalize.tbl"&gt;
+        &lt;Section SectionName="[equalization]" GroupLength="4" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="etc/disjoint.etc"&gt;
+        &lt;Section SectionName="[additional result]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="5"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[additional result const]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="4"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[fighter]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[gunner]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[swordman]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[mage]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[priest]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[at gunner]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[at fighter]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[at mage]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[demonic swordman]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[creator mage]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[thief]" GroupLength="4" /&gt;
+        &lt;Section SectionName="[avatar disjoint for parts info]" GroupLength="4" /&gt;
+
+
+    &lt;/File&gt;
+
+    &lt;File FileName="etc/etcparameter.etc"&gt;
+        &lt;Section SectionName="[PVP equalization]" GroupLength="6" /&gt;
+        &lt;Section SectionName="[PVP equalization for tournament]" GroupLength="6" /&gt;
+        &lt;Section SectionName="[PVP equalization for APC]" GroupLength="6" /&gt;
+        &lt;Section SectionName="[fair PVP equalization]" GroupLength="6" /&gt;
+        &lt;Section SectionName="[fair PVP equalization for tournament]" GroupLength="6" /&gt;
+        &lt;Section SectionName="[fair PVP equalization for APC]" GroupLength="6" /&gt;
+        &lt;Section SectionName="[upgrade effect]"&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="11"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+        &lt;Section SectionName="[assault equalization]" GroupLength="14" /&gt;
+        &lt;Section SectionName="[skill damage base parameter dungeon]" GroupLength="7" /&gt;
+        &lt;Section SectionName="[skill damage base parameter pvp]" GroupLength="7" /&gt;
+    &lt;/File&gt;
+    &lt;File FileName="*.skl"&gt;
+        &lt;Section SectionName="[level property]"&gt;
+            &lt;GroupLength Value="2"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+            &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+        &lt;/Section&gt;
+
+    &lt;/File&gt;
+&lt;/root&gt;</value></data>
+  </root>

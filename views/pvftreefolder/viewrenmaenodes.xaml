@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pvftreefolder:ViewReNmaeNodes xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:pvfcode="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:treefolder="clr-namespace:PvfCode.ViewModels.TreeFolder;assembly=pvfUtility" xmlns:treelist="clr-namespace:PvfCode.ValidationRules.TreeList;assembly=pvfUtility" FrameworkElement.Name="win" Window.Title="{DynamicResource ViewReNmaeNodes_Title}" FrameworkElement.Width="600" FrameworkElement.Height="600" xmlns:pvftreefolder="clr-namespace:PvfCode.Views.PvfTreeFolder;assembly=pvfUtility">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.EventName="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding LoadedCommand}" ui:EventToCommandBase.CommandParameter="{Binding ElementName=tree}" />
+  </interactivity:Interaction.Behaviors>
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="errorTemplate">
+        <TextBlock Foreground="#FFFF0000" Text="{Binding ErrorContent}" />
+      </DataTemplate>
+      <DataTemplate x:Key="PvfFileTreeColumnRenameTemplate">
+        <StackPanel Margin="0,0,10,0" AllowDrop="True" Orientation="Horizontal" DataContext="{Binding Row, Mode=OneWay}">
+          <TextBlock Margin="0,0,3,0" FontSize="8" FontWeight="Bold" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.NewFileFlagBrush, Mode=OneWay}" Text="{Binding Path=Value.ChangedViewText, Mode=OneWay}" Visibility="{Binding Path=Value.ChangedViewText, Converter={StaticResource ConvertNullToVisibility}}" />
+          <TextBlock Margin="5,0,0,0" Text="{DynamicResource ViewReNmaeNodes_Label_New}" Style="{StaticResource treeCellTextBlack}" />
+          <editors:TextEdit FrameworkElement.MinWidth="200" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ValidationService.AllowAccessibilityAlerts="True" Control.Background="{DynamicResource TreeListReNameTextEditBackBrush}" Control.BorderThickness="0.5" editors:BaseEdit.NullText="{DynamicResource ViewReNmaeNodes_Label_NewFileNameNullText}" editors:BaseEdit.ErrorToolTipContentTemplate="{StaticResource errorTemplate}" Control.Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.FileNameBrush, Mode=OneWay}">
+            <FrameworkElement.Resources>
+              <ResourceDictionary>
+                <treelist:BindingProxy x:Key="TargetProxy" Data="{Binding Value, Mode=OneWay}" />
+                <treelist:BindingProxy x:Key="SourceProxy" Data="{Binding Path=DataContext.Trees, RelativeSource={RelativeSource AncestorType=dxg:TreeListControl}}" />
+              </ResourceDictionary>
+            </FrameworkElement.Resources>
+            <editors:BaseEdit.EditValue>
+              <Binding Mode="TwoWay" Path="Value.NewFileName" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                  <treelist:TreeListReNameNewFileNameRequiredValidationRule>
+                    <treelist:ComparisonNode Source="{Binding Data, Source={StaticResource SourceProxy}}" Value="{Binding Data, Source={StaticResource TargetProxy}}" />
+                  </treelist:TreeListReNameNewFileNameRequiredValidationRule>
+                </Binding.ValidationRules>
+              </Binding>
+            </editors:BaseEdit.EditValue>
+          </editors:TextEdit>
+          <TextBlock Margin="5,0,0,0" Foreground="#FF808080" Text="{DynamicResource ViewReNmaeNodes_Label_Old}" Style="{StaticResource treeCellTextBlack}" />
+          <TextBlock Margin="0,0,3,0" Foreground="#FF808080" Style="{StaticResource treeCellTextBlack}" Text="{Binding Value.FileName, Mode=OneWay}" />
+          <TextBlock Name="treeComment" Padding="5,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.CommentBrush, Mode=OneWay}" Text="{Binding Value.Comment, Mode=OneWay}" Visibility="{Binding ElementName=treeComment, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+          <TextBlock Name="treeItemName" Padding="15,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.ItemNameBrush, Mode=OneWay}" Text="{Binding Value.ItemName, Mode=OneWay}" Visibility="{Binding ElementName=treeItemName, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+          <TextBlock Name="treeItemCode" Padding="5,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.ItemCodeBrush, Mode=OneWay}" Text="{Binding Value.ItemCodeStr, Mode=OneWay}" Visibility="{Binding ElementName=treeItemCode, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+        </StackPanel>
+      </DataTemplate>
+      <treefolder:TreeListReNmaeCellTemplateSelector x:Key="TreeListReNmaeCellTemplateSelector" File="{StaticResource PvfFileTreeColumnRenameTemplate}" Folder="{StaticResource PvfFileTreeColumnTemplate}" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal">
+      <Image Source="{DynamicResource StatusWarning_16x}" />
+      <Label Margin="5,0,0,0" Content="{DynamicResource ViewReNmaeNodes_Label_SelectedFile}" Foreground="#FF808080" />
+      <Label Margin="5,0,0,0" Content="{DynamicResource ViewReNmaeNodes_Label_AltDown}" Foreground="#FF808080" />
+      <Label Margin="10,0,0,0" Content="{DynamicResource ViewReNmaeNodes_Label_AltUp}" Foreground="#FF808080" />
+    </StackPanel>
+    <Grid Visibility="{Binding IsLoaded, Converter={StaticResource ConvertBoolenToVisibility}, Mode=OneWay}">
+      <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+      </Grid.RowDefinitions>
+      <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="{DynamicResource ViewReNmaeNodes_Label_Loading}" Foreground="#FF808080" />
+      <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" />
+    </Grid>
+    <TreeListControl FrameworkElement.Name="tree" Grid.Row="1" xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid:DataControlBase.SelectionMode="Row" grid:DataControlBase.ShowBorder="False" grid:DataControlBase.CurrentItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" grid:DataControlBase.ItemsSource="{Binding Trees, Mode=OneWay}" grid:DataControlBase.SelectedItem="{Binding FocusedRow}" grid:DataControlBase.SelectedItems="{Binding SelectedItems, Mode=TwoWay}" xmlns="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+      <grid1:TreeListControl.Columns xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+        <grid1:TreeListColumn grid:BaseColumn.Name="columnKey" ColumnBase.CellTemplateSelector="{StaticResource TreeListReNmaeCellTemplateSelector}" grid:ColumnBase.FieldName="Key" grid:ColumnBase.SortMode="Custom" grid:ColumnBase.SortOrder="Ascending" ToolTipService.InitialShowDelay="50" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid:BaseColumn.Width="{Binding Source={x:Static appsetting:AppSetting.Instance}, Mode=OneWay, Path=TreeSetting.AllowHorizontalScrollingAutoWidth, Converter={StaticResource ConverterAllowHorizontalScrolling}}" grid:BaseColumn.CellToolTipBinding="{Binding Path=Value.DetailedComment}">
+        </grid1:TreeListColumn>
+      </grid1:TreeListControl.Columns>
+      <TreeListControl.View>
+        <treefolder:CustomTreeListView treefolder:CustomTreeListView.Name="treeListView" treefolder:CustomTreeListView.CustomColumnSort="View_CustomColumnSort" treefolder:CustomTreeListView.RowDoubleClick="treeListView_RowDoubleClick" FrameworkElement.Width="auto" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid1:TreeListView.AllowAdvancedHorizontalNavigation="False" grid1:TreeListView.AllowAdvancedVerticalNavigation="False" grid1:TreeListView.AllowBandMoving="False" grid1:TreeListView.AllowBandMultiRow="False" grid1:TreeListView.AllowBandResizing="False" grid1:TreeListView.AllowBestFit="False" grid1:TreeListView.AllowCascadeUpdate="False" grid1:TreeListView.AllowChildNodeSourceUpdates="False" grid:DataViewBase.AllowColumnFiltering="False" grid:DataViewBase.AllowDragDrop="False" grid:DataViewBase.AllowEditing="False" grid1:TreeListView.AllowHorizontalScrollingVirtualization="True" grid1:TreeListView.AllowRecursiveNodeChecking="True" grid1:TreeListView.AllowTreeIndentScrolling="False" grid1:TreeListView.AutoExpandAllNodes="True" grid1:TreeListView.AutoWidth="False" grid1:TreeListView.CompactPanelShowMode="CompactMode" grid1:TreeListView.EnableDynamicLoading="True" grid1:TreeListView.FetchSublevelChildrenOnExpand="True" grid1:TreeListView.HorizontalScrollbarVisibility="Auto" grid:DataViewBase.IsDeferredScrolling="False" grid:DataViewBase.NavigationStyle="Row" grid1:TreeListView.NodeImageSelector="{StaticResource PvfTreeNodeImageSelector}" grid:DataViewBase.RowAnimationKind="None" grid1:TreeListView.RowStyle="{StaticResource FileListTreeRowStyle}" grid1:TreeListView.ScrollBarAnnotationMode="Selected,FocusedRow,Custom " grid:DataViewBase.ScrollingMode="Smart" grid1:TreeListView.ShowCheckboxes="False" grid:DataViewBase.ShowColumnHeaders="False" grid1:TreeListView.ShowExpandButtons="True" grid1:TreeListView.ShowIndicator="False" grid1:TreeListView.ShowNodeImages="True" grid:DataViewBase.ShowSearchPanelMode="Never" grid:DataViewBase.ShowSelectionRectangle="False" grid:DataViewBase.ShowTargetInfoInDragDropHint="True" grid1:TreeListView.ShowVerticalLines="False" grid1:TreeListView.TreeColumnFieldName="Key" grid1:TreeListView.TreeDerivationMode="ChildNodesSelector" grid1:TreeListView.VerticalScrollbarVisibility="Auto" grid1:TreeListView.ChildNodesSelector="{Binding ChildNodesSelector}" grid1:TreeListView.RowDoubleClickCommand="{Binding NodeDoubleClickCommand}" grid1:TreeListView.ShowHorizontalLines="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.ShowHorizontalLines, Mode=OneWay}" grid1:TreeListView.UseEvenRowBackground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.UseEvenRowBackground, Mode=OneWay}">
+          <grid1:TreeListView.ScrollBarAnnotationsAppearance>
+            <grid:ScrollBarAnnotationsAppearance>
+              <grid:ScrollBarAnnotationsAppearance.FocusedRow>
+                <grid:ScrollBarAnnotationInfo grid:ScrollBarAnnotationInfo.Width="10" grid:ScrollBarAnnotationInfo.MinHeight="2" grid:ScrollBarAnnotationInfo.Alignment="Full" grid:ScrollBarAnnotationInfo.Brush="#a31515" />
+              </grid:ScrollBarAnnotationsAppearance.FocusedRow>
+              <grid:ScrollBarAnnotationsAppearance.Selected>
+                <grid:ScrollBarAnnotationInfo grid:ScrollBarAnnotationInfo.Width="3" grid:ScrollBarAnnotationInfo.MinHeight="3" grid:ScrollBarAnnotationInfo.Alignment="Right" grid:ScrollBarAnnotationInfo.Brush="#5da9dc" />
+              </grid:ScrollBarAnnotationsAppearance.Selected>
+            </grid:ScrollBarAnnotationsAppearance>
+          </grid1:TreeListView.ScrollBarAnnotationsAppearance>
+          <bars:BarManager.DXContextMenu xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+            <bars:PopupMenu>
+              <bars:PopupMenu.Items xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                <bars:BarButtonItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarItem.CommandParameter="false" bars:BarItem.Content="{DynamicResource ViewReNmaeNodes_ContextMenu_ExpandAll}" bars:BarItem.Command="{Binding ElementName=treeListView, Path=Commands.ExpandAllNodes}" />
+                <bars:BarButtonItem bars:BarItem.CommandParameter="true" bars:BarItem.Content="{DynamicResource ViewReNmaeNodes_ContextMenu_CollapseAll}" bars:BarItem.Command="{Binding ElementName=treeListView, Path=Commands.CollapseAllNodes}" />
+                <bars:BarItemSeparator xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+                <bars:BarButtonItem bars:BarItem.Content="{DynamicResource ViewReNmaeNodes_ContextMenu_RemoveSelected}" bars:BarItem.Glyph="{DynamicResource Action_Delete}" bars:BarItem.KeyGesture="Delete" bars:BarItem.Command="{Binding OnDeleteSelectedNodesCommand}" bars:BarItem.CommandParameter="{Binding ElementName=tree, Path=SelectedItems, Mode=OneWay}" />
+                <bars:BarItemSeparator />
+                <bars:BarItemSeparator />
+                <bars:BarButtonItem bars:BarItem.Content="{DynamicResource ViewReNmaeNodes_ContextMenu_Up}" bars:BarItem.Command="{Binding OnIncreasingUpwardCommand}" bars:BarItem.CommandParameter="{Binding ElementName=tree, Path=CurrentItem, Mode=OneWay}" bars:BarItem.KeyGesture="{Binding Source={x:Static pvfcode:KeyGestureStaticValue.Instance}, Path=AltAndUp}" />
+                <bars:BarButtonItem bars:BarItem.Content="{DynamicResource ViewReNmaeNodes_ContextMenu_Down}" bars:BarItem.Command="{Binding OnIncreasingDownwardCommand}" bars:BarItem.CommandParameter="{Binding ElementName=tree, Path=CurrentItem, Mode=OneWay}" bars:BarItem.KeyGesture="{Binding Source={x:Static pvfcode:KeyGestureStaticValue.Instance}, Path=AltAndDown}" />
+              </bars:PopupMenu.Items>
+            </bars:PopupMenu>
+          </bars:BarManager.DXContextMenu>
+        </treefolder:CustomTreeListView>
+      </TreeListControl.View>
+    </TreeListControl>
+    <StackPanel Grid.Row="2" Margin="0,10,0,10" HorizontalAlignment="Right" Orientation="Horizontal">
+      <CheckBox Margin="0,0,10,0" Content="{DynamicResource ViewReNmaeNodes_CheckBox_ApplyToLst}" Visibility="Collapsed" IsChecked="{Binding ReNameApplyTolstFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <Button Width="90" Height="30" Margin="0,0,9,0" Content="{DynamicResource common_Save}" Command="{Binding OnSaveCommand}" CommandParameter="{Binding ElementName=win}" />
+      <Button Width="90" Height="30" Margin="0,0,9,0" Content="{DynamicResource common_Cancel}" Command="{Binding OnCancelCommand}" CommandParameter="{Binding ElementName=win}" />
+    </StackPanel>
+  </Grid>
+</pvftreefolder:ViewReNmaeNodes>

@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<views:WindowPublicSetting xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:dxprgi="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid/internal" xmlns:enums="clr-namespace:PvfCode.Models.Options.Enums;assembly=PvfCode.Models" xmlns:enums1="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:pvfcode="clr-namespace:PvfCode;assembly=PvfCode.Services" xmlns:pvfcode1="clr-namespace:PvfCode;assembly=PvfCode.Dot" xmlns:pvftree="clr-namespace:PvfCode.Converts.PvfTree;assembly=pvfUtility" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" xmlns:themes="clr-namespace:PvfCode.Converts.Themes;assembly=pvfUtility" FrameworkElement.Name="win" Window.Title="{DynamicResource ViewGlobalOptions_Title}" FrameworkElement.Height="500" FrameworkElement.MinWidth="700" Control.Padding="0" Window.ResizeMode="CanResizeWithGrip" Window.SizeToContent="Width" xmlns:views="clr-namespace:PvfCode.Views;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <themes:ConverterThemeTypeToString x:Key="ConverterThemeTypeToString" />
+      <pvftree:TreeColorConverter x:Key="TreeColorConverter" />
+      <DataTemplate x:Key="defaultSetting">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+          <StackPanel Orientation="Vertical">
+            <Border Margin="0,10,0,0" Background="{DynamicResource PvfReleasePanelBackbrush}" CornerRadius="5">
+              <StackPanel Margin="10">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Column="0" Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme}" />
+                  <editors:ComboBoxEdit Grid.Column="1" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.IsTextEditable="False" editors:BaseEdit.EditValue="{Binding Source={x:Static root:ThemeSwitcher.Instance}, Path=SettingSelectedTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterThemeTypeToString}}">
+                    <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Blue}" />
+                    <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Dark}" />
+                    <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Light}" />
+                  </editors:ComboBoxEdit>
+                </Grid>
+                <Grid Margin="0,10,0,0">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Column="0" Content="{DynamicResource Lang_Region}" />
+                  <ComboBoxEdit FrameworkElement.Name="LangTypeComboBox" Grid.Column="1" p31:ButtonEdit.IsTextEditable="False" FrameworkElement.DataContext="{Binding ElementName=win, Path=DataContext}" p31:BaseEdit.EditValue="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=CurrentLang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                    <editors:LookUpEditBase.ItemsSource xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                      <editors:EnumItemsSource editors:EnumItemsSource.EnumType="{x:Type pvfcode1:LangType}" />
+                    </editors:LookUpEditBase.ItemsSource>
+                    <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+                      <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.EventName="SelectedIndexChanged" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding OnLangTypeChangedCommand}" />
+                    </interactivity:Interaction.Behaviors>
+                  </ComboBoxEdit>
+                </Grid>
+                <Grid Margin="0,10,0,0">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Column="0" Content="{DynamicResource ViewGlobalOptions_Label_DefaultEncoding}" />
+                  <ComboBoxEdit Grid.Column="1" p31:ButtonEdit.IsTextEditable="False" p31:LookUpEditBase.ItemsSource="{StaticResource PvfEncodingTypeList}" p31:BaseEdit.EditValue="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.OverAllEncodingType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                </Grid>
+                <Grid Margin="0,10,0,0">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Column="0" Content="{DynamicResource ViewGlobalOptions_Label_FontSize}" />
+                  <ComboBoxEdit Grid.Column="1" p31:ButtonEdit.IsTextEditable="False" p31:BaseEdit.EditValue="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" p31:LookUpEditBase.ItemsSource="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSizeList, Mode=OneWay}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                </Grid>
+              </StackPanel>
+            </Border>
+            <Border Margin="0,10,0,0" Background="{DynamicResource PvfReleasePanelBackbrush}" CornerRadius="5" Visibility="Collapsed">
+              <StackPanel Margin="10" Orientation="Vertical">
+                <Label Margin="0,0,0,10" FontSize="13" FontWeight="Bold" Foreground="#FF808080">保存pvf封包时 裁剪描述文件选项</Label>
+                <CheckBox Content="裁剪stringTable.bin文件：未被引用的字符串" IsChecked="{Binding Path=PvfConfig.SavePvfPackTrimmableStringBinFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+                <CheckBox Content="裁剪kor.str文件：未被引用的字符串" IsChecked="{Binding Path=PvfConfig.SavePvfPackTrimmableStringViewFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+              </StackPanel>
+            </Border>
+            <Border Margin="0,10,0,0" Background="{DynamicResource PvfReleasePanelBackbrush}" CornerRadius="5">
+              <StackPanel Margin="10">
+                <CheckBox Margin="0,10,0,0" Content="{DynamicResource ViewGlobalOptions_Label_AutoConvertStringLink}" IsChecked="{Binding Path=PvfConfig.AutoConvertStringLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+                <CheckBox Margin="0,0,0,0" Content="{DynamicResource ViewGlobalOptions_Label_AutoConvertTraditionalChinese}" IsChecked="{Binding Path=PvfConfig.FileTextTraditionalConvertSimplified, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+                <CheckBox Margin="0,0,0,0" Content="{DynamicResource ViewGlobalOptions_Label_DisableMainWindowWhenSavingPvf}" IsChecked="{Binding Path=PvfConfig.SavePvfLoadingDisableMainWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+                <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_AutoBackupWhenSavingPvfFailed}" ToolTipService.InitialShowDelay="50" IsChecked="{Binding Path=PvfConfig.PvfSaveWhenTheErrorBackUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}">
+                  <FrameworkElement.ToolTip>
+                    <ToolTip>
+                      <TextBlock Foreground="#FFFF0000" Text="{DynamicResource ViewGlobalOptions_Label_AutoBackupWhenSavingPvfFailed_Tooltip}" TextWrapping="Wrap" />
+                    </ToolTip>
+                  </FrameworkElement.ToolTip>
+                </CheckBox>
+                <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_ShowDialogBeforeSavingPvf}" IsChecked="{Binding Path=PvfConfig.SavePvfPackShowDialog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+                <CheckBox ToolTip="{DynamicResource ViewGlobalOptions_Label_AttachChildWindowToMainWindow_Tooltip}" ToolTipService.InitialShowDelay="50" IsChecked="{Binding Path=ChildWindowAttachmentMainWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}">
+                  <ContentControl.ContentTemplate>
+                    <DataTemplate>
+                      <StackPanel Orientation="Horizontal">
+                        <Label Content="{DynamicResource ViewGlobalOptions_Label_AttachChildWindowToMainWindow}" />
+                        <Label Margin="5,0,0,0" Content="{DynamicResource ViewGlobalOptions_Label_AttachChildWindowToMainWindow_Tooltip2}" Foreground="#FF808080" />
+                        <Label Margin="5,0,0,0" Content="{DynamicResource ViewGlobalOptions_Label_AttachChildWindowToMainWindow_Tooltip3}" Foreground="#FF808080" />
+                      </StackPanel>
+                    </DataTemplate>
+                  </ContentControl.ContentTemplate>
+                </CheckBox>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </DataTemplate>
+      <DataTemplate x:Key="EditorSetting">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Orientation="Vertical" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig}">
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_AutoConvertSimplifiedChineseToTraditionalChinese}" IsChecked="{Binding Path=PvfConfig.EditorConvertTraditionalChinese, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+            <CheckBox Content="使用兼容性反编译器 (已弃用 不再支持！统一格式对未来的发展是必要的，所以必须废除)" Foreground="#FFFF0000" IsEnabled="False" IsChecked="{Binding Path=PvfConfig.UseCompatibleDecompiler, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+            <CheckBox Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowSpaces}" IsChecked="{Binding ShowSpaces, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowTabls}" IsChecked="{Binding ShowTabs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowEndOfLine}" IsChecked="{Binding ShowEndOfLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_AddTabAtLineEnd}" IsChecked="{Binding AddEndTab, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorWordWrap}" IsChecked="{Binding WordWrap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorEnableTextDragDrop}" IsChecked="{Binding EnableTextDragDrop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorEnableVirtualSpace}" IsChecked="{Binding EnableVirtualSpace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorUseAutoCodeFolding}" IsChecked="{Binding UseAutoCodeFolding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorUseFoldingGuideLines}" IsChecked="{Binding UseFoldingGuideLines, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_FormatNutCodeWhenSaving}" IsChecked="{Binding SaveBeautifyNutCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_ShowFirstLineTab}" IsChecked="{Binding ShowFirstColumnTab, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_ClickLstNameToJumpFileNeedCtrl}" IsChecked="{Binding LstDocumentNameGoFileNeedCtrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_DrawReferenceButtonForDescriptionFile}" IsChecked="{Binding OpenKorStrQuote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Grid Margin="0,10,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <Label Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_NutDefaultEncoding}" />
+              <ComboBoxEdit Grid.Column="1" p29:ButtonEdit.IsTextEditable="False" p29:BaseEdit.EditValue="{Binding NutDefaultEncodingType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p29="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                <LookUpEditBase.ItemsSource>
+                  <EnumItemsSource p29:EnumItemsSource.EnumType="{x:Type enums1:EncodingType}" />
+                </LookUpEditBase.ItemsSource>
+              </ComboBoxEdit>
+            </Grid>
+            <StackPanel Height="1" Margin="0,8,0,8" Background="#FF808080" />
+            <Grid Margin="0,10,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+              </Grid.RowDefinitions>
+              <Label HorizontalAlignment="Right" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_SmartTranslateTriggerMode}" />
+              <ComboBoxEdit Grid.Column="1" p29:ButtonEdit.IsTextEditable="False" p29:LookUpEditBase.ItemsSource="{StaticResource HoverTooltipModeList}" p29:BaseEdit.EditValue="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.EditorCommentHoverTooltipMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p29="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+              <Label Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Right" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_CodeIntelliSenseTriggerMode}" />
+              <ComboBoxEdit Grid.Row="1" Grid.Column="1" FrameworkElement.Margin="0,10,0,0" p29:ButtonEdit.IsTextEditable="False" p29:LookUpEditBase.ItemsSource="{StaticResource HoverTooltipModeList}" p29:BaseEdit.EditValue="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.EditorItemCodeHoverTooltipMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p29="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+            </Grid>
+            <StackPanel Height="1" Margin="0,8,0,8" Background="#FF808080" />
+            <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorFindPanel}">
+              <WrapPanel Orientation="Vertical">
+                <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorFindPanel_AllowPopupMessageWhenNotFound}" IsChecked="{Binding SearchPanelFindNotFoundAllowMessageBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Label Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorFindPanel_EnterToNewLine}" Foreground="#FF808080" />
+              </WrapPanel>
+            </GroupBox>
+            <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_Label_EditorSetting_Ellipsis}">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Label Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_Ellipsis_SingleLine}" />
+                <editors:TextEdit Grid.Column="1" FrameworkElement.Width="100" editors:BaseEdit.NullText="{DynamicResource ViewGlobalOptions_Label_EditorSetting_Ellipsis_SingleLine_Default}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:TextEditBase.Text="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.TruncateLongLineLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Label Grid.Column="2" Margin="5,0,0,0" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_Ellipsis_Column}" />
+              </Grid>
+            </GroupBox>
+          </StackPanel>
+        </ScrollViewer>
+      </DataTemplate>
+      <DataTemplate x:Key="EditorhighlightedSetting">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor}">
+            <StackPanel Orientation="Vertical">
+              <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme}" />
+                <ComboBoxEdit Grid.Column="1" p30:ButtonEdit.IsTextEditable="False" p30:BaseEdit.EditValue="{Binding Source={x:Static root:ThemeSwitcher.Instance}, Path=SettingSelectedTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterThemeTypeToString}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                  <ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Blue}" />
+                  <ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Dark}" />
+                  <ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Light}" />
+                </ComboBoxEdit>
+                <editors:HyperlinkEdit Grid.Column="2" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" editors:BaseEdit.EditValue="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_Reset}" editors:HyperlinkEdit.Command="{Binding ResSetCommand}" FrameworkElement.DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption, Mode=OneWay}" />
+              </Grid>
+              <StackPanel Height="1" Margin="0,10,0,10" Background="#FF808080" />
+              <Grid DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption}">
+                <FrameworkElement.Resources>
+                  <ResourceDictionary>
+                    <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
+                      <Setter Property="HorizontalAlignment" Value="Right" />
+                      <Setter Property="Margin" Value="0,10,0,0" />
+                    </Style>
+                    <Style x:Key="{x:Type editors:PopupColorEdit}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type editors:PopupColorEdit}">
+                      <Setter Property="editors:TextEditBase.AcceptsTab" Value="True" />
+                      <Setter Property="editors:PopupBaseEdit.AllowRecreatePopupContent" Value="True" />
+                      <Setter Property="editors:PopupColorEdit.ChipSize" Value="Default" />
+                      <Setter Property="editors:BaseEdit.AllowUpdateTextBlockWhenPrinting" Value="True" />
+                      <Setter Property="editors:BaseEdit.EditMode" Value="Standalone" />
+                      <Setter Property="editors:PopupBaseEdit.IsPopupOpen" Value="False" />
+                      <Setter Property="editors:ButtonEdit.IsTextEditable" Value="False" />
+                      <Setter Property="editors:PopupColorEdit.MoreColorsButtonContent" Value="颜色吸管" />
+                      <Setter Property="editors:PopupColorEdit.ShowAlphaChannel" Value="False" />
+                      <Setter Property="editors:PopupColorEdit.ShowDefaultColorButton" Value="False" />
+                      <Setter Property="editors:BaseEdit.ShowError" Value="True" />
+                      <Setter Property="editors:PopupColorEdit.ShowMoreColorsButton" Value="True" />
+                      <Setter Property="editors:PopupColorEdit.ShowNoColorButton" Value="False" />
+                      <Setter Property="editors:PopupBaseEdit.ShowPopupIfReadOnly" Value="True" />
+                      <Setter Property="FrameworkElement.Margin" Value="0,10,0,0" />
+                      <Setter Property="ToolTipService.InitialShowDelay" Value="50" />
+                    </Style>
+                  </ResourceDictionary>
+                </FrameworkElement.Resources>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Label Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_HeaderFile}" ToolTip="示例：#PVF_File" />
+                <PopupColorEdit Grid.Row="0" Grid.Column="1" FrameworkElement.ToolTip="示例：#PVF_File" p30:PopupColorEdit.Color="{Binding Header, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="1" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_TagNode}" ToolTip="示例：[name]" />
+                <PopupColorEdit Grid.Row="1" Grid.Column="1" FrameworkElement.ToolTip="示例：[name]" p30:PopupColorEdit.Color="{Binding Section, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="2" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_String}" ToolTip="示例：`亞米`" />
+                <PopupColorEdit Grid.Row="2" Grid.Column="1" FrameworkElement.ToolTip="示例：`亞米`" p30:PopupColorEdit.Color="{Binding String, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="3" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_FilePath}" ToolTip="示例：`Effect /Animation/OutRageBreak_DS/sword_slash_stone.ani`" />
+                <PopupColorEdit Grid.Row="3" Grid.Column="1" FrameworkElement.ToolTip="示例：`Effect /Animation/OutRageBreak_DS/sword_slash_stone.ani`" p30:PopupColorEdit.Color="{Binding FilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="4" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_Number}" ToolTip="示例：1883" />
+                <PopupColorEdit Grid.Row="4" Grid.Column="1" FrameworkElement.ToolTip="示例：1883" p30:PopupColorEdit.Color="{Binding Digits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="5" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_Comment}" ToolTip="示例：//注释内容" />
+                <PopupColorEdit Grid.Row="5" Grid.Column="1" FrameworkElement.ToolTip="示例：//注释内容" p30:PopupColorEdit.Color="{Binding Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="6" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_NutPunctuation}" ToolTip="示例：[?,.;()\[\]{}+\-/%*等等" />
+                <PopupColorEdit Grid.Row="6" Grid.Column="1" FrameworkElement.ToolTip="示例：[?,.;()\[\]{}+\-/%*等等" p30:PopupColorEdit.Color="{Binding Punctuation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="7" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_Method}" ToolTip="示例：requestBuy()" />
+                <PopupColorEdit Grid.Row="7" Grid.Column="1" FrameworkElement.ToolTip="示例：requestBuy()" p30:PopupColorEdit.Color="{Binding MethodCall, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="8" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_GGenObject}" ToolTip="示例：GGen_Point、GGen_Path、GGen_Amplitudes、GGen_Data_2D、GGen_Data_1D" />
+                <PopupColorEdit Grid.Row="8" Grid.Column="1" FrameworkElement.ToolTip="示例：GGen_Point、GGen_Path、GGen_Amplitudes、GGen_Data_2D、GGen_Data_1D" p30:PopupColorEdit.Color="{Binding GGenObject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="9" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_Keyword}" ToolTip="示例：if、else、for、while等等..." />
+                <PopupColorEdit Grid.Row="9" Grid.Column="1" FrameworkElement.ToolTip="示例：if、else、for、while等等..." p30:PopupColorEdit.Color="{Binding Keywords, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="10" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_Keyword2}" ToolTip="示例：true、false、function等等" />
+                <PopupColorEdit Grid.Row="10" Grid.Column="1" FrameworkElement.ToolTip="示例：true、false、function等等" p30:PopupColorEdit.Color="{Binding Keywords2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="11" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_LstRightItemName}" />
+                <PopupColorEdit Grid.Row="11" Grid.Column="1" p30:PopupColorEdit.Color="{Binding LstItemNameForeBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="12" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_ScriptFile}" />
+                <PopupColorEdit Grid.Row="12" Grid.Column="1" p30:PopupColorEdit.Color="{Binding KorStringMarkSymbol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="13" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_ScriptFile2}" />
+                <PopupColorEdit Grid.Row="13" Grid.Column="1" p30:PopupColorEdit.Color="{Binding KorName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="14" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_ScriptFile3}" />
+                <PopupColorEdit Grid.Row="14" Grid.Column="1" p30:PopupColorEdit.Color="{Binding KorColon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Grid Row="15" ColumnSpan="2">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Label Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_KorStrDescFile}" Foreground="#FF808080" />
+                  <StackPanel Grid.Column="1" Height="1" Margin="5,7,0,0" VerticalAlignment="Center" Background="#FF808080" />
+                </Grid>
+                <Label Grid.Row="16" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_KorStrDescFile_Index}" />
+                <PopupColorEdit Grid.Row="16" Grid.Column="1" p30:PopupColorEdit.Color="{Binding KorStrIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="17" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_KorStrDescFile_Value}" />
+                <PopupColorEdit Grid.Row="17" Grid.Column="1" p30:PopupColorEdit.Color="{Binding KorStrValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+                <Label Grid.Row="18" Content="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_KorStrDescFile_Bracket}" />
+                <PopupColorEdit Grid.Row="18" Grid.Column="1" p30:PopupColorEdit.Color="{Binding KorStrAngleBrackets, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                </PopupColorEdit>
+              </Grid>
+            </StackPanel>
+          </GroupBox>
+        </ScrollViewer>
+      </DataTemplate>
+      <DataTemplate x:Key="TreeListSettings">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Orientation="Vertical" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting}">
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_FileExplorer_ShowHorizontalLine}" IsChecked="{Binding Path=TreeSetting.ShowHorizontalLines, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_ImportFilePage_FileExplorerAutoExpand}" IsChecked="{Binding Path=TreeSetting.ImportTreeListAutoExpandAllNodes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_HorizontalScrollBar_AutoWidth}" IsChecked="{Binding Path=TreeSetting.AllowHorizontalScrollingAutoWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_UseEvenRowBackgroundColor}" IsChecked="{Binding Path=TreeSetting.UseEvenRowBackground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_CopyFilePathToClipboardWhenCopyFile}" IsChecked="{Binding Path=TreeSetting.CopyFilesSetToClipboard, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_ShowCurrentFocusPathBox}" IsChecked="{Binding Path=TreeSetting.TreeListControlTopShowFilePathTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+            <CheckBox ToolTip="{DynamicResource PublicSetting_NpkIconsApplyToFileExplorerToolTip}" ToolTipService.InitialShowDelay="50" Command="{Binding TreeShowNpkIconCCommand}" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting}" IsChecked="{Binding Path=TreeShowNpkIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=ImagePacks2ViewModel.IsLoading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterBoolenToFalse}}">
+              <ContentControl.ContentTemplate>
+                <DataTemplate>
+                  <StackPanel Orientation="Horizontal">
+                    <Label Content="{DynamicResource PublicSetting_NpkIconsApplyToFileExplorer}" />
+                    <Label Content="{DynamicResource PublicSetting_NpkIconsApplyToFileExplorer2}" Foreground="#FF808080" />
+                  </StackPanel>
+                </DataTemplate>
+              </ContentControl.ContentTemplate>
+            </CheckBox>
+            <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_Label_FileExplorer_CustomColor}">
+              <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Column="0" Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme}" />
+                  <ComboBoxEdit Grid.Column="1" p31:ButtonEdit.IsTextEditable="False" p31:BaseEdit.EditValue="{Binding Source={x:Static root:ThemeSwitcher.Instance}, Path=SettingSelectedTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterThemeTypeToString}}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                    <ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Blue}" />
+                    <ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Dark}" />
+                    <ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Light}" />
+                  </ComboBoxEdit>
+                  <HyperlinkEdit Grid.Column="2" FrameworkElement.VerticalAlignment="Center" p31:HyperlinkEdit.AllowAutoNavigate="True" p31:BaseEdit.EditValue="{DynamicResource ViewGlobalOptions_Label_ResetCustomColor}" p31:HyperlinkEdit.Command="{Binding ResetCommand}" FrameworkElement.DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig, Mode=OneWay}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                </Grid>
+                <StackPanel Height="1" Margin="0,10,0,10" Background="#FF808080" />
+                <Grid>
+                  <FrameworkElement.Resources>
+                    <ResourceDictionary>
+                      <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
+                        <Setter Property="HorizontalAlignment" Value="Right" />
+                        <Setter Property="Margin" Value="0,10,0,0" />
+                      </Style>
+                      <Style x:Key="{x:Type PopupColorEdit}" TargetType="{x:Type PopupColorEdit}">
+                        <Setter Property="TextEditBase.AcceptsTab" Value="True" />
+                        <Setter Property="PopupBaseEdit.AllowRecreatePopupContent" Value="True" />
+                        <Setter Property="PopupColorEdit.ChipSize" Value="Default" />
+                        <Setter Property="BaseEdit.AllowUpdateTextBlockWhenPrinting" Value="True" />
+                        <Setter Property="BaseEdit.EditMode" Value="Standalone" />
+                        <Setter Property="PopupBaseEdit.IsPopupOpen" Value="False" />
+                        <Setter Property="ButtonEdit.IsTextEditable" Value="False" />
+                        <Setter Property="PopupColorEdit.MoreColorsButtonContent" Value="{DynamicResource ViewGlobalOptions_Label_ColorPicker}" />
+                        <Setter Property="PopupColorEdit.ShowAlphaChannel" Value="False" />
+                        <Setter Property="PopupColorEdit.ShowDefaultColorButton" Value="False" />
+                        <Setter Property="BaseEdit.ShowError" Value="True" />
+                        <Setter Property="PopupColorEdit.ShowMoreColorsButton" Value="True" />
+                        <Setter Property="PopupColorEdit.ShowNoColorButton" Value="False" />
+                        <Setter Property="PopupBaseEdit.ShowPopupIfReadOnly" Value="True" />
+                        <Setter Property="FrameworkElement.Margin" Value="0,10,0,0" />
+                      </Style>
+                    </ResourceDictionary>
+                  </FrameworkElement.Resources>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                  </Grid.RowDefinitions>
+                  <Label Content="{DynamicResource ViewGlobalOptions_Label_NewFileFlagColor}" />
+                  <PopupColorEdit Grid.Row="0" Grid.Column="1" p31:PopupColorEdit.Color="{Binding NowTreeColorConfig.NewFileFlagBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="1" Content="{DynamicResource ViewGlobalOptions_Label_FileNameForegroundColor}" />
+                  <PopupColorEdit Grid.Row="1" Grid.Column="1" p31:PopupColorEdit.Color="{Binding NowTreeColorConfig.FileNameBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="2" Content="{DynamicResource ViewGlobalOptions_Label_ItemNameForegroundColor}" />
+                  <PopupColorEdit Grid.Row="2" Grid.Column="1" p31:PopupColorEdit.Color="{Binding NowTreeColorConfig.ItemNameBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="3" Content="{DynamicResource ViewGlobalOptions_Label_ItemCodeForegroundColor}" />
+                  <PopupColorEdit Grid.Row="3" Grid.Column="1" p31:PopupColorEdit.Color="{Binding NowTreeColorConfig.ItemCodeBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="4" Content="{DynamicResource ViewGlobalOptions_Label_CommentForegroundColor}" />
+                  <PopupColorEdit Grid.Row="4" Grid.Column="1" p31:PopupColorEdit.Color="{Binding NowTreeColorConfig.CommentBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="5" Content="{DynamicResource ViewGlobalOptions_Label_FocusRowBackgroundColor}" />
+                  <PopupColorEdit Grid.Row="5" Grid.Column="1" p31:PopupColorEdit.Color="{Binding NowTreeColorConfig.FocusedBackBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="6" Content="{DynamicResource ViewGlobalOptions_Label_SelectedRowBackgroundColor}" />
+                  <PopupColorEdit Grid.Row="6" Grid.Column="1" p31:PopupColorEdit.Color="{Binding NowTreeColorConfig.SelectedBackBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <GroupBox Grid.Row="7" Grid.ColumnSpan="2" Margin="0,18,0,0" Header="{DynamicResource ViewGlobalOptions_ItemNameColor}">
+                    <Grid>
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                      </Grid.RowDefinitions>
+                      <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <CheckBox VerticalAlignment="Center" VerticalContentAlignment="Center" Content="{DynamicResource ViewGlobalOptions_checkBox_ItemNameColorByRarity}" IsChecked="{Binding UseRarityColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Margin="10,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Content="{DynamicResource ViewGlobalOptions_checkBox_ItemNameColorByRarity_Tip}" Foreground="#FF808080" />
+                      </StackPanel>
+                      <Grid Row="1" IsEnabled="{Binding UseRarityColor}">
+                        <Grid.RowDefinitions>
+                          <RowDefinition Height="auto" />
+                          <RowDefinition Height="auto" />
+                          <RowDefinition Height="auto" />
+                          <RowDefinition Height="auto" />
+                          <RowDefinition Height="auto" />
+                          <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="auto" />
+                          <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Content="{DynamicResource FileExplorer_Rarity0_Name}" />
+                        <PopupColorEdit Grid.Row="0" Grid.Column="1" p34:PopupColorEdit.Color="{Binding NowTreeColorConfig.RarityColor0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p34="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                        <Label Grid.Row="1" Content="{DynamicResource FileExplorer_Rarity1_Name}" />
+                        <PopupColorEdit Grid.Row="1" Grid.Column="1" p34:PopupColorEdit.Color="{Binding NowTreeColorConfig.RarityColor1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p34="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                        <Label Grid.Row="2" Content="{DynamicResource FileExplorer_Rarity2_Name}" />
+                        <PopupColorEdit Grid.Row="2" Grid.Column="1" p34:PopupColorEdit.Color="{Binding NowTreeColorConfig.RarityColor2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p34="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                        <Label Grid.Row="3" Content="{DynamicResource FileExplorer_Rarity3_Name}" />
+                        <PopupColorEdit Grid.Row="3" Grid.Column="1" p34:PopupColorEdit.Color="{Binding NowTreeColorConfig.RarityColor3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p34="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                        <Label Grid.Row="4" Content="{DynamicResource FileExplorer_Rarity4_Name}" />
+                        <PopupColorEdit Grid.Row="4" Grid.Column="1" p34:PopupColorEdit.Color="{Binding NowTreeColorConfig.RarityColor4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p34="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                        <Label Grid.Row="5" Content="{DynamicResource FileExplorer_Rarity5_Name}" />
+                        <PopupColorEdit Grid.Row="5" Grid.Column="1" p34:PopupColorEdit.Color="{Binding NowTreeColorConfig.RarityColor5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TreeColorConverter}}" xmlns:p34="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                      </Grid>
+                    </Grid>
+                  </GroupBox>
+                </Grid>
+              </StackPanel>
+            </GroupBox>
+            <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_Label_GetCodeNameSortOption}">
+              <StackPanel Orientation="Vertical" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting}">
+                <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_GetCodeSort}" IsChecked="{Binding GetItemCodeSort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_GetCodeNameSort}" IsChecked="{Binding GetItemNameAndItemCodeIsSort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Grid Margin="0,10,0,0">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Label Content="{DynamicResource ViewGlobalOptions_Label_CodeNameFormat}" />
+                  <ComboBoxEdit Grid.Column="1" p31:ButtonEdit.IsTextEditable="False" p31:BaseEdit.EditValue="{Binding TreeListGetItemNameAndItemCodeFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                    <LookUpEditBase.ItemsSource>
+                      <EnumItemsSource p31:EnumItemsSource.EnumType="{x:Type enums:TreeListGetItemNameAndItemCodeFormat}" />
+                    </LookUpEditBase.ItemsSource>
+                  </ComboBoxEdit>
+                </Grid>
+                <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_Label_GetCodeNameSplitString}" Value="{Binding GetItemNameAndItemCodeSplitChar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              </StackPanel>
+            </GroupBox>
+          </StackPanel>
+        </ScrollViewer>
+      </DataTemplate>
+      <DataTemplate x:Key="AutoBackupPvfSettings">
+        <StackPanel Orientation="Vertical">
+          <CheckBox Name="autoBackupPvfIsOpen" Content="{DynamicResource ViewGlobalOptions_Label_EnableAutoBackupPVFPackage}" IsChecked="{Binding Path=PvfConfig.AutoTheBackupPvfConfig.AutoTheBackupPvfIsOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+          <StackPanel Margin="0,5,0,0" Orientation="Vertical" IsEnabled="{Binding ElementName=autoBackupPvfIsOpen, Path=IsChecked}">
+            <CheckBox Content="{DynamicResource ViewGlobalOptions_Label_OutputTipWhenBackupSuccess}" IsChecked="{Binding Path=PvfConfig.AutoTheBackupPvfConfig.BackupSuccessLog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={x:Static appsetting:AppSetting.Instance}}" />
+            <controls:EditBox Margin="0,5,0,0" Caption="{DynamicResource ViewGlobalOptions_Label_BackupIntervalTime}" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.AutoTheBackupPvfConfig.SleepTimeMinutes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_Label_PVFBackupMaxCount}" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.AutoTheBackupPvfConfig.BackupPvfMaxCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_Label_BackupPathSetting}" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.AutoTheBackupPvfConfig}">
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Label Content="{DynamicResource ViewGlobalOptions_Label_BackupMode}" />
+                  <ComboBoxEdit Grid.Column="1" p31:ButtonEdit.IsTextEditable="False" p31:BaseEdit.EditValue="{Binding BackUpPvfModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                    <LookUpEditBase.ItemsSource>
+                      <EnumItemsSource p31:EnumItemsSource.EnumType="{x:Type appsetting:BackUpPvfModel}" />
+                    </LookUpEditBase.ItemsSource>
+                  </ComboBoxEdit>
+                </Grid>
+                <Grid Row="1" Margin="0,10,0,0" Visibility="{Binding ShowBackUpDirName, Converter={StaticResource ConvertBoolenToVisibility}}">
+                  <controls:EditBox Caption="{DynamicResource ViewGlobalOptions_Label_BackupFolderName}" Value="{Binding BackUpDirName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+                <Grid Row="1" Margin="0,10,0,0" Visibility="{Binding ShowBackUpDirName, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                  </Grid.ColumnDefinitions>
+                  <Label Content="{DynamicResource ViewGlobalOptions_Label_BackupPath}" />
+                  <ButtonEdit Grid.Column="1" p31:ButtonEdit.AllowDefaultButton="False" FrameworkElement.Cursor="Hand" p31:BaseEdit.EditValue="{Binding BackupPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                    <ButtonEdit.Buttons>
+                      <editors:ButtonInfo xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource ViewGlobalOptions_Label_SelectBackupPath}" editors:CommandButtonInfo.Command="{Binding OnSelectBackupPathCommand}" />
+                    </ButtonEdit.Buttons>
+                  </ButtonEdit>
+                  <Button Grid.Column="2" Content="{DynamicResource ViewGlobalOptions_Label_OpenPath}" Cursor="Hand" Command="{Binding OpenBackupPathCommand}" />
+                </Grid>
+              </Grid>
+            </GroupBox>
+          </StackPanel>
+        </StackPanel>
+      </DataTemplate>
+      <DataTemplate x:Key="PublicSearchServiceOptions">
+        <StackPanel Orientation="Vertical" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PublicSearchServiceOptions}">
+          <CheckBox Content="{DynamicResource ViewGlobalOptions_GlobalSearch_Label_DisableEnterKeySearch}" IsChecked="{Binding Path=DisableEnterShortcutsSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <CheckBox Content="{DynamicResource ViewGlobalOptions_GlobalSearch_Label_ShowSimpleSearchBoxInMenu}" IsChecked="{Binding Path=ToolbarShowNameSearchPanel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <GroupBox Margin="0,8,0,0" Header="{DynamicResource ViewGlobalOptions_GlobalSearch_Label_EnableSmartCompletion}">
+            <StackPanel Orientation="Vertical">
+              <CheckBox Content="{DynamicResource ViewGlobalOptions_GlobalSearch_Label_StringLinkOrString}" IsChecked="{Binding Path=OpenStringAndSectionCompletion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <CheckBox Content="{DynamicResource ViewGlobalOptions_GlobalSearch_Label_Name}" IsChecked="{Binding Path=OpenNameCompletion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <CheckBox Content="{DynamicResource ViewGlobalOptions_GlobalSearch_Label_FileName}" IsChecked="{Binding Path=OpenFilePathCompletion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+          </GroupBox>
+          <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_GlobalSearch_Label_SmartCompletionMaxCount}">
+            <controls:EditBox Caption="{DynamicResource ViewGlobalOptions_GlobalSearch_Label_ShowResultMaxCount}" Value="{Binding TakeNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          </GroupBox>
+        </StackPanel>
+      </DataTemplate>
+      <DataTemplate x:Key="ScriptFileContentFormatting">
+        <Grid Name="gridScriptFileContentFormatting" IsEnabled="True" DataContext="{Binding ElementName=win, Path=DataContext}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Grid Row="1" Width="{Binding ElementName=gridScriptFileContentFormatting, Path=ActualWidth, Mode=OneWay}" Height="{Binding ElementName=gridScriptFileContentFormatting, Path=ActualHeight, Mode=OneWay}">
+            <texteditlib:TextEdit texteditlib:TextEdit.Name="XmlEditgor" texteditlib:TextEdit.EditorType="Editor" Control.FontSize="14" xmlns:avalonedit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit:TextEditor.ShowLineNumbers="True" FrameworkElement.DataContext="{Binding ElementName=win, Path=DataContext}" avalonedit:TextEditor.Document="{Binding ScriptFileContentFormattingDocument}" avalonedit:TextEditor.SyntaxHighlighting="{Binding Highlighting}" />
+          </Grid>
+          <Label Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" FontWeight="Bold" Foreground="#FFFF0000">信息收集完毕功能已停用由pvfUtility内置！</Label>
+        </Grid>
+      </DataTemplate>
+      
+      
+      
+      
+      <DataTemplate x:Key="ItemCodeHoverConfig">
+        <Grid Name="gridItemCodeHover">
+          <Grid Width="{Binding ElementName=gridItemCodeHover, Path=ActualWidth, Mode=OneWay}" Height="{Binding ElementName=gridItemCodeHover, Path=ActualHeight, Mode=OneWay}" DataContext="{Binding ElementName=win, Path=DataContext}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <bars:BarContainerControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+              <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControl.ShowDragWidget="True" bars:ToolBarControl.UseWholeRow="True">
+                <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource ViewGlobalOptions_Share_Button_SaveAndReloadConfig}" bars:BarItem.Glyph="{DynamicResource Save_16x}" bars:BarItem.Command="{Binding OnSaveItemCodeHoverXmlCommand}" />
+                <bars:BarItemSeparator />
+                <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource ViewGlobalOptions_Share_Button_ReloadConfig}" bars:BarItem.Glyph="{DynamicResource HotReload}" bars:BarItem.Command="{Binding HotReloadItemCodeHoverXmlCommand}" />
+                <bars:BarItemSeparator />
+                <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource ViewGlobalOptions_Share_Button_OpenConfigFile}" bars:BarItem.Glyph="{DynamicResource ConfigurationFile}" bars:BarItem.Command="{Binding OpenItemCodeHoverXmlCommand}" />
+                <bars:BarItemSeparator />
+              </bars:ToolBarControl>
+            </bars:BarContainerControl>
+            <texteditlib:TextEdit Grid.Row="1" texteditlib:TextEdit.EditorType="Editor" Control.FontSize="14" p28:TextEditor.ShowLineNumbers="True" FrameworkElement.DataContext="{Binding ElementName=win, Path=DataContext}" p28:TextEditor.Document="{Binding ItemCodeHoverDocument}" p28:TextEditor.SyntaxHighlighting="{Binding Highlighting}" xmlns:p28="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" />
+          </Grid>
+        </Grid>
+      </DataTemplate>
+      <DataTemplate x:Key="PvfDcoumentOptions">
+        <StackPanel Margin="0,10,0,0" Orientation="Vertical" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfDocumentOptions}">
+          <GroupBox Header="{DynamicResource ViewGlobalOptions_Share_Label_DocumentIconSize}">
+            <StackPanel Orientation="Vertical">
+              <controls:EditBox Caption="{DynamicResource ViewGlobalOptions_Share_Label_Height}" NullText="{DynamicResource ViewGlobalOptions_Share_Label_HeightDefault}" Value="{Binding IconHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_Share_Label_Width}" NullText="{DynamicResource ViewGlobalOptions_Share_Label_WidthDefault}" Value="{Binding IconWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+          </GroupBox>
+          <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_Share_Label_TitleTabContextMenu}">
+            <StackPanel Orientation="Vertical">
+              <CheckBox Content="{DynamicResource ViewGlobalOptions_Share_Label_DisableFloatingMenu}" IsChecked="{Binding CaptionNotAllowMenuItemNameIsFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <CheckBox Content="{DynamicResource ViewGlobalOptions_Share_Label_DisableNewHorizontalDocumentGroupMenu}" IsChecked="{Binding CaptionNotAllowMenuItemNewVerticalTabGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <CheckBox Content="{DynamicResource ViewGlobalOptions_Share_Label_DisableNewVerticalDocumentGroupMenu}" IsChecked="{Binding CaptionShowNotAllowItemNewHorizontalTabGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+          </GroupBox>
+        </StackPanel>
+      </DataTemplate>
+      <DataTemplate x:Key="groupBoxHeaderTemplate">
+        <StackPanel Orientation="Horizontal">
+          <Label Content="{DynamicResource ViewGlobalOptions_GameLogin_Label_GameAccountB}" />
+          <Label Content="{DynamicResource ViewGlobalOptions_GameLogin_Label_GameAccountAInfo}" Foreground="#FFFF0000" />
+        </StackPanel>
+      </DataTemplate>
+      <DataTemplate x:Key="GameLoginAccountOptions">
+        <StackPanel Margin="0,10,0,0">
+          <GroupBox Header="{DynamicResource ViewGlobalOptions_GameLogin_Label_GameAccountA}" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=GameOptions.GameUserA}">
+            <StackPanel Orientation="Vertical">
+              <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_GameAccount}" NullText="{DynamicResource ViewGlobalOptions_GameLogin_GameAccountInput_NullText}" Visibility="{Binding UseUIDLogin, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}" Value="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_GamePassword}" NullText="{DynamicResource ViewGlobalOptions_GameLogin_GamePasswordInput_NullText}" Visibility="{Binding UseUIDLogin, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}" Value="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_UID}" NullText="{DynamicResource ViewGlobalOptions_GameLogin_UIDInput_NullText}" Visibility="{Binding UseUIDLogin, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}" Value="{Binding UID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <StackPanel Margin="60,10,0,0" Orientation="Horizontal">
+                <CheckBox Content="{DynamicResource ViewGlobalOptions_GameLogin_Label_UseUIDLogin}" Cursor="Hand" ToolTip="{DynamicResource ViewGlobalOptions_GameLogin_Label_UseUIDLoginInfo}" ToolTipService.InitialShowDelay="50" IsChecked="{Binding UseUIDLogin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Label Margin="8,0,0,0" Content="{DynamicResource ViewGlobalOptions_GameLogin_UseUIDLoginInfo2}" Foreground="#FF808080" />
+              </StackPanel>
+            </StackPanel>
+          </GroupBox>
+          <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_GameLogin_Label_GameAccountA}" HeaderTemplate="{StaticResource groupBoxHeaderTemplate}" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=GameOptions.GameUserB}">
+            <StackPanel Orientation="Vertical">
+              <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_GameAccount}" NullText="{DynamicResource ViewGlobalOptions_GameLogin_GameAccountInput_NullText}" Visibility="{Binding UseUIDLogin, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}" Value="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_GamePassword}" NullText="{DynamicResource ViewGlobalOptions_GameLogin_GamePasswordInput_NullText}" Visibility="{Binding UseUIDLogin, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}" Value="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_UID}" NullText="{DynamicResource ViewGlobalOptions_GameLogin_UIDInput_NullText}" Visibility="{Binding UseUIDLogin, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}" Value="{Binding UID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <StackPanel Margin="60,10,0,0" Orientation="Horizontal">
+                <CheckBox Content="{DynamicResource ViewGlobalOptions_GameLogin_Label_UseUIDLogin}" Cursor="Hand" ToolTip="{DynamicResource ViewGlobalOptions_GameLogin_Label_UseUIDLoginInfo}" ToolTipService.InitialShowDelay="50" IsChecked="{Binding UseUIDLogin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Label Margin="8,0,0,0" Content="{DynamicResource ViewGlobalOptions_GameLogin_UseUIDLoginInfo2}" Foreground="#FF808080" />
+              </StackPanel>
+              <controls:EditBox Margin="0,20,0,0" Caption="账户B客户端路径:" NullText="留空则使用默认客户端路径" Value="{Binding ClientPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+          </GroupBox>
+        </StackPanel>
+      </DataTemplate>
+      <DataTemplate x:Key="GameLoginClientOptions">
+        <StackPanel Margin="0,20,0,0">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="{DynamicResource ViewGlobalOptions_GameLogin_Label_ClientDirectory}" />
+            <ButtonEdit FrameworkElement.Name="gameClientPathButtonEdit" Grid.Column="1" p28:ButtonEdit.AllowDefaultButton="False" UIElement.AllowDrop="True" p28:BaseEdit.IsReadOnly="True" p28:BaseEdit.NullText="{DynamicResource ViewGlobalOptions_GameLogin_ClientDirectoryInfo}" FrameworkElement.DataContext="{Binding ElementName=win, Path=DataContext}" p28:TextEditBase.Text="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=GameOptions.GameClientPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p28="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+              <ButtonEdit.Buttons>
+                <ButtonInfo p28:ButtonInfo.GlyphKind="Regular" p28:CommandButtonInfo.Command="{Binding OnSelectGameClientPathCommand}" />
+              </ButtonEdit.Buttons>
+            </ButtonEdit>
+            <Grid Row="1" Column="1" Margin="0,8,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+              </Grid.ColumnDefinitions>
+              <Image Grid.Column="1" Width="45" Height="45" Margin="5,0,0,0" AllowDrop="True" Source="{DynamicResource PanelDragDropTarget}">
+              </Image>
+              <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{DynamicResource ViewGlobalOptions_GameLogin_ClientDirectoryInfo2}" Foreground="#FF808080" />
+            </Grid>
+          </Grid>
+          <TextBlock Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" Foreground="#FF808080" TextWrapping="Wrap">
+            <Run Foreground="#FFFF0000" Text="{DynamicResource ViewGlobalOptions_GameLogin_ClientDirectoryInfo3}" />
+            <LineBreak />
+            <Run Text="{DynamicResource ViewGlobalOptions_GameLogin_ClientDirectoryInfo4}" />
+            <LineBreak />
+            <Run>若侵犯了您的权力请联系pvfUtility作者删除此信息</Run>
+          </TextBlock>
+          <HyperlinkEdit FrameworkElement.Margin="0,10,0,0" FrameworkElement.VerticalAlignment="Center" p27:HyperlinkEdit.AllowAutoNavigate="True" p27:BaseEdit.EditValue="{DynamicResource ViewGlobalOptions_GameLogin_ClientDirectoryInfo5}" p27:HyperlinkEdit.NavigationUrl="https://tieba.baidu.com/p/7778752647?pn=1" xmlns:p27="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+        </StackPanel>
+      </DataTemplate>
+      <DataTemplate x:Key="GameServerOptions">
+        <ScrollViewer Margin="0,10,0,0" VerticalScrollBarVisibility="Auto" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=GameOptions.GameServerOptions}">
+          <StackPanel>
+            <controls:EditBox Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_ServerIP}" NullText="192.168.200.131" Value="{Binding IP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewGlobalOptions_GameLogin_Label_GameDatabase}">
+              <StackPanel>
+                <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_DatabaseAccount}" NullText="{DynamicResource ViewGlobalOptions_GameLogin_Label_DatabaseAccountNullText}" Value="{Binding SqlUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_DatabasePassword}" NullText="{DynamicResource ViewGlobalOptions_GameLogin_Label_DatabasePasswordNullText}" Value="{Binding SqlPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <controls:EditBox Margin="0,10,0,0" Caption="{DynamicResource ViewGlobalOptions_GameLogin_Label_DatabasePort}" NullText="{DynamicResource ViewGlobalOptions_GameLogin_Label_DatabasePortNullText}" Value="{Binding SqlPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              </StackPanel>
+            </GroupBox>
+            <layoutcontrol:GroupBox FrameworkElement.Margin="0,10,0,0" Control.Padding="0" HeaderedContentControlBase.Header="{DynamicResource ViewGlobalOptions_GameLogin_Label_CustomPrivateKey}" xmlns:layoutcontrol="clr-namespace:DevExpress.Xpf.LayoutControl;assembly=DevExpress.Xpf.LayoutControl.v24.1">
+              <ScrollViewer Height="200" VerticalScrollBarVisibility="Auto">
+                <TextEdit Control.VerticalContentAlignment="Top" p30:TextEditBase.AcceptsReturn="True" Control.BorderThickness="0" p30:BaseEdit.ShowBorder="True" p30:TextEditBase.TextWrapping="Wrap" p30:BaseEdit.EditValue="{Binding PemPrivateKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+              </ScrollViewer>
+            </layoutcontrol:GroupBox>
+            <Button Margin="0,10,0,0" Content="{DynamicResource ViewGlobalOptions_GameLogin_Label_CustomPrivateKeyInfo}" ToolTip="{DynamicResource ViewGlobalOptions_GameLogin_Label_CustomPrivateKeyInfoToolTip}" ToolTipService.InitialShowDelay="50" Style="{StaticResource LinkButton}" Command="{Binding ElementName=win, Path=DataContext.OnOnWritePublicPemCommand}" />
+          </StackPanel>
+        </ScrollViewer>
+      </DataTemplate>
+      <DataTemplate x:Key="PvfFilePreviewOptions">
+        <ScrollViewer Margin="0,10,0,0" VerticalScrollBarVisibility="Auto" DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions}">
+          <StackPanel>
+            <CheckBox Name="ForbidShowToolTipCheckBox" Content="禁用文件预览功能" IsChecked="{Binding ForbidShowToolTip, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Grid Margin="0,10,0,0" IsEnabled="{Binding ElementName=ForbidShowToolTipCheckBox, Path=IsChecked, Converter={StaticResource ConverterBoolenToFalse}}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0" Content="{DynamicResource ViewGlobalOptions_Label_FontSize}" />
+              <ComboBoxEdit Grid.Column="1" p29:ButtonEdit.IsTextEditable="False" p29:BaseEdit.EditValue="{Binding FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" p29:LookUpEditBase.ItemsSource="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSizeList, Mode=OneWay}" xmlns:p29="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+            </Grid>
+            <GroupBox Margin="0,10,0,0" Header="文件可视化预览颜色配置" IsEnabled="{Binding ElementName=ForbidShowToolTipCheckBox, Path=IsChecked, Converter={StaticResource ConverterBoolenToFalse}}">
+              <StackPanel>
+                <Grid Row="0" Height="24" Margin="0,0,0,0">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Column="0" Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme}" />
+                  <ComboBoxEdit Grid.Column="1" p31:ButtonEdit.IsTextEditable="False" p31:BaseEdit.EditValue="{Binding Source={x:Static root:ThemeSwitcher.Instance}, Path=SettingSelectedTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterThemeTypeToString}}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                    <ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Blue}" />
+                    <ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Dark}" />
+                    <ComboBoxEditItem ContentControl.Content="{DynamicResource ViewGlobalOptions_Label_ColorTheme_Light}" />
+                  </ComboBoxEdit>
+                  <HyperlinkEdit Grid.Column="2" FrameworkElement.VerticalAlignment="Center" p31:HyperlinkEdit.AllowAutoNavigate="True" p31:BaseEdit.EditValue="{DynamicResource ViewGlobalOptions_Label_EditorSetting_EditorHighlightColor_Reset}" p31:HyperlinkEdit.Command="{Binding OnRestCommand}" FrameworkElement.DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing, Mode=OneWay}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                </Grid>
+                <Grid>
+                  <FrameworkElement.Resources>
+                    <ResourceDictionary>
+                      <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
+                        <Setter Property="HorizontalAlignment" Value="Right" />
+                        <Setter Property="Margin" Value="0,10,0,0" />
+                      </Style>
+                      <Style x:Key="{x:Type PopupColorEdit}" TargetType="{x:Type PopupColorEdit}">
+                        <Setter Property="TextEditBase.AcceptsTab" Value="True" />
+                        <Setter Property="PopupBaseEdit.AllowRecreatePopupContent" Value="True" />
+                        <Setter Property="PopupColorEdit.ChipSize" Value="Default" />
+                        <Setter Property="BaseEdit.AllowUpdateTextBlockWhenPrinting" Value="True" />
+                        <Setter Property="BaseEdit.EditMode" Value="Standalone" />
+                        <Setter Property="PopupBaseEdit.IsPopupOpen" Value="False" />
+                        <Setter Property="ButtonEdit.IsTextEditable" Value="False" />
+                        <Setter Property="PopupColorEdit.MoreColorsButtonContent" Value="颜色吸管" />
+                        <Setter Property="PopupColorEdit.ShowAlphaChannel" Value="False" />
+                        <Setter Property="PopupColorEdit.ShowDefaultColorButton" Value="False" />
+                        <Setter Property="BaseEdit.ShowError" Value="True" />
+                        <Setter Property="PopupColorEdit.ShowMoreColorsButton" Value="True" />
+                        <Setter Property="PopupColorEdit.ShowNoColorButton" Value="False" />
+                        <Setter Property="PopupBaseEdit.ShowPopupIfReadOnly" Value="True" />
+                        <Setter Property="FrameworkElement.Margin" Value="0,10,0,0" />
+                        <Setter Property="ToolTipService.InitialShowDelay" Value="50" />
+                      </Style>
+                    </ResourceDictionary>
+                  </FrameworkElement.Resources>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                  </Grid.RowDefinitions>
+                  <Label Grid.Row="1" Content="文件可视化预览页面背景色：" />
+                  <PopupColorEdit Grid.Row="1" Grid.Column="1" p31:PopupColorEdit.ShowAlphaChannel="True" p31:PopupColorEdit.Color="{Binding Path=CurrentColorConfing.PvfFilePreviewBackBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="2" Content="文件可视化预览页面边框颜色：" />
+                  <PopupColorEdit Grid.Row="2" Grid.Column="1" p31:PopupColorEdit.ShowAlphaChannel="True" p31:PopupColorEdit.Color="{Binding Path=CurrentColorConfing.PvfFilePreviewBorderBrush, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p31="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                </Grid>
+              </StackPanel>
+            </GroupBox>
+          </StackPanel>
+        </ScrollViewer>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <TreeListControl FrameworkElement.Name="tree" FrameworkElement.Width="200" xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid:DataControlBase.SelectionMode="None" grid:DataControlBase.ItemsSource="{Binding TreeMenu, Mode=OneWay}" xmlns="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+      <grid1:TreeListColumn grid:BaseColumn.Name="columnKey" grid:BaseColumn.Width="auto" grid:ColumnBase.FieldName="Key" ToolTipService.InitialShowDelay="50" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+      </grid1:TreeListColumn>
+      <grid1:TreeListControl.View xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+        <grid1:TreeListView xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid1:TreeListView.Name="treeListView" FrameworkElement.Width="auto" grid1:TreeListView.AllowAdvancedHorizontalNavigation="False" grid1:TreeListView.AllowAdvancedVerticalNavigation="False" grid1:TreeListView.AllowBandMoving="False" grid1:TreeListView.AllowBandMultiRow="False" grid1:TreeListView.AllowBandResizing="False" grid1:TreeListView.AllowBestFit="False" grid1:TreeListView.AllowCascadeUpdate="False" grid1:TreeListView.AllowChildNodeSourceUpdates="False" grid:DataViewBase.AllowColumnFiltering="False" grid:DataViewBase.AllowEditing="False" grid1:TreeListView.AllowHorizontalScrollingVirtualization="True" grid1:TreeListView.AllowRecursiveNodeChecking="False" grid1:TreeListView.AllowTreeIndentScrolling="False" grid1:TreeListView.AutoExpandAllNodes="True" grid1:TreeListView.AutoWidth="False" grid1:TreeListView.CompactPanelShowMode="CompactMode" grid1:TreeListView.FetchSublevelChildrenOnExpand="True" grid1:TreeListView.HorizontalScrollbarVisibility="Auto" grid:DataViewBase.IsDeferredScrolling="False" grid:DataViewBase.NavigationStyle="Row" grid:DataViewBase.RowAnimationKind="None" grid1:TreeListView.ScrollBarAnnotationMode="None" grid:DataViewBase.ScrollingMode="Smart" grid1:TreeListView.ShowCheckboxes="False" grid:DataViewBase.ShowColumnHeaders="False" grid1:TreeListView.ShowExpandButtons="True" grid1:TreeListView.ShowHorizontalLines="False" grid1:TreeListView.ShowIndicator="False" grid1:TreeListView.ShowNodeImages="False" grid:DataViewBase.ShowSearchPanelMode="Never" grid:DataViewBase.ShowSelectionRectangle="False" grid1:TreeListView.ShowVerticalLines="False" grid1:TreeListView.TreeColumnFieldName="Key" grid1:TreeListView.TreeDerivationMode="ChildNodesSelector" grid1:TreeListView.UseEvenRowBackground="False" grid1:TreeListView.VerticalScrollbarVisibility="Auto" grid1:TreeListView.ChildNodesSelector="{Binding ChildNodesSelector}" grid:DataViewBase.FocusedRow="{Binding TreeSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        </grid1:TreeListView>
+      </grid1:TreeListControl.View>
+    </TreeListControl>
+    <Grid Column="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
+      <ContentControl Name="contentPanel" Margin="10,0,10,0" ContentTemplate="{Binding TreeSelectedItem.Value.Data}">
+      </ContentControl>
+      <Grid Row="1" Margin="0,10,0,0" Visibility="{Binding ShowSaveButton, Converter={StaticResource ConvertBoolenToVisibility}}">
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+          <Button Width="90" Height="28" Margin="0,8,5,8" Content="{DynamicResource common_Save}" Cursor="Hand">
+          </Button>
+          <Button Width="90" Height="28" Margin="0,8,5,8" Content="{DynamicResource common_Cancel}" Cursor="Hand">
+          </Button>
+        </StackPanel>
+      </Grid>
+    </Grid>
+  </Grid>
+</views:WindowPublicSetting>

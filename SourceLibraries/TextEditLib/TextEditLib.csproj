@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>TextEditLib</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWPF>True</UseWPF>
+    <TargetFramework>net10.0-windows</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="resources\icons\paste.ico" />
+    <None Remove="resources\icons\delete.ico" />
+    <None Remove="resources\icons\openfile.ico" />
+    <None Remove="resources\icons\redo.ico" />
+    <None Remove="resources\icons\undo.ico" />
+    <None Remove="resources\icons\copy.ico" />
+    <None Remove="resources\icons\cut.ico" />
+    <EmbeddedResource Include="resources\icons\paste.ico" LogicalName="resources/icons/paste.ico" />
+    <EmbeddedResource Include="resources\icons\delete.ico" LogicalName="resources/icons/delete.ico" />
+    <EmbeddedResource Include="resources\icons\openfile.ico" LogicalName="resources/icons/openfile.ico" />
+    <EmbeddedResource Include="resources\icons\redo.ico" LogicalName="resources/icons/redo.ico" />
+    <EmbeddedResource Include="resources\icons\undo.ico" LogicalName="resources/icons/undo.ico" />
+    <EmbeddedResource Include="resources\icons\copy.ico" LogicalName="resources/icons/copy.ico" />
+    <EmbeddedResource Include="resources\icons\cut.ico" LogicalName="resources/icons/cut.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj" />
+    <ProjectReference Include="..\PvfCode.Models\PvfCode.Models.csproj" />
+    <ProjectReference Include="..\PvfCode.Dot\PvfCode.Dot.csproj" />
+    <ProjectReference Include="..\UnitComboLib\UnitComboLib.csproj" />
+  </ItemGroup>
+</Project>

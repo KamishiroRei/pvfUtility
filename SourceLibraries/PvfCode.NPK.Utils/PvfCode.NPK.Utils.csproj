@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>PvfCode.NPK.Utils</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net10.0-windows</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="DevExpress.Mvvm.v24.1">
+      <HintPath>$(RecoveredBinaryDirectory)\DevExpress.Mvvm.v24.1.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\PvfCode.Dot\PvfCode.Dot.csproj" />
+    <ProjectReference Include="..\Utools\Utools.csproj" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(RecoveredBinaryDirectory)\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\Swordfish.NET.CollectionsV3\Swordfish.NET.CollectionsV3.csproj" />
+    <ProjectReference Include="..\Vulild.Ionic.Zlib\Vulild.Ionic.Zlib.csproj" />
+  </ItemGroup>
+</Project>

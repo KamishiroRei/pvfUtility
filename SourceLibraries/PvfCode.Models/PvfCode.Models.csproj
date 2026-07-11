@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>PvfCode.Models</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWPF>True</UseWPF>
+    <TargetFramework>net10.0-windows</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PvfCode.Dot\PvfCode.Dot.csproj" />
+    <Reference Include="DevExpress.Mvvm.v24.1">
+      <HintPath>$(RecoveredBinaryDirectory)\DevExpress.Mvvm.v24.1.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\Utools\Utools.csproj" />
+    <ProjectReference Include="..\PvfCode.LoggerBase\PvfCode.LoggerBase.csproj" />
+    <ProjectReference Include="..\ServiceLocator\ServiceLocator.csproj" />
+    <ProjectReference Include="..\UnitComboLib\UnitComboLib.csproj" />
+    <Reference Include="WinCopies.WindowsAPICodePack.Shell">
+      <HintPath>$(RecoveredBinaryDirectory)\WinCopies.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\Swordfish.NET.CollectionsV3\Swordfish.NET.CollectionsV3.csproj" />
+    <Reference Include="Collections.Pooled">
+      <HintPath>$(RecoveredBinaryDirectory)\Collections.Pooled.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj" />
+    <Reference Include="SqlSugar">
+      <HintPath>$(RecoveredBinaryDirectory)\SqlSugar.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\GMTool.Dot\GMTool.Dot.csproj" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(RecoveredBinaryDirectory)\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

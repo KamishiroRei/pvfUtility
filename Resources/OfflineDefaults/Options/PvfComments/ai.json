@@ -1,0 +1,486 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "ai",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "ai pattern",
+                         "Title":  "AI逻辑",
+                         "Comment":  "AI逻辑",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "think",
+                         "Title":  "逻辑判断块",
+                         "Comment":  "逻辑判断块：内部比较条件并根据结果进入 [true]/[false] 分支",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "true",
+                         "Title":  "条件为真分支",
+                         "Comment":  "条件为真分支",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "false",
+                         "Title":  "条件为假分支",
+                         "Comment":  "条件为假分支",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "return",
+                         "Title":  "返回按键索引",
+                         "Comment":  "返回按键索引；-1 / 空 表示不执行任何键",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "void",
+                         "Title":  "void",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "check key cooltime",
+                         "Title":  "check key cooltime",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "return str",
+                         "Title":  "返回一个字符串",
+                         "Comment":  "返回一个字符串",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "import ai",
+                         "Title":  "插入一个.ai文件",
+                         "Comment":  "插入一个.ai文件 \n`示例.ai`",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "hp",
+                         "Title":  "当前 HP 数值 (可与 \u003e",
+                         "Comment":  "当前 HP 数值 (可与 \u003e=, \u003c=, == 等运算符比较)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "mp",
+                         "Title":  "当前 MP 数值",
+                         "Comment":  "当前 MP 数值",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "random",
+                         "Title":  "0~99 随机值 (实时变化)",
+                         "Comment":  "0~99 随机值 (实时变化)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "target distance",
+                         "Title":  "与当前目标的像素距离",
+                         "Comment":  "与当前目标的像素距离",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "last result",
+                         "Title":  "last result",
+                         "Comment":  "上一条指令写入的结果 (get random / enemy number of in attack area 等)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "\u003e=",
+                         "Title":  "比较运算",
+                         "Comment":  "比较运算：大于等于",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "\u003c=",
+                         "Title":  "比较运算",
+                         "Comment":  "比较运算：小于等于",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "==",
+                         "Title":  "比较运算",
+                         "Comment":  "比较运算：等于",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "\u003e",
+                         "Title":  "比较运算",
+                         "Comment":  "比较运算：大于",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "\u003c",
+                         "Title":  "比较运算",
+                         "Comment":  "比较运算：小于",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "%\u003e=",
+                         "Title":  "百分比比较",
+                         "Comment":  "百分比比较：当前值/最大值 \u003e=",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "%\u003c=",
+                         "Title":  "百分比比较",
+                         "Comment":  "百分比比较：当前值/最大值 \u003c=",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "%==",
+                         "Title":  "百分比比较",
+                         "Comment":  "百分比比较：当前值/最大值 ==",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "%\u003e",
+                         "Title":  "百分比比较",
+                         "Comment":  "百分比比较：当前值/最大值 \u003e",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "%\u003c",
+                         "Title":  "百分比比较",
+                         "Comment":  "百分比比较：当前值/最大值 \u003c",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "get random()",
+                         "Title":  "get random()",
+                         "Comment":  "生成区间随机数写入 [last result]：语法 `[void]` `get random()` min max",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "enemy number of in attack area()",
+                         "Title":  "enemy number of in attack area()",
+                         "Comment":  "统计攻击区域内敌人数写入 [last result]：`[void]` `enemy number of in attack area()` 前 后 上 下",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "is target in attack area()",
+                         "Title":  "检测目标是否位于攻击区域",
+                         "Comment":  "检测目标是否位于攻击区域",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "is the skill in cooltime()",
+                         "Title":  "检测技能是否处于冷却",
+                         "Comment":  "检测技能是否处于冷却",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "cooltime",
+                         "Title":  "cooltime",
+                         "Comment":  "设置当前 [return] 动作附加冷却 (需放在同一层 [think] 且位于 [return] 之前)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "my active status",
+                         "Title":  "检测自身状态变化",
+                         "Comment":  "检测自身状态变化",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "my state",
+                         "Title":  "检测自身当前状态",
+                         "Comment":  "检测自身当前状态",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "target state",
+                         "Title":  "检测目标当前状态",
+                         "Comment":  "检测目标当前状态",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "combo",
+                         "Title":  "比较连击数",
+                         "Comment":  "比较连击数",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "aerial",
+                         "Title":  "比较空中连击数",
+                         "Comment":  "比较空中连击数",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "overkill",
+                         "Title":  "目标是否被超杀",
+                         "Comment":  "目标是否被超杀",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "check skill on",
+                         "Title":  "检查技能开关状态",
+                         "Comment":  "检查技能开关状态：`[think] [check skill on] 52`",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "check use skill",
+                         "Title":  "检查是否可使用特定技能 (技能索引)",
+                         "Comment":  "检查是否可使用特定技能 (技能索引)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "use skill",
+                         "Title":  "事件",
+                         "Comment":  "事件：技能使用时 (Event.ai 专用)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "attack success",
+                         "Title":  "攻击成功事件 (Event.ai)",
+                         "Comment":  "攻击成功事件 (Event.ai)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "hit",
+                         "Title":  "受击事件 (Event.ai)",
+                         "Comment":  "受击事件 (Event.ai)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "element",
+                         "Title":  "当前攻击/受击属性 (火/水/暗/光/无)",
+                         "Comment":  "当前攻击/受击属性 (火/水/暗/光/无)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "set friend character",
+                         "Title":  "DestinationSelect",
+                         "Comment":  "DestinationSelect：指定友方角色 AI ID",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "set target monster",
+                         "Title":  "DestinationSelect",
+                         "Comment":  "DestinationSelect：指定目标怪物 ID 与队伍",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "set friend object",
+                         "Title":  "DestinationSelect",
+                         "Comment":  "DestinationSelect：指定友方对象 ID",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "set bound",
+                         "Title":  "DestinationSelect",
+                         "Comment":  "DestinationSelect：设置移动边界 前 后 上 下",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "auto attack direction",
+                         "Title":  "是否自动面向敌人 (1/0)",
+                         "Comment":  "是否自动面向敌人 (1/0)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "my hp down",
+                         "Title":  "检测 HP 降低瞬间",
+                         "Comment":  "检测 HP 降低瞬间：% 或 + 模式",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ai",
+                         "Section":  "my mp down",
+                         "Title":  "检测 MP 降低瞬间",
+                         "Comment":  "检测 MP 降低瞬间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     }
+                 ]
+}

@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="Comment" xml:space="preserve"><value>&lt;!--
+
+文本编辑器 =&gt; 代码智能提示
+    此功能由：@半斤橙子 构思并协助编写配置文件！
+                            by:@美国的华莱士 2022.8.6 
+    独立掉落的：[independent drop] 副本接口的：副本接口解析 不用编写 由程序自动完成
+    参数说明：
+    File="要处理的文件名" *.xxx=此类扩展名的所有文件 XXX/XXX.XXX表示仅处理该文件
+    SectionName="要处理的代码所属标签" 
+    ParentSectionName="当前代码所属标签的父标签" 例如：↓↓↓↓
+    LstFileName="当前代码所属.lst名称 非文件名 打开lst管理器 左侧列表的名称就是 多个lst使用,隔开" 
+    Description="描述 说明"
+    IgnoreItemCode="要忽略的代码 例：0,1 则忽略代码0和1" 
+    Index="当前代码的列索引位置" 行： 5888 6888 7888 //Index="1" 则表示只处理 6888  //Index="0,2"则表示只处理5888 7888 
+    StartIndex="从开始位置起到结束" StartIndex 必须使用：&lt;SectionRange /&gt;
+    
+    --&gt;</value></data>
+  <data name="ItemCodeHoverConfig" xml:space="preserve"><value>&lt;?xml version="1.0"?&gt;
+&lt;!--文本编辑器 =&gt; 代码智能提示
+    此功能由：@半斤橙子 构思并协助编写配置文件！
+                            by:@美国的华莱士 2022.8.6 
+    独立掉落的：[independent drop] 副本接口的：副本接口解析 不用编写 由程序自动完成
+    参数说明：
+    File="要处理的文件名" *.xxx=此类扩展名的所有文件 XXX/XXX.XXX表示仅处理该文件
+    SectionName="要处理的代码所属标签" 
+    ParentSectionName="当前代码所属标签的父标签" 例如：↓↓↓↓
+    LstFileName="当前代码所属.lst名称 非文件名 打开lst管理器 左侧列表的名称就是 多个lst使用,隔开" 
+    Description="描述 说明"
+    IgnoreItemCode="要忽略的代码 例：0,1 则忽略代码0和1" 
+    Index="当前代码的列索引位置" 行： 5888 6888 7888 //Index="1" 则表示只处理 6888  //Index="0,2"则表示只处理5888 7888 
+    StartIndex="从开始位置起到结束" StartIndex 必须使用：&lt;SectionRange /&gt;--&gt;
+&lt;root&gt;
+		&lt;File FileName="*.act"&gt;
+				&lt;Section SectionName="[Test]" LstFileName="monster" Description="怪物" ParentSectionName="[SUMMON MONSTER]" /&gt;
+				&lt;Section SectionName="[Index]" LstFileName="monster" Description="怪物" ParentSectionName="[SUMMON MONSTER]" /&gt;
+				&lt;Section SectionName="[Index]" LstFileName="aicharacter" Description="APC" ParentSectionName="[SUMMON APC]" /&gt;
+		&lt;/File&gt;
+		&lt;File FileName="etc/newcashshop.etc"&gt;
+				&lt;Section SectionName="[avatar]" Index="1,7" LstFileName="equipment" Description="时装" /&gt;
+		&lt;/File&gt;
+		&lt;File FileName="*.dgn"&gt;
+				&lt;Section SectionName="[quest connection]" Index="1" LstFileName="n_quest" Description="任务" /&gt;
+				&lt;Section SectionName="[common monster item drop list]" LstFileName="tackable,equipment" Description="道具/装备" /&gt;
+				&lt;Section SectionName="[common champion item drop list]" LstFileName="tackable,equipment" Description="道具/装备" /&gt;
+				&lt;Section SectionName="[super champion item drop list]" LstFileName="tackable,equipment" Description="道具/装备" /&gt;
+				&lt;Section SectionName="[boss item drop list]" LstFileName="tackable,equipment" Description="道具/装备" /&gt;
+				&lt;Section SectionName="[spawn common monster index]" LstFileName="monster" Description="怪物" /&gt;
+				&lt;Section SectionName="[spawn common champion index]" LstFileName="monster" Description="怪物" /&gt;
+				&lt;Section SectionName="[spawn super champion index]" LstFileName="monster" Description="怪物" /&gt;
+				&lt;Section SectionName="[spawn boss index]" LstFileName="monster" Description="怪物" /&gt;
+				&lt;Section SectionName="[required item]" LstFileName="stackable" Description="道具" /&gt;
+				&lt;Section SectionName="[pathgate object]" LstFileName="passiveobject" Description="对象" /&gt;
+				&lt;SectionRange SectionName="[map specification]" StartIndex="2" LstFileName="map" Description="map" /&gt;
+		&lt;/File&gt;
+		&lt;File FileName="*.map"&gt;
+				&lt;Section SectionName="[npc]" Index="0" LstFileName="npc" Description="NPC" /&gt;
+				&lt;Section SectionName="[dungeon]" LstFileName="dungeon" Description="副本" /&gt;
+				&lt;Section SectionName="[monster]" Index="0" LstFileName="monster" Description="怪物" /&gt;
+				&lt;Section SectionName="[ai character]" Index="0" LstFileName="aicharacter" Description="APC" /&gt;
+				&lt;Section SectionName="[passive object]" Index="0" LstFileName="passiveobject" Description="对象" /&gt;
+		&lt;/File&gt;
+		&lt;File FileName="*.mm"&gt;
+				&lt;Section SectionName="[index]" LstFileName="worldmap" Description="副本接口" ParentSectionName="[world]" /&gt;
+				&lt;Section SectionName="[index]" LstFileName="npc" Description="NPC" ParentSectionName="[npc]" /&gt;
+				&lt;Section SectionName="[index]" LstFileName="wown" Description="城镇" ParentSectionName="[town]" /&gt;
+		&lt;/File&gt;
+		&lt;File FileName="*.mob"&gt;
+				&lt;Section SectionName="[item]" LstFileName="tackable,equipment" Description="道具/装备" /&gt;
+		&lt;/File&gt;
+		&lt;File FileName="*.qst"&gt;
+				&lt;Section SectionName="[npc index]" LstFileName="npc" Description="NPC" /&gt;
+				&lt;Section SectionName="[complete npc index]" LstFileName="npc" Description="NPC" /&gt;
+				&lt;Section SectionName="[pre required quest]" LstFileName="n_quest" Description="任务" /&gt;
+				&lt;Section SectionName="[limit dungeon index]" LstFileName="dungeon" Description="副本" /&gt;
+				&lt;Section SectionName="[appear map]" Index="0" LstFileName="dungeon" Description="副本" /&gt;
+				&lt;Section SectionName="[depend give item]" Index="0" LstFileName="stackable,equipment" Description="物品/装备" /&gt;
+				&lt;Section SectionName="[dungeon info]" Index="0" LstFileName="dungeon" Description="副本" /&gt;
+				&lt;Section SectionName="[reward int data]" Index="0" LstFileName="stackable,equipment" Description="物品/装备" /&gt;
+				&lt;Section SectionName="[int data]" Index="0" LstFileName="stackable,equipment" Description="物品/装备"&gt;
+						&lt;ValidationSection Name="[type]" Value="`[seeking]`" /&gt;
+				&lt;/Section&gt;
+				&lt;Section SectionName="[int data]" Index="0" LstFileName="dungeon" Description="副本"&gt;
+						&lt;ValidationSection Name="[type]" Value="`[condition under clear]`" /&gt;
+				&lt;/Section&gt;
+				&lt;SectionGroup SectionName="[int data]"&gt;
+						&lt;Index Value="0" LstFileName="dungeon" Description="副本" /&gt;
+						&lt;Index Value="2" LstFileName="monster" Description="怪物" /&gt;
+						&lt;ValidationSection Name="[type]" Value="`[hunt monster]`" /&gt;
+				&lt;/SectionGroup&gt;
+				&lt;SectionGroup SectionName="[int data]"&gt;
+						&lt;Index Value="0" LstFileName="dungeon" Description="副本" /&gt;
+						&lt;Index Value="2" LstFileName="monster" Description="怪物" /&gt;
+						&lt;ValidationSection Name="[sub type]" Value="0" /&gt;
+						&lt;ValidationSection Name="[type]" Value="`[clear map]`" /&gt;
+				&lt;/SectionGroup&gt;
+				&lt;SectionGroup SectionName="[monster reward item]"&gt;
+						&lt;Index Value="0" LstFileName="monster" Description="怪物" /&gt;
+						&lt;Index Value="1" LstFileName="dungeon" Description="副本" /&gt;
+						&lt;Index Value="3" LstFileName="stackable,equipment" Description="物品/装备" /&gt;
+				&lt;/SectionGroup&gt;
+				&lt;SectionGroup SectionName="[clear reward item]"&gt;
+						&lt;Index Value="0" LstFileName="dungeon" Description="副本" /&gt;
+						&lt;Index Value="2" LstFileName="stackable,equipment" Description="物品/装备" /&gt;
+				&lt;/SectionGroup&gt;
+				&lt;SectionGroup SectionName="[enemy reward item]"&gt;
+						&lt;Index Value="2" LstFileName="Dungeon" Description="副本" /&gt;
+						&lt;Index Value="4" LstFileName="stackable,equipment" Description="物品/装备" /&gt;
+				&lt;/SectionGroup&gt;
+				&lt;SectionGroup SectionName="[dialog]"&gt;
+						&lt;Index Value="2" LstFileName="dungeon,map" Description="副本/地图" /&gt;
+						&lt;Index Value="5" LstFileName="monster,aicharacter" Description="怪物/APC" /&gt;
+				&lt;/SectionGroup&gt;
+		&lt;/File&gt;
+		&lt;File FileName="*.shp"&gt;
+				&lt;Section SectionName="[NPC]" LstFileName="npc" Description="NPC" /&gt;
+				&lt;Section SectionName="[sell item]" LstFileName="stackable,equipment" Description="物品/装备" /&gt;
+		&lt;/File&gt;
+		&lt;File FileName="*.stk"&gt;
+				&lt;Section SectionName="[etc]" Index="0" LstFileName="stackable,equipment" Description="物品/装备" ParentSectionName="[booster select category]" /&gt;
+				&lt;Section SectionName="[etc]" Index="0" LstFileName="stackable,equipment" Description="物品/装备2" ParentSectionName="[booster info]" /&gt;
+				&lt;Section SectionName="[equipment]" Index="0" LstFileName="equipment" Description="装备" ParentSectionName="[booster select category]" /&gt;
+		&lt;/File&gt;
+		&lt;File FileName="etc/worlddrop.etc"&gt;
+				&lt;Section SectionName="[world drop]" Index="0" LstFileName="stackable,equipment" Description="物品/装备 妈咪妈咪哄" /&gt;
+		&lt;/File&gt;
+&lt;/root&gt;</value></data>
+  <data name="pvfUtilityLayout" type="System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><value>dC95VG9nS3lRTmRKRlZ1Q0pLVytFTkNKV0JhS0NwSEp5RHcrY3EzVmxoLzhVT3FzSXBtUS9zSmxl
+S3ZYdU9ZMVZ1WVN1VUUydEJNTmJUdXVKd2tPOTFXM3B2bGY0Mi9KVmdCOUhLUWw4MG1YQ2FGbitW
+anFmc0w2cFEyZVZMbFd2K3RzbXloS2J5NkdUMGRoZjIydXZ0SlA4eGJQTmtmL3h4WnczMkRDSWJP
+QWlsTUxXY01rNHEwSFowSmlvSGxSVHFTVk5EK3RPOGJ6Qm1WRTR4VHo1bzREbTBWWGFVTUVwYXFC
+dWtvZVBJWDBxRGpjWm51aEdYanpSdGpJRGcwYzRnMkJBNjNxdEdNR01qZzR5bThoditZVjBiS0RD
+bTRnQ1NJaVdMNk1td0ZGcG1YWFB2T3NCVlprb3JZVFd5YzBJSXZxd3dkVUlBV1F0WVpERU1oeU1X
+dDUyZXBCV2RSQXpCUFczbjQzUVUxOTZpaFJZcUpWVE5ERW45Nkthb2hyTms4Z0dBcjBkSFFGTkhm
+cCtScDd4SHVyUUZQa3RWYWMrcGhIMDBZL01BR29MRG5Ia0pIQ3ErRFpZZmlOVjZHK1I4M3V5STR3
+cVFKSjZwbE5JaEYxdUE3VHlqV3h5Nmt2Y1B2OTFiMjJ2SkdOUmI4blIxU2U2UnVwZmo2d0RzQjlO
+V1ZHOU5GaGxDclJlZE03dWJZM2pHZ21iLzEvczZ5UUNYOERlMkxjcnVlb0xEbkhrSkhDcStEWllm
+aU5WNkcrUjgzdXlJNHdxUUpKNnBsTkloRjF1QTdUeWpXeHk2a3ZjUHY5MWIyMnZKRzExWDR2am0v
+Z2l0Q0t5YlhPSW9sRlBjSlI1bXN4TVNjaG1JNkYxeldhS2kxMzlrSGIzZmVxNkdRWVRJYUs5S1Mv
+NjJ5YktFcHZMb1pQUjJGL2JhNitpMDc5bW9ZeUVldzRzRllzQ0NNaEl2aFh5eUU1cEtQT01Nd1Ry
+VU9nRlowYTZUUEpoWGkwRUM4SnliZVVUSnBiVlAwUFpkYk5FOEZDYXlrd25lQ0puRVBSb0hMZjRV
+LzdBd3FlVmJ1SHFaRDNwaXhiOWtpK0tLaHp3a3Z6cXNGTkdwQVBGU1pYOHZmSzhlUmRrb2diMklz
+UnhIUXlhZDRka21qc08wYlp2cmxVL1E5bDFzMFR3VUpyS1RDZDRJbWNsWE5HMzlIaHFEekNPbEo3
+dFRqTloyZi92M1habHVVYlNrenBRMG84MGxFS05RUHFQaUU3WjdZM1ltbjJ3aGs3dE0zeUwxTXYz
+VlVZbjlnTzErai92VFQ1cGdQQ0ovejVpSkxNYjViMlBwOTR6T3gyMUY5dHg1cFl6Z0JYZlFteUpC
+VkhvR3IxUjBnakQxaG9SRFg3bmpQT0NDZzgxYmUwNUhSUU9sT3BQaTUzb2RZa25meFg3MUR3TGJH
+MTJEQzBndUVwSVhQdEpYazZLeWtCTngvblpTS3JoczJjeVZwcFJ5MG9UM3RDMFdIaVFTSUpsMUxq
+alFPMnZkTi9pWUkxSm11RFJNbHRtbk5yeDVRNGQ5MzFJQWNNbDlYYlJBc1FwUkZhNUJ4VkkwcUEv
+aTkyb0tUN05Ia21pSE41Q29tbi9UcFZlUW9OblhHT2V2bU94U29FQm9MaEtTRno3U1Y1T2lzcEFU
+Y2Y1MlZDYXlwa3RqRzVkb3o4V0NDWlpKWk5qZ09iUlZkcFF3U2xxb0c2U2g0OGhUcTBsbXZzaHN2
+T2lLZWUvUko0VzB6Y2xFVE11TGppbGwxY2JNTVhEMEtueFd5bGh3QVlxRUpoWEtLSVFLYXZkaFFL
+ZzNtRzNERTVuUE1zMjExTU13MDMvZEp0UkVtMVVQWlRHNFVTdVBIM1VKYW5NMEN5U2kyQjJqOVJa
+SE5WOU1XQXYyNlFwcDZLTHVheUNWT0c1Qzk2cjdETVpzNVhMbDB6YW9lRldDRTJpMklrZ3p5U245
+clRkdjhla05aNDdwZ0ZwdWdCOWlDOFpxdUVGY2FacWl4VS9ROWwxczBUd1VKcktUQ2Q0SW1jRkJG
+MkVnczhLWkdFSmpDQjZvK2IwVmlxTkNyUEx5b0h0a2JXSXkwQ2lGaUNiZnZJQ2FWR2dJZGFpeHdU
+NDhoVXFqQkdlOUZRbUxlN1N5OTR0UzhZNm4zcUtGRmlvbFZNME1TZjNvcHFpR3ZNdmhFc0ljcW9O
+N2U1cHN6b2hUZmQrQjNIUFF6UU5VZWZnNXM2L1FWWlEyNDdSdUJZcjUzbDNGc1VtSWJjNDJMNG9u
+MkpMWVlTcEtyOElva0Faekxxc1BaUVNkenc2a0luVGZuUmdDWXAyV09oY1BoeEJXRERkYXhpWVU4
+MHVHcGpub1gyamVSWUlKZkdETUJvYVlsSWd3ckZMbytKSll3OUNCTkUralMySFVGcmtOQUxPd1Vt
+czc2ai9wVFBiRWhRbHFjelFMSktMWUhhUDFGa2MxWDBPWnpGVlc0aG1UWGVaSXZMZXhSbUcxcTl3
+SlVHd3ZmV0duMXhkMy9vMnBacjc5STR0YmJ1ZVY3eWdFaGljdHMyeDdpNExubGcyT1JsM25YdEdn
+a0FuRkNXcHpOQXNrb3RnZG8vVVdSelZmVFR5cHNxVXRuNm8xOUZRZGRUU0x6MHlRVVh6MGt5alRa
+TlQxNmxJMEgxV25aa3RhUDdQbUlhQ21IVmlrOEZaVEErMjNZT1MwMzNUREY1cklOWTdDTXdxQ3c1
+eDVDUndxdmcyV0g0alZlaHZycG5xOFA4WEtMZzExRTk5cFJodVdEZC94TEVTT0t2S2JDWFd2N1Za
+bk1BRnJUcVlLT2lWT0tXUFdvNXVTZHJldlJ2WTllWGo3dnQ3YlFJRllmUVJPV3FNRVo3MFZDWXQ3
+dExMM2kxTHhqcWZlb29VV0tpVlV6UXhKL2VpbXFJYXdTMjc1N3JCUHBzOC80NlNPMk1mNkhyMk1Z
+QnJ6dWlsQjM1eDF4TUcxSGJlcVY3TkFqdVEwU0JPaWFLVm82eHVvSW5BTkcxcGk3Qlp1YVlCcjVq
+QThacEdUK0QxZnFyUytvcHkrNlU0VjJ5Z1pwajIzVHZ0WEtxMXNLUlZ1MFNtU3ZIN0gxSDlobGpD
+azhZQndwZkx1anZPSG1UWTNiWnZzV1c5bHdGUk9xM09TZlVzbzhJczJDNFg4NHZWYmFrS1ZDV3B6
+TkFza290Z2RvL1VXUnpWZlRUeXBzcVV0bjZvMTlGUWRkVFNMejB5Qkh3TTJ3NURNa3BWSDVtZjJw
+NEtRdmxaZFR3WTdzTGZmejcrYno3V2VScjc5STR0YmJ1ZVY3eWdFaGljdHMyeDdpNExubGcyT1Js
+M25YdEdna0FuR3NpOW15RzJNSnltM0pJdVUvOTU1NHFzdkhFQmIzMGlhTTF6R0Q1bE80WUw2dnI1
+WWVlRHk1TWc1V1Q5dVNGa2R4WVdrSHN0ZjdzZDJSZ2pCR2U3NFdZQmFib0FmWWd2R2FyaEJYR21h
+b3NkbkRTYjRNdEtuMHpESHhBTThoWjREOFNxb0V6bGFpcnFObTFYejFiNW9LT0E1dEZWMmxEQktX
+cWdicEtIanlGMUxBaDBhbnVCTjJpUmgxSTdJR1hFaFgrMzNueGloTzIxemdPMVY3dXQ0ekxwOXFK
+SEhTZHhMWnI2UGVJZXlrRDRrRWlDWmRTNDQwRHRyM1RmNG1DTlNacmcwVEpiWnB6YThlVU9IZmQ5
+U0RBaExsZW9kUWNJZ0JpNzBOM2dsSG40MkhuRklIMk9pbWE5RmhhbXh1S21aZ0ZwdWdCOWlDOFpx
+dUVGY2FacWl4VS9ROWwxczBUd1VKcktUQ2Q0SW1jRkJGMkVnczhLWkdFSmpDQjZvK2IwZTNtOG1X
+bWsvcjJPWWo3U0xid25HMHlMTEZkUTJCdWNSTjMwdDJqNVYrdFNqaWplY3JuME5qWGRqM3cwNmJD
+QW1zaTlteUcyTUp5bTNKSXVVLzk1NTRxc3ZIRUJiMzBpYU0xekdENWxPNFlDRUp4TTFya2ZHemdS
+Ky9ySEJhVDJNVmNvbFJRcUVwOEt1QjVyQUptOTNQTXNNOHgrTGpZcmp0R2tsZkQ3aEM3cUN3NXg1
+Q1J3cXZnMldINGpWZWh2bmpNN0hiVVgyM0htbGpPQUZkOUNiTGsvcTFhYk9FKzdwc3pORTY1Q1RM
+SXdaLytPQVl5b1ZHMnFjelYzY3ZIbkdWVUViMVJ2Q0xiaTQ3eEl5U2EzamJGV3o1ZUtZZzRtWkUr
+eUE1WTdNZERlTXpzZHRSZmJjZWFXTTRBVjMwSnNpUVZSNkJxOVVkSUl3OVlhRVExKzU2dzA3KzFT
+SkV1eFJSOXM2cWdFQkh6QmljZ3lBalNJRjhGVUxEZFRpMnJ2aWROOTNibjg4WFR4NVRZNW1CVEs0
+RTArYVlEd2lmOCtZaVN6RytXOWo2ZmVNenNkdFJmYmNlYVdNNEFWMzBKc2lRVlI2QnE5VWRJSXc5
+WWFFUTErNTZ3MDcrMVNKRXV4UlI5czZxZ0VCSHppYUlKb2pKNWliemwzOWpPZ2NWTU1PcDRyTWwx
+KzZWYjI4L3Q2aWZOK0x3L0VxcUJNNVdvcTZqWnRWODlXK2FDamdPYlJWZHBRd1NscW9HNlNoNDho
+YWJzYkFVcE1yczhyRDNUMWVEM0xDOC9OTE5wUDE3ZFhKSzJFZERXUCtUdk5QbW1BOEluL1BtSWtz
+eHZsdlkrbjNqTTdIYlVYMjNIbWxqT0FGZDlDYkxrL3ExYWJPRSs3cHN6TkU2NUNUTEkvdDFSOC82
+TFI2VDExZ3dIZTd5VDFEZjkwbTFFU2JWUTlsTWJoUks0OGZkUWxxY3pRTEpLTFlIYVAxRmtjMVgw
+MDhxYktsTForcU5mUlVIWFUwaTg5R21ob2ZKbEJJYnB6eHhESUI1YWtTczF4REcwL1ovSmM0bUhy
+bjNiSS9uLzVoWFJzb01LYmlBSklpSll2b3liQWJZNU04SUZabFJFbWFraUk5TkNEZlBFVDl0UXJx
+ZEd2UkMrOE9xQ1ZVL25naWNBMGJXbUxzRm01cGdHdm1NRHhta1pQNFBWK3F0TDZpbkw3cFRoWGJK
+SllSaW1ZVkE3V01QSS85SHVFWmdIMjFmNUxMQkI2VVBSN1ZmSllqcXY3K1lWMGJLRENtNGdDU0lp
+V0w2TW13SDRvbjJKTFlZU3BLcjhJb2tBWnpMcXNQWlFTZHp3NmtJblRmblJnQ1lwMlNWVjl5dUhw
+UXBmWDVtWXZGQWg4RzkzclMzKytYTzlkL0dvZ0xUekpBVjhiUUV3a1ZkbGY4eS9wb1NnU29kYkpY
+cWxlelFJN2tORWdUb21pbGFPc2JxQ0p3RFJ0YVl1d1dibW1BYStZd1BHNUhPNlNvdzY3YUpIaWRu
+c0hJOVVpVXJ4TlZmTDMwKzRzUVZVREVoZmk2cEkxcUFLbytHczVDcXV5S2VvQ0dlU3FqQkdlOUZR
+bUxlN1N5OTR0UzhZNm4zcUtGRmlvbFZNME1TZjNvcHFpR3ZNdmhFc0ljcW9ON2U1cHN6b2hUZmQr
+QjNIUFF6UU5VZWZnNXM2L1FWWlEyNDdSdUJZcjUzbDNGc1VtSWJjNDJMNG9uMkpMWVlTcEtyOElv
+a0Faekxxc1BaUVNkenc2a0luVGZuUmdDWXAyV09oY1BoeEJXRERkYXhpWVU4MHVHcE90bTB2N2pn
+dGlvUEN6QnBqMHlHK1ZpS21vbkF1Rnp2cEhqZ0F2Ynh6TEpnRnB1Z0I5aUM4WnF1RUZjYVpxaXhV
+L1E5bDFzMFR3VUpyS1RDZDRJbWNOMnNpU20xT21EckpGdDdoQXlaLzdaeU1uVC85MEUvZVV1VGpL
+eVpjZUJpYy91aUYzbVpOaTlOWlJEMGZZSldFUUpaVjY0SktHNThRaWg0Wko1amt6c1U4Tk9VTUQ0
+Y1hKemxuT2U3M3N0bEJhNURRQ3pzRkpyTytvLzZVejJ4SXBTVDdzYTZXeGg1bm1MaE1LcjU3Kyto
+a3hLNy9vZjZBRStqYk5zZUIxSk9PQTV0RlYybERCS1dxZ2JwS0hqeUZSZWxnK24zNnhLZDNad3FX
+N2FVQ3RHNDdSdUJZcjUzbDNGc1VtSWJjNDJLZ1RlSVVFOE90TjZtemRnRENUREVWbDJIamxiVkVt
+VDV6cWRRYVlyKyt1NDREbTBWWGFVTUVwYXFCdWtvZVBJWElwNm1yeW9YMXhBNjFtNHo3OURVT0xB
+dGZJM3JELzl3TE16dDMwL2hQMUtmcEh6T2xZTkdMV3VnK2IxUEgrcDNGYktXSEFCaW9RbUZjb29o
+QXBxOTJCQk9yRmQwbmtrV1QvZ0RHb21iVWo3L3JiSnNvU204dWhrOUhZWDl0cnI0TTlOV29pY285
+TTdSbTE1S2c4NlpveW1YbkV5YjkvRHF2a1JLWmNwN1hEYWdzT2NlUWtjS3I0TmxoK0kxWG9iNjZa
+NnZEL0Z5aTROZFJQZmFVWWJsZ0pVYjIvakRrejZVTnp0aytrbStwVHMyVXZ4TGZTV2NnMy93M2hZ
+WGhKTExLRFFXSHJxbE13T1FXa3lWcHBNVFVkNUdvcGFEblBlaXNSTmJFbW9vK3lVRnJrTkFMT3dV
+bXM3NmovcFRQYkVockl2WnNodGpDY3B0eVNMbFAvZWVlS3JMeHhBVzk5SW1qTmN4ZytaVHVHTlNu
+QklGMlRMdGMvZEdMa0NFbXZZNzBiMlBYbDQrNzdlMjBDQldIMEVUbHFqQkdlOUZRbUxlN1N5OTR0
+UzhZNm4zcUtGRmlvbFZNME1TZjNvcHFpR3Z3YkZ4MTI0cksxZDErdTlIdjA4eGllaXprVm1RMm5y
+WlZ0cU5tUUEyc1VSNGtwRFdFZHpwbUUyaTFHWnVHT1VQQ3EwT0lON1RhM3ZEb1hGSURaZzFmWmJP
+aDF2dnBMa2RFWkt1aldFQmpuRlQ5RDJYV3pSUEJRbXNwTUozZ2laeVZjMGJmMGVHb1BNSTZVbnUx
+T00xbmpxTjJuaUJUeERTekxmWlFndTU2cURkYUM1YzN6TzVrZHoyVzQ4V2VGeXNha0E4VkpsZnk5
+OHJ4NUYyU2lCdllpeEhFZERKcDNoMlNhT3c3UnRtK3VWQ1dwek5Bc2tvdGdkby9VV1J6VmZSQ0dY
+Ymk3Tm1Sa0hSbDZCdktHbXZ6ZTBhb0Q4VGVuZHFFb0dGN3Y0N3FWbXczMU5CcFJ6M0RhRUpjeFNx
+aWtxaXIxL0Q2SlVsc2hYZlVoQkVWN0tNbDFYWFdCdmhHWERJa1BJMUNYMEFhSWVKQklnbVhVdU9O
+QTdhOTAzK0pnalVtYTRORXlXMmFjMnZIbERoMzNmVWdHajd2OUR2WnZwVzdZd21ERWMvTndhRENB
+Mml2NmF3T0tXVS9BR0F0TjRURmJLV0hBQmlvUW1GY29vaEFwcTkyQkJPckZkMG5ra1dUL2dER29t
+YlVqNy9yYkpzb1NtOHVoazlIWVg5dHJyNE5xQk9vcjhpczRzUkRORDVtK2haMXY2WDZIR1VFTGZV
+dU95R1VZMEprU0tnc09jZVFrY0tyNE5saCtJMVhvYjY2WjZ2RC9GeWk0TmRSUGZhVVlibGdmc1lp
+OS9hR0xtSTgrNWMrb1F0eUhMblBmbjNCSlRHSnYxWFF4NUx3N3ZERlp5dVJPK0VRR2tqWGphRUtR
+V1I4U3RaQXJETkw0ZVhpZXkzUFljVHVSK0pCSWdtWFV1T05BN2E5MDMrSmdqVW1hNE5FeVcyYWMy
+dkhsRGgzM2ZVZ3ArNURXdmNIcnV5QzZXVkg2VmN0bXVpaGRpVWhSeG5ZY2NVVVl3NFJrODNvWk1T
+dS82SCtnQlBvMnpiSGdkU1ROeDVwN2FLU3BRTW5nR2ttZ1RCZ1VCaVd4SmE0YURrRjVqQWpMRXhu
+SWdBcXN2SEVCYjMwaWFNMXpHRDVsTzRZUEQ5NmVJNDRYMVBVN2NFbWFyTktxUEQ5RDFodFNuN0Jr
+UUZRc2NEVkN2VWRDZ1p5ODhTbGFkWmM3UStQbW9QRGF5TDJiSWJZd25LYmNraTVULzNubmlxeThj
+UUZ2ZlNKb3pYTVlQbVU3aGlpMXcvaTliRk5sMExtNWJjVUxGaTNrN1F0ZUppblZmRkdSODFUNmFF
+U2owRnJrTkFMT3dVbXM3NmovcFRQYkVockl2WnNodGpDY3B0eVNMbFAvZWVlS3JMeHhBVzk5SW1q
+TmN4ZytaVHVHUDJvUG5nOSs4VFUxNC9UcjlrUW9mODF4Y1RodlFUNFBqSlJTWjRocXovTVhYVGlp
+cmVwTHcvWDBwcHdmSXRWc2NWc3BZY0FHS2hDWVZ5aWlFQ21yM1lFRTZzVjNTZVNSWlArQU1haVp0
+U1B2K3RzbXloS2J5NkdUMGRoZjIydXZxZVJxTzRuYnV4MGJ4aW5pM1pONytXR0QyNFI0WVVRUCtO
+b081cVZKUG9LaWtTT1N4Y0w0YmxrZ21QZnBvMmVqRFQ1cGdQQ0ovejVpSkxNYjViMlBwOTR6T3gy
+MUY5dHg1cFl6Z0JYZlFteUpCVkhvR3IxUjBnakQxaG9SRFg3bmpQT0NDZzgxYmUwNUhSUU9sT3BQ
+aTUzb2RZa25meFg3MUR3TGJHMTJEQzBndUVwSVhQdEpYazZLeWtCTngvblpTS3JoczJjeVZwcFJ5
+MG9UM3RDMFdIaVFTSUpsMUxqalFPMnZkTi9pWUkxSm11RFJNbHRtbk5yeDVRNGQ5MzFJQWNNbDlY
+YlJBc1FwUkZhNUJ4VkkwcUEvaTkyb0tUN05Ia21pSE41Q29tbi9UcFZlUW9OblhHT2V2bU94U29F
+Qm9MaEtTRno3U1Y1T2lzcEFUY2Y1MlZDYXlwa3RqRzVkb3o4V0NDWlpKWk5qZ09iUlZkcFF3U2xx
+b0c2U2g0OGhUcTBsbXZzaHN2T2lLZWUvUko0VzB3a0J6VlF5aEVRbzhoZitubTdobWxjaFl6eFpF
+dnVDSkE1dzRQOU13NmJ4Yjl4YTNTOHdReTJBVkpUalRxazFQdW9MRG5Ia0pIQ3ErRFpZZmlOVjZH
+K3VtZXJ3L3hjb3VEWFVUMzJsR0c1WUhtQ1FubFQ3OUwxa20wOU96QngyNWpNWFYyblNjWXM4SDZi
+Y3U3S253ZHJlZFJOWjNjb3k0VkpmZWFUeVU2dWVqVDVwZ1BDSi96NWlKTE1iNWIyUHA5NHpPeDIx
+Rjl0eDVwWXpnQlhmUW15amdIV0lOREp5bXVCT0J5QkxQZ3ZtSW1lRWYrd2liUG4xR1ZEcE5hQzZw
+M29vWFlsSVVjWjJISEZGR01PRVpQTjZHVEVyditoL29BVDZOczJ4NEhVazBmTjdzaU9NS2tDU2Vx
+WlRTSVJkYmc2UVVKWjc2RlViQTkxUUR3TlVHN0NzZW5mR0Rmak9KVXZZS3p1T29pdSt6YTRzZWNi
+VENnbDQwcHphaGZHRDVGT3BKVTBQNjA3eHZNR1pVVGpGUFBtdW1lcncveGNvdURYVVQzMmxHRzVZ
+TU5zOVBTeXZVZi9qZDI0S3FpNEVjaURhSTJSdmY5Uk1Hem9ScVU2Q3hiYU1VQnRRRkI5WkVJWEFG
+Ykh1QUhHOXE3S2pDM2xOdGtGTWM3M3ZGK2J2amMzL2RKdFJFbTFVUFpURzRVU3VQSDNWUDBQWmRi
+TkU4RkNheWt3bmVDSm5FUFJvSExmNFUvN0F3cWVWYnVIcVpBWmVyUVduVDR6eUFYWEdrRnV5TFdG
+R3BBUEZTWlg4dmZLOGVSZGtvZ2IySXNSeEhReWFkNGRrbWpzTzBiWnZybFUvUTlsMXMwVHdVSnJL
+VENkNEltYzk3Y0U2ZkJySDg4S21oUXQrZUlXc2lrRXovc3pKUWRTN1hXMlF4THNVZU0vbzFnL0wz
+S1VUTkRpYUErV0FSTDlwK0Q0bWllQnZaeUY0RDd6SnNGRnExWWtRTmxsMWc5OEhvQ1krWTZEK1hR
+L0VxcUJNNVdvcTZqWnRWODlXK2FDamdPYlJWZHBRd1NscW9HNlNoNDhoUXBVOCt2ejdNUjFmUUtw
+V3NkbDRTY1d1bkVtRzlNMVlqQmV4SnZSYm1CRHFDdzV4NUNSd3F2ZzJXSDRqVmVodnJwbnE4UDhY
+S0xnMTFFOTlwUmh1V0FsUnZiK01PVFBwUTNPMlQ2U2I2bE9vWVZqUEF3WHFxOVUxWEhjajNsRUs0
+K2hIUTI5bGViNVZCOFdxRVZub1JCQmE1RFFDenNGSnJPK28vNlV6MnhJYXlMMmJJYll3bktiY2tp
+NVQvM25uaXF5OGNRRnZmU0pvelhNWVBtVTdoZ1REQ0x0bGZDYzdlTkhNVktISXVMaTl2Tm5aSi92
+NWd6alZZZzdKdERzdkxvZkFVcW9zWG5vcndqaEtPSUdBWURvWk1TdS82SCtnQlBvMnpiSGdkU1RS
+ODN1eUk0d3FRSko2cGxOSWhGMXVKVjhzaTBnczFmSTdkbkxTVXVreERUZnhxMG90K0wrckcrQ003
+RTlwTERtTFhxbWZLOUJNZlNtSGtUUjRjdCtYTk1SbzhMUlUvc2pFRUMwOStvTWJtVG9aTVN1LzZI
+K2dCUG8yemJIZ2RTVFI4M3V5STR3cVFKSjZwbE5JaEYxdUc2d0ZMVFdjV2tGOVJYSTZTY1c0NExE
+cE51cVhXdS95dDEvbHdrZFpYU3dKRTRMOWlKL09NdW9MQTZoQlM3ak9PaGt4Szcvb2Y2QUUramJO
+c2VCMUpOSHplN0lqakNwQWtucW1VMGlFWFc0bFh5eUxTQ3pWOGp0MmN0SlM2VEVORElPSGxYTWVp
+anB1djV2VnhsbnR4TUlpYTBIcWJyVDFlNjA1K3RJMS9oMzVmRzJRZ05KWXY2aTlUdktZZFN2NXo0
+WnFZUGZ2aEdnakkwbzgrOXM4Q2tFRTZzVjNTZVNSWlArQU1haVp0U1B2K3RzbXloS2J5NkdUMGRo
+ZjIydXZ0SkdJdjkwb3JRNURzRVl5S0NZSUtLdWJuTFBIVkRPUWdDSHIvTC9idzZvNWpDeHVEZFdr
+NnNkRU5kU05tL2lTRStIc2N5cTJHYlNoWGJQNzhjelhZTWdQbTJSbVFyNTNDZXJQazVoak56VEpt
+dURSTWx0bW5Ocng1UTRkOTMxSVBERWhFZElxQWNWOVlwUHp4dVp3SUZXeGhYQ2tOT2ppRWpIWHZM
+UFNQZlZxQ3c1eDVDUndxdmcyV0g0alZlaHZ2YXh5cHJlVUhqdUpiR20vSDlQMjEyWUJhYm9BZlln
+dkdhcmhCWEdtYW9zVlAwUFpkYk5FOEZDYXlrd25lQ0puSkIva1MvRkROU3ptWkNTOE9KKys4c0V6
+eHo5Z3IwOGlqZndaV2loVEE1dUFPd1JabVY2TDgvYXM4bXVrUStvdDVnRnB1Z0I5aUM4WnF1RUZj
+YVpxaXhVL1E5bDFzMFR3VUpyS1RDZDRJbWNGQkYyRWdzOEtaR0VKakNCNm8rYjBXeFpZN2V2VVVN
+NlBKQXp5V0puazJ2YnFrWFB2SWNkMGx3WjBaQnFsZFZKcTlmdytpVkpiSVYzMUlRUkZleWpKYkQy
+VUVuYzhPcENKMDM1MFlBbUtkbS83YXpwa0dkdmlhTEg2Zk5JN3FSRDRXUzhVLzN5dlQ4ZmlaU1NE
+aWltMDNwOFBQMU84ZjdEazdPVkZ1RDlzV3piQVR4aWN3ck15WDhnVjFhRnErcldVSmFuTTBDeVNp
+MkIyajlSWkhOVjlPVFNqdG1YT1VtZjdpUENpUENwRys5VWlPS1F4SE5JZE5xaXJmN3lQdHVYency
+MnY4SXd6R1dMaG42RThQdHYvVDhTcW9FemxhaXJxTm0xWHoxYjVvS09BNXRGVjJsREJLV3FnYnBL
+SGp5RkNLZHB3QlAwR2hBNldNNXFLQ0NRQ1JtVWNCRE9OcWh1eEphYytQYXZRWS9nOVdaOGZYcSs3
+dEtUYkxua0FycDE0Uk0zMUxtU3BQYW8reWJuMitlOTB6VDVwZ1BDSi96NWlKTE1iNWIyUHArdDRi
+RlhXQ3F3bGxOdDQvUVJuUlNuNENSS0VBb3crREszZTBESVh1VndNWDNxS0ZGaW9sVk0wTVNmM29w
+cWlHdGZrRXR1QVUvRjhUamZjeHRLU1ZmY1pmSVpMWEZqZVVzQW9tcStRdGhxa2gvWithQUgrRHNr
+MWlmbEdtMHcvY2lxTUVaNzBWQ1l0N3RMTDNpMUx4anFmZW9vVVdLaVZVelF4Si9laW1xSWEvQnNY
+SFhiaXNyVjNYNjcwZS9UekdJb3E5TUVsaXRZZWNyYzJJRC9YNFZ6RE5NekxKR1ZRQWxXMUViSTdn
+Ykh6MDNzVExtZ3MwV242L081ZG40WXN1ZXFNRVo3MFZDWXQ3dExMM2kxTHhqcWZlb29VV0tpVlV6
+UXhKL2VpbXFJYS9Cc1hIWGJpc3JWM1g2NzBlL1R6R0lTS05jWXZwRFh1OGlzMjcveUxnZDA3eDhZ
+akY5eUk2WFpPUXhWSW5UTGJEZjkwbTFFU2JWUTlsTWJoUks0OGZkUWxxY3pRTEpLTFlIYVAxRmtj
+MVgwMDhxYktsTForcU5mUlVIWFUwaTg5R21ob2ZKbEJJYnB6eHhESUI1YWtTczF4REcwL1ovSmM0
+bUhybjNiSS9uLzVoWFJzb01LYmlBSklpSll2b3liQWJZNU04SUZabFJFbWFraUk5TkNEZlBFVDl0
+UXJxZEd2UkMrOE9xQ1ZVL25naWNBMGJXbUxzRm01cGdHdm1NRHhta1pQNFBWK3F0TDZpbkw3cFRo
+WGJKSllSaW1ZVkE3V01QSS85SHVFWmdIMjFmNUxMQkI2VVBSN1ZmSllqcXY3K1lWMGJLRENtNGdD
+U0lpV0w2TW13SDRvbjJKTFlZU3BLcjhJb2tBWnpMcXNQWlFTZHp3NmtJblRmblJnQ1lwMlNWVjl5
+dUhwUXBmWDVtWXZGQWg4RzlVaU9LUXhITklkTnFpcmY3eVB0dVgwK3RGUjRESmZXMGx3cGFRaStP
+ZnRLdlg4UG9sU1d5RmQ5U0VFUlhzb3lXdzlsQkozUERxUWlkTitkR0FKaW5adisyczZaQm5iNG1p
+eCtuelNPNmtRd1RQSFAyQ3ZUeUtOL0JsYUtGTURtNDl0ZGhWcndDUGlMa1N0em9BcWN2NDZHVEVy
+ditoL29BVDZOczJ4NEhVazBmTjdzaU9NS2tDU2VxWlRTSVJkYmc2UVVKWjc2RlViQTkxUUR3TlVH
+N0NzZW5mR0Rmak9KVXZZS3p1T29pdSt6YTRzZWNiVENnbDQwcHphaGZHRDVGT3BKVTBQNjA3eHZN
+R1pVVGpGUFBtdW1lcncveGNvdURYVVQzMmxHRzVZTU5zOVBTeXZVZi9qZDI0S3FpNEVjaURhSTJS
+dmY5Uk1Hem9ScVU2Q3hiYVdleDlSQkV3Z3pHT2EyanJZZXkxcU9KQklnbVhVdU9OQTdhOTAzK0pn
+alVtYTRORXlXMmFjMnZIbERoMzNmVWdCd3lYMWR0RUN4Q2xFVnJrSEZValNnU0QzV1R0dzA2VXY5
+Y294NXI0ZEt5ejJZMzM2TVpnRkhFQm5qY3FXckplSXI1M0wvTnZMRG9yMUVISWtMdjVYZzFjUWFU
+MkJmZmJ2dFAyY0lvb1hISTArYVlEd2lmOCtZaVN6RytXOWo2ZlI4M3V5STR3cVFKSjZwbE5JaEYx
+dUdHeEdWbjNGWExIa0htQWhqZzN6U2YwbHRvWGdpVUhRU2NFQnRadGZFelg0a0RsSmFsQjk1aTRF
+WE5LVlpBa0VQRFUrdzVITHlVOU5mY0l6TzUydGE1SHplN0lqakNwQWtucW1VMGlFWFc0bFh5eUxT
+Q3pWOGp0MmN0SlM2VEVOTi9HclNpMzR2NnNiNEl6c1Qya3NPWXRlcVo4cjBFeDlLWWVSTkhoeTM1
+YzB4R2p3dEZUK3lNUVFMVDM2Z3h1Wk9oa3hLNy9vZjZBRStqYk5zZUIxSk5IemU3SWpqQ3BBa25x
+bVUwaUVYVzREdFBLTmJITHFTOXcrLzNWdmJhOGtjUDdMTGlqZW8wa0F2cXpNWWEyc3I4SmFHcW1F
+T1g1WWJuWU5DRXRMMnNBUHhLcWdUT1ZxS3VvMmJWZlBWdm1nbzREbTBWWGFVTUVwYXFCdWtvZVBJ
+WDRyeWxRMDM0Y1lzVWFrMzIyNnlrak4wb3VxbHB4dStUaTNjdmJmR1R0Z3h0MmpTYzF5NEtOUmd1
+STh3UjVSd1BGYktXSEFCaW9RbUZjb29oQXBxOTJCQk9yRmQwbmtrV1QvZ0RHb21iVWo3L3JiSnNv
+U204dWhrOUhZWDl0cnI1T2UxUW1xNXlnZ1BYTFBxTjU3cndwTzdDY0JBb29Sd0RjVDFQa1Ivdm5u
+eGkrZGI1U2hucjVSWGFuUDQ0anlqOXlITkpOazFMeE91dDQ0Ykpxcy8yV0NSc0tnY1dVd20vMElF
+RWJSakg4dWtmTjdzaU9NS2tDU2VxWlRTSVJkYmlWZkxJdElMTlh5TzNaeTBsTHBNUTBZendBSXAz
+L1JzN3lDT2NWSmc2TVB2U1cyaGVDSlFkQkp3UUcxbTE4VE5maVFPVWxxVUgzbUxnUmMwcFZrQ1FR
+OE5UN0RrY3ZKVDAxOXdqTTduYTFybmpNN0hiVVgyM0htbGpPQUZkOUNiSWlsVTdTeHB4L1FZaTBG
+dFoyY3NRT0tFYzZKYVFqZWZMWEZzcHVacTRUL2FoSEtGTVliUmppeUhjb3FiSElXcXMvRXFxQk01
+V29xNmpadFY4OVcrYUNOeDVwN2FLU3BRTW5nR2ttZ1RCZ1VLb3dSbnZSVUppM3Uwc3ZlTFV2R09w
+OTZpaFJZcUpWVE5ERW45Nkthb2hyZDZCTXN1NDZjemwrSDNmdGZGMTFHbmpEZ2gwMnJwWTFOSE1w
+ais5QjZCTkJhNURRQ3pzRkpyTytvLzZVejJ4SWF5TDJiSWJZd25LYmNraTVULzNubmlxeThjUUZ2
+ZlNKb3pYTVlQbVU3aGpyVldyUWw2THNoNlF4S1hvSGtuYUsvc2YzVjJJSlREYkpkbXBxV3czd1VU
+ZjkwbTFFU2JWUTlsTWJoUks0OGZkUWxxY3pRTEpLTFlIYVAxRmtjMVgwM1VIbE1vaTRQbXZIQkp6
+NE5yZVM0MXQyQlBzQW1CeS9MK0N0R0FJR2d1c2VZeWw0bUczN0FoM2xLaVpNZjNmUWdtMzd5QW1s
+Um9DSFdvc2NFK1BJVktvd1JudlJVSmkzdTBzdmVMVXZHT3A5NmloUllxSlZUTkRFbjk2S2FvaHJx
+Zy9MeGhRQzN0UHVwM09Zb09FR0RwNElyM2E4Um42YTBrUjFGRStQZDVHcjEvRDZKVWxzaFhmVWhC
+RVY3S01seFd5bGh3QVlxRUpoWEtLSVFLYXZkcExuNE5IZVZwbGZVQmlxQU04TVc5WGQveExFU09L
+dktiQ1hXdjdWWm5NQWRkNVlBdGhkaE1Lb0N4dHowWjJqamRRdjNkKzlXSE50aHNCQ1MvZmtXMXcz
+c1ZXanl6cDNpdGdPRkR1S01RZXV1bWVydy94Y291RFhVVDMybEdHNVlDVkc5djR3NU0rbERjN1pQ
+cEp2cVU2dWUvckRtWk9zNkJNb1IxUXBMK1k1aC9yY1NGWVlUTU5qWmRIMVJOc2tzdCtQNDVzM0Zq
+V21PK2Nnems5TE1uU29MRG5Ia0pIQ3ErRFpZZmlOVjZHK3VtZXJ3L3hjb3VEWFVUMzJsR0c1WUNW
+Rzl2NHc1TStsRGM3WlBwSnZxVTZ1ZS9yRG1aT3M2Qk1vUjFRcEwrWTU5N3Z1MC9UajdlUmtUdVQv
+UWptZ3RZaXlua0FkRTFPalV5V1A4QnJSK2xIb1pNU3UvNkgrZ0JQbzJ6YkhnZFNUUjgzdXlJNHdx
+UUpKNnBsTkloRjF1Q0NOOUljM3RDV3R3cy9CUGlxVkhUZUhjRk4va2tLMUQzekkvZncxR1NpbU4v
+M1NiVVJKdFZEMlV4dUZFcmp4OTFDV3B6TkFza290Z2RvL1VXUnpWZlE1bk1WVmJpR1pOZDVraTh0
+N0ZHWWJKS2h1V3Rpb29McFhycUs0RHNhNzc2Z3NPY2VRa2NLcjRObGgrSTFYb2I2Nlo2dkQvRnlp
+NE5kUlBmYVVZYmxnSlViMi9qRGt6NlVOenRrK2ttK3BUcVB6NWJkalpDK2F6cElYa24zOTBwZ0ho
+cUNXdVJUR0VUSzlYYnJKYTR2aW9FM2lGQlBEclRlcHMzWUF3a3d4RlE2ZFowakl3WW9GTDRVTkJL
+eUtXUUNrLzFVVW9XU0R0SEk5V29WcDI4L3JqZ09iUlZkcFF3U2xxb0c2U2g0OGhlK0FuaXZiY21E
+MFdUdEovelNEblloTnFUSjhudWYvWVcrNnBzUGRNZnJQYmp0RzRGaXZuZVhjV3hTWWh0empZcUJO
+NGhRVHc2MDNxYk4yQU1KTU1SVVViM1A2WWpjbVBGQkZrbUcwWlhhN1I4M3V5STR3cVFKSjZwbE5J
+aEYxdUpPVnYwbzdhaWg3Zmx3akhIR2poVlNuQy9TSUJGNFdUWUpNRVo3SmJycHdGZmgvMHNSMGVs
+Sll5RFR5aTFvS3BqOFNxb0V6bGFpcnFObTFYejFiNW9LT0E1dEZWMmxEQktXcWdicEtIanlGdStj
+R2d6OEF4UXNKUGYxRFpXbzRHb05valpHOS8xRXdiT2hHcFRvTEZ0bzArSUExQldQMXFEcStNR2Yy
+MVNDbDRrRWlDWmRTNDQwRHRyM1RmNG1DTlNacmcwVEpiWnB6YThlVU9IZmQ5U0FETCtla21JK3Av
+VmV1K2VaakJxMnVTbm8vQ0ZvWW8rOXhGZ1Ircmxvb2NhQk55S3VlZzRUK2NDSDh6NTh4K25NVWIz
+UDZZamNtUEZCRmttRzBaWGE3UjgzdXlJNHdxUUpKNnBsTkloRjF1R3A3dWpESVhwazR2a2J3UVlS
+bWxZYjRqTnFTb1R1RkdGN3laTThjZ3d0L1FXdVEwQXM3QlNhenZxUCtsTTlzU0dzaTlteUcyTUp5
+bTNKSXVVLzk1NTRxc3ZIRUJiMzBpYU0xekdENWxPNFlORERzMU5IZ0ZZb1lrMGF1L2RiM01DRFdC
+ZXVMQTFaOHFRMjZuN1U5UXNlUG1YczBma2R4b0xHRkZxT05NRit3eFd5bGh3QVlxRUpoWEtLSVFL
+YXZkcEVYMHlScEVGaUdaUGlONVl4NHdmZVlCYWJvQWZZZ3ZHYXJoQlhHbWFvc3NQWlFTZHp3NmtJ
+blRmblJnQ1lwMlFqdzF4Z0RMQkJqcjk4TGxzVHNSckgwbHRvWGdpVUhRU2NFQnRadGZFelg0a0Rs
+SmFsQjk1aTRFWE5LVlpBa0VQRFUrdzVITHlVOU5mY0l6TzUydGE1SHplN0lqakNwQWtucW1VMGlF
+WFc0bFh5eUxTQ3pWOGp0MmN0SlM2VEVOTlVJODRXVnNJMWxiRUxUdlNoMEVoeGJXbllTT1JYNEc0
+cUt2NUpJT2VlS2xNeTF2ZzhNRGdDaU55WjBDK3gvQ09oa3hLNy9vZjZBRStqYk5zZUIxSk5IemU3
+SWpqQ3BBa25xbVUwaUVYVzRsWHl5TFNDelY4anQyY3RKUzZURU5OVUk4NFdWc0kxbGJFTFR2U2gw
+RWh3aTQ1ek9YS3BMVmpLTktEV0Q2V2lyVG0yZjEyZ0tMUGVIb0s2bG5OanNpT0pCSWdtWFV1T05B
+N2E5MDMrSmdqVW1hNE5FeVcyYWMydkhsRGgzM2ZVZ3FBanF4Qm1PWTBvL0duWXM4Y0lXVVNST0Mv
+WWlmempMcUN3T29RVXU0empvWk1TdS82SCtnQlBvMnpiSGdkU1RSODN1eUk0d3FRSko2cGxOSWhG
+MXVPZFlsNXo4TVBoeFpqVlkzZUFKZ0NyRTU0eitZWkowdzBoQjE4M2FiN2QzbUFXbTZBSDJJTHht
+cTRRVnhwbXFMRlQ5RDJYV3pSUEJRbXNwTUozZ2laeVZjMGJmMGVHb1BNSTZVbnUxT00xbnNTY3pt
+YVM4bUdhdGlmK0EzNjdFTkdUUWxxUjFVRFRCWS84MFdvUmx4dzFIb0RQRlNNbVFPRC94a3l5WEtP
+T3ppbXRCL3FqMTdlemc1dlZwckVSN3Fxb3dSbnZSVUppM3Uwc3ZlTFV2R09wOTZpaFJZcUpWVE5E
+RW45Nkthb2hySHVnVC9pVGwwcjJYMThvbWpQRW1yTlcxdmdiZnI1Z08rdUt4dUhES2NCSmw4aGt0
+Y1dONVN3Q2lhcjVDMkdxU1I2QXp4VWpKa0RnLzhaTXNseWpqczhSUDIxQ3VwMGE5RUw3dzZvSlZU
+K2VDSndEUnRhWXV3V2JtbUFhK1l3UEdMYjFTc1dDZ3ZFUFRNQWpIb0locDg2NVJnTFM2QXNMYTEw
+VUpWUUhvdjZzampKUENyNXFFc1pleUlvNEV1UDBucWpCR2U5RlFtTGU3U3k5NHRTOFk2bjNxS0ZG
+aW9sVk0wTVNmM29wcWlHdmJkaGRhUW9UYUQvRVdQOWliaUthcGpBckc2OTVnc08rM1NpaUdyUmMy
+MFVGcmtOQUxPd1Vtczc2ai9wVFBiRWhySXZac2h0akNjcHR5U0xsUC9lZWVLckx4eEFXOTlJbWpO
+Y3hnK1pUdUdBbVAzemZVOUhzdGVyNTZQbWYvVjFHZGdZSWp5cVpzS2ExVTVoWmxTSHh2L1RwVmVR
+b05uWEdPZXZtT3hTb0VCc1JQMjFDdXAwYTlFTDd3Nm9KVlQrZUNKd0RSdGFZdXdXYm1tQWErWXdQ
+R1J0dXdkUysvSnFVWmNGdjhmclRRZUEyOEZ0SjZlWXVYT2xpYWZwNkw3QWpGYktXSEFCaW9RbUZj
+b29oQXBxOTJCQk9yRmQwbmtrV1QvZ0RHb21iVWo3L3JiSnNvU204dWhrOUhZWDl0cnI1UlNSQTBZ
+STQzSjZVdmEramYyVzVmdGh0dHp3bEF6Y3RsNHoxMnpDUGdvNHF6aUFkNnU5VndqZStaQlg1ZWEr
+SWY1bm82OTlWclQ5aXIvc0d5dzd4R21BV202QUgySUx4bXE0UVZ4cG1xTE5WMTFnYjRSbHd5SkR5
+TlFsOUFHaUhYRzBnUlpzY1U2UEVBa2JlR0h1ZC92K3RzbXloS2J5NkdUMGRoZjIydXZnaHNnK3pM
+bkl4L0JjTEY2THF1RHZObDhoa3RjV041U3dDaWFyNUMyR3FTSDluNW9BZjRPeVRXSitVYWJURDl5
+S293Um52UlVKaTN1MHN2ZUxVdkdPcDk2aWhSWXFKVlROREVuOTZLYW9ocjhHeGNkZHVLeXRYZGZy
+dlI3OVBNWWlpcjB3U1dLMWg1eXR6WWdQOWZoWE1NMHpNc2taVkFDVmJVUnNqdUJzZlBUZXhNdWFD
+elJhZnI4N2wyZmhpeTU2b3dSbnZSVUppM3Uwc3ZlTFV2R09wOTZpaFJZcUpWVE5ERW45Nkthb2hy
+OEd4Y2RkdUt5dFhkZnJ2Ujc5UE1ZaElvMXhpK2tOZTd5S3pidi9JdUIzVHZIeGlNWDNJanBkazVE
+RlVpZE10c04vM1NiVVJKdFZEMlV4dUZFcmp4OTFDV3B6TkFza290Z2RvL1VXUnpWZlJDR1hiaTdO
+bVJrSFJsNkJ2S0dtdnpLbFcxZThXL1Y3eE1iZmYzbjV5bzRvV004V1JMN2dpUU9jT0QvVE1PbThX
+cU1FWjcwVkNZdDd0TEwzaTFMeGpxZmVvb1VXS2lWVXpReEovZWltcUlhd1MyNzU3ckJQcHM4LzQ2
+U08yTWY2SDVnaHhqZklZbVQ1TFZhLzBXUzhnUTRrRWlDWmRTNDQwRHRyM1RmNG1DTlNacmcwVEpi
+WnB6YThlVU9IZmQ5U0FIREpmVjIwUUxFS1VSV3VRY1ZTTktpTFlRQW1xSlBhVEdKRkI5VlJ0Y05N
+L2ZlSjB1ZzZjeE1qRjNFUG5NRGJJc21qSFdpTU9lRmIzUE15Uk50QXA2blp3UFJXR1E3YnQrMnB4
+UmdyU1NNM2pNN0hiVVgyM0htbGpPQUZkOUNiSWtGVWVnYXZWSFNDTVBXR2hFTmZ1ZUdOV0FINStH
+Y08wS3RMLzNJbnJaL0ttZVZWWXFqdThld0grcVZ1SnlONmRsVkJHOVVid2kyNHVPOFNNa210NDJU
+cVNWTkQrdE84YnpCbVZFNHhUejVycG5xOFA4WEtMZzExRTk5cFJodVdCNWdrSjVVKy9TOVpKdFBU
+c3djZHVZekYxZHAwbkdMUEIrbTNMdXlwOEhhK2pzMG8raTlUYi9vVThzcFdSUmZmQTArYVlEd2lm
+OCtZaVN6RytXOWo2ZmVNenNkdFJmYmNlYVdNNEFWMzBKc280QjFpRFF5Y3ByZ1RnY2dTejRMNWlK
+bmhIL3NJbXo1OVJsUTZUV2d1cWQ2VW15c3JIYVJQRHA5eHBMWlpiUzJ1aGt4Szcvb2Y2QUUramJO
+c2VCMUpOSHplN0lqakNwQWtucW1VMGlFWFc0T2tGQ1dlK2hWR3dQZFVBOERWQnV3ckhwM3hnMzR6
+aVZMMkNzN2pxSXJ2czJ1TEhuRzB3b0plTktjMm9YeGcrUlRxU1ZORCt0TzhiekJtVkU0eFR6NXJw
+bnE4UDhYS0xnMTFFOTlwUmh1V0REYlBUMHNyMUgvNDNkdUNxb3VCSElVU0pmYWh6bUMvVytYd3JY
+b1JuM3JMM2UxL3U5ZDFvQW8xTlJ0RGtJUUhpWUJhYm9BZllndkdhcmhCWEdtYW9zVlAwUFpkYk5F
+OEZDYXlrd25lQ0puRGRySWtwdFRwZzZ5UmJlNFFNbWYrMmNqSjAvL2RCUDNsTGs0eXNtWEhnWW5Q
+N29oZDVtVFl2VFdVUTlIMkNWaERMaVpzL1Y3OGNhR1NQcHM2NSs2bDRsMHdtY0pETjJFRkZreWZN
+ckViT3pRV3VRMEFzN0JTYXp2cVArbE05c1NLVWsrN0d1bHNZZVo1aTRUQ3ErZS92b1pNU3UvNkgr
+Z0JQbzJ6YkhnZFNUamdPYlJWZHBRd1NscW9HNlNoNDhoUy9TMStqQW96eXQyaGNpUzY3SVdLT2dU
+Y2lybm9PRS9uQWgvTStmTWZwekdpYjk3bUNDQ0NrblZUUExYazgyMXZNblZkQXdvYnZmbGVKRVRp
+MkVXWUt3OWxCSjNQRHFRaWROK2RHQUppblpXem9mNlBjaHVGbWEyY09ROTEyUWc1WFd2Sm81YVIz
+L3JLOWxhQU1ZSjRrR0hrSm91NFAyWlRXVHV3MEhkZW1YZ1hOaVd3MDFLNEhMQ3ErcnZnZzNzcXZY
+OFBvbFNXeUZkOVNFRVJYc295V3c5bEJKM1BEcVFpZE4rZEdBSmluWld6b2Y2UGNodUZtYTJjT1E5
+MTJRZzVYV3ZKbzVhUjMvcks5bGFBTVlKNGxrbzk2ZWJkZml4WU9UVjBEL3dLQy9UZXhNdWFDelJh
+ZnI4N2wyZmhpeTU2b3dSbnZSVUppM3Uwc3ZlTFV2R09wOTZpaFJZcUpWVE5ERW45Nkthb2hyQkxi
+dm51c0UrbXp6L2pwSTdZeC9vZm1DSEdOOGhpWlBrdFZyL1JaTHlCRGlRU0lKbDFMampRTzJ2ZE4v
+aVlJMUptdURSTWx0bW5Ocng1UTRkOTMxSUtuWWh6Uk5FNmd4MDFxUEg3SlZkTzFCLzVHYmdaQjdq
+d2JOc1pRaW9PNmVtQVdtNkFIMklMeG1xNFFWeHBtcUxGVDlEMlhXelJQQlFtc3BNSjNnaVp5VmMw
+YmYwZUdvUE1JNlVudTFPTTFuc1Njem1hUzhtR2F0aWYrQTM2N0VOR1RRbHFSMVVEVEJZLzgwV29S
+bHh3MUhvRFBGU01tUU9EL3hreXlYS09PemltdEIvcWoxN2V6ZzV2VnByRVI3cXFvd1JudlJVSmkz
+dTBzdmVMVXZHT3A5NmloUllxSlZUTkRFbjk2S2FvaHJIdWdUL2lUbDByMlgxOG9talBFbXJOVzF2
+Z2JmcjVnTyt1S3h1SERLY0JKbDhoa3RjV041U3dDaWFyNUMyR3FTUjZBenhVakprRGcvOFpNc2x5
+ampzOFJQMjFDdXAwYTlFTDd3Nm9KVlQrZUNKd0RSdGFZdXdXYm1tQWErWXdQR0xiMVNzV0NndkVQ
+VE1BakhvSWhwODY1UmdMUzZBc0xhMTBVSlZRSG92NnNqakpQQ3I1cUVzWmV5SW80RXVQMG5xakJH
+ZTlGUW1MZTdTeTk0dFM4WTZuM3FLRkZpb2xWTTBNU2Yzb3BxaUd2YmRoZGFRb1RhRC9FV1A5aWJp
+S2FwOUFQK1R4Ukt1bUZpQVV4dXhqRDRBRUZya05BTE93VW1zNzZqL3BUUGJFaHJJdlpzaHRqQ2Nw
+dHlTTGxQL2VlZUtyTHh4QVc5OUltak5jeGcrWlR1R0FtUDN6ZlU5SHN0ZXI1NlBtZi9WMUdkZ1lJ
+anlxWnNLYTFVNWhabFNIeHYvVHBWZVFvTm5YR09ldm1PeFNvRUJzUlAyMUN1cDBhOUVMN3c2b0pW
+VCtlQ0p3RFJ0YVl1d1dibW1BYStZd1BHVy9sQk9xd3krOEhnMXVNRm4wSTc2OEdNTEpSTjAzQy9v
+RXhta28rb0RPN29aTVN1LzZIK2dCUG8yemJIZ2RTVFI4M3V5STR3cVFKSjZwbE5JaEYxdURsZnk5
+V20yMEM2QnNFUXQ5bllJSWF6VHd5aW1Lald4cTNTUjhmWks2UWZZb1JRbmk3S2x6ZFZvQmlmNm94
+RDFKa0ZhY1R0WW9hTGJpWGRWVE1rbks4S1duNWlyNWJlV3pqbGlDbnYxSjBqRFZ4QnBQWUY5OXUr
+MC9ad2lpaGNjalQ1cGdQQ0ovejVpSkxNYjViMlBwODNIbW50b3BLbEF5ZUFhU2FCTUdCUTRDa2Ju
+QkJ1RWpyZXM0aTNUck5zVTRXMlVXSW9MWXJxcmU0OEZncnlId1RraWczSXE0WGdLdEJPaVVmMjRG
+YngxUXczRlBOMDBQMmxvSm1SNjZTaTlabCtLNWZtN0JDSitFQURJdFc5RWN2RmJLV0hBQmlvUW1G
+Y29vaEFwcTkyaXFaOEprdm03QzI2VjdxUkExczYvY1IrZFh4SThqN3FHNXdlYmxoU0tJSkxHSXF2
+cEFWaVh5aDRMN2lQMGZ2dWs1aGtMOVdwRTNxdTFmbm90d3ovQUtoSEtGTVliUmppeUhjb3FiSElX
+cXN0ZC9aQjI5MzNxdWhrR0V5R2l2U2t2K3RzbXloS2J5NkdUMGRoZjIydXZzTGFXTTFSai9oLzll
+UUFhL0crYUZmWW9RTEJUeUdQd2xCOU1wUXpmOXZja1dwQzZlQ280bVQ3YnhKR2hvUzR1SkdnSUs2
+a3luVTZyRWdINisyV3Nyb0NTaEM4Ny9jU0tiN0MwQkVPUlRjVUdxUVZ4aklycXQ0Zi9sVWpIWEMv
+eTJSUDlwaWlsam9PZnlsNXhYVnZjSlRkcGQxT0dzb3IrZFZGdkt3M3U0eWJqc0p6cXd0T1FaUk5v
+QUFhR3F6UmdWbjY4b21aNnZ3YUszMmtteEtwaGRrZ3d4V1U5amQ3alNkanRUWURiNWtBSlJXemRl
+c0NCOTg0dU4xYTVjRzJoN1lpV0hxRGgyOGJ4V3RvOUNKV1QyL0p6ekQ0Qkd0SzgzcFZNUUxLRno0
+L1gyTUNkQjZTS0ptY2k0MFkyT2ZES090QlhQcENkdGN1YzNScVdqVnZRQ21uTDE4TXV4d2dTNm1j
+NThxNW5ReU45VVozdDQzY25YRHFGK0JQNTQwVmFBPT0=</value></data></root>

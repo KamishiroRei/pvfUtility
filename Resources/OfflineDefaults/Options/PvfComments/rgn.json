@@ -1,0 +1,16 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "rgn",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "rgn",
+                         "Section":  "towns",
+                         "Title":  "城市",
+                         "Comment":  "城市\n在rgn文件里,town代表此区域包含的城镇地图,数字在town.lst里定义",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "notlikeKFC"
+                     }
+                 ]
+}

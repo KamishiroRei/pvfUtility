@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<admin:WinAdvertisingTool xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" Window.Title="广告管理-Admin" FrameworkElement.Width="1000" FrameworkElement.Height="800" xmlns:admin="clr-namespace:PvfCode.Views.Admin;assembly=pvfUtility">
+  <Grid>
+    <bars:BarContainerControl Grid.Row="0" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+      <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControl.ShowDragWidget="True">
+        <bars:BarStaticItem BarItem.Content="{DynamicResource WinAdvertisingTool_ToolTipBarBtnContent}" BarItem.Foreground="#FF808080" />
+      </bars:ToolBarControl>
+    </bars:BarContainerControl>
+  </Grid>
+</admin:WinAdvertisingTool>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+  <DataTemplate x:Key="AdvertisingPositionListBoxItemTemplate">
+    <StackPanel Orientation="Horizontal">
+      <Image Width="28" Height="28" Margin="5,0,0,0" Source="{DynamicResource EditComment}" />
+      <editors:HyperlinkEdit FrameworkElement.Margin="5,0,0,0" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" Control.FontSize="13" editors:BaseEdit.EditValue="{Binding Title}" editors:HyperlinkEdit.NavigationUrl="{Binding Url}" />
+      <editors:RatingEdit xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:RatingEdit.Name="editor" FrameworkElement.Margin="0,0,0,0" FrameworkElement.HorizontalAlignment="Center" FrameworkElement.VerticalAlignment="Center" Control.Foreground="#FFFFFF00" editors:RatingEdit.Value="3.5" />
+    </StackPanel>
+  </DataTemplate>
+  <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}">
+    <Style.Triggers>
+      <Trigger Property="ListBoxItem.IsSelected" Value="True">
+        <Setter Property="Background" Value="#3e3e40" />
+        <Setter Property="BorderBrush" Value="#3e3e40" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <DataTemplate x:Key="pvfUtilityDocumentInexDataTemplate">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
+      <Border Grid.Row="0" Height="40" Padding="5" Background="#3D3A3A">
+        <StackPanel Orientation="Horizontal">
+          <Image Source="{DynamicResource VisualStudioBlendLogo2015Pre}" />
+          <Label Margin="10,0,0,0" VerticalAlignment="Center" FontFamily="微软雅黑" FontSize="14" FontWeight="ExtraBold">pvfUtility-for-2022</Label>
+          <HyperlinkEdit FrameworkElement.Margin="10,0,0,0" FrameworkElement.VerticalAlignment="Center" p10:HyperlinkEdit.AllowAutoNavigate="True" p10:BaseEdit.EditValue="加入官方交流群：651052546" Control.FontSize="13" p10:HyperlinkEdit.NavigationUrl="https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/regular-expression-language-quick-reference" xmlns:p10="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+          <HyperlinkEdit FrameworkElement.Margin="10,0,0,0" FrameworkElement.VerticalAlignment="Center" p10:HyperlinkEdit.AllowAutoNavigate="True" p10:BaseEdit.EditValue="更新日志" Control.FontSize="13" p10:HyperlinkEdit.NavigationUrl="https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/regular-expression-language-quick-reference" xmlns:p10="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+          <HyperlinkEdit FrameworkElement.Margin="10,0,0,0" FrameworkElement.VerticalAlignment="Center" p10:HyperlinkEdit.AllowAutoNavigate="True" p10:BaseEdit.EditValue="扩展插件API文档" Control.FontSize="13" p10:HyperlinkEdit.NavigationUrl="https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/regular-expression-language-quick-reference" xmlns:p10="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+        </StackPanel>
+      </Border>
+      <Border Grid.Row="1">
+        <Grid Margin="0,0,0,0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <TextBox Margin="5" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" IsReadOnly="True">广告位招租 联系QQ：812143836</TextBox>
+          </StackPanel>
+          <Grid Row="1" Background="#383838" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ListBox Height="300" Margin="0,0,0,0" Background="#00FFFFFF" ItemTemplate="{StaticResource AdvertisingPositionListBoxItemTemplate}" ItemsSource="{Binding IndexInfo.LeftAdvertisingPositionInfoItems}" />
+            <ListBox Grid.Column="1" Height="300" Margin="0,0,0,0" Background="#00FFFFFF" ItemTemplate="{StaticResource AdvertisingPositionListBoxItemTemplate}" />
+          </Grid>
+        </Grid>
+      </Border>
+      <Grid Row="2" />
+    </Grid>
+  </DataTemplate>
+</ResourceDictionary>

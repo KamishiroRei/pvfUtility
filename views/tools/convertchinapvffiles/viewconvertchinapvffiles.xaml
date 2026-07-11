@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<convertchinapvffiles:ViewConvertChinaPvfFiles xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" Window.Title="转换70PlusPvf 脚本文件" FrameworkElement.Width="1000" FrameworkElement.Height="800" Window.SizeToContent="WidthAndHeight" xmlns:convertchinapvffiles="clr-namespace:Views.Tools.ConvertChinaPvfFiles;assembly=pvfUtility" UIElement.IsEnabled="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConverterBoolenToFalse}}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Vertical">
+      <CheckBox Content="转换70plus+套装文件 (注：这里只能使用一次！请不要重复的使用此功能)" ToolTip="功能包含移除套装文件中的多余名称 为已注册的套装主体文件自动设定[set name]" ToolTipService.InitialShowDelay="50" IsChecked="{Binding Convertequipmentpartset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <CheckBox Content="转换add 标签" IsChecked="{Binding ConvertAddSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    </StackPanel>
+    <StackPanel Grid.Row="1" Margin="0,8,0,8" HorizontalAlignment="Right" Orientation="Horizontal">
+      <Grid Margin="0,0,10,0" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}">
+        <Grid.RowDefinitions>
+          <RowDefinition />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="转换中...请不要操作其他功能" Foreground="#FF808080" />
+        <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" />
+      </Grid>
+      <Button Content="开始转换" Cursor="Hand" Command="{Binding OnStartCommand}" />
+    </StackPanel>
+  </Grid>
+</convertchinapvffiles:ViewConvertChinaPvfFiles>

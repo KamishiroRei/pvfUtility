@@ -1,0 +1,1266 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "etc",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "account restrict",
+                         "Title":  "表示账号限制",
+                         "Comment":  "[account restrict]表示账号限制，用于限制账号只能购买多少次。\n[character restrict]表示角色限制，用于限制单个角色只能购买多少次。\n格式都一样，自行复制即可\n\n30008 商城排序号\n1 限制次数\n0 保留\n2013  年\n3 月\n2 日起\n0保留\n2013 年\n4 月\n10日止\n23 保留\n50000 保留",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "By：小小白-770141757|unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "active status duration",
+                         "Title":  "活动状态的持续时间",
+                         "Comment":  "活动状态的持续时间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "add selectAble equipment list",
+                         "Title":  "晶体契约效果配置",
+                         "Comment":  "[add selectAble equipment list] 晶体契约效果配置",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "additional result",
+                         "Title":  "分解物品结果",
+                         "Comment":  "分解物品结果",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Yasashiikaze"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "additional result const",
+                         "Title":  "分解出额外结晶的概率",
+                         "Comment":  "分解出额外结晶的概率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Yasashiikaze"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "AI LIST",
+                         "Title":  "ai列表",
+                         "Comment":  "ai列表\n\n0      // 0.PVP_Practice_APC.img 图片编号\n305  //1.AI 脚本字符编号\n40   //2. 等级\n\u003c4::pvp_apc_job1`鬼剑士`\u003e  //3.职业\n\u003c4::pvp_apc_name1`苍白的阴影狄尔`\u003e //4.角色名\n1  //5.难度 (1-5)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "apply area list",
+                         "Title":  "应用区域列表！",
+                         "Comment":  "应用区域列表！",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "a123123"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "apply buff index",
+                         "Title":  "应用缓冲指数",
+                         "Comment":  "应用缓冲指数",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "a123123"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "apply dungeon type",
+                         "Title":  "应用地牢类型",
+                         "Comment":  "应用地牢类型",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "a123123"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "apply ultimate",
+                         "Title":  "若此标签在",
+                         "Comment":  "若此标签在\n{ etc/ultimatedungeonlist.etc }\n路径内，则将副本编号写入即可开放王者级难度",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "armor grade rate",
+                         "Title":  "装甲级率",
+                         "Comment":  "装甲级率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "attacked map info",
+                         "Title":  "攻击地图信息",
+                         "Comment":  "攻击地图信息\n// 村庄索引、区域索引、最大怪物数量、重生时间（秒）\n2\t0\t50\t2",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "avatar",
+                         "Title":  "时装",
+                         "Comment":  "时装\n\n商城里是装扮购买界面",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "avatar coin info",
+                         "Title":  "头像硬币信息",
+                         "Comment":  "头像硬币信息",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "basis of rarity dicision",
+                         "Title":  "2代表两个难度 爆率顺序分别是白 蓝 紫 粉 史诗",
+                         "Comment":  "2代表两个难度 爆率顺序分别是白 蓝 紫 粉 史诗， 1000001和1000002是深渊的困难和非常困难\n\n2   210000   610000   755000   931000   1000000   1000001\n\n史诗的爆率=史诗减粉的数值 1000000-931000=69000，再除以一百万，也就是说，史诗的爆率=6.9%\n\n粉的爆率=粉的数值减去紫的数值 931000-755000=176000，再除以一百万，粉的爆率=17.6%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "法海"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "cart disallowance",
+                         "Title":  "禁止购物车",
+                         "Comment":  "禁止购物车",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "cerapoint disallowance",
+                         "Title":  "cerapoint disallowance",
+                         "Comment":  "[cerapoint disallowance]\n商城道具D点无法购买，只可点券购买\n注意下方不是道具代码，是道具在商城里的编号",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "by巳月~QQ1322276685"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "character restrict",
+                         "Title":  "表示角色限制",
+                         "Comment":  "[character restrict]表示角色限制，用于限制单个角色只能购买多少次。\n\n30008 商城排序号\n1 限制次数\n0 保留\n2013  年\n3 月\n2 日起\n0保留\n2013 年\n4 月\n10日止\n23 保留\n50000 保留",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "巳月~1322276685"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "clear rank exp bonusrate",
+                         "Title":  "通关评分的经验加成率",
+                         "Comment":  "通关评分的经验加成率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "巳月：1322276685"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "cnt",
+                         "Title":  "道具数量",
+                         "Comment":  "道具数量",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "小小白 770141757"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "coin",
+                         "Title":  "复活币",
+                         "Comment":  "复活币\n\n商城里是道具→复活币购买界面",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "common cool time",
+                         "Title":  "公共冷却时间",
+                         "Comment":  "公共冷却时间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "cost weights by rarity",
+                         "Title":  "由稀有成本的权重",
+                         "Comment":  "由稀有成本的权重",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "creature",
+                         "Title":  "宠物",
+                         "Comment":  "宠物\n\n商城里是宠物→消耗品购买界面",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "宠物|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "cube creation const",
+                         "Title":  "cube creation const",
+                         "Comment":  "无色暴出倍率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Yasashiikaze"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "cube index",
+                         "Title":  "立方体指数",
+                         "Comment":  "立方体指数",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "default term in town",
+                         "Title":  "在镇默认项",
+                         "Comment":  "在镇默认项",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "dialog",
+                         "Title":  "对话",
+                         "Comment":  "对话",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "difficulty",
+                         "Title":  "在任务(*.qst)中",
+                         "Comment":  "在任务(*.qst)中，设置难度级别参数。\n* 详情参考路径 : { n_quest/questparameter.etc }\n————————\u003c分割线\u003e————————\n该词条位于 : { etc/hellparty.etc }的路径里时，代表：\n\n第1竖排 : [深渊难度] : 传奇、英雄、王者、勇士、冒险\n     //对应地下城难度：英雄、王者、勇士、冒险、普通\n\n第2竖排 : 各个难度下击杀深渊房最终怪物时，所掉落[装备]数量\n\n第3竖排 : 各个难度下击杀深渊房最终怪物时，所掉落[道具]数量\n              `（可能是，等后续测试完成会重新追加注释）`\n\n第4竖排 : 各个难度下击杀深渊房最终怪物时，\n                对掉落[更好品质装备]的{概率}或{权重}的增幅\n             `（可能是，等后续测试完成会重新追加注释）`\n\n第5竖排 : 同4\n\n第6竖排 : （等待后续测试以追加标签注释）\n\n`最后编辑时间 : 2026/3/18`",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "drop prob",
+                         "Title":  "下降的概率",
+                         "Comment":  "下降的概率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "dungeon",
+                         "Title":  "在副本接口处代表",
+                         "Comment":  "在副本接口处代表\n第一个数为副本ID\n第二个为任务ID 假如是-1就代表该副本无前置任务\n如果不为-1 则代表需完成指定任务ID才可开启该副本我",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "白糖-193284563"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "dungeon difficulty drop bonusrate",
+                         "Title":  "地下城难度掉落加成率",
+                         "Comment":  "地下城难度掉落加成率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "巳月：1322276685"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "dungeon difficulty gold drop bonusrate",
+                         "Title":  "地下城难度翻牌获得金币倍率",
+                         "Comment":  "地下城难度翻牌获得金币倍率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "轩大爷i"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "dungeon drop rate balance",
+                         "Title":  "地牢下降率平衡",
+                         "Comment":  "地牢下降率平衡",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "dungeon inout time",
+                         "Title":  "地牢陷入困境",
+                         "Comment":  "地牢陷入困境\n//是时候打开地牢了。\n//（极端祭坛，进入中国一定要放出来！！）\n//时间：0~23，分钟：0~59\n//[地牢进入时间]\n//开始结束开始结束\n//索引时间时间分分\n//11007 0 23 0 10 //从0到23小时（即每小时）在0到50分钟之间打开。\n//[/dungeon inout time]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "dungeon npc",
+                         "Title":  "地牢NPC",
+                         "Comment":  "地牢NPC",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "dungeonindex",
+                         "Title":  "副本索引",
+                         "Comment":  "副本索引\n新手体验中指副本的相对lst中的索引",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "琉璃娃娃"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "each layer matching dungeon",
+                         "Title":  "each layer matching dungeon",
+                         "Comment":  "[each layer matching dungeon]，绝望之塔的副本数据\n例如1是第一层，11008是指向的副本，后面也是这样类推，1到100，对应100层，11008到11107对应副本编号，可在副本列表找到对应的编号。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "老徐的梦想"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "effect equipment part set",
+                         "Title":  "effect equipment part set",
+                         "Comment":  "effect equipment part set\n控制时装触发的ani动画，1是编号，下面是equ是指向套装的，需要多少件时装",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "老徐的梦想"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "emblem compound cost",
+                         "Title":  "徽章合成成本",
+                         "Comment":  "徽章合成成本",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "emblem compound info",
+                         "Title":  "徽章信息",
+                         "Comment":  "徽章信息",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "巳月：1322276685"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "emblem compound result",
+                         "Title":  "徽章合成结果",
+                         "Comment":  "徽章合成结果",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "emblem list",
+                         "Title":  "徽章列表",
+                         "Comment":  "徽章列表",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "equipment index",
+                         "Title":  "设备指数",
+                         "Comment":  "设备指数\n\n`defaultEquipment`  基础角色外形：头发--上衣--下装--鞋子--皮肤--武器  -1则表示原始角色的基础外貌",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "equipment part set",
+                         "Title":  "套装开始",
+                         "Comment":  "套装开始",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "event button on item",
+                         "Title":  "如果下面的物品（索引）在库存中",
+                         "Comment":  "// 如果下面的物品（索引）在库存中，则事件按钮会闪烁。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "exp",
+                         "Title":  "黑钻经验+xx%",
+                         "Comment":  "黑钻经验+xx%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "exp bonus",
+                         "Title":  "冒险团各等级的经验BUFF奖励",
+                         "Comment":  "冒险团各等级的经验BUFF奖励",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "阿晓"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "first channel server info",
+                         "Title":  "第一频道服务器信息",
+                         "Comment":  "第一频道服务器信息",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "gift disallowance",
+                         "Title":  "商城道具不可赠送",
+                         "Comment":  "商城道具不可赠送",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "By：小小白-770141757"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "give emotion",
+                         "Title":  "发放心情状态",
+                         "Comment":  "发放心情状态",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "gold bonus",
+                         "Title":  "冒险团金币奖励",
+                         "Comment":  "冒险团金币奖励\n//两个一组，分别是等级和金币倍率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "gold card cost table",
+                         "Title":  "以副本等级为基准等级来决定收费翻牌的价格",
+                         "Comment":  "以副本等级为基准等级来决定收费翻牌的价格",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "By:春秋-745373814|轩大爷i"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "gold drop ref table",
+                         "Title":  "等级掉落金币表格",
+                         "Comment":  "等级掉落金币表格\n\n共有3个参数\n1  等级  2  最高掉落   3   最少掉落",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BY：春秋"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "gold limit from level",
+                         "Title":  "每个等级可容纳的金币上限",
+                         "Comment":  "[gold limit from level]每个等级可容纳的金币上限\n\n左边是等级                  右边是金币上限",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "group",
+                         "Title":  "组",
+                         "Comment":  "组",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "group index",
+                         "Title":  "深渊派对组",
+                         "Comment":  "深渊派对组\n0为怪物-1为APC",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "夜白-1229998088"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "guild create cost",
+                         "Title":  "创建公会要花的费用",
+                         "Comment":  "创建公会要花的费用",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "hell table",
+                         "Title":  "hell table",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "hellparty basic values",
+                         "Title":  "深渊派对基本设定",
+                         "Comment":  "深渊派对基本设定",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "hidden npc",
+                         "Title":  "隐藏的NPC",
+                         "Comment":  "隐藏的NPC",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "high link character exp bonus",
+                         "Title":  "高于70级的经验加成",
+                         "Comment":  "高于70级的经验加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "pvf"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "high link character gold bonus",
+                         "Title":  "高于70级的金币加成",
+                         "Comment":  "高于70级的金币加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "pvf"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "in game advertisement expose condition of teen",
+                         "Title":  "在游戏中的广告暴露青少年的条件",
+                         "Comment":  "在游戏中的广告暴露青少年的条件",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "independent drop",
+                         "Title":  "独立掉落",
+                         "Comment":  "[独立掉落]\n首行十七个数字\n3种写法，第十七位数字写0就是掉落一种物品，写1就是下面跟掉落列表，写2就说明是外部掉落文件, 比如异界掉落\n\n-----\n独立掉落写法1 掉落一种物品的\n0 61424(怪物) 1(掉落物品) 100000 100000 100000 100000 100000(五种难度掉落, 几率一百万为100%) 1 1 1 1 1(对应五种难度掉落个数) 0 0 -1 0\n\n独立掉落写法2 掉落一组物品的\n 0 2 0 50000 50000 50000 50000 50000 1 1 1 1 1 0 0 -1 1\n掉落一组物品的，那么掉落物品就写0，然后增加 [list]...[/list] 标签, 在里面写掉落的物品\n [list]\n  10564 1000 //物品代码-掉落权重(1000等于100% ?)\n  12561 1000\n [/list]\n\n独立掉落写法3 调用外部独立掉落文件的 比如异界装备的掉落\n 0 59009 0 0 0 140000 285920 0 1 1 1 1 1 70 90 -1 2\n [list]\n  116 //数字为外部独立掉落文件的编号 编号在etc/independentdrop.lst\n [/list]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "pvf"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "inventory limit",
+                         "Title":  "增加负重",
+                         "Comment":  "增加负重\n\n* 10000 = 10kg",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "item drop ref table",
+                         "Title":  "掉落物品参见詳細物品請查看代碼表格",
+                         "Comment":  "掉落物品参见詳細物品請查看代碼表格",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "神王"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "key value index",
+                         "Title":  "关键价值指数",
+                         "Comment":  "关键价值指数",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "legacy info",
+                         "Title":  "传统的信息",
+                         "Comment":  "传统的信息",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "link level",
+                         "Title":  "MP槽上面的冒险团支援兵出现等级",
+                         "Comment":  "MP槽上面的冒险团支援兵出现等级\n50=50级出现\n隐藏则是 比如你的版本满级是70版本 输入71即可隐藏",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "list",
+                         "Title":  "独立掉落中表示",
+                         "Comment":  "独立掉落中表示：\n\n物品代码-掉落权重",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "pvf"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "low link character exp bonus",
+                         "Title":  "低于70级有10%经验加成",
+                         "Comment":  "//低于70级有10%经验加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "阿晓"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "low link character gold bonus",
+                         "Title":  "低于70级增加10%金币加成",
+                         "Comment":  "//低于70级增加10%金币加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "阿晓"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "manage basic explain",
+                         "Title":  "每个等级的冒险团名称",
+                         "Comment":  "每个等级的冒险团名称",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "manage level max",
+                         "Title":  "冒险团最大等级",
+                         "Comment":  "冒险团最大等级",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "阿晓"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "manage level point",
+                         "Title":  "冒险团升级所需经验",
+                         "Comment":  "冒险团升级所需经验",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "阿晓"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "manage option",
+                         "Title":  "冒险团各等级的四围加成",
+                         "Comment":  "冒险团各等级的四围加成",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "pvf"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "material",
+                         "Title":  "所需材料",
+                         "Comment":  "所需材料",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "雪花 2524501757"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "max fatigue",
+                         "Title":  "最大疲劳",
+                         "Comment":  "最大疲劳",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "a123123"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "normal table",
+                         "Title":  "正常的表",
+                         "Comment":  "正常的表",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "notice",
+                         "Title":  "注意",
+                         "Comment":  "注意\n// 如果强化高于以下级别，则通知在公屏显示通知。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "notice legacy with upgrade",
+                         "Title":  "通知遗留升级",
+                         "Comment":  "通知遗留升级",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "npc info",
+                         "Title":  "人大信息",
+                         "Comment":  "人大信息",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "option type",
+                         "Title":  "选项类型",
+                         "Comment":  "选项类型",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "package",
+                         "Title":  "礼包",
+                         "Comment":  "礼包\n\n商城里是礼包购买界面",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "party member drop bonusrate",
+                         "Title":  "地下城通关结算时免费翻牌金币掉落控制（根据组队人数获得金钱倍率）",
+                         "Comment":  "地下城通关结算时免费翻牌金币掉落控制（根据组队人数获得金钱倍率）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "BY:春秋|轩大爷i"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "pickRatio",
+                         "Title":  "抓取几率",
+                         "Comment":  "抓取几率\n\n如果是100就是抓到之后百分百上钩",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Yuchin 289177531"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "piece reward",
+                         "Title":  "阶段奖励",
+                         "Comment":  "阶段奖励",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "piece reward table",
+                         "Title":  "达成阶段时的奖励表",
+                         "Comment":  "达成阶段时的奖励表",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "point bonus",
+                         "Title":  "point bonus",
+                         "Comment":  "//↑这个应该是到达等级冒险团获得的经验(40级以上角色才能提供经验)↑",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "阿晓"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "position",
+                         "Title":  "位置坐标(X",
+                         "Comment":  "位置坐标(X,Y,Z)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "premium",
+                         "Title":  "时效道具",
+                         "Comment":  "时效道具\n\n商城里是道具→优惠的购买界面",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "西门庆|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "premium rarity dicision",
+                         "Title":  "类似深渊掉落一样的数据",
+                         "Comment":  "类似深渊掉落一样的数据\n// 出现在高级金卡上的装备等级概率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "巳月：1322276685|飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "premium service",
+                         "Title":  "契约效果",
+                         "Comment":  "[premium service] 契约效果\n`[type]` 类型\n`[main preminum image index]` 主契约图片索引\n`[additional preminum image index]`增加契约图片索引\n`[add selectAble equipment list]` 增加可用装备列表",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "protect of upgrade down",
+                         "Title":  "设置强化增幅保护券",
+                         "Comment":  "设置强化增幅保护券\n四个数字为一组\n1、保护券代码\n2、最低保护等级\n3、最高保护的等级\n4、失败是否掉级\n(填1就是掉1级，填多少就是掉多少级，填0为不掉级)\n例：10~13保护券 = 8239\t10\t13\t0\n例：10~13掉级保护券 = 8239\t10\t13\t-31",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "巳月：1322276685"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "pvp deathmatch battle time",
+                         "Title":  "PVP战斗中死亡竞赛时间",
+                         "Comment":  "PVP战斗中死亡竞赛时间\n//死斗决斗时间限制：毫秒单位",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "pvp experience loss",
+                         "Title":  "PVP经验损失",
+                         "Comment":  "PVP经验损失\n//当等级高于第一个数字时在仪表栏上显示MAX\n29\n//第二个数字是每天扣除的决斗经验量\n7000",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "pvp map order",
+                         "Title":  "PVP地图订单",
+                         "Comment":  "PVP地图订单\n//这是选择决斗地图时使用的顺序。\n  确保【pvp地图基础数据】与列出的顺序相同！",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "pvp normal battle time",
+                         "Title":  "PVP战斗正常时间",
+                         "Comment":  "PVP战斗正常时间\n//普通决斗时限：毫秒单位",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "pvp relay battle time",
+                         "Title":  "PVP继电器战斗时间",
+                         "Comment":  "PVP继电器战斗时间\n// 队长战斗时间限制：毫秒单位",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "refill item",
+                         "Title":  "三个数据一组",
+                         "Comment":  "三个数据一组\n物品代码   数量    发送时间\n此处是游戏全角色发送",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "酸辣白菜"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "require party num",
+                         "Title":  "要求党NUM",
+                         "Comment":  "要求党NUM",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "required item",
+                         "Title":  "进图门票",
+                         "Comment":  "进图门票\n分别为  物品代碼，数量，消耗量\n在etc/accountcargo.etc中\n表示升级账号金库所需材料",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "reward exp weight",
+                         "Title":  "奖励exp重量",
+                         "Comment":  "奖励exp重量",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "section icon",
+                         "Title":  "称号簿普通成就各块的图标",
+                         "Comment":  "称号簿普通成就各块的图标",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "section name",
+                         "Title":  "称号簿升级名",
+                         "Comment":  "称号簿升级名",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "separate upgrade effect",
+                         "Title":  "单独升级效果",
+                         "Comment":  "单独升级效果",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "skill damage base parameter dungeon",
+                         "Title":  "技能损伤基地参数地牢",
+                         "Comment":  "技能损伤基地参数地牢\n可修改成长独立攻击\n1.2.3.4.5.6......100数字后面跟着的第一个数字就是成长独立攻击",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "灰色大尾猫"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "skill prob",
+                         "Title":  "技能概率",
+                         "Comment":  "技能概率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "sp table",
+                         "Title":  "sp table",
+                         "Comment":  "[sp table]\n左边是职业等级      右边是升到当前等级可获得的sp点",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "stage difficulty",
+                         "Title":  "阶段难度",
+                         "Comment":  "阶段难度",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "请叫我靓仔"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "stat weights by rarity",
+                         "Title":  "stat weights by rarity",
+                         "Comment":  "[stat weights by rarity]\n\t0.4\t0.7\t1\t1.25\t1.4\t1.1\n[/stat weights by rarity]\n控制强化附加的无视攻击（物理，魔法）比率，\n6个数值对应[普通]-[高级]-[稀有]-[神器]-[史诗]-[异界（勇者）]6种类型，\n例如修改第一个数值0.4改1.4，相应的游戏里强化[普通]级装备的无视攻击也会提高\n同理控制增幅的路径{ etc/amplifyupgrade.etc }也有这个标签，对应增幅附加的四维",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "徐丧彪2952411669|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "striker combo",
+                         "Title":  "支援兵连击",
+                         "Comment":  "支援兵连击",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "striker dungeon impossible",
+                         "Title":  "禁用支援兵的副本",
+                         "Comment":  "禁用支援兵的副本，下面是副本编号",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "striker module impossible",
+                         "Title":  "禁用支援兵功能的区域",
+                         "Comment":  "禁用支援兵功能的区域",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "striker skill attack penalty",
+                         "Title":  "支援兵技能伤害惩罚(相当于原技能伤害的比例)",
+                         "Comment":  "支援兵技能伤害惩罚(相当于原技能伤害的比例)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "striker skill cooltime penalty",
+                         "Title":  "支援兵技能冷却时间惩罚",
+                         "Comment":  "支援兵技能冷却时间惩罚",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "striker skill macro",
+                         "Title":  "支援兵技能宏",
+                         "Comment":  "支援兵技能宏",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "萨日朗"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "table",
+                         "Title":  "强化/增幅属性（从左到右）",
+                         "Comment":  "强化/增幅属性（从左到右）\n\n1、\n2、\n3、\n4、\n5、\n6、\n7、概率 [计算公式]：(100000-X) / 100000\n    （人话就是数字越小成功率越大，设置0就是100%成功）\n8、失败时（1保级  2降级  3损坏）\n9、保级时：写0\n      降级时：写多少就掉多少级\n      损坏时：写0\n10、需求材料编号\n11、需求材料消耗数量\n12、\n13、\n14、\n15、\n16、\n17、",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "title collection info",
+                         "Title":  "70 0 0 6501 1 26596",
+                         "Comment":  "70\t         0\t0\t 6501\t       1\t26596\n表示一共有70个   未知  第0个称号\t对应的任务编号  未知\t对应的称号编号 这里是怪兽猎杀者\n································\n我们来到这里→\t5\t0\t6506\t1\t26601\t6\t-1\t7\t-1\t8\t-1\t9\t-1\n这里后面的6 7 8 9 是因为称号簿每个块得有10个称号才会切到下一个块 -1表示为空白\n\n`general`\t普通成就\n`specific` 特殊成就\n`despair` 绝望之塔",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "unusable items",
+                         "Title":  "禁止使用的物品",
+                         "Comment":  "禁止使用的物品",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "巳月：1322276685"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "upgrade machine frame rate",
+                         "Title":  "升级机帧率",
+                         "Comment":  "升级机帧率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "viewRatio",
+                         "Title":  "视线比例",
+                         "Comment":  "视线比例\n抓取的范围 就是能不能抓到 而不是能不能抓上来\n\n抓取几率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "小宝 1307813456|Yuchin 289177531"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "white ip",
+                         "Title":  "白色的IP",
+                         "Comment":  "白色的IP\n/*\n这是 Dunpa 使用的 ip 和端口列表。\n修改日期：08 03 07\n*/\n\n//\n// 如果 211 189 29 128 255 呢？\n// 允许的 IP 从 211.189.29.128 到 211.189.29.255\n//\n// 并且如果属于白ip，则无条件传递任何端口号。\n//",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "飞飞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "world drop",
+                         "Title":  "全局掉落",
+                         "Comment":  "[world drop]全局掉落\n与使怪物专门掉落材料的独立掉落[item]不同，全局掉落是根据怪物等级来决定掉落材料的，\n全局掉落分3部分组成：\n\nA、怪物等级\n\nB、左边为击杀该等级怪物之后随机掉落材料，\n     右边为掉落材料的权重\n\nC、-1（写-1为该等级收尾）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "etc",
+                         "Section":  "character job",
+                         "Title":  "职业",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "preview"
+                     }
+                 ]
+}

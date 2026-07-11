@@ -1,0 +1,44 @@
+# .NET build and publish output
+[Bb]in/
+[Oo]bj/
+artifacts/
+publish/
+SourceLibraries/.build/
+packages/
+TestResults/
+coverage/
+coverage.*
+*.trx
+*_wpftmp.csproj
+
+# IDE and user-specific files
+.vs/
+.idea/
+.fleet/
+.vscode/*
+!.vscode/settings.json
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Runtime-generated user data. Bundled defaults under Resources are tracked.
+/Options/
+/Defaults/
+recovered-source-libraries.txt
+
+# Recovery diagnostics, logs, and temporary files
+*.log
+*.tmp
+*.bak
+*.dmp
+artifacts-resource-items.json
+startup-stdout.log
+startup-stderr.log
+System.Xml.XmlWellFormedWriter
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:korelementgenerator="clr-namespace:PvfCode.ViewModels.DocumentFolder.KorElementGenerator;assembly=pvfUtility">
+  <Grid>
+    <Button Name="TestBlock" Style="{StaticResource KorFileQuoteButtonStyle}" Template="{StaticResource KorFileQuoteButtonContentTemplate}">
+      <ButtonBase.Click>
+        <dxbinding:DXEventExtension xmlns:dxbinding="clr-namespace:DevExpress.Xpf.DXBinding;assembly=DevExpress.Xpf.Core.v24.1" dxbinding:DXEventExtension.Handler="@e(flyout).IsOpen = true" />
+      </ButtonBase.Click>
+    </Button>
+    <flyout:FlyoutControl FrameworkElement.Name="flyout" ContentControl.ContentTemplate="{StaticResource KorFileToolTipContentTemplate}" FrameworkElement.Style="{StaticResource KorFileQuoteFlyoutControlStyle}" xmlns:flyout="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" ContentControl.Content="{Binding}" p8:FlyoutBase.PlacementTarget="{Binding ElementName=TestBlock}" xmlns:p8="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1">
+    </flyout:FlyoutControl>
+  </Grid>
+</UserControl>

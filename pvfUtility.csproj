@@ -1,0 +1,410 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>pvfUtility</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="images\svgs\treefiletypes\ani.svg" />
+    <None Remove="images\svgs\asx_checkboxclearall_grey_16x.svg" />
+    <None Remove="images\svgs\edit\saveall_16x.svg" />
+    <None Remove="images\svgs\zipfile_16x.svg" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\13.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\11.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\12.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\10.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\15.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\14.png" />
+    <None Remove="images\svgs\edit\savefiledialogcontrol_16x.svg" />
+    <None Remove="images\svgs\extractfile2.svg" />
+    <None Remove="images\svgs\difflefticon.svg" />
+    <None Remove="images\svgs\selectall.svg" />
+    <None Remove="images\svgs\openfolder_16x3.svg" />
+    <None Remove="images\pngs\npcshop\selecteditem.png" />
+    <None Remove="images\svgs\copy_dark.svg" />
+    <None Remove="images\svgs\edit\saveall_16x_2.svg" />
+    <None Remove="images\svgs\groupselectcursor_16x.svg" />
+    <None Remove="images\svgs\treefiletypes\script_16x.svg" />
+    <None Remove="images\svgs\search\collapseup.svg" />
+    <None Remove="images\svgs\extractfile2_dark.svg" />
+    <None Remove="images\svgs\edit\uncommentcode_16x_dark.svg" />
+    <None Remove="images\svgs\measuretree.svg" />
+    <None Remove="images\pngs\npcshop\imageborder.png" />
+    <None Remove="images\svgs\copy.svg" />
+    <None Remove="images\svgs\exportdata_16xdark.svg" />
+    <None Remove="images\svgs\clearwindowcontent.svg" />
+    <None Remove="images\svgs\forwards_16x.svg" />
+    <None Remove="images\pngs\chatgpt.png" />
+    <None Remove="images\svgs\importfilter_16xdark.svg" />
+    <None Remove="images\svgs\search\findsymbol.svg" />
+    <None Remove="images\svgs\treefiletypes\folderopened.svg" />
+    <None Remove="images\svgs\codedefinitionwindow_16x.svg" />
+    <None Remove="images\svgs\search\wholewordmatch_16x_dark.svg" />
+    <None Remove="images\svgs\visualstudioblendlogo2013diff_40x.png" />
+    <None Remove="images\svgs\search\wholewordmatch_16x.svg" />
+    <None Remove="images\svgs\clearwindowcontent_dark.svg" />
+    <None Remove="images\svgs\groupselectcursor_16x_dark.svg" />
+    <None Remove="images\svgs\save_16x.svg" />
+    <None Remove="images\svgs\exportdata_16x.svg" />
+    <None Remove="images\svgs\edit\savefiledialogcontrol_16x_2.svg" />
+    <None Remove="images\pngs\npcshop\imagemark.png" />
+    <None Remove="images\svgs\edit\commentcode_16x_dark.svg" />
+    <None Remove="images\svgs\erroricon.svg" />
+    <None Remove="images\svgs\extractfile_dark.svg" />
+    <None Remove="images\pngs\npcshop\rednull.png" />
+    <None Remove="images\pngs\splashscreenbackground.png" />
+    <None Remove="images\svgs\wordwrap_dark.svg" />
+    <None Remove="images\svgs\search\quickreplacedark.svg" />
+    <None Remove="images\svgs\importcatalogpart.svg" />
+    <None Remove="images\pngs\npcshop\npcshopheader.png" />
+    <None Remove="images\svgs\search\collapseupdark.svg" />
+    <None Remove="images\svgs\treefiletypes\str.svg" />
+    <None Remove="images\svgs\backwards_16x.svg" />
+    <None Remove="images\svgs\remove_color_16x.svg" />
+    <None Remove="images\svgs\wordwrap.svg" />
+    <None Remove="images\svgs\edit\commentcode_16x_light.svg" />
+    <None Remove="images\svgs\action_delete.svg" />
+    <None Remove="images\svgs\search\finddown_16x.svg" />
+    <None Remove="images\svgs\editcomment.svg" />
+    <None Remove="images\svgs\paste.svg" />
+    <None Remove="images\svgs\closeall_16x.svg" />
+    <None Remove="images\svgs\import.svg" />
+    <None Remove="images\svgs\cut.svg" />
+    <None Remove="images\svgs\extractfile.svg" />
+    <None Remove="images\svgs\edit\highimportance.svg" />
+    <None Remove="images\pngs\npcshop\86.png" />
+    <None Remove="images\pngs\npcshop\87.png" />
+    <None Remove="images\svgs\importsettings.svg" />
+    <None Remove="images\pngs\npcshop\88.png" />
+    <None Remove="images\pngs\npcshop\89.png" />
+    <None Remove="images\svgs\resetlayoutoptions.svg" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\2.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\0.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\3.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\6.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\1.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\4.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\7.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\5.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\8.png" />
+    <None Remove="images\pngs\dnfcharacdefaulticon\9.png" />
+    <None Remove="images\pngs\npcshop\48.png" />
+    <None Remove="images\pngs\npcshop\46.png" />
+    <None Remove="images\pngs\npcshop\47.png" />
+    <None Remove="images\pngs\npcshop\57.png" />
+    <None Remove="images\svgs\paste_dark.svg" />
+    <None Remove="images\svgs\search\regularexpression.svg" />
+    <None Remove="images\svgs\search\findsymboldark.svg" />
+    <None Remove="images\svgs\rename.svg" />
+    <None Remove="images\svgs\treefiletypes\lst.svg" />
+    <None Remove="images\svgs\treefiletypes\file.svg" />
+    <None Remove="images\svgs\close.svg" />
+    <None Remove="images\svgs\collapsegroup_16x.svg" />
+    <None Remove="images\svgs\gotolast_16x.svg" />
+    <None Remove="images\svgs\treefiletypes\folderclosed.svg" />
+    <None Remove="images\svgs\diff.svg" />
+    <None Remove="images\svgs\openfolder_16x.svg" />
+    <None Remove="images\svgs\renamedark.svg" />
+    <None Remove="images\svgs\visualstudioblendlogo2015pre_16x.svg" />
+    <None Remove="images\svgs\closepvf.svg" />
+    <None Remove="images\svgs\treeview_dark.svg" />
+    <None Remove="images\svgs\diffrighticon.svg" />
+    <None Remove="images\svgs\search\searchdark.svg" />
+    <None Remove="images\svgs\search\quickreplace.svg" />
+    <None Remove="images\svgs\edit\uncommentcode_16x_light.svg" />
+    <None Remove="images\svgs\findinfiles_16x.svg" />
+    <None Remove="iconfont\fzktjw.ttf" />
+    <None Remove="images\svgs\search\regularexpression_dark.svg" />
+    <None Remove="images\svgs\search\expanddown.svg" />
+    <None Remove="images\svgs\search\finddown_16x_dark.svg" />
+    <None Remove="images\svgs\selectall_dark.svg" />
+    <None Remove="images\svgs\search\expanddowndark.svg" />
+    <None Remove="images\svgs\treeview.svg" />
+    <None Remove="images\svgs\search\search.svg" />
+    <None Remove="images\svgs\importfilter_16x.svg" />
+    <None Remove="images\svgs\saveas_16x.svg" />
+    <None Remove="images\svgs\cut_dark.svg" />
+    <None Remove="images\svgs\treefiletypes\ui.svg" />
+    <None Remove="images\svgs\gotofirst_16x.svg" />
+    <EmbeddedResource Include="images\svgs\treefiletypes\ani.svg" LogicalName="images/svgs/treefiletypes/ani.svg" />
+    <EmbeddedResource Include="images\svgs\asx_checkboxclearall_grey_16x.svg" LogicalName="images/svgs/asx_checkboxclearall_grey_16x.svg" />
+    <EmbeddedResource Include="images\svgs\edit\saveall_16x.svg" LogicalName="images/svgs/edit/saveall_16x.svg" />
+    <EmbeddedResource Include="images\svgs\zipfile_16x.svg" LogicalName="images/svgs/zipfile_16x.svg" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\13.png" LogicalName="images/pngs/dnfcharacdefaulticon/13.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\11.png" LogicalName="images/pngs/dnfcharacdefaulticon/11.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\12.png" LogicalName="images/pngs/dnfcharacdefaulticon/12.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\10.png" LogicalName="images/pngs/dnfcharacdefaulticon/10.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\15.png" LogicalName="images/pngs/dnfcharacdefaulticon/15.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\14.png" LogicalName="images/pngs/dnfcharacdefaulticon/14.png" />
+    <EmbeddedResource Include="images\svgs\edit\savefiledialogcontrol_16x.svg" LogicalName="images/svgs/edit/savefiledialogcontrol_16x.svg" />
+    <EmbeddedResource Include="images\svgs\extractfile2.svg" LogicalName="images/svgs/extractfile2.svg" />
+    <EmbeddedResource Include="images\svgs\difflefticon.svg" LogicalName="images/svgs/difflefticon.svg" />
+    <EmbeddedResource Include="images\svgs\selectall.svg" LogicalName="images/svgs/selectall.svg" />
+    <EmbeddedResource Include="images\svgs\openfolder_16x3.svg" LogicalName="images/svgs/openfolder_16x3.svg" />
+    <EmbeddedResource Include="images\pngs\npcshop\selecteditem.png" LogicalName="images/pngs/npcshop/selecteditem.png" />
+    <EmbeddedResource Include="images\svgs\copy_dark.svg" LogicalName="images/svgs/copy_dark.svg" />
+    <EmbeddedResource Include="images\svgs\edit\saveall_16x_2.svg" LogicalName="images/svgs/edit/saveall_16x_2.svg" />
+    <EmbeddedResource Include="images\svgs\groupselectcursor_16x.svg" LogicalName="images/svgs/groupselectcursor_16x.svg" />
+    <EmbeddedResource Include="images\svgs\treefiletypes\script_16x.svg" LogicalName="images/svgs/treefiletypes/script_16x.svg" />
+    <EmbeddedResource Include="images\svgs\search\collapseup.svg" LogicalName="images/svgs/search/collapseup.svg" />
+    <EmbeddedResource Include="images\svgs\extractfile2_dark.svg" LogicalName="images/svgs/extractfile2_dark.svg" />
+    <EmbeddedResource Include="images\svgs\edit\uncommentcode_16x_dark.svg" LogicalName="images/svgs/edit/uncommentcode_16x_dark.svg" />
+    <EmbeddedResource Include="images\svgs\measuretree.svg" LogicalName="images/svgs/measuretree.svg" />
+    <EmbeddedResource Include="images\pngs\npcshop\imageborder.png" LogicalName="images/pngs/npcshop/imageborder.png" />
+    <EmbeddedResource Include="images\svgs\copy.svg" LogicalName="images/svgs/copy.svg" />
+    <EmbeddedResource Include="images\svgs\exportdata_16xdark.svg" LogicalName="images/svgs/exportdata_16xdark.svg" />
+    <EmbeddedResource Include="images\svgs\clearwindowcontent.svg" LogicalName="images/svgs/clearwindowcontent.svg" />
+    <EmbeddedResource Include="images\svgs\forwards_16x.svg" LogicalName="images/svgs/forwards_16x.svg" />
+    <EmbeddedResource Include="images\pngs\chatgpt.png" LogicalName="images/pngs/chatgpt.png" />
+    <EmbeddedResource Include="images\svgs\importfilter_16xdark.svg" LogicalName="images/svgs/importfilter_16xdark.svg" />
+    <EmbeddedResource Include="images\svgs\search\findsymbol.svg" LogicalName="images/svgs/search/findsymbol.svg" />
+    <EmbeddedResource Include="images\svgs\treefiletypes\folderopened.svg" LogicalName="images/svgs/treefiletypes/folderopened.svg" />
+    <EmbeddedResource Include="images\svgs\codedefinitionwindow_16x.svg" LogicalName="images/svgs/codedefinitionwindow_16x.svg" />
+    <EmbeddedResource Include="images\svgs\search\wholewordmatch_16x_dark.svg" LogicalName="images/svgs/search/wholewordmatch_16x_dark.svg" />
+    <EmbeddedResource Include="images\svgs\visualstudioblendlogo2013diff_40x.png" LogicalName="images/svgs/visualstudioblendlogo2013diff_40x.png" />
+    <EmbeddedResource Include="images\svgs\search\wholewordmatch_16x.svg" LogicalName="images/svgs/search/wholewordmatch_16x.svg" />
+    <EmbeddedResource Include="images\svgs\clearwindowcontent_dark.svg" LogicalName="images/svgs/clearwindowcontent_dark.svg" />
+    <EmbeddedResource Include="images\svgs\groupselectcursor_16x_dark.svg" LogicalName="images/svgs/groupselectcursor_16x_dark.svg" />
+    <EmbeddedResource Include="images\svgs\save_16x.svg" LogicalName="images/svgs/save_16x.svg" />
+    <EmbeddedResource Include="images\svgs\exportdata_16x.svg" LogicalName="images/svgs/exportdata_16x.svg" />
+    <EmbeddedResource Include="images\svgs\edit\savefiledialogcontrol_16x_2.svg" LogicalName="images/svgs/edit/savefiledialogcontrol_16x_2.svg" />
+    <EmbeddedResource Include="images\pngs\npcshop\imagemark.png" LogicalName="images/pngs/npcshop/imagemark.png" />
+    <EmbeddedResource Include="images\svgs\edit\commentcode_16x_dark.svg" LogicalName="images/svgs/edit/commentcode_16x_dark.svg" />
+    <EmbeddedResource Include="images\svgs\erroricon.svg" LogicalName="images/svgs/erroricon.svg" />
+    <EmbeddedResource Include="images\svgs\extractfile_dark.svg" LogicalName="images/svgs/extractfile_dark.svg" />
+    <EmbeddedResource Include="images\pngs\npcshop\rednull.png" LogicalName="images/pngs/npcshop/rednull.png" />
+    <EmbeddedResource Include="images\pngs\splashscreenbackground.png" LogicalName="images/pngs/splashscreenbackground.png" />
+    <EmbeddedResource Include="images\svgs\wordwrap_dark.svg" LogicalName="images/svgs/wordwrap_dark.svg" />
+    <EmbeddedResource Include="images\svgs\search\quickreplacedark.svg" LogicalName="images/svgs/search/quickreplacedark.svg" />
+    <EmbeddedResource Include="images\svgs\importcatalogpart.svg" LogicalName="images/svgs/importcatalogpart.svg" />
+    <EmbeddedResource Include="images\pngs\npcshop\npcshopheader.png" LogicalName="images/pngs/npcshop/npcshopheader.png" />
+    <EmbeddedResource Include="images\svgs\search\collapseupdark.svg" LogicalName="images/svgs/search/collapseupdark.svg" />
+    <EmbeddedResource Include="images\svgs\treefiletypes\str.svg" LogicalName="images/svgs/treefiletypes/str.svg" />
+    <EmbeddedResource Include="images\svgs\backwards_16x.svg" LogicalName="images/svgs/backwards_16x.svg" />
+    <EmbeddedResource Include="images\svgs\remove_color_16x.svg" LogicalName="images/svgs/remove_color_16x.svg" />
+    <EmbeddedResource Include="images\svgs\wordwrap.svg" LogicalName="images/svgs/wordwrap.svg" />
+    <EmbeddedResource Include="images\svgs\edit\commentcode_16x_light.svg" LogicalName="images/svgs/edit/commentcode_16x_light.svg" />
+    <EmbeddedResource Include="images\svgs\action_delete.svg" LogicalName="images/svgs/action_delete.svg" />
+    <EmbeddedResource Include="images\svgs\search\finddown_16x.svg" LogicalName="images/svgs/search/finddown_16x.svg" />
+    <EmbeddedResource Include="images\svgs\editcomment.svg" LogicalName="images/svgs/editcomment.svg" />
+    <EmbeddedResource Include="images\svgs\paste.svg" LogicalName="images/svgs/paste.svg" />
+    <EmbeddedResource Include="images\svgs\closeall_16x.svg" LogicalName="images/svgs/closeall_16x.svg" />
+    <EmbeddedResource Include="images\svgs\import.svg" LogicalName="images/svgs/import.svg" />
+    <EmbeddedResource Include="images\svgs\cut.svg" LogicalName="images/svgs/cut.svg" />
+    <EmbeddedResource Include="images\svgs\extractfile.svg" LogicalName="images/svgs/extractfile.svg" />
+    <EmbeddedResource Include="images\svgs\edit\highimportance.svg" LogicalName="images/svgs/edit/highimportance.svg" />
+    <EmbeddedResource Include="images\pngs\npcshop\86.png" LogicalName="images/pngs/npcshop/86.png" />
+    <EmbeddedResource Include="images\pngs\npcshop\87.png" LogicalName="images/pngs/npcshop/87.png" />
+    <EmbeddedResource Include="images\svgs\importsettings.svg" LogicalName="images/svgs/importsettings.svg" />
+    <EmbeddedResource Include="images\pngs\npcshop\88.png" LogicalName="images/pngs/npcshop/88.png" />
+    <EmbeddedResource Include="images\pngs\npcshop\89.png" LogicalName="images/pngs/npcshop/89.png" />
+    <EmbeddedResource Include="images\svgs\resetlayoutoptions.svg" LogicalName="images/svgs/resetlayoutoptions.svg" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\2.png" LogicalName="images/pngs/dnfcharacdefaulticon/2.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\0.png" LogicalName="images/pngs/dnfcharacdefaulticon/0.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\3.png" LogicalName="images/pngs/dnfcharacdefaulticon/3.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\6.png" LogicalName="images/pngs/dnfcharacdefaulticon/6.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\1.png" LogicalName="images/pngs/dnfcharacdefaulticon/1.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\4.png" LogicalName="images/pngs/dnfcharacdefaulticon/4.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\7.png" LogicalName="images/pngs/dnfcharacdefaulticon/7.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\5.png" LogicalName="images/pngs/dnfcharacdefaulticon/5.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\8.png" LogicalName="images/pngs/dnfcharacdefaulticon/8.png" />
+    <EmbeddedResource Include="images\pngs\dnfcharacdefaulticon\9.png" LogicalName="images/pngs/dnfcharacdefaulticon/9.png" />
+    <EmbeddedResource Include="images\pngs\npcshop\48.png" LogicalName="images/pngs/npcshop/48.png" />
+    <EmbeddedResource Include="images\pngs\npcshop\46.png" LogicalName="images/pngs/npcshop/46.png" />
+    <EmbeddedResource Include="images\pngs\npcshop\47.png" LogicalName="images/pngs/npcshop/47.png" />
+    <EmbeddedResource Include="images\pngs\npcshop\57.png" LogicalName="images/pngs/npcshop/57.png" />
+    <EmbeddedResource Include="images\svgs\paste_dark.svg" LogicalName="images/svgs/paste_dark.svg" />
+    <EmbeddedResource Include="images\svgs\search\regularexpression.svg" LogicalName="images/svgs/search/regularexpression.svg" />
+    <EmbeddedResource Include="images\svgs\search\findsymboldark.svg" LogicalName="images/svgs/search/findsymboldark.svg" />
+    <EmbeddedResource Include="images\svgs\rename.svg" LogicalName="images/svgs/rename.svg" />
+    <EmbeddedResource Include="images\svgs\treefiletypes\lst.svg" LogicalName="images/svgs/treefiletypes/lst.svg" />
+    <EmbeddedResource Include="images\svgs\treefiletypes\file.svg" LogicalName="images/svgs/treefiletypes/file.svg" />
+    <EmbeddedResource Include="images\svgs\close.svg" LogicalName="images/svgs/close.svg" />
+    <EmbeddedResource Include="images\svgs\collapsegroup_16x.svg" LogicalName="images/svgs/collapsegroup_16x.svg" />
+    <EmbeddedResource Include="images\svgs\gotolast_16x.svg" LogicalName="images/svgs/gotolast_16x.svg" />
+    <EmbeddedResource Include="images\svgs\treefiletypes\folderclosed.svg" LogicalName="images/svgs/treefiletypes/folderclosed.svg" />
+    <EmbeddedResource Include="images\svgs\diff.svg" LogicalName="images/svgs/diff.svg" />
+    <EmbeddedResource Include="images\svgs\openfolder_16x.svg" LogicalName="images/svgs/openfolder_16x.svg" />
+    <EmbeddedResource Include="images\svgs\renamedark.svg" LogicalName="images/svgs/renamedark.svg" />
+    <EmbeddedResource Include="images\svgs\visualstudioblendlogo2015pre_16x.svg" LogicalName="images/svgs/visualstudioblendlogo2015pre_16x.svg" />
+    <EmbeddedResource Include="images\svgs\closepvf.svg" LogicalName="images/svgs/closepvf.svg" />
+    <EmbeddedResource Include="images\svgs\treeview_dark.svg" LogicalName="images/svgs/treeview_dark.svg" />
+    <EmbeddedResource Include="images\svgs\diffrighticon.svg" LogicalName="images/svgs/diffrighticon.svg" />
+    <EmbeddedResource Include="images\svgs\search\searchdark.svg" LogicalName="images/svgs/search/searchdark.svg" />
+    <EmbeddedResource Include="images\svgs\search\quickreplace.svg" LogicalName="images/svgs/search/quickreplace.svg" />
+    <EmbeddedResource Include="images\svgs\edit\uncommentcode_16x_light.svg" LogicalName="images/svgs/edit/uncommentcode_16x_light.svg" />
+    <EmbeddedResource Include="images\svgs\findinfiles_16x.svg" LogicalName="images/svgs/findinfiles_16x.svg" />
+    <EmbeddedResource Include="iconfont\fzktjw.ttf" LogicalName="iconfont/fzktjw.ttf" />
+    <EmbeddedResource Include="images\svgs\search\regularexpression_dark.svg" LogicalName="images/svgs/search/regularexpression_dark.svg" />
+    <EmbeddedResource Include="images\svgs\search\expanddown.svg" LogicalName="images/svgs/search/expanddown.svg" />
+    <EmbeddedResource Include="images\svgs\search\finddown_16x_dark.svg" LogicalName="images/svgs/search/finddown_16x_dark.svg" />
+    <EmbeddedResource Include="images\svgs\selectall_dark.svg" LogicalName="images/svgs/selectall_dark.svg" />
+    <EmbeddedResource Include="images\svgs\search\expanddowndark.svg" LogicalName="images/svgs/search/expanddowndark.svg" />
+    <EmbeddedResource Include="images\svgs\treeview.svg" LogicalName="images/svgs/treeview.svg" />
+    <EmbeddedResource Include="images\svgs\search\search.svg" LogicalName="images/svgs/search/search.svg" />
+    <EmbeddedResource Include="images\svgs\importfilter_16x.svg" LogicalName="images/svgs/importfilter_16x.svg" />
+    <EmbeddedResource Include="images\svgs\saveas_16x.svg" LogicalName="images/svgs/saveas_16x.svg" />
+    <EmbeddedResource Include="images\svgs\cut_dark.svg" LogicalName="images/svgs/cut_dark.svg" />
+    <EmbeddedResource Include="images\svgs\treefiletypes\ui.svg" LogicalName="images/svgs/treefiletypes/ui.svg" />
+    <EmbeddedResource Include="images\svgs\gotofirst_16x.svg" LogicalName="images/svgs/gotofirst_16x.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Xpf.Core.v24.1">
+      <HintPath>lib/DevExpress.Xpf.Core.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v24.1">
+      <HintPath>lib/DevExpress.Mvvm.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>lib/ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="PvfCode.Dot">
+      <HintPath>lib/PvfCode.Dot.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v24.1">
+      <HintPath>lib/DevExpress.Xpf.Grid.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+      <HintPath>lib/Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf">
+      <HintPath>lib/Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="TextEditLib">
+      <HintPath>lib/TextEditLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v24.1">
+      <HintPath>lib/DevExpress.Data.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Collections.Pooled">
+      <HintPath>lib/Collections.Pooled.dll</HintPath>
+    </Reference>
+    <Reference Include="PvfCode.Models">
+      <HintPath>lib/PvfCode.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="PvfCode.LoggerBase">
+      <HintPath>lib/PvfCode.LoggerBase.dll</HintPath>
+    </Reference>
+    <Reference Include="PvfCode.Services">
+      <HintPath>lib/PvfCode.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Coordination">
+      <HintPath>lib/Nito.AsyncEx.Coordination.dll</HintPath>
+    </Reference>
+    <Reference Include="SevenZipSharp">
+      <HintPath>lib/SevenZipSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceLocator">
+      <HintPath>lib/ServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Ben.Demystifier">
+      <HintPath>lib/Ben.Demystifier.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Tasks">
+      <HintPath>lib/Nito.AsyncEx.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Utools">
+      <HintPath>lib/Utools.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>lib/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WinCopies.WindowsAPICodePack">
+      <HintPath>lib/WinCopies.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v24.1">
+      <HintPath>lib/DevExpress.Xpf.Docking.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="UnitComboLib">
+      <HintPath>lib/UnitComboLib.dll</HintPath>
+    </Reference>
+    <Reference Include="WinCopies.Util">
+      <HintPath>lib/WinCopies.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="HL">
+      <HintPath>lib/HL.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>lib/AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="pvfUtility.WebApi.Dto">
+      <HintPath>lib/pvfUtility.WebApi.Dto.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlSugar">
+      <HintPath>lib/SqlSugar.dll</HintPath>
+    </Reference>
+    <Reference Include="WinCopies.WindowsAPICodePack.Shell">
+      <HintPath>lib/WinCopies.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v24.1.Core">
+      <HintPath>lib/DevExpress.Xpf.Grid.v24.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Swordfish.NET.CollectionsV3">
+      <HintPath>lib/Swordfish.NET.CollectionsV3.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v24.1">
+      <HintPath>lib/DevExpress.Xpf.LayoutControl.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="GMTool.Dot">
+      <HintPath>lib/GMTool.Dot.dll</HintPath>
+    </Reference>
+    <Reference Include="GMTool.SqlModel">
+      <HintPath>lib/GMTool.SqlModel.dll</HintPath>
+    </Reference>
+    <Reference Include="GMTool.Services">
+      <HintPath>lib/GMTool.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="PvfCode.NPK.Utils">
+      <HintPath>lib/PvfCode.NPK.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="WinCopies.Collections">
+      <HintPath>lib/WinCopies.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Whetstone.ChatGPT">
+      <HintPath>lib/Whetstone.ChatGPT.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core">
+      <HintPath>lib/Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AnyClone">
+      <HintPath>lib/AnyClone.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v24.1">
+      <HintPath>lib/DevExpress.Data.Desktop.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v24.1.Core">
+      <HintPath>lib/DevExpress.Xpf.Layout.v24.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WpfRangeControls">
+      <HintPath>lib/WpfRangeControls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\OfflineDefaults\Options\AppConfig.json;Resources\OfflineDefaults\Options\Bookmarks.json"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest"
+          TargetPath="Defaults\Options\%(Filename)%(Extension)" />
+    <None Update="Resources\OfflineDefaults\Options\PvfComments\*.json"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest"
+          TargetPath="Defaults\Options\PvfComments\%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,66 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "cre",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "cre",
+                         "Section":  "basic motion",
+                         "Title":  "主动画演出Ani指向",
+                         "Comment":  "主动画演出Ani指向",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "ZateL"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "cre",
+                         "Section":  "learn overskill level",
+                         "Title":  "学习overskill水平",
+                         "Comment":  "学习overskill水平",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "cre",
+                         "Section":  "response motion",
+                         "Title":  "解答动作",
+                         "Comment":  "解答动作",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "cre",
+                         "Section":  "run over effect",
+                         "Title":  "跑步动作",
+                         "Comment":  "跑步动作",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "挚爱"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "cre",
+                         "Section":  "skill recovery time",
+                         "Title":  "技能恢复时间",
+                         "Comment":  "技能恢复时间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "cre",
+                         "Section":  "walk over effect",
+                         "Title":  "走路动作",
+                         "Comment":  "走路动作",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "挚爱"
+                     }
+                 ]
+}

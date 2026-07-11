@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root:MainWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Assists="clr-namespace:PvfCode.Controls.AvatarControl;assembly=pvfUtility" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:converts="clr-namespace:PvfCode.Converts;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxmvvm="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:dxmvvm1="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" xmlns:macro="clr-namespace:PvfCode.Views.Macro;assembly=pvfUtility" xmlns:mainwindow="clr-namespace:PvfCode.Converts.MainWindow;assembly=pvfUtility" xmlns:mvvmservices="clr-namespace:PvfCode.MVVMServices;assembly=pvfUtility" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:services="clr-namespace:PvfCode;assembly=PvfCode.Services" xmlns:textedit="clr-namespace:PvfCode.Converts.TextEdit;assembly=pvfUtility" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" xmlns:views="clr-namespace:PvfCode.Views;assembly=pvfUtility" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" core:ThemedWindow.Name="mainWindow" FrameworkElement.Width="1450" FrameworkElement.Height="880" Control.Padding="0" Control.FontFamily="微软雅黑" Control.FontStyle="Normal" core:ThemedWindow.ShowGlow="True" core:ThemedWindow.ShowTitle="False" core:ThemedWindow.TitleAlignment="Right" Window.Topmost="False" Window.WindowStartupLocation="CenterScreen">
+  <Window.ContentRendered>
+    <dxbinding:DXEventExtension xmlns:dxbinding="clr-namespace:DevExpress.Xpf.DXBinding;assembly=DevExpress.Xpf.Core.v24.1" dxbinding:DXEventExtension.Handler="Load(@sender)" />
+  </Window.ContentRendered>
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="./Styles\MainWindowStyle.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <Style x:Key="{x:Type root:MainWindow}" TargetType="{x:Type root:MainWindow}">
+        <Style.Triggers>
+          <DataTrigger Value="True" Binding="{Binding PVF.PvfIsOpen}">
+            <Setter Property="Window.Title" Value="{Binding PVF.PvfPackFilePath}" />
+          </DataTrigger>
+          <DataTrigger Value="False" Binding="{Binding PVF.PvfIsOpen}">
+            <Setter Property="Window.Title" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=AppName}" />
+          </DataTrigger>
+        </Style.Triggers>
+      </Style>
+      <Style x:Key="{x:Type docking:FloatGroup}" xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" TargetType="{x:Type docking:FloatGroup}">
+        <Setter Property="docking:BaseLayoutItem.Caption" Value="pvfUtility-Documents" />
+      </Style>
+      <mainwindow:ConvertBarStaticPvfStatus x:Key="ConvertBarStaticPvfStatus" />
+      <converts:ConverterMainWindowProgressVisibility x:Key="ConverterMainWindowProgressVisibility" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <dxmvvm:Interaction.Behaviors>
+    <ui:NotificationService xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:NotificationService.Name="notificationService" ui:NotificationService.CreateApplicationShortcut="True" ui:NotificationService.CustomNotificationPosition="BottomRight" ui:NotificationService.CustomNotificationTemplate="{StaticResource CustomNotificationTemplate}" ui:NotificationService.UseWin8NotificationsIfAvailable="False" ui:NotificationService.ApplicationActivator="{x:Type root:MyNotificationActivator}" ui:NotificationService.ApplicationId="{x:Static root:MainWindow.ApplicationID}">
+    </ui:NotificationService>
+  </dxmvvm:Interaction.Behaviors>
+  <core:ThemedWindow.ToolbarItems>
+    <bars:MainMenuControl FrameworkElement.VerticalAlignment="Center" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+    <CheckBox Margin="15,0,0,0" Content="{DynamicResource mainWin_bar_Main_subItem_View_AlwaysOnTop}" Foreground="#FF808080" IsChecked="{Binding ElementName=mainWindow, Path=Topmost, Mode=TwoWay}" />
+  </core:ThemedWindow.ToolbarItems>
+  <dxb:BarManager>
+    <dxb:BarManager.Bars>
+      <bars:Bar xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:MergingProperties.ElementMergingBehavior="All" bars:Bar.AllowCustomizationMenu="False" bars:Bar.AllowQuickCustomization="False" bars:Bar.Caption="mainBar" bars:Bar.IsMainMenu="True">
+        <bars:BarSubItem bars:BarSubItem.Name="subFile" bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_File}">
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarOpenPvfFileStyle}" />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_File_AddNewEmptyPvfFile}" bars:BarItem.Glyph="{DynamicResource VisualStudioBlendLogo2015Pre}" bars:BarItem.Command="{Binding BarsVm.OnAddNewEmptyPvfFileCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Converter={StaticResource ConverterBoolenToFalse}}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarSavePvfFileStyle}" />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarSaveAsPvfFileStyle}" />
+          <bars:BarButtonItem bars:BarItem.CommandParameter="True" bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_File_Associate_pvfPack}" FrameworkContentElement.ToolTip="{DynamicResource mainWin_bar_Main_subItem_File_Associate_pvfPack_tip}" bars:BarItem.Command="{Binding RegPvfRegisteredCommand}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_GlobalOptions}" bars:BarItem.Glyph="{DynamicResource SettingWindowIcon}" bars:BarItem.Command="{Binding BarsVm.OnOpenPublicSettingWindowCommand}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarClosePvfFileStyle}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_ImportOldTreeListComment}" bars:BarItem.Command="{Binding BarsVm.OnImportCommentXmlFileCommand}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarExitStyle}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_OpenPvfUtilityBaseDirectoryPath}" bars:BarItem.Command="{Binding BarsVm.OnOpenPvfUtilityRootDirCommand}" />
+          <bars:BarItemSeparator />
+          <bars:BarSubItem bars:BarSubItem.Name="subPvfOpenLog" bars:BarItem.Content="PVF载入历史记录" bars:BarItem.IsVisible="False" bars:BarSubItem.ItemTemplate="{StaticResource subPvfOpenLogItemTemplate}" bars:BarSubItem.ItemLinksSource="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PathConfig.PvfOpenLog, Mode=OneWay}">
+          </bars:BarSubItem>
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_ClearPvfPackOpenLogs}" bars:BarItem.Command="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PathConfig.ClearPvfOpenLogcCommand}" />
+          <bars:BarItemSeparator />
+        </bars:BarSubItem>
+        <bars:BarSubItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_PvfPack}">
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_PvfPack_GoToFile}" bars:BarItem.KeyGesture="f1" bars:BarItem.Command="{Binding PvfFileTreeViewModel.OnGoToFileCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}" />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarRefTreeFileListStyle}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_PvfPack_EditPvfHeaderInfo}" bars:BarItem.Glyph="{DynamicResource EditComment}" bars:BarItem.Command="{Binding BarsVm.OnEditPvfHeaderInfoCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}" />
+        </bars:BarSubItem>
+        <bars:BarSubItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_View}">
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_View_AlwaysOnTop}" bars:BarCheckItem.IsChecked="{Binding ElementName=mainWindow, Path=Topmost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <bars:BarItemSeparator />
+          <bars:BarCheckItem FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowTabs, Mode=TwoWay}">
+            <bars:BarItem.ContentTemplate>
+              <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowTabls}" />
+                  <TextBlock Foreground="#FF808080" Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowTabls_RightText}" />
+                </StackPanel>
+              </DataTemplate>
+            </bars:BarItem.ContentTemplate>
+          </bars:BarCheckItem>
+          <bars:BarCheckItem FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowSpaces, Mode=TwoWay}">
+            <bars:BarItem.ContentTemplate>
+              <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowSpaces}" />
+                  <TextBlock Foreground="#FF808080" Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowTabls_RightText}" />
+                </StackPanel>
+              </DataTemplate>
+            </bars:BarItem.ContentTemplate>
+          </bars:BarCheckItem>
+          <bars:BarCheckItem FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowEndOfLine, Mode=TwoWay}">
+            <bars:BarItem.ContentTemplate>
+              <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowEndOfLine}" />
+                  <TextBlock Foreground="#FF808080" Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowTabls_RightText}" />
+                </StackPanel>
+              </DataTemplate>
+            </bars:BarItem.ContentTemplate>
+          </bars:BarCheckItem>
+          <bars:BarCheckItem FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.UseFoldingGuideLines, Mode=TwoWay}">
+            <bars:BarItem.ContentTemplate>
+              <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorUseFoldingGuideLines}" />
+                  <TextBlock Foreground="#FF808080" Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowTabls_RightText}" />
+                </StackPanel>
+              </DataTemplate>
+            </bars:BarItem.ContentTemplate>
+          </bars:BarCheckItem>
+          <bars:BarCheckItem FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.OpenKorStrQuote, Mode=TwoWay}">
+            <bars:BarItem.ContentTemplate>
+              <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorOpenKorStrQuote}" />
+                  <TextBlock Foreground="#FF808080" Text="{DynamicResource mainWin_bar_Main_subItem_View_EditorShowTabls_RightText}" />
+                </StackPanel>
+              </DataTemplate>
+            </bars:BarItem.ContentTemplate>
+          </bars:BarCheckItem>
+          <bars:BarItemSeparator />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorWordWrap}" bars:BarItem.KeyGesture="alt+z" FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.WordWrap, Mode=TwoWay}" />
+          <bars:BarItemSeparator />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorEnableTextDragDrop}" FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.EnableTextDragDrop, Mode=TwoWay}" />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorEnableVirtualSpace}" FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.EnableVirtualSpace, Mode=TwoWay}" />
+          <bars:BarItemSeparator />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_View_EditorUseAutoCodeFolding}" FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.UseAutoCodeFolding, Mode=TwoWay}" />
+          <bars:BarItemSeparator />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_View_TreeListShowHorizontalLines}" FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.ShowHorizontalLines, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <bars:BarCheckItem FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.AllowHorizontalScrollingAutoWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <bars:BarItem.ContentTemplate>
+              <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{DynamicResource mainWin_bar_Main_subItem_View_TreeListEditorAllowHorizontalScrollingAutoWidth}" />
+                  <TextBlock Foreground="#FF808080" Text="{DynamicResource mainWin_bar_Main_subItem_View_TreeListEditorAllowHorizontalScrollingAutoWidth_RightText}" />
+                </StackPanel>
+              </DataTemplate>
+            </bars:BarItem.ContentTemplate>
+          </bars:BarCheckItem>
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_View_TreeListUseEvenRowBackground}" FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.UseEvenRowBackground, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_View_TreeListControlTopShowFilePathTextBox}" FrameworkContentElement.Style="{StaticResource BarCheckItemSaveAppsettingStyle}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.TreeListControlTopShowFilePathTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </bars:BarSubItem>
+        <bars:BarSubItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_ViewMode}">
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_ViewMode_FilelistLayoutPanel}" bars:BarCheckItem.IsChecked="{Binding ElementName=FilelistLayoutPanel, Path=Visibility, Converter={StaticResource ConvertBoolVisibility}}" />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_ViewMode_FindView}" bars:BarCheckItem.IsChecked="{Binding ElementName=FindView, Path=Visibility, Converter={StaticResource ConvertBoolVisibility}}" />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_ViewMode_outPutView}" bars:BarCheckItem.IsChecked="{Binding ElementName=outPutView, Path=Visibility, Converter={StaticResource ConvertBoolVisibility}}" />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_ViewMode_ErrorListPanel}" bars:BarCheckItem.IsChecked="{Binding ElementName=ErrorListPanel, Path=Visibility, Converter={StaticResource ConvertBoolVisibility}}" />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_ViewMode_findResultView}" bars:BarCheckItem.IsChecked="{Binding ElementName=findResultView, Path=Visibility, Converter={StaticResource ConvertBoolVisibility}}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_ViewMode_ResetWindowLayout}">
+          </bars:BarButtonItem>
+        </bars:BarSubItem>
+        <bars:BarSubItem bars:BarSubItem.Name="subBookmark" bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_BookMark}">
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_BookMark_BookMarkManager}" bars:BarItem.Glyph="{DynamicResource BookMarkIcon}" bars:BarItem.Command="{Binding BarsVm.OnOpenBookMarkEditCommand}" />
+        </bars:BarSubItem>
+        <bars:BarSubItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Search}">
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarPublicSeearch}" />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarAddNewSearchResult}" />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarOnTxtImportFileList}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarSeearchItemCodeTool}" />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarSeearchItemNameTool}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarSeearchNpkTool}" />
+        </bars:BarSubItem>
+        <bars:BarSubItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Comment}">
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Comment_TreeListCommentManager}" bars:BarItem.Command="{Binding BarsVm.OnOpenViewFileListDescriptionCommand}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Comment_SectionTranslateManager}" bars:BarItem.Command="{Binding BarsVm.OnOpenViewTabCommentCommand}" />
+        </bars:BarSubItem>
+        <bars:BarSubItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Macro}">
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Macro_MacroManager}" bars:BarItem.Glyph="{DynamicResource MacroIcon}" bars:BarItem.Command="{Binding BarsVm.OnOpenMacroToolCommand}" />
+          <bars:BarItemSeparator />
+          <bars:BarSubItem FrameworkContentElement.Style="{StaticResource 批处理宏_SubItem}" />
+          <bars:BarSubItem FrameworkContentElement.Style="{StaticResource 全局搜索宏_SubItem}" />
+        </bars:BarSubItem>
+        <bars:BarSubItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Tools}">
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_IndependentDropEditor}" bars:BarItem.Command="{Binding BarsVm.OnOpenViewIndependent_dropCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Tools_Convert70PlusPvfScript}" bars:BarItem.Command="{Binding BarsVm.OnConvertChinaPlusPvfCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem FrameworkContentElement.Style="{StaticResource BarPvfRelease}" />
+          <bars:BarButtonItem bars:BarItem.Content="ani设计器" bars:BarItem.Command="{Binding BarsVm.OnOpenWindowAniDesignerCommand}" />
+          <bars:BarButtonItem bars:BarItem.Content="GM工具简易版" bars:BarItem.Command="{Binding BarsVm.OnOpenGMToolCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+          <bars:BarButtonItem bars:BarItem.Content="Npc商店设计器" bars:BarItem.Command="{Binding BarsVm.OnOpenNpcShopEditorCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+          <bars:BarButtonItem bars:BarItem.Content="游戏Images资源获取器" bars:BarItem.IsVisible="True" bars:BarItem.Command="{Binding BarsVm.OnOpenGameImagesExtractToolCommand}" />
+          <bars:BarButtonItem bars:BarItem.Content="全局爆率管理" bars:BarItem.Command="{Binding BarsVm.OnOpenWorlddropToolCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+          <bars:BarButtonItem bars:BarItem.Content="商城管理器" bars:BarItem.Command="{Binding BarsVm.OnOpenWinShopManagerCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+          <bars:BarSubItem bars:BarItem.Content="称号簿">
+            <bars:BarButtonItem bars:BarItem.Content="提取任务代码" bars:BarItem.Command="{Binding BarsVm.OnExtractTitleBookQstCodeListCommand}" />
+            <bars:BarButtonItem bars:BarItem.Content="提取称号代码" bars:BarItem.Command="{Binding BarsVm.OnExtractTitleBookTitleEquCoodeCommand}" />
+          </bars:BarSubItem>
+        </bars:BarSubItem>
+        <bars:BarSubItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Help}">
+          <bars:BarItemSeparator />
+          <bars:BarItemSeparator />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource mainWin_bar_Main_subItem_Help_About}" bars:BarItem.Command="{Binding BarsVm.OnAboutCommand}" />
+        </bars:BarSubItem>
+        <bars:BarStaticItem bars:BarItem.Margin="10,0,0,0" FrameworkContentElement.Cursor="Hand" bars:BarItem.Foreground="#FF808080" bars:BarItem.ShowScreenTip="True" FrameworkContentElement.ToolTip="{DynamicResource MainWin_Bar_Main_SubItem_CurrentPvfPackFilePathToolTip}" bars:BarItem.IsVisible="{Binding PVF.PvfIsOpen}">
+          <bars:BarItem.ContentTemplate>
+            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+              <core:SimpleButton Control.Background="#00FFFFFF" Control.BorderThickness="0" ContentControl.Content="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfPackFilePath}">
+              </core:SimpleButton>
+            </DataTemplate>
+          </bars:BarItem.ContentTemplate>
+        </bars:BarStaticItem>
+      </bars:Bar>
+      <dxb:Bar dxb:Bar.AllowCustomizationMenu="False" dxb:Bar.AllowQuickCustomization="False" dxb:Bar.Caption="File" dxb:Bar.IsMainMenu="False" dxb:Bar.ShowDragWidget="True" xmlns:p25="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+        <p25:BarSplitButtonItem p25:BarItem.CommandParameter="True" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_NavigateBack}" p25:BarItem.Glyph="{DynamicResource BackwardsIcon}" p25:BarItem.Command="{Binding Source={x:Static root:DocumentNavigationService.Instance}, Path=BackCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:DocumentNavigationService.Instance}, Path=BackIsEnable}" p25:BarItem.KeyGesture="{Binding Source={x:Static root:KeyGestureStaticValue.Instance}, Path=AltAndLeft}">
+          <p25:BarSplitButtonItem.PopupControl>
+            <p25:PopupMenu p25:PopupMenu.ItemTemplate="{StaticResource DocumentNavigationBackBarCheckTemplate}" p25:PopupMenu.ItemLinksSource="{Binding Source={x:Static root:DocumentNavigationService.Instance}, Path=Items}" />
+          </p25:BarSplitButtonItem.PopupControl>
+        </p25:BarSplitButtonItem>
+        <p25:BarButtonItem p25:BarItem.CommandParameter="False" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_NavigateForward}" p25:BarItem.Glyph="{DynamicResource ForwardsIcon}" p25:BarItem.Command="{Binding Source={x:Static root:DocumentNavigationService.Instance}, Path=ForwardsCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:DocumentNavigationService.Instance}, Path=ForwardsIsEnable}" p25:BarItem.KeyGesture="{Binding Source={x:Static root:KeyGestureStaticValue.Instance}, Path=AltAndRight}" />
+        <p25:BarItemSeparator />
+        <p25:BarButtonItem FrameworkContentElement.Style="{StaticResource BarOpenPvfFileStyle}" />
+        <p25:BarButtonItem FrameworkContentElement.Style="{StaticResource BarSavePvfFileStyle}" />
+        <p25:BarButtonItem FrameworkContentElement.Style="{StaticResource BarRefTreeFileListStyle}" />
+        <p25:BarItemSeparator />
+        <p25:BarButtonItem FrameworkContentElement.Style="{StaticResource BarClosePvfFileStyle}" />
+        <p25:BarItemSeparator />
+        <bars:BarEditItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarEditItem.EditWidth="75" FrameworkContentElement.ToolTip="{DynamicResource mainWin_bar_ToolBar_subItem_SwitchPvfGlobalEncodingToolTip}" bars:BarEditItem.EditValue="{Binding PVF.OverAllEncodingType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+          <bars:BarEditItem.EditStyle>
+            <Style xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type editors:ComboBoxEdit}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+              <Setter Property="Control.Padding" Value="0" />
+              <Setter Property="FrameworkElement.Height" Value="21" />
+            </Style>
+          </bars:BarEditItem.EditStyle>
+          <bars:BarEditItem.EditSettings>
+            <settings:ComboBoxEditSettings xmlns:settings="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" settings:ButtonEditSettings.IsTextEditable="False" settings:LookUpEditSettingsBase.ItemsSource="{Binding Source={StaticResource PvfEncodingTypeList}}" />
+          </bars:BarEditItem.EditSettings>
+        </bars:BarEditItem>
+        <p25:BarItemSeparator />
+        <p25:BarItemSeparator />
+        <p25:BarButtonItem p25:BarItem.BarItemDisplayMode="ContentAndGlyph" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_ImportFile}" p25:BarItem.Glyph="{DynamicResource ImportFilesIcon}" p25:BarItem.Command="{Binding BarsVm.OnImportFilesCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}" />
+        <p25:BarButtonItem p25:BarItem.BarItemDisplayMode="ContentAndGlyph" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_ExtractFile}" p25:BarItem.Glyph="{DynamicResource ExtractFilesIcon}" p25:BarItem.Command="{Binding BarsVm.OnExtractFilesCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}" />
+        <p25:BarItemSeparator />
+        <p25:BarSplitButtonItem p25:BarItem.BarItemDisplayMode="ContentAndGlyph" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_Search}" p25:BarItem.Glyph="/images/svgs/findinfiles_16x.svg" p25:BarItem.KeyGesture="F3" p25:BarItem.Command="{Binding OnSearchPvfCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}">
+          <p25:BarSplitButtonItem.PopupControl>
+            <p25:PopupMenu>
+              <p25:BarButtonItem FrameworkContentElement.Style="{StaticResource BarPublicSeearch}" />
+              <p25:BarItemSeparator />
+              <p25:BarButtonItem FrameworkContentElement.Style="{StaticResource BarSeearchItemCodeTool}" />
+              <p25:BarItemSeparator />
+              <p25:BarButtonItem FrameworkContentElement.Style="{StaticResource BarSeearchItemNameTool}" />
+              <p25:BarItemSeparator />
+              <p25:BarButtonItem FrameworkContentElement.Style="{StaticResource BarSeearchNpkTool}" />
+            </p25:PopupMenu>
+          </p25:BarSplitButtonItem.PopupControl>
+        </p25:BarSplitButtonItem>
+        <p25:BarStaticItem p25:BarItem.IsVisible="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PublicSearchServiceOptions.ToolbarShowNameSearchPanel, Mode=OneWay}">
+          <p25:BarItem.ContentTemplate>
+            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+              <editors:ButtonEdit FrameworkElement.Name="SearchPvfTextBox" FrameworkElement.Width="180" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:TextEditBase.AcceptsReturn="False" editors:ButtonEdit.AllowDefaultButton="False" BaseEdit.NullText="{DynamicResource mainWin_bar_ToolBar_subItem_SearchWatermark}" FrameworkElement.DataContext="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=SearchResultViewModel.SearchUiViewModel}" editors:BaseEdit.EditValue="{Binding MainWindowSearchConfig.Keyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <FrameworkElement.Style>
+                  <Style TargetType="{x:Type editors:ButtonEdit}">
+                    <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+                      <Setter.Value>
+                        <DataTemplate>
+                          <ContentControl>
+                            <ui:KeyToCommand ui:EventToCommandBase.CommandParameter="True" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:KeyToCommand.KeyGesture="Enter" ui:EventToCommandBase.Command="{Binding OnMainWindowSearchCommand}" />
+                          </ContentControl>
+                        </DataTemplate>
+                      </Setter.Value>
+                    </Setter>
+                  </Style>
+                </FrameworkElement.Style>
+                <editors:ButtonEdit.Buttons>
+                  <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Simple" editors:ButtonInfoBase.ClickMode="Press" editors:ButtonInfo.GlyphKind="Search" editors:CommonButtonInfo.IsChecked="False" FrameworkContentElement.ToolTip="{DynamicResource mainWin_bar_ToolBar_subItem_Search}" editors:CommandButtonInfo.Command="{Binding OnMainWindowSearchCommand}" />
+                  <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Toggle" editors:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource mainWin_bar_ToolBar_subItem_SearchOption_Regex}" editors:CommonButtonInfo.IsChecked="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=SearchResultViewModel.SearchUiViewModel.MainWindowSearchConfig.UseRegularExpression, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <editors:ButtonInfo.Content>
+                      <Image Width="16" Height="16" Source="{DynamicResource RegularExpression}" Stretch="Fill" />
+                    </editors:ButtonInfo.Content>
+                  </editors:ButtonInfo>
+                  <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Toggle" editors:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource mainWin_bar_ToolBar_subItem_SearchOption_WholeWord}" editors:CommonButtonInfo.IsChecked="{Binding MainWindowSearchConfig.WholeWordMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <editors:ButtonInfo.Content>
+                      <Image Width="16" Height="16" Source="{DynamicResource WholeWordMatch_16x}" Stretch="Fill" />
+                    </editors:ButtonInfo.Content>
+                  </editors:ButtonInfo>
+                  <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Toggle" editors:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource mainWin_bar_ToolBar_subItem_SearchOption_StartWith}" editors:CommonButtonInfo.IsChecked="{Binding MainWindowSearchConfig.IsStartMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <editors:ButtonInfo.Content>
+                      <Image Width="16" Height="16" Source="{DynamicResource Space_16x}" Stretch="Fill" />
+                    </editors:ButtonInfo.Content>
+                  </editors:ButtonInfo>
+                </editors:ButtonEdit.Buttons>
+              </editors:ButtonEdit>
+            </DataTemplate>
+          </p25:BarItem.ContentTemplate>
+        </p25:BarStaticItem>
+        <p25:BarItemSeparator />
+        <p25:BarSplitButtonItem p25:BarItem.BarItemDisplayMode="ContentAndGlyph" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_StartGame}" p25:BarItem.Glyph="{DynamicResource RunIcon}" p25:BarItem.KeyGesture="F5" p25:BarItem.Command="{Binding GameLoginViewModel.OnStartCommand}" p25:BarItem.CommandParameter="False">
+          <p25:BarSplitButtonItem.PopupControl>
+            <p25:PopupMenu>
+              <p25:BarButtonItem p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_StartGame}" p25:BarItem.Glyph="{DynamicResource RunIcon}" p25:BarItem.KeyGesture="F5" p25:BarItem.Command="{Binding GameLoginViewModel.OnStartCommand}" />
+              <p25:BarButtonItem p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_StopGame}" p25:BarItem.Glyph="{DynamicResource StopIcon}" p25:BarItem.KeyGesture="F12" />
+              <p25:BarCheckItem p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_StartGame_SavePvfPackToGameClientDir}" p25:BarCheckItem.IsChecked="{Binding GameLoginViewModel.IsSavePvfFile}" />
+              <p25:BarItemSeparator />
+              <p25:BarButtonItem p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_StartGame_Account2}" p25:BarItem.Glyph="{DynamicResource RunIcon}" p25:BarItem.KeyGesture="F6" p25:BarItem.Command="{Binding GameLoginViewModel.OnStart2Command}" />
+              <p25:BarItemSeparator />
+              <p25:BarButtonItem p25:BarItem.CommandParameter="{DynamicResource ViewGlobalOptions_TreeMenu_StartGameConfig}" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_StartGame_LoginConfig}" p25:BarItem.Glyph="{DynamicResource SettingWindowIcon}" p25:BarItem.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=BarsVm.OnOpenPublicSettingCommand}" />
+            </p25:PopupMenu>
+          </p25:BarSplitButtonItem.PopupControl>
+        </p25:BarSplitButtonItem>
+        <p25:BarItemSeparator />
+        <p25:BarButtonItem p25:BarItem.BarItemDisplayMode="ContentAndGlyph" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_LstManager}" p25:BarItem.Command="{Binding BarsVm.OnOpenLstToolsCommand}" p25:BarItem.Glyph="{Binding Source={x:Static root:Res.Instance}, Path=TreeFiles.Lst}" />
+        <p25:BarItemSeparator />
+        <p25:BarButtonItem p25:BarItem.BarItemDisplayMode="ContentAndGlyph" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_Batch}" p25:BarItem.Glyph="{DynamicResource CollapseGroup_16x}" p25:BarItem.Command="{Binding BarsVm.BatchOperationCommand}" />
+        <p25:BarItemSeparator />
+        <p25:BarButtonItem p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_PvfDiff}" p25:BarItem.Command="{Binding BarsVm.OnOpenPvfDiffToolCommand}" />
+        <p25:BarButtonItem p25:BarItem.BarItemDisplayMode="ContentAndGlyph" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_DocDiff}" p25:BarItem.Glyph="{DynamicResource DiffIcon}" p25:BarItem.Command="{Binding BarsVm.OnOpenDiffWindowCommand}" />
+        <p25:BarButtonItem p25:BarItem.BarItemDisplayMode="ContentAndGlyph" p25:BarItem.Content="{DynamicResource mainWin_bar_ToolBar_subItem_IndependentDropEditor}" p25:BarItem.Command="{Binding BarsVm.OnOpenViewIndependent_dropCommand}" ContentElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen, Mode=OneWay}" />
+        <p25:BarButtonItem FrameworkContentElement.Style="{StaticResource BarPvfRelease}" />
+      </dxb:Bar>
+    </dxb:BarManager.Bars>
+    <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
+      <docking:DockLayoutManager xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:DockLayoutManager.Name="DemoDockContainer" Grid.Row="0" Grid.ColumnSpan="2" FrameworkElement.Margin="0,0,0,3" docking:DockLayoutManager.DisposeOnWindowClosing="False" docking:DockLayoutManager.DockingStyle="VS2010" docking:DockLayoutManager.FloatingDocumentContainer="Default" docking:DockLayoutManager.FloatingMode="Desktop" docking:DockLayoutManager.ShowFloatWindowsInTaskbar="True">
+        <dxmvvm:Interaction.Behaviors>
+          <mvvmservices:DockLayoutManagerService />
+        </dxmvvm:Interaction.Behaviors>
+        <docking:LayoutGroup FrameworkElement.Name="Root">
+          <docking:LayoutGroup docking:BaseLayoutItem.ItemWidth="3*" docking:LayoutGroup.Orientation="Vertical">
+            <docking:LayoutGroup docking:BaseLayoutItem.ItemHeight="3*">
+              <docking:LayoutPanel FrameworkElement.Name="FilelistLayoutPanel" docking:BaseLayoutItem.Caption="{DynamicResource mainWin_Layout_FileExplorerTitle}" docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.ItemWidth="*">
+                <controls:PvfTreeViewGroup x:Name="treeListControlGroupEx" TreeAllowDrop="True" DataContext="{Binding PvfFileTreeViewModel}">
+                </controls:PvfTreeViewGroup>
+              </docking:LayoutPanel>
+              <docking:LayoutGroup docking:FloatGroup.SizeToContent="WidthAndHeight" docking:LayoutGroup.DestroyOnClosingChildren="False" docking:BaseLayoutItem.ItemWidth="3*">
+                <docking:DocumentGroup FrameworkElement.Name="DocumentHost" docking:BaseLayoutItem.AllowContextMenu="False" docking:BaseLayoutItem.Caption="文档组" docking:DocumentGroup.ClosePageButtonShowMode="InAllTabPageHeaders" docking:LayoutGroup.DestroyOnClosingChildren="True" docking:LayoutGroup.ItemContentTemplateSelector="{StaticResource DocumentItemContentTemplateSelector}" docking:LayoutGroup.ItemStyle="{StaticResource DocumentPanelItemStyle}" docking:DocumentGroup.MDIStyle="Tabbed" docking:DocumentGroup.ShowDropDownButton="True" docking:LayoutGroup.TabItemContainerStyle="{StaticResource TabItemContainerStyle}" docking:LayoutGroup.ItemsSource="{Binding RootDocument.Documents}">
+                </docking:DocumentGroup>
+              </docking:LayoutGroup>
+              <docking:LayoutPanel FrameworkElement.Name="FindView" docking:BaseLayoutItem.Padding="0" docking:BaseLayoutItem.Caption="{DynamicResource mainWin_Layout_SearchViewTitle}" docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.ItemWidth="*">
+                <controls:SearchResultControl DataContext="{Binding SearchResultViewModel}" />
+              </docking:LayoutPanel>
+            </docking:LayoutGroup>
+            <docking:TabbedGroup>
+              <docking:LayoutPanel FrameworkElement.Name="outPutView" docking:BaseLayoutItem.Caption="{DynamicResource mainWin_Layout_OutputTitle}" docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.IsActive="True" docking:BaseLayoutItem.ItemWidth="*">
+                <views:ViewOutPut />
+              </docking:LayoutPanel>
+              <docking:LayoutPanel FrameworkElement.Name="ErrorListPanel" docking:BaseLayoutItem.Caption="{DynamicResource mainWin_Layout_ErrorListTitle}" docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.ItemWidth="*">
+                <views:ErrorListView />
+              </docking:LayoutPanel>
+              <docking:LayoutPanel FrameworkElement.Name="findResultView" docking:BaseLayoutItem.Caption="{DynamicResource mainWin_Layout_CodeEditorFindResultTitle}" docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.ItemWidth="*" FrameworkElement.DataContext="{Binding RootDocument.DocumentsSearchManager.AllSearchResultViewModel}" UIElement.Focusable="{Binding IsActive}" docking:BaseLayoutItem.IsActive="{Binding IsActive}">
+                <texteditorfolder:AllSearchResultView />
+              </docking:LayoutPanel>
+            </docking:TabbedGroup>
+          </docking:LayoutGroup>
+        </docking:LayoutGroup>
+      </docking:DockLayoutManager>
+      <bars:StatusBarControl Grid.Row="2" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControlBase.Caption="StatusBar" bars:ToolBarControlBase.HideWhenEmpty="False" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:StatusBarControl.ShowSizeGrip="True">
+        <bars:BarStaticItem bars:BarItem.Content="{Binding PvfFileTreeViewModel.TreeGroupData.FileCount, Mode=OneWay, Converter={StaticResource ConvertBarStaticPvfStatus}}" />
+        <bars:BarItemSeparator />
+        <bars:BarStaticItem>
+          <bars:BarItem.ContentTemplate>
+            <DataTemplate>
+              <Image RenderTransformOrigin="0.5,0.5" Source="{DynamicResource AddLayoutItem}">
+                <UIElement.RenderTransform>
+                  <RotateTransform Angle="45" CenterX="0.5" CenterY="0.5" />
+                </UIElement.RenderTransform>
+              </Image>
+            </DataTemplate>
+          </bars:BarItem.ContentTemplate>
+        </bars:BarStaticItem>
+        <bars:BarStaticItem>
+          <bars:BarItem.ContentTemplate>
+            <DataTemplate>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="{DynamicResource mainWin_StatusBar_HttpApiPort}" />
+                <ButtonEdit Grid.Column="1" FrameworkElement.Width="80" FrameworkElement.Height="19" FrameworkElement.VerticalAlignment="Center" Control.HorizontalContentAlignment="Center" Control.VerticalContentAlignment="Center" p30:ButtonEdit.AllowDefaultButton="False" p30:BaseEdit.EditValue="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=ClientApiOptions.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" UIElement.IsEnabled="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=ClientApiOptions.StartLoading, Converter={StaticResource ConverterBoolenToFalse}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                  <p30:ButtonEdit.Buttons>
+                    <p30:ButtonInfo p30:CommonButtonInfo.ButtonKind="Toggle" p30:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource mainWin_StatusBar_HttpApiEnabledCompatibilityDecompiler}" p30:CommonButtonInfo.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=ClientApiOptions.UseCompatibleDecompiler, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                      <p30:ButtonInfo.Content>
+                        <Image Width="13" Height="13" Source="{DynamicResource WebApiOpenDecompiling}" Stretch="Fill" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+                      </p30:ButtonInfo.Content>
+                    </p30:ButtonInfo>
+                    <p30:ButtonInfo p30:ButtonInfo.GlyphKind="Apply" FrameworkContentElement.ToolTip="{DynamicResource mainWin_StatusBar_HttpApiPortChange}" p30:CommandButtonInfo.Command="{Binding Path=DataContext.OnChangedWebApiPortCommand, RelativeSource={RelativeSource AncestorType=dxb:StatusBarControl}}" />
+                  </p30:ButtonEdit.Buttons>
+                </ButtonEdit>
+              </Grid>
+            </DataTemplate>
+          </bars:BarItem.ContentTemplate>
+        </bars:BarStaticItem>
+        <bars:BarItemSeparator />
+        <bars:BarStaticItem>
+          <bars:BarItem.ContentTemplate>
+            <DataTemplate>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="ImagePacks2：" />
+                <ButtonEdit Grid.Column="1" FrameworkElement.Width="500" FrameworkElement.Height="19" FrameworkElement.VerticalAlignment="Center" Control.HorizontalContentAlignment="Left" Control.VerticalContentAlignment="Center" p30:ButtonEdit.AllowDefaultButton="False" p30:BaseEdit.EditValue="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=ImagePacks2Options.ImagePacks2Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" UIElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=ImagePacks2ViewModel.IsLoading, Converter={StaticResource ConverterBoolenToFalse}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                  <p30:ButtonEdit.Buttons>
+                    <p30:ButtonInfo p30:ButtonInfoBase.Foreground="#FF808080">
+                      <p30:ButtonInfo.Content>
+                        <StackPanel Orientation="Horizontal" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                          <TextBlock Foreground="#FF808080" Text="{DynamicResource mainWin_StatusBar_ImgCount}" />
+                          <TextBlock Foreground="#FF808080" Text="{Binding Source={x:Static services:ImagePack2Service.Instance}, Path=Count, Mode=OneWay}" />
+                        </StackPanel>
+                      </p30:ButtonInfo.Content>
+                    </p30:ButtonInfo>
+                    <p30:ButtonInfo p30:CommonButtonInfo.ButtonKind="Toggle" p30:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource PublicSetting_NpkIconsApplyToFileExplorer}" ToolTipService.InitialShowDelay="50" p30:CommandButtonInfo.Command="{Binding TreeShowNpkIconCCommand}" FrameworkContentElement.DataContext="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting}" p30:CommonButtonInfo.IsChecked="{Binding TreeShowNpkIcon, Mode=TwoWay}">
+                      <p30:ButtonInfo.Content>
+                        <Image Width="14" Height="14" Source="{DynamicResource TreeViewIcon}" Stretch="Fill" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+                      </p30:ButtonInfo.Content>
+                    </p30:ButtonInfo>
+                    <p30:ButtonInfo p30:CommonButtonInfo.ButtonKind="Simple" p30:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource mainWin_StatusBar_ImgReloadToolTip}" p30:CommandButtonInfo.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=ImagePacks2ViewModel.OnRefreshCommand}">
+                      <p30:ButtonInfo.Content>
+                        <Image Width="14" Height="14" Source="{DynamicResource HotReload}" Stretch="Fill" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+                      </p30:ButtonInfo.Content>
+                    </p30:ButtonInfo>
+                    <p30:ButtonInfo p30:ButtonInfoBase.Foreground="#FFFF69B4" FrameworkContentElement.ToolTip="{DynamicResource mess_OnClearCommand}" ToolTipService.InitialShowDelay="50" p30:CommandButtonInfo.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=ImagePacks2ViewModel.OnClearCommand}">
+                      <p30:ButtonInfo.Content>
+                        <Image Width="12" Height="12" Source="{DynamicResource Close_red_16x}" Stretch="Fill" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+                      </p30:ButtonInfo.Content>
+                    </p30:ButtonInfo>
+                    <p30:ButtonInfo p30:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource mainWin_StatusBar_SetDnfClientModelDir}" ToolTipService.InitialShowDelay="50" p30:CommandButtonInfo.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=ImagePacks2ViewModel.OnLoadImagePacks2Command}" />
+                  </p30:ButtonEdit.Buttons>
+                </ButtonEdit>
+              </Grid>
+            </DataTemplate>
+          </bars:BarItem.ContentTemplate>
+        </bars:BarStaticItem>
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource mainWin_StatusBar_ReleaseMemory}" bars:BarItem.Glyph="{DynamicResource Memory}" bars:BarItem.IsVisible="True" FrameworkContentElement.ToolTip="{DynamicResource mainWin_StatusBar_ReleaseMemoryToolTip}" bars:BarItem.Command="{Binding ClearMemoryCommand}" />
+        <bars:BarStaticItem bars:BarItem.Alignment="Far">
+          <bars:BarItem.ContentTemplate>
+            <DataTemplate>
+              <editors:ProgressBarEdit xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ProgressBarEdit.Name="navProgressBar" FrameworkElement.Width="200" FrameworkElement.Height="18" editors:RangeBaseEdit.Maximum="1" UIElement.Visibility="{Binding Path=DataContext.Progress, Converter={StaticResource ConverterMainWindowProgressVisibility}, RelativeSource={RelativeSource AncestorType=dxb:StatusBarControl}}" editors:RangeBaseEdit.Value="{Binding Path=DataContext.Progress, RelativeSource={RelativeSource AncestorType=dxb:StatusBarControl}}" />
+            </DataTemplate>
+          </bars:BarItem.ContentTemplate>
+        </bars:BarStaticItem>
+      </bars:StatusBarControl>
+    </Grid>
+  </dxb:BarManager>
+</root:MainWindow>

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns:flyoutNative="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:enums="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:preview="clr-namespace:PvfCode.Views.Preview;assembly=pvfUtility" xmlns:pvfcode="clr-namespace:PvfCode;assembly=PvfCode.Dot" xmlns:pvftree="clr-namespace:PvfCode.Converts.PvfTree;assembly=pvfUtility" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:treefolder="clr-namespace:PvfCode.ViewModels.TreeFolder;assembly=pvfUtility">
+  <pvftree:ConvertTreeColumnVisibility x:Key="ConvertTreeColumnVisibility" />
+  <pvftree:ConvertTreeItemCode x:Key="ConvertTreeItemCode" />
+  <pvftree:ConvertTreeItemName x:Key="ConvertTreeItemName" />
+  <treefolder:PvfTreeNodeImageSelector x:Key="PvfTreeNodeImageSelector" />
+  <pvftree:ConvertMultiSelectMode x:Key="ConvertMultiSelectMode" />
+  <pvftree:ConvertAutoExpandAllNodes x:Key="ConvertAutoExpandAllNodes" />
+  <treefolder:PvfFileTreeColumnSelectorDataTemplate x:Key="PvfFileTreeColumnSelectorDataTemplate" />
+  <pvftree:ConverterAllowHorizontalScrolling x:Key="ConverterAllowHorizontalScrolling" />
+  <pvftree:ConverterImportFilesTreeRowBack x:Key="ConverterImportFilesTreeRowBack" />
+  <pvftree:ConverterContextMenuImportFIlesButton x:Key="ConverterContextMenuImportFIlesButton" />
+  <pvftree:ConverterContextMenuITemIsVisibility x:Key="ConverterContextMenuITemIsVisibility" />
+  <pvftree:ConvertTreeRowIsDiff x:Key="ConvertTreeRowIsDiff" />
+  <pvftree:ConvertTreeDiffTypeBackBrush x:Key="ConvertTreeDiffTypeBackBrush" />
+  <pvftree:ConvertTreeDiffStrMess x:Key="ConvertTreeDiffStrMess" />
+  <pvftree:ConverterImportFileIsNewFile x:Key="ConverterImportFileIsNewFile" />
+  <pvftree:ConverterTreeListGroupCurrentPathInputVisibility x:Key="ConverterTreeListGroupCurrentPathInputVisibility" />
+  <Style x:Key="treeCellTextBlack" TargetType="{x:Type TextBlock}">
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style x:Key="treeCellUpdateCellStyle" BasedOn="{StaticResource treeCellTextBlack}" TargetType="{x:Type TextBlock}">
+    <Style.Triggers>
+      <DataTrigger Value="True" Binding="{Binding Row.Value.File.IsUpdated}">
+        <Setter Property="Text" Value="Up" />
+        <Setter Property="Visibility" Value="Visible" />
+      </DataTrigger>
+      <DataTrigger Value="True" Binding="{Binding Row.Value.File.IsNewFile}">
+        <Setter Property="Text" Value="New" />
+        <Setter Property="Visibility" Value="Visible" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="ItemNameCellStyle" BasedOn="{StaticResource treeCellTextBlack}" TargetType="{x:Type TextBlock}">
+    <Style.Triggers>
+      <DataTrigger Binding="{Binding Row.Value.Rarity}" Value="{x:Null}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.ItemNameBrush}" />
+      </DataTrigger>
+      <DataTrigger Value="0" Binding="{Binding Row.Value.Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor0}" />
+      </DataTrigger>
+      <DataTrigger Value="1" Binding="{Binding Row.Value.Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor1}" />
+      </DataTrigger>
+      <DataTrigger Value="2" Binding="{Binding Row.Value.Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor2}" />
+      </DataTrigger>
+      <DataTrigger Value="3" Binding="{Binding Row.Value.Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor3}" />
+      </DataTrigger>
+      <DataTrigger Value="4" Binding="{Binding Row.Value.Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor4}" />
+      </DataTrigger>
+      <DataTrigger Value="5" Binding="{Binding Row.Value.Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor5}" />
+      </DataTrigger>
+      <DataTrigger Value="False" Binding="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.UseRarityColor}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.ItemNameBrush}" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+  <ControlTemplate x:Key="treeListSearchPopupBaseEdit_PopupContentTemplate">
+    <StackPanel Margin="5,0,5,0" Orientation="Vertical" DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType=dxe:PopupBaseEdit}}">
+      <Label Content="{DynamicResource FileExplorer_SearchOption}" FontWeight="Bold" />
+      <CheckBox Content="{DynamicResource FileExplorer_SearchOption_ItemName}" IsChecked="{Binding TreeGroupData.SearchPanelOptions.ItemName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <CheckBox Content="{DynamicResource FileExplorer_SearchOption_ItemID}" IsChecked="{Binding TreeGroupData.SearchPanelOptions.ItemCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <CheckBox Content="{DynamicResource FileExplorer_SearchOption_Comment}" IsChecked="{Binding TreeGroupData.SearchPanelOptions.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <CheckBox Content="{DynamicResource FileExplorer_SearchOption_FileName}" IsChecked="{Binding TreeGroupData.SearchPanelOptions.FilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <StackPanel Height="1" Margin="0,10,0,0" Background="#FF808080" />
+      <CheckBox Margin="0,10,0,10" Content="{DynamicResource FileExplorer_SearchOption_AutoConvertToTraditionalChinese}" IsChecked="{Binding TreeGroupData.SearchPanelOptions.ConvertTw, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    </StackPanel>
+  </ControlTemplate>
+  <Style x:Key="treeListSearchPopupBaseEdit" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type editors:PopupBaseEdit}">
+    <Setter Property="Grid.Column" Value="0" />
+    <Setter Property="Control.Padding" Value="0" />
+    <Setter Property="editors:PopupBaseEdit.PopupContentTemplate" Value="{StaticResource treeListSearchPopupBaseEdit_PopupContentTemplate}" />
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="editors:TextEditBase.AcceptsTab" Value="True" />
+    <Setter Property="editors:ButtonEdit.AllowDefaultButton" Value="False" />
+    <Setter Property="editors:BaseEdit.EditValue" Value="{Binding SearchKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <Setter Property="editors:BaseEdit.NullText" Value="{DynamicResource FileExplorer_SearchFileExplorerNullText}" />
+    <Setter Property="editors:BaseEdit.ShowBorder" Value="False" />
+  </Style>
+  <Style x:Key="treeListTopCurrentFilePathInput" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type editors:TextEdit}">
+    <Setter Property="Control.Background" Value="{DynamicResource TreeListGroupCurrentPathInputBackBrush}" />
+    <Setter Property="FrameworkElement.Margin" Value="0,1,0,0" />
+    <Setter Property="editors:BaseEdit.IsReadOnly" Value="True" />
+    <Setter Property="Grid.Row" Value="1" />
+    <Setter Property="editors:TextEditBase.Text" Value="{Binding CurrentSelectedTreePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <Setter Property="Control.Padding" Value="0" />
+    <Setter Property="UIElement.Visibility">
+      <Setter.Value>
+        <MultiBinding Converter="{StaticResource ConverterTreeListGroupCurrentPathInputVisibility}">
+          <Binding Mode="OneWay" Path="TreeType" />
+          <Binding Mode="OneWay" Path="TreeSetting.TreeListControlTopShowFilePathTextBox" Source="{x:Static appsetting:AppSetting.Instance}" />
+        </MultiBinding>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="pvfFileTreeImage" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type core:DXImage}">
+    <Setter Property="core:DXImage.Source" Value="{Binding Row.Value.Image, Mode=OneWay}" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Style.Triggers>
+      <DataTrigger Value="True" Binding="{Binding RowData.IsExpanded, Mode=OneWay}">
+        <Setter Property="core:DXImage.Source" Value="{Binding Source={x:Static root:Res.Instance}, Path=TreeFiles.FolderOpened}" />
+      </DataTrigger>
+      <DataTrigger Value="Folder" Binding="{Binding Row.Value.ImageType, Mode=OneWay}">
+        <Setter Property="FrameworkElement.Height" Value="18" />
+        <Setter Property="FrameworkElement.Width" Value="18" />
+      </DataTrigger>
+      <DataTrigger Value="DefaultFileIcon" Binding="{Binding Row.Value.ImageType, Mode=OneWay}">
+        <Setter Property="FrameworkElement.Height" Value="16" />
+        <Setter Property="FrameworkElement.Width" Value="16" />
+      </DataTrigger>
+      <DataTrigger Value="FileIcon" Binding="{Binding Row.Value.ImageType, Mode=OneWay}">
+        <Setter Property="FrameworkElement.Height" Value="20" />
+        <Setter Property="FrameworkElement.Width" Value="20" />
+        <Setter Property="FrameworkElement.Margin" Value="0,1,0,1" />
+      </DataTrigger>
+      <DataTrigger Value="QstIcon" Binding="{Binding Row.Value.ImageType, Mode=OneWay}">
+        <Setter Property="FrameworkElement.Height" Value="15" />
+        <Setter Property="FrameworkElement.Width" Value="41" />
+        <Setter Property="FrameworkElement.Margin" Value="0,1,0,1" />
+      </DataTrigger>
+      <DataTrigger Value="shp" Binding="{Binding Row.Value.File.FileType}">
+        <Setter Property="FrameworkElement.Margin" Value="0,2,0,2" />
+        <Setter Property="FrameworkElement.Height" Value="16" />
+        <Setter Property="FrameworkElement.Width" Value="16" />
+      </DataTrigger>
+      <DataTrigger Value="npc" Binding="{Binding Row.Value.File.FileType}">
+        <Setter Property="FrameworkElement.Margin" Value="0,2,0,2" />
+        <Setter Property="FrameworkElement.Height" Value="16" />
+        <Setter Property="FrameworkElement.Width" Value="16" />
+      </DataTrigger>
+      <DataTrigger Value="emo" Binding="{Binding Row.Value.File.FileType}">
+        <Setter Property="FrameworkElement.Height" Value="14" />
+        <Setter Property="FrameworkElement.Width" Value="14" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="imgFileIsSealingStyle" TargetType="{x:Type dx:DXImage}">
+    <Setter Property="FrameworkElement.Width" Value="20" />
+    <Setter Property="FrameworkElement.Height" Value="20" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="UIElement.Visibility" Value="Collapsed" />
+    <Style.Triggers>
+      <DataTrigger Value="{x:Static enums:AttachType.sealing}" Binding="{Binding Row.Value.AttachType, Mode=OneWay}">
+        <Setter Property="UIElement.Visibility" Value="Visible" />
+        <Setter Property="dx:DXImage.Source" Value="{Binding Source={x:Static root:Res.Instance}, Path=ImageSealingMark}" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+  <DataTemplate x:Key="PvfFileTreeColumnTemplate">
+    <Grid>
+      <StackPanel Name="rt" Margin="0,0,10,0" AllowDrop="True" Focusable="True" Orientation="Horizontal">
+        <Grid>
+          <DXImage FrameworkElement.Style="{StaticResource pvfFileTreeImage}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+          <DXImage FrameworkElement.Style="{StaticResource imgFileIsSealingStyle}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+        </Grid>
+        <TextBlock Margin="5,0,3,0" FontSize="8" FontWeight="Bold" Style="{StaticResource treeCellUpdateCellStyle}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.NewFileFlagBrush, Mode=OneWay}" />
+        <TextBlock Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.FileNameBrush, Mode=OneWay}" Text="{Binding Row.Value.FileName, Mode=OneWay}" />
+        <TextBlock Name="treeComment" Padding="5,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.CommentBrush, Mode=OneWay}" Text="{Binding Row.Value.Comment, Mode=OneWay}" Visibility="{Binding ElementName=treeComment, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+        <TextBlock Name="treeItemName" Padding="15,0,0,0" Style="{StaticResource ItemNameCellStyle}" Text="{Binding Row.Value.ItemName, Mode=OneWay}" Visibility="{Binding ElementName=treeItemName, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+        <TextBlock Name="treeItemCode" Padding="5,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.ItemCodeBrush, Mode=OneWay}" Text="{Binding Row.Value.ItemCodeStr, Mode=OneWay}" Visibility="{Binding ElementName=treeItemCode, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+      </StackPanel>
+    </Grid>
+  </DataTemplate>
+  <DataTemplate x:Key="PvfDiffTreeColumnTemplate">
+    <StackPanel Margin="0,0,10,0" Orientation="Horizontal">
+      <Grid>
+        <DXImage FrameworkElement.Style="{StaticResource pvfFileTreeImage}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+        <DXImage FrameworkElement.Style="{StaticResource imgFileIsSealingStyle}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+      </Grid>
+      <TextBlock Name="diffStr" Margin="5,0,3,0" FontSize="9" FontWeight="Bold" Foreground="#FFFFFF00" Style="{StaticResource treeCellUpdateCellStyle}" Visibility="{Binding ElementName=diffStr, Path=Text, Converter={StaticResource ConvertNullToVisibility}}" />
+      <TextBlock Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.FileNameBrush, Mode=OneWay}" Text="{Binding Row.Value.FileName, Mode=OneWay}" />
+      <TextBlock Name="treeComment" Padding="5,0,0,0" Foreground="{DynamicResource TreePvfComment}" Style="{StaticResource treeCellTextBlack}" Text="{Binding Row.Value.Comment, Mode=OneWay}" Visibility="{Binding ElementName=treeComment, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+      <TextBlock Name="treeItemName" Padding="15,0,0,0" Style="{StaticResource ItemNameCellStyle}" Text="{Binding Row.Value.ItemName, Mode=OneWay}" Visibility="{Binding ElementName=treeItemName, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+      <TextBlock Name="treeItemCode" Padding="5,0,0,0" Foreground="{DynamicResource TreePvfItemCodeColor}" Style="{StaticResource treeCellTextBlack}" Text="{Binding Row.Value.ItemCodeStr, Mode=OneWay}" Visibility="{Binding ElementName=treeItemCode, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+    </StackPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="SearchResultPvfFileTreeColumnTemplate">
+    <StackPanel Orientation="Horizontal">
+      <Grid>
+        <DXImage FrameworkElement.Style="{StaticResource pvfFileTreeImage}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+        <DXImage FrameworkElement.Style="{StaticResource imgFileIsSealingStyle}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+      </Grid>
+      <TextBlock Margin="5,0,3,0" FontSize="8" FontWeight="Bold" Style="{StaticResource treeCellUpdateCellStyle}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.NewFileFlagBrush, Mode=OneWay}" />
+      <TextBlock Name="treeItemName" Style="{StaticResource ItemNameCellStyle}" Text="{Binding Row.Value.ItemName, Mode=OneWay}" Visibility="{Binding ElementName=treeItemName, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+      <TextBlock Padding="5,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.FileNameBrush, Mode=OneWay}" Text="{Binding Row.Key, Mode=OneWay}" />
+      <TextBlock Name="treeComment" Padding="5,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.CommentBrush, Mode=OneWay}" Text="{Binding Row.Value.Comment, Mode=OneWay}" Visibility="{Binding ElementName=treeComment, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+      <TextBlock Name="treeItemCode" Padding="5,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.ItemCodeBrush, Mode=OneWay}" Text="{Binding Row.Value.ItemCodeStr, Mode=OneWay}" Visibility="{Binding ElementName=treeItemCode, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+    </StackPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="ImportPvfFileColumnTemplate">
+    <StackPanel Margin="0,0,10,0" Orientation="Horizontal">
+      <Grid>
+        <DXImage FrameworkElement.Style="{StaticResource pvfFileTreeImage}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+        <DXImage FrameworkElement.Style="{StaticResource imgFileIsSealingStyle}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+      </Grid>
+      <TextBlock Margin="5,0,3,0" FontSize="8" FontWeight="Bold" Text="{DynamicResource FileExplorer_NewFile}" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.NewFileFlagBrush, Mode=OneWay}" Visibility="{Binding Path=Row.Value, Converter={StaticResource ConverterImportFileIsNewFile}}" />
+      <TextBlock Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.FileNameBrush, Mode=OneWay}" Text="{Binding Row.Value.FileName, Mode=OneWay}" />
+      <TextBlock Name="treeComment" Padding="5,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.CommentBrush, Mode=OneWay}" Text="{Binding Row.Value.Comment, Mode=OneWay}" Visibility="{Binding ElementName=treeComment, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+      <TextBlock Name="treeItemName" Padding="15,0,0,0" Style="{StaticResource ItemNameCellStyle}" Text="{Binding Row.Value.ItemName, Mode=OneWay}" Visibility="{Binding ElementName=treeItemName, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+      <TextBlock Name="treeItemCode" Padding="5,0,0,0" Style="{StaticResource treeCellTextBlack}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.ItemCodeBrush, Mode=OneWay}" Text="{Binding Row.Value.ItemCodeStr, Mode=OneWay}" Visibility="{Binding ElementName=treeItemCode, Mode=OneWay, Path=Text, Converter={StaticResource ConvertTreeColumnVisibility}}" />
+    </StackPanel>
+  </DataTemplate>
+  <ControlTemplate x:Key="pvfTreePreviewItemRowControlTemplate" xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" TargetType="{x:Type grid:RowControl}">
+    <Grid>
+      <Border Name="BackgroundRow" Background="{TemplateBinding Control.Background}" />
+      <Grid Name="PART_LayoutPanel" />
+      <flyout:FlyoutControl xmlns:flyout="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" flyout:FlyoutControl.Name="flyoutControl" Control.Padding="0" FrameworkElement.VerticalAlignment="Bottom" Control.Background="#00FFFFFF" Control.BorderThickness="0" FrameworkElement.FlowDirection="LeftToRight" xmlns:native="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" native:FlyoutBase.StaysOpen="True" native:FlyoutBase.PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+        <FrameworkElement.Style>
+          <Style TargetType="{x:Type flyout:FlyoutControl}">
+            <Setter Property="native:FlyoutBase.Settings">
+              <Setter.Value>
+                <flyout:FlyoutSettings flyout:FlyoutSettings.Placement="Right" flyout:FlyoutSettings.ShowIndicator="False" />
+              </Setter.Value>
+            </Setter>
+            <Setter Property="native:FlyoutBase.HorizontalOffset" Value="30" />
+            <Setter Property="native:FlyoutBase.IsOpen" Value="False" />
+            <Style.Triggers>
+              <DataTrigger Value="{x:Static treefolder:TreeViewType.SearchResult}" Binding="{Binding Path=DataContext.TreeType, RelativeSource={RelativeSource AncestorType=dxg:TreeListControl}}">
+                <Setter Property="native:FlyoutBase.Settings">
+                  <Setter.Value>
+                    <flyout:FlyoutSettings flyout:FlyoutSettings.Placement="Left" flyout:FlyoutSettings.ShowIndicator="False" />
+                  </Setter.Value>
+                </Setter>
+                <Setter Property="native:FlyoutBase.HorizontalOffset" Value="-30" />
+              </DataTrigger>
+              <DataTrigger Value="{x:Static treefolder:TreeViewType.PvfDiffRight}" Binding="{Binding Path=DataContext.TreeType, RelativeSource={RelativeSource AncestorType=dxg:TreeListControl}}">
+                <Setter Property="native:FlyoutBase.Settings">
+                  <Setter.Value>
+                    <flyout:FlyoutSettings flyout:FlyoutSettings.Placement="Left" flyout:FlyoutSettings.ShowIndicator="False" />
+                  </Setter.Value>
+                </Setter>
+                <Setter Property="native:FlyoutBase.HorizontalOffset" Value="-30" />
+              </DataTrigger>
+              <DataTrigger Value="{x:Static treefolder:TreeViewType.ImportFiles}" Binding="{Binding Path=DataContext.TreeType, RelativeSource={RelativeSource AncestorType=dxg:TreeListControl}}">
+                <Setter Property="native:FlyoutBase.IsOpen" Value="False" />
+                <Setter Property="UIElement.Visibility" Value="Collapsed" />
+              </DataTrigger>
+              <Trigger Property="native:FlyoutBase.IsOpen" Value="False">
+                <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                <Setter Property="native:FlyoutBase.Settings">
+                  <Setter.Value>
+                    <flyout:FlyoutSettings flyout:FlyoutSettings.Placement="Right" flyout:FlyoutSettings.ShowIndicator="False" />
+                  </Setter.Value>
+                </Setter>
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkElement.Style>
+        <preview:PreviewPvfItemControl x:Name="previewControl">
+          <FrameworkElement.Style>
+            <Style TargetType="{x:Type preview:PreviewPvfItemControl}">
+              <Style.Triggers>
+                <DataTrigger Value="True" Binding="{Binding Row.Value.PreviewItemVisibility, Mode=OneWay}">
+                  <Setter Property="preview:PreviewPvfItemControl.ContentEx" Value="{Binding Row.Value.ItemPreviewData, Mode=OneWay}" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </FrameworkElement.Style>
+        </preview:PreviewPvfItemControl>
+      </flyout:FlyoutControl>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <EventTrigger RoutedEvent="Control.MouseEnter">
+        <BeginStoryboard>
+          <Storyboard>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+              <DiscreteBooleanKeyFrame KeyTime="0:0:0.6" Value="True" />
+            </BooleanAnimationUsingKeyFrames>
+          </Storyboard>
+        </BeginStoryboard>
+      </EventTrigger>
+      <EventTrigger RoutedEvent="Control.MouseLeave">
+        <BeginStoryboard>
+          <Storyboard>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+              <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="False" />
+            </BooleanAnimationUsingKeyFrames>
+          </Storyboard>
+        </BeginStoryboard>
+      </EventTrigger>
+      <DataTrigger Value="False" Binding="{Binding Row.Value.PreviewItemVisibility}">
+        <Setter TargetName="flyoutControl" Property="flyoutNative:FlyoutBase.IsOpen" Value="False" />
+        <Setter TargetName="flyoutControl" Property="flyoutNative:FlyoutBase.Settings">
+          <Setter.Value>
+            <FlyoutSettings p21:FlyoutSettings.Placement="Right" p21:FlyoutSettings.ShowIndicator="False" xmlns:p21="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" />
+          </Setter.Value>
+        </Setter>
+      </DataTrigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <Style x:Key="ImportFilesTreeRowStyle" TargetType="{x:Type dxg:RowControl}">
+    <Setter Property="Control.Background" Value="#252526" />
+    <Setter Property="dxg:RowControl.SelectionState" Value="Selected" />
+    <Style.Triggers>
+      <Trigger Property="UIElement.IsMouseOver" Value="True">
+        <Setter Property="Control.Background" Value="#FFFFFF00" />
+      </Trigger>
+      <Trigger Property="dxg:RowControl.SelectionState" Value="Selected">
+        <Setter Property="Control.Background" Value="#7160e8" />
+        <Setter Property="TextBlock.Foreground" Value="#7160e8" />
+      </Trigger>
+      <DataTrigger Value="Selected" Binding="{Binding Path=SelectionState}">
+        <Setter Property="Control.Background" Value="#7160e8" />
+        <Setter Property="TextBlock.Foreground" Value="#7160e8" />
+      </DataTrigger>
+      <Trigger Property="UIElement.IsMouseOver" Value="True">
+        <Setter Property="Control.Background" Value="{DynamicResource TreeListRowBackBrushIsMouseOver}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="DiffTreeRowStyle" TargetType="{x:Type dxg:RowControl}">
+    <Setter Property="Control.Template" Value="{StaticResource pvfTreePreviewItemRowControlTemplate}" />
+    <Style.Triggers>
+      <DataTrigger Value="True" Binding="{Binding Row.Value, Converter={StaticResource ConvertTreeRowIsDiff}}">
+        <Setter Property="Control.Background" Value="{DynamicResource TreePvfDiffRowBackBrush}" />
+        <Setter Property="UIElement.Opacity" Value="0.8" />
+      </DataTrigger>
+      <Trigger Property="dxg:RowControl.SelectionState" Value="Selected">
+        <Setter Property="Control.Background" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.SelectedBackBrush, Mode=OneWay}" />
+      </Trigger>
+      <Trigger Property="dxg:RowControl.SelectionState" Value="Focused">
+        <Setter Property="Control.Background" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.FocusedBackBrush, Mode=OneWay}" />
+      </Trigger>
+      <Trigger Property="UIElement.IsMouseOver" Value="True">
+        <Setter Property="Control.Background" Value="{DynamicResource TreeListRowBackBrushIsMouseOver}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="FileListTreeRowStyle" TargetType="{x:Type dxg:RowControl}">
+    <Setter Property="Control.Template" Value="{StaticResource pvfTreePreviewItemRowControlTemplate}" />
+    <Style.Triggers>
+      <DataTrigger Value="True" Binding="{Binding Row.Value.IsShearStatus}">
+        <Setter Property="UIElement.Opacity" Value="0.5" />
+      </DataTrigger>
+      <Trigger Property="dxg:RowControl.SelectionState" Value="Focused">
+        <Setter Property="Control.Background" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.FocusedBackBrush, Mode=OneWay}" />
+      </Trigger>
+      <Trigger Property="dxg:RowControl.SelectionState" Value="Selected">
+        <Setter Property="Control.Background" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.SelectedBackBrush, Mode=OneWay}" />
+      </Trigger>
+      <Trigger Property="UIElement.IsMouseOver" Value="True">
+        <Setter Property="Control.Background" Value="{DynamicResource TreeListRowBackBrushIsMouseOver}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+</ResourceDictionary>

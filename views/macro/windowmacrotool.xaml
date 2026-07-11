@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<macro:WindowMacroTool xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:macro="clr-namespace:PvfCode.Views.Macro;assembly=pvfUtility" FrameworkElement.Name="win" FrameworkElement.Width="450" FrameworkElement.Height="600" Control.Padding="0" Window.ResizeMode="CanResizeWithGrip" Window.Title="{Binding Title}" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}" UIElement.IsEnabled="{Binding SaveLoading, Converter={StaticResource ConverterBoolenToFalse}}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <bars:BarContainerControl Grid.Row="0" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" UIElement.Visibility="{Binding IsTreeList, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+      <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControl.ShowDragWidget="True">
+        <bars:BarButtonItem bars:BarItem.CommandParameter="false" bars:BarItem.Content="{DynamicResource WindowMacroTool_Button_NewDirectory}" bars:BarItem.Command="{Binding OnAddCommand}" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.CommandParameter="false" bars:BarItem.Content="{DynamicResource WindowMacroTool_Button_Rename}" bars:BarItem.Command="{Binding OnEditCommand}" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.CommandParameter="true" bars:BarItem.Content="{DynamicResource WindowMacroTool_Button_Delete}" bars:BarItem.Command="{Binding OnDeleteCommand}" />
+      </bars:ToolBarControl>
+    </bars:BarContainerControl>
+    <macro:MacroTreeView Grid.Row="1" p8:DataControlBase.ItemsSource="{Binding Trees}" xmlns:p8="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" />
+    <StackPanel Grid.Row="2" Margin="0,8,0,8" HorizontalAlignment="Right" Orientation="Horizontal">
+      <Button Width="70" Margin="0,0,10,0" Content="{DynamicResource common_Save}" Command="{Binding OnSaveCommand}" />
+      <Button Width="70" Margin="0,0,5,0" Content="{DynamicResource common_Cancel}" Command="{Binding OnCancelCommand}" />
+    </StackPanel>
+  </Grid>
+</macro:WindowMacroTool>

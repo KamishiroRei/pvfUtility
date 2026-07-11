@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bookmark:EditBookmarkView xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" FrameworkElement.Width="490" Control.Padding="10" Window.ResizeMode="CanMinimize" Window.SizeToContent="Height" xmlns:bookmark="clr-namespace:PvfCode.Views.BookMark;assembly=pvfUtility" Window.Title="{Binding WinTitle}" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <controls:EditBox x:Name="txtTitle" NullText="{DynamicResource EditBookmarkView_BookMarkNameNullText}" Caption="{Binding BookMarkTitle}">
+    </controls:EditBox>
+    <Grid Row="1" Margin="0,10,0,0" Visibility="{Binding Row.Value.IsFile, Converter={StaticResource ConvertBoolenToVisibility}}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Label Content="{DynamicResource EditBookmarkView_FilePathLabel}" />
+      <editors:ButtonEdit xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.Name="txtFilePath" Grid.Column="1" editors:ButtonEdit.AllowDefaultButton="False" BaseEdit.NullText="{DynamicResource EditBookmarkView_SelectBookMarkPathNullText}">
+        <editors:ButtonEdit.Buttons>
+          <editors:ButtonInfo editors:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource EditBookmarkView_SelectBookMarkPathButton}">
+          </editors:ButtonInfo>
+        </editors:ButtonEdit.Buttons>
+      </editors:ButtonEdit>
+    </Grid>
+    <StackPanel Grid.Row="2" Margin="0,20,0,0" HorizontalAlignment="Right" Orientation="Horizontal">
+      <Button Name="btnSave" Width="70" Content="{DynamicResource common_Save}">
+      </Button>
+      <Button Name="btnCancel" Width="70" Margin="10,0,0,0" Content="{DynamicResource common_Cancel}">
+      </Button>
+    </StackPanel>
+  </Grid>
+</bookmark:EditBookmarkView>

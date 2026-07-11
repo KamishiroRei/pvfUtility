@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:WinFindNpk xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:viewmodels="clr-namespace:PvfCode.ViewModels;assembly=pvfUtility" Window.Title="NPK查询器" FrameworkElement.Width="1000" FrameworkElement.Height="800" xmlns:views="clr-namespace:PvfCode.Views;assembly=pvfUtility">
+  <FrameworkElement.DataContext>
+    <viewmodels:WinFindNpkViewModel />
+  </FrameworkElement.DataContext>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <editors:ButtonEdit xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.AllowDefaultButton="False" editors:TextEditBase.Text="{Binding Keyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+      <editors:ButtonEdit.Buttons>
+        <editors:ButtonInfo editors:ButtonInfo.GlyphKind="Search" editors:CommandButtonInfo.Command="{Binding OnFindCommand}" />
+      </editors:ButtonEdit.Buttons>
+    </editors:ButtonEdit>
+    <GridControl FrameworkElement.Name="gridMonster" Grid.Row="1" FrameworkElement.Margin="0,1,0,0" xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid:DataControlBase.SelectionMode="Row" grid:DataControlBase.CurrentItem="{Binding SelectedItem, Mode=TwoWay}" grid:DataControlBase.ItemsSource="{Binding Items.CollectionView}" grid:DataControlBase.SelectedItem="{Binding SelectedItem2, Mode=TwoWay}" grid:DataControlBase.SelectedItems="{Binding SelectedItems, Mode=TwoWay}" xmlns="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+      <grid1:GridControl.Columns xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+        <grid1:GridColumn grid:BaseColumn.Width="*" grid:BaseColumn.MinWidth="140" grid:ColumnBase.FieldName="ImageFileName" grid:BaseColumn.Header="Img名" grid:BaseColumn.HorizontalHeaderContentAlignment="Center" grid:ColumnBase.ShowAllTableValuesInCheckedFilterPopup="False" grid:ColumnBase.ShowAllTableValuesInFilterPopup="False" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+          <grid:ColumnBase.CellTemplate>
+            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+              <TextBox Text="{Binding Row.ImageFileName, Mode=OneWay}" />
+            </DataTemplate>
+          </grid:ColumnBase.CellTemplate>
+        </grid1:GridColumn>
+        <grid1:GridColumn grid:BaseColumn.Width="*" grid:BaseColumn.MinWidth="140" grid:ColumnBase.FieldName="ImagePath" grid:BaseColumn.Header="完整路径" grid:BaseColumn.HorizontalHeaderContentAlignment="Center" grid:ColumnBase.ShowAllTableValuesInCheckedFilterPopup="False" grid:ColumnBase.ShowAllTableValuesInFilterPopup="False">
+          <grid:ColumnBase.CellTemplate>
+            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+              <TextBox Text="{Binding Row.ImagePath, Mode=OneWay}" />
+            </DataTemplate>
+          </grid:ColumnBase.CellTemplate>
+        </grid1:GridColumn>
+        <grid1:GridColumn grid:BaseColumn.Width="auto" grid:BaseColumn.MinWidth="140" grid:ColumnBase.FieldName="ImagePath" grid:BaseColumn.Header="贴图数量" grid:BaseColumn.HorizontalHeaderContentAlignment="Center" grid:ColumnBase.ShowAllTableValuesInCheckedFilterPopup="False" grid:ColumnBase.ShowAllTableValuesInFilterPopup="False">
+          <grid:ColumnBase.CellTemplate>
+            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+              <TextBlock Text="{Binding Row.ImgFile.Count, Mode=OneWay}" />
+            </DataTemplate>
+          </grid:ColumnBase.CellTemplate>
+        </grid1:GridColumn>
+        <grid1:GridColumn grid:BaseColumn.Width="*" grid:BaseColumn.MinWidth="140" grid:ColumnBase.FieldName="NpkFileName" grid:BaseColumn.Header="Npk文件名" grid:BaseColumn.HorizontalHeaderContentAlignment="Center" grid:ColumnBase.ShowAllTableValuesInCheckedFilterPopup="False" grid:ColumnBase.ShowAllTableValuesInFilterPopup="False">
+          <grid:ColumnBase.CellTemplate>
+            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+              <editors:HyperlinkEdit Control.Padding="0,0,15,0" FrameworkElement.HorizontalAlignment="Right" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="False" editors:HyperlinkEdit.Command="{Binding Row.OnGoToNpkFileCommand}" editors:BaseEdit.EditValue="{Binding Row.NpkFileName, Mode=OneWay}" FrameworkElement.ToolTip="{Binding Row.NpkFilePath, Mode=OneWay}" />
+            </DataTemplate>
+          </grid:ColumnBase.CellTemplate>
+        </grid1:GridColumn>
+      </grid1:GridControl.Columns>
+      <GridControl.View>
+        <grid1:TableView xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid1:TableView.AllowBandMoving="False" grid1:TableView.AllowBandMultiRow="False" grid1:TableView.AllowBandResizing="False" grid1:TableView.AllowBestFit="False" grid1:TableView.AllowCascadeUpdate="False" grid:DataViewBase.AllowColumnFiltering="False" grid:DataViewBase.AllowColumnMoving="False" grid:DataViewBase.AllowEditing="True" grid1:TableView.AllowHorizontalScrollingVirtualization="True" grid:DataViewBase.EnableSelectedRowAppearance="True" grid1:TableView.HorizontalScrollbarVisibility="Auto" grid:DataViewBase.NavigationStyle="Row" grid1:TableView.ScrollBarAnnotationMode="Selected,FocusedRow,Custom " grid:DataViewBase.ScrollingMode="Smart" grid1:TableView.ShowAutoFilterRow="False" grid1:TableView.ShowBandsInCustomizationForm="False" grid1:TableView.ShowBandsPanel="False" grid:DataViewBase.ShowColumnHeaders="True" grid1:TableView.ShowDataNavigator="False" grid:DataViewBase.ShowEmptyText="False" grid:DataViewBase.ShowFilterPanelMode="Never" grid1:GridViewBase.ShowGroupPanel="False" grid1:TableView.ShowHorizontalLines="True" grid1:TableView.ShowIndicator="True" grid:DataViewBase.ShowSearchPanelMode="Default" grid:DataViewBase.ShowSelectionRectangle="True" grid1:TableView.ShowVerticalLines="True" grid1:TableView.UseEvenRowBackground="False" grid1:TableView.VerticalScrollbarVisibility="Auto">
+          <bars:BarManager.DXContextMenu xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+            <bars:PopupMenu>
+              <bars:PopupMenu.Items xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                <bars:BarButtonItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarItem.Content="复制" bars:BarItem.Glyph="{DynamicResource Action_Delete}" bars:BarItem.KeyGesture="Delete" bars:BarItem.Command="{Binding OnDeleteSelectedMonsterCommand}" />
+                <bars:BarButtonItem bars:BarItem.Content="复制选中掉落为文本 支持多选" bars:BarItem.Glyph="{DynamicResource CopyIcon}" bars:BarItem.KeyGesture="Ctrl+C" bars:BarItem.Command="{Binding OnCopyMonsterDropToTextCommand}" bars:BarItem.CommandParameter="{Binding ElementName=gridMonster, Path=SelectedItems, Mode=OneWay}" />
+              </bars:PopupMenu.Items>
+            </bars:PopupMenu>
+          </bars:BarManager.DXContextMenu>
+        </grid1:TableView>
+      </GridControl.View>
+    </GridControl>
+  </Grid>
+</views:WinFindNpk>

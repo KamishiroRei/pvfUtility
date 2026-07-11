@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>GMTool.Services</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\GMTool.SqlModel\GMTool.SqlModel.csproj" />
+    <Reference Include="DevExpress.Mvvm.v24.1">
+      <HintPath>$(RecoveredBinaryDirectory)\DevExpress.Mvvm.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlSugar">
+      <HintPath>$(RecoveredBinaryDirectory)\SqlSugar.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\PvfCode.Dot\PvfCode.Dot.csproj" />
+    <ProjectReference Include="..\GMTool.Dot\GMTool.Dot.csproj" />
+  </ItemGroup>
+</Project>

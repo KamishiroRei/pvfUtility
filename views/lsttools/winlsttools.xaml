@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root:WindowBase xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:addarraylstmodels="clr-namespace:PvfCode.ViewModels.LstTools.AddarrayLstModels;assembly=pvfUtility" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:i1="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" root:WindowBase.Loaded="WinLstTools_Loaded" Window.Title="{DynamicResource WinLstTools_Title}" FrameworkElement.Width="650" FrameworkElement.Height="600" Control.Padding="0" Window.ResizeMode="CanResizeWithGrip" xmlns:lsttools="clr-namespace:PvfCode.Views.LstTools;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary />
+  </FrameworkElement.Resources>
+  <LayoutGroup FrameworkElement.Name="Root" xmlns="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1">
+    <docking:LayoutPanel xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource WinLstTools_LstFileListCaption}" docking:BaseLayoutItem.ItemWidth="1*">
+      <Grid IsEnabled="{Binding IsLoading, Converter={StaticResource ConverterBoolenToFalse}, Mode=OneWay}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <GridControl p19:DataControlBase.ItemsSource="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.ListFileTable.LstFilePaths}" p19:DataControlBase.SelectedItem="{Binding SelectedItem, Mode=TwoWay}" xmlns:p19="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" xmlns="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+          <grid:GridControl.Columns xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+            <grid1:GridColumn xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid:BaseColumn.Width="*" grid:ColumnBase.FieldName="Key" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" />
+          </grid:GridControl.Columns>
+          <GridControl.View>
+            <grid:TableView xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid:TableView.AllowBandMoving="False" grid:TableView.AllowBandMultiRow="False" grid:TableView.AllowBandResizing="False" grid:TableView.AllowBestFit="False" grid:TableView.AllowCascadeUpdate="False" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid1:DataViewBase.AllowColumnFiltering="False" grid1:DataViewBase.AllowEditing="False" grid:TableView.AllowHorizontalScrollingVirtualization="True" grid:TableView.HorizontalScrollbarVisibility="Auto" grid1:DataViewBase.NavigationStyle="Row" grid1:DataViewBase.ScrollingMode="Smart" grid:TableView.ShowAutoFilterRow="False" grid:TableView.ShowBandsInCustomizationForm="False" grid:TableView.ShowBandsPanel="False" grid1:DataViewBase.ShowColumnHeaders="False" grid:TableView.ShowDataNavigator="False" grid1:DataViewBase.ShowEmptyText="False" grid1:DataViewBase.ShowFilterPanelMode="Never" grid:GridViewBase.ShowGroupPanel="False" grid:TableView.ShowHorizontalLines="True" grid:TableView.ShowIndicator="True" grid1:DataViewBase.ShowSearchPanelMode="Never" grid1:DataViewBase.ShowSelectionRectangle="True" grid:TableView.ShowVerticalLines="True" grid:TableView.UseEvenRowBackground="False" grid:TableView.VerticalScrollbarVisibility="Auto" grid:TableView.RowDoubleClickCommand="{Binding RowDoubleClickCommand}" />
+          </GridControl.View>
+        </GridControl>
+      </Grid>
+    </docking:LayoutPanel>
+    <docking:LayoutGroup FrameworkElement.Name="rightRoot" docking:BaseLayoutItem.ItemWidth="2*" xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:LayoutGroup.Orientation="Vertical">
+      <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource WinLstTools_FunctionCaption}" docking:BaseLayoutItem.ItemHeight="2*" docking:BaseLayoutItem.ShowCaption="True">
+        <TabControl Margin="0,1,0,0" Padding="0" BorderThickness="0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+          <TabItem Header="{DynamicResource WinLstTools_TabHeader_CheckLst}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <GroupBox Margin="5" Header="{DynamicResource WinLstTools_GroupCaption_CheckLst}">
+                <WrapPanel>
+                  <FrameworkElement.Resources>
+                    <ResourceDictionary>
+                      <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="0,8,10,0" />
+                        <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+                        <Setter Property="Width" Value="220" />
+                      </Style>
+                    </ResourceDictionary>
+                  </FrameworkElement.Resources>
+                  <Button Content="{DynamicResource WinLstTools_Button_CheckLstError}" Command="{Binding OnCheckRepeatAndInexistenceCommand}" />
+                  <Button Content="{DynamicResource WinLstTools_Button_DeleteLstError}" Command="{Binding OnDeleteRepeatAndInexistenceCommand}" />
+                  <Button Content="{DynamicResource WinLstTools_Button_CheckLstPathRepeat}" Command="{Binding OnPathRepeatCommand}" />
+                  <Button Content="{DynamicResource WinLstTools_Button_DeleteLstPathRepeat}" Command="{Binding OnDeletePathRepeatCommand}" />
+                  <Button Content="{DynamicResource WinLstTools_Button_ExportCodeName}" Command="{Binding OnExtractItemCodeOrItemNameCommand}" />
+                </WrapPanel>
+              </GroupBox>
+              <GroupBox Grid.Row="1" Margin="5" Header="{DynamicResource WinLstTools_TabHeader_SortLst}">
+                <WrapPanel>
+                  <FrameworkElement.Resources>
+                    <ResourceDictionary>
+                      <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="0,8,10,0" />
+                        <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+                        <Setter Property="Width" Value="220" />
+                      </Style>
+                    </ResourceDictionary>
+                  </FrameworkElement.Resources>
+                  <Button CommandParameter="True" Content="{DynamicResource WinLstTools_Button_SortLstByCode}" Command="{Binding OnSortLstCommand}" />
+                  <Button CommandParameter="false" Content="{DynamicResource WinLstTools_Button_SortLstByPath}" Command="{Binding OnSortLstCommand}" />
+                </WrapPanel>
+              </GroupBox>
+            </Grid>
+          </TabItem>
+          <TabItem Header="{DynamicResource WinLstTools_TabHeader_BatchAddLst}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+              </Grid.RowDefinitions>
+              <Grid>
+                <texteditlib:TextEditDefault xmlns:avalonedit1="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit1:TextEditor.ShowLineNumbers="True" avalonedit1:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}">
+                  <avalonedit1:TextEditor.Options>
+                    <avalonedit1:TextEditorOptions avalonedit1:TextEditorOptions.ShowTabs="True" />
+                  </avalonedit1:TextEditor.Options>
+                  <i1:Interaction.Behaviors>
+                    <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding AddArrayLstModel.ArrarLstString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  </i1:Interaction.Behaviors>
+                </texteditlib:TextEditDefault>
+              </Grid>
+              <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                <GroupBox Header="{DynamicResource WinLstTools_GroupCaption_CodeRepeat}">
+                  <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="{DynamicResource WinLstTools_RadioButton_Skip}" Cursor="Hand" IsChecked="{Binding Path=AddArrayLstModel.CodeRepeatManageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static addarraylstmodels:CodeRepeatManageType.跳过}}" />
+                    <RadioButton Margin="7,0,0,0" Content="{DynamicResource WinLstTools_RadioButton_AutoGenerateCode}" Cursor="Hand" IsChecked="{Binding Path=AddArrayLstModel.CodeRepeatManageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static addarraylstmodels:CodeRepeatManageType.自动生成编号}}" />
+                    <RadioButton Margin="7,0,0,0" Content="{DynamicResource WinLstTools_RadioButton_Ignore}" Cursor="Hand" ToolTip="{DynamicResource WinLstTools_RadioButton_Ignore_ToolTip}" ToolTipService.InitialShowDelay="50" IsChecked="{Binding Path=AddArrayLstModel.CodeRepeatManageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static addarraylstmodels:CodeRepeatManageType.忽略}}" />
+                  </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="0,10,0,0" Header="{DynamicResource WinLstTools_GroupCaption_PathRepeat}">
+                  <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="{DynamicResource WinLstTools_RadioButton_Skip}" Cursor="Hand" IsChecked="{Binding Path=AddArrayLstModel.PathRepeatManageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static addarraylstmodels:PathRepeatManageType.跳过}}" />
+                    <RadioButton Margin="7,0,0,0" Content="{DynamicResource WinLstTools_RadioButton_Ignore}" Cursor="Hand" ToolTip="{DynamicResource WinLstTools_RadioButton_Ignore_ToolTip}" ToolTipService.InitialShowDelay="50" IsChecked="{Binding Path=AddArrayLstModel.PathRepeatManageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static addarraylstmodels:PathRepeatManageType.忽略}}" />
+                  </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="0,10,0,0" Header="{DynamicResource WinLstTools_GroupCaption_PathNotExist}">
+                  <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="{DynamicResource WinLstTools_RadioButton_Ignore}" Cursor="Hand" ToolTip="{DynamicResource WinLstTools_RadioButton_Ignore_ToolTip}" ToolTipService.InitialShowDelay="50" IsChecked="{Binding Path=AddArrayLstModel.PathNotAnyManageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static addarraylstmodels:PathRepeatManageType.忽略}}" />
+                    <RadioButton Margin="7,0,0,0" Content="{DynamicResource WinLstTools_RadioButton_Skip}" Cursor="Hand" IsChecked="{Binding Path=AddArrayLstModel.PathNotAnyManageType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static addarraylstmodels:PathRepeatManageType.跳过}}" />
+                  </StackPanel>
+                </GroupBox>
+                <Button Height="35" Margin="10,5,10,10" Content="{DynamicResource WinLstTools_BatchAddLstBtn_Add}" Command="{Binding OnAddArrayLstCommand}" />
+              </StackPanel>
+            </Grid>
+          </TabItem>
+        </TabControl>
+      </docking:LayoutPanel>
+      <docking:LayoutPanel Grid.Row="1" docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource WinLstTools_GroupCaption_Output}" docking:BaseLayoutItem.ItemHeight="*" docking:BaseLayoutItem.ShowCaption="True">
+        <texteditorfolder:TextEditorBase FrameworkElement.MinHeight="100" AllowCompletion="False" AllowFolding="False" texteditlib:TextEdit.EditorType="Search" FileType="lst" p20:TextEditor.HorizontalScrollBarVisibility="Auto" p20:TextEditor.ShowLineNumbers="True" p20:TextEditor.Document="{Binding Document}" p20:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" xmlns:p20="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" />
+      </docking:LayoutPanel>
+    </docking:LayoutGroup>
+  </LayoutGroup>
+</root:WindowBase>

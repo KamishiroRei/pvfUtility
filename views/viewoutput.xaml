@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:local="clr-namespace:PvfCode.Views;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" BorderThickness="0" BorderBrush="{x:Null}" DataContext="{Binding Source={x:Static root:AppCore.Logger}}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <bars:BarContainerControl Grid.Row="0" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+      <bars:Bar xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:Bar.AllowCustomizationMenu="False" bars:Bar.AllowQuickCustomization="False" bars:Bar.ShowDragWidget="True">
+        <bars:BarButtonItem bars:BarItem.Content="{DynamicResource ViewOutPut_Button_ClearAll}" bars:BarItem.Glyph="{DynamicResource ClearWindowContent}" bars:BarItem.Command="{Binding ClearOutPutCommand}" />
+        <bars:BarCheckItem bars:BarItem.Content="{DynamicResource ViewOutPut_Button_ToggleAutoWrap}" FrameworkContentElement.Cursor="Hand" bars:BarItem.Glyph="{DynamicResource WordWrap}" bars:BarCheckItem.IsChecked="{Binding ElementName=editor, Path=WordWrap, Mode=TwoWay}" />
+      </bars:Bar>
+    </bars:BarContainerControl>
+    <texteditlib:TextEdit FrameworkElement.Name="editor" Grid.Row="1" Control.Background="{DynamicResource OutPutEditorBackColor}" Control.BorderThickness="0" texteditlib:TextEdit.EditorCurrentLineBackground="#00FFFFFF" texteditlib:TextEdit.EditorCurrentLineBorderThickness="0" texteditlib:TextEdit.EditorType="OutPut" xmlns:avalonedit1="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit1:TextEditor.HorizontalScrollBarVisibility="Auto" avalonedit1:TextEditor.IsReadOnly="False" avalonedit1:TextEditor.ShowLineNumbers="False" texteditlib:TextEdit.VerticalScrollBarVisibilityEx="Hidden" avalonedit1:TextEditor.WordWrap="False" Control.BorderBrush="{x:Null}" texteditlib:TextEdit.CaretOffsetEx="{Binding ElementName=editor, Path=Document.TextLength, Mode=OneWay}" avalonedit1:TextEditor.Document="{Binding Document}" avalonedit1:TextEditor.SyntaxHighlighting="{Binding Highlighting}">
+      <avalonedit1:TextEditor.Options>
+        <avalonedit1:TextEditorOptions avalonedit1:TextEditorOptions.AllowScrollBelowDocument="False" avalonedit1:TextEditorOptions.ShowSpaces="False" avalonedit1:TextEditorOptions.ShowTabs="False" />
+      </avalonedit1:TextEditor.Options>
+    </texteditlib:TextEdit>
+  </Grid>
+</UserControl>

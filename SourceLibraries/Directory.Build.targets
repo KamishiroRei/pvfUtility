@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+    <AssemblySearchPaths>$(RecoveredBinaryDirectory);$(AssemblySearchPaths)</AssemblySearchPaths>
+  </PropertyGroup>
+</Project>

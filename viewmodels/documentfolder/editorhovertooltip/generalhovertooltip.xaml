@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Popup xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:local="clr-namespace:PvfCode.ViewModels.DocumentFolder.EditorHoverTooltip;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Name="pop" Loaded="CCgmY8AvZd">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="./TootipStyles.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <ContentControl Grid.Row="1" Content="{Binding}" ContentTemplateSelector="{Binding ContentTemplateSelector, Mode=OneWay}" />
+  </Grid>
+</Popup>

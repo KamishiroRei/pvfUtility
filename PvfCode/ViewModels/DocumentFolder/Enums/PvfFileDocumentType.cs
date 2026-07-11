@@ -1,0 +1,12 @@
+namespace PvfCode.ViewModels.DocumentFolder.Enums;
+
+public enum PvfFileDocumentType
+{
+	PVF文档,
+	起始页,
+	PVF差异比较器,
+	发布,
+	导入文件,
+	商店,
+	chatGPT
+}

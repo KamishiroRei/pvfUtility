@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Themes/Styles/IconsDark.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <SolidColorBrush x:Key="TreeListRowBackBrushIsMouseOver">#505050</SolidColorBrush>
+  <SolidColorBrush x:Key="PvfFilePreviewBackBrush">#84052236</SolidColorBrush>
+  <SolidColorBrush x:Key="PvfFilePreviewFontBrush" Color="White" />
+  <ControlTemplate xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type core:WaitIndicatorContainer}">
+    <Border BorderThickness="0">
+      <ContentPresenter />
+    </Border>
+    <x:Key>
+      <core:WaitIndicatorThemeKeyExtension xmlns:themes="clr-namespace:DevExpress.Xpf.Utils.Themes;assembly=DevExpress.Xpf.Core.v24.1" ResourceKey="WaitIndicatorContainerTemplate" ThemeName="VS2019Dark" />
+    </x:Key>
+  </ControlTemplate>
+  <SolidColorBrush x:Key="WinErrorTextBackBrush">#383838</SolidColorBrush>
+  <SolidColorBrush x:Key="DocumentTabCaptionBackBrush_Default">#393737</SolidColorBrush>
+  <SolidColorBrush x:Key="DocumentTabCaptionBackBrush_Hover">#454444</SolidColorBrush>
+  <SolidColorBrush x:Key="DocumentTabCaptionBackBrush_Selected">#414141</SolidColorBrush>
+  <SolidColorBrush x:Key="DocumentTabCatpionBorderTopBackBrush">#007acc</SolidColorBrush>
+  <SolidColorBrush x:Key="DocumentTabCatpionCloseBtnHoverBackBrush">#007acc</SolidColorBrush>
+  <SolidColorBrush x:Key="PvfReleasePanelBackbrush">#333333</SolidColorBrush>
+  <SolidColorBrush x:Key="PvfReleaseStatusPanelBorderBrush">#6ccb5f</SolidColorBrush>
+  <SolidColorBrush x:Key="PvfReleaseStatusPanelBackBrush">#393d1b</SolidColorBrush>
+  <SolidColorBrush x:Key="TreeListReNameTextEditBackBrush">#272729</SolidColorBrush>
+  <SolidColorBrush x:Key="KorStrFileQuoteTooltipBottomBackBrush">#2D2D30</SolidColorBrush>
+  <SolidColorBrush x:Key="TreeListGroupCurrentPathInputBackBrush">#404040</SolidColorBrush>
+  <SolidColorBrush x:Key="PreviewAniUiToolBarBackBrush">#333337</SolidColorBrush>
+  <SolidColorBrush x:Key="ItemCodeHoverPanelBottomBackBrush">#2d2d30</SolidColorBrush>
+  <SolidColorBrush x:Key="LinkTextForeBrush">#1e4fa9</SolidColorBrush>
+  <SolidColorBrush x:Key="WindowBackColor">#2d2d30</SolidColorBrush>
+  <SolidColorBrush x:Key="WindowBorderColor">#007acc</SolidColorBrush>
+  <SolidColorBrush x:Key="WindowForeground">White</SolidColorBrush>
+  <SolidColorBrush x:Key="LoadingProgressBarBackBrush">white</SolidColorBrush>
+  <SolidColorBrush x:Key="LoadingProgressBarForeBrush">#06b025</SolidColorBrush>
+  <SolidColorBrush x:Key="TreeLoadingProgressForeground">#007acc</SolidColorBrush>
+  <SolidColorBrush x:Key="TreePvfItemNameColor">#ff8000</SolidColorBrush>
+  <SolidColorBrush x:Key="TreePvfItemCodeColor">#3296b0</SolidColorBrush>
+  <SolidColorBrush x:Key="TreePvfComment">gray</SolidColorBrush>
+  <SolidColorBrush x:Key="TreePvfDiffRowBackBrush">#861b2d</SolidColorBrush>
+  <SolidColorBrush x:Key="TreeDiffScrollBarCustomRowAnnotationBrush">#773800</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorToolBarItemCodeBrush">#B5CEA8</SolidColorBrush>
+  <SolidColorBrush x:Key="TextEditorCommentAuthorsGridBackBrush">#3e3e40</SolidColorBrush>
+  <SolidColorBrush x:Key="CompletionListSelectItemBackBrush">#007acc</SolidColorBrush>
+  <SolidColorBrush x:Key="CompletionCommentEditorBackBrush" Color="#424242" />
+  <SolidColorBrush x:Key="CompletionCommentTooltipTabControlBottomBackBrush">#1e1e1e</SolidColorBrush>
+  <SolidColorBrush x:Key="DiffLeftBackBrush">#3c0000</SolidColorBrush>
+  <SolidColorBrush x:Key="DiffRightBackBrush">#15352c</SolidColorBrush>
+  <SolidColorBrush x:Key="RangeScrollbarDefaultBackground">#333337</SolidColorBrush>
+  <SolidColorBrush x:Key="RangeScrollbarDefaultBorderBrush">#3b3b40</SolidColorBrush>
+  <SolidColorBrush x:Key="RepeatButtonIsMouseOverBackGround">#383839</SolidColorBrush>
+  <SolidColorBrush x:Key="RepeatButtonIsMouseOverBorderBrush">#3f3f46</SolidColorBrush>
+  <SolidColorBrush x:Key="RepeatButtonIsPressedOverBackGround">#007acc</SolidColorBrush>
+  <SolidColorBrush x:Key="RepeatButtonIsPressedOverBorderBrush">#3f3f46</SolidColorBrush>
+  <SolidColorBrush x:Key="RepeatButtonDefaultBackGround">#333337</SolidColorBrush>
+  <SolidColorBrush x:Key="RepeatButtonIsDefaultBorderBrush">#3b3b40</SolidColorBrush>
+  <SolidColorBrush x:Key="RepeatButtonForeBrush">#9e9e9e</SolidColorBrush>
+  <SolidColorBrush x:Key="RangeScrollThumbDefaultBackBrush">#686868</SolidColorBrush>
+  <SolidColorBrush x:Key="RangeScrollThumbIsDraggingBackBrush">#9e9e9e</SolidColorBrush>
+  <SolidColorBrush x:Key="OutPutEditorBackColor">#252526</SolidColorBrush>
+  <SolidColorBrush x:Key="FoldingGuideLineBrush0">#717171</SolidColorBrush>
+  <SolidColorBrush x:Key="FoldingGuideLineBrush1">#135647</SolidColorBrush>
+  <SolidColorBrush x:Key="FoldingGuideLineBrush2">#172e41</SolidColorBrush>
+  <SolidColorBrush x:Key="FoldingGuideLineBrush3">#7B4528</SolidColorBrush>
+  <SolidColorBrush x:Key="FoldingGuideLineBrush4">#7938a5</SolidColorBrush>
+  <SolidColorBrush x:Key="SearchPanelTWCheckBoxForeBrush">#9e9e9e</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorFindKeyWordTextBoxBorderBrush">#3f3f46</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorFindKeyWordTextBoxErrorBorderBrush">#ff99a4</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorFindKeyWordTextBoxBorderBrushStatusIsMouseOver">#007acc</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorFindKeyWordTextBoxBackBrush">#333337</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorSearchPanelBottomBackBrush">#007acc</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorSearchPanelBottomBackBrushStatusNotFocused">#3f3f46</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorSearchPanelSettingBorderBrush">#9e9e9e</SolidColorBrush>
+  <SolidColorBrush x:Key="SearchResultMarkerBrush">#8F4808</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorBackground">#1e1e1e</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorForeground">white</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorLineNumbersForeground">#2b91af</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorCurrentLineBackgroundBrushKey">#1e1e1e</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorCurrentLineBorderBrushKey">#464646</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorNonPrintableCharacterBrush">#FF808080</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorLinkTextForegroundBrush">#FF569cd6</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorLinkTextBackgroundBrush">#FF1E1E1E</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorSelectionBrush">#BF264F78</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorSelectionBorder">#8F264F78</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorSelectionForeBrush">#FFDCDCDC</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorFoldingMarkerBackgroundBrush">#1e1e1e</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorFoldingMarkerBrush">#a5a5a5</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorSelectedFoldingMarkerBackgroundBrush">#1e1e1e</SolidColorBrush>
+  <SolidColorBrush x:Key="EditorSelectedFoldingMarkerBrush">White</SolidColorBrush>
+  <Color x:Key="ControlAccentColorKey">#FF1888b8</Color>
+  <SolidColorBrush x:Key="ControlAccentBrushKey">#FF1888b8</SolidColorBrush>
+  <SolidColorBrush x:Key="NormalBackgroundBrushKey" Color="#333337" />
+  <LinearGradientBrush x:Key="UnitCmbDarkBrushKey" StartPoint="0,0" EndPoint="0,1">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Offset="1.0" Color="#444" />
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="UnitCmbHighlighColorBrushKey" Color="{StaticResource ControlAccentColorKey}" />
+  <SolidColorBrush x:Key="UnitCmbPressedBrushKey" Color="{StaticResource ControlAccentColorKey}" />
+  <SolidColorBrush x:Key="UnitCmbDisabledForegroundBrushKey" Color="#888" />
+  <SolidColorBrush x:Key="UnitCmbDisabledBackgroundBrushKey" Color="#EEE" />
+  <SolidColorBrush x:Key="UnitCmbWindowBackgroundBrushKey" Color="#333337" />
+  <LinearGradientBrush x:Key="UnitCmbNormalBorderBrushKey" StartPoint="0,0" EndPoint="0,1">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Offset="1.0" Color="#444" />
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="UnitCmbDisabledBorderBrush" Color="#AAA" />
+  <SolidColorBrush x:Key="UnitCmbSolidBorderBrushKey" Color="#3f3f46" />
+  <SolidColorBrush x:Key="UnitCmbGlyphBrushKey" Color="#444" />
+</ResourceDictionary>

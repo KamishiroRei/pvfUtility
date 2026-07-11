@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<descriptionviews:ViewTabComment xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" Window.Title="{DynamicResource ViewTabComment_Title}" FrameworkElement.Width="700" FrameworkElement.Height="700" Window.ResizeMode="CanResizeWithGrip" xmlns:descriptionviews="clr-namespace:PvfCode.Views.DescriptionViews;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding LoadedCommand}" />
+    <EventToCommand interactivity:EventTriggerBase.Event="Unloaded" p17:EventToCommandBase.Command="{Binding UnloadedCommand}" xmlns:p17="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+  </interactivity:Interaction.Behaviors>
+  <Grid>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="auto " />
+      </Grid.RowDefinitions>
+      <docking:DockLayoutManager xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:DockLayoutManager.Name="DemoDockContainer" Grid.Row="0" Grid.ColumnSpan="2" FrameworkElement.Margin="0,0,0,3" docking:DockLayoutManager.DockingStyle="VS2010" docking:DockLayoutManager.FloatingDocumentContainer="DocumentHost" docking:DockLayoutManager.FloatingMode="Desktop">
+        <docking:LayoutGroup FrameworkElement.Name="Root">
+          <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource ViewTabComment_TabTranslateListHeader}" docking:BaseLayoutItem.ItemWidth="1.5*">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <Grid Row="0">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <editors:ButtonEdit FrameworkElement.Name="textKeyword" Grid.Column="0" Grid.ColumnSpan="2" FrameworkElement.Height="24" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:TextEditBase.AcceptsTab="True" editors:ButtonEdit.AllowDefaultButton="False" editors:BaseEdit.EditValuePostDelay="10" editors:BaseEdit.EditValuePostMode="Delayed" editors:BaseEdit.NullText="{DynamicResource ViewTabComment_FindKeywordNullText}" editors:TextEditBase.PrintTextWrapping="NoWrap" editors:TextEditBase.SelectAllOnGotFocus="True" editors:TextEditBase.SelectAllOnMouseUp="True" editors:TextEditBase.TextWrapping="NoWrap" editors:BaseEdit.EditValue="{Binding Keyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}">
+                  <Interaction.Behaviors xmlns="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+                    <ui:KeyToCommand ui:EventToCommandBase.CommandParameter="True" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:KeyToCommand.KeyGesture="Enter" ui:EventToCommandBase.Command="{Binding OnSearchCommand}" />
+                  </Interaction.Behaviors>
+                  <editors:ButtonEdit.Buttons>
+                    <editors:ButtonInfo ButtonInfo.Content="{DynamicResource ViewTabComment_SearchButton}" editors:ButtonInfo.GlyphKind="Search" editors:CommandButtonInfo.Command="{Binding OnSearchCommand}" />
+                    <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Toggle" editors:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource ViewTabComment_SearchOptions_FullWordMatch}" editors:CommonButtonInfo.IsChecked="{Binding WholeWordMatch, Mode=TwoWay}">
+                      <editors:ButtonInfo.Content>
+                        <Image Width="16" Height="16" Source="{DynamicResource WholeWordMatch_16x}" Stretch="Fill" />
+                      </editors:ButtonInfo.Content>
+                    </editors:ButtonInfo>
+                    <editors:ButtonInfo editors:ButtonInfo.GlyphKind="Cancel" FrameworkContentElement.ToolTip="{DynamicResource ViewTabComment_ClearButton}" editors:CommandButtonInfo.Command="{Binding OnClearKeywordCommand}" />
+                  </editors:ButtonEdit.Buttons>
+                </editors:ButtonEdit>
+              </Grid>
+              <bars:ToolBarControl FrameworkElement.Name="toolbarControl" Grid.Row="1" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+                <bars:BarStaticItem bars:BarItem.Content="{Binding Count}" />
+              </bars:ToolBarControl>
+              <GridControl Grid.Row="2" xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid:DataControlBase.SelectionMode="Row" grid:DataControlBase.ItemsSource="{Binding Items}" grid:DataControlBase.SelectedItems="{Binding SelectedItems}" xmlns="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+                <grid1:GridControl.Columns xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+                  <grid1:GridColumn grid:BaseColumn.Width="*" grid:ColumnBase.FieldName="Section" grid:BaseColumn.Header="{DynamicResource ViewTabComment_GridDataColumnHeader_Tag}" grid:ColumnBase.ShowAllTableValuesInCheckedFilterPopup="False" grid:ColumnBase.ShowAllTableValuesInFilterPopup="False" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" />
+                  <grid1:GridColumn grid:BaseColumn.Width="auto" grid:BaseColumn.MinWidth="50" grid:ColumnBase.FieldName="FileType" grid:BaseColumn.Header="{DynamicResource ViewTabComment_GridDataColumnHeader_File}" grid:BaseColumn.HorizontalHeaderContentAlignment="Right" />
+                  <grid1:GridColumn grid:BaseColumn.Width="auto" grid:BaseColumn.MinWidth="50" grid:ColumnBase.FieldName="PvfCommentType" grid:BaseColumn.Header="{DynamicResource ViewTabComment_GridDataColumnHeader_Type}" grid:BaseColumn.HorizontalHeaderContentAlignment="Right" />
+                </grid1:GridControl.Columns>
+                <GridControl.View>
+                  <grid1:TableView xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid1:TableView.AllowBandMoving="False" grid1:TableView.AllowBandMultiRow="False" grid1:TableView.AllowBandResizing="False" grid1:TableView.AllowBestFit="False" grid1:TableView.AllowCascadeUpdate="False" grid:DataViewBase.AllowColumnFiltering="False" grid:DataViewBase.AllowColumnMoving="False" grid:DataViewBase.AllowEditing="False" grid1:TableView.AllowHorizontalScrollingVirtualization="True" grid:DataViewBase.EnableSelectedRowAppearance="True" grid1:TableView.HorizontalScrollbarVisibility="Auto" grid:DataViewBase.NavigationStyle="Row" grid:DataViewBase.ScrollingMode="Smart" grid1:TableView.ShowAutoFilterRow="False" grid1:TableView.ShowBandsInCustomizationForm="False" grid1:TableView.ShowBandsPanel="False" grid:DataViewBase.ShowColumnHeaders="True" grid1:TableView.ShowDataNavigator="False" grid:DataViewBase.ShowEmptyText="False" grid:DataViewBase.ShowFilterPanelMode="Never" grid1:GridViewBase.ShowGroupPanel="False" grid1:TableView.ShowHorizontalLines="True" grid1:TableView.ShowIndicator="True" grid:DataViewBase.ShowSearchPanelMode="Default" grid:DataViewBase.ShowSelectionRectangle="True" grid1:TableView.ShowVerticalLines="True" grid1:TableView.UseEvenRowBackground="False" grid1:TableView.VerticalScrollbarVisibility="Auto" grid:DataViewBase.FocusedRow="{Binding SelectedItem, Mode=TwoWay}">
+                    <bars:BarManager.DXContextMenu xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                      <bars:PopupMenu>
+                        <bars:PopupMenu.Items xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource ViewTabComment_DeleteSelected}" bars:BarItem.Glyph="{DynamicResource Action_Delete}" bars:BarItem.KeyGesture="Delete" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarItem.Command="{Binding OnSeleteSelectedItemsCommand}" />
+                        </bars:PopupMenu.Items>
+                      </bars:PopupMenu>
+                    </bars:BarManager.DXContextMenu>
+                  </grid1:TableView>
+                </GridControl.View>
+              </GridControl>
+            </Grid>
+          </docking:LayoutPanel>
+          <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource ViewTabComment_ManageAreaHeader}" docking:BaseLayoutItem.ItemWidth="2*">
+            <Grid Margin="5">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <GroupBox Margin="0,0,0,0" Header="{DynamicResource ViewTabComment_AddHeader}">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                  </Grid.RowDefinitions>
+                  <Label HorizontalAlignment="Right" Content="{DynamicResource ViewTabComment_FileTypeLabel}" />
+                  <editors:ComboBoxEdit Grid.Column="1" editors:ButtonEdit.IsTextEditable="True" editors:BaseEdit.NullText="{DynamicResource ViewTabComment_FileTypeNullText}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:BaseEdit.EditValue="{Binding AddData.FileType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" editors:LookUpEditBase.ItemsSource="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.FileTypeHasSet}" />
+                  <Label Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Right" Content="{DynamicResource ViewTabComment_TypeLabel}" />
+                  <ComboBoxEdit Grid.Row="1" Grid.Column="1" FrameworkElement.Margin="0,10,0,0" p23:ButtonEdit.IsTextEditable="False" p23:LookUpEditBase.ItemsSource="{StaticResource KeyCommentType}" p23:BaseEdit.NullText="{DynamicResource ViewTabComment_TypeNullText}" FrameworkElement.ToolTip="{DynamicResource ViewTabComment_TypeToolTip}" ToolTipService.InitialShowDelay="50" p23:BaseEdit.EditValue="{Binding AddData.PvfCommentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p23="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Right" Content="{DynamicResource ViewTabComment_TagLabel}" />
+                  <editors:TextEdit Grid.Row="2" Grid.Column="1" FrameworkElement.Margin="0,10,0,0" editors:BaseEdit.NullText="{DynamicResource ViewTabComment_TagNullText}" FrameworkElement.ToolTip="{DynamicResource ViewTabComment_TagToolTip}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:TextEditBase.Text="{Binding AddData.Section, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  <texteditlib:TextEdit texteditlib:TextEdit.Name="editor" Grid.Row="3" Grid.Column="1" FrameworkElement.MinHeight="100" FrameworkElement.MaxHeight="100" FrameworkElement.Margin="0,10,0,0" Control.Padding="0" Control.Background="{DynamicResource CompletionCommentEditorBackBrush}" Control.BorderBrush="{DynamicResource WindowBorderColor}" Control.BorderThickness="1" texteditlib:TextEdit.EditorCurrentLineBackground="{DynamicResource CompletionCommentEditorBackBrush}" texteditlib:TextEdit.EditorCurrentLineBorderThickness="0" texteditlib:TextEdit.EditorType="ToolTip" xmlns:avalonedit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit:TextEditor.HorizontalScrollBarVisibility="Disabled" avalonedit:TextEditor.IsReadOnly="False" avalonedit:TextEditor.ShowLineNumbers="False" avalonedit:TextEditor.SyntaxHighlighting="{Binding AddDataHighlighting, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Interaction.Behaviors xmlns="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+                      <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding AddData.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Interaction.Behaviors>
+                  </texteditlib:TextEdit>
+                  <Button Grid.Row="4" Grid.Column="1" Margin="0,10,0,0" Content="{DynamicResource ViewTabComment_AddButton}" Command="{Binding OnAddCommand}" />
+                </Grid>
+              </GroupBox>
+              <GroupBox Grid.Row="1" Margin="0,10,0,0" Header="{DynamicResource ViewTabComment_EditHeader}" Visibility="{Binding SelectedItem, Converter={StaticResource ConvertNullToVisibility}}">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                  </Grid.RowDefinitions>
+                  <Label HorizontalAlignment="Right" Content="{DynamicResource ViewTabComment_FileTypeLabel}" />
+                  <ComboBoxEdit Grid.Column="1" p23:ButtonEdit.IsTextEditable="True" p23:BaseEdit.NullText="{DynamicResource ViewTabComment_FileTypeNullText}" p23:BaseEdit.EditValue="{Binding SelectedItem.FileType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" p23:LookUpEditBase.ItemsSource="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.FileTypeHasSet}" xmlns:p23="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Right" Content="{DynamicResource ViewTabComment_TypeLabel}" />
+                  <ComboBoxEdit Grid.Row="1" Grid.Column="1" FrameworkElement.Margin="0,10,0,0" p23:ButtonEdit.IsTextEditable="False" p23:LookUpEditBase.ItemsSource="{StaticResource KeyCommentType}" p23:BaseEdit.NullText="{DynamicResource ViewTabComment_TypeNullText}" FrameworkElement.ToolTip="{DynamicResource ViewTabComment_TypeToolTip}" ToolTipService.InitialShowDelay="50" p23:BaseEdit.EditValue="{Binding SelectedItem.PvfCommentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p23="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Right" Content="{DynamicResource ViewTabComment_TagLabel}" />
+                  <TextEdit Grid.Row="2" Grid.Column="1" FrameworkElement.Margin="0,10,0,0" p23:BaseEdit.NullText="{DynamicResource ViewTabComment_TagNullText}" FrameworkElement.ToolTip="{DynamicResource ViewTabComment_TagToolTip}" p23:TextEditBase.Text="{Binding SelectedItem.Section, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p23="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Row="3" Content="{DynamicResource ViewTabComment_AuthorLabel}" />
+                  <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding SelectedItem.Authors}" />
+                  <texteditlib:TextEdit Grid.Row="4" Grid.Column="1" FrameworkElement.MinHeight="100" FrameworkElement.MaxHeight="100" FrameworkElement.Margin="0,10,0,0" Control.Padding="0" Control.Background="{DynamicResource CompletionCommentEditorBackBrush}" Control.BorderBrush="{DynamicResource WindowBorderColor}" Control.BorderThickness="1" texteditlib:TextEdit.EditorCurrentLineBackground="{DynamicResource CompletionCommentEditorBackBrush}" texteditlib:TextEdit.EditorCurrentLineBorderThickness="0" texteditlib:TextEdit.EditorType="ToolTip" p23:TextEditor.HorizontalScrollBarVisibility="Disabled" p23:TextEditor.IsReadOnly="False" p23:TextEditor.ShowLineNumbers="False" p23:TextEditor.SyntaxHighlighting="{Binding AddDataHighlighting, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p23="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit">
+                    <Interaction.Behaviors xmlns="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+                      <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding SelectedItem.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Interaction.Behaviors>
+                  </texteditlib:TextEdit>
+                  <Button Grid.Row="5" Grid.Column="1" Margin="0,10,0,0" Content="{DynamicResource common_Save}" Command="{Binding OnUpdateSelectedDataCommand}" />
+                </Grid>
+              </GroupBox>
+            </Grid>
+          </docking:LayoutPanel>
+        </docking:LayoutGroup>
+      </docking:DockLayoutManager>
+      <StackPanel Grid.Row="1" Margin="0,5,0,5" HorizontalAlignment="Right" Orientation="Horizontal">
+        <StackPanel Margin="0,0,10,0" HorizontalAlignment="Left">
+          <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF808080" TextWrapping="Wrap">
+            <Run Text="{DynamicResource ViewTabComment_AuthorNullText1}" />
+            <LineBreak />
+            <Run Text="{DynamicResource ViewTabComment_AuthorNullText2}" />
+            <LineBreak />
+            <Run />
+          </TextBlock>
+        </StackPanel>
+        <editors:HyperlinkEdit FrameworkElement.Margin="0,0,10,0" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" editors:BaseEdit.EditValue="{DynamicResource EditorToolTipStyle_ItemCodeHover_ShareSetting}" editors:HyperlinkEdit.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=BarsVm.OnOpenPublicSettingCommand}" editors:HyperlinkEdit.CommandParameter="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=LuanguageOptions.GoToStoreShareOption_TagTranslation}" />
+        <Button Width="90" Height="24" Margin="0,0,10,0" Content="{DynamicResource common_Save}" Command="{Binding OnSaveCommand}" />
+        <Button Width="90" Height="24" Margin="0,0,10,0" Content="{DynamicResource common_Cancel}" Command="{Binding OnCloseCommand}" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</descriptionviews:ViewTabComment>

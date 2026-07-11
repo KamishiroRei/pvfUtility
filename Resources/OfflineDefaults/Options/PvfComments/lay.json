@@ -1,0 +1,16 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "lay",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "lay",
+                         "Section":  "dashattack motion",
+                         "Title":  "大屠杀运动",
+                         "Comment":  "大屠杀运动",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     }
+                 ]
+}

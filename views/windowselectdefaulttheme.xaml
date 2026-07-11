@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:WindowSelectDefaultTheme xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:enums="clr-namespace:PvfCode.Models.Enums;assembly=PvfCode.Models" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" Window.Title="{DynamicResource WindowSelectDefaultTheme_Title}" FrameworkElement.Width="300" FrameworkElement.Height="200" Window.SizeToContent="Height" Window.WindowStyle="ToolWindow" xmlns:views="clr-namespace:PvfCode.Views;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <Grid>
+    <StackPanel Margin="0,8,0,8" Orientation="Horizontal" DataContext="{Binding Source={x:Static root:ThemeSwitcher.Instance}}">
+      <RadioButton Margin="15,0,0,0" Content="{DynamicResource common_Theme_Blue}" Cursor="Hand" IsChecked="{Binding Path=SettingSelectedTheme, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enums:ThemeType.VS2019Blue}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <RadioButton Margin="15,0,0,0" Content="{DynamicResource common_Theme_Dark}" Cursor="Hand" IsChecked="{Binding Path=SettingSelectedTheme, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enums:ThemeType.VS2019Dark}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <RadioButton Margin="15,0,0,0" Content="{DynamicResource common_Theme_Light}" Cursor="Hand" IsChecked="{Binding Path=SettingSelectedTheme, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enums:ThemeType.VS2019Light}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    </StackPanel>
+  </Grid>
+</views:WindowSelectDefaultTheme>

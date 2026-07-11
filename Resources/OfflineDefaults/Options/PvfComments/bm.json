@@ -1,0 +1,16 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "bm",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "bm",
+                         "Section":  "tile",
+                         "Title":  "在近景图层上平铺绘制的地图基础",
+                         "Comment":  "\n在近景图层上平铺绘制的地图基础。\n\n地图底板",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "阿董-137735017"
+                     }
+                 ]
+}

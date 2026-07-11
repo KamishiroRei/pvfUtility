@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:PvfCode.Views.Preview;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+  <ContentControl ContentTemplateSelector="{StaticResource PvfFilePreviewContentTemplateSelector}" Content="{Binding Path=ContentEx, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=local:PreviewPvfItemControl, Mode=FindAncestor}}" />
+</UserControl>

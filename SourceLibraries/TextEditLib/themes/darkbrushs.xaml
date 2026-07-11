@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:TextEditLib.Themes" xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options" xmlns:reskeys="clr-namespace:TextEditLib.Themes">
+  <Color x:Key="{ComponentResourceKey ResourceId=ControlAccentColorKey, TypeInTargetAssembly={x:Type local:ResourceKeys}}">#1ba1e2</Color>
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=ControlAccentBrushKey, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Color="{DynamicResource {x:Static local:ResourceKeys.ControlAccentColorKey}}" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorBackground, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Color="#FF181818" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorForeground, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Color="#FFFFFFFF" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorLineNumbersForeground, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Color="#ff929292" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorSelectionBrush, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Opacity="0.75" Color="{DynamicResource {x:Static local:ResourceKeys.ControlAccentColorKey}}" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorSelectionBorder, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Opacity="0.75" Color="{DynamicResource {x:Static local:ResourceKeys.ControlAccentColorKey}}" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorNonPrintableCharacterBrush, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Color="#2FFFFFFF" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorLinkTextForegroundBrush, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Color="#FFAAAAFF" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorLinkTextBackgroundBrush, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Color="Transparent" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorCurrentLineBackgroundBrushKey, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Color="#2FCCCDCE" />
+  <SolidColorBrush x:Key="{ComponentResourceKey ResourceId=EditorCurrentLineBorderBrushKey, TypeInTargetAssembly={x:Type local:ResourceKeys}}" options:Freeze="true" Opacity=".6" Color="#2FCCCDCE" />
+</ResourceDictionary>

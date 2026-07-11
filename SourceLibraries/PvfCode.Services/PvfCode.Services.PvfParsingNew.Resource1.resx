@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="ScriptFileParserConfiger" xml:space="preserve"><value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root&gt;
+  &lt;!--
+        开放此配置的目的是为了收集并完善PVF文档格式 希望大家能尽量提交到云端并允许作者合并
+        待完善后，该功能可能会关闭！因为统一文档格式是有必要的！
+    --&gt;
+  &lt;File FileName="*.tbl"&gt;
+    &lt;Section SectionName="[easy]" GroupLength="14" /&gt;
+    &lt;Section SectionName="[medium]" GroupLength="14" /&gt;
+    &lt;Section SectionName="[hard]" GroupLength="14" /&gt;
+    &lt;Section SectionName="[ultimate]" GroupLength="14" /&gt;
+    &lt;Section SectionName="[hero]" GroupLength="14" /&gt;
+    &lt;Section SectionName="[normal]" GroupLength="2" ParentSectionName="[mesmerization damage balance]" Description="" /&gt;
+    &lt;Section SectionName="[named]" GroupLength="2" ParentSectionName="[mesmerization damage balance]" Description="" /&gt;
+    &lt;Section SectionName="[boss]" GroupLength="2" ParentSectionName="[mesmerization damage balance]" Description="" /&gt;
+    &lt;Section SectionName="[named]" GroupLength="3" ParentSectionName="[limit slowdown]" Description="" /&gt;
+    &lt;Section SectionName="[boss]" GroupLength="3" ParentSectionName="[limit slowdown]" Description="" /&gt;
+    &lt;Section SectionName="[Revision Table]" GroupLength="14"  Description="" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="*.map" Description="地图文件格式化"&gt;
+    &lt;Section SectionName="[animation]" Description="地图相关动画文件" GroupLength="5" /&gt;
+    &lt;Section SectionName="[passive object]" Description="地图相关被动对象" GroupLength="4" /&gt;
+    &lt;!--&lt;Section SectionName="[monster]" Description="怪物" GroupLength="10" /&gt;--&gt;
+    &lt;Section SectionName="[monster condition]" Description="地图相关动画文件" GroupLength="10" /&gt;
+    &lt;Section SectionName="[NPC]" Description="NPC" GroupLength="5" /&gt;
+    &lt;Section SectionName="[ai character]" Description="APC" GroupLength="8" /&gt;
+    &lt;Section SectionName="[event monster position]" Description="怪物" GroupLength="3" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="*.wdm"&gt;
+    &lt;Section SectionName="[hell freepass item]" Description="免邀请函门票" GroupLength="2" /&gt;
+    &lt;Section SectionName="[dungeon]" Description="地下城" GroupLength="2" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="*.mob"&gt;
+    &lt;Section SectionName="[ability category]" Description="能力目录" GroupLength="3" /&gt;
+    &lt;Section SectionName="[speech on situation]" Description="条件发言" GroupLength="3" /&gt;
+    &lt;Section SectionName="[attack kind]" Description="攻击类型" GroupLength="12" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="*.equ"&gt;
+    &lt;Section SectionName="[skill data up]" Description="技能提升数据" GroupLength="7" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="*.stk"&gt;
+    &lt;Section SectionName="[package data]" Description="包裹数据" GroupLength="2" /&gt;
+    &lt;Section SectionName="[random list]" Description=""&gt;
+      &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+      &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+      &lt;GroupLength Value="4"&gt;&lt;/GroupLength&gt;
+    &lt;/Section&gt;
+
+    &lt;Section SectionName="[default list]" Description=""&gt;
+      &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+      &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+      &lt;GroupLength Value="4"&gt;&lt;/GroupLength&gt;
+    &lt;/Section&gt;
+
+    &lt;Section SectionName="[cera]" Description=""&gt;
+      &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+      &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+    &lt;/Section&gt;
+
+    &lt;Section SectionName="[etc]" ParentSectionName="[booster info]" Description=""&gt;
+      &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+      &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+    &lt;/Section&gt;
+    &lt;Section SectionName="[etc]" ParentSectionName="[booster select category]" GroupLength="2" /&gt;
+    &lt;Section SectionName="[equipment]" ParentSectionName="[booster select category]" GroupLength="2" /&gt;
+    &lt;Section SectionName="[stackable]" ParentSectionName="[booster info]" Description=""&gt;
+      &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+      &lt;GroupLength Value="3"&gt;&lt;/GroupLength&gt;
+    &lt;/Section&gt;
+
+    &lt;Section SectionName="[stackable]" ParentSectionName="[booster select category]" GroupLength="2" /&gt;
+    &lt;Section SectionName="[int data]" Description="" GroupLength="3" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="*.aic"&gt;
+    &lt;Section SectionName="[equipment]" Description="aic" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="*.shp"&gt;
+    &lt;Section SectionName="[display avatar list]" Description="头像列表" GroupLength="4" /&gt;
+    &lt;Section SectionName="[avatar list]" Description="头像列表" GroupLength="5" /&gt;
+    &lt;Section SectionName="[neck avatar ability list]" Description="头像列表" GroupLength="5" /&gt;
+    &lt;Section SectionName="[swordman]" Description="头像列表" GroupLength="12" /&gt;
+    &lt;Section SectionName="[fighter]" Description="头像列表" GroupLength="12" /&gt;
+    &lt;Section SectionName="[gunner]" Description="头像列表" GroupLength="12" /&gt;
+    &lt;Section SectionName="[mage]" Description="头像列表" GroupLength="12" /&gt;
+    &lt;Section SectionName="[priest]" Description="头像列表" GroupLength="12" /&gt;
+    &lt;Section SectionName="[at gunner]" Description="头像列表" GroupLength="12" /&gt;
+    &lt;Section SectionName="[thief]" Description="头像列表" GroupLength="12" /&gt;
+    &lt;Section SectionName="[at fighter]" Description="头像列表" GroupLength="12" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="*.exj"&gt;
+    &lt;Section SectionName="[disjoint result]" Description="disjoint result" GroupLength="8" /&gt;
+    &lt;Section SectionName="[additional result]" Description="additional result" GroupLength="6" /&gt;
+    &lt;Section SectionName="[big win result]" Description="big win result" GroupLength="6" /&gt;
+    &lt;Section SectionName="[items]" Description="items" GroupLength="4" /&gt;
+    &lt;Section SectionName="[expertness exp]" Description="expertness exp" GroupLength="3" /&gt;
+    &lt;Section SectionName="[upgrade cost]" Description="upgrade cost" GroupLength="2" /&gt;
+    &lt;Section SectionName="[endurance repair cost]" Description="endurance repair cost" GroupLength="2" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="*.qst"&gt;
+    &lt;Section SectionName="[monster reward item]" Description="当接取该任务后可以让指定怪物掉落指定物品" GroupLength="7" /&gt;
+    &lt;Section SectionName="[reward int data]" Description="完成任务时给予的奖励" GroupLength="2" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="*.skl"&gt;
+    &lt;Section SectionName="[level info]" Description=""&gt;
+      &lt;GroupLength Value="1"&gt;&lt;/GroupLength&gt;
+      &lt;GroupLength Value="20"&gt;&lt;/GroupLength&gt;
+    &lt;/Section&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/itemdropinfo_common.etc"&gt;
+    &lt;Section SectionName="[gold drop ref table]" Description="金币" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/etcparameter.etc"&gt;
+    &lt;Section SectionName="[assault equalization]" Description="" GroupLength="13" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="event/eventserver/eventserverworlddrop.evt"&gt;
+    &lt;Section SectionName="[world drop]" Description="掉落" GroupLength="12" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/itemdictionary/(r)baseitemdictionarytable.etc"&gt;
+
+    &lt;Section SectionName="[base table]" Description="词典" GroupLength="12" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/itemdictionary/(r)recipelistmakeequip.etc"&gt;
+    &lt;Section SectionName="[equipRecipe list]" Description="词典" GroupLength="8" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/upgrade.etc"&gt;
+    &lt;Section SectionName="[table]" Description="强化表" GroupLength="17" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/upgrade_separate.etc"&gt;
+
+    &lt;Section SectionName="[item weights by grade]" Description="_" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/upgrade_separate.etc"&gt;
+
+    &lt;Section SectionName="[separate upgrade effect]" Description="__" GroupLength="6" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/worlddropwararea.etc"&gt;
+
+    &lt;Section SectionName="[world drop]" Description="世界掉落" GroupLength="7" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/worlddropwarareapcroom.etc"&gt;
+
+    &lt;Section SectionName="[world drop]" Description="世界掉落" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/towerofdespair.etc"&gt;
+    &lt;Section SectionName="[each layer matching dungeon]" Description="绝望之塔的副本数据" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="*.etc"&gt;
+    &lt;Section SectionName="[key value index]" Description="绝望之塔的副本数据" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;!--  商城  --&gt;
+  &lt;File FileName="etc/newcashshop.etc"&gt;
+    &lt;Section SectionName="[avatar]" Description="时装" GroupLength="12" /&gt;
+    &lt;Section SectionName="[coin]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[item]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[premium]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[creature]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[package]" Description="时装" GroupLength="10" /&gt;
+    &lt;Section SectionName="[mileage item]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[avatar coin]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[category event tag]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[not stackable buy]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[max gift count]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[gift only]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[cerapoint disallowance]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[gift disallowance]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[cart disallowance]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[npc info]" Description="时装" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/newcashshop_restrict.etc"&gt;
+    &lt;Section SectionName="[account restrict]" Description="商城账号购买限制" GroupLength="12" /&gt;
+    &lt;Section SectionName="[character restrict]" Description="商城角色购买限制" GroupLength="12" /&gt;
+  &lt;/File&gt;
+  &lt;!--  cerashop_first --&gt;
+  &lt;File FileName="etc/cerashop_first.etc"&gt;
+    &lt;Section SectionName="[avatar]" Description="时装" GroupLength="12" /&gt;
+    &lt;Section SectionName="[coin]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[item]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[premium]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[creature]" Description="时装" GroupLength="9" /&gt;
+    &lt;Section SectionName="[package]" Description="时装" GroupLength="10" /&gt;
+    &lt;Section SectionName="[gift only]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[cerapoint disallowance]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[gift disallowance]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[cart disallowance]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[max gift count]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[category event tag]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[not stackable buy]" Description="时装" GroupLength="1" /&gt;
+    &lt;Section SectionName="[recommended avatar list]" Description="时装" GroupLength="12" /&gt;
+    &lt;Section SectionName="[dont trade avatar]" Description="时装" GroupLength="8" /&gt;
+  &lt;/File&gt;
+
+  &lt;!-- 全局爆率 --&gt;
+  &lt;File FileName="etc/worlddrop.etc"&gt;
+    &lt;Section SectionName="[world drop]" Description="全局爆率" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/accountcargo.etc"&gt;
+    &lt;Section SectionName="[upgrade info]" Description="账号金库" GroupLength="4" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/amplifyupgrade.etc"&gt;
+    &lt;Section SectionName="[amplification const]" Description="amplification const" GroupLength="4" /&gt;
+    &lt;Section SectionName="[table]" Description="amplification const" GroupLength="17" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/bloodclearreward.etc"&gt;
+    &lt;Section SectionName="[ultimate reward prob]" Description="终极奖励" GroupLength="3" /&gt;
+  &lt;/File&gt;
+
+  &lt;!--  工会  --&gt;
+  &lt;File FileName="etc/guild.etc"&gt;
+    &lt;Section SectionName="[guild levelup cost]" Description="升级经验" GroupLength="3" /&gt;
+    &lt;Section SectionName="[guild levelup price]" Description="升级所需金币" GroupLength="18" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="etc/independent_drop.etc"&gt;
+    &lt;Section SectionName="[list]" Description="独立掉落列表" GroupLength="2" /&gt;
+    &lt;Section SectionName="[independent drop]" Description="独立掉落" GroupLength="17" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/itemdropinfo_clearreward.etc"&gt;
+    &lt;Section SectionName="[gold card cost table]" Description="通关结算翻牌爆率-金币" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/itemdropinfo_control.etc"&gt;
+    &lt;Section SectionName="[control of gold drop amount rate per level]" Description="每级金币掉落速率的控制" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/labyrinth.etc"&gt;
+    &lt;Section SectionName="[character exp table]" Description="character exp table" GroupLength="2" /&gt;
+    &lt;Section SectionName="[monster fp exp point]" Description="monster fp exp point" GroupLength="3" /&gt;
+    &lt;Section SectionName="[barrack fp exp point]" Description="barrack fp exp point" GroupLength="3" /&gt;
+    &lt;Section SectionName="[tower fp exp point]" Description="tower fp exp point" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/mercenary.etc"&gt;
+    &lt;Section SectionName="[item index]" Description="索引" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/mileageshop.etc"&gt;
+    &lt;Section SectionName="[recommended avatar list]" Description="recommended avatar list" GroupLength="12" /&gt;
+    &lt;Section SectionName="[coin]" Description="coin" GroupLength="10" /&gt;
+    &lt;Section SectionName="[premium]" Description="premium" GroupLength="10" /&gt;
+    &lt;Section SectionName="[item]" Description="item" GroupLength="10" /&gt;
+    &lt;Section SectionName="[creature]" Description="creature" GroupLength="10" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/pcbangrentalservice.etc"&gt;
+    &lt;Section SectionName="[package selection]" Description="package selection" GroupLength="4" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/pcroom.vm"&gt;
+    &lt;Section SectionName="[output]" Description="抽奖机" GroupLength="4" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/pcroom3.vm"&gt;
+    &lt;Section SectionName="[output]" Description="抽奖机" GroupLength="4" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/pcroom4.vm"&gt;
+    &lt;Section SectionName="[output]" Description="抽奖机" GroupLength="4" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/premiumserviceeffect.etc"&gt;
+    &lt;Section SectionName="[add selectAble equipment list]" Description="add selectAble equipment list" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/pvp_ref.etc"&gt;
+    &lt;Section SectionName="[pvp experience]" Description="PVP经验" GroupLength="2" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="etc/pvppracticeailist.etc"&gt;
+    &lt;Section SectionName="[AI LIST]" Description="ai列表" GroupLength="6" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/questpiece.etc"&gt;
+    &lt;Section SectionName="[piece quest list]" Description="piece quest list" GroupLength="2" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="etc/quickparty.etc"&gt;
+    &lt;Section SectionName="[increase gold card]" Description="increase gold card" GroupLength="3" /&gt;
+    &lt;Section SectionName="[reward]" Description="reward" GroupLength="11" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/ranksysteminfo.etc"&gt;
+
+    &lt;Section SectionName="[dungeon clear time average]" Description="dungeon clear time average" GroupLength="7" /&gt;
+    &lt;Section SectionName="[combo interval boundaries]" Description="combo interval boundaries" GroupLength="4" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/serverparameter.etc"&gt;
+    &lt;Section SectionName="[light server notice]" Description="light server notice" GroupLength="3" /&gt;
+    &lt;Section SectionName="[protect of upgrade down]" Description="强化保护券" GroupLength="4" /&gt;
+    &lt;Section SectionName="[training first give]" Description="training first give" GroupLength="4" /&gt;
+    &lt;Section SectionName="[drop bonus of dungeon level increase]" Description="drop bonus of dungeon level increase" GroupLength="4" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/sptable.etc"&gt;
+    &lt;Section SectionName="[sp table]" Description="SP表" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/timelimiteditemslist_jpn.etc"&gt;
+    &lt;Section SectionName="[entry]" Description="entry" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/timelimiteditemslist.etc"&gt;
+    &lt;Section SectionName="[entry]" Description="entry" GroupLength="2" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/globaltutorialinfo/at_fighter.etc"&gt;
+    &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/globaltutorialinfo/at_gunner.etc"&gt;
+    &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="etc/globaltutorialinfo/at_mage.etc"&gt;
+    &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+  &lt;/File&gt;
+
+  &lt;File FileName="etc/globaltutorialinfo/fighter.etc"&gt;
+    &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/globaltutorialinfo/gunner.etc"&gt;
+    &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/globaltutorialinfo/mage.etc"&gt;
+    &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/globaltutorialinfo/preist.etc"&gt;
+    &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/globaltutorialinfo/swordman.etc"&gt;
+    &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+  &lt;/File&gt;
+  &lt;File FileName="etc/globaltutorialinfo/thief.etc"&gt;
+    &lt;Section SectionName="[dialog]" Description="dialog" GroupLength="3" /&gt;
+  &lt;/File&gt;
+&lt;/root&gt;</value></data>
+  </root>

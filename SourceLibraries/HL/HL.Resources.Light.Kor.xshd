@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- Source: http://geogen.googlecode.com/svn/trunk/config/squirrel.xshd -->
+<SyntaxDefinition name="Kor" extensions=".str" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+	<!-- Reference: http://www.squirrel-lang.org/
+       Reference Manual: http://www.squirrel-lang.org/doc/squirrel2.html -->
+	<Color name="Comment" foreground="Green" exampleText="// comment" />
+	<Color name="KorStrIndex" foreground="#f92672" />
+	<Color name="KorStrValue" foreground="#a31515" />
+	<Color name="KorStrAngleBrackets" foreground="#5b2da8" fontWeight="bold" />
+	<RuleSet ignoreCase="true">
+		<Span color="Comment">
+			<Begin>//</Begin>
+		</Span>
+
+		<Rule color="KorStrIndex">
+			^[A-Za-z0-9].*?(?=>)
+		</Rule>
+		<Rule color="KorStrValue">
+			(?&lt;=&gt;).*?[\s\S]$
+		</Rule>
+		<Keywords color="KorStrAngleBrackets">
+			<Word>></Word>
+		</Keywords>
+	</RuleSet>
+</SyntaxDefinition>

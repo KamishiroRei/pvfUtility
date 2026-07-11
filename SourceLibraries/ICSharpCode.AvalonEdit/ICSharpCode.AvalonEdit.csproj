@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ICSharpCode.AvalonEdit</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>annotations</Nullable>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>ICSharpCode.AvalonEdit.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="search\next.png" />
+    <None Remove="themes\rightarrow.cur" />
+    <Compile Remove="highlighting\resources\resources.cs" />
+    <None Remove="search\prev.png" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.ASPX.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.Boo.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.Coco-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.CPP-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.CSharp-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.CSS-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.HTML-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.Java-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.JavaScript-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.Json.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.MarkDown-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.MarkDownWithFontSize-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.Patch-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.PHP-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.PowerShell.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.Python-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.Tex-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.TSQL-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.VB-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.XML-Mode.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.XmlDoc.xshd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.ModeV1.xsd" />
+    <None Remove="ICSharpCode.AvalonEdit.Highlighting.Resources.ModeV2.xsd" />
+    <Resource Include="search\next.png" LogicalName="search/next.png" />
+    <Resource Include="themes\rightarrow.cur" LogicalName="themes/rightarrow.cur" />
+    <Resource Include="highlighting\resources\resources.cs" LogicalName="highlighting/resources/resources.cs" />
+    <Resource Include="search\prev.png" LogicalName="search/prev.png" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.ASPX.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.ASPX.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.Boo.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.Boo.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.Coco-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.Coco-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.CPP-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.CPP-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.CSharp-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.CSharp-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.CSS-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.CSS-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.HTML-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.HTML-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.Java-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.Java-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.JavaScript-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.JavaScript-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.Json.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.Json.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.MarkDown-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.MarkDown-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.MarkDownWithFontSize-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.MarkDownWithFontSize-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.Patch-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.Patch-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.PHP-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.PHP-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.PowerShell.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.PowerShell.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.Python-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.Python-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.Tex-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.Tex-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.TSQL-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.TSQL-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.VB-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.VB-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.XML-Mode.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.XML-Mode.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.XmlDoc.xshd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.XmlDoc.xshd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.ModeV1.xsd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.ModeV1.xsd" />
+    <EmbeddedResource Include="ICSharpCode.AvalonEdit.Highlighting.Resources.ModeV2.xsd" LogicalName="ICSharpCode.AvalonEdit.Highlighting.Resources.ModeV2.xsd" />
+  </ItemGroup>
+</Project>

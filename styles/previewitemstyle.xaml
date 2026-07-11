@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns:flyoutNative="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Views.Preview.Controls;assembly=pvfUtility" xmlns:converter="clr-namespace:PvfCode.NPK.Utils.Converter;assembly=PvfCode.NPK.Utils" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:enums="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:flyout="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" xmlns:npcshopeditor1="clr-namespace:PvfCode.Views.NpcShopEditor;assembly=pvfUtility" xmlns:preview="clr-namespace:PvfCode.ViewModels.Preview;assembly=pvfUtility" xmlns:preview1="clr-namespace:PvfCode.Views.Preview;assembly=pvfUtility" xmlns:pvfcode="clr-namespace:PvfCode;assembly=pvfUtility">
+  <converter:TreeColorConverter x:Key="TreeColorConverterPreview" />
+  <FontFamily x:Key="IconFontFZKT">Pack://application:,,,/pvfUtility;component/IconFont/FZKTJW.TTF#方正楷体简体</FontFamily>
+  <DataTemplate x:Key="NpcShopDragDropHintTemplate">
+    <Grid MaxWidth="270" MaxHeight="400" Margin="0,0,30,0">
+      <npcshopeditor1:NpcShopItemListControlEx npcshopeditor1:NpcShopItemListControlEx.Name="equGrid" ShowSearchPanelMode="Never" Type="Equ" p19:DataControlBase.ItemsSource="{Binding Records}" xmlns:p19="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" />
+    </Grid>
+  </DataTemplate>
+  <Style x:Key="NpcShopItemIconStyle" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type core:DXImage}">
+    <Setter Property="FrameworkElement.Width" Value="30" />
+    <Setter Property="FrameworkElement.Height" Value="30" />
+    <Setter Property="core:DXImage.Source" Value="{Binding ImageSource}" />
+  </Style>
+  <Style x:Key="TextBlockForeBrushFromRarity" BasedOn="{StaticResource TextBlockCenter}" TargetType="{x:Type TextBlock}">
+    <Style.Triggers>
+      <DataTrigger Binding="{Binding Rarity}" Value="{x:Null}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </DataTrigger>
+      <DataTrigger Value="0" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </DataTrigger>
+      <DataTrigger Value="1" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor1}" />
+      </DataTrigger>
+      <DataTrigger Value="2" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor2}" />
+      </DataTrigger>
+      <DataTrigger Value="3" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor3}" />
+      </DataTrigger>
+      <DataTrigger Value="4" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor4}" />
+      </DataTrigger>
+      <DataTrigger Value="5" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor5}" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="TextBlockForeBrushFromRarity2" BasedOn="{StaticResource TextBlockCenter}" TargetType="{x:Type TextBlock}">
+    <Setter Property="Text" Value="{Binding Rarity}" />
+    <Style.Triggers>
+      <DataTrigger Binding="{Binding Rarity}" Value="{x:Null}">
+        <Setter Property="Visibility" Value="Collapsed" />
+      </DataTrigger>
+      <DataTrigger Value="0" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </DataTrigger>
+      <DataTrigger Value="1" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor1}" />
+      </DataTrigger>
+      <DataTrigger Value="2" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor2}" />
+      </DataTrigger>
+      <DataTrigger Value="3" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor3}" />
+      </DataTrigger>
+      <DataTrigger Value="4" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor4}" />
+      </DataTrigger>
+      <DataTrigger Value="5" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor5}" />
+      </DataTrigger>
+      <MultiDataTrigger>
+        <MultiDataTrigger.Conditions>
+          <Condition Binding="{Binding Rarity}" Value="{x:Null}" />
+          <Condition Value="True" Binding="{Binding IsAvatar}" />
+        </MultiDataTrigger.Conditions>
+        <Setter Property="Foreground" Value="#eea600" />
+        <Setter Property="Text" Value="普通" />
+      </MultiDataTrigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="PreviewButtonLinkStyle" TargetType="{x:Type Button}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <ContentPresenter VerticalAlignment="Center" Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}">
+            <FrameworkElement.Resources>
+              <ResourceDictionary>
+                <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                  <Style.Triggers>
+                    <Trigger Property="UIElement.IsMouseOver" Value="True">
+                      <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+                      <Setter Property="TextDecorations" Value="Underline" />
+                    </Trigger>
+                  </Style.Triggers>
+                </Style>
+              </ResourceDictionary>
+            </FrameworkElement.Resources>
+          </ContentPresenter>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Foreground" Value="#FF808080" />
+    <Style.Triggers>
+      <Trigger Property="UIElement.IsMouseOver" Value="True">
+        <Setter Property="Foreground" Value="#5dbcff" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="NeedMaterialPreviewButtonLinkStyle" TargetType="{x:Type Button}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <ContentPresenter VerticalAlignment="Center" Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}">
+            <FrameworkElement.Resources>
+              <ResourceDictionary>
+                <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                  <Style.Triggers>
+                    <Trigger Property="UIElement.IsMouseOver" Value="True">
+                      <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+                      <Setter Property="TextDecorations" Value="Underline" />
+                    </Trigger>
+                  </Style.Triggers>
+                </Style>
+              </ResourceDictionary>
+            </FrameworkElement.Resources>
+          </ContentPresenter>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Foreground" Value="#FFFFFFFF" />
+    <Style.Triggers>
+      <Trigger Property="UIElement.IsMouseOver" Value="True">
+        <Setter Property="Foreground" Value="#5dbcff" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="RarityButtonLink" TargetType="{x:Type Button}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <ContentPresenter VerticalAlignment="Center" Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}">
+            <FrameworkElement.Resources>
+              <ResourceDictionary>
+                <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                  <Style.Triggers>
+                    <Trigger Property="UIElement.IsMouseOver" Value="True">
+                      <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+                      <Setter Property="TextDecorations" Value="Underline" />
+                    </Trigger>
+                  </Style.Triggers>
+                </Style>
+              </ResourceDictionary>
+            </FrameworkElement.Resources>
+          </ContentPresenter>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Foreground" Value="#FFFFFFFF" />
+    <Style.Triggers>
+      <DataTrigger Binding="{Binding Rarity}" Value="{x:Null}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </DataTrigger>
+      <DataTrigger Value="0" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </DataTrigger>
+      <DataTrigger Value="1" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor1}" />
+      </DataTrigger>
+      <DataTrigger Value="2" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor2}" />
+      </DataTrigger>
+      <DataTrigger Value="3" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor3}" />
+      </DataTrigger>
+      <DataTrigger Value="4" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor4}" />
+      </DataTrigger>
+      <DataTrigger Value="5" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor5}" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+  <DataTemplate x:Key="equGroupListBoxItemTemplate" DataType="{x:Type ListBoxItem}">
+    <StackPanel Orientation="Vertical">
+      <Button Margin="0" Padding="0" Background="#00FFFFFF" BorderThickness="0" FontWeight="Bold" ToolTip="鼠标点击名称打开文件 鼠标点击套装名称打开所有套装文件 按住Ctrl则添加到查找视图" ToolTipService.InitialShowDelay="50" ToolTipService.ShowDuration="10000" Style="{StaticResource PreviewButtonLinkStyle}" Command="{Binding Path=DataContext.OnOpenEquGroupFileCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Content="{Binding Name, Mode=OneWay}" />
+    </StackPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="Stkable_礼包_0_PreviewFileItemsPreviewListBoxItemTemplate" DataType="{x:Type ListBoxItem}">
+    <Grid Margin="8">
+      <GroupBox Margin="0" Padding="0,5,0,5" Foreground="#FFFFFFFF" Header="{Binding Title}">
+        <controls:PvfItemAvatarListBoxGroupControl Items="{Binding FilePreviewItems}" />
+      </GroupBox>
+    </Grid>
+  </DataTemplate>
+  <Style x:Key="NeedMaterialPreviewButtonLinkReferencesStyle" TargetType="{x:Type Button}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid>
+            <Border Name="border">
+              <ContentPresenter VerticalAlignment="Center" Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}">
+                <FrameworkElement.Resources>
+                  <ResourceDictionary>
+                    <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                      <Style.Triggers>
+                        <Trigger Property="UIElement.IsMouseOver" Value="True">
+                          <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+                          <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                      </Style.Triggers>
+                    </Style>
+                  </ResourceDictionary>
+                </FrameworkElement.Resources>
+              </ContentPresenter>
+            </Border>
+            <flyout:FlyoutControl xmlns:flyout="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" flyout:FlyoutControl.Name="flyoutControl" Control.Padding="0" Control.BorderThickness="0" FrameworkElement.FlowDirection="LeftToRight" xmlns:native="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" native:FlyoutBase.StaysOpen="True" Control.Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" Control.BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}" native:FlyoutBase.PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type flyout:FlyoutControl}">
+                  <Setter Property="native:FlyoutBase.Settings">
+                    <Setter.Value>
+                      <flyout:FlyoutSettings flyout:FlyoutSettings.Placement="Right" flyout:FlyoutSettings.ShowIndicator="False" />
+                    </Setter.Value>
+                  </Setter>
+                  <Setter Property="native:FlyoutBase.HorizontalOffset" Value="30" />
+                  <Setter Property="native:FlyoutBase.IsOpen" Value="False" />
+                </Style>
+              </FrameworkElement.Style>
+              <Grid>
+                <GridControl FrameworkElement.Height="300" FrameworkElement.MaxWidth="300" FrameworkElement.Margin="5" p25:DataControlBase.SelectionMode="Row" p26:GridControl.Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" p25:DataControlBase.ItemsSource="{Binding Value.ReferencesFiles}" xmlns:p26="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" xmlns:p25="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" xmlns="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+                  <p26:GridControl.Columns>
+                    <grid1:GridColumn xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid:BaseColumn.Width="*" grid:BaseColumn.MinWidth="50" grid:ColumnBase.FieldName="ItemName" grid:BaseColumn.Header="名称" grid:BaseColumn.HorizontalHeaderContentAlignment="Center" grid:ColumnBase.ShowAllTableValuesInCheckedFilterPopup="False" grid:ColumnBase.ShowAllTableValuesInFilterPopup="False" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+                      <grid:ColumnBase.CellTemplate>
+                        <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                          <TextBlock VerticalAlignment="Center" ToolTip="双击打开文件" ToolTipService.InitialShowDelay="50" DataContext="{Binding Row}" Text="{Binding ItemName}">
+                            <FrameworkElement.Style>
+                              <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                  <DataTrigger Binding="{Binding Rarity}" Value="{x:Null}">
+                                    <Setter Property="Foreground" Value="#FFFFFFFF" />
+                                  </DataTrigger>
+                                  <DataTrigger Value="0" Binding="{Binding Rarity}">
+                                    <Setter Property="Foreground" Value="#FFFFFFFF" />
+                                  </DataTrigger>
+                                  <DataTrigger Value="1" Binding="{Binding Rarity}">
+                                    <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor1}" />
+                                  </DataTrigger>
+                                  <DataTrigger Value="2" Binding="{Binding Rarity}">
+                                    <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor2}" />
+                                  </DataTrigger>
+                                  <DataTrigger Value="3" Binding="{Binding Rarity}">
+                                    <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor3}" />
+                                  </DataTrigger>
+                                  <DataTrigger Value="4" Binding="{Binding Rarity}">
+                                    <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor4}" />
+                                  </DataTrigger>
+                                  <DataTrigger Value="5" Binding="{Binding Rarity}">
+                                    <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor5}" />
+                                  </DataTrigger>
+                                </Style.Triggers>
+                              </Style>
+                            </FrameworkElement.Style>
+                          </TextBlock>
+                        </DataTemplate>
+                      </grid:ColumnBase.CellTemplate>
+                      <grid:ColumnBase.EditSettings>
+                        <settings:TextEditSettings xmlns:settings="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" settings:BaseEditSettings.HorizontalContentAlignment="Center" />
+                      </grid:ColumnBase.EditSettings>
+                    </grid1:GridColumn>
+                  </p26:GridControl.Columns>
+                  <p26:GridControl.View>
+                    <grid:TableView xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid:TableView.AllowBandMoving="False" grid:TableView.AllowBandMultiRow="False" grid:TableView.AllowBandResizing="False" grid:TableView.AllowBestFit="False" grid:TableView.AllowCascadeUpdate="False" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid1:DataViewBase.AllowColumnFiltering="False" grid1:DataViewBase.AllowColumnMoving="False" grid1:DataViewBase.AllowEditing="True" grid:TableView.AllowHorizontalScrollingVirtualization="True" grid1:DataViewBase.EnableSelectedRowAppearance="True" grid:TableView.HorizontalScrollbarVisibility="Auto" grid1:DataViewBase.NavigationStyle="Row" grid:TableView.ScrollBarAnnotationMode="Selected,FocusedRow,Custom " grid1:DataViewBase.ScrollingMode="Smart" grid:TableView.ShowAutoFilterRow="False" grid:TableView.ShowBandsInCustomizationForm="False" grid:TableView.ShowBandsPanel="False" grid1:DataViewBase.ShowColumnHeaders="False" grid:TableView.ShowDataNavigator="False" grid1:DataViewBase.ShowEmptyText="False" grid1:DataViewBase.ShowFilterPanelMode="Never" grid:GridViewBase.ShowGroupPanel="False" grid:TableView.ShowHorizontalLines="True" grid:TableView.ShowIndicator="False" grid1:DataViewBase.ShowSearchPanelMode="Always" grid1:DataViewBase.ShowSelectionRectangle="True" grid:TableView.ShowVerticalLines="True" grid:TableView.UseEvenRowBackground="False" grid:TableView.VerticalScrollbarVisibility="Auto" grid:TableView.RowDoubleClickCommand="{Binding Path=DataContext.EquPartsetFile.ReferencesGridDoubleClickCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                    </grid:TableView>
+                  </p26:GridControl.View>
+                </GridControl>
+              </Grid>
+            </flyout:FlyoutControl>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="Control.MouseEnter">
+              <BeginStoryboard>
+                <Storyboard>
+                  <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.1 " Value="True" />
+                  </BooleanAnimationUsingKeyFrames>
+                </Storyboard>
+              </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseLeave">
+              <BeginStoryboard>
+                <Storyboard>
+                  <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False" />
+                  </BooleanAnimationUsingKeyFrames>
+                </Storyboard>
+              </BeginStoryboard>
+            </EventTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Foreground" Value="#FF808080" />
+    <Style.Triggers>
+      <Trigger Property="UIElement.IsMouseOver" Value="True">
+        <Setter Property="Foreground" Value="#5dbcff" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <DataTemplate x:Key="equGroupListBoxItemTemplate2" DataType="{x:Type ListBoxItem}">
+    <StackPanel Orientation="Horizontal">
+      <Button Margin="0" Padding="0" Background="#00FFFFFF" BorderThickness="0" FontWeight="Bold" ToolTip="鼠标点击名称打开文件 鼠标点击套装名称打开所有套装文件 按住Ctrl则添加到查找视图" ToolTipService.InitialShowDelay="50" ToolTipService.ShowDuration="10000" Style="{StaticResource PreviewButtonLinkStyle}" Command="{Binding Path=DataContext.EquPartsetFile.OnOpenFileCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding Value}" Content="{Binding Value.Name, Mode=OneWay}" />
+      <Button Margin="5,0,0,0" Padding="0" Background="#00FFFFFF" BorderThickness="0" FontWeight="Bold" ToolTipService.InitialShowDelay="50" ToolTipService.ShowDuration="10000" Style="{StaticResource NeedMaterialPreviewButtonLinkReferencesStyle}" Content="{Binding Value.ReferencesNumberText, Mode=OneWay}" Visibility="{Binding Value.ReferencesNumber, Converter={StaticResource ConverterGreaterThan_1_ToVisibility}}" />
+    </StackPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="Preview_DataTemplate_EQU_armor">
+    <UserControl FontWeight="Bold" FontFamily="{StaticResource IconFontFZKT}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, Mode=OneWay}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <Border Height="auto" Padding="5" VerticalAlignment="Top" BorderThickness="1.5" CornerRadius="2" Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}">
+          <StackPanel Width="270" Height="auto" Focusable="True" Orientation="Vertical">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+              </Grid.ColumnDefinitions>
+              <Border MaxWidth="30.2" MaxHeight="30.2" Padding="2" BorderThickness="2.2" CornerRadius="4">
+                <Border.Background>
+                  <ImageBrush ImageSource="/images/pngs/npcshop/imageborder.png" />
+                </Border.Background>
+                <Grid>
+                  <Image Stretch="Fill" Source="{Binding ImageSource}" />
+                  <Image>
+                    <FrameworkElement.Style>
+                      <Style TargetType="{x:Type Image}">
+                        <Style.Triggers>
+                          <DataTrigger Value="{x:Static enums:AttachType.sealing}" Binding="{Binding AttachTypeEnum}">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Setter Property="Source" Value="{Binding Source={x:Static pvfcode:Res.Instance}, Path=ImageSealingMark}" />
+                          </DataTrigger>
+                        </Style.Triggers>
+                      </Style>
+                    </FrameworkElement.Style>
+                  </Image>
+                </Grid>
+              </Border>
+              <TextBlock Grid.Column="1" Margin="6,0,0,0" TextWrapping="Wrap" Style="{StaticResource TextBlockForeBrushFromRarity}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=2, Converter={StaticResource ConverterFontSizeAdd}}" Text="{Binding ItemName}" />
+              <TextBlock Grid.Column="2" Margin="6,0,0,0" Foreground="#FFFF0000" Text="(此为套装效果文件)">
+                <FrameworkElement.Style>
+                  <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                      <DataTrigger Value="{x:Static enums:EquGroupType.GroupPart}" Binding="{Binding EquGroupType}">
+                        <Setter Property="Visibility" Value="Visible" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </FrameworkElement.Style>
+              </TextBlock>
+            </Grid>
+            <StackPanel Height="2" Margin="10,8,10,8" Background="#FF808080" Opacity="0.1" />
+            <TextBlock TextAlignment="Right" Style="{StaticResource TextBlockForeBrushFromRarity2}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=2, Converter={StaticResource ConverterFontSizeAdd}}" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="点击转到该物品" ToolTipService.InitialShowDelay="50" Style="{StaticResource NeedMaterialPreviewButtonLinkStyle}" Command="{Binding OnGoToNeedMaterialFileCommand}" Content="{Binding NeedMaterial, Mode=OneWay}" Visibility="{Binding NeedMaterial, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <TextBlock Foreground="#FFFFFFFF" Style="{StaticResource TextBlockCenter}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=2, Converter={StaticResource ConvertFontSizeReduction}}" Text="{Binding Weight, Mode=OneWay}" Visibility="{Binding Weight, Converter={StaticResource ConvertNullToVisibility}}" />
+              <TextBlock Grid.Column="1" Foreground="#FFFFFFFF" TextAlignment="Right" Text="{Binding SalePrice, Mode=OneWay}" Visibility="{Binding SalePrice, Converter={StaticResource ConvertNullToVisibility}}" />
+            </Grid>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <TextBlock Style="{StaticResource TextBlockCenter}" Text="{Binding EquArmorType, Mode=OneWay}" Visibility="{Binding EquArmorType, Converter={StaticResource ConvertNullToVisibility}}" />
+              <TextBlock Text="{Binding ItemGroupNameStr, Mode=OneWay}">
+                <FrameworkElement.Style>
+                  <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    <Style.Triggers>
+                      <DataTrigger Value="{x:Static enums:EquipmentType.武器}" Binding="{Binding EquipmentTypeEnum}">
+                        <Setter Property="Visibility" Value="Visible" />
+                      </DataTrigger>
+                      <DataTrigger Value="True" Binding="{Binding IsAvatar, Mode=OneWay}">
+                        <Setter Property="Visibility" Value="Visible" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </FrameworkElement.Style>
+              </TextBlock>
+              <TextBlock Foreground="#FFFFFFFF" TextAlignment="Right" Text="{Binding EquipmentTypeEnum}" Visibility="{Binding EquipmentTypeEnum, Converter={StaticResource ConvertNullToVisibility}}">
+                <FrameworkElement.Style>
+                  <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    <Setter Property="Grid.Column" Value="1" />
+                    <Style.Triggers>
+                      <DataTrigger Value="True" Binding="{Binding IsAvatar, Mode=OneWay}">
+                        <Setter Property="Grid.Column" Value="0" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </FrameworkElement.Style>
+              </TextBlock>
+            </Grid>
+            <TextBlock Foreground="#FFFFFFFF" Style="{StaticResource TextBlockCenter}" Text="{Binding UsableJobStr}" Visibility="{Binding UsableJobStr, Converter={StaticResource ConvertNullToVisibility}}" />
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <TextBlock Foreground="#FFFFFFFF" Style="{StaticResource TextBlockCenter}" Text="{Binding Durability, Mode=OneWay}" Visibility="{Binding Durability, Converter={StaticResource ConvertNullToVisibility}}" />
+              <TextBlock Grid.Column="1" TextAlignment="Right" Text="{Binding AttachType, Mode=OneWay}" Visibility="{Binding AttachType, Converter={StaticResource ConvertNullToVisibility}}">
+                <FrameworkElement.Style>
+                  <Style BasedOn="{StaticResource TextBlockCenter}" TargetType="{x:Type TextBlock}">
+                    <Setter Property="Foreground" Value="#FFFFFFFF" />
+                    <Style.Triggers>
+                      <DataTrigger Value="{x:Static enums:AttachType.account}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                        <Setter Property="Foreground" Value="#FFFF0000" />
+                      </DataTrigger>
+                      <DataTrigger Value="{x:Static enums:AttachType.sealing_trade}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                        <Setter Property="Foreground" Value="#FFFF0000" />
+                      </DataTrigger>
+                      <DataTrigger Value="{x:Static enums:AttachType.trade}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                        <Setter Property="Foreground" Value="#FFFF0000" />
+                      </DataTrigger>
+                      <DataTrigger Value="{x:Static enums:AttachType.trade_delete}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                        <Setter Property="Foreground" Value="#FFFF0000" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </FrameworkElement.Style>
+              </TextBlock>
+            </Grid>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <TextBlock Foreground="#FFFF0000" Style="{StaticResource TextBlockCenter}" Text="{Binding MiniNumLevel, Mode=OneWay}" Visibility="{Binding MiniNumLevel, Converter={StaticResource ConvertNullToVisibility}}" />
+              <TextBlock Grid.Column="1" Foreground="#FFFFFF00" Text="最上级" TextAlignment="Right" Style="{StaticResource TextBlockCenter}" Visibility="{Binding Rarity, Converter={StaticResource ConvertNullToVisibility}}" />
+            </Grid>
+            <TextBlock Margin="0,10,0,0" Foreground="#FFFFFFFF" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding EquWhiteAttributes, Mode=OneWay}" Visibility="{Binding EquWhiteAttributes, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding ElementName=EquBlueAttributesTextBlock, Path=Visibility}">
+              <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+                <StackPanel Height="2" Margin="10,0,10,0" Background="#FF808080" Opacity="0.1" />
+                <TextBlock Name="EquBlueAttributesTextBlock" Foreground="#68D5ED" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding EquBlueAttributes, Mode=OneWay}" Visibility="{Binding EquBlueAttributes, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+              </StackPanel>
+            </ScrollViewer>
+            <StackPanel Visibility="{Binding avatar_select_ability, Converter={StaticResource ConvertNullToVisibility}}">
+              <Label Content="[选择属性值]" Foreground="#55a4e1" />
+              <ScrollViewer MaxHeight="400" VerticalScrollBarVisibility="Auto">
+                <TextBlock Foreground="#FFFFFFFF" Style="{StaticResource TextBlockCenter}" Text="{Binding avatar_select_ability, Mode=OneWay}" />
+              </ScrollViewer>
+            </StackPanel>
+            <TextBlock Margin="0,0,0,0" Foreground="#68D5ED" TextWrapping="Wrap" Text="{Binding Basic_explain, Mode=OneWay}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                  <Setter Property="Visibility" Value="Collapsed" />
+                  <Style.Triggers>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Value="True" Binding="{Binding Basic_explain, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}" />
+                        <Condition Value="False" Binding="{Binding ShowDetail_Explain}" />
+                      </MultiDataTrigger.Conditions>
+                      <Setter Property="Visibility" Value="Visible" />
+                    </MultiDataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </TextBlock>
+            <TextBlock Margin="0,0,0,0" Foreground="#68D5ED" TextWrapping="Wrap" Text="{Binding Detail_Explain, Mode=OneWay}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                  <Setter Property="Visibility" Value="Collapsed" />
+                  <Style.Triggers>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Value="True" Binding="{Binding Detail_Explain, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}" />
+                        <Condition Value="True" Binding="{Binding ShowDetail_Explain}" />
+                      </MultiDataTrigger.Conditions>
+                      <Setter Property="Visibility" Value="Visible" />
+                    </MultiDataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </TextBlock>
+            <TextBlock Margin="0,15,0,0" Foreground="#68D5ED" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding explain, Mode=OneWay}" Visibility="{Binding explain, Converter={StaticResource ConvertNullToVisibility}}" />
+            <StackPanel Height="2" Margin="10,8,10,8" Background="#FF808080" Opacity="0.1" Visibility="{Binding Flavor_text, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+            <TextBlock Foreground="#FF808080" TextWrapping="Wrap" Text="{Binding Flavor_text, Mode=OneWay}" Visibility="{Binding Flavor_text, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+            <StackPanel Height="2" Margin="10,8,10,4" Background="#FF808080" Opacity="0.1" Visibility="{Binding ElementName=textBlocLookDetail_Explain, Path=Visibility}" />
+            <Button Name="textBlocLookDetail_Explain" Margin="0,0,0,0" HorizontalAlignment="Center" Background="#00FFFFFF" BorderThickness="0" Command="{Binding OnSwitchExplainCommand}" Content="查看详细说明(F4)" Foreground="#68D5ED" BorderBrush="{x:Null}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type Button}">
+                  <Setter Property="Visibility" Value="Collapsed" />
+                  <Style.Triggers>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Value="True" Binding="{Binding Detail_Explain, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}" />
+                      </MultiDataTrigger.Conditions>
+                      <Setter Property="Visibility" Value="Visible" />
+                    </MultiDataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </Button>
+          </StackPanel>
+        </Border>
+        <Grid Column="1" Height="auto" Margin="1,0,0,0" VerticalAlignment="Top">
+          <Border Height="auto" Margin="0.5,0,0,0" Padding="5" BorderThickness="1.5" CornerRadius="2" Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type Border}">
+                <Setter Property="Visibility" Value="Collapsed" />
+                <Style.Triggers>
+                  <DataTrigger Value="{x:Static enums:EquGroupType.Root}" Binding="{Binding EquGroupType}">
+                    <Setter Property="Visibility" Value="Visible" />
+                  </DataTrigger>
+                  <DataTrigger Value="{x:Static enums:EquGroupType.Children}" Binding="{Binding EquGroupType}">
+                    <Setter Property="Visibility" Value="Visible" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+            <StackPanel Width="270" Focusable="True" Orientation="Vertical">
+              <Button Margin="0,0,0,0" Foreground="#6ce51b" ToolTip="鼠标点击名称打开文件 鼠标点击套装名称打开所有套装文件 按住Ctrl则添加到查找视图" ToolTipService.InitialShowDelay="50" Style="{StaticResource PreviewButtonLinkStyle}" Command="{Binding OnOpenEquGroupFileCommand}" CommandParameter="{x:Null}" Content="{Binding EquGroupName}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=1, Converter={StaticResource ConverterFontSizeAdd}}" />
+              <StackPanel Height="2" Margin="10,8,10,2" Background="#FF808080" Opacity="0.2" />
+              <ListBox Background="#00FFFFFF" BorderThickness="0" ItemTemplate="{StaticResource equGroupListBoxItemTemplate}" BorderBrush="{x:Null}" ItemsSource="{Binding EquGroupItemInfos}">
+                <FrameworkElement.Resources>
+                  <ResourceDictionary>
+                    <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}">
+                      <Setter Property="HorizontalContentAlignment" Value="Left" />
+                      <Setter Property="VerticalAlignment" Value="Center" />
+                      <Setter Property="BorderBrush" Value="#FFFF0000" />
+                      <Setter Property="BorderThickness" Value="0" />
+                      <Setter Property="Padding" Value="0" />
+                      <Setter Property="Margin" Value="0" />
+                      <Style.Triggers>
+                        <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                          <Setter Property="Background" Value="#00FFFFFF" />
+                        </Trigger>
+                        <Trigger Property="UIElement.IsMouseOver" Value="True">
+                          <Setter Property="Background" Value="#00FFFFFF" />
+                        </Trigger>
+                      </Style.Triggers>
+                    </Style>
+                  </ResourceDictionary>
+                </FrameworkElement.Resources>
+              </ListBox>
+              <StackPanel Height="2" Margin="10,2,10,8" Background="#FF808080" Opacity="0.2" />
+              <TextBlock Margin="0,10,0,0" Foreground="#FF808080" TextWrapping="Wrap" Text="{Binding EquGroupAttributesText, Mode=OneWay}" Visibility="{Binding EquGroupAttributesText, Converter={StaticResource ConvertNullToVisibility}}" />
+              <TextBlock Margin="0,10,0,0" Foreground="#FF808080" TextWrapping="Wrap" Text="{Binding FullsetBasicExplain, Mode=OneWay}" Visibility="{Binding FullsetBasicExplain, Converter={StaticResource ConvertNullToVisibility}}" />
+            </StackPanel>
+          </Border>
+          <Border Height="auto" Margin="0.5,0,0,0" Padding="5" BorderThickness="1.5" CornerRadius="2" Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type Border}">
+                <Setter Property="Visibility" Value="Collapsed" />
+                <Style.Triggers>
+                  <DataTrigger Value="{x:Static enums:EquGroupType.Link}" Binding="{Binding EquGroupType}">
+                    <Setter Property="Visibility" Value="Visible" />
+                  </DataTrigger>
+                  <DataTrigger Value="{x:Static enums:EquGroupType.GroupPart}" Binding="{Binding EquGroupType}">
+                    <Setter Property="Visibility" Value="Visible" />
+                  </DataTrigger>
+                  <DataTrigger Value="{x:Static enums:EquGroupType.GroupPart2}" Binding="{Binding EquGroupType}">
+                    <Setter Property="Visibility" Value="Visible" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+            <StackPanel Width="270" Height="auto" Focusable="True" Orientation="Vertical">
+              <Button Margin="0,0,0,0" Foreground="#6ce51b" ToolTip="鼠标点击套装名称打开所有套装文件 按住Ctrl则添加到查找视图 按住ALT则仅打开套装信息部件" ToolTipService.InitialShowDelay="50" Style="{StaticResource PreviewButtonLinkStyle}" Command="{Binding EquPartsetFile.OnOpenPartFileCommand}" Content="{Binding EquPartsetFile.Name}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=1, Converter={StaticResource ConverterFontSizeAdd}}" />
+              <StackPanel Height="2" Margin="10,8,10,2" Background="#FF808080" Opacity="0.2" />
+              <ListBox Name="listBoxEquGroup2" Background="#00FFFFFF" BorderThickness="0" ItemTemplate="{StaticResource equGroupListBoxItemTemplate2}" BorderBrush="{x:Null}" ItemsSource="{Binding EquPartsetFile.EquItems, Mode=TwoWay}">
+                <FrameworkElement.Resources>
+                  <ResourceDictionary>
+                    <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}">
+                      <Setter Property="HorizontalContentAlignment" Value="Left" />
+                      <Setter Property="VerticalAlignment" Value="Center" />
+                      <Setter Property="BorderBrush" Value="#FFFF0000" />
+                      <Setter Property="BorderThickness" Value="0" />
+                      <Setter Property="Padding" Value="0" />
+                      <Setter Property="Margin" Value="0" />
+                      <Style.Triggers>
+                        <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                          <Setter Property="Background" Value="#00FFFFFF" />
+                        </Trigger>
+                        <Trigger Property="UIElement.IsMouseOver" Value="True">
+                          <Setter Property="Background" Value="#00FFFFFF" />
+                        </Trigger>
+                      </Style.Triggers>
+                    </Style>
+                  </ResourceDictionary>
+                </FrameworkElement.Resources>
+              </ListBox>
+              <StackPanel Height="2" Margin="10,2,10,8" Background="#FF808080" Opacity="0.2" />
+              <TextBlock Margin="0,10,0,0" Foreground="#6ce51b" TextWrapping="Wrap" Text="{Binding EquPartsetFile.ItemsText, Mode=OneWay}" />
+            </StackPanel>
+          </Border>
+        </Grid>
+      </Grid>
+    </UserControl>
+  </DataTemplate>
+  <DataTemplate x:Key="Stackable_礼包">
+    <StackPanel>
+      <Button Margin="0,18,0,0" Content="[礼包内物品]" Foreground="#55a4e1" ToolTip="鼠标点击查看物品详情 按住Ctrl点击添加到查找视图" ToolTipService.InitialShowDelay="50" Command="{Binding BoosterInfo.OnAddAllFilesToSearchPanelCommand}">
+        <FrameworkElement.Resources>
+          <ResourceDictionary />
+        </FrameworkElement.Resources>
+        <FrameworkElement.Style>
+          <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                  <Grid>
+                    <Border Name="border">
+                      <ContentPresenter VerticalAlignment="Center" Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}">
+                        <FrameworkElement.Resources>
+                          <ResourceDictionary>
+                            <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+                              <Style.Triggers>
+                                <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                  <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+                                  <Setter Property="TextDecorations" Value="Underline" />
+                                </Trigger>
+                              </Style.Triggers>
+                            </Style>
+                          </ResourceDictionary>
+                        </FrameworkElement.Resources>
+                      </ContentPresenter>
+                    </Border>
+                    <p26:FlyoutControl Name="flyoutControl" Control.Padding="0" Control.BorderThickness="0" FrameworkElement.FlowDirection="LeftToRight" p27:FlyoutBase.StaysOpen="false" Control.Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" Control.BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}" FrameworkElement.DataContext="{Binding BoosterInfo}" p27:FlyoutBase.IsOpen="{Binding ShowPreviewItemListVmItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" p27:FlyoutBase.PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}" xmlns:p27="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p26="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1">
+                      <p27:FlyoutBase.Settings>
+                        <p26:FlyoutSettings p26:FlyoutSettings.Placement="Bottom" p26:FlyoutSettings.ShowIndicator="False" />
+                      </p27:FlyoutBase.Settings>
+                      <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                        <Border BorderThickness="1" CornerRadius="3" Focusable="False" BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}">
+                          <ListBox MinHeight="300" MaxHeight="600" Margin="0,10,0,0" Background="#00FFFFFF" BorderThickness="0" ItemTemplate="{StaticResource Stkable_礼包_0_PreviewFileItemsPreviewListBoxItemTemplate}" BorderBrush="{x:Null}" ItemsSource="{Binding PreviewItemListVmItems}">
+                            <ItemsControl.ItemsPanel>
+                              <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                              </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <FrameworkElement.Resources>
+                              <ResourceDictionary>
+                                <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}">
+                                  <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                  <Setter Property="Width" Value="370" />
+                                  <Setter Property="MaxHeight" Value="400" />
+                                  <Setter Property="VerticalAlignment" Value="Center" />
+                                  <Setter Property="BorderBrush" Value="#FFFF0000" />
+                                  <Setter Property="BorderThickness" Value="0" />
+                                  <Setter Property="Padding" Value="0" />
+                                  <Setter Property="Margin" Value="0" />
+                                  <Style.Triggers>
+                                    <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                                      <Setter Property="Background" Value="#00FFFFFF" />
+                                    </Trigger>
+                                    <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                      <Setter Property="Background" Value="#00FFFFFF" />
+                                    </Trigger>
+                                  </Style.Triggers>
+                                </Style>
+                              </ResourceDictionary>
+                            </FrameworkElement.Resources>
+                          </ListBox>
+                        </Border>
+                        <Grid Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}">
+                          <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                          </Grid.RowDefinitions>
+                          <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="加载中..." Foreground="#FF808080" />
+                          <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" />
+                        </Grid>
+                        <core:SimpleButton FrameworkElement.Width="16" FrameworkElement.Height="16" FrameworkElement.Margin="0,3,3,0" FrameworkElement.HorizontalAlignment="Right" FrameworkElement.VerticalAlignment="Top" Control.Background="#00FFFFFF" Control.BorderThickness="0" FrameworkElement.Cursor="Hand" SimpleButton.Glyph="{DynamicResource Close}" FrameworkElement.ToolTip="关闭" ToolTipService.InitialShowDelay="50" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" ButtonBase.Command="{Binding OnCloseFileItemsPanelCommand}" />
+                      </Grid>
+                    </p26:FlyoutControl>
+                  </Grid>
+                  <ControlTemplate.Triggers />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+              <Trigger Property="UIElement.IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#5dbcff" />
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkElement.Style>
+      </Button>
+      <TextBlock Margin="0,5,0,0" Foreground="#FFFFFFFF" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding BoosterInfo.Text}" />
+    </StackPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="Stackable_附魔卡片">
+    <UserControl FontWeight="Bold" FontFamily="{StaticResource IconFontFZKT}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, Mode=OneWay}">
+      <dxmvvm:Interaction.Behaviors>
+        <ui:EventToCommand p20:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding EnchantCardInfo.OnLoadedCommand}" xmlns:p20="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" />
+      </dxmvvm:Interaction.Behaviors>
+      <Border VerticalAlignment="Top">
+        <Grid Width="206" Height="268">
+          <Panel.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="{Binding EnchantCardInfo.BackImageSource}" />
+          </Panel.Background>
+          <TextBlock Visibility="Collapsed" Text="{Binding ItemName}" />
+          <Image Width="32" Height="15" Margin="12,42,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding EnchantCardInfo.MonsterTypeImageSource}" />
+          <Grid Width="30" Height="20" Margin="13,18,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ShowGridLines="false  " Visibility="{Binding EnchantCardInfo.IsMonsterLevelMaxMoreThan9, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Margin="3,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding EnchantCardInfo.LevelImgLeft.Width}" Height="{Binding EnchantCardInfo.LevelImgLeft.Height}" Source="{Binding EnchantCardInfo.LevelImgLeft.ImageSource}" />
+            <Image Grid.Column="1" Margin="-2,0,0,0" HorizontalAlignment="Left" Width="{Binding EnchantCardInfo.LevelImgRight.Width}" Height="{Binding EnchantCardInfo.LevelImgRight.Height}" Source="{Binding EnchantCardInfo.LevelImgRight.ImageSource}" />
+          </Grid>
+          <Grid Width="30" Height="20" Margin="13,18,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ShowGridLines="false  " Visibility="{Binding EnchantCardInfo.IsMonsterLevelMaxMoreThan9, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+            <Image Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding EnchantCardInfo.LevelImgLeft.Width}" Height="{Binding EnchantCardInfo.LevelImgLeft.Height}" Source="{Binding EnchantCardInfo.LevelImgLeft.ImageSource}" />
+          </Grid>
+          <Border Width="180" Height="auto" Margin="0,0,0,10" VerticalAlignment="Bottom" Background="#030204" BorderBrush="#FF808080" BorderThickness="1,0,1,1" CornerRadius="2" Opacity="0.8">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <TextBlock Margin="4,5,0,0" VerticalAlignment="Top" Foreground="#65e69c" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding EnchantCardInfo.EquipPartsText, Mode=OneWay}" />
+              <TextBlock Grid.Row="1" Margin="4,5,0,0" VerticalAlignment="Top" Foreground="#65e69c" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding EnchantCardInfo.EquBlueAttributes, Mode=OneWay}" />
+              <Grid Row="2" Margin="5,0,5,5">
+                <TextBlock VerticalAlignment="Bottom" Foreground="#838383" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding Flavor_text}" />
+              </Grid>
+            </Grid>
+          </Border>
+        </Grid>
+      </Border>
+    </UserControl>
+  </DataTemplate>
+  <DataTemplate x:Key="Stackable_附魔宝珠">
+    <StackPanel>
+      <TextBlock VerticalAlignment="Top" Foreground="#65e69c" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding EnchantWasteInfo.EquTypes, Mode=OneWay}" />
+      <TextBlock VerticalAlignment="Top" Foreground="#65e69c" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding EnchantWasteInfo.Text, Mode=OneWay}" />
+    </StackPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="Stackable_时装礼包可选">
+    <StackPanel>
+      <Button ToolTip="鼠标点击 添加到查找视图" Style="{StaticResource LinkButton}" Command="{Binding Usable_cera_package.OnOpenAllFilesCommand}">礼包内物品列表</Button>
+      <ListBox Margin="0,4,0,0" Padding="0" BorderThickness="0" ItemsSource="{Binding Path=Usable_cera_package.Items}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <VirtualizingStackPanel />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <FrameworkElement.Style>
+          <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="#00FFFFFF" />
+            <Setter Property="Foreground" Value="#FFFF0000" />
+            <Setter Property="ItemContainerStyle">
+              <Setter.Value>
+                <Style TargetType="{x:Type ListBoxItem}">
+                  <Setter Property="Padding" Value="0" />
+                  <Setter Property="HorizontalContentAlignment" Value="Left" />
+                  <Setter Property="VerticalAlignment" Value="Center" />
+                  <Setter Property="Margin" Value="0" />
+                  <Setter Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid Margin="0">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Orientation="Horizontal">
+                            <Label Foreground="#FFFFFFFF">[</Label>
+                            <Button Margin="0" Padding="0" Background="#00FFFFFF" BorderThickness="0" FontWeight="Bold" Foreground="#FFFFFFFF" ToolTip="鼠标点击转到文件" ToolTipService.InitialShowDelay="50" ToolTipService.ShowDuration="10000" Style="{StaticResource RarityButtonLink}" Command="{Binding OnOpenFileCommand}" Content="{Binding ItemName, Mode=OneWay}" />
+                            <Label Foreground="#FFFFFFFF">]</Label>
+                            <TextBlock Grid.Column="1" Margin="4,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FFFFFFFF" Text="{Binding ItemCount}" />
+                            <Label>个</Label>
+                          </StackPanel>
+                          <p29:FlyoutControl Name="flyoutControl" Control.Padding="0" Control.BorderThickness="0" FrameworkElement.FlowDirection="LeftToRight" p30:FlyoutBase.StaysOpen="True" p30:FlyoutBase.IsOpen="False" Control.Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" Control.BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}" p30:FlyoutBase.PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}" xmlns:p30="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p29="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1">
+                            <p30:FlyoutBase.Settings>
+                              <p29:FlyoutSettings p29:FlyoutSettings.Placement="Right" p29:FlyoutSettings.ShowIndicator="True" />
+                            </p30:FlyoutBase.Settings>
+                            <preview1:PreviewPvfItemControl x:Name="previewControl" ContentEx="{Binding PreviewBase}" />
+                          </p29:FlyoutControl>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                          <EventTrigger RoutedEvent="Control.MouseEnter">
+                            <BeginStoryboard>
+                              <Storyboard>
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                                  <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True" />
+                                </BooleanAnimationUsingKeyFrames>
+                              </Storyboard>
+                            </BeginStoryboard>
+                          </EventTrigger>
+                          <EventTrigger RoutedEvent="Control.MouseLeave">
+                            <BeginStoryboard>
+                              <Storyboard>
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                                  <DiscreteBooleanKeyFrame KeyTime="0:0:0.05" Value="False" />
+                                </BooleanAnimationUsingKeyFrames>
+                              </Storyboard>
+                            </BeginStoryboard>
+                          </EventTrigger>
+                        </ControlTemplate.Triggers>
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </FrameworkElement.Style>
+      </ListBox>
+    </StackPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="Stackable_NullTemplate" />
+  <preview:PvfFilePreviewStackableContentTemplateSelector x:Key="PvfFilePreviewStackableContentTemplateSelector" NullControl="{StaticResource Stackable_NullTemplate}" Stackable_时装礼包可选="{StaticResource Stackable_时装礼包可选}" Stackable_附魔宝珠="{StaticResource Stackable_附魔宝珠}" 礼包="{StaticResource Stackable_礼包}" />
+  <DataTemplate x:Key="StkablePreviewDefault">
+    <UserControl FontWeight="Bold" FontFamily="{StaticResource IconFontFZKT}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, Mode=OneWay}">
+      <Border Height="auto" Padding="5" VerticalAlignment="Top" BorderThickness="1.5" CornerRadius="2" Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}">
+        <StackPanel Width="270" Height="auto" Focusable="True" Orientation="Vertical">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border MaxWidth="30.2" MaxHeight="30.2" BorderBrush="#a77a41" BorderThickness="2.2" CornerRadius="4">
+              <Image Stretch="Fill" Source="{Binding ImageSource}" />
+            </Border>
+            <TextBlock Grid.Column="1" Margin="6,0,0,0" TextWrapping="Wrap" Style="{StaticResource TextBlockForeBrushFromRarity}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=2, Converter={StaticResource ConverterFontSizeAdd}}" Text="{Binding ItemName}" />
+          </Grid>
+          <StackPanel Height="2" Margin="10,8,10,8" Background="#FF808080" Opacity="0.1" />
+          <TextBlock TextAlignment="Right" Style="{StaticResource TextBlockForeBrushFromRarity2}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=2, Converter={StaticResource ConverterFontSizeAdd}}" />
+          <Button HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="点击转到该物品" ToolTipService.InitialShowDelay="50" Style="{StaticResource NeedMaterialPreviewButtonLinkStyle}" Command="{Binding OnGoToNeedMaterialFileCommand}" Content="{Binding NeedMaterial, Mode=OneWay}" Visibility="{Binding NeedMaterial, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Foreground="#FFFFFFFF" Style="{StaticResource TextBlockCenter}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=2, Converter={StaticResource ConvertFontSizeReduction}}" Text="{Binding Weight, Mode=OneWay}" Visibility="{Binding Weight, Converter={StaticResource ConvertNullToVisibility}}" />
+            <TextBlock Grid.Column="1" Foreground="#FFFFFFFF" TextAlignment="Right" Text="{Binding SalePrice, Mode=OneWay}" Visibility="{Binding SalePrice, Converter={StaticResource ConvertNullToVisibility}}" />
+          </Grid>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource TextBlockCenter}" Text="{Binding StackableTypeToGameText, Mode=OneWay}" Visibility="{Binding StackableType, Converter={StaticResource ConvertNullToVisibility}}" />
+          </Grid>
+          <TextBlock HorizontalAlignment="Right" Foreground="#FFFFFFFF" Style="{StaticResource TextBlockCenter}" Text="{Binding StackLimit}" Visibility="{Binding StackLimit, Converter={StaticResource ConvertNullToVisibility}}" />
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="auto" />
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" TextAlignment="Right" Text="{Binding AttachType, Mode=OneWay}" Visibility="{Binding AttachType, Converter={StaticResource ConvertNullToVisibility}}">
+              <FrameworkElement.Style>
+                <Style BasedOn="{StaticResource TextBlockCenter}" TargetType="{x:Type TextBlock}">
+                  <Setter Property="Foreground" Value="#FFFFFFFF" />
+                  <Style.Triggers>
+                    <DataTrigger Value="{x:Static enums:AttachType.account}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                      <Setter Property="Foreground" Value="#FFFF0000" />
+                    </DataTrigger>
+                    <DataTrigger Value="{x:Static enums:AttachType.sealing_trade}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                      <Setter Property="Foreground" Value="#FFFF0000" />
+                    </DataTrigger>
+                    <DataTrigger Value="{x:Static enums:AttachType.trade}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                      <Setter Property="Foreground" Value="#FFFF0000" />
+                    </DataTrigger>
+                    <DataTrigger Value="{x:Static enums:AttachType.trade_delete}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                      <Setter Property="Foreground" Value="#FFFF0000" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </TextBlock>
+          </Grid>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="auto" />
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+          </Grid>
+          <TextBlock Margin="0,0,0,0" Foreground="#68D5ED" TextWrapping="Wrap" Text="{Binding Basic_explain, Mode=OneWay}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Visibility" Value="Collapsed" />
+                <Style.Triggers>
+                  <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                      <Condition Value="True" Binding="{Binding Basic_explain, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}" />
+                      <Condition Value="False" Binding="{Binding ShowDetail_Explain}" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Visibility" Value="Visible" />
+                  </MultiDataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </TextBlock>
+          <TextBlock Margin="0,0,0,0" Foreground="#68D5ED" TextWrapping="Wrap" Text="{Binding Detail_Explain, Mode=OneWay}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Visibility" Value="Collapsed" />
+                <Style.Triggers>
+                  <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                      <Condition Value="True" Binding="{Binding Detail_Explain, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}" />
+                      <Condition Value="True" Binding="{Binding ShowDetail_Explain}" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Visibility" Value="Visible" />
+                  </MultiDataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </TextBlock>
+          <TextBlock Margin="0,15,0,0" Foreground="#68D5ED" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding explain, Mode=OneWay}" Visibility="{Binding explain, Converter={StaticResource ConvertNullToVisibility}}" />
+          <ContentControl ContentTemplateSelector="{StaticResource PvfFilePreviewStackableContentTemplateSelector}" Content="{Binding}" />
+          <StackPanel Height="2" Margin="10,8,10,8" Background="#FF808080" Opacity="0.1" Visibility="{Binding Flavor_text, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+          <TextBlock Foreground="#FF808080" TextWrapping="Wrap" Text="{Binding Flavor_text, Mode=OneWay}" Visibility="{Binding Flavor_text, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+          <StackPanel Height="2" Margin="10,8,10,4" Background="#FF808080" Opacity="0.1" Visibility="{Binding ElementName=textBlocLookDetail_Explain, Path=Visibility}" />
+          <Button Name="textBlocLookDetail_Explain" Margin="0,0,0,0" HorizontalAlignment="Center" Background="#00FFFFFF" BorderThickness="0" Content="查看详细说明(F4)" Foreground="#68D5ED" BorderBrush="{x:Null}">
+            <dxmvvm:Interaction.Behaviors>
+              <FocusBehavior xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+              <KeyToCommand p23:EventTriggerBase.EventName="PreviewKeyDown" p24:KeyToCommand.KeyGesture="F4" p24:EventToCommandBase.Command="{Binding OnSwitchExplainCommand}" xmlns:p24="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p23="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+            </dxmvvm:Interaction.Behaviors>
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type Button}">
+                <Setter Property="Visibility" Value="Collapsed" />
+                <Style.Triggers>
+                  <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                      <Condition Value="True" Binding="{Binding Detail_Explain, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Visibility" Value="Visible" />
+                  </MultiDataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </Button>
+        </StackPanel>
+      </Border>
+    </UserControl>
+  </DataTemplate>
+  <DataTemplate x:Key="Stkable_设计图">
+    <UserControl FontWeight="Bold" FontFamily="{StaticResource IconFontFZKT}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, Mode=OneWay}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border Height="auto" Padding="5" VerticalAlignment="Top" BorderThickness="1.5" CornerRadius="2" Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}">
+          <StackPanel Width="270" Height="auto" Focusable="True" Orientation="Vertical">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+              </Grid.ColumnDefinitions>
+              <Border MaxWidth="30.2" MaxHeight="30.2" BorderBrush="#a77a41" BorderThickness="2.2" CornerRadius="4">
+                <Image Stretch="Fill" Source="{Binding ImageSource}" />
+              </Border>
+              <Button Grid.Column="1" Margin="6,0,0,0" Padding="0" Background="#00FFFFFF" BorderThickness="0" FontWeight="Bold" ToolTip="鼠标点击将设计图相关文件添加到查找视图" ToolTipService.InitialShowDelay="50" ToolTipService.ShowDuration="10000" Style="{StaticResource RarityButtonLink}" Command="{Binding OnAddRecipeAllFilesToSearchPanelCommand}" Content="{Binding ItemName, Mode=OneWay}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=2, Converter={StaticResource ConverterFontSizeAdd}}" />
+            </Grid>
+            <StackPanel Height="2" Margin="10,8,10,8" Background="#FF808080" Opacity="0.1" />
+            <TextBlock TextAlignment="Right" Style="{StaticResource TextBlockForeBrushFromRarity2}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=2, Converter={StaticResource ConverterFontSizeAdd}}" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="点击转到该物品" ToolTipService.InitialShowDelay="50" Style="{StaticResource NeedMaterialPreviewButtonLinkStyle}" Command="{Binding OnGoToNeedMaterialFileCommand}" Content="{Binding NeedMaterial, Mode=OneWay}" Visibility="{Binding NeedMaterial, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <TextBlock Foreground="#FFFFFFFF" Style="{StaticResource TextBlockCenter}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, ConverterParameter=2, Converter={StaticResource ConvertFontSizeReduction}}" Text="{Binding Weight, Mode=OneWay}" Visibility="{Binding Weight, Converter={StaticResource ConvertNullToVisibility}}" />
+              <TextBlock Grid.Column="1" Foreground="#FFFFFFFF" TextAlignment="Right" Text="{Binding SalePrice, Mode=OneWay}" Visibility="{Binding SalePrice, Converter={StaticResource ConvertNullToVisibility}}" />
+            </Grid>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <TextBlock Style="{StaticResource TextBlockCenter}" Text="{Binding StackableTypeToGameText, Mode=OneWay}" Visibility="{Binding StackableType, Converter={StaticResource ConvertNullToVisibility}}" />
+            </Grid>
+            <TextBlock HorizontalAlignment="Right" Foreground="#FFFFFFFF" Style="{StaticResource TextBlockCenter}" Text="{Binding StackLimit}" Visibility="{Binding StackLimit, Converter={StaticResource ConvertNullToVisibility}}" />
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <TextBlock Grid.Column="1" TextAlignment="Right" Text="{Binding AttachType, Mode=OneWay}" Visibility="{Binding AttachType, Converter={StaticResource ConvertNullToVisibility}}">
+                <FrameworkElement.Style>
+                  <Style BasedOn="{StaticResource TextBlockCenter}" TargetType="{x:Type TextBlock}">
+                    <Setter Property="Foreground" Value="#FFFFFFFF" />
+                    <Style.Triggers>
+                      <DataTrigger Value="{x:Static enums:AttachType.account}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                        <Setter Property="Foreground" Value="#FFFF0000" />
+                      </DataTrigger>
+                      <DataTrigger Value="{x:Static enums:AttachType.sealing_trade}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                        <Setter Property="Foreground" Value="#FFFF0000" />
+                      </DataTrigger>
+                      <DataTrigger Value="{x:Static enums:AttachType.trade}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                        <Setter Property="Foreground" Value="#FFFF0000" />
+                      </DataTrigger>
+                      <DataTrigger Value="{x:Static enums:AttachType.trade_delete}" Binding="{Binding AttachTypeEnum, Mode=OneWay}">
+                        <Setter Property="Foreground" Value="#FFFF0000" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </FrameworkElement.Style>
+              </TextBlock>
+            </Grid>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <TextBlock Foreground="#FFFF0000" Style="{StaticResource TextBlockCenter}" Text="{Binding MiniNumLevel, Mode=OneWay}" Visibility="{Binding MiniNumLevel, Converter={StaticResource ConvertNullToVisibility}}" />
+            </Grid>
+            <StackPanel Visibility="{Binding RecipeViewModel.HasSubJob, Converter={StaticResource ConvertBoolenToVisibility}}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="#FFFF0000" Style="{StaticResource TextBlockCenter}" Text="{Binding RecipeViewModel.SubJobType}" />
+                <Label Foreground="#FFFF0000">可以使用</Label>
+              </StackPanel>
+              <StackPanel Orientation="Horizontal">
+                <Label Foreground="#FFFF0000">适合的熟练度lv</Label>
+                <TextBlock Foreground="#FFFF0000" Style="{StaticResource TextBlockCenter}" Text="{Binding RecipeViewModel.SubJob.SubJobLevel}" />
+              </StackPanel>
+            </StackPanel>
+            <TextBlock Margin="0,0,0,0" Foreground="#68D5ED" TextWrapping="Wrap" Text="{Binding Basic_explain, Mode=OneWay}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                  <Setter Property="Visibility" Value="Collapsed" />
+                  <Style.Triggers>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Value="True" Binding="{Binding Basic_explain, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}" />
+                        <Condition Value="False" Binding="{Binding ShowDetail_Explain}" />
+                      </MultiDataTrigger.Conditions>
+                      <Setter Property="Visibility" Value="Visible" />
+                    </MultiDataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </TextBlock>
+            <TextBlock Margin="0,0,0,0" Foreground="#68D5ED" TextWrapping="Wrap" Text="{Binding Detail_Explain, Mode=OneWay}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                  <Setter Property="Visibility" Value="Collapsed" />
+                  <Style.Triggers>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Value="True" Binding="{Binding Detail_Explain, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}" />
+                        <Condition Value="True" Binding="{Binding ShowDetail_Explain}" />
+                      </MultiDataTrigger.Conditions>
+                      <Setter Property="Visibility" Value="Visible" />
+                    </MultiDataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </TextBlock>
+            <TextBlock Margin="0,15,0,0" Foreground="#68D5ED" TextWrapping="Wrap" Style="{StaticResource TextBlockCenter}" Text="{Binding explain, Mode=OneWay}" Visibility="{Binding explain, Converter={StaticResource ConvertNullToVisibility}}" />
+            <StackPanel Height="2" Margin="10,8,10,8" Background="#FF808080" Opacity="0.1" Visibility="{Binding Flavor_text, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+            <TextBlock Foreground="#FF808080" TextWrapping="Wrap" Text="{Binding Flavor_text, Mode=OneWay}" Visibility="{Binding Flavor_text, Mode=OneWay, Converter={StaticResource ConvertNullToVisibility}}" />
+            <ListBox Margin="0,10,0,0" Padding="0" BorderThickness="0" ItemsSource="{Binding Path=RecipeViewModel.Items}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type ListBox}">
+                  <Setter Property="Background" Value="#00FFFFFF" />
+                  <Setter Property="Foreground" Value="#FFFF0000" />
+                  <Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                      <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="Template">
+                          <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                              <Grid Margin="0">
+                                <Grid.ColumnDefinitions>
+                                  <ColumnDefinition />
+                                  <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Button Margin="0" Padding="0" Background="#00FFFFFF" BorderThickness="0" FontWeight="Bold" Foreground="#FFFF0000" ToolTip="鼠标点击转到文件" ToolTipService.InitialShowDelay="50" ToolTipService.ShowDuration="10000" Style="{StaticResource PreviewButtonLinkStyle}" Command="{Binding OnOpenFileCommand}" Content="{Binding ItemName, Mode=OneWay}" />
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FFFF0000" Text="{Binding NeedCountString}" />
+                                <p32:FlyoutControl Name="flyoutControl" Control.Padding="0" Control.BorderThickness="0" FrameworkElement.FlowDirection="LeftToRight" p33:FlyoutBase.StaysOpen="True" p33:FlyoutBase.IsOpen="False" Control.Background="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBackBrush, Converter={StaticResource TreeColorConverterPreview}}" Control.BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}" p33:FlyoutBase.PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}" xmlns:p33="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p32="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1">
+                                  <p33:FlyoutBase.Settings>
+                                    <p32:FlyoutSettings p32:FlyoutSettings.Placement="Right" p32:FlyoutSettings.ShowIndicator="True" />
+                                  </p33:FlyoutBase.Settings>
+                                  <Border BorderThickness="1" Focusable="False" BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                                    <preview1:PreviewPvfItemControl x:Name="previewControl" ContentEx="{Binding PreviewBase}" />
+                                  </Border>
+                                </p32:FlyoutControl>
+                              </Grid>
+                              <ControlTemplate.Triggers>
+                                <EventTrigger RoutedEvent="Control.MouseEnter">
+                                  <BeginStoryboard>
+                                    <Storyboard>
+                                      <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                                        <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True" />
+                                      </BooleanAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                  </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Control.MouseLeave">
+                                  <BeginStoryboard>
+                                    <Storyboard>
+                                      <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                                        <DiscreteBooleanKeyFrame KeyTime="0:0:0.05" Value="False" />
+                                      </BooleanAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                  </BeginStoryboard>
+                                </EventTrigger>
+                              </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                          </Setter.Value>
+                        </Setter>
+                      </Style>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+              </FrameworkElement.Style>
+            </ListBox>
+            <Button Name="textBlocLookDetail_Explain" Margin="0,0,0,0" HorizontalAlignment="Center" Background="#00FFFFFF" BorderThickness="0" Content="查看详细说明(F4)" Foreground="#68D5ED" BorderBrush="{x:Null}">
+              <dxmvvm:Interaction.Behaviors>
+                <FocusBehavior xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+                <KeyToCommand p24:EventTriggerBase.EventName="PreviewKeyDown" p25:KeyToCommand.KeyGesture="F4" p25:EventToCommandBase.Command="{Binding OnSwitchExplainCommand}" xmlns:p25="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p24="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+              </dxmvvm:Interaction.Behaviors>
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type Button}">
+                  <Setter Property="Visibility" Value="Collapsed" />
+                  <Style.Triggers>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Value="True" Binding="{Binding Detail_Explain, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}" />
+                      </MultiDataTrigger.Conditions>
+                      <Setter Property="Visibility" Value="Visible" />
+                    </MultiDataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </Button>
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Height="auto" Margin="2,0,0,0" VerticalAlignment="Top">
+          <preview1:PreviewPvfItemControl x:Name="previewControl" ContentEx="{Binding RecipeViewModel.ResultItem.PreviewBase}" />
+        </Border>
+      </Grid>
+    </UserControl>
+  </DataTemplate>
+  <Style x:Key="NpcShopTabControlStyle" TargetType="{x:Type TabControl}">
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Background" Value="#00FFFFFF" />
+    <Setter Property="BorderBrush" Value="#574d27" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+  </Style>
+  <DataTemplate x:Key="NpcShopContentTemplate">
+    <Grid>
+      <controls:NpcShopGridControlEx />
+    </Grid>
+  </DataTemplate>
+  <DataTemplate x:Key="NpcShopTabItemHeaderTemplate">
+    <Label Content="{Binding Title}" />
+  </DataTemplate>
+  <DataTemplate x:Key="NpcShopPreviewPanel">
+    <ContentControl FontFamily="{StaticResource IconFontFZKT}" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, Mode=OneWay}">
+      <dxmvvm:Interaction.Behaviors>
+        <FocusBehavior xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+        <EventToCommand p20:EventTriggerBase.EventName="Loaded" p21:EventToCommandBase.Command="{Binding OnPreviewLoadedCommand}" xmlns:p21="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p20="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+      </dxmvvm:Interaction.Behaviors>
+      <Grid>
+        <Border Width="310" Height="453" Background="#171d28" Opacity="0.95">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border BorderBrush="#65552d" BorderThickness="2.5">
+              <Grid>
+                <Grid Name="gridHeader" Width="310" Height="21">
+                  <Image Source="/images/pngs/npcshop/46.png" Stretch="Fill" />
+                  <Image Source="/images/pngs/npcshop/47.png" Stretch="Fill" />
+                  <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FFFFFFFF" Content="{Binding NpcName}" />
+                </Grid>
+              </Grid>
+            </Border>
+            <Border Grid.Row="1" BorderBrush="#46372f" BorderThickness="1,0,1,1" CornerRadius="0,0,3,3">
+              <Border Grid.Row="1" BorderBrush="#65552d" BorderThickness="2.5,0,2.5,2.5" CornerRadius="0,0,3,3">
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                  </Grid.RowDefinitions>
+                  <Border Width="280" Margin="0,5,0,0" BorderBrush="#FF000000" BorderThickness="0">
+                    <Image Height="60" Source="/images/pngs/npcshop/npcshopheader.png" Stretch="Fill" />
+                  </Border>
+                  <TabControl Grid.Row="1" Margin="15,10,15,64" ContentTemplate="{StaticResource NpcShopContentTemplate}" ItemTemplate="{StaticResource NpcShopTabItemHeaderTemplate}" Style="{StaticResource NpcShopTabControlStyle}" ItemsSource="{Binding Items.CollectionView}">
+                    <FrameworkElement.Resources>
+                      <ResourceDictionary>
+                        <Style x:Key="{x:Type TabItem}" TargetType="{x:Type TabItem}">
+                          <Setter Property="TabItem.IsSelected" Value="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                          <Setter Property="Template">
+                            <Setter.Value>
+                              <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Grid Width="67" Height="20">
+                                  <Image Name="img" Width="67" Height="20" />
+                                  <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#c7b185" Text="{Binding Title}" />
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                  <Trigger Property="UIElement.IsMouseOver" Value="False">
+                                    <Setter TargetName="img" Property="Image.Source" Value="/images/pngs/npcshop/86.png" />
+                                  </Trigger>
+                                  <Trigger Property="TabItem.IsSelected" Value="True">
+                                    <Setter TargetName="img" Property="Image.Source" Value="/images/pngs/npcshop/88.png" />
+                                  </Trigger>
+                                  <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                    <Setter TargetName="img" Property="Image.Source" Value="/images/pngs/npcshop/87.png" />
+                                  </Trigger>
+                                </ControlTemplate.Triggers>
+                              </ControlTemplate>
+                            </Setter.Value>
+                          </Setter>
+                        </Style>
+                      </ResourceDictionary>
+                    </FrameworkElement.Resources>
+                  </TabControl>
+                </Grid>
+              </Border>
+            </Border>
+          </Grid>
+        </Border>
+        <Image Width="39" Height="39" Margin="-5,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="top" Source="/images/pngs/npcshop/48.png" Stretch="Fill" />
+        <editors:HyperlinkEdit FrameworkElement.Margin="10,0,0,10" FrameworkElement.HorizontalAlignment="Left" FrameworkElement.VerticalAlignment="Bottom" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" editors:BaseEdit.EditValue="使用Npc商店设计器打开" Control.FontFamily="微软雅黑" editors:HyperlinkEdit.Command="{Binding OnOpenNpcShopEditorCommand}" />
+      </Grid>
+    </ContentControl>
+  </DataTemplate>
+  <preview:PvfFilePreviewContentTemplateSelector x:Key="PvfFilePreviewContentTemplateSelector" Equipment="{StaticResource Preview_DataTemplate_EQU_armor}" NpcShop="{StaticResource NpcShopPreviewPanel}" StackableDefaultTemplate="{StaticResource StkablePreviewDefault}" Stackable_附魔卡片="{StaticResource Stackable_附魔卡片}" Stkable_设计图="{StaticResource Stkable_设计图}" />
+  <Style x:Key="ItemPreviewToolTipStyle" TargetType="{x:Type ToolTip}">
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="Focusable" Value="True" />
+    <Setter Property="BorderBrush" Value="{x:Null}" />
+    <Setter Property="Background" Value="{x:Null}" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+</ResourceDictionary>

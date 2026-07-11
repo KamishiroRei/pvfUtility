@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:local="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:previewcontrols="clr-namespace:Controls.TextEditorFolder.PreviewControls;assembly=pvfUtility" xmlns:pvfcode="clr-namespace:PvfCode;assembly=PvfCode.Models" MinWidth="200" MinHeight="200" Width="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.PreviewAniPanelWidht, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.PreviewAniPanelHeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowAniPreviewPanel, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding TextEditorPreviewViewModelBase.LoadedCommand}" />
+    <EventToCommand interactivity:EventTriggerBase.Event="Unloaded" p12:EventToCommandBase.Command="{Binding TextEditorPreviewViewModelBase.OnUninstall2Command}" xmlns:p12="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+  </interactivity:Interaction.Behaviors>
+  <Grid Name="gridMain" DataContext="{Binding TextEditorPreviewViewModelBase}">
+    <previewcontrols:TextEditorPreviewAni />
+    <Thumb Width="12" Height="12" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="SizeNWSE" ToolTip="拖动此处改变大小" ToolTipService.InitialShowDelay="50" Visibility="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowAniPreviewPanel, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}" DragCompleted="Eq25iXX1g7" DragDelta="qN05Y66NCw">
+      <Control.Template>
+        <ControlTemplate>
+          <Border Padding="0">
+            <Image Source="{DynamicResource ResizeGripLeftXamlIcon}" />
+          </Border>
+        </ControlTemplate>
+      </Control.Template>
+    </Thumb>
+  </Grid>
+</UserControl>

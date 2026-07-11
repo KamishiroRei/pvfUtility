@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:ViewExtractFiles xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:extractModel="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:pvfEnums="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:searchModel="clr-namespace:PvfCode.Services.SearchModel;assembly=PvfCode.Services" xmlns:services="clr-namespace:PvfCode.Services;assembly=PvfCode.Services" Window.Title="{DynamicResource ViewExtractFiles_Title}" FrameworkElement.Width="800" Control.Padding="0" ThemedWindow.Icon="{DynamicResource ExtractFilesIcon}" Window.ResizeMode="CanResizeWithGrip" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" core:ThemedWindow.ShowBackButton="False" core:ThemedWindow.ShowGlow="True" Window.ShowInTaskbar="False" core:ThemedWindow.ShowStatusPanel="False" Window.SizeToContent="Height" xmlns:views="clr-namespace:PvfCode.Views;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <FrameworkElement.Loaded>
+    <dxbinding:DXEventExtension xmlns:dxbinding="clr-namespace:DevExpress.Xpf.DXBinding;assembly=DevExpress.Xpf.Core.v24.1" dxbinding:DXEventExtension.Handler="Loaded(@sender)" />
+  </FrameworkElement.Loaded>
+  <docking:DockLayoutManager xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:DockLayoutManager.Name="DemoDockContainer" Grid.Row="0" Grid.ColumnSpan="2" FrameworkElement.Margin="0,0,0,3" docking:DockLayoutManager.DockingStyle="VS2010" docking:DockLayoutManager.FloatingDocumentContainer="DocumentHost" docking:DockLayoutManager.FloatingMode="Desktop" UIElement.IsEnabled="{Binding IsLoading, Converter={StaticResource ConverterBoolenToFalse}, Mode=OneWay}">
+    <docking:LayoutGroup FrameworkElement.Name="Root">
+      <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource ViewExtractFiles_Caption_FileExplorerName}" docking:BaseLayoutItem.ItemWidth="1.5*">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+          <bars:ToolBarControl FrameworkElement.Name="toolbarControl" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+            <bars:BarButtonItem bars:BarItem.CommandParameter="false" bars:BarItem.Content="{DynamicResource ViewExtractFiles_Button_AddFileFromExplorer}" bars:BarItem.Glyph="{DynamicResource SelectAllIcon}" bars:BarItem.Command="{Binding SelectedFilesCommand}" bars:BarItem.IsVisible="{Binding IsDiffExtract, Converter={StaticResource ConverterBoolenToFalse}}" />
+            <bars:BarItemSeparator />
+            <bars:BarButtonItem bars:BarItem.CommandParameter="true" bars:BarItem.Content="{DynamicResource ViewExtractFiles_Button_AddFileFromSearch}" bars:BarItem.Glyph="/images/svgs/groupselectcursor_16x.svg" bars:BarItem.Command="{Binding SelectedFilesCommand}" bars:BarItem.IsVisible="{Binding IsDiffExtract, Converter={StaticResource ConverterBoolenToFalse}}" />
+            <bars:BarItemSeparator />
+            <bars:BarButtonItem bars:BarItem.Content="{DynamicResource ViewExtractFiles_Button_ClearAllFiles}" bars:BarItem.Glyph="{DynamicResource ClearWindowContent}" bars:BarItem.Command="{Binding OnClearAllFilesCommand}" />
+          </bars:ToolBarControl>
+          <controls:PvfTreeViewGroup Grid.Row="1" DataContext="{Binding TreeViewModel}" />
+          <bars:StatusBarControl Grid.Row="2" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" Control.Background="{Binding ElementName=toolbarControl, Path=Background}">
+            <bars:BarStaticItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+              <bars:BarItem.ContentTemplate>
+                <DataTemplate>
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource BatchOperationView_FileCount}" />
+                    <TextBlock Text="{Binding Path=DataContext.TreeViewModel.TreeGroupData.FileCount, Mode=OneWay, RelativeSource={RelativeSource AncestorType=dxb:StatusBarControl}}" />
+                  </StackPanel>
+                </DataTemplate>
+              </bars:BarItem.ContentTemplate>
+            </bars:BarStaticItem>
+          </bars:StatusBarControl>
+        </Grid>
+      </docking:LayoutPanel>
+      <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource ViewExtractFiles_Caption_ExtractProperties}" docking:BaseLayoutItem.ItemWidth="2*">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewExtractFiles_GroupBox_ExtractOptions}">
+            <WrapPanel Orientation="Vertical">
+              <CheckBox Content="{DynamicResource ViewExtractFiles_CheckBox_ExtractScript}" IsChecked="{Binding Config.DecompileScript, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <CheckBox Content="{DynamicResource ViewExtractFiles_CheckBox_ExtractAni}" IsChecked="{Binding Config.DecompileBinaryAni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <CheckBox Content="{DynamicResource ViewExtractFiles_CheckBox_TraditionalToSimplified}" IsChecked="{Binding Config.ConvertConvertSimplifiedChinese, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <CheckBox Content="{DynamicResource ViewExtractFiles_CheckBox_UseCompatibilityDecompiler}" IsChecked="{Binding Config.UseCompatibleDecompiler, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              <CheckBox Content="{DynamicResource ViewExtractFiles_CheckBox_ExtractLst}" IsChecked="{Binding Config.ExtractCorrespondenceFileLst, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </WrapPanel>
+          </GroupBox>
+          <GroupBox Grid.Row="1" Margin="0,10,0,0" Header="{DynamicResource ViewExtractFiles_Caption_FileConflict}">
+            <WrapPanel Orientation="Vertical">
+              <RadioButton Content="{DynamicResource ViewExtractFiles_RadioButton_Overwrite}" IsChecked="{Binding Config.Operation, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static extractModel:FileOperation.Cover}, Mode=TwoWay}" />
+              <RadioButton Content="{DynamicResource ViewExtractFiles_RadioButton_Rename}" IsChecked="{Binding Config.Operation, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static extractModel:FileOperation.Rename}, Mode=TwoWay}" />
+              <RadioButton Content="{DynamicResource ViewExtractFiles_RadioButton_Skip}" IsChecked="{Binding Config.Operation, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static extractModel:FileOperation.Skip}, Mode=TwoWay}" />
+              <RadioButton Content="{DynamicResource ViewExtractFiles_RadioButton_Stop}" IsChecked="{Binding Config.Operation, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static extractModel:FileOperation.Cancel}, Mode=TwoWay}" />
+              <StackPanel Height="1" Margin="0,5,0,5" Background="#FF808080" />
+              <CheckBox Content="{DynamicResource ViewExtractFiles_CheckBox_OpenDirectoryAfterExtract}" IsChecked="{Binding Config.ExtractSuccessOpenFolder, Mode=TwoWay}" />
+            </WrapPanel>
+          </GroupBox>
+          <GroupBox Grid.Row="2" Margin="0,10,0,0" Header="{DynamicResource ViewExtractFiles_Caption_FilterFileType}">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <editors:ComboBoxEdit xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.IsTextEditable="False" editors:BaseEdit.EditValue="{Binding Config.RemoveOrKeepFileType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterFileTypeKeepOrExcludeSelectItem}}">
+                <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource GlobalSearchWindow_FileTypeOption_Keep}" />
+                <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource GlobalSearchWindow_FileTypeOption_Exclude}" />
+              </editors:ComboBoxEdit>
+              <ComboBoxEdit FrameworkElement.Name="comboBoxEditFileTypesString" Grid.Column="1" p22:ButtonEdit.AllowDefaultButton="False" p22:ButtonEdit.IsTextEditable="True" p22:BaseEdit.NullText="{DynamicResource WinImportFile_Options_FilterFileType_NullText}" p22:BaseEdit.EditValue="{Binding Config.FileTypes, Converter={StaticResource ConvertFileTypeHasSet}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" p22:LookUpEditBase.ItemsSource="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.FileTypes}" xmlns:p22="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                <p22:ButtonEdit.Buttons>
+                  <editors:ButtonInfo xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonInfo.GlyphKind="Cancel" FrameworkContentElement.ToolTip="{DynamicResource WinImportFile_Options_ClearFilterFileType}" />
+                  <editors:ButtonInfo editors:ButtonInfo.GlyphKind="DropDown" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonInfoBase.IsDefaultButton="True" FrameworkContentElement.ToolTip="{DynamicResource WinImportFile_Options_SelectFilterFileType}" />
+                </p22:ButtonEdit.Buttons>
+                <p22:BaseEdit.StyleSettings>
+                  <editors:CheckedComboBoxStyleSettings xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                </p22:BaseEdit.StyleSettings>
+              </ComboBoxEdit>
+            </Grid>
+          </GroupBox>
+          <GroupBox Grid.Row="4" Margin="0,10,0,0" Header="{DynamicResource WinImportFile_Options_Caption_Execute}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="{DynamicResource ViewExtractFiles_Label_ExtractTo}" />
+                <ButtonEdit Grid.Column="1" p23:ButtonEdit.AllowDefaultButton="False" p23:BaseEdit.EditValue="{Binding Config.TargetPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p23="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                  <p23:ButtonEdit.Buttons>
+                    <p23:ButtonInfo FrameworkContentElement.Cursor="Hand" p23:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource ViewExtractFiles_Button_BrowseDirectory}" p23:CommandButtonInfo.Command="{Binding OnSelectTargetPathCommand}" />
+                  </p23:ButtonEdit.Buttons>
+                </ButtonEdit>
+              </Grid>
+              <StackPanel Grid.Row="1" Margin="0,20,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+                <CheckBox Name="checkAutoImportFileGroup" Margin="0,0,10,0" Content="提取为一键导入包 - 开发中" Foreground="#FF808080" IsEnabled="False" Visibility="Collapsed" IsChecked="{Binding Config.ExtractToAutoImportFileGroup, Mode=TwoWay}">
+                </CheckBox>
+                <CheckBox Margin="0,0,10,0" Content="{DynamicResource ViewExtractFiles_CheckBox_ExtractAs7z}" IsChecked="{Binding Config.ExtractTo7zip, Mode=TwoWay}" IsEnabled="{Binding ElementName=checkAutoImportFileGroup, Path=IsChecked, Converter={StaticResource ConverterBoolenToFalse}}" />
+                <Button Width="90" Height="24" Content="{DynamicResource ViewExtractFiles_Button_StartExtract}" Cursor="Hand" Command="{Binding OnExtractStartCommand}" IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}" />
+              </StackPanel>
+            </Grid>
+          </GroupBox>
+        </Grid>
+      </docking:LayoutPanel>
+    </docking:LayoutGroup>
+  </docking:DockLayoutManager>
+</views:ViewExtractFiles>

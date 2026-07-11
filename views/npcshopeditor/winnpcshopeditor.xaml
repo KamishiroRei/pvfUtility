@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<npcshopeditor1:WinNpcShopEditor xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxdove="http://schemas.devexpress.com/winfx/2008/xaml/docking/visualelements" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys" xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:npcshopeditor="clr-namespace:PvfCode.ViewModels.NpcShopEditor;assembly=pvfUtility" xmlns:npcshopeditor1="clr-namespace:PvfCode.Views.NpcShopEditor;assembly=pvfUtility" xmlns:preview="clr-namespace:PvfCode.Views.Preview;assembly=pvfUtility" xmlns:pvfcode="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" FrameworkElement.Width="1000" FrameworkElement.Height="800" Control.Padding="0" Window.Title="{Binding Title}">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding OnLoadedCommand}" />
+  </interactivity:Interaction.Behaviors>
+  <FrameworkElement.DataContext>
+    <npcshopeditor:NpcShopEditorViewModel />
+  </FrameworkElement.DataContext>
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <SolidColorBrush Color="Yellow">
+        <x:Key>
+          <themes1:CardViewThemeKeyExtension xmlns:themes="clr-namespace:DevExpress.Xpf.Utils.Themes;assembly=DevExpress.Xpf.Core.v24.1" ResourceKey="GroupPanelBackground" IsThemeIndependent="True" xmlns:themes1="clr-namespace:DevExpress.Xpf.Grid.Themes;assembly=DevExpress.Xpf.Grid.v24.1" />
+        </x:Key>
+      </SolidColorBrush>
+      <FontFamily x:Key="IconFontFZKT">Pack://application:,,,/pvfUtility;component/IconFont/FZKTJW.TTF#方正楷体简体</FontFamily>
+      <DataTemplate x:Key="NpcShopContentTemplate">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Grid>
+            <editors:ButtonEdit FrameworkElement.Name="TEXTNpcShopSearchKeyword" FrameworkElement.Width="200" FrameworkElement.Margin="10" FrameworkElement.HorizontalAlignment="Right" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.AllowDefaultButton="False" Control.Background="#06080f" Control.BorderBrush="#807253" TextEditBase.CaretBrush="#FFFFFFFF" Control.Foreground="#FFFFFFFF" editors:BaseEdit.NullText="输入物品名称查找" TextEditBase.NullTextForeground="#FF808080" editors:TextEditBase.Text="{Binding Path=DataContext.NpcShopSearchKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window}}">
+              <editors:ButtonEdit.Buttons>
+                <editors:ButtonInfo ButtonInfoBase.Foreground="#FFFFFFFF" editors:ButtonInfo.GlyphKind="Search" />
+                <editors:ButtonInfo ButtonInfoBase.Foreground="#FFFFFFFF" editors:ButtonInfo.GlyphKind="Cancel" editors:CommandButtonInfo.Command="{Binding Path=DataContext. OnClearNpcShopSearchKeywordCommand, RelativeSource={RelativeSource AncestorType=Window}}" />
+              </editors:ButtonEdit.Buttons>
+            </editors:ButtonEdit>
+          </Grid>
+          <GridControl Grid.Row="1" xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid:DataControlBase.AllowInitiallyFocusedRow="False" grid:DataControlBase.AutoGenerateColumns="AddNew" GridControl.Background="#00FFFFFF" grid:DataControlBase.EnableSmartColumnsGeneration="True" grid:DataControlBase.SelectionMode="Row" grid:DataControlBase.ShowBorder="False" grid:DataControlBase.CurrentItem="{Binding CurrentItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" grid:DataControlBase.ItemsSource="{Binding Items.CollectionView}" grid:DataControlBase.SelectedItems="{Binding SelectedItems, Mode=TwoWay}" xmlns="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+            <FrameworkElement.Resources xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+              <ResourceDictionary>
+                <Style TargetType="{x:Type ContentControl}">
+                  <Setter xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" Property="core:FocusHelper2.Focusable" Value="False" />
+                  <Setter Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate>
+                        <StackPanel Orientation="Vertical">
+                          <StackPanel Background="Transparent" Orientation="Horizontal">
+                            <grid1:GridSearchControl xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid1:GridSearchControl.Name="PART_SearchControl" FrameworkElement.HorizontalAlignment="Left" grid:GridSearchControlBase.View="{Binding Path=(dxg:GridControl.CurrentView), RelativeSource={RelativeSource TemplatedParent}}">
+                              <FrameworkElement.Width>
+                                <native:ThemeResourceExtension xmlns:native="clr-namespace:DevExpress.Xpf.Core.Native;assembly=DevExpress.Xpf.Core.v24.1" ThemeKey="{dxgt:TableViewThemeKey ResourceKey=SearchPanelWidth}" />
+                              </FrameworkElement.Width>
+                              <FrameworkElement.Margin>
+                                <Binding ElementName="PART_SearchControl" Path="GroupPanelShown">
+                                  <Binding.Converter>
+                                    <BoolToObjectConverter xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1">
+                                      <core:BoolToObjectConverter.FalseValue xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1">
+                                        <DynamicResourceExtension xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" ResourceKey="{dxgt:TableViewThemeKey ResourceKey=SearchPanelWithoutGroupedPanelMargin}" />
+                                      </core:BoolToObjectConverter.FalseValue>
+                                      <BoolToObjectConverter.TrueValue>
+                                        <DynamicResourceExtension xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" ResourceKey="{dxgt:TableViewThemeKey ResourceKey=SearchPanelWithGroupedPanelMargin}" />
+                                      </BoolToObjectConverter.TrueValue>
+                                    </BoolToObjectConverter>
+                                  </Binding.Converter>
+                                </Binding>
+                              </FrameworkElement.Margin>
+                            </grid1:GridSearchControl>
+                            <core:SimpleButton FrameworkElement.Margin="0,10,0,12" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1">
+                              <ContentControl.Content>
+                                <StackPanel Orientation="Horizontal">
+                                  <Image Width="16" Height="16" Source="pack://application:,,,/DevExpress.Images.v24.1;component/DevAV/Actions/About_16x16.png" />
+                                  <TextBlock Text="帮助" />
+                                </StackPanel>
+                              </ContentControl.Content>
+                            </core:SimpleButton>
+                          </StackPanel>
+                          <Border Name="PART_SearchPanelBorderBottom" BorderThickness="0,0,0,1">
+                            <Border.BorderBrush>
+                              <ThemeResourceExtension xmlns="clr-namespace:DevExpress.Xpf.Core.Native;assembly=DevExpress.Xpf.Core.v24.1" ThemeKey="{dxgt:TableViewThemeKey ResourceKey=SearchPanelBorderBottomBrush}" />
+                            </Border.BorderBrush>
+                            <UIElement.Visibility>
+                              <Binding ElementName="PART_SearchControl" Path="GroupPanelShown">
+                                <Binding.Converter>
+                                  <core:BoolToVisibilityInverseConverter xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+                                </Binding.Converter>
+                              </Binding>
+                            </UIElement.Visibility>
+                          </Border>
+                        </StackPanel>
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                  <x:Key>
+                    <TableViewThemeKeyExtension ResourceKey="SearchPanelContentTemplate" IsThemeIndependent="true" xmlns:p30="clr-namespace:DevExpress.Xpf.Utils.Themes;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Grid.Themes;assembly=DevExpress.Xpf.Grid.v24.1" />
+                  </x:Key>
+                </Style>
+                <Style x:Key="{x:Type grid1:GridCard}" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" TargetType="{x:Type grid1:GridCard}">
+                  <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+                  <Setter Property="Control.BorderThickness" Value="0" />
+                  <Setter Property="FrameworkElement.Margin" Value="0" />
+                  <Setter Property="Control.Padding" Value="0" />
+                  <Setter Property="Control.Template">
+                    <Setter.Value>
+                      <ControlTemplate TargetType="{x:Type grid1:GridCard}">
+                        <ContentControl Name="card" Margin="0" Padding="0" AllowDrop="True">
+                          <Grid Width="36" Height="36" Margin="0">
+                            <Image Name="imageBack" Width="36" Height="36" Source="/images/pngs/npcshop/57.png" />
+                            <DXImage FrameworkElement.Width="30" FrameworkElement.Height="30" p36:DXImage.Source="{Binding Row.ImageSource}" xmlns:p36="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+                            <Image Name="imageSealingMark" Width="32" Height="32" Opacity="1" />
+                            <Image Name="imageSelected" Width="36" Height="36" Opacity="1" />
+                            <Image Name="imageBorder" Width="31" Height="31" Source="/images/pngs/npcshop/imageborder.png" />
+                            <flyout:FlyoutControl xmlns:flyout="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" flyout:FlyoutControl.Name="flyoutControl" Control.Padding="0" Control.Background="#00FFFFFF" Control.BorderThickness="0" FrameworkElement.FlowDirection="LeftToRight" xmlns:native="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" native:FlyoutBase.StaysOpen="True" Control.BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}" native:FlyoutBase.PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                              <Border BorderThickness="0" Focusable="False" BorderBrush="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.CurrentColorConfing.PvfFilePreviewBorderBrush, Converter={StaticResource TreeColorConverterPreview}}">
+                                <preview:PreviewPvfItemControl x:Name="previewControl" />
+                              </Border>
+                              <FrameworkElement.Style>
+                                <Style TargetType="{x:Type flyout:FlyoutControl}">
+                                  <Setter Property="native:FlyoutBase.Settings">
+                                    <Setter.Value>
+                                      <flyout:FlyoutSettings flyout:FlyoutSettings.Placement="Top" flyout:FlyoutSettings.ShowIndicator="False" />
+                                    </Setter.Value>
+                                  </Setter>
+                                  <Setter Property="native:FlyoutBase.IsOpen" Value="False" />
+                                  <Setter Property="native:FlyoutBase.HorizontalOffset" Value="60" />
+                                </Style>
+                              </FrameworkElement.Style>
+                            </flyout:FlyoutControl>
+                          </Grid>
+                        </ContentControl>
+                        <ControlTemplate.Triggers>
+                          <EventTrigger RoutedEvent="Control.MouseEnter">
+                            <BeginStoryboard>
+                              <Storyboard>
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                                  <DiscreteBooleanKeyFrame KeyTime="0:0:0.5" Value="True" />
+                                </BooleanAnimationUsingKeyFrames>
+                              </Storyboard>
+                            </BeginStoryboard>
+                          </EventTrigger>
+                          <EventTrigger RoutedEvent="Control.MouseLeave">
+                            <BeginStoryboard>
+                              <Storyboard>
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                                  <DiscreteBooleanKeyFrame KeyTime="0:0:0.05" Value="False" />
+                                </BooleanAnimationUsingKeyFrames>
+                              </Storyboard>
+                            </BeginStoryboard>
+                          </EventTrigger>
+                          <Trigger SourceName="flyoutControl" Property="FlyoutBase.IsOpen" Value="True">
+                            <Setter TargetName="previewControl" Property="preview:PreviewPvfItemControl.ContentEx" Value="{Binding Row.PreviewBase}" />
+                          </Trigger>
+                          <DataTrigger Value="True" Binding="{Binding Row.EquIsSealing}">
+                            <Setter TargetName="imageSealingMark" Property="Image.Source" Value="{Binding Source={x:Static pvfcode:Res.Instance}, Path=ImageSealingMark}" />
+                            <Setter TargetName="imageSealingMark" Property="UIElement.Visibility" Value="Visible" />
+                            <Setter TargetName="imageBorder" Property="UIElement.Visibility" Value="Collapsed" />
+                          </DataTrigger>
+                          <DataTrigger Value="False" Binding="{Binding Row.EquIsSealing}">
+                            <Setter TargetName="imageSealingMark" Property="Image.Source" Value="{Binding Source={x:Static pvfcode:Res.Instance}, Path=ImageSealingMark}" />
+                            <Setter TargetName="imageSealingMark" Property="UIElement.Visibility" Value="Collapsed" />
+                            <Setter TargetName="imageBorder" Property="UIElement.Visibility" Value="Collapsed" />
+                          </DataTrigger>
+                          <Trigger Property="UIElement.IsMouseOver" Value="False">
+                            <Setter TargetName="imageBack" Property="Image.Source" Value="/images/pngs/npcshop/57.png" />
+                          </Trigger>
+                          <Trigger Property="UIElement.IsMouseOver" Value="True">
+                            <Setter TargetName="imageSelected" Property="Image.Source" Value="{Binding Source={x:Static pvfcode:Res.Instance}, Path=ItemImageSourceSelected}" />
+                          </Trigger>
+                          <DataTrigger Value="True" Binding="{Binding IsSelected}">
+                            <Setter TargetName="imageSelected" Property="Image.Source" Value="{Binding Source={x:Static pvfcode:Res.Instance}, Path=ItemImageSourceSelected}" />
+                          </DataTrigger>
+                        </ControlTemplate.Triggers>
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+                <Style x:Key="{x:Type editors:SearchControl}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type editors:SearchControl}">
+                  <Setter Property="Control.Background" Value="Transparent" />
+                </Style>
+              </ResourceDictionary>
+            </FrameworkElement.Resources>
+            <grid1:GridControl.Columns xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+              <grid1:GridColumn grid:ColumnBase.FieldName="ItemName" grid:BaseColumn.Visible="False" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" />
+            </grid1:GridControl.Columns>
+            <GridControl.View>
+              <grid1:CardView FrameworkElement.Name="View" grid:DataViewBase.AllowDragDrop="True" UIElement.AllowDrop="False" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid1:CardView.CardLayout="Rows" grid1:CardView.CardMargin="0" grid:DataViewBase.IsColumnChooserVisible="False" grid:DataViewBase.NavigationStyle="Row" grid:DataViewBase.SearchColumns="ItemName" grid:DataViewBase.SearchPanelAllowFilter="True" grid:DataViewBase.SearchPanelHighlightResults="True" grid:DataViewBase.SearchPanelNullText="输入物品名称查找" grid1:CardView.SeparatorThickness="0" grid1:CardView.ShowCardExpandButton="False" grid:DataViewBase.ShowColumnHeaders="False" grid:DataViewBase.ShowDragDropHint="True" grid:DataViewBase.ShowFilterPanelMode="Never" grid1:GridViewBase.ShowGroupPanel="False" grid1:GridViewBase.ShowGroupedColumns="False" grid:DataViewBase.ShowSearchPanelMode="Never" grid:DataViewBase.ShowSelectionRectangle="True" grid:DataViewBase.ShowTargetInfoInDragDropHint="True" grid:DataViewBase.DragDropHintTemplate="{StaticResource NpcShopDragDropHintTemplate}" grid:DataViewBase.SearchString="{Binding Path=DataContext.NpcShopSearchKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window}}">
+                <Interaction.Behaviors xmlns="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+                  <EventToCommand p30:EventTriggerBase.EventName="DragRecordOver" p31:EventToCommand.PassEventArgsToCommand="True" p31:EventToCommandBase.Command="{Binding Path=DataContext.DragRecordOverCommand, RelativeSource={RelativeSource AncestorType=Window}}" xmlns:p31="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p30="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <EventToCommand p30:EventTriggerBase.EventName="DropRecord" p31:EventToCommand.PassEventArgsToCommand="True" p31:EventToCommandBase.Command="{Binding Path=DataContext.ShopPageDropRecordCommand, RelativeSource={RelativeSource AncestorType=Window}}" xmlns:p31="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p30="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+                </Interaction.Behaviors>
+                <bars:BarManager.DXContextMenu xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                  <bars:PopupMenu>
+                    <bars:PopupMenu.Items xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                      <bars:BarButtonItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarItem.Content="移除物品(设定为-1)" bars:BarItem.Glyph="{DynamicResource Action_Delete}" bars:BarItem.KeyGesture="Delete" bars:BarItem.Command="{Binding OnRemoveItemsCommand}" />
+                      <bars:BarItemSeparator xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+                      <bars:BarButtonItem bars:BarItem.Content="删除物品" bars:BarItem.Glyph="{DynamicResource Action_Delete}" bars:BarItem.KeyGesture="Ctrl +Delete" bars:BarItem.Command="{Binding OnDeleteItemsCommand}" />
+                      <bars:BarItemSeparator />
+                      <bars:BarButtonItem bars:BarItem.Content="添加行" bars:BarItem.Glyph="{DynamicResource AddClassIcon}" bars:BarItem.KeyGesture="Ctrl +n" bars:BarItem.Command="{Binding OnAddPageLineCommand}" />
+                    </bars:PopupMenu.Items>
+                  </bars:PopupMenu>
+                </bars:BarManager.DXContextMenu>
+              </grid1:CardView>
+            </GridControl.View>
+          </GridControl>
+        </Grid>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <BarManager xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+    <BarManager.Bars>
+      <bars:Bar xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:Bar.AllowCustomizationMenu="False" bars:Bar.AllowQuickCustomization="False" bars:Bar.Caption="File" bars:Bar.IsMainMenu="False" bars:Bar.ShowDragWidget="True">
+        <bars:BarEditItem bars:BarItem.Content="选择商店：" bars:BarEditItem.EditValue="{Binding CurrentNpcShop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ContentElement.IsEnabled="{Binding ShopIsOpen, Converter={StaticResource ConverterBoolenToFalse}}">
+          <bars:BarEditItem.EditStyle>
+            <Style xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type editors:AutoSuggestEdit}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+              <Setter Property="Control.Padding" Value="0" />
+              <Setter Property="FrameworkElement.Height" Value="21" />
+              <Setter Property="FrameworkElement.MinWidth" Value="200" />
+              <Setter Property="editors:AutoSuggestEdit.PopupHighlightedTextCriteria" Value="StartsWith" />
+              <Setter Property="editors:AutoSuggestEdit.AcceptValueOnPopupContentSelectionChanged" Value="True" />
+              <Setter Property="editors:AutoSuggestEdit.AllowPopupTextHighlighting" Value="True" />
+              <Setter Property="editors:AutoSuggestEdit.ImmediatePopup" Value="True" />
+              <Setter Property="editors:BaseEdit.NullText" Value="输入：商店ID 商店名 文件名 查找 " />
+              <Setter Property="editors:AutoSuggestEdit.ItemTemplate">
+                <Setter.Value>
+                  <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                      <Label Content="{Binding NpcName}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.String}" />
+                      <Label Margin="5,0,0,0" Content="{Binding File.ItemCode}" Foreground="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.Digits}" />
+                      <Label Margin="5,0,0,0" Content="{Binding File.ShortName}" />
+                    </StackPanel>
+                  </DataTemplate>
+                </Setter.Value>
+              </Setter>
+              <Setter Property="Interaction.BehaviorsTemplate">
+                <Setter.Value>
+                  <DataTemplate>
+                    <ItemsControl>
+                      <EventToCommand p30:EventToCommand.EventArgsConverter="{StaticResource EventArgsConverterSenderAndArgs}" p31:EventTriggerBase.EventName="QuerySubmitted" p30:EventToCommandBase.Command="{Binding FindNpsShopQuerySubmittedCommand}" xmlns:p31="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p30="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+                      <EventToCommand p30:EventTriggerBase.EventName="SuggestionChosen" p31:EventToCommand.PassEventArgsToCommand="True" p31:EventToCommandBase.Command="{Binding FindNpcShopSuggestionChosenCommand}" xmlns:p31="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p30="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+                    </ItemsControl>
+                  </DataTemplate>
+                </Setter.Value>
+              </Setter>
+            </Style>
+          </bars:BarEditItem.EditStyle>
+          <bars:BarEditItem.EditSettings>
+            <settings:AutoSuggestEditSettings xmlns:settings="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" settings:ButtonEditSettings.IsTextEditable="True" settings:AutoSuggestEditSettings.ItemsSource="{Binding NpcShopList}" />
+          </bars:BarEditItem.EditSettings>
+        </bars:BarEditItem>
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.Content="编译" bars:BarItem.Glyph="{DynamicResource Save_16x}" bars:BarItem.Command="{Binding OnSaveShopCommand}" ContentElement.IsEnabled="{Binding ShopIsOpen}" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.Content="关闭商店" bars:BarItem.Glyph="{DynamicResource Close_red_16x}" bars:BarItem.Command="{Binding OnCloseShopCommand}" ContentElement.IsEnabled="{Binding ShopIsOpen}" />
+        <bars:BarItemSeparator />
+      </bars:Bar>
+    </BarManager.Bars>
+    <docking:DockLayoutManager xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:DockLayoutManager.Name="DemoDockContainer" Grid.Row="1" Grid.ColumnSpan="2" FrameworkElement.Margin="0,0,0,3" docking:DockLayoutManager.DisposeOnWindowClosing="False" docking:DockLayoutManager.DockingStyle="VS2010" docking:DockLayoutManager.FloatingDocumentContainer="Default" docking:DockLayoutManager.FloatingMode="Desktop" docking:DockLayoutManager.ShowFloatWindowsInTaskbar="True">
+      <docking:LayoutGroup FrameworkElement.Name="Root">
+        <docking:LayoutGroup docking:BaseLayoutItem.ItemWidth="3*" docking:LayoutGroup.Orientation="Vertical">
+          <docking:LayoutGroup docking:BaseLayoutItem.ItemHeight="3*">
+            <docking:LayoutGroup docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.ItemWidth="2*" docking:LayoutGroup.Orientation="Vertical" UIElement.IsEnabled="{Binding ShopIsOpen}">
+              <docking:LayoutPanel docking:BaseLayoutItem.Padding="0" docking:BaseLayoutItem.Caption="装备列表" docking:BaseLayoutItem.ItemHeight="*">
+                <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                  <npcshopeditor1:NpcShopItemListControlEx npcshopeditor1:NpcShopItemListControlEx.Name="equGrid" Type="Equ" p27:DataControlBase.ItemsSource="{Binding EquItems.CollectionView}" xmlns:p27="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core">
+                  </npcshopeditor1:NpcShopItemListControlEx>
+                </Grid>
+              </docking:LayoutPanel>
+              <docking:LayoutPanel docking:BaseLayoutItem.Padding="0" docking:BaseLayoutItem.Caption="道具列表" docking:BaseLayoutItem.ItemHeight="*">
+                <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                  <npcshopeditor1:NpcShopItemListControlEx npcshopeditor1:NpcShopItemListControlEx.Name="stkGrid" Type="Stk" p27:DataControlBase.ItemsSource="{Binding StkItems.CollectionView}" xmlns:p27="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core">
+                  </npcshopeditor1:NpcShopItemListControlEx>
+                </Grid>
+              </docking:LayoutPanel>
+            </docking:LayoutGroup>
+            <docking:LayoutGroup docking:FloatGroup.SizeToContent="WidthAndHeight" docking:LayoutGroup.DestroyOnClosingChildren="False" docking:BaseLayoutItem.ItemWidth="3*" docking:LayoutGroup.Orientation="Vertical" docking:BaseLayoutItem.ShowCaption="false">
+              <docking:LayoutPanel docking:BaseLayoutItem.Caption="设计区" docking:BaseLayoutItem.ItemHeight="3*" docking:BaseLayoutItem.ShowCaption="False">
+                <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                  </Grid.RowDefinitions>
+                  <bars:BarContainerControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" UIElement.IsEnabled="{Binding ShopIsOpen}">
+                    <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControl.AllowCollapse="False" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControlBase.AllowHide="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControlBase.AllowRemove="False" bars:ToolBarControlBase.BarItemHorizontalIndent="0" bars:ToolBarControl.ShowDragWidget="True" bars:ToolBarControl.UseWholeRow="True">
+                      <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="添加页" bars:BarItem.Glyph="{DynamicResource AddLayoutItem}" bars:BarItem.KeyGesture="Ctrl+o" bars:BarItem.Command="{Binding OnAddPageCommand}" />
+                      <bars:BarItemSeparator />
+                      <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="向左移动页" bars:BarItem.Glyph="{DynamicResource BackwardsIcon}" bars:BarItem.Command="{Binding OnMoveLeftPageCommand}" />
+                      <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="向右移动页" bars:BarItem.Glyph="{DynamicResource ForwardsIcon}" bars:BarItem.Command="{Binding OnMoveRightPageCommand}" />
+                    </bars:ToolBarControl>
+                  </bars:BarContainerControl>
+                  <ContentControl Grid.Row="1" FontFamily="{StaticResource IconFontFZKT}" Visibility="Visible" FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfFilePreviewOptions.FontSize, Mode=OneWay}" IsEnabled="{Binding ShopIsOpen}">
+                    <Grid Background="#FF808080">
+                      <Grid Width="310" Height="453" Background="#171d28" Opacity="0.95">
+                        <Border>
+                          <Grid>
+                            <Grid.RowDefinitions>
+                              <RowDefinition Height="auto" />
+                              <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="#65552d" BorderThickness="2.5">
+                              <Grid>
+                                <Grid Name="gridHeader" Width="310" Height="21">
+                                  <Image Source="/images/pngs/npcshop/46.png" Stretch="Fill" />
+                                  <Image Source="/images/pngs/npcshop/47.png" Stretch="Fill" />
+                                  <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FFFFFFFF" Content="{Binding NpcName}" />
+                                </Grid>
+                              </Grid>
+                            </Border>
+                            <Border Grid.Row="1" BorderBrush="#46372f" BorderThickness="1,0,1,1" CornerRadius="0,0,3,3">
+                              <Border Grid.Row="1" BorderBrush="#65552d" BorderThickness="2.5,0,2.5,2.5" CornerRadius="0,0,3,3">
+                                <Grid>
+                                  <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                  </Grid.RowDefinitions>
+                                  <Border Width="280" Margin="0,5,0,0" BorderBrush="#FF000000" BorderThickness="0">
+                                    <Image Height="60" Source="/images/pngs/npcshop/npcshopheader.png" Stretch="Fill" />
+                                  </Border>
+                                  <TabControl Grid.Row="1" Margin="15,10,15,64" ContentTemplate="{StaticResource NpcShopContentTemplate}" Style="{StaticResource NpcShopTabControlStyle}" ItemsSource="{Binding Pages.CollectionView}" SelectedItem="{Binding CurrentPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <FrameworkElement.Resources>
+                                      <ResourceDictionary>
+                                        <Style x:Key="{x:Type TabItem}" TargetType="{x:Type TabItem}">
+                                          <Setter Property="TabItem.IsSelected" Value="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                          <Setter Property="Template">
+                                            <Setter.Value>
+                                              <ControlTemplate TargetType="{x:Type TabItem}">
+                                                <Grid Width="67" Height="20">
+                                                  <Image Name="img" Width="67" Height="20" />
+                                                  <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                      <ColumnDefinition Width="*" />
+                                                      <ColumnDefinition Width="auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#c7b185" Text="{Binding Title}" />
+                                                    <SimpleButton Grid.Column="1" FrameworkElement.Width="10" FrameworkElement.Height="10" FrameworkElement.Margin="0,0,3,0" FrameworkElement.HorizontalAlignment="Right" Control.Background="#00FFFFFF" Control.BorderThickness="0" p45:SimpleButton.Glyph="{DynamicResource Close}" FrameworkElement.ToolTip="删除当前页" ToolTipService.InitialShowDelay="50" ButtonBase.Command="{Binding Path=DataContext.OnDeletePageCommand, RelativeSource={RelativeSource AncestorType=Window}}" ButtonBase.CommandParameter="{Binding}" xmlns:p45="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+                                                  </Grid>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                  <Trigger Property="UIElement.IsMouseOver" Value="False">
+                                                    <Setter TargetName="img" Property="Image.Source" Value="/images/pngs/npcshop/86.png" />
+                                                  </Trigger>
+                                                  <Trigger Property="TabItem.IsSelected" Value="True">
+                                                    <Setter TargetName="img" Property="Image.Source" Value="/images/pngs/npcshop/88.png" />
+                                                  </Trigger>
+                                                  <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                                    <Setter TargetName="img" Property="Image.Source" Value="/images/pngs/npcshop/87.png" />
+                                                  </Trigger>
+                                                </ControlTemplate.Triggers>
+                                              </ControlTemplate>
+                                            </Setter.Value>
+                                          </Setter>
+                                        </Style>
+                                      </ResourceDictionary>
+                                    </FrameworkElement.Resources>
+                                  </TabControl>
+                                </Grid>
+                              </Border>
+                            </Border>
+                          </Grid>
+                        </Border>
+                        <Image Width="39" Height="39" Margin="-5,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="top" Source="/images/pngs/npcshop/48.png" Stretch="Fill" />
+                      </Grid>
+                    </Grid>
+                  </ContentControl>
+                </Grid>
+              </docking:LayoutPanel>
+              <docking:LayoutPanel docking:BaseLayoutItem.Caption="输出">
+                <StackPanel Margin="10" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                  <Label Foreground="#FF808080">小提示：拖动物品即可改变物品顺序</Label>
+                  <Label Foreground="#FF808080">小提示：物品列表支持多选后拖入到商店页</Label>
+                  <Label Foreground="#FF808080">小提示：Ctrl+鼠标左键单点多选</Label>
+                  <Label Foreground="#FF808080">小提示：Shift+鼠标左键区域多选</Label>
+                </StackPanel>
+              </docking:LayoutPanel>
+            </docking:LayoutGroup>
+            <docking:LayoutGroup docking:BaseLayoutItem.ItemWidth="*" docking:LayoutGroup.Orientation="Vertical" UIElement.IsEnabled="{Binding ShopIsOpen}">
+              <docking:LayoutPanel docking:BaseLayoutItem.Padding="0" docking:BaseLayoutItem.Caption="商店属性" docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.ItemHeight="*">
+                <StackPanel Margin="4,10,4,0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                  <controls:EditBox Caption="页标题：" Value="{Binding CurrentPage.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+              </docking:LayoutPanel>
+              <docking:LayoutPanel docking:BaseLayoutItem.Padding="0" docking:BaseLayoutItem.Caption="物品属性" docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.ItemHeight="*">
+                <StackPanel Margin="4,10,4,0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                  <controls:EditBox Caption="物品ID：" Value="{Binding CurrentPage.CurrentItem.ItemCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  <controls:EditBox Caption="物品名：" Value="{Binding CurrentPage.CurrentItem.ItemName, Mode=OneWay}" />
+                </StackPanel>
+              </docking:LayoutPanel>
+            </docking:LayoutGroup>
+          </docking:LayoutGroup>
+        </docking:LayoutGroup>
+      </docking:LayoutGroup>
+    </docking:DockLayoutManager>
+  </BarManager>
+</npcshopeditor1:WinNpcShopEditor>

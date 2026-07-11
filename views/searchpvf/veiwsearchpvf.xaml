@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<searchpvf:VeiwSearchPvf xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:enum="clr-namespace:PvfCode.Services.SearchModel;assembly=PvfCode.Services" xmlns:enums="clr-namespace:PvfCode.Services.SearchModel.Enums;assembly=PvfCode.Services" xmlns:i1="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:models="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:search="clr-namespace:PvfCode.Converts.Search;assembly=pvfUtility" xmlns:search1="clr-namespace:Converts.Search;assembly=pvfUtility" xmlns:searchModel="clr-namespace:PvfCode.Services.SearchModel;assembly=PvfCode.Services" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" Window.Title="{DynamicResource GlobalSearchWindow_Title}" FrameworkElement.MinWidth="480" Control.Padding="5" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" core:ThemedWindow.Icon="/images/svgs/findinfiles_16x.svg" Window.ResizeMode="NoResize" Window.SizeToContent="WidthAndHeight" Window.WindowStyle="SingleBorderWindow" xmlns:searchpvf="clr-namespace:PvfCode.Views.SearchPvf;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <Window.Closing>
+    <dxbinding:DXEventExtension xmlns:dxbinding="clr-namespace:DevExpress.Xpf.DXBinding;assembly=DevExpress.Xpf.Core.v24.1" dxbinding:DXEventExtension.Handler="SearchUiViewModel.Closing(@sender,@args)" />
+  </Window.Closing>
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <search1:ConvertScriptContentSearchMode x:Key="ConvertScriptContentSearchMode" />
+      <Style x:Key="{x:Type RadioButton}" TargetType="{x:Type RadioButton}">
+        <Setter Property="Margin" Value="0,0,10,0" />
+        <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+      </Style>
+      <DataTemplate x:Key="ScriptContentgRroupBoxTemplate">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="{DynamicResource GlobalSearchWindow_ScriptFileSearchContentLabel}" />
+            <CheckBox Padding="20,0,0,0" HorizontalAlignment="Right" Content="{DynamicResource GlobalSearchWindow_ScriptFileFeatureSearchCheckBoxContent}" Cursor="Hand" IsChecked="{Binding Path=DataContext.Trait, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Self}}" />
+          </StackPanel>
+          <StackPanel Grid.Row="1" Height="1" Margin="0,5,0,5" Background="#FF808080" />
+          <StackPanel Grid.Row="2" Orientation="Horizontal" Visibility="{Binding Path=DataContext.ScriptContentSearchModeComBoBoxVisibility, Mode=OneWay, RelativeSource={RelativeSource Self}, Converter={StaticResource ConvertBoolenToVisibility}}">
+            <Label Content="{Binding GlobalSearchWindow_ScriptFileSearchTypeLabel}" />
+            <ComboBox Name="contentSearchTypeCombo" SelectedIndex="{Binding Path=DataContext.ScriptContentSearchModeSelectedIndex, Mode=OneWay, RelativeSource={RelativeSource Self}}" SelectedItem="{Binding Path=DataContext.ScriptContentSearchMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Self}, Converter={StaticResource ConvertScriptContentSearchMode}}">
+              <ComboBoxItem Content="{DynamicResource GlobalSearchWindow_ScriptFileSearchTypeComboBoxItem1}" />
+              <ComboBoxItem Content="{DynamicResource GlobalSearchWindow_ScriptFileSearchTypeComboBoxItem2}" />
+            </ComboBox>
+            <CheckBox Margin="5,0,0,0" Content="{DynamicResource GlobalSearchWindow_ScriptFileSearchOptions_UseRegex}" DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource Self}}" IsEnabled="{Binding ScriptContentSearchMode, Mode=OneWay, ConverterParameter={x:Static enums:ScriptContentSearchMode.基于文本}, Converter={StaticResource ConvertEnumToBoolen}}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type CheckBox}">
+                  <Setter Property="ToggleButton.IsChecked" Value="{Binding UseRegularExpression, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  <Style.Triggers>
+                    <DataTrigger Value="{x:Static enums:ScriptContentSearchMode.二进制}" Binding="{Binding Path=ScriptContentSearchMode, Mode=OneWay}">
+                      <Setter Property="ToggleButton.IsChecked" Value="False" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </CheckBox>
+          </StackPanel>
+        </Grid>
+      </DataTemplate>
+      <search:ConvertSearchContentVisibility x:Key="ConvertSearchContentVisibility" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <core:ThemedWindow.HeaderItems>
+    <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+      <bars:BarSubItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" FrameworkContentElement.DataContext="{Binding SearchUiViewModel}">
+        <FrameworkContentElement.Style>
+          <Style TargetType="{x:Type bars:BarSubItem}">
+            <Style.Triggers>
+              <DataTrigger Value="True" Binding="{Binding RecordingLoading}">
+                <Setter Property="bars:BarItem.Content" Value="{DynamicResource GlobalSearchWindow_MacroBarButtonTitleRecording}" />
+                <Setter Property="bars:BarItem.Foreground" Value="#c04048" />
+                <Setter Property="bars:BarItem.Glyph" Value="{DynamicResource StopIcon}" />
+              </DataTrigger>
+              <DataTrigger Value="False" Binding="{Binding RecordingLoading}">
+                <Setter Property="bars:BarItem.Content" Value="{DynamicResource GlobalSearchWindow_MacroBarButtonTitle}" />
+                <Setter Property="bars:BarItem.Glyph" Value="{DynamicResource MacroIcon}" />
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkContentElement.Style>
+        <bars:BarButtonItem bars:BarItem.Command="{Binding SetRecordingLoadingCommand}">
+          <FrameworkContentElement.Style>
+            <Style TargetType="{x:Type bars:BarButtonItem}">
+              <Style.Triggers>
+                <DataTrigger Value="True" Binding="{Binding RecordingLoading}">
+                  <Setter Property="bars:BarItem.Content" Value="{DynamicResource GlobalSearchWindow_StopRecording}" />
+                  <Setter Property="bars:BarItem.CommandParameter" Value="False" />
+                  <Setter Property="bars:BarItem.Glyph" Value="{DynamicResource StopIcon}" />
+                </DataTrigger>
+                <DataTrigger Value="False" Binding="{Binding RecordingLoading}">
+                  <Setter Property="bars:BarItem.Content" Value="{DynamicResource GlobalSearchWindow_RecordMacro}" />
+                  <Setter Property="bars:BarItem.CommandParameter" Value="True" />
+                  <Setter Property="bars:BarItem.Glyph" Value="{DynamicResource RunIcon}" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </FrameworkContentElement.Style>
+        </bars:BarButtonItem>
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.Content="{DynamicResource GlobalSearchWindow_ManageMacro}" bars:BarItem.Glyph="{DynamicResource SettingWindowIcon}" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.Content="{DynamicResource GlobalSearchWindow_MacroStore}" />
+        <bars:BarItemSeparator />
+        <bars:BarSubItem FrameworkContentElement.Style="{StaticResource 全局搜索宏_SubItem}" />
+      </bars:BarSubItem>
+    </bars:ToolBarControl>
+  </core:ThemedWindow.HeaderItems>
+  <Grid Name="gridMain">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <Grid Row="0" Margin="0,0,0,0">
+      <Grid Visibility="{Binding SearchUiViewModel.Config.Type, Mode=OneWay, Converter={StaticResource ConvertSearchContentVisibility}, ConverterParameter=非脚本文件搜索内容}">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <editors:AutoSuggestEdit FrameworkElement.Name="textKeyword" Grid.Column="1" Grid.ColumnSpan="2" FrameworkElement.Height="24" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:AutoSuggestEdit.AcceptValueOnPopupContentSelectionChanged="True" editors:TextEditBase.AcceptsReturn="False" editors:TextEditBase.AcceptsTab="True" editors:ButtonEdit.AllowDefaultButton="False" editors:AutoSuggestEdit.AllowPopupTextHighlighting="True" BaseEdit.NullText="{DynamicResource GlobalSearchWindow_FindKeywordNullText}" editors:AutoSuggestEdit.PopupHighlightedTextCriteria="StartsWith" editors:TextEditBase.PrintTextWrapping="NoWrap" editors:TextEditBase.SelectAllOnGotFocus="True" editors:TextEditBase.SelectAllOnMouseUp="True" editors:TextEditBase.TextWrapping="NoWrap" editors:AutoSuggestEdit.ImmediatePopup="{Binding SearchUiViewModel.ImmediatePopup}" editors:AutoSuggestEdit.ItemsSource="{Binding SearchUiViewModel.KeywordLog}" editors:TextEditBase.Text="{Binding SearchUiViewModel.Config.Keyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <editors:AutoSuggestEdit.QuerySubmitted>
+              <DXEventExtension p30:DXEventExtension.Handler="SearchUiViewModel.textKeyword_QuerySubmitted(@sender,@args)" xmlns:p30="clr-namespace:DevExpress.Xpf.DXBinding;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.DXBinding;assembly=DevExpress.Xpf.Core.v24.1" />
+            </editors:AutoSuggestEdit.QuerySubmitted>
+            <i1:Interaction.Behaviors>
+              <ui:KeyToCommand xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.CommandParameter="True" ui:KeyToCommand.KeyGesture="Enter" ui:EventToCommandBase.Command="{Binding SearchUiViewModel.OnStartCommand}" />
+            </i1:Interaction.Behaviors>
+            <editors:ButtonEdit.Buttons>
+              <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Simple" editors:ButtonInfoBase.ClickMode="Press" editors:ButtonInfo.GlyphKind="Search" editors:CommonButtonInfo.IsChecked="False" FrameworkContentElement.ToolTip="{DynamicResource GlobalSearchWindow_FindButtonTitle}" editors:CommandButtonInfo.Command="{Binding ElementName=btnStartSearch, Path=Command}" ContentElement.IsEnabled="{Binding ElementName=btnStartSearch, Path=IsEnabled}" />
+              <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Toggle" editors:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource GlobalSearchWindow_FindOptions_UseRegex}" editors:CommonButtonInfo.IsChecked="{Binding SearchUiViewModel.Config.UseRegularExpression, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <editors:ButtonInfo.Content>
+                  <Image Width="16" Height="16" Source="{DynamicResource RegularExpression}" Stretch="Fill" />
+                </editors:ButtonInfo.Content>
+              </editors:ButtonInfo>
+              <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Toggle" editors:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource GlobalSearchWindow_FindOptions_WholeWords}" editors:CommonButtonInfo.IsChecked="{Binding SearchUiViewModel.Config.WholeWordMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <editors:ButtonInfo.Content>
+                  <Image Width="16" Height="16" Source="{DynamicResource WholeWordMatch_16x}" Stretch="Fill" />
+                </editors:ButtonInfo.Content>
+              </editors:ButtonInfo>
+              <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Toggle" editors:ButtonInfoBase.ClickMode="Press" FrameworkContentElement.ToolTip="{DynamicResource GlobalSearchWindow_FindOptions_StartWith}" editors:CommonButtonInfo.IsChecked="{Binding SearchUiViewModel.Config.IsStartMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <editors:ButtonInfo.Content>
+                  <Image Width="16" Height="16" Source="{DynamicResource Space_16x}" Stretch="Fill" />
+                </editors:ButtonInfo.Content>
+              </editors:ButtonInfo>
+              <editors:ButtonInfo editors:ButtonInfoBase.Margin="2,0,0,0" editors:ButtonInfoBase.ClickMode="Press" editors:ButtonInfo.GlyphKind="DropDown" editors:ButtonInfoBase.IsDefaultButton="True" FrameworkContentElement.ToolTip="{DynamicResource GlobalSearchWindow_HistoryDropDownButtonToolTip}" />
+            </editors:ButtonEdit.Buttons>
+          </editors:AutoSuggestEdit>
+        </Grid>
+      </Grid>
+      <layoutcontrol:GroupBox FrameworkElement.MinHeight="50" FrameworkElement.MaxHeight="180" FrameworkElement.Margin="0,0,0,10" Control.Padding="0" HeaderedContentControlBase.HeaderTemplate="{StaticResource ScriptContentgRroupBoxTemplate}" xmlns:layoutcontrol="clr-namespace:DevExpress.Xpf.LayoutControl;assembly=DevExpress.Xpf.LayoutControl.v24.1" layoutcontrol:GroupBox.ShowShadow="Always" core:HeaderedContentControlBase.Header="{Binding SearchUiViewModel.Config, Mode=TwoWay}" UIElement.Visibility="{Binding SearchUiViewModel.Config.Type, Mode=OneWay, Converter={StaticResource ConvertSearchContentVisibility}, ConverterParameter=脚本文件搜索内容}">
+        <Grid>
+          <texteditlib:TextEdit FrameworkElement.MinHeight="100" texteditlib:TextEdit.EditorType="Search" xmlns:avalonedit1="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit1:TextEditor.ShowLineNumbers="False" FrameworkElement.DataContext="{Binding SearchUiViewModel}" avalonedit1:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" UIElement.Visibility="{Binding Config.Trait, Mode=TwoWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+            <i1:Interaction.Behaviors>
+              <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Config.ScriptContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </i1:Interaction.Behaviors>
+          </texteditlib:TextEdit>
+          <Grid Visibility="{Binding SearchUiViewModel.Config.Trait, Mode=TwoWay, Converter={StaticResource ConvertBoolenToVisibility}}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <layoutcontrol:GroupBox FrameworkElement.Margin="0,5,0,0" Control.Padding="0" core:HeaderedContentControlBase.Header="{DynamicResource GlobalSearchWindow_StartFeatureKeywordGroupHeader}">
+              <texteditlib:TextEdit Control.Padding="0" texteditlib:TextEdit.EditorType="Search" p32:TextEditor.HorizontalScrollBarVisibility="Auto" p32:TextEditor.ShowLineNumbers="False" FrameworkElement.DataContext="{Binding SearchUiViewModel}" p32:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" xmlns:p32="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit">
+                <i1:Interaction.Behaviors>
+                  <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Config.ScriptContentStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </i1:Interaction.Behaviors>
+              </texteditlib:TextEdit>
+            </layoutcontrol:GroupBox>
+            <GridSplitter Grid.Column="1" Width="5" Padding="0" HorizontalAlignment="Stretch" />
+            <layoutcontrol:GroupBox Grid.Column="2" FrameworkElement.Margin="0,5,0,0" Control.Padding="0" core:HeaderedContentControlBase.Header="{DynamicResource GlobalSearchWindow_EndFeatureKeywordGroupHeader}">
+              <texteditlib:TextEdit FrameworkElement.MinHeight="100" texteditlib:TextEdit.EditorType="Search" p32:TextEditor.HorizontalScrollBarVisibility="Auto" p32:TextEditor.ShowLineNumbers="False" FrameworkElement.DataContext="{Binding SearchUiViewModel}" p32:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" xmlns:p32="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit">
+                <i1:Interaction.Behaviors>
+                  <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Config.ScriptContentStop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </i1:Interaction.Behaviors>
+              </texteditlib:TextEdit>
+            </layoutcontrol:GroupBox>
+          </Grid>
+        </Grid>
+      </layoutcontrol:GroupBox>
+    </Grid>
+    <WrapPanel Grid.Row="1" Margin="5,10,0,0" Orientation="Horizontal" DataContext="{Binding SearchUiViewModel.Config}">
+      <RadioButton Content="{DynamicResource GlobalSearchWindow_FindTypeRadioButtonPanel_IntFloat}" IsChecked="{Binding Type, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enum:SearchType.Num}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <RadioButton Content="{DynamicResource GlobalSearchWindow_FindTypeRadioButtonPanel_StringLink}" IsChecked="{Binding Type, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enum:SearchType.Strings}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <RadioButton Content="{DynamicResource GlobalSearchWindow_FindTypeRadioButtonPanel_FileName}" IsChecked="{Binding Type, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enum:SearchType.FileName}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <RadioButton Content="{DynamicResource GlobalSearchWindow_FindTypeRadioButtonPanel_Name}" IsChecked="{Binding Type, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enum:SearchType.Name}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <RadioButton Content="{DynamicResource GlobalSearchWindow_FindTypeRadioButtonPanel_ScriptFileContent}" IsChecked="{Binding Type, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enum:SearchType.ScriptContent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    </WrapPanel>
+    <GroupBox Grid.Row="2" Margin="0,10,0,0" Header="{DynamicResource GlobalSearchWindow_SearchSourceGroupBoxHeader}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal" DataContext="{Binding SearchUiViewModel.Config}">
+          <RadioButton Name="radioIsFindAllPath" Content="{DynamicResource GlobalSearchWindow_SearchSourceRadioButton_AllFiles}" Cursor="Hand" IsChecked="{Binding Path=SourceType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enum:SearchSourceType.AllFiles}}">
+          </RadioButton>
+          <RadioButton Margin="0,0,8,0" Content="{DynamicResource GlobalSearchWindow_SearchSourceRadioButton_FromSearchResult}" IsChecked="{Binding Path=SourceType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enum:SearchSourceType.InSearchResultFind}}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type RadioButton}">
+                <Style.Triggers>
+                  <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="#e35125" />
+                  </Trigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </RadioButton>
+          <RadioButton Margin="0,0,8,0" Content="{DynamicResource GlobalSearchWindow_SearchSourceRadioButton_FromSearchResultExclude}" Cursor="Hand" IsChecked="{Binding Path=SourceType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static enum:SearchSourceType.InSearchResultRemove}}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type RadioButton}">
+                <Style.Triggers>
+                  <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="#e35125" />
+                  </Trigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </RadioButton>
+        </WrapPanel>
+        <Grid Row="1" Margin="0,10,0,0" Visibility="{Binding ElementName=radioIsFindAllPath, Path=IsChecked, Converter={StaticResource ConvertBoolenToVisibility}}">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Label Content="{DynamicResource GlobalSearchWindow_SearchDirectoryLabel}" />
+          <AutoSuggestEdit Grid.Column="1" p28:ButtonEdit.AllowDefaultButton="False" p28:AutoSuggestEdit.AllowPopupTextHighlighting="True" p28:AutoSuggestEdit.ImmediatePopup="True" BaseEdit.NullText="{DynamicResource GlobalSearchWindow_SearchDirectoryTextBoxNullText}" p28:AutoSuggestEdit.PopupHighlightedTextCriteria="StartsWith" p28:TextEditBase.SelectAllOnGotFocus="True" p28:TextEditBase.SelectAllOnMouseUp="True" p28:BaseEdit.EditValue="{Binding SearchUiViewModel.Config.SearchFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" UIElement.IsEnabled="{Binding ElementName=radioIsFindAllPath, Path=IsChecked}" p28:AutoSuggestEdit.ItemsSource="{Binding SearchUiViewModel.FolderLog}" xmlns:p28="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+            <p28:ButtonEdit.Buttons>
+              <p28:ButtonInfo p28:CommonButtonInfo.ButtonKind="Simple" p28:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource GlobalSearchWindow_QuickSelectDirectoryButton}" p28:CommandButtonInfo.Command="{Binding SearchUiViewModel.OnSelectedFolderCommand}" />
+              <p28:ButtonInfo p28:ButtonInfoBase.ClickMode="Press" p28:ButtonInfo.GlyphKind="DropDown" p28:CommonButtonInfo.IsChecked="False" p28:ButtonInfoBase.IsDefaultButton="True" FrameworkContentElement.ToolTip="{DynamicResource GlobalSearchWindow_SelectDirectoryHistory}" />
+            </p28:ButtonEdit.Buttons>
+          </AutoSuggestEdit>
+        </Grid>
+        <Grid Row="2" Margin="0,10,0,0" Visibility="{Binding ElementName=radioIsFindAllPath, Path=IsChecked, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Label Content="{DynamicResource GlobalSearchWindow_SelectSearchResultLabel}" Foreground="#e35125" />
+          <editors:ComboBoxEdit Grid.Column="1" Control.Foreground="#e35125" editors:ButtonEdit.IsTextEditable="False" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:LookUpEditBase.SelectedIndex="0" editors:LookUpEditBase.ItemsSource="{Binding SearchReusltData.Keys}" editors:LookUpEditBase.SelectedItem="{Binding SearchUiViewModel.SelectedSourceItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+      </Grid>
+    </GroupBox>
+    <GroupBox Grid.Row="3" Header="{DynamicResource GlobalSearchWindow_FileTypeGroupBoxHeader}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ComboBoxEdit p27:ButtonEdit.IsTextEditable="False" p27:BaseEdit.EditValue="{Binding SearchUiViewModel.Config.RemoveOrKeep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterFileTypeKeepOrExcludeSelectItem}}" xmlns:p27="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+          <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource GlobalSearchWindow_FileTypeOption_Keep}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+          <p27:ComboBoxEditItem ContentControl.Content="{DynamicResource GlobalSearchWindow_FileTypeOption_Exclude}" />
+        </ComboBoxEdit>
+        <ComboBoxEdit FrameworkElement.Name="comboBoxEditFileTypesString" Grid.Column="1" p27:ButtonEdit.AllowDefaultButton="False" p27:ButtonEdit.IsTextEditable="True" p27:BaseEdit.NullText="{DynamicResource GlobalSearchWindow_FileTypeComboBoxNullText}" p27:BaseEdit.EditValue="{Binding SearchUiViewModel.Config.FileTypesString, Converter={StaticResource ConvertFileTypeHasSet}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" p27:LookUpEditBase.ItemsSource="{Binding SearchUiViewModel.Config.FileTypes}" xmlns:p27="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+          <p27:ButtonEdit.Buttons>
+            <p27:ButtonInfo p27:ButtonInfo.GlyphKind="Cancel" FrameworkContentElement.ToolTip="{DynamicResource GlobalSearchWindow_ClearFileTypeButton}">
+            </p27:ButtonInfo>
+            <p27:ButtonInfo p27:ButtonInfo.GlyphKind="DropDown" p27:ButtonInfoBase.IsDefaultButton="True" FrameworkContentElement.ToolTip="{DynamicResource GlobalSearchWindow_SelectFileTypeButton}" />
+          </p27:ButtonEdit.Buttons>
+          <p27:BaseEdit.StyleSettings>
+            <editors:CheckedComboBoxStyleSettings xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+          </p27:BaseEdit.StyleSettings>
+        </ComboBoxEdit>
+      </Grid>
+    </GroupBox>
+    <Grid Row="4">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+        <editors:HyperlinkEdit FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" editors:BaseEdit.EditValue="{DynamicResource GlobalSearchWindow_RegexLanguageQuickReferenceButton}" editors:HyperlinkEdit.NavigationUrl="https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/regular-expression-language-quick-reference" />
+      </StackPanel>
+      <WrapPanel Grid.Column="1" Margin="0,10,0,5" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" DataContext="{Binding SearchUiViewModel}">
+        <FrameworkElement.Resources>
+          <ResourceDictionary>
+            <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+              <Setter Property="Margin" Value="0,0,10,0" />
+              <Setter Property="Width" Value="80" />
+              <Setter Property="Height" Value="24" />
+            </Style>
+          </ResourceDictionary>
+        </FrameworkElement.Resources>
+        <HyperlinkEdit Control.Padding="0,0,15,0" FrameworkElement.HorizontalAlignment="Right" FrameworkElement.VerticalAlignment="Center" p27:HyperlinkEdit.AllowAutoNavigate="False" p27:BaseEdit.EditValue="{DynamicResource GlobalSearchWindow_ResetSearchConditionTitle}" FrameworkElement.ToolTip="{DynamicResource GlobalSearchWindow_ResetSearchConditionToolTip}" p27:HyperlinkEdit.Command="{Binding ReSetCommand}" xmlns:p27="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+        <Button Name="btnStartSearch" Content="{DynamicResource GlobalSearchWindow_StartSearchButtonTitle}" Command="{Binding OnStartCommand}" IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}">
+        </Button>
+        <Button Content="{DynamicResource GlobalSearchWindow_CancelSearchButtonTitle}" Command="{Binding OnCancelCommand}" />
+      </WrapPanel>
+    </Grid>
+  </Grid>
+</searchpvf:VeiwSearchPvf>

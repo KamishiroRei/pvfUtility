@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- Source: http://geogen.googlecode.com/svn/trunk/config/squirrel.xshd -->
+<SyntaxDefinition name="Lst" extensions=".lst" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+	<!-- Reference: http://www.squirrel-lang.org/
+       Reference Manual: http://www.squirrel-lang.org/doc/squirrel2.html -->
+
+	<Color name="Header"  foreground="Gray" fontWeight="bold" />
+	<Color name="String" foreground="#a31515" exampleText="string text = &quot;Hello, World!&quot;" />
+	<Color name="Digits" foreground="#5b2da8" exampleText="3.1415f" />
+	<Color name="Comment" foreground="Green" exampleText="// comment" />
+	<RuleSet ignoreCase="true">
+
+		<Span  color="Header" multiline="false">
+			<Begin>\#</Begin>
+		</Span>
+
+		<Span color="String" multiline="true">
+			<Begin>`</Begin>
+			<End>`</End>
+		</Span>
+
+		<!-- Digits -->
+		<Rule color="Digits">
+			-?(0|[1-9]\d*)(\.\d+)?
+		</Rule>
+		<Span color="Comment">
+			<Begin>//</Begin>
+		</Span>
+	</RuleSet>
+</SyntaxDefinition>

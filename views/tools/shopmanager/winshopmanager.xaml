@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shopmanager1:WinShopManager xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:shopmanager="clr-namespace:PvfCode.ViewModels.ShopManager;assembly=pvfUtility" Window.Title="商城管理器" FrameworkElement.Width="1000" FrameworkElement.Height="800" xmlns:shopmanager1="clr-namespace:PvfCode.Views.Tools.ShopManager;assembly=pvfUtility">
+  <FrameworkElement.DataContext>
+    <shopmanager:WinShopManagerVm />
+  </FrameworkElement.DataContext>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <bars:BarContainerControl Grid.Row="0" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+      <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControl.ShowDragWidget="True" bars:ToolBarControl.UseWholeRow="True">
+        <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="礼包重新排序" bars:BarItem.Command="{Binding OnPackageCodeSortCommand}" />
+        <bars:BarItemSeparator />
+      </bars:ToolBarControl>
+    </bars:BarContainerControl>
+  </Grid>
+</shopmanager1:WinShopManager>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<local:DefaultScriptEditor xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:local="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" texteditlib:TextEdit.EditorType="Editor" Control.FontFamily="Consola" xmlns:avalonedit1="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit1:TextEditor.ShowLineNumbers="True" texteditlib:TextEdit.EnableTextDragDrop="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.EnableTextDragDrop, Mode=TwoWay}" texteditlib:TextEdit.EnableVirtualSpace="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.EnableVirtualSpace, Mode=TwoWay}" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.SizeUnitLabel.ScreenPoints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" texteditlib:TextEdit.ShowEndOfLine="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowEndOfLine, Mode=TwoWay}" texteditlib:TextEdit.ShowSpaces="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowSpaces, Mode=TwoWay}" texteditlib:TextEdit.ShowTabs="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowTabs, Mode=TwoWay}" texteditlib:TextEdit.SizeUnitLabel="{Binding Source={x:Static appsetting:AppSetting.Instance}, Mode=OneWay, Path=EditConfig.SizeUnitLabel}" avalonedit1:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" avalonedit1:TextEditor.WordWrap="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.WordWrap, Mode=TwoWay}">
+  <avalonedit1:TextEditor.Options>
+    <avalonedit1:TextEditorOptions avalonedit1:TextEditorOptions.AllowScrollBelowDocument="False" avalonedit1:TextEditorOptions.CutCopyWholeLine="True" avalonedit1:TextEditorOptions.EnableEmailHyperlinks="False" avalonedit1:TextEditorOptions.EnableImeSupport="True" />
+  </avalonedit1:TextEditor.Options>
+  <bars:BarManager.DXContextMenu xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+    <bars:PopupMenu>
+      <bars:PopupMenu.Items xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+        <bars:BarItemSeparator xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" />
+        <bars:BarButtonItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarItem.Command="Cut" bars:BarItem.Content="{DynamicResource DefaultScriptEditor_RightClickMenu_Cut}" bars:BarItem.Glyph="{DynamicResource CutIcon}" bars:BarItem.KeyGesture="Ctrl+X" />
+        <bars:BarButtonItem bars:BarItem.Command="Copy" bars:BarItem.Content="{DynamicResource DefaultScriptEditor_RightClickMenu_Copy}" bars:BarItem.Glyph="{DynamicResource CopyIcon}" bars:BarItem.KeyGesture="Ctrl+C" />
+        <bars:BarButtonItem bars:BarItem.Command="Paste" bars:BarItem.Content="{DynamicResource DefaultScriptEditor_RightClickMenu_Paste}" bars:BarItem.Glyph="{DynamicResource PasteIcon}" bars:BarItem.KeyGesture="Ctrl+V" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.Command="SelectAll" bars:BarItem.Content="{DynamicResource DefaultScriptEditor_RightClickMenu_SelectAll}" bars:BarItem.Glyph="{DynamicResource SelectAllIcon}" bars:BarItem.KeyGesture="Ctrl+A" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.Command="Undo" bars:BarItem.Content="{DynamicResource DefaultScriptEditor_RightClickMenu_Undo}" />
+        <bars:BarButtonItem bars:BarItem.Command="Redo" bars:BarItem.Content="{DynamicResource DefaultScriptEditor_RightClickMenu_Redo}" />
+      </bars:PopupMenu.Items>
+    </bars:PopupMenu>
+  </bars:BarManager.DXContextMenu>
+</local:DefaultScriptEditor>

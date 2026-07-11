@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preview:PreviewItemCodeHoverView xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" Window.Title="{DynamicResource PreviewItemCodeHoverView_Title}" FrameworkElement.Width="1000" FrameworkElement.Height="800" Window.ResizeMode="CanResizeWithGrip" xmlns:preview="clr-namespace:PvfCode.Views.Store.Preview" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <Grid>
+    <texteditlib:TextEdit Grid.Row="1" texteditlib:TextEdit.EditorType="Editor" Control.FontSize="14" xmlns:avalonedit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit:TextEditor.IsReadOnly="True" avalonedit:TextEditor.ShowLineNumbers="True" avalonedit:TextEditor.Document="{Binding Document}" avalonedit:TextEditor.SyntaxHighlighting="{Binding Highlighting}" />
+  </Grid>
+  <!--Unknown connection ID: 1-->
+</preview:PreviewItemCodeHoverView>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pvftreefolder:ViewRenameNode xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" Window.Title="{DynamicResource ViewRenameNode_Title}" FrameworkElement.Width="400" FrameworkElement.Height="165" Control.Padding="20,10,20,10" Window.ResizeMode="NoResize" xmlns:pvftreefolder="clr-namespace:PvfCode.Views.PvfTreeFolder;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:KeyToCommand xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:KeyToCommand.KeyGesture="Enter" ui:EventToCommandBase.Command="{Binding OnSaveCommand}" />
+  </interactivity:Interaction.Behaviors>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal">
+      <Label Content="{DynamicResource ViewRenameNode_Label_PleaseInput}" />
+      <Label Foreground="#FFFF0000" Content="{Binding TreeFile.FullPath}" />
+      <Label Content="{DynamicResource ViewRenameNode_Label_NewName}" />
+    </StackPanel>
+    <controls:EditBox x:Name="editBox" Grid.Row="1" Margin="0,20,0,0" NullText="" Caption="{Binding Caption}" Value="{Binding NewFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+    </controls:EditBox>
+    <StackPanel Grid.Row="2" Margin="0,20,0,0" HorizontalAlignment="Right" Orientation="Horizontal">
+      <Button Width="70" Height="24" Content="{DynamicResource common_OK}" Command="{Binding OnSaveCommand}" />
+      <Button Width="70" Height="24" Margin="10,0,0,0" Content="{DynamicResource common_Cancel}" Command="{Binding OnCancelCommand}" />
+    </StackPanel>
+  </Grid>
+</pvftreefolder:ViewRenameNode>

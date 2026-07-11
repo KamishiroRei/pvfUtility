@@ -1,0 +1,356 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "ani",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "FRAME MAX",
+                         "Title":  "整个动画过程播放的最大帧数",
+                         "Comment":  "整个动画过程播放的最大帧数",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[FRAME MAX] 3\t// 总帧数：下面使用的 FRAME00X 编号数量必须与此相同。\n\t\t// 例如) [FRAME MAX] 3 的情况下，最后一帧必须以 FRAME002 结尾。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "IMAGE",
+                         "Title":  "动画贴图",
+                         "Comment":  "[IMAGE]动画贴图\n在此标签下添加npk路径以调用npk文件的贴图，贴图npk文件的位置在客户端的[ImagePacks2]文件夹\n\n[ImagePacks2]内的贴图文件需借助npk解包工具查看\n目前据作者所知的npk解包工具有：\nExtractorSharp（可编辑贴图、音乐）\n黑猫（适合拿来做时装）\n\n若是不会找工具也可以加群下载，从下载到使用到产出成品都无需任何费用：\nQQ群：903031457",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[IMAGE] `Monster/Golem/PassiveObject/GolemBullet.img` 0\t\t// 图像路径,帧编号\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "IMAGE POS",
+                         "Title":  "动画贴图坐标",
+                         "Comment":  "[IMAGE POS]动画贴图坐标\n左边为X轴          右边为Y轴",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[IMAGE POS] -51 -50\t\t\t\t\t\t// 图像位置\n```",
+                         "Closing":  false,
+                         "Authors":  "糖糖QQ6494667|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "IMAGE RATE",
+                         "Title":  "放大或缩小",
+                         "Comment":  "放大或缩小\n1.0不变\n0.5缩小到原图百分之50\n 1.5放大到原图百分之150",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[IMAGE RATE] 1.000000 1.000000\t\t\t\t\t// 图像缩放\n```",
+                         "Closing":  false,
+                         "Authors":  "-1为反转"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "IMAGE ROTATE",
+                         "Title":  "旋转角度",
+                         "Comment":  "旋转角度",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[IMAGE ROTATE] 0.000000\t\t\t\t\t\t// 图像旋转\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "RGBA",
+                         "Title":  "颜色",
+                         "Comment":  "颜色",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[RGBA] 255 255 255 255\t\t\t\t\t\t// 颜色\n```",
+                         "Closing":  false,
+                         "Authors":  "糖糖QQ6494667"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "DAMAGE BOX",
+                         "Title":  "受击判定框",
+                         "Comment":  "受击判定框\n拥有该标签表示使用此技能时可以被命中，移除此标签可赋予一帧的无敌时间\n[DAMAGE BOX]\nX1   Y1  Z1   X2  Y2  Z2\nX1:以ani坐标为基点的碰撞框X轴坐标\nY1:以ani坐标为基点的碰撞框Y轴坐标\nZ1:以ani坐标为基点的碰撞框Z轴坐标\nX2:以ani坐标为基点的碰撞框X轴大小\nY2:以ani坐标为基点的碰撞框Y轴大小\nZ2:以ani坐标为基点的碰撞框Z轴大小",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "ATTACK BOX",
+                         "Title":  "攻击范围判定框",
+                         "Comment":  "[ATTACK BOX]  攻击范围判定框\nX1   Y1  Z1   X2  Y2  Z2\n\nX1:以ani坐标为基点的碰撞框X轴坐标\n\nY1:以ani坐标为基点的碰撞框Y轴坐标\n\nZ1:以ani坐标为基点的碰撞框Z轴坐标\n\nX2:以ani坐标为基点的碰撞框X轴大小\n\nY2:以ani坐标为基点的碰撞框Y轴大小\n\nZ2:以ani坐标为基点的碰撞框Z轴大小",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[ATTACK BOX] -12 -7 -12 28 14 28\t\t\t\t// 攻击盒大小\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "SHADOW",
+                         "Title":  "开启阴影 0关闭",
+                         "Comment":  "开启阴影 0关闭",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[SHADOW] 1\t// 是否使用阴影 (0:不使用 1:使用)\n```",
+                         "Closing":  false,
+                         "Authors":  "糖糖QQ6494667"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "COORD",
+                         "Title":  "单色效果",
+                         "Comment":  "单色效果",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "糖糖QQ6494667"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "OPERATION",
+                         "Title":  "操作模式/标志",
+                         "Comment":  "操作模式/标志",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "SPECTRUM",
+                         "Title":  "残影",
+                         "Comment":  "残影\n\n跟传承武器一样，走路有拖影\n\n代码前面三个数字就是控制颜色，打开【开始】【所有程序】【附件】【画图】【编辑颜色】左下角那三个值，你选择好自己要的颜色，把数值换到刚刚的代码写入装备即可\n\n前面三个值是颜色，至于后面那两个，应该是残影的产生间隔和残影残留时间",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n// * 残影功能 *\n// 如果不使用，则删除下面整个语句即可。\n[SPECTRUM] 1\t\t\t// 是否使用残影功能 (0:不使用,1:使用)\n```",
+                         "Closing":  false,
+                         "Authors":  "By：短腿猫不吃鱼-694326115"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "INTERPOLATION",
+                         "Title":  "插值模式",
+                         "Comment":  "插值模式",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n// 从指定帧的值到下一帧的值（位置、大小、颜色、角度）进行“线性插值”。\n// 受影响的标签为\n// [RGBA]\n// [IMAGE POS]\n// [IMAGE RATE]\n// [IMAGE ROTATE]\n// [CLIP]\n[INTERPOLATION] 1\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "SET FLAG",
+                         "Title":  "设置帧标记",
+                         "Comment":  "设置帧标记，可在脚本中读取",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n// 在特定帧中指定特定值，用于编程时减少硬编码。\n[SET FLAG] 0 ~ 65535\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "GRAPHIC EFFECT",
+                         "Title":  "图形效果",
+                         "Comment":  "图形效果",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[GRAPHIC EFFECT] `NONE`\t\t\t\t\t\t// 效果类型 `NONE` , `DODGE` , `LINEARDODGE` , `DARK` , `XOR` , `MONOCHROME`\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "PLAY SOUND",
+                         "Title":  "播放声音",
+                         "Comment":  "播放声音",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n// 播放音效。\n[PLAY SOUND] `音效标签名`\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "DELAY",
+                         "Title":  "一帧贴图的持续时间",
+                         "Comment":  "一帧贴图的持续时间\n1000=1秒\n\n若要为此帧赋予霸体状态，需添加词条：\n\t[DAMAGE TYPE]\n\t\t`SUPERARMOR`",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[DELAY] 70\t\t\t\t\t\t\t// 帧持续时间\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "PRELOAD",
+                         "Title":  "预加载资源",
+                         "Comment":  "预加载资源",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "DAMAGE TYPE",
+                         "Title":  "霸体代码",
+                         "Comment":  "霸体代码\n\n\t[DAMAGE TYPE]\n\t\t`SUPERARMOR`    超级护甲（一般拿来添加进帧数文件的）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "FLIP TYPE",
+                         "Title":  "翻转类型",
+                         "Comment":  "翻转类型",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n// 将指定帧的图像按指定方向镜像。\n// 为 ALL 时，左右上下全部镜像。\n// 注意：存在 bug，如果不位于正中央时，`ALL` 和 `VERTICAL` 会出现奇怪现象。\n[FLIP TYPE] `ALL` or `HORIZON` or `VERTICAL`\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "LOOP",
+                         "Title":  "循环",
+                         "Comment":  "循环\n\n部分拥有位移效果的动作添加此标签后才可以生效\n比如牛头怪或翼龙的冲撞，各个职业的行走、奔跑等等",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[LOOP] 1\t// 当前动画是否循环 (0:不循环 1:循环)\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "LOOP START",
+                         "Title":  "循环段开始",
+                         "Comment":  "循环段开始",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n// 从包含 [LOOP START] 的帧开始\n// 到包含 [LOOP END] \"次数\" 的帧为止，重复指定的次数。\n// 注意：与复杂代码交织的 ANI 使用时可能会发生异常。\n// 建议仅用于简单的特效等。\n[LOOP START]\n```\n\n#### 官方示例: animationsamplebytool.ani\n\n```pvf\n// 从包含 [LOOP START] 的帧开始\n// 到包含 [LOOP END] \"次数\" 的帧为止，重复指定的次数。\n// 注意：与复杂代码交织的 ANI 使用时可能会发生异常。\n// 建议仅用于简单的特效等。\n[LOOP START]\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "LOOP END",
+                         "Title":  "循环段结束 (跟一个次数)",
+                         "Comment":  "循环段结束 (跟一个次数)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "CLIP",
+                         "Title":  "裁剪区域",
+                         "Comment":  "裁剪区域",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n// 设置剪裁矩形，仅绘制该矩形内的图像。\n// 矩形的坐标以动画基准点为基准。\n[CLIP] 0 0 100 100\t// SX SY WIDTH HEIGHT\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "FRAME001",
+                         "Title":  "第二帧对应img中的第二张png",
+                         "Comment":  "FRAME001第二帧对应img中的第二张png",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "如亦"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "FRAME000",
+                         "Title":  "FRAME000",
+                         "Comment":  "[FRAME000]\n这是每个动画的第一帧，\n001就是第二帧，\n一般是不用专门改frame后面数字的，只要添加进动画就会自动按顺序改",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[FRAME000]\t\t\t\t\t\t\t// 当前帧编号\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "SUPERARMOR",
+                         "Title":  "霸体",
+                         "Comment":  "霸体：超级护甲",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "create draw only object",
+                         "Title":  "创建唯一的绘制对象",
+                         "Comment":  "创建唯一的绘制对象，该词条创建的Ani动画不会随着人物当前动作的结束，而销毁该Ani动画。",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "ZateL"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "LINEARDODGE",
+                         "Title":  "线性减淡",
+                         "Comment":  "线性减淡",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "北海3092158274"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "SPECTRUM TERM",
+                         "Title":  "残影生成间隔 1/1000秒",
+                         "Comment":  "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM TERM] 100\t\t// 残影生成间隔 1/1000秒\n```",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM TERM] 100\t\t// 残影生成间隔 1/1000秒\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "SPECTRUM LIFE TIME",
+                         "Title":  "残影持续时间 1/1000秒",
+                         "Comment":  "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM LIFE TIME] 500\t// 残影持续时间 1/1000秒\n```",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM LIFE TIME] 500\t// 残影持续时间 1/1000秒\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "SPECTRUM COLOR",
+                         "Title":  "残影颜色",
+                         "Comment":  "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM COLOR] 255 0 0 155\t// 残影颜色，根据 [SPECTRUM EFFECT] 类型可能不适用。\n\t\t\t\t// 例如) NONE 类型的情况下，仅使用 alpha 值。\n```",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM COLOR] 255 0 0 155\t// 残影颜色，根据 [SPECTRUM EFFECT] 类型可能不适用。\n\t\t\t\t// 例如) NONE 类型的情况下，仅使用 alpha 值。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "SPECTRUM EFFECT",
+                         "Title":  "效果类型",
+                         "Comment":  "#### 官方示例: animation.ani\n\n```pvf\n// 例如) NONE 类型的情况下，仅使用 alpha 值。\n[SPECTRUM EFFECT] `LINEARDODGE` // 效果类型\n\t\t\t\t// `NONE`\t : 原样复制角色形象。\n\t\t\t\t// `DODGE`\n\t\t\t\t// `LINEARDODGE`\n\t\t\t\t// `DARK`\n\t\t\t\t// `XOR`\n\t\t\t\t// `MONOCHROME`\n\t\t\t\t// 其他功能会出错\n```",
+                         "OfficialDescription":  "#### 官方示例: animation.ani\n\n```pvf\n// 例如) NONE 类型的情况下，仅使用 alpha 值。\n[SPECTRUM EFFECT] `LINEARDODGE` // 效果类型\n\t\t\t\t// `NONE`\t : 原样复制角色形象。\n\t\t\t\t// `DODGE`\n\t\t\t\t// `LINEARDODGE`\n\t\t\t\t// `DARK`\n\t\t\t\t// `XOR`\n\t\t\t\t// `MONOCHROME`\n\t\t\t\t// 其他功能会出错\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "use animation",
+                         "Title":  "将ani文件作为",
+                         "Comment":  "use as，将第一行的.ani文件作为第二行的名称使用，可以是数字",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "ani",
+                         "Section":  "add",
+                         "Title":  "添加动画",
+                         "Comment":  "- 第1行的第1个数字代表时间，帧\n- 第1行的第2个数字代表图层\n- 第二行是上面定义的动画",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1|Lancarus"
+                     }
+                 ]
+}

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>UnitComboLib</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWPF>True</UseWPF>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <EnableDefaultPageItems>False</EnableDefaultPageItems>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <Page Include="unitcombobox.xaml" />
+    <Page Include="themes\lightbrushs.xaml" />
+    <Page Include="themes\generic.xaml" />
+    <Page Include="themes\darkbrushs.xaml" />
+  </ItemGroup>
+  <ItemGroup />
+</Project>

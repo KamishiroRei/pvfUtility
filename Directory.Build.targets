@@ -1,0 +1,190 @@
+<Project>
+  <PropertyGroup>
+    <RecoveredDependencyDirectory>$(MSBuildThisFileDirectory)lib</RecoveredDependencyDirectory>
+    <RecoveredResourceDirectory>$(MSBuildThisFileDirectory)Resources</RecoveredResourceDirectory>
+    <RecoveredLibrarySourceDirectory>$(MSBuildThisFileDirectory)SourceLibraries</RecoveredLibrarySourceDirectory>
+    <RecoveredSourceLibraryMode Condition="'$(RecoveredSourceLibraryMode)' == ''">All</RecoveredSourceLibraryMode>
+    <AssemblySearchPaths>$(RecoveredDependencyDirectory);$(AssemblySearchPaths)</AssemblySearchPaths>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(RecoveredSourceLibraryMode)' == 'Leaf' Or '$(RecoveredSourceLibraryMode)' == 'Core' Or '$(RecoveredSourceLibraryMode)' == 'All'">
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+      <AssemblyName>ICSharpCode.AvalonEdit</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\pvfUtility.WebApi.Dto\pvfUtility.WebApi.Dto.csproj">
+      <AssemblyName>pvfUtility.WebApi.Dto</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\Swordfish.NET.CollectionsV3\Swordfish.NET.CollectionsV3.csproj">
+      <AssemblyName>Swordfish.NET.CollectionsV3</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\UnitComboLib\UnitComboLib.csproj">
+      <AssemblyName>UnitComboLib</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\Utools\Utools.csproj">
+      <AssemblyName>Utools</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\Whetstone.ChatGPT\Whetstone.ChatGPT.csproj">
+      <AssemblyName>Whetstone.ChatGPT</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\WpfRangeControls\WpfRangeControls.csproj">
+      <AssemblyName>WpfRangeControls</AssemblyName>
+    </RecoveredSourceProject>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(RecoveredSourceLibraryMode)' == 'Core' Or '$(RecoveredSourceLibraryMode)' == 'All'">
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\GMTool.Dot\GMTool.Dot.csproj">
+      <AssemblyName>GMTool.Dot</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\GMTool.Services\GMTool.Services.csproj">
+      <AssemblyName>GMTool.Services</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\GMTool.SqlModel\GMTool.SqlModel.csproj">
+      <AssemblyName>GMTool.SqlModel</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\HL\HL.csproj">
+      <AssemblyName>HL</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\PvfCode.Dot\PvfCode.Dot.csproj">
+      <AssemblyName>PvfCode.Dot</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\PvfCode.LoggerBase\PvfCode.LoggerBase.csproj">
+      <AssemblyName>PvfCode.LoggerBase</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\PvfCode.NPK.Utils\PvfCode.NPK.Utils.csproj">
+      <AssemblyName>PvfCode.NPK.Utils</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\ServiceLocator\ServiceLocator.csproj">
+      <AssemblyName>ServiceLocator</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\SevenZipSharp\SevenZipSharp.csproj">
+      <AssemblyName>SevenZipSharp</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\Vulild.Ionic.Zlib\Vulild.Ionic.Zlib.csproj">
+      <AssemblyName>Vulild.Ionic.Zlib</AssemblyName>
+    </RecoveredSourceProject>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(RecoveredSourceLibraryMode)' == 'All'">
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\PvfCode.Models\PvfCode.Models.csproj">
+      <AssemblyName>PvfCode.Models</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\PvfCode.Services\PvfCode.Services.csproj">
+      <AssemblyName>PvfCode.Services</AssemblyName>
+    </RecoveredSourceProject>
+    <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\TextEditLib\TextEditLib.csproj">
+      <AssemblyName>TextEditLib</AssemblyName>
+    </RecoveredSourceProject>
+  </ItemGroup>
+
+  <ItemGroup>
+    <RecoveredReadableXaml Include="$(MSBuildThisFileDirectory)**\*.xaml"
+                           Exclude="$(MSBuildThisFileDirectory)bin\**\*;$(MSBuildThisFileDirectory)obj\**\*" />
+
+    <ApplicationDefinition Remove="@(RecoveredReadableXaml)" />
+    <Page Remove="@(RecoveredReadableXaml)" />
+    <None Remove="@(RecoveredReadableXaml)" />
+    <None Include="@(RecoveredReadableXaml)" />
+
+    <ApplicationDefinition Remove="$(RecoveredLibrarySourceDirectory)\**\*" />
+    <Compile Remove="$(RecoveredLibrarySourceDirectory)\**\*" />
+    <Content Remove="$(RecoveredLibrarySourceDirectory)\**\*" />
+    <EmbeddedResource Remove="$(RecoveredLibrarySourceDirectory)\**\*" />
+    <Page Remove="$(RecoveredLibrarySourceDirectory)\**\*" />
+    <Resource Remove="$(RecoveredLibrarySourceDirectory)\**\*" />
+
+    <RecoveredThemeAssembly Include="$(RecoveredDependencyDirectory)\DevExpress.Xpf.Themes.*.dll" />
+
+    <Reference Include="Microsoft.Extensions.Options">
+      <HintPath>$(RecoveredDependencyDirectory)\Microsoft.Extensions.Options.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v24.1">
+      <HintPath>$(RecoveredDependencyDirectory)\DevExpress.Xpf.Controls.v24.1.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.PropertyGrid.v24.1">
+      <HintPath>$(RecoveredDependencyDirectory)\DevExpress.Xpf.PropertyGrid.v24.1.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.TypedStyles.v24.1">
+      <HintPath>$(RecoveredDependencyDirectory)\DevExpress.Xpf.TypedStyles.v24.1.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="@(RecoveredThemeAssembly)">
+      <Private>true</Private>
+    </Reference>
+
+    <EmbeddedResource Include="$(RecoveredResourceDirectory)\pvfUtility.g.resources">
+      <LogicalName>pvfUtility.g.resources</LogicalName>
+    </EmbeddedResource>
+
+    <Content Include="$(RecoveredDependencyDirectory)\**\*"
+             Exclude="$(RecoveredDependencyDirectory)\pvfUtility.dll;$(RecoveredDependencyDirectory)\pvfUtility.deps.json;$(RecoveredDependencyDirectory)\pvfUtility.runtimeconfig.json;$(RecoveredDependencyDirectory)\Exceptionless.dll;$(RecoveredDependencyDirectory)\Exceptionless.Wpf.dll;$(RecoveredDependencyDirectory)\AutoUpdater.NET.dll;$(RecoveredDependencyDirectory)\Whetstone.ChatGPT.dll;$(RecoveredDependencyDirectory)\Whetstone.ChatGPT.pdb">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup Condition="'@(RecoveredSourceProject)' != ''">
+    <Reference Remove="@(RecoveredSourceProject->'%(AssemblyName)')" />
+    <Content Remove="@(RecoveredSourceProject->'$(RecoveredDependencyDirectory)\%(AssemblyName).dll')" />
+    <Content Remove="$(RecoveredDependencyDirectory)\**\UnitComboLib.resources.dll"
+             Condition="'$(RecoveredSourceLibraryMode)' == 'Leaf' Or '$(RecoveredSourceLibraryMode)' == 'Core' Or '$(RecoveredSourceLibraryMode)' == 'All'" />
+
+    <ProjectReference Include="@(RecoveredSourceProject)"
+                      Private="true"
+                      ReferenceOutputAssembly="true">
+      <GlobalPropertiesToRemove>OutputPath;BaseOutputPath;BaseIntermediateOutputPath</GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Target Name="ValidateRecoveredSourceLibraryMode" BeforeTargets="PrepareForBuild">
+    <Error Condition="'$(RecoveredSourceLibraryMode)' != 'Binary' And '$(RecoveredSourceLibraryMode)' != 'Leaf' And '$(RecoveredSourceLibraryMode)' != 'Core' And '$(RecoveredSourceLibraryMode)' != 'All'"
+           Text="RecoveredSourceLibraryMode must be Binary, Leaf, Core, or All." />
+  </Target>
+
+  <Target Name="PreferResolvedDependenciesForPublish"
+          AfterTargets="ComputeFilesToPublish"
+          BeforeTargets="_HandleFileConflictsForPublish">
+    <ItemGroup>
+      <_RecoveredLibPublishFile Include="@(ResolvedFileToPublish)"
+                                Condition="$([System.String]::Copy('%(ResolvedFileToPublish.FullPath)').StartsWith('$([MSBuild]::EnsureTrailingSlash($(RecoveredDependencyDirectory)))', System.StringComparison.OrdinalIgnoreCase))" />
+      <_PreferredPublishFile Include="@(ResolvedFileToPublish)"
+                             Condition="!$([System.String]::Copy('%(ResolvedFileToPublish.FullPath)').StartsWith('$([MSBuild]::EnsureTrailingSlash($(RecoveredDependencyDirectory)))', System.StringComparison.OrdinalIgnoreCase))" />
+
+      <ResolvedFileToPublish Remove="@(_RecoveredLibPublishFile)" />
+      <_RecoveredLibPublishFile Remove="@(_PreferredPublishFile)"
+                                MatchOnMetadata="RelativePath"
+                                MatchOnMetadataOptions="PathLike" />
+      <ResolvedFileToPublish Include="@(_RecoveredLibPublishFile)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="WriteRecoveredSourceLibraryManifest"
+          AfterTargets="Build"
+          Condition="'@(RecoveredSourceProject)' != ''">
+    <WriteLinesToFile File="$(TargetDir)recovered-source-libraries.txt"
+                      Lines="@(RecoveredSourceProject->'%(AssemblyName)|%(FullPath)')"
+                      Overwrite="true"
+                      Encoding="UTF-8" />
+  </Target>
+
+  <Target Name="PublishRecoveredSourceLibraryManifest"
+          BeforeTargets="ComputeFilesToPublish"
+          DependsOnTargets="WriteRecoveredSourceLibraryManifest"
+          Condition="'@(RecoveredSourceProject)' != ''">
+    <ItemGroup>
+      <ResolvedFileToPublish Include="$(TargetDir)recovered-source-libraries.txt">
+        <RelativePath>recovered-source-libraries.txt</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="RemoveRecoveredSourceLibraryManifest"
+          AfterTargets="Build"
+          Condition="'@(RecoveredSourceProject)' == ''">
+    <Delete Files="$(TargetDir)recovered-source-libraries.txt" />
+  </Target>
+
+</Project>

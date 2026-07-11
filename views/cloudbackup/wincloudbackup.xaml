@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cloudbackup:WinCloudBackup xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:user="clr-namespace:PvfCode.ViewModels.User" Window.Title="{DynamicResource CloudBackupView_Title}" FrameworkElement.MinWidth="500" FrameworkElement.Margin="20" Window.ResizeMode="NoResize" Window.SizeToContent="WidthAndHeight" xmlns:cloudbackup="clr-namespace:PvfCode.Views.CloudBackup">
+  <FrameworkElement.DataContext>
+    <user:WinCloudBackupViewModel />
+  </FrameworkElement.DataContext>
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding LoadedCommand}" />
+  </interactivity:Interaction.Behaviors>
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <Style x:Key="timeBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="Text" Value="{Binding Path=Tag, StringFormat=yyyy-MM-dd HH:mm:ss, RelativeSource={RelativeSource Mode=Self}}" />
+        <Style.Triggers>
+          <Trigger Property="FrameworkElement.Tag" Value="{x:Null}">
+            <Setter Property="Text" Value="{DynamicResource CloudBackupView_NotBackup}" />
+          </Trigger>
+        </Style.Triggers>
+      </Style>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid IsEnabled="{Binding IsLoading, Mode=OneWay, Converter={StaticResource ConverterBoolenToFalse}}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <Grid Margin="15,20,15,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
+      <Label Content="{DynamicResource CloudBackupView_BackupItems}" FontWeight="DemiBold" />
+      <Label Grid.Column="1" Content="{DynamicResource CloudBackupView_LastBackupTime}" FontWeight="DemiBold" />
+      <CheckBox Grid.Row="1" Content="{DynamicResource CloudBackupView_BookMark}" IsChecked="{Binding BackUpData.BookMark.AllowBackUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Tag="{Binding BackUpData.BookMark.BackUpTime}">
+        <FrameworkElement.Style>
+          <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Text" Value="{Binding Path=Tag, StringFormat=yyyy-MM-dd HH:mm:ss, RelativeSource={RelativeSource Mode=Self}}" />
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding BackUpData.BookMark.BackUpTime}" Value="{x:Null}">
+                <Setter Property="Text" Value="{DynamicResource CloudBackupView_NotBackup}" />
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkElement.Style>
+      </TextBlock>
+      <CheckBox Grid.Row="2" Content="{DynamicResource CloudBackupView_FileExplorerComment}" IsChecked="{Binding BackUpData.TreeListComment.AllowBackUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource timeBlock}" Tag="{Binding BackUpData.TreeListComment.BackUpTime}" />
+      <CheckBox Grid.Row="3" Content="{DynamicResource CloudBackupView_CodeIntelliSenseConfig}" IsChecked="{Binding BackUpData.ItemCodeHoverConfig.AllowBackUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource timeBlock}" Tag="{Binding BackUpData.ItemCodeHoverConfig.BackUpTime}" />
+      <CheckBox Grid.Row="4" Content="{DynamicResource CloudBackupView_TagTranslate}" IsChecked="{Binding BackUpData.SectionComment.AllowBackUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource timeBlock}" Tag="{Binding BackUpData.SectionComment.BackUpTime}" />
+      <CheckBox Grid.Row="5" Content="{DynamicResource CloudBackupView_AppConfig}" IsChecked="{Binding BackUpData.AppSetting.AllowBackUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource timeBlock}" Tag="{Binding BackUpData.AppSetting.BackUpTime}" />
+    </Grid>
+    <StackPanel Grid.Row="1" Height="1" Margin="0,10,0,5" Background="#FF808080" />
+    <StackPanel Grid.Row="2" Margin="0,10,0,5" HorizontalAlignment="Right" Orientation="Horizontal">
+      <WaitIndicator FrameworkElement.Margin="0,0,5,0" FrameworkElement.HorizontalAlignment="Left" Control.Background="#00FFFFFF" Control.BorderBrush="#00FFFFFF" Control.BorderThickness="0" ContentControl.Content="Loading..." p9:WaitIndicator.DeferedVisibility="{Binding IsLoading}" xmlns:p9="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+      <Button Width="70" Margin="0,0,8,0" Content="{DynamicResource CloudBackupView_Upload}" Cursor="Hand" Command="{Binding OnBackupStartCommand}" />
+      <Button Width="70" Margin="0,0,8,0" Content="{DynamicResource CloudBackupView_Download}" Cursor="Hand" Command="{Binding OnDownloadBackupStartCommand}" />
+    </StackPanel>
+  </Grid>
+</cloudbackup:WinCloudBackup>

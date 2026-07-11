@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>PvfCode.LoggerBase</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWPF>True</UseWPF>
+    <TargetFramework>net10.0-windows</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Swordfish.NET.CollectionsV3\Swordfish.NET.CollectionsV3.csproj" />
+    <Reference Include="DevExpress.Mvvm.v24.1">
+      <HintPath>$(RecoveredBinaryDirectory)\DevExpress.Mvvm.v24.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Collections.Pooled">
+      <HintPath>$(RecoveredBinaryDirectory)\Collections.Pooled.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\PvfCode.Dot\PvfCode.Dot.csproj" />
+  </ItemGroup>
+</Project>

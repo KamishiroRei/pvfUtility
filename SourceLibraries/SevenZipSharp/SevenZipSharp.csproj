@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>SevenZipSharp</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net10.0</TargetFramework>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>SevenZip\SevenZip.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="SevenZip.sfx.7z.sfx" />
+    <None Remove="SevenZip.sfx.7zCon.sfx" />
+    <None Remove="SevenZip.sfx.7zS.sfx" />
+    <None Remove="SevenZip.sfx.7zSD.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_All.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_All_x64.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_Deflate.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_Deflate_x64.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_LZMA.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_LZMA_x64.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_LZMA2.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_LZMA2_x64.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_PPMd.sfx" />
+    <None Remove="SevenZip.sfx.7zxSD_PPMd_x64.sfx" />
+    <None Remove="SevenZip.sfx.Configs.xml" />
+    <None Remove="SevenZip.sfx.Configs.xsd" />
+    <None Remove="SevenZip.sfx.Configs.xslt" />
+    <None Remove="SevenZip.arch.Test.bzip2.7z" />
+    <None Remove="SevenZip.arch.Test.lzma.7z" />
+    <None Remove="SevenZip.arch.Test.lzma2.7z" />
+    <None Remove="SevenZip.arch.Test.ppmd.7z" />
+    <None Remove="SevenZip.arch.Test.rar" />
+    <None Remove="SevenZip.arch.Test.tar" />
+    <None Remove="SevenZip.arch.Test.txt" />
+    <None Remove="SevenZip.arch.Test.txt.bz2" />
+    <None Remove="SevenZip.arch.Test.txt.gz" />
+    <None Remove="SevenZip.arch.Test.txt.xz" />
+    <None Remove="SevenZip.arch.Test.zip" />
+    <EmbeddedResource Include="SevenZip.sfx.7z.sfx" LogicalName="SevenZip.sfx.7z.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zCon.sfx" LogicalName="SevenZip.sfx.7zCon.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zS.sfx" LogicalName="SevenZip.sfx.7zS.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zSD.sfx" LogicalName="SevenZip.sfx.7zSD.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_All.sfx" LogicalName="SevenZip.sfx.7zxSD_All.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_All_x64.sfx" LogicalName="SevenZip.sfx.7zxSD_All_x64.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_Deflate.sfx" LogicalName="SevenZip.sfx.7zxSD_Deflate.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_Deflate_x64.sfx" LogicalName="SevenZip.sfx.7zxSD_Deflate_x64.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_LZMA.sfx" LogicalName="SevenZip.sfx.7zxSD_LZMA.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_LZMA_x64.sfx" LogicalName="SevenZip.sfx.7zxSD_LZMA_x64.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_LZMA2.sfx" LogicalName="SevenZip.sfx.7zxSD_LZMA2.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_LZMA2_x64.sfx" LogicalName="SevenZip.sfx.7zxSD_LZMA2_x64.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_PPMd.sfx" LogicalName="SevenZip.sfx.7zxSD_PPMd.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.7zxSD_PPMd_x64.sfx" LogicalName="SevenZip.sfx.7zxSD_PPMd_x64.sfx" />
+    <EmbeddedResource Include="SevenZip.sfx.Configs.xml" LogicalName="SevenZip.sfx.Configs.xml" />
+    <EmbeddedResource Include="SevenZip.sfx.Configs.xsd" LogicalName="SevenZip.sfx.Configs.xsd" />
+    <EmbeddedResource Include="SevenZip.sfx.Configs.xslt" LogicalName="SevenZip.sfx.Configs.xslt" />
+    <EmbeddedResource Include="SevenZip.arch.Test.bzip2.7z" LogicalName="SevenZip.arch.Test.bzip2.7z" />
+    <EmbeddedResource Include="SevenZip.arch.Test.lzma.7z" LogicalName="SevenZip.arch.Test.lzma.7z" />
+    <EmbeddedResource Include="SevenZip.arch.Test.lzma2.7z" LogicalName="SevenZip.arch.Test.lzma2.7z" />
+    <EmbeddedResource Include="SevenZip.arch.Test.ppmd.7z" LogicalName="SevenZip.arch.Test.ppmd.7z" />
+    <EmbeddedResource Include="SevenZip.arch.Test.rar" LogicalName="SevenZip.arch.Test.rar" />
+    <EmbeddedResource Include="SevenZip.arch.Test.tar" LogicalName="SevenZip.arch.Test.tar" />
+    <EmbeddedResource Include="SevenZip.arch.Test.txt" LogicalName="SevenZip.arch.Test.txt" />
+    <EmbeddedResource Include="SevenZip.arch.Test.txt.bz2" LogicalName="SevenZip.arch.Test.txt.bz2" />
+    <EmbeddedResource Include="SevenZip.arch.Test.txt.gz" LogicalName="SevenZip.arch.Test.txt.gz" />
+    <EmbeddedResource Include="SevenZip.arch.Test.txt.xz" LogicalName="SevenZip.arch.Test.txt.xz" />
+    <EmbeddedResource Include="SevenZip.arch.Test.zip" LogicalName="SevenZip.arch.Test.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PvfCode.Dot\PvfCode.Dot.csproj" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.0" />
+  </ItemGroup>
+</Project>

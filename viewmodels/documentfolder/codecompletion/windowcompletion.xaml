@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<codecompletion:CompletionWindowBase xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:codecompletion="clr-namespace:PvfCode.ViewModels.DocumentFolder.CodeCompletion;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" Window.Title="WindowCompletion" Control.Background="{DynamicResource EditorBackground}">
+  <Grid Name="rootGrid">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <codecompletion:CompletionList x:Name="completionList" />
+    <bars:ToolBarControl Grid.Row="1" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False" Control.Background="{DynamicResource EditorBackground}" Control.BorderThickness="0">
+      <bars:BarButtonItem FrameworkContentElement.Name="BtnAddCompletionData" bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource WindowCompletion_BtnTitle_Add}" bars:BarItem.Glyph="{DynamicResource AddClassIcon}">
+      </bars:BarButtonItem>
+      <bars:BarItemSeparator />
+      <bars:BarButtonItem FrameworkContentElement.Name="BtnEditCompletionData" bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource WindowCompletion_BtnTitle_Edit}" bars:BarItem.Glyph="{DynamicResource EditComment}">
+      </bars:BarButtonItem>
+      <bars:BarItemSeparator />
+      <bars:BarButtonItem FrameworkContentElement.Name="BtnDeleteAddCompletionData" bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource WindowCompletion_BtnTitle_Delete}" bars:BarItem.Glyph="{DynamicResource DeleteClassIcon2}">
+      </bars:BarButtonItem>
+    </bars:ToolBarControl>
+  </Grid>
+</codecompletion:CompletionWindowBase>

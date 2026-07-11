@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns:flyoutNative="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:bookMark="clr-namespace:PvfCode.Views.BookMark;assembly=pvfUtility" xmlns:chatgpt="clr-namespace:PvfCode.Views.ChatGPT;assembly=pvfUtility" xmlns:documentfolder1="clr-namespace:PvfCode.ViewModels.DocumentFolder;assembly=pvfUtility" xmlns:documents="clr-namespace:PvfCode.Views.Documents;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxdove="http://schemas.devexpress.com/winfx/2008/xaml/docking/visualelements" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:enum="clr-namespace:PvfCode.Models.Enums;assembly=PvfCode.Models" xmlns:enums="clr-namespace:PvfCode.Models.Pvf.Enums;assembly=PvfCode.Models" xmlns:importviews="clr-namespace:PvfCode.Views.ImportViews;assembly=pvfUtility" xmlns:macro="clr-namespace:PvfCode.Views.Macro;assembly=pvfUtility" xmlns:mvvmservices="clr-namespace:PvfCode.MVVMServices;assembly=pvfUtility" xmlns:preview="clr-namespace:PvfCode.Views.Preview;assembly=pvfUtility" xmlns:pvfcode="clr-namespace:PvfCode;assembly=PvfCode.Dot" xmlns:pvfdifftools="clr-namespace:PvfCode.Views.PvfDiffTools;assembly=pvfUtility" xmlns:pvftree="clr-namespace:PvfCode.Converts.PvfTree;assembly=pvfUtility" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:search="clr-namespace:PvfCode.Converts.TextEdit.Search;assembly=pvfUtility" xmlns:searchPanelEnums="clr-namespace:PvfCode.ViewModels.DocumentFolder.SearchViewModels.Enums;assembly=pvfUtility" xmlns:store="clr-namespace:Views.Store;assembly=pvfUtility" xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:textedit="clr-namespace:PvfCode.Converts.TextEdit;assembly=pvfUtility" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" xmlns:views="clr-namespace:PvfCode.Views;assembly=pvfUtility" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf">
+  <textedit:ConverterFileTypeShowCommentBarButton x:Key="ConverterFileTypeShowCommentBarButton" />
+  <search:ConverterSearchResultNumVisibility x:Key="ConverterSearchResultNumVisibility" />
+  <DataTemplate x:Key="DocumentIndex_View2">
+    <Grid Name="gridRoot" />
+  </DataTemplate>
+  <documents:DocumentIndexContentTemplateSelector x:Key="DocumentIndexContentTemplateSelector" View2="{StaticResource DocumentIndex_View2}" />
+  <DataTemplate x:Key="PvfFileDocumentTemplate">
+    <texteditorfolder:DocumentTextEditor DataContext="{Binding}">
+    </texteditorfolder:DocumentTextEditor>
+  </DataTemplate>
+  <DataTemplate x:Key="Document_PvfRelease">
+    <views:ViewPvfRelease />
+  </DataTemplate>
+  <DataTemplate x:Key="PvfDiffToolDataTemplate">
+    <pvfdifftools:PvfDiffControl>
+    </pvfdifftools:PvfDiffControl>
+  </DataTemplate>
+  <DataTemplate x:Key="documentIndex">
+    <ContentControl ContentTemplateSelector="{StaticResource DocumentIndexContentTemplateSelector}" Content="{Binding}" />
+  </DataTemplate>
+  <DataTemplate x:Key="ImportFilesDocument">
+    <importviews:ViewImportFilesPanel />
+  </DataTemplate>
+  <documentfolder1:DocumentItemContentTemplateSelector x:Key="DocumentItemContentTemplateSelector" DocumentIndex="{StaticResource documentIndex}" Import="{StaticResource ImportFilesDocument}" PvfDiffToolDataTemplate="{StaticResource PvfDiffToolDataTemplate}" PvfFileDocumentDataTemplate="{StaticResource PvfFileDocumentTemplate}" PvfRelease="{StaticResource Document_PvfRelease}" />
+  <DataTemplate x:Key="DocumentCaptionTemplateDefault">
+    <TextBlock Grid.Column="1" Margin="4,0,0,0" VerticalAlignment="Center" Text="{Binding DocumentPath, Mode=OneWay}" />
+  </DataTemplate>
+  <Style x:Key="PvfFileDocumentFileNameStyle" TargetType="{x:Type TextBlock}">
+    <Style.Triggers>
+      <DataTrigger Binding="{Binding Rarity}" Value="{x:Null}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.FileNameBrush}" />
+      </DataTrigger>
+      <DataTrigger Value="0" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor0}" />
+      </DataTrigger>
+      <DataTrigger Value="1" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor1}" />
+      </DataTrigger>
+      <DataTrigger Value="2" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor2}" />
+      </DataTrigger>
+      <DataTrigger Value="3" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor3}" />
+      </DataTrigger>
+      <DataTrigger Value="4" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor4}" />
+      </DataTrigger>
+      <DataTrigger Value="5" Binding="{Binding Rarity}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.RarityColor5}" />
+      </DataTrigger>
+      <DataTrigger Value="False" Binding="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.UseRarityColor}">
+        <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.NowTreeColorConfig.FileNameBrush}" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="documentCaptFileIsSealingStyle" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type core:DXImage}">
+    <Setter Property="FrameworkElement.Width" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfDocumentOptions.IconWidth, Mode=OneWay}" />
+    <Setter Property="FrameworkElement.Height" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfDocumentOptions.IconHeight, Mode=OneWay}" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="UIElement.Visibility" Value="Collapsed" />
+    <Style.Triggers>
+      <DataTrigger Value="{x:Static enums:AttachType.sealing}" Binding="{Binding AttachType, Mode=OneWay}">
+        <Setter Property="UIElement.Visibility" Value="Visible" />
+        <Setter Property="core:DXImage.Source" Value="{Binding Source={x:Static root:Res.Instance}, Path=ImageSealingMark}" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="documentCaptionIconStyle" TargetType="{x:Type dx:DXImage}">
+    <Setter Property="FrameworkElement.Width" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfDocumentOptions.IconWidth, Mode=OneWay}" />
+    <Setter Property="FrameworkElement.Height" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfDocumentOptions.IconHeight, Mode=OneWay}" />
+    <Setter Property="dx:DXImage.Source" Value="{Binding Icon, Mode=OneWay}" />
+    <Style.Triggers>
+      <DataTrigger Value="{x:Static pvfcode:PvfFileType.qst}" Binding="{Binding File.FileType, Mode=OneWay}">
+        <Setter Property="FrameworkElement.Width" Value="41" />
+        <Setter Property="FrameworkElement.Height" Value="16" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+  <DataTemplate x:Key="DocumentCaptionTemplatePvfFile">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid Margin="-6,0,0,0" Visibility="{Binding ElementName=captionImage, Path=Source, Converter={StaticResource ConvertNullToVisibility}}">
+        <DXImage FrameworkElement.Name="captionImage" Image.Stretch="Fill" FrameworkElement.Style="{StaticResource documentCaptionIconStyle}" UIElement.Visibility="{Binding ElementName=captionImage, Path=Source, Converter={StaticResource ConvertNullToVisibility}}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+        <DXImage FrameworkElement.Style="{StaticResource documentCaptFileIsSealingStyle}" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+        <Grid ToolTip="{DynamicResource mess_ClickChangeIcon}" ToolTipService.InitialShowDelay="50" Width="{Binding ElementName=captionImage, Path=Width}" Height="{Binding ElementName=captionImage, Path=Height}">
+          <FrameworkElement.Style>
+            <Style TargetType="{x:Type Grid}">
+              <Style.Triggers>
+                <Trigger Property="UIElement.IsMouseOver" Value="True">
+                  <Setter Property="Background" Value="#FFFF0000" />
+                  <Setter Property="UIElement.Opacity" Value="0.1" />
+                  <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+                </Trigger>
+                <Trigger Property="UIElement.IsMouseOver" Value="False">
+                  <Setter Property="Background" Value="#FFFF0000" />
+                  <Setter Property="UIElement.Opacity" Value="0  " />
+                </Trigger>
+              </Style.Triggers>
+            </Style>
+          </FrameworkElement.Style>
+        </Grid>
+      </Grid>
+      <TextBlock Grid.Column="1" Margin="4,0,0,0" VerticalAlignment="Center" Style="{StaticResource PvfFileDocumentFileNameStyle}" Text="{Binding FileName, Mode=OneWay}" />
+    </Grid>
+  </DataTemplate>
+  <documentfolder1:DocumentCaptionTemplateSelector x:Key="DocumentCaptionTemplateSelector" Default="{StaticResource DocumentCaptionTemplateDefault}" PvfFile="{StaticResource DocumentCaptionTemplatePvfFile}" />
+  <Style x:Key="DocumentPanelItemStyle" xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" TargetType="{x:Type docking:DocumentPanel}">
+    <Setter Property="docking:BaseLayoutItem.ClosingBehavior" Value="ImmediatelyRemove" />
+    <Setter Property="docking:BaseLayoutItem.CloseCommand" Value="{Binding Path=DataContext.RootDocument.OnDocumentCloseCommand, RelativeSource={RelativeSource AncestorType=dxdo:LayoutGroup}}" />
+    <Setter Property="docking:BaseLayoutItem.IsActive" Value="{Binding Path=IsActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <Setter Property="UIElement.Focusable" Value="{Binding Path=IsActive, Mode=OneWay}" />
+    <Setter Property="docking:BaseLayoutItem.CaptionImageLocation" Value="BeforeText" />
+    <Setter Property="docking:BaseLayoutItem.AllowContextMenu" Value="True" />
+    <Setter Property="UIElement.IsEnabled" Value="{Binding IsLoading, Converter={StaticResource ConverterBoolenToFalse}}" />
+    <Setter Property="docking:BaseLayoutItem.ToolTip" Value="{Binding Path=DocumentPath, Mode=OneWay}" />
+    <Setter Property="docking:BaseLayoutItem.Padding" Value="0" />
+    <Setter Property="docking:BaseLayoutItem.IsSelectedItem" Value="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <Setter Property="docking:BaseLayoutItem.Caption" Value="{Binding}" />
+    <Setter Property="docking:BaseLayoutItem.CaptionTemplateSelector" Value="{StaticResource DocumentCaptionTemplateSelector}" />
+    <Setter Property="docking:BaseLayoutItem.Margin" Value="0" />
+    <Setter Property="docking:BaseLayoutItem.AllowFloat" Value="True" />
+    <Setter Property="docking:BaseLayoutItem.AllowDock" Value="true" />
+    <Setter Property="ToolTipService.InitialShowDelay" Value="50" />
+    <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <ContentControl>
+            <i721dqgnl7knwxi8rzs:Bo0H7Bgqq9eBhXsKqI6 xmlns:i721dqgnl7knwxi8rzs="clr-namespace:I721dqgNL7kNWxI8RZs;assembly=pvfUtility" />
+          </ContentControl>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="TabItemContainerStyle" TargetType="{x:Type ContentControl}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Border Name="border" Margin="2,0,0,0" Padding="0" DataContext="{Binding Path=DataContext}">
+            <dxmvvm:Interaction.Behaviors>
+              <dxmvvm:EventToCommand EventName="MouseRightButtonUp" Command="{Binding OnShowContextMenuCommand}" />
+            </dxmvvm:Interaction.Behaviors>
+            <StackPanel Grid.Row="1" Margin="7,1,0,3" VerticalAlignment="Center" Orientation="Horizontal">
+              <Grid Margin="5,1,0,0">
+                <dx:DXImage Name="captionImage" Stretch="Fill" Style="{StaticResource documentCaptionIconStyle}" Visibility="{Binding ElementName=captionImage, Path=Source, Converter={StaticResource ConvertNullToVisibility}}" />
+                <dx:DXImage Style="{StaticResource documentCaptFileIsSealingStyle}" />
+                <flyout:FlyoutControl xmlns:flyout="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" flyout:FlyoutControl.Name="flyoutControl" Control.Padding="0" FrameworkElement.VerticalAlignment="Bottom" Control.Background="#00FFFFFF" Control.BorderThickness="0" FrameworkElement.FlowDirection="LeftToRight" xmlns:native="clr-namespace:DevExpress.Xpf.Editors.Flyout.Native;assembly=DevExpress.Xpf.Core.v24.1" native:FlyoutBase.StaysOpen="True" native:FlyoutBase.PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                  <FrameworkElement.Style>
+                    <Style TargetType="{x:Type flyout:FlyoutControl}">
+                      <Setter Property="native:FlyoutBase.Settings">
+                        <Setter.Value>
+                          <flyout:FlyoutSettings flyout:FlyoutSettings.Placement="Bottom" flyout:FlyoutSettings.ShowIndicator="False" />
+                        </Setter.Value>
+                      </Setter>
+                      <Setter Property="native:FlyoutBase.IsOpen" Value="False" />
+                      <Style.Triggers>
+                        <Trigger Property="native:FlyoutBase.IsOpen" Value="False">
+                          <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                        </Trigger>
+                      </Style.Triggers>
+                    </Style>
+                  </FrameworkElement.Style>
+                  <preview:PreviewPvfItemControl x:Name="previewControl">
+                    <FrameworkElement.Style>
+                      <Style TargetType="{x:Type preview:PreviewPvfItemControl}">
+                        <Style.Triggers>
+                          <DataTrigger Value="True" Binding="{Binding PreviewItemVisibility, Mode=OneWay}">
+                            <Setter Property="preview:PreviewPvfItemControl.ContentEx" Value="{Binding ItemPreviewData, Mode=OneWay}" />
+                          </DataTrigger>
+                        </Style.Triggers>
+                      </Style>
+                    </FrameworkElement.Style>
+                  </preview:PreviewPvfItemControl>
+                </flyout:FlyoutControl>
+              </Grid>
+              <TextBlock Name="title" Margin="7,0,0,0" VerticalAlignment="Center" Style="{StaticResource PvfFileDocumentFileNameStyle}" Text="{Binding FileName}" />
+              <core:SimpleButton xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" core:SimpleButton.Name="PART_Close" Grid.Row="1" FrameworkElement.Margin="20,0,6,0" Control.Padding="0" FrameworkElement.VerticalAlignment="Center" Control.VerticalContentAlignment="Center" xmlns:visualelements="clr-namespace:DevExpress.Xpf.Docking.VisualElements;assembly=DevExpress.Xpf.Docking.v24.1" visualelements:DockPane.HitTestType="ControlBox" Control.BorderThickness="0" UIElement.Focusable="False" core:SimpleButton.Glyph="{DynamicResource Close}" core:SimpleButton.GlyphHeight="13" FrameworkElement.ToolTip="关闭 (Ctrl+W)" ButtonBase.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=RootDocument.OnCloseCommand}" ButtonBase.CommandParameter="{Binding}">
+                <FrameworkElement.Style>
+                  <Style TargetType="{x:Type core:SimpleButton}">
+                    <Setter Property="Control.Background" Value="#00FFFFFF" />
+                    <Style.Triggers>
+                      <Trigger Property="UIElement.IsMouseOver" Value="True">
+                        <Setter Property="Control.Background" Value="{DynamicResource DocumentTabCatpionCloseBtnHoverBackBrush}" />
+                      </Trigger>
+                      <Trigger Property="ButtonBase.IsPressed" Value="True">
+                        <Setter Property="Control.Background" Value="#FFFF0000" />
+                      </Trigger>
+                    </Style.Triggers>
+                  </Style>
+                </FrameworkElement.Style>
+              </core:SimpleButton>
+            </StackPanel>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="False">
+              <Setter TargetName="PART_Close" Property="Visibility" Value="Hidden" />
+            </Trigger>
+            <DataTrigger Value="False" Binding="{Binding DataContext.IsSelected}">
+              <Setter TargetName="border" Value="{DynamicResource DocumentTabCaptionBackBrush_Default}" Property="Border.Background" />
+            </DataTrigger>
+            <MultiDataTrigger>
+              <MultiDataTrigger.Conditions>
+                <Condition Value="False" Binding="{Binding DataContext.IsSelected}" />
+                <Condition Value="{x:Static enum:ThemeType.VS2019Blue}" Binding="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=NowThemeType}" />
+                <Condition Binding="{Binding DataContext.Rarity}" Value="{x:Null}" />
+              </MultiDataTrigger.Conditions>
+              <Setter TargetName="title" Property="TextBlock.Foreground" Value="#FFFFFFFF" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+              <MultiDataTrigger.Conditions>
+                <Condition Value="False" Binding="{Binding DataContext.IsSelected}" />
+                <Condition Value="{x:Static enum:ThemeType.VS2019Blue}" Binding="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=NowThemeType}" />
+                <Condition Value="False" Binding="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.UseRarityColor}" />
+              </MultiDataTrigger.Conditions>
+              <Setter TargetName="title" Property="TextBlock.Foreground" Value="#FFFFFFFF" />
+            </MultiDataTrigger>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="PART_Close" Property="Visibility" Value="Visible" />
+              <Setter TargetName="border" Value="{DynamicResource DocumentTabCaptionBackBrush_Hover}" Property="Border.Background" />
+            </Trigger>
+            <MultiDataTrigger>
+              <MultiDataTrigger.Conditions>
+                <Condition Value="True" Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" />
+                <Condition Value="{x:Static enum:ThemeType.VS2019Blue}" Binding="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=NowThemeType}" />
+                <Condition Binding="{Binding DataContext.Rarity}" Value="{x:Null}" />
+              </MultiDataTrigger.Conditions>
+              <Setter TargetName="title" Property="TextBlock.Foreground" Value="#FF000000" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+              <MultiDataTrigger.Conditions>
+                <Condition Value="True" Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" />
+                <Condition Value="{x:Static enum:ThemeType.VS2019Blue}" Binding="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=NowThemeType}" />
+                <Condition Value="False" Binding="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=TreeSetting.UseRarityColor}" />
+              </MultiDataTrigger.Conditions>
+              <Setter TargetName="title" Property="TextBlock.Foreground" Value="#FF000000" />
+            </MultiDataTrigger>
+            <DataTrigger Value="True" Binding="{Binding DataContext.IsSelected}">
+              <Setter TargetName="border" Value="{DynamicResource DocumentTabCatpionBorderTopBackBrush}" Property="Border.BorderBrush" />
+              <Setter TargetName="border" Property="Border.BorderThickness" Value="0,4,0,0" />
+              <Setter TargetName="border" Value="{DynamicResource DocumentTabCaptionBackBrush_Selected}" Property="Border.Background" />
+              <Setter TargetName="PART_Close" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <EventTrigger RoutedEvent="Control.MouseEnter">
+              <BeginStoryboard>
+                <Storyboard>
+                  <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.6" Value="True" />
+                  </BooleanAnimationUsingKeyFrames>
+                </Storyboard>
+              </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Control.MouseLeave">
+              <BeginStoryboard>
+                <Storyboard>
+                  <BooleanAnimationUsingKeyFrames Storyboard.TargetName="flyoutControl" Storyboard.TargetProperty="IsOpen">
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="False" />
+                  </BooleanAnimationUsingKeyFrames>
+                </Storyboard>
+              </BeginStoryboard>
+            </EventTrigger>
+            <DataTrigger Value="False" Binding="{Binding PreviewItemVisibility}">
+              <Setter TargetName="flyoutControl" Property="flyoutNative:FlyoutBase.IsOpen" Value="False" />
+              <Setter TargetName="flyoutControl" Property="flyoutNative:FlyoutBase.Settings">
+                <Setter.Value>
+                  <FlyoutSettings p40:FlyoutSettings.Placement="Right" p40:FlyoutSettings.ShowIndicator="False" xmlns:p40="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors.Flyout;assembly=DevExpress.Xpf.Core.v24.1" />
+                </Setter.Value>
+              </Setter>
+            </DataTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <ObjectDataProvider x:Key="KeyEditorSearchPanelSourceType" MethodName="GetNames" xmlns:system="clr-namespace:System;assembly=System.Runtime" ObjectType="{x:Type system:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="searchPanelEnums:SourceType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+  <ObjectDataProvider x:Key="ValueEditorSearchPanelSourceType" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+    <ObjectDataProvider.MethodParameters>
+      <x:TypeExtension TypeName="searchPanelEnums:SourceType" />
+    </ObjectDataProvider.MethodParameters>
+  </ObjectDataProvider>
+</ResourceDictionary>

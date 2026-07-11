@@ -1,0 +1,616 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "map",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "animation",
+                         "Title":  "物品贴图动画等",
+                         "Comment":  "物品贴图动画等",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[animation] //指定放置在地图上的动画。没有则不写也可以。\n`Lawn.ani` `[bottom]` 30 100 0 //依次为动画文件名, 图层, x坐标, y坐标, z坐标\n`Picture.ani` `[closeback]` 30 0 30 //图层可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]`\n[/animation]\n```",
+                         "Closing":  true,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "background pos",
+                         "Title":  "背景POS",
+                         "Comment":  "背景POS",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[background pos] 80 //扩展为800*600时，在原有背景绘制位置上提升该数值进行绘制。通常设置为80\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "basic action",
+                         "Title":  "基本动作",
+                         "Comment":  "基本动作",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "block use stackable item",
+                         "Title":  "禁止使用消耗品",
+                         "Comment":  "禁止使用消耗品",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "dungeon start area",
+                         "Title":  "进入该副本地图时的入场坐标（大概是）",
+                         "Comment":  "进入该副本地图时的入场坐标（大概是）\n1、X轴位置\n2、Y轴位置\n3、\n4、",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[dungeon start area] 950 219 114 172 //在地牢起始地图设置，角色开始地牢时位置的x坐标,y坐标,x大小,y大小\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "far sight scroll",
+                         "Title":  "城镇最后面的背景图片随着人物移动也跟着移动的词条",
+                         "Comment":  "城镇最后面的背景图片随着人物移动也跟着移动的词条，数字越大图片移动的越快",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n// 图层的滚动速度。(滚动速度默认值为100)\n[far sight scroll] 60 // 地砖滚动速度与远景滚动速度的比率 (%) 100则为一起滚动，0则不滚动\n```",
+                         "Closing":  false,
+                         "Authors":  "南城以北花似海"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "filename",
+                         "Title":  "城镇的最底层背景的贴图",
+                         "Comment":  "城镇的最底层背景的贴图",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[filename] `Animation/far1.ani` //动画路径\n```",
+                         "Closing":  false,
+                         "Authors":  "小鬼"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "greed",
+                         "Title":  "贪吃蛇小游戏",
+                         "Comment":  "贪吃蛇小游戏。\n副本房间的连接顺序，显示副本网格形状\nBB\t=\t右\nMM\t=\t左下\nDD\t=\t右上\nGG\t=\t左上\nJJ\t=\t右下\nFF\t=\t左右\nEE\t=\t左\nNN\t=\t左下右\nCC\t=\t上\nII\t=\t下\nKK\t=\t上下\nPP\t=\t十字\nHH\t=\t左上右\nAA\t=\t无法通过\nLL             =              上下右",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[greed] //设置在地牢的哪种网格类型中使用此地图\n`┿ ┿`\n```",
+                         "Closing":  false,
+                         "Authors":  "阿董-137735017"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "monster",
+                         "Title":  "如下",
+                         "Comment":  "如下：\t61337\t1\t0\t611\t240\t0\t1\t1\t`[fixed]`\t`[normal]`\n\n61337（怪物代码）-（1）怪物数量-（0）怪物等级，如果写0就是代表跟随副本等级-611（坐标）-240（坐标）-0-1-1（0-1-1不用管）-[fixed]-[normal]（怪物类别普通怪物）\n\n如果想做成BOSS 就把[normal]变成[boss]11",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[monster] //指定放置在地图上的怪物。没有则不写也可以。\n1 1 10 1003 37 0 1 1 `[fixed]` `[normal]` //怪物索引, 等级自动指定与否, 等级, x坐标, y坐标, Z坐标, 随机物品掉落次数, 指定物品掉落次数, 复制类型, 怪物类型\n71 1 15 173 28 0 2 2 `[half]` `[champion]` 0 //若等级自动指定，则等级为修正值，否则为绝对值\n3 0 15 188 57 0 1 1 `[ratio]` `[boss]` //复制类型为 `[fixed]` 则固定1只，`[half]` 则为玩家数的一半 (1, 2人 - 1只, 3, 4人 - 2只)，`[ratio]` 则为玩家数\n//怪物类型可选择 `[normal]` `[champion]` `[super champion]` `[boss]`\n//使用 `[champion]`, `[super champion]` 时在后面指定特性个数及特性。\n//物品掉落次数 是什么？\n//新增参数，如果是3，则最少出现0个最多出现3个物品\n63024 1 0 523 268 0 1 1 `[fixed]` `[NPC]` 1020 `[boss]`\n//在怪物类型前输入 `[NPC]` NPC编号，则击杀此怪物后，此NPC会出现。\n[/monster] //必须用此标签闭合。\n```",
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "pathgate pos",
+                         "Title":  "房间入口的坐标",
+                         "Comment":  "房间入口的坐标\n一共8个数字，两组数字为一个入口的X,Y坐标。\n第1组=左边入口坐标\n第2组=右边入口坐标\n第3组=上方入口坐标\n第4组=下方入口坐标",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[pathgate pos] //放置通道对象的坐标\n0 200 //左侧对象 x, y\n1000 200 //右侧对象 x, y\n500 0 //上方对象 x, y\n500 400 //下方对象 x, y\n```",
+                         "Closing":  false,
+                         "Authors":  "pvf"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "player number",
+                         "Title":  "玩家人数",
+                         "Comment":  "玩家人数\n\n最少人数，最多人数",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "pvp practice start area",
+                         "Title":  "和[pvp start area]一样",
+                         "Comment":  "和[pvp start area]一样,就是玩家和人机开始时的位置",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[pvp practice start area] //pvp练习模式开始地点定义 (X坐标, Y坐标, 宽度, 高度 顺序)\n112 201 69 231 //1队的开始地点\n497 205 69 226 //2队的开始地点\n```",
+                         "Closing":  false,
+                         "Authors":  "notlikeKFC"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "pvp start area",
+                         "Title":  "pvp起始点定义（X坐标",
+                         "Comment":  "pvp起始点定义（X坐标，Y坐标，宽度，高度顺序）\n四个数字一组，分三组\n0 0 0 0\t\t/个人战开始点\n\n0 0 0 0\t\t/1队的起点\n\n0 0 0 0\t\t/2队的起点",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[pvp start area] //pvp开始地点定义 (X坐标, Y坐标, 宽度, 高度 顺序)\n0 0 0 0 //个人战开始地点\n0 0 0 0 //1队的开始地点\n0 0 0 0 //2队的开始地点\n```",
+                         "Closing":  false,
+                         "Authors":  "阿董-137735017"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "sound",
+                         "Title":  "进入副本时会播放的背景音乐和环境音乐",
+                         "Comment":  "进入副本时会播放的背景音乐和环境音乐\n可以在客户端 audio.xml 文件内查看指向哪个声音文件\n\n背景音乐位置在客户端的[Music]\n环境音乐位置在客户端的[SoundPacks]（大概是）\n\n[SoundPacks]内的声音文件需借助npk解包工具查看\n目前据作者所知的npk解包工具有：\nExtractorSharp（可编辑贴图、音乐）\n黑猫（适合拿来做时装）\n\n除了解包工具还有配套的免费调音工具，也是作者正在使用的：\nAudacity\n\n若是不会找工具也可以加群下载，从下载到使用到产出成品都无需任何费用：\nQQ群：903031457",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[sound] //进入地图时输出的声音标签列表\n`AMBIENT_FOREST`\n`BGM_FOREST`\n[/sound]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "special passive object",
+                         "Title":  "指向深渊派对组",
+                         "Comment":  "指向深渊派对组，书签-常用-深渊派对。\n特殊建筑物(item如果洛兰的树可能会出果实，木桶可能会爆出怪物、HP、MP精灵之类的...)\n[id, x, y, ?, 组数量] 接下来将读取按6个为一组 [type, id, ?, ?, ?, ?]",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[special passive object]\n222 400 172 //被动对象索引, x坐标 , y坐标\n3 //要创建的对象数量\n`[monster]` 202 16 -1 -1 1 //怪物索引, 怪物等级, 生成概率1, 生成概率2 (以生成概率1/生成概率2生成), 是否跳出(-1则跳出)\n`[trap]` 48003 5 -1 -1 -1 //陷阱被动的索引, 陷阱的魔法等级, 生成概率1, 生成概率2 (以生成概率1/生成概率2生成), 未使用\n`[item]` 1 -1 -1 -1 -1 //dungeon script的[special passive object item]中的索引,指定掉落生成尝试次数,随机掉落生成尝试次数,物品箱索引,未使用\n`[hellparty]` //地狱派对索引, 相对概率, 组号\n101 25 1 //Blaze\n102 25 1 //Vapor\n103 25 1 //Overgrowth\n`[/hellparty]`\n[/special passive object]\n```",
+                         "Closing":  true,
+                         "Authors":  "fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "tile",
+                         "Title":  "在近景图层上平铺绘制的地图基础",
+                         "Comment":  "\n在近景图层上平铺绘制的地图基础。\n\n地图底板",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[tile] //地图基本地砖 - 在近景图层绘制。\n`Tile/hm01_1.til`\n`Tile/hm01_1.til`\n`Tile/hm01_1.til`\n`Tile/hm01_1.til`\n[/tile]\n```",
+                         "Closing":  true,
+                         "Authors":  "阿董-137735017"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "town movable area",
+                         "Title":  "城镇内区域之间的连接",
+                         "Comment":  "城镇内区域之间的连接\n\n六个数字为一组\n1、X坐标\n2、Y坐标\n3、X的范围\n4、Y的范围\n5、城镇编号\n6、区域编号\n\n例如：\n1-100-200-300-2-0\n释：在此地图X1Y100的地方有一个200*300大小的传送阵通向2号城镇的第0个区域。\n\n注：如果5、6位数字都为-1，则表示此处进入副本选图界面",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n//+ 等候室用地图专用数据 +//\n[town movable area] // 等候室用起始区域的列表。\n0 30 150 100 1 1 // 依次为x坐标, y坐标, x大小, y大小, 移动城镇索引, AREA索引\n300 20 150 100 -1 -1 // 将移动城镇索引和AREA索引指定为-1则不是AREA移动，而是副本开始\n[/town movable area]\n```",
+                         "Closing":  true,
+                         "Authors":  "pvf"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "virtual movable area",
+                         "Title":  "城镇可移动区域",
+                         "Comment":  "城镇可移动区域\n\n四组数字为一组\n1、X坐标\n2、Y坐标\n3、X的范围\n4、Y的范围\n\n例子：45 55 65 75\n从X45为起点向右扩展65\n从Y55为起点向下扩展75\n人物可以在这个范围内移动",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[virtual movable area] // 等候室用角色可移动的方形区域列表。依次为x坐标, y坐标, x大小, y大小\n0 100 1500 300 // 可在列表的并集区域内移动。\n100 0 1300 500\n[/virtual movable area]\n```",
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "map name",
+                         "Title":  "地图的名称",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[map name] \u003c6::map_name_455\u003e //地图的名称\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[map name] \u003c6::map_name_455\u003e //地图的名称\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "player name",
+                         "Title":  "最少人数",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[player name] 1 4 //最少人数，最多人数\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[player name] 1 4 //最少人数，最多人数\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "is character escape",
+                         "Title":  "角色卡死逃脱例外",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[is character escape] //角色卡死逃脱例外\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[is character escape] //角色卡死逃脱例外\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "show dust",
+                         "Title":  "灰尘和脚印效果",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[show dust] //灰尘和脚印效果\n`Common/CommonEffect/Animation/SandDust.ani` //输出的灰尘路径\n`Common/CommonEffect/Animation/FootPrintOnSand.ani` //输出的脚印路径\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[show dust] //灰尘和脚印效果\n`Common/CommonEffect/Animation/SandDust.ani` //输出的灰尘路径\n`Common/CommonEffect/Animation/FootPrintOnSand.ani` //输出的脚印路径\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "sort bottom",
+                         "Title":  "除一般图层外是否使用其他图层排序 1",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[sort bottom] 1 //除一般图层外是否使用其他图层排序 1:使用 其他:不使用\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[sort bottom] 1 //除一般图层外是否使用其他图层排序 1:使用 其他:不使用\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "tournament start area",
+                         "Title":  "武斗场地图开始坐标定义 (入场人数",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[tournament start area] 1 760 270 2 //武斗场地图开始坐标定义 (入场人数, X坐标, Y坐标, 队伍(1:角色, 2:怪物))\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[tournament start area] 1 760 270 2 //武斗场地图开始坐标定义 (入场人数, X坐标, Y坐标, 队伍(1:角色, 2:怪物))\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "shadow type",
+                         "Title":  "影子模式",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[shadow type] `[mirror]`, `[more darker]` //影子模式 : 设置为 `[mirror]` 时绘制上层、下层影子。\n//当前PVP、酒馆中使用 `[mirror]` 模式\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[shadow type] `[mirror]`, `[more darker]` //影子模式 : 设置为 `[mirror]` 时绘制上层、下层影子。\n//当前PVP、酒馆中使用 `[mirror]` 模式\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "dungeon",
+                         "Title":  "使用此地图的副本列表",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[dungeon] //使用此地图的副本列表\n1507\n[/dungeon]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[dungeon] //使用此地图的副本列表\n1507\n[/dungeon]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "type",
+                         "Title":  "类型设置",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[type] `[normal]`, `[boss]`, `[dummy]` //类型设置 : 普通房间, 首领房间, 虚拟房间 (诱惑之村哈梅伦中使用 : 首领用硬编码)\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[type] `[normal]`, `[boss]`, `[dummy]` //类型设置 : 普通房间, 首领房间, 虚拟房间 (诱惑之村哈梅伦中使用 : 首领用硬编码)\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "extended tile",
+                         "Title":  "扩展地砖列表 附加在地砖下方的扩展地砖列表",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[extended tile] //扩展地砖列表 附加在地砖下方的扩展地砖列表\n`Tile/tileex01.til` //横向排列 [tile] 标签的地砖后，剩余部分排列在下方。\n`Tile/tileex01.til`\n`Tile/tileex01.til`\n`Tile/tileex01.til`\n`Tile/tileex01.til`\n`Tile/tileex03.til`\n`Tile/tileex03.til`\n`Tile/tileex03.til`\n`Tile/tileex03.til`\n`Tile/tileex03.til`\n[/extended tile]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[extended tile] //扩展地砖列表 附加在地砖下方的扩展地砖列表\n`Tile/tileex01.til` //横向排列 [tile] 标签的地砖后，剩余部分排列在下方。\n`Tile/tileex01.til`\n`Tile/tileex01.til`\n`Tile/tileex01.til`\n`Tile/tileex01.til`\n`Tile/tileex03.til`\n`Tile/tileex03.til`\n`Tile/tileex03.til`\n`Tile/tileex03.til`\n`Tile/tileex03.til`\n[/extended tile]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "elemental property",
+                         "Title":  "为地图指定属性",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[elemental property] `[fire element]`, `[water element]`, `[dark element]`, `[light element]` //为地图指定属性。\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[elemental property] `[fire element]`, `[water element]`, `[dark element]`, `[light element]` //为地图指定属性。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "middle sight scroll",
+                         "Title":  "地砖滚动速度与中景滚动速度的比率 (%) 100则为一起滚动",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[middle sight scroll] 80 // 地砖滚动速度与中景滚动速度的比率 (%) 100则为一起滚动，0则不滚动\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[middle sight scroll] 80 // 地砖滚动速度与中景滚动速度的比率 (%) 100则为一起滚动，0则不滚动\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "near sight scroll",
+                         "Title":  "地砖滚动速度与近景滚动速度的比率 (%) 100则为一起滚动",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[near sight scroll] 120 // 地砖滚动速度与近景滚动速度的比率 (%) 100则为一起滚动，0则不滚动\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[near sight scroll] 120 // 地砖滚动速度与近景滚动速度的比率 (%) 100则为一起滚动，0则不滚动\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "layer",
+                         "Title":  "绘制的图层",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[layer] `[distantback]` //绘制的图层\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[layer] `[distantback]` //绘制的图层\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "loop y axis",
+                         "Title":  "是否持续沿Y坐标向下重复",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[loop y axis] 1 //是否持续沿Y坐标向下重复\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[loop y axis] 1 //是否持续沿Y坐标向下重复\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "screen pos",
+                         "Title":  "以屏幕坐标基准设置起始坐标",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[screen pos] 0 80 //以屏幕坐标基准设置起始坐标\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[screen pos] 0 80 //以屏幕坐标基准设置起始坐标\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "guild agit entrance info",
+                         "Title":  "公会据点进/出场用AREA区域 x坐标",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[guild agit entrance info] //公会据点进/出场用AREA区域 x坐标,y坐标,x大小,y大小,放入-2, -2\n833 196 78 61 -2 -2\n[/guild agit entrance info]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[guild agit entrance info] //公会据点进/出场用AREA区域 x坐标,y坐标,x大小,y大小,放入-2, -2\n833 196 78 61 -2 -2\n[/guild agit entrance info]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "static player start pos",
+                         "Title":  "固定的地图起始位置",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[static player start pos] //固定的地图起始位置。在指定的精确坐标开始。\n\t[player 1] 100 120 200 //玩家, x, y, z\n\t[player 2] 200 120 400\n\t[player 3] 300 120 600\n\t[player 4] 400 120 800\n[/static player start pos]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[static player start pos] //固定的地图起始位置。在指定的精确坐标开始。\n\t[player 1] 100 120 200 //玩家, x, y, z\n\t[player 2] 200 120 400\n\t[player 3] 300 120 600\n\t[player 4] 400 120 800\n[/static player start pos]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "player 1",
+                         "Title":  "玩家",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[player 1] 100 120 200 //玩家, x, y, z\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[player 1] 100 120 200 //玩家, x, y, z\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "opening bgm",
+                         "Title":  "标签名 声音播放时间(播放30秒后播放主BGM)",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[opening bgm] `M_BAKALCASTLE_BOSS_INTRO` 30000 //标签名 声音播放时间(播放30秒后播放主BGM)\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[opening bgm] `M_BAKALCASTLE_BOSS_INTRO` 30000 //标签名 声音播放时间(播放30秒后播放主BGM)\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "passive object",
+                         "Title":  "指定放置在地图上的被动对象",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[passive object] //指定放置在地图上的被动对象。没有则不写也可以。\n37 100 27 0 //依次为对象索引, x坐标, y坐标, z坐标\n38 270 100 72\n39 1020 183 -1\n[/passive object]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[passive object] //指定放置在地图上的被动对象。没有则不写也可以。\n37 100 27 0 //依次为对象索引, x坐标, y坐标, z坐标\n38 270 100 72\n39 1020 183 -1\n[/passive object]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "monster condition",
+                         "Title":  "地图上出现的条件怪物 与 [monster] 标签相同",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[monster condition] //地图上出现的条件怪物 与 [monster] 标签相同\n[/monster condition] //参考黑曜石墓地、影子迷宫\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[monster condition] //地图上出现的条件怪物 与 [monster] 标签相同\n[/monster condition] //参考黑曜石墓地、影子迷宫\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "blood monster",
+                         "Title":  "怪物索引",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[blood monster] //怪物索引,召唤前(5秒前)出现的演出对象索引,x,y,z坐标,将复活多久,\n62001 0 792 258 0 10000 3000 1 0 3 //复活数字增加的时机(1000为1秒),血战开始时召唤的怪物数量,\n62001 0 792 258 0 7000 3000 1 0 2 //怪物复活数字增加的程度, 怪物增加的总次数\n[/blood monster]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[blood monster] //怪物索引,召唤前(5秒前)出现的演出对象索引,x,y,z坐标,将复活多久,\n62001 0 792 258 0 10000 3000 1 0 3 //复活数字增加的时机(1000为1秒),血战开始时召唤的怪物数量,\n62001 0 792 258 0 7000 3000 1 0 2 //怪物复活数字增加的程度, 怪物增加的总次数\n[/blood monster]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "ultimate monster",
+                         "Title":  "与[blood monster]相同",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[ultimate monster] //与[blood monster]相同\n[/ultimate monster]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[ultimate monster] //与[blood monster]相同\n[/ultimate monster]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "tournament monster",
+                         "Title":  "武斗场出现的怪物列表",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[tournament monster] //武斗场出现的怪物列表\n1 //几人的武斗场？(目前仅1人可能)\n56156 900 //怪物索引, 抽取点数 (越低越容易在初期比赛中遇到)\n56045 600\n[/tournament monster]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[tournament monster] //武斗场出现的怪物列表\n1 //几人的武斗场？(目前仅1人可能)\n56156 900 //怪物索引, 抽取点数 (越低越容易在初期比赛中遇到)\n56045 600\n[/tournament monster]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "blood phase time",
+                         "Title":  "第几轮",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[blood phase time] //第几轮, 血战怪物列表索引(-1是从列表中随机..),\n0 0 3000 1.1 0 0 //移动到下一轮的时间 (-1则指定最后的血战，使其通关…,将变强几倍?(2则为2倍,最大4倍)\n0 1 2000 1.1 1 3 //轮内召唤的列表的顺序\n0 2 2000 1.1 1 1 //轮内连续召唤的怪物列表的数量\n0 3 2000 1.1 1 1\n[/blood phase time]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[blood phase time] //第几轮, 血战怪物列表索引(-1是从列表中随机..),\n0 0 3000 1.1 0 0 //移动到下一轮的时间 (-1则指定最后的血战，使其通关…,将变强几倍?(2则为2倍,最大4倍)\n0 1 2000 1.1 1 3 //轮内召唤的列表的顺序\n0 2 2000 1.1 1 1 //轮内连续召唤的怪物列表的数量\n0 3 2000 1.1 1 1\n[/blood phase time]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "ultimate phase time",
+                         "Title":  "与[blood phase time]相同",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[ultimate phase time] //与[blood phase time]相同，但在最后放入难度 \u0027A\u0027, \u0027B\u0027, \u0027C\u0027, \u0027D\u0027, \u0027E\u0027\n0 0 5000 1.5 0 0 `A`\n[/ultimate phase time]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[ultimate phase time] //与[blood phase time]相同，但在最后放入难度 \u0027A\u0027, \u0027B\u0027, \u0027C\u0027, \u0027D\u0027, \u0027E\u0027\n0 0 5000 1.5 0 0 `A`\n[/ultimate phase time]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "heroes mode map index",
+                         "Title":  "英雄模式时代替出现的地图索引",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[heroes mode map index] 13091 //英雄模式时代替出现的地图索引\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[heroes mode map index] 13091 //英雄模式时代替出现的地图索引\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "monster team",
+                         "Title":  "地图上出现的怪物的队伍",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[monster team] //地图上出现的怪物的队伍。无特别指定时不需要。\n0 //依次输入。0则为角色队。角色一方。\n100 //100则为怪物队。一般的怪物。\n[/monster team] //输入与怪物数量相同，并且必须用此标签闭合。\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[monster team] //地图上出现的怪物的队伍。无特别指定时不需要。\n0 //依次输入。0则为角色队。角色一方。\n100 //100则为怪物队。一般的怪物。\n[/monster team] //输入与怪物数量相同，并且必须用此标签闭合。\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "monster specific AI",
+                         "Title":  "地图上有巡逻、区域防御AI的怪物放置时指定",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[monster specific AI] //地图上有巡逻、区域防御AI的怪物放置时指定。没有则无需指定。怪物AI指定按声明的顺序。\n`[normal]` //怪物按一般AI移动时指定。\n//以下两种AI在CHAOS模式中使用\n`[zone defence]` 100 100 //在100, 100处等待直到怪物视野内出现目标。丢失目标则返回100, 100处。\n`[roaming]` 4 100 100 150 150 200 100 250 150 //坐标个数 X1 Y1 X2 Y2 X3 Y3 X4 Y4 怪物在无目标时从X1 Y1开始按顺序移动，跑完一遍后返回起点。\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[monster specific AI] //地图上有巡逻、区域防御AI的怪物放置时指定。没有则无需指定。怪物AI指定按声明的顺序。\n`[normal]` //怪物按一般AI移动时指定。\n//以下两种AI在CHAOS模式中使用\n`[zone defence]` 100 100 //在100, 100处等待直到怪物视野内出现目标。丢失目标则返回100, 100处。\n`[roaming]` 4 100 100 150 150 200 100 250 150 //坐标个数 X1 Y1 X2 Y2 X3 Y3 X4 Y4 怪物在无目标时从X1 Y1开始按顺序移动，跑完一遍后返回起点。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "champion",
+                         "Title":  "冠军怪物数量",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[champion] 11 //冠军怪物数量\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[champion] 11 //冠军怪物数量\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "NPC",
+                         "Title":  "指定放置在地图上的NPC",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[NPC] //指定放置在地图上的NPC。没有则不写也可以。\n2 `[left]` 300 200 //依次为索引, 朝向, x坐标, y坐标\n1001 `[right]` 352 127 //朝向可选择 `[left]` `[right]`\n[/NPC]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[NPC] //指定放置在地图上的NPC。没有则不写也可以。\n2 `[left]` 300 200 //依次为索引, 朝向, x坐标, y坐标\n1001 `[right]` 352 127 //朝向可选择 `[left]` `[right]`\n[/NPC]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "event monster position",
+                         "Title":  "活动怪物生成坐标",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[event monster position] //活动怪物生成坐标\n257 239 0 //x坐标, y坐标, z坐标\n441 233 0\n944 235 0\n1164 238 0\n[/event monster position]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[event monster position] //活动怪物生成坐标\n257 239 0 //x坐标, y坐标, z坐标\n441 233 0\n944 235 0\n1164 238 0\n[/event monster position]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "quest animation",
+                         "Title":  "可以通过任务控制动画显示或不显示",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[quest animation] //可以通过任务控制动画显示或不显示。\n`Animation/Village_0.ani` `[normal]` 636 180 0 2490 //Animation路径, 图层, x坐标, y坐标, z坐标, 任务编号(完成此任务则播放)\n[/quest animation]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[quest animation] //可以通过任务控制动画显示或不显示。\n`Animation/Village_0.ani` `[normal]` 636 180 0 2490 //Animation路径, 图层, x坐标, y坐标, z坐标, 任务编号(完成此任务则播放)\n[/quest animation]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "attacked monster info",
+                         "Title":  "城镇袭击怪物信息",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[attacked monster info] //城镇袭击怪物信息\n1 433 346 0 557 20000 153 //怪物索引, x坐标, y坐标, z坐标(未使用), 生成比例(总和需为10000), 地牢编号, 通关限制时间\n1016 433 346 0 429 20001 184 //地牢编号和通关限制时间用途无法确认，恳请后续添加。\n262 433 346 0 286 20002 230\n5005 433 346 0 143 20003 275\n17 433 346 0 13 20020 306\n5 883 266 0 557 20000 153\n1016 883 266 0 429 20001 184\n[/attacked monster info]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[attacked monster info] //城镇袭击怪物信息\n1 433 346 0 557 20000 153 //怪物索引, x坐标, y坐标, z坐标(未使用), 生成比例(总和需为10000), 地牢编号, 通关限制时间\n1016 433 346 0 429 20001 184 //地牢编号和通关限制时间用途无法确认，恳请后续添加。\n262 433 346 0 286 20002 230\n5005 433 346 0 143 20003 275\n17 433 346 0 13 20020 306\n5 883 266 0 557 20000 153\n1016 883 266 0 429 20001 184\n[/attacked monster info]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "move layered map",
+                         "Title":  "上下重叠的地图 (layered map) 移动条件",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[move layered map] //上下重叠的地图 (layered map) 移动条件。\n\t[all dead case passable] //队员全灭时可自动移动 (无此标签则停留在当前地图)\n\t[zpos under] -300 // [zpos under] -300 : z值在-300以下时\n[/move layered map]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[move layered map] //上下重叠的地图 (layered map) 移动条件。\n\t[all dead case passable] //队员全灭时可自动移动 (无此标签则停留在当前地图)\n\t[zpos under] -300 // [zpos under] -300 : z值在-300以下时\n[/move layered map]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "all dead case passable",
+                         "Title":  "队员全灭时可自动移动 (无此标签则停留在当前地图)",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[all dead case passable] //队员全灭时可自动移动 (无此标签则停留在当前地图)\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[all dead case passable] //队员全灭时可自动移动 (无此标签则停留在当前地图)\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "zpos under",
+                         "Title":  "[zpos under] -300",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[zpos under] -300 // [zpos under] -300 : z值在-300以下时\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[zpos under] -300 // [zpos under] -300 : z值在-300以下时\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "map dialog",
+                         "Title":  "进入地图时出现的对话",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[map dialog] \u003c11::despair_dummy_03\u003e //进入地图时出现的对话\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[map dialog] \u003c11::despair_dummy_03\u003e //进入地图时出现的对话\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "monster spawn pos",
+                         "Title":  "出现坐标的数量",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n//竞争地牢用\n[monster spawn pos]\n5 //出现坐标的数量\n50 100 30 //x坐标, y坐标, 出现概率\n50 100 30\n50 100 30\n50 100 30\n50 100 30\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n//竞争地牢用\n[monster spawn pos]\n5 //出现坐标的数量\n50 100 30 //x坐标, y坐标, 出现概率\n50 100 30\n50 100 30\n50 100 30\n50 100 30\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "ai character",
+                         "Title":  "AI怪物索引",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n[ai character]\n20301 494 252 0 `[monster]` `[normal]` 1 0 //AI怪物索引, x坐标, y坐标, z坐标, 队伍, 怪物类型(\u0027[monster]` 标签参考), 随机物品生成次数, 指定物品生成次数\n20301 494 252 0 `[monster]` `[NPC]` 5 `[normal]` 1 0 //APC死亡后若有召唤的NPC，则在队伍后放入[NPC]标签。\n[/ai character]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n[ai character]\n20301 494 252 0 `[monster]` `[normal]` 1 0 //AI怪物索引, x坐标, y坐标, z坐标, 队伍, 怪物类型(\u0027[monster]` 标签参考), 随机物品生成次数, 指定物品生成次数\n20301 494 252 0 `[monster]` `[NPC]` 5 `[normal]` 1 0 //APC死亡后若有召唤的NPC，则在队伍后放入[NPC]标签。\n[/ai character]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "background animation",
+                         "Title":  "从0",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n// 从0, 0坐标开始自动重复绘制的背景动画。\n// 图层可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]`，\n// 若为 `[below]` 则在该图层的动画和对象绘制之前，\n// 若为 `[upper]` 则在该图层的动画和对象绘制之后进行绘制。\n// `[close]` 的情况下，若为 `[below]` 则在地砖绘制之前绘制。\n[background animation]\n\t[ani info]\n\t\t[filename] `Animation/far1.ani` //动画路径\n\t\t[layer] `[distantback]` //绘制的图层\n\t\t[order] `[below]`\n\t\t[loop y axis] 1 //是否持续沿Y坐标向下重复\n\t\t[screen pos] 0 80 //以屏幕坐标基准设置起始坐标\n\t[/ani info]\n[/background animation]\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n// 从0, 0坐标开始自动重复绘制的背景动画。\n// 图层可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]`，\n// 若为 `[below]` 则在该图层的动画和对象绘制之前，\n// 若为 `[upper]` 则在该图层的动画和对象绘制之后进行绘制。\n// `[close]` 的情况下，若为 `[below]` 则在地砖绘制之前绘制。\n[background animation]\n\t[ani info]\n\t\t[filename] `Animation/far1.ani` //动画路径\n\t\t[layer] `[distantback]` //绘制的图层\n\t\t[order] `[below]`\n\t\t[loop y axis] 1 //是否持续沿Y坐标向下重复\n\t\t[screen pos] 0 80 //以屏幕坐标基准设置起始坐标\n\t[/ani info]\n[/background animation]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "map",
+                         "Section":  "map loading image path",
+                         "Title":  "加载此地图时显示的图像",
+                         "Comment":  "#### 官方示例: mapsample.map\n\n```pvf\n//加载此地图时显示的图像\n//img为800*640大小，\n//0号为正文，1号为背景构成。按1号\u003e0号顺序绘制，\n//此时若没有1号则只绘制正文。\n[map loading image path] `sprite/map/loadingimage/samui_otoko.img`\n```",
+                         "OfficialDescription":  "#### 官方示例: mapsample.map\n\n```pvf\n//加载此地图时显示的图像\n//img为800*640大小，\n//0号为正文，1号为背景构成。按1号\u003e0号顺序绘制，\n//此时若没有1号则只绘制正文。\n[map loading image path] `sprite/map/loadingimage/samui_otoko.img`\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     }
+                 ]
+}

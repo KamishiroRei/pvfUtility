@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<svg x="0px" y="0px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" xml:space="preserve" id="Layer_1">
+  <style type="text/css">
+	.Blue{fill:#1177D7;}
+	.Black{fill:#727272;}
+</style>
+  <polygon points="26,4 14,4 16,6 24,6 24,12 30,12 30,28 12,28 12,18 10,18 10,30 32,30 32,10 " fill="#727272" class="Black" />
+  <path d="M13,16h-3l4-4h0h-2H5c-2.8,0-5-2.2-5-5s2.2-5,5-5h3v2H5C3.3,4,2,5.3,2,7s1.3,3,3,3h7h2h0l-4-4h3l5,5L13,16z" fill="#1177D7" class="Blue" />
+</svg>

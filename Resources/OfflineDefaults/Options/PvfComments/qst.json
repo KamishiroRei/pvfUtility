@@ -1,0 +1,746 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "qst",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "clear map",
+                         "Title":  "清空副本地图",
+                         "Comment":  "清空副本地图",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "牧羊人"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "clear reward item",
+                         "Title":  "通关时获得物品",
+                         "Comment":  "通关时获得物品\n* 6 个数值为一组数据。\n1 0 1002 3 17 -1\t\t// 副本编号, 副本难度, 物品编号,最大数量，出现概率 (%), 最大拥有数量(如果为-1，则表示无限制)\n2 0 1003 2 100 30\t\t// 如果副本难度为-1，则表示所有难度, 0:EASY 1:NORMAL 2:HARD 3:VERYHARD 普通,冒险,勇士,王者",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[clear reward item] // 任务执行期间出现的地城通关奖励物品。\n1 0 1002 3 17 -1 // 地城索引，地城难度，物品索引，最大物品数，出现概率(%)，最大持有数（-1则为无限）。\n2 0 1003 2 100 30 // 地城难度若为-1则所有难度，0:EASY 1:NORMAL 2:HARD 3:VERYHARD。\n[/clear reward item]\n```",
+                         "Closing":  true,
+                         "Authors":  "Cai|unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "collision quest",
+                         "Title":  "冲突任务",
+                         "Comment":  "[collision quest]冲突任务\n魔法师跟魔法师",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[collision quest] // 接受此任务时，不能已完成或已接受的任务索引列表（或关系）。\n2\n3\n[/collision quest]\n```",
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "complete npc index",
+                         "Title":  "完成 NPC",
+                         "Comment":  "完成任务的 NPC。\n\n* 填写 NPC 的 ID，当 -1 时等于没有。",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[complete npc index] 0 // 完成任务给的NPC索引。若为-1或未指定，则与[npc index]相同。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "daily",
+                         "Title":  "每日任务",
+                         "Comment":  "每日任务",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "阿军"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "depend message",
+                         "Title":  "接受任务时的对话",
+                         "Comment":  "接受任务时的对话。",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 设置[job message]时，鬼剑士语句在\u003c11:name_6565_0\u003e，格斗家语句在\u003c11:name_6565_1\u003e，枪手语句在\u003c11:name_6565_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:name_6565\u003e。\n[depend message] // 接受委托时的消息。\n\u003c11::depend_message_6570\u003e\n// 设置[job message]时，鬼剑士语句在\u003c11:depend_message_6570_0\u003e，格斗家语句在\u003c11:depend_message_6570_1\u003e，枪手语句在\u003c11:depend_message_6570_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:depend_message_6570\u003e。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "dungeon info",
+                         "Title":  "任务副本的目的地",
+                         "Comment":  "任务副本的目的地，也可用于显示副本难度要求（即副本入口中的任务闪烁）。\n* 此项非必要；如果 [type] 是 `[clear map]` 时，必须要加入。\n//如果条件为`[meet npc]`，且在后面的任务中进入地下城副本，那么在`[meet npc]`中也应该输入地下城信息(例如:任务以罗莉安\u003e赛利亚\u003e幽暗密林 顺序的话， 那么请在罗莉安，赛利亚的任务中输入幽暗密林地下城",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 地城信息。\n[dungeon info] // 任务窗口中显示的地城目的地。也用作地城排序的依据。基本上参考seeking, condition under clear, hunt monster等的信息，因此大多数任务无需输入。\n38 3 // 但，条件是clear map的情况下必须输入，seeking的情况下若判断需要也输入。可复数输入。（会复数显示）。\n29 2 // 按地城索引，难度顺序输入。难度为-1则不显示难度。(-1,0,1,2,3,4顺序)地城索引参考dungeon文件夹内的dungeon.lst。\n[/dungeon info] // 条件是meet npc的情况下，若后续任务要去地城，则meet npc的情况也输入地城信息。（例：洛兰\u003e赛丽亚\u003e格兰之森顺序，则在洛兰、赛丽亚任务中输入格兰之森地城信息）。\n```",
+                         "Closing":  true,
+                         "Authors":  "Cai|unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "enemy reward item",
+                         "Title":  "在任务执行的状态下(怪物",
+                         "Comment":  "在任务执行的状态下(怪物,APC) 杀死时出现的任务道具,与[monster reward item]不同的是,该标签可指明敌人类型,八个数据为一组\n\n怪物编号,\n敌人类型(1:怪物，2:APC，3:obj对象()),\n副本编号 (如果不指定副本则该值为 -1),\n副本难度 (如果不指定难度则该值为 -1),\n物品编号\n每次获得数量,\n出现概率 (%),\n获得上限 (如果为-1则无上限)",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[enemy reward item] // 任务执行状态下杀死敌人（怪物、APC）时出现的任务物品。\n50 1 1 0 10001 2 30 3 // 敌人索引，敌人类型(1:怪物, 2: APC, 3:obj(未实现))，地城索引（若无关则为-1），地城难度（若无关则为-1），物品索引，\n51 1 2 0 10002 3 30 6 // 最大物品数，出现概率(%)，最大持有数（-1则为无限）。\n[/enemy reward item]\n```",
+                         "Closing":  true,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "epic",
+                         "Title":  "主线",
+                         "Comment":  "主线",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "陈"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "event",
+                         "Title":  "任务里代表活动",
+                         "Comment":  "任务里代表活动，置顶此任务",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[event] 1 // 是否为活动任务。值为1时，拥有任务标记暴露的最高优先级，并变为活动任务标记。\n```\n\n```pvf\n[think] [event] == 8 // 地图开始时。\n```",
+                         "Closing":  false,
+                         "Authors":  "赵三岁"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "exposed by npc",
+                         "Title":  "是否显示在NPC的任务界面",
+                         "Comment":  "是否显示在NPC的任务界面\n\n0 = 不显示\n1 = 显示\n\n添加此标签并赋予0时，即便NPC有此任务也无法在游戏内接取",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[exposed by npc] 0 // 是否由NPC暴露。1: 暴露, 0 : 不暴露，默认为1（若没有则取默认值）。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "first exposed by npc",
+                         "Title":  "首先由NPC曝光",
+                         "Comment":  "首先由NPC曝光",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[first exposed by npc] 0 // 第一服务器时：是否由NPC暴露。1: 暴露, 0 : 不暴露，默认为1（若没有则取默认值）。\n```",
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "gold multiple",
+                         "Title":  "任务金币奖励倍数",
+                         "Comment":  "任务金币奖励倍数\n\n* 在 [reward int data] 或[reward selection int data]奖励中, 有金币代码0才会生效。\n\n* 实际奖励金额 = 等级奖励基数 * 任务难度 * 金币奖励倍数\n\n* 等级奖励基数由 [ignore quest level 4 exp] 来决定是取决于角色等级还是任务等级，该标签不存在或为 0 时，按任务等级。\n\n* 任务难度由 [difficulty] 决定。\n\n* 等",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 本任务完成时影响经验值奖励。\n[gold multiple] 50 // 任务金币奖励倍数（百分比）。仅在[reward int data]中有金币索引0时才生效，\n// （按级别金币奖励基本表）*（任务奖励难度）*（任务金币奖励倍数）的结果为最终金币奖励值。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "grow number",
+                         "Title":  "转职类型（0到3）",
+                         "Comment":  "转职类型（0到3）",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n//用于播放影片的转职编号。仅添加到转职的第一个任务中。\n//与ENUM_GROW_TYPE的顺序相同，从0开始。\n// 例) 剑魂 0, 鬼泣 1, 狂战 2, 阿修罗 3 气功 0, 散打 1, 街霸 2, 柔道 3。\n[grow number] 0\n```",
+                         "Closing":  false,
+                         "Authors":  "Allenwhere"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "int data",
+                         "Title":  "int数据",
+                         "Comment":  "int数据\n在任务.qst中\n当 [type] = `[seeking]`时\n两个数值\n分别为: 所需物品 所需物品数量\n\n当 [type] = `[condition under clear]` 时\n三个数值\n分别为: 副本代码 副本難度 组队人数\n也可以只填写前2个参数 副本代码 副本难度\n\n当[type]=[hunt monster]时\n四个数值\n分别为 副本代码 难度 怪物ID 怪物数量\n\n当type=[[custom quest]]时\n三个数值\n1 0 1未知 有时最后一个数可能是任务怪物ID\n\n`不修改前辈已有信息的补充：部分怪物会把机制信息写在int数据而不是\natk info里，想修改的话，有个笨方法，一个一个改，改对了就记住`",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[int data] // 整数资料。用法参考最底部的注释。\n38 3\n29 2\n[/int data] // 闭合。\n```\n\n```pvf\n[int data] // APC解救任务的情况下，[int data]中写入\u003c需通关的地图索引\u003e和\u003capc的索引\u003e。\n\u003c需通关的地图索引\u003e \u003capc的索引\u003e\n[/int data]\n```\n\n```pvf\n[int data]\n\u003c地城索引\u003e \u003c难度\u003e \u003c对象索引\u003e \u003c对象种类\u003e \u003c对象数量\u003e //// \u003c对象种类\u003e怪物为1，APC为2，被动对象为3。\n[/int data]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "job",
+                         "Title":  "职业",
+                         "Comment":  "职业类型\n[all] ————————所有职业(在一些文件中不适用)\n[swordman] —————鬼剑士（男）\n[at swordman] ————鬼剑士（女）\n[fighter] ——————格斗家（女）\n[at fighter] —————格斗家（男）\n[gunner] ——————神枪手（男）\n[at gunner] —————神枪手（女）\n[mage] ———————魔法师（女）\n[at mage] ——————魔法师（男）\n[priest] ———————圣职者（男）\n[thief] ———————暗夜使者\n[creator mage] ————外传职业 : 缔造者\n[demonic swordman] —外传职业 : 黑暗武士\n\n//截止到2026/3/22还没有能改的女鬼剑，都是别的职业改过来的，注意辨别",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 出现条件\n[job] `[swordman]` // 可接受任务的职业。可选择 `[swordman]` `[fighter]` `[gunner]` `[priest]` `[mage]` `[at gunner]` `[thief]` `[all]` 之一。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "job message",
+                         "Title":  "作业消息",
+                         "Comment":  "作业消息",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[job message] 1 // 设置是否按职业使用不同的语句（1:使用, 0:不使用）。\n// 应用于[name], [depend message], [condition message], [solve message], [dialog]。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "module",
+                         "Title":  "在哪儿生效 下面例如写",
+                         "Comment":  "在哪儿生效  下面例如写\n\n`[dead tower]`\n`[dungeon]`\n`[tournament dungeon]`\n`[war room]`\n`[blood system]`\n\n看不懂的百度翻译",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "空QQ2533448753"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "monster reward item",
+                         "Title":  "当接取该任务后可以让指定怪物掉落指定物品",
+                         "Comment":  "当接取该任务后可以让指定怪物掉落指定物品。\n* 七个数值为一组。\n分别为：\n怪物\n副本\n副本难度\n物品代码\n每次获得数量\n概率\n获得上限",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[monster reward item] // 任务执行状态下杀死怪物时出现的任务物品。\n50 1 0 10001 2 30 3 // 怪物索引，地城索引（若无关则为-1），地城难度（若无关则为-1），物品索引，\n51 2 0 10002 3 30 6 // 最大物品数，出现概率(%)，最大持有数（-1则为无限）。\n[/monster reward item]\n```",
+                         "Closing":  true,
+                         "Authors":  "丞哥-37358891"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "npc index",
+                         "Title":  "接取 NPC",
+                         "Comment":  "在任务(*.qst)中，设置接取任务的 NPC。\n\n* 填写 NPC 的 ID。",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[npc index] 0 // 该NPC的索引。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "on int data 130409 1",
+                         "Title":  "任务奖励中",
+                         "Comment":  "任务奖励中，可供选择的奖励 代码 数量",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Dr久之"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "pre required quest",
+                         "Title":  "前置任务",
+                         "Comment":  "前置任务\n\n* 接取该任务之前，需要完成的前置任务。\n\n* 填写前置任务的 ID。",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// PVP/亡者峡谷/古代地城/觉醒/使魔相关/副职业任务等属于此类，\n// 若不存在该标签，则默认为0。\n[pre required quest] // 接受此任务前必须先完成的任务索引列表（与关系）。\n1\n7\n[/pre required quest]\n```\n\n```pvf\n[pre required quest] // 第二个先决任务组。与第一组是或关系。\n5\n8\n[/pre required quest]\n```",
+                         "Closing":  true,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "relation quest",
+                         "Title":  "关联任务",
+                         "Comment":  "完成当前任务时，自动弹出下一个任务。\n\n* 填写任务 ID，通常用于普通、成就类的任务。",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[relation quest] 4 // 任务完成后自动获得的任务。若为-1或标签不存在则为无。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "reward int data",
+                         "Title":  "完成任务时给予的固定奖励",
+                         "Comment":  "完成任务时给予的固定奖励\n\n* 两个数值为一组，第一个为装备、道具代码，第二个为数量\n\n* 赋予金币代码0时，任务金币奖励倍数[gold multiple]就会生效",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[reward int data] // 奖励的整数资料。用法参考最底部的注释。\n10 1 // 若为`[hero]`则是[地城索引]。\n2354 10\n2356 `[job]` 2 1 10 // 在物品索引和数量之间添加`[job]`和职业索引、转职索引，则仅在该职业、转职时给予奖励。（若转职为-1则所有转职）。\n[/reward int data] // 闭合。\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "reward selection int data",
+                         "Title":  "完成任务时",
+                         "Comment":  "完成任务时，可以选择其中一种作为奖励\n\n//此类有两种写法：\n①与 [reward int data] 一致，同样是两个代码为一组\n②根据不同职业发放道具、装备\n\n//第②种写法的示例（第2种写法同样适用于固定奖励）：\n\t27012\t`[job]`\t0\t-1\t1\n   为男鬼剑的全部职业发放一把短剑\n\n\t27611\t`[job]`\t0\t1\t1\n   为男鬼剑的剑魂发放一把太刀\n\n//五个代码为一组：\n1 = 道具、装备 ID\n2 = `[job]`\n3 = 职业类型(0 到 10)\n4 = -1代表是否转职都可以领，0到4代表限定某个职业\n5 = 数量\n\n//职业类型代码：\n* 职业类型可在PVF主界面的character/character.lst查看\n男鬼剑：0\n女格斗：1\n男枪手：2\n女魔法：3\n男圣职：4\n\n//限定某个职业的代码：\n-1不限职业  0男鬼剑士 1剑魂            2鬼泣         3狂战士      4阿修罗\n-1不限职业  0女格斗     1女气功        2女散打     3女街霸      4女柔道家\n-1不限职业  0女魔法师 1女元素师     2召唤师     3战斗法师  4魔道学者\n-1不限职业  0男圣职者 1男圣骑士     2蓝拳圣使 3男驱魔师   4复仇者",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[reward selection int data] // 奖励的整数资料。用法参考最底部的注释。\n10 1\n2354 10\n2356 `[job]` 2 10 // 在物品索引和数量之间添加`[job]`和职业索引，则仅在该职业时可以选择该物品。\n[/reward selection int data] // 闭合。\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "reward type",
+                         "Title":  "奖励类型",
+                         "Comment":  "任务奖励类型\n\n[item] = 装备、物品\n[title] = 点亮称号簿\n[hero] = 开启英雄级地图\n[grow type] = 角色转职\n[expert job] = 学习副职业\n[slot expansion] = 左右槽\n[hell challenge] = 开启深渊\n[awakening type] = 职业觉醒\n[creature evolution] = 宠物进化\n[event creat",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 任务奖励。\n[reward type] `[item]` // 奖励的类型。可选择 `[item]` `[grow type]` `[awakening type]` `[pro job]` `[hero]` 之一。\n```",
+                         "Closing":  false,
+                         "Authors":  "Cai|dongjak"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "special",
+                         "Title":  "特殊任务（国服的词条）台服不适应",
+                         "Comment":  "特殊任务（国服的词条）台服不适应",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "by甘先生992466200"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "sub type",
+                         "Title":  "子项目类型",
+                         "Comment":  "子项目类型\n--------------------------------------------------\n在任务(*.qst)中，与 [type] 响应。\n* 当 [type] = `[condition under clear]` 时，[sub type] 将对应以下子类型，其它类型则为 -1。\n0 = 通关时间          （副本编号，副本难度，限时通关秒数）\n1 = 被击数              （副本编号，副本难度，受击次数限制要求）\n\n2 = 技巧                 （副本编号，副本难度，技巧要求  10=10%）\n\n3 = 操作                 （副本编号，副本难度，操作要求  10=10%）\n4 = 不使用复活币   （副本编号，副本难度）\n5 = 组队                  （副本编号，副本难度，组队人数）\n6 = 通关副本          （副本编号，副本难度）\n\n7 =连击杀伤率       （副本编号，副本难度，连击杀伤率要求  10=10%）\n\n10 = 连击数           （副本编号，副本难度，连击数要求）",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[sub type] 0 // 任务的子类型。\n```\n\n```pvf\n[sub type] 0 // APC解救任务的情况下，将任务条件类型设置为[clear map]，子类型为0。\n```\n\n```pvf\n[sub type] -1 // APC解救任务的情况下，将任务条件类型设置为[hunt enemy]，子类型为-1。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "type",
+                         "Title":  "类型",
+                         "Comment":  "[type]任务完成条件类型\n`[condition under clear]`过图\n`[seeking]`需要道具\n`[hunt monster]`击杀怪物次数\n`[meet npc]`对话NPC\n`[custom quest]`按字面意思应该是自定任务 暂且叫私人任务或者个人任务吧 学习技能或者加点时使用 对话时也出现了\n`[disjoint item]`分解装备\n`[clear map]` 任务在地图里找人",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 任务完成条件。\n[type] `[seeking]` // 任务的类型。可选择 `[seeking]` `[condition under clear]` `[hunt monster]` `[hunt enemy]` `[clear map]` `[meet npc]` `[pvp rank]` `[powerwar win]` `[powerwar point]` 之一。\n```\n\n```pvf\n// ※ APC相关任务用法\n// APC同行（解救后同行条件相同）。\n[type] `[clear map]`\n```\n\n```pvf\n// apc简单解救。\n[type] `[hunt enemy]`\n```",
+                         "Closing":  false,
+                         "Authors":  "Like浪浪：547314354|dongjak|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "grade",
+                         "Title":  "任务品级",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[grade] `[epic]` // 任务的等级。可选择 `[normaly repeat]` `[common unique]` `[epic]` `[achievement]` `[daily]` `[training]` `[title]` 之一。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[grade] `[epic]` // 任务的等级。可选择 `[normaly repeat]` `[common unique]` `[epic]` `[achievement]` `[daily]` `[training]` `[title]` 之一。\n```",
+                         "Closing":  false,
+                         "Authors":  "preview"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "job change quest",
+                         "Title":  "是否为转职任务",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[job change quest] 0 // 是否为转职任务。(0:一般, 1:转职, 2:觉醒, 10:使魔进化, 20:副职业)\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[job change quest] 0 // 是否为转职任务。(0:一般, 1:转职, 2:觉醒, 10:使魔进化, 20:副职业)\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "searching infomation",
+                         "Title":  "默认为1",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[searching infomation] 0 // 默认为1。指定为0，则在小地图上不显示该任务在何处执行。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[searching infomation] 0 // 默认为1。指定为0，则在小地图上不显示该任务在何处执行。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "grow type",
+                         "Title":  "可行的成长类型",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[grow type] -1 // 可行的成长类型。无限制则为-1。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[grow type] -1 // 可行的成长类型。无限制则为-1。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "exceptional grow type",
+                         "Title":  "排除的成长类型",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[exceptional grow type] // 排除的成长类型。若不排除则不写。 // 未使用\n0\n3\n4\n[/exceptional grow type]\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[exceptional grow type] // 排除的成长类型。若不排除则不写。 // 未使用\n0\n3\n4\n[/exceptional grow type]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "target character",
+                         "Title":  "可重复的job",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[target character] // 可重复的job, grow type标签。顺序为职业，转职，觉醒。\n`[swordman]` 1 -1 // 是上述标签[job]和[grow type]、[exceptional grow type]的合并形式，\n`[at gunner]` 2 1 // 仅此一个标签即可替代，并可同时设置多个职业的条件。\n[/target character]\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[target character] // 可重复的job, grow type标签。顺序为职业，转职，觉醒。\n`[swordman]` 1 -1 // 是上述标签[job]和[grow type]、[exceptional grow type]的合并形式，\n`[at gunner]` 2 1 // 仅此一个标签即可替代，并可同时设置多个职业的条件。\n[/target character]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "level",
+                         "Title":  "可行的等级下限和上限",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[level] 3 99 // 可行的等级下限和上限。下限以上，上限以下可行（上限目前不生效）。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[level] 3 99 // 可行的等级下限和上限。下限以上，上限以下可行（上限目前不生效）。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "ignore quest level 4 exp",
+                         "Title":  "1",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[ignore quest level 4 exp] 1 // 1:经验值金币奖励不跟随任务等级，而是跟随角色等级。任务标题始终保持橙色。\n// PVP/亡者峡谷/古代地城/觉醒/使魔相关/副职业任务等属于此类，\n// 若不存在该标签，则默认为0。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[ignore quest level 4 exp] 1 // 1:经验值金币奖励不跟随任务等级，而是跟随角色等级。任务标题始终保持橙色。\n// PVP/亡者峡谷/古代地城/觉醒/使魔相关/副职业任务等属于此类，\n// 若不存在该标签，则默认为0。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "PVP RANK",
+                         "Title":  "接受任务所需的最低PVP等级",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[PVP RANK] 0 // 接受任务所需的最低PVP等级。\n// 0:10级 1:9级 2:8级 3:7级 4:6级 5:5级 6:4级 7:3级 8:2级 9:1级\n// 10:1段 11:2段 12:3段 13:4段 14:5段 15:6段 16:7段 17:8段 18:9段 19:10段\n// 20:至尊1 21:至尊2 22:至尊3 23:至尊4 24:至尊5 25:至尊6 26:至尊7 27:至尊8 28:至尊9 29:至尊10\n// 30:达人 31:名人 32:小霸王 33:霸王 34:斗神\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[PVP RANK] 0 // 接受任务所需的最低PVP等级。\n// 0:10级 1:9级 2:8级 3:7级 4:6级 5:5级 6:4级 7:3级 8:2级 9:1级\n// 10:1段 11:2段 12:3段 13:4段 14:5段 15:6段 16:7段 17:8段 18:9段 19:10段\n// 20:至尊1 21:至尊2 22:至尊3 23:至尊4 24:至尊5 25:至尊6 26:至尊7 27:至尊8 28:至尊9 29:至尊10\n// 30:达人 31:名人 32:小霸王 33:霸王 34:斗神\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "effect after clear quest",
+                         "Title":  "任务完成后是否对之后有影响",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 任务带来的影响。\n[effect after clear quest] 0 // 任务完成后是否对之后有影响。(1:有, 0:无)。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 任务带来的影响。\n[effect after clear quest] 0 // 任务完成后是否对之后有影响。(1:有, 0:无)。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "delete npc index",
+                         "Title":  "任务执行期间从地图上消失的NPC索引",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[delete npc index] 3 // 任务执行期间从地图上消失的NPC索引，若无则删除此项或设为-1。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[delete npc index] 3 // 任务执行期间从地图上消失的NPC索引，若无则删除此项或设为-1。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "appear map",
+                         "Title":  "任务执行期间出现的地图",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[appear map] 1 0 501 50 // 任务执行期间出现的地图。\n// 地城索引，地城难度（若无关则为-1）地图索引，出现概率(%)。若无则删除此项或全部设为-1。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[appear map] 1 0 501 50 // 任务执行期间出现的地图。\n// 地城索引，地城难度（若无关则为-1）地图索引，出现概率(%)。若无则删除此项或全部设为-1。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "depend give item",
+                         "Title":  "委托时给予的物品",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 地城索引，地城难度（若无关则为-1）地图索引，出现概率(%)。若无则删除此项或全部设为-1。\n[depend give item] // 委托时给予的物品。\n3 1 // 物品索引，物品数量。\n1002 3\n[/depend give item]\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 地城索引，地城难度（若无关则为-1）地图索引，出现概率(%)。若无则删除此项或全部设为-1。\n[depend give item] // 委托时给予的物品。\n3 1 // 物品索引，物品数量。\n1002 3\n[/depend give item]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "auto display",
+                         "Title":  "建议不使用",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[auto display] [0]出现条件 [1]出现详细条件 [2]消失的条件（以数字表示的等级范围） // 建议不使用。\n// [0]出现条件 [1]出现详细条件 [2]消失的条件（-1则为始终允许）。\n// 0 : 进入特定城镇时 城镇索引 允许等级范围。\n// 1 : 经过特定NPC前时 NPC索引 允许等级范围。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[auto display] [0]出现条件 [1]出现详细条件 [2]消失的条件（以数字表示的等级范围） // 建议不使用。\n// [0]出现条件 [1]出现详细条件 [2]消失的条件（-1则为始终允许）。\n// 0 : 进入特定城镇时 城镇索引 允许等级范围。\n// 1 : 经过特定NPC前时 NPC索引 允许等级范围。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "change dungeon info message",
+                         "Title":  "可以指定鼠标悬停在任务上时弹出的提示文本",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[change dungeon info message] `请在此输入信息` // 可以指定鼠标悬停在任务上时弹出的提示文本。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[change dungeon info message] `请在此输入信息` // 可以指定鼠标悬停在任务上时弹出的提示文本。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "name",
+                         "Title":  "任务的名称",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 名称，消息。\n[name] \u003c11::name_6565\u003e // 任务的名称。\n// 设置[job message]时，鬼剑士语句在\u003c11:name_6565_0\u003e，格斗家语句在\u003c11:name_6565_1\u003e，枪手语句在\u003c11:name_6565_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:name_6565\u003e。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 名称，消息。\n[name] \u003c11::name_6565\u003e // 任务的名称。\n// 设置[job message]时，鬼剑士语句在\u003c11:name_6565_0\u003e，格斗家语句在\u003c11:name_6565_1\u003e，枪手语句在\u003c11:name_6565_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:name_6565\u003e。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "condition message",
+                         "Title":  "详细条件消息",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 设置[job message]时，鬼剑士语句在\u003c11:depend_message_6570_0\u003e，格斗家语句在\u003c11:depend_message_6570_1\u003e，枪手语句在\u003c11:depend_message_6570_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:depend_message_6570\u003e。\n[condition message] // 详细条件消息。\n\u003c11::condition_message_6575\u003e\n// 设置[job message]时，鬼剑士语句在\u003c11:condition_message_6575_0\u003e，格斗家语句在\u003c11:condition_message_6575_1\u003e，枪手语句在\u003c11:condition_message_6575_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:condition_message_6575\u003e。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 设置[job message]时，鬼剑士语句在\u003c11:depend_message_6570_0\u003e，格斗家语句在\u003c11:depend_message_6570_1\u003e，枪手语句在\u003c11:depend_message_6570_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:depend_message_6570\u003e。\n[condition message] // 详细条件消息。\n\u003c11::condition_message_6575\u003e\n// 设置[job message]时，鬼剑士语句在\u003c11:condition_message_6575_0\u003e，格斗家语句在\u003c11:condition_message_6575_1\u003e，枪手语句在\u003c11:condition_message_6575_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:condition_message_6575\u003e。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "solve message",
+                         "Title":  "完成时的消息",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 设置[job message]时，鬼剑士语句在\u003c11:condition_message_6575_0\u003e，格斗家语句在\u003c11:condition_message_6575_1\u003e，枪手语句在\u003c11:condition_message_6575_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:condition_message_6575\u003e。\n[solve message] // 完成时的消息。\n\u003c11::solve_message_6580\u003e\n// 设置[job message]时，鬼剑士语句在\u003c11:solve_message_6580_0\u003e，格斗家语句在\u003c11:solve_message_6580_1\u003e，枪手语句在\u003c11:solve_message_6580_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:solve_message_6580\u003e。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 设置[job message]时，鬼剑士语句在\u003c11:condition_message_6575_0\u003e，格斗家语句在\u003c11:condition_message_6575_1\u003e，枪手语句在\u003c11:condition_message_6575_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:condition_message_6575\u003e。\n[solve message] // 完成时的消息。\n\u003c11::solve_message_6580\u003e\n// 设置[job message]时，鬼剑士语句在\u003c11:solve_message_6580_0\u003e，格斗家语句在\u003c11:solve_message_6580_1\u003e，枪手语句在\u003c11:solve_message_6580_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:solve_message_6580\u003e。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "light level",
+                         "Title":  "轻量服务器时",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 轻量服务器相关 // 未使用。\n[light level] 3 32 // 轻量服务器时：可行的等级下限和上限。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 轻量服务器相关 // 未使用。\n[light level] 3 32 // 轻量服务器时：可行的等级下限和上限。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "light exposed by npc",
+                         "Title":  "轻量服务器时",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[light exposed by npc] 0 // 轻量服务器时：是否由NPC暴露。1: 暴露, 0 : 不暴露，默认为1（若没有则取默认值）。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[light exposed by npc] 0 // 轻量服务器时：是否由NPC暴露。1: 暴露, 0 : 不暴露，默认为1（若没有则取默认值）。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "light int data",
+                         "Title":  "轻量服务器时",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[light int data] // 轻量服务器时：整数资料。用法参考最底部的注释。\n38 3\n29 2\n[/light int data] // 闭合。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[light int data] // 轻量服务器时：整数资料。用法参考最底部的注释。\n38 3\n29 2\n[/light int data] // 闭合。\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "light condition message",
+                         "Title":  "轻量服务器时",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[light condition message] // 轻量服务器时：详细条件消息。\n\u003c11::condition_message_6575\u003e\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[light condition message] // 轻量服务器时：详细条件消息。\n\u003c11::condition_message_6575\u003e\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "first level",
+                         "Title":  "第一服务器时",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 第一服务器相关。\n[first level] 3 32 // 第一服务器时：可行的等级下限和上限。下限以上，上限以下可行。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 第一服务器相关。\n[first level] 3 32 // 第一服务器时：可行的等级下限和上限。下限以上，上限以下可行。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "first int data",
+                         "Title":  "第一服务器时",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[first int data] // 第一服务器时：整数资料。用法参考最底部的注释。\n38 3\n29 2\n[/first int data] // 闭合。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[first int data] // 第一服务器时：整数资料。用法参考最底部的注释。\n38 3\n29 2\n[/first int data] // 闭合。\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "first condition message",
+                         "Title":  "第一服务器时",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[first condition message] // 第一服务器时：详细条件消息。\n\u003c11::condition_message_6575\u003e\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[first condition message] // 第一服务器时：详细条件消息。\n\u003c11::condition_message_6575\u003e\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "difficulty",
+                         "Title":  "任务的奖励难度",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 以下为新标签（08年04月）。\n[difficulty] `S` // 任务的奖励难度。输入的字符常数在quest/`questparameter.etc`文件中定义。\n// 本任务完成时影响经验值奖励。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 以下为新标签（08年04月）。\n[difficulty] `S` // 任务的奖励难度。输入的字符常数在quest/`questparameter.etc`文件中定义。\n// 本任务完成时影响经验值奖励。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "collision reward int data",
+                         "Title":  "冲突奖励",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[collision reward int data] // 冲突奖励。当完成此标签内注明的特定索引的任务时，给予此处列出的奖励而非[reward int data]的奖励。\n1000 -1 // 冲突奖励的目标任务索引（可在下方列出多个）。\n1001 -1\n`[and]` // 所列任务之间的关系。`[and]`、`[or]`。\n2020 2 // 冲突奖励的物品索引和数量。以下若物品种类有多种，则向下列出。\n3030 3\n[/collision reward int data]\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[collision reward int data] // 冲突奖励。当完成此标签内注明的特定索引的任务时，给予此处列出的奖励而非[reward int data]的奖励。\n1000 -1 // 冲突奖励的目标任务索引（可在下方列出多个）。\n1001 -1\n`[and]` // 所列任务之间的关系。`[and]`、`[or]`。\n2020 2 // 冲突奖励的物品索引和数量。以下若物品种类有多种，则向下列出。\n3030 3\n[/collision reward int data]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "mail time",
+                         "Title":  "发送与此任务相关的邮件的时机",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[mail time] 0 // 发送与此任务相关的邮件的时机。\n// 0 : 角色达到特定等级时发送邮件。\"特定等级\"指本脚本中注明的任务等级。\n// 1 : 角色完成本任务时发送邮件。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[mail time] 0 // 发送与此任务相关的邮件的时机。\n// 0 : 角色达到特定等级时发送邮件。\"特定等级\"指本脚本中注明的任务等级。\n// 1 : 角色完成本任务时发送邮件。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "mail title",
+                         "Title":  "邮件的标题",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 0 : 角色达到特定等级时发送邮件。\"特定等级\"指本脚本中注明的任务等级。\n// 1 : 角色完成本任务时发送邮件。\n[mail title] \u003c文本编号\u003e // 邮件的标题。在quest.str.kor中注明并链接。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 0 : 角色达到特定等级时发送邮件。\"特定等级\"指本脚本中注明的任务等级。\n// 1 : 角色完成本任务时发送邮件。\n[mail title] \u003c文本编号\u003e // 邮件的标题。在quest.str.kor中注明并链接。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "mail sender",
+                         "Title":  "邮件的发送者",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[mail sender] \u003c邮件发送者\u003e // 邮件的发送者。在quest.str.kor中注明并链接。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[mail sender] \u003c邮件发送者\u003e // 邮件的发送者。在quest.str.kor中注明并链接。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "mail contents",
+                         "Title":  "邮件的内容",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[mail contents] \u003c文本编号\u003e // 邮件的内容。在quest.str.kor中注明并链接。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[mail contents] \u003c文本编号\u003e // 邮件的内容。在quest.str.kor中注明并链接。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "mail enclose",
+                         "Title":  "邮件中附带的物品索引和数量（若发送多个",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[mail enclose] \u003c物品索引\u003e \u003c物品数量\u003e // 邮件中附带的物品索引和数量（若发送多个，则以相同形式重复）。\n[/mail enclose]\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[mail enclose] \u003c物品索引\u003e \u003c物品数量\u003e // 邮件中附带的物品索引和数量（若发送多个，则以相同形式重复）。\n[/mail enclose]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "substitutive names",
+                         "Title":  "更改或删除任务界面中出现的对象名称",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[substitutive names] // 更改或删除任务界面中出现的对象名称。\n\u003c替代名称\u003e // 替代名称的数量必须与[int data]中使用的对象种类数量相同。\n[/substitutive names] // 若在替代名称中输入``，则相应对象的信息将不显示。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[substitutive names] // 更改或删除任务界面中出现的对象名称。\n\u003c替代名称\u003e // 替代名称的数量必须与[int data]中使用的对象种类数量相同。\n[/substitutive names] // 若在替代名称中输入``，则相应对象的信息将不显示。\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "cant giveup",
+                         "Title":  "0",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[cant giveup] 1 // 0: 完成后可放弃（默认，无此标签时也始终为0），1:完成后不可放弃，并且在地城中也不可放弃（队伍中不出现） 2:队伍也可。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[cant giveup] 1 // 0: 完成后可放弃（默认，无此标签时也始终为0），1:完成后不可放弃，并且在地城中也不可放弃（队伍中不出现） 2:队伍也可。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "think",
+                         "Title":  "地图开始时",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[think] [set team] -1 // 变更为怪物队伍。\n[true]\n[return] -1\n[/think]\n```\n\n```pvf\n[think] [check team] 1 // 若是友军。\n[true]\n[think] [set team] -1 // 变更为怪物队伍。\n[true]\n[return] -1\n[/think]\n[/think]\n```\n\n```pvf\n[think] [map index] == 1000 // 若当前地图索引为1000。\n[true]\n[think] [check team] 1 // 若是友军。\n[true]\n[think] [set team] -1 // 变更为怪物队伍。\n[true]\n[return] -1\n[/think]\n[/think]\n[/think]\n```\n\n```pvf\n[think] [event] == 8 // 地图开始时。\n[true]\n[think] [map index] == 1000 // 若当前地图索引为1000。\n[true]\n[think] [check team] 1 // 若是友军。\n[true]\n[think] [set team] -1 // 变更为怪物队伍。\n[true]\n[return] -1\n[/think]\n[/think]\n[/think]\n[/think]\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[think] [set team] -1 // 变更为怪物队伍。\n[true]\n[return] -1\n[/think]\n```\n\n```pvf\n[think] [check team] 1 // 若是友军。\n[true]\n[think] [set team] -1 // 变更为怪物队伍。\n[true]\n[return] -1\n[/think]\n[/think]\n```\n\n```pvf\n[think] [map index] == 1000 // 若当前地图索引为1000。\n[true]\n[think] [check team] 1 // 若是友军。\n[true]\n[think] [set team] -1 // 变更为怪物队伍。\n[true]\n[return] -1\n[/think]\n[/think]\n[/think]\n```\n\n```pvf\n[think] [event] == 8 // 地图开始时。\n[true]\n[think] [map index] == 1000 // 若当前地图索引为1000。\n[true]\n[think] [check team] 1 // 若是友军。\n[true]\n[think] [set team] -1 // 变更为怪物队伍。\n[true]\n[return] -1\n[/think]\n[/think]\n[/think]\n[/think]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "belong to winning power",
+                         "Title":  "1",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[belong to winning power] a(常数) // -1 : 与获胜势力所属无关而出现的任务，0 : 仅对获胜势力出现的任务，1:仅对失败势力出现的任务。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[belong to winning power] a(常数) // -1 : 与获胜势力所属无关而出现的任务，0 : 仅对获胜势力出现的任务，1:仅对失败势力出现的任务。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "limit dungeon index",
+                         "Title":  "允许检查的地城索引",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 限制地城索引。\n// 使用本标签后，只会在列表中的地城进行检查。\n// 不使用本标签则无条件检查。\n[limit dungeon index]\n12322 // 允许检查的地城索引。\n[/limit dungeon index]\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 限制地城索引。\n// 使用本标签后，只会在列表中的地城进行检查。\n// 不使用本标签则无条件检查。\n[limit dungeon index]\n12322 // 允许检查的地城索引。\n[/limit dungeon index]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "2",
+                         "Title":  "[0]出现条件 [1]出现详细条件 [2]消失的条件（-1则为始终允许）",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[auto display] [0]出现条件 [1]出现详细条件 [2]消失的条件（以数字表示的等级范围） // 建议不使用。\n// [0]出现条件 [1]出现详细条件 [2]消失的条件（-1则为始终允许）。\n// 0 : 进入特定城镇时 城镇索引 允许等级范围。\n// 1 : 经过特定NPC前时 NPC索引 允许等级范围。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[auto display] [0]出现条件 [1]出现详细条件 [2]消失的条件（以数字表示的等级范围） // 建议不使用。\n// [0]出现条件 [1]出现详细条件 [2]消失的条件（-1则为始终允许）。\n// 0 : 进入特定城镇时 城镇索引 允许等级范围。\n// 1 : 经过特定NPC前时 NPC索引 允许等级范围。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "dialog",
+                         "Title":  "是地图还是地城",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[dialog]\n0 // 是地图还是地城。\n0 // 是开始时还是通关时。\n1111 // 地图或地城索引。\n0 // 事件对话将输出的地城难度的最低等级（填写0到3）。\n0 // 若想在首领房间触发事件（0则否，1则在首领房间触发事件）。\n1234 // 想触发事件对话的怪物索引（主要是首领）。\n30 // 想触发事件对话的怪物体力百分比（可写1~100，0不可，推荐5~100） // 未使用。\n\u003c11::event_30\u003e // 事件对话链接。\n// 设置[job message]时，鬼剑士语句在\u003c11:event_30_0\u003e，格斗家语句在\u003c11:event_30_1\u003e，枪手语句在\u003c11:event_30_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:event_30\u003e。\n[/dialog]\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[dialog]\n0 // 是地图还是地城。\n0 // 是开始时还是通关时。\n1111 // 地图或地城索引。\n0 // 事件对话将输出的地城难度的最低等级（填写0到3）。\n0 // 若想在首领房间触发事件（0则否，1则在首领房间触发事件）。\n1234 // 想触发事件对话的怪物索引（主要是首领）。\n30 // 想触发事件对话的怪物体力百分比（可写1~100，0不可，推荐5~100） // 未使用。\n\u003c11::event_30\u003e // 事件对话链接。\n// 设置[job message]时，鬼剑士语句在\u003c11:event_30_0\u003e，格斗家语句在\u003c11:event_30_1\u003e，枪手语句在\u003c11:event_30_2\u003e，...\n// 若无对应职业的语句，则使用默认语句\u003c11:event_30\u003e。\n[/dialog]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "condition data",
+                         "Title":  "使用1以上的正数作为索引时",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n// 使用1以上的正数作为索引时，使用int data中写的单位。\n// 使用0~负数时，则使用[check count]标签内的数量。\n[condition data]\n1 `某个物品 %d/%d 个`\n2 `另一个物品 %d/%d 个`\n[/condition data]\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n// 使用1以上的正数作为索引时，使用int data中写的单位。\n// 使用0~负数时，则使用[check count]标签内的数量。\n[condition data]\n1 `某个物品 %d/%d 个`\n2 `另一个物品 %d/%d 个`\n[/condition data]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "0",
+                         "Title":  "建议不使用",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[auto display] [0]出现条件 [1]出现详细条件 [2]消失的条件（以数字表示的等级范围） // 建议不使用。\n// [0]出现条件 [1]出现详细条件 [2]消失的条件（-1则为始终允许）。\n// 0 : 进入特定城镇时 城镇索引 允许等级范围。\n// 1 : 经过特定NPC前时 NPC索引 允许等级范围。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[auto display] [0]出现条件 [1]出现详细条件 [2]消失的条件（以数字表示的等级范围） // 建议不使用。\n// [0]出现条件 [1]出现详细条件 [2]消失的条件（-1则为始终允许）。\n// 0 : 进入特定城镇时 城镇索引 允许等级范围。\n// 1 : 经过特定NPC前时 NPC索引 允许等级范围。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "1",
+                         "Title":  "建议不使用",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[auto display] [0]出现条件 [1]出现详细条件 [2]消失的条件（以数字表示的等级范围） // 建议不使用。\n// [0]出现条件 [1]出现详细条件 [2]消失的条件（-1则为始终允许）。\n// 0 : 进入特定城镇时 城镇索引 允许等级范围。\n// 1 : 经过特定NPC前时 NPC索引 允许等级范围。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[auto display] [0]出现条件 [1]出现详细条件 [2]消失的条件（以数字表示的等级范围） // 建议不使用。\n// [0]出现条件 [1]出现详细条件 [2]消失的条件（-1则为始终允许）。\n// 0 : 进入特定城镇时 城镇索引 允许等级范围。\n// 1 : 经过特定NPC前时 NPC索引 允许等级范围。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "map index",
+                         "Title":  "若当前地图索引为1000",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[think] [map index] == 1000 // 若当前地图索引为1000。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[think] [map index] == 1000 // 若当前地图索引为1000。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "check team",
+                         "Title":  "若是友军",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[think] [check team] 1 // 若是友军。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[think] [check team] 1 // 若是友军。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "qst",
+                         "Section":  "set team",
+                         "Title":  "变更为怪物队伍",
+                         "Comment":  "#### 官方示例: questsample.qst\n\n```pvf\n[think] [set team] -1 // 变更为怪物队伍。\n```",
+                         "OfficialDescription":  "#### 官方示例: questsample.qst\n\n```pvf\n[think] [set team] -1 // 变更为怪物队伍。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     }
+                 ]
+}

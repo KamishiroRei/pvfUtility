@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>PvfCode.Services</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net10.0-windows</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Mvvm.v24.1">
+      <HintPath>$(RecoveredBinaryDirectory)\DevExpress.Mvvm.v24.1.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\PvfCode.Models\PvfCode.Models.csproj" />
+    <ProjectReference Include="..\PvfCode.Dot\PvfCode.Dot.csproj" />
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+      <HintPath>$(RecoveredBinaryDirectory)\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\GMTool.SqlModel\GMTool.SqlModel.csproj" />
+    <Reference Include="SqlSugar">
+      <HintPath>$(RecoveredBinaryDirectory)\SqlSugar.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\Utools\Utools.csproj" />
+    <ProjectReference Include="..\PvfCode.LoggerBase\PvfCode.LoggerBase.csproj" />
+    <ProjectReference Include="..\PvfCode.NPK.Utils\PvfCode.NPK.Utils.csproj" />
+    <Reference Include="Collections.Pooled">
+      <HintPath>$(RecoveredBinaryDirectory)\Collections.Pooled.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\Swordfish.NET.CollectionsV3\Swordfish.NET.CollectionsV3.csproj" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(RecoveredBinaryDirectory)\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Coordination">
+      <HintPath>$(RecoveredBinaryDirectory)\Nito.AsyncEx.Coordination.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\pvfUtility.WebApi.Dto\pvfUtility.WebApi.Dto.csproj" />
+    <Reference Include="Nito.AsyncEx.Tasks">
+      <HintPath>$(RecoveredBinaryDirectory)\Nito.AsyncEx.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="WinCopies.Util">
+      <HintPath>$(RecoveredBinaryDirectory)\WinCopies.Util.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\SevenZipSharp\SevenZipSharp.csproj" />
+    <Reference Include="WinCopies.Collections">
+      <HintPath>$(RecoveredBinaryDirectory)\WinCopies.Collections.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

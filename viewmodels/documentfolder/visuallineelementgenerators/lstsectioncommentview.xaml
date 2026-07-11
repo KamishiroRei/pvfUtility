@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:local="clr-namespace:PvfCode.ViewModels.DocumentFolder.VisualLineElementGenerators;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Name="TestBlock" Margin="50,0,0,-10" Cursor="Hand" ToolTipService.InitialShowDelay="50">
+  <Control.Template>
+    <ControlTemplate TargetType="{x:Type Button}">
+      <TextBlock>
+        <ContentPresenter />
+        <FrameworkElement.Style>
+          <Style TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+              <Trigger Property="UIElement.IsMouseOver" Value="true">
+                <Setter Property="TextDecorations" Value="Underline" />
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkElement.Style>
+      </TextBlock>
+    </ControlTemplate>
+  </Control.Template>
+  <FrameworkElement.Style>
+    <Style TargetType="{x:Type Button}">
+      <Setter Property="Foreground" Value="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.NowEditorHighlightingColorOption.LstItemNameForeBrush, Mode=OneWay}" />
+      <Style.Triggers>
+        <Trigger Property="UIElement.IsMouseOver" Value="true">
+          <Setter Property="Foreground" Value="#007acc" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+  </FrameworkElement.Style>
+</Button>

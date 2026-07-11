@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<searchpvf:WindowAddNewSearchResult xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" Window.Title="{DynamicResource WindowAddNewSearchResult_Title}" FrameworkElement.Width="300" FrameworkElement.Height="400" Window.SizeToContent="Height" xmlns:searchpvf="clr-namespace:PvfCode.Views.SearchPvf;assembly=pvfUtility">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <Grid Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Label Content="{DynamicResource WindowAddNewSearchResult_Label_Name}" />
+      <TextBox Name="input" Grid.Column="1">
+      </TextBox>
+    </Grid>
+    <StackPanel Grid.Row="2" Margin="0,10,0,10" HorizontalAlignment="Right" Orientation="Horizontal">
+      <Button Name="buttonYes" Margin="0,0,10,0" Content="{DynamicResource common_OK}">
+      </Button>
+      <Button Margin="0,0,10,0" Content="{DynamicResource common_Cancel}">
+      </Button>
+    </StackPanel>
+  </Grid>
+</searchpvf:WindowAddNewSearchResult>

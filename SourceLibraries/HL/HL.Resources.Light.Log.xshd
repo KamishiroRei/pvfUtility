@@ -1,0 +1,38 @@
+<!--
+  There is no such thing like a log file format but there are usually keywords,
+  such as, ERROR, FATAL, DEBUG, or timestamps in squared brackets that could be
+  viewed with a better experience than no highlighting at all.
+
+  This highlighting pattern is intended to improve the viewing experience for text
+  based (non-xml based) log files.
+-->
+<SyntaxDefinition name="LOG" extensions=".log"
+     xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+	<Color name="Digits"       foreground="#6260E9" fontStyle="italic" fontWeight="normal" />
+	<Color name="Error"      foreground="#BA4343" />
+	<Color name="Warning"      foreground="#AC9D4D" />
+	<Color name="Success"      foreground="Green" />
+	<Color name="TimeStamp"    foreground="#78c691" />
+	<RuleSet ignoreCase="true">
+		<Rule color="Digits">
+			[ ?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+[0-9]+[ ?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+\n
+		</Rule>
+		<Span color="Error" multiline="false">
+			<Begin>Error：</Begin>
+		</Span>
+
+		<Span color="Warning" multiline="false">
+			<Begin>Warning：</Begin>
+		</Span>
+		<Span color="Success" multiline="false">
+			<Begin>Success：</Begin>
+		</Span>
+
+		<!--Time Stamp WITHOUT milli seconds: 13:05:35-->
+
+		<Rule color="TimeStamp">
+			[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9]
+		</Rule>
+	</RuleSet>
+</SyntaxDefinition>

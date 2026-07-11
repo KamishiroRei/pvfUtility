@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bookmark:BookMarkEditView xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:bookmark="clr-namespace:PvfCode.Views.BookMark;assembly=pvfUtility" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:i1="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:pvfcode="clr-namespace:PvfCode;assembly=PvfCode.Services" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" FrameworkElement.Name="win" FrameworkElement.Width="600" FrameworkElement.Height="600" Control.Padding="0" Window.ResizeMode="CanResizeWithGrip" Window.Title="{Binding Title}" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary />
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <bars:BarContainerControl FrameworkElement.Name="toolBar" Grid.Row="0" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" UIElement.Visibility="{Binding IsTreeList, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+      <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControl.ShowDragWidget="True">
+        <bars:BarButtonItem bars:BarItem.CommandParameter="false" bars:BarItem.Content="{DynamicResource BookMarkEditView_NewFolderButton}" bars:BarItem.Command="{Binding OnAddBookMarkCommand}" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.CommandParameter="true" bars:BarItem.Content="{DynamicResource BookMarkEditView_NewBookMarkButton}" bars:BarItem.Command="{Binding OnAddBookMarkCommand}" />
+        <bars:BarItemSeparator />
+        <bars:BarStaticItem bars:BarItem.Content="{DynamicResource BookMarkEditView_OperationSuggest}" bars:BarItem.Foreground="#FF808080" />
+      </bars:ToolBarControl>
+    </bars:BarContainerControl>
+    <bookmark:BookMarkTreeView bookmark:BookMarkTreeView.Name="treeListView" Grid.Row="1">
+    </bookmark:BookMarkTreeView>
+    <Grid Row="3" Margin="0,10,0,10" Visibility="{Binding IsPreview, Mode=OneWay, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+        <Button Width="90" Height="24" Content="{DynamicResource common_Save}" Command="{Binding OnSaveCommand}" />
+        <Button Width="90" Height="24" Margin="10,0,10,0" Content="{DynamicResource common_Cancel}">
+        </Button>
+      </StackPanel>
+    </Grid>
+  </Grid>
+</bookmark:BookMarkEditView>

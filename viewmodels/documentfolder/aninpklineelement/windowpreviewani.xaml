@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aninpklineelement:WindowPreviewAni xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" Window.Title="ani预览" FrameworkElement.Width="800" FrameworkElement.Height="500" Window.ResizeMode="CanResizeWithGrip" xmlns:aninpklineelement="clr-namespace:PvfCode.ViewModels.DocumentFolder.AniNpkLineElement;assembly=pvfUtility">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding OnLoadedCommand}" />
+  </interactivity:Interaction.Behaviors>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <bars:BarContainerControl FrameworkElement.Name="toolBar" Grid.Row="0" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+      <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControl.ShowDragWidget="True">
+        <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.CommandParameter="False" bars:BarItem.Content="播放" bars:BarItem.Glyph="{DynamicResource RunIcon}" bars:BarItem.Command="{Binding OnPlayCommand}" ContentElement.IsEnabled="{Binding IsStart, Converter={StaticResource ConverterBoolenToFalse}}" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.CommandParameter="True" bars:BarItem.Content="停止" bars:BarItem.Glyph="{DynamicResource StopIcon}" bars:BarItem.Command="{Binding OnPlayCommand}" ContentElement.IsEnabled="{Binding IsStart}" />
+        <bars:BarItemSeparator />
+      </bars:ToolBarControl>
+    </bars:BarContainerControl>
+    <Grid Row="1">
+      <docking:DockLayoutManager xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:DockLayoutManager.Name="DemoDockContainer" FrameworkElement.Margin="0,0,0,3" docking:DockLayoutManager.DockingStyle="VS2010" docking:DockLayoutManager.FloatingDocumentContainer="DocumentHost" docking:DockLayoutManager.FloatingMode="Desktop">
+        <docking:LayoutGroup FrameworkElement.Name="Root">
+          <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="帧列表" docking:BaseLayoutItem.ItemWidth="1.5*">
+            <GridControl Grid.Row="1" FrameworkElement.Margin="0,1,0,0" xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core" grid:DataControlBase.SelectionMode="Row" grid:DataControlBase.CurrentItem="{Binding Item, Mode=TwoWay}" grid:DataControlBase.ItemsSource="{Binding Items}" xmlns="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+              <grid1:GridControl.Columns xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+                <grid1:GridColumn grid:BaseColumn.Width="70" grid:ColumnBase.FieldName="Sprite.ImageSource" grid:BaseColumn.Header="缩略图" grid:BaseColumn.HorizontalHeaderContentAlignment="Center" grid:ColumnBase.ShowAllTableValuesInCheckedFilterPopup="False" grid:ColumnBase.ShowAllTableValuesInFilterPopup="False" xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1">
+                  <grid:ColumnBase.EditSettings>
+                    <settings:ImageEditSettings xmlns:settings="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" settings:BaseEditSettings.MaxWidth="18" settings:ImageEditSettings.ShowMenu="False" />
+                  </grid:ColumnBase.EditSettings>
+                </grid1:GridColumn>
+                <grid1:GridColumn grid:BaseColumn.Width="auto" grid:ColumnBase.FieldName="IconIndex" grid:BaseColumn.Header="index" grid:BaseColumn.HorizontalHeaderContentAlignment="Center">
+                  <grid:ColumnBase.EditSettings>
+                    <settings:TextEditSettings settings:BaseEditSettings.HorizontalContentAlignment="Center" xmlns:settings="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" />
+                  </grid:ColumnBase.EditSettings>
+                </grid1:GridColumn>
+                <grid1:GridColumn grid:BaseColumn.Width="auto" grid:ColumnBase.FieldName="MosterOrApcId" grid:BaseColumn.Header="Index" grid:BaseColumn.HorizontalHeaderContentAlignment="Center" grid:ColumnBase.ShowAllTableValuesInCheckedFilterPopup="False" grid:ColumnBase.ShowAllTableValuesInFilterPopup="False">
+                  <grid:ColumnBase.EditSettings>
+                    <TextEditSettings p21:BaseEditSettings.HorizontalContentAlignment="Center" xmlns:p21="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" />
+                  </grid:ColumnBase.EditSettings>
+                </grid1:GridColumn>
+                <grid1:GridColumn grid:BaseColumn.Width="*" grid:ColumnBase.FieldName="Icon" grid:BaseColumn.Header="Img" grid:BaseColumn.HorizontalHeaderContentAlignment="Center">
+                  <grid:ColumnBase.EditSettings>
+                    <TextEditSettings p21:BaseEditSettings.HorizontalContentAlignment="Center" xmlns:p21="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" />
+                  </grid:ColumnBase.EditSettings>
+                </grid1:GridColumn>
+              </grid1:GridControl.Columns>
+              <GridControl.View>
+                <grid1:TableView xmlns:grid1="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1" grid1:TableView.AllowBandMoving="False" grid1:TableView.AllowBandMultiRow="False" grid1:TableView.AllowBandResizing="False" grid1:TableView.AllowBestFit="False" grid1:TableView.AllowCascadeUpdate="False" grid:DataViewBase.AllowColumnFiltering="False" grid:DataViewBase.AllowColumnMoving="False" grid1:TableView.AllowHorizontalScrollingVirtualization="True" grid:DataViewBase.EnableSelectedRowAppearance="True" grid1:TableView.HorizontalScrollbarVisibility="Auto" grid:DataViewBase.NavigationStyle="Row" grid1:TableView.ScrollBarAnnotationMode="Selected,FocusedRow,Custom " grid:DataViewBase.ScrollingMode="Smart" grid1:TableView.ShowAutoFilterRow="False" grid1:TableView.ShowBandsInCustomizationForm="False" grid1:TableView.ShowBandsPanel="False" grid:DataViewBase.ShowColumnHeaders="True" grid1:TableView.ShowDataNavigator="False" grid:DataViewBase.ShowEmptyText="False" grid:DataViewBase.ShowFilterPanelMode="Never" grid1:GridViewBase.ShowGroupPanel="False" grid1:TableView.ShowHorizontalLines="True" grid1:TableView.ShowIndicator="True" grid:DataViewBase.ShowSearchPanelMode="Default" grid:DataViewBase.ShowSelectionRectangle="True" grid1:TableView.ShowVerticalLines="True" grid1:TableView.UseEvenRowBackground="False" grid1:TableView.VerticalScrollbarVisibility="Auto" />
+              </GridControl.View>
+            </GridControl>
+          </docking:LayoutPanel>
+          <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="预览图" docking:BaseLayoutItem.ItemWidth="2*">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <BarContainerControl Grid.Row="0" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                <ToolBarControl p17:ToolBarControlBase.AllowCustomizationMenu="False" p17:ToolBarControl.AllowQuickCustomization="False" p17:ToolBarControl.ShowDragWidget="True" xmlns:p17="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                  <p17:BarCheckItem p17:BarItem.BarItemDisplayMode="ContentAndGlyph" p17:BarItem.Content="真实坐标" p17:BarItem.Glyph="{DynamicResource Location}" p17:BarCheckItem.IsChecked="{Binding RealLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  <p17:BarItemSeparator />
+                  <p17:BarItemSeparator />
+                </ToolBarControl>
+              </BarContainerControl>
+              <Grid Row="1" Background="#FF808080">
+                <Canvas>
+                  <Image Width="{Binding Item.Sprite.Width}" Height="{Binding Item.Sprite.Height}" Source="{Binding Item.Sprite.ImageSource}">
+                    <FrameworkElement.Style>
+                      <Style TargetType="{x:Type Image}">
+                        <Style.Triggers>
+                          <DataTrigger Value="True" Binding="{Binding RealLocation}">
+                            <Setter Property="Canvas.Left" Value="{Binding Item.Sprite.X}" />
+                            <Setter Property="Canvas.Top" Value="{Binding Item.Sprite.Y}" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Top" />
+                          </DataTrigger>
+                        </Style.Triggers>
+                      </Style>
+                    </FrameworkElement.Style>
+                  </Image>
+                  <FrameworkElement.Style>
+                    <Style TargetType="{x:Type Canvas}">
+                      <Style.Triggers>
+                        <DataTrigger Value="True" Binding="{Binding RealLocation}">
+                          <Setter Property="HorizontalAlignment" Value="Left" />
+                          <Setter Property="VerticalAlignment" Value="Top" />
+                        </DataTrigger>
+                        <DataTrigger Value="False" Binding="{Binding RealLocation}">
+                          <Setter Property="HorizontalAlignment" Value="Center" />
+                          <Setter Property="VerticalAlignment" Value="Center" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </FrameworkElement.Style>
+                </Canvas>
+              </Grid>
+            </Grid>
+          </docking:LayoutPanel>
+        </docking:LayoutGroup>
+      </docking:DockLayoutManager>
+    </Grid>
+  </Grid>
+</aninpklineelement:WindowPreviewAni>

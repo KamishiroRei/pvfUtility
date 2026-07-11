@@ -1,0 +1,596 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "aic",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "key stream",
+                         "Title":  "列出可引用的 .key 脚本",
+                         "Comment":  "列出可引用的 .key 脚本：\n`[key stream]` 每行 `名称?` `路径`，省略名则自动取文件名，返回索引用于 .ai [return]",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "minimum info",
+                         "Title":  "APC的基础信息",
+                         "Comment":  "[minimum info]APC的基础信息，从左到右依次为：\n1、APC的名字\n2、职业类型（职业类型可在PVF主界面的character/character.lst查看）\n3、主成长类型\n4、副成长类型\n5、显示成长光环（开启改1，关闭改0）\n6、等级\n7、角色状态\n8、职业的转职类型\n9、PVP排名\n10、公会\n11、坐骑\n12、宠物编号\n13、宠物名称\n14、宠物能量满格（开启改1，关闭改0）\n15、高级网吧特权\n16、黑名单等级",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "appearance point",
+                         "Title":  "appearance point",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "pvp win point",
+                         "Title":  "pvp win point",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "attack damage rate",
+                         "Title":  "伤害比例",
+                         "Comment":  "伤害比例\n即1.0代表能打出100%的伤害\n0.9代表只能打出90%的伤害",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "attack damage rate special",
+                         "Title":  "attack damage rate special",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "add equipment status from level",
+                         "Title":  "add equipment status from level",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "think term",
+                         "Title":  "思考时间（1000 = 1秒）",
+                         "Comment":  "[think term]思考时间（1000 = 1秒）\n//在各种场景下做出对策的反应时间\n\n与攻击延迟[attack delay]差不多",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "destination change term",
+                         "Title":  "存在多个敌对目标时",
+                         "Comment":  "存在多个敌对目标时，转换目标所用时间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "keep distance with target",
+                         "Title":  "与敌对目标保持的攻击距离",
+                         "Comment":  "与敌对目标保持的攻击距离",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "warlike",
+                         "Title":  "攻击欲望",
+                         "Comment":  "[warlike]攻击欲望\n100=10%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "vision",
+                         "Title":  "视力",
+                         "Comment":  "视力\n此数值越高，越不容易因为距离过远而丢失目标",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "targeting bonus",
+                         "Title":  "targeting bonus",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "far attack reaction rate",
+                         "Title":  "far attack reaction rate",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "armor subtype",
+                         "Title":  "防具类型",
+                         "Comment":  "防具类型",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "move action",
+                         "Title":  "move action",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "proc action",
+                         "Title":  "proc action",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "keep range distance with target",
+                         "Title":  "keep range distance with target",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "default equipment",
+                         "Title":  "default equipment",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "animation job",
+                         "Title":  "animation job",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "hell monster",
+                         "Title":  "hell monster",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "no cooltime",
+                         "Title":  "no cooltime",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "rarity",
+                         "Title":  "rarity",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "on key",
+                         "Title":  "on key",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "on stand",
+                         "Title":  "处于站立状态时",
+                         "Comment":  "处于站立状态时",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "on damage",
+                         "Title":  "受到攻击",
+                         "Comment":  "受到攻击",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "on die",
+                         "Title":  "生命值耗尽",
+                         "Comment":  "生命值耗尽",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "on appear",
+                         "Title":  "出现时",
+                         "Comment":  "出现时",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "on disappear",
+                         "Title":  "[on appear]台词结束后接上的话",
+                         "Comment":  "[on appear]台词结束后接上的话，需要分到同一组",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "on attack",
+                         "Title":  "发起攻击",
+                         "Comment":  "发起攻击",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "overhead gauge type",
+                         "Title":  "攻击时",
+                         "Comment":  "攻击时",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "king",
+                         "Title":  "不同副本难度下的表现-王者级",
+                         "Comment":  "不同副本难度下的表现-王者级",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "master",
+                         "Title":  "不同副本难度下的表现-大师级",
+                         "Comment":  "不同副本难度下的表现-大师级",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "expert",
+                         "Title":  "不同副本难度下的表现-专家级",
+                         "Comment":  "不同副本难度下的表现-专家级",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "normal",
+                         "Title":  "不同副本难度下的表现-普通级",
+                         "Comment":  "不同副本难度下的表现-普通级",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "drop avatar item",
+                         "Title":  "drop avatar item",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "summon monster status rate",
+                         "Title":  "summon monster status rate",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "skill correction",
+                         "Title":  "skill correction",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "etc action",
+                         "Title":  "etc action",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "speech on situation",
+                         "Title":  "在不同时机时说话",
+                         "Comment":  "在不同时机时说话",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "key cooltime",
+                         "Title":  "key cooltime",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "ai pattern",
+                         "Title":  "AI逻辑",
+                         "Comment":  "AI逻辑",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "death tower item",
+                         "Title":  "death tower item",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "equipment",
+                         "Title":  "装备编号 品质 强化等级",
+                         "Comment":  "装备编号 品质 强化等级\n武器\n防具（上衣，头肩，下装，鞋子，腰带）\n首饰（项链，手镯，戒指）\n时装（第一个是头发 最后是鞋子）",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "zhiyuan|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "skill",
+                         "Title":  "持有的技能",
+                         "Comment":  "持有的技能\n65 1 //代表持有Lv1的技能id为65的技能，可多组",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "quick skill",
+                         "Title":  "快捷栏技能",
+                         "Comment":  "快捷栏技能\n\n也就是ASDFGH以及QWERTY这种技能\n\n左边是技能编号      右边是技能等级",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "custom skill level",
+                         "Title":  "custom skill level",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "additional character status",
+                         "Title":  "APC的面板",
+                         "Comment":  "[additional character status]APC的面板，从左到右依次为：\n1、最大生命值\n2、最大魔法值\n3、物理攻击力\n4、物理防御\n5、魔法攻击力\n6、魔法防御\n7、背包容量\n8、生命值恢复效率\n9、魔法值恢复效率\n10、移动速度\n11、攻击速度\n12、施法速度\n13、硬直\n14、跳跃力\n15、负重\n16、耐力\n17、火属性抗性\n18、冰属性抗性\n19、暗属性抗性\n20、光属性抗性\n21、减速抗性\n22、冰冻抗性\n23、中毒抗性\n24、眩晕抗性\n25、诅咒抗性\n26、致盲抗性\n27、感电抗性\n28、石化抗性\n29、睡眠抗性\n30、灼烧抗性\n31、武器损坏抗性\n32、出血抗性\n33、穿透抗性\n34、卡顿抗性\n35、混乱抗性\n36、束缚抗性\n37、装备损坏抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "character status rate",
+                         "Title":  "APC的面板倍率",
+                         "Comment":  "[character status rate]APC的面板倍率，从左到右依次为：\n1、最大生命值倍率\n2、最大魔法值倍率\n3、力量倍率\n4、体力倍率\n5、智力倍率\n6、精神倍率\n7、物理攻击力倍率\n8、物理防御倍率\n9、魔法攻击力倍率\n10、魔法防御倍率\n11、背包容量倍率\n12、生命值恢复效率倍率\n13、魔法值恢复效率倍率\n14、移动速度倍率\n15、攻击速度倍率\n16、施法速度倍率\n17、硬直倍率\n18、跳跃力倍率\n19、负重倍率\n20、耐力倍率\n21、火属性抗性倍率\n22、冰属性抗性倍率\n23、暗属性抗性倍率\n24、光属性抗性倍率\n25、减速抗性倍率\n26、冰冻抗性倍率\n27、中毒抗性倍率\n28、眩晕抗性倍率\n29、诅咒抗性倍率\n30、致盲抗性倍率\n31、感电抗性倍率\n32、石化抗性倍率\n33、睡眠抗性倍率\n34、灼烧抗性倍率\n35、武器损坏抗性倍率\n36、出血抗性倍率\n37、穿透抗性倍率\n38、卡顿抗性倍率\n39、混乱抗性倍率\n40、束缚抗性倍率\n41、装备损坏抗性倍率",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "character status rate special",
+                         "Title":  "character status rate special",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "doll special dungeon",
+                         "Title":  "APC可以得到特殊加成的副本",
+                         "Comment":  "APC可以得到特殊加成的副本",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "黑鹤"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "skill data up",
+                         "Title":  "技能加成——主要出现在异界或者侍魂装备中",
+                         "Comment":  "技能加成——主要出现在异界或者侍魂装备中",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "牧野-QQ1320113373"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "quick item",
+                         "Title":  "快捷栏道具",
+                         "Comment":  "快捷栏道具\n左边是道具代码      右边是道具数量",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "party member",
+                         "Title":  "固定队伍成员绑定",
+                         "Comment":  "固定队伍成员绑定：行内为 成员索引(1起) APC编号",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "set party member",
+                         "Title":  "在 AI 逻辑中指定增益目标队员索引",
+                         "Comment":  "在 AI 逻辑中指定增益目标队员索引",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "party member alive",
+                         "Title":  "判断指定成员是否存活",
+                         "Comment":  "判断指定成员是否存活",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "party member hp",
+                         "Title":  "比较指定成员 HP 百分比",
+                         "Comment":  "比较指定成员 HP 百分比：用法 [party member hp] `%\u003e` 50",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "limit passiveobject",
+                         "Title":  "限制可生成的被动对象索引列表块",
+                         "Comment":  "限制可生成的被动对象索引列表块",
+                         "OfficialDescription":  null,
+                         "Closing":  true,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "aic",
+                         "Section":  "check accountitem",
+                         "Title":  "是否检查账户绑定道具 (1",
+                         "Comment":  "是否检查账户绑定道具 (1=检查 0=不检查)",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     }
+                 ]
+}

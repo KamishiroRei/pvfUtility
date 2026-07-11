@@ -1,0 +1,136 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "evt",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "condition reward",
+                         "Title":  "奖励条件",
+                         "Comment":  "奖励条件",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "end",
+                         "Title":  "结束时间",
+                         "Comment":  "结束时间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "entry",
+                         "Title":  "条目",
+                         "Comment":  "条目",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "event info",
+                         "Title":  "活动资​​讯",
+                         "Comment":  "活动资​​讯",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "idx",
+                         "Title":  "开启活动的 ID",
+                         "Comment":  "开启活动的 ID",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "mail content",
+                         "Title":  "邮件内容",
+                         "Comment":  "邮件内容",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "monster id",
+                         "Title":  "怪物ID",
+                         "Comment":  "怪物ID",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "ON",
+                         "Title":  "显示什么公告",
+                         "Comment":  "显示什么公告\n在下面有公告ID",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "烟辰"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "reward",
+                         "Title":  "完成获得获得的奖励",
+                         "Comment":  "完成获得获得的奖励",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "Seria Blessing",
+                         "Title":  "赛丽亚的祝福活动",
+                         "Comment":  "赛丽亚的祝福活动",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "start",
+                         "Title":  "开始时间",
+                         "Comment":  "开始时间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "thief",
+                         "Title":  "暗夜使者",
+                         "Comment":  "[thief]=暗夜使者",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "evt",
+                         "Section":  "url hyperlink",
+                         "Title":  "URL超级链接",
+                         "Comment":  "URL超级链接",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     }
+                 ]
+}

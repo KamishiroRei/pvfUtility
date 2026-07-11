@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:advanced="clr-namespace:WpfRangeControls;assembly=WpfRangeControls" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:avEditEx="clr-namespace:TextEditLib;assembly=TextEditLib" xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:local="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:previewcontrols="clr-namespace:Controls.TextEditorFolder.PreviewControls;assembly=pvfUtility" xmlns:pvfcode="clr-namespace:PvfCode;assembly=PvfCode.Dot" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:textedit="clr-namespace:PvfCode.Converts.TextEdit;assembly=pvfUtility" xmlns:verticalscrollbarhighlighted="clr-namespace:PvfCode.ViewModels.DocumentFolder.VerticalScrollBarHighlighted;assembly=pvfUtility" x:Name="documentEditor" AllowDrop="True">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="MouseUp" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding OnMouseUpCommand}" />
+  </interactivity:Interaction.Behaviors>
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <textedit:ConvertEditorTopBarPathWidth x:Key="ConvertEditorTopBarPathWidth" />
+      <Style x:Key="{x:Type editing:LineNumberMargin}" xmlns:editing="clr-namespace:ICSharpCode.AvalonEdit.Editing;assembly=ICSharpCode.AvalonEdit" TargetType="{x:Type editing:LineNumberMargin}">
+        <Setter Property="FrameworkElement.Margin" Value="15,0,15,0" />
+      </Style>
+      <VisualBrush x:Key="VisualBrush" AlignmentX="Left" AlignmentY="Top" AutoLayoutContent="False" Stretch="Uniform" Visual="{Binding ElementName=editor, Path=TextArea.TextView}" />
+      <DataTemplate x:Key="itemTemplate">
+        <Rectangle Name="elp" Height="2" HorizontalAlignment="Stretch" Fill="#949494" advanced:RangePanel.Position="{Binding Position}" />
+      </DataTemplate>
+      <DataTemplate x:Key="MarkSameWordTemplate">
+        <Rectangle Width="7" Height="5" HorizontalAlignment="Center" Fill="#773800" advanced:RangePanel.Position="{Binding Position}" />
+      </DataTemplate>
+      <verticalscrollbarhighlighted:VerticalScrollBarHighlightedSelectorTemplate x:Key="VerticalScrollBarHighlightedSelectorTemplate" MarkSameWordTemplate="{StaticResource MarkSameWordTemplate}" SelectedTemplate="{StaticResource itemTemplate}" />
+      <textedit:ConvertEditorSaveButtonIcon x:Key="ConvertEditorSaveButtonIcon" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <bars:BarContainerControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+        <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControl.AllowCollapse="False" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControlBase.AllowHide="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControlBase.AllowRemove="False" bars:ToolBarControlBase.BarItemHorizontalIndent="0" bars:ToolBarControl.ShowDragWidget="True" bars:ToolBarControl.UseWholeRow="True">
+          <bars:BarSplitButtonItem bars:BarItem.BarItemDisplayMode="Default" bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_SaveThisDocument}" bars:BarItem.KeyGesture="Ctrl+S" bars:BarItem.Command="{Binding OnSaveCommand}" bars:BarItem.Glyph="{Binding TextIsChanged, Mode=OneWay, Converter={StaticResource ConvertEditorSaveButtonIcon}}">
+            <bars:BarSplitButtonItem.PopupControl>
+              <bars:PopupMenu>
+                <bars:BarButtonItem bars:BarItem.CommandParameter="true" bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_SaveThisDocument}" bars:BarItem.KeyGesture="Ctrl+S" bars:BarItem.Command="{Binding OnSaveCommand}" />
+                <bars:BarItemSeparator />
+                <bars:BarButtonItem bars:BarItem.CommandParameter="true" bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_SaveAllOpenedDocument}" bars:BarItem.KeyGesture="Ctrl+shift+d" bars:BarItem.Command="{Binding OnSaveAllDocumentCommand}" />
+                <bars:BarItemSeparator />
+                <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_SaveAsAni}" bars:BarItem.Command="{Binding OnSaveToAniFileCommand}" />
+                <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_SaveAsScript}" bars:BarItem.Command="{Binding OnSaveToScriptFileCommand}" />
+                <bars:BarItemSeparator />
+              </bars:PopupMenu>
+            </bars:BarSplitButtonItem.PopupControl>
+          </bars:BarSplitButtonItem>
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_SaveAllOpenedDocument}" bars:BarItem.Glyph="/images/svgs/edit/saveall_16x.svg" bars:BarItem.KeyGesture="Ctrl+shift+d" bars:BarItem.Command="{Binding OnSaveAllDocumentCommand}" />
+          <bars:BarItemSeparator />
+          <bars:BarSplitButtonItem bars:BarItem.BarItemDisplayMode="Default" bars:BarItem.CommandParameter="true" bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_FindOrReplace}" bars:BarItem.Glyph="{DynamicResource EditorShowSerchPanel}" bars:BarItem.KeyGesture="Ctrl+F" bars:BarItem.Command="{Binding SearchPanel.OnShowSearchPanelCommand}">
+            <bars:BarSplitButtonItem.PopupControl>
+              <bars:PopupMenu>
+                <bars:BarButtonItem bars:BarItem.CommandParameter="true" bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_Find}" bars:BarItem.Glyph="{DynamicResource EditorShowSerchPanel}" bars:BarItem.KeyGesture="Ctrl+F" bars:BarItem.Command="{Binding SearchPanel.OnShowSearchPanelCommand}" />
+                <bars:BarItemSeparator />
+                <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_Replace}" bars:BarItem.Glyph="{DynamicResource QuickReplaceIcon}" bars:BarItem.KeyGesture="Ctrl+H" bars:BarItem.Command="{Binding SearchPanel.OnShowReplacePanelCommand}" />
+                <bars:BarItemSeparator />
+                <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_GoToOffset}" bars:BarItem.Command="{Binding OnGoToLineCommand}" />
+              </bars:PopupMenu>
+            </bars:BarSplitButtonItem.PopupControl>
+          </bars:BarSplitButtonItem>
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_CommentSelectedLine}" bars:BarItem.Glyph="{DynamicResource CommentCode}" bars:BarItem.Command="{Binding OnCommentCodeCommand}" bars:BarItem.IsVisible="{Binding File.FileType, Converter={StaticResource ConverterFileTypeShowCommentBarButton}, Mode=OneWay}" bars:BarItem.KeyGesture="{Binding Source={x:Static root:KeyGestureStaticValue.Instance}, Path=CtrlAndBackslash}" />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_UnCommentSelectedLine}" bars:BarItem.Glyph="{DynamicResource UncommentCode}" bars:BarItem.KeyGesture="Ctrl+D" bars:BarItem.Command="{Binding OnUncommentCodeCommand}" bars:BarItem.IsVisible="{Binding File.FileType, Converter={StaticResource ConverterFileTypeShowCommentBarButton}, Mode=OneWay}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_AddCustomCodeCompletion}" bars:BarItem.Glyph="{DynamicResource AddClassIcon}" bars:BarItem.Command="{Binding OpenWindowAddCodeCompletionDataCommand}" />
+          <bars:BarItemSeparator />
+          <bars:BarCheckItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_AniPreview}" bars:BarItem.Command="{Binding OnPrivewAniCommand}" bars:BarCheckItem.IsChecked="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowAniPreviewPanel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" bars:BarItem.IsVisible="{Binding File.FileType, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static pvfcode:PvfFileType.ani}, Mode=OneWay}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Foreground="{DynamicResource EditorToolBarItemCodeBrush}" FrameworkContentElement.ToolTip="{DynamicResource DocumentTextEditor_BarToolControl_CopyItemCode}" bars:BarItem.Command="{Binding OnCopyItemCodeCommand}" bars:BarItem.Content="{Binding File.ItemCode, Mode=OneWay}" bars:BarItem.IsVisible="{Binding File.ItemCode, Converter={StaticResource ConverterNullToIsVisibilityBoolen}}" />
+          <bars:BarItemSeparator />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_CopyCurrentLineAndPasteInNextLine}" bars:BarItem.IsVisible="False" bars:BarItem.KeyGesture="Ctrl+D" bars:BarItem.Command="{Binding OnCopyNowLinePasteNextLineCommand}" />
+          <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_CloseCurrentDocument}" bars:BarItem.IsVisible="False" bars:BarItem.KeyGesture="Ctrl+W" bars:BarItem.Command="{Binding OnCloseCommand}" />
+          <bars:BarButtonItem bars:BarItem.CommandParameter="True" bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_MoveUpLine}" bars:BarItem.IsVisible="False" bars:BarItem.KeyGesture="Alt + Up" bars:BarItem.Command="{Binding OnMovingCurrentRowUpAndDownCommand}" />
+          <bars:BarButtonItem bars:BarItem.CommandParameter="False" bars:BarItem.Content="{DynamicResource DocumentTextEditor_BarToolControl_MoveDownLine}" bars:BarItem.IsVisible="False" bars:BarItem.KeyGesture="Alt + Down" bars:BarItem.Command="{Binding OnMovingCurrentRowUpAndDownCommand}" />
+        </bars:ToolBarControl>
+      </bars:BarContainerControl>
+      <editors:ButtonEdit FrameworkElement.Name="pathTextBox" Grid.Column="1" FrameworkElement.MinWidth="0" FrameworkElement.HorizontalAlignment="Stretch" Control.VerticalContentAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.AllowDefaultButton="False" Control.BorderThickness="0" editors:BaseEdit.IsReadOnly="False" editors:TextEditBase.ShowTooltipForTrimmedText="True" editors:TextEditBase.TextTrimming="CharacterEllipsis" Control.BorderBrush="{x:Null}" editors:TextEditBase.Text="{Binding Path=ToolBarFullPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <editors:ButtonEdit.Buttons>
+          <editors:ButtonInfo editors:ButtonInfoBase.IsLeft="False" FrameworkContentElement.ToolTip="复制路径" ToolTipService.InitialShowDelay="50" editors:CommandButtonInfo.Command="{Binding OnCopyFilePathCommand}">
+            <editors:ButtonInfo.Content>
+              <Image Width="12" Height="12" Source="{DynamicResource CopyIcon}" Stretch="Fill" />
+            </editors:ButtonInfo.Content>
+          </editors:ButtonInfo>
+        </editors:ButtonEdit.Buttons>
+        <Interaction.Behaviors xmlns="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+          <ui:KeyToCommand xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:KeyToCommand.KeyGesture="Enter" ui:EventToCommandBase.Command="{Binding OnOpenNewDocumentCommand}" />
+        </Interaction.Behaviors>
+      </editors:ButtonEdit>
+    </Grid>
+    <Grid Name="gridMain" Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+      <local:SearchPanel HorizontalAlignment="Right" VerticalAlignment="Top" Panel.ZIndex="1" AllowDrop="True" DataContext="{Binding SearchPanel}" MaxWidthValue="{Binding ElementName=editor, Path=ActualWidth, Mode=OneWay}" Visibility="{Binding Visibility, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}" />
+      <previewcontrols:TextEditorPreviewAni HorizontalAlignment="Right" VerticalAlignment="Bottom" Panel.ZIndex="1" MaxHeightValue="{Binding ElementName=editor, Path=ActualHeight, Mode=OneWay}" MaxWidthValue="{Binding ElementName=editor, Path=ActualWidth, Mode=OneWay}">
+        <FrameworkElement.Style>
+          <Style TargetType="{x:Type previewcontrols:TextEditorPreviewAni}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+              <DataTrigger Value="True" Binding="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowAniPreviewPanel, Mode=OneWay}">
+                <Setter Property="Visibility" Value="Visible" />
+              </DataTrigger>
+              <DataTrigger Value="False" Binding="{Binding TextEditorPrivewViewVisibility}">
+                <Setter Property="Visibility" Value="Collapsed" />
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkElement.Style>
+      </previewcontrols:TextEditorPreviewAni>
+      <local:TextEditorBase local:TextEditorBase.Name="editor" AllowCompletion="True" AllowFolding="True" avEditEx:TextEdit.EditorType="Editor" Control.FontFamily="Consola" Control.Foreground="{DynamicResource EditorForeground}" xmlns:avalonedit1="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit1:TextEditor.ShowLineNumbers="True" avEditEx:TextEdit.VerticalScrollBarVisibilityBase="Disabled" avalonedit1:TextEditor.Document="{Binding Document, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" avEditEx:TextEdit.EnableTextDragDrop="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.EnableTextDragDrop, Mode=TwoWay}" avEditEx:TextEdit.EnableVirtualSpace="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.EnableVirtualSpace, Mode=TwoWay}" avalonedit1:TextEditor.Encoding="{Binding EditorEdcoding, Mode=OneWay}" FileType="{Binding File.FileType, Mode=OneWay}" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.SizeUnitLabel.ScreenPoints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsActive="{Binding IsActive, Mode=TwoWay}" avEditEx:TextEdit.Line="{Binding FocusCaretLine, Mode=TwoWay}" avEditEx:TextEdit.PvfEncodingType="{Binding NowEncoding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PvfFile="{Binding File, Mode=OneWay}" avEditEx:TextEdit.ShowEndOfLine="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowEndOfLine, Mode=TwoWay}" avEditEx:TextEdit.ShowSpaces="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowSpaces, Mode=TwoWay}" avEditEx:TextEdit.ShowTabs="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowTabs, Mode=TwoWay}" avEditEx:TextEdit.SizeUnitLabel="{Binding Source={x:Static appsetting:AppSetting.Instance}, Mode=OneWay, Path=EditConfig.SizeUnitLabel}" avalonedit1:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" TextIsChanged="{Binding TextIsChanged, Mode=TwoWay}" avalonedit1:TextEditor.WordWrap="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.WordWrap, Mode=TwoWay}" x:Name="editor">
+        <Interaction.Behaviors xmlns="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+          <EventToCommand p26:EventTriggerBase.Event="Loaded" p27:EventToCommandBase.Command="{Binding TextEditLoadCommand}" p27:EventToCommandBase.CommandParameter="{Binding ElementName=editor}" xmlns:p27="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns:p26="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+        </Interaction.Behaviors>
+        <avalonedit1:TextEditor.Options>
+          <avalonedit1:TextEditorOptions avalonedit1:TextEditorOptions.AllowScrollBelowDocument="False" avalonedit1:TextEditorOptions.CutCopyWholeLine="True" avalonedit1:TextEditorOptions.EnableEmailHyperlinks="False" avalonedit1:TextEditorOptions.EnableImeSupport="True" avalonedit1:TextEditorOptions.HighlightCurrentLine="False" avalonedit1:TextEditorOptions.InheritWordWrapIndentation="True" avalonedit1:TextEditorOptions.ShowBoxForControlCharacters="False" />
+        </avalonedit1:TextEditor.Options>
+        <bars:BarManager.DXContextMenu xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+          <bars:PopupMenu>
+            <bars:PopupMenu.Items>
+              <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_SelectNodeInFileExplorer}" bars:BarItem.Glyph="{DynamicResource TreeViewIcon}" bars:BarItem.Command="{Binding OnGoToTreeFileViewCommand}" />
+              <bars:BarItemSeparator />
+              <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_Refresh}" bars:BarItem.Glyph="{DynamicResource RefreshIcon}" bars:BarItem.Command="{Binding RefDocumentTextCommand}" />
+              <bars:BarItemSeparator />
+              <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_Save}" bars:BarItem.Command="{Binding OnSaveCommand}" />
+              <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_SaveAs}" bars:BarItem.Command="{Binding DocumentTextSaveAsCommand}" />
+              <bars:BarItemSeparator />
+              <bars:BarButtonItem bars:BarItem.Command="Cut" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_Cut}" bars:BarItem.Glyph="{DynamicResource CutIcon}" bars:BarItem.KeyGesture="Ctrl+X" />
+              <bars:BarButtonItem bars:BarItem.Command="Copy" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_Copy}" bars:BarItem.Glyph="{DynamicResource CopyIcon}" bars:BarItem.KeyGesture="Ctrl+C" />
+              <bars:BarButtonItem bars:BarItem.Command="Paste" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_Paste}" bars:BarItem.Glyph="{DynamicResource PasteIcon}" bars:BarItem.KeyGesture="Ctrl+V" />
+              <bars:BarItemSeparator />
+              <bars:BarButtonItem bars:BarItem.CommandParameter="False" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_FormatDocument}" bars:BarItem.Command="{Binding BeautifyCodeCommand}" bars:BarItem.IsVisible="{Binding File.FileType, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static pvfcode:PvfFileType.nut}}" />
+              <bars:BarButtonItem bars:BarItem.CommandParameter="True" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_FormatSelection}" bars:BarItem.Command="{Binding BeautifyCodeCommand}" bars:BarItem.IsVisible="{Binding File.FileType, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static pvfcode:PvfFileType.nut}}" />
+              <bars:BarItemSeparator />
+              <bars:BarButtonItem bars:BarItem.Command="SelectAll" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_SelectAll}" bars:BarItem.Glyph="{DynamicResource SelectAllIcon}" bars:BarItem.KeyGesture="Ctrl+A" />
+              <bars:BarItemSeparator />
+              <bars:BarButtonItem bars:BarItem.Command="Undo" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_Undo}" bars:BarItem.KeyGesture="Ctrl+Z" />
+              <bars:BarButtonItem bars:BarItem.Command="Redo" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_Redo}" />
+              <bars:BarItemSeparator />
+              <bars:BarSubItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_OutlineDisplay}" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                <bars:BarButtonItem bars:BarItem.CommandParameter="True" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_ToggleOutlineDisplayExpand}" bars:BarItem.KeyGesture="Ctrl+M" bars:BarItem.Command="{Binding OnSwitchFoldingCommand}" />
+                <bars:BarButtonItem bars:BarItem.CommandParameter="False" bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_ToggleOutlineDisplayCollapse}" bars:BarItem.KeyGesture="Ctrl+L" bars:BarItem.Command="{Binding OnSwitchFoldingCommand}" />
+                <bars:BarItemSeparator />
+                <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_CollapseCurrentRegion}" bars:BarItem.KeyGesture="Ctrl+U" bars:BarItem.Command="{Binding OnSwitchFoldingCurrentRangeCommand}" />
+              </bars:BarSubItem>
+              <bars:BarItemSeparator />
+              <bars:BarButtonItem bars:BarItem.Content="{DynamicResource DocumentTextEditor_RightClickMenu_NewLstEmptyLine}" bars:BarItem.KeyGesture="Ctrl+O" bars:BarItem.Command="{Binding OnInsertLstNullLineCommand}" bars:BarItem.IsVisible="{Binding File.FileType, Converter={StaticResource ConvertEnumToBoolen}, ConverterParameter={x:Static pvfcode:PvfFileType.lst}}" />
+            </bars:PopupMenu.Items>
+          </bars:PopupMenu>
+        </bars:BarManager.DXContextMenu>
+      </local:TextEditorBase>
+      <Grid Name="gridScrollMap" Column="2">
+        <advanced:RangeScrollbar advanced:RangeScrollbar.Name="rscrollbar" FrameworkElement.Width="23" FrameworkElement.Margin="0,0,0,0" Control.BorderThickness="1" advanced:RangeScrollbar.ItemTemplateSelector="{StaticResource VerticalScrollBarHighlightedSelectorTemplate}" RangeBase.Minimum="0" RangeBase.SmallChange="10" advanced:RangeScrollbar.ItemsSource="{Binding Path=VerticalScrollBarHighlightedMagager.Items}" RangeBase.LargeChange="{Binding ElementName=editor, Path=ViewportSizeEx, Mode=TwoWay}" RangeBase.Maximum="{Binding ElementName=editor, Path=MaxNumEx, Mode=TwoWay}" ScrollBar.ViewportSize="{Binding ElementName=editor, Path=ViewportSizeEx, Mode=TwoWay}" RangeBase.Value="{Binding ElementName=editor, Path=VerticalOffsetEx, Mode=TwoWay}">
+        </advanced:RangeScrollbar>
+      </Grid>
+      <WaitIndicator FrameworkElement.HorizontalAlignment="Center" Control.Background="#00FFFFFF" Control.BorderBrush="#00FFFFFF" Control.BorderThickness="0" ContentControl.Content="Loading..." p21:WaitIndicator.DeferedVisibility="{Binding IsLoading, Mode=OneWay}" xmlns:p21="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+    </Grid>
+  </Grid>
+</UserControl>

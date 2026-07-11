@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!-- Source: http://geogen.googlecode.com/svn/trunk/config/squirrel.xshd -->
+<SyntaxDefinition name="Script" extensions=".script" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+	<!-- Reference: http://www.squirrel-lang.org/
+       Reference Manual: http://www.squirrel-lang.org/doc/squirrel2.html -->
+	<Color name="Header"  foreground="Gray" fontWeight="bold" />
+	<Color name="String" foreground="#a31515" exampleText="string text = &quot;Hello, World!&quot;" />
+	<!--<Color name="FilePath" foreground="#a31515" exampleText="string text = &quot;Hello, World!&quot;"  /> -->
+	<!--仅标记为路径但不创建下划线！下划线由程序自动生成 underline="true"-->
+	<Color name="Section" foreground="#f92672" />
+	<Color name="SectionEnd" foreground="#f92672" />
+	<Color name="Digits" foreground="#5b2da8" exampleText="3.1415f" />
+	<Color name="Comment" foreground="Green" exampleText="// comment" />
+	<Color name="Curlybraces" foreground="#007acc" exampleText="{}" />
+	<!--KOR尖括号-->
+	<Color name="KorStringMarkSymbol" foreground="#007acc" />
+	<!--KorName-->
+	<Color name="KorName" foreground="#f92672" underline="true"/>
+	<!--Kor冒号-->
+	<Color name="KorColon" foreground="#569CD6" underline="true"/>
+
+
+	<RuleSet ignoreCase="true">
+
+		<Span  color="Header" multiline="false">
+			<Begin>\#</Begin>
+		</Span>
+
+		<Span color="KorStringMarkSymbol" multiline="false">
+			<Begin>&lt;</Begin>
+			<End>&gt;</End>
+			<RuleSet ignoreCase="true">
+				<Rule color="KorName">
+					(?&lt;=::)[^`]+
+				</Rule>
+				<Rule color="Digits">
+					-?(0|[1-9]\d*)(\.\d+)?
+				</Rule>
+				<Span color="String" multiline="true">
+					<Begin>`</Begin>
+					<End>`</End>
+				</Span>
+				<Keywords color="KorColon">
+					<Word>::</Word>
+				</Keywords>
+			</RuleSet>
+			<!--<RuleSet ignoreCase="true">
+			</RuleSet>-->
+		</Span>
+
+
+		<Span color="String" multiline="true">
+			<Begin>`</Begin>
+			<End>`</End>
+
+			<!--<RuleSet ignoreCase="true">
+				<Rule color="FilePath">
+					[^\.]+\.[^\.]+
+				</Rule>
+			</RuleSet>-->
+		</Span>
+
+		<!--//skill/atgunner/aerialgatling.skl-->
+		<Span color="Curlybraces" multiline="false">
+			<Begin>{</Begin>
+			<End>}</End>
+
+			<RuleSet ignoreCase="true">
+				<Span color="String" multiline="true">
+					<Begin>`</Begin>
+					<End>`</End>
+				</Span>
+				<Rule color="Digits">
+					\b0[xX][0-9a-fA-F]+  # hex number
+					|	\b
+					(	\d+(\.[0-9]+)?   #number with optional floating point
+					|	\.[0-9]+         #or just starting with floating point
+					)
+					([eE][+-]?[0-9]+)? # optional exponent
+				</Rule>
+			</RuleSet>
+		</Span>
+		<Span color="SectionEnd">
+			<Begin>\[/</Begin>
+			<End>\]</End>
+		</Span>
+		<Span color="Section">
+			<Begin>\[</Begin>
+			<End>\]</End>
+		</Span>
+		<Span color="Comment">
+			<Begin>//</Begin>
+		</Span>
+
+		<!-- Digits -->
+		<Rule color="Digits">
+			-?(0|[1-9]\d*)(\.\d+)?
+		</Rule>
+	</RuleSet>
+</SyntaxDefinition>

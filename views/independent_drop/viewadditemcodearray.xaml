@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<independent_drop:ViewAddItemCodeArray xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:i1="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" FrameworkElement.Name="win" Window.Title="{DynamicResource ViewAddItemCodeArray_Title}" FrameworkElement.Width="400" FrameworkElement.Height="300" xmlns:independent_drop="clr-namespace:PvfCode.Views.independent_drop;assembly=pvfUtility">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <Grid>
+      <texteditorfolder:TextEditorBase AllowCompletion="False" UIElement.AllowDrop="False" AllowFolding="False" AllowUpdateFolding="False" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" texteditlib:TextEdit.EditorType="OutPut" xmlns:avalonedit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit:TextEditor.ShowLineNumbers="False">
+        <i1:Interaction.Behaviors>
+          <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Str, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </i1:Interaction.Behaviors>
+      </texteditorfolder:TextEditorBase>
+    </Grid>
+    <controls:EditBox Grid.Row="1" Margin="0,8,0,8" Caption="{DynamicResource ViewAddItemCodeArray_Weight}" Value="{Binding DropWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <Grid Row="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <StackPanel Orientation="Horizontal" />
+      <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+        <CheckBox Content="{DynamicResource ViewAddItemCodeArray_RemoveDuplicate}" IsChecked="{Binding RemoveRepeat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <CheckBox Margin="5,0,0,0" Content="{DynamicResource ViewAddItemCodeArray_RemoveInvalidCode}" IsChecked="{Binding CheckItemCodeAny, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Width="70" Height="25" Margin="10,0,10,0" Content="{DynamicResource common_OK}" Cursor="Hand" Command="{Binding OnYesCommand}" CommandParameter="{Binding ElementName=win}" IsEnabled="{Binding YesButtonIsEnable}" />
+        <Button Width="70" Height="25" Content="{DynamicResource common_Cancel}" Cursor="Hand" Command="{Binding OnCancelCommand}" CommandParameter="{Binding ElementName=win}" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</independent_drop:ViewAddItemCodeArray>

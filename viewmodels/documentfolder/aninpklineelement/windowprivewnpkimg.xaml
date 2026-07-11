@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aninpklineelement:WindowPrivewNpkImg xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" FrameworkElement.Width="600" FrameworkElement.Height="600" Window.ResizeMode="CanResizeWithGrip" xmlns:aninpklineelement="clr-namespace:PvfCode.ViewModels.DocumentFolder.AniNpkLineElement;assembly=pvfUtility" Window.Title="{Binding ImgPath}">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding LoadedCommand}" />
+  </interactivity:Interaction.Behaviors>
+  <Grid>
+    <Label Foreground="#FF808080">目前这只是简易版不要吐糟应提交建议</Label>
+    <ProgressBar Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" Visibility="{Binding Loading, Converter={StaticResource ConvertBoolenToVisibility}}" />
+    <Canvas HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Image Stretch="Fill" Canvas.Left="{Binding Item.Sprite.X}" Canvas.Top="{Binding Item.Sprite.Y}" Width="{Binding Sprite.Width}" Height="{Binding Sprite.Height}" Source="{Binding Sprite.ImageSource, Mode=OneWay}" Visibility="{Binding Loading, Converter={StaticResource ConvertBoolenFalseToVisibility}}" />
+    </Canvas>
+  </Grid>
+</aninpklineelement:WindowPrivewNpkImg>

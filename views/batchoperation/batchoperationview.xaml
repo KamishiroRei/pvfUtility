@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<batchoperation:BatchOperationView xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:batch="clr-namespace:PvfCode.Converts.Batch;assembly=pvfUtility" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" xmlns:i1="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:macro="clr-namespace:PvfCode.Views.Macro;assembly=pvfUtility" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" FrameworkElement.Name="win" Window.Title="{DynamicResource BatchOperationView_Title}" FrameworkElement.Width="800" FrameworkElement.Height="550" Control.Padding="0" Window.ResizeMode="CanResizeWithGrip" xmlns:batchoperation="clr-namespace:PvfCode.Views.BatchOperation;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}" UIElement.IsEnabled="{Binding TreeViewModel.TreeGroupData.Loading, Converter={StaticResource ConverterBoolenToFalse}, Mode=OneWay}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <batch:ConverterBatchSourceComboxItem x:Key="ConverterBatchSourceComboxItem" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <core:ThemedWindow.HeaderItems xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1">
+    <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+      <bars:BarSubItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.KeyGesture="{Binding Source={x:Static root:KeyGestureStaticValue.Instance}, Path=AltAndLeft}">
+        <FrameworkContentElement.Style>
+          <Style TargetType="{x:Type bars:BarSubItem}">
+            <Style.Triggers>
+              <DataTrigger Value="True" Binding="{Binding RecordingLoading}">
+                <Setter Property="bars:BarItem.Content" Value="{DynamicResource GlobalSearchWindow_MacroBarButtonTitleRecording}" />
+                <Setter Property="bars:BarItem.Foreground" Value="#c04048" />
+                <Setter Property="bars:BarItem.Glyph" Value="{DynamicResource StopIcon}" />
+              </DataTrigger>
+              <DataTrigger Value="False" Binding="{Binding RecordingLoading}">
+                <Setter Property="bars:BarItem.Content" Value="{DynamicResource GlobalSearchWindow_MacroBarButtonTitle}" />
+                <Setter Property="bars:BarItem.Glyph" Value="{DynamicResource MacroIcon}" />
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkContentElement.Style>
+        <bars:BarButtonItem bars:BarItem.Command="{Binding SetRecordingLoadingCommand}">
+          <FrameworkContentElement.Style>
+            <Style TargetType="{x:Type bars:BarButtonItem}">
+              <Style.Triggers>
+                <DataTrigger Value="True" Binding="{Binding RecordingLoading}">
+                  <Setter Property="bars:BarItem.Content" Value="{DynamicResource GlobalSearchWindow_StopRecording}" />
+                  <Setter Property="bars:BarItem.CommandParameter" Value="False" />
+                  <Setter Property="bars:BarItem.Glyph" Value="{DynamicResource StopIcon}" />
+                </DataTrigger>
+                <DataTrigger Value="False" Binding="{Binding RecordingLoading}">
+                  <Setter Property="bars:BarItem.Content" Value="{DynamicResource GlobalSearchWindow_RecordMacro}" />
+                  <Setter Property="bars:BarItem.CommandParameter" Value="True" />
+                  <Setter Property="bars:BarItem.Glyph" Value="{DynamicResource RunIcon}" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </FrameworkContentElement.Style>
+        </bars:BarButtonItem>
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.Content="{DynamicResource GlobalSearchWindow_ManageMacro}" bars:BarItem.Glyph="{DynamicResource SettingWindowIcon}" />
+        <bars:BarItemSeparator />
+        <bars:BarButtonItem bars:BarItem.Content="{DynamicResource GlobalSearchWindow_MacroStore}" />
+        <bars:BarItemSeparator />
+        <bars:BarSubItem FrameworkContentElement.Style="{StaticResource 批处理宏_SubItemNow}" />
+      </bars:BarSubItem>
+    </bars:ToolBarControl>
+  </core:ThemedWindow.HeaderItems>
+  <docking:DockLayoutManager xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:DockLayoutManager.Name="DemoDockContainer" Grid.Row="0" Grid.ColumnSpan="2" FrameworkElement.Margin="0,0,0,3" docking:DockLayoutManager.DockingStyle="VS2010" docking:DockLayoutManager.FloatingDocumentContainer="DocumentHost" docking:DockLayoutManager.FloatingMode="Desktop">
+    <docking:LayoutGroup FrameworkElement.Name="Root">
+      <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource BatchOperationView_FileExplorerCaption}" docking:BaseLayoutItem.ItemWidth="1.5*">
+        <Grid IsEnabled="{Binding TreeViewModel.TreeGroupData.Loading, Converter={StaticResource ConverterBoolenToFalse}, Mode=OneWay}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+          <ToolBarControl FrameworkElement.Name="toolbarControl" p21:ToolBarControlBase.AllowCustomizationMenu="False" p21:ToolBarControl.AllowQuickCustomization="False" xmlns:p21="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+            <p21:BarButtonItem p21:BarItem.CommandParameter="false" p21:BarItem.Content="{DynamicResource BatchOperationView_AddFileFromExplorer}" p21:BarItem.Glyph="{DynamicResource SelectAllIcon}" p21:BarItem.Command="{Binding SelectedFilesCommand}" />
+            <p21:BarItemSeparator />
+            <p21:BarButtonItem p21:BarItem.CommandParameter="true" p21:BarItem.Content="{DynamicResource BatchOperationView_AddFileFromSearchView}" p21:BarItem.Glyph="/images/svgs/groupselectcursor_16x.svg" p21:BarItem.Command="{Binding SelectedFilesCommand}" />
+            <p21:BarItemSeparator />
+            <p21:BarButtonItem p21:BarItem.CommandParameter="false" p21:BarItem.Content="{DynamicResource BatchOperationView_ClearAllFile}" p21:BarItem.Glyph="{DynamicResource ClearWindowContent}" p21:BarItem.Command="{Binding OnClearAllFilesCommand}" />
+          </ToolBarControl>
+          <controls:PvfTreeViewGroup Grid.Row="1" TreeAllowDrop="False" DataContext="{Binding TreeViewModel}" />
+          <bars:StatusBarControl Grid.Row="2" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" Control.Background="{Binding ElementName=toolbarControl, Path=Background}">
+            <bars:BarStaticItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+              <bars:BarItem.ContentTemplate>
+                <DataTemplate>
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource BatchOperationView_FileCount}" />
+                    <TextBlock Text="{Binding Path=DataContext.TreeViewModel.TreeGroupData.FileCount, Mode=OneWay, RelativeSource={RelativeSource AncestorType=dxb:StatusBarControl}}" />
+                  </StackPanel>
+                </DataTemplate>
+              </bars:BarItem.ContentTemplate>
+            </bars:BarStaticItem>
+          </bars:StatusBarControl>
+        </Grid>
+      </docking:LayoutPanel>
+      <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource BatchOperationView_OperationPanelCaption}" docking:BaseLayoutItem.ItemWidth="2*">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+          <TabControl Margin="0,1,0,0" Padding="0" BorderThickness="0" SelectedIndex="{Binding Config.TabControlSelectedIndex, Mode=TwoWay}">
+            <FrameworkElement.Resources>
+              <ResourceDictionary>
+                <Style x:Key="{x:Type TabItem}" TargetType="{x:Type TabItem}">
+                  <Setter xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" Property="bars:MergingProperties.ElementMergingBehavior" Value="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}" />
+                </Style>
+              </ResourceDictionary>
+            </FrameworkElement.Resources>
+            <TabItem Margin="0" Header="{DynamicResource BatchOperationView_FindReplaceTabItemHeader}">
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <layoutcontrol:GroupBox FrameworkElement.Margin="0" Control.Padding="0" HeaderedContentControlBase.Header="{DynamicResource BatchOperationView_FindContentLabel}" xmlns:layoutcontrol="clr-namespace:DevExpress.Xpf.LayoutControl;assembly=DevExpress.Xpf.LayoutControl.v24.1">
+                  <texteditlib:TextEdit FrameworkElement.MinHeight="100" Control.Padding="0" texteditlib:TextEdit.EditorType="Search" xmlns:avalonedit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit:TextEditor.HorizontalScrollBarVisibility="Disabled" avalonedit:TextEditor.ShowLineNumbers="False" avalonedit:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}">
+                    <i1:Interaction.Behaviors>
+                      <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Config.FindKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </i1:Interaction.Behaviors>
+                  </texteditlib:TextEdit>
+                </layoutcontrol:GroupBox>
+                <GridSplitter Grid.Row="1" Height="5" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                <GroupBox Grid.Row="2" FrameworkElement.Margin="0" Control.Padding="0" HeaderedContentControlBase.Header="{DynamicResource BatchOperationView_ReplaceContentLabel}" xmlns="clr-namespace:DevExpress.Xpf.LayoutControl;assembly=DevExpress.Xpf.LayoutControl.v24.1">
+                  <texteditlib:TextEdit FrameworkElement.MinHeight="100" Control.Padding="0" texteditlib:TextEdit.EditorType="Search" p25:TextEditor.HorizontalScrollBarVisibility="Disabled" p25:TextEditor.ShowLineNumbers="False" p25:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" xmlns:p25="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit">
+                    <i1:Interaction.Behaviors>
+                      <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Config.ReplaceKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </i1:Interaction.Behaviors>
+                  </texteditlib:TextEdit>
+                </GroupBox>
+              </Grid>
+            </TabItem>
+            <TabItem Header="{DynamicResource BatchOperationView_FeatureReplaceTabItemHeader}">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1.8*" />
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <GroupBox FrameworkElement.Margin="0" Control.Padding="0" HeaderedContentControlBase.Header="{DynamicResource BatchOperationView_StartFeatureLabel}" xmlns="clr-namespace:DevExpress.Xpf.LayoutControl;assembly=DevExpress.Xpf.LayoutControl.v24.1">
+                  <texteditlib:TextEdit FrameworkElement.MinHeight="100" Control.Padding="0" texteditlib:TextEdit.EditorType="Search" p25:TextEditor.HorizontalScrollBarVisibility="Disabled" p25:TextEditor.ShowLineNumbers="False" p25:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" xmlns:p25="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit">
+                    <i1:Interaction.Behaviors>
+                      <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Config.FindStartKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </i1:Interaction.Behaviors>
+                  </texteditlib:TextEdit>
+                </GroupBox>
+                <GridSplitter Grid.Row="1" Height="5" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                <GroupBox Grid.Row="2" FrameworkElement.Margin="0" Control.Padding="0" HeaderedContentControlBase.Header="{DynamicResource BatchOperationView_EndFeatureLabel}" xmlns="clr-namespace:DevExpress.Xpf.LayoutControl;assembly=DevExpress.Xpf.LayoutControl.v24.1">
+                  <texteditlib:TextEdit FrameworkElement.MinHeight="100" Control.Padding="0" texteditlib:TextEdit.EditorType="Search" p25:TextEditor.HorizontalScrollBarVisibility="Disabled" p25:TextEditor.ShowLineNumbers="False" p25:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" xmlns:p25="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit">
+                    <i1:Interaction.Behaviors>
+                      <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Config.FindEndKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </i1:Interaction.Behaviors>
+                  </texteditlib:TextEdit>
+                </GroupBox>
+                <GridSplitter Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Width="5" Padding="0" HorizontalAlignment="Stretch" />
+                <GroupBox Grid.RowSpan="3" Grid.Column="2" FrameworkElement.Margin="0" Control.Padding="0" HeaderedContentControlBase.Header="{DynamicResource BatchOperationView_FeatureReplaceContentLabel}" xmlns="clr-namespace:DevExpress.Xpf.LayoutControl;assembly=DevExpress.Xpf.LayoutControl.v24.1">
+                  <texteditlib:TextEdit FrameworkElement.MinHeight="100" Control.Padding="0" texteditlib:TextEdit.EditorType="Search" p25:TextEditor.HorizontalScrollBarVisibility="Disabled" p25:TextEditor.ShowLineNumbers="False" p25:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" xmlns:p25="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit">
+                    <i1:Interaction.Behaviors>
+                      <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Config.TraitReplaceKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </i1:Interaction.Behaviors>
+                  </texteditlib:TextEdit>
+                </GroupBox>
+              </Grid>
+            </TabItem>
+            <TabItem Margin="0" Header="{DynamicResource BatchOperationView_AppendContentTabItemHeader}">
+              <GroupBox FrameworkElement.Margin="0" Control.Padding="0" HeaderedContentControlBase.Header="{DynamicResource BatchOperationView_AppendContentLabel}" xmlns="clr-namespace:DevExpress.Xpf.LayoutControl;assembly=DevExpress.Xpf.LayoutControl.v24.1">
+                <texteditlib:TextEdit FrameworkElement.MinHeight="100" Control.Padding="0" texteditlib:TextEdit.EditorType="Search" p24:TextEditor.HorizontalScrollBarVisibility="Disabled" p24:TextEditor.ShowLineNumbers="False" p24:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" xmlns:p24="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit">
+                  <i1:Interaction.Behaviors>
+                    <texteditorfolder:AvalonEditBehaviour GiveMeTheText="{Binding Config.AddContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  </i1:Interaction.Behaviors>
+                </texteditlib:TextEdit>
+              </GroupBox>
+            </TabItem>
+            <TabItem Margin="0" Header="{DynamicResource BatchOperationView_DeleteTagTabItemHeader}">
+              <Grid Margin="10">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label HorizontalAlignment="Right" Content="{DynamicResource BatchOperationView_TagLabel}" />
+                <editors:TextEdit Grid.Column="1" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:BaseEdit.NullText="[name]" editors:TextEditBase.Text="{Binding Config.DeleteSectionKeyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Grid Row="1" Column="1" Margin="0,10,0,0" Visibility="{Binding Config.HasEndSection, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                  </Grid.ColumnDefinitions>
+                  <Label Margin="0,0,0,0" Content="{DynamicResource BatchOperationView_DeleteTagAndChildLLabe}" ToolTip="{DynamicResource BatchOperationView_DeleteTagAndChildLLabeToolTip}" ToolTipService.InitialShowDelay="50" />
+                  <TextEdit Grid.Column="1" FrameworkElement.Width="30" FrameworkElement.ToolTip="{DynamicResource BatchOperationView_DeleteTagAndChildLLabeToolTip}" p25:TextEditBase.Text="{Binding Config.DeleteSectionLineNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p25="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  <Label Grid.Column="2" Margin="5,0,0,0" Content="{DynamicResource BatchOperationView_LineLabel}" ToolTip="{DynamicResource BatchOperationView_DeleteTagAndChildLLabeToolTip}" />
+                </Grid>
+                <CheckBox Grid.Row="2" Grid.Column="1" Margin="0,5,0,0" Content="{DynamicResource BatchOperationView_KeepTagCheckBox}" IsChecked="{Binding Config.KeepDeleteSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Config.HasEndSection, Converter={StaticResource ConvertBoolenFalseToVisibility}}" />
+                <CheckBox Grid.Row="3" Grid.Column="1" Margin="0,5,0,0" Content="{DynamicResource BatchOperationView_HasEndTagCheckBox}" ToolTip="{DynamicResource BatchOperationView_HasEndTagCheckBoxToolTip}" IsChecked="{Binding Config.HasEndSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+              </Grid>
+            </TabItem>
+          </TabControl>
+          <Grid Row="1">
+            <GroupBox Header="{DynamicResource BatchOperationView_Options_FileTypeFilterLabel}">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <editors:ComboBoxEdit xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.IsTextEditable="False" editors:BaseEdit.EditValue="{Binding Config.RemoveOrKeepFileType, Mode=TwoWay}" editors:LookUpEditBase.ItemsSource="{Binding Source={StaticResource KeyRemoveOrKeepFileType}}" />
+                <ComboBoxEdit FrameworkElement.Name="comboBoxEditFileTypesString" Grid.Column="1" p24:ButtonEdit.AllowDefaultButton="False" p24:ButtonEdit.IsTextEditable="True" p24:BaseEdit.NullText="{DynamicResource BatchOperationView_Options_FileTypeFilterNullText}" p24:BaseEdit.EditValue="{Binding Config.FileTypes, Converter={StaticResource ConvertFileTypeHasSet}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" p24:LookUpEditBase.ItemsSource="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=PvfConfig.FileTypes}" xmlns:p24="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+                  <p24:ButtonEdit.Buttons>
+                    <editors:ButtonInfo xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonInfo.GlyphKind="Cancel" FrameworkContentElement.ToolTip="{DynamicResource BatchOperationView_Options_ClearButtonToolTip}">
+                    </editors:ButtonInfo>
+                    <editors:ButtonInfo editors:ButtonInfo.GlyphKind="DropDown" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonInfoBase.IsDefaultButton="True" FrameworkContentElement.ToolTip="{DynamicResource BatchOperationView_Options_SelectFileTypeButtonToolTip}" />
+                  </p24:ButtonEdit.Buttons>
+                  <p24:BaseEdit.StyleSettings>
+                    <editors:CheckedComboBoxStyleSettings xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                  </p24:BaseEdit.StyleSettings>
+                </ComboBoxEdit>
+              </Grid>
+            </GroupBox>
+          </Grid>
+          <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
+            <ToolBarControl Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" FrameworkElement.Margin="0,0,20,0" FrameworkElement.VerticalAlignment="Center" p22:ToolBarControlBase.AllowCustomizationMenu="False" p22:ToolBarControl.AllowQuickCustomization="False" xmlns:p22="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+              <FrameworkElement.Resources xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                <ResourceDictionary>
+                  <Style x:Key="{x:Type bars:BarCheckItem}" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" TargetType="{x:Type bars:BarCheckItem}">
+                    <Style.Triggers>
+                      <Trigger Property="bars:BarCheckItem.IsChecked" Value="True">
+                        <Setter Property="bars:BarItem.Background" Value="#00FFFFFF" />
+                        <Setter Property="bars:BarItem.BorderBrush" Value="{DynamicResource EditorSearchPanelSettingBorderBrush}" />
+                        <Setter Property="bars:BarItem.BorderThickness" Value="2.3" />
+                      </Trigger>
+                    </Style.Triggers>
+                  </Style>
+                </ResourceDictionary>
+              </FrameworkElement.Resources>
+              <p22:BarCheckItem p22:BarItem.Margin="0,0,5,0" p22:BarItem.CommandParameter="false" p22:BarItem.Content="{DynamicResource BatchOperationView_Options_CaseSensitiveCheckBox}" FrameworkContentElement.Cursor="Hand" p22:BarItem.Glyph="{DynamicResource CaseSensitiveXamlIcon}" p22:BarItem.GlyphSize="Medium" p22:BarItem.KeyGesture="Alt+C" p22:BarCheckItem.IsChecked="{Binding Config.CaseSensitive, Mode=TwoWay}" />
+              <p22:BarCheckItem p22:BarItem.Margin="0,0,5,0" p22:BarItem.CommandParameter="false" p22:BarItem.Content="{DynamicResource BatchOperationView_Options_WholeWordCheckBox}" FrameworkContentElement.Cursor="Hand" p22:BarItem.Glyph="{DynamicResource WholeWordMatchXamlIcon}" p22:BarItem.GlyphSize="Medium" p22:BarItem.KeyGesture="Alt+W" p22:BarCheckItem.IsChecked="{Binding Config.WholeWordMatch, Mode=TwoWay}" />
+              <p22:BarCheckItem p22:BarItem.Margin="0,0,5,0" p22:BarItem.CommandParameter="false" p22:BarItem.Content="{DynamicResource BatchOperationView_Options_UseRegexCheckBox}" FrameworkContentElement.Cursor="Hand" p22:BarItem.Glyph="{DynamicResource RegularExpressionXamlIcon}" p22:BarItem.GlyphSize="Medium" p22:BarItem.KeyGesture="Alt+E" p22:BarCheckItem.IsChecked="{Binding Config.RegularExpression, Mode=TwoWay}" p22:BarItem.IsVisible="{Binding Config.RegularExpressionVisibility}" />
+              <bars:BarEditItem bars:BarItem.BorderThickness="0" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:BarEditItem.EditWidth="120" bars:BarItem.BorderBrush="{x:Null}" bars:BarEditItem.EditValue="{Binding FilesSourceType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterBatchSourceComboxItem}}">
+                <bars:BarEditItem.EditStyle>
+                  <Style TargetType="{x:Type ComboBoxEdit}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                    <Setter Property="Control.Padding" Value="0" />
+                    <Setter Property="FrameworkElement.Height" Value="21" />
+                    <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+                    <Setter Property="Control.BorderThickness" Value="0" />
+                    <Setter Property="BaseEdit.ShowBorder" Value="False" />
+                    <Setter Property="Control.FontFamily" Value="微软雅黑" />
+                  </Style>
+                </bars:BarEditItem.EditStyle>
+                <bars:BarEditItem.EditSettings>
+                  <settings:ComboBoxEditSettings xmlns:settings="clr-namespace:DevExpress.Xpf.Editors.Settings;assembly=DevExpress.Xpf.Core.v24.1" settings:ButtonEditSettings.IsTextEditable="False">
+                    <settings:ComboBoxEditSettings.Items>
+                      <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource BatchOperationView_Source_AllFiles}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                      <ComboBoxEditItem ContentControl.Content="{DynamicResource BatchOperationView_Source_SelectedFiles}" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                    </settings:ComboBoxEditSettings.Items>
+                  </settings:ComboBoxEditSettings>
+                </bars:BarEditItem.EditSettings>
+              </bars:BarEditItem>
+            </ToolBarControl>
+            <core:SimpleButton FrameworkElement.Width="100" FrameworkElement.Height="30" FrameworkElement.Margin="0,10,8,10" Control.BorderThickness="2" ContentControl.Content="{DynamicResource BatchOperationView_Options_StartButton}" FrameworkElement.Cursor="Hand" SimpleButton.Glyph="{DynamicResource RunIcon}" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" core:SimpleButton.GlyphAlignment="Left" core:SimpleButton.GlyphToContentOffset="5" FrameworkElement.ToolTip="{DynamicResource BatchOperationView_Options_StartButtonToolTip}" Control.BorderBrush="{Binding ElementName=win, Path=BorderBrush}" ButtonBase.Command="{Binding OnStartCommand}" UIElement.IsEnabled="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=PVF.PvfIsOpen}" />
+          </StackPanel>
+        </Grid>
+      </docking:LayoutPanel>
+    </docking:LayoutGroup>
+  </docking:DockLayoutManager>
+</batchoperation:BatchOperationView>

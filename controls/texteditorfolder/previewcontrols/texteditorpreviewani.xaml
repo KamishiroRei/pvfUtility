@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxb="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:local="clr-namespace:Controls.TextEditorFolder.PreviewControls;assembly=pvfUtility" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:pvfcode="clr-namespace:PvfCode;assembly=PvfCode.Models" MinWidth="200" MinHeight="200" Margin="0,0,0,18" BorderBrush="{DynamicResource WindowBackColor}" BorderThickness="0" Width="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.PreviewAniPanelWidht, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.PreviewAniPanelHeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding TextEditorPreviewViewModelBase.LoadedCommand}" ui:EventToCommandBase.CommandParameter="{Binding Document.Text}" />
+    <EventToCommand interactivity:EventTriggerBase.Event="Unloaded" p13:EventToCommandBase.Command="{Binding TextEditorPreviewViewModelBase.OnUninstall2Command}" xmlns:p13="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+  </interactivity:Interaction.Behaviors>
+  <Grid Name="gridMain">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid Background="{DynamicResource PreviewAniUiToolBarBackBrush}">
+      <dxb:ToolBarControl FrameworkElement.HorizontalAlignment="Right" FrameworkElement.VerticalAlignment="Top" Panel.ZIndex="1" dxb:ToolBarControlBase.AllowCustomizationMenu="False" dxb:ToolBarControl.AllowQuickCustomization="False" Control.Background="{DynamicResource PreviewAniUiToolBarBackBrush}" dxb:ToolBarControl.ShowDragWidget="True" dxb:ToolBarControl.UseWholeRow="True">
+        <dxb:BarCheckItem dxb:BarItem.Content="{DynamicResource TextEditorPreviewAni_RealCoordinate}" dxb:BarItem.Glyph="{DynamicResource Location}" dxb:BarCheckItem.IsChecked="{Binding TextEditorPreviewViewModelBase.RealLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <dxb:BarButtonItem dxb:BarItem.Content="{DynamicResource TextEditorPreviewAni_Detail}" FrameworkContentElement.ToolTip="{DynamicResource TextEditorPreviewAni_Detail_ToolTip}" dxb:BarItem.Command="{Binding TextEditorPreviewViewModelBase.OnOpenPreviewAniWindowCommand}" />
+        <dxb:BarButtonItem dxb:BarItem.Content="{DynamicResource TextEditorPreviewAni_Refresh}" dxb:BarItem.Glyph="{DynamicResource RefreshIcon}" dxb:BarItem.Command="{Binding TextEditorPreviewViewModelBase.OnRefreshCommand}" dxb:BarItem.CommandParameter="{Binding Document.Text}" />
+      </dxb:ToolBarControl>
+    </Grid>
+    <Grid Row="1" Background="#FF808080">
+      <Canvas Grid.Row="1" MaxWidth="100" MaxHeight="100" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding TextEditorPreviewViewModelBase.IsLoading, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+        <Image Stretch="Fill" Canvas.Left="{Binding TextEditorPreviewViewModelBase.Item.Image.ImgFile.X}" Canvas.Top="{Binding TextEditorPreviewViewModelBase.Item.Image.ImgFile.Y}" Source="{Binding TextEditorPreviewViewModelBase.Item.ImageSource, Mode=OneWay}" Visibility="{Binding TextEditorPreviewViewModelBase.RealLocation, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}" />
+      </Canvas>
+      <Canvas Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding TextEditorPreviewViewModelBase.IsLoading, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+        <Image Stretch="Fill" Source="{Binding TextEditorPreviewViewModelBase.Item.ImageSource, Mode=OneWay}" Visibility="{Binding TextEditorPreviewViewModelBase.RealLocation, Converter={StaticResource ConvertBoolenFalseToVisibility}}" />
+      </Canvas>
+      <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" Visibility="{Binding TextEditorPreviewViewModelBase.IsLoading, Converter={StaticResource ConvertBoolenToVisibility}}" />
+    </Grid>
+    <Thumb Grid.RowSpan="2" Width="12" Height="12" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="SizeNWSE" ToolTip="拖动此处改变大小" ToolTipService.InitialShowDelay="50" Visibility="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=EditConfig.ShowAniPreviewPanel, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}" DragCompleted="r1fdIDccR" DragDelta="XiIctRLGH">
+      <Control.Template>
+        <ControlTemplate>
+          <Border Padding="0">
+            <Image Source="{DynamicResource ResizeGripLeftXamlIcon}" />
+          </Border>
+        </ControlTemplate>
+      </Control.Template>
+    </Thumb>
+  </Grid>
+</UserControl>

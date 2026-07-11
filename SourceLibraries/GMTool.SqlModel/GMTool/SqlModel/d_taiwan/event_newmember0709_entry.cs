@@ -1,0 +1,24 @@
+using SqlSugar;
+
+namespace GMTool.SqlModel.d_taiwan;
+
+[SugarTable("event_newmember0709_entry")]
+public class event_newmember0709_entry
+{
+	[SugarColumn(IsPrimaryKey = true)]
+	public int m_id { get; set; }
+
+	public int occ_date { get; set; }
+
+	public byte server_id { get; set; }
+
+	public int charac_no { get; set; }
+
+	public int item1_no { get; set; }
+
+	public int item1_check { get; set; }
+
+	public int item2_no { get; set; }
+
+	public int item2_check { get; set; }
+}

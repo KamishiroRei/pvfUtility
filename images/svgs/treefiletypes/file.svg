@@ -1,0 +1,13 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<svg x="0px" y="0px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" xml:space="preserve" id="Layer_1">
+  <style type="text/css">
+	.Black{fill:#727272;}
+</style>
+  <path d="M2,4v24h28V4H2z M28,26H4V8h24V26z" fill="#727272" class="Black" />
+  <rect x="6" y="10" width="6" height="2" fill="#727272" class="Black" />
+  <rect x="14" y="10" width="12" height="4" fill="#727272" class="Black" />
+  <rect x="6" y="16" width="6" height="2" fill="#727272" class="Black" />
+  <rect x="14" y="16" width="12" height="4" fill="#727272" class="Black" />
+  <rect x="16" y="22" width="4" height="2" fill="#727272" class="Black" />
+  <rect x="22" y="22" width="4" height="2" fill="#727272" class="Black" />
+</svg>

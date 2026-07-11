@@ -1,0 +1,936 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "stk",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "3choro enchant",
+                         "Title":  "异次元属性赋予",
+                         "Comment":  "异次元属性赋予",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "A condition item",
+                         "Title":  "（A项）",
+                         "Comment":  "[A condition item]（A项）\n  物品代码1  数量  物品代码2  数量  .........\n[/A condition item]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "内脏没坏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "action type",
+                         "Title":  "強化器类型",
+                         "Comment":  "強化器类型",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "active status recovery",
+                         "Title":  "解除异常效果",
+                         "Comment":  "解除异常效果\n\n//示例：\n[active status recovery]\n\t`poison`\t70\n\t`party`\n//以上代表最高可以解除70级的中毒异常效果，且对身边友军也会生效\n\n感电：`lightning`\n束缚：`hold`\n减速：`slow`\n灼伤：`burn`\n中毒：`poison`\n眩晕：`stun`\n睡眠：`sleep`\n石化：`stone`\n失明：`blind`\n疾病：`disease`\n混乱：`confuse`\n出血：`bleeding`\n沉默：`silence`\n冰冻：`freeze`\n诅咒：`curse`\n所有异常效果：`all`\n所有异常效果：`any`\n\n仅对自身生效：`myself`\n对身边友军也会生效：`party`",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "add fatigue",
+                         "Title":  "疲劳",
+                         "Comment":  "疲劳",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "zed"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "amplification random value",
+                         "Title":  "3→50→4→30→5→15→6→5→",
+                         "Comment":  "3→50→4→30→5→15→6→5→\n3=增幅等级\n50=50%几率--以此类推\n总几率为100%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "By：春秋"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "amulet",
+                         "Title":  "装备",
+                         "Comment":  "装备：项链",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "any",
+                         "Title":  "所有异常状态效果",
+                         "Comment":  "所有异常状态效果",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "attach type",
+                         "Title":  "交易",
+                         "Comment":  "交易类型\n`[free]` = 不限制\n`[sealing]` = 封装\n`[trade]` = 不可交易\n`[account]` = 帐号绑定\n`[trade delete]` = 无法交易、删除\n`[sealing trade]` = 封装且不可交易",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "avatar select ability change",
+                         "Title":  "装扮属性调整",
+                         "Comment":  "装扮属性调整\n后面的数字2对应装扮文件里的[grade] 2 属性为高级\n数字3对应装扮文件里的[grade] 3 属性为稀有\n一一对应才可调整!",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "B condition item",
+                         "Title":  "（回收需要的条件）",
+                         "Comment":  "[B condition item]（回收需要的条件）\n    物品代码   数量\n\n[result item] （回收后给的道具）\n物品代码\t数量   概率   （可多选项随机）\n[/result item]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "内脏没坏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "bleeding",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：出血",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "blind",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：失明",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "booster random",
+                         "Title":  "随机魔盒",
+                         "Comment":  "随机魔盒",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "天盗狂人"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "booster select category",
+                         "Title":  "助推器选择类别",
+                         "Comment":  "助推器选择类别",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "booster selection num",
+                         "Title":  "礼盒中",
+                         "Comment":  "礼盒中，控制物品选择数量。\n“0”为不可选择\n“1”为只能选择一个\n以此类推",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "uMen-13925489110"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "buff",
+                         "Title":  "增益状态",
+                         "Comment":  "增益状态",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "cash",
+                         "Title":  "购买所花费点券",
+                         "Comment":  "购买所花费点券",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "coat",
+                         "Title":  "装备",
+                         "Comment":  "装备：上衣",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "confuse",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：混乱",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "creation rate",
+                         "Title":  "掉落概率",
+                         "Comment":  "掉落概率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "dark attack",
+                         "Title":  "暗属性强化",
+                         "Comment":  "暗属性强化\n光属性强化\n[light attack]\n火属性强化\n[fire attack]\n水属性强化\n[water attack]\n暗属性强化\n[dark attack]\n\n独立攻击\n[separate attack]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|麻子"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "deadlystrike",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：致命一击\n\n//字面意思，直接清空血条的异常效果",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "deadlystrike resistance",
+                         "Title":  "致命一击抗性",
+                         "Comment":  "致命一击抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "deelement resistance",
+                         "Title":  "元素属性剥离抗性",
+                         "Comment":  "元素属性剥离抗性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "default list",
+                         "Title":  "默认列表",
+                         "Comment":  "默认列表",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "disease",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：疾病",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "equipment amplify reinforcement ticket",
+                         "Title":  "增幅的等级与成功几率",
+                         "Comment":  "增幅的等级与成功几率\n例如\n→7→90\n7代表等级\n90代表几率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "By：别叫我小阿叶"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "etc",
+                         "Title":  "礼盒类道具的模块",
+                         "Comment":  "礼盒类道具的模块\n[etc]\n1-道具代码1-概率-数量\n   道具代码2-概率\t-数量\n[/etc]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "暖阳"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "exp bonus rate",
+                         "Title":  "经验倍率例如",
+                         "Comment":  "经验倍率例如\n3.0=300%经验倍率也就是三倍经验",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "陌梦轩"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "expiration date",
+                         "Title":  "有效期限",
+                         "Comment":  "有效期限\n\n* 使用 Unix 时间戳转换。\n\n* 1609344000 = 2020-12-31 00:00:00",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "expUp",
+                         "Title":  "增加经验",
+                         "Comment":  "增加经验",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "挽辞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "fail output",
+                         "Title":  "失效输出",
+                         "Comment":  "失效输出",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "field image",
+                         "Title":  "掉落图标",
+                         "Comment":  "掉落图标\n该路径下img的第几帧",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "by：黑桃K"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "fire attack",
+                         "Title":  "火属性强化",
+                         "Comment":  "火属性强化\n光属性强化 = [light attack]\n火属性强化 = [fire attack]\n冰属性强化 = [water attack]\n暗属性强化 = [dark attack]\n所有属性强化 = [all elemental attack]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|大狮纸q1925229848|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "freeze",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：冰冻",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "hold",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：束缚",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "icon",
+                         "Title":  "游戏中展示的图标",
+                         "Comment":  "游戏中展示的图标\n\n调用客户端的ImagePacks2文件夹的NPK文件里面图像，\n需借助ExtractorSharp工具查看",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "increase status type",
+                         "Title":  "使用此道具后获得的状态",
+                         "Comment":  "使用此道具后获得的状态：\n`[expUp]` = 获得经验",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "magic stone",
+                         "Title":  "装备",
+                         "Comment":  "装备：魔法石",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "magical attack bonus",
+                         "Title":  "魔法攻击力",
+                         "Comment":  "魔法攻击力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "magical critical hit",
+                         "Title":  "魔法暴击率",
+                         "Comment":  "魔法暴击率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "巳月-1322276685|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "magical defense bonus",
+                         "Title":  "魔法防御力",
+                         "Comment":  "魔法防御力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "maintain ability",
+                         "Title":  "维持能力",
+                         "Comment":  "维持能力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "medal",
+                         "Title":  "需要的胜点",
+                         "Comment":  "需要的胜点",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "星月-867592445"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "minimum fame value",
+                         "Title":  "最低名望值",
+                         "Comment":  "最低名望值",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "赵三岁376421898"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "minimum itemmaking level",
+                         "Title":  "最低物品制作等级",
+                         "Comment":  "最低物品制作等级",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "麻豆传媒"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "minimum level",
+                         "Title":  "等级限制",
+                         "Comment":  "等级限制\n装备、物品最低可使用的等级",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "monster card id",
+                         "Title":  "monster card id",
+                         "Comment":  "[monster card id]\n\t589\n宝珠指向卡片的标签，宝珠属性在卡片里修改，这个标签下的编号就是卡片的代码",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "徐丧彪2952411669"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "my status",
+                         "Title":  "赋予自身异常状态",
+                         "Comment":  "赋予自身异常状态\n\n//示例：\n[my status]\n\t`confuse`\t10\t7000\t40\t1\n\n以上为暗黑城特产干酪的效果，1%的几率为自身赋予40级的混乱异常状态，持续7秒",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "npc gift disallowance",
+                         "Title":  "不可赠送给npc",
+                         "Comment":  "不可赠送给npc，用于npc好感度系统，无用",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "package data",
+                         "Title":  "包含的物品",
+                         "Comment":  "包含的物品，格式为代码-数量-代码-数量-代码-数量",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "pants",
+                         "Title":  "装备",
+                         "Comment":  "装备：下装",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "party",
+                         "Title":  "对身边友军也会生效",
+                         "Comment":  "对身边友军也会生效",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "physical attack bonus",
+                         "Title":  "物理攻击力",
+                         "Comment":  "物理攻击力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "physical critical hit",
+                         "Title":  "物理暴击率",
+                         "Comment":  "物理暴击率",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "巳月-1322276685|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "physical defense bonus",
+                         "Title":  "物理防御力",
+                         "Comment":  "物理防御力",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "poison",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：中毒",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "POTION_TOUCH",
+                         "Title":  "药水类",
+                         "Comment":  "药水类",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "挽辞"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "price",
+                         "Title":  "价格",
+                         "Comment":  "[price] 金币购买的价格\n\n//除了金币购买还可以添加如下词条：\n[value]                售出价格（实际出售价为标写的1/5）\n[cash]                 点券购买\n[need material]  道具购买（左道具编号，右道具数量）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "random",
+                         "Title":  "随机",
+                         "Comment":  "随机",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "random list",
+                         "Title":  "礼盒随机列项目",
+                         "Comment":  "礼盒随机列项目\n四组数值为一组\n第一组数值为垫底数值\n代码/几率/数量/格式",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Aoran傲然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "rigidity",
+                         "Title":  "硬直",
+                         "Comment":  "硬直",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "ring",
+                         "Title":  "装备",
+                         "Comment":  "装备：戒指",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "sealing removal item",
+                         "Title":  "开启所需物品代码",
+                         "Comment":  "开启所需物品代码",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "小初心"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "shoes",
+                         "Title":  "装备",
+                         "Comment":  "装备：鞋子",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "shoulder",
+                         "Title":  "装备",
+                         "Comment":  "装备：头肩",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "silence",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：沉默",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "skill super armor",
+                         "Title":  "使用技能霸体",
+                         "Comment":  "使用技能霸体",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "sleep",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：睡眠",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "stack limit",
+                         "Title":  "堆叠上限",
+                         "Comment":  "道具叠加上限",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "stackable",
+                         "Title":  "可堆叠",
+                         "Comment":  "可堆叠\n42  2000   1",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "stackable type",
+                         "Title":  "类型",
+                         "Comment":  "[recipe] = 设计图\n[upgradable legacy] = 罐子类\n[quest]=任务物品（被放在背包的任务物品栏）\n\n[booster random] = 随机魔盒\n[multi upgradable legacy] = 幸运礼盒\n[booster] = 礼包：使用后获得(所有/随机)物品\n[booster selection] = 礼包：可选\n[cera booster] = 礼包：自动使用\n[unlimited waste]=重复使用\n[material]=材料\n[usable cera package] 0=时装礼包开启后可自己选择属性",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "菱云-3204170464"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "stat change",
+                         "Title":  "道具效果",
+                         "Comment":  "道具效果：\n一般和[stat change duration]联动使用\n`———————————————————————————`\n//示例①：\n[stat change]\n\t`%` 10\n\t`physical critical hit`\n[/stat change]\n//以上为使用道具之后在已有物理暴击率的基础上增加10%的物理暴击率\n`———————————————————————————`\n//示例②：\n[stat change]\n\t`%` 10\n\t`physical critical hit`\n\t`+`\t7\n\t`physical attack bonus`\n[/stat change]\n//以上为使用道具之后增加10%的物理暴击率和7点物理攻击力\n`———————————————————————————`\n//上方：\n`+` = 固定数值\n`%` = 百分比数值\n\n//提醒：\n使用`+`时，若为暴击率、命中率、闪避率、三速，则按百分比增加，也就是说0暴击率吃了一个为`+`的暴击药，效果是10，则实际增加到10%暴击率\n\n使用`%`时，暴击率、命中率、闪避率、三速只会按当前数值增幅，比如自带50%暴击率，用`%`增加50%暴击率只会在此基础上增加一半的暴击率，也就是实际使用道具达到75%暴击率\n`———————————————————————————`\n//下方：\n`stuck` = 命中率（负数增加命中率，正数减少命中率）\n`stuck resistance` = 闪避率\n`attack speed` = 攻击速度\n`cast speed` = 施法速度\n`move speed` = 移动速度\n`physical critical hit` = 物理暴击率\n`magical critical hit` = 法术暴击率\n`physical attack bonus` = 物理攻击力\n`magical attack bonus` = 法术攻击力\n`physical defense bonus` = 物理防御力\n`magical defense bonus` = 法术防御力\n`separate attack` = 独立攻击力\n`physical attack` = 力量\n`magical attack` = 智力\n`physical defense` = 体力\n`magical defense` = 精神\n`HP MAX` = 生命值上限\n`MP MAX` = 魔法值上限\n`all elemental resistance` = 所有属性抗性\n`fire resistance` = 火属性抗性\n`light resistance` = 光属性抗性\n`water resistance` = 冰属性抗性\n`dark resistance` = 暗属性抗性\n`all elemental attack` = 所有属性强化\n`fire attack` = 火属性强化\n`light attack` = 光属性强化\n`water attack` = 冰属性强化\n`dark attack` = 暗属性强化\n`weight` = 重量\n`hit recovery` = 硬直恢复\n`jump power` = 跳跃力\n`jump speed` = 跳跃速度\n`HP regen speed` = 生命值恢复速度\n`MP regen speed` = 魔法值恢复速度\n`hold resistance` = 束缚抗性\n`slow resistance` = 减速抗性\n`burn resistance` = 灼伤抗性\n`poison resistance` = 中毒抗性\n`stun resistance` = 眩晕抗性\n`sleep resistance` = 睡眠抗性\n`stone resistance` = 石化抗性\n`blind resistance` = 失明抗性\n`disease resistance` = 疾病抗性\n`confuse resistance` = 混乱抗性\n`bleeding resistance` = 出血抗性\n`silence resistance` = 沉默抗性\n`freeze resistance` = 冰冻抗性\n`curse resistance` = 诅咒抗性\n`lightning resistance` = 感电抗性\n`weakness resistance` = 虚弱抗性\n`weapon break resistance` = 武器损坏抗性\n`armor break resistance` = 防具损坏抗性\n`piercing resistance` = 破甲抗性\n`deelement resistance` = 属性剥离抗性\n`deadlystrike resistance` = 致命一击抗性\n`———————————————————————————`\n//补充：\n搭配下方这个标签可以隐藏道具自带的介绍文本 ↓\n[use effect explain]\n\t0\n\n隐藏完之后，可以使用下方这个标签自己写一个效果介绍文本 ↓\n[explain]\n\t`（文本）`",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "stat change duration",
+                         "Title":  "道具效果持续时间",
+                         "Comment":  "道具效果持续时间：\n一般与[stat change]联动使用\n\n//示例：\n[stat change duration]\n\t7000\n\t`myself`\n//以上为使用道具之后效果持续7秒，且仅对自身生效\n\n1000 = 1秒\n\n`myself` = 仅对自身生效\n`party` = 对周边友军也会生效",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "stat desc",
+                         "Title":  "统计数据",
+                         "Comment":  "统计数据",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "stone",
+                         "Title":  "异常效果",
+                         "Comment":  "异常效果：石化",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "string data",
+                         "Title":  "宝珠可镶嵌的部位",
+                         "Comment":  "宝珠可镶嵌的部位：\n称号      `[title name]`\n武器      `[weapon]`\n上衣      `[coat]`\n下装      `[pants]`\n头肩      `[shoulder]`\n腰带      `[waist]`\n鞋子      `[shoes]`\n手镯      `[wrist]`\n项链      `[amulet]`\n戒指      `[ring]`\n魔法石  `[magic stone]`\n护石      `[support]`\n\n字符串工艺\n精湛工艺\t\t`[craftmanship]`\n\n串数据（相关）：\n工艺：craftmanship （制作：炼金、人偶）\n机械：machinary\n编织：weaving\n三种都可以制作装备，具体对应未知",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "success rate",
+                         "Title":  "success rate",
+                         "Comment":  "[success rate]\n100\n\n100成功率为百分百\n改成50为 百分之50",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "by巳月—QQ1322276685"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "suitable job",
+                         "Title":  "允许使用的角色",
+                         "Comment":  "允许使用的角色\n-----------------------------------------\n[all] = 所有角色\n[swordman] = 鬼剑士\n[demonic swordman] = 黑暗武士\n[fighter] = 格斗家(女)\n[at fighter] = 格斗家(男)\n[gunner] = 神枪手(男)\n[at gunner] = 神枪手(女)\n[mage] = 魔法师(女)\n[at mage] = 魔法师(男)\n[thief] = 女鬼剑//暗夜使者\n[priest] =圣骑士\n\n [creator mage]=缔造者",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai - 263007544"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "support",
+                         "Title":  "装备",
+                         "Comment":  "装备：护石",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "teleport potion",
+                         "Title":  "传送药水 移动药剂",
+                         "Comment":  "传送药水 移动药剂",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "秋不得"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "title name",
+                         "Title":  "装备",
+                         "Comment":  "装备：称号",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "奶甜味儿的小颜颜|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "usable job",
+                         "Title":  "在道具里为可以使用的职业",
+                         "Comment":  "[usable job]在道具里为可以使用的职业\n\n`[all]` = 所有职业\n`[creator mage]` = 缔造者\n`[swordman]` = 鬼剑士(男)\n`[at swordman]` = 鬼剑士(女)\n`[demonic swordman]` = 黑暗武士\n`[fighter]` = 格斗家(女)\n`[at fighter]` = 格斗家(男)\n`[gunner]` = 神枪手(男)\n`[at gunner]` = 神枪手(女)\n`[mage]` = 魔法师(女)\n`[at mage]` = 魔法师(男)\n`[priest]` = 圣职者(男)\n`[thief]` = 暗夜使者",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "usable world",
+                         "Title":  "usable world",
+                         "Comment":  "[usable world]\n宝珠下面这个标签是只能附魔PK公平装备，删除即可任意附魔正常刷图装备",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "徐丧彪2952411669"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "use effect explain",
+                         "Title":  "道具自带的使用效果介绍开关",
+                         "Comment":  "道具自带的使用效果介绍开关\n\n//隐藏或显示都不影响实际使用\n改为0隐藏          改为1显示\n\n隐藏过后就可以用下方这个标签自己编辑道具效果的介绍文本\n\n[explain]\n\t`（文本）`",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "waist",
+                         "Title":  "装备",
+                         "Comment":  "装备：腰带",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "weapon",
+                         "Title":  "装备",
+                         "Comment":  "装备：武器",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "weight",
+                         "Title":  "重量",
+                         "Comment":  "重量\n此数值越高，角色或怪物被击飞后的下落速度越快\n若为装备或物品时，将减少物品栏或金库的容量",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "wrist",
+                         "Title":  "装备",
+                         "Comment":  "装备：手环",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "material",
+                         "Title":  "所需材料",
+                         "Comment":  "所需材料",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "output",
+                         "Title":  "4个一组",
+                         "Comment":  "4个一组，分别为道具ID、抽中几率（最大100W），数量，是否公告（0不公告，1公告）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "网瘾少年"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "stk",
+                         "Section":  "value",
+                         "Title":  "出售价格",
+                         "Comment":  "",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "preview"
+                     }
+                 ]
+}

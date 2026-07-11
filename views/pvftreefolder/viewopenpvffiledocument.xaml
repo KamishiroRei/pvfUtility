@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pvftreefolder:ViewOpenPvfFileDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" Window.Title="{DynamicResource ViewOpenPvfFileDocument_Title}" FrameworkElement.Width="490" FrameworkElement.Height="130" Control.Padding="10,0,10,0" xmlns:pvftreefolder="clr-namespace:PvfCode.Views.PvfTreeFolder;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <controls:EditBox x:Name="editBox" KeyDown="CheckGoToNode_KeyDown" Margin="0,10,0,0" Caption="{DynamicResource ViewOpenPvfFileDocument_Label_FileName}" NullText="{DynamicResource ViewOpenPvfFileDocument_Label_FileFullPathNullText}">
+    </controls:EditBox>
+    <CheckBox Name="CheckGoToNode" Grid.Row="1" Margin="0,10,0,0" Content="{DynamicResource ViewOpenPvfFileDocument_ShowInExplorer}" IsChecked="True">
+    </CheckBox>
+    <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+      <Button Name="BtnOk" Width="70" Height="24" Margin="0,0,10,0" Content="{DynamicResource common_OK}" IsEnabled="{Binding ElementName=editBox, Path=Value, Converter={StaticResource ConverterIsNullOrEmptyToFalse}}">
+      </Button>
+      <Button Name="BtnCancel" Width="70" Height="24" Content="{DynamicResource common_Cancel}">
+      </Button>
+    </StackPanel>
+  </Grid>
+</pvftreefolder:ViewOpenPvfFileDocument>

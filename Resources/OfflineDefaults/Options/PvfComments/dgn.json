@@ -1,0 +1,856 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "dgn",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "ancient dungeon",
+                         "Title":  "是否远古图",
+                         "Comment":  "是否远古图",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[ancient dungeon] 1            // 如果是远古地下城则为1，否则可以没有\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[ancient dungeon] 1            // 如果是远古地下城则为1，否则可以没有\n```",
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "background pos",
+                         "Title":  "背景POS",
+                         "Comment":  "背景POS",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "basis level",
+                         "Title":  "副本内怪物的平均等级",
+                         "Comment":  "副本内怪物的平均等级",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[basis level]  4            // 怪物的标准等级\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[basis level]  4            // 怪物的标准等级\n```",
+                         "Closing":  false,
+                         "Authors":  "FreyaGrace|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "boss map",
+                         "Title":  "这个标签是boss房间",
+                         "Comment":  "这个标签是boss房间\n先x后y，从0开始\n\n比如最后一个房间是\n[map specification]\n     3     0      xxxxxx\n[/map specification]\n那么它对应的map房间xxxxxx应该有[boss]标签要注意哦~\n[boss map]\n     3     0\n[/boss map]",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[boss map]             // 可设置为首领地图的网格列表（x, y）\n2 3\n1 1\n[/boss map]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[boss map]             // 可设置为首领地图的网格列表（x, y）\n2 3\n1 1\n[/boss map]\n```",
+                         "Closing":  true,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "boss map specification",
+                         "Title":  "随机BOSS房间",
+                         "Comment":  "随机BOSS房间",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[boss map specification]             // 指定当地图作为首领地图出现时的地图列表。\n1 2                // 坐标\n20011                // 地图索引们\n[/boss map specification]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[boss map specification]             // 指定当地图作为首领地图出现时的地图列表。\n1 2                // 坐标\n20011                // 地图索引们\n[/boss map specification]\n```",
+                         "Closing":  true,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "champion",
+                         "Title":  "champion",
+                         "Comment":  "[champion]\n100\t100\t100\t100\t100\n\n普通级、冒险级、勇士级、王者级、英雄级\n出现精英怪的几率\n\n1=1%\n也就是说赋予100时，每个房间必出1个",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[champion]  10 15 20 30            // 各难度下整个地下城中将出现的冠军怪物数量\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[champion]  10 15 20 30            // 各难度下整个地下城中将出现的冠军怪物数量\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "clear reward item",
+                         "Title":  "通关时获得物品",
+                         "Comment":  "通关时获得物品\n* 6 个数值为一组数据。\n1 0 1002 3 17 -1\t\t// 副本编号, 副本难度, 物品编号,最大数量，出现概率 (%), 最大拥有数量(如果为-1，则表示无限制)\n2 0 1003 2 100 30\t\t// 如果副本难度为-1，则表示所有难度, 0:EASY 1:NORMAL 2:HARD 3:VERYHARD 普通,冒险,勇士,王者",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Cai|unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "coin info",
+                         "Title":  "复活币限制",
+                         "Comment":  "复活币限制",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "coin limit",
+                         "Title":  "副本内的复活次数",
+                         "Comment":  "副本内的复活次数\n[coin limit]\n      6\n上面这种代表副本内生命值耗尽时可复活6次\n通过移除此标签或将数字改为-1即可不限制复活次数",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 不想指定则移除标签或将物品索引设为65535\n[coin limit] 3                // 地下城中复活币限制使用次数。（队伍全体）移除标签或设为-1则无限制\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 不想指定则移除标签或将物品索引设为65535\n[coin limit] 3                // 地下城中复活币限制使用次数。（队伍全体）移除标签或设为-1则无限制\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "cutscene image",
+                         "Title":  "进入新城镇时的过场动画图像",
+                         "Comment":  "进入新城镇时的过场动画图像\n进图画面",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[cutscene image]  `CutScene.img` 0    // 过场图像文件名，帧索引\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[cutscene image]  `CutScene.img` 0    // 过场图像文件名，帧索引\n```",
+                         "Closing":  false,
+                         "Authors":  "阿董-137735017|Xiao哩"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "designate dungeon difficulty",
+                         "Title":  "设定地图难度01234",
+                         "Comment":  "设定地图难度01234",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "by：月初-771706233"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "dimension dungeon",
+                         "Title":  "dimension dungeon",
+                         "Comment":  "[dimension dungeon]\n1\t30\n1 意思是对应数据库编号，每个图不一样，理论上最大是6，可以看成编号，不能乱改\n30 意思就是 一天可以进入的次数\n这个就是30次的意思",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "By:小妖|糖糖QQ6494667"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "entering title",
+                         "Title":  "进入城镇时的标题动画",
+                         "Comment":  "进入城镇时的标题动画\n例如：埃尔文防线，赫顿马尔，这些大字",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[entering title]  `Title.ani`        // 用作标题的动画。将动画中心对准屏幕中央。\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[entering title]  `Title.ani`        // 用作标题的动画。将动画中心对准屏幕中央。\n```",
+                         "Closing":  false,
+                         "Authors":  "王良一"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "escape hell",
+                         "Title":  "逃脱地狱",
+                         "Comment":  "逃脱地狱",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[escape hell] 1            // 在该迷宫中不出现地狱模式\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "evil high level",
+                         "Title":  "邪恶的高水平",
+                         "Comment":  "邪恶的高水平",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[evil high level] 100 150 200 250 270  // 高等级用抗魔力（65级以上）\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "evil rate",
+                         "Title":  "第一个是最低值",
+                         "Comment":  "第一个是最低值，第二个是减少属性，第三个是最高值，第四个是增加属性，如果想要抗磨不够就减少99的属性，抗磨够就增加0的属性就等于99~1~100~100（最后这个100表示百分之1）",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[evil rate]            // 抗魔力最大最小比率\n0    10        // 0时 10% 的下限\n200    150        // 200 时 150% 的上限\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[evil rate]            // 抗魔力最大最小比率\n0    10        // 0时 10% 的下限\n200    150        // 200 时 150% 的上限\n```",
+                         "Closing":  false,
+                         "Authors":  "凛冬-QQ439076736"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "experience increasing point",
+                         "Title":  "副本内的经验值获取倍率",
+                         "Comment":  "副本内的经验值获取倍率\n0.5代表只有50%的获取效率",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[experience increasing point]  1.3    // 经验值权重\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[experience increasing point]  1.3    // 经验值权重\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "greed",
+                         "Title":  "贪吃蛇小游戏",
+                         "Comment":  "贪吃蛇小游戏。\n副本房间的连接顺序，显示副本网格形状\nBB\t=\t右\nMM\t=\t左下\nDD\t=\t右上\nGG\t=\t左上\nJJ\t=\t右下\nFF\t=\t左右\nEE\t=\t左\nNN\t=\t左下右\nCC\t=\t上\nII\t=\t下\nKK\t=\t上下\nPP\t=\t十字\nHH\t=\t左上右\nAA\t=\t无法通过",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[greed]                 // 地下城网格形状表示\n`┼┾╅\n ┾╅╂\n ┼╊╉\n ┾╃╂\n ┾┿╃`\n```\n\n```pvf\n[greed]             // 地下城网格形状表示\n`┼┾╅\n ┾╅╂\n ┼╊╉\n ┾╃╂\n ┾┿╃`\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[greed]                 // 地下城网格形状表示\n`┼┾╅\n ┾╅╂\n ┼╊╉\n ┾╃╂\n ┾┿╃`\n```\n\n```pvf\n[greed]             // 地下城网格形状表示\n`┼┾╅\n ┾╅╂\n ┼╊╉\n ┾╃╂\n ┾┿╃`\n```",
+                         "Closing":  false,
+                         "Authors":  "阿董-137735017"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "heaven dungeon",
+                         "Title":  "天堂地牢",
+                         "Comment":  "天堂地牢",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "hit count",
+                         "Title":  "命中次数",
+                         "Comment":  "命中次数",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "individual map movement",
+                         "Title":  "进图之后可以独立进图移动",
+                         "Comment":  "进图之后可以独立进图移动",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "limit inout count",
+                         "Title":  "限制inout count.",
+                         "Comment":  "限制inout count.",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "map specification",
+                         "Title":  "副本指向的map房间",
+                         "Comment":  "副本指向的map房间",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[map specification]             // 指定特定网格中出现的地图列表。未指定的网格随机选择\n1 2                    // 坐标（x, y）坐标以左上角为0, 0\n10001                    // 地图索引列表\n10002                    // 如果是可选作首领地图的网格，则必须包含是首领地图时和不是首领地图时的\n10003                    // 所有地图索引。\n[/map specification]\n```\n\n```pvf\n[map specification]             // 根据需要重复。\n2 2\n10011\n[/map specification]\n```\n\n```pvf\n[map specification]             // 指定特定网格中出现的地图列表。未指定的网格随机选择\n1 2                // 坐标（x, y）坐标以左上角为0, 0\n10001                // 地图索引列表\n10002                // 如果是可选作首领地图的网格，则必须包含是首领地图时和不是首领地图时的\n10003                // 所有地图索引。\n[/map specification]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[map specification]             // 指定特定网格中出现的地图列表。未指定的网格随机选择\n1 2                    // 坐标（x, y）坐标以左上角为0, 0\n10001                    // 地图索引列表\n10002                    // 如果是可选作首领地图的网格，则必须包含是首领地图时和不是首领地图时的\n10003                    // 所有地图索引。\n[/map specification]\n```\n\n```pvf\n[map specification]             // 根据需要重复。\n2 2\n10011\n[/map specification]\n```\n\n```pvf\n[map specification]             // 指定特定网格中出现的地图列表。未指定的网格随机选择\n1 2                // 坐标（x, y）坐标以左上角为0, 0\n10001                // 地图索引列表\n10002                // 如果是可选作首领地图的网格，则必须包含是首领地图时和不是首领地图时的\n10003                // 所有地图索引。\n[/map specification]\n```",
+                         "Closing":  true,
+                         "Authors":  "夜白-1229998088"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "maze info",
+                         "Title":  "地图走势",
+                         "Comment":  "地图走势",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[maze info]                 // 表示一个迷宫信息开始。\n```\n\n```pvf\n[maze info]             // 表示一个迷宫信息开始。\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[maze info]                 // 表示一个迷宫信息开始。\n```\n\n```pvf\n[maze info]             // 表示一个迷宫信息开始。\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiao哩"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "minimap image",
+                         "Title":  "副本中显示的小地图",
+                         "Comment":  "副本中显示的小地图\n小地图图像包的文件名",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[minimap image]  `MiniMap.img`        // 小地图图像包的文件名\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[minimap image]  `MiniMap.img`        // 小地图图像包的文件名\n```",
+                         "Closing":  false,
+                         "Authors":  "释然"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "minimum required level",
+                         "Title":  "开启地下城的等级",
+                         "Comment":  "开启地下城的等级",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[minimum required level]  11        // 进入地下城所需的最低要求等级\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[minimum required level]  11        // 进入地下城所需的最低要求等级\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "monster difficulty bonus",
+                         "Title":  "整个副本怪物属性按倍数翻倍",
+                         "Comment":  "整个副本怪物属性按倍数翻倍\n五个数值一组代表五个难度\n普通\t冒险\t王者\t地狱级\t未知难度\n[monster difficulty bonus]\n500\t500\t500\t500\t500(好战性?)\n500\t500\t500\t500\t500(视野?)\n1\t1\t1\t1\t1(命中)\n0.1\t0.1\t0.1\t0.1\t0.1(回避率)\n5\t5\t5\t5\t5(血量)\n1\t1\t1\t1\t1(攻速)\n1\t1\t1\t1\t1(移动速度)\n100\t100\t100\t100\t100(异常状态抗性?)\n200\t200\t200\t200\t200(攻击伤害)\n1\t1\t1\t1\t1(防御)\n200\t200\t200\t200\t200(硬直)\n0.1\t0.1\t0.1\t0.1\t0.1(百分比忽略玩家带来的无视攻击力)\n200\t200\t200\t200\t200(对玩家额外伤害)\n[/monster difficulty bonus]",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "羡鱼3313140229"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "monsterapc diff table",
+                         "Title":  "副本单独调用全局tbl",
+                         "Comment":  "副本单独调用全局tbl",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[monsterapc diff table]    `Monster/MonsterApcTableForLorien.tbl`    // 自定义怪物-APC难度表（不添加此标签则应用默认文件）\n```",
+                         "Closing":  false,
+                         "Authors":  "夜白-1229998088"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "necessary party",
+                         "Title":  "地下城进入人数需求",
+                         "Comment":  "地下城进入人数需求",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "冉默QQ:932962233"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "no fatigue",
+                         "Title":  "不消耗疲劳值",
+                         "Comment":  "不消耗疲劳值",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "老于"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "pathgate object",
+                         "Title":  "副本中的门",
+                         "Comment":  "副本中的门，其实是obj指向，真正的门ani在obj中。一般为10个数据，每个数据代表着一个门，-1代表没有门。",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[pathgate object]             // 通道被动对象索引。不存在的对象为 -1\n100 101 102                // 左侧普通通道 / 首领通道 / 墙壁\n200 201 202                // 右侧普通通道 / 首领通道 / 墙壁\n300 301                    // 上方普通通道 / 首领通道\n400 401                    // 下方普通通道 / 首领通道\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[pathgate object]             // 通道被动对象索引。不存在的对象为 -1\n100 101 102                // 左侧普通通道 / 首领通道 / 墙壁\n200 201 202                // 右侧普通通道 / 首领通道 / 墙壁\n300 301                    // 上方普通通道 / 首领通道\n400 401                    // 下方普通通道 / 首领通道\n```",
+                         "Closing":  false,
+                         "Authors":  "Xiao哩"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "re required skill",
+                         "Title":  "学习技能后才可学此技能",
+                         "Comment":  "学习技能后才可学此技能\n技能代码\t    1",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "空"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "recommended level",
+                         "Title":  "推荐级别",
+                         "Comment":  "推荐级别",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "required item",
+                         "Title":  "进图门票",
+                         "Comment":  "进图门票\n分别为  物品代碼，数量，消耗量\n在etc/accountcargo.etc中\n表示升级账号金库所需材料",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[required item] 10003 1 1        // 进入地下城所需的物品。索引，数量，是否消耗。消耗为0则不消耗\n                    // 不想指定则移除标签或将物品索引设为65535\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[required item] 10003 1 1        // 进入地下城所需的物品。索引，数量，是否消耗。消耗为0则不消耗\n                    // 不想指定则移除标签或将物品索引设为65535\n```",
+                         "Closing":  false,
+                         "Authors":  "丞哥-37358891"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "risk dungeon",
+                         "Title":  "是否魂图",
+                         "Comment":  "是否魂图",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "feirnova"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "schedule",
+                         "Title":  "时间表",
+                         "Comment":  "时间表\n周一到周日\n`MON`\n`TUE`\n`WED`\n`THU`\n`FRI`\n`SAT`\n`SUN`\n`ALL`  代表每天",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Vang-z"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "seal door map index",
+                         "Title":  "指向深渊派对map房间",
+                         "Comment":  "指向深渊派对map房间",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "夜白-1229998088"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "seal door pos",
+                         "Title":  "深渊房间的位置",
+                         "Comment":  "深渊房间的位置",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "size",
+                         "Title":  "这个在副本中代表 这个副本小地图的大小",
+                         "Comment":  "这个在副本中代表 这个副本小地图的大小\n\n[size]\n     4     1\n\n横坐标是4纵坐标是1\n+----------------------+\n|  口  口  口  口   |\n+----------------------+\n副本地图就是一条直线",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[size]  3 5                // 横向地图大小，纵向地图大小（最大 50x50）\n```\n\n```pvf\n[size]  5 3            // 横向地图大小，纵向地图大小\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[size]  3 5                // 横向地图大小，纵向地图大小（最大 50x50）\n```\n\n```pvf\n[size]  5 3            // 横向地图大小，纵向地图大小\n```",
+                         "Closing":  false,
+                         "Authors":  "FreyaGrace"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "special passive object item",
+                         "Title":  "特别被动对象项目",
+                         "Comment":  "特别被动对象项目\n建筑物掉落\n以格蓝迪为例\n[special passive object item]\n\t0\t-1\t1\t3341（魔刹石）\t2500（目测是概率）\n[/special passive object item]\n\n前三个属性不知道\n自己测试",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n//特殊被动对象生成的物品信息\n[special passive object item]\n0    -1    3    //用于掉落列表的索引值（重复则出问题），    等级指定值（-1则跟随地下城等级）    物品列表有几项的计数\n1000    5000    //物品索引                    生成概率\n1001    3000\n1002    2000\n\n1    -1    3\n1003    5000\n1004    3000\n1005    2000\n\n2    22    0\n[/special passive object item]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiao哩"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "tournament dungeon",
+                         "Title":  "比赛地牢",
+                         "Comment":  "比赛地牢",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "tower limit of stackable item",
+                         "Title":  "堆叠的物品的塔极限",
+                         "Comment":  "堆叠的物品的塔极限",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "use zoom rate",
+                         "Title":  "副本内镜头缩放倍率",
+                         "Comment":  "副本内镜头缩放倍率\n\n1.0=100%",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "worldmap pattern info",
+                         "Title":  "世界地图模式信息",
+                         "Comment":  "世界地图模式信息",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[worldmap pattern info] 1 5        // 改进版世界地图顺序：图案类型 图案索引（从1开始）\n`WorldMap/Act1/elvengard.img` 0        // 世界地图中要使用的图像包，图像包内的索引\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "herosmode enable",
+                         "Title":  "是否有英雄模式？有 1 无 0",
+                         "Comment":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[herosmode enable] 1            // 是否有英雄模式？有 1 无 0\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[herosmode enable] 1            // 是否有英雄模式？有 1 无 0\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "revision table",
+                         "Title":  "指定修正表路径",
+                         "Comment":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[revision table]  `Dungeon/Act1/table/Lorien.tbl` // 指定修正表路径。\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[revision table]  `Dungeon/Act1/table/Lorien.tbl` // 指定修正表路径。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "worldmap info",
+                         "Title":  "要显示在世界地图上的信息",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[worldmap info]             // 要显示在世界地图上的信息\n200 302                    // 未激活地图的坐标\n210 312                    // 已激活地图的坐标\n`Godae.img`                // 世界地图中要使用的图像包\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 注意 [worldmap info] : 旧版本, [worldmap pattern info] : 改版后版本, 只能使用其中一个。\n[worldmap info]             // 要显示在世界地图上的信息\n200 302                    // 未激活地图的坐标\n210 312                    // 已激活地图的坐标\n`Godae.img`                // 世界地图中要使用的图像包\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[worldmap info]             // 要显示在世界地图上的信息\n200 302                    // 未激活地图的坐标\n210 312                    // 已激活地图的坐标\n`Godae.img`                // 世界地图中要使用的图像包\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 注意 [worldmap info] : 旧版本, [worldmap pattern info] : 改版后版本, 只能使用其中一个。\n[worldmap info]             // 要显示在世界地图上的信息\n200 302                    // 未激活地图的坐标\n210 312                    // 已激活地图的坐标\n`Godae.img`                // 世界地图中要使用的图像包\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "boss room entrance condition",
+                         "Title":  "首领房间进入条件",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[boss room entrance condition]        // 首领房间进入条件\n`[hunt monster]`            // 去狩猎怪物!!!!（目前仅此...以后可扩展）\n2                    // 怪物数量..\n31 1 1                    // 怪物索引 出现数量 需要击杀数量\n22 1 1                    // 怪物索引 出现数量 需要击杀数量\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[boss room entrance condition]        // 首领房间进入条件\n`[hunt monster]`            // 去狩猎怪物!!!!（目前仅此...以后可扩展）\n2                    // 怪物数量..\n31 1 1                    // 怪物索引 出现数量 需要击杀数量\n22 1 1                    // 怪物索引 出现数量 需要击杀数量\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[boss room entrance condition]        // 首领房间进入条件\n`[hunt monster]`            // 去狩猎怪物!!!!（目前仅此...以后可扩展）\n2                    // 怪物数量..\n31 1 1                    // 怪物索引 出现数量 需要击杀数量\n22 1 1                    // 怪物索引 出现数量 需要击杀数量\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[boss room entrance condition]        // 首领房间进入条件\n`[hunt monster]`            // 去狩猎怪物!!!!（目前仅此...以后可扩展）\n2                    // 怪物数量..\n31 1 1                    // 怪物索引 出现数量 需要击杀数量\n22 1 1                    // 怪物索引 出现数量 需要击杀数量\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "character coin limit",
+                         "Title":  "地下城中复活币限制次数",
+                         "Comment":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[character coin limit] 3        // 地下城中复活币限制次数。（个人可使用的复活币限制）移除标签或设为-1则无限制\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[character coin limit] 3        // 地下城中复活币限制次数。（个人可使用的复活币限制）移除标签或设为-1则无限制\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "item",
+                         "Title":  "地下城通关时掉落的物品列表",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[item]                     // 地下城通关时掉落的物品列表\n323 30                    // 索引，概率\n222 15\n[/item]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[item]                     // 地下城通关时掉落的物品列表\n323 30                    // 索引，概率\n222 15\n[/item]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[item]                     // 地下城通关时掉落的物品列表\n323 30                    // 索引，概率\n222 15\n[/item]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[item]                     // 地下城通关时掉落的物品列表\n323 30                    // 索引，概率\n222 15\n[/item]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "quest connection",
+                         "Title":  "进行0 完成1",
+                         "Comment":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[quest connection] 0 4003 -1        // 进行0 完成1，任务编号，难度（ -1 所有难度，0 普通，1 冒险，2 王者，3 英雄）\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[quest connection] 0 4003 -1        // 进行0 完成1，任务编号，难度（ -1 所有难度，0 普通，1 冒险，2 王者，3 英雄）\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "start map",
+                         "Title":  "可设置为起始地图的网格列表（x",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[start map]             // 可设置为起始地图的网格列表（x, y）\n2 2\n1 2\n0 0\n[/start map]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[start map]             // 可设置为起始地图的网格列表（x, y）\n2 2\n1 2\n0 0\n[/start map]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[start map]             // 可设置为起始地图的网格列表（x, y）\n2 2\n1 2\n0 0\n[/start map]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[start map]             // 可设置为起始地图的网格列表（x, y）\n2 2\n1 2\n0 0\n[/start map]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "name",
+                         "Title":  "地下城的名称",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[name]  `远古洞穴`        // 地下城的名称\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[name]  `远古洞穴`        // 地下城的名称\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[name]  `远古洞穴`        // 地下城的名称\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[name]  `远古洞穴`        // 地下城的名称\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "explain",
+                         "Title":  "地下城的说明",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[explain]                 // 地下城的说明。可换行。\n`古代就有的洞穴\n气氛阴森 难度为B级\n等等...`\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[explain]                 // 地下城的说明。可换行。\n`古代就有的洞穴\n气氛阴森 难度为B级\n等等...`\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[explain]                 // 地下城的说明。可换行。\n`古代就有的洞穴\n气氛阴森 难度为B级\n等等...`\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[explain]                 // 地下城的说明。可换行。\n`古代就有的洞穴\n气氛阴森 难度为B级\n等等...`\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "monster type spawn prob",
+                         "Title":  "普通",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 怪物类型选择概率\n[monster type spawn prob] 50 20 20 10    // 普通，普通冠军，超级冠军，首领\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 怪物类型选择概率\n[monster type spawn prob] 50 20 20 10    // 普通，普通冠军，超级冠军，首领\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 怪物类型选择概率\n[monster type spawn prob] 50 20 20 10    // 普通，普通冠军，超级冠军，首领\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 怪物类型选择概率\n[monster type spawn prob] 50 20 20 10    // 普通，普通冠军，超级冠军，首领\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "monster type spawn cost",
+                         "Title":  "普通",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 怪物类型消耗资源\n[monster type spawn cost] 2 4 6 10        // 普通，普通冠军，超级冠军，首领\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 怪物类型消耗资源\n[monster type spawn cost] 2 4 6 10        // 普通，普通冠军，超级冠军，首领\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 怪物类型消耗资源\n[monster type spawn cost] 2 4 6 10        // 普通，普通冠军，超级冠军，首领\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 怪物类型消耗资源\n[monster type spawn cost] 2 4 6 10        // 普通，普通冠军，超级冠军，首领\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "evil",
+                         "Title":  "抗魔力数值（按难度）",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[evil] 100 200 300 400  // 抗魔力数值（按难度）\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[evil] 100 200 300 400  // 抗魔力数值（按难度）\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[evil] 100 200 300 400  // 抗魔力数值（按难度）\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n[evil] 100 200 300 400  // 抗魔力数值（按难度）\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "gold card use",
+                         "Title":  "该地下城通关时是否使用黄金卡",
+                         "Comment":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[gold card use] 0 // 该地下城通关时是否使用黄金卡。0:不使用 1:使用\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample.dgn\n\n```pvf\n[gold card use] 0 // 该地下城通关时是否使用黄金卡。0:不使用 1:使用\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "prohibit practice",
+                         "Title":  "是否禁止练习模式（1",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[prohibit practice] 1                // 是否禁止练习模式（1: 禁止，不写标签或写0则不禁止）\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[prohibit practice] 1                // 是否禁止练习模式（1: 禁止，不写标签或写0则不禁止）\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "tower item drop",
+                         "Title":  "死亡之塔中是否掉落物品（1",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n/////////////////////////////////////////////////////////////////////\n// 死亡之塔用数据\n[tower item drop] 0    //死亡之塔中是否掉落物品（1: 掉落，0: 不掉落）\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n/////////////////////////////////////////////////////////////////////\n// 死亡之塔用数据\n[tower item drop] 0    //死亡之塔中是否掉落物品（1: 掉落，0: 不掉落）\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "event monster",
+                         "Title":  "指定地下城中将出现的事件怪物的标签",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[event monster]        //指定地下城中将出现的事件怪物的标签\n2 20000            //怪物选择数量 出现概率（万分率）\n56039 1 300 1 1        //怪物索引 数量 选择概率（相对概率） 拾取次数\n[/event monster]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[event monster]        //指定地下城中将出现的事件怪物的标签\n2 20000            //怪物选择数量 出现概率（万分率）\n56039 1 300 1 1        //怪物索引 数量 选择概率（相对概率） 拾取次数\n[/event monster]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "battle spawn time",
+                         "Title":  "////////////////////////////////////",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 战斗限制时间 60000 = 1分钟\n[battle spawn time] 60000\n/////////////////////////////////////////////////////////////////////\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 战斗限制时间 60000 = 1分钟\n[battle spawn time] 60000\n/////////////////////////////////////////////////////////////////////\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 战斗限制时间 60000 = 1分钟\n[battle spawn time] 60000\n/////////////////////////////////////////////////////////////////////\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 战斗限制时间 60000 = 1分钟\n[battle spawn time] 60000\n/////////////////////////////////////////////////////////////////////\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "spawn common monster index",
+                         "Title":  "生成的普通怪物索引",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 生成的普通怪物索引\n[spawn common monster index]\n1\n[/spawn common monster index]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 生成的普通怪物索引\n[spawn common monster index]\n1\n[/spawn common monster index]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 生成的普通怪物索引\n[spawn common monster index]\n1\n[/spawn common monster index]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 生成的普通怪物索引\n[spawn common monster index]\n1\n[/spawn common monster index]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "spawn common champion index",
+                         "Title":  "生成的普通冠军索引",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 生成的普通冠军索引\n[spawn common champion index]\n3000\n[/spawn common champion index]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 生成的普通冠军索引\n[spawn common champion index]\n3000\n[/spawn common champion index]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 生成的普通冠军索引\n[spawn common champion index]\n3000\n[/spawn common champion index]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 生成的普通冠军索引\n[spawn common champion index]\n3000\n[/spawn common champion index]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "spawn super champion index",
+                         "Title":  "生成的超级冠军索引",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 生成的超级冠军索引\n[spawn super champion index]\n3001\n[/spawn super champion index]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 生成的超级冠军索引\n[spawn super champion index]\n3001\n[/spawn super champion index]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 生成的超级冠军索引\n[spawn super champion index]\n3001\n[/spawn super champion index]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 生成的超级冠军索引\n[spawn super champion index]\n3001\n[/spawn super champion index]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "spawn boss index",
+                         "Title":  "生成的首领索引",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 生成的首领索引\n[spawn boss index]\n50000\n[/spawn boss index]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 生成的首领索引\n[spawn boss index]\n50000\n[/spawn boss index]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 生成的首领索引\n[spawn boss index]\n50000\n[/spawn boss index]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 生成的首领索引\n[spawn boss index]\n50000\n[/spawn boss index]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "common monster item drop list",
+                         "Title":  "普通怪物物品掉落列表",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通怪物物品掉落列表\n[common monster item drop list]\n1015\n3037\n[/common monster item drop list]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通怪物物品掉落列表\n[common monster item drop list]\n1015\n3037\n[/common monster item drop list]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通怪物物品掉落列表\n[common monster item drop list]\n1015\n3037\n[/common monster item drop list]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通怪物物品掉落列表\n[common monster item drop list]\n1015\n3037\n[/common monster item drop list]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "common champion item drop list",
+                         "Title":  "普通冠军物品掉落列表",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通冠军物品掉落列表\n[common champion item drop list]\n1015\n3038\n[/common champion item drop list]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通冠军物品掉落列表\n[common champion item drop list]\n1015\n3038\n[/common champion item drop list]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通冠军物品掉落列表\n[common champion item drop list]\n1015\n3038\n[/common champion item drop list]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通冠军物品掉落列表\n[common champion item drop list]\n1015\n3038\n[/common champion item drop list]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "super champion item drop list",
+                         "Title":  "超级冠军物品掉落列表",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 超级冠军物品掉落列表\n[super champion item drop list]\n1000\n1001\n[/super champion item drop list]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 超级冠军物品掉落列表\n[super champion item drop list]\n1000\n1001\n[/super champion item drop list]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 超级冠军物品掉落列表\n[super champion item drop list]\n1000\n1001\n[/super champion item drop list]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 超级冠军物品掉落列表\n[super champion item drop list]\n1000\n1001\n[/super champion item drop list]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "boss item drop list",
+                         "Title":  "首领物品掉落列表",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 首领物品掉落列表\n[boss item drop list]\n2000\n3000\n[/boss item drop list]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 首领物品掉落列表\n[boss item drop list]\n2000\n3000\n[/boss item drop list]\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 首领物品掉落列表\n[boss item drop list]\n2000\n3000\n[/boss item drop list]\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 首领物品掉落列表\n[boss item drop list]\n2000\n3000\n[/boss item drop list]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "warroom map index",
+                         "Title":  "竞赛地下城中要使用的地图索引",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 竞赛地下城中要使用的地图索引\n[warroom map index] 1000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 竞赛地下城中要使用的地图索引\n[warroom map index] 1000\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 竞赛地下城中要使用的地图索引\n[warroom map index] 1000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 竞赛地下城中要使用的地图索引\n[warroom map index] 1000\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "spawn step max",
+                         "Title":  "最大生成阶段",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 最大生成阶段\n[spawn step max] 5\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 最大生成阶段\n[spawn step max] 5\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 最大生成阶段\n[spawn step max] 5\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 最大生成阶段\n[spawn step max] 5\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "spawn step resource pool",
+                         "Title":  "各生成阶段资源池",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 各生成阶段资源池，按 [spawn step max] 指定的数量指定\n[spawn step resource pool]\n30\n40\n50\n60\n70\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 各生成阶段资源池，按 [spawn step max] 指定的数量指定\n[spawn step resource pool]\n30\n40\n50\n60\n70\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 各生成阶段资源池，按 [spawn step max] 指定的数量指定\n[spawn step resource pool]\n30\n40\n50\n60\n70\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 各生成阶段资源池，按 [spawn step max] 指定的数量指定\n[spawn step resource pool]\n30\n40\n50\n60\n70\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "kill count const",
+                         "Title":  "各种计算中使用的击杀数常数",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 各种计算中使用的击杀数常数\n[kill count const] 500\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 各种计算中使用的击杀数常数\n[kill count const] 500\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 各种计算中使用的击杀数常数\n[kill count const] 500\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 各种计算中使用的击杀数常数\n[kill count const] 500\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "join cost gold",
+                         "Title":  "入场费",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 入场费\n[join cost gold] 5000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 入场费\n[join cost gold] 5000\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 入场费\n[join cost gold] 5000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 入场费\n[join cost gold] 5000\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "gold drop prob",
+                         "Title":  "金币掉落率",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 金币掉落率\n[gold drop prob] 50\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 金币掉落率\n[gold drop prob] 50\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 金币掉落率\n[gold drop prob] 50\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 金币掉落率\n[gold drop prob] 50\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "common monster item drop prob",
+                         "Title":  "普通怪物物品掉落率",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通怪物物品掉落率\n[common monster item drop prob] 10\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通怪物物品掉落率\n[common monster item drop prob] 10\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通怪物物品掉落率\n[common monster item drop prob] 10\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通怪物物品掉落率\n[common monster item drop prob] 10\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "common champion item drop prob",
+                         "Title":  "普通冠军物品掉落率",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通冠军物品掉落率\n[common champion item drop prob] 20\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通冠军物品掉落率\n[common champion item drop prob] 20\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通冠军物品掉落率\n[common champion item drop prob] 20\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通冠军物品掉落率\n[common champion item drop prob] 20\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "super champion item drop prob",
+                         "Title":  "超级冠军物品掉落率",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 超级冠军物品掉落率\n[super champion item drop prob] 40\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 超级冠军物品掉落率\n[super champion item drop prob] 40\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 超级冠军物品掉落率\n[super champion item drop prob] 40\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 超级冠军物品掉落率\n[super champion item drop prob] 40\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "boss item drop prob",
+                         "Title":  "首领物品掉落率",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 首领物品掉落率\n[boss item drop prob] 50\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 首领物品掉落率\n[boss item drop prob] 50\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 首领物品掉落率\n[boss item drop prob] 50\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 首领物品掉落率\n[boss item drop prob] 50\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "common monster exp const",
+                         "Title":  "普通怪物经验值计算常数",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通怪物经验值计算常数\n[common monster exp const] 500\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通怪物经验值计算常数\n[common monster exp const] 500\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通怪物经验值计算常数\n[common monster exp const] 500\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通怪物经验值计算常数\n[common monster exp const] 500\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "common champion exp const",
+                         "Title":  "普通冠军经验值计算常数",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通冠军经验值计算常数\n[common champion exp const] 1000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通冠军经验值计算常数\n[common champion exp const] 1000\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 普通冠军经验值计算常数\n[common champion exp const] 1000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 普通冠军经验值计算常数\n[common champion exp const] 1000\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "super champion exp const",
+                         "Title":  "超级冠军经验值计算常数",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 超级冠军经验值计算常数\n[super champion exp const] 2000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 超级冠军经验值计算常数\n[super champion exp const] 2000\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 超级冠军经验值计算常数\n[super champion exp const] 2000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 超级冠军经验值计算常数\n[super champion exp const] 2000\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "boss exp const",
+                         "Title":  "首领经验值计算常数",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 首领经验值计算常数\n[boss exp const] 3000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 首领经验值计算常数\n[boss exp const] 3000\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 首领经验值计算常数\n[boss exp const] 3000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 首领经验值计算常数\n[boss exp const] 3000\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "dgn",
+                         "Section":  "player kc",
+                         "Title":  "玩家之间互相击杀时的 finishPoint 计算常数",
+                         "Comment":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 玩家之间互相击杀时的 finishPoint 计算常数\n[player kc] 1000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 玩家之间互相击杀时的 finishPoint 计算常数\n[player kc] 1000\n```",
+                         "OfficialDescription":  "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 玩家之间互相击杀时的 finishPoint 计算常数\n[player kc] 1000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 玩家之间互相击杀时的 finishPoint 计算常数\n[player kc] 1000\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     }
+                 ]
+}

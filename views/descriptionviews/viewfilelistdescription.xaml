@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<descriptionviews:ViewFileListDescription xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls;assembly=pvfUtility" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" Window.Title="{DynamicResource ViewFileListDescription_Title}" FrameworkElement.Width="600" FrameworkElement.MinHeight="500" Control.Padding="0" xmlns:descriptionviews="clr-namespace:PvfCode.Views.DescriptionViews;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding LoadedCommand}" />
+    <EventToCommand interactivity:EventTriggerBase.Event="Unloaded" p14:EventToCommandBase.Command="{Binding UnloadedCommand}" xmlns:p14="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+  </interactivity:Interaction.Behaviors>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto " />
+    </Grid.RowDefinitions>
+    <docking:DockLayoutManager xmlns:docking="clr-namespace:DevExpress.Xpf.Docking;assembly=DevExpress.Xpf.Docking.v24.1" docking:DockLayoutManager.Name="DemoDockContainer" Grid.Row="0" Grid.ColumnSpan="2" FrameworkElement.Margin="0,0,0,3" docking:DockLayoutManager.DockingStyle="VS2010" docking:DockLayoutManager.FloatingDocumentContainer="DocumentHost" docking:DockLayoutManager.FloatingMode="Desktop">
+      <docking:LayoutGroup FrameworkElement.Name="Root">
+        <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource ViewFileListDescription_FileExplorerCaption}" docking:BaseLayoutItem.ItemWidth="1.5*">
+          <Grid IsEnabled="{Binding TreeViewModel.TreeGroupData.Loading, Converter={StaticResource ConverterBoolenToFalse}, Mode=OneWay}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <bars:ToolBarControl FrameworkElement.Name="toolbarControl" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+              <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.CommandParameter="false" bars:BarItem.Content="{DynamicResource ViewFileListDescription_DeleteSelected}" bars:BarItem.Glyph="{DynamicResource ClearWindowContent}" bars:BarItem.Command="{Binding OnDeleteSelectedItemsCommand}" />
+            </bars:ToolBarControl>
+            <controls:PvfTreeViewGroup Grid.Row="1" TreeAllowDrop="False" DataContext="{Binding TreeViewModel}" />
+            <bars:StatusBarControl Grid.Row="2" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" Control.Background="{Binding ElementName=toolbarControl, Path=Background}">
+              <bars:BarStaticItem xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+                <bars:BarItem.ContentTemplate>
+                  <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                      <TextBlock Text="{DynamicResource BatchOperationView_FileCount}" />
+                      <TextBlock Text="{Binding Path=DataContext.TreeViewModel.TreeGroupData.FileCount, Mode=OneWay, RelativeSource={RelativeSource AncestorType=dxb:StatusBarControl}}" />
+                    </StackPanel>
+                  </DataTemplate>
+                </bars:BarItem.ContentTemplate>
+              </bars:BarStaticItem>
+            </bars:StatusBarControl>
+          </Grid>
+        </docking:LayoutPanel>
+        <docking:LayoutPanel docking:BaseLayoutItem.AllowDock="False" docking:BaseLayoutItem.AllowFloat="False" docking:BaseLayoutItem.Caption="{DynamicResource ViewFileListDescription_ManageAreaCaption}" docking:BaseLayoutItem.ItemWidth="2*">
+          <Grid Margin="5">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <GroupBox Margin="0,10,0,0" Header="{DynamicResource ViewFileListDescription_AddHeader}">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Label Content="{DynamicResource ViewFileListDescription_FileLabel}" />
+                <editors:ButtonEdit Grid.Column="1" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.AllowDefaultButton="False" BaseEdit.NullText="{DynamicResource ViewFileListDescription_FileNullText}" editors:TextEditBase.Text="{Binding AddData.FilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                  <editors:ButtonEdit.Buttons>
+                    <editors:ButtonInfo editors:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource ViewFileListDescription_BrowseButton}" editors:CommandButtonInfo.Command="{Binding OnSelectedFilePathCommand}" />
+                  </editors:ButtonEdit.Buttons>
+                </editors:ButtonEdit>
+                <Label Grid.Row="1" Margin="0,10,0,0" Content="{DynamicResource ViewFileListDescription_CommentLabel}" />
+                <editors:TextEdit Grid.Row="1" Grid.Column="1" FrameworkElement.Margin="0,10,0,0" BaseEdit.NullText="{DynamicResource ViewFileListDescription_CommentNullText}" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:TextEditBase.Text="{Binding AddData.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Grid.Row="2" Grid.Column="1" Margin="0,10,0,0" Content="{DynamicResource ViewFileListDescription_AddButton}" Command="{Binding OnAddCommand}" />
+              </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Margin="0,20,0,0" Header="{DynamicResource ViewFileListDescription_EditHeader}" Visibility="{Binding SelectedItem, Converter={StaticResource ConvertNullToVisibility}}">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Label Content="{DynamicResource ViewFileListDescription_FileLabel}" />
+                <editors:ButtonEdit Grid.Column="1" editors:ButtonEdit.AllowDefaultButton="False" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:BaseEdit.IsReadOnly="True" editors:BaseEdit.NullText="{DynamicResource ViewFileListDescription_FileNullText}" editors:TextEditBase.Text="{Binding SelectedItem.FilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Label Grid.Row="1" Margin="0,10,0,0" Content="{DynamicResource ViewFileListDescription_CommentLabel}" />
+                <TextEdit Grid.Row="1" Grid.Column="1" FrameworkElement.Margin="0,10,0,0" p19:BaseEdit.NullText="{DynamicResource ViewFileListDescription_CommentNullText}" p19:TextEditBase.Text="{Binding SelectedItem.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p19="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                <Button Grid.Row="2" Grid.Column="1" Margin="0,10,0,0" Content="{DynamicResource common_Save}" Command="{Binding OnSaveSelectedItemCommand}" />
+              </Grid>
+            </GroupBox>
+          </Grid>
+        </docking:LayoutPanel>
+      </docking:LayoutGroup>
+    </docking:DockLayoutManager>
+    <StackPanel Grid.Row="1" Margin="0,10,0,10" HorizontalAlignment="Right" Orientation="Horizontal">
+      <editors:HyperlinkEdit FrameworkElement.Margin="0,0,10,0" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" editors:BaseEdit.EditValue="{DynamicResource EditorToolTipStyle_ItemCodeHover_ShareSetting}" editors:HyperlinkEdit.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=BarsVm.OnOpenPublicSettingCommand}" editors:HyperlinkEdit.CommandParameter="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=LuanguageOptions.GoToStoreShareOption_FileExplorerComment}" />
+      <Button Width="90" Height="24" Margin="0,0,10,0" Content="{DynamicResource common_Save}" Command="{Binding OnSaveCommand}" />
+      <Button Width="90" Height="24" Margin="0,0,10,0" Content="{DynamicResource common_Cancel}">
+      </Button>
+    </StackPanel>
+  </Grid>
+</descriptionviews:ViewFileListDescription>

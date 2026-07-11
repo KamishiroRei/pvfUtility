@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Views.Store.ViewStoreList" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Assists="clr-namespace:PvfCode.Controls.AvatarControl" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxmvvm="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:dxmvvm1="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:enums="clr-namespace:PvfCode.Dot.Desktop.Enums;assembly=PvfCode.Dot" xmlns:local="clr-namespace:Views.Store" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:pvfcode="clr-namespace:PvfCode;assembly=PvfCode.Services" xmlns:root="clr-namespace:PvfCode" xmlns:storelist="clr-namespace:PvfCode.Converts.StoreList" xmlns:sys="clr-namespace:System;assembly=mscorlib" Margin="10" IsEnabled="{Binding IsLoading, Converter={StaticResource ConverterBoolenToFalse}}">
+  <dxmvvm:Interaction.Behaviors>
+    <ui:EventToCommand dxmvvm:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding LoadedCommand}" />
+    <EventToCommand dxmvvm:EventTriggerBase.Event="Unloaded" p18:EventToCommandBase.Command="{Binding UnloadedCommand}" xmlns:p18="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" />
+  </dxmvvm:Interaction.Behaviors>
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <storelist:ConverterStoreDataType x:Key="ConverterStoreDataType" />
+      <ObjectDataProvider x:Key="StoreTypeList" MethodName="GetNames" xmlns:system="clr-namespace:System;assembly=System.Runtime" ObjectType="{x:Type system:Enum}">
+        <ObjectDataProvider.MethodParameters>
+          <x:TypeExtension TypeName="enums:StoreType" />
+        </ObjectDataProvider.MethodParameters>
+      </ObjectDataProvider>
+      <ObjectDataProvider x:Key="ValueStoreTypeList" MethodName="GetValues" ObjectType="{x:Type Enum}">
+        <ObjectDataProvider.MethodParameters>
+          <x:TypeExtension TypeName="enums:StoreType" />
+        </ObjectDataProvider.MethodParameters>
+      </ObjectDataProvider>
+      <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Height" Value="65" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderThickness" Value="0" />
+      </Style>
+      <DataTemplate x:Key="ListBoxItemTemplate" DataType="{x:Type ListBoxItem}">
+        <Grid ShowGridLines="False">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+          </Grid.ColumnDefinitions>
+          <Assists:AvatarControlEx Width="40" Height="40" Margin="10,0,0,0" ImageSource="{Binding Avatar}" />
+          <Grid Column="1" Margin="15,0,0,0" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock VerticalAlignment="Center" FontSize="14" Text="{Binding Title}" />
+              <StackPanel Margin="5,0,0,0" Orientation="Horizontal" Visibility="{Binding Path=DataContext.QueryData.Type, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, ConverterParameter={x:Static enums:StoreType.宏}, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource ConverterEnumToVisibility}}">
+                <TextBlock VerticalAlignment="Center" FontSize="10" Foreground="#ababab" Text="(" />
+                <TextBlock VerticalAlignment="Center" FontSize="10" Foreground="#ababab" Text="{Binding MacroType}" />
+                <TextBlock VerticalAlignment="Center" FontSize="10" Foreground="#ababab" Text=")" />
+              </StackPanel>
+            </StackPanel>
+            <TextBlock Grid.Row="1" MaxWidth="300" MaxHeight="40" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#ababab" TextWrapping="Wrap" Text="{Binding Description}" />
+          </Grid>
+          <Grid Column="2" Margin="0,0,40,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="2" Margin="0,0,40,0" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+              <Label Margin="5,0,0,0" Content="{DynamicResource ViewStoreList_Label_Author}" />
+              <Label Margin="0,0,0,0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Content="{Binding NickName}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,40,0" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+              <Label Margin="5,0,0,0" Content="{DynamicResource ViewStoreList_Label_DownloadCount}" FontSize="10" Foreground="#ababab" />
+              <Label Margin="0,0,0,0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="10" Foreground="#ababab" Content="{Binding DownLoadNumber}" />
+            </StackPanel>
+          </Grid>
+          <bars:ToolBarControl FrameworkElement.Name="rightToolbar" Grid.Column="3" FrameworkElement.VerticalAlignment="Center" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+            <bars:BarButtonItem FrameworkContentElement.Cursor="Hand" BarItem.Glyph="{DynamicResource PrintPreview_16x}" FrameworkContentElement.ToolTip="{DynamicResource ViewStoreList_Button_Preview}" bars:BarItem.Command="{Binding Path=DataContext.OnPreviewCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" bars:BarItem.CommandParameter="{Binding}" bars:BarItem.IsVisible="{Binding Path=DataContext.PreviewButtonVisibility, Mode=OneWay, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            <bars:BarButtonItem FrameworkContentElement.Cursor="Hand" bars:BarItem.Glyph="{DynamicResource Download_16x}" FrameworkContentElement.ToolTip="{DynamicResource ViewStoreList_Button_Download}" bars:BarItem.Command="{Binding Path=DataContext.OnDownCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" bars:BarItem.CommandParameter="{Binding}" />
+            <bars:BarButtonItem FrameworkContentElement.Cursor="Hand" bars:BarItem.Glyph="{DynamicResource Action_Delete}" FrameworkContentElement.ToolTip="{DynamicResource ViewStoreList_Button_Delete}" bars:BarItem.Command="{Binding Path=DataContext.OnDeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" bars:BarItem.CommandParameter="{Binding}" bars:BarItem.IsVisible="{Binding Source={x:Static pvfcode:ServiceCloud.Instance}, Path=IsAdmin, Mode=OneWay}" />
+          </bars:ToolBarControl>
+        </Grid>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <editors:ComboBoxEdit xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.IsTextEditable="False" editors:BaseEdit.EditValue="{Binding QueryData.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ConverterStoreDataType}}" UIElement.IsEnabled="{Binding IsLoading, Converter={StaticResource ConverterBoolenToFalse}}">
+        <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewStoreList_StoreDataType_Bookmark}" />
+        <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewStoreList_StoreDataType_Macro}" />
+        <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewStoreList_StoreDataType_FileListComment}" />
+        <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewStoreList_StoreDataType_ScriptFileTabComment}" />
+        <editors:ComboBoxEditItem ContentControl.Content="{DynamicResource ViewStoreList_StoreDataType_ItemCodeHover}" />
+      </editors:ComboBoxEdit>
+      <ComboBoxEdit Grid.Column="1" FrameworkElement.MinWidth="300" FrameworkElement.Margin="5,0,0,0" p18:ButtonEdit.AllowDefaultButton="False" p18:BaseEdit.NullText="{DynamicResource ViewStoreList_Button_Search}" p18:BaseEdit.EditValue="{Binding QueryData.Keyword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" UIElement.IsEnabled="{Binding IsLoading, Converter={StaticResource ConverterBoolenToFalse}}" xmlns:p18="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+        <FrameworkElement.Style xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+          <Style TargetType="{x:Type ComboBoxEdit}">
+            <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+              <Setter.Value>
+                <DataTemplate>
+                  <ContentControl>
+                    <ui:KeyToCommand xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:KeyToCommand.KeyGesture="Enter" ui:EventToCommandBase.Command="{Binding OnRefSourceCommand}" />
+                  </ContentControl>
+                </DataTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </FrameworkElement.Style>
+        <p18:ButtonEdit.Buttons>
+          <editors:ButtonInfo xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonInfo.GlyphKind="Search" editors:CommandButtonInfo.Command="{Binding OnRefSourceCommand}" />
+          <p18:ButtonInfo p18:ButtonInfo.GlyphKind="Down" />
+        </p18:ButtonEdit.Buttons>
+      </ComboBoxEdit>
+      <ToolBarControl Grid.Column="2" p18:ToolBarControlBase.AllowCustomizationMenu="False" p18:ToolBarControl.AllowQuickCustomization="False" xmlns:p18="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+        <p18:BarButtonItem p18:BarItem.Glyph="{DynamicResource RefreshIcon}" p18:BarItem.Command="{Binding OnRefSourceCommand}" ContentElement.IsEnabled="{Binding IsLoading, Converter={StaticResource ConverterBoolenToFalse}}" />
+      </ToolBarControl>
+      <StackPanel Grid.Column="3" HorizontalAlignment="Right" Orientation="Horizontal">
+        <editors:HyperlinkEdit FrameworkElement.Margin="0,0,10,0" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" editors:HyperlinkEdit.CommandParameter="{DynamicResource ViewGlobalOptions_TreeMenu_Setting_ShareSetting}" editors:BaseEdit.EditValue="{DynamicResource ViewStoreList_Button_UploadMyDataToStore}" Control.FontSize="13" editors:HyperlinkEdit.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=BarsVm.OnOpenPublicSettingCommand}" />
+      </StackPanel>
+    </Grid>
+    <StackPanel Grid.Row="1" Height="1" Margin="0,10,0,10" Background="#ababab" />
+    <Grid Row="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" MinWidth="300" />
+      </Grid.ColumnDefinitions>
+      <Grid>
+        <ListBox Name="listBox" Background="#00FFFFFF" ItemTemplate="{StaticResource ListBoxItemTemplate}" ItemsSource="{Binding Items.CollectionView}" SelectedItem="{Binding SelectedItem}" />
+        <Grid VerticalAlignment="Top" Visibility="{Binding IsLoading, Converter={StaticResource ConvertBoolenToVisibility}, Mode=OneWay}">
+          <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+          </Grid.RowDefinitions>
+          <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="{DynamicResource ViewStoreList_Label_Loading}" Foreground="#FF808080" />
+          <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" />
+        </Grid>
+      </Grid>
+      <GridSplitter Grid.Column="1" Width="5" Padding="0" HorizontalAlignment="Stretch" />
+      <StackPanel Grid.Column="2" MinWidth="300" Orientation="Vertical">
+        <TextBox Margin="10,0,10,0" Background="#00FFFFFF" BorderThickness="0" FontSize="20" IsReadOnly="True" Text="{Binding ElementName=listBox, Path=SelectedItem.Title}" />
+        <Grid Margin="10,5,10,5">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <StackPanel Orientation="Horizontal">
+            <Label Content="{DynamicResource ViewStoreList_Label_DownloadCount}" />
+            <Label Grid.Column="1" Content="{Binding ElementName=listBox, Path=SelectedItem.DownLoadNumber}" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Margin="0,0,0,0" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Width="80" Margin="0,0,5,0" Content="{DynamicResource ViewStoreList_Button_Preview}" ToolTip="{DynamicResource ViewStoreList_Label_PreviewBookmark}" Command="{Binding OnPreviewCommand}" Visibility="{Binding PreviewButtonVisibility, Mode=OneWay, Converter={StaticResource ConvertBoolenToVisibility}}" />
+            <Button Width="90" Content="{DynamicResource ViewStoreList_Button_Download}" Command="{Binding OnDownCommand}" />
+          </StackPanel>
+        </Grid>
+        <StackPanel Height="1" Margin="10,5,10,5" Background="#FF808080" />
+        <Grid Row="2" Margin="10,0,10,0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+          <Label Content="{DynamicResource ViewStoreList_Label_Description}" FontSize="15" />
+          <TextBox Grid.Row="1" MaxWidth="400" Background="#00FFFFFF" BorderThickness="0" FontSize="11" IsReadOnly="True" TextWrapping="Wrap" Text="{Binding ElementName=listBox, Path=SelectedItem.Description}" />
+        </Grid>
+        <StackPanel Height="1" Margin="10,5,10,5" Background="#FF808080" />
+        <StackPanel Grid.Row="3" Margin="10,0,10,0" Orientation="Horizontal">
+          <Label Content="{DynamicResource ViewStoreList_Label_Author}" />
+          <TextBox Background="#00FFFFFF" BorderThickness="0" IsReadOnly="True" Text="{Binding ElementName=listBox, Path=SelectedItem.NickName}" />
+        </StackPanel>
+        <StackPanel Grid.Row="4" Margin="10,0,10,0" Orientation="Horizontal">
+          <Label Content="{DynamicResource ViewStoreList_Label_ShareTime}" />
+          <TextBlock VerticalAlignment="Center" Text="{Binding ElementName=listBox, Path=SelectedItem.Create, StringFormat=yyyy-MM-dd hh:mm:ss}" />
+        </StackPanel>
+        <StackPanel Grid.Row="4" Margin="10,0,10,0" Orientation="Horizontal">
+          <Label Content="{DynamicResource ViewStoreList_Label_UpdateTime}" />
+          <TextBlock VerticalAlignment="Center" Text="{Binding ElementName=listBox, Path=SelectedItem.UpdateTime, StringFormat=yyyy-MM-dd hh:mm:ss}" />
+        </StackPanel>
+        <StackPanel Grid.Row="5" Height="1" Margin="10,5,10,5" Background="#FF808080" />
+        <TextBox Grid.Row="6" MaxWidth="400" Margin="10,10,10,0" Background="#00FFFFFF" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap" Text="{Binding ElementName=listBox, Path=SelectedItem.DetailedInstructions}" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</UserControl>

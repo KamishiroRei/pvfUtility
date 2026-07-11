@@ -1,0 +1,105 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>HL</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWPF>True</UseWPF>
+    <TargetFramework>net10.0-windows</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>15.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="HL.Modes.ModeV1.xsd" />
+    <None Remove="HL.Modes.ModeV2.xsd" />
+    <None Remove="HL.Modes.ModeV2_htd.xsd" />
+    <None Remove="HL.Resources.Light.AS3.xshd" />
+    <None Remove="HL.Resources.Light.ASPX.xshd" />
+    <None Remove="HL.Resources.Light.Boo.xshd" />
+    <None Remove="HL.Resources.Light.Coco-Mode.xshd" />
+    <None Remove="HL.Resources.Light.CPP-Mode.xshd" />
+    <None Remove="HL.Resources.Light.CSharp-Mode.xshd" />
+    <None Remove="HL.Resources.Light.CSS-Mode.xshd" />
+    <None Remove="HL.Resources.Light.DOSBATCH.xshd" />
+    <None Remove="HL.Resources.Light.FSharp-Mode.xshd" />
+    <None Remove="HL.Resources.Light.HLSL.xshd" />
+    <None Remove="HL.Resources.Light.HTML-Mode.xshd" />
+    <None Remove="HL.Resources.Light.INI.xshd" />
+    <None Remove="HL.Resources.Light.Java-Mode.xshd" />
+    <None Remove="HL.Resources.Light.JavaScript-Mode.xshd" />
+    <None Remove="HL.Resources.Light.Kor.xshd" />
+    <None Remove="HL.Resources.Light.Log.xshd" />
+    <None Remove="HL.Resources.Light.MarkDown-Mode.xshd" />
+    <None Remove="HL.Resources.Light.Pascal.xshd" />
+    <None Remove="HL.Resources.Light.Patch-Mode.xshd" />
+    <None Remove="HL.Resources.Light.PHP-Mode.xshd" />
+    <None Remove="HL.Resources.Light.PLSQL.xshd" />
+    <None Remove="HL.Resources.Light.PowerShell.xshd" />
+    <None Remove="HL.Resources.Light.Python-Mode.xshd" />
+    <None Remove="HL.Resources.Light.Ruby.xshd" />
+    <None Remove="HL.Resources.Light.scheme.xshd" />
+    <None Remove="HL.Resources.Light.Lst.xshd" />
+    <None Remove="HL.Resources.Light.Script.xshd" />
+    <None Remove="HL.Resources.Light.squirrel.xshd" />
+    <None Remove="HL.Resources.Light.StringTable.xshd" />
+    <None Remove="HL.Resources.Light.Tex-Mode.xshd" />
+    <None Remove="HL.Resources.Light.TSQL-Mode.xshd" />
+    <None Remove="HL.Resources.Light.TXT.xshd" />
+    <None Remove="HL.Resources.Light.VB-Mode.xshd" />
+    <None Remove="HL.Resources.Light.vtl.xshd" />
+    <None Remove="HL.Resources.Light.XML-Mode.xshd" />
+    <None Remove="HL.Resources.Light.XmlDoc.xshd" />
+    <None Remove="HL.Resources.Themes.Dark.xshtd" />
+    <None Remove="HL.Resources.Themes.TrueBlue.xshtd" />
+    <None Remove="HL.Resources.Themes.VS2019_Dark.xshtd" />
+    <EmbeddedResource Include="HL.Modes.ModeV1.xsd" LogicalName="HL.Modes.ModeV1.xsd" />
+    <EmbeddedResource Include="HL.Modes.ModeV2.xsd" LogicalName="HL.Modes.ModeV2.xsd" />
+    <EmbeddedResource Include="HL.Modes.ModeV2_htd.xsd" LogicalName="HL.Modes.ModeV2_htd.xsd" />
+    <EmbeddedResource Include="HL.Resources.Light.AS3.xshd" LogicalName="HL.Resources.Light.AS3.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.ASPX.xshd" LogicalName="HL.Resources.Light.ASPX.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Boo.xshd" LogicalName="HL.Resources.Light.Boo.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Coco-Mode.xshd" LogicalName="HL.Resources.Light.Coco-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.CPP-Mode.xshd" LogicalName="HL.Resources.Light.CPP-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.CSharp-Mode.xshd" LogicalName="HL.Resources.Light.CSharp-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.CSS-Mode.xshd" LogicalName="HL.Resources.Light.CSS-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.DOSBATCH.xshd" LogicalName="HL.Resources.Light.DOSBATCH.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.FSharp-Mode.xshd" LogicalName="HL.Resources.Light.FSharp-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.HLSL.xshd" LogicalName="HL.Resources.Light.HLSL.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.HTML-Mode.xshd" LogicalName="HL.Resources.Light.HTML-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.INI.xshd" LogicalName="HL.Resources.Light.INI.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Java-Mode.xshd" LogicalName="HL.Resources.Light.Java-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.JavaScript-Mode.xshd" LogicalName="HL.Resources.Light.JavaScript-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Kor.xshd" LogicalName="HL.Resources.Light.Kor.xshd" WithCulture="false" />
+    <EmbeddedResource Include="HL.Resources.Light.Log.xshd" LogicalName="HL.Resources.Light.Log.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.MarkDown-Mode.xshd" LogicalName="HL.Resources.Light.MarkDown-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Pascal.xshd" LogicalName="HL.Resources.Light.Pascal.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Patch-Mode.xshd" LogicalName="HL.Resources.Light.Patch-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.PHP-Mode.xshd" LogicalName="HL.Resources.Light.PHP-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.PLSQL.xshd" LogicalName="HL.Resources.Light.PLSQL.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.PowerShell.xshd" LogicalName="HL.Resources.Light.PowerShell.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Python-Mode.xshd" LogicalName="HL.Resources.Light.Python-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Ruby.xshd" LogicalName="HL.Resources.Light.Ruby.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.scheme.xshd" LogicalName="HL.Resources.Light.scheme.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Lst.xshd" LogicalName="HL.Resources.Light.Lst.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Script.xshd" LogicalName="HL.Resources.Light.Script.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.squirrel.xshd" LogicalName="HL.Resources.Light.squirrel.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.StringTable.xshd" LogicalName="HL.Resources.Light.StringTable.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.Tex-Mode.xshd" LogicalName="HL.Resources.Light.Tex-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.TSQL-Mode.xshd" LogicalName="HL.Resources.Light.TSQL-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.TXT.xshd" LogicalName="HL.Resources.Light.TXT.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.VB-Mode.xshd" LogicalName="HL.Resources.Light.VB-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.vtl.xshd" LogicalName="HL.Resources.Light.vtl.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.XML-Mode.xshd" LogicalName="HL.Resources.Light.XML-Mode.xshd" />
+    <EmbeddedResource Include="HL.Resources.Light.XmlDoc.xshd" LogicalName="HL.Resources.Light.XmlDoc.xshd" />
+    <EmbeddedResource Include="HL.Resources.Themes.Dark.xshtd" LogicalName="HL.Resources.Themes.Dark.xshtd" />
+    <EmbeddedResource Include="HL.Resources.Themes.TrueBlue.xshtd" LogicalName="HL.Resources.Themes.TrueBlue.xshtd" />
+    <EmbeddedResource Include="HL.Resources.Themes.VS2019_Dark.xshtd" LogicalName="HL.Resources.Themes.VS2019_Dark.xshtd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj" />
+  </ItemGroup>
+</Project>

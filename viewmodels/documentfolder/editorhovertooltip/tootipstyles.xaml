@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:editorhovertooltip="clr-namespace:PvfCode.ViewModels.DocumentFolder.EditorHoverTooltip;assembly=pvfUtility" xmlns:i1="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" xmlns:root="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility">
+  <DataTemplate x:Key="FoldingTooltip">
+    <Border Background="{DynamicResource CompletionCommentEditorBackBrush}" BorderBrush="#FF808080" BorderThickness="0">
+      <Grid DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType=Popup}}">
+        <texteditlib:TextEditDefault Grid.Row="1" FrameworkElement.MinWidth="300" FrameworkElement.MaxHeight="400" FrameworkElement.Margin="5,5,2,5" Control.Background="{DynamicResource CompletionCommentEditorBackBrush}" texteditlib:TextEditDefault.EditorCurrentLineBackground="#00FFFFFF" texteditlib:TextEditDefault.EditorCurrentLineBorder="#00FFFFFF" texteditlib:TextEditDefault.EditorCurrentLineBorderThickness="0" Control.FontSize="9" xmlns:avalonedit1="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" avalonedit1:TextEditor.IsReadOnly="True" avalonedit1:TextEditor.ShowLineNumbers="False" avalonedit1:TextEditor.Document="{Binding Document}" avalonedit1:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay}" />
+      </Grid>
+    </Border>
+  </DataTemplate>
+  <DataTemplate x:Key="FilePathTooltipDataTemPlate">
+    <Border Background="{DynamicResource CompletionCommentEditorBackBrush}" BorderBrush="#FF808080">
+      <Grid Margin="2">
+        <Grid Visibility="{Binding ImagePack2NotLoaded, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+          <Label Content="{DynamicResource EditorToolTipStyle_ItemCodeHover_NoImagePack2ModelDir}" Foreground="#FFFF0000" />
+        </Grid>
+        <Grid Visibility="{Binding ImagePack2NotLoaded, Converter={StaticResource ConvertBoolenToVisibility}}">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Button Content="{DynamicResource EditorToolTipStyle_ItemCodeHover_GoToFileBtnTitle}" FontSize="14" Style="{StaticResource LinkButton}" />
+          <Label Grid.Column="1" Margin="20,0,0,0" Content="{DynamicResource EditorToolTipStyle_ItemCodeHover_GoToFileShortcutKey}" />
+        </Grid>
+      </Grid>
+    </Border>
+  </DataTemplate>
+  <DataTemplate x:Key="CommentToolTipDataTemplate">
+    <Grid>
+      <Border BorderThickness="1">
+        <UIElement.Effect>
+          <DropShadowEffect BlurRadius="12" Opacity="1" ShadowDepth="0" Color="#d24726" />
+        </UIElement.Effect>
+        <Grid Background="{DynamicResource CompletionCommentEditorBackBrush}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+          <Grid Name="gridEditBox">
+            <texteditlib:TextEditDefault texteditlib:TextEditDefault.Name="editorCommentInput" FrameworkElement.MaxWidth="500" FrameworkElement.MaxHeight="600" FrameworkElement.Margin="10,10,0,10" Control.Background="{DynamicResource CompletionCommentEditorBackBrush}" texteditlib:TextEditDefault.EditorCurrentLineBackground="{DynamicResource CompletionCommentEditorBackBrush}" texteditlib:TextEditDefault.EditorCurrentLineBorderThickness="0" Control.FontSize="15" p18:TextEditor.HorizontalScrollBarVisibility="Auto" p18:TextEditor.IsReadOnly="False" p18:TextEditor.ShowLineNumbers="False" p18:TextEditor.VerticalScrollBarVisibility="Auto" p18:TextEditor.WordWrap="True" p18:TextEditor.Document="{Binding Document}" p18:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p18="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" />
+          </Grid>
+          <ProgressBar Grid.Row="0" VerticalAlignment="Center" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" Visibility="{Binding IsLoading, Converter={StaticResource ConvertBoolenToVisibility}}" />
+          <Grid Row="1" Background="{DynamicResource TextEditorCommentAuthorsGridBackBrush}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+              <TextBlock Margin="5,2,0,2" Foreground="#FF808080" Text="{DynamicResource CodeCompletionToolTip_TextBlock_Author}" />
+              <TextBlock Margin="0,2,0,2" Foreground="#FF808080" Text="{Binding Comment.Authors}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="5,0,0,0" HorizontalAlignment="Right" Orientation="Horizontal">
+              <TextBlock Margin="0,2,0,2" Foreground="#FF808080" Text="update：" />
+              <TextBlock Margin="0,2,10,2" Foreground="#FF808080" Text="{Binding Comment.UpdateTime, StringFormat=yyyy-MM-dd}" />
+            </StackPanel>
+          </Grid>
+          <bars:ToolBarControl Grid.Row="2" Control.Padding="3" xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False" bars:ToolBarControl.ShowDragWidget="True" bars:ToolBarControl.UseWholeRow="True" UIElement.Visibility="Visible">
+            <bars:BarStaticItem bars:BarStaticItem.Name="share">
+              <bars:BarItem.ContentTemplate>
+                <DataTemplate>
+                  <editors:HyperlinkEdit FrameworkElement.Margin="0,0,10,0" FrameworkElement.VerticalAlignment="Center" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:HyperlinkEdit.AllowAutoNavigate="True" BaseEdit.EditValue="{DynamicResource EditorToolTipStyle_ItemCodeHover_ShareSetting}" editors:HyperlinkEdit.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=BarsVm.OnOpenPublicSettingCommand}" editors:HyperlinkEdit.CommandParameter="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=LuanguageOptions.GoToStoreShareOption_TagTranslation}" />
+                </DataTemplate>
+              </bars:BarItem.ContentTemplate>
+            </bars:BarStaticItem>
+            <bars:BarItemSeparator />
+            <bars:BarStaticItem>
+              <bars:BarItem.ContentTemplate>
+                <DataTemplate>
+                  <HyperlinkEdit FrameworkElement.Margin="0,0,10,0" FrameworkElement.VerticalAlignment="Center" p21:HyperlinkEdit.AllowAutoNavigate="True" p21:HyperlinkEdit.CommandParameter="{DynamicResource ViewGlobalOptions_TreeMenu_Setting_TextEditor}" BaseEdit.EditValue="{DynamicResource EditorToolTipStyle_ItemCodeHover_TriggerType}" p21:HyperlinkEdit.Command="{Binding Source={x:Static root:AppCore.ViewModelBase}, Path=BarsVm.OnOpenPublicSettingCommand}" xmlns:p21="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+                </DataTemplate>
+              </bars:BarItem.ContentTemplate>
+            </bars:BarStaticItem>
+            <bars:BarItemSeparator />
+            <bars:BarStaticItem FrameworkContentElement.Name="baseNameNickInput" bars:BarStaticItem.AutoSizeMode="Fill" bars:BarStaticItem.ContentAlignment="Stretch" bars:BarStaticItem.ShowBorder="False" ContentElement.IsEnabled="{Binding IsShare}">
+              <bars:BarItem.ContentTemplate>
+                <DataTemplate>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="auto" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" Text="{DynamicResource CodeCompletionToolTip_Label_NickName}" />
+                    <TextBox Name="editorCommentNickNameInput" Grid.Column="1" IsReadOnly="False" BorderBrush="{x:Null}" Text="{Binding Path=DataContext.NickName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=dxb:ToolBarControl}}" />
+                  </Grid>
+                </DataTemplate>
+              </bars:BarItem.ContentTemplate>
+            </bars:BarStaticItem>
+            <bars:BarButtonItem bars:BarItem.Content="{DynamicResource CodeCompletionToolTip_Btn_Save}" bars:BarItem.Glyph="{DynamicResource SaveStatusBar}" bars:BarItem.Command="{Binding SaveCommand}" />
+          </bars:ToolBarControl>
+        </Grid>
+      </Border>
+    </Grid>
+  </DataTemplate>
+  <DataTemplate x:Key="ItemCodeToolTipDataTempate">
+    <Border BorderBrush="#FF808080" BorderThickness="0.5">
+      <Grid Background="{DynamicResource CompletionCommentEditorBackBrush}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Row="0" Column="0" Visibility="{Binding ShowImage, Mode=TwoWay}">
+          <Image Width="32" Height="32" Source="{Binding ImageSource}" />
+        </Grid>
+        <Grid Column="1">
+          <texteditlib:TextEditDefault texteditlib:TextEditDefault.Name="editorAuto" Grid.Row="0" FrameworkElement.MaxHeight="800" FrameworkElement.Margin="3,6,3,3" Control.Background="{DynamicResource CompletionCommentEditorBackBrush}" texteditlib:TextEditDefault.EditorCurrentLineBackground="{DynamicResource CompletionCommentEditorBackBrush}" texteditlib:TextEditDefault.EditorCurrentLineBorderThickness="0" Control.FontSize="15" p17:TextEditor.HorizontalScrollBarVisibility="Auto" p17:TextEditor.IsReadOnly="True" p17:TextEditor.ShowLineNumbers="False" p17:TextEditor.VerticalScrollBarVisibility="Auto" p17:TextEditor.Document="{Binding Document}" p17:TextEditor.SyntaxHighlighting="{Binding Highlighting, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" xmlns:p17="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" />
+        </Grid>
+        <Grid Row="1" ColumnSpan="2" Background="{DynamicResource ItemCodeHoverPanelBottomBackBrush}">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+          </Grid.ColumnDefinitions>
+          <Label Margin="5,0,0,0" Content="{Binding Data.Description}" />
+          <HyperlinkEdit Grid.Column="1" FrameworkElement.VerticalAlignment="Center" p17:HyperlinkEdit.AllowAutoNavigate="True" BaseEdit.EditValue="{DynamicResource EditorToolTipStyle_ItemCodeHover_GoToFileBtnTitle}" p17:HyperlinkEdit.Command="{Binding GoToFileCommand}" xmlns:p17="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" />
+        </Grid>
+      </Grid>
+    </Border>
+  </DataTemplate>
+  <editorhovertooltip:EditorTooltipDataTemplateSelector x:Key="EditorTooltipDataTemplateSelector" CommentTooltip="{StaticResource CommentToolTipDataTemplate}" FilePath="{StaticResource FilePathTooltipDataTemPlate}" FoldingTooltip="{StaticResource FoldingTooltip}" ItemCode="{StaticResource ItemCodeToolTipDataTempate}" />
+</ResourceDictionary>

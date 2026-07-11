@@ -1,0 +1,386 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "npc",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "at fighter",
+                         "Title":  "男格斗",
+                         "Comment":  "男格斗",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "at mage",
+                         "Title":  "男魔法师",
+                         "Comment":  "男魔法师",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "pvfUtili|Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "big face",
+                         "Title":  "接取任务时在点开NPC时对话的大头像",
+                         "Comment":  "接取任务时在点开NPC时对话的大头像。",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[big face] `slainer.img` 1 // 窗口中显示的大脸部图像文件名和帧索引。\n```",
+                         "Closing":  false,
+                         "Authors":  "夜白：122998088"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "common",
+                         "Title":  "该词条位于导师技能商店内时",
+                         "Comment":  "该词条位于导师技能商店内时，代表这是全职业通用技能，比如受身蹲伏等等",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "compound emblem",
+                         "Title":  "徽章合成",
+                         "Comment":  "徽章合成\n\nNPC的徽章合成功能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "convert avatar",
+                         "Title":  "重铸徽章",
+                         "Comment":  "重铸徽章\n\n也就是NPC的分解时装为徽章功能，如达芙妮",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "crane minigame",
+                         "Title":  "娃娃机",
+                         "Comment":  "娃娃机。路径/etc/craneminigameitem.etc",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "一只鱼2"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "create guild agit",
+                         "Title":  "创建公会",
+                         "Comment":  "创建公会\n\n博肯的创建公会功能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "delete guild agit",
+                         "Title":  "解散公会",
+                         "Comment":  "解散公会\n\n博肯的解散公会功能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "dialog",
+                         "Title":  "对话",
+                         "Comment":  "对话\n[dialog]\n4                     //对话索引\n1 99                  //等级限制\n-1                //要列出的职业数量 职业索引1(鬼剑士) 1(on)/0(off) 2(格斗家) 1(on)/0(off).... 5(圣职者) 1(on)/0(off)), 想让所有职业都on的话则用 -1\n0                //默认为0\n0                //以上4个条件为OR运算时为1，AND运算时为0\n\u003cnpc::27\u003e是你的對手太過強大？ 還是你太過弱小？ 在向別人求助前， 你最好先反省下        //对话\n1//相关任务编号，可根据需要添加 0为无任务\n[/dialog]",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[dialog]\n4 // 对话索引。\n1 99 // 等级限制。\n-1 // 要列出的职业数量，职业索引(1(鬼剑士) 1(开启)/0(关闭) 2(格斗家) 1(开启)/0(关闭).... 5(圣职者) 1(开启)/0(关闭))，要对所有职业开启则使用-1。\n0 // 体力：是否考虑OTL状态，是则为1，否则为0。\n0 // 对以上4种条件进行OR运算则为1，进行AND运算则为0。\n\u003c8::dialog_Ser_MDL_1\u003e // 对话。\n1 // 相关任务索引，可按需添加。\n[/dialog]\n```",
+                         "Closing":  true,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "field animation",
+                         "Title":  "场动画",
+                         "Comment":  "场动画",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[field animation] `Animation/slainer.ani` // 在场景中显示的动画的相对路径。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "field name",
+                         "Title":  "字段名",
+                         "Comment":  "字段名",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[field name] `프로그래머 승민` // 在场景中显示的名称。\n```",
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "field wav",
+                         "Title":  "STATIC_SOUND",
+                         "Comment":  "[field wav]  `STATIC_SOUND`                        // 场效音,当你在NPC附近时播放的声音",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[field wav] `STATIC_SOUND` // 在场景中时始终存在的效果音。\n```",
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "guild",
+                         "Title":  "公会",
+                         "Comment":  "公会\n\n博肯的公会管理功能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "item shop",
+                         "Title":  "NPC商店",
+                         "Comment":  "NPC商店\n\n写多少号就是调用多少号的NPC商店，比如写8号，就是调用8号的诺顿商店",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "job change",
+                         "Title":  "副职业",
+                         "Comment":  "副职业\n\nNPC的副职业功能\n1附魔师\n2药剂师\n3分解师\n4人偶师",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "look around",
+                         "Title":  "环顾四周",
+                         "Comment":  "环顾四周\n当你点击npc时，npc会随着你角色所在位置朝向你\n[look around]\n\t0\n写0，npc就会固定位置，不写这个代码npc就会朝向你 默认值为1",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[look around] 0 // 在场景中是否转向对话方向。1（转身看）为默认值。\n```",
+                         "Closing":  false,
+                         "Authors":  "王良一|unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "move town",
+                         "Title":  "移动到城镇",
+                         "Comment":  "移动到城镇，后面写到达的NPC编号",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "网瘾少年"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "popup face",
+                         "Title":  "接取任务时在点开NPC时对话的小头像",
+                         "Comment":  "接取任务时在点开NPC时对话的小头像。",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[popup face] `slainer.img` 2 // 弹出菜单中显示的小脸部图像文件名和帧索引。\n```",
+                         "Closing":  false,
+                         "Authors":  "夜白：122998088"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "popup wav",
+                         "Title":  "NPC_SOUND NPC_END_SOUND",
+                         "Comment":  "[popup wav]  `NPC_SOUND` `NPC_END_SOUND`        // 弹出/关闭对话框时产生的效果音",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[popup wav] `NPC_SOUND` `NPC_END_SOUND` // 打开菜单时、关闭菜单时播放的效果音。\n```",
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "product item",
+                         "Title":  "生产",
+                         "Comment":  "生产\n\n罗杰的商店，同时也是生产材料功能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "recover stamina",
+                         "Title":  "解除虚弱",
+                         "Comment":  "解除虚弱\n\nNPC的解除虚弱功能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "role",
+                         "Title":  "NPC的各项功能",
+                         "Comment":  "[role]  NPC的各项功能\n———————————————————————————\n//拓展功能\n[skill]\n\t`职业`\n[/skill]\n//导师技能商店（需写在[role]词条的外边，且部分端需要插件支持）\n———————————————————————————\n\t`[time sand]`\t0\n//导师技能商店（或许是）\n\n\t`[item shop]`\t33\n//NPC商店，NPC商店编号\n\t`[secret shop]`\t1002\n//加百利商店\n\n\t`[recover stamina]`\t0\n//解除虚弱\n\n\t`[sera shop]`\t\t0\n//进入商城\n\n\t`[create guild agit]`\t0\n//创建公会\n\n\t`[guild]`\t0\n//管理公会\n\n\t`[delete guild agit]`\t0\n//解散公会\n\n\t`[upgrade item]`\t0\n//强化装备\n\n\t`[convert avatar]`\t33\n//重铸徽章\n\n\t`[compound emblem]`\t33\n//徽章合成\n\n\t`[job change]`\t-1\n//副职业——1附魔师、2药剂师、3分解师、4人偶师\n\n\t`[product item]`\t20\n//生产，罗杰商店编号\n\n\t`[mouse register]`\t0",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[role] // NPC的角色列表。交替写入所需的角色名称和索引。顺序没有意义。\n`[item shop]` 3 // 物品商店。普通商店和修理商店通用。索引是物品商店索引。\n`[secret shop]` 1002 // 秘密商店。像加百列那样在地城中不规则出现的NPC。索引是物品商店索引。\n`[recover stamina]` 0 // 恢复体力。索引必须为0。\n`[sera shop]` 0 // 赛拉商店。索引必须为0。\n`[guild]` 0 // 公会管理。索引必须为0。\n`[upgrade item]` 0 // 物品升级。索引必须为0。\n`[disjoint item]` 0 // 物品分解。索引必须为0。\n`[product item]` 17 // 物品生产。索引是物品商店索引。\n`[item storage]` 0 // 仓库。索引必须为0。\n`[post box]` 0 // 邮箱。索引必须为0。\n`[move town]` 2 // 城镇移动。要移动到的town index。\n`[convert avatar]` 0 // 装扮转换。索引必须为0。\n`[genuine damage upgrade]` 0 // 武器真伤升级。索引必须为0。\n`[play quest movie]` 0 // 任务影片回放。\n[/role]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "secret shop",
+                         "Title":  "加百利商店",
+                         "Comment":  "加百利商店",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "sera shop",
+                         "Title":  "进入商城",
+                         "Comment":  "进入商城\n\n在NPC的功能里通过此功能跳转到游戏内商城",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "skill",
+                         "Title":  "左边是技能编号 右边是技能等级",
+                         "Comment":  "左边是技能编号      右边是技能等级\n\n该词条位于NPC内时，代表这是导师技能商店，将技能编号写进即可添加\n\n//示例1：\n[skill]\n\t`[swordman]`\t1\n[/skill]\n以上代表该导师技能商店内有一个男鬼剑士专属的编号为1的  `格挡`\n\n//示例2：\n[skill]\n\t`[common]`\t169\n[/skill]\n以上代表该导师技能商店内有一个全职业通用的编号为169的  `后跳`",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[skill] // 可教授的职业技能。\n`[fighter]` // 职业。选择 `[swordman]` `[fighter]` `[common]` 之一。\n1 // 可教授的职业技能索引列表。\n34\n27\n33\n[/skill]\n```",
+                         "Closing":  true,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "swordman",
+                         "Title":  "男鬼剑士",
+                         "Comment":  "男鬼剑士\n\n该词条位于导师技能商店内时，代表这是男鬼剑专属技能，比如里鬼剑术、血之狂暴等等",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "time sand",
+                         "Title":  "导师技能商店（或许是）",
+                         "Comment":  "导师技能商店（或许是）",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "upgrade item",
+                         "Title":  "强化装备",
+                         "Comment":  "强化装备\n\n凯丽姐的强化功能",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "Xiti Fox"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "visible on dungeon clear",
+                         "Title":  "在Boss房间中设置副本通关前看不见",
+                         "Comment":  "在Boss房间中设置副本通关前看不见，然后在副本通关后显示",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n// 设置在首领房间中，地城通关前不可见，地城通关后才可见。\n[visible on dungeon clear] 1\n```",
+                         "Closing":  false,
+                         "Authors":  "unMen"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "small face",
+                         "Title":  "窗口中显示的小脸部图像文件名和帧索引",
+                         "Comment":  "#### 官方示例: npcsample.npc\n\n```pvf\n[small face] `slainer.img` 0 // 窗口中显示的小脸部图像文件名和帧索引。\n```",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[small face] `slainer.img` 0 // 窗口中显示的小脸部图像文件名和帧索引。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "name",
+                         "Title":  "名称",
+                         "Comment":  "#### 官方示例: npcsample.npc\n\n```pvf\n[name] `승민` // 名称。\n```",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[name] `승민` // 名称。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "speech",
+                         "Title":  "一段对话开始",
+                         "Comment":  "#### 官方示例: npcsample.npc\n\n```pvf\n[speech] // 一段对话开始。\n1 // 索引。初次对话时从1号对话开始。\n3 5 // 对话显示的等级。（例如：3~5）若无等级限制则填写0 0或1 99。\n`关于NDS` // 标题（按钮上显示的文字。简短一行。）\n`NDS是最棒的！ // 内容（若无内容，只有选择项则使用 ``\n你也买一个！\n买两个！`\n3 4 // 子对话索引列表。没有则可不写。\n[/speech]\n```",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[speech] // 一段对话开始。\n1 // 索引。初次对话时从1号对话开始。\n3 5 // 对话显示的等级。（例如：3~5）若无等级限制则填写0 0或1 99。\n`关于NDS` // 标题（按钮上显示的文字。简短一行。）\n`NDS是最棒的！ // 内容（若无内容，只有选择项则使用 ``\n你也买一个！\n买两个！`\n3 4 // 子对话索引列表。没有则可不写。\n[/speech]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "move town limit str",
+                         "Title":  "NPC区域移动限制弹出窗口字符串",
+                         "Comment":  "#### 官方示例: npcsample.npc\n\n```pvf\n[move town limit str] // NPC区域移动限制弹出窗口字符串。\n\u003c8::marlene_arad_movetown_limit\u003e // 弹出窗口中显示的内容。\n```",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[move town limit str] // NPC区域移动限制弹出窗口字符串。\n\u003c8::marlene_arad_movetown_limit\u003e // 弹出窗口中显示的内容。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "move town confirm str",
+                         "Title":  "NPC区域移动前确认弹出窗口字符串",
+                         "Comment":  "#### 官方示例: npcsample.npc\n\n```pvf\n[move town confirm str] // NPC区域移动前确认弹出窗口字符串。\n\u003c8::marlene_arad_movetown_confirm\u003e // 确认窗口中显示的内容。\n```",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[move town confirm str] // NPC区域移动前确认弹出窗口字符串。\n\u003c8::marlene_arad_movetown_confirm\u003e // 确认窗口中显示的内容。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "chaos team",
+                         "Title":  "混乱模式中使用的NPC队伍指定",
+                         "Comment":  "#### 官方示例: npcsample.npc\n\n```pvf\n[chaos team]\n`[red team]` 或 `[blue team]` 或 `[neutral team]` // 混乱模式中使用的NPC队伍指定。\n```",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n[chaos team]\n`[red team]` 或 `[blue team]` 或 `[neutral team]` // 混乱模式中使用的NPC队伍指定。\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "random message balloon",
+                         "Title":  "随机消息出现时显示的动画",
+                         "Comment":  "#### 官方示例: npcsample.npc\n\n```pvf\n// NPC消息气泡随机显示。\n[random message balloon]\n`[random message animation]` `Animation/ChristmasSanta_Random.ani` // 随机消息出现时显示的动画。\n`[random message probability]` 20 // 随机消息出现的概率。\n`[random message list]` 3 \u003c8::random_message_1\u003e \u003c8::random_message_2\u003e \u003c8::random_message_3\u003e // 数量 消息字符串。\n[/random message balloon]\n```",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n// NPC消息气泡随机显示。\n[random message balloon]\n`[random message animation]` `Animation/ChristmasSanta_Random.ani` // 随机消息出现时显示的动画。\n`[random message probability]` 20 // 随机消息出现的概率。\n`[random message list]` 3 \u003c8::random_message_1\u003e \u003c8::random_message_2\u003e \u003c8::random_message_3\u003e // 数量 消息字符串。\n[/random message balloon]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "npc",
+                         "Section":  "click mark",
+                         "Title":  "为NPC显示点击标记的功能",
+                         "Comment":  "#### 官方示例: npcsample.npc\n\n```pvf\n// 为NPC显示点击标记的功能。可以设置2个以上。\n// 第一个参数是点击标记显示的条件，其余为各条件的数据。\n// 如果条件为0号，则任务进行中显示点击标记。后面跟着的数字是任务索引。\n[click mark]\n0 1016\n0 2000\n[/click mark]\n```",
+                         "OfficialDescription":  "#### 官方示例: npcsample.npc\n\n```pvf\n// 为NPC显示点击标记的功能。可以设置2个以上。\n// 第一个参数是点击标记显示的条件，其余为各条件的数据。\n// 如果条件为0号，则任务进行中显示点击标记。后面跟着的数字是任务索引。\n[click mark]\n0 1016\n0 2000\n[/click mark]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     }
+                 ]
+}

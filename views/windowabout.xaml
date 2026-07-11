@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:WindowAbout xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxmvvm1="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" Window.Title="{DynamicResource WindowAbout_Title}" FrameworkElement.Width="400" FrameworkElement.Height="400" Control.Padding="10" Window.ResizeMode="CanResizeWithGrip" Window.SizeToContent="Height" Window.WindowStyle="ToolWindow" xmlns:views="clr-namespace:PvfCode.Views;assembly=pvfUtility">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding LoadedCommand}" />
+  </interactivity:Interaction.Behaviors>
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="ListBoxTemplate">
+        <Grid Width="50" Height="50" ToolTipService.InitialShowDelay="50" ToolTip="{Binding Tooltip, Mode=OneWay}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+          <DXImage FrameworkElement.Width="30" FrameworkElement.Height="30" Image.Stretch="Fill" p13:DXImage.Source="{Binding Photo}" xmlns:p13="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" />
+          <TextBlock Grid.Row="1" Width="auto" Height="auto" Margin="0,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Text="{Binding NickName, Mode=TwoWay}" />
+        </Grid>
+      </DataTemplate>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal">
+      <Label FontSize="32" FontWeight="Bold" Foreground="{DynamicResource TreeLoadingProgressForeground}">pvfUtility - 2022</Label>
+    </StackPanel>
+    <StackPanel Grid.Row="1" Margin="0,10,0,0" Orientation="Vertical">
+      <Label VerticalAlignment="Center">@美国的华莱士</Label>
+      <StackPanel Orientation="Horizontal">
+        <Label>Version：</Label>
+        <Label Name="labelVersion">
+        </Label>
+      </StackPanel>
+    </StackPanel>
+    <ListBox Name="listLibs" Grid.Row="2" Margin="0,10,0,0">
+      <ListBoxItem>AdamsLairLGPL:SevenZipSharp</ListBoxItem>
+      <ListBoxItem>DiffEditor：Monaco Editor</ListBoxItem>
+      <ListBoxItem>API Code Pack for Microsoft</ListBoxItem>
+      <ListBoxItem>Microsoft.AspNetCore.Hosting</ListBoxItem>
+      <ListBoxItem>WinCopies.WindowsAPICodePack.Shell</ListBoxItem>
+    </ListBox>
+    <StackPanel Grid.Row="3" Margin="0,20,0,0">
+      <StackPanel Height="1" Margin="0,0,0,20" Background="#FF808080" />
+      <StackPanel Orientation="Horizontal">
+        <Label VerticalAlignment="Center" Content="{DynamicResource WindowAbout_ContributorList}" FontSize="15" Foreground="{DynamicResource TreeLoadingProgressForeground}" />
+        <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="{DynamicResource WindowAbout_Thanks}" Foreground="#FF808080" />
+      </StackPanel>
+      <Grid>
+        <Border BorderThickness="1" BorderBrush="{Binding ElementName=listLibs, Path=BorderBrush}">
+          <ListBox Name="DownLoadListBox" MinHeight="80" MaxHeight="300" ItemTemplate="{StaticResource ListBoxTemplate}" SelectionMode="Single" ItemsSource="{Binding ContributeInfoItems}">
+            <Control.Template>
+              <ControlTemplate TargetType="{x:Type ListBox}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                  <WrapPanel IsItemsHost="True" Orientation="Horizontal" ScrollViewer.CanContentScroll="True" />
+                </ScrollViewer>
+              </ControlTemplate>
+            </Control.Template>
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type ListBox}">
+                <Setter Property="BorderBrush" Value="#FFFF0000" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="ItemContainerStyle">
+                  <Setter.Value>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                      <Setter Property="Template">
+                        <Setter.Value>
+                          <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Border Name="Border" Margin="10,3,10,3" VerticalAlignment="Center" BorderBrush="#FFFF0000" BorderThickness="0" CornerRadius="10">
+                              <Label Name="LixtBoxItem" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand">
+                                <ContentPresenter />
+                              </Label>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                              <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Value="{DynamicResource TreeSelectedRowBackBrush}" Property="Border.Background" />
+                              </Trigger>
+                            </ControlTemplate.Triggers>
+                          </ControlTemplate>
+                        </Setter.Value>
+                      </Setter>
+                    </Style>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </FrameworkElement.Style>
+          </ListBox>
+        </Border>
+        <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" Visibility="{Binding IsLoading, Converter={StaticResource ConvertBoolenToVisibility}}" />
+      </Grid>
+    </StackPanel>
+    <StackPanel Grid.Row="4" Margin="0,20,0,0">
+      <StackPanel Height="1" Margin="0,0,0,20" Background="#FF808080" />
+      <StackPanel Orientation="Horizontal">
+        <Label VerticalAlignment="Center" Content="{DynamicResource WindowAbout_SponsorList}" FontSize="15" Foreground="{DynamicResource TreeLoadingProgressForeground}" />
+      </StackPanel>
+      <Grid>
+        <Border BorderThickness="1" BorderBrush="{Binding ElementName=listLibs, Path=BorderBrush}">
+          <ListBox MinHeight="80" MaxHeight="300" ItemTemplate="{StaticResource ListBoxTemplate}" SelectionMode="Single" ItemsSource="{Binding SponsorItems}">
+            <Control.Template>
+              <ControlTemplate TargetType="{x:Type ListBox}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                  <WrapPanel IsItemsHost="True" Orientation="Horizontal" ScrollViewer.CanContentScroll="True" />
+                </ScrollViewer>
+              </ControlTemplate>
+            </Control.Template>
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type ListBox}">
+                <Setter Property="BorderBrush" Value="#FFFF0000" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="ItemContainerStyle">
+                  <Setter.Value>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                      <Setter Property="Template">
+                        <Setter.Value>
+                          <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Border Name="Border" Margin="10,3,10,3" VerticalAlignment="Center" BorderBrush="#FFFF0000" BorderThickness="0" CornerRadius="10">
+                              <Label Name="LixtBoxItem" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand">
+                                <ContentPresenter />
+                              </Label>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                              <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Value="{DynamicResource TreeSelectedRowBackBrush}" Property="Border.Background" />
+                              </Trigger>
+                            </ControlTemplate.Triggers>
+                          </ControlTemplate>
+                        </Setter.Value>
+                      </Setter>
+                    </Style>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </FrameworkElement.Style>
+          </ListBox>
+        </Border>
+        <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" Visibility="{Binding IsLoading, Converter={StaticResource ConvertBoolenToVisibility}}" />
+      </Grid>
+    </StackPanel>
+  </Grid>
+</views:WindowAbout>

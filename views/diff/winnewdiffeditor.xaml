@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pvfcode:WindowBase xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:pvfcode="clr-namespace:PvfCode;assembly=pvfUtility" xmlns:visualcodeeditors="clr-namespace:PvfCode.Controls.VisualCodeEditors;assembly=pvfUtility" pvfcode:WindowBase.SizeChanged="WinNewDiffEditor_SizeChanged" pvfcode:WindowBase.StateChanged="WinNewDiffEditor_StateChanged" Window.Title="{DynamicResource WinNewDiffEditor_Title}" FrameworkElement.Width="1000" FrameworkElement.Height="800" Control.Padding="0" Window.ResizeMode="CanResizeWithGrip" xmlns:diff="clr-namespace:PvfCode.Views.Diff;assembly=pvfUtility" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <core:ThemedWindow.HeaderItems xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1">
+    <bars:ToolBarControl xmlns:bars="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" bars:ToolBarControlBase.AllowCustomizationMenu="False" bars:ToolBarControl.AllowQuickCustomization="False">
+      <bars:BarButtonItem bars:BarItem.BarItemDisplayMode="ContentAndGlyph" bars:BarItem.Content="{DynamicResource WinNewDiffEditor_NextDiffButton}" bars:BarItem.Glyph="{DynamicResource FindNextIcon}" bars:BarItem.Command="{Binding OnGoToNextDiffFileCommand}" />
+    </bars:ToolBarControl>
+  </core:ThemedWindow.HeaderItems>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <Grid Name="leftGrid" Column="0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ToolBarControl p13:ToolBarControlBase.AllowCustomizationMenu="False" p13:ToolBarControl.AllowQuickCustomization="False" xmlns:p13="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+          <p13:BarButtonItem p13:BarItem.CommandParameter="true" p13:BarItem.Content="{DynamicResource common_Save}" p13:BarItem.Glyph="{DynamicResource SaveStatusBar}" p13:BarItem.Command="{Binding SaveDocumentCommand}" />
+        </ToolBarControl>
+        <editors:ButtonEdit FrameworkElement.Name="leftButtonEdit" Grid.Column="1" xmlns:editors="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" editors:ButtonEdit.AllowDefaultButton="False" editors:BaseEdit.IsReadOnly="True" editors:BaseEdit.NullText="{DynamicResource WinNewDiffEditor_LeftFilePathTextBoxNullText}" editors:BaseEdit.EditValue="{Binding LeftSource.FilePath, Mode=OneWay}">
+          <editors:ButtonEdit.Buttons>
+            <editors:ButtonInfo editors:CommandButtonInfo.CommandParameter="false" editors:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource WinNewDiffEditor_LeftFilePathBtnName_PvfPack}" editors:CommandButtonInfo.Command="{Binding LeftDocuemntSelectDiffFileCommand}" />
+            <editors:ButtonInfo editors:CommonButtonInfo.ButtonKind="Simple" editors:ButtonInfoBase.ClickMode="Press" editors:CommandButtonInfo.CommandParameter="true" FrameworkContentElement.ToolTip="{DynamicResource WinNewDiffEditor_LeftFilePathBtnName_Local}" editors:CommandButtonInfo.Command="{Binding LeftDocuemntSelectDiffFileCommand}">
+              <editors:ButtonInfo.Content>
+                <Image Width="16" Height="16" Source="{DynamicResource GroupSelectCursor_16x}" Stretch="Fill" />
+              </editors:ButtonInfo.Content>
+            </editors:ButtonInfo>
+          </editors:ButtonEdit.Buttons>
+        </editors:ButtonEdit>
+      </Grid>
+      <Grid Column="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ToolBarControl p13:ToolBarControlBase.AllowCustomizationMenu="False" p13:ToolBarControl.AllowQuickCustomization="False" xmlns:p13="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Bars;assembly=DevExpress.Xpf.Core.v24.1">
+          <p13:BarButtonItem p13:BarItem.CommandParameter="False" p13:BarItem.Content="{DynamicResource common_Save}" p13:BarItem.Glyph="{DynamicResource SaveStatusBar}" p13:BarItem.Command="{Binding SaveDocumentCommand}" />
+        </ToolBarControl>
+        <ButtonEdit Grid.Column="1" p13:ButtonEdit.AllowDefaultButton="False" p13:BaseEdit.IsReadOnly="True" p13:BaseEdit.NullText="{DynamicResource WinNewDiffEditor_RightFilePathTextBoxNullText}" p13:BaseEdit.EditValue="{Binding RightSource.FilePath, Mode=OneWay}" xmlns:p13="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1" xmlns="clr-namespace:DevExpress.Xpf.Editors;assembly=DevExpress.Xpf.Core.v24.1">
+          <p13:ButtonEdit.Buttons>
+            <p13:ButtonInfo p13:CommandButtonInfo.CommandParameter="false" p13:ButtonInfo.GlyphKind="Regular" FrameworkContentElement.ToolTip="{DynamicResource WinNewDiffEditor_RightFilePathBtnName_PvfPack}" p13:CommandButtonInfo.Command="{Binding RightDocumentSelectDiffFileCommand}" />
+            <p13:ButtonInfo p13:CommonButtonInfo.ButtonKind="Simple" p13:ButtonInfoBase.ClickMode="Press" p13:CommandButtonInfo.CommandParameter="true" FrameworkContentElement.ToolTip="{DynamicResource WinNewDiffEditor_RightFilePathBtnName_Local}" p13:CommandButtonInfo.Command="{Binding RightDocumentSelectDiffFileCommand}">
+              <p13:ButtonInfo.Content>
+                <Image Width="16" Height="16" Source="{DynamicResource GroupSelectCursor_16x}" Stretch="Fill" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />
+              </p13:ButtonInfo.Content>
+            </p13:ButtonInfo>
+          </p13:ButtonEdit.Buttons>
+        </ButtonEdit>
+      </Grid>
+    </Grid>
+    <Grid Row="1">
+      <Grid Visibility="{Binding IsLoaded, Converter={StaticResource ConvertBoolenFalseToVisibility}}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Label Margin="0,10,0,0" HorizontalAlignment="Center" Content="{DynamicResource WinNewDiffEditor_FirstLoad}" Foreground="#FF808080" />
+        <ProgressBar Grid.Row="1" Height="24" BorderThickness="0" Foreground="{DynamicResource TreeLoadingProgressForeground}" IsIndeterminate="True" Style="{StaticResource ProgressVs}" BorderBrush="{x:Null}" />
+      </Grid>
+      <visualcodeeditors:VsCodeEditor FrameworkElement.Language="{Binding Language, Mode=OneWay}" PvfCodeTheme="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=NowThemeType, Mode=OneWay}" />
+    </Grid>
+  </Grid>
+</pvfcode:WindowBase>

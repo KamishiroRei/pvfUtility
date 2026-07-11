@@ -1,0 +1,116 @@
+﻿{
+    "SchemaVersion":  1,
+    "FileType":  "wdm",
+    "Comments":  [
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "dungeon",
+                         "Title":  "在副本接口处代表",
+                         "Comment":  "在副本接口处代表\n第一个数为副本ID\n第二个为任务ID 假如是-1就代表该副本无前置任务\n如果不为-1 则代表需完成指定任务ID才可开启该副本",
+                         "OfficialDescription":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[dungeon]\t\t\t\t// 要列出的地下城\n1 -1\t\t\t\t// 地下城索引，为显示而需要接收或清除的任务索引\n2 -1\n3 -1\n4 -1\n5 102\n6 [in progress] 203\t\t// 在地下城索引和任务索引之间插入 [in progress]，则仅在任务进行中时才显示该地下城\n[/dungeon]\n```",
+                         "Closing":  true,
+                         "Authors":  "白糖-193284563"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "hell dungeon",
+                         "Title":  "副本深渊开启指向 写1代表可以开启深渊",
+                         "Comment":  "副本深渊开启指向 写1代表可以开启深渊",
+                         "OfficialDescription":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[hell dungeon] 1\t// 世界中是否存在地狱地下城 (1:有，0:无)\n```",
+                         "Closing":  false,
+                         "Authors":  "白糖-193284563"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "hell freepass item",
+                         "Title":  "深渊破魔石代码",
+                         "Comment":  "深渊破魔石代码，优先扣除这里，两个数一组：物品ID\t物品数量，数量必须为1，否则会不扣门票bug",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "By:952696929"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "in progress",
+                         "Title":  "进行中",
+                         "Comment":  "进行中",
+                         "OfficialDescription":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n6 [in progress] 203\t\t// 在地下城索引和任务索引之间插入 [in progress]，则仅在任务进行中时才显示该地下城\n```",
+                         "Closing":  false,
+                         "Authors":  "无名氏"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "item condition",
+                         "Title":  "在worldmap中表示 深渊门票代码",
+                         "Comment":  "在worldmap中表示  深渊门票代码，仅适用于冰雪宫殿以上的副本",
+                         "OfficialDescription":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[item condition]\t// 进入地狱地下城时消耗的物品索引、数量\n4150 1\t\t\t// 如果没有该物品，则无法进入地狱地下城。\n[/item condition]\n```",
+                         "Closing":  true,
+                         "Authors":  "依旧"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "map image",
+                         "Title":  "选择副本的背景图",
+                         "Comment":  "选择副本的背景图",
+                         "OfficialDescription":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[map image] `Map.img` 0\t// 地图图像文件名称，帧索引\n```",
+                         "Closing":  false,
+                         "Authors":  "大白：649964267"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "ui controls",
+                         "Title":  "UI控件",
+                         "Comment":  "UI控件\n3-1-3-81\n三个数一组-框框外形-起泡形状-副本标号",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "ui path",
+                         "Title":  "UI路径",
+                         "Comment":  "UI路径",
+                         "OfficialDescription":  null,
+                         "Closing":  false,
+                         "Authors":  "lostluna1"
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "name",
+                         "Title":  "名称",
+                         "Comment":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[name] `格兰·弗洛里斯`\t\t// 名称\n```",
+                         "OfficialDescription":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[name] `格兰·弗洛里斯`\t\t// 名称\n```",
+                         "Closing":  false,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "hell quest",
+                         "Title":  "地狱任务索引",
+                         "Comment":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[hell quest]\t\t// 地狱任务索引：必须完成该任务才能进入地狱地下城\n2601\n[/hell quest]\n```",
+                         "OfficialDescription":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[hell quest]\t\t// 地狱任务索引：必须完成该任务才能进入地狱地下城\n2601\n[/hell quest]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     },
+                     {
+                         "PvfCommentType":  "Section",
+                         "FileType":  "wdm",
+                         "Section":  "minimap points",
+                         "Title":  "位置(x",
+                         "Comment":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[minimap points]\n1000\t100\t\t\t// 位置(x, y)  step 0\n100\t\t10\t\t\t// 位置(x, y)  step 1\n[/minimap points]\n```",
+                         "OfficialDescription":  "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[minimap points]\n1000\t100\t\t\t// 位置(x, y)  step 0\n100\t\t10\t\t\t// 位置(x, y)  step 1\n[/minimap points]\n```",
+                         "Closing":  true,
+                         "Authors":  null
+                     }
+                 ]
+}

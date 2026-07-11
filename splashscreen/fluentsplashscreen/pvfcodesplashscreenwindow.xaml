@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<splashscreen:PvfCodeSplashScreenWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" FrameworkElement.MinWidth="600" FrameworkElement.MinHeight="400" DXDesignTimeHelper.Background="#FF525252" xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v24.1" core:SplashScreenWindow.AllowAcrylic="True" core:SplashScreenWindow.AllowTheming="False" core:SplashScreenWindow.FadeOutDuration="0:0:1" Window.Topmost="False" xmlns:splashscreen="clr-namespace:PvfCode.SplashScreen;assembly=pvfUtility">
+  <Grid>
+    <core:DXImage FrameworkElement.Width="600" FrameworkElement.Height="400" core:DXImage.Source="/images/pngs/splashscreenbackground.png" />
+    <StackPanel VerticalAlignment="Top" Orientation="Vertical">
+      <core:DXImage core:DXImage.Name="PART_Logo" FrameworkElement.Margin="30,30,0,0" FrameworkElement.HorizontalAlignment="Left" FrameworkElement.VerticalAlignment="Top" core:DXImage.Source="/images/svgs/visualstudioblendlogo2015pre_16x.svg" Image.Stretch="None">
+      </core:DXImage>
+      <TextBlock Name="PART_Title" Margin="30,11,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="27" FontWeight="Thin" Foreground="#FFDB9DFF" Text="pvfUtility">
+      </TextBlock>
+      <StackPanel Margin="30,10,30,0" Orientation="Horizontal">
+        <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Regular" Foreground="#FFFFFFFF" Text="Version：" />
+        <TextBlock Name="PART_SubTitle" HorizontalAlignment="Left" FontSize="18" FontWeight="Regular" Foreground="#FFFFFFFF">
+        </TextBlock>
+      </StackPanel>
+    </StackPanel>
+  </Grid>
+</splashscreen:PvfCodeSplashScreenWindow>

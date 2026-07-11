@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preview:PreviewFileListComment xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:controls="clr-namespace:PvfCode.Controls" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" Window.Title="{DynamicResource PreviewFileListComment_Title}" FrameworkElement.Width="400" FrameworkElement.Height="500" Window.ResizeMode="CanResizeWithGrip" xmlns:preview="clr-namespace:PvfCode.Views.Store.Preview" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+  <interactivity:Interaction.Behaviors xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1">
+    <ui:EventToCommand xmlns:interactivity="clr-namespace:DevExpress.Mvvm.UI.Interactivity;assembly=DevExpress.Xpf.Core.v24.1" interactivity:EventTriggerBase.Event="Loaded" xmlns:ui="clr-namespace:DevExpress.Mvvm.UI;assembly=DevExpress.Xpf.Core.v24.1" ui:EventToCommandBase.Command="{Binding LoadedCommand}" />
+  </interactivity:Interaction.Behaviors>
+  <Grid>
+    <controls:PvfTreeViewGroup Grid.Row="1" TreeAllowDrop="False" DataContext="{Binding TreeViewModel}" />
+  </Grid>
+</preview:PreviewFileListComment>
