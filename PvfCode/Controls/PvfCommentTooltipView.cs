@@ -3,12 +3,15 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using PvfCode.ViewModels.DocumentFolder.EditorHoverTooltip;
 
 namespace PvfCode.Controls;
 
 public class PvfCommentTooltipView : Border
 {
+	private static readonly SolidColorBrush TooltipBackground = CreateTooltipBackground();
+
 	private readonly Grid readPanel;
 	private readonly Grid editPanel;
 	private ToolTipViewModel_SectionComment viewModel;
@@ -20,7 +23,8 @@ public class PvfCommentTooltipView : Border
 		MinWidth = 420;
 		Padding = new Thickness(1);
 		BorderThickness = new Thickness(1);
-		BorderBrush = System.Windows.Media.Brushes.Gray;
+		BorderBrush = Brushes.Gray;
+		Background = TooltipBackground;
 		Grid root = new();
 		readPanel = CreateReadPanel();
 		editPanel = CreateEditPanel();
@@ -29,6 +33,13 @@ public class PvfCommentTooltipView : Border
 		Child = root;
 		DataContextChanged += OnDataContextChanged;
 		UpdateMode();
+	}
+
+	private static SolidColorBrush CreateTooltipBackground()
+	{
+		SolidColorBrush brush = new(Color.FromRgb(0x2D, 0x2D, 0x30));
+		brush.Freeze();
+		return brush;
 	}
 
 	private Grid CreateReadPanel()
