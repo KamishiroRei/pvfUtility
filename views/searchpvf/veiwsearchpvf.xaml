@@ -85,8 +85,6 @@
         <bars:BarItemSeparator />
         <bars:BarButtonItem bars:BarItem.Content="{DynamicResource GlobalSearchWindow_ManageMacro}" bars:BarItem.Glyph="{DynamicResource SettingWindowIcon}" />
         <bars:BarItemSeparator />
-        <bars:BarButtonItem bars:BarItem.Content="{DynamicResource GlobalSearchWindow_MacroStore}" />
-        <bars:BarItemSeparator />
         <bars:BarSubItem FrameworkContentElement.Style="{StaticResource 全局搜索宏_SubItem}" />
       </bars:BarSubItem>
     </bars:ToolBarControl>

@@ -50,7 +50,8 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		"mainWin_bar_Main_subItem_ExtensionStore_BookMarkStore",
 		"mainWin_bar_Main_subItem_ExtensionStore_TreeListCommentStore",
 		"mainWin_bar_Main_subItem_ExtensionStore_SectionTranslateStore",
-		"mainWin_bar_Main_subItem_ExtensionStore_CodeIntelliSenseStore"
+		"mainWin_bar_Main_subItem_ExtensionStore_CodeIntelliSenseStore",
+		"GlobalSearchWindow_MacroStore"
 	};
 
 	[CompilerGenerated]
@@ -149,11 +150,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		}
 
 		HeaderItems.Clear();
-		HashSet<string> onlineCaptions = OnlineMenuResourceKeys
-			.Select(key => TryFindResource(key)?.ToString())
-			.Where(value => !string.IsNullOrWhiteSpace(value))
-			.ToHashSet(StringComparer.Ordinal);
-		onlineCaptions.Add("chatGPT");
+		HashSet<string> onlineCaptions = GetOnlineMenuCaptions();
 
 		foreach (BarItem item in barManager.Items)
 		{
@@ -163,6 +160,16 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			}
 		}
 		HideOnlineFeatureLinks(this, onlineCaptions);
+	}
+
+	private static HashSet<string> GetOnlineMenuCaptions()
+	{
+		HashSet<string> captions = OnlineMenuResourceKeys
+			.Select(key => Application.Current?.TryFindResource(key)?.ToString())
+			.Where(value => !string.IsNullOrWhiteSpace(value))
+			.ToHashSet(StringComparer.Ordinal);
+		captions.Add("chatGPT");
+		return captions;
 	}
 
 	private static void HideOnlineFeatureLinks(DependencyObject parent, HashSet<string> onlineCaptions)
@@ -243,7 +250,13 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		SetInitialToolTipDelay(sender, e);
 		LightweightBarItemLinkControl linkControl = (LightweightBarItemLinkControl)sender;
 		string content = linkControl.ActualContent?.ToString();
-		if (content == "GotoLine")
+		if (GetOnlineMenuCaptions().Contains(content ?? string.Empty))
+		{
+			linkControl.Link.IsVisible = false;
+			linkControl.Link.Item.IsVisible = false;
+			linkControl.Visibility = Visibility.Collapsed;
+		}
+		else if (content == "GotoLine")
 		{
 			linkControl.Link.Item.Content = "跳转到偏移量";
 		}
@@ -370,25 +383,15 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 	private void gXPlkxAdHB(object? sender, EventArgs P_1)
 	{
-		bool flag = false;
-		BarItemLinkBase[] array = subBookmark.ItemLinks.ToArray();
-		foreach (BarItemLinkBase barItemLinkBase in array)
+		foreach (BarItemLinkBase dynamicLink in subBookmark.ItemLinks.ToArray().Skip(1))
 		{
-			if (flag)
-			{
-				subBookmark.ItemLinks.Remove(barItemLinkBase);
-			}
-			if (barItemLinkBase.ActualContent != null && barItemLinkBase.ActualContent.ToString() == AppSetting.Instance.GetIlogger().GetStr("mainWin_bar_Main_subItem_BookMark_BookMarkStore"))
-			{
-				flag = true;
-			}
+			subBookmark.ItemLinks.Remove(dynamicLink);
 		}
 		subBookmark.ItemLinks.Add(new BarItemSeparator());
-		using Dictionary<string, BookMarkDto>.Enumerator enumerator = AppSetting.Instance.BookMarkGroup.Trees.Values.FirstOrDefault().Children.OrderBy<KeyValuePair<string, BookMarkDto>, int>((KeyValuePair<string, BookMarkDto> x) => x.Value.Sort).ToDictionary((KeyValuePair<string, BookMarkDto> x) => x.Key, (KeyValuePair<string, BookMarkDto> x) => x.Value).GetEnumerator();
-		while (enumerator.MoveNext())
+		foreach (KeyValuePair<string, BookMarkDto> menuItem in GetBookmarkMenuItems())
 		{
 			_003C_003Ec__DisplayClass5_0 CS_0024_003C_003E8__locals7 = new _003C_003Ec__DisplayClass5_0();
-			CS_0024_003C_003E8__locals7.item = enumerator.Current;
+			CS_0024_003C_003E8__locals7.item = menuItem;
 			if (CS_0024_003C_003E8__locals7.item.Value.IsFile)
 			{
 				subBookmark.ItemLinks.Add(new BarButtonItem
@@ -413,6 +416,34 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 				BeIl0g7GfH(CS_0024_003C_003E8__locals7.item.Value.Children, barSubItem);
 			}
 		}
+	}
+
+	private static IEnumerable<KeyValuePair<string, BookMarkDto>> GetBookmarkMenuItems()
+	{
+		BookMarkDto root = AppSetting.Instance.BookMarkGroup.Trees.Values.FirstOrDefault();
+		if (root == null)
+		{
+			yield break;
+		}
+		foreach (KeyValuePair<string, BookMarkDto> item in OrderBookmarks(root.Children))
+		{
+			if (string.Equals(item.Key, "默认书签", StringComparison.Ordinal) && !item.Value.IsFile)
+			{
+				foreach (KeyValuePair<string, BookMarkDto> defaultItem in OrderBookmarks(item.Value.Children))
+				{
+					yield return defaultItem;
+				}
+				continue;
+			}
+			yield return item;
+		}
+	}
+
+	private static IOrderedEnumerable<KeyValuePair<string, BookMarkDto>> OrderBookmarks(IEnumerable<KeyValuePair<string, BookMarkDto>> bookmarks)
+	{
+		return bookmarks
+			.OrderBy(item => item.Value.Sort)
+			.ThenBy(item => item.Key, StringComparer.CurrentCulture);
 	}
 
 	private void BeIl0g7GfH(IDictionary<string, BookMarkDto> P_0, BarSubItem P_1)
