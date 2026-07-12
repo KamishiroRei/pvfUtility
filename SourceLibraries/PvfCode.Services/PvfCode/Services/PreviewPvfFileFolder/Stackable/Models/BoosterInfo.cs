@@ -157,6 +157,12 @@ public class BoosterInfo : ViewModelBase
 	{
 		public BoosterType Type { get; set; }
 
+		public string? Title { get; set; }
+
+		public int? PrimaryCategoryIndex { get; set; }
+
+		public int? SecondaryCategoryIndex { get; set; }
+
 		public int GainCount { get; set; }
 
 		public List<BoosterInfoItemBase> Items { get; set; }
@@ -220,6 +226,16 @@ public class BoosterInfo : ViewModelBase
 
 	private readonly PvfFile file;
 
+	public int SelectionMenuLevel { get; set; }
+
+	public int PrimaryCategoryCount { get; set; }
+
+	public int SecondaryCategoryCount { get; set; }
+
+	public string? SelectionPrompt { get; set; }
+
+	public string? SecondarySelectionPrompt { get; set; }
+
 	public List<BoosterInfoItemRoot> Items { get; set; }
 
 	public ObservableCollection<PreviewItemListVm> PreviewItemListVmItems
@@ -270,6 +286,15 @@ public class BoosterInfo : ViewModelBase
 	public string GetText()
 	{
 		StringBuilder stringBuilder = new StringBuilder();
+		if (SelectionMenuLevel > 0)
+		{
+			stringBuilder.Append($"{SelectionMenuLevel}级自选菜单：{PrimaryCategoryCount}项");
+			if (SelectionMenuLevel == 2)
+			{
+				stringBuilder.Append($" x {SecondaryCategoryCount}项");
+			}
+			stringBuilder.AppendLine();
+		}
 		Dictionary<BoosterType, int> dictionary = new Dictionary<BoosterType, int>();
 		foreach (BoosterInfoItemRoot item in Items)
 		{
@@ -337,7 +362,7 @@ public class BoosterInfo : ViewModelBase
 			Items.ForEach(item =>
 			{
 				List<KeyValuePair<int, PvfFile>> files = item.GetFiles(pvf);
-				previewItems.Add(new PreviewItemListVm(files, pvf, BoosterTypeToName(item.Type)));
+				previewItems.Add(new PreviewItemListVm(files, pvf, item.Title ?? BoosterTypeToName(item.Type)));
 			});
 		});
 		IsLoading = false;
@@ -442,5 +467,45 @@ public class BoosterInfo : ViewModelBase
 			BoosterType.Emblem => "徽章", 
 			_ => "未知BoosterType", 
 		};
+	}
+
+	public static bool CreateSelectionItemRoot(BoosterType boosterType, IReadOnlyList<int> values, int groupLength, string title, int primaryCategoryIndex, int secondaryCategoryIndex, out BoosterInfoItemRoot? result, out string? error)
+	{
+		result = null;
+		error = null;
+		if (groupLength < 2)
+		{
+			error = "自选礼盒项目列数不能小于2。";
+			return false;
+		}
+		if (values.Count < 2)
+		{
+			error = "自选礼盒项目缺少物品ID或数量。";
+			return false;
+		}
+
+		List<BoosterInfoItemBase> items = new List<BoosterInfoItemBase>();
+		for (int i = 0; i + groupLength <= values.Count; i += groupLength)
+		{
+			items.Add(new BoosterInfoItemBase(values[i], 0, values[i + 1]));
+		}
+		if (items.Count == 0)
+		{
+			error = "自选礼盒项目中没有可预览的物品。";
+			return false;
+		}
+
+		result = new BoosterInfoItemRoot(1, items)
+		{
+			Type = boosterType,
+			Title = title,
+			PrimaryCategoryIndex = primaryCategoryIndex,
+			SecondaryCategoryIndex = secondaryCategoryIndex
+		};
+		if (values.Count % groupLength != 0)
+		{
+			error = $"自选礼盒项目数据长度 {values.Count} 不是每组 {groupLength} 列的整数倍，末尾数据已忽略。";
+		}
+		return true;
 	}
 }

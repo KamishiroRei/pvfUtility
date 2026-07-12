@@ -170,6 +170,8 @@
 				&lt;Section SectionName="[etc]" Index="0" LstFileName="stackable,equipment" Description="物品/装备" ParentSectionName="[booster select category]" /&gt;
 				&lt;Section SectionName="[etc]" Index="0" LstFileName="stackable,equipment" Description="物品/装备2" ParentSectionName="[booster info]" /&gt;
 				&lt;Section SectionName="[equipment]" Index="0" LstFileName="equipment" Description="装备" ParentSectionName="[booster select category]" /&gt;
+				&lt;Section SectionName="[stackable]" Index="0" LstFileName="stackable" Description="道具" ParentSectionName="[booster select category]" /&gt;
+				&lt;Section SectionName="[avatar]" Index="0" LstFileName="equipment" Description="时装" ParentSectionName="[booster select category]" /&gt;
 				&lt;Section SectionName="[A condition item]" Index="0,2,4,6,8,10,12,14,16,18" LstFileName="stackable,equipment" Description="条件物品/装备" /&gt;
 				&lt;Section SectionName="[B condition item]" Index="0" LstFileName="stackable,equipment" Description="条件物品/装备" /&gt;
 				&lt;Section SectionName="[result item]" Index="0" LstFileName="stackable,equipment" Description="结果物品/装备" /&gt;

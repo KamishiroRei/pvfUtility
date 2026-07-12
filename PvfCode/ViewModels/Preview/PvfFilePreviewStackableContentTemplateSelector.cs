@@ -86,6 +86,7 @@ public class PvfFilePreviewStackableContentTemplateSelector : DataTemplateSelect
 		{
 			switch (stackableType)
 			{
+			case StackableType.消耗品_可选盒子_0:
 			case StackableType.消耗品_礼包_0:
 			case StackableType.消耗品_礼包_1:
 			case StackableType.消耗品_点券盒子_0:

@@ -225,6 +225,10 @@ public class StackablePreviewBase : StackableOrEquPreviewBase
 			return null;
 		}
 		StackableType value = StackableType.Value;
+		if (value == PvfCode.Models.Pvf.Enums.Stackable.StackableType.消耗品_可选盒子_0)
+		{
+			return HNbjNjnb1h.GetBoosterSelectionInfo(out BoosterInfo? selectionInfo) ? selectionInfo : null;
+		}
 		if ((uint)(value - 25) > 3u)
 		{
 			return null;
