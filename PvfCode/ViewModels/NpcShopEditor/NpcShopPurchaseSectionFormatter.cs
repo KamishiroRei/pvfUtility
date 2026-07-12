@@ -21,16 +21,46 @@ internal static class NpcShopPurchaseSectionFormatter
 			error = null;
 			return true;
 		}
-		bool valid = value.Contains('.')
-			? float.TryParse(value, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out float floatValue) && float.IsFinite(floatValue)
-			: int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out _);
+		bool valid = TryNormalizePrice(value, out _);
 		if (valid)
 		{
 			error = null;
 			return true;
 		}
-		error = "金币价格必须是整数或小数，留空表示移除price。";
+		error = "金币价格必须是整数，留空表示移除price。";
 		return false;
+	}
+
+	public static bool TryNormalizePrice(string? price, out string? normalizedPrice)
+	{
+		string? value = Normalize(price);
+		if (value == null || !TryParseIntegerPrice(value, out int numericValue))
+		{
+			normalizedPrice = null;
+			return false;
+		}
+
+		normalizedPrice = numericValue.ToString(CultureInfo.InvariantCulture);
+		return true;
+	}
+
+	public static bool TryFormatValueFallbackPrice(string? value, out string? fallbackPrice)
+	{
+		string? normalizedValue = Normalize(value);
+		if (normalizedValue == null)
+		{
+			fallbackPrice = null;
+			return false;
+		}
+
+		if (!TryParseIntegerPrice(normalizedValue, out int numericValue))
+		{
+			fallbackPrice = null;
+			return false;
+		}
+
+		fallbackPrice = (numericValue / 5).ToString(CultureInfo.InvariantCulture);
+		return true;
 	}
 
 	public static bool TryValidateNeedMaterial(
@@ -123,5 +153,10 @@ internal static class NpcShopPurchaseSectionFormatter
 	private static string? Normalize(string? value)
 	{
 		return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+	}
+
+	private static bool TryParseIntegerPrice(string value, out int numericValue)
+	{
+		return int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out numericValue);
 	}
 }

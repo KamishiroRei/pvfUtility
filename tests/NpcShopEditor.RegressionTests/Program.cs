@@ -13,10 +13,16 @@ AssertEqual(
     NpcShopPurchaseSectionFormatter.Format("1200", null, null),
     "price-only formatting");
 
-AssertEqual(
-	$"[price]{newline}12.5{newline}",
-    NpcShopPurchaseSectionFormatter.FormatPrice(" 12.5 "),
-    "float price and surrounding whitespace");
+AssertFalse(
+	NpcShopPurchaseSectionFormatter.TryValidatePrice("12.5", out _),
+	"decimal price must be rejected");
+AssertTrue(
+	NpcShopPurchaseSectionFormatter.TryNormalizePrice(" 0012 ", out string? normalizedPrice),
+	"integer price must be normalizable");
+AssertEqual("12", normalizedPrice!, "integer price normalization");
+AssertFalse(
+	NpcShopPurchaseSectionFormatter.TryNormalizePrice("12.5", out _),
+	"decimal price must not be normalized for display");
 
 AssertEqual(
     $"[price]{newline}1200{newline}" +
@@ -70,6 +76,15 @@ AssertFalse(
 AssertFalse(
     NpcShopPurchaseSectionFormatter.TryValidateNeedMaterial("3037", "4", [3040], out _),
     "incomplete additional need-material pair must be rejected");
+
+AssertFallbackPrice("1000", "200", "integer value fallback");
+AssertFallbackPrice("1001", "200", "integer value fallback truncates remainder");
+AssertFalse(
+	NpcShopPurchaseSectionFormatter.TryFormatValueFallbackPrice("12.5", out _),
+	"decimal value fallback must be rejected");
+AssertFalse(
+	NpcShopPurchaseSectionFormatter.TryFormatValueFallbackPrice("not-a-number", out _),
+	"invalid value fallback must be rejected");
 
 CultureInfo originalCulture = CultureInfo.CurrentCulture;
 try
@@ -136,6 +151,15 @@ static void AssertCompilerFloat(string cultureName, float expected)
 	{
 		throw new InvalidOperationException($"script compiler float value under {cultureName}: expected {expected}, got {actual}.");
 	}
+}
+
+static void AssertFallbackPrice(string value, string expected, string scenario)
+{
+	if (!NpcShopPurchaseSectionFormatter.TryFormatValueFallbackPrice(value, out string? actual))
+	{
+		throw new InvalidOperationException($"{scenario} failed: value could not be formatted.");
+	}
+	AssertEqual(expected, actual!, scenario);
 }
 
 static PvfGroup CreateCompilerGroup()

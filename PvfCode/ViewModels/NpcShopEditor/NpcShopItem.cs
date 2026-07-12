@@ -251,7 +251,19 @@ public class NpcShopItem : ViewModelBase
 		try
 		{
 			PvfFile? file = File;
-			Price = file != null && file.GetPrice(Pvf, out string loadedPrice) ? loadedPrice : null;
+			string? loadedPrice = null;
+			if (file != null)
+			{
+				if (file.GetPrice(Pvf, out string priceValue))
+				{
+					NpcShopPurchaseSectionFormatter.TryNormalizePrice(priceValue, out loadedPrice);
+				}
+				else if (file.GetValuePrice(Pvf, out string valuePrice))
+				{
+					NpcShopPurchaseSectionFormatter.TryFormatValueFallbackPrice(valuePrice, out loadedPrice);
+				}
+			}
+			Price = loadedPrice;
 
 			List<int> materialValues = new List<int>();
 			if (file != null)
