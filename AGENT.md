@@ -121,7 +121,7 @@ rg -n "<HintPath>([A-Za-z]:|\\\\)" . `
 
 - `AssemblyName`、Version、Culture 和 PublicKeyToken 必须与替代的 DLL 兼容；
 - 对应 `lib` DLL 不能与项目输出以同一路径重复发布；
-- `recovered-source-libraries.txt` 必须列出实际接入的项目；
+- `recovered-source-libraries.txt` 必须列出实际接入的项目，且只能记录项目文件名，不能发布本机绝对路径；
 - `scripts/Test-RecoveredStartup.ps1` 必须通过 20 个 SHA-256 来源比较、已加载模块检查和完整主窗口检查；
 - `Binary` 模式必须保持可用，便于区分源码恢复问题和原发布依赖问题。
 

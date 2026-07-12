@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <ContinuousIntegrationBuild Condition="'$(Configuration)' == 'Release' And '$(ContinuousIntegrationBuild)' == ''">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+</Project>

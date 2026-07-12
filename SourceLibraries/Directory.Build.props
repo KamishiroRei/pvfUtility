@@ -3,5 +3,6 @@
     <RecoveredBinaryDirectory>$(MSBuildThisFileDirectory)..\lib</RecoveredBinaryDirectory>
     <BaseOutputPath>$(MSBuildThisFileDirectory).build\$(MSBuildProjectName)\bin\</BaseOutputPath>
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory).build\$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
+    <ContinuousIntegrationBuild Condition="'$(Configuration)' == 'Release' And '$(ContinuousIntegrationBuild)' == ''">true</ContinuousIntegrationBuild>
   </PropertyGroup>
 </Project>

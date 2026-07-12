@@ -78,9 +78,27 @@ if (Test-Path -LiteralPath $sourceAssemblyManifest -PathType Leaf) {
         }
 
         $assemblyName = $parts[0]
-        $projectPath = $parts[1]
-        $projectName = [IO.Path]::GetFileNameWithoutExtension($projectPath)
-        $sourceBuildDirectory = Join-Path $projectRoot "SourceLibraries\.build\$projectName\bin\$Configuration"
+        $projectFileName = $parts[1]
+        if ([string]::IsNullOrWhiteSpace($projectFileName) -or
+            [IO.Path]::IsPathRooted($projectFileName) -or
+            $projectFileName -match '[\\/]' -or
+            $projectFileName.IndexOfAny([IO.Path]::GetInvalidFileNameChars()) -ge 0 -or
+            [IO.Path]::GetExtension($projectFileName) -ne ".csproj") {
+            throw "Recovered source assembly manifest must not contain a project path: $line"
+        }
+        $projectName = [IO.Path]::GetFileNameWithoutExtension($projectFileName)
+        if ([string]::IsNullOrWhiteSpace($projectName) -or $projectName -eq "." -or $projectName -eq "..") {
+            throw "Invalid recovered source project filename: $projectFileName"
+        }
+
+        $sourceBuildRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot "SourceLibraries\.build"))
+        $sourceBuildDirectory = [IO.Path]::GetFullPath(
+            (Join-Path $sourceBuildRoot "$projectName\bin\$Configuration")
+        )
+        $sourceBuildPrefix = $sourceBuildRoot + [IO.Path]::DirectorySeparatorChar
+        if (-not $sourceBuildDirectory.StartsWith($sourceBuildPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+            throw "Recovered source project build directory escaped its expected root: $projectFileName"
+        }
         $sourceAssembly = Get-ChildItem `
             -LiteralPath $sourceBuildDirectory `
             -Recurse `

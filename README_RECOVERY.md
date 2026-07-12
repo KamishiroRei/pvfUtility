@@ -227,7 +227,9 @@ the main executable. Assembly names, versions, and public-key tokens were checke
 against the release DLLs. The startup verifier reads
 `recovered-source-libraries.txt`, compares all 20 output hashes with the matching
 `.build` products, checks loaded-module paths, and then performs the populated
-main-window/error-window assertions.
+main-window/error-window assertions. The manifest stores project filenames rather
+than absolute paths, and Release builds map source paths deterministically so the
+published manifest, assemblies, and PDBs do not expose the build workspace.
 
 ## Recovery provenance
 

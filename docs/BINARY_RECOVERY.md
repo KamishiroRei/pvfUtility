@@ -164,7 +164,10 @@ fallback.
 Each source-mode build writes `recovered-source-libraries.txt`. The startup test
 uses it to compare every output DLL with its source build using SHA-256, rejects a
 hash matching the old `lib` binary, inspects loaded module paths, and then checks
-the populated main window and absence of an error window. The standard `All`
+the populated main window and absence of an error window. Manifest entries retain
+only the assembly name and project filename, so published output does not expose
+the build machine's absolute workspace path. Release builds also enable
+deterministic source paths for the emitted assemblies and PDBs. The standard `All`
 manifest contains 20 entries, all represented as `type: project` in the generated
 `.NET 10` deps file.
 

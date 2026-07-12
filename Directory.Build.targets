@@ -185,7 +185,7 @@
           AfterTargets="Build"
           Condition="'@(RecoveredSourceProject)' != ''">
     <WriteLinesToFile File="$(TargetDir)recovered-source-libraries.txt"
-                      Lines="@(RecoveredSourceProject->'%(AssemblyName)|%(FullPath)')"
+                      Lines="@(RecoveredSourceProject->'%(AssemblyName)|%(Filename)%(Extension)')"
                       Overwrite="true"
                       Encoding="UTF-8" />
   </Target>
