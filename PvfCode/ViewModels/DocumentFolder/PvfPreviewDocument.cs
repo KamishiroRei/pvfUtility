@@ -248,6 +248,15 @@ public sealed class PvfPreviewDocument : DocumentBase
 		public List<string> LevelProperty { get; } = new();
 	}
 
+	private sealed class SkillDataLabelRef
+	{
+		public bool IsLevel { get; init; }
+
+		public int Index { get; init; }
+
+		public string Label { get; init; }
+	}
+
 	public const string PreviewDocumentPath = "pvf-preview://current";
 
 	private static readonly Regex TagLineRegex = new(
@@ -255,8 +264,6 @@ public sealed class PvfPreviewDocument : DocumentBase
 		RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
 	private static readonly Regex NumberRegex = new(@"-?\d+", RegexOptions.Compiled | RegexOptions.CultureInvariant);
-
-	private static readonly Regex NumericTokenRegex = new(@"-?\d+(?:\.\d+)?", RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
 	private static readonly Regex ValueTokenRegex = new(
 		"`(?<backtick>[^`]*)`|\"(?<double>[^\"]*)\"|'(?<single>[^']*)'|(?<plain>[^\\s]+)",
@@ -332,6 +339,17 @@ public sealed class PvfPreviewDocument : DocumentBase
 		["nenmaster"] = "气功师", ["striker"] = "散打", ["streetfighter"] = "街霸", ["grappler"] = "柔道家",
 		["crusader"] = "圣骑士", ["infighter"] = "蓝拳圣使", ["exorcist"] = "驱魔师", ["avenger"] = "复仇者",
 		["rogue"] = "刺客", ["necromancer"] = "死灵术士"
+	};
+
+	private static readonly Dictionary<int, string> SkillDamageSourceLabels = new()
+	{
+		[-1] = "百分比伤害",
+		[-2] = "独立攻击力",
+		[-3] = "中毒伤害",
+		[-4] = "出血伤害",
+		[-5] = "灼伤伤害",
+		[-6] = "感电伤害",
+		[-7] = "石化伤害"
 	};
 
 	private readonly Dictionary<string, List<PvfPreviewTag>> tagsByName = new(StringComparer.OrdinalIgnoreCase);
@@ -709,10 +727,17 @@ public sealed class PvfPreviewDocument : DocumentBase
 	private void AddSkillDataTables(PvfRichPreview preview, string text)
 	{
 		List<SkillDataScene> scenes = ParseSkillDataScenes(text);
+		PvfSkillDataParameterSkill parameters = PvfSkillDataParameters.Find(sourceDocument?.File);
+		IEnumerable<string> defaultProperties = scenes.FirstOrDefault(scene => scene.Key == "default")?.LevelProperty ?? Enumerable.Empty<string>();
+		List<SkillDataLabelRef> defaultRefs = ParseSkillPropertyRefs(defaultProperties);
 		PvfPreviewSection section = new("动态/静态数据", PvfPreviewTone.Blue, FindTag("level info") ?? FindTag("static data"));
 		foreach (SkillDataScene scene in scenes)
 		{
-			(Dictionary<int, string> levelLabels, Dictionary<int, string> staticLabels) = BuildSkillDataLabels(scene.LevelProperty);
+			List<SkillDataLabelRef> refs = MergeSkillDataLabelRefs(
+				RefsFromSkillDataParameters(parameters, scene.Key),
+				MergeSkillDataLabelRefs(defaultRefs, ParseSkillPropertyRefs(scene.LevelProperty)));
+			Dictionary<int, List<string>> levelLabels = LabelsFromRefs(refs, true);
+			Dictionary<int, List<string>> staticLabels = LabelsFromRefs(refs, false);
 			List<List<SkillDataValue>> levelRows = NormalizeLevelInfoRows(scene.LevelInfo);
 			if (levelRows.Count > 0)
 			{
@@ -721,7 +746,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 				int columnCount = levelRows.Max(row => row.Count);
 				for (int column = 0; column < columnCount; column++)
 				{
-					table.Headers.Add(levelLabels.TryGetValue(column, out string label) ? label : $"动态#{column}");
+					table.Headers.Add(SkillDataLabel(levelLabels, column, "动态"));
 				}
 				for (int rowIndex = 0; rowIndex < levelRows.Count; rowIndex++)
 				{
@@ -743,7 +768,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 				for (int index = 0; index < scene.StaticData.Count; index++)
 				{
 					SkillDataValue value = scene.StaticData[index];
-					string label = staticLabels.TryGetValue(index, out string knownLabel) ? knownLabel : $"静态#{index}";
+					string label = SkillDataLabel(staticLabels, index, "静态");
 					table.Rows.Add(new PvfPreviewTableRow(new[] { index.ToString(CultureInfo.InvariantCulture), label, value.Value }, value.Target));
 				}
 				section.Tables.Add(table);
@@ -914,40 +939,181 @@ public sealed class PvfPreviewDocument : DocumentBase
 		return rows;
 	}
 
-	private static (Dictionary<int, string> Level, Dictionary<int, string> Static) BuildSkillDataLabels(IEnumerable<string> lines)
+	private static List<SkillDataLabelRef> RefsFromSkillDataParameters(PvfSkillDataParameterSkill parameters, string sceneKey)
 	{
-		Dictionary<int, string> level = new();
-		Dictionary<int, string> stat = new();
-		string pendingLabel = string.Empty;
-		foreach (string line in lines)
+		List<SkillDataLabelRef> refs = new();
+		PvfSkillDataParameterLabels labels = parameters?.GetLabels(sceneKey);
+		if (labels == null)
 		{
-			Match text = Regex.Match(line, @"`([^`]*)`");
-			if (text.Success)
+			return refs;
+		}
+		AddParameterRefs(refs, labels.LevelInfo, true);
+		AddParameterRefs(refs, labels.StaticData, false);
+		return refs;
+	}
+
+	private static void AddParameterRefs(List<SkillDataLabelRef> refs, Dictionary<int, List<string>> labels, bool isLevel)
+	{
+		foreach ((int index, List<string> values) in labels)
+		{
+			foreach (string label in values)
 			{
-				pendingLabel = Regex.Replace(text.Groups[1].Value, @"<[^>]+>", string.Empty).Trim(' ', ':', '：');
+				refs.Add(new SkillDataLabelRef { IsLevel = isLevel, Index = index, Label = label });
 			}
-			List<double> numbers = NumericTokenRegex.Matches(line).Select(match => double.Parse(match.Value, CultureInfo.InvariantCulture)).ToList();
-			for (int index = 0; index + 2 < numbers.Count; index += 3)
+		}
+	}
+
+	private static List<SkillDataLabelRef> ParseSkillPropertyRefs(IEnumerable<string> lines)
+	{
+		List<SkillDataLabelRef> refs = new();
+		List<string> fallbackLabels = new();
+		string pendingText = string.Empty;
+		foreach (string raw in lines)
+		{
+			string line = raw.Trim();
+			if (line.Length == 0)
 			{
-				double source = numbers[index];
-				double target = numbers[index + 1];
+				continue;
+			}
+			string text = ExtractSkillPropertyText(line);
+			if (!string.IsNullOrEmpty(text))
+			{
+				pendingText = text;
+				fallbackLabels = SplitSkillPropertyLabels(text);
+			}
+			List<double> numbers = NumericTokens(line);
+			if (numbers.Count < 3)
+			{
+				continue;
+			}
+			int groups = numbers.Count / 3;
+			for (int group = 0; group < groups; group++)
+			{
+				double source = numbers[group * 3];
+				double target = numbers[group * 3 + 1];
+				double scale = numbers[group * 3 + 2];
 				if (target < 0 || target != Math.Truncate(target))
 				{
 					continue;
 				}
-				string label = string.IsNullOrEmpty(pendingLabel) ? (source < 0 ? $"动态#{(int)target}" : $"静态#{(int)source}") : pendingLabel;
+				string labelBase = refs.Count < fallbackLabels.Count ? fallbackLabels[refs.Count] : pendingText;
+				if (string.IsNullOrEmpty(labelBase) && source == Math.Truncate(source))
+				{
+					SkillDamageSourceLabels.TryGetValue((int)source, out labelBase);
+				}
+				string label = FormatSkillDataMeaning(labelBase, scale);
 				if (source < 0)
 				{
-					level[(int)target] = label;
+					refs.Add(new SkillDataLabelRef { IsLevel = true, Index = (int)target, Label = label });
 				}
 				else if (source == Math.Truncate(source))
 				{
-					stat[(int)source] = label;
-					stat.TryAdd((int)target, label);
+					int sourceIndex = (int)source;
+					refs.Add(new SkillDataLabelRef { IsLevel = false, Index = sourceIndex, Label = label });
+					if (sourceIndex != (int)target)
+					{
+						refs.Add(new SkillDataLabelRef { IsLevel = false, Index = (int)target, Label = label });
+					}
 				}
 			}
 		}
-		return (level, stat);
+		return refs;
+	}
+
+	private static string ExtractSkillPropertyText(string line)
+	{
+		Match backtick = Regex.Match(line, @"`([^`]*)`");
+		if (backtick.Success && backtick.Groups[1].Value.Length > 0)
+		{
+			return backtick.Groups[1].Value.Trim();
+		}
+		Match linked = Regex.Match(line, @"<\d+::([^>`]+)(?:`[^`]*)?>");
+		return linked.Success ? linked.Groups[1].Value.Trim() : null;
+	}
+
+	private static List<string> SplitSkillPropertyLabels(string text)
+	{
+		string normalized = Regex.Replace(text, @"<[^>]+>", "\0").Replace("%%", "%");
+		normalized = Regex.Replace(normalized, @"\s+", " ").Trim();
+		return normalized.Split('\0').Select(CleanSkillPropertyLabel).Where(label => label.Length > 0).ToList();
+	}
+
+	private static string CleanSkillPropertyLabel(string value)
+	{
+		string cleaned = Regex.Replace(value, @"[：:，,、/+\-~()（）\[\]【】<>]+", " ");
+		cleaned = Regex.Replace(cleaned, @"\b(int|float1|float2)\b", " ", RegexOptions.IgnoreCase);
+		return Regex.Replace(cleaned, @"\s+", " ").Trim();
+	}
+
+	private static string FormatSkillDataMeaning(string labelBase, double scale)
+	{
+		string scaleText = ScaleMeaning(scale);
+		return string.Join(" ", new[] { labelBase, scaleText }.Where(value => !string.IsNullOrEmpty(value)));
+	}
+
+	private static string ScaleMeaning(double scale)
+	{
+		if (Math.Abs(scale - 1) < 0.000001)
+		{
+			return null;
+		}
+		if (Math.Abs(scale - 0.1) < 0.000001)
+		{
+			return "x0.1";
+		}
+		if (Math.Abs(scale - 0.01) < 0.000001)
+		{
+			return "x0.01";
+		}
+		if (Math.Abs(scale - 0.001) < 0.000001)
+		{
+			return "x0.001";
+		}
+		return $"x{scale.ToString("0.######", CultureInfo.InvariantCulture)}";
+	}
+
+	private static List<double> NumericTokens(string line)
+	{
+		return Regex.Split(line, @"\s+").Select(part => part.Trim()).Where(part => Regex.IsMatch(part, @"^[-+]?(?:\d+(?:\.\d+)?|\.\d+)$"))
+			.Select(part => double.Parse(part, CultureInfo.InvariantCulture)).Where(double.IsFinite).ToList();
+	}
+
+	private static List<SkillDataLabelRef> MergeSkillDataLabelRefs(IEnumerable<SkillDataLabelRef> first, IEnumerable<SkillDataLabelRef> second)
+	{
+		List<SkillDataLabelRef> merged = new();
+		HashSet<string> seen = new(StringComparer.Ordinal);
+		foreach (SkillDataLabelRef reference in first.Concat(second))
+		{
+			string key = $"{reference.IsLevel}:{reference.Index}:{reference.Label}";
+			if (!string.IsNullOrEmpty(reference.Label) && seen.Add(key))
+			{
+				merged.Add(reference);
+			}
+		}
+		return merged;
+	}
+
+	private static Dictionary<int, List<string>> LabelsFromRefs(IEnumerable<SkillDataLabelRef> refs, bool isLevel)
+	{
+		Dictionary<int, List<string>> labels = new();
+		foreach (SkillDataLabelRef reference in refs.Where(reference => reference.IsLevel == isLevel && !string.IsNullOrEmpty(reference.Label)))
+		{
+			if (!labels.TryGetValue(reference.Index, out List<string> values))
+			{
+				values = new List<string>();
+				labels[reference.Index] = values;
+			}
+			if (!values.Contains(reference.Label))
+			{
+				values.Add(reference.Label);
+			}
+		}
+		return labels;
+	}
+
+	private static string SkillDataLabel(Dictionary<int, List<string>> labels, int index, string fallbackPrefix)
+	{
+		return labels.TryGetValue(index, out List<string> known) && known.Count > 0 ? string.Join(" / ", known) : $"{fallbackPrefix}#{index}";
 	}
 
 	private static string FormatLevelInfoCell(string current, string previous)

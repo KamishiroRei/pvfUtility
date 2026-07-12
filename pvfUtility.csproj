@@ -399,6 +399,8 @@
     <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\SkillDataParameters.json" />
+    <EmbeddedResource Include="Resources\SkillDataParameters.json" LogicalName="PvfCode.SkillDataParameters.json" />
     <None Update="Resources\OfflineDefaults\Options\AppConfig.json;Resources\OfflineDefaults\Options\Bookmarks.json"
           CopyToOutputDirectory="PreserveNewest"
           CopyToPublishDirectory="PreserveNewest"

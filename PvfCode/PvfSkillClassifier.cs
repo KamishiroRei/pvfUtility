@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace PvfCode;
@@ -124,6 +124,7 @@ public static class PvfSkillClassifier
 public static class PvfSkillTreeColorBehavior
 {
 	private static bool initialized;
+	private static readonly Dictionary<Style, Style> SkillStyles = new();
 
 	public static void Initialize()
 	{
@@ -132,7 +133,7 @@ public static class PvfSkillTreeColorBehavior
 			return;
 		}
 		initialized = true;
-		EventManager.RegisterClassHandler(typeof(TextBlock), FrameworkElement.LoadedEvent, new RoutedEventHandler(OnTextBlockLoaded));
+		EventManager.RegisterClassHandler(typeof(TextBlock), FrameworkElement.LoadedEvent, new RoutedEventHandler(OnTextBlockLoaded), true);
 	}
 
 	private static void OnTextBlockLoaded(object sender, RoutedEventArgs e)
@@ -141,47 +142,32 @@ public static class PvfSkillTreeColorBehavior
 		{
 			return;
 		}
-		textBlock.DataContextChanged -= OnDataContextChanged;
-		textBlock.DataContextChanged += OnDataContextChanged;
-		ApplyColor(textBlock);
+		Style baseStyle = textBlock.Style;
+		if (baseStyle == null || SkillStyles.ContainsValue(baseStyle))
+		{
+			return;
+		}
+		if (!SkillStyles.TryGetValue(baseStyle, out Style skillStyle))
+		{
+			skillStyle = CreateSkillStyle(baseStyle);
+			SkillStyles[baseStyle] = skillStyle;
+		}
+		textBlock.Style = skillStyle;
 	}
 
-	private static void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+	private static Style CreateSkillStyle(Style baseStyle)
 	{
-		if (sender is TextBlock textBlock)
+		Style style = new(typeof(TextBlock), baseStyle);
+		foreach (PvfSkillKind kind in Enum.GetValues<PvfSkillKind>())
 		{
-			ApplyColor(textBlock);
-		}
-	}
-
-	private static void ApplyColor(TextBlock textBlock)
-	{
-		PvfTreeFileBase node = FindTreeNode(textBlock.DataContext);
-		PvfSkillKind? kind = node?.SkillKind;
-		if (kind.HasValue)
-		{
-			textBlock.Foreground = PvfSkillClassifier.GetBrush(kind.Value);
-		}
-		else
-		{
-			textBlock.ClearValue(TextBlock.ForegroundProperty);
-		}
-	}
-
-	private static PvfTreeFileBase FindTreeNode(object value)
-	{
-		for (int depth = 0; value != null && depth < 4; depth++)
-		{
-			if (value is PvfTreeFileBase node)
+			DataTrigger trigger = new()
 			{
-				return node;
-			}
-			Type type = value.GetType();
-			PropertyInfo property = type.GetProperty(depth == 0 ? "Row" : "Value", BindingFlags.Instance | BindingFlags.Public) ??
-				type.GetProperty("Value", BindingFlags.Instance | BindingFlags.Public) ??
-				type.GetProperty("Row", BindingFlags.Instance | BindingFlags.Public);
-			value = property?.GetValue(value);
+				Binding = new Binding("Row.Value.SkillKind") { Mode = BindingMode.OneWay },
+				Value = kind
+			};
+			trigger.Setters.Add(new Setter(TextBlock.ForegroundProperty, PvfSkillClassifier.GetBrush(kind)));
+			style.Triggers.Add(trigger);
 		}
-		return null;
+		return style;
 	}
 }
