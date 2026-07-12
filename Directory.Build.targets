@@ -7,6 +7,18 @@
     <AssemblySearchPaths>$(RecoveredDependencyDirectory);$(AssemblySearchPaths)</AssemblySearchPaths>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(RecoveredSourceLibraryMode)' == 'Leaf' Or '$(RecoveredSourceLibraryMode)' == 'Core' Or '$(RecoveredSourceLibraryMode)' == 'All'">
+    <DefineConstants>$(DefineConstants);RECOVERED_WHESTONE_CHATGPT_SOURCE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RecoveredSourceLibraryMode)' == 'Binary' Or '$(RecoveredSourceLibraryMode)' == 'Leaf'">
+    <DefineConstants>$(DefineConstants);RECOVERED_LEGACY_PVFCODE_DOT</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RecoveredSourceLibraryMode)' == 'Binary' Or '$(RecoveredSourceLibraryMode)' == 'Leaf' Or '$(RecoveredSourceLibraryMode)' == 'Core'">
+    <DefineConstants>$(DefineConstants);RECOVERED_LEGACY_PVFCODE_SERVICES</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(RecoveredSourceLibraryMode)' == 'Leaf' Or '$(RecoveredSourceLibraryMode)' == 'Core' Or '$(RecoveredSourceLibraryMode)' == 'All'">
     <RecoveredSourceProject Include="$(RecoveredLibrarySourceDirectory)\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <AssemblyName>ICSharpCode.AvalonEdit</AssemblyName>
@@ -118,6 +130,15 @@
       <LogicalName>pvfUtility.g.resources</LogicalName>
     </EmbeddedResource>
 
+    <None Remove="$(RecoveredResourceDirectory)\AiAssistant\KnowledgePack\**\*" />
+    <Content Include="$(RecoveredResourceDirectory)\AiAssistant\KnowledgePack\**\*">
+      <Link>AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <TargetPath>AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)</TargetPath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <AiAssistantKnowledge Include="$(RecoveredResourceDirectory)\AiAssistant\KnowledgePack\**\*" />
+
     <Content Include="$(RecoveredDependencyDirectory)\**\*"
              Exclude="$(RecoveredDependencyDirectory)\pvfUtility.dll;$(RecoveredDependencyDirectory)\pvfUtility.deps.json;$(RecoveredDependencyDirectory)\pvfUtility.runtimeconfig.json;$(RecoveredDependencyDirectory)\Exceptionless.dll;$(RecoveredDependencyDirectory)\Exceptionless.Wpf.dll;$(RecoveredDependencyDirectory)\AutoUpdater.NET.dll;$(RecoveredDependencyDirectory)\Whetstone.ChatGPT.dll;$(RecoveredDependencyDirectory)\Whetstone.ChatGPT.pdb">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
@@ -185,6 +206,22 @@
           AfterTargets="Build"
           Condition="'@(RecoveredSourceProject)' == ''">
     <Delete Files="$(TargetDir)recovered-source-libraries.txt" />
+  </Target>
+
+  <Target Name="SynchronizeAiAssistantKnowledgeOutput"
+          AfterTargets="Build"
+          Condition="'$(AssemblyName)' == 'pvfUtility' And '@(AiAssistantKnowledge)' != ''">
+    <RemoveDir Directories="$(TargetDir)AgentKnowledge" />
+    <Copy SourceFiles="@(AiAssistantKnowledge)"
+          DestinationFiles="@(AiAssistantKnowledge->'$(TargetDir)AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <Target Name="SynchronizeAiAssistantKnowledgePublish"
+          AfterTargets="Publish"
+          Condition="'$(AssemblyName)' == 'pvfUtility' And '$(PublishDir)' != '' And '@(AiAssistantKnowledge)' != ''">
+    <RemoveDir Directories="$(PublishDir)AgentKnowledge" />
+    <Copy SourceFiles="@(AiAssistantKnowledge)"
+          DestinationFiles="@(AiAssistantKnowledge->'$(PublishDir)AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 
 </Project>

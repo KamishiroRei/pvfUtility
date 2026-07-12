@@ -43,7 +43,7 @@ or differential verification. A generated manifest and SHA-256 checks in
 source builds rather than same-named fallback DLLs in `lib`.
 
 All projects target `net10.0` or `net10.0-windows`. A clean build with .NET SDK
-10.0.300 completes with zero errors. The solution contains 1,389 C# files, 18
+10.0.300 completes with zero errors. The solution contains 1,394 C# files, 18
 buildable XAML files, 16 RESX files, and no loose BAML.
 
 ## Recovered resources
@@ -104,7 +104,7 @@ These files no longer contain explicit display-class source types, pseudo
 decompiler comments. Private fields and helpers now use behavior-based semantic
 names. See `docs/OBFUSCATED_NAME_MAP.md` for the recorded mappings.
 
-Normalization is not complete across all 1,389 C# files. Model libraries and
+Normalization is not complete across all 1,394 C# files. Model libraries and
 recovered UI dependencies still retain expanded auto-property accessors,
 compiler closures, and private obfuscated members. Those areas should continue in
 small build-verified batches. Public or resource-visible CLR names must remain

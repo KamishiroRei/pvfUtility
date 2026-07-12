@@ -17,10 +17,15 @@ namespace Whetstone.ChatGPT;
 public class ChatGPTClient : IChatGPTClient, IDisposable
 {
 	private const string ResponseLinePrefix = "data: ";
+	private static readonly Uri DefaultBaseAddress = new Uri("https://api.openai.com/v1/");
 
 	private readonly HttpClient _client;
 
-	private readonly bool _isHttpClientProvided = true;
+	private readonly Uri _baseAddress;
+
+	private readonly bool _ownsHttpClient;
+
+	private readonly long? _maximumResponseBytes;
 
 	private ChatGPTCredentials? _chatCredentials;
 
@@ -35,50 +40,81 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 	}
 
 	public ChatGPTClient(string apiKey)
-		: this(new ChatGPTCredentials(apiKey), new HttpClient())
+		: this(new ChatGPTCredentials(apiKey), new HttpClient(), null, ownsHttpClient: true)
 	{
 	}
 
 	public ChatGPTClient(string apiKey, string organization)
-		: this(new ChatGPTCredentials(apiKey, organization), new HttpClient())
+		: this(new ChatGPTCredentials(apiKey, organization), new HttpClient(), null, ownsHttpClient: true)
 	{
 	}
 
 	public ChatGPTClient(ChatGPTCredentials credentials)
-		: this(credentials, new HttpClient())
+		: this(credentials, new HttpClient(), null, ownsHttpClient: true)
 	{
 	}
 
 	public ChatGPTClient(IOptions<ChatGPTCredentials> credentialsOptions)
-		: this(credentialsOptions.Value, new HttpClient())
+		: this(credentialsOptions.Value, new HttpClient(), null, ownsHttpClient: true)
 	{
 	}
 
 	public ChatGPTClient(IOptions<ChatGPTCredentials> credentialsOptions, HttpClient httpClient)
-		: this(credentialsOptions.Value, httpClient)
+		: this(credentialsOptions.Value, httpClient, null, ownsHttpClient: false)
 	{
 	}
 
-	private ChatGPTClient(ChatGPTCredentials credentials, HttpClient httpClient)
+	public ChatGPTClient(IOptions<ChatGPTCredentials> credentialsOptions, HttpClient httpClient, Uri baseAddress)
+		: this(credentialsOptions.Value, httpClient, baseAddress, ownsHttpClient: false)
 	{
-		_chatCredentials = credentials;
-		if (httpClient == null)
-		{
-			_client = new HttpClient();
-			_isHttpClientProvided = false;
-		}
-		else
-		{
-			_client = httpClient;
-			_isHttpClientProvided = true;
-		}
-		InitializeClient(_client);
 	}
 
-	private void InitializeClient(HttpClient client)
+	public ChatGPTClient(ChatGPTCredentials credentials, HttpClient httpClient)
+		: this(credentials, httpClient, null, ownsHttpClient: false)
 	{
-		client.BaseAddress = new Uri("https://api.openai.com/v1/");
-		if (!string.IsNullOrWhiteSpace(_client.DefaultRequestHeaders.Authorization?.Parameter))
+	}
+
+	public ChatGPTClient(ChatGPTCredentials credentials, HttpClient httpClient, Uri baseAddress)
+		: this(credentials, httpClient, baseAddress, ownsHttpClient: false)
+	{
+	}
+
+	public ChatGPTClient(ChatGPTCredentials credentials, HttpClient httpClient, Uri baseAddress, long maximumResponseBytes)
+		: this(credentials, httpClient, baseAddress, ownsHttpClient: false, maximumResponseBytes)
+	{
+	}
+
+	private ChatGPTClient(
+		ChatGPTCredentials credentials,
+		HttpClient httpClient,
+		Uri? baseAddress,
+		bool ownsHttpClient,
+		long? maximumResponseBytes = null)
+	{
+		if (maximumResponseBytes <= 0)
+		{
+			throw new ArgumentOutOfRangeException(nameof(maximumResponseBytes));
+		}
+		_chatCredentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
+		_client = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+		_ownsHttpClient = ownsHttpClient;
+		_maximumResponseBytes = maximumResponseBytes;
+		_baseAddress = NormalizeBaseAddress(baseAddress ?? httpClient.BaseAddress ?? DefaultBaseAddress);
+		ValidateClient(_client);
+	}
+
+	private static Uri NormalizeBaseAddress(Uri baseAddress)
+	{
+		if (!baseAddress.IsAbsoluteUri)
+		{
+			throw new ArgumentException("Base address must be an absolute URI.", nameof(baseAddress));
+		}
+		return new Uri(baseAddress.AbsoluteUri.TrimEnd('/') + "/", UriKind.Absolute);
+	}
+
+	private static void ValidateClient(HttpClient client)
+	{
+		if (!string.IsNullOrWhiteSpace(client.DefaultRequestHeaders.Authorization?.Parameter))
 		{
 			throw new ArgumentException("HttpClient already has authorization token.", "client");
 		}
@@ -156,7 +192,7 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 			}
 			yield break;
 		}
-		throw new ChatGPTException(JsonSerializer.Deserialize<ChatGPTErrorResponse>(await responseMessage.Content.ReadAsStringAsync(cancelToken).ConfigureAwait(continueOnCapturedContext: false))?.Error, responseMessage.StatusCode);
+		throw CreateResponseException(await responseMessage.Content.ReadAsStringAsync(cancelToken).ConfigureAwait(continueOnCapturedContext: false), responseMessage.StatusCode);
 	}
 
 	public async Task<ChatGPTCompletionResponse?> CreateCompletionAsync(ChatGPTCompletionRequest completionRequest, CancellationToken? cancellationToken = null)
@@ -240,7 +276,7 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 			}
 			yield break;
 		}
-		throw new ChatGPTException(JsonSerializer.Deserialize<ChatGPTErrorResponse>(await responseMessage.Content.ReadAsStringAsync(cancelToken).ConfigureAwait(continueOnCapturedContext: false))?.Error, responseMessage.StatusCode);
+		throw CreateResponseException(await responseMessage.Content.ReadAsStringAsync(cancelToken).ConfigureAwait(continueOnCapturedContext: false), responseMessage.StatusCode);
 	}
 
 	public async Task<ChatGPTCreateEditResponse?> CreateEditAsync(ChatGPTCreateEditRequest createEditRequest, CancellationToken? cancellationToken = null)
@@ -341,7 +377,7 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 			fileContent.FileName = httpResponse.Content?.Headers?.ContentDisposition?.FileName?.Replace("\"", "");
 			return fileContent;
 		}
-		throw new ChatGPTException(JsonSerializer.Deserialize<ChatGPTErrorResponse>(await GetResponseStringAsync(httpResponse, cancelToken).ConfigureAwait(continueOnCapturedContext: false))?.Error, httpResponse.StatusCode);
+		throw CreateResponseException(await GetResponseStringAsync(httpResponse, cancelToken).ConfigureAwait(continueOnCapturedContext: false), httpResponse.StatusCode);
 	}
 
 	public async Task<ChatGPTFineTuneJob?> CreateFineTuneAsync(ChatGPTCreateFineTuneRequest? createFineTuneRequest, CancellationToken? cancellationToken = null)
@@ -422,7 +458,7 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 			}
 			yield break;
 		}
-		throw new ChatGPTException(JsonSerializer.Deserialize<ChatGPTErrorResponse>(await responseMessage.Content.ReadAsStringAsync(cancelToken).ConfigureAwait(continueOnCapturedContext: false))?.Error, responseMessage.StatusCode);
+		throw CreateResponseException(await responseMessage.Content.ReadAsStringAsync(cancelToken).ConfigureAwait(continueOnCapturedContext: false), responseMessage.StatusCode);
 	}
 
 	public async Task<ChatGPTCreateModerationResponse?> CreateModerationAsync(ChatGPTCreateModerationRequest? createModerationRequest, CancellationToken? cancellationToken = null)
@@ -821,7 +857,8 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 		using HttpRequestMessage httpReq = CreateRequestMessage(method, url);
 		string content = JsonSerializer.Serialize(requestMessage);
 		httpReq.Content = new StringContent(content, Encoding.UTF8, "application/json");
-		HttpResponseMessage httpResponseMessage = (cancellationToken.HasValue ? (await _client.SendAsync(httpReq, cancellationToken.Value).ConfigureAwait(continueOnCapturedContext: false)) : (await _client.SendAsync(httpReq).ConfigureAwait(continueOnCapturedContext: false)));
+		CancellationToken cancelToken = cancellationToken ?? CancellationToken.None;
+		HttpResponseMessage httpResponseMessage = await _client.SendAsync(httpReq, HttpCompletionOption.ResponseHeadersRead, cancelToken).ConfigureAwait(continueOnCapturedContext: false);
 		using HttpResponseMessage httpResponse = httpResponseMessage;
 		return await ProcessResponseAsync<TR>(httpResponse, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
 	}
@@ -829,12 +866,13 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 	private async Task<T?> SendRequestAsync<T>(HttpMethod method, string url, CancellationToken? cancellationToken) where T : class
 	{
 		using HttpRequestMessage request = CreateRequestMessage(method, url);
-		HttpResponseMessage httpResponseMessage = (cancellationToken.HasValue ? (await _client.SendAsync(request, cancellationToken.Value).ConfigureAwait(continueOnCapturedContext: false)) : (await _client.SendAsync(request).ConfigureAwait(continueOnCapturedContext: false)));
+		CancellationToken cancelToken = cancellationToken ?? CancellationToken.None;
+		HttpResponseMessage httpResponseMessage = await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancelToken).ConfigureAwait(continueOnCapturedContext: false);
 		using HttpResponseMessage httpResponse = httpResponseMessage;
 		return await ProcessResponseAsync<T>(httpResponse, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
 	}
 
-	private static async Task<T?> ProcessResponseAsync<T>(HttpResponseMessage responseMessage, CancellationToken? cancellationToken) where T : class
+	private async Task<T?> ProcessResponseAsync<T>(HttpResponseMessage responseMessage, CancellationToken? cancellationToken) where T : class
 	{
 		string text = await GetResponseStringAsync(responseMessage, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
 		if (responseMessage.IsSuccessStatusCode)
@@ -850,17 +888,61 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 			}
 			return null;
 		}
-		throw new ChatGPTException(JsonSerializer.Deserialize<ChatGPTErrorResponse>(text)?.Error, responseMessage.StatusCode);
+		throw CreateResponseException(text, responseMessage.StatusCode);
 	}
 
-	private static async Task<string> GetResponseStringAsync(HttpResponseMessage responseMessage, CancellationToken? cancellationToken)
+	private static ChatGPTException CreateResponseException(string responseContent, System.Net.HttpStatusCode statusCode)
 	{
-		return cancellationToken.HasValue ? (await responseMessage.Content.ReadAsStringAsync(cancellationToken.Value).ConfigureAwait(continueOnCapturedContext: false)) : (await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false));
+		try
+		{
+			ChatGPTError? error = JsonSerializer.Deserialize<ChatGPTErrorResponse>(responseContent)?.Error;
+			if (error != null)
+			{
+				return new ChatGPTException(error, statusCode);
+			}
+		}
+		catch (JsonException)
+		{
+		}
+		return new ChatGPTException("ChatGPT request failed with HTTP status " + (int)statusCode + ".", statusCode);
+	}
+
+	private async Task<string> GetResponseStringAsync(HttpResponseMessage responseMessage, CancellationToken? cancellationToken)
+	{
+		CancellationToken cancelToken = cancellationToken ?? CancellationToken.None;
+		if (!_maximumResponseBytes.HasValue)
+		{
+			return await responseMessage.Content.ReadAsStringAsync(cancelToken).ConfigureAwait(continueOnCapturedContext: false);
+		}
+
+		long maximumResponseBytes = _maximumResponseBytes.Value;
+		if (responseMessage.Content.Headers.ContentLength > maximumResponseBytes)
+		{
+			throw new ChatGPTResponseTooLargeException(maximumResponseBytes);
+		}
+
+		using Stream responseStream = await responseMessage.Content.ReadAsStreamAsync(cancelToken).ConfigureAwait(continueOnCapturedContext: false);
+		using MemoryStream buffer = new MemoryStream();
+		byte[] chunk = new byte[8192];
+		while (true)
+		{
+			int read = await responseStream.ReadAsync(chunk.AsMemory(0, chunk.Length), cancelToken).ConfigureAwait(continueOnCapturedContext: false);
+			if (read == 0)
+			{
+				break;
+			}
+			if (buffer.Length + read > maximumResponseBytes)
+			{
+				throw new ChatGPTResponseTooLargeException(maximumResponseBytes);
+			}
+			buffer.Write(chunk, 0, read);
+		}
+		return Encoding.UTF8.GetString(buffer.GetBuffer(), 0, checked((int)buffer.Length));
 	}
 
 	private HttpRequestMessage CreateRequestMessage(HttpMethod method, string url)
 	{
-		HttpRequestMessage httpRequestMessage = new HttpRequestMessage(method, url);
+		HttpRequestMessage httpRequestMessage = new HttpRequestMessage(method, new Uri(_baseAddress, url));
 		if (_chatCredentials == null)
 		{
 			throw new ChatGPTException("ChatGPTCredentials are null.");
@@ -877,11 +959,6 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 		return httpRequestMessage;
 	}
 
-	~ChatGPTClient()
-	{
-		Dispose(disposing: true);
-	}
-
 	public void Dispose()
 	{
 		Dispose(disposing: true);
@@ -892,7 +969,7 @@ public class ChatGPTClient : IChatGPTClient, IDisposable
 	{
 		if (!_isDisposed)
 		{
-			if (!_isHttpClientProvided)
+			if (disposing && _ownsHttpClient)
 			{
 				_client.Dispose();
 			}

@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -20,6 +21,7 @@ using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Docking;
 using DevExpress.Xpf.Docking.Base;
 using DevExpress.Xpf.Editors;
+using DevExpress.Xpf.Layout.Core;
 using PvfCode.Controls;
 using PvfCode.Dot.Desktop;
 using PvfCode.Dot.Desktop.Enums;
@@ -29,6 +31,7 @@ using PvfCode.ViewModels;
 using PvfCode.ViewModels.DocumentFolder;
 using PvfCode.ViewModels.DocumentFolder.Enums;
 using PvfCode.Views;
+using PvfCode.Views.ChatGPT;
 using PvfCode.Views.NpcShopEditor;
 using PvfCode.Views.Dialogs;
 using PvfCode.Views.ImportViews;
@@ -86,6 +89,14 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 	private bool LXtjTCGkg9;
 
+	private ChatGPTDocumentVm _aiAssistantViewModel;
+
+	private ChatGPTMessDocument _aiAssistantView;
+
+	private LayoutPanel _aiAssistantPanel;
+
+	private bool _aiAssistantDisposed;
+
 	internal MainWindow mainWindow;
 
 	internal TaskbarButtonService tttt;
@@ -125,11 +136,15 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		PvfSkillTreeColorBehavior.Initialize();
 		base.DataContext = (AppCore.ViewModelBase = new MainWindowViewModel());
 		InitializeComponent();
+		EnsureAiAssistantPanelDocked(restoreFindView: true);
 		HideOnlineFeatures();
+		EnableAiAssistantToolbarItem();
 		HideDevelopmentTestButton();
 		Dispatcher.BeginInvoke((Action)(() =>
 		{
 			HideOnlineFeatures();
+			EnableAiAssistantToolbarItem();
+			EnsureAiAssistantPanelDocked();
 			HideDevelopmentTestButton();
 		}), DispatcherPriority.ApplicationIdle);
 		double primaryScreenHeight = SystemParameters.PrimaryScreenHeight;
@@ -163,14 +178,56 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		HideOnlineFeatureLinks(this, onlineCaptions);
 	}
 
+	private void EnableAiAssistantToolbarItem()
+	{
+		BarManager barManager = Content as BarManager ?? BarManager.GetBarManager(this);
+		BarButtonItem button = barManager?.Items
+			.OfType<BarButtonItem>()
+			.FirstOrDefault(item =>
+			{
+				string commandPath = BindingOperations
+					.GetBindingExpression(item, BarItem.CommandProperty)
+					?.ParentBinding.Path?.Path;
+				return string.Equals(commandPath, "BarsVm.OnOpenChatGPTDocumentCommand", StringComparison.Ordinal) ||
+					string.Equals(item.Content?.ToString(), "chatGPT", StringComparison.OrdinalIgnoreCase) ||
+					(item.Glyph?.ToString()?.Contains("chatgpt.png", StringComparison.OrdinalIgnoreCase) ?? false);
+			});
+		if (button != null)
+		{
+			button.Content = "AI 助手";
+			button.IsEnabled = true;
+			button.IsVisible = true;
+		}
+		EnableAiAssistantToolbarLinks(this);
+	}
+
+	private static void EnableAiAssistantToolbarLinks(DependencyObject parent)
+	{
+		int childCount = VisualTreeHelper.GetChildrenCount(parent);
+		for (int index = 0; index < childCount; index++)
+		{
+			DependencyObject child = VisualTreeHelper.GetChild(parent, index);
+			if (child is LightweightBarItemLinkControl linkControl &&
+				(string.Equals(linkControl.ActualContent?.ToString(), "chatGPT", StringComparison.OrdinalIgnoreCase) ||
+				 string.Equals(linkControl.Link.Item.Content?.ToString(), "chatGPT", StringComparison.OrdinalIgnoreCase)))
+			{
+				linkControl.Link.Item.Content = "AI 助手";
+				linkControl.Link.Item.IsEnabled = true;
+				linkControl.Link.Item.IsVisible = true;
+				linkControl.Link.IsVisible = true;
+				linkControl.IsEnabled = true;
+				linkControl.Visibility = Visibility.Visible;
+			}
+			EnableAiAssistantToolbarLinks(child);
+		}
+	}
+
 	private static HashSet<string> GetOnlineMenuCaptions()
 	{
-		HashSet<string> captions = OnlineMenuResourceKeys
+		return OnlineMenuResourceKeys
 			.Select(key => Application.Current?.TryFindResource(key)?.ToString())
 			.Where(value => !string.IsNullOrWhiteSpace(value))
 			.ToHashSet(StringComparer.Ordinal);
-		captions.Add("chatGPT");
-		return captions;
 	}
 
 	private static void HideOnlineFeatureLinks(DependencyObject parent, HashSet<string> onlineCaptions)
@@ -220,6 +277,119 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		}
 	}
 
+	private void EnsureAiAssistantPanelDocked(bool restoreFindView = false)
+	{
+		if (_aiAssistantDisposed || DemoDockContainer?.DockController == null || FindView == null)
+		{
+			return;
+		}
+
+		if (_aiAssistantViewModel == null)
+		{
+			_aiAssistantViewModel = new ChatGPTDocumentVm();
+		}
+		if (_aiAssistantView == null)
+		{
+			_aiAssistantView = new ChatGPTMessDocument
+			{
+				DataContext = _aiAssistantViewModel
+			};
+		}
+		if (_aiAssistantPanel == null)
+		{
+			_aiAssistantPanel = new LayoutPanel
+			{
+				Name = "AiAssistantView",
+				Caption = "AI 助手",
+				CaptionImage = Res.Instance.ChatGPTICON,
+				Padding = new Thickness(0),
+				ClosingBehavior = ClosingBehavior.HideToClosedPanelsCollection,
+				DataContext = _aiAssistantViewModel,
+				Content = _aiAssistantView
+			};
+		}
+
+		if (restoreFindView)
+		{
+			RestorePanel(FindView);
+		}
+		if (FindView.IsClosed || FindView.Parent == null)
+		{
+			return;
+		}
+
+		bool sharesFindTabGroup = _aiAssistantPanel.Parent is TabbedGroup aiTabs &&
+			ReferenceEquals(aiTabs, FindView.Parent);
+		if (!sharesFindTabGroup)
+		{
+			if (_aiAssistantPanel.IsClosed)
+			{
+				DemoDockContainer.DockController.Restore(_aiAssistantPanel);
+			}
+			if (FindView.Parent is TabbedGroup findTabs)
+			{
+				DemoDockContainer.DockController.RemoveItem(_aiAssistantPanel);
+				findTabs.Add(_aiAssistantPanel);
+			}
+			else
+			{
+				DemoDockContainer.DockController.Dock(_aiAssistantPanel, FindView, DockType.Fill);
+			}
+			if (_aiAssistantPanel.Parent is TabbedGroup tabs)
+			{
+				tabs.DestroyOnClosingChildren = false;
+				tabs.SelectedTabIndex = tabs.Items.IndexOf(FindView);
+			}
+		}
+	}
+
+	private void RestorePanel(LayoutPanel panel)
+	{
+		if (panel.IsClosed)
+		{
+			DemoDockContainer.DockController.Restore(panel);
+		}
+		panel.Visibility = Visibility.Visible;
+	}
+
+	public void ShowAiAssistantPanel()
+	{
+		EnsureAiAssistantPanelDocked(restoreFindView: true);
+		if (_aiAssistantPanel == null)
+		{
+			return;
+		}
+
+		RestorePanel(_aiAssistantPanel);
+		EnsureAiAssistantPanelDocked(restoreFindView: true);
+		if (_aiAssistantPanel.Parent is TabbedGroup tabs)
+		{
+			tabs.SelectedTabIndex = tabs.Items.IndexOf(_aiAssistantPanel);
+		}
+		DemoDockContainer.Activate(_aiAssistantPanel);
+		_aiAssistantView?.FocusPrompt();
+	}
+
+	private void DisposeAiAssistant()
+	{
+		if (_aiAssistantDisposed)
+		{
+			return;
+		}
+
+		_aiAssistantDisposed = true;
+		_aiAssistantViewModel?.Dispose();
+		if (_aiAssistantView != null)
+		{
+			_aiAssistantView.DataContext = null;
+		}
+		if (_aiAssistantPanel != null)
+		{
+			_aiAssistantPanel.Content = null;
+			_aiAssistantPanel.DataContext = null;
+		}
+	}
+
 	private async void mGBlZlcndb(object? sender, EventArgs P_1)
 	{
 		EventManager.RegisterClassHandler(typeof(LightweightBarItemLinkControl), FrameworkElement.LoadedEvent, (RoutedEventHandler)OnBarItemLinkLoaded);
@@ -251,7 +421,17 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		SetInitialToolTipDelay(sender, e);
 		LightweightBarItemLinkControl linkControl = (LightweightBarItemLinkControl)sender;
 		string content = linkControl.ActualContent?.ToString();
-		if (GetOnlineMenuCaptions().Contains(content ?? string.Empty))
+		if (string.Equals(content, "chatGPT", StringComparison.OrdinalIgnoreCase) ||
+			string.Equals(content, "AI 助手", StringComparison.Ordinal))
+		{
+			linkControl.Link.Item.Content = "AI 助手";
+			linkControl.Link.IsVisible = true;
+			linkControl.Link.Item.IsVisible = true;
+			linkControl.Link.Item.IsEnabled = true;
+			linkControl.IsEnabled = true;
+			linkControl.Visibility = Visibility.Visible;
+		}
+		else if (GetOnlineMenuCaptions().Contains(content ?? string.Empty))
 		{
 			linkControl.Link.IsVisible = false;
 			linkControl.Link.Item.IsVisible = false;
@@ -517,6 +697,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		catch (Exception)
 		{
 		}
+		DisposeAiAssistant();
 		App.OnExit();
 	}
 
@@ -584,6 +765,10 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		catch (Exception ex3)
 		{
 			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_LoadLayoutError"), ex3.Message));
+		}
+		finally
+		{
+			EnsureAiAssistantPanelDocked();
 		}
 	}
 
@@ -911,6 +1096,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			Stream stream = BytesHelper.StringToBytes((await File.ReadAllTextAsync(AppSetting.LayoutSavePath)).TextDecrypt(AppSetting.ConfigPwd)).BytesToStream();
 			stream.Seek(0L, SeekOrigin.Begin);
 			DemoDockContainer.RestoreLayoutFromStream(stream);
+			EnsureAiAssistantPanelDocked();
 			AppCore.ViewModelBase.RootDocument.AddControl(PvfFileDocumentType.起始页);
 			RgVlpJNt5a();
 		}
@@ -934,6 +1120,11 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 	private void hLtjDEeYDP(object P_0, ItemCancelEventArgs P_1)
 	{
+		if (ReferenceEquals(P_1.Item, _aiAssistantPanel))
+		{
+			_aiAssistantViewModel?.CancelCurrentRequest();
+			return;
+		}
 		if (P_1.Item.DataContext is DocumentBase)
 		{
 			return;

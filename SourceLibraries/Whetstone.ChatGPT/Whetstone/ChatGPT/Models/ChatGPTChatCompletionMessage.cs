@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
@@ -12,4 +13,12 @@ public class ChatGPTChatCompletionMessage
 
 	[JsonPropertyName("content")]
 	public string? Content { get; set; }
+
+	[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+	[JsonPropertyName("tool_calls")]
+	public List<ChatGPTToolCall>? ToolCalls { get; set; }
+
+	[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+	[JsonPropertyName("tool_call_id")]
+	public string? ToolCallId { get; set; }
 }

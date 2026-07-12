@@ -1,6 +1,9 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+#if RECOVERED_LEGACY_PVFCODE_DOT
+using PvfCode.Compatibility;
+#endif
 using PvfCode.Dot.Desktop;
 using PvfCode.ViewModels.Description.ViewTabComment;
 
@@ -35,7 +38,11 @@ public class PvfCommentManagementPanel : Border
 		{
 			if (!updating && target != null)
 			{
+#if RECOVERED_LEGACY_PVFCODE_DOT
+				PvfCommentDtoCompatibility.SetTitle(target, titleEditor.Text);
+#else
 				target.Title = titleEditor.Text;
+#endif
 				commentEditor.PreviewTitle = titleEditor.Text;
 			}
 		};
@@ -59,7 +66,11 @@ public class PvfCommentManagementPanel : Border
 		{
 			if (!updating && target != null)
 			{
+#if RECOVERED_LEGACY_PVFCODE_DOT
+				PvfCommentDtoCompatibility.SetOfficialDescription(target, officialEditor.Text);
+#else
 				target.OfficialDescription = officialEditor.Text;
+#endif
 			}
 		};
 		tabs.Items.Add(new TabItem { Header = "Official Markdown", Content = officialEditor });
@@ -114,10 +125,17 @@ public class PvfCommentManagementPanel : Border
 	{
 		updating = true;
 		targetLabel.Text = target == null ? string.Empty : $"{target.FileType}: [{target.Section}]";
+#if RECOVERED_LEGACY_PVFCODE_DOT
+		titleEditor.Text = PvfCommentDtoCompatibility.GetTitle(target);
+		commentEditor.PreviewTitle = PvfCommentDtoCompatibility.GetTitle(target);
+		commentEditor.Text = target?.Comment ?? string.Empty;
+		officialEditor.Text = PvfCommentDtoCompatibility.GetOfficialDescription(target);
+#else
 		titleEditor.Text = target?.Title ?? string.Empty;
 		commentEditor.PreviewTitle = target?.Title ?? string.Empty;
 		commentEditor.Text = target?.Comment ?? string.Empty;
 		officialEditor.Text = target?.OfficialDescription ?? string.Empty;
+#endif
 		updating = false;
 	}
 }

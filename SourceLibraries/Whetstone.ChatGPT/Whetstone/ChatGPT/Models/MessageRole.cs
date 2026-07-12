@@ -9,5 +9,7 @@ public enum MessageRole
 	[EnumMember(Value = "user")]
 	User,
 	[EnumMember(Value = "assistant")]
-	Assistant
+	Assistant,
+	[EnumMember(Value = "tool")]
+	Tool
 }

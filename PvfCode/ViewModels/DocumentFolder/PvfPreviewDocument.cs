@@ -715,11 +715,16 @@ public sealed class PvfPreviewDocument : DocumentBase
 		RemoveEmpty(preview, info);
 		AddTextSection(preview, "道具说明", PvfPreviewTone.Blue, "explain", "basic explain", "detail explain", "use effect explain");
 		AddEntrySection(preview, "礼包内容", PvfPreviewTone.Shop, true, "package data");
+#if RECOVERED_LEGACY_PVFCODE_SERVICES
+		// The recovered binary predates the structured booster-selection preview API.
+		AddEntrySection(preview, "随机/产出内容", PvfPreviewTone.Shop, false, "random list", "booster random", "etc", "output", "result item");
+#else
 		bool isBoosterSelection = string.Equals(LabelToken(FirstText("stackable type")), "booster selection", StringComparison.OrdinalIgnoreCase);
 		if (!isBoosterSelection || !AddBoosterSelectionPreview(preview))
 		{
 			AddEntrySection(preview, "随机/产出内容", PvfPreviewTone.Shop, false, "random list", "booster random", "etc", "output", "result item");
 		}
+#endif
 		AddEntrySection(preview, "材料/条件", PvfPreviewTone.Normal, false, "need material", "material", "condition item", "a condition item", "b condition item");
 		AddTextSection(preview, "附魔/特殊数据", PvfPreviewTone.Blue, "enchant", "monster card id", "string data", "stat change", "stat change duration");
 		AddTextSection(preview, "风味文本", PvfPreviewTone.Flavor, "flavor text");
@@ -744,6 +749,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 		return StackableTypeLabels.TryGetValue(token, out string label) ? label : token;
 	}
 
+#if !RECOVERED_LEGACY_PVFCODE_SERVICES
 	private bool AddBoosterSelectionPreview(PvfRichPreview preview)
 	{
 		try
@@ -828,6 +834,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 		}
 		return occurrences.FirstOrDefault();
 	}
+#endif
 
 	private void BuildShop(PvfRichPreview preview)
 	{

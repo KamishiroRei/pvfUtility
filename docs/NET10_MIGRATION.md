@@ -99,7 +99,7 @@ Source inventory, excluding generated directories:
 
 ```text
 Projects: 22
-C# files: 1,388
+C# files: 1,394
 XAML:     18
 RESX:     16
 BAML:      0
@@ -151,6 +151,7 @@ can be tested explicitly with:
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Release `
   -OutputDirectory <publish-directory>
 ```
 

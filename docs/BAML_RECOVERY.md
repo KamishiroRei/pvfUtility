@@ -59,7 +59,7 @@ a time: reconcile `x:Class`, make the code-behind partial, remove recovered
 generated connector code, rebuild, and run the full UI regression test after each
 view.
 
-## Offline compatibility types
+## Network boundaries and compatibility types
 
 Continuing to load the original BAML also preserves its serialized CLR schema.
 The schema contains references to account, cloud-backup, store, and ChatGPT
@@ -76,15 +76,18 @@ the serialized property surface fixed the failure. Treat BAML-referenced types,
 constructors, public properties, event handlers, and enum identities as runtime
 contracts even when the corresponding feature is disabled.
 
-These compatibility contracts do not restore network behavior. The active
-offline boundary is enforced separately:
+These compatibility contracts do not implicitly restore network behavior. The
+active boundary is enforced separately:
 
 - `ServiceCloud` GET and POST transport returns an offline error without making
   an HTTP request.
-- ChatGPT compatibility code does not instantiate a client or retain an API key.
+- The original ChatGPT toolbar binding is an explicit opt-in PVF assistant. It
+  opens beside `FindView` in the same docked tab group. Endpoint/model settings
+  are local, the API key is session-only or comes from `OPENAI_API_KEY`, and
+  current-PVF tools require an in-session read toggle.
 - Auto-update and exception-telemetry assemblies are excluded from output.
-- Account, cloud, store, sharing, and ChatGPT controls serialized in BAML are
-  removed from the populated main-window UI.
+- Account, cloud, store, and sharing controls serialized in BAML are removed
+  from the populated main-window UI; only the ChatGPT assistant is enabled.
 - Application settings, bookmarks, tree comments, and extension-scoped PVF tag
   comments remain JSON-only.
 

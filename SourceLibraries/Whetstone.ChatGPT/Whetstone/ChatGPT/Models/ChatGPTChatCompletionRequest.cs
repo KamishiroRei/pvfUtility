@@ -17,10 +17,10 @@ public class ChatGPTChatCompletionRequest
 	public List<ChatGPTChatCompletionMessage>? Messages { get; set; }
 
 	[JsonPropertyOrder(2)]
-	[DefaultValue(16)]
+	[DefaultValue(0)]
 	[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 	[JsonPropertyName("max_tokens")]
-	public int MaxTokens { get; set; } = 16;
+	public int MaxTokens { get; set; }
 
 	[JsonPropertyOrder(3)]
 	[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -70,4 +70,14 @@ public class ChatGPTChatCompletionRequest
 	[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 	[JsonPropertyName("user")]
 	public string? User { get; set; }
+
+	[JsonPropertyOrder(12)]
+	[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+	[JsonPropertyName("tools")]
+	public List<ChatGPTTool>? Tools { get; set; }
+
+	[JsonPropertyOrder(13)]
+	[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+	[JsonPropertyName("tool_choice")]
+	public string? ToolChoice { get; set; }
 }

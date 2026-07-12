@@ -5,6 +5,9 @@ using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
+#if RECOVERED_LEGACY_PVFCODE_DOT
+using PvfCode.Compatibility;
+#endif
 using PvfCode.Dot;
 using PvfCode.Dot.Desktop;
 using PvfCode.Dot.Desktop.Enums;
@@ -240,11 +243,20 @@ public class CodeCompletionToolTipViewModel : ViewModelBase
 			else
 			{
 				Document.Text = CompletionData.Description;
+#if RECOVERED_LEGACY_PVFCODE_DOT
+				PvfCommentDto comment = new PvfCommentDto
+				{
+					Comment = CompletionData.Description
+				};
+				PvfCommentDtoCompatibility.SetTitle(comment, CompletionData.Text);
+				Comment = comment;
+#else
 				Comment = new PvfCommentDto
 				{
 					Title = CompletionData.Text,
 					Comment = CompletionData.Description
 				};
+#endif
 			}
 		}
 		catch (Exception e)

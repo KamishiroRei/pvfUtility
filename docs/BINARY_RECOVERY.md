@@ -39,10 +39,10 @@ Twenty-two managed assemblies now have buildable projects under
 | `UnitComboLib` | `net10.0-windows` | Builds | Four BAML files restored to XAML; ten satellite RESX files restored. |
 | `Utools` | `net10.0` | Builds | 518 encrypted strings inlined; anonymous types and data stream removed. |
 | `Vulild.Ionic.Zlib` | `net10.0` | Builds | 30 C# files; compression and CRC round-trip checks pass. |
-| `Whetstone.ChatGPT` | `net10.0` | Builds | Source compiles with nullable-context warnings only. |
+| `Whetstone.ChatGPT` | `net10.0` | Builds | Restored configurable OpenAI-compatible base URI, client ownership, cancellation, bounded responses, safe errors, and function-tool DTOs; nine focused regressions pass. |
 | `WpfRangeControls` | `net10.0-windows` | Builds | One BAML file restored to XAML. |
 
-The solution contains 1,388 C# files, 18 XAML files, 16 RESX files, and zero
+The solution contains 1,394 C# files, 18 XAML files, 16 RESX files, and zero
 loose BAML files. A clean solution build completes with zero errors. Remaining
 warnings are decompiler nullable annotations, obsolete APIs, Windows platform
 analysis, unused recovered fields, and DevExpress framework-version conflicts.
@@ -150,6 +150,16 @@ projects under `SourceLibraries`. `Settings` and `SettingsModel` are
 the only two recovered projects not required by the main executable. Same-named
 fallback DLLs remain in `lib` for `Binary` mode but are excluded from normal build
 and publish output when a project supplies that relative path.
+
+The original `PvfCode.Dot`, `PvfCode.Services`, and `Whetstone.ChatGPT` binaries
+predate several APIs used by the recovered source application. The main project
+defines narrow compatibility symbols whenever a mode selects those legacy DLLs:
+missing extended comment fields are left blank in `Binary`/`Leaf`, and
+booster-selection content uses the existing generic preview in
+`Binary`/`Leaf`/`Core`. Binary AI requests report that a source-library mode is
+required because only that mode uses the legacy ChatGPT DLL. `All` retains the
+complete behavior, and no second chat protocol stack is compiled for the binary
+fallback.
 
 Each source-mode build writes `recovered-source-libraries.txt`. The startup test
 uses it to compare every output DLL with its source build using SHA-256, rejects a

@@ -50,6 +50,7 @@ design-time metadata cannot be recovered exactly from the published executable.
 - `docs/NET10_MIGRATION.md`: target-framework migration, runtime compatibility
   work, dependency-manifest changes, and clean verification results.
 - `scripts/Test-RecoveredStartup.ps1`: UI smoke test for the populated main window.
+- `scripts/Test-AiAssistantDocking.ps1`: verifies that Find and AI share one dock tab group and can be switched from the toolbar.
 - `scripts/Inline-ObfuscatedStrings.ps1`: recovery utility used to produce the
   string map from the pre-inlining assembly.
 - `scripts/Recover-SourceLibraryStrings.ps1`: reproducible wrapper for the three
@@ -98,15 +99,19 @@ The test checks the `pvfUtility` main-window title, a populated visual tree, and
 key controls including `BarSubItemLinksubFile`, `FilelistLayoutPanel`, and
 `DocumentHost`.
 
-## Offline data and BAML compatibility
+## Offline data, optional AI, and BAML compatibility
 
-The recovered application is intentionally offline. Account operations, cloud
-backup, shared uploads, remote stores, automatic updates, remote start content,
-and exception telemetry are disabled. Runtime state is stored as readable,
+Account operations, cloud backup, shared uploads, remote stores, automatic
+updates, remote start content, and exception telemetry remain intentionally
+offline. The ChatGPT compatibility entry is the single opt-in network
+exception: it now opens a PVF assistant beside the existing Find view in the
+same docked tab group. Runtime state is otherwise stored as readable,
 unencrypted JSON:
 
 - `Options/AppConfig.json` contains application settings and resource-tree
   comments.
+- `Options/AiAssistant.json` contains the assistant endpoint, model, and output
+  limit, but never the API key.
 - `Options/Bookmarks.json` contains the local bookmark tree.
 - `Options/PvfComments/<extension>.json` contains PVF tag comments isolated by
   file extension. Tag documentation supports Markdown and the `Title` and
@@ -117,13 +122,14 @@ application does not import the former binary, encrypted, XML bookmark, or
 SQLite comment formats. Runtime `Options` is user data and is excluded from Git.
 
 The original BAML schema still names several account, store, cloud-backup, and
-ChatGPT CLR types and deferred template properties. Minimal compatibility types
-remain so WPF can deserialize that schema. They are not functional online
-features: cloud GET/POST transport returns an offline error without creating an
-HTTP client, ChatGPT does not create a client, update and telemetry assemblies
-are excluded, and the legacy online controls are removed from the populated UI.
-Removing these compatibility members without rewriting the original BAML can
-surface as an unhelpful `WpfXamlLoader.TransformNodes` null reference.
+ChatGPT CLR types and deferred template properties. These compatibility members
+remain so WPF can deserialize that schema. Cloud GET/POST transport still
+returns an offline error, and update and telemetry assemblies remain excluded.
+Only the original ChatGPT toolbar binding is deliberately enabled: its API key
+is session-only or supplied by `OPENAI_API_KEY`, and access to the open PVF is
+disabled until the user explicitly enables read-only tools. Removing the BAML
+compatibility members can still surface as an unhelpful
+`WpfXamlLoader.TransformNodes` null reference.
 
 Build all recovered managed libraries from source:
 
@@ -256,7 +262,7 @@ decompiler-oriented, primarily nullable annotations, unused generated fields, an
 async calls whose original discard/await intent cannot be proven without symbols.
 
 The managed dependency audit additionally recovered 22 source projects with
-1,388 C# files, converted all 18 dependency-library BAML files to buildable XAML,
+1,394 C# files, converted all 18 dependency-library BAML files to buildable XAML,
 restored ten UnitComboLib satellite RESX files, and identified the seven native
 DLLs that cannot be converted to managed source. Clean .NET 10 builds complete
 with zero errors, and the populated main window passed repeated Debug and Release

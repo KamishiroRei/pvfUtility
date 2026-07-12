@@ -240,6 +240,12 @@ public class BarViewModel : ViewModelBase
 	}
 
 	[Command]
+	public void OnOpenChatGPTDocument()
+	{
+		(Application.Current?.MainWindow as MainWindow)?.ShowAiAssistantPanel();
+	}
+
+	[Command]
 	public void OnOpenPvfDiffTool()
 	{
 		AppCore.ViewModelBase.RootDocument.AddControl(PvfFileDocumentType.PVF差异比较器);

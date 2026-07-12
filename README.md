@@ -11,7 +11,7 @@
 - 主解决方案：`pvfUtility.sln`。
 - 主解决方案包含 1 个 WPF 主程序和 22 个已恢复的源码库项目。
 - 默认 `RecoveredSourceLibraryMode=All`，主程序运行时直接使用其中 20 个恢复源码项目的构建产物；`Settings` 和 `SettingsModel` 保持独立可构建，但不是主程序依赖图的一部分。
-- 22 个源码库共包含 1,388 个 C# 文件、18 个可编译 XAML 和 16 个 RESX。
+- 22 个源码库共包含 1,394 个 C# 文件、18 个可编译 XAML 和 16 个 RESX。
 - 主程序的 126 个原始 WPF BAML 已保存在 `Resources/pvfUtility.g.resources` 中。
 - 主程序运行时继续依赖该原始 BAML；根目录中的可读 XAML 仅供审阅，不参与主程序 WPF 标记编译。
 - 原 `Recovered` 汇总目录已经移除；正式工程输入已分别归位到根目录 `Resources/`、`PvfCode/Compatibility/` 和 `SourceLibraries/`。
@@ -19,11 +19,12 @@
 - 目录归位后已重新验证 Debug 和 Release：20 个源码程序集哈希匹配，启动阶段观察到 14 个实际加载，主窗口保持 15 秒且没有错误窗口。
 - Debug 和 Release 发布目录都会生成 `recovered-source-libraries.txt`；启动脚本会核对 20 个 DLL 的 SHA-256，防止无意回退到 `lib` 中的旧二进制。
 
-## 离线数据
+## 离线数据与联网边界
 
 账号、云备份、联网商店、共享上传、在线更新、远程起始页和异常遥测已经停用。资源树注释、书签和 PVF 标签注释改为未加密 JSON，运行后可直接维护：
 
 - `Options/AppConfig.json`：应用设置与 `PvfConfig.TreelistCommentDic` 资源树注释。
+- `Options/AiAssistant.json`：PVF AI 助手的 Base URL、模型和输出上限；不包含 API Key。
 - `Options/Bookmarks.json`：本地书签树。
 - `Options/PvfComments/<后缀>.json`：严格按 PVF 文件后缀隔离的标签注释；查询不会回退到其他后缀的同名标签。标签悬浮提示和标签翻译管理器会显示 `Title`、Markdown 格式的 `Comment`，以及 Markdown 格式的 `OfficialDescription`，并提供对应编辑与预览界面。
 
@@ -35,7 +36,22 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Import-PvfParserIn
 
 程序只读取和写入上述 JSON 文件，不再包含 `AppConfig.bin`、`PvfTabComments.bin`、加密配置或 SQLite 注释库的兼容迁移路径。
 
-原始 BAML 的类型表和延迟资源仍引用登录、云备份、商店与 ChatGPT 的部分 CLR 类型和模板属性。为保证 BAML 能够反序列化，这些类型中保留了最小兼容外壳，但不代表联网功能恢复：主窗口会移除对应入口，`ServiceCloud` 的 GET/POST 传输直接返回离线错误，ChatGPT 文档不创建客户端，自动更新与异常遥测程序集也不会进入输出目录。
+原始 BAML 的类型表和延迟资源仍引用登录、云备份、商店与 ChatGPT 的部分 CLR 类型和模板属性。为保证 BAML 能够反序列化，这些类型和属性继续作为运行时契约保留。账号、云备份、联网商店、共享上传、自动更新、远程起始页和异常遥测仍保持禁用；ChatGPT 兼容入口现在只用于显式配置的 PVF AI 助手，不会重新启用其他在线功能。
+
+## PVF AI 助手
+
+原工具栏中的 `chatGPT` 按钮现显示为“AI 助手”。它打开右侧查找区域中的 AI 页签；查找视图和 AI 对话位于同一个 DevExpress `TabbedGroup`，可直接用页签切换，不会占用中央文档组。
+
+- API 通过恢复完成的 `Whetstone.ChatGPT.ChatGPTClient` 调用 OpenAI-compatible
+  `POST <Base URL>/chat/completions` 与 function tools；主程序不再维护第二套协议实现。
+- Base URL、模型和最大输出 Token 保存在 `Options/AiAssistant.json`。
+- API Key 只保留在当前进程内，也可由 `OPENAI_API_KEY` 环境变量提供；不会写入 `AppConfig.json` 或 `AiAssistant.json`。
+- `OPENAI_BASE_URL` 和 `OPENAI_MODEL` 可覆盖本地配置。远程服务必须使用 HTTPS，HTTP 仅允许本机回环地址。
+- “允许 AI 读取当前 PVF”默认关闭。只有用户在当前会话中明确勾选后，模型才能调用 PVF 只读工具并接收对应内容。
+- 模型只有知识检索和白名单 PVF 只读工具，没有保存、替换、发布、部署、客户端写入、进程执行或通用文件系统工具。
+- 构建输出中的 `AgentKnowledge/` 固定来自 `PVF-Agent-Workbench` clean commit 的 273 条 manifest 项和一份 CC0 许可，不包含 `.env`、真实 PVF、Node runtime、本地工作区输出或部署脚本。
+
+当前适配器保留传统 Chat Completions 兼容面；不同提供方对模型名称、`max_tokens` 和 function tools 的支持可能不同，模型名称应按实际服务配置。实现结构、工具边界、知识来源和验证方法见 `docs/AI_ASSISTANT.md`。
 
 ## 快速开始
 
@@ -121,6 +137,7 @@ dotnet publish .\pvfUtility.csproj `
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Release `
   -OutputDirectory .\artifacts\publish\win-x64
 ```
 
@@ -159,7 +176,7 @@ SourceLibraries\.build\
 | `PvfCode/` | 主程序的主要恢复源码。 |
 | `controls/`、`views/`、`styles/`、`themes/` | 从主程序集恢复出的可读 XAML。 |
 | `lib/` | 外部商业/开源托管依赖、原生 DLL、主题、卫星资源、可选运行文件和 `Binary` 回退模式所需的原发布 DLL。默认 `All` 模式不会把已由 20 个源码项目提供的同名 DLL 发布两次。 |
-| `Resources/` | 主程序集的原始编译资源容器；其中 `pvfUtility.g.resources` 是正式构建输入。 |
+| `Resources/` | 主程序集的原始编译资源容器和 AI 知识包；其中 `pvfUtility.g.resources` 是正式构建输入。 |
 | `PvfCode/Compatibility/` | 程序集解析、DevExpress 试用初始化和 `.NET 10` WPF 兼容代码。 |
 | `SourceLibraries/` | 从 22 个托管 DLL 恢复出的独立源码项目、解决方案和目录级构建配置。 |
 | `scripts/` | 启动验证和字符串恢复工具。 |
@@ -198,6 +215,13 @@ dotnet build .\pvfUtility.csproj -c Debug `
   -p:RecoveredSourceLibraryMode=Binary
 ```
 
+`Binary` 只用于确认旧 DLL 与恢复源码之间的差异，不是发布模式。原始
+`lib/PvfCode.Dot.dll`、`lib/PvfCode.Services.dll` 和 `lib/Whetstone.ChatGPT.dll`
+缺少恢复源码新增的注释字段、自选礼盒预览和 function tools API。Binary 构建通过
+窄范围条件编译保持可用：缺失注释字段留空，自选礼盒使用通用预览，AI 请求会提示
+改用源码模式；不会在 Binary 分支重新实现一套聊天协议。`Leaf` 和 `Core` 选中同一
+旧 DLL 时也只启用对应的窄范围降级。默认构建、测试和发布路径仍是 `All`。
+
 只构建恢复库源码图：
 
 ```powershell
@@ -228,7 +252,7 @@ ILSpy 曾在 74 个主程序 XAML 中留下 270 条 `Unknown connection ID` 诊�
 - 不要仅凭物理文件名重命名混淆后的 CLR 类型，原始 BAML 可能仍引用其完整类型名。
 - 不要删除看似未被 C# 调用、但由 BAML 类型表或延迟资源引用的兼容属性；修改后必须运行 UI 启动检查。
 
-恢复原始 BAML 后，主窗口可能重新实例化 BAML 中遗留的账号、商店和 ChatGPT 控件。当前实现以两层方式保持离线：底层传输和客户端逻辑被禁用，界面层再按本地化资源键过滤遗留入口。仅隐藏菜单而保留可用网络传输不符合本工程的离线边界。
+恢复原始 BAML 后，主窗口可能重新实例化 BAML 中遗留的账号、商店和 ChatGPT 控件。账号、云、商店、更新和遥测仍通过禁用传输与过滤入口两层保持离线。ChatGPT 是唯一按用户配置恢复的联网入口：它使用会话内密钥、白名单只读工具和显式 PVF 读取授权，并作为查找面板旁的页签存在；不得借此恢复其他遗留网络传输。
 
 依赖库中的 18 个 BAML 已单独恢复为可编译 XAML，不受上述主程序限制。详细记录见 `docs/BAML_RECOVERY.md`。
 
@@ -297,6 +321,7 @@ pvfUtility.sln
 - `docs/BINARY_RECOVERY.md`：托管/原生二进制分类和源码恢复清单。
 - `docs/BAML_RECOVERY.md`：BAML 到 XAML 的恢复方法与运行策略。
 - `docs/NET10_MIGRATION.md`：`.NET 10` 迁移和 DevExpress 兼容处理。
+- `docs/AI_ASSISTANT.md`：AI 助手宿主、接口、安全边界、知识来源与验证方法。
 - `docs/OBFUSCATED_NAME_MAP.md`：混淆 CLR 类型与语义文件名的映射。
 - `docs/BAML_XAML_MAP.csv`：126 个 BAML/XAML 的一对一映射。
 - `docs/BAML_CONNECTION_ID_AUDIT.csv`：从 74 个可读 XAML 外置的 270 条连接 ID 反编译诊断。
