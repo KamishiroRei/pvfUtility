@@ -1,106 +1,106 @@
 ﻿{
-    "SchemaVersion":  1,
-    "FileType":  "shp",
-    "Comments":  [
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "at gunner",
-                         "Title":  "神枪手",
-                         "Comment":  "神枪手",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "pvfUtility"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "message",
-                         "Title":  "消息",
-                         "Comment":  "商店橱窗上的消息",
-                         "OfficialDescription":  "#### 官方示例: itemshopsample.shp\n\n```pvf\n[message]\t\t\t// 商店窗口显示的消息\n`超便宜的我们店\n买100个爆炸头`\n```",
-                         "Closing":  false,
-                         "Authors":  "吧哥"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "one a day start time",
-                         "Title":  "每天一个启动时间",
-                         "Comment":  "每天一个启动时间",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "lostluna1"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "sell item",
-                         "Title":  "出售的项目",
-                         "Comment":  "出售的项目\n-1代表空格-2代表翻页",
-                         "OfficialDescription":  "#### 官方示例: itemshopsample.shp\n\n```pvf\n[sell item]\t\t\t// 出售道具的索引列表\n34\n11\n10003\n51003\n2223\n-1\t\t\t\t// -1 为空白\n4413\n[/sell item]\t\t\t// 以此结束\n```",
-                         "Closing":  true,
-                         "Authors":  "李云溪"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "spending item",
-                         "Title":  "支出项目",
-                         "Comment":  "支出项目",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "无名氏"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "tab name",
-                         "Title":  "标签名称",
-                         "Comment":  "标签名称",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "无名氏"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "weapon shop",
-                         "Title":  "商店类型",
-                         "Comment":  "商店类型:武器商店,此写法开启商店修理权限",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "墨白"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "npc",
-                         "Title":  "NPC",
-                         "Comment":  "#### 官方示例: itemshopsample.shp\n\n```pvf\n// 商店脚本文件示例\n[NPC] 1\t\t\t\t// NPC 索引\n```",
-                         "OfficialDescription":  "#### 官方示例: itemshopsample.shp\n\n```pvf\n// 商店脚本文件示例\n[NPC] 1\t\t\t\t// NPC 索引\n```",
-                         "Closing":  false,
-                         "Authors":  "preview"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "type",
-                         "Title":  "中选择一个",
-                         "Comment":  "#### 官方示例: itemshopsample.shp\n\n```pvf\n[type] `[etc shop]`\t\t// `[etc shop]` `[weapon shop]` `[disjoint shop]` 中选择一个\n```",
-                         "OfficialDescription":  "#### 官方示例: itemshopsample.shp\n\n```pvf\n[type] `[etc shop]`\t\t// `[etc shop]` `[weapon shop]` `[disjoint shop]` 中选择一个\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "shp",
-                         "Section":  "only buy",
-                         "Title":  "商店是否可以卖东西还是只能买东西",
-                         "Comment":  "#### 官方示例: itemshopsample.shp\n\n```pvf\n[only buy] 1\t\t\t// 商店是否可以卖东西还是只能买东西。两者都可以则为 0\n```",
-                         "OfficialDescription":  "#### 官方示例: itemshopsample.shp\n\n```pvf\n[only buy] 1\t\t\t// 商店是否可以卖东西还是只能买东西。两者都可以则为 0\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     }
-                 ]
+  "SchemaVersion": 1,
+  "FileType": "shp",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "at gunner",
+      "Title": "神枪手",
+      "Comment": "神枪手",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "pvfUtility"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "message",
+      "Title": "消息",
+      "Comment": "商店橱窗上的消息",
+      "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[message]\t\t\t// 商店窗口显示的消息\n`超便宜的我们店\n买100个爆炸头`\n```",
+      "Closing": false,
+      "Authors": "吧哥"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "one a day start time",
+      "Title": "每天一个启动时间",
+      "Comment": "每天一个启动时间",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "sell item",
+      "Title": "出售的项目",
+      "Comment": "出售的项目\n-1代表空格-2代表翻页",
+      "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[sell item]\t\t\t// 出售道具的索引列表\n34\n11\n10003\n51003\n2223\n-1\t\t\t\t// -1 为空白\n4413\n[/sell item]\t\t\t// 以此结束\n```",
+      "Closing": true,
+      "Authors": "李云溪"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "spending item",
+      "Title": "支出项目",
+      "Comment": "支出项目",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "无名氏"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "tab name",
+      "Title": "标签名称",
+      "Comment": "标签名称",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "无名氏"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "weapon shop",
+      "Title": "商店类型",
+      "Comment": "商店类型:武器商店,此写法开启商店修理权限",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "墨白"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "npc",
+      "Title": "NPC",
+      "Comment": "#### 官方示例: itemshopsample.shp\n\n```pvf\n// 商店脚本文件示例\n[NPC] 1\t\t\t\t// NPC 索引\n```",
+      "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n// 商店脚本文件示例\n[NPC] 1\t\t\t\t// NPC 索引\n```",
+      "Closing": false,
+      "Authors": "preview"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "type",
+      "Title": "中选择一个",
+      "Comment": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[type] `[etc shop]`\t\t// `[etc shop]` `[weapon shop]` `[disjoint shop]` 中选择一个\n```",
+      "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[type] `[etc shop]`\t\t// `[etc shop]` `[weapon shop]` `[disjoint shop]` 中选择一个\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "only buy",
+      "Title": "商店是否可以卖东西还是只能买东西",
+      "Comment": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[only buy] 1\t\t\t// 商店是否可以卖东西还是只能买东西。两者都可以则为 0\n```",
+      "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[only buy] 1\t\t\t// 商店是否可以卖东西还是只能买东西。两者都可以则为 0\n```",
+      "Closing": false,
+      "Authors": null
+    }
+  ]
 }

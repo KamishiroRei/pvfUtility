@@ -1,16 +1,16 @@
 ﻿{
-    "SchemaVersion":  1,
-    "FileType":  "stm",
-    "Comments":  [
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "stm",
-                         "Section":  "stage",
-                         "Title":  "阶段haode",
-                         "Comment":  "阶段haode",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "无名氏"
-                     }
-                 ]
+  "SchemaVersion": 1,
+  "FileType": "stm",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stm",
+      "Section": "stage",
+      "Title": "阶段haode",
+      "Comment": "阶段haode",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "无名氏"
+    }
+  ]
 }

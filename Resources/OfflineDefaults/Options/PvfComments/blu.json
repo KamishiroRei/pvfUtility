@@ -1,16 +1,16 @@
 ﻿{
-    "SchemaVersion":  1,
-    "FileType":  "blu",
-    "Comments":  [
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "blu",
-                         "Section":  "dungeon difficulty list",
-                         "Title":  "额外副本难度比王者级低一级",
-                         "Comment":  "额外副本难度比王者级低一级",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "By:小小白：770141757"
-                     }
-                 ]
+  "SchemaVersion": 1,
+  "FileType": "blu",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "dungeon difficulty list",
+      "Title": "额外副本难度比王者级低一级",
+      "Comment": "额外副本难度比王者级低一级",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "By:小小白：770141757"
+    }
+  ]
 }

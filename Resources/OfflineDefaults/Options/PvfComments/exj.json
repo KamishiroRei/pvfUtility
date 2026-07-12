@@ -1,116 +1,116 @@
 ﻿{
-    "SchemaVersion":  1,
-    "FileType":  "exj",
-    "Comments":  [
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "additional result",
-                         "Title":  "分解得出的结果 6个一组",
-                         "Comment":  "分解得出的结果 6个一组",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "一梦"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "big win result",
-                         "Title":  "分解得出的最大值结果 6个一组",
-                         "Comment":  "分解得出的最大值结果 6个一组",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "一梦"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "disjoint result",
-                         "Title":  "分解结果 是否红字 0否 1是",
-                         "Comment":  "分解结果 是否红字 0否 1是",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "青山工作室"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "disjoint self service",
-                         "Title":  "分解机零件",
-                         "Comment":  "分解机零件",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "青山工作室"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "endurance initial value",
-                         "Title":  "分解商店初始耐久",
-                         "Comment":  "分解商店初始耐久",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "青山工作室"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "endurance reduce",
-                         "Title":  "分解商店耐久消耗",
-                         "Comment":  "分解商店耐久消耗",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "青山工作室"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "expertness exp",
-                         "Title":  "各等级升级所需经验",
-                         "Comment":  "各等级升级所需经验",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "lostluna1"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "gain exp",
-                         "Title":  "收益经验值（修改升级经验在这里）",
-                         "Comment":  "收益经验值（修改升级经验在这里）",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "青山工作室"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "items",
-                         "Title":  "175 2600646 3786 11",
-                         "Comment":  "175\t2600646\t3786\t11\n編號 捲軸 卡片 副職業等級",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "思持c"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "limit disjoint gold",
-                         "Title":  "分解商店价格上限",
-                         "Comment":  "分解商店价格上限",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "lostluna1"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "exj",
-                         "Section":  "shop doll info",
-                         "Title":  "人偶商店的格子",
-                         "Comment":  "人偶商店的格子\n[shop doll info]\n        0        3        1        6        2        9\n[/shop doll info]\n这个文件就是调整人偶商店的格子了\n\n0 3 意思是 最低级 3个  1 6 是中级6个 29 就是最高级9个 懂了么？",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "酸辣白菜"
-                     }
-                 ]
+  "SchemaVersion": 1,
+  "FileType": "exj",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "additional result",
+      "Title": "分解得出的结果 6个一组",
+      "Comment": "分解得出的结果 6个一组",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "一梦"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "big win result",
+      "Title": "分解得出的最大值结果 6个一组",
+      "Comment": "分解得出的最大值结果 6个一组",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "一梦"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "disjoint result",
+      "Title": "分解结果 是否红字 0否 1是",
+      "Comment": "分解结果 是否红字 0否 1是",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "青山工作室"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "disjoint self service",
+      "Title": "分解机零件",
+      "Comment": "分解机零件",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "青山工作室"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "endurance initial value",
+      "Title": "分解商店初始耐久",
+      "Comment": "分解商店初始耐久",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "青山工作室"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "endurance reduce",
+      "Title": "分解商店耐久消耗",
+      "Comment": "分解商店耐久消耗",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "青山工作室"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "expertness exp",
+      "Title": "各等级升级所需经验",
+      "Comment": "各等级升级所需经验",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "gain exp",
+      "Title": "收益经验值（修改升级经验在这里）",
+      "Comment": "收益经验值（修改升级经验在这里）",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "青山工作室"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "items",
+      "Title": "175 2600646 3786 11",
+      "Comment": "175\t2600646\t3786\t11\n編號 捲軸 卡片 副職業等級",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "思持c"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "limit disjoint gold",
+      "Title": "分解商店价格上限",
+      "Comment": "分解商店价格上限",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "shop doll info",
+      "Title": "人偶商店的格子",
+      "Comment": "人偶商店的格子\n[shop doll info]\n        0        3        1        6        2        9\n[/shop doll info]\n这个文件就是调整人偶商店的格子了\n\n0 3 意思是 最低级 3个  1 6 是中级6个 29 就是最高级9个 懂了么？",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "酸辣白菜"
+    }
+  ]
 }

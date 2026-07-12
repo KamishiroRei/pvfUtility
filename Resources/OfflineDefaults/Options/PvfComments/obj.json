@@ -1,586 +1,586 @@
 ﻿{
-    "SchemaVersion":  1,
-    "FileType":  "obj",
-    "Comments":  [
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "basic motion",
-                         "Title":  "主动画演出Ani指向",
-                         "Comment":  "主动画演出Ani指向",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 动画列表。没有的可以不写。或用 `` 输入则视为没有。\n[basic motion] `Lawn.ani` // 基本动作动画文件名。\n```",
-                         "Closing":  false,
-                         "Authors":  "ZateL"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "object destroy condition",
-                         "Title":  "对象销毁条件",
-                         "Comment":  "对象销毁条件",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[object destroy condition]\n`[destroy condition]` `[time limite]` 4000\n\n// 若为 [on end of animation] 则为动画结束后删除对象，此外无需输入。\n// 例\u003e\u003e[on end of animation]\n// 若为 [z pos equal zero] 则为接触地面时删除对象，此外无需输入。\n// 例\u003e\u003e[z pos equal zero]\n// 若为 [time limite] 则为经过时间后删除，仅在 [time limite] 处输入时间。\n// 例\u003e\u003e[time limite] 400\n\n`[destroy action]` `[only destroy]`\n// [only destroy] 则为自身破坏。\n// [object create after destroy] 则为自身破坏后生成其他对象。\n`[add object index]`\n1\n30005 // 要新生成的对象索引。\n\n// 对象碰撞时的处理，若无额外选项则可不写。\n`[on attack]` `[object create after destroy]`\n`[add object index on attack]`\n1\n30005 // 要新生成的对象索引。\n[/object destroy condition]\n```",
-                         "Closing":  true,
-                         "Authors":  "无名氏"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "piercing power",
-                         "Title":  "obj特效攻击时的穿透力",
-                         "Comment":  "obj特效攻击时的穿透力，数值越大穿透的单位越多。",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[piercing power] 50 // 攻击时的穿透力。攻击成功时计算概率，失败则对象消失。\n```",
-                         "Closing":  false,
-                         "Authors":  "ZateL"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "name",
-                         "Title":  "对象的名称",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[name] (字符串索引) // 对象的名称。\n```\n\n```pvf\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[name] (字符串索引) // 对象的名称。\n```\n\n```pvf\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "width",
-                         "Title":  "怪物的碰撞检测范围",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[width] 40 10 // 怪物的碰撞检测范围。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[width] 40 10 // 怪物的碰撞检测范围。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "layer",
-                         "Title":  "绘制图层",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[layer] `[bottom]` // 绘制图层。可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[layer] `[bottom]` // 绘制图层。可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "layer level",
-                         "Title":  "图层层级",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[layer level] -500 // 图层层级。此数值越高则位置越靠前。即此数值低则会被数值高的对象遮挡。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[layer level] -500 // 图层层级。此数值越高则位置越靠前。即此数值低则会被数值高的对象遮挡。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "pass type",
-                         "Title":  "选择    之一",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pass type] `[pass all]` // 选择 `[pass all]` `[pass only float type]` `[do not pass]` 之一。添加 `[pass only red team]`、`[pass only blue team]`（势力战用）。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pass type] `[pass all]` // 选择 `[pass all]` `[pass only float type]` `[do not pass]` 之一。添加 `[pass only red team]`、`[pass only blue team]`（势力战用）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "piercing tolerance",
-                         "Title":  "穿透抗性",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[piercing tolerance] 1 // 穿透抗性。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[piercing tolerance] 1 // 穿透抗性。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "hp max",
-                         "Title":  "被动对象的HP值",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp max] 5000 // 被动对象的HP值。若无此值则完全不会受到伤害（障碍物概念）。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp max] 5000 // 被动对象的HP值。若无此值则完全不会受到伤害（障碍物概念）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "hp destroy",
-                         "Title":  "HP耗尽时是否破坏",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp destroy] 1 // HP耗尽时是否破坏。0则不破坏，1则破坏。\n// 若想制作有打击感但不应被破坏的对象，可将 [hp max] 设为0以上的适当值，[hp destroy] 设为0，则攻击时有反应但绝不会破坏。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp destroy] 1 // HP耗尽时是否破坏。0则不破坏，1则破坏。\n// 若想制作有打击感但不应被破坏的对象，可将 [hp max] 设为0以上的适当值，[hp destroy] 设为0，则攻击时有反应但绝不会破坏。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "vanish on move collision",
-                         "Title":  "碰撞时是否消失 (1",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[vanish on move collision] 1 // 碰撞时是否消失 (1: 消失[默认] 0: 不消失)。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[vanish on move collision] 1 // 碰撞时是否消失 (1: 消失[默认] 0: 不消失)。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "category",
-                         "Title":  "该对象的所属类别列表",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[category] // 该对象的所属类别列表。\n`[undead]`\n[/category]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[category] // 该对象的所属类别列表。\n`[undead]`\n[/category]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "etc motion",
-                         "Title":  "硬编码用动作动画文件名列表（顺序重要）",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[etc motion] // 硬编码用动作动画文件名列表（顺序重要）。\n`Burn.ani`\n[/etc motion] // 必须用此标签闭合。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[etc motion] // 硬编码用动作动画文件名列表（顺序重要）。\n`Burn.ani`\n[/etc motion] // 必须用此标签闭合。\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "basic action",
-                         "Title":  "基本动作的路径和文件名",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[basic action] `blah/basic.act` // 基本动作的路径和文件名。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[basic action] `blah/basic.act` // 基本动作的路径和文件名。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "etc action",
-                         "Title":  "对象基本没有攻击",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[etc action] // 对象基本没有攻击，因此不使用 [action list] 标签，只使用 [etc action] 标签。\n`blah/action1.act` // 自定义动作 - 可通过动作文件的 [SET ACTION] [CUSTOM] 访问的动作，从前到后依次为 0, 1 顺序。\n`blah/action2.act` // 自定义动作。\n[/etc action]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[etc action] // 对象基本没有攻击，因此不使用 [action list] 标签，只使用 [etc action] 标签。\n`blah/action1.act` // 自定义动作 - 可通过动作文件的 [SET ACTION] [CUSTOM] 访问的动作，从前到后依次为 0, 1 顺序。\n`blah/action2.act` // 自定义动作。\n[/etc action]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "team",
-                         "Title":  "队伍编号 0~",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[team] 0 // 队伍编号 0~ : 角色队伍 100~ : 怪物队伍 200~ : 中立队伍。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[team] 0 // 队伍编号 0~ : 角色队伍 100~ : 怪物队伍 200~ : 中立队伍。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "trap",
-                         "Title":  "是否为陷阱",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[trap] 1 // 是否为陷阱。为1则必须破坏才能通关。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[trap] 1 // 是否为陷阱。为1则必须破坏才能通关。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "last action",
-                         "Title":  "在破坏前必须执行一次的动作的文件路径",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[last action] `pangya.act` // 在破坏前必须执行一次的动作的文件路径。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[last action] `pangya.act` // 在破坏前必须执行一次的动作的文件路径。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "homing follow",
-                         "Title":  "// 0 - 若是角色",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing follow] `[ENEMY]` // `[ME]` `[ENEMY]` //`[CHARACTER]` 0 - 若是角色，则放入队伍索引。\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing follow] `[ENEMY]` // `[ME]` `[ENEMY]` //`[CHARACTER]` 0 - 若是角色，则放入队伍索引。\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "homing velocity",
-                         "Title":  "速度",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n[homing velocity] 100 50 // 速度，加速度。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n[homing velocity] 100 50 // 速度，加速度。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "homing check gap",
-                         "Title":  "追踪中的目标位置检查时间间隔（1/1000）秒",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing check gap] 200 // 追踪中的目标位置检查时间间隔（1/1000）秒。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing check gap] 200 // 追踪中的目标位置检查时间间隔（1/1000）秒。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "sync animation rotation",
-                         "Title":  "是否根据移动方向对齐动画（默认值 0）",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sync animation rotation] 1 // 是否根据移动方向对齐动画（默认值 0）。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sync animation rotation] 1 // 是否根据移动方向对齐动画（默认值 0）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "max rotation",
-                         "Title":  "每秒最大可旋转角度（0则为无限旋转）",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[max rotation] 200 // 每秒最大可旋转角度（0则为无限旋转）。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[max rotation] 200 // 每秒最大可旋转角度（0则为无限旋转）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "init rotation",
-                         "Title":  "对象生成时的旋转角度（默认值 0）",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[init rotation] 0 // 对象生成时的旋转角度（默认值 0）。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[init rotation] 0 // 对象生成时的旋转角度（默认值 0）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "diff rotation",
-                         "Title":  "可感知目标的角度（默认值 180）- 当 [max rotation] ",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[diff rotation] 100 // 可感知目标的角度（默认值 180）- 当 [max rotation] 不为0时生效。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[diff rotation] 100 // 可感知目标的角度（默认值 180）- 当 [max rotation] 不为0时生效。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "homing time",
-                         "Title":  "制导功能生效的时间（0则为无限",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing time] 10000 // 制导功能生效的时间（0则为无限，默认值 0）。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing time] 10000 // 制导功能生效的时间（0则为无限，默认值 0）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "sync target move",
-                         "Title":  "制导功能期间",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sync target move] // 制导功能期间，若目标移动，则实时移动该距离，使制导轨迹不变的功能。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sync target move] // 制导功能期间，若目标移动，则实时移动该距离，使制导轨迹不变的功能。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "file",
-                         "Title":  "粒子的生成位置为被动对象的生成位置 + 粒子脚本的生成位置",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[file]`a.ptl` // 粒子的生成位置为被动对象的生成位置 + 粒子脚本的生成位置。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[file]`a.ptl` // 粒子的生成位置为被动对象的生成位置 + 粒子脚本的生成位置。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "create delay",
-                         "Title":  "被动对象生成后到粒子特效出现为止的延迟",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[create delay] 1000 // 被动对象生成后到粒子特效出现为止的延迟。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[create delay] 1000 // 被动对象生成后到粒子特效出现为止的延迟。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "create sound",
-                         "Title":  "粒子生成时输出的声音（不支持循环）",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[create sound] `SOUND_TAG` // 粒子生成时输出的声音（不支持循环）。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[create sound] `SOUND_TAG` // 粒子生成时输出的声音（不支持循环）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "follow parent",
-                         "Title":  "将粒子的生成位置改为距离被动对象特定位置偏移的位置",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[follow parent] 10 10 10 // 将粒子的生成位置改为距离被动对象特定位置偏移的位置。\u003c移动类型：仅最后声明的移动类型有效\u003e\n```\n\n```pvf\n[follow parent] `[from parent]` // `[path gate]` 进入门时随机位置。\n// `[parent]` 与PARENT精确重叠的位置。\n// `[from parent]` 保持与PARENT的相对位置。\n// `[keep position]` 保持坐标。\n// `[none]` 默认值。不跟随。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[follow parent] 10 10 10 // 将粒子的生成位置改为距离被动对象特定位置偏移的位置。\u003c移动类型：仅最后声明的移动类型有效\u003e\n```\n\n```pvf\n[follow parent] `[from parent]` // `[path gate]` 进入门时随机位置。\n// `[parent]` 与PARENT精确重叠的位置。\n// `[from parent]` 保持与PARENT的相对位置。\n// `[keep position]` 保持坐标。\n// `[none]` 默认值。不跟随。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "is blocking obj",
-                         "Title":  "设为1并放置在门前",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[is blocking obj] 1 // 设为1并放置在门前，则门不会打开。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[is blocking obj] 1 // 设为1并放置在门前，则门不会打开。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "is hp by difficulty",
-                         "Title":  "为1则根据难度改变HP",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[is hp by difficulty] 1 // 为1则根据难度改变HP：普通 * 1.0 - 专家 * 2.0 - 大师 * 3.0 - 王者 * 4.0 - 英雄 - * 5.0。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[is hp by difficulty] 1 // 为1则根据难度改变HP：普通 * 1.0 - 专家 * 2.0 - 大师 * 3.0 - 王者 * 4.0 - 英雄 - * 5.0。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "hp gage",
-                         "Title":  "为1则绘制HP条",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp gage] 1 // 为1则绘制HP条。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp gage] 1 // 为1则绘制HP条。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "burning death path",
-                         "Title":  "被火属性武器终结时输出的特效路径（写入此标签则仅在火属性时死亡）",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[burning death path] `PassiveObject/Common/Animation/SunkenRock.ani` // 被火属性武器终结时输出的特效路径（写入此标签则仅在火属性时死亡）。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[burning death path] `PassiveObject/Common/Animation/SunkenRock.ani` // 被火属性武器终结时输出的特效路径（写入此标签则仅在火属性时死亡）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "can beat index",
-                         "Title":  "只有具有此标签内索引的怪物攻击时才会受到伤害",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[can beat index] // 只有具有此标签内索引的怪物攻击时才会受到伤害。\n65523\n61902\n[/can beat index]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[can beat index] // 只有具有此标签内索引的怪物攻击时才会受到伤害。\n65523\n61902\n[/can beat index]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "apply physics",
-                         "Title":  "应用动力学",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[apply physics] 1500 // 应用动力学，刚体的牛顿值（默认 1500N）。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[apply physics] 1500 // 应用动力学，刚体的牛顿值（默认 1500N）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "index",
-                         "Title":  "控制速度的对象索引",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[index] 9165 // 控制速度的对象索引。\n```\n\n```pvf\n[index] 51332 // 控制速度的对象索引。\n```\n\n```pvf\n[index] 9974 // 要生成的对象索引。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[index] 9165 // 控制速度的对象索引。\n```\n\n```pvf\n[index] 51332 // 控制速度的对象索引。\n```\n\n```pvf\n[index] 9974 // 要生成的对象索引。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "speed",
-                         "Title":  "速度增加",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[speed] `[up]` // 速度增加。\n```\n\n```pvf\n[speed] `[down]` // 速度减少。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[speed] `[up]` // 速度增加。\n```\n\n```pvf\n[speed] `[down]` // 速度减少。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "id",
-                         "Title":  "用于[data]模式的ID",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[id] 1 // 用于[data]模式的ID。用此值区分模式中出现的对象。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[id] 1 // 用于[data]模式的ID。用此值区分模式中出现的对象。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "probability",
-                         "Title":  "对象生成的概率",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[probability] 0.25 // 对象生成的概率。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[probability] 0.25 // 对象生成的概率。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "warning",
-                         "Title":  "是否显示警告标记",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n- 是否显示警告标记。",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n- 是否显示警告标记。",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "pattern",
-                         "Title":  "\u003e 可以指定模式",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pattern] // -\u003e 可以指定模式。也可以有多个。\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n[/pattern] // -\u003e 至此为一个模式。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 第一个参数是模式名称，必须是上面[patterns]标签中指定的名称。\n```\n\n```pvf\n[pattern] `B` 3000 [/pattern] // 第二个参数是模式持续的时间，毫秒单位。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 示例中，模式以 A-B-A-A-B-R-A 的顺序每3秒变化一次。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 模式全部结束后，再从开始重复。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pattern] // -\u003e 可以指定模式。也可以有多个。\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n[/pattern] // -\u003e 至此为一个模式。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 第一个参数是模式名称，必须是上面[patterns]标签中指定的名称。\n```\n\n```pvf\n[pattern] `B` 3000 [/pattern] // 第二个参数是模式持续的时间，毫秒单位。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 示例中，模式以 A-B-A-A-B-R-A 的顺序每3秒变化一次。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 模式全部结束后，再从开始重复。\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "interval",
-                         "Title":  "\u003e 对象生成的时间周期",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "columns",
-                         "Title":  "\u003e 一个周期内生成的模式单位数量",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "data",
-                         "Title":  "\u003e 在此指定模式数据",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "sequences",
-                         "Title":  "\u003e 按顺序放出上面指定的模式",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sequences] // -\u003e 按顺序放出上面指定的模式。\n[pattern] `A` 3000 [/pattern] // 第一个参数是模式名称，必须是上面[patterns]标签中指定的名称。\n[pattern] `B` 3000 [/pattern] // 第二个参数是模式持续的时间，毫秒单位。\n[pattern] `A` 3000 [/pattern] // 示例中，模式以 A-B-A-A-B-R-A 的顺序每3秒变化一次。\n[pattern] `A` 3000 [/pattern] // 模式全部结束后，再从开始重复。\n[pattern] `B` 3000 [/pattern]\n[pattern] `R` 3000 [/pattern]\n[pattern] `A` 3000 [/pattern]\n[/sequences]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sequences] // -\u003e 按顺序放出上面指定的模式。\n[pattern] `A` 3000 [/pattern] // 第一个参数是模式名称，必须是上面[patterns]标签中指定的名称。\n[pattern] `B` 3000 [/pattern] // 第二个参数是模式持续的时间，毫秒单位。\n[pattern] `A` 3000 [/pattern] // 示例中，模式以 A-B-A-A-B-R-A 的顺序每3秒变化一次。\n[pattern] `A` 3000 [/pattern] // 模式全部结束后，再从开始重复。\n[pattern] `B` 3000 [/pattern]\n[pattern] `R` 3000 [/pattern]\n[pattern] `A` 3000 [/pattern]\n[/sequences]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "string data",
-                         "Title":  "这里是用于声音等的空间",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n//mkjung 120627\n[string data] // 这里是用于声音等的空间。\n``\n``\n``\n`WOOD_HIT`\n`WOOD_CRASH`\n[/string data]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n//mkjung 120627\n[string data] // 这里是用于声音等的空间。\n``\n``\n``\n`WOOD_HIT`\n`WOOD_CRASH`\n[/string data]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "pvp room transparent value for observer",
-                         "Title":  "若有此标签",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pvp room transparent value for observer] 100 // 若有此标签，则对象仅对观察者以此值透明显示。\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pvp room transparent value for observer] 100 // 若有此标签，则对象仅对观察者以此值透明显示。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "destroy particle",
-                         "Title":  "破坏时生成的（一次性）粒子脚本文件名",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[destroy particle]\n`Particle/Destroy.ptl` // 破坏时生成的（一次性）粒子脚本文件名。相对路径。\n[/destroy particle]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[destroy particle]\n`Particle/Destroy.ptl` // 破坏时生成的（一次性）粒子脚本文件名。相对路径。\n[/destroy particle]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "homing",
-                         "Title":  "1 - 为使其跟随特定怪物",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 制导功能。\n[homing]\n[homing use] 1\n[homing follow] `[ENEMY]` // `[ME]` `[ENEMY]` //`[CHARACTER]` 0 - 若是角色，则放入队伍索引。\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n[homing velocity] 100 50 // 速度，加速度。\n[homing check gap] 200 // 追踪中的目标位置检查时间间隔（1/1000）秒。\n[sync animation rotation] 1 // 是否根据移动方向对齐动画（默认值 0）。\n[max rotation] 200 // 每秒最大可旋转角度（0则为无限旋转）。\n[init rotation] 0 // 对象生成时的旋转角度（默认值 0）。\n[diff rotation] 100 // 可感知目标的角度（默认值 180）- 当 [max rotation] 不为0时生效。\n[homing time] 10000 // 制导功能生效的时间（0则为无限，默认值 0）。\n[sync target move] // 制导功能期间，若目标移动，则实时移动该距离，使制导轨迹不变的功能。\n[/homing]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 制导功能。\n[homing]\n[homing use] 1\n[homing follow] `[ENEMY]` // `[ME]` `[ENEMY]` //`[CHARACTER]` 0 - 若是角色，则放入队伍索引。\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n[homing velocity] 100 50 // 速度，加速度。\n[homing check gap] 200 // 追踪中的目标位置检查时间间隔（1/1000）秒。\n[sync animation rotation] 1 // 是否根据移动方向对齐动画（默认值 0）。\n[max rotation] 200 // 每秒最大可旋转角度（0则为无限旋转）。\n[init rotation] 0 // 对象生成时的旋转角度（默认值 0）。\n[diff rotation] 100 // 可感知目标的角度（默认值 180）- 当 [max rotation] 不为0时生效。\n[homing time] 10000 // 制导功能生效的时间（0则为无限，默认值 0）。\n[sync target move] // 制导功能期间，若目标移动，则实时移动该距离，使制导轨迹不变的功能。\n[/homing]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "sound category",
-                         "Title":  "对象创建后立即播放声音时",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sound category]\n`[after object create]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象创建后立即播放声音时。\n`[on frame]` `ZOMBIE_EYEROLLING_LOOP` 43739 1 // 对象超过一定帧数时，最后为起始帧编号。\n`[on attack]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 与其他对象碰撞时。\n`[on damage]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象受到伤害时。\n`[on destroyobject]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象被破坏时。\n// `[类别]` `声音标签名称` [对象索引]（若要使循环声音只播放一次则为-1，无任何条件则为-2）\n// 破坏声音请勿循环。\n[/sound category]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sound category]\n`[after object create]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象创建后立即播放声音时。\n`[on frame]` `ZOMBIE_EYEROLLING_LOOP` 43739 1 // 对象超过一定帧数时，最后为起始帧编号。\n`[on attack]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 与其他对象碰撞时。\n`[on damage]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象受到伤害时。\n`[on destroyobject]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象被破坏时。\n// `[类别]` `声音标签名称` [对象索引]（若要使循环声音只播放一次则为-1，无任何条件则为-2）\n// 破坏声音请勿循环。\n[/sound category]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "add object effect",
-                         "Title":  "图层文件名",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[add object effect]\n`Ani/ZEyeBallGlow.ani` 100 // 图层文件名，附加的顺序。\n[/add object effect]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[add object effect]\n`Ani/ZEyeBallGlow.ani` 100 // 图层文件名，附加的顺序。\n[/add object effect]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "speed control passive objects",
-                         "Title":  "恶灵之云用速度控制被动对象（可注册多个[passive object]",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 恶灵之云用速度控制被动对象（可注册多个[passive object]，顺序无关）。\n// 恶灵之云的[int data]中的速度增加键对象索引（第4个）、速度减少键对象索引（第6个）必须都为-1，此标签才生效。\n[speed control passive objects]\n[passive object]\n[index] 9165 // 控制速度的对象索引。\n[speed] `[up]` // 速度增加。\n[/passive object]\n[passive object]\n[index] 51332 // 控制速度的对象索引。\n[speed] `[down]` // 速度减少。\n[/passive object]\n[/speed control passive objects]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 恶灵之云用速度控制被动对象（可注册多个[passive object]，顺序无关）。\n// 恶灵之云的[int data]中的速度增加键对象索引（第4个）、速度减少键对象索引（第6个）必须都为-1，此标签才生效。\n[speed control passive objects]\n[passive object]\n[index] 9165 // 控制速度的对象索引。\n[speed] `[up]` // 速度增加。\n[/passive object]\n[passive object]\n[index] 51332 // 控制速度的对象索引。\n[speed] `[down]` // 速度减少。\n[/passive object]\n[/speed control passive objects]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "objects",
-                         "Title":  "用于周期性地生成被动对象的被动对象生成器的标签 ////////////",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 用于周期性地生成被动对象的被动对象生成器的标签 //////////////\n// 注册要生成的对象。\n[objects]\n[object]\n[id] 1 // 用于[data]模式的ID。用此值区分模式中出现的对象。\n[index] 9974 // 要生成的对象索引。\n[probability] 0.25 // 对象生成的概率。\n[warning] `true` // 是否显示警告标记。\n[/object]\n[/objects]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 用于周期性地生成被动对象的被动对象生成器的标签 //////////////\n// 注册要生成的对象。\n[objects]\n[object]\n[id] 1 // 用于[data]模式的ID。用此值区分模式中出现的对象。\n[index] 9974 // 要生成的对象索引。\n[probability] 0.25 // 对象生成的概率。\n[warning] `true` // 是否显示警告标记。\n[/object]\n[/objects]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "patterns",
-                         "Title":  "在[patterns]中按类别记录模式",
-                         "Comment":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 在[patterns]中按类别记录模式，在[sequences]中指定这些模式出现的顺序。\n[patterns]\n[pattern] // -\u003e 可以指定模式。也可以有多个。\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n[/pattern] // -\u003e 至此为一个模式。\n[/patterns]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 在[patterns]中按类别记录模式，在[sequences]中指定这些模式出现的顺序。\n[patterns]\n[pattern] // -\u003e 可以指定模式。也可以有多个。\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n[/pattern] // -\u003e 至此为一个模式。\n[/patterns]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "obj",
-                         "Section":  "int data",
-                         "Title":  "mkjung 120627 添加",
-                         "Comment":  "#### 官方示例: passiveobjectsamplebytool.obj\n\n```pvf\n//mkjung 120627 添加\n[int data]\n    {int(:)}\n        {opt1}{variableInt(:)}\n    {!int(:)}\n[/int data]\n```",
-                         "OfficialDescription":  "#### 官方示例: passiveobjectsamplebytool.obj\n\n```pvf\n//mkjung 120627 添加\n[int data]\n    {int(:)}\n        {opt1}{variableInt(:)}\n    {!int(:)}\n[/int data]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     }
-                 ]
+  "SchemaVersion": 1,
+  "FileType": "obj",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "basic motion",
+      "Title": "主动画演出Ani指向",
+      "Comment": "主动画演出Ani指向",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 动画列表。没有的可以不写。或用 `` 输入则视为没有。\n[basic motion] `Lawn.ani` // 基本动作动画文件名。\n```",
+      "Closing": false,
+      "Authors": "ZateL"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "object destroy condition",
+      "Title": "对象销毁条件",
+      "Comment": "对象销毁条件",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[object destroy condition]\n`[destroy condition]` `[time limite]` 4000\n\n// 若为 [on end of animation] 则为动画结束后删除对象，此外无需输入。\n// 例\u003e\u003e[on end of animation]\n// 若为 [z pos equal zero] 则为接触地面时删除对象，此外无需输入。\n// 例\u003e\u003e[z pos equal zero]\n// 若为 [time limite] 则为经过时间后删除，仅在 [time limite] 处输入时间。\n// 例\u003e\u003e[time limite] 400\n\n`[destroy action]` `[only destroy]`\n// [only destroy] 则为自身破坏。\n// [object create after destroy] 则为自身破坏后生成其他对象。\n`[add object index]`\n1\n30005 // 要新生成的对象索引。\n\n// 对象碰撞时的处理，若无额外选项则可不写。\n`[on attack]` `[object create after destroy]`\n`[add object index on attack]`\n1\n30005 // 要新生成的对象索引。\n[/object destroy condition]\n```",
+      "Closing": true,
+      "Authors": "无名氏"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "piercing power",
+      "Title": "obj特效攻击时的穿透力",
+      "Comment": "obj特效攻击时的穿透力，数值越大穿透的单位越多。",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[piercing power] 50 // 攻击时的穿透力。攻击成功时计算概率，失败则对象消失。\n```",
+      "Closing": false,
+      "Authors": "ZateL"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "name",
+      "Title": "对象的名称",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[name] (字符串索引) // 对象的名称。\n```\n\n```pvf\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[name] (字符串索引) // 对象的名称。\n```\n\n```pvf\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "width",
+      "Title": "怪物的碰撞检测范围",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[width] 40 10 // 怪物的碰撞检测范围。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[width] 40 10 // 怪物的碰撞检测范围。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "layer",
+      "Title": "绘制图层",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[layer] `[bottom]` // 绘制图层。可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[layer] `[bottom]` // 绘制图层。可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "layer level",
+      "Title": "图层层级",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[layer level] -500 // 图层层级。此数值越高则位置越靠前。即此数值低则会被数值高的对象遮挡。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[layer level] -500 // 图层层级。此数值越高则位置越靠前。即此数值低则会被数值高的对象遮挡。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "pass type",
+      "Title": "选择    之一",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pass type] `[pass all]` // 选择 `[pass all]` `[pass only float type]` `[do not pass]` 之一。添加 `[pass only red team]`、`[pass only blue team]`（势力战用）。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pass type] `[pass all]` // 选择 `[pass all]` `[pass only float type]` `[do not pass]` 之一。添加 `[pass only red team]`、`[pass only blue team]`（势力战用）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "piercing tolerance",
+      "Title": "穿透抗性",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[piercing tolerance] 1 // 穿透抗性。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[piercing tolerance] 1 // 穿透抗性。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "hp max",
+      "Title": "被动对象的HP值",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp max] 5000 // 被动对象的HP值。若无此值则完全不会受到伤害（障碍物概念）。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp max] 5000 // 被动对象的HP值。若无此值则完全不会受到伤害（障碍物概念）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "hp destroy",
+      "Title": "HP耗尽时是否破坏",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp destroy] 1 // HP耗尽时是否破坏。0则不破坏，1则破坏。\n// 若想制作有打击感但不应被破坏的对象，可将 [hp max] 设为0以上的适当值，[hp destroy] 设为0，则攻击时有反应但绝不会破坏。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp destroy] 1 // HP耗尽时是否破坏。0则不破坏，1则破坏。\n// 若想制作有打击感但不应被破坏的对象，可将 [hp max] 设为0以上的适当值，[hp destroy] 设为0，则攻击时有反应但绝不会破坏。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "vanish on move collision",
+      "Title": "碰撞时是否消失 (1",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[vanish on move collision] 1 // 碰撞时是否消失 (1: 消失[默认] 0: 不消失)。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[vanish on move collision] 1 // 碰撞时是否消失 (1: 消失[默认] 0: 不消失)。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "category",
+      "Title": "该对象的所属类别列表",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[category] // 该对象的所属类别列表。\n`[undead]`\n[/category]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[category] // 该对象的所属类别列表。\n`[undead]`\n[/category]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "etc motion",
+      "Title": "硬编码用动作动画文件名列表（顺序重要）",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[etc motion] // 硬编码用动作动画文件名列表（顺序重要）。\n`Burn.ani`\n[/etc motion] // 必须用此标签闭合。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[etc motion] // 硬编码用动作动画文件名列表（顺序重要）。\n`Burn.ani`\n[/etc motion] // 必须用此标签闭合。\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "basic action",
+      "Title": "基本动作的路径和文件名",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[basic action] `blah/basic.act` // 基本动作的路径和文件名。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[basic action] `blah/basic.act` // 基本动作的路径和文件名。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "etc action",
+      "Title": "对象基本没有攻击",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[etc action] // 对象基本没有攻击，因此不使用 [action list] 标签，只使用 [etc action] 标签。\n`blah/action1.act` // 自定义动作 - 可通过动作文件的 [SET ACTION] [CUSTOM] 访问的动作，从前到后依次为 0, 1 顺序。\n`blah/action2.act` // 自定义动作。\n[/etc action]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[etc action] // 对象基本没有攻击，因此不使用 [action list] 标签，只使用 [etc action] 标签。\n`blah/action1.act` // 自定义动作 - 可通过动作文件的 [SET ACTION] [CUSTOM] 访问的动作，从前到后依次为 0, 1 顺序。\n`blah/action2.act` // 自定义动作。\n[/etc action]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "team",
+      "Title": "队伍编号 0~",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[team] 0 // 队伍编号 0~ : 角色队伍 100~ : 怪物队伍 200~ : 中立队伍。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[team] 0 // 队伍编号 0~ : 角色队伍 100~ : 怪物队伍 200~ : 中立队伍。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "trap",
+      "Title": "是否为陷阱",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[trap] 1 // 是否为陷阱。为1则必须破坏才能通关。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[trap] 1 // 是否为陷阱。为1则必须破坏才能通关。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "last action",
+      "Title": "在破坏前必须执行一次的动作的文件路径",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[last action] `pangya.act` // 在破坏前必须执行一次的动作的文件路径。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[last action] `pangya.act` // 在破坏前必须执行一次的动作的文件路径。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "homing follow",
+      "Title": "// 0 - 若是角色",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing follow] `[ENEMY]` // `[ME]` `[ENEMY]` //`[CHARACTER]` 0 - 若是角色，则放入队伍索引。\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing follow] `[ENEMY]` // `[ME]` `[ENEMY]` //`[CHARACTER]` 0 - 若是角色，则放入队伍索引。\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "homing velocity",
+      "Title": "速度",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n[homing velocity] 100 50 // 速度，加速度。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n[homing velocity] 100 50 // 速度，加速度。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "homing check gap",
+      "Title": "追踪中的目标位置检查时间间隔（1/1000）秒",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing check gap] 200 // 追踪中的目标位置检查时间间隔（1/1000）秒。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing check gap] 200 // 追踪中的目标位置检查时间间隔（1/1000）秒。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "sync animation rotation",
+      "Title": "是否根据移动方向对齐动画（默认值 0）",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sync animation rotation] 1 // 是否根据移动方向对齐动画（默认值 0）。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sync animation rotation] 1 // 是否根据移动方向对齐动画（默认值 0）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "max rotation",
+      "Title": "每秒最大可旋转角度（0则为无限旋转）",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[max rotation] 200 // 每秒最大可旋转角度（0则为无限旋转）。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[max rotation] 200 // 每秒最大可旋转角度（0则为无限旋转）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "init rotation",
+      "Title": "对象生成时的旋转角度（默认值 0）",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[init rotation] 0 // 对象生成时的旋转角度（默认值 0）。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[init rotation] 0 // 对象生成时的旋转角度（默认值 0）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "diff rotation",
+      "Title": "可感知目标的角度（默认值 180）- 当 [max rotation] ",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[diff rotation] 100 // 可感知目标的角度（默认值 180）- 当 [max rotation] 不为0时生效。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[diff rotation] 100 // 可感知目标的角度（默认值 180）- 当 [max rotation] 不为0时生效。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "homing time",
+      "Title": "制导功能生效的时间（0则为无限",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing time] 10000 // 制导功能生效的时间（0则为无限，默认值 0）。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[homing time] 10000 // 制导功能生效的时间（0则为无限，默认值 0）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "sync target move",
+      "Title": "制导功能期间",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sync target move] // 制导功能期间，若目标移动，则实时移动该距离，使制导轨迹不变的功能。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sync target move] // 制导功能期间，若目标移动，则实时移动该距离，使制导轨迹不变的功能。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "file",
+      "Title": "粒子的生成位置为被动对象的生成位置 + 粒子脚本的生成位置",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[file]`a.ptl` // 粒子的生成位置为被动对象的生成位置 + 粒子脚本的生成位置。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[file]`a.ptl` // 粒子的生成位置为被动对象的生成位置 + 粒子脚本的生成位置。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "create delay",
+      "Title": "被动对象生成后到粒子特效出现为止的延迟",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[create delay] 1000 // 被动对象生成后到粒子特效出现为止的延迟。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[create delay] 1000 // 被动对象生成后到粒子特效出现为止的延迟。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "create sound",
+      "Title": "粒子生成时输出的声音（不支持循环）",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[create sound] `SOUND_TAG` // 粒子生成时输出的声音（不支持循环）。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[create sound] `SOUND_TAG` // 粒子生成时输出的声音（不支持循环）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "follow parent",
+      "Title": "将粒子的生成位置改为距离被动对象特定位置偏移的位置",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[follow parent] 10 10 10 // 将粒子的生成位置改为距离被动对象特定位置偏移的位置。\u003c移动类型：仅最后声明的移动类型有效\u003e\n```\n\n```pvf\n[follow parent] `[from parent]` // `[path gate]` 进入门时随机位置。\n// `[parent]` 与PARENT精确重叠的位置。\n// `[from parent]` 保持与PARENT的相对位置。\n// `[keep position]` 保持坐标。\n// `[none]` 默认值。不跟随。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[follow parent] 10 10 10 // 将粒子的生成位置改为距离被动对象特定位置偏移的位置。\u003c移动类型：仅最后声明的移动类型有效\u003e\n```\n\n```pvf\n[follow parent] `[from parent]` // `[path gate]` 进入门时随机位置。\n// `[parent]` 与PARENT精确重叠的位置。\n// `[from parent]` 保持与PARENT的相对位置。\n// `[keep position]` 保持坐标。\n// `[none]` 默认值。不跟随。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "is blocking obj",
+      "Title": "设为1并放置在门前",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[is blocking obj] 1 // 设为1并放置在门前，则门不会打开。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[is blocking obj] 1 // 设为1并放置在门前，则门不会打开。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "is hp by difficulty",
+      "Title": "为1则根据难度改变HP",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[is hp by difficulty] 1 // 为1则根据难度改变HP：普通 * 1.0 - 专家 * 2.0 - 大师 * 3.0 - 王者 * 4.0 - 英雄 - * 5.0。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[is hp by difficulty] 1 // 为1则根据难度改变HP：普通 * 1.0 - 专家 * 2.0 - 大师 * 3.0 - 王者 * 4.0 - 英雄 - * 5.0。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "hp gage",
+      "Title": "为1则绘制HP条",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp gage] 1 // 为1则绘制HP条。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[hp gage] 1 // 为1则绘制HP条。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "burning death path",
+      "Title": "被火属性武器终结时输出的特效路径（写入此标签则仅在火属性时死亡）",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[burning death path] `PassiveObject/Common/Animation/SunkenRock.ani` // 被火属性武器终结时输出的特效路径（写入此标签则仅在火属性时死亡）。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[burning death path] `PassiveObject/Common/Animation/SunkenRock.ani` // 被火属性武器终结时输出的特效路径（写入此标签则仅在火属性时死亡）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "can beat index",
+      "Title": "只有具有此标签内索引的怪物攻击时才会受到伤害",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[can beat index] // 只有具有此标签内索引的怪物攻击时才会受到伤害。\n65523\n61902\n[/can beat index]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[can beat index] // 只有具有此标签内索引的怪物攻击时才会受到伤害。\n65523\n61902\n[/can beat index]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "apply physics",
+      "Title": "应用动力学",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[apply physics] 1500 // 应用动力学，刚体的牛顿值（默认 1500N）。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[apply physics] 1500 // 应用动力学，刚体的牛顿值（默认 1500N）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "index",
+      "Title": "控制速度的对象索引",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[index] 9165 // 控制速度的对象索引。\n```\n\n```pvf\n[index] 51332 // 控制速度的对象索引。\n```\n\n```pvf\n[index] 9974 // 要生成的对象索引。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[index] 9165 // 控制速度的对象索引。\n```\n\n```pvf\n[index] 51332 // 控制速度的对象索引。\n```\n\n```pvf\n[index] 9974 // 要生成的对象索引。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "speed",
+      "Title": "速度增加",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[speed] `[up]` // 速度增加。\n```\n\n```pvf\n[speed] `[down]` // 速度减少。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[speed] `[up]` // 速度增加。\n```\n\n```pvf\n[speed] `[down]` // 速度减少。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "id",
+      "Title": "用于[data]模式的ID",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[id] 1 // 用于[data]模式的ID。用此值区分模式中出现的对象。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[id] 1 // 用于[data]模式的ID。用此值区分模式中出现的对象。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "probability",
+      "Title": "对象生成的概率",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[probability] 0.25 // 对象生成的概率。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[probability] 0.25 // 对象生成的概率。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "warning",
+      "Title": "是否显示警告标记",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n- 是否显示警告标记。",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n- 是否显示警告标记。",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "pattern",
+      "Title": "\u003e 可以指定模式",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pattern] // -\u003e 可以指定模式。也可以有多个。\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n[/pattern] // -\u003e 至此为一个模式。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 第一个参数是模式名称，必须是上面[patterns]标签中指定的名称。\n```\n\n```pvf\n[pattern] `B` 3000 [/pattern] // 第二个参数是模式持续的时间，毫秒单位。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 示例中，模式以 A-B-A-A-B-R-A 的顺序每3秒变化一次。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 模式全部结束后，再从开始重复。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pattern] // -\u003e 可以指定模式。也可以有多个。\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n[/pattern] // -\u003e 至此为一个模式。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 第一个参数是模式名称，必须是上面[patterns]标签中指定的名称。\n```\n\n```pvf\n[pattern] `B` 3000 [/pattern] // 第二个参数是模式持续的时间，毫秒单位。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 示例中，模式以 A-B-A-A-B-R-A 的顺序每3秒变化一次。\n```\n\n```pvf\n[pattern] `A` 3000 [/pattern] // 模式全部结束后，再从开始重复。\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "interval",
+      "Title": "\u003e 对象生成的时间周期",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "columns",
+      "Title": "\u003e 一个周期内生成的模式单位数量",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "data",
+      "Title": "\u003e 在此指定模式数据",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "sequences",
+      "Title": "\u003e 按顺序放出上面指定的模式",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sequences] // -\u003e 按顺序放出上面指定的模式。\n[pattern] `A` 3000 [/pattern] // 第一个参数是模式名称，必须是上面[patterns]标签中指定的名称。\n[pattern] `B` 3000 [/pattern] // 第二个参数是模式持续的时间，毫秒单位。\n[pattern] `A` 3000 [/pattern] // 示例中，模式以 A-B-A-A-B-R-A 的顺序每3秒变化一次。\n[pattern] `A` 3000 [/pattern] // 模式全部结束后，再从开始重复。\n[pattern] `B` 3000 [/pattern]\n[pattern] `R` 3000 [/pattern]\n[pattern] `A` 3000 [/pattern]\n[/sequences]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sequences] // -\u003e 按顺序放出上面指定的模式。\n[pattern] `A` 3000 [/pattern] // 第一个参数是模式名称，必须是上面[patterns]标签中指定的名称。\n[pattern] `B` 3000 [/pattern] // 第二个参数是模式持续的时间，毫秒单位。\n[pattern] `A` 3000 [/pattern] // 示例中，模式以 A-B-A-A-B-R-A 的顺序每3秒变化一次。\n[pattern] `A` 3000 [/pattern] // 模式全部结束后，再从开始重复。\n[pattern] `B` 3000 [/pattern]\n[pattern] `R` 3000 [/pattern]\n[pattern] `A` 3000 [/pattern]\n[/sequences]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "string data",
+      "Title": "这里是用于声音等的空间",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n//mkjung 120627\n[string data] // 这里是用于声音等的空间。\n``\n``\n``\n`WOOD_HIT`\n`WOOD_CRASH`\n[/string data]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n//mkjung 120627\n[string data] // 这里是用于声音等的空间。\n``\n``\n``\n`WOOD_HIT`\n`WOOD_CRASH`\n[/string data]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "pvp room transparent value for observer",
+      "Title": "若有此标签",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pvp room transparent value for observer] 100 // 若有此标签，则对象仅对观察者以此值透明显示。\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[pvp room transparent value for observer] 100 // 若有此标签，则对象仅对观察者以此值透明显示。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "destroy particle",
+      "Title": "破坏时生成的（一次性）粒子脚本文件名",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[destroy particle]\n`Particle/Destroy.ptl` // 破坏时生成的（一次性）粒子脚本文件名。相对路径。\n[/destroy particle]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[destroy particle]\n`Particle/Destroy.ptl` // 破坏时生成的（一次性）粒子脚本文件名。相对路径。\n[/destroy particle]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "homing",
+      "Title": "1 - 为使其跟随特定怪物",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 制导功能。\n[homing]\n[homing use] 1\n[homing follow] `[ENEMY]` // `[ME]` `[ENEMY]` //`[CHARACTER]` 0 - 若是角色，则放入队伍索引。\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n[homing velocity] 100 50 // 速度，加速度。\n[homing check gap] 200 // 追踪中的目标位置检查时间间隔（1/1000）秒。\n[sync animation rotation] 1 // 是否根据移动方向对齐动画（默认值 0）。\n[max rotation] 200 // 每秒最大可旋转角度（0则为无限旋转）。\n[init rotation] 0 // 对象生成时的旋转角度（默认值 0）。\n[diff rotation] 100 // 可感知目标的角度（默认值 180）- 当 [max rotation] 不为0时生效。\n[homing time] 10000 // 制导功能生效的时间（0则为无限，默认值 0）。\n[sync target move] // 制导功能期间，若目标移动，则实时移动该距离，使制导轨迹不变的功能。\n[/homing]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 制导功能。\n[homing]\n[homing use] 1\n[homing follow] `[ENEMY]` // `[ME]` `[ENEMY]` //`[CHARACTER]` 0 - 若是角色，则放入队伍索引。\n// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。\n[homing velocity] 100 50 // 速度，加速度。\n[homing check gap] 200 // 追踪中的目标位置检查时间间隔（1/1000）秒。\n[sync animation rotation] 1 // 是否根据移动方向对齐动画（默认值 0）。\n[max rotation] 200 // 每秒最大可旋转角度（0则为无限旋转）。\n[init rotation] 0 // 对象生成时的旋转角度（默认值 0）。\n[diff rotation] 100 // 可感知目标的角度（默认值 180）- 当 [max rotation] 不为0时生效。\n[homing time] 10000 // 制导功能生效的时间（0则为无限，默认值 0）。\n[sync target move] // 制导功能期间，若目标移动，则实时移动该距离，使制导轨迹不变的功能。\n[/homing]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "sound category",
+      "Title": "对象创建后立即播放声音时",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sound category]\n`[after object create]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象创建后立即播放声音时。\n`[on frame]` `ZOMBIE_EYEROLLING_LOOP` 43739 1 // 对象超过一定帧数时，最后为起始帧编号。\n`[on attack]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 与其他对象碰撞时。\n`[on damage]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象受到伤害时。\n`[on destroyobject]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象被破坏时。\n// `[类别]` `声音标签名称` [对象索引]（若要使循环声音只播放一次则为-1，无任何条件则为-2）\n// 破坏声音请勿循环。\n[/sound category]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[sound category]\n`[after object create]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象创建后立即播放声音时。\n`[on frame]` `ZOMBIE_EYEROLLING_LOOP` 43739 1 // 对象超过一定帧数时，最后为起始帧编号。\n`[on attack]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 与其他对象碰撞时。\n`[on damage]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象受到伤害时。\n`[on destroyobject]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象被破坏时。\n// `[类别]` `声音标签名称` [对象索引]（若要使循环声音只播放一次则为-1，无任何条件则为-2）\n// 破坏声音请勿循环。\n[/sound category]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "add object effect",
+      "Title": "图层文件名",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[add object effect]\n`Ani/ZEyeBallGlow.ani` 100 // 图层文件名，附加的顺序。\n[/add object effect]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n[add object effect]\n`Ani/ZEyeBallGlow.ani` 100 // 图层文件名，附加的顺序。\n[/add object effect]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "speed control passive objects",
+      "Title": "恶灵之云用速度控制被动对象（可注册多个[passive object]",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 恶灵之云用速度控制被动对象（可注册多个[passive object]，顺序无关）。\n// 恶灵之云的[int data]中的速度增加键对象索引（第4个）、速度减少键对象索引（第6个）必须都为-1，此标签才生效。\n[speed control passive objects]\n[passive object]\n[index] 9165 // 控制速度的对象索引。\n[speed] `[up]` // 速度增加。\n[/passive object]\n[passive object]\n[index] 51332 // 控制速度的对象索引。\n[speed] `[down]` // 速度减少。\n[/passive object]\n[/speed control passive objects]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 恶灵之云用速度控制被动对象（可注册多个[passive object]，顺序无关）。\n// 恶灵之云的[int data]中的速度增加键对象索引（第4个）、速度减少键对象索引（第6个）必须都为-1，此标签才生效。\n[speed control passive objects]\n[passive object]\n[index] 9165 // 控制速度的对象索引。\n[speed] `[up]` // 速度增加。\n[/passive object]\n[passive object]\n[index] 51332 // 控制速度的对象索引。\n[speed] `[down]` // 速度减少。\n[/passive object]\n[/speed control passive objects]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "objects",
+      "Title": "用于周期性地生成被动对象的被动对象生成器的标签 ////////////",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 用于周期性地生成被动对象的被动对象生成器的标签 //////////////\n// 注册要生成的对象。\n[objects]\n[object]\n[id] 1 // 用于[data]模式的ID。用此值区分模式中出现的对象。\n[index] 9974 // 要生成的对象索引。\n[probability] 0.25 // 对象生成的概率。\n[warning] `true` // 是否显示警告标记。\n[/object]\n[/objects]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 用于周期性地生成被动对象的被动对象生成器的标签 //////////////\n// 注册要生成的对象。\n[objects]\n[object]\n[id] 1 // 用于[data]模式的ID。用此值区分模式中出现的对象。\n[index] 9974 // 要生成的对象索引。\n[probability] 0.25 // 对象生成的概率。\n[warning] `true` // 是否显示警告标记。\n[/object]\n[/objects]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "patterns",
+      "Title": "在[patterns]中按类别记录模式",
+      "Comment": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 在[patterns]中按类别记录模式，在[sequences]中指定这些模式出现的顺序。\n[patterns]\n[pattern] // -\u003e 可以指定模式。也可以有多个。\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n[/pattern] // -\u003e 至此为一个模式。\n[/patterns]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsample.obj\n\n```pvf\n// 在[patterns]中按类别记录模式，在[sequences]中指定这些模式出现的顺序。\n[patterns]\n[pattern] // -\u003e 可以指定模式。也可以有多个。\n[name] `A` // -\u003e 模式的唯一名称。必须是唯一的名称。\n[interval] 500 // -\u003e 对象生成的时间周期。毫秒单位。\n[columns] 3 // -\u003e 一个周期内生成的模式单位数量。\n[data] // -\u003e 在此指定模式数据。0为空位，1表示要生成的被动对象。\n0 1 1 // 省略 [data] 标签时，对象随机出现。\n0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。\n1 0 1 // 因此数据数量必须是column的倍数。\n0 1 1\n1 0 1\n[/data]\n[/pattern] // -\u003e 至此为一个模式。\n[/patterns]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
+      "Section": "int data",
+      "Title": "mkjung 120627 添加",
+      "Comment": "#### 官方示例: passiveobjectsamplebytool.obj\n\n```pvf\n//mkjung 120627 添加\n[int data]\n    {int(:)}\n        {opt1}{variableInt(:)}\n    {!int(:)}\n[/int data]\n```",
+      "OfficialDescription": "#### 官方示例: passiveobjectsamplebytool.obj\n\n```pvf\n//mkjung 120627 添加\n[int data]\n    {int(:)}\n        {opt1}{variableInt(:)}\n    {!int(:)}\n[/int data]\n```",
+      "Closing": true,
+      "Authors": null
+    }
+  ]
 }

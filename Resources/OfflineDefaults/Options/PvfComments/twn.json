@@ -1,86 +1,86 @@
 ﻿{
-    "SchemaVersion":  1,
-    "FileType":  "twn",
-    "Comments":  [
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "twn",
-                         "Section":  "area",
-                         "Title":  "城镇区域（减号代表制表符）",
-                         "Comment":  "城镇区域（减号代表制表符）\n-数字，意思是小区域的编号\n-xxx/xxx.map，意思是这个小区域的map文件，不能直接转到，需要复制文件名搜索文件名\n-`[minimap rect]`，这个什么用都没有，猜测是在迷你地图里鼠标右键点击可以自动寻路的一个东西，\n但台服好像不能在地图上自动寻路，即使全部删掉也能正常游戏，跟正常跑五国，不过不建议删掉\n-[dungeon gate] 表示连接到worldmap选图界面的ID 19 (worldmap/worldmap.lst)\n-[gate] 城镇内传送门\n474 234 (赛丽亚房间门)",
-                         "OfficialDescription":  "#### 官方示例: townsample.twn\n\n```pvf\n[area]\t\t\t\t\t\t// 区域 (AREA) 的一个信息\n0\t\t\t\t\t\t// 索引。从 0 开始并使用连续的值\n`Town/HendonMyre/Gate.map`\t\t\t// 地图脚本文件名称 (Script/Map 下的相对路径)\n`[minimap rect]`\n1000\t100\t\t2500\t500\t\t\t// 起点(x, y) 终点(x, y) step 0\n100\t\t10\t\t250\t\t50\t\t\t// 起点(x, y) 终点(x, y) step 1\n`[/minimap rect]`\n`[gate]`\t\t\t\t\t// 区域类型。在 `[normal]` `[gate]` `[fishing place]` `[pub]` `[dungeon gate]` 中选择\n273\t\t\t\t\t\t// 根据区域类型的整数数据。使用方法在最底部\n222\n[/area]\n```",
-                         "Closing":  true,
-                         "Authors":  "pvf"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "twn",
-                         "Section":  "at swordman",
-                         "Title":  "女鬼剑士",
-                         "Comment":  "女鬼剑士",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "Xiti Fox"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "twn",
-                         "Section":  "dungeon gate",
-                         "Title":  "副本入口",
-                         "Comment":  "副本入口，在worldmap.lst 中被定义",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "pvf"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "twn",
-                         "Section":  "entering title",
-                         "Title":  "进入城镇时的标题动画",
-                         "Comment":  "进入城镇时的标题动画\n例如：埃尔文防线，赫顿马尔，这些大字",
-                         "OfficialDescription":  "#### 官方示例: townsample.twn\n\n```pvf\n[entering title] `TitleAnimation/HendonMyre.ani`\t// 用作标题的动画。将动画的中心对准屏幕中央。\n```",
-                         "Closing":  false,
-                         "Authors":  "王良一"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "twn",
-                         "Section":  "minimap rect",
-                         "Title":  "小地图上可以移动的区域",
-                         "Comment":  "小地图上可以移动的区域",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "依旧"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "twn",
-                         "Section":  "name",
-                         "Title":  "名称",
-                         "Comment":  "#### 官方示例: townsample.twn\n\n```pvf\n[name] `亨顿迈尔`\t\t\t\t// 名称\n```",
-                         "OfficialDescription":  "#### 官方示例: townsample.twn\n\n```pvf\n[name] `亨顿迈尔`\t\t\t\t// 名称\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "twn",
-                         "Section":  "cutscene image",
-                         "Title":  "过场图像文件名称",
-                         "Comment":  "#### 官方示例: townsample.twn\n\n```pvf\n[cutscene image] `CutScene.img` 0\t\t\t// 过场图像文件名称，帧索引\n```",
-                         "OfficialDescription":  "#### 官方示例: townsample.twn\n\n```pvf\n[cutscene image] `CutScene.img` 0\t\t\t// 过场图像文件名称，帧索引\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "twn",
-                         "Section":  "dungeon what must be cleared",
-                         "Title":  "为进入而必须清除的地下城索引",
-                         "Comment":  "#### 官方示例: townsample.twn\n\n```pvf\n[dungeon what must be cleared] -1\t\t\t\t\t// 为进入而必须清除的地下城索引。-1 表示无\n```",
-                         "OfficialDescription":  "#### 官方示例: townsample.twn\n\n```pvf\n[dungeon what must be cleared] -1\t\t\t\t\t// 为进入而必须清除的地下城索引。-1 表示无\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     }
-                 ]
+  "SchemaVersion": 1,
+  "FileType": "twn",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "area",
+      "Title": "城镇区域（减号代表制表符）",
+      "Comment": "城镇区域（减号代表制表符）\n-数字，意思是小区域的编号\n-xxx/xxx.map，意思是这个小区域的map文件，不能直接转到，需要复制文件名搜索文件名\n-`[minimap rect]`，这个什么用都没有，猜测是在迷你地图里鼠标右键点击可以自动寻路的一个东西，\n但台服好像不能在地图上自动寻路，即使全部删掉也能正常游戏，跟正常跑五国，不过不建议删掉\n-[dungeon gate] 表示连接到worldmap选图界面的ID 19 (worldmap/worldmap.lst)\n-[gate] 城镇内传送门\n474 234 (赛丽亚房间门)",
+      "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[area]\t\t\t\t\t\t// 区域 (AREA) 的一个信息\n0\t\t\t\t\t\t// 索引。从 0 开始并使用连续的值\n`Town/HendonMyre/Gate.map`\t\t\t// 地图脚本文件名称 (Script/Map 下的相对路径)\n`[minimap rect]`\n1000\t100\t\t2500\t500\t\t\t// 起点(x, y) 终点(x, y) step 0\n100\t\t10\t\t250\t\t50\t\t\t// 起点(x, y) 终点(x, y) step 1\n`[/minimap rect]`\n`[gate]`\t\t\t\t\t// 区域类型。在 `[normal]` `[gate]` `[fishing place]` `[pub]` `[dungeon gate]` 中选择\n273\t\t\t\t\t\t// 根据区域类型的整数数据。使用方法在最底部\n222\n[/area]\n```",
+      "Closing": true,
+      "Authors": "pvf"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "at swordman",
+      "Title": "女鬼剑士",
+      "Comment": "女鬼剑士",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "dungeon gate",
+      "Title": "副本入口",
+      "Comment": "副本入口，在worldmap.lst 中被定义",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "pvf"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "entering title",
+      "Title": "进入城镇时的标题动画",
+      "Comment": "进入城镇时的标题动画\n例如：埃尔文防线，赫顿马尔，这些大字",
+      "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[entering title] `TitleAnimation/HendonMyre.ani`\t// 用作标题的动画。将动画的中心对准屏幕中央。\n```",
+      "Closing": false,
+      "Authors": "王良一"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "minimap rect",
+      "Title": "小地图上可以移动的区域",
+      "Comment": "小地图上可以移动的区域",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "依旧"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "name",
+      "Title": "名称",
+      "Comment": "#### 官方示例: townsample.twn\n\n```pvf\n[name] `亨顿迈尔`\t\t\t\t// 名称\n```",
+      "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[name] `亨顿迈尔`\t\t\t\t// 名称\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "cutscene image",
+      "Title": "过场图像文件名称",
+      "Comment": "#### 官方示例: townsample.twn\n\n```pvf\n[cutscene image] `CutScene.img` 0\t\t\t// 过场图像文件名称，帧索引\n```",
+      "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[cutscene image] `CutScene.img` 0\t\t\t// 过场图像文件名称，帧索引\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "dungeon what must be cleared",
+      "Title": "为进入而必须清除的地下城索引",
+      "Comment": "#### 官方示例: townsample.twn\n\n```pvf\n[dungeon what must be cleared] -1\t\t\t\t\t// 为进入而必须清除的地下城索引。-1 表示无\n```",
+      "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[dungeon what must be cleared] -1\t\t\t\t\t// 为进入而必须清除的地下城索引。-1 表示无\n```",
+      "Closing": false,
+      "Authors": null
+    }
+  ]
 }

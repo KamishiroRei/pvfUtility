@@ -1,546 +1,546 @@
 ﻿{
-    "SchemaVersion":  1,
-    "FileType":  "chr",
-    "Comments":  [
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "劍影",
-                         "Title":  "劍影",
-                         "Comment":  "待翻译，请编辑！",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "lostluna1"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "awakening 1",
-                         "Title":  "唤醒1",
-                         "Comment":  "唤醒1",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "lostluna1"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "creator mage",
-                         "Title":  "外传职业",
-                         "Comment":  "外传职业：缔造者",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "Xiti Fox"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "fighter",
-                         "Title":  "女格斗",
-                         "Comment":  "女格斗",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "Xiti Fox"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "growtype name",
-                         "Title":  "基本的角色 转职1 转职2 转职3",
-                         "Comment":  "[growtype name] `基本的角色` `转职1` `转职2` `转职3` // 每种职业类型的名称。",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype name] `基础` `成长1剑士` `成长2剑士` `成长3剑士` // 各成长类型的成长类型名称\n```",
-                         "Closing":  false,
-                         "Authors":  "FreyaGrace"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "gunner",
-                         "Title":  "男枪手",
-                         "Comment":  "男枪手",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "Xiti Fox"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "mage",
-                         "Title":  "女魔法",
-                         "Comment":  "女魔法",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "Xiti Fox"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "priest",
-                         "Title":  "男圣职",
-                         "Comment":  "男圣职",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "麻豆传媒|Xiti Fox"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "weapon hit info",
-                         "Title":  "武器命中信息",
-                         "Comment":  "武器命中信息\n\n//示例：\n\t`[cut]`\n\t`[blood]`\t90\t1.0\t0.0\t0.0\n\n`[cut]` = 武器打击类型为`切割`，就像太刀一样\n`[blood]` = 武器命中时`有出血视觉效果`\n\n`出血视觉效果开关`的右边第1个数字也就是90代表普攻卡肉时间为0.09秒\n——————————————————————\n//示例2：\n\t`[blow]`\n\t`[no blood]`\t100\t1.2\t0.1\t-0.95\n\n`[blow]` = 武器打击类型为`钝击`，就像钝器一样\n`[no blood]` = 武器命中时`无出血视觉效果`\n——————————————————————\n补充：第二个数值是命中硬直比率，比如卡肉时间0.2秒，\n           命中硬直比率为2.0，那么实际造成的硬直是0.4秒",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[weapon hit info]            // 武器的子类型信息（详情请参考 AttackInfo 示例）\n`[blow]` `[no blood]` 50 1.0\n`[blow]` `[no blood]` 50 1.0\n`[blow]` `[blood]` 10 1.0\n`[blow]` `[no blood]` 50 1.0\n`[blow]` `[no blood]` 100 2.0\n`[cut]` `[no blood]` 100 2.0\n[/weapon hit info]            // 必须用此关闭\n```",
-                         "Closing":  true,
-                         "Authors":  "Xiti Fox"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "weapon skill info",
-                         "Title":  "武器技能信息",
-                         "Comment":  "武器技能信息",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[weapon skill info]    // 武器的子类型对应的武器技能 MP，冷却时间信息。\n1.0 1.0 1.0 1.0        // 物理 MP，物理冷却，魔法 MP，魔法冷却比率\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n[/weapon skill info]\n```",
-                         "Closing":  true,
-                         "Authors":  "无名氏"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "width",
-                         "Title":  "40 10",
-                         "Comment":  "[width] 40 10\t\t// X轴，Y轴宽度顺序（像素值）",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[width] 40 10        // 依次为 X轴，Y轴宽度（像素值）\n```",
-                         "Closing":  false,
-                         "Authors":  "FreyaGrace"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "job",
-                         "Title":  "在   中选择其一",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[job] `[swordman]`        // 在 `[swordman]` `[fighter]` 中选择其一\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[job] `[swordman]`        // 在 `[swordman]` `[fighter]` 中选择其一\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "initial value",
-                         "Title":  "此标识之后的数值为初始创建时的属性",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[initial value]        // 此标识之后的数值为初始创建时的属性。可输入到小数点后第一位\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[initial value]        // 此标识之后的数值为初始创建时的属性。可输入到小数点后第一位\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "stuck resistance",
-                         "Title":  "0",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[stuck resistance] 11    // 0.1% 单位\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[stuck resistance] 11    // 0.1% 单位\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "inventory limit",
-                         "Title":  "（单位",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[inventory limit] 3000    // （单位：10g）\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[inventory limit] 3000    // （单位：10g）\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "move speed",
-                         "Title":  "以 1000 为基准值",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[move speed] 1000    // 以 1000 为基准值\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[move speed] 1000    // 以 1000 为基准值\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "weight",
-                         "Title":  "（单位",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[weight] 6000        // （单位：10g）\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[weight] 6000        // （单位：10g）\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "skill",
-                         "Title":  "初始赋予技能列表",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[skill]            // 初始赋予技能列表\n3 1            // 技能索引，等级\n22 1\n27 1\n[/skill]\n```\n\n```pvf\n[skill]            // 转职时赋予的技能\n34 1            // 技能索引，等级\n123 1\n127 1\n[/skill]\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[skill]            // 初始赋予技能列表\n3 1            // 技能索引，等级\n22 1\n27 1\n[/skill]\n```\n\n```pvf\n[skill]            // 转职时赋予的技能\n34 1            // 技能索引，等级\n123 1\n127 1\n[/skill]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "category",
-                         "Title":  "所属类别列表",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[category]        // 所属类别列表\n`[human]`\n[/category]\n```\n\n```pvf\n[category]    // 转职时获得的护甲类别。不能与 initial value 中的重复。\n`[armor]`\n[/category]\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[category]        // 所属类别列表\n`[human]`\n[/category]\n```\n\n```pvf\n[category]    // 转职时获得的护甲类别。不能与 initial value 中的重复。\n`[armor]`\n[/category]\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "module damage rate",
-                         "Title":  "PVP",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[module damage rate] 1.0 1.0 1.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```\n\n```pvf\n[module damage rate] 1.0 0.3 0.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[module damage rate] 1.0 1.0 1.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```\n\n```pvf\n[module damage rate] 1.0 0.3 0.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "growtype 1",
-                         "Title":  "之后的数值为转职前的属性成长值",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 1]        // 之后的数值为转职前的属性成长值\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 1]        // 之后的数值为转职前的属性成长值\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "growtype 2",
-                         "Title":  "之后的数值为第一次转职时的属性",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 2]        // 之后的数值为第一次转职时的属性\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 2]        // 之后的数值为第一次转职时的属性\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "growtype 3",
-                         "Title":  "之后的数值为第二次转职时的属性",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 3]        // 之后的数值为第二次转职时的属性\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 3]        // 之后的数值为第二次转职时的属性\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "growtype 4",
-                         "Title":  "之后的数值为第三次转职时的属性",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 4]        // 之后的数值为第三次转职时的属性\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 4]        // 之后的数值为第三次转职时的属性\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "growtype 5",
-                         "Title":  "之后的数值为第四次转职时的属性",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 5]        // 之后的数值为第四次转职时的属性\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 5]        // 之后的数值为第四次转职时的属性\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "waiting motion",
-                         "Title":  "待机动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 动画列表。没有的可不填写。或用 `` 表示没有 //\n[waiting motion] `BodyStay.ani`        // 待机动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 动画列表。没有的可不填写。或用 `` 表示没有 //\n[waiting motion] `BodyStay.ani`        // 待机动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "move motion",
-                         "Title":  "移动动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[move motion] `BodyMove.ani`        // 移动动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[move motion] `BodyMove.ani`        // 移动动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "sit motion",
-                         "Title":  "坐下动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[sit motion] `BodySit.ani`        // 坐下动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[sit motion] `BodySit.ani`        // 坐下动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "damage motion 1",
-                         "Title":  "受击动作1动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[damage motion 1] `BodyDamage1.ani`    // 受击动作1动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[damage motion 1] `BodyDamage1.ani`    // 受击动作1动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "damage motion 2",
-                         "Title":  "受击动作2动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[damage motion 2] `BodyDamage2.ani`    // 受击动作2动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[damage motion 2] `BodyDamage2.ani`    // 受击动作2动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "down motion",
-                         "Title":  "倒地动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[down motion] `BodyDown.ani`        // 倒地动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[down motion] `BodyDown.ani`        // 倒地动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "overturn motion",
-                         "Title":  "翻身动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[overturn motion] `BodyOverturn.ani`        // 翻身动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[overturn motion] `BodyOverturn.ani`        // 翻身动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "jump motion",
-                         "Title":  "跳跃动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[jump motion] `BodyJump.ani`        // 跳跃动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[jump motion] `BodyJump.ani`        // 跳跃动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "jumpattack motion",
-                         "Title":  "跳跃攻击动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[jumpattack motion] `BodyJumpAttack.ani`    // 跳跃攻击动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[jumpattack motion] `BodyJumpAttack.ani`    // 跳跃攻击动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "rest motion",
-                         "Title":  "休息动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[rest motion] `BodyRest.ani`        // 休息动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[rest motion] `BodyRest.ani`        // 休息动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "throw motion 1-1",
-                         "Title":  "投掷动作1蓄力动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 1-1] `BodyThrow1.ani`        // 投掷动作1蓄力动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 1-1] `BodyThrow1.ani`        // 投掷动作1蓄力动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "throw motion 1-2",
-                         "Title":  "投掷动作1发射动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 1-2] `BodyThrow2.ani`        // 投掷动作1发射动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 1-2] `BodyThrow2.ani`        // 投掷动作1发射动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "throw motion 2-1",
-                         "Title":  "投掷动作2蓄力动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 2-1] `BodyCast1.ani`        // 投掷动作2蓄力动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 2-1] `BodyCast1.ani`        // 投掷动作2蓄力动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "throw motion 2-2",
-                         "Title":  "投掷动作2发射动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 2-2] `BodyCast2.ani`        // 投掷动作2发射动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 2-2] `BodyCast2.ani`        // 投掷动作2发射动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "dash motion",
-                         "Title":  "冲刺动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[dash motion] `BodyDash.ani`        // 冲刺动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[dash motion] `BodyDash.ani`        // 冲刺动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "dashattack motion",
-                         "Title":  "冲刺攻击动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[dashattack motion] `BodyDashAttack.ani`    // 冲刺攻击动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[dashattack motion] `BodyDashAttack.ani`    // 冲刺攻击动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "getitem motion",
-                         "Title":  "拾取物品动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[getitem motion] `BodyGetItem.ani`    // 拾取物品动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[getitem motion] `BodyGetItem.ani`    // 拾取物品动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "buff motion",
-                         "Title":  "增益效果使用动作动画文件名",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[buff motion] `BodyBuff.ani`        // 增益效果使用动作动画文件名\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[buff motion] `BodyBuff.ani`        // 增益效果使用动作动画文件名\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "attack motion",
-                         "Title":  "攻击动作动画文件名列表",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[attack motion]                // 攻击动作动画文件名列表\n`Attack1.ani`\n`Attack2.ani`\n[/attack motion]                // 必须用此关闭\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[attack motion]                // 攻击动作动画文件名列表\n`Attack1.ani`\n`Attack2.ani`\n[/attack motion]                // 必须用此关闭\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "etc motion",
-                         "Title":  "硬编码用动作动画文件名列表（顺序重要）",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[etc motion]                // 硬编码用动作动画文件名列表（顺序重要）\n`Magic.ani`\n`PowerUp.ani`\n[/etc motion]                // 必须用此关闭\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[etc motion]                // 硬编码用动作动画文件名列表（顺序重要）\n`Magic.ani`\n`PowerUp.ani`\n[/etc motion]                // 必须用此关闭\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "jumpattack info",
-                         "Title":  "跳跃攻击的攻击信息",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 攻击信息列表。没有的可不填写。或用 `` 表示没有 //\n[jumpattack info] `JumpAttack.atk`    // 跳跃攻击的攻击信息\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 攻击信息列表。没有的可不填写。或用 `` 表示没有 //\n[jumpattack info] `JumpAttack.atk`    // 跳跃攻击的攻击信息\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "dashattack info",
-                         "Title":  "冲刺攻击的攻击信息",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[dashattack info] `DashAttack.atk`    // 冲刺攻击的攻击信息\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[dashattack info] `DashAttack.atk`    // 冲刺攻击的攻击信息\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "attack info",
-                         "Title":  "基础攻击动作的攻击信息",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[attack info]                // 基础攻击动作的攻击信息\n`Attack1.atk`\n`Attack2.atk`\n[/attack info]            // 必须用此关闭\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[attack info]                // 基础攻击动作的攻击信息\n`Attack1.atk`\n`Attack2.atk`\n[/attack info]            // 必须用此关闭\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "etc attack info",
-                         "Title":  "其他硬编码用攻击信息",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n[etc attack info]                // 其他硬编码用攻击信息\n`Magic.atk`\n[/etc attack info]            // 必须用此关闭\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n[etc attack info]                // 其他硬编码用攻击信息\n`Magic.atk`\n[/etc attack info]            // 必须用此关闭\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "weapon wav",
-                         "Title":  "武器子类型1的自定义音效列表",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 音效列表\n[weapon wav]                // 武器子类型1的自定义音效列表\n`SHORT_SWORD_WHIP`\n`SHORT_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```\n\n```pvf\n[weapon wav]                // 武器子类型2的自定义音效列表\n`LONG_SWORD_WHIP`\n`LONG_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```\n\n```pvf\n[weapon wav]                // 武器子类型3的自定义音效列表\n`BLUNT_SWORD_WHIP`\n`BLUNT_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 音效列表\n[weapon wav]                // 武器子类型1的自定义音效列表\n`SHORT_SWORD_WHIP`\n`SHORT_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```\n\n```pvf\n[weapon wav]                // 武器子类型2的自定义音效列表\n`LONG_SWORD_WHIP`\n`LONG_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```\n\n```pvf\n[weapon wav]                // 武器子类型3的自定义音效列表\n`BLUNT_SWORD_WHIP`\n`BLUNT_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```",
-                         "Closing":  true,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "fire resistance",
-                         "Title":  "元素属性",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 元素属性。为0可不填写。 //\n[fire resistance] 99.2\n```\n\n```pvf\n// 元素属性。为0可不填写。 //\n[fire resistance] 1\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 元素属性。为0可不填写。 //\n[fire resistance] 99.2\n```\n\n```pvf\n// 元素属性。为0可不填写。 //\n[fire resistance] 1\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "slow resistance",
-                         "Title":  "特殊属性",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 特殊属性。为0可不填写。 //\n[slow resistance] 18\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 特殊属性。为0可不填写。 //\n[slow resistance] 18\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "HP regen speed",
-                         "Title":  "私有信息",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 私有信息。 //\n[HP regen speed] 0\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 私有信息。 //\n[HP regen speed] 0\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "chr",
-                         "Section":  "MP regen speed",
-                         "Title":  "私有信息",
-                         "Comment":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 私有信息。 //\n[MP regen speed] 2\n```",
-                         "OfficialDescription":  "#### 官方示例: charactersample.chr\n\n```pvf\n// 私有信息。 //\n[MP regen speed] 2\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     }
-                 ]
+  "SchemaVersion": 1,
+  "FileType": "chr",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "劍影",
+      "Title": "劍影",
+      "Comment": "待翻译，请编辑！",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "awakening 1",
+      "Title": "唤醒1",
+      "Comment": "唤醒1",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "creator mage",
+      "Title": "外传职业",
+      "Comment": "外传职业：缔造者",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "fighter",
+      "Title": "女格斗",
+      "Comment": "女格斗",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "growtype name",
+      "Title": "基本的角色 转职1 转职2 转职3",
+      "Comment": "[growtype name] `基本的角色` `转职1` `转职2` `转职3` // 每种职业类型的名称。",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype name] `基础` `成长1剑士` `成长2剑士` `成长3剑士` // 各成长类型的成长类型名称\n```",
+      "Closing": false,
+      "Authors": "FreyaGrace"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "gunner",
+      "Title": "男枪手",
+      "Comment": "男枪手",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "mage",
+      "Title": "女魔法",
+      "Comment": "女魔法",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "priest",
+      "Title": "男圣职",
+      "Comment": "男圣职",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "麻豆传媒|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "weapon hit info",
+      "Title": "武器命中信息",
+      "Comment": "武器命中信息\n\n//示例：\n\t`[cut]`\n\t`[blood]`\t90\t1.0\t0.0\t0.0\n\n`[cut]` = 武器打击类型为`切割`，就像太刀一样\n`[blood]` = 武器命中时`有出血视觉效果`\n\n`出血视觉效果开关`的右边第1个数字也就是90代表普攻卡肉时间为0.09秒\n——————————————————————\n//示例2：\n\t`[blow]`\n\t`[no blood]`\t100\t1.2\t0.1\t-0.95\n\n`[blow]` = 武器打击类型为`钝击`，就像钝器一样\n`[no blood]` = 武器命中时`无出血视觉效果`\n——————————————————————\n补充：第二个数值是命中硬直比率，比如卡肉时间0.2秒，\n           命中硬直比率为2.0，那么实际造成的硬直是0.4秒",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[weapon hit info]            // 武器的子类型信息（详情请参考 AttackInfo 示例）\n`[blow]` `[no blood]` 50 1.0\n`[blow]` `[no blood]` 50 1.0\n`[blow]` `[blood]` 10 1.0\n`[blow]` `[no blood]` 50 1.0\n`[blow]` `[no blood]` 100 2.0\n`[cut]` `[no blood]` 100 2.0\n[/weapon hit info]            // 必须用此关闭\n```",
+      "Closing": true,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "weapon skill info",
+      "Title": "武器技能信息",
+      "Comment": "武器技能信息",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[weapon skill info]    // 武器的子类型对应的武器技能 MP，冷却时间信息。\n1.0 1.0 1.0 1.0        // 物理 MP，物理冷却，魔法 MP，魔法冷却比率\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n[/weapon skill info]\n```",
+      "Closing": true,
+      "Authors": "无名氏"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "width",
+      "Title": "40 10",
+      "Comment": "[width] 40 10\t\t// X轴，Y轴宽度顺序（像素值）",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[width] 40 10        // 依次为 X轴，Y轴宽度（像素值）\n```",
+      "Closing": false,
+      "Authors": "FreyaGrace"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "job",
+      "Title": "在   中选择其一",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[job] `[swordman]`        // 在 `[swordman]` `[fighter]` 中选择其一\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[job] `[swordman]`        // 在 `[swordman]` `[fighter]` 中选择其一\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "initial value",
+      "Title": "此标识之后的数值为初始创建时的属性",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[initial value]        // 此标识之后的数值为初始创建时的属性。可输入到小数点后第一位\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[initial value]        // 此标识之后的数值为初始创建时的属性。可输入到小数点后第一位\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "stuck resistance",
+      "Title": "0",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[stuck resistance] 11    // 0.1% 单位\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[stuck resistance] 11    // 0.1% 单位\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "inventory limit",
+      "Title": "（单位",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[inventory limit] 3000    // （单位：10g）\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[inventory limit] 3000    // （单位：10g）\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "move speed",
+      "Title": "以 1000 为基准值",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[move speed] 1000    // 以 1000 为基准值\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[move speed] 1000    // 以 1000 为基准值\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "weight",
+      "Title": "（单位",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[weight] 6000        // （单位：10g）\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[weight] 6000        // （单位：10g）\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "skill",
+      "Title": "初始赋予技能列表",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[skill]            // 初始赋予技能列表\n3 1            // 技能索引，等级\n22 1\n27 1\n[/skill]\n```\n\n```pvf\n[skill]            // 转职时赋予的技能\n34 1            // 技能索引，等级\n123 1\n127 1\n[/skill]\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[skill]            // 初始赋予技能列表\n3 1            // 技能索引，等级\n22 1\n27 1\n[/skill]\n```\n\n```pvf\n[skill]            // 转职时赋予的技能\n34 1            // 技能索引，等级\n123 1\n127 1\n[/skill]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "category",
+      "Title": "所属类别列表",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[category]        // 所属类别列表\n`[human]`\n[/category]\n```\n\n```pvf\n[category]    // 转职时获得的护甲类别。不能与 initial value 中的重复。\n`[armor]`\n[/category]\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[category]        // 所属类别列表\n`[human]`\n[/category]\n```\n\n```pvf\n[category]    // 转职时获得的护甲类别。不能与 initial value 中的重复。\n`[armor]`\n[/category]\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "module damage rate",
+      "Title": "PVP",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[module damage rate] 1.0 1.0 1.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```\n\n```pvf\n[module damage rate] 1.0 0.3 0.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[module damage rate] 1.0 1.0 1.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```\n\n```pvf\n[module damage rate] 1.0 0.3 0.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "growtype 1",
+      "Title": "之后的数值为转职前的属性成长值",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 1]        // 之后的数值为转职前的属性成长值\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 1]        // 之后的数值为转职前的属性成长值\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "growtype 2",
+      "Title": "之后的数值为第一次转职时的属性",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 2]        // 之后的数值为第一次转职时的属性\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 2]        // 之后的数值为第一次转职时的属性\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "growtype 3",
+      "Title": "之后的数值为第二次转职时的属性",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 3]        // 之后的数值为第二次转职时的属性\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 3]        // 之后的数值为第二次转职时的属性\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "growtype 4",
+      "Title": "之后的数值为第三次转职时的属性",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 4]        // 之后的数值为第三次转职时的属性\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 4]        // 之后的数值为第三次转职时的属性\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "growtype 5",
+      "Title": "之后的数值为第四次转职时的属性",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 5]        // 之后的数值为第四次转职时的属性\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 5]        // 之后的数值为第四次转职时的属性\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "waiting motion",
+      "Title": "待机动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n// 动画列表。没有的可不填写。或用 `` 表示没有 //\n[waiting motion] `BodyStay.ani`        // 待机动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n// 动画列表。没有的可不填写。或用 `` 表示没有 //\n[waiting motion] `BodyStay.ani`        // 待机动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "move motion",
+      "Title": "移动动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[move motion] `BodyMove.ani`        // 移动动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[move motion] `BodyMove.ani`        // 移动动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "sit motion",
+      "Title": "坐下动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[sit motion] `BodySit.ani`        // 坐下动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[sit motion] `BodySit.ani`        // 坐下动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "damage motion 1",
+      "Title": "受击动作1动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[damage motion 1] `BodyDamage1.ani`    // 受击动作1动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[damage motion 1] `BodyDamage1.ani`    // 受击动作1动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "damage motion 2",
+      "Title": "受击动作2动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[damage motion 2] `BodyDamage2.ani`    // 受击动作2动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[damage motion 2] `BodyDamage2.ani`    // 受击动作2动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "down motion",
+      "Title": "倒地动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[down motion] `BodyDown.ani`        // 倒地动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[down motion] `BodyDown.ani`        // 倒地动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "overturn motion",
+      "Title": "翻身动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[overturn motion] `BodyOverturn.ani`        // 翻身动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[overturn motion] `BodyOverturn.ani`        // 翻身动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "jump motion",
+      "Title": "跳跃动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[jump motion] `BodyJump.ani`        // 跳跃动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[jump motion] `BodyJump.ani`        // 跳跃动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "jumpattack motion",
+      "Title": "跳跃攻击动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[jumpattack motion] `BodyJumpAttack.ani`    // 跳跃攻击动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[jumpattack motion] `BodyJumpAttack.ani`    // 跳跃攻击动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "rest motion",
+      "Title": "休息动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[rest motion] `BodyRest.ani`        // 休息动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[rest motion] `BodyRest.ani`        // 休息动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "throw motion 1-1",
+      "Title": "投掷动作1蓄力动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 1-1] `BodyThrow1.ani`        // 投掷动作1蓄力动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 1-1] `BodyThrow1.ani`        // 投掷动作1蓄力动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "throw motion 1-2",
+      "Title": "投掷动作1发射动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 1-2] `BodyThrow2.ani`        // 投掷动作1发射动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 1-2] `BodyThrow2.ani`        // 投掷动作1发射动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "throw motion 2-1",
+      "Title": "投掷动作2蓄力动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 2-1] `BodyCast1.ani`        // 投掷动作2蓄力动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 2-1] `BodyCast1.ani`        // 投掷动作2蓄力动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "throw motion 2-2",
+      "Title": "投掷动作2发射动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 2-2] `BodyCast2.ani`        // 投掷动作2发射动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[throw motion 2-2] `BodyCast2.ani`        // 投掷动作2发射动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "dash motion",
+      "Title": "冲刺动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[dash motion] `BodyDash.ani`        // 冲刺动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[dash motion] `BodyDash.ani`        // 冲刺动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "dashattack motion",
+      "Title": "冲刺攻击动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[dashattack motion] `BodyDashAttack.ani`    // 冲刺攻击动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[dashattack motion] `BodyDashAttack.ani`    // 冲刺攻击动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "getitem motion",
+      "Title": "拾取物品动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[getitem motion] `BodyGetItem.ani`    // 拾取物品动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[getitem motion] `BodyGetItem.ani`    // 拾取物品动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "buff motion",
+      "Title": "增益效果使用动作动画文件名",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[buff motion] `BodyBuff.ani`        // 增益效果使用动作动画文件名\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[buff motion] `BodyBuff.ani`        // 增益效果使用动作动画文件名\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "attack motion",
+      "Title": "攻击动作动画文件名列表",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[attack motion]                // 攻击动作动画文件名列表\n`Attack1.ani`\n`Attack2.ani`\n[/attack motion]                // 必须用此关闭\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[attack motion]                // 攻击动作动画文件名列表\n`Attack1.ani`\n`Attack2.ani`\n[/attack motion]                // 必须用此关闭\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "etc motion",
+      "Title": "硬编码用动作动画文件名列表（顺序重要）",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[etc motion]                // 硬编码用动作动画文件名列表（顺序重要）\n`Magic.ani`\n`PowerUp.ani`\n[/etc motion]                // 必须用此关闭\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[etc motion]                // 硬编码用动作动画文件名列表（顺序重要）\n`Magic.ani`\n`PowerUp.ani`\n[/etc motion]                // 必须用此关闭\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "jumpattack info",
+      "Title": "跳跃攻击的攻击信息",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n// 攻击信息列表。没有的可不填写。或用 `` 表示没有 //\n[jumpattack info] `JumpAttack.atk`    // 跳跃攻击的攻击信息\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n// 攻击信息列表。没有的可不填写。或用 `` 表示没有 //\n[jumpattack info] `JumpAttack.atk`    // 跳跃攻击的攻击信息\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "dashattack info",
+      "Title": "冲刺攻击的攻击信息",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[dashattack info] `DashAttack.atk`    // 冲刺攻击的攻击信息\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[dashattack info] `DashAttack.atk`    // 冲刺攻击的攻击信息\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "attack info",
+      "Title": "基础攻击动作的攻击信息",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[attack info]                // 基础攻击动作的攻击信息\n`Attack1.atk`\n`Attack2.atk`\n[/attack info]            // 必须用此关闭\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[attack info]                // 基础攻击动作的攻击信息\n`Attack1.atk`\n`Attack2.atk`\n[/attack info]            // 必须用此关闭\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "etc attack info",
+      "Title": "其他硬编码用攻击信息",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n[etc attack info]                // 其他硬编码用攻击信息\n`Magic.atk`\n[/etc attack info]            // 必须用此关闭\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[etc attack info]                // 其他硬编码用攻击信息\n`Magic.atk`\n[/etc attack info]            // 必须用此关闭\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "weapon wav",
+      "Title": "武器子类型1的自定义音效列表",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n// 音效列表\n[weapon wav]                // 武器子类型1的自定义音效列表\n`SHORT_SWORD_WHIP`\n`SHORT_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```\n\n```pvf\n[weapon wav]                // 武器子类型2的自定义音效列表\n`LONG_SWORD_WHIP`\n`LONG_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```\n\n```pvf\n[weapon wav]                // 武器子类型3的自定义音效列表\n`BLUNT_SWORD_WHIP`\n`BLUNT_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n// 音效列表\n[weapon wav]                // 武器子类型1的自定义音效列表\n`SHORT_SWORD_WHIP`\n`SHORT_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```\n\n```pvf\n[weapon wav]                // 武器子类型2的自定义音效列表\n`LONG_SWORD_WHIP`\n`LONG_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```\n\n```pvf\n[weapon wav]                // 武器子类型3的自定义音效列表\n`BLUNT_SWORD_WHIP`\n`BLUNT_SWORD_HIT`\n[/weapon wav]                // 必须用此关闭\n```",
+      "Closing": true,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "fire resistance",
+      "Title": "元素属性",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n// 元素属性。为0可不填写。 //\n[fire resistance] 99.2\n```\n\n```pvf\n// 元素属性。为0可不填写。 //\n[fire resistance] 1\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n// 元素属性。为0可不填写。 //\n[fire resistance] 99.2\n```\n\n```pvf\n// 元素属性。为0可不填写。 //\n[fire resistance] 1\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "slow resistance",
+      "Title": "特殊属性",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n// 特殊属性。为0可不填写。 //\n[slow resistance] 18\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n// 特殊属性。为0可不填写。 //\n[slow resistance] 18\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "HP regen speed",
+      "Title": "私有信息",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n// 私有信息。 //\n[HP regen speed] 0\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n// 私有信息。 //\n[HP regen speed] 0\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "MP regen speed",
+      "Title": "私有信息",
+      "Comment": "#### 官方示例: charactersample.chr\n\n```pvf\n// 私有信息。 //\n[MP regen speed] 2\n```",
+      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n// 私有信息。 //\n[MP regen speed] 2\n```",
+      "Closing": false,
+      "Authors": null
+    }
+  ]
 }

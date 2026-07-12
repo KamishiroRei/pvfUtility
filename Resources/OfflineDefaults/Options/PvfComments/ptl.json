@@ -1,326 +1,326 @@
 ﻿{
-    "SchemaVersion":  1,
-    "FileType":  "ptl",
-    "Comments":  [
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "circle",
-                         "Title":  "圈",
-                         "Comment":  "圈",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "飞过半边天"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "keep changing",
-                         "Title":  "变化",
-                         "Comment":  "变化",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "飞过半边天"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "move variable 1",
-                         "Title":  "移动变量1",
-                         "Comment":  "移动变量1",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[move variable 1] 100 102 // 移动变量 1。初始值和最终值（移动速度 / 振动最大值）。\n```\n\n```pvf\n[move variable 1] 172 113 // 移动变量 1。初始值和最终值。\n```",
-                         "Closing":  false,
-                         "Authors":  "无名氏"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "object",
-                         "Title":  "目的",
-                         "Comment":  "目的",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[object] // 对象列表。\n`abcd.img` 3 // 写入要生成的对象的字符串 / 整数数据。\n`abc.ani` -1 // 指定动画时，整数值为-1（动画从相对路径读取）。\n// `` 3 // 被动对象的情况下，整数值放入对象索引。\n[/object] // 必须用此标签闭合。\n```",
-                         "Closing":  true,
-                         "Authors":  "无名氏"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "straight line",
-                         "Title":  "直线",
-                         "Comment":  "直线",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "飞过半边天"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "vanish",
-                         "Title":  "消失",
-                         "Comment":  "消失",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "飞过半边天"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "creation pos",
-                         "Title":  "生成 x",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[creation pos] 100 127 0 // 生成 x, y, z 坐标\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[creation pos] 100 127 0 // 生成 x, y, z 坐标\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "x axis",
-                         "Title":  "要编辑移动的轴",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[x axis] // 要编辑移动的轴。此标记之后的值是X轴。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[x axis] // 要编辑移动的轴。此标记之后的值是X轴。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "move type",
-                         "Title":  "移动类型",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[move type] `[sin]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```\n\n```pvf\n[move type] `[straight line]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```\n\n```pvf\n[move type] `[stop]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[move type] `[sin]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```\n\n```pvf\n[move type] `[straight line]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```\n\n```pvf\n[move type] `[stop]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "move variable 2",
-                         "Title":  "移动变量 2",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[move variable 2] 150 152 // 移动变量 2。初始值和最终值（未使用 / 振动周期）。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[move variable 2] 150 152 // 移动变量 2。初始值和最终值（未使用 / 振动周期）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "y axis",
-                         "Title":  "要编辑移动的轴",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[y axis] // 要编辑移动的轴。此标记之后的值是Y轴。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[y axis] // 要编辑移动的轴。此标记之后的值是Y轴。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "z axis",
-                         "Title":  "要编辑移动的轴",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[z axis] // 要编辑移动的轴。此标记之后的值是Z轴。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[z axis] // 要编辑移动的轴。此标记之后的值是Z轴。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "changing term",
-                         "Title":  "初始值和最终值之间的变化间隔",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[changing term] 1000 // 初始值和最终值之间的变化间隔。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[changing term] 1000 // 初始值和最终值之间的变化间隔。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "changing type",
-                         "Title":  "初始值和最终值之间的移动类型",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[changing type] `[keep changing]` // 初始值和最终值之间的移动类型。可选择 `[keep changing]` `[keep last value]` `[ping pong]` 之一。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[changing type] `[keep changing]` // 初始值和最终值之间的移动类型。可选择 `[keep changing]` `[keep last value]` `[ping pong]` 之一。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "gravity",
-                         "Title":  "重力值",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[gravity] 10 // 重力值。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[gravity] 10 // 重力值。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "rotation angle",
-                         "Title":  "旋转角度",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle] 30 10 0 // 旋转角度。水平角 / 垂直角 / 旋转角。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle] 30 10 0 // 旋转角度。水平角 / 垂直角 / 旋转角。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "life time",
-                         "Title":  "生命周期",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[life time] 1000 // 生命周期。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[life time] 1000 // 生命周期。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "landing type",
-                         "Title":  "接触地面时的处理",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[landing type] `[vanish]` // 接触地面时的处理。可选择 `[pierce]` `[slide]` `[stop]` `[vanish]` 之一。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[landing type] `[vanish]` // 接触地面时的处理。可选择 `[pierce]` `[slide]` `[stop]` `[vanish]` 之一。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "transparent value",
-                         "Title":  "起始 / 结束透明度（%值）",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[transparent value] 100 0 // 起始 / 结束透明度（%值）。结束的基准是生命周期。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[transparent value] 100 0 // 起始 / 结束透明度（%值）。结束的基准是生命周期。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "creation frequency",
-                         "Title":  "每秒粒子生成频率（-1则按最大生成数量生成）",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[creation frequency] 0.5 // 每秒粒子生成频率（-1则按最大生成数量生成）。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[creation frequency] 0.5 // 每秒粒子生成频率（-1则按最大生成数量生成）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "maximum create number",
-                         "Title":  "粒子最大生成数量（0则为无限）",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[maximum create number] 100 // 粒子最大生成数量（0则为无限）。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[maximum create number] 100 // 粒子最大生成数量（0则为无限）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "maximum create time",
-                         "Title":  "粒子最大生成时间（0则为无限）",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[maximum create time] 0 // 粒子最大生成时间（0则为无限）。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[maximum create time] 0 // 粒子最大生成时间（0则为无限）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "create area size",
-                         "Title":  "生成空间大小",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[create area size] 100 10 0 // 生成空间大小。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[create area size] 100 10 0 // 生成空间大小。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "create area rotation angle",
-                         "Title":  "生成空间旋转角度",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[create area rotation angle] 100 32 0 // 生成空间旋转角度。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[create area rotation angle] 100 32 0 // 生成空间旋转角度。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "rotation angle range type",
-                         "Title":  "指定生成角度范围的方法",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle range type] `[rectangle]` // 指定生成角度范围的方法。可选择 `[rectangle]` 和 `[circle]` 之一。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle range type] `[rectangle]` // 指定生成角度范围的方法。可选择 `[rectangle]` 和 `[circle]` 之一。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "rotation angle variable",
-                         "Title":  "生成角度的变量 1",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle variable] 300 10 // 生成角度的变量 1, 2（水平角度范围/直径角，垂直角度范围/未使用）。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle variable] 300 10 // 生成角度的变量 1, 2（水平角度范围/直径角，垂直角度范围/未使用）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "random range",
-                         "Title":  "随机范围（%值）",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[random range] 10 // 随机范围（%值）。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[random range] 10 // 随机范围（%值）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "create pos correct",
-                         "Title":  "是否校正生成坐标",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[create pos correct] 1 // 是否校正生成坐标。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[create pos correct] 1 // 是否校正生成坐标。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "how to create object",
-                         "Title":  "两者择一",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[how to create object] `[randomize]` 或 `[in order]` // 两者择一。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[how to create object] `[randomize]` 或 `[in order]` // 两者择一。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "object type",
-                         "Title":  "要生成的对象的类型",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[object type] `[animation]` // 要生成的对象的类型。可选择 `[animation]` 和 `[passive object]` 之一。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[object type] `[animation]` // 要生成的对象的类型。可选择 `[animation]` 和 `[passive object]` 之一。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "layer",
-                         "Title":  "生成的粒子的图层",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[layer] `[bottom]` // 生成的粒子的图层。仅当生成对象为 `[animation]` 时有效。\n// 可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[layer] `[bottom]` // 生成的粒子的图层。仅当生成对象为 `[animation]` 时有效。\n// 可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "ptl",
-                         "Section":  "display effect rate",
-                         "Title":  "特效等级（低-中-高）时生成的粒子比例",
-                         "Comment":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[display effect rate] 50 75 100 // 特效等级（低-中-高）时生成的粒子比例。%值（默认是100 100 100）。\n```",
-                         "OfficialDescription":  "#### 官方示例: particlesample.ptl\n\n```pvf\n[display effect rate] 50 75 100 // 特效等级（低-中-高）时生成的粒子比例。%值（默认是100 100 100）。\n```",
-                         "Closing":  false,
-                         "Authors":  null
-                     }
-                 ]
+  "SchemaVersion": 1,
+  "FileType": "ptl",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "circle",
+      "Title": "圈",
+      "Comment": "圈",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "飞过半边天"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "keep changing",
+      "Title": "变化",
+      "Comment": "变化",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "飞过半边天"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "move variable 1",
+      "Title": "移动变量1",
+      "Comment": "移动变量1",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[move variable 1] 100 102 // 移动变量 1。初始值和最终值（移动速度 / 振动最大值）。\n```\n\n```pvf\n[move variable 1] 172 113 // 移动变量 1。初始值和最终值。\n```",
+      "Closing": false,
+      "Authors": "无名氏"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "object",
+      "Title": "目的",
+      "Comment": "目的",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[object] // 对象列表。\n`abcd.img` 3 // 写入要生成的对象的字符串 / 整数数据。\n`abc.ani` -1 // 指定动画时，整数值为-1（动画从相对路径读取）。\n// `` 3 // 被动对象的情况下，整数值放入对象索引。\n[/object] // 必须用此标签闭合。\n```",
+      "Closing": true,
+      "Authors": "无名氏"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "straight line",
+      "Title": "直线",
+      "Comment": "直线",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "飞过半边天"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "vanish",
+      "Title": "消失",
+      "Comment": "消失",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "飞过半边天"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "creation pos",
+      "Title": "生成 x",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[creation pos] 100 127 0 // 生成 x, y, z 坐标\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[creation pos] 100 127 0 // 生成 x, y, z 坐标\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "x axis",
+      "Title": "要编辑移动的轴",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[x axis] // 要编辑移动的轴。此标记之后的值是X轴。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[x axis] // 要编辑移动的轴。此标记之后的值是X轴。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "move type",
+      "Title": "移动类型",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[move type] `[sin]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```\n\n```pvf\n[move type] `[straight line]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```\n\n```pvf\n[move type] `[stop]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[move type] `[sin]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```\n\n```pvf\n[move type] `[straight line]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```\n\n```pvf\n[move type] `[stop]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "move variable 2",
+      "Title": "移动变量 2",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[move variable 2] 150 152 // 移动变量 2。初始值和最终值（未使用 / 振动周期）。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[move variable 2] 150 152 // 移动变量 2。初始值和最终值（未使用 / 振动周期）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "y axis",
+      "Title": "要编辑移动的轴",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[y axis] // 要编辑移动的轴。此标记之后的值是Y轴。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[y axis] // 要编辑移动的轴。此标记之后的值是Y轴。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "z axis",
+      "Title": "要编辑移动的轴",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[z axis] // 要编辑移动的轴。此标记之后的值是Z轴。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[z axis] // 要编辑移动的轴。此标记之后的值是Z轴。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "changing term",
+      "Title": "初始值和最终值之间的变化间隔",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[changing term] 1000 // 初始值和最终值之间的变化间隔。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[changing term] 1000 // 初始值和最终值之间的变化间隔。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "changing type",
+      "Title": "初始值和最终值之间的移动类型",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[changing type] `[keep changing]` // 初始值和最终值之间的移动类型。可选择 `[keep changing]` `[keep last value]` `[ping pong]` 之一。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[changing type] `[keep changing]` // 初始值和最终值之间的移动类型。可选择 `[keep changing]` `[keep last value]` `[ping pong]` 之一。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "gravity",
+      "Title": "重力值",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[gravity] 10 // 重力值。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[gravity] 10 // 重力值。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "rotation angle",
+      "Title": "旋转角度",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle] 30 10 0 // 旋转角度。水平角 / 垂直角 / 旋转角。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle] 30 10 0 // 旋转角度。水平角 / 垂直角 / 旋转角。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "life time",
+      "Title": "生命周期",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[life time] 1000 // 生命周期。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[life time] 1000 // 生命周期。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "landing type",
+      "Title": "接触地面时的处理",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[landing type] `[vanish]` // 接触地面时的处理。可选择 `[pierce]` `[slide]` `[stop]` `[vanish]` 之一。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[landing type] `[vanish]` // 接触地面时的处理。可选择 `[pierce]` `[slide]` `[stop]` `[vanish]` 之一。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "transparent value",
+      "Title": "起始 / 结束透明度（%值）",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[transparent value] 100 0 // 起始 / 结束透明度（%值）。结束的基准是生命周期。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[transparent value] 100 0 // 起始 / 结束透明度（%值）。结束的基准是生命周期。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "creation frequency",
+      "Title": "每秒粒子生成频率（-1则按最大生成数量生成）",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[creation frequency] 0.5 // 每秒粒子生成频率（-1则按最大生成数量生成）。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[creation frequency] 0.5 // 每秒粒子生成频率（-1则按最大生成数量生成）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "maximum create number",
+      "Title": "粒子最大生成数量（0则为无限）",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[maximum create number] 100 // 粒子最大生成数量（0则为无限）。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[maximum create number] 100 // 粒子最大生成数量（0则为无限）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "maximum create time",
+      "Title": "粒子最大生成时间（0则为无限）",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[maximum create time] 0 // 粒子最大生成时间（0则为无限）。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[maximum create time] 0 // 粒子最大生成时间（0则为无限）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "create area size",
+      "Title": "生成空间大小",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[create area size] 100 10 0 // 生成空间大小。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[create area size] 100 10 0 // 生成空间大小。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "create area rotation angle",
+      "Title": "生成空间旋转角度",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[create area rotation angle] 100 32 0 // 生成空间旋转角度。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[create area rotation angle] 100 32 0 // 生成空间旋转角度。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "rotation angle range type",
+      "Title": "指定生成角度范围的方法",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle range type] `[rectangle]` // 指定生成角度范围的方法。可选择 `[rectangle]` 和 `[circle]` 之一。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle range type] `[rectangle]` // 指定生成角度范围的方法。可选择 `[rectangle]` 和 `[circle]` 之一。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "rotation angle variable",
+      "Title": "生成角度的变量 1",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle variable] 300 10 // 生成角度的变量 1, 2（水平角度范围/直径角，垂直角度范围/未使用）。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[rotation angle variable] 300 10 // 生成角度的变量 1, 2（水平角度范围/直径角，垂直角度范围/未使用）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "random range",
+      "Title": "随机范围（%值）",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[random range] 10 // 随机范围（%值）。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[random range] 10 // 随机范围（%值）。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "create pos correct",
+      "Title": "是否校正生成坐标",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[create pos correct] 1 // 是否校正生成坐标。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[create pos correct] 1 // 是否校正生成坐标。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "how to create object",
+      "Title": "两者择一",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[how to create object] `[randomize]` 或 `[in order]` // 两者择一。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[how to create object] `[randomize]` 或 `[in order]` // 两者择一。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "object type",
+      "Title": "要生成的对象的类型",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[object type] `[animation]` // 要生成的对象的类型。可选择 `[animation]` 和 `[passive object]` 之一。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[object type] `[animation]` // 要生成的对象的类型。可选择 `[animation]` 和 `[passive object]` 之一。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "layer",
+      "Title": "生成的粒子的图层",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[layer] `[bottom]` // 生成的粒子的图层。仅当生成对象为 `[animation]` 时有效。\n// 可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[layer] `[bottom]` // 生成的粒子的图层。仅当生成对象为 `[animation]` 时有效。\n// 可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。\n```",
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "display effect rate",
+      "Title": "特效等级（低-中-高）时生成的粒子比例",
+      "Comment": "#### 官方示例: particlesample.ptl\n\n```pvf\n[display effect rate] 50 75 100 // 特效等级（低-中-高）时生成的粒子比例。%值（默认是100 100 100）。\n```",
+      "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[display effect rate] 50 75 100 // 特效等级（低-中-高）时生成的粒子比例。%值（默认是100 100 100）。\n```",
+      "Closing": false,
+      "Authors": null
+    }
+  ]
 }

@@ -1,66 +1,66 @@
 ﻿{
-    "SchemaVersion":  1,
-    "FileType":  "sd",
-    "Comments":  [
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "sd",
-                         "Section":  "g3 max angle",
-                         "Title":  "G3角度",
-                         "Comment":  "G3角度",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "浮浮浮"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "sd",
-                         "Section":  "g3 max radius",
-                         "Title":  "G3旋转最大半径",
-                         "Comment":  "G3旋转最大半径",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "浮浮浮"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "sd",
-                         "Section":  "g3 max round time",
-                         "Title":  "G3旋转时长",
-                         "Comment":  "G3旋转时长",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "浮浮浮"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "sd",
-                         "Section":  "g3 move time",
-                         "Title":  "G3移动时长（越小就越快）",
-                         "Comment":  "G3移动时长（越小就越快）",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "浮浮浮"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "sd",
-                         "Section":  "g3 transform time",
-                         "Title":  "G3 变形时间",
-                         "Comment":  "G3 变形时间",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "浮浮浮"
-                     },
-                     {
-                         "PvfCommentType":  "Section",
-                         "FileType":  "sd",
-                         "Section":  "int",
-                         "Title":  "INT",
-                         "Comment":  "INT",
-                         "OfficialDescription":  null,
-                         "Closing":  false,
-                         "Authors":  "lostluna1"
-                     }
-                 ]
+  "SchemaVersion": 1,
+  "FileType": "sd",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "sd",
+      "Section": "g3 max angle",
+      "Title": "G3角度",
+      "Comment": "G3角度",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "sd",
+      "Section": "g3 max radius",
+      "Title": "G3旋转最大半径",
+      "Comment": "G3旋转最大半径",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "sd",
+      "Section": "g3 max round time",
+      "Title": "G3旋转时长",
+      "Comment": "G3旋转时长",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "sd",
+      "Section": "g3 move time",
+      "Title": "G3移动时长（越小就越快）",
+      "Comment": "G3移动时长（越小就越快）",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "sd",
+      "Section": "g3 transform time",
+      "Title": "G3 变形时间",
+      "Comment": "G3 变形时间",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "sd",
+      "Section": "int",
+      "Title": "INT",
+      "Comment": "INT",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    }
+  ]
 }
