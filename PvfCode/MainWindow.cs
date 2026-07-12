@@ -122,6 +122,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 	public MainWindow()
 	{
+		PvfSkillTreeColorBehavior.Initialize();
 		base.DataContext = (AppCore.ViewModelBase = new MainWindowViewModel());
 		InitializeComponent();
 		HideOnlineFeatures();

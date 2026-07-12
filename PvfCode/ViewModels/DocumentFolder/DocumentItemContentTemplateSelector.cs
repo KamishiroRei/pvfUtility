@@ -6,6 +6,8 @@ namespace PvfCode.ViewModels.DocumentFolder;
 
 public class DocumentItemContentTemplateSelector : DataTemplateSelector
 {
+	private static readonly DataTemplate PreviewTemplate = CreatePreviewTemplate();
+
 	public DataTemplate PvfFileDocumentDataTemplate { get; set; }
 
 	// These properties are populated by the original compiled BAML resource.
@@ -28,6 +30,10 @@ public class DocumentItemContentTemplateSelector : DataTemplateSelector
 
 	public override DataTemplate SelectTemplate(object item, DependencyObject container)
 	{
+		if (item is PvfPreviewDocument)
+		{
+			return PreviewTemplate;
+		}
 		return ((DocumentBase)item).DocumentType switch
 		{
 			PvfFileDocumentType.PVF文档 => PvfFileDocumentDataTemplate, 
@@ -50,5 +56,13 @@ public class DocumentItemContentTemplateSelector : DataTemplateSelector
 			return element.TryFindResource(resourceKey) as DataTemplate;
 		}
 		return null;
+	}
+
+	private static DataTemplate CreatePreviewTemplate()
+	{
+		return new DataTemplate
+		{
+			VisualTree = new FrameworkElementFactory(typeof(PvfPreviewDocumentView))
+		};
 	}
 }

@@ -7,6 +7,7 @@ public enum PvfFileDocumentType
 	PVF差异比较器,
 	发布,
 	导入文件,
+	预览,
 	商店,
 	chatGPT
 }

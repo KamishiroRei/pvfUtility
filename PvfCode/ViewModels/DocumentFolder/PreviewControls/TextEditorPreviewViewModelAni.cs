@@ -125,6 +125,18 @@ public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 		}
 	}
 
+	public void LoadDataForPreviewDocument(string fileText)
+	{
+		try
+		{
+			LFKAzTqTFU(fileText);
+		}
+		catch (Exception e)
+		{
+			AppCore.Logger.ErrorUploadDialog(e, "TextEditorPreviewViewModelAni.LoadDataForPreviewDocument");
+		}
+	}
+
 	private async void LFKAzTqTFU(string P_0)
 	{
 		_003C_003Ec__DisplayClass19_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass19_0();

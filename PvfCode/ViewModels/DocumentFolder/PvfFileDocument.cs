@@ -40,6 +40,8 @@ namespace PvfCode.ViewModels.DocumentFolder;
 
 public class PvfFileDocument : DocumentBase
 {
+	public event EventHandler PreviewContentChanged;
+
 	[CompilerGenerated]
 	private sealed class _003C_003Ec__DisplayClass51_0
 	{
@@ -428,6 +430,8 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
+	public bool SupportsPreview => PvfPreviewDocument.Supports(File);
+
 	public TextEditorBase Editor
 	{
 		get
@@ -778,6 +782,34 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
+	[Command]
+	public void OnOpenPreview()
+	{
+		AppCore.ViewModelBase.RootDocument.OpenPreview(this);
+	}
+
+	public void NavigateToTag(int offset, int length)
+	{
+		base.IsActive = true;
+		if (Application.Current == null)
+		{
+			return;
+		}
+		Application.Current.Dispatcher.BeginInvoke((Action)delegate
+		{
+			if (Editor == null || Document == null || Document.TextLength == 0)
+			{
+				return;
+			}
+			int safeOffset = Math.Max(0, Math.Min(offset, Document.TextLength - 1));
+			int safeLength = Math.Max(0, Math.Min(length, Document.TextLength - safeOffset));
+			Editor.Select(safeOffset, safeLength);
+			Editor.TextArea.Caret.Offset = safeOffset;
+			Editor.ScrollToLine(Document.GetLineByOffset(safeOffset).LineNumber);
+			Editor.Focus();
+		}, DispatcherPriority.Background);
+	}
+
 	private async void Sy2fzpfUqV()
 	{
 		try
@@ -975,6 +1007,7 @@ public class PvfFileDocument : DocumentBase
 			if (AppCore.ViewModelBase.PVF.SaveFileText(File, Document.Text, NowEncoding))
 			{
 				TnA5hQnSic();
+				PreviewContentChanged?.Invoke(this, EventArgs.Empty);
 			}
 			if (fileText == AppCore.ViewModelBase.PVF.GetFileText(File, NowEncoding) && !isUpdated)
 			{

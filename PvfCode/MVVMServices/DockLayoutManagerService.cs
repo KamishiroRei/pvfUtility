@@ -75,6 +75,14 @@ public class DockLayoutManagerService : ServiceBase, IDockLayoutManagerService
 		}
 	}
 
+	public bool SplitRight(object panelViewModel)
+	{
+		DocumentPanel panel = LayoutManager.GetItems()
+			.OfType<DocumentPanel>()
+			.FirstOrDefault(it => it.DataContext == panelViewModel);
+		return panel != null && LayoutManager.DockController.CreateNewDocumentGroup(panel, Orientation.Horizontal);
+	}
+
 	public void SetFloatPanelAutoHeight(object panelViewModel, SizeToContent sizeToContent)
 	{
 		if (LayoutManager.FloatGroups == null)

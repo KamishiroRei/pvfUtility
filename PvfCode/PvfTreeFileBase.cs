@@ -133,6 +133,8 @@ public abstract class PvfTreeFileBase : ModelBase
 		}
 	}
 
+	public PvfSkillKind? SkillKind => IsFile && File != null ? PvfSkillClassifier.GetKind(Pvf, File, ItemName) : null;
+
 	public string ItemCodeStr
 	{
 		get
@@ -347,6 +349,7 @@ public abstract class PvfTreeFileBase : ModelBase
 		DoNotify("Image");
 		DoNotify("ItemPreviewData");
 		DoNotify("AttachType");
+		DoNotify("SkillKind");
 	}
 
 	public bool HaveChildren()

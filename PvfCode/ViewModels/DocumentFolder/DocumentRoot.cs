@@ -69,6 +69,7 @@ public class DocumentRoot : ViewModelBase
 			{
 				DocumentPath = file.FileName
 			};
+			pvfFileDocument.Activated += OnPvfDocumentActivated;
 			Documents.Add(pvfFileDocument);
 			pvfFileDocument.IsActive = true;
 		}
@@ -83,6 +84,56 @@ public class DocumentRoot : ViewModelBase
 				AppCore.ViewModelBase.PvfFileTreeViewModel.GoToNode(file.FileName);
 			}, Array.Empty<object>());
 		});
+	}
+
+	public void OpenPreview(PvfFileDocument sourceDocument)
+	{
+		if (sourceDocument == null || !PvfPreviewDocument.Supports(sourceDocument.File))
+		{
+			return;
+		}
+		PvfPreviewDocument preview = Documents.OfType<PvfPreviewDocument>().FirstOrDefault();
+		if (preview != null)
+		{
+			preview.SetSource(sourceDocument);
+			return;
+		}
+		preview = new PvfPreviewDocument(sourceDocument);
+		Documents.Add(preview);
+		preview.IsActive = true;
+		SplitPreviewRight(preview, sourceDocument, 0);
+	}
+
+	private void OnPvfDocumentActivated(object sender, EventArgs e)
+	{
+		if (sender is PvfFileDocument sourceDocument)
+		{
+			OpenPreview(sourceDocument);
+		}
+	}
+
+	private void SplitPreviewRight(PvfPreviewDocument preview, PvfFileDocument sourceDocument, int attempt)
+	{
+		if (Application.Current == null)
+		{
+			return;
+		}
+		Application.Current.Dispatcher.BeginInvoke((Action)delegate
+		{
+			if (!Documents.Contains(preview))
+			{
+				return;
+			}
+			if (AppCore.ViewModelBase.DockLayoutManagerService.SplitRight(preview))
+			{
+				sourceDocument.IsActive = true;
+				return;
+			}
+			if (attempt < 8)
+			{
+				SplitPreviewRight(preview, sourceDocument, attempt + 1);
+			}
+		}, attempt == 0 ? DispatcherPriority.Loaded : DispatcherPriority.Background);
 	}
 
 	public void AddDocument(string filePath, bool gotoNode = false)
@@ -246,6 +297,11 @@ public class DocumentRoot : ViewModelBase
 			}
 			DocumentNavigationService.Instance.Remove(pvfFileDocument.FullPath);
 		}
+		CloseLinkedPreview(doc);
+		if (doc is PvfFileDocument sourceDocument)
+		{
+			sourceDocument.Activated -= OnPvfDocumentActivated;
+		}
 		doc.Dispose();
 		if (Documents.Contains(doc))
 		{
@@ -273,14 +329,39 @@ public class DocumentRoot : ViewModelBase
 		{
 			DocumentNavigationService.Instance.Remove((documentBase as PvfFileDocument).FullPath);
 		}
+		CloseLinkedPreview(documentBase);
+		if (documentBase is PvfFileDocument sourceDocument)
+		{
+			sourceDocument.Activated -= OnPvfDocumentActivated;
+		}
 		documentBase.Dispose();
 		Documents.Remove(documentBase);
+	}
+
+	private void CloseLinkedPreview(DocumentBase document)
+	{
+		if (document is not PvfFileDocument sourceDocument)
+		{
+			return;
+		}
+		PvfPreviewDocument preview = Documents.OfType<PvfPreviewDocument>()
+			.FirstOrDefault(it => ReferenceEquals(it.SourceDocument, sourceDocument));
+		if (preview != null)
+		{
+			preview.Dispose();
+			Documents.Remove(preview);
+		}
 	}
 
 	public void RemoveDocument(string filePath, bool isShowDialog)
 	{
 		if (CheckIsOpen(filePath, out DocumentBase docu) && (!isShowDialog || !(docu is PvfFileDocument { TextIsChanged: not false }) || AppCore.Logger.ShowDialog(AppSetting.Instance.GetIlogger()?.GetStr("mess_CloseCurrentDocumentDialog")) == MessageResult.Yes))
 		{
+			CloseLinkedPreview(docu);
+			if (docu is PvfFileDocument sourceDocument)
+			{
+				sourceDocument.Activated -= OnPvfDocumentActivated;
+			}
 			docu.Dispose();
 			Documents.Remove(docu);
 		}
@@ -328,7 +409,11 @@ public class DocumentRoot : ViewModelBase
 	{
 		DocumentNavigationService.Instance.Clear();
 		DocumentsSearchManager.Clear();
-		foreach (DocumentBase document in Documents)
+		foreach (PvfFileDocument sourceDocument in Documents.OfType<PvfFileDocument>())
+		{
+			sourceDocument.Activated -= OnPvfDocumentActivated;
+		}
+		foreach (DocumentBase document in Documents.OrderByDescending(it => it is PvfPreviewDocument).ToArray())
 		{
 			document.Dispose();
 		}

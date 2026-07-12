@@ -6,10 +6,13 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
+using DevExpress.Mvvm;
 using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Editors;
+using PvfCode.ViewModels.DocumentFolder;
 using WpfRangeControls;
 
 namespace PvfCode.Controls.TextEditorFolder;
@@ -51,6 +54,33 @@ public class DocumentTextEditor : UserControl, IComponentConnector
 	{
 		InitializeComponent();
 		NormalizeToolbarLabels();
+		InstallDocumentActions();
+	}
+
+	private void InstallDocumentActions()
+	{
+		ToolBarControl toolBar = FindVisualChild<ToolBarControl>(this);
+		if (toolBar == null)
+		{
+			return;
+		}
+		toolBar.Items.Add(new BarItemSeparator());
+		toolBar.Items.Add(new BarButtonItem
+		{
+			Content = "向右拆分编辑器",
+			ToolTip = "向右拆分编辑器",
+			Glyph = TryFindResource("AddLayoutItem") as ImageSource,
+			Command = new DelegateCommand(() => (DataContext as DocumentBase)?.OnSplitRight())
+		});
+		BarButtonItem previewButton = new()
+		{
+			Content = "在侧边打开预览",
+			ToolTip = "在侧边打开预览",
+			Glyph = TryFindResource("PrintPreview_16x") as ImageSource,
+			Command = new DelegateCommand(() => (DataContext as PvfFileDocument)?.OnOpenPreview())
+		};
+		previewButton.SetBinding(BarItem.IsVisibleProperty, new Binding(nameof(PvfFileDocument.SupportsPreview)));
+		toolBar.Items.Add(previewButton);
 	}
 
 	private void NormalizeToolbarLabels()

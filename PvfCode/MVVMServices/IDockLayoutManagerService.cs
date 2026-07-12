@@ -19,4 +19,6 @@ public interface IDockLayoutManagerService
 	void ClosePanel(object panelViewModel);
 
 	void ShowContextMenu(object panelViewModel);
+
+	bool SplitRight(object panelViewModel);
 }

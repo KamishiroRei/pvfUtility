@@ -66,9 +66,12 @@ public abstract class DocumentBase : ViewModelBase, IDisposable
 			if (value)
 			{
 				IsSelected = true;
+				Activated?.Invoke(this, EventArgs.Empty);
 			}
 		}
 	}
+
+	public event EventHandler Activated;
 
 	public PvfFileDocumentType DocumentType { get; set; }
 
@@ -82,6 +85,12 @@ public abstract class DocumentBase : ViewModelBase, IDisposable
 	{
 		DocumentService.Test();
 		AppCore.ViewModelBase.DockLayoutManagerService.ShowContextMenu(this);
+	}
+
+	[Command]
+	public void OnSplitRight()
+	{
+		AppCore.ViewModelBase.DockLayoutManagerService.SplitRight(this);
 	}
 
 	public void PreviewMouseDown(object sender, MouseButtonEventArgs e)
