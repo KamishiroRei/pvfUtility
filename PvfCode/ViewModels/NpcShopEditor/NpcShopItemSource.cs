@@ -31,5 +31,6 @@ public class NpcShopItemSource : NpcShopItem
 	public NpcShopItemSource(PvfFile file)
 	{
 		HXZmnBr19e = file;
+		InvalidatePurchaseData();
 	}
 }

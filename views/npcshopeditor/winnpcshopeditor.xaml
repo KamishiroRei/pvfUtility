@@ -252,13 +252,13 @@
             <docking:LayoutGroup docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.ItemWidth="2*" docking:LayoutGroup.Orientation="Vertical" UIElement.IsEnabled="{Binding ShopIsOpen}">
               <docking:LayoutPanel docking:BaseLayoutItem.Padding="0" docking:BaseLayoutItem.Caption="装备列表" docking:BaseLayoutItem.ItemHeight="*">
                 <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-                  <npcshopeditor1:NpcShopItemListControlEx npcshopeditor1:NpcShopItemListControlEx.Name="equGrid" Type="Equ" p27:DataControlBase.ItemsSource="{Binding EquItems.CollectionView}" xmlns:p27="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core">
+                  <npcshopeditor1:NpcShopItemListControlEx npcshopeditor1:NpcShopItemListControlEx.Name="equGrid" Type="Equ" p27:DataControlBase.ItemsSource="{Binding EquItems.CollectionView}" p27:DataControlBase.CurrentItem="{Binding CurrentPurchaseItem, Mode=OneWayToSource}" xmlns:p27="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core">
                   </npcshopeditor1:NpcShopItemListControlEx>
                 </Grid>
               </docking:LayoutPanel>
               <docking:LayoutPanel docking:BaseLayoutItem.Padding="0" docking:BaseLayoutItem.Caption="道具列表" docking:BaseLayoutItem.ItemHeight="*">
                 <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-                  <npcshopeditor1:NpcShopItemListControlEx npcshopeditor1:NpcShopItemListControlEx.Name="stkGrid" Type="Stk" p27:DataControlBase.ItemsSource="{Binding StkItems.CollectionView}" xmlns:p27="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core">
+                  <npcshopeditor1:NpcShopItemListControlEx npcshopeditor1:NpcShopItemListControlEx.Name="stkGrid" Type="Stk" p27:DataControlBase.ItemsSource="{Binding StkItems.CollectionView}" p27:DataControlBase.CurrentItem="{Binding CurrentPurchaseItem, Mode=OneWayToSource}" xmlns:p27="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v24.1.Core">
                   </npcshopeditor1:NpcShopItemListControlEx>
                 </Grid>
               </docking:LayoutPanel>
@@ -371,8 +371,11 @@
               </docking:LayoutPanel>
               <docking:LayoutPanel docking:BaseLayoutItem.Padding="0" docking:BaseLayoutItem.Caption="物品属性" docking:BaseLayoutItem.ClosingBehavior="HideToClosedPanelsCollection" docking:BaseLayoutItem.ItemHeight="*">
                 <StackPanel Margin="4,10,4,0" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-                  <controls:EditBox Caption="物品ID：" Value="{Binding CurrentPage.CurrentItem.ItemCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                  <controls:EditBox Caption="物品名：" Value="{Binding CurrentPage.CurrentItem.ItemName, Mode=OneWay}" />
+                  <controls:EditBox Caption="物品ID：" IsEnabled="{Binding CanEditCurrentPurchaseItemCode}" Value="{Binding CurrentPurchaseItemCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  <controls:EditBox Caption="物品名：" Value="{Binding CurrentPurchaseItem.ItemName, Mode=OneWay}" />
+                  <controls:EditBox AutomationProperties.AutomationId="NpcShopPurchaseEditor.Price" Caption="金币价格：" IsEnabled="{Binding CurrentPurchaseItem.CanEditPurchaseData}" Value="{Binding CurrentPurchaseItem.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  <controls:EditBox AutomationProperties.AutomationId="NpcShopPurchaseEditor.MaterialId" Caption="所需材料ID：" IsEnabled="{Binding CurrentPurchaseItem.CanEditPurchaseData}" Value="{Binding CurrentPurchaseItem.NeedMaterialItemCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  <controls:EditBox AutomationProperties.AutomationId="NpcShopPurchaseEditor.MaterialCount" Caption="所需材料数量：" IsEnabled="{Binding CurrentPurchaseItem.CanEditPurchaseData}" Value="{Binding CurrentPurchaseItem.NeedMaterialCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
               </docking:LayoutPanel>
             </docking:LayoutGroup>

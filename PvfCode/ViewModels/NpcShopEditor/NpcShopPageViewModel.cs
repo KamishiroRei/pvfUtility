@@ -109,6 +109,11 @@ public class NpcShopPageViewModel : ViewModelBase
 		{
 			return;
 		}
+		if (SelectedItems.Any(item => item.IsPurchaseDataModified))
+		{
+			AppCore.ShowMsg("选中商品包含尚未保存的购买属性，请先编译保存。", isError: true);
+			return;
+		}
 		foreach (NpcShopItem selectedItem in SelectedItems)
 		{
 			selectedItem.ItemCode = -1;
@@ -121,6 +126,11 @@ public class NpcShopPageViewModel : ViewModelBase
 	{
 		if (SelectedItems.Count > 0)
 		{
+			if (SelectedItems.Any(item => item.IsPurchaseDataModified))
+			{
+				AppCore.ShowMsg("选中商品包含尚未保存的购买属性，请先编译保存。", isError: true);
+				return;
+			}
 			Items.RemoveRange(SelectedItems);
 			SelectedItems.Clear();
 			CheckItems();

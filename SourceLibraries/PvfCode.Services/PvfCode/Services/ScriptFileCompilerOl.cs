@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -236,17 +237,19 @@ public class ScriptFileCompilerOl
 		memoryStream.WriteByte(176);
 		memoryStream.WriteByte(208);
 		List<ErrorItem> list = lmvIvCLGxk(obj.FileName, scriptText, false, memoryStream, compileChinaScriptFile);
-		List<ErrorItem> list2 = new List<ErrorItem>();
+		Ilogger? logger = jk8IFnVWb6();
+		string unknownDataFormat = logger?.GetStrNoReplace("mess_UnknownData") ?? "Unknown data: {0}";
 		foreach (ErrorItem item in list)
 		{
-			item.Description = string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_UnknownData"), item.Input);
+			item.Description = string.Format(unknownDataFormat, item.Input);
 		}
-		if (list2.Count == 0)
+		if (list.Count == 0)
 		{
 			return memoryStream.ToArray();
 		}
-		jk8IFnVWb6().Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_ScriptCompilerError"), list.Count));
-		jk8IFnVWb6().Error(list);
+		string compilerErrorFormat = logger?.GetStrNoReplace("mess_ScriptCompilerError") ?? "Script compiler errors: {0}";
+		logger?.Error(string.Format(compilerErrorFormat, list.Count));
+		logger?.Error(list);
 		return null;
 	}
 
@@ -516,7 +519,7 @@ public class ScriptFileCompilerOl
 		{
 			result = 4;
 			float result4;
-			bool num3 = float.TryParse(P_0, out result4);
+			bool num3 = float.TryParse(P_0, NumberStyles.Float, CultureInfo.InvariantCulture, out result4);
 			bytes = BitConverter.GetBytes(result4);
 			if (!num3)
 			{
@@ -616,7 +619,7 @@ public class ScriptFileCompilerOl
 		{
 			result = 4;
 			float result4;
-			bool num = float.TryParse(P_0, out result4);
+			bool num = float.TryParse(P_0, NumberStyles.Float, CultureInfo.InvariantCulture, out result4);
 			bytes = BitConverter.GetBytes(result4);
 			if (!num)
 			{
@@ -773,7 +776,7 @@ public class ScriptFileCompilerOl
 		{
 			result = 4;
 			float result4;
-			bool num3 = float.TryParse(P_0, out result4);
+			bool num3 = float.TryParse(P_0, NumberStyles.Float, CultureInfo.InvariantCulture, out result4);
 			bytes = BitConverter.GetBytes(result4);
 			if (!num3)
 			{

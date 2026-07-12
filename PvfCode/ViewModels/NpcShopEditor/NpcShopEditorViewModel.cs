@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -19,6 +20,21 @@ namespace PvfCode.ViewModels.NpcShopEditor;
 
 public class NpcShopEditorViewModel : ViewModelBase
 {
+	private sealed class PurchaseFileUpdate
+	{
+		public PvfFile File;
+
+		public List<NpcShopItem> Items = new List<NpcShopItem>();
+
+		public bool UpdatePrice;
+
+		public string PriceSection = string.Empty;
+
+		public bool UpdateNeedMaterial;
+
+		public string NeedMaterialSection = string.Empty;
+	}
+
 	[CompilerGenerated]
 	private sealed class _003C_003Ec__DisplayClass47_0
 	{
@@ -85,6 +101,8 @@ public class NpcShopEditorViewModel : ViewModelBase
 
 	[CompilerGenerated]
 	private ConcurrentObservableCollection<NpcShopPageViewModel> lbDmsLwH65;
+
+	private NpcShopPageViewModel? observedCurrentPage;
 
 	public PvfFile File
 	{
@@ -221,7 +239,7 @@ public class NpcShopEditorViewModel : ViewModelBase
 		}
 	}
 
-	public NpcShopPageViewModel CurrentPage
+	public NpcShopPageViewModel? CurrentPage
 	{
 		get
 		{
@@ -229,9 +247,64 @@ public class NpcShopEditorViewModel : ViewModelBase
 		}
 		set
 		{
-			SetProperty<NpcShopPageViewModel>(() => CurrentPage, value);
+			if (ReferenceEquals(CurrentPage, value))
+			{
+				return;
+			}
+			SetProperty<NpcShopPageViewModel?>(() => CurrentPage, value);
+			ObserveCurrentPage(value);
 		}
 	}
+
+	public NpcShopItem? CurrentPurchaseItem
+	{
+		get => GetProperty(() => CurrentPurchaseItem);
+		set
+		{
+			NpcShopItem? current = CurrentPurchaseItem;
+			if (ReferenceEquals(current, value))
+			{
+				value?.EnsurePurchaseDataLoaded();
+				return;
+			}
+			if (current != null)
+			{
+				current.PropertyChanged -= CurrentPurchaseItemPropertyChanged;
+			}
+			SetProperty<NpcShopItem?>(() => CurrentPurchaseItem, value);
+			if (value != null)
+			{
+				value.PropertyChanged += CurrentPurchaseItemPropertyChanged;
+				value.EnsurePurchaseDataLoaded();
+			}
+			RaisePropertyChanged(nameof(CurrentPurchaseItemCode));
+			RaisePropertyChanged(nameof(CanEditCurrentPurchaseItemCode));
+		}
+	}
+
+	public int? CurrentPurchaseItemCode
+	{
+		get => CurrentPurchaseItem?.ItemCode;
+		set
+		{
+			if (!value.HasValue || CurrentPurchaseItem == null || CurrentPurchaseItem.ItemCode == value.Value)
+			{
+				return;
+			}
+			if (!CanEditCurrentPurchaseItemCode)
+			{
+				AppCore.ShowMsg("当前商品的购买属性尚未保存，请先编译保存后再修改物品ID。", isError: true);
+				RaisePropertyChanged(nameof(CurrentPurchaseItemCode));
+				return;
+			}
+			CurrentPurchaseItem.ItemCode = value.Value;
+		}
+	}
+
+	public bool CanEditCurrentPurchaseItemCode =>
+		CurrentPurchaseItem != null &&
+		CurrentPurchaseItem is not NpcShopItemSource &&
+		!CurrentPurchaseItem.IsPurchaseDataModified;
 
 	public string Title
 	{
@@ -270,6 +343,41 @@ public class NpcShopEditorViewModel : ViewModelBase
 		Pages = new ConcurrentObservableCollection<NpcShopPageViewModel>();
 	}
 
+	private void ObserveCurrentPage(NpcShopPageViewModel? page)
+	{
+		if (observedCurrentPage != null)
+		{
+			observedCurrentPage.PropertyChanged -= CurrentPagePropertyChanged;
+		}
+		observedCurrentPage = page;
+		if (observedCurrentPage != null)
+		{
+			observedCurrentPage.PropertyChanged += CurrentPagePropertyChanged;
+		}
+		CurrentPurchaseItem = page?.CurrentItem;
+	}
+
+	private void CurrentPagePropertyChanged(object? sender, PropertyChangedEventArgs e)
+	{
+		if (e.PropertyName == nameof(NpcShopPageViewModel.CurrentItem))
+		{
+			CurrentPurchaseItem = observedCurrentPage?.CurrentItem;
+		}
+	}
+
+	private void CurrentPurchaseItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
+	{
+		if (e.PropertyName == nameof(NpcShopItem.ItemCode))
+		{
+			RaisePropertyChanged(nameof(CurrentPurchaseItemCode));
+			RaisePropertyChanged(nameof(CanEditCurrentPurchaseItemCode));
+		}
+		else if (e.PropertyName == nameof(NpcShopItem.IsPurchaseDataModified))
+		{
+			RaisePropertyChanged(nameof(CanEditCurrentPurchaseItemCode));
+		}
+	}
+
 	[Command]
 	public void OnLoaded()
 	{
@@ -292,6 +400,12 @@ public class NpcShopEditorViewModel : ViewModelBase
 
 	private void IqEmx2a4Ib()
 	{
+		foreach (NpcShopItemSource item in EquItems.Concat(StkItems).Where(item => item.IsPurchaseDataModified))
+		{
+			item.ReloadPurchaseData();
+		}
+		CurrentPage = null;
+		CurrentPurchaseItem = null;
 		Pages.Clear();
 		RaisePropertyChanged("NpcName");
 	}
@@ -392,6 +506,7 @@ public class NpcShopEditorViewModel : ViewModelBase
 			}
 		}
 		Pages.AddRange(CS_0024_003C_003E8__locals22.pY9dvhrrIo);
+		CurrentPage = Pages.FirstOrDefault();
 	}
 
 	private static string PKHmaI3tNd(List<string> P_0, int P_1)
@@ -430,39 +545,179 @@ public class NpcShopEditorViewModel : ViewModelBase
 	[Command]
 	public void OnSaveShop()
 	{
-		StringBuilder stringBuilder = new StringBuilder("[sell item]\r\n");
-		StringBuilder stringBuilder2 = new StringBuilder("[tab name]\r\n");
-		int num = 1;
+		if (CurrentNpcShop?.File == null || File == null)
+		{
+			AppCore.ShowMsg("请先选择要保存的NPC商店。", isError: true);
+			return;
+		}
+		if (!TryCreatePurchaseFileUpdates(out List<PurchaseFileUpdate> updates, out string? validationError))
+		{
+			AppCore.ShowMsg(validationError ?? "商品购买属性验证失败。", isError: true);
+			return;
+		}
+
+		List<(PurchaseFileUpdate Update, string Text)> purchaseTexts = new List<(PurchaseFileUpdate, string)>();
+		string shopText;
+		try
+		{
+			foreach (PurchaseFileUpdate update in updates)
+			{
+				purchaseTexts.Add((update, BuildPurchaseFileText(update)));
+			}
+			shopText = BuildShopFileText();
+		}
+		catch (Exception ex)
+		{
+			AppCore.ShowMsg("生成商店保存内容失败：" + ex.Message, isError: true);
+			return;
+		}
+
+		int savedPurchaseFileCount = 0;
+		foreach ((PurchaseFileUpdate update, string text) in purchaseTexts)
+		{
+			if (!Pvf.SaveFileText(update.File, text))
+			{
+				AppCore.ShowMsg(
+					$"商品文件保存失败：{update.File.FileName}\r\n已保存 {savedPurchaseFileCount}/{updates.Count} 个商品文件；商店文件未保存。",
+					isError: true);
+				return;
+			}
+			savedPurchaseFileCount++;
+			foreach (NpcShopItem item in update.Items)
+			{
+				item.ReloadPurchaseData();
+			}
+		}
+
+		if (!Pvf.SaveFileText(File, shopText))
+		{
+			AppCore.ShowMsg(
+				$"商店文件保存失败：{File.FileName}\r\n已保存 {savedPurchaseFileCount}/{updates.Count} 个商品文件；商店文件未保存。",
+				isError: true);
+			return;
+		}
+		AppCore.ShowMsg($"编译成功，已保存 {savedPurchaseFileCount} 个商品文件和商店文件。");
+	}
+
+	private bool TryCreatePurchaseFileUpdates(out List<PurchaseFileUpdate> updates, out string? error)
+	{
+		updates = new List<PurchaseFileUpdate>();
+		error = null;
+		List<NpcShopItem> allItems = Pages
+			.SelectMany(page => page.Items)
+			.Concat(EquItems.Cast<NpcShopItem>())
+			.Concat(StkItems.Cast<NpcShopItem>())
+			.Distinct()
+			.ToList();
+		List<NpcShopItem> dirtyItems = allItems.Where(item => item.IsPurchaseDataModified).ToList();
+		foreach (NpcShopItem item in dirtyItems)
+		{
+			if (!item.CanEditPurchaseData || item.File == null)
+			{
+				error = $"物品 {item.ItemCode} 没有可编辑的equ/stk商品文件。";
+				return false;
+			}
+			if (!item.TryValidatePurchaseData(out string? itemError))
+			{
+				error = $"商品文件 {item.File.FileName}：{itemError}";
+				return false;
+			}
+		}
+
+		foreach (IGrouping<string, NpcShopItem> group in dirtyItems.GroupBy(
+			item => item.File.FileName,
+			StringComparer.OrdinalIgnoreCase))
+		{
+			List<string> priceSections = group
+				.Where(item => item.IsPriceModified)
+				.Select(item => NpcShopPurchaseSectionFormatter.FormatPrice(item.Price))
+				.Distinct(StringComparer.Ordinal)
+				.ToList();
+			if (priceSections.Count > 1)
+			{
+				error = $"商品文件 {group.Key} 的金币价格存在多个不同修改，未写入任何文件。";
+				return false;
+			}
+
+			List<string> materialSections = group
+				.Where(item => item.IsNeedMaterialModified)
+				.Select(item => NpcShopPurchaseSectionFormatter.FormatNeedMaterial(
+					item.NeedMaterialItemCode,
+					item.NeedMaterialCount,
+					item.AdditionalNeedMaterialValues))
+				.Distinct(StringComparer.Ordinal)
+				.ToList();
+			if (materialSections.Count > 1)
+			{
+				error = $"商品文件 {group.Key} 的所需材料存在多个不同修改，未写入任何文件。";
+				return false;
+			}
+
+			PurchaseFileUpdate update = new PurchaseFileUpdate
+			{
+				File = group.First().File,
+				Items = allItems.Where(item => item.File != null && string.Equals(
+					item.File.FileName,
+					group.Key,
+					StringComparison.OrdinalIgnoreCase)).ToList(),
+				UpdatePrice = priceSections.Count == 1,
+				PriceSection = priceSections.FirstOrDefault() ?? string.Empty,
+				UpdateNeedMaterial = materialSections.Count == 1,
+				NeedMaterialSection = materialSections.FirstOrDefault() ?? string.Empty
+			};
+			updates.Add(update);
+		}
+		return true;
+	}
+
+	private string BuildPurchaseFileText(PurchaseFileUpdate update)
+	{
+		ScriptFileParserNew parser = new ScriptFileParserNew(update.File, Pvf);
+		parser.PraseStructureMain();
+		parser.Sections.RemoveAll(section =>
+			(update.UpdatePrice && string.Equals(section.GetSectionName(), "[price]", StringComparison.OrdinalIgnoreCase)) ||
+			(update.UpdateNeedMaterial && string.Equals(section.GetSectionName(), "[need material]", StringComparison.OrdinalIgnoreCase)));
+		return AppendSections(parser.GetText(), update.PriceSection + update.NeedMaterialSection);
+	}
+
+	private string BuildShopFileText()
+	{
+		StringBuilder sellItems = new StringBuilder("[sell item]\r\n");
+		StringBuilder tabNames = new StringBuilder("[tab name]\r\n");
+		int pageNumber = 1;
 		foreach (NpcShopPageViewModel page in Pages)
 		{
-			ConcurrentObservableCollection<NpcShopItem> items = page.Items;
-			if (items != null && items.Any())
+			if (page.Items != null && page.Items.Any())
 			{
-				stringBuilder.AppendLine(page.ToString());
-				StringBuilder stringBuilder3 = stringBuilder2;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(2, 1, stringBuilder3);
-				handler.AppendLiteral("`");
-				handler.AppendFormatted(page.Title);
-				handler.AppendLiteral("`");
-				stringBuilder3.AppendLine(ref handler);
+				sellItems.AppendLine(page.ToString());
+				tabNames.AppendLine($"`{page.Title}`");
 			}
-			if (num != Pages.Count)
+			if (pageNumber != Pages.Count)
 			{
-				stringBuilder.AppendLine("-2\t");
+				sellItems.AppendLine("-2\t");
 			}
-			num++;
+			pageNumber++;
 		}
-		stringBuilder.AppendLine("[/sell item]");
-		stringBuilder2.AppendLine("[/tab name]");
-		ScriptFileParserNew scriptFileParserNew = new ScriptFileParserNew(File, Pvf);
-		scriptFileParserNew.PraseStructureMain();
-		scriptFileParserNew.RemoveSection("[sell item]");
-		scriptFileParserNew.RemoveSection("[tab name]");
-		StringBuilder stringBuilder4 = new StringBuilder(scriptFileParserNew.GetText());
-		stringBuilder4.AppendLine(stringBuilder.ToString());
-		stringBuilder4.AppendLine(stringBuilder2.ToString());
-		Pvf.SaveFileText(File, stringBuilder4.ToString());
-		AppCore.ShowMsg("编译成功");
+		sellItems.AppendLine("[/sell item]");
+		tabNames.AppendLine("[/tab name]");
+
+		ScriptFileParserNew parser = new ScriptFileParserNew(File, Pvf);
+		parser.PraseStructureMain();
+		parser.Sections.RemoveAll(section =>
+			string.Equals(section.GetSectionName(), "[sell item]", StringComparison.OrdinalIgnoreCase) ||
+			string.Equals(section.GetSectionName(), "[tab name]", StringComparison.OrdinalIgnoreCase));
+		return AppendSections(parser.GetText(), sellItems.ToString() + tabNames.ToString());
+	}
+
+	private static string AppendSections(string originalText, string sections)
+	{
+		StringBuilder output = new StringBuilder(originalText ?? string.Empty);
+		if (output.Length > 0 && output[output.Length - 1] != '\r' && output[output.Length - 1] != '\n')
+		{
+			output.AppendLine();
+		}
+		output.Append(sections);
+		return output.ToString();
 	}
 
 	[Command]
@@ -481,6 +736,11 @@ public class NpcShopEditorViewModel : ViewModelBase
 	[Command]
 	public void OnDeletePage(NpcShopPageViewModel page)
 	{
+		if (page?.Items.Any(item => item.IsPurchaseDataModified) == true)
+		{
+			AppCore.ShowMsg("当前页包含尚未保存的商品购买属性，请先编译保存。", isError: true);
+			return;
+		}
 		if (page != null && AppCore.Logger.ShowDialog("确定要删除当前页：" + page.Title + "？") == MessageResult.Yes)
 		{
 			Pages.Remove(page);
