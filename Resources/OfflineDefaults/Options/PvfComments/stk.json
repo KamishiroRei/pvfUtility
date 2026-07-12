@@ -6,8 +6,8 @@
       "PvfCommentType": "Section",
       "FileType": "stk",
       "Section": "3choro enchant",
-      "Title": "异次元属性赋予",
-      "Comment": "异次元属性赋予",
+      "Title": "异次元碎片属性赋予",
+      "Comment": "异次元碎片属性赋予",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "unMen"
@@ -136,8 +136,8 @@
       "PvfCommentType": "Section",
       "FileType": "stk",
       "Section": "booster random",
-      "Title": "随机魔盒",
-      "Comment": "随机魔盒",
+      "Title": "随机礼盒/魔盒",
+      "Comment": "随机礼盒/魔盒",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "天盗狂人"
@@ -145,18 +145,8 @@
     {
       "PvfCommentType": "Section",
       "FileType": "stk",
-      "Section": "booster select category",
-      "Title": "助推器选择类别",
-      "Comment": "助推器选择类别",
-      "OfficialDescription": null,
-      "Closing": false,
-      "Authors": "无名氏"
-    },
-    {
-      "PvfCommentType": "Section",
-      "FileType": "stk",
       "Section": "booster selection num",
-      "Title": "礼盒中",
+      "Title": "可选礼盒内容的可选择数量",
       "Comment": "礼盒中，控制物品选择数量。\n“0”为不可选择\n“1”为只能选择一个\n以此类推",
       "OfficialDescription": null,
       "Closing": false,
@@ -736,7 +726,7 @@
       "PvfCommentType": "Section",
       "FileType": "stk",
       "Section": "booster category num",
-      "Title": "礼包选择数量控制",
+      "Title": "礼包选择级数控制",
       "Comment": "第一个数字来决定选择级数\n如果是1就是1级选择，共n页\n如果是2就是2级选择菜单，一级选择n项，二级选择m项",
       "OfficialDescription": null,
       "Closing": false,
@@ -748,6 +738,46 @@
       "Section": "booster select category",
       "Title": "礼包选择页",
       "Comment": "开始的两个数字代表一级和二级选择位置\n其内可能是物品[stackable]、装备[equipment]、时装[avatar]，其他[etc]等，一般每行以id+数量显示",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Lancarus"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "stackable",
+      "Title": "道具",
+      "Comment": "id+数量",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Lancarus"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "equipment",
+      "Title": "装备",
+      "Comment": "id+数量",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Lancarus"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "avatar",
+      "Title": "装扮",
+      "Comment": "id+数量",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Lancarus"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "etc",
+      "Title": "其他",
+      "Comment": "物品或者装备的id+数量",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Lancarus"

@@ -9,6 +9,9 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 using ICSharpCode.AvalonEdit.Document;
+using PvfCode.Models.Options.Editor.ItemCodeHoverConfigModels;
+using PvfCode.Services;
+using PvfCode.Services.PreviewPvfFileFolder.Stackable.Models;
 using PvfCode.ViewModels.DocumentFolder.Enums;
 using PvfCode.ViewModels.DocumentFolder.PreviewControls;
 
@@ -79,12 +82,15 @@ public sealed class PvfPreviewField
 
 	public PvfPreviewTone Tone { get; }
 
-	public PvfPreviewField(string label, string value, PvfPreviewTag tag = null, PvfPreviewTone tone = PvfPreviewTone.Normal)
+	public ImageSource Icon { get; }
+
+	public PvfPreviewField(string label, string value, PvfPreviewTag tag = null, PvfPreviewTone tone = PvfPreviewTone.Normal, ImageSource icon = null)
 	{
 		Label = label;
 		Value = value;
 		Tag = tag;
 		Tone = tone;
+		Icon = icon;
 	}
 }
 
@@ -94,10 +100,13 @@ public sealed class PvfPreviewLine
 
 	public PvfPreviewTag Tag { get; }
 
-	public PvfPreviewLine(string text, PvfPreviewTag tag)
+	public ImageSource Icon { get; }
+
+	public PvfPreviewLine(string text, PvfPreviewTag tag, ImageSource icon = null)
 	{
 		Text = text;
 		Tag = tag;
+		Icon = icon;
 	}
 }
 
@@ -113,15 +122,18 @@ public sealed class PvfPreviewEntry
 
 	public PvfPreviewTag Tag { get; }
 
+	public ImageSource Icon { get; }
+
 	public string DisplayName => Quantity.HasValue ? $"{Code}  {Name} x{Quantity}" : $"{Code}  {Name}";
 
-	public PvfPreviewEntry(int code, int? quantity, string name, string detail, PvfPreviewTag tag)
+	public PvfPreviewEntry(int code, int? quantity, string name, string detail, PvfPreviewTag tag, ImageSource icon = null)
 	{
 		Code = code;
 		Quantity = quantity;
 		Name = name;
 		Detail = detail;
 		Tag = tag;
+		Icon = icon;
 	}
 }
 
@@ -167,13 +179,16 @@ public sealed class PvfPreviewNode
 
 	public PvfPreviewTag Tag { get; }
 
-	public PvfPreviewNode(int code, string name, double x, double y, PvfPreviewTag tag)
+	public ImageSource Icon { get; }
+
+	public PvfPreviewNode(int code, string name, double x, double y, PvfPreviewTag tag, ImageSource icon = null)
 	{
 		Code = code;
 		Name = name;
 		X = x;
 		Y = y;
 		Tag = tag;
+		Icon = icon;
 	}
 }
 
@@ -190,6 +205,8 @@ public sealed class PvfPreviewSection
 	public List<PvfPreviewLine> Lines { get; } = new();
 
 	public List<PvfPreviewEntry> Entries { get; } = new();
+
+	public bool ShowAllEntries { get; set; }
 
 	public List<PvfPreviewTable> Tables { get; } = new();
 
@@ -282,7 +299,8 @@ public sealed class PvfPreviewDocument : DocumentBase
 		"result item", "reward int data", "reward selection int data", "sell item", "set ability",
 		"set item", "skill fitness growtype", "skill fitness second growtype", "skill info", "skill levelup",
 		"skill under cooltime effect", "skill under cooltime effect each", "special level up",
-		"special purchase cost", "spending item", "static data", "string data", "usable job"
+		"special purchase cost", "spending item", "static data", "string data", "usable job",
+		"booster select category"
 	};
 
 	private static readonly HashSet<string> KnownPreviewTags = new(BlockValueTags, StringComparer.OrdinalIgnoreCase)
@@ -297,7 +315,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 		"required level", "required level range", "reward type", "set name", "skill class",
 		"skill command advantage", "stack limit", "stackable type", "start cool time", "tab name", "type",
 		"use effect explain", "value", "weapon effect type", "weight", "durability", "weapon shop",
-		"character job", "part set index"
+		"character job", "part set index", "booster category num", "booster category name"
 	};
 
 	private static readonly Dictionary<string, string> EquipmentStats = new(StringComparer.OrdinalIgnoreCase)
@@ -341,6 +359,42 @@ public sealed class PvfPreviewDocument : DocumentBase
 		["rogue"] = "刺客", ["necromancer"] = "死灵术士"
 	};
 
+	private static readonly Dictionary<string, string> StackableTypeLabels = new(StringComparer.OrdinalIgnoreCase)
+	{
+		["recipe"] = "设计图",
+		["upgradable legacy"] = "罐子类",
+		["quest"] = "任务物品（被放在背包的任务物品栏）",
+		["booster random"] = "随机魔盒",
+		["multi upgradable legacy"] = "幸运礼盒",
+		["booster"] = "礼包：使用后获得(所有/随机)物品",
+		["booster selection"] = "礼包：可选",
+		["cera booster"] = "礼包：自动使用",
+		["unlimited waste"] = "重复使用",
+		["material"] = "材料"
+	};
+
+	private static readonly HashSet<string> SkillReferenceTags = new(StringComparer.OrdinalIgnoreCase)
+	{
+		"pre required skill", "next skill", "skill info", "original skill", "skill index", "skill id"
+	};
+
+	private static readonly Dictionary<string, string[]> ReferenceTagLstNames = new(StringComparer.OrdinalIgnoreCase)
+	{
+		["npc"] = new[] { "npc" },
+		["npc index"] = new[] { "npc" },
+		["complete npc index"] = new[] { "npc" },
+		["delete npc index"] = new[] { "npc" },
+		["pre required quest"] = new[] { "n_quest" },
+		["relation quest"] = new[] { "n_quest" },
+		["collision quest"] = new[] { "n_quest" },
+		["dungeon"] = new[] { "dungeon" },
+		["dungeon info"] = new[] { "dungeon" },
+		["limit dungeon index"] = new[] { "dungeon" },
+		["monster"] = new[] { "monster" },
+		["ai character"] = new[] { "aicharacter" },
+		["passive object"] = new[] { "passiveobject" }
+	};
+
 	private static readonly Dictionary<int, string> SkillDamageSourceLabels = new()
 	{
 		[-1] = "百分比伤害",
@@ -353,6 +407,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 	};
 
 	private readonly Dictionary<string, List<PvfPreviewTag>> tagsByName = new(StringComparer.OrdinalIgnoreCase);
+	private readonly Dictionary<string, ImageSource> referenceIconCache = new(StringComparer.OrdinalIgnoreCase);
 	private TextDocument sourceTextDocument;
 	private PvfFileDocument sourceDocument;
 	private TextEditorPreviewViewModelAni aniPreviewViewModel;
@@ -463,6 +518,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 		{
 			return;
 		}
+		referenceIconCache.Clear();
 		ParseTags(sourceTextDocument?.Text ?? string.Empty);
 		RichPreview = BuildRichPreview(sourceDocument.File);
 		if (IsAniPreview)
@@ -650,7 +706,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 	{
 		PvfPreviewSection info = AddSection(preview, "道具信息", PvfPreviewTone.Normal, "stackable type");
 		AddCode(info, "ID", preview.ItemCode);
-		AddField(info, "类型", LabelToken(FirstText("stackable type")), "stackable type");
+		AddField(info, "类型", StackableTypeText(), "stackable type");
 		AddField(info, "堆叠上限", NumberText(FirstNumber("stack limit")), "stack limit");
 		AddField(info, "等级限制", LevelText(FirstNumber("minimum level")), "minimum level");
 		AddField(info, "交易", TradeText(FirstText("attach type")), "attach type");
@@ -659,10 +715,118 @@ public sealed class PvfPreviewDocument : DocumentBase
 		RemoveEmpty(preview, info);
 		AddTextSection(preview, "道具说明", PvfPreviewTone.Blue, "explain", "basic explain", "detail explain", "use effect explain");
 		AddEntrySection(preview, "礼包内容", PvfPreviewTone.Shop, true, "package data");
-		AddEntrySection(preview, "随机/产出内容", PvfPreviewTone.Shop, false, "random list", "booster random", "etc", "output", "result item");
+		bool isBoosterSelection = string.Equals(LabelToken(FirstText("stackable type")), "booster selection", StringComparison.OrdinalIgnoreCase);
+		if (!isBoosterSelection || !AddBoosterSelectionPreview(preview))
+		{
+			AddEntrySection(preview, "随机/产出内容", PvfPreviewTone.Shop, false, "random list", "booster random", "etc", "output", "result item");
+		}
 		AddEntrySection(preview, "材料/条件", PvfPreviewTone.Normal, false, "need material", "material", "condition item", "a condition item", "b condition item");
 		AddTextSection(preview, "附魔/特殊数据", PvfPreviewTone.Blue, "enchant", "monster card id", "string data", "stat change", "stat change duration");
 		AddTextSection(preview, "风味文本", PvfPreviewTone.Flavor, "flavor text");
+	}
+
+	private string StackableTypeText()
+	{
+		PvfPreviewTag tag = FindTag("stackable type");
+		string rawValue = tag?.Values.FirstOrDefault() ?? FirstText("stackable type");
+		string token = LabelToken(rawValue);
+		if (string.IsNullOrWhiteSpace(token))
+		{
+			return null;
+		}
+		if (string.Equals(token, "usable cera package", StringComparison.OrdinalIgnoreCase))
+		{
+			List<int> arguments = NumbersFromLines(tag?.Values ?? Array.Empty<string>());
+			return arguments.FirstOrDefault() == 0 && arguments.Count > 0
+				? "时装礼包开启后可自己选择属性"
+				: token;
+		}
+		return StackableTypeLabels.TryGetValue(token, out string label) ? label : token;
+	}
+
+	private bool AddBoosterSelectionPreview(PvfRichPreview preview)
+	{
+		try
+		{
+			PvfGroup pvf = AppCore.ViewModelBase.PVF;
+			if (pvf == null || sourceDocument?.File == null ||
+				!new ServiceStackable(pvf, sourceDocument.File).GetBoosterSelectionInfo(out BoosterInfo boosterInfo) ||
+				boosterInfo?.Items == null || boosterInfo.Items.Count == 0)
+			{
+				return false;
+			}
+
+			int totalItemCount = boosterInfo.Items.Sum(group => group.Items?.Count ?? 0);
+			int nonEmptyPageCount = boosterInfo.Items
+				.Where(group => group.Items != null && group.Items.Count > 0)
+				.Select(group => (group.PrimaryCategoryIndex, group.SecondaryCategoryIndex))
+				.Distinct()
+				.Count();
+			PvfPreviewSection summary = new("自选礼盒菜单", PvfPreviewTone.Shop, FindTag("booster category num"));
+			summary.Fields.Add(new PvfPreviewField("菜单层级", $"{boosterInfo.SelectionMenuLevel} 级", FindTag("booster category num"), PvfPreviewTone.Shop));
+			summary.Fields.Add(new PvfPreviewField("一级选项", boosterInfo.PrimaryCategoryCount.ToString(CultureInfo.InvariantCulture), FindTag("booster category num")));
+			if (boosterInfo.SelectionMenuLevel == 2)
+			{
+				summary.Fields.Add(new PvfPreviewField("二级选项/一级", boosterInfo.SecondaryCategoryCount.ToString(CultureInfo.InvariantCulture), FindTag("booster category num")));
+			}
+			if (!string.IsNullOrWhiteSpace(boosterInfo.SelectionPrompt))
+			{
+				summary.Fields.Add(new PvfPreviewField("一级选择提示", boosterInfo.SelectionPrompt, FindTag("booster category name")));
+			}
+			if (!string.IsNullOrWhiteSpace(boosterInfo.SecondarySelectionPrompt))
+			{
+				summary.Fields.Add(new PvfPreviewField("二级选择提示", boosterInfo.SecondarySelectionPrompt, FindTag("booster category name")));
+			}
+			summary.Fields.Add(new PvfPreviewField("非空页面", nonEmptyPageCount.ToString(CultureInfo.InvariantCulture)));
+			summary.Fields.Add(new PvfPreviewField("物品总数", totalItemCount.ToString(CultureInfo.InvariantCulture)));
+			preview.Sections.Add(summary);
+
+			foreach (BoosterInfo.BoosterInfoItemRoot group in boosterInfo.Items.Where(group => group.Items != null && group.Items.Count > 0))
+			{
+				string title = string.IsNullOrWhiteSpace(group.Title)
+					? $"自选礼盒 - {BoosterInfo.BoosterTypeToName(group.Type)}"
+					: $"自选礼盒 - {group.Title}";
+				PvfPreviewTag categoryTag = FindBoosterSelectionTag(group.PrimaryCategoryIndex, group.SecondaryCategoryIndex);
+				PvfPreviewSection section = new(title, PvfPreviewTone.Shop, categoryTag)
+				{
+					ShowAllEntries = true
+				};
+				string itemType = BoosterInfo.BoosterTypeToName(group.Type);
+				foreach (BoosterInfo.BoosterInfoItemBase item in group.Items)
+				{
+					section.Entries.Add(new PvfPreviewEntry(
+						item.ItemCode,
+						item.ItemNumber,
+						ResolveItemName(item.ItemCode),
+						$"类型：{itemType}",
+						categoryTag,
+						ResolveReferenceIcon(item.ItemCode, null, 0, null, fallbackToItems: true)));
+				}
+				preview.Sections.Add(section);
+			}
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
+	}
+
+	private PvfPreviewTag FindBoosterSelectionTag(int? primaryIndex, int? secondaryIndex)
+	{
+		if (!tagsByName.TryGetValue("booster select category", out List<PvfPreviewTag> occurrences))
+		{
+			return null;
+		}
+		foreach (PvfPreviewTag occurrence in occurrences)
+		{
+			List<int> indexes = NumbersFromLines(occurrence.Values);
+			if (indexes.Count >= 2 && indexes[0] == primaryIndex && indexes[1] == secondaryIndex)
+			{
+				return occurrence;
+			}
+		}
+		return occurrences.FirstOrDefault();
 	}
 
 	private void BuildShop(PvfRichPreview preview)
@@ -1205,7 +1369,14 @@ public sealed class PvfPreviewDocument : DocumentBase
 			}
 			double x = double.Parse(pos.Groups[1].Value, CultureInfo.InvariantCulture);
 			double y = double.Parse(pos.Groups[2].Value, CultureInfo.InvariantCulture);
-			preview.SkillTreeNodes.Add(new PvfPreviewNode(code.Value, ResolveItemName(code.Value), x, y, tag));
+			PvfFile skillFile = ResolveReferenceFile(code.Value, "skill info", 0, GetSkillReferenceDirectories());
+			preview.SkillTreeNodes.Add(new PvfPreviewNode(
+				code.Value,
+				ResolveReferenceName(skillFile, code.Value),
+				x,
+				y,
+				tag,
+				ResolveFileIcon(skillFile)));
 		}
 		if (preview.SkillTreeNodes.Count == 0)
 		{
@@ -1221,7 +1392,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 			string value = tag.ValuePreview;
 			if (!string.IsNullOrEmpty(value))
 			{
-				section.Fields.Add(new PvfPreviewField(tag.TagLabel, value, tag));
+				section.Fields.Add(new PvfPreviewField(tag.TagLabel, value, tag, PvfPreviewTone.Normal, ResolveTagIcon(tag.Name, tag.Values)));
 			}
 		}
 		if (section.Fields.Count == 0)
@@ -1256,7 +1427,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 			PvfPreviewTag tag = FindTag(tagName);
 			foreach (string line in TagLines(tagName).SelectMany(value => value.Replace("\\n", "\n").Split('\n')).Select(value => value.Trim()).Where(value => value.Length > 0).Take(80))
 			{
-				section.Lines.Add(new PvfPreviewLine(line, tag));
+				section.Lines.Add(new PvfPreviewLine(line, tag, ResolveLineIcon(tagName, line)));
 			}
 		}
 		if (section.Lines.Count > 0)
@@ -1278,7 +1449,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 				{
 					for (int index = 0; index < numbers.Count; index += 2)
 					{
-						AddEntry(section, numbers[index], index + 1 < numbers.Count ? numbers[index + 1] : null, line, tag);
+						AddEntry(section, numbers[index], index + 1 < numbers.Count ? numbers[index + 1] : null, line, tag, tagName, index);
 					}
 				}
 				else
@@ -1288,7 +1459,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 					{
 						int codeIndex = numbers.IndexOf(code);
 						int? quantity = codeIndex + 1 < numbers.Count ? numbers[codeIndex + 1] : null;
-						AddEntry(section, code, quantity, line, tag);
+						AddEntry(section, code, quantity, line, tag, tagName, codeIndex);
 					}
 				}
 			}
@@ -1299,28 +1470,220 @@ public sealed class PvfPreviewDocument : DocumentBase
 		}
 	}
 
-	private void AddEntry(PvfPreviewSection section, int code, int? quantity, string detail, PvfPreviewTag tag)
+	private void AddEntry(PvfPreviewSection section, int code, int? quantity, string detail, PvfPreviewTag tag, string tagName, int index)
 	{
 		if (code < 0 || section.Entries.Any(entry => entry.Code == code && entry.Quantity == quantity))
 		{
 			return;
 		}
-		section.Entries.Add(new PvfPreviewEntry(code, quantity, ResolveItemName(code), CleanValue(detail), tag));
+		PvfFile referenceFile = ResolveReferenceFile(code, tagName, index, null, fallbackToItems: true);
+		section.Entries.Add(new PvfPreviewEntry(
+			code,
+			quantity,
+			ResolveReferenceName(referenceFile, code),
+			CleanValue(detail),
+			tag,
+			ResolveFileIcon(referenceFile)));
 	}
 
 	private string ResolveItemName(int code)
 	{
+		return ResolveReferenceName(ResolveReferenceFile(code, null, 0, null, fallbackToItems: true), code);
+	}
+
+	private ImageSource ResolveTagIcon(string tagName, IEnumerable<string> values)
+	{
+		if (values == null)
+		{
+			return null;
+		}
+		int index = 0;
+		foreach (string value in values)
+		{
+			ImageSource pathIcon = ResolvePathIcon(value);
+			if (pathIcon != null)
+			{
+				return pathIcon;
+			}
+			foreach (Match match in NumberRegex.Matches(value ?? string.Empty))
+			{
+				if (int.TryParse(match.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int code))
+				{
+					ImageSource icon = ResolveReferenceIcon(code, tagName, index, SkillReferenceTags.Contains(tagName) ? GetSkillReferenceDirectories() : null);
+					if (icon != null)
+					{
+						return icon;
+					}
+				}
+				index++;
+			}
+		}
+		return null;
+	}
+
+	private ImageSource ResolveLineIcon(string tagName, string line)
+	{
+		ImageSource pathIcon = ResolvePathIcon(line);
+		if (pathIcon != null)
+		{
+			return pathIcon;
+		}
+		int index = 0;
+		foreach (Match match in NumberRegex.Matches(line ?? string.Empty))
+		{
+			if (int.TryParse(match.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int code))
+			{
+				ImageSource icon = ResolveReferenceIcon(code, tagName, index, SkillReferenceTags.Contains(tagName) ? GetSkillReferenceDirectories() : null);
+				if (icon != null)
+				{
+					return icon;
+				}
+			}
+			index++;
+		}
+		return null;
+	}
+
+	private ImageSource ResolvePathIcon(string value)
+	{
+		string path = CleanValue(value)?.Replace('\\', '/');
+		if (string.IsNullOrWhiteSpace(path) || !path.Contains('/') || !path.Contains('.'))
+		{
+			return null;
+		}
+		return ResolveFileIcon(AppCore.ViewModelBase.PVF?.GetFile(path));
+	}
+
+	private ImageSource ResolveReferenceIcon(int code, string tagName, int index, IEnumerable<string> preferredLstNames, bool fallbackToItems = false)
+	{
+		return ResolveFileIcon(ResolveReferenceFile(code, tagName, index, preferredLstNames, fallbackToItems));
+	}
+
+	private PvfFile ResolveReferenceFile(int code, string tagName, int index, IEnumerable<string> preferredLstNames, bool fallbackToItems = false)
+	{
 		try
 		{
-			var pvf = AppCore.ViewModelBase.PVF;
-			string path = pvf?.ListFileTable?.ItemCodeConvertFilePath(code);
-			PvfFile file = string.IsNullOrEmpty(path) ? null : pvf.GetFile(path);
-			return pvf?.GetItemName(file) ?? (string.IsNullOrEmpty(path) ? "未解析" : Path.GetFileNameWithoutExtension(path));
+			PvfGroup pvf = AppCore.ViewModelBase.PVF;
+			if (pvf?.ListFileTable == null || code < 0)
+			{
+				return null;
+			}
+
+			PvfFile file = ResolveReferenceFileFromLstNames(pvf, code, preferredLstNames);
+			if (file != null)
+			{
+				return file;
+			}
+			if (!string.IsNullOrWhiteSpace(tagName) && ReferenceTagLstNames.TryGetValue(tagName, out string[] builtInLstNames))
+			{
+				file = ResolveReferenceFileFromLstNames(pvf, code, builtInLstNames);
+				if (file != null)
+				{
+					return file;
+				}
+			}
+
+			if (!string.IsNullOrWhiteSpace(tagName) && sourceDocument?.File != null)
+			{
+				List<KeyValuePair<string, ItemCodeHoverInfoBase>> configs = AppSetting.Instance.EditConfig
+					.ItemCodeConvertItemNameConfiger.Get(sourceDocument.File.FileName, $"[{tagName}]", index, code);
+				foreach (KeyValuePair<string, ItemCodeHoverInfoBase> config in configs ?? new List<KeyValuePair<string, ItemCodeHoverInfoBase>>())
+				{
+					if (config.Value?.ValidationSectionList?.Count > 0)
+					{
+						continue;
+					}
+					ItemCodeHoverInfoBase resolvedConfig = config.Value?.Get(index, code);
+					file = ResolveReferenceFileFromLstNames(pvf, code, resolvedConfig?.LstFileNames);
+					if (file != null)
+					{
+						return file;
+					}
+				}
+			}
+
+			return fallbackToItems
+				? ResolveReferenceFileFromLstNames(pvf, code, new[] { "stackable", "equipment" })
+				: null;
+		}
+		catch
+		{
+			return null;
+		}
+	}
+
+	private static PvfFile ResolveReferenceFileFromLstNames(PvfGroup pvf, int code, IEnumerable<string> lstNames)
+	{
+		if (lstNames == null)
+		{
+			return null;
+		}
+		string path = pvf.ListFileTable.ItemCodeConvertFilePath(lstNames.Where(name => !string.IsNullOrWhiteSpace(name)), code);
+		return string.IsNullOrEmpty(path) ? null : pvf.GetFile(path);
+	}
+
+	private ImageSource ResolveFileIcon(PvfFile file)
+	{
+		if (file == null)
+		{
+			return null;
+		}
+		string cacheKey = file.FileName ?? file.ShortName;
+		if (!string.IsNullOrEmpty(cacheKey) && referenceIconCache.TryGetValue(cacheKey, out ImageSource cached))
+		{
+			return cached;
+		}
+		try
+		{
+			if (ImagePack2Service.Instance.GetIcon(AppCore.ViewModelBase.PVF, file, out ImageSource icon) && icon != null)
+			{
+				if (!string.IsNullOrEmpty(cacheKey))
+				{
+					referenceIconCache[cacheKey] = icon;
+				}
+				return icon;
+			}
+		}
+		catch
+		{
+		}
+		return null;
+	}
+
+	private string ResolveReferenceName(PvfFile file, int code)
+	{
+		try
+		{
+			if (file == null)
+			{
+				return "未解析";
+			}
+			return AppCore.ViewModelBase.PVF?.GetItemName(file) ?? Path.GetFileNameWithoutExtension(file.ShortName) ?? code.ToString(CultureInfo.InvariantCulture);
 		}
 		catch
 		{
 			return "未解析";
 		}
+	}
+
+	private IReadOnlyList<string> GetSkillReferenceDirectories()
+	{
+		List<string> directories = new();
+		string sourcePath = sourceDocument?.File?.FileName?.Replace('\\', '/');
+		if (!string.IsNullOrEmpty(sourcePath) && sourcePath.StartsWith("skill/", StringComparison.OrdinalIgnoreCase))
+		{
+			string[] parts = sourcePath.Split('/');
+			if (parts.Length >= 2)
+			{
+				directories.Add($"skill/{parts[1]}");
+			}
+		}
+		string job = LabelToken(FirstText("character job"));
+		if (!string.IsNullOrWhiteSpace(job))
+		{
+			directories.Add($"skill/{job.Replace(" ", string.Empty).ToLowerInvariant()}");
+		}
+		return directories.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
 	}
 
 	private PvfPreviewSection AddSection(PvfRichPreview preview, string title, PvfPreviewTone tone, string tagName)
@@ -1342,7 +1705,8 @@ public sealed class PvfPreviewDocument : DocumentBase
 	{
 		if (!string.IsNullOrWhiteSpace(value))
 		{
-			section.Fields.Add(new PvfPreviewField(label, value, FindTag(tagName), tone));
+			PvfPreviewTag tag = FindTag(tagName);
+			section.Fields.Add(new PvfPreviewField(label, value, tag, tone, ResolveTagIcon(tagName, tag?.Values)));
 		}
 	}
 

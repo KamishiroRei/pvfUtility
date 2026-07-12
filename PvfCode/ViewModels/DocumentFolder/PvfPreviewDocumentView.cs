@@ -297,18 +297,28 @@ public sealed class PvfPreviewDocumentView : UserControl
 		{
 			double x = 35 + (node.X - minX) * scale;
 			double y = 35 + (node.Y - minY) * scale;
+			Grid nodeContent = new();
+			nodeContent.ColumnDefinitions.Add(new ColumnDefinition { Width = node.Icon == null ? new GridLength(0) : new GridLength(30) });
+			nodeContent.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+			if (node.Icon != null)
+			{
+				nodeContent.Children.Add(CreateReferenceIcon(node.Icon, 26));
+			}
+			TextBlock nodeText = new()
+			{
+				Text = $"{node.Code}\n{node.Name}",
+				FontSize = 9,
+				TextAlignment = TextAlignment.Center,
+				TextTrimming = TextTrimming.CharacterEllipsis
+			};
+			Grid.SetColumn(nodeText, 1);
+			nodeContent.Children.Add(nodeText);
 			Button button = new()
 			{
-				Width = 78,
-				Height = 34,
+				Width = 92,
+				Height = 48,
 				Padding = new Thickness(3),
-				Content = new TextBlock
-				{
-					Text = $"{node.Code}\n{node.Name}",
-					FontSize = 9,
-					TextAlignment = TextAlignment.Center,
-					TextTrimming = TextTrimming.CharacterEllipsis
-				},
+				Content = nodeContent,
 				ToolTip = $"[{node.Tag?.Name}] 第 {node.Tag?.LineNumber} 行",
 				Cursor = Cursors.Hand
 			};
@@ -329,8 +339,15 @@ public sealed class PvfPreviewDocumentView : UserControl
 		{
 			Grid row = new() { MinHeight = 18 };
 			row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto, MinWidth = 112 });
+			row.ColumnDefinitions.Add(new ColumnDefinition { Width = field.Icon == null ? new GridLength(0) : new GridLength(26) });
 			row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 			FrameworkElement label = CreateTagButton(field.Label, field.Tag, MutedTextBrush, 12, FontWeights.Normal);
+			if (field.Icon != null)
+			{
+				FrameworkElement icon = CreateReferenceIcon(field.Icon, 20);
+				Grid.SetColumn(icon, 1);
+				row.Children.Add(icon);
+			}
 			TextBlock value = new()
 			{
 				Text = field.Value,
@@ -338,14 +355,24 @@ public sealed class PvfPreviewDocumentView : UserControl
 				TextWrapping = TextWrapping.Wrap,
 				Margin = new Thickness(8, 1, 0, 1)
 			};
-			Grid.SetColumn(value, 1);
+			Grid.SetColumn(value, 2);
 			row.Children.Add(label);
 			row.Children.Add(value);
 			panel.Children.Add(row);
 		}
 		foreach (PvfPreviewLine line in section.Lines)
 		{
-			panel.Children.Add(CreateTagButton(line.Text, line.Tag, ToneBrush(section.Tone), 12, FontWeights.Normal, true));
+			Grid lineRow = new() { MinHeight = line.Icon == null ? 18 : 26 };
+			lineRow.ColumnDefinitions.Add(new ColumnDefinition { Width = line.Icon == null ? new GridLength(0) : new GridLength(30) });
+			lineRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+			if (line.Icon != null)
+			{
+				lineRow.Children.Add(CreateReferenceIcon(line.Icon, 24));
+			}
+			FrameworkElement lineText = CreateTagButton(line.Text, line.Tag, ToneBrush(section.Tone), 12, FontWeights.Normal, true);
+			Grid.SetColumn(lineText, 1);
+			lineRow.Children.Add(lineText);
+			panel.Children.Add(lineRow);
 		}
 		foreach (PvfPreviewTable table in section.Tables)
 		{
@@ -361,11 +388,17 @@ public sealed class PvfPreviewDocumentView : UserControl
 				Margin = new Thickness(0, 3, 0, 0)
 			};
 			StackPanel entries = new();
-			foreach (PvfPreviewEntry entry in section.Entries.Take(80))
+			IEnumerable<PvfPreviewEntry> visibleEntries = section.ShowAllEntries ? section.Entries : section.Entries.Take(80);
+			foreach (PvfPreviewEntry entry in visibleEntries)
 			{
-				Grid row = new() { MinHeight = 29, Margin = new Thickness(6, 2, 6, 2) };
+				Grid row = new() { MinHeight = entry.Icon == null ? 29 : 34, Margin = new Thickness(6, 2, 6, 2) };
+				row.ColumnDefinitions.Add(new ColumnDefinition { Width = entry.Icon == null ? new GridLength(0) : new GridLength(36) });
 				row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 				row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+				if (entry.Icon != null)
+				{
+					row.Children.Add(CreateReferenceIcon(entry.Icon, 30));
+				}
 				StackPanel text = new();
 				text.Children.Add(CreateTagButton(entry.DisplayName, entry.Tag, ToneBrush(section.Tone), 12, FontWeights.SemiBold));
 				if (!string.IsNullOrEmpty(entry.Detail))
@@ -373,7 +406,8 @@ public sealed class PvfPreviewDocumentView : UserControl
 					text.Children.Add(new TextBlock { Text = entry.Detail, Foreground = FlavorBrush, FontSize = 10, TextWrapping = TextWrapping.Wrap });
 				}
 				TextBlock lineNumber = new() { Text = entry.Tag == null ? string.Empty : $"L{entry.Tag.LineNumber}", Foreground = MutedTextBrush, FontSize = 10, VerticalAlignment = VerticalAlignment.Center };
-				Grid.SetColumn(lineNumber, 1);
+				Grid.SetColumn(text, 1);
+				Grid.SetColumn(lineNumber, 2);
 				row.Children.Add(text);
 				row.Children.Add(lineNumber);
 				entries.Children.Add(row);
@@ -382,6 +416,26 @@ public sealed class PvfPreviewDocumentView : UserControl
 			panel.Children.Add(entriesFrame);
 		}
 		return panel;
+	}
+
+	private static FrameworkElement CreateReferenceIcon(ImageSource source, double size)
+	{
+		return new Border
+		{
+			Width = size,
+			Height = size,
+			BorderBrush = Brush("#343943"),
+			BorderThickness = new Thickness(1),
+			Background = Brush("#111318"),
+			VerticalAlignment = VerticalAlignment.Center,
+			HorizontalAlignment = HorizontalAlignment.Left,
+			Child = new Image
+			{
+				Source = source,
+				Stretch = Stretch.Uniform,
+				SnapsToDevicePixels = true
+			}
+		};
 	}
 
 	private FrameworkElement CreateTable(PvfPreviewTable table)
