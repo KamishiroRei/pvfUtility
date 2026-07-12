@@ -101,6 +101,14 @@ public class WinNpcShopEditor : ThemedWindow, IComponentConnector
 			"所需材料ID：",
 			"CurrentPurchaseItem.NeedMaterialItemCode",
 			"NpcShopPurchaseEditor.MaterialId"));
+		EditBox materialNameEditor = new EditBox
+		{
+			Caption = "所需材料名：",
+			IsEnabled = false
+		};
+		AutomationProperties.SetAutomationId(materialNameEditor, "NpcShopPurchaseEditor.MaterialName");
+		BindEditor(materialNameEditor, "CurrentPurchaseItem.NeedMaterialItemName", BindingMode.OneWay);
+		propertyEditors.Children.Add(materialNameEditor);
 		propertyEditors.Children.Add(CreatePurchaseEditor(
 			"所需材料数量：",
 			"CurrentPurchaseItem.NeedMaterialCount",

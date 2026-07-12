@@ -375,6 +375,7 @@
                   <controls:EditBox Caption="物品名：" Value="{Binding CurrentPurchaseItem.ItemName, Mode=OneWay}" />
                   <controls:EditBox AutomationProperties.AutomationId="NpcShopPurchaseEditor.Price" Caption="金币价格：" IsEnabled="{Binding CurrentPurchaseItem.CanEditPurchaseData}" Value="{Binding CurrentPurchaseItem.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                   <controls:EditBox AutomationProperties.AutomationId="NpcShopPurchaseEditor.MaterialId" Caption="所需材料ID：" IsEnabled="{Binding CurrentPurchaseItem.CanEditPurchaseData}" Value="{Binding CurrentPurchaseItem.NeedMaterialItemCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  <controls:EditBox AutomationProperties.AutomationId="NpcShopPurchaseEditor.MaterialName" Caption="所需材料名：" IsEnabled="False" Value="{Binding CurrentPurchaseItem.NeedMaterialItemName, Mode=OneWay}" />
                   <controls:EditBox AutomationProperties.AutomationId="NpcShopPurchaseEditor.MaterialCount" Caption="所需材料数量：" IsEnabled="{Binding CurrentPurchaseItem.CanEditPurchaseData}" Value="{Binding CurrentPurchaseItem.NeedMaterialCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
               </docking:LayoutPanel>

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
@@ -89,7 +90,21 @@ public class NpcShopItem : ViewModelBase
 			}
 			needMaterialItemCode = value;
 			RaisePropertyChanged(nameof(NeedMaterialItemCode));
+			RaisePropertyChanged(nameof(NeedMaterialItemName));
 			MarkNeedMaterialModified();
+		}
+	}
+
+	public string? NeedMaterialItemName
+	{
+		get
+		{
+			if (!int.TryParse(NeedMaterialItemCode, NumberStyles.Integer, CultureInfo.InvariantCulture, out int itemCode))
+			{
+				return null;
+			}
+			PvfFile? file = Pvf.ListFileTable.ItemCodeConvertPvfFile(Pvf, itemCode);
+			return file == null ? null : Pvf.GetItemName(file);
 		}
 	}
 
@@ -291,6 +306,7 @@ public class NpcShopItem : ViewModelBase
 	{
 		RaisePropertyChanged(nameof(Price));
 		RaisePropertyChanged(nameof(NeedMaterialItemCode));
+		RaisePropertyChanged(nameof(NeedMaterialItemName));
 		RaisePropertyChanged(nameof(NeedMaterialCount));
 		RaisePropertyChanged(nameof(IsPriceModified));
 		RaisePropertyChanged(nameof(IsNeedMaterialModified));
