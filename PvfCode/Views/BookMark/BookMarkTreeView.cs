@@ -17,19 +17,19 @@ public class BookMarkTreeView : TreeListControl, IComponentConnector
 
 	internal TreeListView treeListView;
 
-	private bool YhbvOSbGpD;
+	private bool _contentLoaded;
 
 	public BookMarkTreeView()
 	{
 		InitializeComponent();
 	}
 
-	private void eF7vIss0iG(object P_0, ItemClickEventArgs P_1)
+	private void OnExpandAllClick(object sender, ItemClickEventArgs e)
 	{
 		treeListView.ExpandAllNodes();
 	}
 
-	private void xwZvEnOulT(object P_0, ItemClickEventArgs P_1)
+	private void OnCollapseAllClick(object sender, ItemClickEventArgs e)
 	{
 		treeListView.CollapseAllNodes();
 	}
@@ -38,9 +38,9 @@ public class BookMarkTreeView : TreeListControl, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!YhbvOSbGpD)
+		if (!_contentLoaded)
 		{
-			YhbvOSbGpD = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/bookmark/bookmarktreeview.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -63,13 +63,13 @@ public class BookMarkTreeView : TreeListControl, IComponentConnector
 			treeListView = (TreeListView)target;
 			break;
 		case 4:
-			((BarButtonItem)target).ItemClick += eF7vIss0iG;
+			((BarButtonItem)target).ItemClick += OnExpandAllClick;
 			break;
 		case 5:
-			((BarButtonItem)target).ItemClick += xwZvEnOulT;
+			((BarButtonItem)target).ItemClick += OnCollapseAllClick;
 			break;
 		default:
-			YhbvOSbGpD = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

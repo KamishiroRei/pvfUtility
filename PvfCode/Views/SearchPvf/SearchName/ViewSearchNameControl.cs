@@ -11,25 +11,25 @@ namespace PvfCode.Views.SearchPvf.SearchName;
 
 public class ViewSearchNameControl : UserControl, IComponentConnector
 {
-	private bool rfGHTPv9et;
+	private bool _contentLoaded;
 
 	public ViewSearchNameControl()
 	{
 		InitializeComponent();
 	}
 
-	private void h8BHj4GU3K(object P_0, ItemCancelEventArgs P_1)
+	private void OnDockItemClosing(object sender, ItemCancelEventArgs e)
 	{
-		P_1.Cancel = true;
+		e.Cancel = true;
 	}
 
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!rfGHTPv9et)
+		if (!_contentLoaded)
 		{
-			rfGHTPv9et = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/searchpvf/searchname/viewsearchnamecontrol.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -40,6 +40,6 @@ public class ViewSearchNameControl : UserControl, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	void IComponentConnector.Connect(int connectionId, object target)
 	{
-		rfGHTPv9et = true;
+		_contentLoaded = true;
 	}
 }

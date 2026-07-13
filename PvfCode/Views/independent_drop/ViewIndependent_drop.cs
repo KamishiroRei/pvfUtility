@@ -32,7 +32,7 @@ public class ViewIndependent_drop : ThemedWindow, IComponentConnector
 
 	internal ToolBarControl dropItemCodesControlBar;
 
-	private bool gCOh7aM4p9;
+	private bool _contentLoaded;
 
 	public ViewIndependent_drop()
 	{
@@ -54,18 +54,18 @@ public class ViewIndependent_drop : ThemedWindow, IComponentConnector
 		GC.Collect(2, GCCollectionMode.Optimized);
 	}
 
-	private void vVrh0001Ir(object P_0, ItemCancelEventArgs P_1)
+	private void OnDockItemClosing(object sender, ItemCancelEventArgs e)
 	{
-		P_1.Cancel = true;
+		e.Cancel = true;
 	}
 
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!gCOh7aM4p9)
+		if (!_contentLoaded)
 		{
-			gCOh7aM4p9 = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/independent_drop/viewindependent_drop.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -90,7 +90,7 @@ public class ViewIndependent_drop : ThemedWindow, IComponentConnector
 			break;
 		case 2:
 			DemoDockContainer = (DockLayoutManager)target;
-			DemoDockContainer.DockItemClosing += vVrh0001Ir;
+			DemoDockContainer.DockItemClosing += OnDockItemClosing;
 			break;
 		case 3:
 			Root = (LayoutGroup)target;
@@ -111,7 +111,7 @@ public class ViewIndependent_drop : ThemedWindow, IComponentConnector
 			dropItemCodesControlBar = (ToolBarControl)target;
 			break;
 		default:
-			gCOh7aM4p9 = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

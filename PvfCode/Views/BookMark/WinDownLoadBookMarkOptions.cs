@@ -17,14 +17,14 @@ public class WinDownLoadBookMarkOptions : ThemedWindow, IComponentConnector
 
 	internal Button btnok;
 
-	private bool YRDvUpn3ki;
+	private bool _contentLoaded;
 
 	public WinDownLoadBookMarkOptions()
 	{
 		InitializeComponent();
 	}
 
-	private void eqPvpWsAqx(object P_0, RoutedEventArgs P_1)
+	private void OnConfirmClick(object sender, RoutedEventArgs e)
 	{
 		base.DialogResult = mergeRadio.IsChecked;
 	}
@@ -33,9 +33,9 @@ public class WinDownLoadBookMarkOptions : ThemedWindow, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!YRDvUpn3ki)
+		if (!_contentLoaded)
 		{
-			YRDvUpn3ki = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/bookmark/windownloadbookmarkoptions.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -56,10 +56,10 @@ public class WinDownLoadBookMarkOptions : ThemedWindow, IComponentConnector
 			break;
 		case 3:
 			btnok = (Button)target;
-			btnok.Click += eqPvpWsAqx;
+			btnok.Click += OnConfirmClick;
 			break;
 		default:
-			YRDvUpn3ki = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

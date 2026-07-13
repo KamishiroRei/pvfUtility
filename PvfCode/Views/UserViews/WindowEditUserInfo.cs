@@ -12,7 +12,7 @@ namespace PvfCode.Views.UserViews;
 
 public class WindowEditUserInfo : ThemedWindow, IComponentConnector
 {
-	private bool YvECoO3mWN;
+	private bool _contentLoaded;
 
 	public WindowEditUserInfo()
 	{
@@ -25,7 +25,7 @@ public class WindowEditUserInfo : ThemedWindow, IComponentConnector
 		Application.Current.MainWindow.Activate();
 	}
 
-	private void U46CwktZxD(object P_0, RoutedEventArgs P_1)
+	private void OnCloseClick(object sender, RoutedEventArgs e)
 	{
 		Close();
 	}
@@ -34,9 +34,9 @@ public class WindowEditUserInfo : ThemedWindow, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!YvECoO3mWN)
+		if (!_contentLoaded)
 		{
-			YvECoO3mWN = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/userviews/windowedituserinfo.xaml", UriKind.Relative);
 			Application.LoadComponent(this, resourceLocator);
 		}
@@ -56,11 +56,11 @@ public class WindowEditUserInfo : ThemedWindow, IComponentConnector
 	{
 		if (connectionId == 1)
 		{
-			((Button)target).Click += U46CwktZxD;
+			((Button)target).Click += OnCloseClick;
 		}
 		else
 		{
-			YvECoO3mWN = true;
+			_contentLoaded = true;
 		}
 	}
 }

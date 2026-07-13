@@ -15,7 +15,7 @@ public class WindowLoading : ThemedWindow, IComponentConnector
 {
 	internal TextBlock title;
 
-	private bool bYdjJwhmtJ;
+	private bool _contentLoaded;
 
 	public WindowLoading(string text)
 	{
@@ -29,9 +29,9 @@ public class WindowLoading : ThemedWindow, IComponentConnector
 		InitializeComponent();
 	}
 
-	private void yYQjZOgUB5(object P_0, KeyEventArgs P_1)
+	private void OnKeyDown(object sender, KeyEventArgs e)
 	{
-		if ((int)P_1.Key == 13)
+		if ((int)e.Key == 13)
 		{
 			Close();
 		}
@@ -41,9 +41,9 @@ public class WindowLoading : ThemedWindow, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!bYdjJwhmtJ)
+		if (!_contentLoaded)
 		{
-			bYdjJwhmtJ = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/windowloading.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -57,13 +57,13 @@ public class WindowLoading : ThemedWindow, IComponentConnector
 		switch (connectionId)
 		{
 		case 1:
-			((WindowLoading)target).KeyDown += yYQjZOgUB5;
+			((WindowLoading)target).KeyDown += OnKeyDown;
 			break;
 		case 2:
 			title = (TextBlock)target;
 			break;
 		default:
-			bYdjJwhmtJ = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

@@ -24,7 +24,7 @@ public class BookMarkEditView : ThemedWindow, IComponentConnector
 
 	internal DevExpress.Xpf.LayoutControl.GroupBox shareGroup;
 
-	private bool RQHvtP3h3M;
+	private bool _contentLoaded;
 
 	public BookMarkEditView(bool isTreeList, bool isPreview = false, BookMarkGroupDto previewSource = null)
 	{
@@ -40,7 +40,7 @@ public class BookMarkEditView : ThemedWindow, IComponentConnector
 		}
 	}
 
-	private void eYevdJy54H(object P_0, RoutedEventArgs P_1)
+	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
 		((BookMarkEditViewViewModel)base.DataContext).Loaded();
 	}
@@ -57,7 +57,7 @@ public class BookMarkEditView : ThemedWindow, IComponentConnector
 		}
 	}
 
-	private void cXQvesmhjx(object P_0, RoutedEventArgs P_1)
+	private void OnCloseClick(object sender, RoutedEventArgs e)
 	{
 		Close();
 	}
@@ -66,9 +66,9 @@ public class BookMarkEditView : ThemedWindow, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!RQHvtP3h3M)
+		if (!_contentLoaded)
 		{
-			RQHvtP3h3M = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/bookmark/bookmarkeditview.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -90,7 +90,7 @@ public class BookMarkEditView : ThemedWindow, IComponentConnector
 		{
 		case 1:
 			win = (BookMarkEditView)target;
-			win.Loaded += eYevdJy54H;
+			win.Loaded += OnLoaded;
 			break;
 		case 2:
 			toolBar = (BarContainerControl)target;
@@ -102,10 +102,10 @@ public class BookMarkEditView : ThemedWindow, IComponentConnector
 			shareGroup = (DevExpress.Xpf.LayoutControl.GroupBox)target;
 			break;
 		case 5:
-			((Button)target).Click += cXQvesmhjx;
+			((Button)target).Click += OnCloseClick;
 			break;
 		default:
-			RQHvtP3h3M = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

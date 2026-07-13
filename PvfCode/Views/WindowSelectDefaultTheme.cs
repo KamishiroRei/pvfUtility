@@ -10,14 +10,14 @@ namespace PvfCode.Views;
 
 public class WindowSelectDefaultTheme : ThemedWindow, IComponentConnector
 {
-	private bool jy7Cg9Q9JX;
+	private bool _contentLoaded;
 
 	public WindowSelectDefaultTheme()
 	{
 		InitializeComponent();
 	}
 
-	private void UElCa69Ica(object P_0, EventArgs P_1)
+	private void OnClosed(object sender, EventArgs e)
 	{
 		Application.Current.MainWindow.Activate();
 	}
@@ -26,9 +26,9 @@ public class WindowSelectDefaultTheme : ThemedWindow, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!jy7Cg9Q9JX)
+		if (!_contentLoaded)
 		{
-			jy7Cg9Q9JX = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/windowselectdefaulttheme.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -41,11 +41,11 @@ public class WindowSelectDefaultTheme : ThemedWindow, IComponentConnector
 	{
 		if (connectionId == 1)
 		{
-			((WindowSelectDefaultTheme)target).Closed += UElCa69Ica;
+			((WindowSelectDefaultTheme)target).Closed += OnClosed;
 		}
 		else
 		{
-			jy7Cg9Q9JX = true;
+			_contentLoaded = true;
 		}
 	}
 }

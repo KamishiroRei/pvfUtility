@@ -3,7 +3,6 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -21,7 +20,7 @@ public class ViewAddNewFolder : ThemedWindow, IComponentConnector
 
 	internal Button buttonOk;
 
-	private bool TVUHmK27N4;
+	private bool _contentLoaded;
 
 	public ViewAddNewFolder(KeyValuePair<string, PvfTreeFileBase>? keyValuePair)
 	{
@@ -29,7 +28,7 @@ public class ViewAddNewFolder : ThemedWindow, IComponentConnector
 		InitializeComponent();
 	}
 
-	private void kMHHrXw9uf(object P_0, RoutedEventArgs P_1)
+	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
 		((DispatcherObject)textInput).Dispatcher.BeginInvoke((Delegate)(Action)delegate
 		{
@@ -41,9 +40,9 @@ public class ViewAddNewFolder : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!TVUHmK27N4)
+		if (!_contentLoaded)
 		{
-			TVUHmK27N4 = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/pvftreefolder/viewaddnewfolder.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -58,7 +57,7 @@ public class ViewAddNewFolder : ThemedWindow, IComponentConnector
 		{
 		case 1:
 			win = (ViewAddNewFolder)target;
-			win.Loaded += kMHHrXw9uf;
+			win.Loaded += OnLoaded;
 			break;
 		case 2:
 			textInput = (TextEdit)target;
@@ -67,14 +66,8 @@ public class ViewAddNewFolder : ThemedWindow, IComponentConnector
 			buttonOk = (Button)target;
 			break;
 		default:
-			TVUHmK27N4 = true;
+			_contentLoaded = true;
 			break;
 		}
-	}
-
-	[CompilerGenerated]
-	private void W5YHWMFKWn()
-	{
-		textInput.Focus();
 	}
 }

@@ -20,7 +20,7 @@ public class WindowPvfFileHeaderEdit : ThemedWindow, IComponentConnector
 
 	internal Button cancel;
 
-	private bool Ab9CQ49KHn;
+	private bool _contentLoaded;
 
 	public WindowPvfFileHeaderEdit()
 	{
@@ -33,12 +33,12 @@ public class WindowPvfFileHeaderEdit : ThemedWindow, IComponentConnector
 		}
 	}
 
-	private void GuxCGgMQO9(object P_0, RoutedEventArgs P_1)
+	private void OnCancelClick(object sender, RoutedEventArgs e)
 	{
 		Close();
 	}
 
-	private void qDTCxx1YCl(object P_0, RoutedEventArgs P_1)
+	private void OnSaveClick(object sender, RoutedEventArgs e)
 	{
 		PvfGroup pVF = AppCore.ViewModelBase.PVF;
 		try
@@ -66,9 +66,9 @@ public class WindowPvfFileHeaderEdit : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!Ab9CQ49KHn)
+		if (!_contentLoaded)
 		{
-			Ab9CQ49KHn = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/windowpvffileheaderedit.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -89,14 +89,14 @@ public class WindowPvfFileHeaderEdit : ThemedWindow, IComponentConnector
 			break;
 		case 3:
 			save = (Button)target;
-			save.Click += qDTCxx1YCl;
+			save.Click += OnSaveClick;
 			break;
 		case 4:
 			cancel = (Button)target;
-			cancel.Click += GuxCGgMQO9;
+			cancel.Click += OnCancelClick;
 			break;
 		default:
-			Ab9CQ49KHn = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

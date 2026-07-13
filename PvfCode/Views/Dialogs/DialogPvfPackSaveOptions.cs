@@ -11,7 +11,7 @@ namespace PvfCode.Views.Dialogs;
 
 public class DialogPvfPackSaveOptions : ThemedWindow, IComponentConnector
 {
-	private bool fCVv4VXQGX;
+	private bool _contentLoaded;
 
 	public DialogPvfPackSaveOptions()
 	{
@@ -24,7 +24,7 @@ public class DialogPvfPackSaveOptions : ThemedWindow, IComponentConnector
 		Application.Current.MainWindow.Activate();
 	}
 
-	private void pTivApiLpm(object P_0, RoutedEventArgs P_1)
+	private void OnConfirmClick(object sender, RoutedEventArgs e)
 	{
 		base.DialogResult = true;
 	}
@@ -33,9 +33,9 @@ public class DialogPvfPackSaveOptions : ThemedWindow, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!fCVv4VXQGX)
+		if (!_contentLoaded)
 		{
-			fCVv4VXQGX = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/dialogs/dialogpvfpacksaveoptions.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -48,11 +48,11 @@ public class DialogPvfPackSaveOptions : ThemedWindow, IComponentConnector
 	{
 		if (connectionId == 1)
 		{
-			((Button)target).Click += pTivApiLpm;
+			((Button)target).Click += OnConfirmClick;
 		}
 		else
 		{
-			fCVv4VXQGX = true;
+			_contentLoaded = true;
 		}
 	}
 }

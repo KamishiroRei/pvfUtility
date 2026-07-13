@@ -28,7 +28,7 @@ public class ViewTabComment : ThemedWindow, IComponentConnector
 
 	internal TextEditLib.TextEdit editor;
 
-	private bool RgmvLiquIj;
+	private bool _contentLoaded;
 
 	public ViewTabComment()
 	{
@@ -64,18 +64,18 @@ public class ViewTabComment : ThemedWindow, IComponentConnector
 		Application.Current.MainWindow.Activate();
 	}
 
-	private void HgovsgFdsB(object P_0, ItemCancelEventArgs P_1)
+	private void OnDockItemClosing(object sender, ItemCancelEventArgs e)
 	{
-		P_1.Cancel = true;
+		e.Cancel = true;
 	}
 
 	[DebuggerNonUserCode]
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!RgmvLiquIj)
+		if (!_contentLoaded)
 		{
-			RgmvLiquIj = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/descriptionviews/viewtabcomment.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -97,7 +97,7 @@ public class ViewTabComment : ThemedWindow, IComponentConnector
 		{
 		case 1:
 			DemoDockContainer = (DockLayoutManager)target;
-			DemoDockContainer.DockItemClosing += HgovsgFdsB;
+			DemoDockContainer.DockItemClosing += OnDockItemClosing;
 			break;
 		case 2:
 			Root = (LayoutGroup)target;
@@ -112,7 +112,7 @@ public class ViewTabComment : ThemedWindow, IComponentConnector
 			editor = (TextEditLib.TextEdit)target;
 			break;
 		default:
-			RgmvLiquIj = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

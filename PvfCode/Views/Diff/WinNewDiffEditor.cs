@@ -2,7 +2,6 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -18,7 +17,7 @@ public class WinNewDiffEditor : WindowBase, IComponentConnector
 
 	internal ButtonEdit leftButtonEdit;
 
-	private bool yvGvS906VJ;
+	private bool _contentLoaded;
 
 	public WinNewDiffEditor(WinNewDiffViewModel? winNewDiffViewModel = null)
 	{
@@ -59,9 +58,9 @@ public class WinNewDiffEditor : WindowBase, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!yvGvS906VJ)
+		if (!_contentLoaded)
 		{
-			yvGvS906VJ = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/diff/winnewdiffeditor.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -88,14 +87,8 @@ public class WinNewDiffEditor : WindowBase, IComponentConnector
 			leftButtonEdit = (ButtonEdit)target;
 			break;
 		default:
-			yvGvS906VJ = true;
+			_contentLoaded = true;
 			break;
 		}
-	}
-
-	[CompilerGenerated]
-	private void TBrv5Cfcil()
-	{
-		leftGrid.Width = base.ActualWidth / 2.0 - 18.0;
 	}
 }

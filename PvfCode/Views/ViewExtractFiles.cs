@@ -26,7 +26,7 @@ public class ViewExtractFiles : ThemedWindow, IComponentConnector
 
 	internal CheckBox checkAutoImportFileGroup;
 
-	private bool N0oTR0flUB;
+	private bool _contentLoaded;
 
 	public ViewExtractFiles(IEnumerable<string> targetExtractFiles = null)
 	{
@@ -50,18 +50,18 @@ public class ViewExtractFiles : ThemedWindow, IComponentConnector
 		Application.Current.MainWindow.Activate();
 	}
 
-	private void vp5T35wbxc(object P_0, ItemCancelEventArgs P_1)
+	private void OnDockItemClosing(object sender, ItemCancelEventArgs e)
 	{
-		P_1.Cancel = true;
+		e.Cancel = true;
 	}
 
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!N0oTR0flUB)
+		if (!_contentLoaded)
 		{
-			N0oTR0flUB = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/viewextractfiles.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -83,7 +83,7 @@ public class ViewExtractFiles : ThemedWindow, IComponentConnector
 		{
 		case 1:
 			DemoDockContainer = (DockLayoutManager)target;
-			DemoDockContainer.DockItemClosing += vp5T35wbxc;
+			DemoDockContainer.DockItemClosing += OnDockItemClosing;
 			break;
 		case 2:
 			Root = (LayoutGroup)target;
@@ -98,7 +98,7 @@ public class ViewExtractFiles : ThemedWindow, IComponentConnector
 			checkAutoImportFileGroup = (CheckBox)target;
 			break;
 		default:
-			N0oTR0flUB = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

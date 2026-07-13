@@ -21,7 +21,7 @@ public class WindowSearchItemName : ThemedWindow, IComponentConnector
 
 	internal LayoutGroup Root;
 
-	private bool Fr3HHDmnY5;
+	private bool _contentLoaded;
 
 	public int? ItemCode
 	{
@@ -49,9 +49,9 @@ public class WindowSearchItemName : ThemedWindow, IComponentConnector
 		base.Width = 400.0;
 	}
 
-	private void oIFHCJWjiS(object P_0, ItemCancelEventArgs P_1)
+	private void OnDockItemClosing(object sender, ItemCancelEventArgs e)
 	{
-		P_1.Cancel = true;
+		e.Cancel = true;
 	}
 
 	public IEnumerable<int> ItemCodes()
@@ -77,9 +77,9 @@ public class WindowSearchItemName : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!Fr3HHDmnY5)
+		if (!_contentLoaded)
 		{
-			Fr3HHDmnY5 = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/searchpvf/searchname/windowsearchitemname.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -97,13 +97,13 @@ public class WindowSearchItemName : ThemedWindow, IComponentConnector
 			break;
 		case 2:
 			DemoDockContainer = (DockLayoutManager)target;
-			DemoDockContainer.DockItemClosing += oIFHCJWjiS;
+			DemoDockContainer.DockItemClosing += OnDockItemClosing;
 			break;
 		case 3:
 			Root = (LayoutGroup)target;
 			break;
 		default:
-			Fr3HHDmnY5 = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

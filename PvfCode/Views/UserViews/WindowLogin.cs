@@ -15,7 +15,7 @@ public class WindowLogin : ThemedWindow, IComponentConnector
 
 	internal Grid Reg;
 
-	private bool nZFCLiHfZn;
+	private bool _contentLoaded;
 
 	public WindowLogin()
 	{
@@ -24,7 +24,7 @@ public class WindowLogin : ThemedWindow, IComponentConnector
 		InitializeComponent();
 	}
 
-	private void NAtCsDPjNv(object P_0, RoutedEventArgs P_1)
+	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
 		AppCore.ViewModelBase.LoginViewModel.Loaded(this);
 	}
@@ -38,9 +38,9 @@ public class WindowLogin : ThemedWindow, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!nZFCLiHfZn)
+		if (!_contentLoaded)
 		{
-			nZFCLiHfZn = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/userviews/windowlogin.xaml", UriKind.Relative);
 			Application.LoadComponent(this, resourceLocator);
 		}
@@ -61,7 +61,7 @@ public class WindowLogin : ThemedWindow, IComponentConnector
 		switch (connectionId)
 		{
 		case 1:
-			((WindowLogin)target).Loaded += NAtCsDPjNv;
+			((WindowLogin)target).Loaded += OnLoaded;
 			break;
 		case 2:
 			loginView = (Grid)target;
@@ -70,7 +70,7 @@ public class WindowLogin : ThemedWindow, IComponentConnector
 			Reg = (Grid)target;
 			break;
 		default:
-			nZFCLiHfZn = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

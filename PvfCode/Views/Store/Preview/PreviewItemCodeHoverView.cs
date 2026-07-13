@@ -11,7 +11,7 @@ namespace PvfCode.Views.Store.Preview;
 
 public class PreviewItemCodeHoverView : ThemedWindow, IComponentConnector
 {
-	private bool TGIC0ofpsI;
+	private bool _contentLoaded;
 
 	public PreviewItemCodeHoverView(string text)
 	{
@@ -23,7 +23,7 @@ public class PreviewItemCodeHoverView : ThemedWindow, IComponentConnector
 		base.Height = primaryScreenHeight * 0.6;
 	}
 
-	private void Q2iCkFd9xU(object P_0, EventArgs P_1)
+	private void OnClosed(object sender, EventArgs e)
 	{
 		Application.Current.MainWindow.Activate();
 	}
@@ -32,9 +32,9 @@ public class PreviewItemCodeHoverView : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!TGIC0ofpsI)
+		if (!_contentLoaded)
 		{
-			TGIC0ofpsI = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/store/preview/previewitemcodehoverview.xaml", UriKind.Relative);
 			Application.LoadComponent(this, resourceLocator);
 		}
@@ -47,11 +47,11 @@ public class PreviewItemCodeHoverView : ThemedWindow, IComponentConnector
 	{
 		if (connectionId == 1)
 		{
-			((PreviewItemCodeHoverView)target).Closed += Q2iCkFd9xU;
+			((PreviewItemCodeHoverView)target).Closed += OnClosed;
 		}
 		else
 		{
-			TGIC0ofpsI = true;
+			_contentLoaded = true;
 		}
 	}
 }

@@ -16,7 +16,7 @@ public class ViewRenameNode : ThemedWindow, IComponentConnector
 {
 	internal EditBox editBox;
 
-	private bool CMeHGvbpbO;
+	private bool _contentLoaded;
 
 	public ViewRenameNode(KeyValuePair<string, PvfTreeFileBase> treeFileDic)
 	{
@@ -25,7 +25,7 @@ public class ViewRenameNode : ThemedWindow, IComponentConnector
 		InitializeComponent();
 	}
 
-	private void X7NHiriJl4(object P_0, RoutedEventArgs P_1)
+	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
 		Focus();
 		((DispatcherObject)this).Dispatcher.Invoke((Action)delegate
@@ -59,9 +59,9 @@ public class ViewRenameNode : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!CMeHGvbpbO)
+		if (!_contentLoaded)
 		{
-			CMeHGvbpbO = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/pvftreefolder/viewrenamenode.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -82,13 +82,13 @@ public class ViewRenameNode : ThemedWindow, IComponentConnector
 		switch (connectionId)
 		{
 		case 1:
-			((ViewRenameNode)target).Loaded += X7NHiriJl4;
+			((ViewRenameNode)target).Loaded += OnLoaded;
 			break;
 		case 2:
 			editBox = (EditBox)target;
 			break;
 		default:
-			CMeHGvbpbO = true;
+			_contentLoaded = true;
 			break;
 		}
 	}

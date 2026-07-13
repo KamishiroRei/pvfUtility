@@ -139,6 +139,12 @@ Completed areas include:
   private localization-label fields in the PVF-diff and store-type converters
   now use interface- and behavior-derived names. Converter CLR identities and
   XAML resource contracts remain unchanged.
+- Eighteen small WPF windows and controls under `PvfCode/Views` plus
+  `WindowLoading`; generated content-loaded flags, private event handlers, and
+  event parameters now use semantic names. Two unreferenced compiler helper
+  methods were removed after source and BAML searches found no consumer;
+  connection IDs, generated fields, resource URIs, and public CLR identities
+  remain unchanged.
 - Readable-XAML cleanup replaced 13 ILSpy pseudo-`<Ctor>` nodes with valid markup
   extension/property syntax and moved 270 `Unknown connection ID` comments from
   74 documents into `docs/BAML_CONNECTION_ID_AUDIT.csv`. These edits improve the
