@@ -317,6 +317,7 @@ public class ChatGPTMessDocument : UserControl, IComponentConnector
 		_sendButton = CreateCommandButton("发送", "chatGPTSend", "OnSendCommand", isPrimary: true);
 		_sendButton.MinWidth = 72;
 		_sendButton.Margin = new Thickness(8, 0, 0, 0);
+		AutomationProperties.SetAutomationId(_sendButton, "AiAssistantSend");
 		_sendButton.SetBinding(IsEnabledProperty, new Binding("IsSending")
 		{
 			Converter = _inverseBooleanConverter

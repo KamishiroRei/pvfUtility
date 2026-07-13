@@ -44,6 +44,8 @@ namespace PvfCode;
 
 public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 {
+	private const double DefaultAiAssistantWidth = 380.0;
+
 	private static readonly string[] OnlineMenuResourceKeys =
 	{
 		"mainWin_bar_Main_subItem_BookMark_BookMarkStore",
@@ -279,7 +281,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 	private void EnsureAiAssistantPanelDocked(bool restoreFindView = false)
 	{
-		if (_aiAssistantDisposed || DemoDockContainer?.DockController == null || FindView == null)
+		if (_aiAssistantDisposed || DemoDockContainer?.DockController == null || Root == null)
 		{
 			return;
 		}
@@ -301,45 +303,36 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			{
 				Name = "AiAssistantView",
 				Caption = "AI 助手",
-				CaptionImage = Res.Instance.ChatGPTICON,
 				Padding = new Thickness(0),
+				ItemWidth = new GridLength(DefaultAiAssistantWidth),
 				ClosingBehavior = ClosingBehavior.HideToClosedPanelsCollection,
 				DataContext = _aiAssistantViewModel,
 				Content = _aiAssistantView
 			};
 		}
 
-		if (restoreFindView)
+		if (restoreFindView && FindView != null)
 		{
 			RestorePanel(FindView);
 		}
-		if (FindView.IsClosed || FindView.Parent == null)
+
+		BaseLayoutItem workspace = Root.Items.FirstOrDefault(item => !ReferenceEquals(item, _aiAssistantPanel));
+		if (workspace == null)
 		{
 			return;
 		}
 
-		bool sharesFindTabGroup = _aiAssistantPanel.Parent is TabbedGroup aiTabs &&
-			ReferenceEquals(aiTabs, FindView.Parent);
-		if (!sharesFindTabGroup)
+		bool isRightmostRootPanel = ReferenceEquals(_aiAssistantPanel.Parent, Root) &&
+			Root.Items.IndexOf(_aiAssistantPanel) == Root.Items.Count - 1;
+		if (!isRightmostRootPanel)
 		{
 			if (_aiAssistantPanel.IsClosed)
 			{
 				DemoDockContainer.DockController.Restore(_aiAssistantPanel);
 			}
-			if (FindView.Parent is TabbedGroup findTabs)
-			{
-				DemoDockContainer.DockController.RemoveItem(_aiAssistantPanel);
-				findTabs.Add(_aiAssistantPanel);
-			}
-			else
-			{
-				DemoDockContainer.DockController.Dock(_aiAssistantPanel, FindView, DockType.Fill);
-			}
-			if (_aiAssistantPanel.Parent is TabbedGroup tabs)
-			{
-				tabs.DestroyOnClosingChildren = false;
-				tabs.SelectedTabIndex = tabs.Items.IndexOf(FindView);
-			}
+			DemoDockContainer.DockController.RemoveItem(_aiAssistantPanel);
+			DemoDockContainer.DockController.Dock(_aiAssistantPanel, workspace, DockType.Right);
+			_aiAssistantPanel.ItemWidth = new GridLength(DefaultAiAssistantWidth);
 		}
 	}
 
@@ -362,10 +355,6 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 		RestorePanel(_aiAssistantPanel);
 		EnsureAiAssistantPanelDocked(restoreFindView: true);
-		if (_aiAssistantPanel.Parent is TabbedGroup tabs)
-		{
-			tabs.SelectedTabIndex = tabs.Items.IndexOf(_aiAssistantPanel);
-		}
 		DemoDockContainer.Activate(_aiAssistantPanel);
 		_aiAssistantView?.FocusPrompt();
 	}

@@ -104,8 +104,8 @@ key controls including `BarSubItemLinksubFile`, `FilelistLayoutPanel`, and
 Account operations, cloud backup, shared uploads, remote stores, automatic
 updates, remote start content, and exception telemetry remain intentionally
 offline. The ChatGPT compatibility entry is the single opt-in network
-exception: it now opens a PVF assistant beside the existing Find view in the
-same docked tab group. Runtime state is otherwise stored as readable,
+exception: it now opens a PVF assistant in the full-height docked panel at the
+far right. Runtime state is otherwise stored as readable,
 unencrypted JSON:
 
 - `Options/AppConfig.json` contains application settings and resource-tree

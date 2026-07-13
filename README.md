@@ -40,7 +40,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Import-PvfParserIn
 
 ## PVF AI 助手
 
-原工具栏中的 `chatGPT` 按钮现显示为“AI 助手”。它打开右侧查找区域中的 AI 页签；查找视图和 AI 对话位于同一个 DevExpress `TabbedGroup`，可直接用页签切换，不会占用中央文档组。
+原工具栏中的 `chatGPT` 按钮现显示为“AI 助手”。完整对话界面默认停靠在主工作区最右侧并贯穿工作区高度，不会占用中央文档组；关闭后可通过工具栏按钮恢复并聚焦消息输入框。
 
 - API 通过恢复完成的 `Whetstone.ChatGPT.ChatGPTClient` 调用 OpenAI-compatible
   `POST <Base URL>/chat/completions` 与 function tools；主程序不再维护第二套协议实现。

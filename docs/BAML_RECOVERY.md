@@ -82,7 +82,7 @@ active boundary is enforced separately:
 - `ServiceCloud` GET and POST transport returns an offline error without making
   an HTTP request.
 - The original ChatGPT toolbar binding is an explicit opt-in PVF assistant. It
-  opens beside `FindView` in the same docked tab group. Endpoint/model settings
+  opens in a full-height panel at the far right. Endpoint/model settings
   are local, the API key is session-only or comes from `OPENAI_API_KEY`, and
   current-PVF tools require an in-session read toggle.
 - Auto-update and exception-telemetry assemblies are excluded from output.

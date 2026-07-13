@@ -44,19 +44,6 @@ function Wait-ForElementByAutomationId {
     return $null
 }
 
-function Get-IsSelected {
-    param([System.Windows.Automation.AutomationElement]$Element)
-
-    $selectionItem = $null
-    if (-not $Element.TryGetCurrentPattern(
-        [System.Windows.Automation.SelectionItemPattern]::Pattern,
-        [ref]$selectionItem
-    )) {
-        throw "SelectionItem pattern is unavailable: $($Element.Current.AutomationId)"
-    }
-    return $selectionItem.Current.IsSelected
-}
-
 $projectRoot = Split-Path -Parent $PSScriptRoot
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
     $OutputDirectory = Join-Path $projectRoot "bin\$Configuration\$TargetFramework\$RuntimeIdentifier"
@@ -108,41 +95,67 @@ try {
         throw "Main window was not observed within $TimeoutSeconds seconds."
     }
 
+    $windowPattern = $null
+    if ($mainWindow.TryGetCurrentPattern(
+        [System.Windows.Automation.WindowPattern]::Pattern,
+        [ref]$windowPattern
+    )) {
+        $windowPattern.SetWindowVisualState(
+            [System.Windows.Automation.WindowVisualState]::Maximized
+        )
+        Start-Sleep -Milliseconds 500
+    }
+
     $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
-    $walker = [System.Windows.Automation.TreeWalker]::ControlViewWalker
-    $findTab = $null
-    $aiTab = $null
-    $sameTabGroup = $false
-    while ([DateTime]::UtcNow -lt $deadline -and -not $sameTabGroup) {
-        $findTab = Find-ElementByAutomationId -Root $mainWindow -AutomationId "FindViewTabId"
-        $aiTab = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantViewTabId"
-        if ($null -ne $findTab -and $null -ne $aiTab) {
-            $findTabParent = $walker.GetParent($findTab)
-            $aiTabParent = $walker.GetParent($aiTab)
-            $sameTabGroup = $null -ne $findTabParent -and $null -ne $aiTabParent -and
-                (($findTabParent.GetRuntimeId() -join ",") -eq ($aiTabParent.GetRuntimeId() -join ","))
-        }
-        if (-not $sameTabGroup) {
-            Start-Sleep -Milliseconds 100
+    $aiView = Wait-ForElementByAutomationId `
+        -Root $mainWindow `
+        -AutomationId "AiAssistantConversationView" `
+        -Deadline $deadline
+    $prompt = Wait-ForElementByAutomationId `
+        -Root $mainWindow `
+        -AutomationId "AiAssistantPrompt" `
+        -Deadline $deadline
+    if ($null -eq $aiView -or $null -eq $prompt) {
+        throw "The default AI assistant panel did not expose its conversation controls."
+    }
+
+    $aiPanel = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantView"
+    if ($null -eq $aiPanel) {
+        throw "The AI assistant dock panel was not found."
+    }
+
+    $imageCondition = [System.Windows.Automation.PropertyCondition]::new(
+        [System.Windows.Automation.AutomationElement]::ControlTypeProperty,
+        [System.Windows.Automation.ControlType]::Image
+    )
+    $panelImages = $aiPanel.FindAll(
+        [System.Windows.Automation.TreeScope]::Descendants,
+        $imageCondition
+    )
+    for ($index = 0; $index -lt $panelImages.Count; $index++) {
+        $imageBounds = $panelImages.Item($index).Current.BoundingRectangle
+        if ($imageBounds.Width -gt 128 -or $imageBounds.Height -gt 128) {
+            throw "The AI assistant is covered by an oversized panel image: $imageBounds."
         }
     }
-    if ($null -eq $findTab -or $null -eq $aiTab) {
-        $tabCondition = [System.Windows.Automation.PropertyCondition]::new(
-            [System.Windows.Automation.AutomationElement]::ControlTypeProperty,
-            [System.Windows.Automation.ControlType]::TabItem
-        )
-        $loadedTabs = $mainWindow.FindAll(
-            [System.Windows.Automation.TreeScope]::Descendants,
-            $tabCondition
-        )
-        $tabDescriptions = for ($index = 0; $index -lt $loadedTabs.Count; $index++) {
-            $tab = $loadedTabs.Item($index)
-            "Name='$($tab.Current.Name)', Id='$($tab.Current.AutomationId)'"
-        }
-        throw "The Find and AI assistant dock tabs were not both loaded. Loaded tabs: $($tabDescriptions -join '; ')"
+
+    $documentHost = Find-ElementByAutomationId -Root $mainWindow -AutomationId "DocumentHost"
+    $outputView = Find-ElementByAutomationId -Root $mainWindow -AutomationId "outPutViewTabId"
+    if ($null -eq $documentHost -or $null -eq $outputView) {
+        throw "The panels required to verify the default layout were not found."
     }
-    if (-not $sameTabGroup) {
-        throw "The Find and AI assistant views are not in the same tab group."
+
+    $sendButton = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantSend"
+    if ($null -eq $sendButton) {
+        throw "The AI assistant composer did not expose its send action."
+    }
+
+    $promptBounds = $prompt.Current.BoundingRectangle
+    $documentBounds = $documentHost.Current.BoundingRectangle
+    $outputBounds = $outputView.Current.BoundingRectangle
+    if ($promptBounds.Left -lt ($documentBounds.Right - 2) -or
+        $promptBounds.Left -lt ($outputBounds.Right - 2)) {
+        throw "The AI assistant is not the rightmost docked panel."
     }
 
     $buttonCondition = [System.Windows.Automation.AndCondition]::new(
@@ -175,42 +188,14 @@ try {
     }
     $invoke.Invoke()
 
-    $prompt = Wait-ForElementByAutomationId `
-        -Root $mainWindow `
-        -AutomationId "AiAssistantPrompt" `
-        -Deadline $deadline
-    if ($null -eq $prompt) {
-        throw "The AI assistant prompt did not appear after toolbar invocation."
-    }
-
-    while ([DateTime]::UtcNow -lt $deadline -and
-        (-not (Get-IsSelected -Element $aiTab) -or -not $prompt.Current.HasKeyboardFocus)) {
+    while ([DateTime]::UtcNow -lt $deadline -and -not $prompt.Current.HasKeyboardFocus) {
         Start-Sleep -Milliseconds 100
-    }
-    if (-not (Get-IsSelected -Element $aiTab)) {
-        throw "The AI assistant tab was not selected after toolbar invocation."
     }
     if (-not $prompt.Current.HasKeyboardFocus) {
         throw "The AI assistant prompt did not receive keyboard focus."
     }
 
-    $findSelectionItem = $null
-    if (-not $findTab.TryGetCurrentPattern(
-        [System.Windows.Automation.SelectionItemPattern]::Pattern,
-        [ref]$findSelectionItem
-    )) {
-        throw "The Find tab cannot be selected."
-    }
-    $findSelectionItem.Select()
-
-    while ([DateTime]::UtcNow -lt $deadline -and -not (Get-IsSelected -Element $findTab)) {
-        Start-Sleep -Milliseconds 100
-    }
-    if (-not (Get-IsSelected -Element $findTab) -or (Get-IsSelected -Element $aiTab)) {
-        throw "The dock group could not switch back to the Find tab."
-    }
-
-    Write-Output "PASS: the enabled AI assistant toolbar button selected the AI tab, focused its prompt, and the shared dock group switched back to the Find tab."
+    Write-Output "PASS: the complete AI conversation panel is visible by default, docked at the far right, and receives toolbar focus."
 }
 finally {
     $process.Refresh()
