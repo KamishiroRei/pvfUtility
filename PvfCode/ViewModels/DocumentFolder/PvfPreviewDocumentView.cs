@@ -180,9 +180,9 @@ public sealed class PvfPreviewDocumentView : UserControl
 		{
 			content.Children.Add(CreateAniSurface());
 		}
-		if (preview.SkillTreeNodes.Count > 0)
+		if (preview.SkillTreeGroups.Count > 0)
 		{
-			content.Children.Add(CreateSkillTree(preview.SkillTreeNodes));
+			content.Children.Add(CreateSkillTrees(preview.SkillTreeGroups));
 		}
 		foreach (PvfPreviewSection section in preview.Sections)
 		{
@@ -275,60 +275,161 @@ public sealed class PvfPreviewDocumentView : UserControl
 		return new Border { BorderBrush = OutlineBorderBrush, BorderThickness = new Thickness(1), Child = grid };
 	}
 
-	private FrameworkElement CreateSkillTree(IReadOnlyList<PvfPreviewNode> nodes)
+	private FrameworkElement CreateSkillTrees(IReadOnlyList<PvfPreviewSkillTreeGroup> groups)
 	{
 		StackPanel panel = new() { Margin = new Thickness(0, 2, 0, 8) };
-		panel.Children.Add(CreateTagButton("技能树节点", nodes.FirstOrDefault()?.Tag, GoldBrush, 11, FontWeights.Normal));
+		panel.Children.Add(new TextBlock
+		{
+			Text = "技能树",
+			Foreground = GoldBrush,
+			FontSize = 11,
+			Margin = new Thickness(0, 1, 0, 4)
+		});
+		foreach (PvfPreviewSkillTreeGroup group in groups)
+		{
+			panel.Children.Add(CreateSkillTreeGroup(group));
+		}
+		return panel;
+	}
+
+	private FrameworkElement CreateSkillTreeGroup(PvfPreviewSkillTreeGroup group)
+	{
+		const double canvasWidth = 800;
+		IReadOnlyList<PvfPreviewNode> nodes = group.Nodes;
+		double canvasHeight = SkillTreeHeight(nodes);
 		Canvas canvas = new()
 		{
-			Width = 700,
-			Height = 320,
+			Width = canvasWidth,
+			Height = canvasHeight,
 			Background = Brush("#111318"),
-			ClipToBounds = true
+			ClipToBounds = true,
+			SnapsToDevicePixels = true
 		};
-		double minX = nodes.Min(node => node.X);
-		double maxX = nodes.Max(node => node.X);
-		double minY = nodes.Min(node => node.Y);
-		double maxY = nodes.Max(node => node.Y);
-		double scaleX = 630 / Math.Max(1, maxX - minX);
-		double scaleY = 250 / Math.Max(1, maxY - minY);
-		double scale = Math.Min(1.5, Math.Min(scaleX, scaleY));
+		Dictionary<PvfPreviewNode, Point> positions = SkillTreePositions(nodes, canvasWidth, canvasHeight);
+		Dictionary<int, Point> positionsByCode = new();
 		foreach (PvfPreviewNode node in nodes)
 		{
-			double x = 35 + (node.X - minX) * scale;
-			double y = 35 + (node.Y - minY) * scale;
-			Grid nodeContent = new();
-			nodeContent.ColumnDefinitions.Add(new ColumnDefinition { Width = node.Icon == null ? new GridLength(0) : new GridLength(30) });
-			nodeContent.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-			if (node.Icon != null)
+			positionsByCode[node.Code] = positions[node];
+		}
+		foreach (PvfPreviewNode node in nodes)
+		{
+			Point from = positions[node];
+			foreach (int nextSkill in node.NextSkills)
 			{
-				nodeContent.Children.Add(CreateReferenceIcon(node.Icon, 26));
+				if (!positionsByCode.TryGetValue(nextSkill, out Point to))
+				{
+					continue;
+				}
+				canvas.Children.Add(new Line
+				{
+					X1 = from.X,
+					Y1 = from.Y,
+					X2 = to.X,
+					Y2 = to.Y,
+					Stroke = Brush("#667184"),
+					StrokeThickness = 1.5,
+					IsHitTestVisible = false
+				});
 			}
-			TextBlock nodeText = new()
-			{
-				Text = $"{node.Code}\n{node.Name}",
-				FontSize = 9,
-				TextAlignment = TextAlignment.Center,
-				TextTrimming = TextTrimming.CharacterEllipsis
-			};
-			Grid.SetColumn(nodeText, 1);
-			nodeContent.Children.Add(nodeText);
+		}
+		foreach (PvfPreviewNode node in nodes)
+		{
+			Point position = positions[node];
+			FrameworkElement nodeContent = node.Icon != null
+				? new Image { Source = node.Icon, Stretch = Stretch.Uniform, SnapsToDevicePixels = true }
+				: new TextBlock
+				{
+					Text = node.Code.ToString(),
+					Foreground = node.Name == "未解析" ? Brush("#777777") : PrimaryTextBrush,
+					FontSize = 9,
+					TextAlignment = TextAlignment.Center,
+					VerticalAlignment = VerticalAlignment.Center,
+					HorizontalAlignment = HorizontalAlignment.Center
+				};
 			Button button = new()
 			{
-				Width = 92,
-				Height = 48,
-				Padding = new Thickness(3),
+				Width = 36,
+				Height = 36,
+				Padding = new Thickness(2),
 				Content = nodeContent,
-				ToolTip = $"[{node.Tag?.Name}] 第 {node.Tag?.LineNumber} 行",
-				Cursor = Cursors.Hand
+				Background = Brush(node.Name == "未解析" ? "#1B1B1B" : "#101114"),
+				BorderBrush = Brush(node.IsCommon ? "#D8B657" : node.Name == "未解析" ? "#575757" : "#84735A"),
+				BorderThickness = new Thickness(1),
+				ToolTip = $"ID: {node.Code}\n名称: {node.Name}\n[{node.Tag?.Name}] 第 {node.Tag?.LineNumber} 行",
+				Cursor = Cursors.Hand,
+				SnapsToDevicePixels = true
 			};
 			button.Click += (_, _) => document?.JumpToTag(node.Tag);
-			Canvas.SetLeft(button, Math.Max(0, Math.Min(canvas.Width - button.Width, x - button.Width / 2)));
-			Canvas.SetTop(button, Math.Max(0, Math.Min(canvas.Height - button.Height, y - button.Height / 2)));
+			Canvas.SetLeft(button, Math.Max(0, Math.Min(canvas.Width - button.Width, position.X - button.Width / 2)));
+			Canvas.SetTop(button, Math.Max(0, Math.Min(canvas.Height - button.Height, position.Y - button.Height / 2)));
 			canvas.Children.Add(button);
 		}
-		panel.Children.Add(new Border { BorderBrush = OutlineBorderBrush, BorderThickness = new Thickness(1), Child = canvas });
-		return panel;
+
+		StackPanel content = new();
+		content.Children.Add(new Border
+		{
+			Height = 27,
+			Padding = new Thickness(8, 4, 8, 4),
+			Background = Brush("#0B0D12"),
+			BorderBrush = Brush("#38352F"),
+			BorderThickness = new Thickness(0, 0, 0, 1),
+			Child = new TextBlock
+			{
+				Text = group.Title,
+				Foreground = GoldBrush,
+				FontSize = 11,
+				TextTrimming = TextTrimming.CharacterEllipsis
+			}
+		});
+		content.Children.Add(canvas);
+		return new Border
+		{
+			Margin = new Thickness(0, 0, 0, 9),
+			BorderBrush = OutlineBorderBrush,
+			BorderThickness = new Thickness(1),
+			Child = content
+		};
+	}
+
+	private static Dictionary<PvfPreviewNode, Point> SkillTreePositions(IReadOnlyList<PvfPreviewNode> nodes, double width, double height)
+	{
+		List<PvfPreviewNode> positioned = nodes.Where(node => node.X.HasValue && node.Y.HasValue).ToList();
+		double minX = positioned.Count > 0 ? positioned.Min(node => node.X.Value) : 0;
+		double maxX = positioned.Count > 0 ? positioned.Max(node => node.X.Value) : 1;
+		double minY = positioned.Count > 0 ? positioned.Min(node => node.Y.Value) : 0;
+		double maxY = positioned.Count > 0 ? positioned.Max(node => node.Y.Value) : 1;
+		double spanX = Math.Max(1, maxX - minX);
+		double spanY = Math.Max(1, maxY - minY);
+		int fallbackColumns = Math.Max(1, (int)Math.Ceiling(Math.Sqrt(Math.Max(1, nodes.Count))));
+		Dictionary<PvfPreviewNode, Point> result = new();
+		for (int index = 0; index < nodes.Count; index++)
+		{
+			PvfPreviewNode node = nodes[index];
+			if (node.X.HasValue && node.Y.HasValue)
+			{
+				result[node] = new Point(
+					48 + ((node.X.Value - minX) / spanX) * (width - 96),
+					48 + ((node.Y.Value - minY) / spanY) * (height - 96));
+				continue;
+			}
+			int column = index % fallbackColumns;
+			int row = index / fallbackColumns;
+			result[node] = new Point(
+				48 + (column / (double)Math.Max(1, fallbackColumns - 1)) * (width - 96),
+				48 + row * 54);
+		}
+		return result;
+	}
+
+	private static double SkillTreeHeight(IReadOnlyList<PvfPreviewNode> nodes)
+	{
+		List<double> ys = nodes.Where(node => node.Y.HasValue).Select(node => node.Y.Value).ToList();
+		if (ys.Count == 0)
+		{
+			return Math.Min(620, Math.Max(260, Math.Ceiling(nodes.Count / 8d) * 62));
+		}
+		double span = Math.Max(1, ys.Max() - ys.Min());
+		return Math.Min(760, Math.Max(260, Math.Round(span + 120)));
 	}
 
 	private FrameworkElement CreateSection(PvfPreviewSection section)

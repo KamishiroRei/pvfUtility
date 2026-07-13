@@ -173,15 +173,27 @@ public sealed class PvfPreviewNode
 
 	public string Name { get; }
 
-	public double X { get; }
+	public double? X { get; }
 
-	public double Y { get; }
+	public double? Y { get; }
+
+	public bool IsCommon { get; }
+
+	public IReadOnlyList<int> NextSkills { get; }
 
 	public PvfPreviewTag Tag { get; }
 
 	public ImageSource Icon { get; }
 
-	public PvfPreviewNode(int code, string name, double x, double y, PvfPreviewTag tag, ImageSource icon = null)
+	public PvfPreviewNode(
+		int code,
+		string name,
+		double? x,
+		double? y,
+		PvfPreviewTag tag,
+		ImageSource icon = null,
+		bool isCommon = false,
+		IReadOnlyList<int> nextSkills = null)
 	{
 		Code = code;
 		Name = name;
@@ -189,6 +201,26 @@ public sealed class PvfPreviewNode
 		Y = y;
 		Tag = tag;
 		Icon = icon;
+		IsCommon = isCommon;
+		NextSkills = nextSkills ?? Array.Empty<int>();
+	}
+}
+
+public sealed class PvfPreviewSkillTreeGroup
+{
+	public string Title { get; }
+
+	public string Job { get; }
+
+	public string Branch { get; }
+
+	public List<PvfPreviewNode> Nodes { get; } = new();
+
+	public PvfPreviewSkillTreeGroup(string title, string job, string branch)
+	{
+		Title = title;
+		Job = job;
+		Branch = branch;
 	}
 }
 
@@ -241,6 +273,8 @@ public sealed class PvfRichPreview
 	public List<PvfPreviewSection> Sections { get; } = new();
 
 	public List<PvfPreviewNode> SkillTreeNodes { get; } = new();
+
+	public List<PvfPreviewSkillTreeGroup> SkillTreeGroups { get; } = new();
 }
 
 public sealed class PvfPreviewDocument : DocumentBase
@@ -351,6 +385,8 @@ public sealed class PvfPreviewDocument : DocumentBase
 		["atfighter"] = "格斗家(男)", ["gunner"] = "神枪手(男)", ["at gunner"] = "神枪手(女)",
 		["atgunner"] = "神枪手(女)", ["mage"] = "魔法师(女)", ["at mage"] = "魔法师(男)",
 		["atmage"] = "魔法师(男)", ["priest"] = "圣职者", ["thief"] = "暗夜使者",
+		["demonic swordman"] = "黑暗武士", ["demonicswordman"] = "黑暗武士",
+		["creator mage"] = "缔造者", ["creatormage"] = "缔造者", ["none"] = "未转职",
 		["weaponmaster"] = "剑魂", ["soulbringer"] = "鬼泣", ["berserker"] = "狂战士", ["asura"] = "阿修罗",
 		["ranger"] = "漫游枪手", ["launcher"] = "枪炮师", ["mechanic"] = "机械师", ["spitfire"] = "弹药专家",
 		["elementalmaster"] = "元素师", ["summoner"] = "召唤师", ["battlemage"] = "战斗法师", ["witch"] = "魔道学者",
@@ -1354,41 +1390,79 @@ public sealed class PvfPreviewDocument : DocumentBase
 
 	private void BuildSkillTree(PvfRichPreview preview)
 	{
-		preview.Badges.Add(preview.SourcePath.EndsWith("_tp.co", StringComparison.OrdinalIgnoreCase) ? "TP 技能树" : "SP 技能树");
+		preview.Badges.Add(GetSkillTreeType(preview.SourcePath));
+		IReadOnlyList<PvfParsedSkillTreeGroup> parsedGroups = PvfSkillTreeParser.Parse(sourceTextDocument?.Text ?? string.Empty);
+		int nodeCount = parsedGroups.Sum(group => group.Nodes.Count);
+		int linkCount = parsedGroups.Sum(group => group.Nodes.Sum(node => node.NextSkills.Count));
 		PvfPreviewSection info = AddSection(preview, "技能树信息", PvfPreviewTone.Skill, "character job");
-		string job = LabelToken(FirstText("character job"));
-		AddField(info, "职业", JobLabels.TryGetValue(job ?? string.Empty, out string jobLabel) ? jobLabel : job, "character job");
-		AddField(info, "节点数", tagsByName.TryGetValue("skill info", out List<PvfPreviewTag> skillTags) ? skillTags.Count.ToString(CultureInfo.InvariantCulture) : "0", "skill info");
-		RemoveEmpty(preview, info);
-		if (skillTags == null)
+		info.Fields.Add(new PvfPreviewField("分组数", parsedGroups.Count.ToString(CultureInfo.InvariantCulture), FindTag("character job")));
+		info.Fields.Add(new PvfPreviewField("节点数", nodeCount.ToString(CultureInfo.InvariantCulture), FindTag("skill info") ?? FindTag("common skill")));
+		info.Fields.Add(new PvfPreviewField("连线数", linkCount.ToString(CultureInfo.InvariantCulture), FindTag("next skill")));
+		if (parsedGroups.Count == 0)
 		{
 			preview.Message = "没有解析到可绘制的技能树节点。";
 			return;
 		}
-		foreach (PvfPreviewTag tag in skillTags)
+		foreach (PvfParsedSkillTreeGroup parsedGroup in parsedGroups)
 		{
-			string block = string.Join(" ", tag.Values);
-			int? code = ExtractTaggedNumber(block, "index");
-			Match pos = Regex.Match(block, @"\[\s*icon pos\s*\]\s*(-?\d+)\s+(-?\d+)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-			if (!code.HasValue || !pos.Success)
+			string jobLabel = JobLabel(parsedGroup.Job);
+			string branchLabel = JobLabel(parsedGroup.Branch);
+			string title = string.Join(" / ", new[] { jobLabel, branchLabel }.Where(value => !string.IsNullOrWhiteSpace(value)));
+			PvfPreviewSkillTreeGroup group = new(string.IsNullOrEmpty(title) ? "技能树" : title, parsedGroup.Job, parsedGroup.Branch);
+			foreach (PvfParsedSkillTreeNode parsedNode in parsedGroup.Nodes)
 			{
-				continue;
+				PvfPreviewTag tag = FindParsedSkillTreeTag(parsedNode);
+				PvfFile skillFile = ResolveReferenceFile(
+					parsedNode.Code,
+					parsedNode.SourceTagName,
+					0,
+					GetSkillReferenceDirectories(parsedGroup.Job, parsedNode.IsCommon));
+				PvfPreviewNode node = new(
+					parsedNode.Code,
+					ResolveReferenceName(skillFile, parsedNode.Code),
+					parsedNode.X,
+					parsedNode.Y,
+					tag,
+					ResolveFileIcon(skillFile),
+					parsedNode.IsCommon,
+					parsedNode.NextSkills);
+				group.Nodes.Add(node);
+				preview.SkillTreeNodes.Add(node);
 			}
-			double x = double.Parse(pos.Groups[1].Value, CultureInfo.InvariantCulture);
-			double y = double.Parse(pos.Groups[2].Value, CultureInfo.InvariantCulture);
-			PvfFile skillFile = ResolveReferenceFile(code.Value, "skill info", 0, GetSkillReferenceDirectories());
-			preview.SkillTreeNodes.Add(new PvfPreviewNode(
-				code.Value,
-				ResolveReferenceName(skillFile, code.Value),
-				x,
-				y,
-				tag,
-				ResolveFileIcon(skillFile)));
+			preview.SkillTreeGroups.Add(group);
 		}
-		if (preview.SkillTreeNodes.Count == 0)
+	}
+
+	private PvfPreviewTag FindParsedSkillTreeTag(PvfParsedSkillTreeNode node)
+	{
+		if (tagsByName.TryGetValue(node.SourceTagName, out List<PvfPreviewTag> tags))
 		{
-			preview.Message = "已找到技能树 TAG，但没有解析到带 [index] 与 [icon pos] 的节点。";
+			PvfPreviewTag exact = tags.FirstOrDefault(tag => tag.Offset == node.SourceOffset);
+			if (exact != null)
+			{
+				return exact;
+			}
 		}
+		return new PvfPreviewTag(node.SourceTagName, GetLineNumber(node.SourceOffset), node.SourceOffset, node.SourceLength);
+	}
+
+	private static string JobLabel(string value)
+	{
+		return !string.IsNullOrWhiteSpace(value) && JobLabels.TryGetValue(value, out string label) ? label : value;
+	}
+
+	private static string GetSkillTreeType(string sourcePath)
+	{
+		string normalized = sourcePath?.Replace('\\', '/') ?? string.Empty;
+		if (normalized.Contains("/pvpskilltree/", StringComparison.OrdinalIgnoreCase))
+		{
+			return "PVP 技能树";
+		}
+		if (normalized.EndsWith("_tp.co", StringComparison.OrdinalIgnoreCase) || normalized.Contains("skillshoptreetp", StringComparison.OrdinalIgnoreCase))
+		{
+			return "TP 技能树";
+		}
+		return "SP 技能树";
 	}
 
 	private void BuildGeneric(PvfRichPreview preview)
@@ -1673,7 +1747,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 		}
 	}
 
-	private IReadOnlyList<string> GetSkillReferenceDirectories()
+	private IReadOnlyList<string> GetSkillReferenceDirectories(string job = null, bool common = false)
 	{
 		List<string> directories = new();
 		string sourcePath = sourceDocument?.File?.FileName?.Replace('\\', '/');
@@ -1685,10 +1759,20 @@ public sealed class PvfPreviewDocument : DocumentBase
 				directories.Add($"skill/{parts[1]}");
 			}
 		}
-		string job = LabelToken(FirstText("character job"));
+		job ??= LabelToken(FirstText("character job"));
+		if (common)
+		{
+			directories.Add("skill/common");
+			directories.Add("skill");
+		}
 		if (!string.IsNullOrWhiteSpace(job))
 		{
 			directories.Add($"skill/{job.Replace(" ", string.Empty).ToLowerInvariant()}");
+		}
+		if (!common)
+		{
+			directories.Add("skill/common");
+			directories.Add("skill");
 		}
 		return directories.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
 	}
@@ -1767,12 +1851,6 @@ public sealed class PvfPreviewDocument : DocumentBase
 			}
 		}
 		return values;
-	}
-
-	private static int? ExtractTaggedNumber(string text, string name)
-	{
-		Match match = Regex.Match(text, $@"\[\s*{Regex.Escape(name)}\s*\]\s*(-?\d+)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-		return match.Success && int.TryParse(match.Groups[1].Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value) ? value : null;
 	}
 
 	private static string CleanValue(string value)
