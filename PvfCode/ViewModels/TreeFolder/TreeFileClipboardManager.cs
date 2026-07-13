@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using Collections.Pooled;
@@ -12,183 +11,100 @@ namespace dRvgUYFXgiUlumD56M2;
 
 internal class qjqilnF7lAFbCxZ5lIf : ModelBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass17_0
-	{
-		public TreeGroup treeGroup;
-
-		public IEnumerable<KeyValuePair<string, PvfTreeFileBase>> PXWLijs7Fh;
-
-		public _003C_003Ec__DisplayClass17_0()
-		{
-		}
-
-		internal Task? kChLyuEmC4()
-		{
-			return treeGroup.SetFilesCutStatus(PXWLijs7Fh);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass18_0
-	{
-		public qjqilnF7lAFbCxZ5lIf b7gLGZwWUd;
-
-		public TreeGroup treeGroup;
-
-		public _003C_003Ec__DisplayClass18_0()
-		{
-		}
-
-		internal Task? AU2Lu3ZVya()
-		{
-			return treeGroup.ClearFileCopyStatus(b7gLGZwWUd.lpeFRRxb72);
-		}
-	}
-
-	private static qjqilnF7lAFbCxZ5lIf WTorCbAuxx;
-
-	[CompilerGenerated]
-	private HashSet<string>? Kb2rHjxCmq;
-
-	[CompilerGenerated]
-	private TreeFileCopyStatus? MpUrhaZ73Y;
-
-	[CompilerGenerated]
-	private TreeViewType? T7Lrv7SpF9;
+	private static qjqilnF7lAFbCxZ5lIf instance;
 
 	public static qjqilnF7lAFbCxZ5lIf Instance
 	{
 		get
 		{
-			if (WTorCbAuxx == null)
+			if (instance == null)
 			{
-				WTorCbAuxx = new qjqilnF7lAFbCxZ5lIf();
+				instance = new qjqilnF7lAFbCxZ5lIf();
 			}
-			return WTorCbAuxx;
+			return instance;
 		}
 	}
 
-	public HashSet<string>? lpeFRRxb72
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Kb2rHjxCmq;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Kb2rHjxCmq = value;
-		}
-	}
+	public HashSet<string>? FilePaths { get; set; }
 
-	public TreeViewType? TreeType
+	public TreeViewType? TreeType { get; set; }
+
+	public bool PasedIsEnabled => FilePaths != null;
+
+	public TreeFileCopyStatus? CopyStatus { get; set; }
+
+	public async Task SetClipboardAsync(IEnumerable<KeyValuePair<string, PvfTreeFileBase>> treeFiles, TreeFileCopyStatus? copyStatus, TreeViewType? treeType)
 	{
-		[CompilerGenerated]
-		get
+		await ClearCutStatusAsync();
+		TreeGroup treeGroup = (TreeType == TreeViewType.SearchResult) ? AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData : AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData;
+		if (copyStatus == TreeFileCopyStatus.剪切)
 		{
-			return T7Lrv7SpF9;
-		}
-		[CompilerGenerated]
-		set
-		{
-			T7Lrv7SpF9 = value;
-		}
-	}
-
-	public bool PasedIsEnabled => lpeFRRxb72 != null;
-
-	[SpecialName]
-	[CompilerGenerated]
-	public TreeFileCopyStatus? F4OFNpbEoT()
-	{
-		return MpUrhaZ73Y;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	public void ruCFzf6r5g(TreeFileCopyStatus? P_0)
-	{
-		MpUrhaZ73Y = P_0;
-	}
-
-	public async Task Pi8FpQMdM7(IEnumerable<KeyValuePair<string, PvfTreeFileBase>> treeFiles, TreeFileCopyStatus? P_1, TreeViewType? P_2)
-	{
-		_003C_003Ec__DisplayClass17_0 CS_0024_003C_003E8__locals7 = new _003C_003Ec__DisplayClass17_0();
-		CS_0024_003C_003E8__locals7.PXWLijs7Fh = treeFiles;
-		await D8FFUxEc3P();
-		CS_0024_003C_003E8__locals7.treeGroup = ((TreeType == TreeViewType.SearchResult) ? AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData : AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData);
-		if (P_1 == TreeFileCopyStatus.剪切)
-		{
-			await Task.Run(() => CS_0024_003C_003E8__locals7.treeGroup.SetFilesCutStatus(CS_0024_003C_003E8__locals7.PXWLijs7Fh));
+			await Task.Run(() => treeGroup.SetFilesCutStatus(treeFiles));
 		}
 		if (AppSetting.Instance.TreeSetting.CopyFilesSetToClipboard)
 		{
-			PooledSet<string> pooledSet = CS_0024_003C_003E8__locals7.treeGroup.SelectedNodesToFilePaths(CS_0024_003C_003E8__locals7.PXWLijs7Fh, GetTreeType.File);
-			if (pooledSet != null && pooledSet.Count > 0)
+			PooledSet<string> selectedFilePaths = treeGroup.SelectedNodesToFilePaths(treeFiles, GetTreeType.File);
+			if (selectedFilePaths != null && selectedFilePaths.Count > 0)
 			{
-				AppCore.CopyString(string.Join("\r\n", pooledSet));
+				AppCore.CopyString(string.Join("\r\n", selectedFilePaths));
 			}
 			else
 			{
 				AppCore.CopyString("");
 			}
 		}
-		lpeFRRxb72 = CS_0024_003C_003E8__locals7.PXWLijs7Fh.Select<KeyValuePair<string, PvfTreeFileBase>, string>((KeyValuePair<string, PvfTreeFileBase> it) => it.Value.FullPath).ToHashSet();
-		ruCFzf6r5g(P_1);
-		TreeType = P_2;
+		FilePaths = treeFiles.Select((KeyValuePair<string, PvfTreeFileBase> item) => item.Value.FullPath).ToHashSet();
+		CopyStatus = copyStatus;
+		TreeType = treeType;
 		DoNotify("PasedIsEnabled");
 	}
 
-	public async Task D8FFUxEc3P()
+	public async Task ClearCutStatusAsync()
 	{
-		_003C_003Ec__DisplayClass18_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass18_0();
-		CS_0024_003C_003E8__locals4.b7gLGZwWUd = this;
-		if (F4OFNpbEoT() == TreeFileCopyStatus.剪切)
+		if (CopyStatus == TreeFileCopyStatus.剪切)
 		{
-			CS_0024_003C_003E8__locals4.treeGroup = ((TreeType == TreeViewType.SearchResult) ? AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData : AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData);
-			await Task.Run(() => CS_0024_003C_003E8__locals4.treeGroup.ClearFileCopyStatus(CS_0024_003C_003E8__locals4.b7gLGZwWUd.lpeFRRxb72));
+			TreeGroup treeGroup = (TreeType == TreeViewType.SearchResult) ? AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData : AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData;
+			await Task.Run(() => treeGroup.ClearFileCopyStatus(FilePaths));
 		}
 	}
 
-	public async void ckWFcDK6M8(string P_0)
+	public async void PasteFiles(string targetPath)
 	{
-		if (lpeFRRxb72 == null)
+		if (FilePaths == null)
 		{
 			return;
 		}
-		if (F4OFNpbEoT() != TreeFileCopyStatus.从磁盘导入)
+		if (CopyStatus != TreeFileCopyStatus.从磁盘导入)
 		{
 			WindowLoading loading = AppCore.CreateLoading(AppSetting.Instance.GetIlogger()?.GetStr("mess_Pasting"), Application.Current.MainWindow);
 			loading.Show();
-			TreeGroup treeGroup = ((TreeType == TreeViewType.SearchResult) ? AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData : AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData);
-			PvfGroup pVF = AppCore.ViewModelBase.PVF;
-			if (F4OFNpbEoT() == TreeFileCopyStatus.剪切)
+			TreeGroup treeGroup = (TreeType == TreeViewType.SearchResult) ? AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData : AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData;
+			PvfGroup pvf = AppCore.ViewModelBase.PVF;
+			if (CopyStatus == TreeFileCopyStatus.剪切)
 			{
-				treeGroup.DeleteTreeNode(lpeFRRxb72);
+				treeGroup.DeleteTreeNode(FilePaths);
 			}
-			List<string> list = new List<string>();
-			foreach (string item in lpeFRRxb72)
+			List<string> pastedFilePaths = new List<string>();
+			foreach (string sourcePath in FilePaths)
 			{
-				foreach (string item2 in pVF.MoveFile(item, P_0, F4OFNpbEoT() == TreeFileCopyStatus.剪切))
+				foreach (string pastedFilePath in pvf.MoveFile(sourcePath, targetPath, CopyStatus == TreeFileCopyStatus.剪切))
 				{
-					list.Add(item2);
+					pastedFilePaths.Add(pastedFilePath);
 				}
 			}
-			if (list.Count > 0)
+			if (pastedFilePaths.Count > 0)
 			{
-				await AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(list));
+				await AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(pastedFilePaths));
 			}
 			loading.Close();
 		}
-		TcyF8C1Thg();
+		Clear();
 	}
 
-	public void TcyF8C1Thg()
+	public void Clear()
 	{
-		lpeFRRxb72 = null;
-		ruCFzf6r5g(null);
+		FilePaths = null;
+		CopyStatus = null;
 		TreeType = null;
 		DoNotify("PasedIsEnabled");
 	}

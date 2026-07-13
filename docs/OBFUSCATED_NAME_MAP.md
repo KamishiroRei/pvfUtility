@@ -150,6 +150,10 @@ Completed areas include:
   restored to ordinary C#, while private regex/wildcard helpers and selector
   parameters now use behavior-derived names. Public properties, dependency
   properties, events, and selector class identities remain unchanged.
+- The three BAML-retained service/clipboard types now use ordinary closures,
+  auto-properties, and semantic private or C#-only member names internally.
+  Their serialized CLR identities and the clipboard singleton's BAML-bound
+  `Instance` and `PasedIsEnabled` members remain unchanged.
 - Readable-XAML cleanup replaced 13 ILSpy pseudo-`<Ctor>` nodes with valid markup
   extension/property syntax and moved 270 `Unknown connection ID` comments from
   74 documents into `docs/BAML_CONNECTION_ID_AUDIT.csv`. These edits improve the

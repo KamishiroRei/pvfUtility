@@ -489,7 +489,7 @@ public class MainWindowViewModel : ViewModelBase, IDisposable
 				RootDocument.Clear();
 				SearchResultViewModel.Clear();
 				PvfFileTreeViewModel.Clear();
-				qjqilnF7lAFbCxZ5lIf.Instance.TcyF8C1Thg();
+				qjqilnF7lAFbCxZ5lIf.Instance.Clear();
 				AppCore.EditorReplaceKeywordLog.Clear();
 				AppCore.EditorSearchKeywordLog.Clear();
 				PVF.Clear();
@@ -669,7 +669,7 @@ public class MainWindowViewModel : ViewModelBase, IDisposable
 			RootDocument.Clear();
 			SearchResultViewModel.Clear();
 			PvfFileTreeViewModel.Clear();
-			qjqilnF7lAFbCxZ5lIf.Instance.TcyF8C1Thg();
+			qjqilnF7lAFbCxZ5lIf.Instance.Clear();
 			AppCore.EditorReplaceKeywordLog.Clear();
 			AppCore.EditorSearchKeywordLog.Clear();
 			PVF.Clear();

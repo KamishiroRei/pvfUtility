@@ -1392,10 +1392,10 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 		try
 		{
-			await qjqilnF7lAFbCxZ5lIf.Instance.D8FFUxEc3P();
+			await qjqilnF7lAFbCxZ5lIf.Instance.ClearCutStatusAsync();
 			WindowLoading loading = AppCore.CreateLoading(AppSetting.Instance.GetIlogger()?.GetStr("mess_Cutting"), Application.Current.MainWindow);
 			loading.Show();
-			await qjqilnF7lAFbCxZ5lIf.Instance.Pi8FpQMdM7(SelectedNodesBindBase, TreeFileCopyStatus.剪切, TreeType);
+			await qjqilnF7lAFbCxZ5lIf.Instance.SetClipboardAsync(SelectedNodesBindBase, TreeFileCopyStatus.剪切, TreeType);
 			loading.Close();
 		}
 		catch (Exception e)
@@ -1412,10 +1412,10 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 		try
 		{
-			await qjqilnF7lAFbCxZ5lIf.Instance.D8FFUxEc3P();
+			await qjqilnF7lAFbCxZ5lIf.Instance.ClearCutStatusAsync();
 			WindowLoading loading = AppCore.CreateLoading(AppSetting.Instance.GetIlogger()?.GetStr("mess_Copying"), Application.Current.MainWindow);
 			loading.Show();
-			await qjqilnF7lAFbCxZ5lIf.Instance.Pi8FpQMdM7(SelectedNodesBindBase, TreeFileCopyStatus.复制, TreeType);
+			await qjqilnF7lAFbCxZ5lIf.Instance.SetClipboardAsync(SelectedNodesBindBase, TreeFileCopyStatus.复制, TreeType);
 			loading.Close();
 		}
 		catch (Exception e)
@@ -1454,7 +1454,7 @@ public class PvfTreeViewModel : ViewModelBase
 			{
 				text = UtFFHl2Drj().FullPath;
 			}
-			qjqilnF7lAFbCxZ5lIf.Instance.ckWFcDK6M8(text);
+			qjqilnF7lAFbCxZ5lIf.Instance.PasteFiles(text);
 		}
 		catch (Exception e)
 		{

@@ -6,12 +6,12 @@ namespace GKcC3iQxbUOdt2roQPY;
 
 internal class Kq4YIkQG1jekqKdxajG : ServiceBase, IDcoumentPanelService
 {
-	private DocumentPanel JfrQaZLIkL => (DocumentPanel)base.AssociatedObject;
+	private DocumentPanel Panel => (DocumentPanel)base.AssociatedObject;
 
 	public void Test()
 	{
-		_ = JfrQaZLIkL.IsSelectedItem;
-		_ = JfrQaZLIkL;
+		_ = Panel.IsSelectedItem;
+		_ = Panel;
 	}
 
 	public Kq4YIkQG1jekqKdxajG()

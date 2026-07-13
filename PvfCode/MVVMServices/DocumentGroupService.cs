@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DevExpress.Data.Extensions;
 using DevExpress.Mvvm.UI;
 using DevExpress.Xpf.Docking;
@@ -10,36 +9,6 @@ namespace FKRF7IQiMoSJtPdh45P;
 
 internal class NRjpElQyfkexPvgV2wp : ServiceBase, IDocumentGroupService
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass3_0
-	{
-		public DocumentBase jNjEU2OyPZ;
-
-		public _003C_003Ec__DisplayClass3_0()
-		{
-		}
-
-		internal bool YmvEpFqs8E(BaseLayoutItem it)
-		{
-			return it.DataContext == jNjEU2OyPZ;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass4_0
-	{
-		public DocumentBase vCDE8DVo2O;
-
-		public _003C_003Ec__DisplayClass4_0()
-		{
-		}
-
-		internal bool Q5EEcfeXdI(BaseLayoutItem it)
-		{
-			return it.DataContext == vCDE8DVo2O;
-		}
-	}
-
 	private DocumentGroup Group => (DocumentGroup)base.AssociatedObject;
 
 	public void ShowContextMenu()
@@ -47,40 +16,38 @@ internal class NRjpElQyfkexPvgV2wp : ServiceBase, IDocumentGroupService
 		_ = Group.ContextMenuCustomizations;
 	}
 
-	public void NextDocument(DocumentBase P_0)
+	public void NextDocument(DocumentBase document)
 	{
-		_003C_003Ec__DisplayClass3_0 CS_0024_003C_003E8__locals3 = new _003C_003Ec__DisplayClass3_0();
-		CS_0024_003C_003E8__locals3.jNjEU2OyPZ = P_0;
+		DocumentBase selectedDocument = document;
 		BaseLayoutItem[] items = Group.GetItems();
 		if (Group.SelectedItem != null)
 		{
-			CS_0024_003C_003E8__locals3.jNjEU2OyPZ = Group.SelectedItem.DataContext as DocumentBase;
+			selectedDocument = Group.SelectedItem.DataContext as DocumentBase;
 		}
 		if (items != null && items.Any())
 		{
-			int num = items.FindIndex((BaseLayoutItem it) => it.DataContext == CS_0024_003C_003E8__locals3.jNjEU2OyPZ);
-			if (num < items.Length - 1 && items[num + 1].DataContext is DocumentBase documentBase)
+			int selectedIndex = items.FindIndex((BaseLayoutItem item) => item.DataContext == selectedDocument);
+			if (selectedIndex < items.Length - 1 && items[selectedIndex + 1].DataContext is DocumentBase nextDocument)
 			{
-				documentBase.IsActive = true;
+				nextDocument.IsActive = true;
 			}
 		}
 	}
 
-	public void LastDocument(DocumentBase P_0)
+	public void LastDocument(DocumentBase document)
 	{
-		_003C_003Ec__DisplayClass4_0 CS_0024_003C_003E8__locals3 = new _003C_003Ec__DisplayClass4_0();
-		CS_0024_003C_003E8__locals3.vCDE8DVo2O = P_0;
+		DocumentBase selectedDocument = document;
 		BaseLayoutItem[] items = Group.GetItems();
 		if (Group.SelectedItem != null)
 		{
-			CS_0024_003C_003E8__locals3.vCDE8DVo2O = Group.SelectedItem.DataContext as DocumentBase;
+			selectedDocument = Group.SelectedItem.DataContext as DocumentBase;
 		}
 		if (items != null && items.Any())
 		{
-			int num = items.FindIndex((BaseLayoutItem it) => it.DataContext == CS_0024_003C_003E8__locals3.vCDE8DVo2O);
-			if (num > 0 && items[num - 1].DataContext is DocumentBase documentBase)
+			int selectedIndex = items.FindIndex((BaseLayoutItem item) => item.DataContext == selectedDocument);
+			if (selectedIndex > 0 && items[selectedIndex - 1].DataContext is DocumentBase previousDocument)
 			{
-				documentBase.IsActive = true;
+				previousDocument.IsActive = true;
 			}
 		}
 	}
