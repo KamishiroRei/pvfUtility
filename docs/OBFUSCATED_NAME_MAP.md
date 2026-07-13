@@ -135,6 +135,10 @@ Completed areas include:
   expanded interpolation, and an unreachable compiler helper were restored to
   semantic C#. Public binding names and the XAML-visible control identity remain
   unchanged.
+- `PvfCode/Converts`; the remaining eight decompiler parameter sets and the
+  private localization-label fields in the PVF-diff and store-type converters
+  now use interface- and behavior-derived names. Converter CLR identities and
+  XAML resource contracts remain unchanged.
 - Readable-XAML cleanup replaced 13 ILSpy pseudo-`<Ctor>` nodes with valid markup
   extension/property syntax and moved 270 `Unknown connection ID` comments from
   74 documents into `docs/BAML_CONNECTION_ID_AUDIT.csv`. These edits improve the

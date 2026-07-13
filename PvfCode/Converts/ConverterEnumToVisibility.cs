@@ -16,13 +16,13 @@ public class ConverterEnumToVisibility : IValueConverter
 		return null;
 	}
 
-	public object ConvertBack(object P_0, Type P_1, object P_2, CultureInfo P_3)
+	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 	{
-		if (P_0 == null || !P_0.Equals(Visibility.Visible))
+		if (value == null || !value.Equals(Visibility.Visible))
 		{
 			return Binding.DoNothing;
 		}
-		return P_2;
+		return parameter;
 	}
 
 	public ConverterEnumToVisibility()

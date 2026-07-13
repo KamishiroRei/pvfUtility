@@ -7,15 +7,15 @@ namespace PvfCode.Converts.StoreList;
 
 internal class ConverterStoreDataType : IValueConverter
 {
-	private string QX6a5NTd6G;
+	private readonly string _bookmarkLabel;
 
-	private string N2raSws6CX;
+	private readonly string _macroLabel;
 
-	private string FileListComment;
+	private readonly string _fileListCommentLabel;
 
-	private string LnraAf0x0Y;
+	private readonly string _scriptTagTranslationLabel;
 
-	private string Y27a4ruEY6;
+	private readonly string _codeCompletionLabel;
 
 	public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 	{
@@ -25,35 +25,35 @@ internal class ConverterStoreDataType : IValueConverter
 		}
 		return (StoreType)value switch
 		{
-			StoreType.书签 => QX6a5NTd6G, 
-			StoreType.宏 => N2raSws6CX, 
-			StoreType.文件资源管理器注释 => FileListComment, 
-			StoreType.脚本文件标签翻译 => LnraAf0x0Y, 
-			StoreType.代码智能提示 => Y27a4ruEY6, 
-			_ => Y27a4ruEY6, 
+			StoreType.书签 => _bookmarkLabel,
+			StoreType.宏 => _macroLabel,
+			StoreType.文件资源管理器注释 => _fileListCommentLabel,
+			StoreType.脚本文件标签翻译 => _scriptTagTranslationLabel,
+			StoreType.代码智能提示 => _codeCompletionLabel,
+			_ => _codeCompletionLabel,
 		};
 	}
 
-	public object ConvertBack(object P_0, Type P_1, object P_2, CultureInfo P_3)
+	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 	{
-		if (P_0 == null)
+		if (value == null)
 		{
 			return null;
 		}
-		string text = P_0.ToString();
-		if (text == QX6a5NTd6G)
+		string text = value.ToString();
+		if (text == _bookmarkLabel)
 		{
 			return StoreType.书签;
 		}
-		if (text == N2raSws6CX)
+		if (text == _macroLabel)
 		{
 			return StoreType.宏;
 		}
-		if (text == FileListComment)
+		if (text == _fileListCommentLabel)
 		{
 			return StoreType.文件资源管理器注释;
 		}
-		if (text == LnraAf0x0Y)
+		if (text == _scriptTagTranslationLabel)
 		{
 			return StoreType.脚本文件标签翻译;
 		}
@@ -62,10 +62,10 @@ internal class ConverterStoreDataType : IValueConverter
 
 	public ConverterStoreDataType()
 	{
-		QX6a5NTd6G = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_Bookmark");
-		N2raSws6CX = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_Macro");
-		FileListComment = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_FileListComment");
-		LnraAf0x0Y = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_ScriptFileTabComment");
-		Y27a4ruEY6 = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_ItemCodeHover");
+		_bookmarkLabel = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_Bookmark");
+		_macroLabel = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_Macro");
+		_fileListCommentLabel = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_FileListComment");
+		_scriptTagTranslationLabel = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_ScriptFileTabComment");
+		_codeCompletionLabel = AppSetting.Instance.GetIlogger().GetStr("ViewStoreList_StoreDataType_ItemCodeHover");
 	}
 }

@@ -21,7 +21,7 @@ public class ConvertTreeDiffStrMess : IValueConverter
 		return null;
 	}
 
-	public object ConvertBack(object P_0, Type P_1, object P_2, CultureInfo P_3)
+	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 	{
 		return null;
 	}

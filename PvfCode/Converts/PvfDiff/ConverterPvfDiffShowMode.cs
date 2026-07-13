@@ -7,13 +7,13 @@ namespace PvfCode.Converts.PvfDiff;
 
 internal class ConverterPvfDiffShowMode : IValueConverter
 {
-	private string Sq9ayBhjkg;
+	private readonly string _pathDifferenceLabel;
 
-	private string PeoaifidX5;
+	private readonly string _fileContentDifferenceLabel;
 
-	private string cXoauTnvbT;
+	private readonly string _pathAndFileDifferenceLabel;
 
-	private string BPlaGq4XDf;
+	private readonly string _allFilesLabel;
 
 	public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 	{
@@ -23,30 +23,30 @@ internal class ConverterPvfDiffShowMode : IValueConverter
 		}
 		return (PvfDiffTreeShowFilesType)value switch
 		{
-			PvfDiffTreeShowFilesType.路径差异 => Sq9ayBhjkg, 
-			PvfDiffTreeShowFilesType.文件内容差异 => PeoaifidX5, 
-			PvfDiffTreeShowFilesType.路径差异和文件差异 => cXoauTnvbT, 
-			PvfDiffTreeShowFilesType.所有文件 => BPlaGq4XDf, 
-			_ => BPlaGq4XDf, 
+			PvfDiffTreeShowFilesType.路径差异 => _pathDifferenceLabel,
+			PvfDiffTreeShowFilesType.文件内容差异 => _fileContentDifferenceLabel,
+			PvfDiffTreeShowFilesType.路径差异和文件差异 => _pathAndFileDifferenceLabel,
+			PvfDiffTreeShowFilesType.所有文件 => _allFilesLabel,
+			_ => _allFilesLabel,
 		};
 	}
 
-	public object ConvertBack(object P_0, Type P_1, object P_2, CultureInfo P_3)
+	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 	{
-		if (P_0 == null)
+		if (value == null)
 		{
 			return null;
 		}
-		string text = P_0.ToString();
-		if (text == Sq9ayBhjkg)
+		string text = value.ToString();
+		if (text == _pathDifferenceLabel)
 		{
 			return PvfDiffTreeShowFilesType.路径差异;
 		}
-		if (text == PeoaifidX5)
+		if (text == _fileContentDifferenceLabel)
 		{
 			return PvfDiffTreeShowFilesType.文件内容差异;
 		}
-		if (text == cXoauTnvbT)
+		if (text == _pathAndFileDifferenceLabel)
 		{
 			return PvfDiffTreeShowFilesType.路径差异和文件差异;
 		}
@@ -55,9 +55,9 @@ internal class ConverterPvfDiffShowMode : IValueConverter
 
 	public ConverterPvfDiffShowMode()
 	{
-		Sq9ayBhjkg = AppSetting.Instance.GetIlogger().GetStr("PvfDiffControl_ShowMode_PathDiff");
-		PeoaifidX5 = AppSetting.Instance.GetIlogger().GetStr("PvfDiffControl_ShowMode_FileContentDiff");
-		cXoauTnvbT = AppSetting.Instance.GetIlogger().GetStr("PvfDiffControl_ShowMode_PathAndFileDiff");
-		BPlaGq4XDf = AppSetting.Instance.GetIlogger().GetStr("PvfDiffControl_ShowMode_AllFile");
+		_pathDifferenceLabel = AppSetting.Instance.GetIlogger().GetStr("PvfDiffControl_ShowMode_PathDiff");
+		_fileContentDifferenceLabel = AppSetting.Instance.GetIlogger().GetStr("PvfDiffControl_ShowMode_FileContentDiff");
+		_pathAndFileDifferenceLabel = AppSetting.Instance.GetIlogger().GetStr("PvfDiffControl_ShowMode_PathAndFileDiff");
+		_allFilesLabel = AppSetting.Instance.GetIlogger().GetStr("PvfDiffControl_ShowMode_AllFile");
 	}
 }

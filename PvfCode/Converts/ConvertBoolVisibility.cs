@@ -18,9 +18,9 @@ public class ConvertBoolVisibility : IValueConverter
 		};
 	}
 
-	public object ConvertBack(object P_0, Type P_1, object P_2, CultureInfo P_3)
+	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 	{
-		if ((bool)P_0)
+		if ((bool)value)
 		{
 			return Visibility.Visible;
 		}
