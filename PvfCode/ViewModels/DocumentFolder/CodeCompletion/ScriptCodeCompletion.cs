@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using ICSharpCode.AvalonEdit.Highlighting;
@@ -16,44 +15,13 @@ namespace PvfCode.ViewModels.DocumentFolder.CodeCompletion;
 
 internal class ScriptCodeCompletion : ScriptCodeCompletionBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass1_0
+	public ScriptCodeCompletion(TextEditorBase editor, PvfFileType? fileType)
+		: base(editor, fileType)
 	{
-		public TextCompositionEventArgs sVgIwjZeX9;
-
-		public ScriptCodeCompletion rqeIoiJBDO;
-
-		public _003C_003Ec__DisplayClass1_0()
-		{
-		}
-
-		internal bool olBI668rew(CodeCompletionData it)
-		{
-			return it.Text.Contains(sVgIwjZeX9.Text);
-		}
-
-		internal void vXEI1OaT0U(object? _003Cp0_003E, EventArgs _003Cp1_003E)
-		{
-			rqeIoiJBDO.Editor.CodeCompletionIsOpen = false;
-			rqeIoiJBDO.completionWindow = null;
-		}
 	}
 
-	public ScriptCodeCompletion(TextEditorBase P_0, PvfFileType? P_1)
-		: base(P_0, P_1)
+	internal override void ShowCompletionWindow(TextCompositionEventArgs e)
 	{
-		g0Iiy1tHWG().Add(' ');
-		g0Iiy1tHWG().Add('`');
-		g0Iiy1tHWG().Add('[');
-		g0Iiy1tHWG().Add(']');
-		g0Iiy1tHWG().Add('/');
-	}
-
-	internal override void f5YZC1mx9X(TextCompositionEventArgs P_0)
-	{
-		_003C_003Ec__DisplayClass1_0 CS_0024_003C_003E8__locals6 = new _003C_003Ec__DisplayClass1_0();
-		CS_0024_003C_003E8__locals6.sVgIwjZeX9 = P_0;
-		CS_0024_003C_003E8__locals6.rqeIoiJBDO = this;
 		try
 		{
 			int offset = Editor.TextArea.Caret.Offset;
@@ -64,22 +32,22 @@ internal class ScriptCodeCompletion : ScriptCodeCompletionBase
 				int offset2 = --offset;
 				if (Editor.OffSetIsHiglig(HighlightingType.FilePath, higSections, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 				if (Editor.OffSetIsHiglig(HighlightingType.Curlybraces, higSections, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 				if (Editor.OffSetIsHiglig(HighlightingType.Digits, higSections, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 				if (Editor.OffSetIsHiglig(HighlightingType.Comment, higSections, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 			}
@@ -115,51 +83,51 @@ internal class ScriptCodeCompletion : ScriptCodeCompletionBase
 					return;
 				}
 			}
-			if ((!(CS_0024_003C_003E8__locals6.sVgIwjZeX9.Text == " ") || completionWindow != null) && (completionWindow != null || AppSetting.Instance.EditConfig.CompletionDatas.Any((CodeCompletionData it) => it.Text.Contains(CS_0024_003C_003E8__locals6.sVgIwjZeX9.Text))))
+			if ((e.Text != " " || completionWindow != null) && (completionWindow != null || AppSetting.Instance.EditConfig.CompletionDatas.Any(item => item.Text.Contains(e.Text))))
 			{
-				List<CodeCompletionData> list = AppSetting.Instance.EditConfig.CompletionDatas.FindAll((CodeCompletionData it) => it.CodeCompletScriptType == CodeCompletScriptType.Script);
-				list.Sort((CodeCompletionData a, CodeCompletionData b) => a.Text.CompareTo(b.Text));
+				List<CodeCompletionData> completionData = AppSetting.Instance.EditConfig.CompletionDatas.FindAll(item => item.CodeCompletScriptType == CodeCompletScriptType.Script);
+				completionData.Sort((left, right) => left.Text.CompareTo(right.Text));
 				int endOffset;
-				int num;
+				int startOffset;
 				if (!highlightingType.HasValue)
 				{
-					num = (endOffset = base.TextArea.Caret.Offset);
-					num--;
+					startOffset = endOffset = base.TextArea.Caret.Offset;
+					startOffset--;
 				}
 				else
 				{
 					HighlightedSection higSection = Editor.GetHigSection(highlightingType.Value, offset);
-					num = higSection.Offset;
+					startOffset = higSection.Offset;
 					endOffset = higSection.EndOffset;
 				}
-				completionWindow = new WindowCompletion(Editor, base.TextArea, FileType, num, endOffset);
-				completionWindow.CompletionList.CompletionData.AddRange(list.ToArray());
+				completionWindow = new WindowCompletion(Editor, base.TextArea, FileType, startOffset, endOffset);
+				completionWindow.CompletionList.CompletionData.AddRange(completionData.ToArray());
 				Editor.CodeCompletionIsOpen = true;
 				completionWindow.Show();
 				completionWindow.Closed += delegate
 				{
-					CS_0024_003C_003E8__locals6.rqeIoiJBDO.Editor.CodeCompletionIsOpen = false;
-					CS_0024_003C_003E8__locals6.rqeIoiJBDO.completionWindow = null;
+					Editor.CodeCompletionIsOpen = false;
+					completionWindow = null;
 				};
 			}
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "ScriptCodeCompletion.ShowCompletionCodeWindow");
+			AppCore.Logger.ErrorUploadDialog(exception, "ScriptCodeCompletion.ShowCompletionCodeWindow");
 		}
 	}
 
-	internal override void ilPZHkiS99(string P_0)
+	internal override void InsertMatchingDelimiter(string text)
 	{
 		try
 		{
 			int offset = Editor.TextArea.Caret.Offset;
-			if (P_0 == "`")
+			if (text == "`")
 			{
 				Editor.Document.Insert(offset, "`");
 				base.TextArea.Caret.Offset--;
 			}
-			else if (P_0 == "[" && (offset + 1 > base.Document.TextLength || !(base.Document.GetText(offset, 1) == "]")))
+			else if (text == "[" && (offset + 1 > base.Document.TextLength || !(base.Document.GetText(offset, 1) == "]")))
 			{
 				base.Document.Insert(offset, "]");
 				base.TextArea.Caret.Offset--;

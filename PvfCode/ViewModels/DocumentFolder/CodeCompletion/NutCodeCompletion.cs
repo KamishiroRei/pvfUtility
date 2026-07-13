@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using ICSharpCode.AvalonEdit.Highlighting;
 using PvfCode;
@@ -14,38 +13,15 @@ namespace PvfCode.ViewModels.DocumentFolder.CodeCompletion;
 
 internal class NutCodeCompletion : ScriptCodeCompletionBase
 {
-	[CompilerGenerated]
-	private string MS8uQQbJ2S;
-
-	public NutCodeCompletion(TextEditorBase P_0, PvfFileType? P_1)
-		: base(P_0, P_1)
+	public NutCodeCompletion(TextEditorBase editor, PvfFileType? fileType)
+		: base(editor, fileType)
 	{
-		MS8uQQbJ2S = "";
-		g0Iiy1tHWG().Add('\'');
-		g0Iiy1tHWG().Add('[');
-		g0Iiy1tHWG().Add(']');
-		g0Iiy1tHWG().Add('.');
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private string hxYuuCX7jv()
-	{
-		return MS8uQQbJ2S;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void IwZuGgjTiv(string P_0)
-	{
-		MS8uQQbJ2S = P_0;
-	}
-
-	internal override void f5YZC1mx9X(TextCompositionEventArgs P_0)
+	internal override void ShowCompletionWindow(TextCompositionEventArgs e)
 	{
 		try
 		{
-			IwZuGgjTiv(hxYuuCX7jv() + P_0.Text);
 			int offset = Editor.TextArea.Caret.Offset;
 			HighlightingType? highlightingType = null;
 			if (offset > 0)
@@ -53,37 +29,37 @@ internal class NutCodeCompletion : ScriptCodeCompletionBase
 				int offset2 = --offset;
 				if (Editor.OffSetIsHiglig(HighlightingType.FilePath, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 				if (Editor.OffSetIsHiglig(HighlightingType.Curlybraces, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 				if (Editor.OffSetIsHiglig(HighlightingType.Digits, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 				if (Editor.OffSetIsHiglig(HighlightingType.Comment, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 				if (Editor.OffSetIsHiglig(HighlightingType.CommentMarkerSetHackUndone, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 				if (Editor.OffSetIsHiglig(HighlightingType.CommentMarkerSetTodo, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 				if (Editor.OffSetIsHiglig(HighlightingType.MethodCall, offset2))
 				{
-					s7HiYlJT7I();
+					CloseCompletionWindow();
 					return;
 				}
 			}
@@ -103,55 +79,54 @@ internal class NutCodeCompletion : ScriptCodeCompletionBase
 			{
 				highlightingType = HighlightingType.GGenObject;
 			}
-			if (P_0.Text == " " && completionWindow == null)
+			if (e.Text == " " && completionWindow == null)
 			{
-				s7HiYlJT7I();
+				CloseCompletionWindow();
 				return;
 			}
-			List<CodeCompletionData> list = AppSetting.Instance.EditConfig.CompletionDatas.FindAll((CodeCompletionData it) => it.CodeCompletScriptType == CodeCompletScriptType.Nut);
-			list.Sort((CodeCompletionData a, CodeCompletionData b) => a.Text.CompareTo(b.Text));
-			if (completionWindow != null || list == null)
+			List<CodeCompletionData> completionData = AppSetting.Instance.EditConfig.CompletionDatas.FindAll(item => item.CodeCompletScriptType == CodeCompletScriptType.Nut);
+			completionData.Sort((left, right) => left.Text.CompareTo(right.Text));
+			if (completionWindow != null || completionData == null)
 			{
 				return;
 			}
 			int endOffset;
-			int startOffSet;
+			int startOffset;
 			if (!highlightingType.HasValue)
 			{
-				if (P_0.Text == ".")
+				if (e.Text == ".")
 				{
-					startOffSet = (endOffset = base.TextArea.Caret.Offset + 1);
+					startOffset = endOffset = base.TextArea.Caret.Offset + 1;
 				}
 				else
 				{
-					startOffSet = (endOffset = base.TextArea.Caret.Offset);
-					startOffSet--;
+					startOffset = endOffset = base.TextArea.Caret.Offset;
+					startOffset--;
 				}
 			}
 			else
 			{
 				HighlightedSection higSection = Editor.GetHigSection(highlightingType.Value, offset);
-				startOffSet = higSection.Offset;
+				startOffset = higSection.Offset;
 				endOffset = higSection.EndOffset;
 			}
-			completionWindow = new WindowCompletion(Editor, base.TextArea, FileType, startOffSet, endOffset);
-			completionWindow.CompletionList.CompletionData.AddRange(list.ToArray());
+			completionWindow = new WindowCompletion(Editor, base.TextArea, FileType, startOffset, endOffset);
+			completionWindow.CompletionList.CompletionData.AddRange(completionData.ToArray());
 			Editor.CodeCompletionIsOpen = true;
 			completionWindow.Show();
 			completionWindow.Closed += delegate
 			{
 				Editor.CodeCompletionIsOpen = false;
 				completionWindow = null;
-				IwZuGgjTiv("");
 			};
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "NutCodeCompletion.ShowCompletionCodeWindow");
+			AppCore.Logger.ErrorUploadDialog(exception, "NutCodeCompletion.ShowCompletionCodeWindow");
 		}
 	}
 
-	internal override void ilPZHkiS99(string P_0)
+	internal override void InsertMatchingDelimiter(string text)
 	{
 		try
 		{
@@ -160,12 +135,12 @@ internal class NutCodeCompletion : ScriptCodeCompletionBase
 			{
 				return;
 			}
-			if (P_0 == "'")
+			if (text == "'")
 			{
 				Editor.Document.Insert(offset, "'");
 				base.TextArea.Caret.Offset--;
 			}
-			else if (P_0 == "[")
+			else if (text == "[")
 			{
 				if (offset + 1 > base.Document.TextLength || !(base.Document.GetText(offset, 1) == "]"))
 				{
@@ -173,17 +148,17 @@ internal class NutCodeCompletion : ScriptCodeCompletionBase
 					base.TextArea.Caret.Offset--;
 				}
 			}
-			else if (P_0 == "{")
+			else if (text == "{")
 			{
 				base.Document.Insert(offset, "}");
 				base.TextArea.Caret.Offset--;
 			}
-			else if (P_0 == "\"")
+			else if (text == "\"")
 			{
 				base.Document.Insert(offset, "\"");
 				base.TextArea.Caret.Offset--;
 			}
-			else if (P_0 == "(")
+			else if (text == "(")
 			{
 				base.Document.Insert(offset, ")");
 				base.TextArea.Caret.Offset--;
@@ -193,13 +168,5 @@ internal class NutCodeCompletion : ScriptCodeCompletionBase
 		{
 			AppCore.Logger.ErrorUploadDialog(e, "NutCodeCompletion.CompletionCode");
 		}
-	}
-
-	[CompilerGenerated]
-	private void yvHuiBYE6P(object? _003Cp0_003E, EventArgs P_1)
-	{
-		Editor.CodeCompletionIsOpen = false;
-		completionWindow = null;
-		IwZuGgjTiv("");
 	}
 }

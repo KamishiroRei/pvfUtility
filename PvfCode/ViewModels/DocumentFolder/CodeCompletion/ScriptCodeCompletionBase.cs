@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
@@ -16,101 +14,77 @@ public abstract class ScriptCodeCompletionBase : IDisposable
 
 	protected WindowCompletion completionWindow;
 
-	[CompilerGenerated]
-	private HashSet<char> J8diQE0WKt;
-
 	internal TextDocument Document => Editor.Document;
 
 	internal TextArea TextArea => Editor.TextArea;
 
-	[SpecialName]
-	[CompilerGenerated]
-	internal HashSet<char> g0Iiy1tHWG()
-	{
-		return J8diQE0WKt;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	internal void WZxiiTZ6S8(HashSet<char> P_0)
-	{
-		J8diQE0WKt = P_0;
-	}
-
 	public ScriptCodeCompletionBase(TextEditorBase editor, PvfFileType? fileType)
 	{
-		J8diQE0WKt = new HashSet<char>();
 		FileType = fileType;
 		Editor = editor;
-		tcKiS60xuW();
+		AttachEvents();
 	}
 
-	private void tcKiS60xuW()
+	private void AttachEvents()
 	{
 		try
 		{
-			Editor.TextArea.TextEntering += WJMi4vh2cA;
-			Editor.TextArea.TextEntered += DlQiARpDvH;
+			Editor.TextArea.TextEntering += OnTextEntering;
+			Editor.TextArea.TextEntered += OnTextEntered;
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "ScriptCodeCompletionBase.CompletionInit");
+			AppCore.Logger.ErrorUploadDialog(exception, "ScriptCodeCompletionBase.CompletionInit");
 		}
 	}
 
-	private void DlQiARpDvH(object P_0, TextCompositionEventArgs P_1)
+	private void OnTextEntered(object sender, TextCompositionEventArgs e)
 	{
 		try
 		{
-			if (P_1.Text == "\n" || P_1.Text == "\r\n")
+			if (e.Text == "\n" || e.Text == "\r\n")
 			{
 				return;
 			}
-			if (FileType.HasValue && FileType == PvfFileType.nut && P_1.Text == ".")
+			if (FileType.HasValue && FileType == PvfFileType.nut && e.Text == ".")
 			{
-				f5YZC1mx9X(P_1);
+				ShowCompletionWindow(e);
 				return;
 			}
 			int offset = Editor.TextArea.Caret.Offset;
 			if (offset - 2 >= 0 && !string.IsNullOrWhiteSpace(Document.GetText(offset - 2, 1)) && completionWindow == null)
 			{
-				s7HiYlJT7I();
+				CloseCompletionWindow();
 			}
 			else
 			{
-				f5YZC1mx9X(P_1);
+				ShowCompletionWindow(e);
 			}
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "ScriptCodeCompletionBase.CompletionInit");
+			AppCore.Logger.ErrorUploadDialog(exception, "ScriptCodeCompletionBase.CompletionInit");
 		}
 	}
 
-	private void WJMi4vh2cA(object P_0, TextCompositionEventArgs P_1)
+	private void OnTextEntering(object sender, TextCompositionEventArgs e)
 	{
 		try
 		{
-			string text = P_1.Text;
-			if (P_1.Text.Length > 0)
+			if (e.Text.Length > 0)
 			{
-				ilPZHkiS99(text);
-			}
-			if (P_1.Text.Length > 0 && completionWindow != null && !char.IsLetterOrDigit(P_1.Text[0]))
-			{
-				char item = P_1.Text[0];
-				g0Iiy1tHWG().Contains(item);
+				InsertMatchingDelimiter(e.Text);
 			}
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "ScriptCodeCompletionBase.TextEditor_TextArea_TextEntering");
+			AppCore.Logger.ErrorUploadDialog(exception, "ScriptCodeCompletionBase.TextEditor_TextArea_TextEntering");
 		}
 	}
 
-	internal abstract void f5YZC1mx9X(TextCompositionEventArgs e);
+	internal abstract void ShowCompletionWindow(TextCompositionEventArgs e);
 
-	internal abstract void ilPZHkiS99(string text);
+	internal abstract void InsertMatchingDelimiter(string text);
 
 	public void CloseWindow()
 	{
@@ -127,7 +101,7 @@ public abstract class ScriptCodeCompletionBase : IDisposable
 		}
 	}
 
-	internal void s7HiYlJT7I()
+	internal void CloseCompletionWindow()
 	{
 		if (completionWindow != null)
 		{
@@ -140,8 +114,8 @@ public abstract class ScriptCodeCompletionBase : IDisposable
 	{
 		if (Editor != null)
 		{
-			Editor.TextArea.TextEntering -= WJMi4vh2cA;
-			Editor.TextArea.TextEntered -= DlQiARpDvH;
+			Editor.TextArea.TextEntering -= OnTextEntering;
+			Editor.TextArea.TextEntered -= OnTextEntered;
 		}
 	}
 }

@@ -100,8 +100,7 @@ public class TextEditorBase : TextEdit, IComponentConnector
 	[CompilerGenerated]
 	private SectionCommentElementGenerator A7hg0O73Xy;
 
-	[CompilerGenerated]
-	private ScriptCodeCompletionBase aWrg7EYjus;
+	private ScriptCodeCompletionBase codeCompletion;
 
 	private new bool IsLoaded;
 
@@ -339,20 +338,6 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		A7hg0O73Xy = P_0;
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private ScriptCodeCompletionBase gb5gOynRul()
-	{
-		return aWrg7EYjus;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void bADgKfmIkV(ScriptCodeCompletionBase P_0)
-	{
-		aWrg7EYjus = P_0;
-	}
-
 	public TextEditorBase()
 	{
 		omTgcZvJwL = new object();
@@ -557,10 +542,10 @@ public class TextEditorBase : TextEdit, IComponentConnector
 					switch (FileType.Value)
 					{
 					case PvfFileType.nut:
-						bADgKfmIkV(new NutCodeCompletion(this, FileType));
+						codeCompletion = new NutCodeCompletion(this, FileType);
 						break;
 					default:
-						bADgKfmIkV(new ScriptCodeCompletion(this, FileType));
+						codeCompletion = new ScriptCodeCompletion(this, FileType);
 						break;
 					case PvfFileType.lst:
 					case PvfFileType.kor:
@@ -845,9 +830,9 @@ public class TextEditorBase : TextEdit, IComponentConnector
 	private static void FYwgtShVSk(DependencyObject P_0, DependencyPropertyChangedEventArgs P_1)
 	{
 		TextEditorBase textEditorBase = (TextEditorBase)(object)P_0;
-		if (textEditorBase != null && !Convert.ToBoolean(P_1.NewValue) && textEditorBase.gb5gOynRul() != null)
+		if (textEditorBase != null && !Convert.ToBoolean(P_1.NewValue) && textEditorBase.codeCompletion != null)
 		{
-			textEditorBase.gb5gOynRul().CloseWindow();
+			textEditorBase.codeCompletion.CloseWindow();
 		}
 	}
 
@@ -862,7 +847,7 @@ public class TextEditorBase : TextEdit, IComponentConnector
 			base.Document.TextChanged -= SmGgLfSInl;
 			KVqgwmoMK4();
 			FoldingStrategyBaseHelper?.Dispose();
-			gb5gOynRul()?.Dispose();
+			codeCompletion?.Dispose();
 			MxqgpWMI0q?.Dispose();
 			base.TextArea.TextView.ElementGenerators?.Clear();
 			base.TextArea.TextView.BackgroundRenderers.Clear();
