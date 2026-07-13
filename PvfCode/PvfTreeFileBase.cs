@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using DevExpress.Mvvm.DataAnnotations;
@@ -19,107 +18,23 @@ public abstract class PvfTreeFileBase : ModelBase
 {
 	internal readonly PvfGroup Pvf;
 
-	[CompilerGenerated]
-	private TreeViewType scHjs2WSRd;
-
 	public readonly short Level;
 
-	[CompilerGenerated]
-	private PvfFile? U2ejLepgAs;
+	private TreeImageType _imageType;
 
-	[CompilerGenerated]
-	private bool? NCBjnUvIFD;
+	private ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> _children;
 
-	[CompilerGenerated]
-	private bool VNFjqWNIEL;
+	public TreeViewType TreeType { get; set; }
 
-	private string EdAjdwZfcA;
+	public PvfFile? File { get; private set; }
 
-	private string bPhjeqCCg4;
+	public bool? IsShearStatus { get; set; }
 
-	private TreeImageType BN9jt4tpVb;
+	public bool IsFile { get; private set; }
 
-	private ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> OpJjbFhi03;
+	public string FullPath { get; private set; }
 
-	public TreeViewType TreeType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return scHjs2WSRd;
-		}
-		[CompilerGenerated]
-		set
-		{
-			scHjs2WSRd = value;
-		}
-	}
-
-	public PvfFile? File
-	{
-		[CompilerGenerated]
-		get
-		{
-			return U2ejLepgAs;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			U2ejLepgAs = value;
-		}
-	}
-
-	public bool? IsShearStatus
-	{
-		[CompilerGenerated]
-		get
-		{
-			return NCBjnUvIFD;
-		}
-		[CompilerGenerated]
-		set
-		{
-			NCBjnUvIFD = value;
-		}
-	}
-
-	public bool IsFile
-	{
-		[CompilerGenerated]
-		get
-		{
-			return VNFjqWNIEL;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			VNFjqWNIEL = value;
-		}
-	}
-
-	public string FullPath
-	{
-		get
-		{
-			return EdAjdwZfcA;
-		}
-		private set
-		{
-			EdAjdwZfcA = value;
-		}
-	}
-
-	public string FileName
-	{
-		get
-		{
-			return bPhjeqCCg4;
-		}
-		private set
-		{
-			bPhjeqCCg4 = value;
-		}
-	}
+	public string FileName { get; private set; }
 
 	public string? ItemName
 	{
@@ -148,11 +63,7 @@ public abstract class PvfTreeFileBase : ModelBase
 			{
 				return null;
 			}
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 1);
-			defaultInterpolatedStringHandler.AppendLiteral("<");
-			defaultInterpolatedStringHandler.AppendFormatted(itemCode);
-			defaultInterpolatedStringHandler.AppendLiteral(">");
-			return defaultInterpolatedStringHandler.ToStringAndClear();
+			return $"<{itemCode}>";
 		}
 	}
 
@@ -160,13 +71,13 @@ public abstract class PvfTreeFileBase : ModelBase
 	{
 		get
 		{
-			return BN9jt4tpVb;
+			return _imageType;
 		}
 		set
 		{
-			if (value != BN9jt4tpVb)
+			if (value != _imageType)
 			{
-				BN9jt4tpVb = value;
+				_imageType = value;
 				DoNotify("ImageType");
 			}
 		}
@@ -295,15 +206,15 @@ public abstract class PvfTreeFileBase : ModelBase
 	{
 		get
 		{
-			if (OpJjbFhi03 == null)
+			if (_children == null)
 			{
-				OpJjbFhi03 = new ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>();
+				_children = new ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>();
 			}
-			return OpJjbFhi03;
+			return _children;
 		}
 		set
 		{
-			OpJjbFhi03 = value;
+			_children = value;
 		}
 	}
 
@@ -354,20 +265,20 @@ public abstract class PvfTreeFileBase : ModelBase
 
 	public bool HaveChildren()
 	{
-		if (OpJjbFhi03 == null)
+		if (_children == null)
 		{
 			return false;
 		}
-		return OpJjbFhi03.Any();
+		return _children.Any();
 	}
 
 	public int ChildrenCount()
 	{
-		if (OpJjbFhi03 == null)
+		if (_children == null)
 		{
 			return 0;
 		}
-		return OpJjbFhi03.Count();
+		return _children.Count();
 	}
 
 	public virtual bool IsFileMethon()
@@ -417,17 +328,11 @@ public abstract class PvfTreeFileBase : ModelBase
 		if (HaveChildren())
 		{
 			ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = new ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>();
-			observableConcurrentDictionaryEx.AddRange(from it in OpJjbFhi03
+			observableConcurrentDictionaryEx.AddRange(from it in _children
 				orderby it.Key
 				orderby it.Value.IsFile descending
 				select it);
-			OpJjbFhi03 = observableConcurrentDictionaryEx;
+			_children = observableConcurrentDictionaryEx;
 		}
-	}
-
-	[CompilerGenerated]
-	private ResultData<ImageSource> QcSjgeZoJT()
-	{
-		return AppCore.ViewModelBase.PVF.GetScriptIconSource(File);
 	}
 }

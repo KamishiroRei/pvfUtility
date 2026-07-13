@@ -11,14 +11,14 @@ namespace PvfCode.Views.PvfTreeFolder;
 
 public class ViewSelectTreeFiles : ThemedWindow, IComponentConnector
 {
-	internal ViewSelectTreeFilesViewModel jj1HLm82nA;
+	internal ViewSelectTreeFilesViewModel ViewModel;
 
-	private bool w5HHnJmpMf;
+	private bool _contentLoaded;
 
 	public ViewSelectTreeFiles(TreeViewType sourceType)
 	{
-		jj1HLm82nA = new ViewSelectTreeFilesViewModel(sourceType, base.Close);
-		base.DataContext = jj1HLm82nA;
+		ViewModel = new ViewSelectTreeFilesViewModel(sourceType, base.Close);
+		base.DataContext = ViewModel;
 		InitializeComponent();
 	}
 
@@ -31,9 +31,9 @@ public class ViewSelectTreeFiles : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!w5HHnJmpMf)
+		if (!_contentLoaded)
 		{
-			w5HHnJmpMf = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/pvftreefolder/viewselecttreefiles.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -51,6 +51,6 @@ public class ViewSelectTreeFiles : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	void IComponentConnector.Connect(int connectionId, object target)
 	{
-		w5HHnJmpMf = true;
+		_contentLoaded = true;
 	}
 }

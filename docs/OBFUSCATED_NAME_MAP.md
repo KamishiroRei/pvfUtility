@@ -129,6 +129,12 @@ Completed areas include:
   restored to ordinary fields, properties, and initialization code. The public
   compatibility names `Widht`, `IndexForm7zip`, `Instance`, and `OnRun` were
   intentionally retained.
+- `RelativeAnimatingContentControl`, `NavigationData`,
+  `DocumentNavigationService`, `ViewSelectTreeFiles`, `TreeListDropGroup`, and
+  `PvfTreeFileBase`; private random identifiers, pseudo-auto-properties,
+  expanded interpolation, and an unreachable compiler helper were restored to
+  semantic C#. Public binding names and the XAML-visible control identity remain
+  unchanged.
 - Readable-XAML cleanup replaced 13 ILSpy pseudo-`<Ctor>` nodes with valid markup
   extension/property syntax and moved 270 `Unknown connection ID` comments from
   74 documents into `docs/BAML_CONNECTION_ID_AUDIT.csv`. These edits improve the

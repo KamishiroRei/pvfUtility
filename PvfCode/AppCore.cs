@@ -80,10 +80,10 @@ public class AppCore
 			viewSelectTreeFiles.Title = title;
 		}
 		viewSelectTreeFiles.ShowDialog();
-		ViewSelectTreeFilesViewModel jj1HLm82nA = viewSelectTreeFiles.jj1HLm82nA;
-		if (jj1HLm82nA.IsOk && jj1HLm82nA.TreeViewModel.IsSelectedNodes)
+		ViewSelectTreeFilesViewModel viewModel = viewSelectTreeFiles.ViewModel;
+		if (viewModel.IsOk && viewModel.TreeViewModel.IsSelectedNodes)
 		{
-			return jj1HLm82nA.TreeViewModel.GetSelectedFilePaths(GetTreeType.File);
+			return viewModel.TreeViewModel.GetSelectedFilePaths(GetTreeType.File);
 		}
 		return null;
 	}

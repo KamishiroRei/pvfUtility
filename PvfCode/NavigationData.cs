@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 
@@ -7,64 +6,31 @@ namespace PvfCode;
 
 public class NavigationData : ViewModelBase
 {
-	[CompilerGenerated]
-	private string jhkj5CEH6p;
+	private int _line;
 
-	[CompilerGenerated]
-	private int usZjSpAphj;
+	private int _column;
 
-	private int b6ijAHvrCk;
+	private bool _isChecked;
 
-	private int BS0j4t4D2V;
+	internal Action<NavigationData> Navigate { get; set; }
 
-	private bool WVIjY74Hy1;
+	public string FilePath { get; set; }
 
-	internal Action<NavigationData> RFCjyyD80B;
-
-	[CompilerGenerated]
-	private string kIpjiTcI6O;
-
-	public string FilePath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return jhkj5CEH6p;
-		}
-		[CompilerGenerated]
-		set
-		{
-			jhkj5CEH6p = value;
-		}
-	}
-
-	public int DocumentOffset
-	{
-		[CompilerGenerated]
-		get
-		{
-			return usZjSpAphj;
-		}
-		[CompilerGenerated]
-		set
-		{
-			usZjSpAphj = value;
-		}
-	}
+	public int DocumentOffset { get; set; }
 
 	public int Line
 	{
 		get
 		{
-			if (b6ijAHvrCk <= 0)
+			if (_line <= 0)
 			{
-				b6ijAHvrCk = 1;
+				_line = 1;
 			}
-			return b6ijAHvrCk;
+			return _line;
 		}
 		set
 		{
-			b6ijAHvrCk = value;
+			_line = value;
 		}
 	}
 
@@ -72,15 +38,15 @@ public class NavigationData : ViewModelBase
 	{
 		get
 		{
-			if (BS0j4t4D2V <= 0)
+			if (_column <= 0)
 			{
-				BS0j4t4D2V = 1;
+				_column = 1;
 			}
-			return BS0j4t4D2V;
+			return _column;
 		}
 		set
 		{
-			BS0j4t4D2V = value;
+			_column = value;
 		}
 	}
 
@@ -88,38 +54,22 @@ public class NavigationData : ViewModelBase
 	{
 		get
 		{
-			return WVIjY74Hy1;
+			return _isChecked;
 		}
 		set
 		{
-			WVIjY74Hy1 = value;
-			RaisePropertyChanged("IsChecked");
+			_isChecked = value;
+			RaisePropertyChanged(nameof(IsChecked));
 		}
 	}
 
-	public string Text
-	{
-		[CompilerGenerated]
-		get
-		{
-			return kIpjiTcI6O;
-		}
-		[CompilerGenerated]
-		set
-		{
-			kIpjiTcI6O = value;
-		}
-	}
+	public string Text { get; set; }
 
 	public bool TextVisibility => !string.IsNullOrEmpty(Text);
 
 	[Command]
 	public void OnClick()
 	{
-		RFCjyyD80B?.Invoke(this);
-	}
-
-	public NavigationData()
-	{
+		Navigate?.Invoke(this);
 	}
 }

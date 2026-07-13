@@ -96,7 +96,7 @@ public class DocumentNavigationService : ViewModelBase
 				Items.RemoveAt(Items.Count - 1);
 			}
 			navigationData.IsChecked = true;
-			navigationData.RFCjyyD80B = Click;
+			navigationData.Navigate = OnNavigationItemClick;
 			RefreshViewState();
 			Items.Insert(0, navigationData);
 		}
@@ -132,9 +132,9 @@ public class DocumentNavigationService : ViewModelBase
 		RefreshViewState();
 	}
 
-	private void Click(NavigationData navigationData)
+	private void OnNavigationItemClick(NavigationData navigationData)
 	{
-		lIHjB34YPV(navigationData);
+		NavigateTo(navigationData);
 		RefreshViewState();
 	}
 
@@ -156,7 +156,7 @@ public class DocumentNavigationService : ViewModelBase
 			}
 			NavigationData navigationData = Items[num];
 			navigationData.IsChecked = true;
-			lIHjB34YPV(navigationData);
+			NavigateTo(navigationData);
 			RefreshViewState();
 		}
 		catch (Exception e)
@@ -179,7 +179,7 @@ public class DocumentNavigationService : ViewModelBase
 			num--;
 			NavigationData navigationData = Items[num];
 			navigationData.IsChecked = true;
-			lIHjB34YPV(navigationData);
+			NavigateTo(navigationData);
 			RefreshViewState();
 		}
 		catch (Exception e)
@@ -188,26 +188,26 @@ public class DocumentNavigationService : ViewModelBase
 		}
 	}
 
-	private void lIHjB34YPV(NavigationData P_0)
+	private void NavigateTo(NavigationData navigationData)
 	{
 		try
 		{
-			DocumentBase document = AppCore.ViewModelBase.RootDocument.GetDocument(P_0.FilePath);
+			DocumentBase document = AppCore.ViewModelBase.RootDocument.GetDocument(navigationData.FilePath);
 			if (document != null && document is PvfFileDocument pvfFileDocument)
 			{
 				IsGoTo = true;
 				pvfFileDocument.IsActive = true;
 				IsGoTo = true;
 				TextEdit editor = pvfFileDocument.GetEditor();
-				if (P_0.DocumentOffset <= editor.Document.TextLength)
+				if (navigationData.DocumentOffset <= editor.Document.TextLength)
 				{
-					editor.TextArea.Caret.Offset = P_0.DocumentOffset;
-					editor.ScrollTo(P_0.Line, P_0.Column);
+					editor.TextArea.Caret.Offset = navigationData.DocumentOffset;
+					editor.ScrollTo(navigationData.Line, navigationData.Column);
 					IsGoTo = true;
 				}
 				else
 				{
-					Items.Remove(P_0);
+					Items.Remove(navigationData);
 				}
 			}
 		}

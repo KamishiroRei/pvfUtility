@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -9,320 +8,231 @@ namespace PvfCode.Styles;
 
 public class RelativeAnimatingContentControl : ContentControl
 {
-	private enum Y6SwQtE5Zb0usYTq7Oj
+	private enum RelativeDimension
 	{
 		Width,
 		Height
 	}
 
-	private abstract class uiohO7EST2NfZKN9sCx
+	private abstract class RelativeValueUpdater
 	{
-		[CompilerGenerated]
-		private double HxVEGr0e10;
-
-		[CompilerGenerated]
-		private Y6SwQtE5Zb0usYTq7Oj gFbExEaNql;
-
-		[SpecialName]
-		[CompilerGenerated]
-		protected double w9SEAFXVhI()
+		protected RelativeValueUpdater(RelativeDimension dimension)
 		{
-			return HxVEGr0e10;
+			Dimension = dimension;
 		}
 
-		[SpecialName]
-		[CompilerGenerated]
-		protected void hpgE4OGpOq(double P_0)
-		{
-			HxVEGr0e10 = P_0;
-		}
+		protected RelativeDimension Dimension { get; }
 
-		public uiohO7EST2NfZKN9sCx(Y6SwQtE5Zb0usYTq7Oj P_0)
-		{
-			MDYEi7D2n6(P_0);
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public Y6SwQtE5Zb0usYTq7Oj TAcEy43XBE()
-		{
-			return gFbExEaNql;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		private void MDYEi7D2n6(Y6SwQtE5Zb0usYTq7Oj P_0)
-		{
-			gFbExEaNql = P_0;
-		}
-
-		public abstract void K0hZ5pSHqf(double P_0, double P_1);
+		public abstract void Update(double width, double height);
 	}
 
-	private abstract class hVxmQDEQwjJ9BvS3Ffa<fn8rkqEaEElqJq7mHrr> : uiohO7EST2NfZKN9sCx
+	private abstract class RelativeAnimationValue<TAnimation> : RelativeValueUpdater
 	{
-		[CompilerGenerated]
-		private fn8rkqEaEElqJq7mHrr TXpEbPljl1;
+		private const double WidthMarker = 0.1;
 
-		[CompilerGenerated]
-		private double PaSEItGBtm;
+		private const double HeightMarker = 0.2;
 
-		private double M18EE9f1XL;
+		private readonly double _scaleFactor;
 
-		protected fn8rkqEaEElqJq7mHrr Instance
+		protected RelativeAnimationValue(RelativeDimension dimension, TAnimation animation)
+			: base(dimension)
 		{
-			[CompilerGenerated]
-			get
+			Animation = animation;
+			_scaleFactor = DecodeRelativeValue(ReadValue()) / 100.0;
+		}
+
+		protected TAnimation Animation { get; }
+
+		protected abstract double ReadValue();
+
+		protected abstract void WriteValue(double value);
+
+		private double DecodeRelativeValue(double encodedValue)
+		{
+			return encodedValue - (Dimension == RelativeDimension.Width ? WidthMarker : HeightMarker);
+		}
+
+		public static RelativeDimension? GetRelativeDimension(double encodedValue)
+		{
+			double marker = encodedValue - Math.Floor(encodedValue);
+			if (marker >= 0.099991 && marker <= 0.100009)
 			{
-				return TXpEbPljl1;
+				return RelativeDimension.Width;
 			}
-			[CompilerGenerated]
-			set
+			if (marker >= 0.199991 && marker <= 0.200009)
 			{
-				TXpEbPljl1 = value;
-			}
-		}
-
-		protected abstract double tiUZS5UHjG();
-
-		protected abstract void om1ZApuME0(double P_0);
-
-		[SpecialName]
-		[CompilerGenerated]
-		protected double h61EdLtsor()
-		{
-			return PaSEItGBtm;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		private void KDIEe5uOKP(double P_0)
-		{
-			PaSEItGBtm = P_0;
-		}
-
-		public hVxmQDEQwjJ9BvS3Ffa(Y6SwQtE5Zb0usYTq7Oj P_0, fn8rkqEaEElqJq7mHrr rGTLfAE1RjDqpGDD58Y)
-			: base(P_0)
-		{
-			Instance = rGTLfAE1RjDqpGDD58Y;
-			KDIEe5uOKP(q5XEwJPg7C(tiUZS5UHjG()));
-			M18EE9f1XL = h61EdLtsor() / 100.0;
-		}
-
-		public double q5XEwJPg7C(double P_0)
-		{
-			if (TAcEy43XBE() != Y6SwQtE5Zb0usYTq7Oj.Width)
-			{
-				return P_0 - 0.2;
-			}
-			return P_0 - 0.1;
-		}
-
-		public static Y6SwQtE5Zb0usYTq7Oj? XcVEoxKT4n(double P_0)
-		{
-			double num = Math.Floor(P_0);
-			double num2 = P_0 - num;
-			if (num2 >= 0.09999100000000001 && num2 <= 0.100009)
-			{
-				return Y6SwQtE5Zb0usYTq7Oj.Width;
-			}
-			if (num2 >= 0.199991 && num2 <= 0.20000900000000002)
-			{
-				return Y6SwQtE5Zb0usYTq7Oj.Height;
+				return RelativeDimension.Height;
 			}
 			return null;
 		}
 
-		public override void K0hZ5pSHqf(double P_0, double P_1)
+		public override void Update(double width, double height)
 		{
-			double num = ((TAcEy43XBE() == Y6SwQtE5Zb0usYTq7Oj.Width) ? P_0 : P_1);
-			SLMEsgjftD(num);
-		}
-
-		private void SLMEsgjftD(double P_0)
-		{
-			om1ZApuME0(P_0 * M18EE9f1XL);
+			double dimensionSize = Dimension == RelativeDimension.Width ? width : height;
+			WriteValue(dimensionSize * _scaleFactor);
 		}
 	}
 
-	private class yV3Aj0EOTqgsOseBy29 : hVxmQDEQwjJ9BvS3Ffa<DoubleAnimation>
+	private sealed class DoubleAnimationToValue : RelativeAnimationValue<DoubleAnimation>
 	{
-		protected override double tiUZS5UHjG()
+		public DoubleAnimationToValue(RelativeDimension dimension, DoubleAnimation animation)
+			: base(dimension, animation)
 		{
-			return base.Instance.To.Value;
 		}
 
-		protected override void om1ZApuME0(double P_0)
+		protected override double ReadValue()
 		{
-			base.Instance.To = P_0;
+			return Animation.To.Value;
 		}
 
-		public yV3Aj0EOTqgsOseBy29(Y6SwQtE5Zb0usYTq7Oj P_0, DoubleAnimation P_1)
-			: base(P_0, P_1)
+		protected override void WriteValue(double value)
 		{
+			Animation.To = value;
 		}
 	}
 
-	private class kGBJsKEKGg8PRPnN4Ih : hVxmQDEQwjJ9BvS3Ffa<DoubleAnimation>
+	private sealed class DoubleAnimationFromValue : RelativeAnimationValue<DoubleAnimation>
 	{
-		protected override double tiUZS5UHjG()
+		public DoubleAnimationFromValue(RelativeDimension dimension, DoubleAnimation animation)
+			: base(dimension, animation)
 		{
-			return base.Instance.From.Value;
 		}
 
-		protected override void om1ZApuME0(double P_0)
+		protected override double ReadValue()
 		{
-			base.Instance.From = P_0;
+			return Animation.From.Value;
 		}
 
-		public kGBJsKEKGg8PRPnN4Ih(Y6SwQtE5Zb0usYTq7Oj P_0, DoubleAnimation P_1)
-			: base(P_0, P_1)
+		protected override void WriteValue(double value)
 		{
+			Animation.From = value;
 		}
 	}
 
-	private class jcPABtE9OOyMjFvkxdc : hVxmQDEQwjJ9BvS3Ffa<DoubleKeyFrame>
+	private sealed class DoubleKeyFrameValue : RelativeAnimationValue<DoubleKeyFrame>
 	{
-		protected override double tiUZS5UHjG()
+		public DoubleKeyFrameValue(RelativeDimension dimension, DoubleKeyFrame keyFrame)
+			: base(dimension, keyFrame)
 		{
-			return base.Instance.Value;
 		}
 
-		protected override void om1ZApuME0(double P_0)
+		protected override double ReadValue()
 		{
-			base.Instance.Value = P_0;
+			return Animation.Value;
 		}
 
-		public jcPABtE9OOyMjFvkxdc(Y6SwQtE5Zb0usYTq7Oj P_0, DoubleKeyFrame P_1)
-			: base(P_0, P_1)
+		protected override void WriteValue(double value)
 		{
+			Animation.Value = value;
 		}
 	}
 
-	private double KNTQfbQkp5;
+	private double _currentWidth;
 
-	private double WhEQ5OB2LG;
+	private double _currentHeight;
 
-	private List<uiohO7EST2NfZKN9sCx> TI6QS53gmb;
+	private List<RelativeValueUpdater> _relativeValues;
 
 	public RelativeAnimatingContentControl()
 	{
-		base.SizeChanged += FHsQFVQHxB;
+		base.SizeChanged += OnSizeChanged;
 	}
 
-	private void FHsQFVQHxB(object P_0, SizeChangedEventArgs P_1)
+	private void OnSizeChanged(object sender, SizeChangedEventArgs e)
 	{
-		if (P_1 == null)
+		if (e?.NewSize.Height > 0.0 && e.NewSize.Width > 0.0)
 		{
-			return;
-		}
-		Size newSize = P_1.NewSize;
-		if (newSize.Height > 0.0)
-		{
-			newSize = P_1.NewSize;
-			if (newSize.Width > 0.0)
-			{
-				newSize = P_1.NewSize;
-				KNTQfbQkp5 = newSize.Width;
-				newSize = P_1.NewSize;
-				WhEQ5OB2LG = newSize.Height;
-				WsBQrKdTeS();
-			}
+			_currentWidth = e.NewSize.Width;
+			_currentHeight = e.NewSize.Height;
+			UpdateRelativeAnimations();
 		}
 	}
 
-	private void WsBQrKdTeS()
+	private void UpdateRelativeAnimations()
 	{
-		if (!(WhEQ5OB2LG > 0.0) || !(KNTQfbQkp5 > 0.0))
+		if (_currentHeight <= 0.0 || _currentWidth <= 0.0)
 		{
 			return;
 		}
-		if (TI6QS53gmb == null)
+		if (_relativeValues == null)
 		{
-			TI6QS53gmb = new List<uiohO7EST2NfZKN9sCx>();
-			foreach (VisualStateGroup visualStateGroup3 in VisualStateManager.GetVisualStateGroups(this))
+			_relativeValues = new List<RelativeValueUpdater>();
+			foreach (VisualStateGroup visualStateGroup in VisualStateManager.GetVisualStateGroups(this))
 			{
-				if (visualStateGroup3 == null)
+				if (visualStateGroup == null)
 				{
 					continue;
 				}
-				foreach (VisualState state in visualStateGroup3.States)
+				foreach (VisualState state in visualStateGroup.States)
 				{
-					if (state == null)
+					if (state?.Storyboard == null)
 					{
 						continue;
 					}
-					Storyboard storyboard = state.Storyboard;
-					if (storyboard == null)
+					foreach (Timeline child in state.Storyboard.Children)
 					{
-						continue;
-					}
-					foreach (Timeline child in storyboard.Children)
-					{
-						DoubleAnimation doubleAnimation = child as DoubleAnimation;
-						DoubleAnimationUsingKeyFrames doubleAnimationUsingKeyFrames = child as DoubleAnimationUsingKeyFrames;
-						if (doubleAnimation != null)
+						if (child is DoubleAnimation doubleAnimation)
 						{
-							BGaQ2xRXb4(doubleAnimation);
+							TrackDoubleAnimation(doubleAnimation);
 						}
-						else if (doubleAnimationUsingKeyFrames != null)
+						else if (child is DoubleAnimationUsingKeyFrames keyFrameAnimation)
 						{
-							vGhQmFqSkS(doubleAnimationUsingKeyFrames);
+							TrackKeyFrameAnimation(keyFrameAnimation);
 						}
 					}
 				}
 			}
 		}
-		LYEQWVPu1J();
-		foreach (VisualStateGroup visualStateGroup4 in VisualStateManager.GetVisualStateGroups(this))
+		ApplyRelativeValues();
+		foreach (VisualStateGroup visualStateGroup in VisualStateManager.GetVisualStateGroups(this))
 		{
-			if (visualStateGroup4 == null)
+			if (visualStateGroup == null)
 			{
 				continue;
 			}
-			foreach (VisualState state2 in visualStateGroup4.States)
+			foreach (VisualState state in visualStateGroup.States)
 			{
-				state2?.Storyboard?.Begin(this);
+				state?.Storyboard?.Begin(this);
 			}
 		}
 	}
 
-	private void LYEQWVPu1J()
+	private void ApplyRelativeValues()
 	{
-		foreach (uiohO7EST2NfZKN9sCx item in TI6QS53gmb)
+		foreach (RelativeValueUpdater relativeValue in _relativeValues)
 		{
-			item.K0hZ5pSHqf(KNTQfbQkp5, WhEQ5OB2LG);
+			relativeValue.Update(_currentWidth, _currentHeight);
 		}
 	}
 
-	private void vGhQmFqSkS(DoubleAnimationUsingKeyFrames P_0)
+	private void TrackKeyFrameAnimation(DoubleAnimationUsingKeyFrames animation)
 	{
-		foreach (DoubleKeyFrame keyFrame in P_0.KeyFrames)
+		foreach (DoubleKeyFrame keyFrame in animation.KeyFrames)
 		{
-			Y6SwQtE5Zb0usYTq7Oj? y6SwQtE5Zb0usYTq7Oj = hVxmQDEQwjJ9BvS3Ffa<DoubleKeyFrame>.XcVEoxKT4n(keyFrame.Value);
-			if (y6SwQtE5Zb0usYTq7Oj.HasValue)
+			RelativeDimension? dimension = RelativeAnimationValue<DoubleKeyFrame>.GetRelativeDimension(keyFrame.Value);
+			if (dimension.HasValue)
 			{
-				TI6QS53gmb.Add(new jcPABtE9OOyMjFvkxdc(y6SwQtE5Zb0usYTq7Oj.Value, keyFrame));
+				_relativeValues.Add(new DoubleKeyFrameValue(dimension.Value, keyFrame));
 			}
 		}
 	}
 
-	private void BGaQ2xRXb4(DoubleAnimation P_0)
+	private void TrackDoubleAnimation(DoubleAnimation animation)
 	{
-		if (P_0.To.HasValue)
+		if (animation.To.HasValue)
 		{
-			Y6SwQtE5Zb0usYTq7Oj? y6SwQtE5Zb0usYTq7Oj = hVxmQDEQwjJ9BvS3Ffa<DoubleAnimation>.XcVEoxKT4n(P_0.To.Value);
-			if (y6SwQtE5Zb0usYTq7Oj.HasValue)
+			RelativeDimension? dimension = RelativeAnimationValue<DoubleAnimation>.GetRelativeDimension(animation.To.Value);
+			if (dimension.HasValue)
 			{
-				TI6QS53gmb.Add(new yV3Aj0EOTqgsOseBy29(y6SwQtE5Zb0usYTq7Oj.Value, P_0));
+				_relativeValues.Add(new DoubleAnimationToValue(dimension.Value, animation));
 			}
 		}
-		if (P_0.From.HasValue)
+		if (animation.From.HasValue)
 		{
-			Y6SwQtE5Zb0usYTq7Oj? y6SwQtE5Zb0usYTq7Oj2 = hVxmQDEQwjJ9BvS3Ffa<DoubleAnimation>.XcVEoxKT4n(P_0.To.Value);
-			if (y6SwQtE5Zb0usYTq7Oj2.HasValue)
+			RelativeDimension? dimension = RelativeAnimationValue<DoubleAnimation>.GetRelativeDimension(animation.From.Value);
+			if (dimension.HasValue)
 			{
-				TI6QS53gmb.Add(new kGBJsKEKGg8PRPnN4Ih(y6SwQtE5Zb0usYTq7Oj2.Value, P_0));
+				_relativeValues.Add(new DoubleAnimationFromValue(dimension.Value, animation));
 			}
 		}
 	}

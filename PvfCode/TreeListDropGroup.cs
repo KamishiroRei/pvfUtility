@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Collections.Pooled;
 using PvfCode.Controls.TextEditorFolder;
 using PvfCode.ViewModels;
@@ -14,18 +13,6 @@ public class TreeListDropGroup
 	public const string DropKey = "TreeListDropGroup：15427586-86B6-5410-5D88-7F139C0C1E9E";
 
 	public static TreeListDropGroup _instance;
-
-	[CompilerGenerated]
-	private bool Y5OjuCH98q;
-
-	[CompilerGenerated]
-	private TreeViewType m8VjGsGFfA;
-
-	[CompilerGenerated]
-	private IList<KeyValuePair<string, PvfTreeFileBase>> HWbjxNFx69;
-
-	[CompilerGenerated]
-	private PvfTreeViewModel lTOjQLSp2j;
 
 	public static TreeListDropGroup Instance
 	{
@@ -43,61 +30,13 @@ public class TreeListDropGroup
 		}
 	}
 
-	public bool Success
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Y5OjuCH98q;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Y5OjuCH98q = value;
-		}
-	}
+	public bool Success { get; set; }
 
-	public TreeViewType Source
-	{
-		[CompilerGenerated]
-		get
-		{
-			return m8VjGsGFfA;
-		}
-		[CompilerGenerated]
-		set
-		{
-			m8VjGsGFfA = value;
-		}
-	}
+	public TreeViewType Source { get; set; }
 
-	public IList<KeyValuePair<string, PvfTreeFileBase>> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return HWbjxNFx69;
-		}
-		[CompilerGenerated]
-		set
-		{
-			HWbjxNFx69 = value;
-		}
-	}
+	public IList<KeyValuePair<string, PvfTreeFileBase>> Items { get; set; }
 
-	public PvfTreeViewModel SourceViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return lTOjQLSp2j;
-		}
-		[CompilerGenerated]
-		set
-		{
-			lTOjQLSp2j = value;
-		}
-	}
+	public PvfTreeViewModel SourceViewModel { get; set; }
 
 	public PooledSet<string> GetFilePaths()
 	{
@@ -125,7 +64,4 @@ public class TreeListDropGroup
 		Instance = null;
 	}
 
-	public TreeListDropGroup()
-	{
-	}
 }
