@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,12 +18,6 @@ namespace PvfCode.Views.BookMark;
 
 public class EditBookmarkView : ThemedWindow, IComponentConnector
 {
-	[CompilerGenerated]
-	private KeyValuePair<string, BookMarkDto> RnNv04cUmn;
-
-	[CompilerGenerated]
-	private string SPav7Iabtl;
-
 	internal EditBox txtTitle;
 
 	internal ButtonEdit txtFilePath;
@@ -33,21 +26,9 @@ public class EditBookmarkView : ThemedWindow, IComponentConnector
 
 	internal Button btnCancel;
 
-	private bool iQQvX8xThP;
+	private bool contentLoaded;
 
-	public KeyValuePair<string, BookMarkDto> Row
-	{
-		[CompilerGenerated]
-		get
-		{
-			return RnNv04cUmn;
-		}
-		[CompilerGenerated]
-		set
-		{
-			RnNv04cUmn = value;
-		}
-	}
+	public KeyValuePair<string, BookMarkDto> Row { get; set; }
 
 	public string BookMarkTitle
 	{
@@ -61,19 +42,7 @@ public class EditBookmarkView : ThemedWindow, IComponentConnector
 		}
 	}
 
-	public string WinTitle
-	{
-		[CompilerGenerated]
-		get
-		{
-			return SPav7Iabtl;
-		}
-		[CompilerGenerated]
-		set
-		{
-			SPav7Iabtl = value;
-		}
-	}
+	public string WinTitle { get; set; }
 
 	public EditBookmarkView(KeyValuePair<string, BookMarkDto> row, bool isAdd)
 	{
@@ -83,25 +52,25 @@ public class EditBookmarkView : ThemedWindow, IComponentConnector
 		InitializeComponent();
 		txtTitle.Value = row.Key;
 		txtFilePath.EditValue = row.Value.FilePath;
-		base.Loaded += jqmv9DhXYC;
-		txtTitle.input.KeyDown += bthvKR00aF;
-		txtFilePath.KeyDown += bthvKR00aF;
+		base.Loaded += OnLoaded;
+		txtTitle.input.KeyDown += OnInputKeyDown;
+		txtFilePath.KeyDown += OnInputKeyDown;
 	}
 
-	private void bthvKR00aF(object P_0, KeyEventArgs P_1)
+	private void OnInputKeyDown(object sender, KeyEventArgs e)
 	{
-		if ((int)P_1.Key == 6)
+		if (e.Key == Key.Enter)
 		{
-			xbjvJFJLSx();
+			SaveAndClose();
 		}
 	}
 
-	private void jqmv9DhXYC(object P_0, RoutedEventArgs P_1)
+	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
 		txtTitle.input.Focus();
 	}
 
-	private void sfnvP0DxHo(object P_0, RoutedEventArgs P_1)
+	private void OnSelectFilePath(object sender, RoutedEventArgs e)
 	{
 		if (!AppCore.ViewModelBase.PVF.PvfIsOpen)
 		{
@@ -115,12 +84,12 @@ public class EditBookmarkView : ThemedWindow, IComponentConnector
 		}
 	}
 
-	private void MKHvZkdIis(object P_0, RoutedEventArgs P_1)
+	private void OnSave(object sender, RoutedEventArgs e)
 	{
-		xbjvJFJLSx();
+		SaveAndClose();
 	}
 
-	private void xbjvJFJLSx()
+	private void SaveAndClose()
 	{
 		string text = null;
 		if (Row.Value.IsFile)
@@ -144,7 +113,7 @@ public class EditBookmarkView : ThemedWindow, IComponentConnector
 		}
 	}
 
-	private void tlNvkSRYK0(object P_0, RoutedEventArgs P_1)
+	private void OnCancel(object sender, RoutedEventArgs e)
 	{
 		base.DialogResult = false;
 	}
@@ -153,9 +122,9 @@ public class EditBookmarkView : ThemedWindow, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!iQQvX8xThP)
+		if (!contentLoaded)
 		{
-			iQQvX8xThP = true;
+			contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/bookmark/editbookmarkview.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -182,18 +151,18 @@ public class EditBookmarkView : ThemedWindow, IComponentConnector
 			txtFilePath = (ButtonEdit)target;
 			break;
 		case 3:
-			((ButtonInfo)target).Click += sfnvP0DxHo;
+			((ButtonInfo)target).Click += OnSelectFilePath;
 			break;
 		case 4:
 			btnSave = (Button)target;
-			btnSave.Click += MKHvZkdIis;
+			btnSave.Click += OnSave;
 			break;
 		case 5:
 			btnCancel = (Button)target;
-			btnCancel.Click += tlNvkSRYK0;
+			btnCancel.Click += OnCancel;
 			break;
 		default:
-			iQQvX8xThP = true;
+			contentLoaded = true;
 			break;
 		}
 	}

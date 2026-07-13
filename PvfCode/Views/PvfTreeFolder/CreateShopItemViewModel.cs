@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using DevExpress.Mvvm;
@@ -13,7 +12,7 @@ namespace PvfCode.Views.PvfTreeFolder;
 
 public class CreateShopItemViewModel : ViewModelBase
 {
-	private readonly List<string> fqQHFBIb17;
+	private readonly List<string> selectedFilePaths;
 
 	public int Price
 	{
@@ -66,84 +65,59 @@ public class CreateShopItemViewModel : ViewModelBase
 
 	public CreateShopItemViewModel(List<string> files)
 	{
-		fqQHFBIb17 = files;
+		selectedFilePaths = files;
 	}
 
 	[Command]
 	public async void OnOk(Window win)
 	{
-		List<PvfFile> files = AppCore.ViewModelBase.PVF.GetFiles(fqQHFBIb17);
+		List<PvfFile> files = AppCore.ViewModelBase.PVF.GetFiles(selectedFilePaths);
 		StringBuilder stringBuilder = new StringBuilder();
-		int num = eUXHBmsWrF(Type);
-		int num2 = 0;
-		foreach (PvfFile item in files)
+		int rowNumber = GetNextRowNumber(Type);
+		int generatedRowCount = 0;
+		foreach (PvfFile file in files)
 		{
-			num++;
-			if (item.ItemCode.HasValue)
+			rowNumber++;
+			if (file.ItemCode.HasValue)
 			{
 				if (Type == ShopSectionType.package)
 				{
-					StringBuilder stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder3 = stringBuilder2;
-					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 3, stringBuilder2);
-					handler.AppendFormatted(num);
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(item.ItemCode);
-					handler.AppendLiteral("\t0\t0\t");
-					handler.AppendFormatted(Price);
-					handler.AppendLiteral("\t``\t4\t0\t-1\t-1");
-					stringBuilder3.AppendLine(ref handler);
+					stringBuilder.AppendLine($"{rowNumber}\t{file.ItemCode}\t0\t0\t{Price}\t``\t4\t0\t-1\t-1");
 				}
 				else
 				{
-					StringBuilder stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder4 = stringBuilder2;
-					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(14, 4, stringBuilder2);
-					handler.AppendFormatted(num);
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(item.ItemCode);
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(ItemCount);
-					handler.AppendLiteral("\t0\t0\t");
-					handler.AppendFormatted(Price);
-					handler.AppendLiteral("\t``\t0\t0");
-					stringBuilder4.AppendLine(ref handler);
+					stringBuilder.AppendLine($"{rowNumber}\t{file.ItemCode}\t{ItemCount}\t0\t0\t{Price}\t``\t0\t0");
 				}
-				num2++;
+				generatedRowCount++;
 			}
 		}
 		string fileText = AppCore.ViewModelBase.PVF.GetFileText("etc/newcashshop.etc");
-		string text = "[/" + ubTHvU1dLT() + "]";
-		if (!fileText.Contains(text))
+		string sectionEndTag = "[/" + GetSectionName() + "]";
+		if (!fileText.Contains(sectionEndTag))
 		{
-			throw new Exception("未能找到结束标签：" + text);
+			throw new Exception("未能找到结束标签：" + sectionEndTag);
 		}
-		string fileText2 = fileText.Insert(fileText.LastIndexOf(text), Environment.NewLine + stringBuilder.ToString() + Environment.NewLine);
-		AppCore.ViewModelBase.PVF.SaveFileText("etc/newcashshop.etc", fileText2);
+		string updatedFileText = fileText.Insert(fileText.LastIndexOf(sectionEndTag), Environment.NewLine + stringBuilder.ToString() + Environment.NewLine);
+		AppCore.ViewModelBase.PVF.SaveFileText("etc/newcashshop.etc", updatedFileText);
 		LoggerViewModel logger = AppCore.Logger;
 		string appName = AppSetting.Instance.AppName;
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(6, 1);
-		defaultInterpolatedStringHandler.AppendLiteral("已生成：");
-		defaultInterpolatedStringHandler.AppendFormatted(num2);
-		defaultInterpolatedStringHandler.AppendLiteral("行。");
-		logger.ShowNotification(new NotificationViewModel(appName, defaultInterpolatedStringHandler.ToStringAndClear(), Res.Instance.VisualStudioBlendLogo2015Pre_16x));
+		logger.ShowNotification(new NotificationViewModel(appName, $"已生成：{generatedRowCount}行。", Res.Instance.VisualStudioBlendLogo2015Pre_16x));
 		win?.Close();
 	}
 
-	private string ubTHvU1dLT()
+	private string GetSectionName()
 	{
-		_ = Type;
 		return Type.ToString() ?? "";
 	}
 
-	private int eUXHBmsWrF(ShopSectionType P_0)
+	private int GetNextRowNumber(ShopSectionType sectionType)
 	{
-		string text = ubTHvU1dLT();
-		int groupSize = (P_0 == ShopSectionType.package) ? 10 : 9;
-		PvfGroup pVF = AppCore.ViewModelBase.PVF;
-		if (!pVF.GetFile("etc/newcashshop.etc").GetSectionIntArray(pVF, "[" + text + "]", out List<int> items))
+		string sectionName = GetSectionName();
+		int groupSize = sectionType == ShopSectionType.package ? 10 : 9;
+		PvfGroup pvf = AppCore.ViewModelBase.PVF;
+		if (!pvf.GetFile("etc/newcashshop.etc").GetSectionIntArray(pvf, "[" + sectionName + "]", out List<int> items))
 		{
-			throw new Exception("未能获取到节点：[" + text + "]");
+			throw new Exception("未能获取到节点：[" + sectionName + "]");
 		}
 		return items.Select((value, index) => new { Index = index, Value = value })
 			.GroupBy(item => item.Index / groupSize)

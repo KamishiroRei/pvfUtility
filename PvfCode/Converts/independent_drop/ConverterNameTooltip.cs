@@ -1,6 +1,5 @@
 using System;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Windows.Data;
 
 namespace PvfCode.Converts.independent_drop;
@@ -13,11 +12,7 @@ public class ConverterNameTooltip : IValueConverter
 		{
 			return null;
 		}
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 2);
-		defaultInterpolatedStringHandler.AppendFormatted<object>(value);
-		defaultInterpolatedStringHandler.AppendLiteral("\r\n");
-		defaultInterpolatedStringHandler.AppendFormatted(AppCore.Logger.GetStr("independent_drop_ConverterNameTooltip"));
-		return defaultInterpolatedStringHandler.ToStringAndClear();
+		return $"{value}\r\n{AppCore.Logger.GetStr("independent_drop_ConverterNameTooltip")}";
 	}
 
 	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
