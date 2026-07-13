@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -6,56 +5,11 @@ namespace PvfCode.ViewModels.DocumentFolder.VerticalScrollBarHighlighted;
 
 public class VerticalScrollBarHighlightedSelectorTemplate : DataTemplateSelector
 {
-	[CompilerGenerated]
-	private DataTemplate d9w5VgMJId;
+	public DataTemplate SelectedTemplate { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate Py653DK5VT;
+	public DataTemplate FindResultTemplate { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate CAn5Rni4ua;
-
-	public DataTemplate SelectedTemplate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return d9w5VgMJId;
-		}
-		[CompilerGenerated]
-		set
-		{
-			d9w5VgMJId = value;
-		}
-	}
-
-	public DataTemplate FindResultTemplate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Py653DK5VT;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Py653DK5VT = value;
-		}
-	}
-
-	public DataTemplate MarkSameWordTemplate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return CAn5Rni4ua;
-		}
-		[CompilerGenerated]
-		set
-		{
-			CAn5Rni4ua = value;
-		}
-	}
+	public DataTemplate MarkSameWordTemplate { get; set; }
 
 	public override DataTemplate SelectTemplate(object item, DependencyObject container)
 	{

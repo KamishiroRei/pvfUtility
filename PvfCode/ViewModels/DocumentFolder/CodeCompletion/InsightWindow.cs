@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Forms;
 using ICSharpCode.AvalonEdit.Editing;
@@ -10,22 +9,7 @@ namespace PvfCode.ViewModels.DocumentFolder.CodeCompletion;
 
 public class InsightWindow : CompletionWindowBase
 {
-	[CompilerGenerated]
-	private bool VfnuSJoFtp;
-
-	public bool CloseAutomatically
-	{
-		[CompilerGenerated]
-		get
-		{
-			return VfnuSJoFtp;
-		}
-		[CompilerGenerated]
-		set
-		{
-			VfnuSJoFtp = value;
-		}
-	}
+	public bool CloseAutomatically { get; set; }
 
 	protected override bool CloseOnFocusLost => CloseAutomatically;
 
@@ -39,7 +23,7 @@ public class InsightWindow : CompletionWindowBase
 		: base(editorBase, textArea, startOffset, endOffset)
 	{
 		CloseAutomatically = true;
-		quVufOU5WK();
+		AttachEvents();
 	}
 
 	protected override void OnSourceInitialized(EventArgs e)
@@ -51,18 +35,18 @@ public class InsightWindow : CompletionWindowBase
 		base.OnSourceInitialized(e);
 	}
 
-	private void quVufOU5WK()
+	private void AttachEvents()
 	{
-		base.TextArea.Caret.PositionChanged += Q1Wu5EEFT2;
+		base.TextArea.Caret.PositionChanged += OnCaretPositionChanged;
 	}
 
 	protected override void DetachEvents()
 	{
-		base.TextArea.Caret.PositionChanged -= Q1Wu5EEFT2;
+		base.TextArea.Caret.PositionChanged -= OnCaretPositionChanged;
 		base.DetachEvents();
 	}
 
-	private void Q1Wu5EEFT2(object? sender, EventArgs P_1)
+	private void OnCaretPositionChanged(object? sender, EventArgs e)
 	{
 		if (CloseAutomatically)
 		{

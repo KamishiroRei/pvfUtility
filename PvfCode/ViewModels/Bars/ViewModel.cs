@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
 
@@ -7,45 +6,15 @@ namespace PvfCode.ViewModels.Bars;
 
 public abstract class ViewModel : ModelBase, IDisposable
 {
-	[CompilerGenerated]
-	private string xB0xMtRjx3;
+	public string BindableName => CreateBindableName(DisplayName);
 
-	[CompilerGenerated]
-	private ImageSource xUaxVBdLNr;
+	public virtual string DisplayName { get; protected set; }
 
-	public string BindableName => Tcax8OPyYt(DisplayName);
+	public virtual ImageSource Glyph { get; set; }
 
-	public virtual string DisplayName
+	private string CreateBindableName(string displayName)
 	{
-		[CompilerGenerated]
-		get
-		{
-			return xB0xMtRjx3;
-		}
-		[CompilerGenerated]
-		protected set
-		{
-			xB0xMtRjx3 = value;
-		}
-	}
-
-	public virtual ImageSource Glyph
-	{
-		[CompilerGenerated]
-		get
-		{
-			return xUaxVBdLNr;
-		}
-		[CompilerGenerated]
-		set
-		{
-			xUaxVBdLNr = value;
-		}
-	}
-
-	private string Tcax8OPyYt(string P_0)
-	{
-		return "_" + Regex.Replace(P_0, "\\W", "");
+		return "_" + Regex.Replace(displayName, "\\W", "");
 	}
 
 	public void Dispose()

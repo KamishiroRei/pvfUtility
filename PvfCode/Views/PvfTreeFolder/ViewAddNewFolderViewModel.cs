@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using Collections.Pooled;
 using DevExpress.Mvvm;
@@ -12,41 +11,11 @@ public class ViewAddNewFolderViewModel : ViewModelBase
 {
 	private readonly KeyValuePair<string, PvfTreeFileBase>? Source;
 
-	[CompilerGenerated]
-	private bool nkkH2u61eY;
-
-	[CompilerGenerated]
-	private string o7WHfZ7Sym;
-
 	protected virtual IMessageBoxService MessageBoxService => GetService<IMessageBoxService>(ServiceSearchMode.PreferParents);
 
-	public bool IsRoot
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nkkH2u61eY;
-		}
-		[CompilerGenerated]
-		set
-		{
-			nkkH2u61eY = value;
-		}
-	}
+	public bool IsRoot { get; set; }
 
-	public string ParentFolderName
-	{
-		[CompilerGenerated]
-		get
-		{
-			return o7WHfZ7Sym;
-		}
-		[CompilerGenerated]
-		set
-		{
-			o7WHfZ7Sym = value;
-		}
-	}
+	public string ParentFolderName { get; set; }
 
 	public string FolderName
 	{

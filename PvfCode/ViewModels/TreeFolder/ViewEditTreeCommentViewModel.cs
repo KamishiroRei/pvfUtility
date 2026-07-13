@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using PvfCode.Dot;
@@ -8,41 +7,11 @@ namespace PvfCode.ViewModels.TreeFolder;
 
 public class ViewEditTreeCommentViewModel : ViewModelBase, IWindowBindingBase
 {
-	[CompilerGenerated]
-	private TreelistCommentRes NSRrZyIPpU;
-
-	[CompilerGenerated]
-	private Action CIDrJ416kR;
-
 	private readonly PvfTreeFileBase TreeFile;
 
-	public TreelistCommentRes TreeListComment
-	{
-		[CompilerGenerated]
-		get
-		{
-			return NSRrZyIPpU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			NSRrZyIPpU = value;
-		}
-	}
+	public TreelistCommentRes TreeListComment { get; set; }
 
-	public Action CloseAction
-	{
-		[CompilerGenerated]
-		get
-		{
-			return CIDrJ416kR;
-		}
-		[CompilerGenerated]
-		set
-		{
-			CIDrJ416kR = value;
-		}
-	}
+	public Action CloseAction { get; set; }
 
 	public ViewEditTreeCommentViewModel(PvfTreeFileBase treeFile, Action closeAction)
 	{

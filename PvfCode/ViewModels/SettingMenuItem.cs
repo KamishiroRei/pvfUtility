@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using Utools;
 
@@ -7,65 +6,35 @@ namespace PvfCode.ViewModels;
 
 public class SettingMenuItem
 {
-	private ObservableConcurrentDictionaryEx<string, SettingMenuItem> O8CFqM1ouN;
-
-	[CompilerGenerated]
-	private DataTemplate? hSNFdLp2AU;
-
-	[CompilerGenerated]
-	private string JN0FeD6LDt;
+	private ObservableConcurrentDictionaryEx<string, SettingMenuItem> children;
 
 	public ObservableConcurrentDictionaryEx<string, SettingMenuItem> Children
 	{
 		get
 		{
-			if (O8CFqM1ouN == null)
+			if (children == null)
 			{
-				O8CFqM1ouN = new ObservableConcurrentDictionaryEx<string, SettingMenuItem>();
+				children = new ObservableConcurrentDictionaryEx<string, SettingMenuItem>();
 			}
-			return O8CFqM1ouN;
+			return children;
 		}
 		set
 		{
-			O8CFqM1ouN = value;
+			children = value;
 		}
 	}
 
-	public DataTemplate? Data
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hSNFdLp2AU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			hSNFdLp2AU = value;
-		}
-	}
+	public DataTemplate? Data { get; set; }
 
-	public string Parname
-	{
-		[CompilerGenerated]
-		get
-		{
-			return JN0FeD6LDt;
-		}
-		[CompilerGenerated]
-		set
-		{
-			JN0FeD6LDt = value;
-		}
-	}
+	public string Parname { get; set; }
 
 	public bool HaveChildren()
 	{
-		if (O8CFqM1ouN == null)
+		if (children == null)
 		{
 			return false;
 		}
-		return O8CFqM1ouN.Any();
+		return children.Any();
 	}
 
 	public SettingMenuItem()

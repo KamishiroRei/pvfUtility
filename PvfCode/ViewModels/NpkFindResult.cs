@@ -1,5 +1,4 @@
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -10,25 +9,7 @@ namespace PvfCode.ViewModels;
 
 public class NpkFindResult : ViewModelBase
 {
-	[CompilerGenerated]
-	private string XHNFEYM05N;
-
-	[CompilerGenerated]
-	private UtImgFile PFaFOKqXRl;
-
-	public string ImagePath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return XHNFEYM05N;
-		}
-		[CompilerGenerated]
-		set
-		{
-			XHNFEYM05N = value;
-		}
-	}
+	public string ImagePath { get; set; }
 
 	public string ImageFileName
 	{
@@ -42,19 +23,7 @@ public class NpkFindResult : ViewModelBase
 		}
 	}
 
-	public UtImgFile ImgFile
-	{
-		[CompilerGenerated]
-		get
-		{
-			return PFaFOKqXRl;
-		}
-		[CompilerGenerated]
-		set
-		{
-			PFaFOKqXRl = value;
-		}
-	}
+	public UtImgFile ImgFile { get; set; }
 
 	public string NpkFilePath => ImagePack2Service.Instance.GetNpkFilePath(ImgFile);
 

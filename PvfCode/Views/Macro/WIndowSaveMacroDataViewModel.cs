@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
@@ -8,13 +7,7 @@ namespace PvfCode.Views.Macro;
 
 public class WIndowSaveMacroDataViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private IHighlightingDefinition BuChbXXp7u;
-
-	private TextDocument QjKhIg66IM;
-
-	[CompilerGenerated]
-	private MacroDataRes bUQhEERtV9;
+	private TextDocument detailedInstructionsDocument;
 
 	public bool IsLoading
 	{
@@ -28,46 +21,22 @@ public class WIndowSaveMacroDataViewModel : ViewModelBase
 		}
 	}
 
-	public IHighlightingDefinition Highlighting
-	{
-		[CompilerGenerated]
-		get
-		{
-			return BuChbXXp7u;
-		}
-		[CompilerGenerated]
-		set
-		{
-			BuChbXXp7u = value;
-		}
-	}
+	public IHighlightingDefinition Highlighting { get; set; }
 
 	public TextDocument DetailedInstructionsDocument
 	{
 		get
 		{
-			return QjKhIg66IM;
+			return detailedInstructionsDocument;
 		}
 		set
 		{
-			QjKhIg66IM = value;
+			detailedInstructionsDocument = value;
 			RaisePropertyChanged("DetailedInstructionsDocument");
 		}
 	}
 
-	public MacroDataRes MacroDataDto
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bUQhEERtV9;
-		}
-		[CompilerGenerated]
-		set
-		{
-			bUQhEERtV9 = value;
-		}
-	}
+	public MacroDataRes MacroDataDto { get; set; }
 
 	public bool IsShare
 	{

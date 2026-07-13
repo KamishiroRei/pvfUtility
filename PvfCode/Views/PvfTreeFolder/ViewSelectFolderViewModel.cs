@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using PvfCode.ViewModels;
@@ -11,37 +10,22 @@ namespace PvfCode.Views.PvfTreeFolder;
 
 public class ViewSelectFolderViewModel : ViewModelBase
 {
-	private readonly Action xqDHoPojck;
-
-	[CompilerGenerated]
-	private PvfTreeViewModel LnJHsZhYh0;
+	private readonly Action closeAction;
 
 	public KeyValuePair<string, PvfTreeFileBase>? SelectedItem;
 
 	protected virtual IMessageBoxService MessageBoxService => GetService<IMessageBoxService>(ServiceSearchMode.PreferParents);
 
-	public PvfTreeViewModel TreeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return LnJHsZhYh0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			LnJHsZhYh0 = value;
-		}
-	}
+	public PvfTreeViewModel TreeViewModel { get; set; }
 
 	public ViewSelectFolderViewModel(Action closeAction)
 	{
-		xqDHoPojck = closeAction;
+		this.closeAction = closeAction;
 		TreeViewModel = new PvfTreeViewModel(TreeViewType.SelectFolder);
-		hFVHw9gA4S();
+		InitializeFolderTree();
 	}
 
-	private void hFVHw9gA4S()
+	private void InitializeFolderTree()
 	{
 		ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = new ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>();
 		if (observableConcurrentDictionaryEx == null)
@@ -68,12 +52,12 @@ public class ViewSelectFolderViewModel : ViewModelBase
 			return;
 		}
 		SelectedItem = TreeViewModel.SelectedNodeBindgBase;
-		xqDHoPojck();
+		closeAction();
 	}
 
 	[Command]
 	public void OnClose()
 	{
-		xqDHoPojck();
+		closeAction();
 	}
 }

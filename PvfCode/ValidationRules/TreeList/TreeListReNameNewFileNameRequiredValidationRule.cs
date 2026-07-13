@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Markup;
 
@@ -9,22 +8,7 @@ namespace PvfCode.ValidationRules.TreeList;
 [ContentProperty("ComparisonNode")]
 public class TreeListReNameNewFileNameRequiredValidationRule : ValidationRule
 {
-	[CompilerGenerated]
-	private ComparisonNode QtnQHRj5Bv;
-
-	public ComparisonNode ComparisonNode
-	{
-		[CompilerGenerated]
-		get
-		{
-			return QtnQHRj5Bv;
-		}
-		[CompilerGenerated]
-		set
-		{
-			QtnQHRj5Bv = value;
-		}
-	}
+	public ComparisonNode ComparisonNode { get; set; }
 
 	public override ValidationResult Validate(object value, CultureInfo cultureInfo)
 	{
@@ -42,7 +26,7 @@ public class TreeListReNameNewFileNameRequiredValidationRule : ValidationRule
 			string str = string.Format(AppCore.Logger.GetStr("FileExplorer_RenameFile_FileNameIsRepeatInPvfPack"), newFullPath);
 			return new ValidationResult(isValid: false, str);
 		}
-		if (NQ7QCQLSPC(newFullPath, text, value2) && value2.CheckChanged(text))
+		if (HasDuplicateName(newFullPath, text, value2) && value2.CheckChanged(text))
 		{
 			string str = string.Format(AppCore.Logger.GetStr("FileExplorer_RenameFile_FileNameIsRepeat"), text);
 			return new ValidationResult(isValid: false, str);
@@ -50,23 +34,23 @@ public class TreeListReNameNewFileNameRequiredValidationRule : ValidationRule
 		return ValidationResult.ValidResult;
 	}
 
-	private bool NQ7QCQLSPC(string P_0, string P_1, PvfTreeFileRename P_2)
+	private bool HasDuplicateName(string newFullPath, string newFileName, PvfTreeFileRename currentFile)
 	{
 		char[] separator = new char[2] { '\\', '/' };
-		string[] array = P_0.Split(separator);
+		string[] pathSegments = newFullPath.Split(separator);
 		IDictionary<string, PvfTreeFileBase> dictionary = ComparisonNode.Source;
-		for (int i = 0; i < array.Length - 1; i++)
+		for (int i = 0; i < pathSegments.Length - 1; i++)
 		{
-			if (dictionary.TryGetValue(array[i], out var value))
+			if (dictionary.TryGetValue(pathSegments[i], out var value))
 			{
 				dictionary = value.Children;
 				continue;
 			}
 			return false;
 		}
-		foreach (PvfTreeFileRename value2 in dictionary.Values)
+		foreach (PvfTreeFileRename file in dictionary.Values)
 		{
-			if (P_2 != value2 && value2.NewFileName.ToLower() == P_1)
+			if (currentFile != file && file.NewFileName.ToLower() == newFileName)
 			{
 				return true;
 			}

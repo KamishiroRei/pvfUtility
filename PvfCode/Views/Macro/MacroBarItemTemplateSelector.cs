@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using PvfCode.Models.Macro;
@@ -8,58 +7,28 @@ namespace PvfCode.Views.Macro;
 
 public class MacroBarItemTemplateSelector : DataTemplateSelector
 {
-	[CompilerGenerated]
-	private string MJXHztxpZy;
+	public string ButtonItemTemplateKey { get; set; }
 
-	[CompilerGenerated]
-	private string gpshDTpE0S;
-
-	public string ButtonItemTemplateKey
-	{
-		[CompilerGenerated]
-		get
-		{
-			return MJXHztxpZy;
-		}
-		[CompilerGenerated]
-		set
-		{
-			MJXHztxpZy = value;
-		}
-	}
-
-	public string SubItemTemplateKey
-	{
-		[CompilerGenerated]
-		get
-		{
-			return gpshDTpE0S;
-		}
-		[CompilerGenerated]
-		set
-		{
-			gpshDTpE0S = value;
-		}
-	}
+	public string SubItemTemplateKey { get; set; }
 
 	public override DataTemplate SelectTemplate(object item, DependencyObject container)
 	{
 		if (((KeyValuePair<string, MacroData>)item).Value.IsFile)
 		{
-			return Rw3HNNy7jW(container, ButtonItemTemplateKey);
+			return FindTemplate(container, ButtonItemTemplateKey);
 		}
-		return Rw3HNNy7jW(container, SubItemTemplateKey);
+		return FindTemplate(container, SubItemTemplateKey);
 	}
 
-	private DataTemplate Rw3HNNy7jW(DependencyObject P_0, object P_1)
+	private DataTemplate FindTemplate(DependencyObject container, object resourceKey)
 	{
-		if (P_0 is FrameworkContentElement)
+		if (container is FrameworkContentElement contentElement)
 		{
-			return ((FrameworkContentElement)(object)P_0).TryFindResource(P_1) as DataTemplate;
+			return contentElement.TryFindResource(resourceKey) as DataTemplate;
 		}
-		if (P_0 is FrameworkElement)
+		if (container is FrameworkElement element)
 		{
-			return ((FrameworkElement)(object)P_0).TryFindResource(P_1) as DataTemplate;
+			return element.TryFindResource(resourceKey) as DataTemplate;
 		}
 		return null;
 	}
