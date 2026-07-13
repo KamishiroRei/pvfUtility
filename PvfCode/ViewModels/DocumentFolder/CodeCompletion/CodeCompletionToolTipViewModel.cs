@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -18,18 +17,9 @@ namespace PvfCode.ViewModels.DocumentFolder.CodeCompletion;
 
 public class CodeCompletionToolTipViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private CodeCompletionData Cc3i6mn2i5;
+	private readonly PvfFileType? fileType;
 
-	[CompilerGenerated]
-	private TextDocument ERci1JtS9G;
-
-	[CompilerGenerated]
-	private TextDocument NdRiwXp0eV;
-
-	private readonly PvfFileType? FileType;
-
-	private readonly PvfCommentDtoRes Go9ioYLDyv;
+	private readonly PvfCommentDtoRes commentRequest;
 
 	public bool CompletionDataIsShare
 	{
@@ -79,47 +69,11 @@ public class CodeCompletionToolTipViewModel : ViewModelBase
 		}
 	}
 
-	public CodeCompletionData CompletionData
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Cc3i6mn2i5;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Cc3i6mn2i5 = value;
-		}
-	}
+	public CodeCompletionData CompletionData { get; set; }
 
-	public TextDocument Document
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ERci1JtS9G;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ERci1JtS9G = value;
-		}
-	}
+	public TextDocument Document { get; set; }
 
-	public TextDocument DocumentAutoText
-	{
-		[CompilerGenerated]
-		get
-		{
-			return NdRiwXp0eV;
-		}
-		[CompilerGenerated]
-		set
-		{
-			NdRiwXp0eV = value;
-		}
-	}
+	public TextDocument DocumentAutoText { get; set; }
 
 	public int TabControlSelectedIndex
 	{
@@ -197,13 +151,13 @@ public class CodeCompletionToolTipViewModel : ViewModelBase
 				pvfCommentType = PvfCommentType.Section;
 				break;
 			}
-			Go9ioYLDyv = new PvfCommentDtoRes
+			commentRequest = new PvfCommentDtoRes
 			{
 				FileType = fileType,
 				PvfCommentType = pvfCommentType,
 				Section = completionData.Text
 			};
-			FileType = fileType;
+			this.fileType = fileType;
 			Highlighting = ThemeSwitcher.Instance.GetHighlightingDefinition(PvfFileType.equ);
 			Document = new TextDocument();
 			CompletionData = completionData;
@@ -217,10 +171,10 @@ public class CodeCompletionToolTipViewModel : ViewModelBase
 
 	public async void Loaded(object sender)
 	{
-		await Q4GiggMcL0();
+		await LoadPvfComment();
 	}
 
-	private async Task Q4GiggMcL0()
+	private async Task LoadPvfComment()
 	{
 		Document.Text = "";
 		IsLoading = true;
@@ -228,7 +182,7 @@ public class CodeCompletionToolTipViewModel : ViewModelBase
 		{
 			if (string.IsNullOrEmpty(CompletionData.Description))
 			{
-				ResultData<PvfCommentDto> resultData = await ServicePvfTabComment.Instance.GetPvfComment(Go9ioYLDyv);
+				ResultData<PvfCommentDto> resultData = await ServicePvfTabComment.Instance.GetPvfComment(commentRequest);
 				if (resultData.IsError)
 				{
 					Document.Text = resultData.Msg;
@@ -293,8 +247,8 @@ public class CodeCompletionToolTipViewModel : ViewModelBase
 				}
 				Comment.Comment = Document.Text;
 				Comment.Authors = NickName;
-				Comment.FileType = FileType;
-				Comment.PvfCommentType = Go9ioYLDyv.PvfCommentType;
+				Comment.FileType = fileType;
+				Comment.PvfCommentType = commentRequest.PvfCommentType;
 				Comment.Create = DateTime.Now;
 				Comment.UpdateTime = DateTime.Now;
 				AppCore.NickNameTemp = NickName;

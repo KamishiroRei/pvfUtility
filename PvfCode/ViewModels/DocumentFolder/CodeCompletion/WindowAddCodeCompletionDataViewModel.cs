@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using ICSharpCode.AvalonEdit.Document;
@@ -11,21 +10,9 @@ namespace PvfCode.ViewModels.DocumentFolder.CodeCompletion;
 
 public class WindowAddCodeCompletionDataViewModel : ViewModelBase
 {
-	private readonly Action Close;
+	private readonly Action closeWindow;
 
-	[CompilerGenerated]
-	private CodeCompletionData jGjud7xTyI;
-
-	[CompilerGenerated]
-	private TextDocument e6iueDvU51;
-
-	[CompilerGenerated]
-	private TextDocument Jbaut6TqRr;
-
-	[CompilerGenerated]
-	private string vbiubv5X6B;
-
-	private readonly bool AgnuIV3xXl;
+	private readonly bool isAdd;
 
 	private bool IsLoading
 	{
@@ -39,47 +26,11 @@ public class WindowAddCodeCompletionDataViewModel : ViewModelBase
 		}
 	}
 
-	public CodeCompletionData Data
-	{
-		[CompilerGenerated]
-		get
-		{
-			return jGjud7xTyI;
-		}
-		[CompilerGenerated]
-		set
-		{
-			jGjud7xTyI = value;
-		}
-	}
+	public CodeCompletionData Data { get; set; }
 
-	public TextDocument Document
-	{
-		[CompilerGenerated]
-		get
-		{
-			return e6iueDvU51;
-		}
-		[CompilerGenerated]
-		set
-		{
-			e6iueDvU51 = value;
-		}
-	}
+	public TextDocument Document { get; set; }
 
-	public TextDocument TextDocumentDescription
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Jbaut6TqRr;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Jbaut6TqRr = value;
-		}
-	}
+	public TextDocument TextDocumentDescription { get; set; }
 
 	public IHighlightingDefinition Highlighting
 	{
@@ -93,25 +44,13 @@ public class WindowAddCodeCompletionDataViewModel : ViewModelBase
 		}
 	}
 
-	public string Title
-	{
-		[CompilerGenerated]
-		get
-		{
-			return vbiubv5X6B;
-		}
-		[CompilerGenerated]
-		set
-		{
-			vbiubv5X6B = value;
-		}
-	}
+	public string Title { get; set; }
 
 	public WindowAddCodeCompletionDataViewModel(Action close, CodeCompletionData? data = null, bool isAdd = true)
 	{
 		try
 		{
-			AgnuIV3xXl = isAdd;
+			this.isAdd = isAdd;
 			Title = (isAdd ? AppSetting.Instance.GetIlogger().GetStr("WindowAddCodeCompletionData_WindowAddDataTitle") : AppSetting.Instance.GetIlogger().GetStr("WindowAddCodeCompletionData_WindowEditDataTitle"));
 			Data = data;
 			TextDocumentDescription = new TextDocument();
@@ -124,7 +63,7 @@ public class WindowAddCodeCompletionDataViewModel : ViewModelBase
 			{
 				Highlighting = ThemeSwitcher.Instance.GetHighlightingDefinition(PvfFileType.equ);
 			}
-			Close = close;
+			closeWindow = close;
 			if (Data == null)
 			{
 				Data = new CodeCompletionData
@@ -151,7 +90,7 @@ public class WindowAddCodeCompletionDataViewModel : ViewModelBase
 					Document.Text = data.CompleteText;
 				}
 			}
-			if (AgnuIV3xXl)
+			if (this.isAdd)
 			{
 				Document.Text = AppSetting.Instance.GetIlogger()?.GetStr("WindowAddCodeCompletionData_CompleteTextDefaultValue2");
 				TextDocumentDescription.Text = AppSetting.Instance.GetIlogger()?.GetStr("WindowAddCodeCompletionData_TextDocumentDescriptionDefaultValue");
@@ -211,7 +150,7 @@ public class WindowAddCodeCompletionDataViewModel : ViewModelBase
 			{
 				AppCore.NickNameTemp = Data.NickNames;
 			}
-			Close();
+			closeWindow();
 			IsLoading = false;
 		}
 		catch (Exception e)
