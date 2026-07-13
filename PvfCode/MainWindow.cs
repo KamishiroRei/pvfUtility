@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -60,37 +59,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		"GlobalSearchWindow_MacroStore"
 	};
 
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass5_0
-	{
-		public KeyValuePair<string, BookMarkDto> item;
-
-		public _003C_003Ec__DisplayClass5_0()
-		{
-		}
-
-		internal void z0MwYXoufi()
-		{
-			AppCore.ViewModelBase.RootDocument.BookMarkOpenDocument(item.Value.FilePath);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass6_0
-	{
-		public KeyValuePair<string, BookMarkDto> item;
-
-		public _003C_003Ec__DisplayClass6_0()
-		{
-		}
-
-		internal void ySvwyRCTAI()
-		{
-			AppCore.ViewModelBase.RootDocument.BookMarkOpenDocument(item.Value.FilePath);
-		}
-	}
-
-	private bool LXtjTCGkg9;
+	private bool _isInitialized;
 
 	private ChatGPTDocumentVm _aiAssistantViewModel;
 
@@ -102,7 +71,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 	internal MainWindow mainWindow;
 
-	internal TaskbarButtonService tttt;
+	internal TaskbarButtonService taskbarButtonService;
 
 	internal NotificationService notificationService;
 
@@ -130,7 +99,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 	internal LayoutPanel findResultView;
 
-	private bool lryjCUlPWT;
+	private bool _contentLoaded;
 
 	public static string ApplicationID => "FunWithNotifications_19_1";
 
@@ -156,10 +125,10 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		double primaryScreenWidth = SystemParameters.PrimaryScreenWidth;
 		base.Height = primaryScreenHeight * 0.8;
 		base.Width = primaryScreenWidth * 0.8;
-		base.Loaded += a1ZlXjd326;
-		subFile.Popup += kscl7af6Nn;
-		subBookmark.Popup += gXPlkxAdHB;
-		(AppSetting.Instance.EditConfig.SizeUnitLabel as UnitViewModel).EventScreenPointsChanged += yY3lJYMd1s;
+		base.Loaded += OnLoaded;
+		subFile.Popup += OnFileMenuPopup;
+		subBookmark.Popup += OnBookmarkMenuPopup;
+		(AppSetting.Instance.EditConfig.SizeUnitLabel as UnitViewModel).EventScreenPointsChanged += OnScreenPointsChanged;
 	}
 
 	private void HideOnlineFeatures()
@@ -464,7 +433,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		}
 	}
 
-	private async void mGBlZlcndb(object? sender, EventArgs P_1)
+	private async void InitializeAfterLoad()
 	{
 		EventManager.RegisterClassHandler(typeof(LightweightBarItemLinkControl), FrameworkElement.LoadedEvent, (RoutedEventHandler)OnBarItemLinkLoaded);
 		EventManager.RegisterClassHandler(typeof(BarItem), FrameworkElement.LoadedEvent, (RoutedEventHandler)SetInitialToolTipDelay);
@@ -631,12 +600,12 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		AppCore.ViewModelBase.ImagePacks2ViewModel.IsLoading = false;
 	}
 
-	private async void yY3lJYMd1s()
+	private async void OnScreenPointsChanged()
 	{
 		await AppSetting.Instance.SaveSetting();
 	}
 
-	private void gXPlkxAdHB(object? sender, EventArgs P_1)
+	private void OnBookmarkMenuPopup(object? sender, EventArgs e)
 	{
 		foreach (BarItemLinkBase dynamicLink in subBookmark.ItemLinks.ToArray().Skip(1))
 		{
@@ -645,31 +614,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		subBookmark.ItemLinks.Add(new BarItemSeparator());
 		foreach (KeyValuePair<string, BookMarkDto> menuItem in GetBookmarkMenuItems())
 		{
-			_003C_003Ec__DisplayClass5_0 CS_0024_003C_003E8__locals7 = new _003C_003Ec__DisplayClass5_0();
-			CS_0024_003C_003E8__locals7.item = menuItem;
-			if (CS_0024_003C_003E8__locals7.item.Value.IsFile)
-			{
-				subBookmark.ItemLinks.Add(new BarButtonItem
-				{
-					Content = CS_0024_003C_003E8__locals7.item.Key,
-					Glyph = Res.Instance.TreeFiles.Script_16x,
-					Command = new DelegateCommand(delegate
-					{
-						AppCore.ViewModelBase.RootDocument.BookMarkOpenDocument(CS_0024_003C_003E8__locals7.item.Value.FilePath);
-					})
-				});
-				continue;
-			}
-			BarSubItem barSubItem = new BarSubItem
-			{
-				Content = CS_0024_003C_003E8__locals7.item.Key,
-				Glyph = Res.Instance.TreeFiles.FolderClosed
-			};
-			subBookmark.ItemLinks.Add(barSubItem);
-			if (CS_0024_003C_003E8__locals7.item.Value.HaveChildren())
-			{
-				BeIl0g7GfH(CS_0024_003C_003E8__locals7.item.Value.Children, barSubItem);
-			}
+			AddBookmarkMenuItem(subBookmark, menuItem);
 		}
 	}
 
@@ -701,40 +646,42 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			.ThenBy(item => item.Key, StringComparer.CurrentCulture);
 	}
 
-	private void BeIl0g7GfH(IDictionary<string, BookMarkDto> P_0, BarSubItem P_1)
+	private void PopulateBookmarkMenu(IDictionary<string, BookMarkDto> bookmarks, BarSubItem parentMenu)
 	{
-		using Dictionary<string, BookMarkDto>.Enumerator enumerator = P_0.OrderBy<KeyValuePair<string, BookMarkDto>, int>((KeyValuePair<string, BookMarkDto> x) => x.Value.Sort).ToDictionary((KeyValuePair<string, BookMarkDto> x) => x.Key, (KeyValuePair<string, BookMarkDto> x) => x.Value).GetEnumerator();
-		while (enumerator.MoveNext())
+		foreach (KeyValuePair<string, BookMarkDto> item in bookmarks.OrderBy(item => item.Value.Sort))
 		{
-			_003C_003Ec__DisplayClass6_0 CS_0024_003C_003E8__locals7 = new _003C_003Ec__DisplayClass6_0();
-			CS_0024_003C_003E8__locals7.item = enumerator.Current;
-			if (CS_0024_003C_003E8__locals7.item.Value.IsFile)
-			{
-				P_1.ItemLinks.Add(new BarButtonItem
-				{
-					Content = CS_0024_003C_003E8__locals7.item.Key,
-					Glyph = Res.Instance.TreeFiles.Script_16x,
-					Command = new DelegateCommand(delegate
-					{
-						AppCore.ViewModelBase.RootDocument.BookMarkOpenDocument(CS_0024_003C_003E8__locals7.item.Value.FilePath);
-					})
-				});
-				continue;
-			}
-			BarSubItem barSubItem = new BarSubItem
-			{
-				Content = CS_0024_003C_003E8__locals7.item.Key,
-				Glyph = Res.Instance.TreeFiles.FolderClosed
-			};
-			P_1.ItemLinks.Add(barSubItem);
-			if (CS_0024_003C_003E8__locals7.item.Value.HaveChildren())
-			{
-				BeIl0g7GfH(CS_0024_003C_003E8__locals7.item.Value.Children, barSubItem);
-			}
+			AddBookmarkMenuItem(parentMenu, item);
 		}
 	}
 
-	private void kscl7af6Nn(object? sender, EventArgs P_1)
+	private void AddBookmarkMenuItem(BarSubItem parentMenu, KeyValuePair<string, BookMarkDto> item)
+	{
+		if (item.Value.IsFile)
+		{
+			parentMenu.ItemLinks.Add(new BarButtonItem
+			{
+				Content = item.Key,
+				Glyph = Res.Instance.TreeFiles.Script_16x,
+				Command = new DelegateCommand(delegate
+				{
+					AppCore.ViewModelBase.RootDocument.BookMarkOpenDocument(item.Value.FilePath);
+				})
+			});
+			return;
+		}
+		BarSubItem submenu = new BarSubItem
+		{
+			Content = item.Key,
+			Glyph = Res.Instance.TreeFiles.FolderClosed
+		};
+		parentMenu.ItemLinks.Add(submenu);
+		if (item.Value.HaveChildren())
+		{
+			PopulateBookmarkMenu(item.Value.Children, submenu);
+		}
+	}
+
+	private void OnFileMenuPopup(object? sender, EventArgs e)
 	{
 		bool flag = false;
 		BarItemLinkBase[] array = subFile.ItemLinks.ToArray();
@@ -763,7 +710,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			e.Cancel = true;
 			return;
 		}
-		RgVlpJNt5a();
+		SaveLayout();
 		try
 		{
 			WebApiServer.Instance.Stop();
@@ -775,18 +722,18 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		App.OnExit();
 	}
 
-	private void a1ZlXjd326(object P_0, RoutedEventArgs P_1)
+	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
-		if (!LXtjTCGkg9)
+		if (!_isInitialized)
 		{
-			LXtjTCGkg9 = true;
+			_isInitialized = true;
 			AppSetting.Instance.EditConfig.InitFoldingGuideLineBurshs(this);
-			BaWlUHWDu1();
-			mGBlZlcndb(null, null);
+			RestoreLayout();
+			InitializeAfterLoad();
 		}
 	}
 
-	private async void RgVlpJNt5a()
+	private async void SaveLayout()
 	{
 		try
 		{
@@ -802,7 +749,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		}
 	}
 
-	private async void BaWlUHWDu1()
+	private async void RestoreLayout()
 	{
 		try
 		{
@@ -846,20 +793,20 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		}
 	}
 
-	private void eNclcdP4GG(object P_0, ItemClickEventArgs P_1)
+	private void OnSettingsCheckItemChanged(object sender, ItemClickEventArgs e)
 	{
-		if (LXtjTCGkg9)
+		if (_isInitialized)
 		{
 			AppSetting.Instance.GetIlogger()?.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ModifySuccess"), AppSetting.Instance.AppName));
 		}
 	}
 
-	private void Tqll8q95Ns(object P_0, ShowingMenuEventArgs P_1)
+	private void OnDockLayoutManagerShowingMenu(object sender, ShowingMenuEventArgs e)
 	{
 		BarButtonItem barButtonItem = null;
 		BarButtonItem barButtonItem2 = null;
 		BarButtonItem barButtonItem3 = null;
-		IBarItem[] array = P_1.Menu.Items.ToArray();
+		IBarItem[] array = e.Menu.Items.ToArray();
 		foreach (IBarItem barItem in array)
 		{
 			if (!(barItem is BarButtonItem))
@@ -926,8 +873,8 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 					barButtonItem4.Content = AppSetting.Instance.GetIlogger()?.GetStr("mess_Document_ContextMenu_Name_CloseAllExceptThis");
 					barButtonItem = barButtonItem4;
 					barButtonItem.Command = null;
-					barButtonItem.ItemClick -= T4klMgUCnt;
-					barButtonItem.ItemClick += T4klMgUCnt;
+					barButtonItem.ItemClick -= CloseAllDocumentsExceptActive;
+					barButtonItem.ItemClick += CloseAllDocumentsExceptActive;
 				}
 				break;
 			case 7:
@@ -966,7 +913,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		}
 		if (barButtonItem != null)
 		{
-			CommonBarItemCollection items = P_1.Menu.Items;
+			CommonBarItemCollection items = e.Menu.Items;
 			if (barButtonItem2 != null)
 			{
 				items.Remove(barButtonItem2);
@@ -978,21 +925,21 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			{
 				Content = AppSetting.Instance.GetIlogger()?.GetStr("mess_Document_ContextMenu_Name_CloseRightDocuments")
 			};
-			barButtonItem5.ItemClick -= ihXl39VClR;
-			barButtonItem5.ItemClick += ihXl39VClR;
+			barButtonItem5.ItemClick -= CloseDocumentsToRight;
+			barButtonItem5.ItemClick += CloseDocumentsToRight;
 			BarButtonItem barButtonItem6 = new BarButtonItem
 			{
 				Content = AppSetting.Instance.GetIlogger()?.GetStr("mess_Document_ContextMenu_Name_CloseLeftDocuments")
 			};
-			barButtonItem6.ItemClick -= lQAlRjdWxI;
-			barButtonItem6.ItemClick += lQAlRjdWxI;
+			barButtonItem6.ItemClick -= CloseDocumentsToLeft;
+			barButtonItem6.ItemClick += CloseDocumentsToLeft;
 			BarButtonItem barButtonItem7 = new BarButtonItem
 			{
 				Content = AppSetting.Instance.GetIlogger()?.GetStr("mess_Document_ContextMenu_Name_CloseAllDocuments"),
 				Glyph = Res.Instance.ClearWindowContent
 			};
-			barButtonItem7.ItemClick -= rOVlVpTRPT;
-			barButtonItem7.ItemClick += rOVlVpTRPT;
+			barButtonItem7.ItemClick -= CloseAllDocuments;
+			barButtonItem7.ItemClick += CloseAllDocuments;
 			items.Add(barButtonItem7);
 			items.Add(new BarItemSeparator());
 			if (barButtonItem2 != null)
@@ -1010,7 +957,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		}
 	}
 
-	private void T4klMgUCnt(object P_0, ItemClickEventArgs P_1)
+	private void CloseAllDocumentsExceptActive(object sender, ItemClickEventArgs e)
 	{
 		string documentPath = AppCore.ViewModelBase.RootDocument.Documents.Where((DocumentBase it) => it.IsActive).FirstOrDefault().DocumentPath;
 		Dictionary<string, DocumentBase> dictionary = new Dictionary<string, DocumentBase>();
@@ -1050,7 +997,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		AppCore.IsSaveAllDocument = false;
 	}
 
-	private void rOVlVpTRPT(object P_0, ItemClickEventArgs P_1)
+	private void CloseAllDocuments(object sender, ItemClickEventArgs e)
 	{
 		List<string> notSaveFiles = AppCore.ViewModelBase.RootDocument.GetNotSaveFiles();
 		if (notSaveFiles != null && notSaveFiles.Count > 0)
@@ -1067,7 +1014,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		AppCore.ViewModelBase.RootDocument.Clear();
 	}
 
-	private void ihXl39VClR(object P_0, ItemClickEventArgs P_1)
+	private void CloseDocumentsToRight(object sender, ItemClickEventArgs e)
 	{
 		BaseLayoutItemCollection items = DocumentHost.Items;
 		bool flag = false;
@@ -1110,7 +1057,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		AppCore.IsSaveAllDocument = false;
 	}
 
-	private void lQAlRjdWxI(object P_0, ItemClickEventArgs P_1)
+	private void CloseDocumentsToLeft(object sender, ItemClickEventArgs e)
 	{
 		BaseLayoutItemCollection items = DocumentHost.Items;
 		bool flag = false;
@@ -1154,7 +1101,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		AppCore.IsSaveAllDocument = false;
 	}
 
-	private async void co4lNaLNxk(object P_0, ItemClickEventArgs P_1)
+	private async void ResetWindowLayout(object sender, ItemClickEventArgs e)
 	{
 		try
 		{
@@ -1172,7 +1119,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			DemoDockContainer.RestoreLayoutFromStream(stream);
 			EnsureAiAssistantPanelDocked();
 			AppCore.ViewModelBase.RootDocument.AddControl(PvfFileDocumentType.起始页);
-			RgVlpJNt5a();
+			SaveLayout();
 		}
 		catch (Exception ex)
 		{
@@ -1180,11 +1127,11 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		}
 	}
 
-	private void sFclzyLgqy(object P_0, KeyEventArgs P_1)
+	private void OnButtonEditPreviewKeyDown(object sender, KeyEventArgs e)
 	{
-		if ((int)P_1.Key != 6)
+		if ((int)e.Key != 6)
 		{
-			ButtonEdit buttonEdit = (ButtonEdit)P_0;
+			ButtonEdit buttonEdit = (ButtonEdit)sender;
 			if (!string.IsNullOrEmpty(buttonEdit.SelectedText) && buttonEdit.SelectedText.Contains("\r\n") && buttonEdit.SelectedText == buttonEdit.Text)
 			{
 				buttonEdit.Text = string.Empty;
@@ -1192,42 +1139,42 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		}
 	}
 
-	private void hLtjDEeYDP(object P_0, ItemCancelEventArgs P_1)
+	private void OnDockItemClosing(object sender, ItemCancelEventArgs e)
 	{
-		if (ReferenceEquals(P_1.Item, _aiAssistantPanel))
+		if (ReferenceEquals(e.Item, _aiAssistantPanel))
 		{
 			_aiAssistantViewModel?.CancelCurrentRequest();
 			return;
 		}
-		if (P_1.Item.DataContext is DocumentBase)
+		if (e.Item.DataContext is DocumentBase)
 		{
 			return;
 		}
-		if (P_1.Item is FloatGroup)
+		if (e.Item is FloatGroup)
 		{
 			List<BaseLayoutItem> list = new List<BaseLayoutItem>();
-			GetAllItems(P_1.Item, list);
+			GetAllItems(e.Item, list);
 			{
 				foreach (BaseLayoutItem item in list)
 				{
 					if (!(item.DataContext is DocumentBase))
 					{
-						P_1.Cancel = true;
+						e.Cancel = true;
 					}
 				}
 				return;
 			}
 		}
-		if (P_1.Item is LayoutPanel layoutPanel)
+		if (e.Item is LayoutPanel layoutPanel)
 		{
 			if (!(layoutPanel.Content is ViewImportFilesPanel))
 			{
-				P_1.Cancel = true;
+				e.Cancel = true;
 			}
 		}
 		else
 		{
-			P_1.Cancel = true;
+			e.Cancel = true;
 		}
 	}
 
@@ -1247,7 +1194,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		return list;
 	}
 
-	private void m2mjjPdBWF(object P_0, RoutedEventArgs P_1)
+	private void OnPvfPathButtonClick(object sender, RoutedEventArgs e)
 	{
 		if (AppCore.ViewModelBase.PVF.PvfIsOpen && ((int)Keyboard.Modifiers & 2) == 2)
 		{
@@ -1266,9 +1213,9 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!lryjCUlPWT)
+		if (!_contentLoaded)
 		{
-			lryjCUlPWT = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/mainwindow.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -1292,7 +1239,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			mainWindow = (MainWindow)target;
 			break;
 		case 2:
-			tttt = (TaskbarButtonService)target;
+			taskbarButtonService = (TaskbarButtonService)target;
 			break;
 		case 3:
 			notificationService = (NotificationService)target;
@@ -1304,18 +1251,18 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			subPvfOpenLog = (BarSubItem)target;
 			break;
 		case 6:
-			((BarCheckItem)target).CheckedChanged += eNclcdP4GG;
+			((BarCheckItem)target).CheckedChanged += OnSettingsCheckItemChanged;
 			break;
 		case 7:
-			((BarButtonItem)target).ItemClick += co4lNaLNxk;
+			((BarButtonItem)target).ItemClick += ResetWindowLayout;
 			break;
 		case 8:
 			subBookmark = (BarSubItem)target;
 			break;
 		case 11:
 			DemoDockContainer = (DockLayoutManager)target;
-			DemoDockContainer.DockItemClosing += hLtjDEeYDP;
-			DemoDockContainer.ShowingMenu += Tqll8q95Ns;
+			DemoDockContainer.DockItemClosing += OnDockItemClosing;
+			DemoDockContainer.ShowingMenu += OnDockLayoutManagerShowingMenu;
 			break;
 		case 12:
 			Root = (LayoutGroup)target;
@@ -1342,7 +1289,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			findResultView = (LayoutPanel)target;
 			break;
 		default:
-			lryjCUlPWT = true;
+			_contentLoaded = true;
 			break;
 		}
 	}
@@ -1355,10 +1302,10 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		switch (connectionId)
 		{
 		case 9:
-			((SimpleButton)target).Click += m2mjjPdBWF;
+			((SimpleButton)target).Click += OnPvfPathButtonClick;
 			break;
 		case 10:
-			((ButtonEdit)target).PreviewKeyDown += sFclzyLgqy;
+			((ButtonEdit)target).PreviewKeyDown += OnButtonEditPreviewKeyDown;
 			break;
 		}
 	}
