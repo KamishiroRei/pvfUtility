@@ -35,6 +35,7 @@ using PvfCode.Views.ChatGPT;
 using PvfCode.Views.NpcShopEditor;
 using PvfCode.Views.Dialogs;
 using PvfCode.Views.ImportViews;
+using PvfCode.Views.Tools;
 using UnitComboLib.ViewModels;
 using Utools;
 using WinCopies.Util;
@@ -141,11 +142,13 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		EnsureAiAssistantPanelDocked(restoreFindView: true);
 		HideOnlineFeatures();
 		EnableAiAssistantToolbarItem();
+		EnsureDropRateManagementMenuItem();
 		HideDevelopmentTestButton();
 		Dispatcher.BeginInvoke((Action)(() =>
 		{
 			HideOnlineFeatures();
 			EnableAiAssistantToolbarItem();
+			EnsureDropRateManagementMenuItem();
 			EnsureAiAssistantPanelDocked();
 			HideDevelopmentTestButton();
 		}), DispatcherPriority.ApplicationIdle);
@@ -201,6 +204,88 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			button.IsVisible = true;
 		}
 		EnableAiAssistantToolbarLinks(this);
+	}
+
+	private void EnsureDropRateManagementMenuItem()
+	{
+		BarManager barManager = Content as BarManager ?? BarManager.GetBarManager(this);
+		if (barManager == null)
+		{
+			return;
+		}
+
+		BarSubItem toolsMenu = FindToolsMenuItem(this) ?? barManager.Items.OfType<BarSubItem>()
+			.FirstOrDefault(menu => menu.Content?.ToString()?.StartsWith("工具", StringComparison.Ordinal) == true);
+		if (toolsMenu == null)
+		{
+			return;
+		}
+		if (toolsMenu.ItemLinks.Any(link =>
+			string.Equals(link.Item?.Content?.ToString(), "深渊/翻牌爆率管理", StringComparison.Ordinal)))
+		{
+			return;
+		}
+
+		BarButtonItem item = new()
+		{
+			Content = "深渊/翻牌爆率管理",
+			Command = new DelegateCommand(OpenDropRateManagementWindow)
+		};
+		BindingOperations.SetBinding(item, ContentElement.IsEnabledProperty, new Binding("PVF.PvfIsOpen")
+		{
+			Source = AppCore.ViewModelBase,
+			Mode = BindingMode.OneWay
+		});
+		int independentDropIndex = toolsMenu.ItemLinks
+			.Select((link, index) => new { link, index })
+			.FirstOrDefault(value => string.Equals(
+				BindingOperations.GetBindingExpression(value.link.Item, BarItem.CommandProperty)?.ParentBinding.Path?.Path,
+				"BarsVm.OnOpenViewIndependent_dropCommand",
+				StringComparison.Ordinal))?.index ?? -1;
+		toolsMenu.ItemLinks.Insert(independentDropIndex + 1, item);
+	}
+
+	private static BarSubItem FindToolsMenuItem(DependencyObject parent)
+	{
+		int childCount = VisualTreeHelper.GetChildrenCount(parent);
+		for (int index = 0; index < childCount; index++)
+		{
+			DependencyObject child = VisualTreeHelper.GetChild(parent, index);
+			if (child is LightweightBarItemLinkControl linkControl &&
+				linkControl.ActualContent?.ToString()?.StartsWith("工具", StringComparison.Ordinal) == true &&
+				linkControl.Link.Item is BarSubItem toolsMenu)
+			{
+				return toolsMenu;
+			}
+			BarSubItem nestedResult = FindToolsMenuItem(child);
+			if (nestedResult != null)
+			{
+				return nestedResult;
+			}
+		}
+		return null;
+	}
+
+	private static void OpenDropRateManagementWindow()
+	{
+		try
+		{
+			if (!AppCore.ViewModelBase.PVF.PvfIsOpen)
+			{
+				AppCore.ShowMsg("请先打开 PVF 文件。", isError: true, caption: "深渊/翻牌爆率管理");
+				return;
+			}
+
+			DropRateManagementWindow window = new()
+			{
+				Owner = Application.Current.MainWindow
+			};
+			window.Show();
+		}
+		catch (Exception exception)
+		{
+			AppCore.ShowMsg(exception.Message, isError: true, caption: "深渊/翻牌爆率管理");
+		}
 	}
 
 	private static void EnableAiAssistantToolbarLinks(DependencyObject parent)
