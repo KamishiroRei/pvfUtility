@@ -11,6 +11,9 @@ coverage.*
 *.trx
 *_wpftmp.csproj
 
+# Local development tests
+/tests/
+
 # IDE and user-specific files
 .vs/
 .idea/

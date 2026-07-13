@@ -134,14 +134,7 @@ and function tools used by this compatibility adapter.
 
 ## Verification
 
-Run the network-free focused regressions:
-
-```powershell
-dotnet run --project .\tests\PvfAiAssistant.RegressionTests\PvfAiAssistant.RegressionTests.csproj -c Debug
-dotnet run --project .\tests\Whetstone.ChatGPT.RegressionTests\Whetstone.ChatGPT.RegressionTests.csproj -c Debug
-```
-
-Then verify the full source graph, BAML startup, dock-tab interaction, and a
+Verify the full source graph, BAML startup, dock-tab interaction, and a
 fresh publish directory:
 
 ```powershell
