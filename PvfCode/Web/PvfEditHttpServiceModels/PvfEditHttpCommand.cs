@@ -1,13 +1,9 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace PvfCode.Web.PvfEditHttpServiceModels;
 
 public class PvfEditHttpCommand
 {
-	[CompilerGenerated]
-	private string YRET8Ec51o;
-
 	public Command Cmd;
 
 	public string Value;
@@ -26,19 +22,7 @@ public class PvfEditHttpCommand
 
 	public int Error => (!string.IsNullOrEmpty(ErrorStr)) ? 1 : 0;
 
-	public string ErrorStr
-	{
-		[CompilerGenerated]
-		get
-		{
-			return YRET8Ec51o;
-		}
-		[CompilerGenerated]
-		set
-		{
-			YRET8Ec51o = value;
-		}
-	}
+	public string ErrorStr { get; set; }
 
 	public bool? GetUseDecompile()
 	{

@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using PvfCode.Dot;
 using PvfCode.Models.Pvf.ImportModels;
 using PvfCode.ViewModels.TreeFolder;
@@ -7,22 +6,7 @@ namespace PvfCode;
 
 public sealed class PvfTreeFileImport : PvfTreeFileBase
 {
-	[CompilerGenerated]
-	private ImportFileItem? mFIjEOcHdF;
-
-	public ImportFileItem? ImportItem
-	{
-		[CompilerGenerated]
-		get
-		{
-			return mFIjEOcHdF;
-		}
-		[CompilerGenerated]
-		set
-		{
-			mFIjEOcHdF = value;
-		}
-	}
+	public ImportFileItem? ImportItem { get; set; }
 
 	public override string? Comment
 	{

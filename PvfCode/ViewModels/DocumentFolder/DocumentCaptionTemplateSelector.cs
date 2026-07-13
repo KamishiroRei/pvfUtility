@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using PvfCode.ViewModels.DocumentFolder.Enums;
@@ -7,39 +6,9 @@ namespace PvfCode.ViewModels.DocumentFolder;
 
 public class DocumentCaptionTemplateSelector : DataTemplateSelector
 {
-	[CompilerGenerated]
-	private DataTemplate uvNfoJc1T9;
+	public DataTemplate Default { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate kbBfs4Sjkp;
-
-	public DataTemplate Default
-	{
-		[CompilerGenerated]
-		get
-		{
-			return uvNfoJc1T9;
-		}
-		[CompilerGenerated]
-		set
-		{
-			uvNfoJc1T9 = value;
-		}
-	}
-
-	public DataTemplate PvfFile
-	{
-		[CompilerGenerated]
-		get
-		{
-			return kbBfs4Sjkp;
-		}
-		[CompilerGenerated]
-		set
-		{
-			kbBfs4Sjkp = value;
-		}
-	}
+	public DataTemplate PvfFile { get; set; }
 
 	public override DataTemplate SelectTemplate(object item, DependencyObject container)
 	{

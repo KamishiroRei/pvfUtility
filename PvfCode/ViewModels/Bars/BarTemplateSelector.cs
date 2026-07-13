@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -6,39 +5,9 @@ namespace PvfCode.ViewModels.Bars;
 
 public class BarTemplateSelector : DataTemplateSelector
 {
-	[CompilerGenerated]
-	private DataTemplate KlSxOeXWc9;
+	public DataTemplate MainMenuTemplate { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate no5xKooQwX;
-
-	public DataTemplate MainMenuTemplate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return KlSxOeXWc9;
-		}
-		[CompilerGenerated]
-		set
-		{
-			KlSxOeXWc9 = value;
-		}
-	}
-
-	public DataTemplate ToolbarTemplate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return no5xKooQwX;
-		}
-		[CompilerGenerated]
-		set
-		{
-			no5xKooQwX = value;
-		}
-	}
+	public DataTemplate ToolbarTemplate { get; set; }
 
 	public override DataTemplate SelectTemplate(object item, DependencyObject container)
 	{

@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using ICSharpCode.AvalonEdit.Document;
@@ -8,22 +7,7 @@ namespace PvfCode.ViewModels.DocumentFolder.EditorHoverTooltip.ItemCodeHoverTool
 
 public class ItemCodeBackgroundRenderers : IBackgroundRenderer
 {
-	[CompilerGenerated]
-	private TextSegment? buZihmdlXi;
-
-	public TextSegment? ItemTextSegment
-	{
-		[CompilerGenerated]
-		get
-		{
-			return buZihmdlXi;
-		}
-		[CompilerGenerated]
-		set
-		{
-			buZihmdlXi = value;
-		}
-	}
+	public TextSegment? ItemTextSegment { get; set; }
 
 	public KnownLayer Layer => KnownLayer.Selection;
 
@@ -33,13 +17,12 @@ public class ItemCodeBackgroundRenderers : IBackgroundRenderer
 		{
 			return;
 		}
-		SolidColorBrush solidColorBrush = new SolidColorBrush(Color.FromArgb(64, 0, 0, byte.MaxValue));
-		((Freezable)solidColorBrush).Freeze();
-		foreach (Rect item in BackgroundGeometryBuilder.GetRectsForSegment(textView, ItemTextSegment))
+		SolidColorBrush highlightBrush = new SolidColorBrush(Color.FromArgb(64, 0, 0, byte.MaxValue));
+		((Freezable)highlightBrush).Freeze();
+		foreach (Rect segmentRect in BackgroundGeometryBuilder.GetRectsForSegment(textView, ItemTextSegment))
 		{
-			Rect current = item;
-			((Freezable)solidColorBrush).Freeze();
-			drawingContext.DrawRectangle(solidColorBrush, null, new Rect(current.Location, new Size(current.Width, current.Height)));
+			((Freezable)highlightBrush).Freeze();
+			drawingContext.DrawRectangle(highlightBrush, null, new Rect(segmentRect.Location, new Size(segmentRect.Width, segmentRect.Height)));
 		}
 	}
 

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using PvfCode.Dot;
 using PvfCode.Models.Pvf.PvfFileDiffModels.Enums;
 using PvfCode.ViewModels.TreeFolder;
@@ -8,22 +7,7 @@ namespace PvfCode;
 
 public sealed class PvfTreeFileDiff : PvfTreeFileBase
 {
-	[CompilerGenerated]
-	private List<PvfFileDiffType>? nmrjIcTWA7;
-
-	public List<PvfFileDiffType>? Diffs
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nmrjIcTWA7;
-		}
-		[CompilerGenerated]
-		set
-		{
-			nmrjIcTWA7 = value;
-		}
-	}
+	public List<PvfFileDiffType>? Diffs { get; set; }
 
 	public override string? Comment
 	{

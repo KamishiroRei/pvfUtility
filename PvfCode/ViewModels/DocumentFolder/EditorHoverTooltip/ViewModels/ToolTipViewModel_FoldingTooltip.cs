@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using PvfCode.Controls.TextEditorFolder;
@@ -7,9 +6,6 @@ namespace PvfCode.ViewModels.DocumentFolder.EditorHoverTooltip.ViewModels;
 
 public class ToolTipViewModel_FoldingTooltip : ToolTipViewModelBase
 {
-	[CompilerGenerated]
-	private TextDocument BCEiC6xLX2;
-
 	public IHighlightingDefinition Highlighting
 	{
 		get
@@ -22,19 +18,7 @@ public class ToolTipViewModel_FoldingTooltip : ToolTipViewModelBase
 		}
 	}
 
-	public TextDocument Document
-	{
-		[CompilerGenerated]
-		get
-		{
-			return BCEiC6xLX2;
-		}
-		[CompilerGenerated]
-		set
-		{
-			BCEiC6xLX2 = value;
-		}
-	}
+	public TextDocument Document { get; set; }
 
 	public ToolTipViewModel_FoldingTooltip(PvfFile file, TextSegment seg, TextEditorBase editor, EditorTooltipDataTemplateSelector selector)
 		: base(seg, file, editor, selector)
