@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text;
 using PvfCode.Dot;
 using PvfCode.Models.Pvf.Enums;
@@ -11,71 +10,26 @@ namespace PvfCode.ViewModels.Diff;
 
 public class DiffSource : ModelBase
 {
-	[CompilerGenerated]
-	private PvfGroup n4RGtFC3it;
+	private string filePath;
 
-	private string UxaGbsNuFf;
-
-	[CompilerGenerated]
-	private string hywGI3fZ6H;
-
-	[CompilerGenerated]
-	private bool fqFGEoQ62g;
-
-	public PvfGroup Pvf
-	{
-		[CompilerGenerated]
-		get
-		{
-			return n4RGtFC3it;
-		}
-		[CompilerGenerated]
-		set
-		{
-			n4RGtFC3it = value;
-		}
-	}
+	public PvfGroup Pvf { get; set; }
 
 	public string FilePath
 	{
 		get
 		{
-			return UxaGbsNuFf;
+			return filePath;
 		}
 		set
 		{
-			UxaGbsNuFf = value;
+			filePath = value;
 			DoNotify("FilePath");
 		}
 	}
 
-	public string FilePath7z
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hywGI3fZ6H;
-		}
-		[CompilerGenerated]
-		set
-		{
-			hywGI3fZ6H = value;
-		}
-	}
+	public string FilePath7z { get; set; }
 
-	public bool Is7z
-	{
-		[CompilerGenerated]
-		get
-		{
-			return fqFGEoQ62g;
-		}
-		[CompilerGenerated]
-		set
-		{
-			fqFGEoQ62g = value;
-		}
-	}
+	public bool Is7z { get; set; }
 
 	public PvfFileType FileType => AppSetting.Instance.PvfConfig.GetPvfFileType(Path.GetExtension(FilePath));
 
@@ -159,12 +113,6 @@ public class DiffSource : ModelBase
 		return LanguageType.ScriptLanguage;
 	}
 
-	[SpecialName]
-	private bool q5PGddWBYQ()
-	{
-		return Pvf == null;
-	}
-
 	public ResultData SaveFileText(string newText)
 	{
 		ResultData resultData = new ResultData();
@@ -175,7 +123,7 @@ public class DiffSource : ModelBase
 				resultData.Msg = AppSetting.Instance.GetIlogger()?.GetStr("mess_7zNotSupport");
 				return resultData;
 			}
-			if (q5PGddWBYQ())
+			if (Pvf == null)
 			{
 				File.WriteAllText(FilePath, newText, Encoding.UTF8);
 			}

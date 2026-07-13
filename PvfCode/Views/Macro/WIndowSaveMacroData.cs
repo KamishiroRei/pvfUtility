@@ -2,7 +2,6 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,22 +19,13 @@ namespace PvfCode.Views.Macro;
 
 public class WIndowSaveMacroData : ThemedWindow, IComponentConnector
 {
-	private readonly MacroData TBohsE84wF;
+	private readonly MacroData macroData;
 
 	private readonly MacroType MacroType;
 
-	private WIndowSaveMacroDataViewModel i8LhLQ1tvE;
+	private WIndowSaveMacroDataViewModel viewModel;
 
-	[CompilerGenerated]
-	private bool cIShn0FisK;
-
-	[CompilerGenerated]
-	private string anNhqMTbiJ;
-
-	[CompilerGenerated]
-	private string jLChdAkkfs;
-
-	private WindowMacroToolViewModel tZAheDC5m6;
+	private WindowMacroToolViewModel selectedFolder;
 
 	internal EditBox TextName;
 
@@ -47,57 +37,18 @@ public class WIndowSaveMacroData : ThemedWindow, IComponentConnector
 
 	internal Button BtnCancel;
 
-	private bool QAPhtQadN9;
+	private bool contentLoaded;
 
-	public string ShareCaption
-	{
-		[CompilerGenerated]
-		get
-		{
-			return anNhqMTbiJ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			anNhqMTbiJ = value;
-		}
-	}
+	public string ShareCaption { get; set; }
 
-	public string ShareInstructions
-	{
-		[CompilerGenerated]
-		get
-		{
-			return jLChdAkkfs;
-		}
-		[CompilerGenerated]
-		set
-		{
-			jLChdAkkfs = value;
-		}
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private bool BwFh1wakDx()
-	{
-		return cIShn0FisK;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void Dx0hwAk2Es(bool P_0)
-	{
-		cIShn0FisK = P_0;
-	}
+	public string ShareInstructions { get; set; }
 
 	public WIndowSaveMacroData(MacroData data, string title, bool showShareCheck = true, bool isShare = false)
 	{
-		TBohsE84wF = data;
+		macroData = data;
 		MacroType = data.MacroType;
-		Dx0hwAk2Es(isShare);
-		i8LhLQ1tvE = new WIndowSaveMacroDataViewModel();
-		base.DataContext = i8LhLQ1tvE;
+		viewModel = new WIndowSaveMacroDataViewModel();
+		base.DataContext = viewModel;
 		InitializeComponent();
 		TextName.Value = title;
 	}
@@ -107,7 +58,7 @@ public class WIndowSaveMacroData : ThemedWindow, IComponentConnector
 		Application.Current.MainWindow.Activate();
 	}
 
-	private void OLjhxp0MRn(object P_0, RoutedEventArgs P_1)
+	private void OnSelectSavePath(object sender, RoutedEventArgs e)
 	{
 		WindowMacroTool windowMacroTool = new WindowMacroTool(isTreeList: true, MacroType);
 		windowMacroTool.Owner = this;
@@ -116,41 +67,41 @@ public class WIndowSaveMacroData : ThemedWindow, IComponentConnector
 		WindowMacroToolViewModel vM = windowMacroTool.VM;
 		if (vM.IsSelect)
 		{
-			tZAheDC5m6 = vM;
+			selectedFolder = vM;
 			btnSavePath.EditValue = vM.SelectNodeToPath();
 		}
 	}
 
-	private void h3YhQnAuMR(object P_0, RoutedEventArgs P_1)
+	private void OnCancelClick(object sender, RoutedEventArgs e)
 	{
 		base.DialogResult = false;
 	}
 
-	private async void TJ8haEtSnd(object P_0, RoutedEventArgs P_1)
+	private async void OnSaveClick(object sender, RoutedEventArgs e)
 	{
 		if (string.IsNullOrEmpty(TextName.Value))
 		{
 			AppCore.ShowMsg("请先输入名称");
 			return;
 		}
-		if (tZAheDC5m6 == null)
+		if (selectedFolder == null)
 		{
 			AppCore.ShowMsg("请先选择保存路径");
 			return;
 		}
-		i8LhLQ1tvE.IsLoading = true;
-		await tZAheDC5m6.Add(TextName.Value, TBohsE84wF);
+		viewModel.IsLoading = true;
+		await selectedFolder.Add(TextName.Value, macroData);
 		base.DialogResult = true;
-		i8LhLQ1tvE.IsLoading = false;
+		viewModel.IsLoading = false;
 	}
 
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!QAPhtQadN9)
+		if (!contentLoaded)
 		{
-			QAPhtQadN9 = true;
+			contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/macro/windowsavemacrodata.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -178,18 +129,18 @@ public class WIndowSaveMacroData : ThemedWindow, IComponentConnector
 			break;
 		case 3:
 			btnSavePath = (ButtonEdit)target;
-			btnSavePath.DefaultButtonClick += OLjhxp0MRn;
+			btnSavePath.DefaultButtonClick += OnSelectSavePath;
 			break;
 		case 4:
 			BtnSave = (Button)target;
-			BtnSave.Click += TJ8haEtSnd;
+			BtnSave.Click += OnSaveClick;
 			break;
 		case 5:
 			BtnCancel = (Button)target;
-			BtnCancel.Click += h3YhQnAuMR;
+			BtnCancel.Click += OnCancelClick;
 			break;
 		default:
-			QAPhtQadN9 = true;
+			contentLoaded = true;
 			break;
 		}
 	}

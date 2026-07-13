@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 using ICSharpCode.AvalonEdit.Document;
@@ -10,22 +9,7 @@ namespace PvfCode.ViewModels.DocumentFolder.Foldings.FoldingEnitys;
 
 public class XmlFoldingStrategy
 {
-	[CompilerGenerated]
-	private bool xAlyuJbHgg;
-
-	public bool ShowAttributesWhenFolded
-	{
-		[CompilerGenerated]
-		get
-		{
-			return xAlyuJbHgg;
-		}
-		[CompilerGenerated]
-		set
-		{
-			xAlyuJbHgg = value;
-		}
-	}
+	public bool ShowAttributesWhenFolded { get; set; }
 
 	public void UpdateFoldings(FoldingManager manager, TextDocument document)
 	{
@@ -62,18 +46,18 @@ public class XmlFoldingStrategy
 				case XmlNodeType.Element:
 					if (!reader.IsEmptyElement)
 					{
-						XmlElementFolding item = kbmy4H88iY(document, reader);
+						XmlElementFolding item = CreateElementFoldStart(document, reader);
 						stack.Push(item);
 					}
 					break;
 				case XmlNodeType.EndElement:
 				{
 					XmlElementFolding folding = stack.Pop();
-					zn7yYsLQDL(document, list, reader, folding);
+					CreateElementFold(document, list, reader, folding);
 					break;
 				}
 				case XmlNodeType.Comment:
-					NBEyAYuGPJ(document, list, reader);
+					CreateCommentFold(document, list, reader);
 					break;
 				}
 			}
@@ -94,27 +78,27 @@ public class XmlFoldingStrategy
 		return list;
 	}
 
-	private static int t5FySEShpo(TextDocument P_0, XmlReader P_1)
+	private static int GetOffset(TextDocument document, XmlReader reader)
 	{
-		if (P_1 is IXmlLineInfo xmlLineInfo && xmlLineInfo.HasLineInfo())
+		if (reader is IXmlLineInfo xmlLineInfo && xmlLineInfo.HasLineInfo())
 		{
-			return P_0.GetOffset(xmlLineInfo.LineNumber, xmlLineInfo.LinePosition);
+			return document.GetOffset(xmlLineInfo.LineNumber, xmlLineInfo.LinePosition);
 		}
 		throw new ArgumentException("XmlReader does not have positioning information.");
 	}
 
-	private static void NBEyAYuGPJ(TextDocument P_0, List<NewFolding> P_1, XmlReader P_2)
+	private static void CreateCommentFold(TextDocument document, List<NewFolding> foldMarkers, XmlReader reader)
 	{
-		string value = P_2.Value;
+		string value = reader.Value;
 		if (value != null)
 		{
 			int num = value.IndexOf('\n');
 			if (num >= 0)
 			{
-				int num2 = t5FySEShpo(P_0, P_2) - 4;
+				int num2 = GetOffset(document, reader) - 4;
 				int end = num2 + value.Length + 7;
 				string name = "<!--" + value.Substring(0, num).TrimEnd('\r') + "-->";
-				P_1.Add(new NewFolding(num2, end)
+				foldMarkers.Add(new NewFolding(num2, end)
 				{
 					Name = name
 				});
@@ -122,47 +106,47 @@ public class XmlFoldingStrategy
 		}
 	}
 
-	private XmlElementFolding kbmy4H88iY(TextDocument P_0, XmlReader P_1)
+	private XmlElementFolding CreateElementFoldStart(TextDocument document, XmlReader reader)
 	{
 		XmlElementFolding folding = new XmlElementFolding();
-		IXmlLineInfo xmlLineInfo = (IXmlLineInfo)P_1;
+		IXmlLineInfo xmlLineInfo = (IXmlLineInfo)reader;
 		folding.StartLine = xmlLineInfo.LineNumber;
-		folding.StartOffset = P_0.GetOffset(folding.StartLine, xmlLineInfo.LinePosition - 1);
-		if (ShowAttributesWhenFolded && P_1.HasAttributes)
+		folding.StartOffset = document.GetOffset(folding.StartLine, xmlLineInfo.LinePosition - 1);
+		if (ShowAttributesWhenFolded && reader.HasAttributes)
 		{
-			folding.Name = "<" + P_1.Name + " " + B9DyyQ2yyi(P_1) + ">";
+			folding.Name = "<" + reader.Name + " " + GetAttributeFoldText(reader) + ">";
 		}
 		else
 		{
-			folding.Name = "<" + P_1.Name + ">";
+			folding.Name = "<" + reader.Name + ">";
 		}
 		return folding;
 	}
 
-	private static void zn7yYsLQDL(TextDocument P_0, List<NewFolding> P_1, XmlReader P_2, XmlElementFolding P_3)
+	private static void CreateElementFold(TextDocument document, List<NewFolding> foldMarkers, XmlReader reader, XmlElementFolding foldStart)
 	{
-		IXmlLineInfo xmlLineInfo = (IXmlLineInfo)P_2;
+		IXmlLineInfo xmlLineInfo = (IXmlLineInfo)reader;
 		int lineNumber = xmlLineInfo.LineNumber;
-		if (lineNumber > P_3.StartLine)
+		if (lineNumber > foldStart.StartLine)
 		{
-			int column = xmlLineInfo.LinePosition + P_2.Name.Length + 1;
-			P_3.EndOffset = P_0.GetOffset(lineNumber, column);
-			P_1.Add(P_3);
+			int column = xmlLineInfo.LinePosition + reader.Name.Length + 1;
+			foldStart.EndOffset = document.GetOffset(lineNumber, column);
+			foldMarkers.Add(foldStart);
 		}
 	}
 
-	private static string B9DyyQ2yyi(XmlReader P_0)
+	private static string GetAttributeFoldText(XmlReader reader)
 	{
 		StringBuilder stringBuilder = new StringBuilder();
-		for (int i = 0; i < P_0.AttributeCount; i++)
+		for (int i = 0; i < reader.AttributeCount; i++)
 		{
-			P_0.MoveToAttribute(i);
-			stringBuilder.Append(P_0.Name);
+			reader.MoveToAttribute(i);
+			stringBuilder.Append(reader.Name);
 			stringBuilder.Append("=");
-			stringBuilder.Append(P_0.QuoteChar.ToString());
-			stringBuilder.Append(IaYyiv8Oww(P_0.Value, P_0.QuoteChar));
-			stringBuilder.Append(P_0.QuoteChar.ToString());
-			if (i < P_0.AttributeCount - 1)
+			stringBuilder.Append(reader.QuoteChar.ToString());
+			stringBuilder.Append(XmlEncodeAttributeValue(reader.Value, reader.QuoteChar));
+			stringBuilder.Append(reader.QuoteChar.ToString());
+			if (i < reader.AttributeCount - 1)
 			{
 				stringBuilder.Append(" ");
 			}
@@ -170,13 +154,13 @@ public class XmlFoldingStrategy
 		return stringBuilder.ToString();
 	}
 
-	private static string IaYyiv8Oww(string P_0, char P_1)
+	private static string XmlEncodeAttributeValue(string attributeValue, char quoteChar)
 	{
-		StringBuilder stringBuilder = new StringBuilder(P_0);
+		StringBuilder stringBuilder = new StringBuilder(attributeValue);
 		stringBuilder.Replace("&", "&amp;");
 		stringBuilder.Replace("<", "&lt;");
 		stringBuilder.Replace(">", "&gt;");
-		if (P_1 == '"')
+		if (quoteChar == '"')
 		{
 			stringBuilder.Replace("\"", "&quot;");
 		}

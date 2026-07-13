@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -11,44 +10,11 @@ namespace PvfCode.ViewModels.Description.FileListDescription;
 
 public class FileListDescriptionViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private Dictionary<string, TreelistCommentRes> sfLGNCXydx;
+	private readonly Action closeAction;
 
-	[CompilerGenerated]
-	private PvfTreeViewModel hPaGzeRkiu;
+	private Dictionary<string, TreelistCommentRes> Source { get; set; }
 
-	[CompilerGenerated]
-	private TreelistCommentRes Nd4xDmpbUR;
-
-	private readonly Action Close;
-
-	private Dictionary<string, TreelistCommentRes> Source
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sfLGNCXydx;
-		}
-		[CompilerGenerated]
-		set
-		{
-			sfLGNCXydx = value;
-		}
-	}
-
-	public PvfTreeViewModel TreeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hPaGzeRkiu;
-		}
-		[CompilerGenerated]
-		set
-		{
-			hPaGzeRkiu = value;
-		}
-	}
+	public PvfTreeViewModel TreeViewModel { get; set; }
 
 	public TreelistCommentRes SelectedItem
 	{
@@ -62,27 +28,15 @@ public class FileListDescriptionViewModel : ViewModelBase
 		}
 	}
 
-	public TreelistCommentRes AddData
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Nd4xDmpbUR;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Nd4xDmpbUR = value;
-		}
-	}
+	public TreelistCommentRes AddData { get; set; }
 
 	public FileListDescriptionViewModel(Action close)
 	{
 		Source = new Dictionary<string, TreelistCommentRes>(AppSetting.Instance.PvfConfig.TreelistCommentDic);
 		AddData = new TreelistCommentRes();
 		TreeViewModel = new PvfTreeViewModel(TreeViewType.FileListDescription);
-		TreeViewModel.SelectedRowChangedEvent += CLJGVPHaDC;
-		Close = close;
+		TreeViewModel.SelectedRowChangedEvent += OnSelectedRowChanged;
+		closeAction = close;
 	}
 
 	[Command]
@@ -130,7 +84,7 @@ public class FileListDescriptionViewModel : ViewModelBase
 		TreeViewModel.TreeGroupData.Clear();
 		await TreeViewModel.TreeGroupData.CreateFileListDescriptionTrees(Source.Keys, Source);
 		await Task.Delay(100);
-		aVqGMnl7TF(AddData.FilePath);
+		RefreshComment(AddData.FilePath);
 	}
 
 	public void AddTreelistComment(TreelistCommentRes treelistCommentRes)
@@ -142,12 +96,12 @@ public class FileListDescriptionViewModel : ViewModelBase
 		Source.Add(treelistCommentRes.FilePath, treelistCommentRes);
 	}
 
-	private void aVqGMnl7TF(string P_0)
+	private void RefreshComment(string filePath)
 	{
-		TreeViewModel.TreeGroupData.FilePathGetTreeNode(P_0)?.Value.CommentDoNotify();
-		AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.FilePathGetTreeNode(P_0)?.Value.CommentDoNotify();
-		AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData.FilePathGetTreeNode(P_0)?.Value.CommentDoNotify();
-		TreeViewModel.GoToNode(P_0);
+		TreeViewModel.TreeGroupData.FilePathGetTreeNode(filePath)?.Value.CommentDoNotify();
+		AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.FilePathGetTreeNode(filePath)?.Value.CommentDoNotify();
+		AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData.FilePathGetTreeNode(filePath)?.Value.CommentDoNotify();
+		TreeViewModel.GoToNode(filePath);
 	}
 
 	[Command]
@@ -161,12 +115,12 @@ public class FileListDescriptionViewModel : ViewModelBase
 			}
 			else
 			{
-				aVqGMnl7TF(SelectedItem.FilePath);
+				RefreshComment(SelectedItem.FilePath);
 			}
 		}
 	}
 
-	private void CLJGVPHaDC(KeyValuePair<string, PvfTreeFileBase> selectedRow)
+	private void OnSelectedRowChanged(KeyValuePair<string, PvfTreeFileBase> selectedRow)
 	{
 		if (Source.TryGetValue(selectedRow.Value.FullPath, out TreelistCommentRes value))
 		{
@@ -187,12 +141,12 @@ public class FileListDescriptionViewModel : ViewModelBase
 		{
 			AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.FilePathGetTreeNode(item.Key)?.Value.CommentDoNotify();
 		}
-		Close?.Invoke();
+		closeAction?.Invoke();
 	}
 
 	[Command]
 	public void Unloaded()
 	{
-		TreeViewModel.SelectedRowChangedEvent -= CLJGVPHaDC;
+		TreeViewModel.SelectedRowChangedEvent -= OnSelectedRowChanged;
 	}
 }

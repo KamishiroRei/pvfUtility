@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using Swordfish.NET.Collections;
@@ -9,12 +8,6 @@ namespace PvfCode.ViewModels.NpcShopEditor;
 
 public class NpcShopPageViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<NpcShopItem> tIamqvH1Z3;
-
-	[CompilerGenerated]
-	private ObservableCollection<NpcShopItem> nEHmdk0jrt;
-
 	public string Title
 	{
 		get
@@ -27,19 +20,7 @@ public class NpcShopPageViewModel : ViewModelBase
 		}
 	}
 
-	public ConcurrentObservableCollection<NpcShopItem> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return tIamqvH1Z3;
-		}
-		[CompilerGenerated]
-		set
-		{
-			tIamqvH1Z3 = value;
-		}
-	}
+	public ConcurrentObservableCollection<NpcShopItem> Items { get; set; }
 
 	public NpcShopItem CurrentItem
 	{
@@ -65,19 +46,7 @@ public class NpcShopPageViewModel : ViewModelBase
 		}
 	}
 
-	public ObservableCollection<NpcShopItem> SelectedItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nEHmdk0jrt;
-		}
-		[CompilerGenerated]
-		set
-		{
-			nEHmdk0jrt = value;
-		}
-	}
+	public ObservableCollection<NpcShopItem> SelectedItems { get; set; }
 
 	public bool IsSelected
 	{
@@ -93,7 +62,7 @@ public class NpcShopPageViewModel : ViewModelBase
 
 	public NpcShopPageViewModel(string title, ConcurrentObservableCollection<NpcShopItem> items)
 	{
-		nEHmdk0jrt = new ObservableCollection<NpcShopItem>();
+		SelectedItems = new ObservableCollection<NpcShopItem>();
 		Title = title;
 		Items = items;
 		if (Items == null)

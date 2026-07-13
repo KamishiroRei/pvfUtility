@@ -3,7 +3,6 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,10 +15,7 @@ namespace PvfCode.Views.PvfTreeFolder;
 
 public class WinAddNewPvfFile : ThemedWindow, IComponentConnector
 {
-	private readonly string? fi0H9cKXUE;
-
-	[CompilerGenerated]
-	private bool f9PHPEV0Hb;
+	private readonly string? rootPath;
 
 	public string FullPpath;
 
@@ -33,55 +29,43 @@ public class WinAddNewPvfFile : ThemedWindow, IComponentConnector
 
 	internal Button BtnCancel;
 
-	private bool Ry6HZIbid0;
+	private bool contentLoaded;
 
-	public bool NewFileRegLstFile
-	{
-		[CompilerGenerated]
-		get
-		{
-			return f9PHPEV0Hb;
-		}
-		[CompilerGenerated]
-		set
-		{
-			f9PHPEV0Hb = value;
-		}
-	}
+	public bool NewFileRegLstFile { get; set; }
 
 	public WinAddNewPvfFile(string? rootPath)
 	{
-		fi0H9cKXUE = rootPath;
+		this.rootPath = rootPath;
 		if (!string.IsNullOrEmpty(rootPath))
 		{
-			fi0H9cKXUE += "/";
+			this.rootPath += "/";
 		}
 		else
 		{
-			fi0H9cKXUE = string.Empty;
+			this.rootPath = string.Empty;
 		}
 		InitializeComponent();
-		labelRootPath.Content = fi0H9cKXUE;
-		TextFileName.input.EditValueChanged += SwkHIZEqJO;
+		labelRootPath.Content = this.rootPath;
+		TextFileName.input.EditValueChanged += OnFileNameChanged;
 	}
 
 	protected override void OnClosing(CancelEventArgs e)
 	{
-		TextFileName.input.EditValueChanged -= SwkHIZEqJO;
+		TextFileName.input.EditValueChanged -= OnFileNameChanged;
 		Application.Current.MainWindow.Activate();
 	}
 
-	private void UGAHbpujwG(object P_0, RoutedEventArgs P_1)
+	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
 		TextFileName.input.Focus();
 	}
 
-	private void SwkHIZEqJO(object P_0, EditValueChangedEventArgs P_1)
+	private void OnFileNameChanged(object sender, EditValueChangedEventArgs e)
 	{
 		BtnSave.IsEnabled = !string.IsNullOrEmpty(TextFileName.Value);
 	}
 
-	private void BxFHEIn6jH(object P_0, RoutedEventArgs P_1)
+	private void OnSaveClick(object sender, RoutedEventArgs e)
 	{
 		string value = TextFileName.Value;
 		if (string.IsNullOrEmpty(value))
@@ -103,7 +87,7 @@ public class WinAddNewPvfFile : ThemedWindow, IComponentConnector
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileNameMustHaveExtension"), isError: true);
 			return;
 		}
-		FullPpath = Path.Combine(fi0H9cKXUE, value).ToLower();
+		FullPpath = Path.Combine(rootPath, value).ToLower();
 		if (AppCore.ViewModelBase.PVF.FileAny(FullPpath))
 		{
 			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileAlreadyExists_3"), FullPpath), isError: true);
@@ -113,16 +97,16 @@ public class WinAddNewPvfFile : ThemedWindow, IComponentConnector
 		base.DialogResult = true;
 	}
 
-	private void dS5HOybWnc(object P_0, RoutedEventArgs P_1)
+	private void OnCancelClick(object sender, RoutedEventArgs e)
 	{
 		base.DialogResult = false;
 	}
 
-	private void WXIHKUVfof(object P_0, KeyEventArgs P_1)
+	private void OnKeyDown(object sender, KeyEventArgs e)
 	{
-		if ((int)P_1.Key == 6)
+		if ((int)e.Key == 6)
 		{
-			BxFHEIn6jH(null, null);
+			OnSaveClick(null, null);
 		}
 	}
 
@@ -130,9 +114,9 @@ public class WinAddNewPvfFile : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!Ry6HZIbid0)
+		if (!contentLoaded)
 		{
-			Ry6HZIbid0 = true;
+			contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/pvftreefolder/winaddnewpvffile.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -153,8 +137,8 @@ public class WinAddNewPvfFile : ThemedWindow, IComponentConnector
 		switch (connectionId)
 		{
 		case 1:
-			((WinAddNewPvfFile)target).KeyDown += WXIHKUVfof;
-			((WinAddNewPvfFile)target).Loaded += UGAHbpujwG;
+			((WinAddNewPvfFile)target).KeyDown += OnKeyDown;
+			((WinAddNewPvfFile)target).Loaded += OnLoaded;
 			break;
 		case 2:
 			labelRootPath = (Label)target;
@@ -167,14 +151,14 @@ public class WinAddNewPvfFile : ThemedWindow, IComponentConnector
 			break;
 		case 5:
 			BtnSave = (Button)target;
-			BtnSave.Click += BxFHEIn6jH;
+			BtnSave.Click += OnSaveClick;
 			break;
 		case 6:
 			BtnCancel = (Button)target;
-			BtnCancel.Click += dS5HOybWnc;
+			BtnCancel.Click += OnCancelClick;
 			break;
 		default:
-			Ry6HZIbid0 = true;
+			contentLoaded = true;
 			break;
 		}
 	}

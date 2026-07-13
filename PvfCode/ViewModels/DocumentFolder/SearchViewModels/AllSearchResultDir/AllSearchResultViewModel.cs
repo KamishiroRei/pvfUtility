@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Xpf.Grid;
 using ICSharpCode.AvalonEdit.Document;
@@ -14,13 +13,7 @@ public class AllSearchResultViewModel : ViewModelBase
 {
 	public delegate TreeListNode ContentToNode(object obj);
 
-	[CompilerGenerated]
-	private ContentToNode sNIApuqujX;
-
 	public ObservableConcurrentDictionaryEx<string, SearchResultNode> _Tree;
-
-	[CompilerGenerated]
-	private PVfTreeChildrenSelector BRpAUFYfxU;
 
 	public bool IsActive
 	{
@@ -34,19 +27,7 @@ public class AllSearchResultViewModel : ViewModelBase
 		}
 	}
 
-	public ContentToNode ContentToNodeMethods
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sNIApuqujX;
-		}
-		[CompilerGenerated]
-		set
-		{
-			sNIApuqujX = value;
-		}
-	}
+	public ContentToNode ContentToNodeMethods { get; set; }
 
 	public ObservableConcurrentDictionaryEx<string, SearchResultNode> Tree
 	{
@@ -69,23 +50,11 @@ public class AllSearchResultViewModel : ViewModelBase
 		}
 		set
 		{
-			SetProperty<KeyValuePair<string, SearchResultNode>?>(() => FocusRow, value, WsXA0IemqC);
+			SetProperty<KeyValuePair<string, SearchResultNode>?>(() => FocusRow, value, OnFocusRowChanged);
 		}
 	}
 
-	public PVfTreeChildrenSelector ChildNodesSelector
-	{
-		[CompilerGenerated]
-		get
-		{
-			return BRpAUFYfxU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			BRpAUFYfxU = value;
-		}
-	}
+	public PVfTreeChildrenSelector ChildNodesSelector { get; set; }
 
 	public void Clear()
 	{
@@ -94,10 +63,10 @@ public class AllSearchResultViewModel : ViewModelBase
 
 	public AllSearchResultViewModel()
 	{
-		ChildNodesSelector = new PVfTreeChildrenSelector(vAVA7JUXn4);
+		ChildNodesSelector = new PVfTreeChildrenSelector(SelectChildren);
 	}
 
-	private void WsXA0IemqC()
+	private void OnFocusRowChanged()
 	{
 		if (!FocusRow.HasValue)
 		{
@@ -119,13 +88,13 @@ public class AllSearchResultViewModel : ViewModelBase
 		}
 	}
 
-	private IEnumerable vAVA7JUXn4(object P_0)
+	private IEnumerable SelectChildren(object item)
 	{
-		if (P_0 == null)
+		if (item == null)
 		{
 			return null;
 		}
-		return ((KeyValuePair<string, SearchResultNode>)P_0).Value.Children;
+		return ((KeyValuePair<string, SearchResultNode>)item).Value.Children;
 	}
 
 	public void AddResult(string filePath, IEnumerable<ISearchResult> searchResult)

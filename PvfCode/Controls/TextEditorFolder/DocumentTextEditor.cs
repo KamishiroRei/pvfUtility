@@ -3,7 +3,6 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,9 +18,6 @@ namespace PvfCode.Controls.TextEditorFolder;
 
 public class DocumentTextEditor : UserControl, IComponentConnector
 {
-	[CompilerGenerated]
-	private int yYEgWes4XC;
-
 	internal DocumentTextEditor documentEditor;
 
 	internal ButtonEdit pathTextBox;
@@ -34,21 +30,9 @@ public class DocumentTextEditor : UserControl, IComponentConnector
 
 	internal RangeScrollbar rscrollbar;
 
-	private bool WDCgmP7chM;
+	private bool contentLoaded;
 
-	public int TopToolBarTextBoxWidth
-	{
-		[CompilerGenerated]
-		get
-		{
-			return yYEgWes4XC;
-		}
-		[CompilerGenerated]
-		set
-		{
-			yYEgWes4XC = value;
-		}
-	}
+	public int TopToolBarTextBoxWidth { get; set; }
 
 	public DocumentTextEditor()
 	{
@@ -142,9 +126,9 @@ public class DocumentTextEditor : UserControl, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!WDCgmP7chM)
+		if (!contentLoaded)
 		{
-			WDCgmP7chM = true;
+			contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/controls/texteditorfolder/documenttexteditor.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -183,7 +167,7 @@ public class DocumentTextEditor : UserControl, IComponentConnector
 			rscrollbar = (RangeScrollbar)target;
 			break;
 		default:
-			WDCgmP7chM = true;
+			contentLoaded = true;
 			break;
 		}
 	}
