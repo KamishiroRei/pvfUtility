@@ -8,13 +8,13 @@ namespace PvfCode.ViewModels.TreeFolder;
 
 public class PvfTreeNodeImageSelector : TreeListNodeImageSelector
 {
-	public override ImageSource Select(TreeListRowData P_0)
+	public override ImageSource Select(TreeListRowData rowData)
 	{
-		if (P_0 == null)
+		if (rowData == null)
 		{
 			return null;
 		}
-		KeyValuePair<string, PvfTreeFileBase> keyValuePair = (KeyValuePair<string, PvfTreeFileBase>)P_0.Row;
+		KeyValuePair<string, PvfTreeFileBase> keyValuePair = (KeyValuePair<string, PvfTreeFileBase>)rowData.Row;
 		PvfTreeFileBase value = keyValuePair.Value;
 		if (value.IsFile)
 		{
@@ -38,7 +38,7 @@ public class PvfTreeNodeImageSelector : TreeListNodeImageSelector
 			}
 			}
 		}
-		if (P_0.IsExpanded)
+		if (rowData.IsExpanded)
 		{
 			return Res.Instance.TreeFiles.FolderOpened;
 		}

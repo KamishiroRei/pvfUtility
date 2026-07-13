@@ -10,13 +10,13 @@ namespace PvfCode.Views.Macro;
 
 internal class MacroTreeNodeImageSelector : TreeListNodeImageSelector
 {
-	public override ImageSource Select(TreeListRowData P_0)
+	public override ImageSource Select(TreeListRowData rowData)
 	{
-		if (P_0 == null)
+		if (rowData == null)
 		{
 			return null;
 		}
-		KeyValuePair<string, MacroData> keyValuePair = (KeyValuePair<string, MacroData>)P_0.Row;
+		KeyValuePair<string, MacroData> keyValuePair = (KeyValuePair<string, MacroData>)rowData.Row;
 		if (keyValuePair.Value.IsFile)
 		{
 			return Res.Instance.MacroIcon;
@@ -30,7 +30,7 @@ internal class MacroTreeNodeImageSelector : TreeListNodeImageSelector
 				_ => null, 
 			};
 		}
-		if (P_0.IsExpanded)
+		if (rowData.IsExpanded)
 		{
 			return Res.Instance.TreeFiles.FolderOpened;
 		}

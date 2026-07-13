@@ -145,6 +145,11 @@ Completed areas include:
   methods were removed after source and BAML searches found no consumer;
   connection IDs, generated fields, resource URIs, and public CLR identities
   remain unchanged.
+- Twenty small search, preview, tree-selector, validation, NPC-shop, drop-list,
+  and diff-event models; pseudo-event accessors and pseudo-auto-properties were
+  restored to ordinary C#, while private regex/wildcard helpers and selector
+  parameters now use behavior-derived names. Public properties, dependency
+  properties, events, and selector class identities remain unchanged.
 - Readable-XAML cleanup replaced 13 ILSpy pseudo-`<Ctor>` nodes with valid markup
   extension/property syntax and moved 270 `Unknown connection ID` comments from
   74 documents into `docs/BAML_CONNECTION_ID_AUDIT.csv`. These edits improve the

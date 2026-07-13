@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using PvfCode.Controls.TextEditorFolder;
@@ -11,22 +10,7 @@ public abstract class TextEditorPreviewViewModelBase : ViewModelBase
 
 	internal PvfFile? File;
 
-	[CompilerGenerated]
-	private bool G2U42PvETx;
-
-	public bool IsLoaded
-	{
-		[CompilerGenerated]
-		get
-		{
-			return G2U42PvETx;
-		}
-		[CompilerGenerated]
-		set
-		{
-			G2U42PvETx = value;
-		}
-	}
+	public bool IsLoaded { get; set; }
 
 	public bool IsLoading
 	{

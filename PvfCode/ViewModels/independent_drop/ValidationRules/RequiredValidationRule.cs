@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using PvfCode.Models.Pvf;
 using PvfCode.ViewModels.independent_drop.DropList;
@@ -11,22 +10,7 @@ public class RequiredValidationRule : ValidationRule
 {
 	public static Dictionary<int, KeyValuePair<List<ListItem>, LstItem>> DIC;
 
-	[CompilerGenerated]
-	private string beo2G7d7v3;
-
-	public string FieldName
-	{
-		[CompilerGenerated]
-		get
-		{
-			return beo2G7d7v3;
-		}
-		[CompilerGenerated]
-		set
-		{
-			beo2G7d7v3 = value;
-		}
-	}
+	public string FieldName { get; set; }
 
 	public static string GetErrorMessage(string fieldName, object fieldValue, object nullValue = null)
 	{

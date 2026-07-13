@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -10,24 +9,9 @@ namespace PvfCode.ViewModels.Store.Preview;
 
 public class PreviewFileListCommentViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private PvfTreeViewModel FSuWfGlYSI;
-
 	private readonly Dictionary<string, TreelistCommentRes> Source;
 
-	public PvfTreeViewModel TreeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return FSuWfGlYSI;
-		}
-		[CompilerGenerated]
-		set
-		{
-			FSuWfGlYSI = value;
-		}
-	}
+	public PvfTreeViewModel TreeViewModel { get; set; }
 
 	public PreviewFileListCommentViewModel(Dictionary<string, TreelistCommentRes> source)
 	{

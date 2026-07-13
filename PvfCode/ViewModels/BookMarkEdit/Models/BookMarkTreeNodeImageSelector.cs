@@ -9,13 +9,13 @@ namespace PvfCode.ViewModels.BookMarkEdit.Models;
 
 public class BookMarkTreeNodeImageSelector : TreeListNodeImageSelector
 {
-	public override ImageSource Select(TreeListRowData P_0)
+	public override ImageSource Select(TreeListRowData rowData)
 	{
-		if (P_0 == null)
+		if (rowData == null)
 		{
 			return null;
 		}
-		KeyValuePair<string, BookMarkDto> keyValuePair = (KeyValuePair<string, BookMarkDto>)P_0.Row;
+		KeyValuePair<string, BookMarkDto> keyValuePair = (KeyValuePair<string, BookMarkDto>)rowData.Row;
 		if (keyValuePair.Value.IsFile)
 		{
 			return AppSetting.Instance.PvfConfig.GetPvfFileType(Path.GetExtension(keyValuePair.Key)) switch
@@ -27,7 +27,7 @@ public class BookMarkTreeNodeImageSelector : TreeListNodeImageSelector
 				_ => Res.Instance.TreeFiles.Script_16x, 
 			};
 		}
-		if (P_0.IsExpanded)
+		if (rowData.IsExpanded)
 		{
 			return Res.Instance.TreeFiles.FolderOpened;
 		}

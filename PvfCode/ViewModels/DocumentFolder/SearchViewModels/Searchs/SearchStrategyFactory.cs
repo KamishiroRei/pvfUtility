@@ -49,7 +49,7 @@ public static class SearchStrategyFactory
 			searchPattern = Regex.Escape(searchPattern);
 			break;
 		case SearchMode.Wildcard:
-			searchPattern = JLNAkZjBUl(searchPattern);
+			searchPattern = ConvertWildcardToRegex(searchPattern);
 			break;
 		}
 		try
@@ -62,16 +62,16 @@ public static class SearchStrategyFactory
 		}
 	}
 
-	private static string JLNAkZjBUl(string P_0)
+	private static string ConvertWildcardToRegex(string wildcardPattern)
 	{
-		if (string.IsNullOrEmpty(P_0))
+		if (string.IsNullOrEmpty(wildcardPattern))
 		{
 			return "";
 		}
 		StringBuilder stringBuilder = new StringBuilder();
-		for (int i = 0; i < P_0.Length; i++)
+		for (int i = 0; i < wildcardPattern.Length; i++)
 		{
-			char c = P_0[i];
+			char c = wildcardPattern[i];
 			switch (c)
 			{
 			case '?':

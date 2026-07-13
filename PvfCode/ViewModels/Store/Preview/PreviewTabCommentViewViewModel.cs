@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using PvfCode.Dot.Desktop;
 
@@ -7,9 +6,6 @@ namespace PvfCode.ViewModels.Store.Preview;
 
 public class PreviewTabCommentViewViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private List<PvfCommentDto> cNgWAvTmSR;
-
 	public string Count
 	{
 		get
@@ -22,19 +18,7 @@ public class PreviewTabCommentViewViewModel : ViewModelBase
 		}
 	}
 
-	public List<PvfCommentDto> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return cNgWAvTmSR;
-		}
-		[CompilerGenerated]
-		set
-		{
-			cNgWAvTmSR = value;
-		}
-	}
+	public List<PvfCommentDto> Items { get; set; }
 
 	public PvfCommentDto SelectedItem
 	{

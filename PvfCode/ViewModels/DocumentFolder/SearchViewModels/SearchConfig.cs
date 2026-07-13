@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using DevExpress.Mvvm;
 using Newtonsoft.Json;
@@ -18,30 +16,27 @@ public class SearchConfig : ViewModelBase
 {
 	public delegate void DelegateConfigChanged();
 
-	private SourceType? QMQSkXD3b2;
+	private SourceType? _sourceType;
 
-	private PvfCode.ViewModels.DocumentFolder.SearchViewModels.Enums.SearchType edvS0NP9Tw;
+	private PvfCode.ViewModels.DocumentFolder.SearchViewModels.Enums.SearchType _searchType;
 
-	private string EcaS7BuXOA;
+	private string _findKeyword;
 
-	private string xy0SXmgVXs;
-
-	[CompilerGenerated]
-	private DelegateConfigChanged WaLSpPej24;
+	private string _replaceKeyword;
 
 	public SourceType SourceType
 	{
 		get
 		{
-			if (!QMQSkXD3b2.HasValue)
+			if (!_sourceType.HasValue)
 			{
-				QMQSkXD3b2 = SourceType.当前文档;
+				_sourceType = SourceType.当前文档;
 			}
-			return QMQSkXD3b2.Value;
+			return _sourceType.Value;
 		}
 		set
 		{
-			QMQSkXD3b2 = value;
+			_sourceType = value;
 			RaisePropertyChanged("SourceType");
 			OnConfigChanged();
 		}
@@ -51,11 +46,11 @@ public class SearchConfig : ViewModelBase
 	{
 		get
 		{
-			return edvS0NP9Tw;
+			return _searchType;
 		}
 		set
 		{
-			edvS0NP9Tw = value;
+			_searchType = value;
 			RaisePropertyChanged("SearchType");
 			OnConfigChanged();
 		}
@@ -65,19 +60,19 @@ public class SearchConfig : ViewModelBase
 	{
 		get
 		{
-			if (EcaS7BuXOA == null)
+			if (_findKeyword == null)
 			{
-				EcaS7BuXOA = string.Empty;
+				_findKeyword = string.Empty;
 			}
 			if (!AppSetting.Instance.EditConfig.SearchPanelKeywordConvertTW)
 			{
-				return EcaS7BuXOA;
+				return _findKeyword;
 			}
-			return ChineseHelper.ToTraditional(EcaS7BuXOA);
+			return ChineseHelper.ToTraditional(_findKeyword);
 		}
 		set
 		{
-			EcaS7BuXOA = value;
+			_findKeyword = value;
 			RaisePropertyChanged("FindKeyword");
 			OnConfigChanged();
 		}
@@ -115,19 +110,19 @@ public class SearchConfig : ViewModelBase
 	{
 		get
 		{
-			if (xy0SXmgVXs == null)
+			if (_replaceKeyword == null)
 			{
-				xy0SXmgVXs = string.Empty;
+				_replaceKeyword = string.Empty;
 			}
 			if (!AppSetting.Instance.EditConfig.SearchPanelKeywordConvertTW)
 			{
-				return xy0SXmgVXs;
+				return _replaceKeyword;
 			}
-			return ChineseHelper.ToTraditional(xy0SXmgVXs);
+			return ChineseHelper.ToTraditional(_replaceKeyword);
 		}
 		set
 		{
-			xy0SXmgVXs = value;
+			_replaceKeyword = value;
 			RaisePropertyChanged("ReplaceKeyword");
 		}
 	}
@@ -168,35 +163,7 @@ public class SearchConfig : ViewModelBase
 		}
 	}
 
-	public event DelegateConfigChanged EventDelegateConfigChanged
-	{
-		[CompilerGenerated]
-		add
-		{
-			DelegateConfigChanged delegateConfigChanged = WaLSpPej24;
-			DelegateConfigChanged delegateConfigChanged2;
-			do
-			{
-				delegateConfigChanged2 = delegateConfigChanged;
-				DelegateConfigChanged value2 = (DelegateConfigChanged)Delegate.Combine(delegateConfigChanged2, value);
-				delegateConfigChanged = Interlocked.CompareExchange(ref WaLSpPej24, value2, delegateConfigChanged2);
-			}
-			while ((object)delegateConfigChanged != delegateConfigChanged2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			DelegateConfigChanged delegateConfigChanged = WaLSpPej24;
-			DelegateConfigChanged delegateConfigChanged2;
-			do
-			{
-				delegateConfigChanged2 = delegateConfigChanged;
-				DelegateConfigChanged value2 = (DelegateConfigChanged)Delegate.Remove(delegateConfigChanged2, value);
-				delegateConfigChanged = Interlocked.CompareExchange(ref WaLSpPej24, value2, delegateConfigChanged2);
-			}
-			while ((object)delegateConfigChanged != delegateConfigChanged2);
-		}
-	}
+	public event DelegateConfigChanged EventDelegateConfigChanged;
 
 	public SearchConfig()
 	{
@@ -204,7 +171,7 @@ public class SearchConfig : ViewModelBase
 
 	public void OnConfigChanged()
 	{
-		WaLSpPej24?.Invoke();
+		EventDelegateConfigChanged?.Invoke();
 	}
 
 	public async Task<ResultData<int>> ItemNameConvertItemCode()

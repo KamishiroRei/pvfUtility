@@ -5,10 +5,10 @@ namespace PvfCode.ViewModels.TreeFolder;
 
 public class PvfFileTreeColumnSelectorDataTemplate : DataTemplateSelector
 {
-	public override DataTemplate SelectTemplate(object P_0, DependencyObject P_1)
+	public override DataTemplate SelectTemplate(object item, DependencyObject container)
 	{
 		string resourceKey = "PvfFileTreeColumnTemplate";
-		return ((FrameworkElement)(object)P_1).FindResource(resourceKey) as DataTemplate;
+		return ((FrameworkElement)container).FindResource(resourceKey) as DataTemplate;
 	}
 
 	public PvfFileTreeColumnSelectorDataTemplate()

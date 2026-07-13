@@ -9,9 +9,9 @@ namespace PvfCode.ViewModels.DocumentFolder.SearchViewModels.Searchs;
 
 public class RegexSearchStrategy : ISearchStrategy, IEquatable<ISearchStrategy>
 {
-	private readonly Regex NYOAgi44Jk;
+	private readonly Regex _searchPattern;
 
-	private readonly bool YMpA6aWpY2;
+	private readonly bool _matchWholeWords;
 
 	public RegexSearchStrategy(Regex searchPattern, bool matchWholeWords)
 	{
@@ -19,17 +19,17 @@ public class RegexSearchStrategy : ISearchStrategy, IEquatable<ISearchStrategy>
 		{
 			throw new ArgumentNullException("searchPattern");
 		}
-		NYOAgi44Jk = searchPattern;
-		YMpA6aWpY2 = matchWholeWords;
+		_searchPattern = searchPattern;
+		_matchWholeWords = matchWholeWords;
 	}
 
 	public IEnumerable<ISearchResult> FindAll(ITextSource document, int offset, int length)
 	{
 		int endOffset = offset + length;
-		foreach (Match item in NYOAgi44Jk.Matches(document.Text))
+		foreach (Match item in _searchPattern.Matches(document.Text))
 		{
 			int num = item.Length + item.Index;
-			if (offset <= item.Index && endOffset >= num && (!YMpA6aWpY2 || (YrVAaBlsEj(document, item.Index) && YrVAaBlsEj(document, num))))
+			if (offset <= item.Index && endOffset >= num && (!_matchWholeWords || (IsWordBorder(document, item.Index) && IsWordBorder(document, num))))
 			{
 				yield return new SearchResult
 				{
@@ -41,9 +41,9 @@ public class RegexSearchStrategy : ISearchStrategy, IEquatable<ISearchStrategy>
 		}
 	}
 
-	private static bool YrVAaBlsEj(ITextSource P_0, int P_1)
+	private static bool IsWordBorder(ITextSource document, int offset)
 	{
-		return TextUtilities.GetNextCaretPosition(P_0, P_1 - 1, LogicalDirection.Forward, CaretPositioningMode.WordBorder) == P_1;
+		return TextUtilities.GetNextCaretPosition(document, offset - 1, LogicalDirection.Forward, CaretPositioningMode.WordBorder) == offset;
 	}
 
 	public ISearchResult FindNext(ITextSource document, int offset, int length)
@@ -53,9 +53,9 @@ public class RegexSearchStrategy : ISearchStrategy, IEquatable<ISearchStrategy>
 
 	public bool Equals(ISearchStrategy other)
 	{
-		if (other is RegexSearchStrategy regexSearchStrategy && regexSearchStrategy.NYOAgi44Jk.ToString() == NYOAgi44Jk.ToString() && regexSearchStrategy.NYOAgi44Jk.Options == NYOAgi44Jk.Options)
+		if (other is RegexSearchStrategy regexSearchStrategy && regexSearchStrategy._searchPattern.ToString() == _searchPattern.ToString() && regexSearchStrategy._searchPattern.Options == _searchPattern.Options)
 		{
-			return regexSearchStrategy.NYOAgi44Jk.RightToLeft == NYOAgi44Jk.RightToLeft;
+			return regexSearchStrategy._searchPattern.RightToLeft == _searchPattern.RightToLeft;
 		}
 		return false;
 	}
@@ -69,12 +69,12 @@ public class RegexSearchStrategy : ISearchStrategy, IEquatable<ISearchStrategy>
 		}
 		int num2 = 0;
 		string text = Transform(config.ReplaceKeyword);
-		foreach (Match item in NYOAgi44Jk.Matches(document.Text))
+		foreach (Match item in _searchPattern.Matches(document.Text))
 		{
 			num++;
 			if (config.RegularExpression)
 			{
-				string text2 = NYOAgi44Jk.Replace(item.Value, Transform(config.ReplaceKeyword));
+				string text2 = _searchPattern.Replace(item.Value, Transform(config.ReplaceKeyword));
 				document.Replace(num2 + item.Index, item.Length, text2);
 				num2 += text2.Length - item.Length;
 			}
@@ -92,7 +92,7 @@ public class RegexSearchStrategy : ISearchStrategy, IEquatable<ISearchStrategy>
 		if (useRegularExpression)
 		{
 			string text = document.GetText(startOffset, length);
-			string text2 = NYOAgi44Jk.Replace(text, Transform(replaceText));
+			string text2 = _searchPattern.Replace(text, Transform(replaceText));
 			document.Replace(startOffset, length, text2);
 			return text2;
 		}

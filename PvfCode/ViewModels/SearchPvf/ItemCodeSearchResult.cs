@@ -1,26 +1,22 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
 namespace PvfCode.ViewModels.SearchPvf;
 
 public class ItemCodeSearchResult : ModelBase
 {
-	private readonly PvfFile? File;
-
-	[CompilerGenerated]
-	private string ecdWi2hQFP;
+	private readonly PvfFile? _file;
 
 	public string ItemCode
 	{
 		get
 		{
-			if (File == null)
+			if (_file == null)
 			{
 				return null;
 			}
-			if (File.ItemCode.HasValue)
+			if (_file.ItemCode.HasValue)
 			{
-				return File.ItemCode.ToString();
+				return _file.ItemCode.ToString();
 			}
 			return null;
 		}
@@ -34,7 +30,7 @@ public class ItemCodeSearchResult : ModelBase
 			{
 				return null;
 			}
-			return AppCore.ViewModelBase.PVF.GetItemName(File);
+			return AppCore.ViewModelBase.PVF.GetItemName(_file);
 		}
 	}
 
@@ -42,11 +38,11 @@ public class ItemCodeSearchResult : ModelBase
 	{
 		get
 		{
-			if (File == null)
+			if (_file == null)
 			{
 				return null;
 			}
-			if (!ImagePack2Service.Instance.TreeGetIcon(AppCore.ViewModelBase.PVF, File, out ImageSource imageSource))
+			if (!ImagePack2Service.Instance.TreeGetIcon(AppCore.ViewModelBase.PVF, _file, out ImageSource imageSource))
 			{
 				return null;
 			}
@@ -54,23 +50,11 @@ public class ItemCodeSearchResult : ModelBase
 		}
 	}
 
-	public string FullPath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ecdWi2hQFP;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ecdWi2hQFP = value;
-		}
-	}
+	public string FullPath { get; set; }
 
 	public ItemCodeSearchResult(string fullPath)
 	{
 		FullPath = fullPath;
-		File = AppCore.ViewModelBase.PVF.GetFile(fullPath);
+		_file = AppCore.ViewModelBase.PVF.GetFile(fullPath);
 	}
 }

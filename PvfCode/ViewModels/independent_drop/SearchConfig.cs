@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using PvfCode.ViewModels.independent_drop.Enums;
 
@@ -8,9 +7,6 @@ namespace PvfCode.ViewModels.independent_drop;
 
 public class SearchConfig : ViewModelBase
 {
-	[CompilerGenerated]
-	private HashSet<int> s8I2uyZ9bi;
-
 	public string SearchKeyword
 	{
 		get
@@ -47,19 +43,7 @@ public class SearchConfig : ViewModelBase
 		}
 	}
 
-	public HashSet<int> KeywordCodes
-	{
-		[CompilerGenerated]
-		get
-		{
-			return s8I2uyZ9bi;
-		}
-		[CompilerGenerated]
-		set
-		{
-			s8I2uyZ9bi = value;
-		}
-	}
+	public HashSet<int> KeywordCodes { get; set; }
 
 	public void KeywordConvertNumberList()
 	{

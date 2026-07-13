@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Media;
 using DevExpress.Mvvm;
@@ -13,26 +12,11 @@ namespace PvfCode.ViewModels.independent_drop;
 
 public class DropListRowData : ViewModelBase
 {
-	[CompilerGenerated]
-	private List<string> Fjim8MFabO;
+	private DropList_independentdrop _independentDropList;
 
-	private DropList_independentdrop QVamMPmvwt;
+	private DropListList _dropList;
 
-	private DropListList XoamVAnUg2;
-
-	public List<string> Datas
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Fjim8MFabO;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Fjim8MFabO = value;
-		}
-	}
+	public List<string> Datas { get; set; }
 
 	public MonsterType MonsterType
 	{
@@ -137,11 +121,11 @@ public class DropListRowData : ViewModelBase
 	{
 		get
 		{
-			return QVamMPmvwt;
+			return _independentDropList;
 		}
 		set
 		{
-			QVamMPmvwt = value;
+			_independentDropList = value;
 			RaisePropertyChanged("DropList_independentdrop");
 		}
 	}
@@ -150,15 +134,15 @@ public class DropListRowData : ViewModelBase
 	{
 		get
 		{
-			if (XoamVAnUg2 == null)
+			if (_dropList == null)
 			{
-				XoamVAnUg2 = new DropListList(new ConcurrentObservableCollection<ListItem>());
+				_dropList = new DropListList(new ConcurrentObservableCollection<ListItem>());
 			}
-			return XoamVAnUg2;
+			return _dropList;
 		}
 		set
 		{
-			XoamVAnUg2 = value;
+			_dropList = value;
 			RaisePropertyChanged("DropListList");
 		}
 	}

@@ -48,9 +48,9 @@ public class ComparisonNode : DependencyObject
 		}
 	}
 
-	private static void UJaQh7majZ(DependencyObject P_0, DependencyPropertyChangedEventArgs P_1)
+	private static void OnValueChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
 	{
-		BindingOperations.GetBindingExpressionBase((DependencyObject)(object)(ComparisonNode)(object)P_0, BindingToTriggerProperty)?.UpdateSource();
+		BindingOperations.GetBindingExpressionBase((ComparisonNode)dependencyObject, BindingToTriggerProperty)?.UpdateSource();
 	}
 
 	public ComparisonNode()
@@ -59,7 +59,7 @@ public class ComparisonNode : DependencyObject
 
 	static ComparisonNode()
 	{
-		ValueProperty = DependencyProperty.Register("Value", typeof(PvfTreeFileRename), typeof(ComparisonNode), new PropertyMetadata((object)null, new PropertyChangedCallback(UJaQh7majZ)));
+		ValueProperty = DependencyProperty.Register("Value", typeof(PvfTreeFileRename), typeof(ComparisonNode), new PropertyMetadata((object)null, new PropertyChangedCallback(OnValueChanged)));
 		BindingToTriggerProperty = DependencyProperty.Register("BindingToTrigger", typeof(object), typeof(ComparisonNode), (PropertyMetadata)(object)new FrameworkPropertyMetadata((object)null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 		SourceProperty = DependencyProperty.Register("Source", typeof(IDictionary<string, PvfTreeFileBase>), typeof(ComparisonNode), new PropertyMetadata((PropertyChangedCallback)null));
 	}
