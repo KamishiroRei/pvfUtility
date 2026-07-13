@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using PvfCode.ViewModels.DocumentFolder.SearchViewModels.Searchs;
 using Utools;
 
@@ -6,89 +5,29 @@ namespace PvfCode.ViewModels.DocumentFolder.SearchViewModels.AllSearchResultDir;
 
 public class SearchResultNode
 {
-	[CompilerGenerated]
-	private string xF6AcWSYoV;
+	private ObservableConcurrentDictionaryEx<string, SearchResultNode> children;
 
-	[CompilerGenerated]
-	private int QATA8SfGDF;
+	public string Text { get; set; }
 
-	[CompilerGenerated]
-	private int nFsAM6GXxi;
+	public int LineNumber { get; set; }
 
-	[CompilerGenerated]
-	private ISearchResult rD0AVEIVuX;
+	public int Column { get; set; }
 
-	private ObservableConcurrentDictionaryEx<string, SearchResultNode> tQKA3llaDI;
-
-	public string Text
-	{
-		[CompilerGenerated]
-		get
-		{
-			return xF6AcWSYoV;
-		}
-		[CompilerGenerated]
-		set
-		{
-			xF6AcWSYoV = value;
-		}
-	}
-
-	public int LineNumber
-	{
-		[CompilerGenerated]
-		get
-		{
-			return QATA8SfGDF;
-		}
-		[CompilerGenerated]
-		set
-		{
-			QATA8SfGDF = value;
-		}
-	}
-
-	public int Column
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nFsAM6GXxi;
-		}
-		[CompilerGenerated]
-		set
-		{
-			nFsAM6GXxi = value;
-		}
-	}
-
-	public ISearchResult SearchResult
-	{
-		[CompilerGenerated]
-		get
-		{
-			return rD0AVEIVuX;
-		}
-		[CompilerGenerated]
-		set
-		{
-			rD0AVEIVuX = value;
-		}
-	}
+	public ISearchResult SearchResult { get; set; }
 
 	public ObservableConcurrentDictionaryEx<string, SearchResultNode> Children
 	{
 		get
 		{
-			if (tQKA3llaDI == null)
+			if (children == null)
 			{
-				tQKA3llaDI = new ObservableConcurrentDictionaryEx<string, SearchResultNode>();
+				children = new ObservableConcurrentDictionaryEx<string, SearchResultNode>();
 			}
-			return tQKA3llaDI;
+			return children;
 		}
 		set
 		{
-			tQKA3llaDI = value;
+			children = value;
 		}
 	}
 

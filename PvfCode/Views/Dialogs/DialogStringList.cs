@@ -3,7 +3,6 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -13,47 +12,17 @@ namespace PvfCode.Views.Dialogs;
 
 public class DialogStringList : ThemedWindow, IComponentConnector
 {
-	[CompilerGenerated]
-	private List<string> DgDvuxBjaN;
-
-	[CompilerGenerated]
-	private DialogStringListViewModelResult oqyvGo6AmA;
-
 	internal Button BtnYes;
 
 	internal Button BtnNo;
 
 	internal Button BtnCancel;
 
-	private bool DdJvxlp7LY;
+	private bool contentLoaded;
 
-	public List<string> StringList
-	{
-		[CompilerGenerated]
-		get
-		{
-			return DgDvuxBjaN;
-		}
-		[CompilerGenerated]
-		set
-		{
-			DgDvuxBjaN = value;
-		}
-	}
+	public List<string> StringList { get; set; }
 
-	public DialogStringListViewModelResult Result
-	{
-		[CompilerGenerated]
-		get
-		{
-			return oqyvGo6AmA;
-		}
-		[CompilerGenerated]
-		set
-		{
-			oqyvGo6AmA = value;
-		}
-	}
+	public DialogStringListViewModelResult Result { get; set; }
 
 	public DialogStringList(DialogStringListViewModel vm)
 	{
@@ -66,19 +35,19 @@ public class DialogStringList : ThemedWindow, IComponentConnector
 		base.MaxWidth = primaryScreenWidth * 0.8;
 	}
 
-	private void PNBvYKJ98A(object P_0, RoutedEventArgs P_1)
+	private void OnYesClick(object sender, RoutedEventArgs e)
 	{
 		Result = DialogStringListViewModelResult.Yes;
 		Close();
 	}
 
-	private void UyevyXyyef(object P_0, RoutedEventArgs P_1)
+	private void OnNoClick(object sender, RoutedEventArgs e)
 	{
 		Result = DialogStringListViewModelResult.No;
 		Close();
 	}
 
-	private void qXLviQVML6(object P_0, RoutedEventArgs P_1)
+	private void OnCancelClick(object sender, RoutedEventArgs e)
 	{
 		Result = DialogStringListViewModelResult.Cancel;
 		Close();
@@ -88,9 +57,9 @@ public class DialogStringList : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!DdJvxlp7LY)
+		if (!contentLoaded)
 		{
-			DdJvxlp7LY = true;
+			contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/dialogs/dialogstringlist.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -105,18 +74,18 @@ public class DialogStringList : ThemedWindow, IComponentConnector
 		{
 		case 1:
 			BtnYes = (Button)target;
-			BtnYes.Click += PNBvYKJ98A;
+			BtnYes.Click += OnYesClick;
 			break;
 		case 2:
 			BtnNo = (Button)target;
-			BtnNo.Click += UyevyXyyef;
+			BtnNo.Click += OnNoClick;
 			break;
 		case 3:
 			BtnCancel = (Button)target;
-			BtnCancel.Click += qXLviQVML6;
+			BtnCancel.Click += OnCancelClick;
 			break;
 		default:
-			DdJvxlp7LY = true;
+			contentLoaded = true;
 			break;
 		}
 	}

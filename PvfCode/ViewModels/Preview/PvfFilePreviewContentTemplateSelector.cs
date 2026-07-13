@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using PvfCode.Models.Pvf.Enums.Stackable;
@@ -10,90 +9,15 @@ namespace PvfCode.ViewModels.Preview;
 
 public class PvfFilePreviewContentTemplateSelector : DataTemplateSelector
 {
-	[CompilerGenerated]
-	private DataTemplate aPgmfndjOt;
+	public DataTemplate Equipment { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate n0Tm5K5cUt;
+	public DataTemplate StackableDefaultTemplate { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate Pa5mS7g9dF;
+	public DataTemplate Stkable_设计图 { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate AEHmAipYaR;
+	public DataTemplate Stackable_附魔卡片 { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate AACm4DOp0u;
-
-	public DataTemplate Equipment
-	{
-		[CompilerGenerated]
-		get
-		{
-			return aPgmfndjOt;
-		}
-		[CompilerGenerated]
-		set
-		{
-			aPgmfndjOt = value;
-		}
-	}
-
-	public DataTemplate StackableDefaultTemplate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return n0Tm5K5cUt;
-		}
-		[CompilerGenerated]
-		set
-		{
-			n0Tm5K5cUt = value;
-		}
-	}
-
-	public DataTemplate Stkable_设计图
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Pa5mS7g9dF;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Pa5mS7g9dF = value;
-		}
-	}
-
-	public DataTemplate Stackable_附魔卡片
-	{
-		[CompilerGenerated]
-		get
-		{
-			return AEHmAipYaR;
-		}
-		[CompilerGenerated]
-		set
-		{
-			AEHmAipYaR = value;
-		}
-	}
-
-	public DataTemplate NpcShop
-	{
-		[CompilerGenerated]
-		get
-		{
-			return AACm4DOp0u;
-		}
-		[CompilerGenerated]
-		set
-		{
-			AACm4DOp0u = value;
-		}
-	}
+	public DataTemplate NpcShop { get; set; }
 
 	public override DataTemplate SelectTemplate(object item, DependencyObject container)
 	{

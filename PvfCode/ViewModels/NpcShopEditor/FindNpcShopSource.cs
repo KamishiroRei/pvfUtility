@@ -1,27 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace PvfCode.ViewModels.NpcShopEditor;
 
 public class FindNpcShopSource
 {
-	[CompilerGenerated]
-	private PvfFile kGDmL3hSDp;
-
-	public PvfFile File
-	{
-		[CompilerGenerated]
-		get
-		{
-			return kGDmL3hSDp;
-		}
-		[CompilerGenerated]
-		set
-		{
-			kGDmL3hSDp = value;
-		}
-	}
+	public PvfFile File { get; set; }
 
 	public string? NpcName
 	{
@@ -83,15 +67,7 @@ public class FindNpcShopSource
 
 	public override string ToString()
 	{
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(6, 3);
-		defaultInterpolatedStringHandler.AppendLiteral("[");
-		defaultInterpolatedStringHandler.AppendFormatted(NpcName);
-		defaultInterpolatedStringHandler.AppendLiteral(",<");
-		defaultInterpolatedStringHandler.AppendFormatted(File?.ItemCode);
-		defaultInterpolatedStringHandler.AppendLiteral(">,");
-		defaultInterpolatedStringHandler.AppendFormatted(File?.ShortName);
-		defaultInterpolatedStringHandler.AppendLiteral("]");
-		return defaultInterpolatedStringHandler.ToStringAndClear();
+		return $"[{NpcName},<{File?.ItemCode}>,{File?.ShortName}]";
 	}
 
 	public static List<FindNpcShopSource> Create()

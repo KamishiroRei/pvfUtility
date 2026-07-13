@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using PvfCode.Models.Pvf.Enums.Stackable;
@@ -8,73 +7,13 @@ namespace PvfCode.ViewModels.Preview;
 
 public class PvfFilePreviewStackableContentTemplateSelector : DataTemplateSelector
 {
-	[CompilerGenerated]
-	private DataTemplate YP7mY8MjUx;
+	public DataTemplate 礼包 { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate HTfmyWWvG8;
+	public DataTemplate Stackable_附魔宝珠 { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate ajYmiXU1Za;
+	public DataTemplate Stackable_时装礼包可选 { get; set; }
 
-	[CompilerGenerated]
-	private DataTemplate lrkmuVq7jo;
-
-	public DataTemplate 礼包
-	{
-		[CompilerGenerated]
-		get
-		{
-			return YP7mY8MjUx;
-		}
-		[CompilerGenerated]
-		set
-		{
-			YP7mY8MjUx = value;
-		}
-	}
-
-	public DataTemplate Stackable_附魔宝珠
-	{
-		[CompilerGenerated]
-		get
-		{
-			return HTfmyWWvG8;
-		}
-		[CompilerGenerated]
-		set
-		{
-			HTfmyWWvG8 = value;
-		}
-	}
-
-	public DataTemplate Stackable_时装礼包可选
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ajYmiXU1Za;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ajYmiXU1Za = value;
-		}
-	}
-
-	public DataTemplate NullControl
-	{
-		[CompilerGenerated]
-		get
-		{
-			return lrkmuVq7jo;
-		}
-		[CompilerGenerated]
-		set
-		{
-			lrkmuVq7jo = value;
-		}
-	}
+	public DataTemplate NullControl { get; set; }
 
 	public override DataTemplate SelectTemplate(object item, DependencyObject container)
 	{

@@ -1,95 +1,19 @@
 using System;
-using System.Runtime.CompilerServices;
 using ICSharpCode.AvalonEdit.Document;
 
 namespace PvfCode.ViewModels.DocumentFolder.Foldings.FoldingEnitys;
 
 public class NewFolding : ISegment
 {
-	[CompilerGenerated]
-	private int liAyB7Q81V;
+	public int StartOffset { get; set; }
 
-	[CompilerGenerated]
-	private int KpmyFE5Jt9;
+	public int EndOffset { get; set; }
 
-	[CompilerGenerated]
-	private string FEwyrTjiKs;
+	public string Name { get; set; }
 
-	[CompilerGenerated]
-	private bool v0FyWH3R59;
+	public bool DefaultClosed { get; set; }
 
-	[CompilerGenerated]
-	private bool ghqymSEbjn;
-
-	public int StartOffset
-	{
-		[CompilerGenerated]
-		get
-		{
-			return liAyB7Q81V;
-		}
-		[CompilerGenerated]
-		set
-		{
-			liAyB7Q81V = value;
-		}
-	}
-
-	public int EndOffset
-	{
-		[CompilerGenerated]
-		get
-		{
-			return KpmyFE5Jt9;
-		}
-		[CompilerGenerated]
-		set
-		{
-			KpmyFE5Jt9 = value;
-		}
-	}
-
-	public string Name
-	{
-		[CompilerGenerated]
-		get
-		{
-			return FEwyrTjiKs;
-		}
-		[CompilerGenerated]
-		set
-		{
-			FEwyrTjiKs = value;
-		}
-	}
-
-	public bool DefaultClosed
-	{
-		[CompilerGenerated]
-		get
-		{
-			return v0FyWH3R59;
-		}
-		[CompilerGenerated]
-		set
-		{
-			v0FyWH3R59 = value;
-		}
-	}
-
-	public bool IsDefinition
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ghqymSEbjn;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ghqymSEbjn = value;
-		}
-	}
+	public bool IsDefinition { get; set; }
 
 	int ISegment.Offset => StartOffset;
 

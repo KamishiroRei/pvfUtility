@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -44,14 +43,14 @@ public class OverloadViewer : Control
 	public override void OnApplyTemplate()
 	{
 		base.OnApplyTemplate();
-		((Button)base.Template.FindName("PART_UP", this)).Click += delegate(object P_0, RoutedEventArgs P_1)
+		((Button)base.Template.FindName("PART_UP", this)).Click += delegate(object sender, RoutedEventArgs e)
 		{
-			P_1.Handled = true;
+			e.Handled = true;
 			ChangeIndex(-1);
 		};
-		((Button)base.Template.FindName("PART_DOWN", this)).Click += delegate(object P_0, RoutedEventArgs P_1)
+		((Button)base.Template.FindName("PART_DOWN", this)).Click += delegate(object sender, RoutedEventArgs e)
 		{
-			P_1.Handled = true;
+			e.Handled = true;
 			ChangeIndex(1);
 		};
 	}
@@ -76,19 +75,5 @@ public class OverloadViewer : Control
 
 	public OverloadViewer()
 	{
-	}
-
-	[CompilerGenerated]
-	private void J5kugsIsvU(object P_0, RoutedEventArgs P_1)
-	{
-		P_1.Handled = true;
-		ChangeIndex(-1);
-	}
-
-	[CompilerGenerated]
-	private void dVPu63HKKX(object P_0, RoutedEventArgs P_1)
-	{
-		P_1.Handled = true;
-		ChangeIndex(1);
 	}
 }

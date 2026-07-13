@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using ICSharpCode.AvalonEdit.Editing;
 using ICSharpCode.AvalonEdit.Rendering;
@@ -8,7 +7,7 @@ namespace PvfCode.ViewModels.DocumentFolder.OffsetColorizers;
 
 public class SelectionColorizerWithBackground : ColorizingTransformer
 {
-	private TextArea bKo46gcXNa;
+	private TextArea textArea;
 
 	public SelectionColorizerWithBackground(TextArea textArea)
 	{
@@ -16,35 +15,35 @@ public class SelectionColorizerWithBackground : ColorizingTransformer
 		{
 			throw new ArgumentNullException("textArea");
 		}
-		bKo46gcXNa = textArea;
+		this.textArea = textArea;
 	}
 
 	protected override void Colorize(ITextRunConstructionContext context)
 	{
 		try
 		{
-			int offset = context.VisualLine.FirstDocumentLine.Offset;
-			int num = context.VisualLine.LastDocumentLine.Offset + context.VisualLine.LastDocumentLine.TotalLength;
-			foreach (SelectionSegment segment in bKo46gcXNa.Selection.Segments)
+			int lineStartOffset = context.VisualLine.FirstDocumentLine.Offset;
+			int lineEndOffset = context.VisualLine.LastDocumentLine.Offset + context.VisualLine.LastDocumentLine.TotalLength;
+			foreach (SelectionSegment segment in textArea.Selection.Segments)
 			{
 				int startOffset = segment.StartOffset;
-				if (startOffset >= num)
+				if (startOffset >= lineEndOffset)
 				{
 					continue;
 				}
 				int endOffset = segment.EndOffset;
-				if (endOffset <= offset)
+				if (endOffset <= lineStartOffset)
 				{
 					continue;
 				}
-				int visualStartColumn = ((startOffset >= offset) ? context.VisualLine.ValidateVisualColumn(segment.StartOffset, segment.StartVisualColumn, bKo46gcXNa.Selection.EnableVirtualSpace) : 0);
-				int visualEndColumn = ((endOffset <= num) ? context.VisualLine.ValidateVisualColumn(segment.EndOffset, segment.EndVisualColumn, bKo46gcXNa.Selection.EnableVirtualSpace) : (bKo46gcXNa.Selection.EnableVirtualSpace ? int.MaxValue : context.VisualLine.VisualLengthWithEndOfLineMarker));
-				ChangeVisualElements(visualStartColumn, visualEndColumn, delegate(VisualLineElement P_0)
+				int visualStartColumn = (startOffset >= lineStartOffset) ? context.VisualLine.ValidateVisualColumn(segment.StartOffset, segment.StartVisualColumn, textArea.Selection.EnableVirtualSpace) : 0;
+				int visualEndColumn = (endOffset <= lineEndOffset) ? context.VisualLine.ValidateVisualColumn(segment.EndOffset, segment.EndVisualColumn, textArea.Selection.EnableVirtualSpace) : (textArea.Selection.EnableVirtualSpace ? int.MaxValue : context.VisualLine.VisualLengthWithEndOfLineMarker);
+				ChangeVisualElements(visualStartColumn, visualEndColumn, delegate(VisualLineElement element)
 				{
-					P_0.TextRunProperties.SetBackgroundBrush(Brushes.Transparent);
-					if (bKo46gcXNa.SelectionForeground != null)
+					element.TextRunProperties.SetBackgroundBrush(Brushes.Transparent);
+					if (textArea.SelectionForeground != null)
 					{
-						P_0.TextRunProperties.SetForegroundBrush(bKo46gcXNa.SelectionForeground);
+						element.TextRunProperties.SetForegroundBrush(textArea.SelectionForeground);
 					}
 				});
 			}
@@ -52,16 +51,6 @@ public class SelectionColorizerWithBackground : ColorizingTransformer
 		catch (Exception e)
 		{
 			AppCore.Logger.ErrorUploadDialog(e, "SelectionColorizerWithBackground.Colorize");
-		}
-	}
-
-	[CompilerGenerated]
-	private void zyk4gBFP6I(VisualLineElement P_0)
-	{
-		P_0.TextRunProperties.SetBackgroundBrush(Brushes.Transparent);
-		if (bKo46gcXNa.SelectionForeground != null)
-		{
-			P_0.TextRunProperties.SetForegroundBrush(bKo46gcXNa.SelectionForeground);
 		}
 	}
 }

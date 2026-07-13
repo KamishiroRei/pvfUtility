@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using DevExpress.Xpf.Bars;
 
@@ -7,105 +6,30 @@ namespace PvfCode.ViewModels.Bars;
 
 public class BarCommandViewModel : ViewModel
 {
-	[CompilerGenerated]
-	private ICommand tLlx6ljG6T;
+	private bool isEnabled;
 
-	[CompilerGenerated]
-	private List<BarCommandViewModel> q2Dx1NxuoX;
+	public ICommand Command { get; private set; }
 
-	[CompilerGenerated]
-	private BarItemDisplayMode klJxwmkhfs;
+	public List<BarCommandViewModel> Commands { get; set; }
 
-	private bool PV1xoKosnM;
-
-	[CompilerGenerated]
-	private BarType TT6xsE0T8c;
-
-	[CompilerGenerated]
-	private KeyGesture hVyxL0CjEP;
-
-	public ICommand Command
-	{
-		[CompilerGenerated]
-		get
-		{
-			return tLlx6ljG6T;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			tLlx6ljG6T = value;
-		}
-	}
-
-	public List<BarCommandViewModel> Commands
-	{
-		[CompilerGenerated]
-		get
-		{
-			return q2Dx1NxuoX;
-		}
-		[CompilerGenerated]
-		set
-		{
-			q2Dx1NxuoX = value;
-		}
-	}
-
-	public BarItemDisplayMode DisplayMode
-	{
-		[CompilerGenerated]
-		get
-		{
-			return klJxwmkhfs;
-		}
-		[CompilerGenerated]
-		set
-		{
-			klJxwmkhfs = value;
-		}
-	}
+	public BarItemDisplayMode DisplayMode { get; set; }
 
 	public bool IsEnabled
 	{
 		get
 		{
-			return PV1xoKosnM;
+			return isEnabled;
 		}
 		set
 		{
-			PV1xoKosnM = value;
+			isEnabled = value;
 			DoNotify("IsEnabled");
 		}
 	}
 
-	public BarType BarItemType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return TT6xsE0T8c;
-		}
-		[CompilerGenerated]
-		set
-		{
-			TT6xsE0T8c = value;
-		}
-	}
+	public BarType BarItemType { get; set; }
 
-	public KeyGesture KeyGesture
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hVyxL0CjEP;
-		}
-		[CompilerGenerated]
-		set
-		{
-			hVyxL0CjEP = value;
-		}
-	}
+	public KeyGesture KeyGesture { get; set; }
 
 	public BarCommandViewModel()
 	{

@@ -2,7 +2,6 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -17,7 +16,7 @@ public class WindowAddNewSearchResult : ThemedWindow, IComponentConnector
 
 	internal Button buttonYes;
 
-	private bool aGoHloiCud;
+	private bool contentLoaded;
 
 	public WindowAddNewSearchResult()
 	{
@@ -25,22 +24,22 @@ public class WindowAddNewSearchResult : ThemedWindow, IComponentConnector
 		buttonYes.IsEnabled = false;
 	}
 
-	private void Eg3C30emKb(object P_0, TextChangedEventArgs P_1)
+	private void OnInputTextChanged(object sender, TextChangedEventArgs e)
 	{
 		buttonYes.IsEnabled = !string.IsNullOrEmpty(input.Text);
 	}
 
-	private void JcWCRpRXHG(object P_0, RoutedEventArgs P_1)
+	private void OnYesClick(object sender, RoutedEventArgs e)
 	{
 		base.DialogResult = true;
 	}
 
-	private void CsdCN20f4o(object P_0, RoutedEventArgs P_1)
+	private void OnCancelClick(object sender, RoutedEventArgs e)
 	{
 		base.DialogResult = false;
 	}
 
-	private void SU9CzLCYKG(object P_0, RoutedEventArgs P_1)
+	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
 		((DispatcherObject)this).Dispatcher.BeginInvoke((Delegate)(Action)delegate
 		{
@@ -52,9 +51,9 @@ public class WindowAddNewSearchResult : ThemedWindow, IComponentConnector
 	[DebuggerNonUserCode]
 	public void InitializeComponent()
 	{
-		if (!aGoHloiCud)
+		if (!contentLoaded)
 		{
-			aGoHloiCud = true;
+			contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/searchpvf/windowaddnewsearchresult.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -68,28 +67,22 @@ public class WindowAddNewSearchResult : ThemedWindow, IComponentConnector
 		switch (connectionId)
 		{
 		case 1:
-			((WindowAddNewSearchResult)target).Loaded += SU9CzLCYKG;
+			((WindowAddNewSearchResult)target).Loaded += OnLoaded;
 			break;
 		case 2:
 			input = (TextBox)target;
-			input.TextChanged += Eg3C30emKb;
+			input.TextChanged += OnInputTextChanged;
 			break;
 		case 3:
 			buttonYes = (Button)target;
-			buttonYes.Click += JcWCRpRXHG;
+			buttonYes.Click += OnYesClick;
 			break;
 		case 4:
-			((Button)target).Click += CsdCN20f4o;
+			((Button)target).Click += OnCancelClick;
 			break;
 		default:
-			aGoHloiCud = true;
+			contentLoaded = true;
 			break;
 		}
-	}
-
-	[CompilerGenerated]
-	private void L4RHDfSNx7()
-	{
-		input.Focus();
 	}
 }
