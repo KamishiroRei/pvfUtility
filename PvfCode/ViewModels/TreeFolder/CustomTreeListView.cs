@@ -10,9 +10,9 @@ public class CustomTreeListView : TreeListView
 		return new CustomTreeListSelectionStrategyRow(this);
 	}
 
-	internal void sHLFPm5Lc8(bool P_0)
+	internal void SetEditorInactiveAfterClick(bool value)
 	{
-		base.EditorSetInactiveAfterClick = P_0;
+		base.EditorSetInactiveAfterClick = value;
 	}
 
 	public CustomTreeListView()
