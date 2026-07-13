@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
@@ -19,156 +18,76 @@ namespace PvfCode.ViewModels.DocumentFolder.CodeCompletion;
 
 public class CompletionWindowBase : ThemedWindow
 {
-	private sealed class oZ9fUlIStpwgK8RA3iW : TextAreaStackedInputHandler
+	private sealed class InputHandler : TextAreaStackedInputHandler
 	{
-		internal readonly CompletionWindowBase nCPIAy6rYm;
+		internal readonly CompletionWindowBase Window;
 
-		public oZ9fUlIStpwgK8RA3iW(CompletionWindowBase P_0)
-			: base(P_0.TextArea)
+		public InputHandler(CompletionWindowBase window)
+			: base(window.TextArea)
 		{
-			nCPIAy6rYm = P_0;
+			Window = window;
 		}
 
 		public override void Detach()
 		{
 			base.Detach();
-			nCPIAy6rYm.Close();
+			Window.Close();
 		}
 
-		public override void OnPreviewKeyDown(System.Windows.Input.KeyEventArgs P_0)
+		public override void OnPreviewKeyDown(System.Windows.Input.KeyEventArgs e)
 		{
-			if ((int)P_0.Key != 172)
+			if (e.Key != Key.DeadCharProcessed)
 			{
-				P_0.Handled = RaiseEventPair(nCPIAy6rYm, UIElement.PreviewKeyDownEvent, UIElement.KeyDownEvent, new System.Windows.Input.KeyEventArgs(P_0.KeyboardDevice, P_0.InputSource, P_0.Timestamp, P_0.Key));
+				e.Handled = RaiseEventPair(Window, UIElement.PreviewKeyDownEvent, UIElement.KeyDownEvent, new System.Windows.Input.KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, e.Key));
 			}
 		}
 
-		public override void OnPreviewKeyUp(System.Windows.Input.KeyEventArgs P_0)
+		public override void OnPreviewKeyUp(System.Windows.Input.KeyEventArgs e)
 		{
-			if ((int)P_0.Key != 172)
+			if (e.Key != Key.DeadCharProcessed)
 			{
-				P_0.Handled = RaiseEventPair(nCPIAy6rYm, UIElement.PreviewKeyUpEvent, UIElement.KeyUpEvent, new System.Windows.Input.KeyEventArgs(P_0.KeyboardDevice, P_0.InputSource, P_0.Timestamp, P_0.Key));
+				e.Handled = RaiseEventPair(Window, UIElement.PreviewKeyUpEvent, UIElement.KeyUpEvent, new System.Windows.Input.KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, e.Key));
 			}
 		}
 	}
-
-	[CompilerGenerated]
-	private CodeCompletionToolTip nFvuje0dq0;
-
-	[CompilerGenerated]
-	private TextArea ErfuTFhrly;
 
 	public Window parentWindow;
 
-	private TextDocument vkduCxdZ7A;
+	private TextDocument document;
 
-	private readonly TextEditorBase tTHuHG1vrV;
+	private InputHandler inputHandler;
 
-	[CompilerGenerated]
-	private int PDZuha1jvE;
+	private bool sourceIsInitialized;
 
-	[CompilerGenerated]
-	private int Wu0uvy26TF;
+	private Point visualLocation;
 
-	[CompilerGenerated]
-	private bool BUDuBYRAiQ;
+	private Point visualLocationTop;
 
-	private oZ9fUlIStpwgK8RA3iW qgkuFbAlYP;
+	internal CodeCompletionToolTip CompletionToolTip { get; set; }
 
-	private bool od7ursuWO3;
+	public TextArea TextArea { get; private set; }
 
-	private Point FGLuWyeg1J;
+	public int StartOffset { get; set; }
 
-	private Point G3AumBsaTv;
+	public int EndOffset { get; set; }
 
-	[CompilerGenerated]
-	private bool xP6u2DP23h;
-
-	public TextArea TextArea
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ErfuTFhrly;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			ErfuTFhrly = value;
-		}
-	}
-
-	public int StartOffset
-	{
-		[CompilerGenerated]
-		get
-		{
-			return PDZuha1jvE;
-		}
-		[CompilerGenerated]
-		set
-		{
-			PDZuha1jvE = value;
-		}
-	}
-
-	public int EndOffset
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Wu0uvy26TF;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Wu0uvy26TF = value;
-		}
-	}
-
-	protected bool IsUp
-	{
-		[CompilerGenerated]
-		get
-		{
-			return BUDuBYRAiQ;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			BUDuBYRAiQ = value;
-		}
-	}
+	protected bool IsUp { get; private set; }
 
 	protected virtual bool CloseOnFocusLost => true;
 
-	public bool ExpectInsertionBeforeStart
+	private bool IsTextAreaFocused
 	{
-		[CompilerGenerated]
 		get
 		{
-			return xP6u2DP23h;
-		}
-		[CompilerGenerated]
-		set
-		{
-			xP6u2DP23h = value;
+			if (parentWindow != null && !parentWindow.IsActive)
+			{
+				return false;
+			}
+			return TextArea.IsKeyboardFocused;
 		}
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	internal CodeCompletionToolTip otjiVCqVBe()
-	{
-		return nFvuje0dq0;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	internal void VfVi3lM8sF(CodeCompletionToolTip P_0)
-	{
-		nFvuje0dq0 = P_0;
-	}
+	public bool ExpectInsertionBeforeStart { get; set; }
 
 	static CompletionWindowBase()
 	{
@@ -179,7 +98,7 @@ public class CompletionWindowBase : ThemedWindow
 
 	public CompletionWindowBase(TextEditorBase editorBase, TextArea textArea, int startOffSet, int endOffset)
 	{
-		nFvuje0dq0 = new CodeCompletionToolTip();
+		CompletionToolTip = new CodeCompletionToolTip();
 		try
 		{
 			if (textArea == null)
@@ -187,15 +106,14 @@ public class CompletionWindowBase : ThemedWindow
 				throw new ArgumentNullException("textArea");
 			}
 			TextArea = textArea;
-			tTHuHG1vrV = editorBase;
 			parentWindow = Window.GetWindow((DependencyObject)(object)textArea);
 			base.Owner = parentWindow;
-			AddHandler(UIElement.MouseUpEvent, new MouseButtonEventHandler(KXeicgA63Q), handledEventsToo: true);
+			AddHandler(UIElement.MouseUpEvent, new MouseButtonEventHandler(OnMouseUp), handledEventsToo: true);
 			base.Padding = new Thickness(0.0, 0.0, 0.0, 0.0);
 			StartOffset = startOffSet;
 			EndOffset = endOffset;
 			base.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
-			om0i05npY6();
+			AttachEvents();
 		}
 		catch (Exception e)
 		{
@@ -203,32 +121,32 @@ public class CompletionWindowBase : ThemedWindow
 		}
 	}
 
-	private void om0i05npY6()
+	private void AttachEvents()
 	{
 		try
 		{
-			vkduCxdZ7A = TextArea.Document;
-			if (vkduCxdZ7A != null)
+			document = TextArea.Document;
+			if (document != null)
 			{
-				vkduCxdZ7A.Changing += F8MiMGkLw4;
+				document.Changing += TextAreaDocumentChanging;
 			}
-			TextArea.LostKeyboardFocus += zCkip94p3H;
-			otjiVCqVBe().editor.TextArea.LostKeyboardFocus += zCkip94p3H;
-			TextArea.TextView.ScrollOffsetChanged += g8Bi7idYPu;
-			TextArea.DocumentChanged += qBhiXLccAT;
+			TextArea.LostKeyboardFocus += TextAreaLostFocus;
+			CompletionToolTip.editor.TextArea.LostKeyboardFocus += TextAreaLostFocus;
+			TextArea.TextView.ScrollOffsetChanged += TextViewScrollOffsetChanged;
+			TextArea.DocumentChanged += TextAreaDocumentChanged;
 			if (parentWindow != null)
 			{
-				parentWindow.LocationChanged += BBCiUsRtOT;
+				parentWindow.LocationChanged += ParentWindowLocationChanged;
 			}
-			foreach (oZ9fUlIStpwgK8RA3iW item in TextArea.StackedInputHandlers.OfType<oZ9fUlIStpwgK8RA3iW>())
+			foreach (InputHandler item in TextArea.StackedInputHandlers.OfType<InputHandler>())
 			{
-				if (((object)item.nCPIAy6rYm).GetType() == ((object)this).GetType())
+				if (item.Window.GetType() == GetType())
 				{
 					TextArea.PopStackedInputHandler(item);
 				}
 			}
-			qgkuFbAlYP = new oZ9fUlIStpwgK8RA3iW(this);
-			TextArea.PushStackedInputHandler(qgkuFbAlYP);
+			inputHandler = new InputHandler(this);
+			TextArea.PushStackedInputHandler(inputHandler);
 		}
 		catch (Exception e)
 		{
@@ -240,19 +158,19 @@ public class CompletionWindowBase : ThemedWindow
 	{
 		try
 		{
-			if (vkduCxdZ7A != null)
+			if (document != null)
 			{
-				vkduCxdZ7A.Changing -= F8MiMGkLw4;
+				document.Changing -= TextAreaDocumentChanging;
 			}
-			TextArea.LostKeyboardFocus -= zCkip94p3H;
-			otjiVCqVBe().editor.TextArea.LostKeyboardFocus -= zCkip94p3H;
-			TextArea.TextView.ScrollOffsetChanged -= g8Bi7idYPu;
-			TextArea.DocumentChanged -= qBhiXLccAT;
+			TextArea.LostKeyboardFocus -= TextAreaLostFocus;
+			CompletionToolTip.editor.TextArea.LostKeyboardFocus -= TextAreaLostFocus;
+			TextArea.TextView.ScrollOffsetChanged -= TextViewScrollOffsetChanged;
+			TextArea.DocumentChanged -= TextAreaDocumentChanged;
 			if (parentWindow != null)
 			{
-				parentWindow.LocationChanged -= BBCiUsRtOT;
+				parentWindow.LocationChanged -= ParentWindowLocationChanged;
 			}
-			TextArea.PopStackedInputHandler(qgkuFbAlYP);
+			TextArea.PopStackedInputHandler(inputHandler);
 		}
 		catch (Exception e)
 		{
@@ -260,16 +178,15 @@ public class CompletionWindowBase : ThemedWindow
 		}
 	}
 
-	private void g8Bi7idYPu(object? sender, EventArgs P_1)
+	private void TextViewScrollOffsetChanged(object? sender, EventArgs e)
 	{
 		try
 		{
-			if (od7ursuWO3)
+			if (sourceIsInitialized)
 			{
 				IScrollInfo textView = TextArea.TextView;
-				Rect val = default(Rect);
-				val = new Rect(textView.HorizontalOffset, textView.VerticalOffset, textView.ViewportWidth, textView.ViewportHeight);
-				if (val.Contains(FGLuWyeg1J) || val.Contains(G3AumBsaTv))
+				Rect visibleArea = new Rect(textView.HorizontalOffset, textView.VerticalOffset, textView.ViewportWidth, textView.ViewportHeight);
+				if (visibleArea.Contains(visualLocation) || visibleArea.Contains(visualLocationTop))
 				{
 					UpdatePosition();
 				}
@@ -279,33 +196,33 @@ public class CompletionWindowBase : ThemedWindow
 				}
 			}
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "CompletionWindowBase.TextViewScrollOffsetChanged");
+			AppCore.Logger.ErrorUploadDialog(exception, "CompletionWindowBase.TextViewScrollOffsetChanged");
 		}
 	}
 
-	private void qBhiXLccAT(object? sender, EventArgs P_1)
+	private void TextAreaDocumentChanged(object? sender, EventArgs e)
 	{
 		Close();
 	}
 
-	private void zCkip94p3H(object? sender, RoutedEventArgs P_1)
+	private void TextAreaLostFocus(object? sender, RoutedEventArgs e)
 	{
 		try
 		{
-			if (!otjiVCqVBe().editor.TextArea.Focusable)
+			if (!CompletionToolTip.editor.TextArea.Focusable)
 			{
-				((DispatcherObject)this).Dispatcher.BeginInvoke((Delegate)new Action(P8Di88FQCO), (DispatcherPriority)4, Array.Empty<object>());
+				((DispatcherObject)this).Dispatcher.BeginInvoke((Delegate)new Action(CloseIfFocusLost), DispatcherPriority.Background, Array.Empty<object>());
 			}
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "CompletionWindowBase.TextAreaLostFocus");
+			AppCore.Logger.ErrorUploadDialog(exception, "CompletionWindowBase.TextAreaLostFocus");
 		}
 	}
 
-	private void BBCiUsRtOT(object? sender, EventArgs P_1)
+	private void ParentWindowLocationChanged(object? sender, EventArgs e)
 	{
 		UpdatePosition();
 	}
@@ -313,7 +230,7 @@ public class CompletionWindowBase : ThemedWindow
 	protected override void OnDeactivated(EventArgs e)
 	{
 		base.OnDeactivated(e);
-		((DispatcherObject)this).Dispatcher.BeginInvoke((Delegate)new Action(P8Di88FQCO), (DispatcherPriority)4, Array.Empty<object>());
+		((DispatcherObject)this).Dispatcher.BeginInvoke((Delegate)new Action(CloseIfFocusLost), DispatcherPriority.Background, Array.Empty<object>());
 	}
 
 	protected static bool RaiseEventPair(UIElement target, RoutedEvent previewEvent, RoutedEvent @event, RoutedEventArgs args)
@@ -349,7 +266,7 @@ public class CompletionWindowBase : ThemedWindow
 		}
 	}
 
-	private void KXeicgA63Q(object P_0, MouseButtonEventArgs P_1)
+	private void OnMouseUp(object sender, MouseButtonEventArgs e)
 	{
 		ActivateParentWindow();
 	}
@@ -362,36 +279,26 @@ public class CompletionWindowBase : ThemedWindow
 		}
 	}
 
-	private void P8Di88FQCO()
+	private void CloseIfFocusLost()
 	{
-		if (CloseOnFocusLost && !base.IsActive && !yCWuDQhjIX())
+		if (CloseOnFocusLost && !base.IsActive && !IsTextAreaFocused)
 		{
 			Close();
 		}
 	}
 
-	[SpecialName]
-	private bool yCWuDQhjIX()
-	{
-		if (parentWindow != null && !parentWindow.IsActive)
-		{
-			return false;
-		}
-		return TextArea.IsKeyboardFocused;
-	}
-
 	protected override void OnSourceInitialized(EventArgs e)
 	{
 		base.OnSourceInitialized(e);
-		if (vkduCxdZ7A != null && StartOffset != TextArea.Caret.Offset)
+		if (document != null && StartOffset != TextArea.Caret.Offset)
 		{
-			SetPosition(new TextViewPosition(vkduCxdZ7A.GetLocation(StartOffset)));
+			SetPosition(new TextViewPosition(document.GetLocation(StartOffset)));
 		}
 		else
 		{
 			SetPosition(TextArea.Caret.Position);
 		}
-		od7ursuWO3 = true;
+		sourceIsInitialized = true;
 	}
 
 	protected override void OnClosed(EventArgs e)
@@ -403,7 +310,7 @@ public class CompletionWindowBase : ThemedWindow
 	protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
 	{
 		base.OnKeyDown(e);
-		if (!e.Handled && (int)e.Key == 13)
+		if (!e.Handled && e.Key == Key.Escape)
 		{
 			e.Handled = true;
 			Close();
@@ -413,8 +320,8 @@ public class CompletionWindowBase : ThemedWindow
 	protected void SetPosition(TextViewPosition position)
 	{
 		TextView textView = TextArea.TextView;
-		FGLuWyeg1J = textView.GetVisualPosition(position, VisualYPosition.LineBottom);
-		G3AumBsaTv = textView.GetVisualPosition(position, VisualYPosition.LineTop);
+		visualLocation = textView.GetVisualPosition(position, VisualYPosition.LineBottom);
+		visualLocationTop = textView.GetVisualPosition(position, VisualYPosition.LineTop);
 		UpdatePosition();
 	}
 
@@ -425,39 +332,38 @@ public class CompletionWindowBase : ThemedWindow
 		{
 			return;
 		}
-		Point val = textView.PointToScreen(FGLuWyeg1J - textView.ScrollOffset);
-		Point val2 = textView.PointToScreen(G3AumBsaTv - textView.ScrollOffset);
-		Size val3 = ExtensionMethods.TransformToDevice(new Size(base.ActualWidth, base.ActualHeight), (Visual)textView);
-		Rect val4 = default(Rect);
-		val4 = new Rect(val, val3);
-		Rect val5 = Screen.GetWorkingArea(val.ToSystemDrawing()).ToWpf();
-		if (!val5.Contains(val4))
+		Point point = textView.PointToScreen(visualLocation - textView.ScrollOffset);
+		Point topPoint = textView.PointToScreen(visualLocationTop - textView.ScrollOffset);
+		Size size = ExtensionMethods.TransformToDevice(new Size(base.ActualWidth, base.ActualHeight), (Visual)textView);
+		Rect rect = new Rect(point, size);
+		Rect workingArea = Screen.GetWorkingArea(point.ToSystemDrawing()).ToWpf();
+		if (!workingArea.Contains(rect))
 		{
-			if (val4.Left < val5.Left)
+			if (rect.Left < workingArea.Left)
 			{
-				val4.X = val5.Left;
+				rect.X = workingArea.Left;
 			}
-			else if (val4.Right > val5.Right)
+			else if (rect.Right > workingArea.Right)
 			{
-				val4.X = val5.Right - val4.Width;
+				rect.X = workingArea.Right - rect.Width;
 			}
-			if (val4.Bottom > val5.Bottom)
+			if (rect.Bottom > workingArea.Bottom)
 			{
-				val4.Y = val2.Y - val4.Height;
+				rect.Y = topPoint.Y - rect.Height;
 				IsUp = true;
 			}
 			else
 			{
 				IsUp = false;
 			}
-			if (val4.Y < val5.Top)
+			if (rect.Y < workingArea.Top)
 			{
-				val4.Y = val5.Top;
+				rect.Y = workingArea.Top;
 			}
 		}
-		val4 = val4.TransformFromDevice(textView);
-		base.Left = val4.X;
-		base.Top = val4.Y;
+		rect = rect.TransformFromDevice(textView);
+		base.Left = rect.X;
+		base.Top = rect.Y;
 	}
 
 	protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
@@ -465,36 +371,32 @@ public class CompletionWindowBase : ThemedWindow
 		base.OnRenderSizeChanged(sizeInfo);
 		if (sizeInfo.HeightChanged && IsUp)
 		{
-			double top = base.Top;
-			Size val = sizeInfo.PreviousSize;
-			double height = val.Height;
-			val = sizeInfo.NewSize;
-			base.Top = top + (height - val.Height);
+			base.Top += sizeInfo.PreviousSize.Height - sizeInfo.NewSize.Height;
 		}
 	}
 
-	private void F8MiMGkLw4(object? sender, DocumentChangeEventArgs P_1)
+	private void TextAreaDocumentChanging(object? sender, DocumentChangeEventArgs e)
 	{
 		try
 		{
-			if ((P_1.Offset + P_1.RemovalLength == StartOffset && P_1.RemovalLength > 0) || P_1.Offset == StartOffset)
+			if ((e.Offset + e.RemovalLength == StartOffset && e.RemovalLength > 0) || e.Offset == StartOffset)
 			{
 				Close();
 			}
-			if (P_1.Offset == StartOffset && P_1.RemovalLength == 0 && ExpectInsertionBeforeStart)
+			if (e.Offset == StartOffset && e.RemovalLength == 0 && ExpectInsertionBeforeStart)
 			{
-				StartOffset = P_1.GetNewOffset(StartOffset, AnchorMovementType.AfterInsertion);
+				StartOffset = e.GetNewOffset(StartOffset, AnchorMovementType.AfterInsertion);
 				ExpectInsertionBeforeStart = false;
 			}
 			else
 			{
-				StartOffset = P_1.GetNewOffset(StartOffset, AnchorMovementType.BeforeInsertion);
+				StartOffset = e.GetNewOffset(StartOffset, AnchorMovementType.BeforeInsertion);
 			}
-			EndOffset = P_1.GetNewOffset(EndOffset, AnchorMovementType.AfterInsertion);
+			EndOffset = e.GetNewOffset(EndOffset, AnchorMovementType.AfterInsertion);
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "CompletionWindowBase.TextArea_Document_Changing");
+			AppCore.Logger.ErrorUploadDialog(exception, "CompletionWindowBase.TextArea_Document_Changing");
 		}
 	}
 }

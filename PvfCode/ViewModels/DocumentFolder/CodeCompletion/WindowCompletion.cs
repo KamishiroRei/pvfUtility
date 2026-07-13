@@ -87,8 +87,8 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 			base.MaxHeight = 250.0;
 			base.MinHeight = 15.0;
 			base.MinWidth = 300.0;
-			otjiVCqVBe().PlacementTarget = this;
-			otjiVCqVBe().Placement = PlacementMode.Right;
+			CompletionToolTip.PlacementTarget = this;
+			CompletionToolTip.Placement = PlacementMode.Right;
 			zEXuPU3cCx();
 		}
 		catch (Exception e)
@@ -99,9 +99,9 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 
 	private void CeguEJwmr3(object? sender, EventArgs P_1)
 	{
-		if (otjiVCqVBe() != null)
+		if (CompletionToolTip != null)
 		{
-			otjiVCqVBe().DataContext = null;
+			CompletionToolTip.DataContext = null;
 		}
 		Application.Current.MainWindow.Activate();
 	}
@@ -112,9 +112,9 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		{
 			try
 			{
-				if (otjiVCqVBe() != null)
+				if (CompletionToolTip != null)
 				{
-					otjiVCqVBe().IsOpen = false;
+					CompletionToolTip.IsOpen = false;
 					CodeCompletionData selectedItem = completionList.SelectedItem;
 					if (selectedItem != null)
 					{
@@ -122,12 +122,12 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 						if (listBox.ItemContainerGenerator.ContainerFromItem(listBox.SelectedItem) is ListBoxItem)
 						{
 							Point val = ipEuKFoV5J();
-							otjiVCqVBe().HorizontalOffset = val.X - 2.0;
-							otjiVCqVBe().VerticalOffset = val.Y;
+							CompletionToolTip.HorizontalOffset = val.X - 2.0;
+							CompletionToolTip.VerticalOffset = val.Y;
 						}
 						CodeCompletionToolTipViewModel codeCompletionToolTipViewModel = new CodeCompletionToolTipViewModel(selectedItem, FileType);
-						otjiVCqVBe().DataContext = codeCompletionToolTipViewModel;
-						otjiVCqVBe().IsOpen = true;
+						CompletionToolTip.DataContext = codeCompletionToolTipViewModel;
+						CompletionToolTip.IsOpen = true;
 						codeCompletionToolTipViewModel.Loaded(null);
 					}
 				}
@@ -174,7 +174,7 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 			base.StateChanged += a7Guk3sMV0;
 			parentWindow.StateChanged += a7Guk3sMV0;
 			parentWindow.Deactivated += jyNuJPpQcl;
-			otjiVCqVBe().Closed += CeguEJwmr3;
+			CompletionToolTip.Closed += CeguEJwmr3;
 			completionList.Loaded += RZouUVIfAI;
 		}
 		catch (Exception e)
@@ -190,9 +190,9 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 
 	private void jyNuJPpQcl(object? sender, EventArgs P_1)
 	{
-		if (otjiVCqVBe() != null)
+		if (CompletionToolTip != null)
 		{
-			otjiVCqVBe().IsOpen = false;
+			CompletionToolTip.IsOpen = false;
 		}
 	}
 
@@ -200,9 +200,9 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 	{
 		try
 		{
-			if ((base.WindowState == WindowState.Minimized || parentWindow.WindowState == WindowState.Minimized) && otjiVCqVBe() != null)
+			if ((base.WindowState == WindowState.Minimized || parentWindow.WindowState == WindowState.Minimized) && CompletionToolTip != null)
 			{
-				otjiVCqVBe().IsOpen = false;
+				CompletionToolTip.IsOpen = false;
 			}
 		}
 		catch (Exception e)
@@ -218,10 +218,10 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		base.TextArea.Caret.PositionChanged -= MeQup4wIla;
 		base.TextArea.MouseWheel -= NYdu7OSRPV;
 		base.TextArea.PreviewTextInput -= AfMu0EiEyS;
-		otjiVCqVBe().Closed -= CeguEJwmr3;
+		CompletionToolTip.Closed -= CeguEJwmr3;
 		base.StateChanged -= a7Guk3sMV0;
 		parentWindow.StateChanged -= a7Guk3sMV0;
-		otjiVCqVBe().Closed -= CeguEJwmr3;
+		CompletionToolTip.Closed -= CeguEJwmr3;
 		completionList.Loaded -= RZouUVIfAI;
 		CompletionList.CloseCompletionWindow -= rY7uZpoP4n;
 		base.DetachEvents();
@@ -230,10 +230,10 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 	protected override void OnClosed(EventArgs e)
 	{
 		base.OnClosed(e);
-		if (otjiVCqVBe() != null)
+		if (CompletionToolTip != null)
 		{
-			otjiVCqVBe().IsOpen = false;
-			VfVi3lM8sF(null);
+			CompletionToolTip.IsOpen = false;
+			CompletionToolTip = null;
 		}
 	}
 
@@ -449,11 +449,11 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 	{
 		try
 		{
-			if (otjiVCqVBe() == null)
+			if (CompletionToolTip == null)
 			{
 				return;
 			}
-			otjiVCqVBe().IsOpen = false;
+			CompletionToolTip.IsOpen = false;
 			CodeCompletionData selectedItem = completionList.SelectedItem;
 			if (selectedItem != null)
 			{
@@ -461,12 +461,12 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 				if (listBox.ItemContainerGenerator.ContainerFromItem(listBox.SelectedItem) is ListBoxItem)
 				{
 					Point val = ipEuKFoV5J();
-					otjiVCqVBe().HorizontalOffset = val.X - 2.0;
-					otjiVCqVBe().VerticalOffset = val.Y;
+					CompletionToolTip.HorizontalOffset = val.X - 2.0;
+					CompletionToolTip.VerticalOffset = val.Y;
 				}
 				CodeCompletionToolTipViewModel codeCompletionToolTipViewModel = new CodeCompletionToolTipViewModel(selectedItem, FileType);
-				otjiVCqVBe().DataContext = codeCompletionToolTipViewModel;
-				otjiVCqVBe().IsOpen = true;
+				CompletionToolTip.DataContext = codeCompletionToolTipViewModel;
+				CompletionToolTip.IsOpen = true;
 				codeCompletionToolTipViewModel.Loaded(null);
 			}
 		}
