@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using PvfCode.NPK.Utils;
@@ -10,15 +9,6 @@ namespace PvfCode.ViewModels.DocumentFolder.AniNpkLineElement;
 
 public class WindowPrivewNpkImgViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private string ixdGLu15js;
-
-	[CompilerGenerated]
-	private string NlNGnUaMhc;
-
-	[CompilerGenerated]
-	private int EqyGqWh74q;
-
 	public bool Loading
 	{
 		get
@@ -31,47 +21,11 @@ public class WindowPrivewNpkImgViewModel : ViewModelBase
 		}
 	}
 
-	public string ImgPath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ixdGLu15js;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ixdGLu15js = value;
-		}
-	}
+	public string ImgPath { get; set; }
 
-	public string NpkPath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return NlNGnUaMhc;
-		}
-		[CompilerGenerated]
-		set
-		{
-			NlNGnUaMhc = value;
-		}
-	}
+	public string NpkPath { get; set; }
 
-	public int Index
-	{
-		[CompilerGenerated]
-		get
-		{
-			return EqyGqWh74q;
-		}
-		[CompilerGenerated]
-		set
-		{
-			EqyGqWh74q = value;
-		}
-	}
+	public int Index { get; set; }
 
 	public ImgFile Sprite
 	{
@@ -107,7 +61,7 @@ public class WindowPrivewNpkImgViewModel : ViewModelBase
 		{
 			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_NpkNotExist"), NpkPath), isError: true);
 		}
-		ImagePack imagePack = list.Find((ImagePack P_0) => P_0.Name == Path.GetFileName(ImgPath.ToLower()));
+		ImagePack imagePack = list.Find((ImagePack pack) => pack.Name == Path.GetFileName(ImgPath.ToLower()));
 		if (imagePack == null)
 		{
 			Loading = false;
@@ -123,11 +77,5 @@ public class WindowPrivewNpkImgViewModel : ViewModelBase
 			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_NpkNotContainImgIndex"), Index), isError: true);
 			Loading = false;
 		}
-	}
-
-	[CompilerGenerated]
-	private bool eaWGsn7WAU(ImagePack P_0)
-	{
-		return P_0.Name == Path.GetFileName(ImgPath.ToLower());
 	}
 }

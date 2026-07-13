@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using Collections.Pooled;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -11,43 +10,13 @@ namespace PvfCode.Views.PvfTreeFolder;
 
 public class ViewRenameNodeViewModel : ViewModelBase
 {
-	private readonly KeyValuePair<string, PvfTreeFileBase> oLmHxIq2pv;
+	private readonly KeyValuePair<string, PvfTreeFileBase> treeFileEntry;
 
-	[CompilerGenerated]
-	private PvfTreeFileBase WdvHQHV6sT;
+	private readonly Action closeAction;
 
-	private readonly Action m5pHagpu5e;
+	public PvfTreeFileBase TreeFile { get; set; }
 
-	[CompilerGenerated]
-	private string Ha8Hg2sPGi;
-
-	public PvfTreeFileBase TreeFile
-	{
-		[CompilerGenerated]
-		get
-		{
-			return WdvHQHV6sT;
-		}
-		[CompilerGenerated]
-		set
-		{
-			WdvHQHV6sT = value;
-		}
-	}
-
-	public string Caption
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Ha8Hg2sPGi;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Ha8Hg2sPGi = value;
-		}
-	}
+	public string Caption { get; set; }
 
 	public string NewFileName
 	{
@@ -63,10 +32,10 @@ public class ViewRenameNodeViewModel : ViewModelBase
 
 	public ViewRenameNodeViewModel(KeyValuePair<string, PvfTreeFileBase> treeFileDic, Action actionClose)
 	{
-		oLmHxIq2pv = treeFileDic;
-		TreeFile = oLmHxIq2pv.Value;
+		treeFileEntry = treeFileDic;
+		TreeFile = treeFileEntry.Value;
 		Caption = (TreeFile.IsFile ? AppSetting.Instance.GetIlogger().GetStr("ViewRenameNode_Label_FileName") : AppSetting.Instance.GetIlogger().GetStr("ViewRenameNode_Label_FolderName"));
-		m5pHagpu5e = actionClose;
+		closeAction = actionClose;
 		NewFileName = TreeFile.FileName;
 	}
 
@@ -80,7 +49,7 @@ public class ViewRenameNodeViewModel : ViewModelBase
 		}
 		if (NewFileName == TreeFile.FileName)
 		{
-			m5pHagpu5e();
+			closeAction();
 		}
 		NewFileName = NewFileName.Replace("\\", null).Replace("/", null).ToLower();
 		bool flag = !string.IsNullOrEmpty(Path.GetExtension(NewFileName));
@@ -100,7 +69,7 @@ public class ViewRenameNodeViewModel : ViewModelBase
 			}
 			AppCore.ViewModelBase.PVF.RenameFile(TreeFile.FullPath, newFilePath);
 			TreeGroup group = AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData;
-			group.DeleteTreeNode(oLmHxIq2pv);
+			group.DeleteTreeNode(treeFileEntry);
 			await group.CreateTrees(new PooledList<string> { newFilePath }, null, group._Trees);
 			if (group.ShowSearchResulTrees)
 			{
@@ -111,7 +80,7 @@ public class ViewRenameNodeViewModel : ViewModelBase
 			{
 				AppCore.ViewModelBase.PvfFileTreeViewModel.GoToNode(keyValuePair.Value);
 			}
-			m5pHagpu5e();
+			closeAction();
 		}
 		else if (flag)
 		{
@@ -121,20 +90,20 @@ public class ViewRenameNodeViewModel : ViewModelBase
 		else
 		{
 			pVF.RenameFolder(TreeFile.FullPath, TreeFile.FileName, NewFileName);
-			AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.DeleteTreeNode(oLmHxIq2pv);
+			AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.DeleteTreeNode(treeFileEntry);
 			await AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(pVF.GetFiles(newFilePath)));
 			KeyValuePair<string, PvfTreeFileBase>? keyValuePair2 = AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.FilePathGetTreeNode(newFilePath);
 			if (keyValuePair2.HasValue)
 			{
 				AppCore.ViewModelBase.PvfFileTreeViewModel.GoToNode(keyValuePair2.Value);
 			}
-			m5pHagpu5e();
+			closeAction();
 		}
 	}
 
 	[Command]
 	public void OnCancel()
 	{
-		m5pHagpu5e();
+		closeAction();
 	}
 }

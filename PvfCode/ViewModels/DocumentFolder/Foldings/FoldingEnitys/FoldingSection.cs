@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Rendering;
 using ICSharpCode.AvalonEdit.Utils;
@@ -7,30 +6,27 @@ namespace PvfCode.ViewModels.DocumentFolder.Foldings.FoldingEnitys;
 
 public sealed class FoldingSection : TextSegment
 {
-	private readonly FoldingManager m6EyHmoQ5G;
+	private readonly FoldingManager manager;
 
-	private bool eCoyhLpoCn;
+	private bool isFolded;
 
 	public CollapsedLineSection[] collapsedSections;
 
 	private string title;
 
-	[CompilerGenerated]
-	private object OwxyvJuGSj;
-
 	public bool IsFolded
 	{
 		get
 		{
-			return eCoyhLpoCn;
+			return isFolded;
 		}
 		set
 		{
-			if (eCoyhLpoCn != value)
+			if (isFolded != value)
 			{
-				eCoyhLpoCn = value;
+				isFolded = value;
 				ValidateCollapsedLineSections();
-				m6EyHmoQ5G.xhMYEsYpfO(this);
+				manager.xhMYEsYpfO(this);
 			}
 		}
 	}
@@ -48,45 +44,33 @@ public sealed class FoldingSection : TextSegment
 				title = value;
 				if (IsFolded)
 				{
-					m6EyHmoQ5G.xhMYEsYpfO(this);
+					manager.xhMYEsYpfO(this);
 				}
 			}
 		}
 	}
 
-	public string TextContent => m6EyHmoQ5G.d6MYOknguE.GetText(base.StartOffset, base.EndOffset - base.StartOffset);
+	public string TextContent => manager.d6MYOknguE.GetText(base.StartOffset, base.EndOffset - base.StartOffset);
 
-	public object Tag
-	{
-		[CompilerGenerated]
-		get
-		{
-			return OwxyvJuGSj;
-		}
-		[CompilerGenerated]
-		set
-		{
-			OwxyvJuGSj = value;
-		}
-	}
+	public object Tag { get; set; }
 
 	public void ValidateCollapsedLineSections()
 	{
-		if (!eCoyhLpoCn)
+		if (!isFolded)
 		{
-			woQyCgVA2w();
+			ClearCollapsedLineSections();
 			return;
 		}
-		DocumentLine lineByOffset = m6EyHmoQ5G.d6MYOknguE.GetLineByOffset(base.StartOffset.CoerceValue(0, m6EyHmoQ5G.d6MYOknguE.TextLength));
-		DocumentLine lineByOffset2 = m6EyHmoQ5G.d6MYOknguE.GetLineByOffset(base.EndOffset.CoerceValue(0, m6EyHmoQ5G.d6MYOknguE.TextLength));
+		DocumentLine lineByOffset = manager.d6MYOknguE.GetLineByOffset(base.StartOffset.CoerceValue(0, manager.d6MYOknguE.TextLength));
+		DocumentLine lineByOffset2 = manager.d6MYOknguE.GetLineByOffset(base.EndOffset.CoerceValue(0, manager.d6MYOknguE.TextLength));
 		if (lineByOffset == lineByOffset2)
 		{
-			woQyCgVA2w();
+			ClearCollapsedLineSections();
 			return;
 		}
 		if (collapsedSections == null)
 		{
-			collapsedSections = new CollapsedLineSection[m6EyHmoQ5G.mIhYKQMGji.Count];
+			collapsedSections = new CollapsedLineSection[manager.mIhYKQMGji.Count];
 		}
 		DocumentLine nextLine = lineByOffset.NextLine;
 		for (int i = 0; i < collapsedSections.Length; i++)
@@ -95,7 +79,7 @@ public sealed class FoldingSection : TextSegment
 			if (collapsedLineSection == null || collapsedLineSection.Start != nextLine || collapsedLineSection.End != lineByOffset2)
 			{
 				collapsedLineSection?.Uncollapse();
-				collapsedSections[i] = m6EyHmoQ5G.mIhYKQMGji[i].CollapseLines(nextLine, lineByOffset2);
+				collapsedSections[i] = manager.mIhYKQMGji[i].CollapseLines(nextLine, lineByOffset2);
 			}
 		}
 	}
@@ -106,18 +90,18 @@ public sealed class FoldingSection : TextSegment
 		base.OnSegmentChanged();
 		if (base.IsConnectedToCollection)
 		{
-			m6EyHmoQ5G.xhMYEsYpfO(this);
+			manager.xhMYEsYpfO(this);
 		}
 	}
 
 	public FoldingSection(FoldingManager manager, int startOffset, int endOffset)
 	{
-		m6EyHmoQ5G = manager;
+		this.manager = manager;
 		base.StartOffset = startOffset;
 		base.Length = endOffset - startOffset;
 	}
 
-	private void woQyCgVA2w()
+	private void ClearCollapsedLineSections()
 	{
 		if (collapsedSections == null)
 		{

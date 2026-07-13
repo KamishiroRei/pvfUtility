@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DevExpress.Mvvm;
@@ -15,22 +14,7 @@ public class WindowEditUserInfoViewModel : ViewModelBase
 {
 	private readonly Action Close;
 
-	[CompilerGenerated]
-	private EditUserInfoRes c8BmchmnFj;
-
-	public EditUserInfoRes UserInfo
-	{
-		[CompilerGenerated]
-		get
-		{
-			return c8BmchmnFj;
-		}
-		[CompilerGenerated]
-		set
-		{
-			c8BmchmnFj = value;
-		}
-	}
+	public EditUserInfoRes UserInfo { get; set; }
 
 	public bool AllowEditPhone
 	{
@@ -71,7 +55,7 @@ public class WindowEditUserInfoViewModel : ViewModelBase
 		{
 			if (text.ToLower().Contains("http://") || text.ToLower().Contains("https://"))
 			{
-				AvatarImageSource = pWpmUFZBpI(text);
+				AvatarImageSource = LoadAvatar(text);
 				return;
 			}
 			byte[] bytes = ImageHelper.Base64ImageToBytes(text);
@@ -115,7 +99,7 @@ public class WindowEditUserInfoViewModel : ViewModelBase
 		}
 	}
 
-	private ImageSource pWpmUFZBpI(string? url)
+	private ImageSource LoadAvatar(string? url)
 	{
 		if (string.IsNullOrEmpty(url))
 		{

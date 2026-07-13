@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DevExpress.Mvvm.DataAnnotations;
 using ICSharpCode.AvalonEdit.Document;
@@ -14,10 +13,7 @@ public class ToolTipViewModel_SectionComment : ToolTipViewModelBase
 {
 	private readonly PvfFileType? FileType;
 
-	private readonly PvfCommentDtoRes BdLijk5r1Y;
-
-	[CompilerGenerated]
-	private TextDocument GxuiTABjSw;
+	private readonly PvfCommentDtoRes commentRequest;
 
 	public PvfCommentDto Comment
 	{
@@ -73,19 +69,7 @@ public class ToolTipViewModel_SectionComment : ToolTipViewModelBase
 		}
 	}
 
-	public TextDocument Document
-	{
-		[CompilerGenerated]
-		get
-		{
-			return GxuiTABjSw;
-		}
-		[CompilerGenerated]
-		set
-		{
-			GxuiTABjSw = value;
-		}
-	}
+	public TextDocument Document { get; set; }
 
 	public IHighlightingDefinition Highlighting
 	{
@@ -104,7 +88,7 @@ public class ToolTipViewModel_SectionComment : ToolTipViewModelBase
 	{
 		Document = new TextDocument();
 		IsShare = true;
-		BdLijk5r1Y = res;
+		commentRequest = res;
 		FileType = res.FileType;
 		Highlighting = ThemeSwitcher.Instance.GetHighlightingDefinition(FileType.HasValue ? FileType.Value : PvfFileType.equ);
 		NickName = AppCore.NickNameTemp;
@@ -113,14 +97,14 @@ public class ToolTipViewModel_SectionComment : ToolTipViewModelBase
 	public override async void Loaded()
 	{
 		IsLoading = true;
-		ResultData<PvfCommentDto> resultData = await ServicePvfTabComment.Instance.GetPvfComment(BdLijk5r1Y);
+		ResultData<PvfCommentDto> resultData = await ServicePvfTabComment.Instance.GetPvfComment(commentRequest);
 		if (resultData.IsError)
 		{
 			Document.Text = resultData.Msg;
 			Comment = new PvfCommentDto
 			{
 				Id = -1,
-				PvfCommentType = BdLijk5r1Y.PvfCommentType
+				PvfCommentType = commentRequest.PvfCommentType
 			};
 		}
 		else
@@ -139,7 +123,7 @@ public class ToolTipViewModel_SectionComment : ToolTipViewModelBase
 			Comment = new PvfCommentDto
 			{
 				Id = -1,
-				PvfCommentType = BdLijk5r1Y.PvfCommentType
+				PvfCommentType = commentRequest.PvfCommentType
 			};
 		}
 		IsLoading = true;
@@ -157,8 +141,8 @@ public class ToolTipViewModel_SectionComment : ToolTipViewModelBase
 			}
 		}
 		Comment.FileType = FileType;
-		Comment.Section = BdLijk5r1Y.Section;
-		Comment.PvfCommentType = BdLijk5r1Y.PvfCommentType;
+		Comment.Section = commentRequest.Section;
+		Comment.PvfCommentType = commentRequest.PvfCommentType;
 		Comment.Create = DateTime.Now;
 		Comment.UpdateTime = DateTime.Now;
 		AppCore.NickNameTemp = NickName;

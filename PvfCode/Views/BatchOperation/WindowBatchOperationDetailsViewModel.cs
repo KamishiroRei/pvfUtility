@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Collections.Pooled;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -15,86 +14,26 @@ namespace PvfCode.Views.BatchOperation;
 
 public class WindowBatchOperationDetailsViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private PvfTreeViewModel WU2BA4pUJ0;
+	private IEnumerable<string> successFiles;
 
-	[CompilerGenerated]
-	private PvfTreeViewModel bqmB4W9dBo;
+	private IEnumerable<string> errorFiles;
 
-	[CompilerGenerated]
-	private IEnumerable<string> OwBBYKP3Mw;
+	public PvfTreeViewModel SuccessTreeViewModel { get; set; }
 
-	[CompilerGenerated]
-	private IEnumerable<string> eM8ByaRoc9;
-
-	public PvfTreeViewModel SuccessTreeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return WU2BA4pUJ0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			WU2BA4pUJ0 = value;
-		}
-	}
-
-	public PvfTreeViewModel ErrorTreeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bqmB4W9dBo;
-		}
-		[CompilerGenerated]
-		set
-		{
-			bqmB4W9dBo = value;
-		}
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private IEnumerable<string> QX4BWUrTr0()
-	{
-		return OwBBYKP3Mw;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void FZJBmCnyp6(IEnumerable<string> P_0)
-	{
-		OwBBYKP3Mw = P_0;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private IEnumerable<string> DkoBfmKIbc()
-	{
-		return eM8ByaRoc9;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void rydB5FDw1d(IEnumerable<string> P_0)
-	{
-		eM8ByaRoc9 = P_0;
-	}
+	public PvfTreeViewModel ErrorTreeViewModel { get; set; }
 
 	public WindowBatchOperationDetailsViewModel(IEnumerable<string> successFiles, IEnumerable<string> errorFiles)
 	{
-		rydB5FDw1d(errorFiles);
-		FZJBmCnyp6(successFiles);
+		this.errorFiles = errorFiles;
+		this.successFiles = successFiles;
 		SuccessTreeViewModel = new PvfTreeViewModel(TreeViewType.BatchOperationLog);
 		ErrorTreeViewModel = new PvfTreeViewModel(TreeViewType.BatchOperationLog);
 	}
 
 	public void Loaded()
 	{
-		SuccessTreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(QX4BWUrTr0()));
-		ErrorTreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(DkoBfmKIbc()));
+		SuccessTreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(successFiles));
+		ErrorTreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(errorFiles));
 	}
 
 	[Command]
@@ -132,7 +71,7 @@ public class WindowBatchOperationDetailsViewModel : ViewModelBase
 	{
 		SuccessTreeViewModel.Clear();
 		ErrorTreeViewModel.Clear();
-		FZJBmCnyp6(null);
-		rydB5FDw1d(null);
+		successFiles = null;
+		errorFiles = null;
 	}
 }

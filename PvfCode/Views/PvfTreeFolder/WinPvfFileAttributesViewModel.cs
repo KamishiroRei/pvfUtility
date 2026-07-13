@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -12,48 +11,9 @@ namespace PvfCode.Views.PvfTreeFolder;
 
 public class WinPvfFileAttributesViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private PvfTreeFileBase gHEHk2CgN0;
+	public PvfTreeFileBase TreeFile { get; set; }
 
-	[CompilerGenerated]
-	private PvfFile? heXH0V3EpU;
-
-	[CompilerGenerated]
-	private string UOyH7T41C1;
-
-	[CompilerGenerated]
-	private string VjAHXrYqvZ;
-
-	[CompilerGenerated]
-	private string X0IHpcIu8Z;
-
-	public PvfTreeFileBase TreeFile
-	{
-		[CompilerGenerated]
-		get
-		{
-			return gHEHk2CgN0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			gHEHk2CgN0 = value;
-		}
-	}
-
-	public PvfFile? File
-	{
-		[CompilerGenerated]
-		get
-		{
-			return heXH0V3EpU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			heXH0V3EpU = value;
-		}
-	}
+	public PvfFile? File { get; set; }
 
 	public ImageSource Img
 	{
@@ -67,47 +27,11 @@ public class WinPvfFileAttributesViewModel : ViewModelBase
 		}
 	}
 
-	public string FileType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return UOyH7T41C1;
-		}
-		[CompilerGenerated]
-		set
-		{
-			UOyH7T41C1 = value;
-		}
-	}
+	public string FileType { get; set; }
 
-	public string FileSize
-	{
-		[CompilerGenerated]
-		get
-		{
-			return VjAHXrYqvZ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			VjAHXrYqvZ = value;
-		}
-	}
+	public string FileSize { get; set; }
 
-	public string FolderInfo
-	{
-		[CompilerGenerated]
-		get
-		{
-			return X0IHpcIu8Z;
-		}
-		[CompilerGenerated]
-		set
-		{
-			X0IHpcIu8Z = value;
-		}
-	}
+	public string FolderInfo { get; set; }
 
 	public WinPvfFileAttributesViewModel(PvfTreeFileBase treeFilefile)
 	{

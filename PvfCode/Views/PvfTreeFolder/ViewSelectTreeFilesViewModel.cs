@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using Collections.Pooled;
 using DevExpress.Mvvm;
@@ -11,16 +10,7 @@ namespace PvfCode.Views.PvfTreeFolder;
 
 public class ViewSelectTreeFilesViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private TreeViewType kg3HdlJY4M;
-
-	[CompilerGenerated]
-	private PvfTreeViewModel YMyHeeFkK8;
-
-	private readonly Action Close;
-
-	[CompilerGenerated]
-	private bool bjjHtTlMfr;
+	private readonly Action closeAction;
 
 	public bool IsLoading
 	{
@@ -34,19 +24,7 @@ public class ViewSelectTreeFilesViewModel : ViewModelBase
 		}
 	}
 
-	public TreeViewType SourceType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return kg3HdlJY4M;
-		}
-		[CompilerGenerated]
-		set
-		{
-			kg3HdlJY4M = value;
-		}
-	}
+	public TreeViewType SourceType { get; set; }
 
 	public Visibility SearchPanelComboBoxVisibility
 	{
@@ -70,39 +48,15 @@ public class ViewSelectTreeFilesViewModel : ViewModelBase
 		}
 		set
 		{
-			SetProperty<string>(() => SearchResultSelectedItem, value, iV5HqH9Mru);
+			SetProperty<string>(() => SearchResultSelectedItem, value, RefreshSearchResultTree);
 		}
 	}
 
-	public PvfTreeViewModel TreeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return YMyHeeFkK8;
-		}
-		[CompilerGenerated]
-		set
-		{
-			YMyHeeFkK8 = value;
-		}
-	}
+	public PvfTreeViewModel TreeViewModel { get; set; }
 
-	public bool IsOk
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bjjHtTlMfr;
-		}
-		[CompilerGenerated]
-		set
-		{
-			bjjHtTlMfr = value;
-		}
-	}
+	public bool IsOk { get; set; }
 
-	private async void iV5HqH9Mru()
+	private async void RefreshSearchResultTree()
 	{
 		if (!string.IsNullOrEmpty(SearchResultSelectedItem))
 		{
@@ -117,7 +71,7 @@ public class ViewSelectTreeFilesViewModel : ViewModelBase
 	public ViewSelectTreeFilesViewModel(TreeViewType sourceType, Action close)
 	{
 		SourceType = sourceType;
-		Close = close;
+		closeAction = close;
 		TreeViewModel = new PvfTreeViewModel(TreeViewType.SelectFiles);
 		if (sourceType == TreeViewType.FileList)
 		{
@@ -132,7 +86,7 @@ public class ViewSelectTreeFilesViewModel : ViewModelBase
 	[Command]
 	public void Cancel()
 	{
-		Close();
+		closeAction();
 	}
 
 	[Command]
@@ -144,6 +98,6 @@ public class ViewSelectTreeFilesViewModel : ViewModelBase
 			return;
 		}
 		IsOk = true;
-		Close();
+		closeAction();
 	}
 }

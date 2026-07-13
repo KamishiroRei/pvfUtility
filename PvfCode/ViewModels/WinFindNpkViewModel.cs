@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using PvfCode.NPK.Utils.Models;
@@ -11,12 +10,6 @@ namespace PvfCode.ViewModels;
 
 public class WinFindNpkViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private ObservableCollection<NpkFindResult> LbhFbWBUWl;
-
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<NpkFindResult> mGZFIEaUBQ;
-
 	public string Keyword
 	{
 		get
@@ -65,33 +58,9 @@ public class WinFindNpkViewModel : ViewModelBase
 		}
 	}
 
-	public ObservableCollection<NpkFindResult> SelectedItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return LbhFbWBUWl;
-		}
-		[CompilerGenerated]
-		set
-		{
-			LbhFbWBUWl = value;
-		}
-	}
+	public ObservableCollection<NpkFindResult> SelectedItems { get; set; }
 
-	public ConcurrentObservableCollection<NpkFindResult> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return mGZFIEaUBQ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			mGZFIEaUBQ = value;
-		}
-	}
+	public ConcurrentObservableCollection<NpkFindResult> Items { get; set; }
 
 	public WinFindNpkViewModel()
 	{
@@ -106,22 +75,16 @@ public class WinFindNpkViewModel : ViewModelBase
 		{
 			return;
 		}
-		IEnumerable<KeyValuePair<string, UtImgFile>> enumerable = ImagePack2Service.Instance.NpkImgDIC.Where<KeyValuePair<string, UtImgFile>>((KeyValuePair<string, UtImgFile> P_0) => P_0.Key.Contains(Keyword));
-		if (enumerable == null)
+		IEnumerable<KeyValuePair<string, UtImgFile>> matches = ImagePack2Service.Instance.NpkImgDIC.Where((KeyValuePair<string, UtImgFile> item) => item.Key.Contains(Keyword));
+		if (matches == null)
 		{
 			return;
 		}
-		List<NpkFindResult> list = new List<NpkFindResult>();
-		foreach (KeyValuePair<string, UtImgFile> item in enumerable)
+		List<NpkFindResult> results = new List<NpkFindResult>();
+		foreach (KeyValuePair<string, UtImgFile> item in matches)
 		{
-			list.Add(new NpkFindResult(item.Value, item.Key));
+			results.Add(new NpkFindResult(item.Value, item.Key));
 		}
-		Items.AddRange(list);
-	}
-
-	[CompilerGenerated]
-	private bool JL9FtCLr0V(KeyValuePair<string, UtImgFile> P_0)
-	{
-		return P_0.Key.Contains(Keyword);
+		Items.AddRange(results);
 	}
 }

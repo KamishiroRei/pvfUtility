@@ -2,7 +2,6 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -27,7 +26,7 @@ public class VeiwSearchPvf : ThemedWindow, IComponentConnector
 
 	internal Button btnStartSearch;
 
-	private bool BQBCVP6JgQ;
+	private bool contentLoaded;
 
 	public VeiwSearchPvf()
 	{
@@ -36,7 +35,7 @@ public class VeiwSearchPvf : ThemedWindow, IComponentConnector
 		InitializeComponent();
 	}
 
-	private void ucBCUX3FhX(object P_0, RoutedEventArgs P_1)
+	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
 		if (((SearchResultTreeViewModel)base.DataContext).SearchUiViewModel.Config.Type != SearchType.ScriptContent)
 		{
@@ -52,16 +51,16 @@ public class VeiwSearchPvf : ThemedWindow, IComponentConnector
 		Application.Current.MainWindow.Activate();
 	}
 
-	private void rFgCcrTEb4(object P_0, RoutedEventArgs P_1)
+	private void OnClearFileTypesClick(object sender, RoutedEventArgs e)
 	{
 		comboBoxEditFileTypesString.EditValue = null;
 	}
 
-	private void A5WC8ZbLSK(object P_0, KeyEventArgs P_1)
+	private void OnKeywordPreviewKeyDown(object sender, KeyEventArgs e)
 	{
-		if ((int)P_1.Key != 6)
+		if ((int)e.Key != 6)
 		{
-			AutoSuggestEdit autoSuggestEdit = (AutoSuggestEdit)P_0;
+			AutoSuggestEdit autoSuggestEdit = (AutoSuggestEdit)sender;
 			if (!string.IsNullOrEmpty(autoSuggestEdit.SelectedText) && autoSuggestEdit.SelectedText.Contains("\r\n") && autoSuggestEdit.SelectedText == autoSuggestEdit.Text)
 			{
 				autoSuggestEdit.Text = string.Empty;
@@ -73,9 +72,9 @@ public class VeiwSearchPvf : ThemedWindow, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!BQBCVP6JgQ)
+		if (!contentLoaded)
 		{
-			BQBCVP6JgQ = true;
+			contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/searchpvf/veiwsearchpvf.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -96,14 +95,14 @@ public class VeiwSearchPvf : ThemedWindow, IComponentConnector
 		switch (connectionId)
 		{
 		case 1:
-			((VeiwSearchPvf)target).Loaded += ucBCUX3FhX;
+			((VeiwSearchPvf)target).Loaded += OnLoaded;
 			break;
 		case 2:
 			gridMain = (Grid)target;
 			break;
 		case 3:
 			textKeyword = (AutoSuggestEdit)target;
-			textKeyword.PreviewKeyDown += A5WC8ZbLSK;
+			textKeyword.PreviewKeyDown += OnKeywordPreviewKeyDown;
 			break;
 		case 4:
 			radioIsFindAllPath = (RadioButton)target;
@@ -112,20 +111,14 @@ public class VeiwSearchPvf : ThemedWindow, IComponentConnector
 			comboBoxEditFileTypesString = (ComboBoxEdit)target;
 			break;
 		case 6:
-			((ButtonInfo)target).Click += rFgCcrTEb4;
+			((ButtonInfo)target).Click += OnClearFileTypesClick;
 			break;
 		case 7:
 			btnStartSearch = (Button)target;
 			break;
 		default:
-			BQBCVP6JgQ = true;
+			contentLoaded = true;
 			break;
 		}
-	}
-
-	[CompilerGenerated]
-	private void np3CMCu36M()
-	{
-		textKeyword.Focus();
 	}
 }
