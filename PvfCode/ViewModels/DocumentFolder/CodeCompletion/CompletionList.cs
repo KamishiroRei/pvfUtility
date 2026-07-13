@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -16,37 +14,15 @@ namespace PvfCode.ViewModels.DocumentFolder.CodeCompletion;
 
 public class CompletionList : Control
 {
-	[CompilerGenerated]
-	private bool ysZiOyuxfO;
-
 	public static readonly DependencyProperty EmptyTemplateProperty;
-
-	[CompilerGenerated]
-	private EventHandler xASiKntf83;
-
-	[CompilerGenerated]
-	private EventHandler wLoi9E8jSH;
 
 	private CompletionListBox listBox;
 
-	[CompilerGenerated]
-	private ObservableCollection<CodeCompletionData> dvriP9mJdZ;
+	private string currentText;
 
-	private string HG9iZIoAd3;
+	private ObservableCollection<CodeCompletionData> currentList;
 
-	private ObservableCollection<CodeCompletionData> hbiiJc0u6m;
-
-	public bool IsFiltering
-	{
-		get
-		{
-			return qTEib8CBNP();
-		}
-		set
-		{
-			F9diIEXhqO(value);
-		}
-	}
+	public bool IsFiltering { get; set; }
 
 	public ControlTemplate EmptyTemplate
 	{
@@ -84,19 +60,7 @@ public class CompletionList : Control
 		}
 	}
 
-	public ObservableCollection<CodeCompletionData> CompletionData
-	{
-		[CompilerGenerated]
-		get
-		{
-			return dvriP9mJdZ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			dvriP9mJdZ = value;
-		}
-	}
+	public ObservableCollection<CodeCompletionData> CompletionData { get; set; }
 
 	public CodeCompletionData SelectedItem
 	{
@@ -117,65 +81,9 @@ public class CompletionList : Control
 		}
 	}
 
-	public event EventHandler InsertionRequested
-	{
-		[CompilerGenerated]
-		add
-		{
-			EventHandler eventHandler = xASiKntf83;
-			EventHandler eventHandler2;
-			do
-			{
-				eventHandler2 = eventHandler;
-				EventHandler value2 = (EventHandler)Delegate.Combine(eventHandler2, value);
-				eventHandler = Interlocked.CompareExchange(ref xASiKntf83, value2, eventHandler2);
-			}
-			while ((object)eventHandler != eventHandler2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			EventHandler eventHandler = xASiKntf83;
-			EventHandler eventHandler2;
-			do
-			{
-				eventHandler2 = eventHandler;
-				EventHandler value2 = (EventHandler)Delegate.Remove(eventHandler2, value);
-				eventHandler = Interlocked.CompareExchange(ref xASiKntf83, value2, eventHandler2);
-			}
-			while ((object)eventHandler != eventHandler2);
-		}
-	}
+	public event EventHandler InsertionRequested;
 
-	public event EventHandler CloseCompletionWindow
-	{
-		[CompilerGenerated]
-		add
-		{
-			EventHandler eventHandler = wLoi9E8jSH;
-			EventHandler eventHandler2;
-			do
-			{
-				eventHandler2 = eventHandler;
-				EventHandler value2 = (EventHandler)Delegate.Combine(eventHandler2, value);
-				eventHandler = Interlocked.CompareExchange(ref wLoi9E8jSH, value2, eventHandler2);
-			}
-			while ((object)eventHandler != eventHandler2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			EventHandler eventHandler = wLoi9E8jSH;
-			EventHandler eventHandler2;
-			do
-			{
-				eventHandler2 = eventHandler;
-				EventHandler value2 = (EventHandler)Delegate.Remove(eventHandler2, value);
-				eventHandler = Interlocked.CompareExchange(ref wLoi9E8jSH, value2, eventHandler2);
-			}
-			while ((object)eventHandler != eventHandler2);
-		}
-	}
+	public event EventHandler CloseCompletionWindow;
 
 	public event SelectionChangedEventHandler SelectionChanged
 	{
@@ -195,26 +103,9 @@ public class CompletionList : Control
 		FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(CompletionList), (PropertyMetadata)(object)new FrameworkPropertyMetadata((object)typeof(CompletionList)));
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private bool qTEib8CBNP()
-	{
-		return ysZiOyuxfO;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void F9diIEXhqO(bool P_0)
-	{
-		ysZiOyuxfO = P_0;
-	}
-
 	public void RequestInsertion(EventArgs e)
 	{
-		if (xASiKntf83 != null)
-		{
-			xASiKntf83(this, e);
-		}
+		InsertionRequested?.Invoke(this, e);
 	}
 
 	public override void OnApplyTemplate()
@@ -251,44 +142,37 @@ public class CompletionList : Control
 		}
 		try
 		{
-			Key key = e.Key;
-			if ((int)key != 3 && (int)key != 6)
+			switch (e.Key)
 			{
-				switch ((int)key - 19)
-				{
-				case 7:
-					e.Handled = true;
-					listBox.SelectIndex(listBox.SelectedIndex + 1);
-					break;
-				case 5:
-					e.Handled = true;
-					listBox.SelectIndex(listBox.SelectedIndex - 1);
-					break;
-				case 1:
-					e.Handled = true;
-					listBox.SelectIndex(listBox.SelectedIndex + listBox.VisibleItemCount);
-					break;
-				case 0:
-					e.Handled = true;
-					listBox.SelectIndex(listBox.SelectedIndex - listBox.VisibleItemCount);
-					break;
-				case 3:
-					e.Handled = true;
-					listBox.SelectIndex(0);
-					break;
-				case 2:
-					e.Handled = true;
-					listBox.SelectIndex(listBox.Items.Count - 1);
-					break;
-				case 4:
-				case 6:
-					break;
-				}
-			}
-			else
-			{
+			case Key.Down:
+				e.Handled = true;
+				listBox.SelectIndex(listBox.SelectedIndex + 1);
+				break;
+			case Key.Up:
+				e.Handled = true;
+				listBox.SelectIndex(listBox.SelectedIndex - 1);
+				break;
+			case Key.Next:
+				e.Handled = true;
+				listBox.SelectIndex(listBox.SelectedIndex + listBox.VisibleItemCount);
+				break;
+			case Key.Prior:
+				e.Handled = true;
+				listBox.SelectIndex(listBox.SelectedIndex - listBox.VisibleItemCount);
+				break;
+			case Key.Home:
+				e.Handled = true;
+				listBox.SelectIndex(0);
+				break;
+			case Key.End:
+				e.Handled = true;
+				listBox.SelectIndex(listBox.Items.Count - 1);
+				break;
+			case Key.Tab:
+			case Key.Return:
 				e.Handled = true;
 				RequestInsertion(e);
+				break;
 			}
 		}
 		catch (Exception e2)
@@ -305,7 +189,7 @@ public class CompletionList : Control
 			if (e.ChangedButton == MouseButton.Left)
 			{
 				object originalSource = e.OriginalSource;
-				if (((DependencyObject)((originalSource is DependencyObject) ? originalSource : null)).VisualAncestorsAndSelf().TakeWhile((DependencyObject P_0) => (object)P_0 != this).Any((DependencyObject obj) => obj is ListBoxItem))
+				if (((DependencyObject)((originalSource is DependencyObject) ? originalSource : null)).VisualAncestorsAndSelf().TakeWhile(item => item != this).Any(item => item is ListBoxItem))
 				{
 					e.Handled = true;
 					RequestInsertion(e);
@@ -341,7 +225,7 @@ public class CompletionList : Control
 	{
 		try
 		{
-			if (!(text == HG9iZIoAd3))
+			if (text != currentText)
 			{
 				if (listBox == null)
 				{
@@ -349,13 +233,13 @@ public class CompletionList : Control
 				}
 				if (IsFiltering)
 				{
-					CHhisdMFKx(text);
+					SelectItemFiltering(text);
 				}
 				else
 				{
-					hoYin8U8G0(text);
+					SelectItemWithStart(text);
 				}
-				HG9iZIoAd3 = text;
+				currentText = text;
 			}
 		}
 		catch (Exception e)
@@ -364,50 +248,49 @@ public class CompletionList : Control
 		}
 	}
 
-	private void CHhisdMFKx(string P_0)
+	private void SelectItemFiltering(string query)
 	{
 		try
 		{
-			var enumerable = from item in (hbiiJc0u6m != null && !string.IsNullOrEmpty(HG9iZIoAd3) && !string.IsNullOrEmpty(P_0) && P_0.StartsWith(HG9iZIoAd3, StringComparison.Ordinal)) ? hbiiJc0u6m : CompletionData
-				let quality = J8cidywF32(item.Text, P_0)
+			var candidates = from item in (currentList != null && !string.IsNullOrEmpty(currentText) && !string.IsNullOrEmpty(query) && query.StartsWith(currentText, StringComparison.Ordinal)) ? currentList : CompletionData
+				let quality = GetMatchQuality(item.Text, query)
 				where quality > 0
 				select new
 				{
 					Item = item,
 					Quality = quality
 				};
-			var similarityResultInfo = enumerable.Similarity(it => it.Item.Text, P_0);
-			CodeCompletionData codeCompletionData;
-			if (similarityResultInfo == null || similarityResultInfo.SimilarityTargetList == null || !similarityResultInfo.SimilarityTargetList.Any())
+			var similarityResult = candidates.Similarity(candidate => candidate.Item.Text, query);
+			CodeCompletionData selectedItem;
+			if (similarityResult == null || similarityResult.SimilarityTargetList == null || !similarityResult.SimilarityTargetList.Any())
 			{
-				wLoi9E8jSH?.Invoke(this, null);
-				codeCompletionData = ((listBox.SelectedIndex != -1) ? ((CodeCompletionData)listBox.Items[listBox.SelectedIndex]) : null);
+				CloseCompletionWindow?.Invoke(this, null);
+				selectedItem = listBox.SelectedIndex != -1 ? (CodeCompletionData)listBox.Items[listBox.SelectedIndex] : null;
 			}
 			else
 			{
-				codeCompletionData = similarityResultInfo.SimilarityTargetList.FirstOrDefault().Item;
+				selectedItem = similarityResult.SimilarityTargetList.FirstOrDefault().Item;
 			}
-			ObservableCollection<CodeCompletionData> observableCollection = new ObservableCollection<CodeCompletionData>();
-			int num = -1;
-			int num2 = -1;
-			double num3 = 0.0;
-			int num4 = 0;
-			foreach (var item in enumerable)
+			ObservableCollection<CodeCompletionData> filteredItems = new ObservableCollection<CodeCompletionData>();
+			int bestIndex = -1;
+			int bestQuality = -1;
+			double bestPriority = 0.0;
+			int index = 0;
+			foreach (var candidate in candidates)
 			{
-				double num5 = ((item.Item == codeCompletionData) ? double.PositiveInfinity : item.Item.Priority);
-				int quality = item.Quality;
-				if (quality > num2 || (quality == num2 && num5 > num3))
+				double priority = candidate.Item == selectedItem ? double.PositiveInfinity : candidate.Item.Priority;
+				if (candidate.Quality > bestQuality || (candidate.Quality == bestQuality && priority > bestPriority))
 				{
-					num = num4;
-					num3 = num5;
-					num2 = quality;
+					bestIndex = index;
+					bestPriority = priority;
+					bestQuality = candidate.Quality;
 				}
-				observableCollection.Add(item.Item);
-				num4++;
+				filteredItems.Add(candidate.Item);
+				index++;
 			}
-			hbiiJc0u6m = observableCollection;
-			listBox.ItemsSource = observableCollection;
-			q6SiqxJLeH(num);
+			currentList = filteredItems;
+			listBox.ItemsSource = filteredItems;
+			SelectIndexCentered(bestIndex);
 		}
 		catch (Exception e)
 		{
@@ -415,67 +298,33 @@ public class CompletionList : Control
 		}
 	}
 
-	private void hgYiLxA2mk(string P_0)
+	private void SelectItemWithStart(string query)
 	{
-		var enumerable = from item in (hbiiJc0u6m != null && !string.IsNullOrEmpty(HG9iZIoAd3) && !string.IsNullOrEmpty(P_0) && P_0.StartsWith(HG9iZIoAd3, StringComparison.Ordinal)) ? hbiiJc0u6m : CompletionData
-			let quality = J8cidywF32(item.Text, P_0)
-			where quality > 0
-			select new
-			{
-				Item = item,
-				Quality = quality
-			};
-		CodeCompletionData codeCompletionData = ((listBox.SelectedIndex != -1) ? ((CodeCompletionData)listBox.Items[listBox.SelectedIndex]) : null);
-		ObservableCollection<CodeCompletionData> observableCollection = new ObservableCollection<CodeCompletionData>();
-		int num = -1;
-		int num2 = -1;
-		double num3 = 0.0;
-		int num4 = 0;
-		foreach (var item in enumerable)
-		{
-			double num5 = ((item.Item == codeCompletionData) ? double.PositiveInfinity : item.Item.Priority);
-			int quality = item.Quality;
-			if (quality > num2 || (quality == num2 && num5 > num3))
-			{
-				num = num4;
-				num3 = num5;
-				num2 = quality;
-			}
-			observableCollection.Add(item.Item);
-			num4++;
-		}
-		hbiiJc0u6m = observableCollection;
-		listBox.ItemsSource = observableCollection;
-		q6SiqxJLeH(num);
-	}
-
-	private void hoYin8U8G0(string P_0)
-	{
-		if (string.IsNullOrEmpty(P_0))
+		if (string.IsNullOrEmpty(query))
 		{
 			return;
 		}
 		try
 		{
 			int selectedIndex = listBox.SelectedIndex;
-			int num = -1;
-			int num2 = -1;
-			double num3 = 0.0;
+			int bestIndex = -1;
+			int bestQuality = -1;
+			double bestPriority = 0.0;
 			for (int i = 0; i < CompletionData.Count; i++)
 			{
-				int num4 = J8cidywF32(CompletionData[i].Text, P_0);
-				if (num4 >= 0)
+				int matchQuality = GetMatchQuality(CompletionData[i].Text, query);
+				if (matchQuality >= 0)
 				{
 					double priority = CompletionData[i].Priority;
-					if (num2 < num4 || (num != selectedIndex && ((i != selectedIndex) ? (num2 == num4 && num3 < priority) : (num2 == num4))))
+					if (bestQuality < matchQuality || (bestIndex != selectedIndex && (i != selectedIndex ? bestQuality == matchQuality && bestPriority < priority : bestQuality == matchQuality)))
 					{
-						num = i;
-						num3 = priority;
-						num2 = num4;
+						bestIndex = i;
+						bestPriority = priority;
+						bestQuality = matchQuality;
 					}
 				}
 			}
-			q6SiqxJLeH(num);
+			SelectIndexCentered(bestIndex);
 		}
 		catch (Exception e)
 		{
@@ -483,24 +332,24 @@ public class CompletionList : Control
 		}
 	}
 
-	private void q6SiqxJLeH(int P_0)
+	private void SelectIndexCentered(int bestIndex)
 	{
 		try
 		{
-			if (P_0 < 0)
+			if (bestIndex < 0)
 			{
 				listBox.ClearSelection();
 				return;
 			}
 			int firstVisibleItem = listBox.FirstVisibleItem;
-			if (P_0 < firstVisibleItem || firstVisibleItem + listBox.VisibleItemCount <= P_0)
+			if (bestIndex < firstVisibleItem || firstVisibleItem + listBox.VisibleItemCount <= bestIndex)
 			{
-				listBox.CenterViewOn(P_0);
-				listBox.SelectIndex(P_0);
+				listBox.CenterViewOn(bestIndex);
+				listBox.SelectIndex(bestIndex);
 			}
 			else
 			{
-				listBox.SelectIndex(P_0);
+				listBox.SelectIndex(bestIndex);
 			}
 		}
 		catch (Exception e)
@@ -509,34 +358,34 @@ public class CompletionList : Control
 		}
 	}
 
-	private int J8cidywF32(string P_0, string P_1)
+	private int GetMatchQuality(string itemText, string query)
 	{
 		try
 		{
-			if (P_0 == null)
+			if (itemText == null)
 			{
 				throw new ArgumentNullException("itemText", "ICompletionData.Text returned null");
 			}
-			if (P_1 == P_0)
+			if (query == itemText)
 			{
 				return 8;
 			}
-			if (string.Equals(P_0, P_1, StringComparison.InvariantCultureIgnoreCase))
+			if (string.Equals(itemText, query, StringComparison.InvariantCultureIgnoreCase))
 			{
 				return 7;
 			}
-			if (P_0.StartsWith(P_1, StringComparison.InvariantCulture))
+			if (itemText.StartsWith(query, StringComparison.InvariantCulture))
 			{
 				return 6;
 			}
-			if (P_0.StartsWith(P_1, StringComparison.InvariantCultureIgnoreCase))
+			if (itemText.StartsWith(query, StringComparison.InvariantCultureIgnoreCase))
 			{
 				return 5;
 			}
 			bool? flag = null;
-			if (P_1.Length <= 2)
+			if (query.Length <= 2)
 			{
-				flag = NtuieoYvb8(P_0, P_1);
+				flag = CamelCaseMatch(itemText, query);
 				if (flag == true)
 				{
 					return 4;
@@ -544,18 +393,18 @@ public class CompletionList : Control
 			}
 			if (IsFiltering)
 			{
-				if (P_0.IndexOf(P_1, StringComparison.InvariantCulture) >= 0)
+				if (itemText.IndexOf(query, StringComparison.InvariantCulture) >= 0)
 				{
 					return 3;
 				}
-				if (P_0.IndexOf(P_1, StringComparison.InvariantCultureIgnoreCase) >= 0)
+				if (itemText.IndexOf(query, StringComparison.InvariantCultureIgnoreCase) >= 0)
 				{
 					return 2;
 				}
 			}
 			if (!flag.HasValue)
 			{
-				flag = NtuieoYvb8(P_0, P_1);
+				flag = CamelCaseMatch(itemText, query);
 			}
 			if (flag == true)
 			{
@@ -569,25 +418,25 @@ public class CompletionList : Control
 		return -1;
 	}
 
-	private static bool NtuieoYvb8(string P_0, string P_1)
+	private static bool CamelCaseMatch(string text, string query)
 	{
 		try
 		{
-			IEnumerable<char> enumerable = P_0.Take(1).Concat(P_0.Skip(1).Where(char.IsUpper));
+			IEnumerable<char> camelCaseCharacters = text.Take(1).Concat(text.Skip(1).Where(char.IsUpper));
 			int num = 0;
-			foreach (char item in enumerable)
+			foreach (char character in camelCaseCharacters)
 			{
-				if (num > P_1.Length - 1)
+				if (num > query.Length - 1)
 				{
 					return true;
 				}
-				if (char.ToUpperInvariant(P_1[num]) != char.ToUpperInvariant(item))
+				if (char.ToUpperInvariant(query[num]) != char.ToUpperInvariant(character))
 				{
 					return false;
 				}
 				num++;
 			}
-			if (num >= P_1.Length)
+			if (num >= query.Length)
 			{
 				return true;
 			}
@@ -601,13 +450,7 @@ public class CompletionList : Control
 
 	public CompletionList()
 	{
-		ysZiOyuxfO = true;
-		dvriP9mJdZ = new ObservableCollection<CodeCompletionData>();
-	}
-
-	[CompilerGenerated]
-	private bool rc8ityI5ia(DependencyObject P_0)
-	{
-		return (object)P_0 != this;
+		IsFiltering = true;
+		CompletionData = new ObservableCollection<CodeCompletionData>();
 	}
 }
