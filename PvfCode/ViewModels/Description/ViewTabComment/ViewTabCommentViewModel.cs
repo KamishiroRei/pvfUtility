@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
-using DevExpress.Xpf.Editors;
 using ICSharpCode.AvalonEdit.Highlighting;
 using PvfCode.Dot;
 using PvfCode.Dot.Desktop;
@@ -18,36 +16,11 @@ namespace PvfCode.ViewModels.Description.ViewTabComment;
 
 public class ViewTabCommentViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass37_0
-	{
-		public ViewTabCommentViewModel sBoIkXWRVq;
+	private ObservableCollection<PvfCommentDto> items;
 
-		public PvfCommentDto ApjI03hQYB;
-
-		public _003C_003Ec__DisplayClass37_0()
-		{
-		}
-
-		internal void RNFIJ9yg3u()
-		{
-			sBoIkXWRVq.SelectedItem = ApjI03hQYB;
-		}
-	}
-
-	private ObservableCollection<PvfCommentDto> t7cGXqwJyx;
-
-	private ObservableCollection<PvfCommentDto> wuhGp7ETgX;
-
-	[CompilerGenerated]
-	private List<PvfCommentDto> ElcGUCMlTy;
-
-	[CompilerGenerated]
-	private PvfCommentDto VpkGc2C02J;
+	private ObservableCollection<PvfCommentDto> searchResult;
 
 	private readonly Action Close;
-
-	internal AutoSuggestEdit JNMG8pVX67;
 
 	public bool Focusable
 	{
@@ -86,7 +59,7 @@ public class ViewTabCommentViewModel : ViewModelBase
 			{
 				RaisePropertyChanged("Items");
 			}
-			LcZGKbl07F();
+			UpdateCount();
 		}
 	}
 
@@ -94,15 +67,15 @@ public class ViewTabCommentViewModel : ViewModelBase
 	{
 		get
 		{
-			if (wuhGp7ETgX == null)
+			if (searchResult == null)
 			{
-				wuhGp7ETgX = new ObservableCollection<PvfCommentDto>();
+				searchResult = new ObservableCollection<PvfCommentDto>();
 			}
-			return wuhGp7ETgX;
+			return searchResult;
 		}
 		set
 		{
-			wuhGp7ETgX = value;
+			searchResult = value;
 		}
 	}
 
@@ -114,11 +87,11 @@ public class ViewTabCommentViewModel : ViewModelBase
 			{
 				return SearchResult;
 			}
-			return t7cGXqwJyx;
+			return items;
 		}
 		set
 		{
-			t7cGXqwJyx = value;
+			items = value;
 		}
 	}
 
@@ -134,33 +107,9 @@ public class ViewTabCommentViewModel : ViewModelBase
 		}
 	}
 
-	public List<PvfCommentDto> SelectedItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ElcGUCMlTy;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ElcGUCMlTy = value;
-		}
-	}
+	public List<PvfCommentDto> SelectedItems { get; set; }
 
-	public PvfCommentDto AddData
-	{
-		[CompilerGenerated]
-		get
-		{
-			return VpkGc2C02J;
-		}
-		[CompilerGenerated]
-		set
-		{
-			VpkGc2C02J = value;
-		}
-	}
+	public PvfCommentDto AddData { get; set; }
 
 	public IHighlightingDefinition AddDataHighlighting
 	{
@@ -186,7 +135,7 @@ public class ViewTabCommentViewModel : ViewModelBase
 		}
 	}
 
-	private void LcZGKbl07F()
+	private void UpdateCount()
 	{
 		if (Items == null)
 		{
@@ -198,7 +147,7 @@ public class ViewTabCommentViewModel : ViewModelBase
 		}
 	}
 
-	private void getG9NA5Qo()
+	private void UpdateAddDataHighlighting()
 	{
 		if (!AddData.FileType.HasValue)
 		{
@@ -217,42 +166,40 @@ public class ViewTabCommentViewModel : ViewModelBase
 			FileType = PvfFileType.equ,
 			Comment = AppSetting.Instance.GetIlogger()?.GetStr("ViewTabCommentViewModel_DefaultSectionComment")
 		};
-		AddData.OnFileTypeChanged += fDmGPeOJfr;
-		getG9NA5Qo();
+		AddData.OnFileTypeChanged += OnAddDataFileTypeChanged;
+		UpdateAddDataHighlighting();
 		SelectedItems = new List<PvfCommentDto>();
 		Close = close;
 	}
 
-	private void fDmGPeOJfr(PvfFileType? P_0)
+	private void OnAddDataFileTypeChanged(PvfFileType? fileType)
 	{
-		getG9NA5Qo();
+		UpdateAddDataHighlighting();
 	}
 
 	[Command]
 	public void OnAdd()
 	{
-		_003C_003Ec__DisplayClass37_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass37_0();
-		CS_0024_003C_003E8__locals5.sBoIkXWRVq = this;
-		if (LKYGZG3qCv(AddData))
+		if (ValidateComment(AddData))
 		{
-			CS_0024_003C_003E8__locals5.ApjI03hQYB = AddData.CloneData();
-			t7cGXqwJyx.Add(CS_0024_003C_003E8__locals5.ApjI03hQYB);
-			LcZGKbl07F();
+			PvfCommentDto comment = AddData.CloneData();
+			items.Add(comment);
+			UpdateCount();
 			((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)delegate
 			{
-				CS_0024_003C_003E8__locals5.sBoIkXWRVq.SelectedItem = CS_0024_003C_003E8__locals5.ApjI03hQYB;
+				SelectedItem = comment;
 			}, Array.Empty<object>());
 		}
 	}
 
-	private bool LKYGZG3qCv(PvfCommentDto P_0)
+	private bool ValidateComment(PvfCommentDto comment)
 	{
-		if (string.IsNullOrEmpty(P_0.Section))
+		if (string.IsNullOrEmpty(comment.Section))
 		{
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputTagName"), isError: true);
 			return false;
 		}
-		if (string.IsNullOrEmpty(P_0.Comment))
+		if (string.IsNullOrEmpty(comment.Comment))
 		{
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputComment"), isError: true);
 			return false;
@@ -263,7 +210,7 @@ public class ViewTabCommentViewModel : ViewModelBase
 	[Command]
 	public void Unloaded()
 	{
-		AddData.OnFileTypeChanged -= fDmGPeOJfr;
+		AddData.OnFileTypeChanged -= OnAddDataFileTypeChanged;
 		Application.Current.MainWindow.Activate();
 	}
 
@@ -282,13 +229,13 @@ public class ViewTabCommentViewModel : ViewModelBase
 		}
 		Items = new ObservableCollection<PvfCommentDto>(resultData.Data);
 		RaisePropertyChanged("Items");
-		LcZGKbl07F();
+		UpdateCount();
 	}
 
 	[Command]
 	public async void OnSave()
 	{
-		ResultData resultData = await ServicePvfTabComment.Instance.ClearAddRanged(t7cGXqwJyx.ToList());
+		ResultData resultData = await ServicePvfTabComment.Instance.ClearAddRanged(items.ToList());
 		if (resultData.IsError)
 		{
 			AppCore.ShowMsg(resultData.Msg, isError: true);
@@ -310,13 +257,13 @@ public class ViewTabCommentViewModel : ViewModelBase
 		PvfCommentDto[] array = SelectedItems.ToArray();
 		foreach (PvfCommentDto item in array)
 		{
-			t7cGXqwJyx.Remove(item);
+			items.Remove(item);
 			if (flag)
 			{
 				SearchResult.Remove(item);
 			}
 		}
-		LcZGKbl07F();
+		UpdateCount();
 	}
 
 	[Command]
@@ -324,7 +271,7 @@ public class ViewTabCommentViewModel : ViewModelBase
 	{
 		if (SelectedItem != null)
 		{
-			LKYGZG3qCv(SelectedItem);
+			ValidateComment(SelectedItem);
 		}
 	}
 
@@ -334,13 +281,13 @@ public class ViewTabCommentViewModel : ViewModelBase
 		if (!string.IsNullOrEmpty(Keyword))
 		{
 			SearchResult.Clear();
-			IEnumerable<PvfCommentDto> array = t7cGXqwJyx.WhereIF(WholeWordMatch, (PvfCommentDto P_0) => P_0.Section.Equals(Keyword, StringComparison.OrdinalIgnoreCase)).WhereIF(!WholeWordMatch, (PvfCommentDto P_0) => P_0.Section.Contains(Keyword, StringComparison.OrdinalIgnoreCase));
-			if (array != null && array.Any())
+			IEnumerable<PvfCommentDto> matchingComments = items.WhereIF(WholeWordMatch, (PvfCommentDto comment) => comment.Section.Equals(Keyword, StringComparison.OrdinalIgnoreCase)).WhereIF(!WholeWordMatch, (PvfCommentDto comment) => comment.Section.Contains(Keyword, StringComparison.OrdinalIgnoreCase));
+			if (matchingComments != null && matchingComments.Any())
 			{
-				SearchResult.AddRange(in array);
+				SearchResult.AddRange(in matchingComments);
 			}
 			RaisePropertyChanged("Items");
-			LcZGKbl07F();
+			UpdateCount();
 		}
 	}
 
@@ -348,17 +295,5 @@ public class ViewTabCommentViewModel : ViewModelBase
 	public void OnClearKeyword()
 	{
 		Keyword = string.Empty;
-	}
-
-	[CompilerGenerated]
-	private bool EsAGJW18Er(PvfCommentDto P_0)
-	{
-		return P_0.Section.Equals(Keyword, StringComparison.OrdinalIgnoreCase);
-	}
-
-	[CompilerGenerated]
-	private bool vjaGkHKnbj(PvfCommentDto P_0)
-	{
-		return P_0.Section.Contains(Keyword, StringComparison.OrdinalIgnoreCase);
 	}
 }
