@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows;
 using HL.Interfaces;
 using ICSharpCode.AvalonEdit.Highlighting;
@@ -14,22 +12,19 @@ public class ThemeSwitcher : ModelBase
 {
 	public delegate void PvfCodeThemeChanged();
 
-	private static ThemeSwitcher kJxjHTMQ1X;
+	private static ThemeSwitcher instance;
 
-	private readonly Dictionary<ThemeType, ResourceDictionary> rwwjho0Q0Q;
-
-	[CompilerGenerated]
-	private PvfCodeThemeChanged R8xjvb6Tvw;
+	private readonly Dictionary<ThemeType, ResourceDictionary> themeResources;
 
 	public static ThemeSwitcher Instance
 	{
 		get
 		{
-			if (kJxjHTMQ1X == null)
+			if (instance == null)
 			{
-				kJxjHTMQ1X = new ThemeSwitcher();
+				instance = new ThemeSwitcher();
 			}
-			return kJxjHTMQ1X;
+			return instance;
 		}
 	}
 
@@ -47,42 +42,14 @@ public class ThemeSwitcher : ModelBase
 		}
 	}
 
-	public event PvfCodeThemeChanged PvfCodeThemeChangedEvent
-	{
-		[CompilerGenerated]
-		add
-		{
-			PvfCodeThemeChanged pvfCodeThemeChanged = R8xjvb6Tvw;
-			PvfCodeThemeChanged pvfCodeThemeChanged2;
-			do
-			{
-				pvfCodeThemeChanged2 = pvfCodeThemeChanged;
-				PvfCodeThemeChanged value2 = (PvfCodeThemeChanged)Delegate.Combine(pvfCodeThemeChanged2, value);
-				pvfCodeThemeChanged = Interlocked.CompareExchange(ref R8xjvb6Tvw, value2, pvfCodeThemeChanged2);
-			}
-			while ((object)pvfCodeThemeChanged != pvfCodeThemeChanged2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			PvfCodeThemeChanged pvfCodeThemeChanged = R8xjvb6Tvw;
-			PvfCodeThemeChanged pvfCodeThemeChanged2;
-			do
-			{
-				pvfCodeThemeChanged2 = pvfCodeThemeChanged;
-				PvfCodeThemeChanged value2 = (PvfCodeThemeChanged)Delegate.Remove(pvfCodeThemeChanged2, value);
-				pvfCodeThemeChanged = Interlocked.CompareExchange(ref R8xjvb6Tvw, value2, pvfCodeThemeChanged2);
-			}
-			while ((object)pvfCodeThemeChanged != pvfCodeThemeChanged2);
-		}
-	}
+	public event PvfCodeThemeChanged PvfCodeThemeChangedEvent;
 
 	public ThemeSwitcher()
 	{
-		rwwjho0Q0Q = new Dictionary<ThemeType, ResourceDictionary>();
-		rwwjho0Q0Q.Add(ThemeType.VS2019Blue, GetThemeResourceDictionary(ThemeType.VS2019Blue));
-		rwwjho0Q0Q.Add(ThemeType.VS2019Dark, GetThemeResourceDictionary(ThemeType.VS2019Dark));
-		rwwjho0Q0Q.Add(ThemeType.VS2019Light, GetThemeResourceDictionary(ThemeType.VS2019Light));
+		themeResources = new Dictionary<ThemeType, ResourceDictionary>();
+		themeResources.Add(ThemeType.VS2019Blue, GetThemeResourceDictionary(ThemeType.VS2019Blue));
+		themeResources.Add(ThemeType.VS2019Dark, GetThemeResourceDictionary(ThemeType.VS2019Dark));
+		themeResources.Add(ThemeType.VS2019Light, GetThemeResourceDictionary(ThemeType.VS2019Light));
 	}
 
 	public void SwitchTheme(ThemeType theme)
@@ -102,12 +69,12 @@ public class ThemeSwitcher : ModelBase
 			break;
 		}
 		UpdateTextEditorColorOptions();
-		R8xjvb6Tvw?.Invoke();
+		PvfCodeThemeChangedEvent?.Invoke();
 	}
 
 	public void PvfCodeThemeChangedEventInvoke()
 	{
-		R8xjvb6Tvw?.Invoke();
+		PvfCodeThemeChangedEvent?.Invoke();
 	}
 
 	public ResourceDictionary GetThemeResourceDictionary(ThemeType theme)

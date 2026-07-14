@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using DevExpress.Mvvm;
@@ -17,9 +16,6 @@ public class SearchNameViewModelBase<TItem> : ViewModelBase where TItem : ItemNa
 {
 	public IEnumerable<string> SourceFileList;
 
-	[CompilerGenerated]
-	private List<TItem> Q1pWPQvn8Z;
-
 	protected virtual IMessageBoxService MessageBoxService => GetService<IMessageBoxService>(ServiceSearchMode.PreferParents);
 
 	public bool IsLoading
@@ -34,19 +30,7 @@ public class SearchNameViewModelBase<TItem> : ViewModelBase where TItem : ItemNa
 		}
 	}
 
-	public List<TItem> SelectedItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Q1pWPQvn8Z;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Q1pWPQvn8Z = value;
-		}
-	}
+	public List<TItem> SelectedItems { get; set; }
 
 	public TItem SelectedItem
 	{
@@ -174,11 +158,7 @@ public class SearchNameViewModelBase<TItem> : ViewModelBase where TItem : ItemNa
 		{
 			if (val.ItemCode.HasValue)
 			{
-				StringBuilder stringBuilder2 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder2);
-				handler.AppendFormatted(val.ItemCode);
-				handler.AppendLiteral("\t");
-				stringBuilder2.AppendLine(ref handler);
+				stringBuilder.AppendLine($"{val.ItemCode}\t");
 			}
 		}
 		AppCore.CopyString(stringBuilder.ToString());

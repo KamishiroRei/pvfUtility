@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using Collections.Pooled;
 using DevExpress.Mvvm;
@@ -18,30 +17,15 @@ namespace PvfCode.Views;
 
 public class ViewExtractFilesViewModels : ViewModelBase, IDisposable
 {
-	[CompilerGenerated]
-	private PvfTreeViewModel Vo1TzFD0wG;
+	private readonly Action close;
 
-	private readonly Action Close;
+	private IEnumerable<string> sourceFiles;
 
-	private IEnumerable<string> BlECDmMFDV;
+	private readonly PvfGroup pvf;
 
-	private readonly PvfGroup Pvf;
+	private ViewExtractFiles view;
 
-	private ViewExtractFiles DuqClb754w;
-
-	public PvfTreeViewModel TreeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Vo1TzFD0wG;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Vo1TzFD0wG = value;
-		}
-	}
+	public PvfTreeViewModel TreeViewModel { get; set; }
 
 	public ExtractConfig Config => AppSetting.Instance.PvfConfig.ExtractConfig;
 
@@ -71,9 +55,9 @@ public class ViewExtractFilesViewModels : ViewModelBase, IDisposable
 
 	public ViewExtractFilesViewModels(Action close, IEnumerable<string> files = null)
 	{
-		Pvf = AppCore.ViewModelBase.PVF;
-		BlECDmMFDV = files;
-		Close = close;
+		pvf = AppCore.ViewModelBase.PVF;
+		sourceFiles = files;
+		this.close = close;
 		TreeViewModel = new PvfTreeViewModel(TreeViewType.ExtractFiles);
 		if (!Config.ExtractTo7zip && string.IsNullOrEmpty(Config.TargetPath))
 		{
@@ -84,9 +68,9 @@ public class ViewExtractFilesViewModels : ViewModelBase, IDisposable
 	public ViewExtractFilesViewModels(Action close, PvfGroup pvf, IEnumerable<string> files = null)
 	{
 		IsDiffExtract = true;
-		Pvf = pvf;
-		BlECDmMFDV = files;
-		Close = close;
+		this.pvf = pvf;
+		sourceFiles = files;
+		this.close = close;
 		TreeViewModel = new PvfTreeViewModel(TreeViewType.ExtractFiles);
 		if (!Config.ExtractTo7zip && string.IsNullOrEmpty(Config.TargetPath))
 		{
@@ -96,14 +80,14 @@ public class ViewExtractFilesViewModels : ViewModelBase, IDisposable
 
 	public async void Loaded(object sender)
 	{
-		DuqClb754w = (ViewExtractFiles)sender;
-		DuqClb754w.SizeToContent = SizeToContent.Manual;
-		if (BlECDmMFDV != null && BlECDmMFDV.Count() > 0)
+		view = (ViewExtractFiles)sender;
+		view.SizeToContent = SizeToContent.Manual;
+		if (sourceFiles != null && sourceFiles.Count() > 0)
 		{
 			IsLoading = true;
-			await TreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(BlECDmMFDV));
+			await TreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(sourceFiles));
 			IsLoading = false;
-			BlECDmMFDV = null;
+			sourceFiles = null;
 		}
 	}
 
@@ -114,7 +98,7 @@ public class ViewExtractFilesViewModels : ViewModelBase, IDisposable
 		if (enumerable != null)
 		{
 			IsLoading = true;
-			await TreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(enumerable), Pvf);
+			await TreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(enumerable), pvf);
 			IsLoading = false;
 		}
 	}
@@ -130,7 +114,7 @@ public class ViewExtractFilesViewModels : ViewModelBase, IDisposable
 			};
 			commonSaveFileDialog.Filters.Add(new CommonFileDialogFilter(AppSetting.Instance.GetIlogger()?.GetStr("mess_7zFile"), ".7z"));
 			commonSaveFileDialog.DefaultFileName = "Script.7z";
-			if (commonSaveFileDialog.ShowDialog(DuqClb754w) == CommonFileDialogResult.Ok)
+			if (commonSaveFileDialog.ShowDialog(view) == CommonFileDialogResult.Ok)
 			{
 				Config.TargetPath = commonSaveFileDialog.FileName;
 			}
@@ -142,7 +126,7 @@ public class ViewExtractFilesViewModels : ViewModelBase, IDisposable
 				IsFolderPicker = true,
 				Title = AppSetting.Instance.GetIlogger().GetStr("Title_SelectFolder")
 			};
-			if (commonOpenFileDialog.ShowDialog(DuqClb754w) == CommonFileDialogResult.Ok)
+			if (commonOpenFileDialog.ShowDialog(view) == CommonFileDialogResult.Ok)
 			{
 				Config.TargetPath = commonOpenFileDialog.FileName;
 			}
@@ -159,18 +143,18 @@ public class ViewExtractFilesViewModels : ViewModelBase, IDisposable
 	public async void OnExtractStart()
 	{
 		Config.SourceFiles = TreeViewModel.TreeGroupData.GetAllFilePaths().ToHashSet();
-		ResultData resultData = Qe0TNIcdvu();
+		ResultData resultData = ValidateAndPrepareConfig();
 		if (resultData.IsError)
 		{
 			AppCore.ShowMsg(resultData.Msg, isError: true);
 			return;
 		}
-		Pvf.ExtractFiles(Config);
+		pvf.ExtractFiles(Config);
 		await AppSetting.Instance.SaveSetting();
-		Close?.Invoke();
+		close?.Invoke();
 	}
 
-	private ResultData Qe0TNIcdvu()
+	private ResultData ValidateAndPrepareConfig()
 	{
 		ResultData resultData = new ResultData();
 		if (string.IsNullOrEmpty(Config.TargetPath))
@@ -216,20 +200,12 @@ public class ViewExtractFilesViewModels : ViewModelBase, IDisposable
 		}
 		if (!Config.ExtractTo7zip)
 		{
-			string text = Config.TargetPath;
-			if (Config.ExtractTo7zip)
-			{
-				text = Path.GetDirectoryName(Config.TargetPath);
-				if (text == null)
-				{
-					text = "";
-				}
-			}
-			if (!Directory.Exists(text))
+			string targetPath = Config.TargetPath;
+			if (!Directory.Exists(targetPath))
 			{
 				try
 				{
-					Directory.CreateDirectory(text);
+					Directory.CreateDirectory(targetPath);
 				}
 				catch (Exception ex)
 				{

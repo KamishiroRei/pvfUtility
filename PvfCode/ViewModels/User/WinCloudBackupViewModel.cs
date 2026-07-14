@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -216,51 +215,5 @@ public class WinCloudBackupViewModel : ViewModelBase
 			}
 		});
 		IsLoading = false;
-	}
-
-	[CompilerGenerated]
-	private async Task? GXQFKGV3I5()
-	{
-		ResultData<AccountCloudBackupDto> resultData = await ServiceCloud.Instance.DownloadAccountCloudBackup();
-		if (resultData.IsError)
-		{
-			AppCore.ShowMsg(resultData.Msg, isError: true);
-		}
-		if (resultData.Data != null)
-		{
-			BackUpData = resultData.Data;
-		}
-	}
-
-	[CompilerGenerated]
-	private async Task? fVlF9GuPdm()
-	{
-		ResultData resultData = await ServiceCloud.Instance.UploadAccountCloudBackup(BackUpData);
-		if (resultData.IsError)
-		{
-			AppCore.ShowMsg(resultData.Msg, isError: true);
-			return;
-		}
-		if (BackUpData.BookMark.AllowBackUp)
-		{
-			BackUpData.BookMark.BackUpTime = DateTime.Now;
-		}
-		if (BackUpData.TreeListComment.AllowBackUp)
-		{
-			BackUpData.TreeListComment.BackUpTime = DateTime.Now;
-		}
-		if (BackUpData.SectionComment.AllowBackUp)
-		{
-			BackUpData.SectionComment.BackUpTime = DateTime.Now;
-		}
-		if (BackUpData.ItemCodeHoverConfig.AllowBackUp)
-		{
-			BackUpData.ItemCodeHoverConfig.BackUpTime = DateTime.Now;
-		}
-		if (BackUpData.AppSetting.AllowBackUp)
-		{
-			BackUpData.AppSetting.BackUpTime = DateTime.Now;
-		}
-		AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_UploadSuccess"));
 	}
 }

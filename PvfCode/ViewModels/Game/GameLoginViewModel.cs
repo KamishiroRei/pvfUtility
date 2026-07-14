@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,9 +16,9 @@ namespace PvfCode.ViewModels.Game;
 
 public class GameLoginViewModel : ViewModelBase
 {
-	private string oQw2NFfDm1;
+	private string loginArgumentPrefix;
 
-	private string UeP2zwODLU;
+	private string loginArgumentSuffix;
 
 	public bool GameIsStart
 	{
@@ -47,8 +46,8 @@ public class GameLoginViewModel : ViewModelBase
 
 	public GameLoginViewModel()
 	{
-		oQw2NFfDm1 = "1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00";
-		UeP2zwODLU = "010101010101010101010101010101010101010101010101010101010101010155914510010403030101";
+		loginArgumentPrefix = "1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00";
+		loginArgumentSuffix = "010101010101010101010101010101010101010101010101010101010101010155914510010403030101";
 		IsSavePvfFile = true;
 	}
 
@@ -57,7 +56,7 @@ public class GameLoginViewModel : ViewModelBase
 	{
 		if (isStop)
 		{
-			FOF28efm4C();
+			StopAllGameInstances();
 			return;
 		}
 		if (string.IsNullOrEmpty(AppSetting.Instance.GameOptions.GameClientPath))
@@ -82,7 +81,7 @@ public class GameLoginViewModel : ViewModelBase
 				await AppCore.ViewModelBase.PVF.SavePvfPack(Path.Combine(AppSetting.Instance.GameOptions.GameClientPath, "script.pvf"), isFastMode: false, AppCore.ViewModelBase.MainProgress);
 			});
 		}
-		FGC2c4yfgb();
+		StopGameBeforeLogin();
 		WindowLoading loading = AppCore.CreateLoading(AppSetting.Instance.GetIlogger()?.GetStr("mess_LoginLoading"), Application.Current.MainWindow);
 		loading.Show();
 		int processId = await Task.Run(() => Login(AppSetting.Instance.GameOptions.GameUserA));
@@ -90,7 +89,7 @@ public class GameLoginViewModel : ViewModelBase
 		loading.Close();
 	}
 
-	private void FGC2c4yfgb()
+	private void StopGameBeforeLogin()
 	{
 		List<Process> list = new List<Process>();
 		Process[] processes = Process.GetProcesses();
@@ -122,7 +121,7 @@ public class GameLoginViewModel : ViewModelBase
 		loading.Close();
 	}
 
-	private void FOF28efm4C()
+	private void StopAllGameInstances()
 	{
 		Process[] processes = Process.GetProcesses();
 		foreach (Process process in processes)
@@ -144,7 +143,7 @@ public class GameLoginViewModel : ViewModelBase
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_LoginUIDNotSet"), isError: true);
 				return -1;
 			}
-			resultData = Jps2MoBOeQ(loginUser.UID);
+			resultData = CreateLoginArgument(loginUser.UID);
 		}
 		else
 		{
@@ -155,7 +154,7 @@ public class GameLoginViewModel : ViewModelBase
 				AppCore.ShowMsg(resultData2.Msg, isError: true);
 				return -1;
 			}
-			resultData = Jps2MoBOeQ(resultData2.Data.UID.ToString());
+			resultData = CreateLoginArgument(resultData2.Data.UID.ToString());
 		}
 		if (resultData.IsError)
 		{
@@ -181,23 +180,22 @@ public class GameLoginViewModel : ViewModelBase
 		})?.Id ?? (-1);
 	}
 
-	private ResultData<string> Jps2MoBOeQ(string P_0)
+	private ResultData<string> CreateLoginArgument(string userId)
 	{
 		ResultData<string> resultData = new ResultData<string>();
 		try
 		{
-			string s = P_0;
 			if (string.IsNullOrEmpty(AppSetting.Instance.GameOptions.GameServerOptions.PemPrivateKey))
 			{
 				resultData.Msg = AppSetting.Instance.GetIlogger().GetStr("mess_PleaseSetPrivateKeyInLoginSetting");
 				return resultData;
 			}
-			RSAParameters rSAParameters = ConvertFromPemPrivateKey(AppSetting.Instance.GameOptions.GameServerOptions.PemPrivateKey);
-			BigInteger bigInteger = new BigInteger(rSAParameters.Modulus);
-			BigInteger bigInteger2 = new BigInteger(rSAParameters.D);
-			s = int.Parse(s).ToString("X8");
-			BigInteger bigInteger3 = new BigInteger(e3o2Vgjd8m(oQw2NFfDm1 + s + UeP2zwODLU, bigInteger2, bigInteger), 16);
-			resultData.Data = Convert.ToBase64String(bigInteger3.getBytes());
+			RSAParameters rsaParameters = ConvertFromPemPrivateKey(AppSetting.Instance.GameOptions.GameServerOptions.PemPrivateKey);
+			BigInteger modulus = new BigInteger(rsaParameters.Modulus);
+			BigInteger privateExponent = new BigInteger(rsaParameters.D);
+			string userIdHex = int.Parse(userId).ToString("X8");
+			BigInteger encryptedArgument = new BigInteger(ModPowHex(loginArgumentPrefix + userIdHex + loginArgumentSuffix, privateExponent, modulus), 16);
+			resultData.Data = Convert.ToBase64String(encryptedArgument.getBytes());
 		}
 		catch (Exception ex)
 		{
@@ -264,20 +262,8 @@ public class GameLoginViewModel : ViewModelBase
 		};
 	}
 
-	private static string e3o2Vgjd8m(string P_0, BigInteger P_1, BigInteger P_2)
+	private static string ModPowHex(string value, BigInteger exponent, BigInteger modulus)
 	{
-		return new BigInteger(P_0, 16).modPow(P_1, P_2).ToHexString();
-	}
-
-	[CompilerGenerated]
-	private Task<int>? VCu234ZI6j()
-	{
-		return Login(AppSetting.Instance.GameOptions.GameUserA);
-	}
-
-	[CompilerGenerated]
-	private Task<int>? QT82Rj4Z3O()
-	{
-		return Login(AppSetting.Instance.GameOptions.GameUserB);
+		return new BigInteger(value, 16).modPow(exponent, modulus).ToHexString();
 	}
 }

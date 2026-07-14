@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Web;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,28 +21,13 @@ namespace PvfCode.ViewModels.DocumentFolder;
 
 public class DocumentIndexViewModel : DocumentBase
 {
-	[CompilerGenerated]
-	private bool rxafbLSwTc;
+	private WebView2 webView2;
 
-	private WebView2 OULfICuT2H;
+	private bool isWebView2Loaded;
 
-	private bool IsLoaded;
+	private bool webBrowserNewWindowHandlerAttached;
 
-	private bool fvSfEYBOAy;
-
-	public bool InsertView2
-	{
-		[CompilerGenerated]
-		get
-		{
-			return rxafbLSwTc;
-		}
-		[CompilerGenerated]
-		set
-		{
-			rxafbLSwTc = value;
-		}
-	}
+	public bool InsertView2 { get; set; }
 
 	public string Url
 	{
@@ -63,23 +47,23 @@ public class DocumentIndexViewModel : DocumentBase
 	[Command]
 	public async void LoadedView2(Grid gridRoot)
 	{
-		if (!IsLoaded)
+		if (!isWebView2Loaded)
 		{
 			int errid = 0;
 			try
 			{
-				OULfICuT2H = new WebView2();
+				webView2 = new WebView2();
 				errid++;
-				OULfICuT2H.Source = new Uri(Url);
+				webView2.Source = new Uri(Url);
 				errid++;
-				gridRoot.Children.Add(OULfICuT2H);
+				gridRoot.Children.Add(webView2);
 				errid++;
-				await OULfICuT2H.EnsureCoreWebView2Async();
-				IsLoaded = true;
+				await webView2.EnsureCoreWebView2Async();
+				isWebView2Loaded = true;
 				errid++;
-				OULfICuT2H.CoreWebView2InitializationCompleted += h1AfLyc0gH;
+				webView2.CoreWebView2InitializationCompleted += OnCoreWebView2InitializationCompleted;
 				errid++;
-				ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += kT1fddRn5r;
+				ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += OnThemeChanged;
 				errid++;
 			}
 			catch (Exception e)
@@ -93,37 +77,37 @@ public class DocumentIndexViewModel : DocumentBase
 		}
 	}
 
-	private void h1AfLyc0gH(object? sender, CoreWebView2InitializationCompletedEventArgs P_1)
+	private void OnCoreWebView2InitializationCompleted(object? sender, CoreWebView2InitializationCompletedEventArgs e)
 	{
 		try
 		{
-			OULfICuT2H.CoreWebView2.Settings.AreDevToolsEnabled = true;
-			OULfICuT2H.CoreWebView2.Settings.AreDefaultContextMenusEnabled = true;
-			OULfICuT2H.CoreWebView2.NavigationCompleted += G4Wfn3c7pE;
+			webView2.CoreWebView2.Settings.AreDevToolsEnabled = true;
+			webView2.CoreWebView2.Settings.AreDefaultContextMenusEnabled = true;
+			webView2.CoreWebView2.NavigationCompleted += OnCoreWebView2NavigationCompleted;
 		}
 		catch (Exception)
 		{
 		}
 	}
 
-	private void G4Wfn3c7pE(object? sender, CoreWebView2NavigationCompletedEventArgs P_1)
+	private void OnCoreWebView2NavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
 	{
 		try
 		{
-			Xb4fqhiplC(AppSetting.Instance.NowThemeType);
+			ApplyThemeToWebView(AppSetting.Instance.NowThemeType);
 		}
 		catch (Exception)
 		{
 		}
 	}
 
-	private async void Xb4fqhiplC(ThemeType P_0)
+	private async void ApplyThemeToWebView(ThemeType theme)
 	{
 		try
 		{
-			if (OULfICuT2H != null && OULfICuT2H.CoreWebView2 != null)
+			if (webView2 != null && webView2.CoreWebView2 != null)
 			{
-				await OULfICuT2H.CoreWebView2.ExecuteScriptAsync("SetTheme(\"" + HttpUtility.JavaScriptStringEncode(P_0.ToString()) + "\")");
+				await webView2.CoreWebView2.ExecuteScriptAsync("SetTheme(\"" + HttpUtility.JavaScriptStringEncode(theme.ToString()) + "\")");
 			}
 		}
 		catch (Exception)
@@ -131,9 +115,9 @@ public class DocumentIndexViewModel : DocumentBase
 		}
 	}
 
-	private void kT1fddRn5r()
+	private void OnThemeChanged()
 	{
-		this?.Xb4fqhiplC(AppSetting.Instance.NowThemeType);
+		ApplyThemeToWebView(AppSetting.Instance.NowThemeType);
 	}
 
 	[Command]
@@ -141,17 +125,17 @@ public class DocumentIndexViewModel : DocumentBase
 	{
 		webBrowser.Source = new Uri(Url);
 		SuppressScriptErrors(webBrowser, Hide: true);
-		webBrowser.LoadCompleted += ntTfedjcJ1;
+		webBrowser.LoadCompleted += OnWebBrowserLoadCompleted;
 	}
 
-	private void ntTfedjcJ1(object P_0, NavigationEventArgs P_1)
+	private void OnWebBrowserLoadCompleted(object sender, NavigationEventArgs e)
 	{
 		try
 		{
-			if (!fvSfEYBOAy)
+			if (!webBrowserNewWindowHandlerAttached)
 			{
-				new WebbrowserOnNewWindow((WebBrowser)P_0).BeforeNewWidnow += r8OfteF3xb;
-				fvSfEYBOAy = true;
+				new WebbrowserOnNewWindow((WebBrowser)sender).BeforeNewWidnow += OnWebBrowserBeforeNewWindow;
+				webBrowserNewWindowHandlerAttached = true;
 			}
 		}
 		catch (Exception)
@@ -159,11 +143,11 @@ public class DocumentIndexViewModel : DocumentBase
 		}
 	}
 
-	private void r8OfteF3xb(WebBrowserUrl2 P_0, WebBrowserEvent P_1)
+	private void OnWebBrowserBeforeNewWindow(WebBrowserUrl2 browserUrl, WebBrowserEvent browserEvent)
 	{
 		try
 		{
-			string url = P_0.Url;
+			string url = browserUrl.Url;
 			Process process = new Process();
 			process.StartInfo.FileName = "cmd.exe";
 			process.StartInfo.UseShellExecute = false;
@@ -176,7 +160,7 @@ public class DocumentIndexViewModel : DocumentBase
 			process.StandardInput.AutoFlush = true;
 			process.WaitForExit();
 			process.Close();
-			P_1.cancel = true;
+			browserEvent.cancel = true;
 		}
 		catch (Exception)
 		{
@@ -203,14 +187,14 @@ public class DocumentIndexViewModel : DocumentBase
 	{
 		try
 		{
-			if (OULfICuT2H != null)
+			if (webView2 != null)
 			{
-				OULfICuT2H.CoreWebView2InitializationCompleted -= h1AfLyc0gH;
-				OULfICuT2H.CoreWebView2.NavigationCompleted -= G4Wfn3c7pE;
-				OULfICuT2H.Dispose();
+				webView2.CoreWebView2InitializationCompleted -= OnCoreWebView2InitializationCompleted;
+				webView2.CoreWebView2.NavigationCompleted -= OnCoreWebView2NavigationCompleted;
+				webView2.Dispose();
 			}
-			ThemeSwitcher.Instance.PvfCodeThemeChangedEvent -= kT1fddRn5r;
-			OULfICuT2H = null;
+			ThemeSwitcher.Instance.PvfCodeThemeChangedEvent -= OnThemeChanged;
+			webView2 = null;
 		}
 		catch (Exception ex)
 		{
