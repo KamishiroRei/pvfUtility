@@ -2,7 +2,6 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -20,15 +19,9 @@ namespace PvfCode.ViewModels.DocumentFolder.CodeCompletion;
 
 public class WindowCompletion : CompletionWindowBase, IComponentConnector
 {
-	private readonly TextEditorBase CwSu3n5h2Q;
+	private readonly TextEditorBase editor;
 
-	private readonly PvfFileType? FileType;
-
-	[CompilerGenerated]
-	private bool zmJuRVZAen;
-
-	[CompilerGenerated]
-	private bool KTSuNNpvdS;
+	private readonly PvfFileType? fileType;
 
 	internal Grid rootGrid;
 
@@ -40,47 +33,23 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 
 	internal BarButtonItem BtnDeleteAddCompletionData;
 
-	private bool vW2uzHU3rQ;
+	private bool contentLoaded;
 
 	public CompletionList CompletionList => completionList;
 
-	public bool CloseAutomatically
-	{
-		[CompilerGenerated]
-		get
-		{
-			return zmJuRVZAen;
-		}
-		[CompilerGenerated]
-		set
-		{
-			zmJuRVZAen = value;
-		}
-	}
+	public bool CloseAutomatically { get; set; }
 
 	protected override bool CloseOnFocusLost => CloseAutomatically;
 
-	public bool CloseWhenCaretAtBeginning
-	{
-		[CompilerGenerated]
-		get
-		{
-			return KTSuNNpvdS;
-		}
-		[CompilerGenerated]
-		set
-		{
-			KTSuNNpvdS = value;
-		}
-	}
+	public bool CloseWhenCaretAtBeginning { get; set; }
 
 	public WindowCompletion(TextEditorBase editorBase, TextArea textArea, PvfFileType? pvfFileType, int startOffSet, int endOffset)
 		: base(editorBase, textArea, startOffSet, endOffset)
 	{
 		try
 		{
-			CwSu3n5h2Q = editorBase;
-			FileType = pvfFileType;
+			editor = editorBase;
+			fileType = pvfFileType;
 			InitializeComponent();
 			CloseAutomatically = true;
 			base.SizeToContent = SizeToContent.WidthAndHeight;
@@ -89,7 +58,7 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 			base.MinWidth = 300.0;
 			CompletionToolTip.PlacementTarget = this;
 			CompletionToolTip.Placement = PlacementMode.Right;
-			zEXuPU3cCx();
+			AttachEvents();
 		}
 		catch (Exception e)
 		{
@@ -97,7 +66,7 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		}
 	}
 
-	private void CeguEJwmr3(object? sender, EventArgs P_1)
+	private void OnToolTipClosed(object? sender, EventArgs e)
 	{
 		if (CompletionToolTip != null)
 		{
@@ -106,7 +75,7 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		Application.Current.MainWindow.Activate();
 	}
 
-	private void AeKuODWtBq(object P_0, SelectionChangedEventArgs P_1)
+	private void OnCompletionListSelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
 		((DispatcherObject)this).Dispatcher.BeginInvoke((Delegate)(Action)delegate
 		{
@@ -121,25 +90,25 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 						CompletionListBox listBox = completionList.ListBox;
 						if (listBox.ItemContainerGenerator.ContainerFromItem(listBox.SelectedItem) is ListBoxItem)
 						{
-							Point val = ipEuKFoV5J();
-							CompletionToolTip.HorizontalOffset = val.X - 2.0;
-							CompletionToolTip.VerticalOffset = val.Y;
+							Point position = GetToolTipPosition();
+							CompletionToolTip.HorizontalOffset = position.X - 2.0;
+							CompletionToolTip.VerticalOffset = position.Y;
 						}
-						CodeCompletionToolTipViewModel codeCompletionToolTipViewModel = new CodeCompletionToolTipViewModel(selectedItem, FileType);
+						CodeCompletionToolTipViewModel codeCompletionToolTipViewModel = new CodeCompletionToolTipViewModel(selectedItem, fileType);
 						CompletionToolTip.DataContext = codeCompletionToolTipViewModel;
 						CompletionToolTip.IsOpen = true;
 						codeCompletionToolTipViewModel.Loaded(null);
 					}
 				}
 			}
-			catch (Exception e)
+			catch (Exception exception)
 			{
-				AppCore.Logger.ErrorUploadDialog(e, "WindowCompletion.CompletionList_SelectionChanged");
+				AppCore.Logger.ErrorUploadDialog(exception, "WindowCompletion.CompletionList_SelectionChanged");
 			}
 		}, Array.Empty<object>());
 	}
 
-	private Point ipEuKFoV5J()
+	private Point GetToolTipPosition()
 	{
 		CompletionListBox listBox = completionList.ListBox;
 		UIElement obj = listBox.ItemContainerGenerator.ContainerFromItem(listBox.SelectedItem) as UIElement;
@@ -148,34 +117,34 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		return obj.TranslatePoint(point, this);
 	}
 
-	private void fGvu938HZg(object? sender, EventArgs P_1)
+	private void OnInsertionRequested(object? sender, EventArgs e)
 	{
 		try
 		{
 			Close();
-			completionList.SelectedItem?.Complete(CwSu3n5h2Q, base.TextArea, new AnchorSegment(base.TextArea.Document, base.StartOffset, base.EndOffset - base.StartOffset), P_1);
+			completionList.SelectedItem?.Complete(editor, base.TextArea, new AnchorSegment(base.TextArea.Document, base.StartOffset, base.EndOffset - base.StartOffset), e);
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "WindowCompletion.CompletionList_InsertionRequested");
+			AppCore.Logger.ErrorUploadDialog(exception, "WindowCompletion.CompletionList_InsertionRequested");
 		}
 	}
 
-	private void zEXuPU3cCx()
+	private void AttachEvents()
 	{
 		try
 		{
-			completionList.InsertionRequested += fGvu938HZg;
-			completionList.SelectionChanged += AeKuODWtBq;
-			CompletionList.CloseCompletionWindow += rY7uZpoP4n;
-			base.TextArea.Caret.PositionChanged += MeQup4wIla;
-			base.TextArea.MouseWheel += NYdu7OSRPV;
-			base.TextArea.PreviewTextInput += AfMu0EiEyS;
-			base.StateChanged += a7Guk3sMV0;
-			parentWindow.StateChanged += a7Guk3sMV0;
-			parentWindow.Deactivated += jyNuJPpQcl;
-			CompletionToolTip.Closed += CeguEJwmr3;
-			completionList.Loaded += RZouUVIfAI;
+			completionList.InsertionRequested += OnInsertionRequested;
+			completionList.SelectionChanged += OnCompletionListSelectionChanged;
+			CompletionList.CloseCompletionWindow += OnCloseCompletionWindow;
+			base.TextArea.Caret.PositionChanged += OnCaretPositionChanged;
+			base.TextArea.MouseWheel += OnTextAreaMouseWheel;
+			base.TextArea.PreviewTextInput += OnTextAreaPreviewTextInput;
+			base.StateChanged += OnWindowStateChanged;
+			parentWindow.StateChanged += OnWindowStateChanged;
+			parentWindow.Deactivated += OnParentWindowDeactivated;
+			CompletionToolTip.Closed += OnToolTipClosed;
+			completionList.Loaded += OnCompletionListLoaded;
 		}
 		catch (Exception e)
 		{
@@ -183,12 +152,12 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		}
 	}
 
-	private void rY7uZpoP4n(object? sender, EventArgs P_1)
+	private void OnCloseCompletionWindow(object? sender, EventArgs e)
 	{
 		Close();
 	}
 
-	private void jyNuJPpQcl(object? sender, EventArgs P_1)
+	private void OnParentWindowDeactivated(object? sender, EventArgs e)
 	{
 		if (CompletionToolTip != null)
 		{
@@ -196,7 +165,7 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		}
 	}
 
-	private void a7Guk3sMV0(object? sender, EventArgs P_1)
+	private void OnWindowStateChanged(object? sender, EventArgs e)
 	{
 		try
 		{
@@ -205,25 +174,25 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 				CompletionToolTip.IsOpen = false;
 			}
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "WindowCompletion.WindowCompletion_StateChanged");
+			AppCore.Logger.ErrorUploadDialog(exception, "WindowCompletion.WindowCompletion_StateChanged");
 		}
 	}
 
 	protected override void DetachEvents()
 	{
-		completionList.InsertionRequested -= fGvu938HZg;
-		completionList.SelectionChanged -= AeKuODWtBq;
-		base.TextArea.Caret.PositionChanged -= MeQup4wIla;
-		base.TextArea.MouseWheel -= NYdu7OSRPV;
-		base.TextArea.PreviewTextInput -= AfMu0EiEyS;
-		CompletionToolTip.Closed -= CeguEJwmr3;
-		base.StateChanged -= a7Guk3sMV0;
-		parentWindow.StateChanged -= a7Guk3sMV0;
-		CompletionToolTip.Closed -= CeguEJwmr3;
-		completionList.Loaded -= RZouUVIfAI;
-		CompletionList.CloseCompletionWindow -= rY7uZpoP4n;
+		completionList.InsertionRequested -= OnInsertionRequested;
+		completionList.SelectionChanged -= OnCompletionListSelectionChanged;
+		base.TextArea.Caret.PositionChanged -= OnCaretPositionChanged;
+		base.TextArea.MouseWheel -= OnTextAreaMouseWheel;
+		base.TextArea.PreviewTextInput -= OnTextAreaPreviewTextInput;
+		CompletionToolTip.Closed -= OnToolTipClosed;
+		base.StateChanged -= OnWindowStateChanged;
+		parentWindow.StateChanged -= OnWindowStateChanged;
+		parentWindow.Deactivated -= OnParentWindowDeactivated;
+		completionList.Loaded -= OnCompletionListLoaded;
+		CompletionList.CloseCompletionWindow -= OnCloseCompletionWindow;
 		base.DetachEvents();
 	}
 
@@ -246,23 +215,23 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		}
 	}
 
-	private void AfMu0EiEyS(object P_0, TextCompositionEventArgs P_1)
+	private void OnTextAreaPreviewTextInput(object sender, TextCompositionEventArgs e)
 	{
 		try
 		{
-			P_1.Handled = CompletionWindowBase.RaiseEventPair(this, UIElement.PreviewTextInputEvent, UIElement.TextInputEvent, new TextCompositionEventArgs(P_1.Device, P_1.TextComposition));
+			e.Handled = CompletionWindowBase.RaiseEventPair(this, UIElement.PreviewTextInputEvent, UIElement.TextInputEvent, new TextCompositionEventArgs(e.Device, e.TextComposition));
 		}
 		catch (Exception)
 		{
 		}
 	}
 
-	private void NYdu7OSRPV(object P_0, MouseWheelEventArgs P_1)
+	private void OnTextAreaMouseWheel(object sender, MouseWheelEventArgs e)
 	{
-		P_1.Handled = CompletionWindowBase.RaiseEventPair(LenuX3G7xB(), UIElement.PreviewMouseWheelEvent, UIElement.MouseWheelEvent, new MouseWheelEventArgs(P_1.MouseDevice, P_1.Timestamp, P_1.Delta));
+		e.Handled = CompletionWindowBase.RaiseEventPair(GetScrollEventTarget(), UIElement.PreviewMouseWheelEvent, UIElement.MouseWheelEvent, new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta));
 	}
 
-	private UIElement LenuX3G7xB()
+	private UIElement GetScrollEventTarget()
 	{
 		if (completionList == null)
 		{
@@ -271,7 +240,7 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		return (UIElement)(completionList.ScrollViewer ?? ((object)completionList.ListBox) ?? ((object)completionList));
 	}
 
-	private void MeQup4wIla(object? sender, EventArgs P_1)
+	private void OnCaretPositionChanged(object? sender, EventArgs e)
 	{
 		try
 		{
@@ -314,7 +283,7 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 		}
 	}
 
-	private void RZouUVIfAI(object P_0, RoutedEventArgs P_1)
+	private void OnCompletionListLoaded(object sender, RoutedEventArgs e)
 	{
 		try
 		{
@@ -328,29 +297,29 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 				}
 			}
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "WindowCompletion.WindowCompletion_Loaded");
+			AppCore.Logger.ErrorUploadDialog(exception, "WindowCompletion.WindowCompletion_Loaded");
 		}
 	}
 
-	private void QfwuctSPlh(object P_0, ItemClickEventArgs P_1)
+	private void OnAddCompletionData(object sender, ItemClickEventArgs e)
 	{
 		try
 		{
-			WindowAddCodeCompletionData windowAddCodeCompletionData = new WindowAddCodeCompletionData(CodeCompletionData.Create(FileType.Value));
+			WindowAddCodeCompletionData windowAddCodeCompletionData = new WindowAddCodeCompletionData(CodeCompletionData.Create(fileType.Value));
 			windowAddCodeCompletionData.Owner = Application.Current.MainWindow;
 			windowAddCodeCompletionData.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			windowAddCodeCompletionData.ShowDialog();
 			Close();
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "WindowCompletion.BtnAddCompletionData_ItemClick");
+			AppCore.Logger.ErrorUploadDialog(exception, "WindowCompletion.BtnAddCompletionData_ItemClick");
 		}
 	}
 
-	private async void R8Ku8cIWpl(object P_0, ItemClickEventArgs P_1)
+	private async void OnDeleteCompletionData(object sender, ItemClickEventArgs e)
 	{
 		try
 		{
@@ -368,13 +337,13 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 				}
 			}
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "WindowCompletion.BtnDeleteAddCompletionData_ItemClick");
+			AppCore.Logger.ErrorUploadDialog(exception, "WindowCompletion.BtnDeleteAddCompletionData_ItemClick");
 		}
 	}
 
-	private void BCruMwmGFT(object P_0, ItemClickEventArgs P_1)
+	private void OnEditCompletionData(object sender, ItemClickEventArgs e)
 	{
 		try
 		{
@@ -388,9 +357,9 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 				Close();
 			}
 		}
-		catch (Exception e)
+		catch (Exception exception)
 		{
-			AppCore.Logger.ErrorUploadDialog(e, "WindowCompletion.BtnEditCompletionData_ItemClick");
+			AppCore.Logger.ErrorUploadDialog(exception, "WindowCompletion.BtnEditCompletionData_ItemClick");
 		}
 	}
 
@@ -398,9 +367,9 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!vW2uzHU3rQ)
+		if (!contentLoaded)
 		{
-			vW2uzHU3rQ = true;
+			contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/viewmodels/documentfolder/codecompletion/windowcompletion.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -428,51 +397,19 @@ public class WindowCompletion : CompletionWindowBase, IComponentConnector
 			break;
 		case 3:
 			BtnAddCompletionData = (BarButtonItem)target;
-			BtnAddCompletionData.ItemClick += QfwuctSPlh;
+			BtnAddCompletionData.ItemClick += OnAddCompletionData;
 			break;
 		case 4:
 			BtnEditCompletionData = (BarButtonItem)target;
-			BtnEditCompletionData.ItemClick += BCruMwmGFT;
+			BtnEditCompletionData.ItemClick += OnEditCompletionData;
 			break;
 		case 5:
 			BtnDeleteAddCompletionData = (BarButtonItem)target;
-			BtnDeleteAddCompletionData.ItemClick += R8Ku8cIWpl;
+			BtnDeleteAddCompletionData.ItemClick += OnDeleteCompletionData;
 			break;
 		default:
-			vW2uzHU3rQ = true;
+			contentLoaded = true;
 			break;
-		}
-	}
-
-	[CompilerGenerated]
-	private void aYxuVlAaqV()
-	{
-		try
-		{
-			if (CompletionToolTip == null)
-			{
-				return;
-			}
-			CompletionToolTip.IsOpen = false;
-			CodeCompletionData selectedItem = completionList.SelectedItem;
-			if (selectedItem != null)
-			{
-				CompletionListBox listBox = completionList.ListBox;
-				if (listBox.ItemContainerGenerator.ContainerFromItem(listBox.SelectedItem) is ListBoxItem)
-				{
-					Point val = ipEuKFoV5J();
-					CompletionToolTip.HorizontalOffset = val.X - 2.0;
-					CompletionToolTip.VerticalOffset = val.Y;
-				}
-				CodeCompletionToolTipViewModel codeCompletionToolTipViewModel = new CodeCompletionToolTipViewModel(selectedItem, FileType);
-				CompletionToolTip.DataContext = codeCompletionToolTipViewModel;
-				CompletionToolTip.IsOpen = true;
-				codeCompletionToolTipViewModel.Loaded(null);
-			}
-		}
-		catch (Exception e)
-		{
-			AppCore.Logger.ErrorUploadDialog(e, "WindowCompletion.CompletionList_SelectionChanged");
 		}
 	}
 }
