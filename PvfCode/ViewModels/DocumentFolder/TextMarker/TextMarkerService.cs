@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -14,96 +12,35 @@ namespace PvfCode.ViewModels.DocumentFolder.TextMarker;
 
 public sealed class TextMarkerService : DocumentColorizingTransformer, IBackgroundRenderer, ITextMarkerService, ITextViewConnect
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass13_0
-	{
-		public TextMarker FbtesiR3CN;
+	private TextSegmentCollection<TextMarker> markers;
 
-		public Brush ofxeLjORFd;
+	private TextDocument document;
 
-		public _003C_003Ec__DisplayClass13_0()
-		{
-		}
+	private readonly List<TextView> textViews = new List<TextView>();
 
-		internal void K02eoVW0QX(VisualLineElement element)
-		{
-			if (ofxeLjORFd != null)
-			{
-				element.TextRunProperties.SetForegroundBrush(ofxeLjORFd);
-			}
-			Typeface typeface = element.TextRunProperties.Typeface;
-			element.TextRunProperties.SetTypeface(new Typeface(typeface.FontFamily, FbtesiR3CN.FontStyle ?? typeface.Style, FbtesiR3CN.FontWeight ?? typeface.Weight, typeface.Stretch));
-		}
-	}
-
-	private TextSegmentCollection<TextMarker> pk7SDtNHUV;
-
-	private TextDocument rW7Sl4RsmB;
-
-	[CompilerGenerated]
-	private EventHandler gwBSjUIJYY;
-
-	private readonly List<TextView> gBFSTRc9V6;
-
-	public IEnumerable<ITextMarker> TextMarkers
-	{
-		get
-		{
-			IEnumerable<ITextMarker> enumerable = pk7SDtNHUV;
-			return enumerable ?? Enumerable.Empty<ITextMarker>();
-		}
-	}
+	public IEnumerable<ITextMarker> TextMarkers => markers ?? Enumerable.Empty<ITextMarker>();
 
 	public KnownLayer Layer => KnownLayer.Selection;
 
-	public event EventHandler RedrawRequested
-	{
-		[CompilerGenerated]
-		add
-		{
-			EventHandler eventHandler = gwBSjUIJYY;
-			EventHandler eventHandler2;
-			do
-			{
-				eventHandler2 = eventHandler;
-				EventHandler value2 = (EventHandler)Delegate.Combine(eventHandler2, value);
-				eventHandler = Interlocked.CompareExchange(ref gwBSjUIJYY, value2, eventHandler2);
-			}
-			while ((object)eventHandler != eventHandler2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			EventHandler eventHandler = gwBSjUIJYY;
-			EventHandler eventHandler2;
-			do
-			{
-				eventHandler2 = eventHandler;
-				EventHandler value2 = (EventHandler)Delegate.Remove(eventHandler2, value);
-				eventHandler = Interlocked.CompareExchange(ref gwBSjUIJYY, value2, eventHandler2);
-			}
-			while ((object)eventHandler != eventHandler2);
-		}
-	}
+	public event EventHandler RedrawRequested;
 
 	public TextMarkerService(TextDocument document)
 	{
-		gBFSTRc9V6 = new List<TextView>();
 		if (document == null)
 		{
 			throw new ArgumentNullException("document");
 		}
-		rW7Sl4RsmB = document;
-		pk7SDtNHUV = new TextSegmentCollection<TextMarker>(document);
+		this.document = document;
+		markers = new TextSegmentCollection<TextMarker>(document);
 	}
 
 	public ITextMarker Create(int startOffset, int length)
 	{
-		if (pk7SDtNHUV == null)
+		if (markers == null)
 		{
 			throw new InvalidOperationException("Cannot create a marker when not attached to a document");
 		}
-		int textLength = rW7Sl4RsmB.TextLength;
+		int textLength = document.TextLength;
 		if (startOffset < 0 || startOffset > textLength)
 		{
 			throw new ArgumentOutOfRangeException("startOffset", startOffset, "Value must be between 0 and " + textLength);
@@ -112,18 +49,18 @@ public sealed class TextMarkerService : DocumentColorizingTransformer, IBackgrou
 		{
 			throw new ArgumentOutOfRangeException("length", length, "length must not be negative and startOffset+length must not be after the end of the document");
 		}
-		TextMarker textMarker = new TextMarker(this, startOffset, length);
-		pk7SDtNHUV.Add(textMarker);
-		return textMarker;
+		TextMarker marker = new TextMarker(this, startOffset, length);
+		markers.Add(marker);
+		return marker;
 	}
 
 	public IEnumerable<ITextMarker> GetMarkersAtOffset(int offset)
 	{
-		if (pk7SDtNHUV == null)
+		if (markers == null)
 		{
 			return Enumerable.Empty<ITextMarker>();
 		}
-		return pk7SDtNHUV.FindSegmentsContaining(offset);
+		return markers.FindSegmentsContaining(offset);
 	}
 
 	public void RemoveAll(Predicate<ITextMarker> predicate)
@@ -132,16 +69,15 @@ public sealed class TextMarkerService : DocumentColorizingTransformer, IBackgrou
 		{
 			throw new ArgumentNullException("predicate");
 		}
-		if (pk7SDtNHUV == null)
+		if (markers == null)
 		{
 			return;
 		}
-		TextMarker[] array = pk7SDtNHUV.ToArray();
-		foreach (TextMarker textMarker in array)
+		foreach (TextMarker marker in markers.ToArray())
 		{
-			if (predicate(textMarker))
+			if (predicate(marker))
 			{
-				Remove(textMarker);
+				Remove(marker);
 			}
 		}
 	}
@@ -153,53 +89,54 @@ public sealed class TextMarkerService : DocumentColorizingTransformer, IBackgrou
 			throw new ArgumentNullException("marker");
 		}
 		TextMarker textMarker = marker as TextMarker;
-		if (pk7SDtNHUV != null && pk7SDtNHUV.Remove(textMarker))
+		if (markers != null && markers.Remove(textMarker))
 		{
-			Ymo5NGv8tI(textMarker);
-			textMarker.sXFSCtUS7y();
+			Redraw(textMarker);
+			textMarker.OnDeleted();
 		}
 	}
 
-	internal void Ymo5NGv8tI(ISegment P_0)
+	internal void Redraw(ISegment segment)
 	{
-		foreach (TextView item in gBFSTRc9V6)
+		foreach (TextView view in textViews)
 		{
-			item.Redraw(P_0, (DispatcherPriority)9);
+			view.Redraw(segment, DispatcherPriority.Normal);
 		}
-		if (gwBSjUIJYY != null)
-		{
-			gwBSjUIJYY(this, EventArgs.Empty);
-		}
+		RedrawRequested?.Invoke(this, EventArgs.Empty);
 	}
 
 	protected override void ColorizeLine(DocumentLine line)
 	{
-		if (pk7SDtNHUV == null)
+		if (markers == null)
 		{
 			return;
 		}
-		int offset = line.Offset;
-		int val = offset + line.Length;
-		using IEnumerator<TextMarker> enumerator = pk7SDtNHUV.FindOverlappingSegments(offset, line.Length).GetEnumerator();
-		while (enumerator.MoveNext())
+		int lineStart = line.Offset;
+		int lineEnd = lineStart + line.Length;
+		foreach (TextMarker marker in markers.FindOverlappingSegments(lineStart, line.Length))
 		{
-			_003C_003Ec__DisplayClass13_0 CS_0024_003C_003E8__locals12 = new _003C_003Ec__DisplayClass13_0();
-			CS_0024_003C_003E8__locals12.FbtesiR3CN = enumerator.Current;
-			CS_0024_003C_003E8__locals12.ofxeLjORFd = null;
-			if (CS_0024_003C_003E8__locals12.FbtesiR3CN.ForegroundColor.HasValue)
+			Brush foregroundBrush = null;
+			if (marker.ForegroundColor != null)
 			{
-				CS_0024_003C_003E8__locals12.ofxeLjORFd = new SolidColorBrush(CS_0024_003C_003E8__locals12.FbtesiR3CN.ForegroundColor.Value);
-				((Freezable)CS_0024_003C_003E8__locals12.ofxeLjORFd).Freeze();
+				foregroundBrush = new SolidColorBrush(marker.ForegroundColor.Value);
+				foregroundBrush.Freeze();
 			}
-			ChangeLinePart(Math.Max(CS_0024_003C_003E8__locals12.FbtesiR3CN.StartOffset, offset), Math.Min(CS_0024_003C_003E8__locals12.FbtesiR3CN.EndOffset, val), delegate(VisualLineElement element)
-			{
-				if (CS_0024_003C_003E8__locals12.ofxeLjORFd != null)
+			ChangeLinePart(
+				Math.Max(marker.StartOffset, lineStart),
+				Math.Min(marker.EndOffset, lineEnd),
+				element =>
 				{
-					element.TextRunProperties.SetForegroundBrush(CS_0024_003C_003E8__locals12.ofxeLjORFd);
-				}
-				Typeface typeface = element.TextRunProperties.Typeface;
-				element.TextRunProperties.SetTypeface(new Typeface(typeface.FontFamily, CS_0024_003C_003E8__locals12.FbtesiR3CN.FontStyle ?? typeface.Style, CS_0024_003C_003E8__locals12.FbtesiR3CN.FontWeight ?? typeface.Weight, typeface.Stretch));
-			});
+					if (foregroundBrush != null)
+					{
+						element.TextRunProperties.SetForegroundBrush(foregroundBrush);
+					}
+					Typeface typeface = element.TextRunProperties.Typeface;
+					element.TextRunProperties.SetTypeface(new Typeface(
+						typeface.FontFamily,
+						marker.FontStyle ?? typeface.Style,
+						marker.FontWeight ?? typeface.Weight,
+						typeface.Stretch));
+				});
 		}
 	}
 
@@ -213,7 +150,7 @@ public sealed class TextMarkerService : DocumentColorizingTransformer, IBackgrou
 		{
 			throw new ArgumentNullException("drawingContext");
 		}
-		if (pk7SDtNHUV == null || !textView.VisualLinesValid)
+		if (markers == null || !textView.VisualLinesValid)
 		{
 			return;
 		}
@@ -222,81 +159,80 @@ public sealed class TextMarkerService : DocumentColorizingTransformer, IBackgrou
 		{
 			return;
 		}
-		int offset = visualLines.First().FirstDocumentLine.Offset;
-		int endOffset = visualLines.Last().LastDocumentLine.EndOffset;
-		foreach (TextMarker item in pk7SDtNHUV.FindOverlappingSegments(offset, endOffset - offset))
+		int viewStart = visualLines.First().FirstDocumentLine.Offset;
+		int viewEnd = visualLines.Last().LastDocumentLine.EndOffset;
+		foreach (TextMarker marker in markers.FindOverlappingSegments(viewStart, viewEnd - viewStart))
 		{
-			if (item.BackgroundColor.HasValue)
+			if (marker.BackgroundColor != null)
 			{
-				BackgroundGeometryBuilder backgroundGeometryBuilder = new BackgroundGeometryBuilder();
-				backgroundGeometryBuilder.AlignToWholePixels = true;
-				backgroundGeometryBuilder.CornerRadius = 3.0;
-				backgroundGeometryBuilder.AddSegment(textView, item);
-				Geometry geometry = backgroundGeometryBuilder.CreateGeometry();
+				BackgroundGeometryBuilder geometryBuilder = new BackgroundGeometryBuilder();
+				geometryBuilder.AlignToWholePixels = true;
+				geometryBuilder.CornerRadius = 3.0;
+				geometryBuilder.AddSegment(textView, marker);
+				Geometry geometry = geometryBuilder.CreateGeometry();
 				if (geometry != null)
 				{
-					SolidColorBrush solidColorBrush = new SolidColorBrush(item.BackgroundColor.Value);
-					((Freezable)solidColorBrush).Freeze();
-					drawingContext.DrawGeometry(solidColorBrush, null, geometry);
+					SolidColorBrush backgroundBrush = new SolidColorBrush(marker.BackgroundColor.Value);
+					backgroundBrush.Freeze();
+					drawingContext.DrawGeometry(backgroundBrush, null, geometry);
 				}
 			}
-			TextMarkerTypes textMarkerTypes = TextMarkerTypes.SquigglyUnderline | TextMarkerTypes.NormalUnderline | TextMarkerTypes.DottedUnderline;
-			if ((item.MarkerTypes & textMarkerTypes) == 0)
+			TextMarkerTypes underlineMarkerTypes = TextMarkerTypes.SquigglyUnderline | TextMarkerTypes.NormalUnderline | TextMarkerTypes.DottedUnderline;
+			if ((marker.MarkerTypes & underlineMarkerTypes) == TextMarkerTypes.None)
 			{
 				continue;
 			}
-			foreach (Rect item2 in BackgroundGeometryBuilder.GetRectsForSegment(textView, item))
+			foreach (Rect rect in BackgroundGeometryBuilder.GetRectsForSegment(textView, marker))
 			{
-				Rect current2 = item2;
-				Point bottomLeft = current2.BottomLeft;
-				Point bottomRight = current2.BottomRight;
-				Brush brush = new SolidColorBrush(item.MarkerColor);
-				((Freezable)brush).Freeze();
-				if ((item.MarkerTypes & TextMarkerTypes.SquigglyUnderline) != TextMarkerTypes.None)
+				Point startPoint = rect.BottomLeft;
+				Point endPoint = rect.BottomRight;
+				Brush usedBrush = new SolidColorBrush(marker.MarkerColor);
+				usedBrush.Freeze();
+				if ((marker.MarkerTypes & TextMarkerTypes.SquigglyUnderline) != TextMarkerTypes.None)
 				{
-					double num = 2.5;
-					int num2 = Math.Max((int)((bottomRight.X - bottomLeft.X) / num) + 1, 4);
-					StreamGeometry streamGeometry = new StreamGeometry();
-					using (StreamGeometryContext streamGeometryContext = streamGeometry.Open())
+					double offset = 2.5;
+					int count = Math.Max((int)((endPoint.X - startPoint.X) / offset) + 1, 4);
+					StreamGeometry geometry = new StreamGeometry();
+					using (StreamGeometryContext context = geometry.Open())
 					{
-						streamGeometryContext.BeginFigure(bottomLeft, isFilled: false, isClosed: false);
-						streamGeometryContext.PolyLineTo(NVy5z4GuVq(bottomLeft, bottomRight, num, num2).ToArray(), isStroked: true, isSmoothJoin: false);
+						context.BeginFigure(startPoint, isFilled: false, isClosed: false);
+						context.PolyLineTo(CreatePoints(startPoint, endPoint, offset, count).ToArray(), isStroked: true, isSmoothJoin: false);
 					}
-					((Freezable)streamGeometry).Freeze();
-					Pen pen = new Pen(brush, 1.0);
-					((Freezable)pen).Freeze();
-					drawingContext.DrawGeometry(Brushes.Transparent, pen, streamGeometry);
+					geometry.Freeze();
+					Pen usedPen = new Pen(usedBrush, 1.0);
+					usedPen.Freeze();
+					drawingContext.DrawGeometry(Brushes.Transparent, usedPen, geometry);
 				}
-				if ((item.MarkerTypes & TextMarkerTypes.NormalUnderline) != TextMarkerTypes.None)
+				if ((marker.MarkerTypes & TextMarkerTypes.NormalUnderline) != TextMarkerTypes.None)
 				{
-					Pen pen2 = new Pen(brush, 1.0);
-					((Freezable)pen2).Freeze();
-					drawingContext.DrawLine(pen2, bottomLeft, bottomRight);
+					Pen usedPen = new Pen(usedBrush, 1.0);
+					usedPen.Freeze();
+					drawingContext.DrawLine(usedPen, startPoint, endPoint);
 				}
-				if ((item.MarkerTypes & TextMarkerTypes.DottedUnderline) != TextMarkerTypes.None)
+				if ((marker.MarkerTypes & TextMarkerTypes.DottedUnderline) != TextMarkerTypes.None)
 				{
-					Pen pen3 = new Pen(brush, 1.0);
-					pen3.DashStyle = DashStyles.Dot;
-					((Freezable)pen3).Freeze();
-					drawingContext.DrawLine(pen3, bottomLeft, bottomRight);
+					Pen usedPen = new Pen(usedBrush, 1.0);
+					usedPen.DashStyle = DashStyles.Dot;
+					usedPen.Freeze();
+					drawingContext.DrawLine(usedPen, startPoint, endPoint);
 				}
 			}
 		}
 	}
 
-	private IEnumerable<Point> NVy5z4GuVq(Point P_0, Point P_1, double P_2, int P_3)
+	private IEnumerable<Point> CreatePoints(Point start, Point end, double offset, int count)
 	{
-		for (int i = 0; i < P_3; i++)
+		for (int i = 0; i < count; i++)
 		{
-			yield return new Point(P_0.X + (double)i * P_2, P_0.Y - (((i + 1) % 2 == 0) ? P_2 : 0.0));
+			yield return new Point(start.X + (double)i * offset, start.Y - (((i + 1) % 2 == 0) ? offset : 0.0));
 		}
 	}
 
 	void ITextViewConnect.AddToTextView(TextView textView)
 	{
-		if (textView != null && !gBFSTRc9V6.Contains(textView))
+		if (textView != null && !textViews.Contains(textView))
 		{
-			gBFSTRc9V6.Add(textView);
+			textViews.Add(textView);
 		}
 	}
 
@@ -304,7 +240,7 @@ public sealed class TextMarkerService : DocumentColorizingTransformer, IBackgrou
 	{
 		if (textView != null)
 		{
-			gBFSTRc9V6.Remove(textView);
+			textViews.Remove(textView);
 		}
 	}
 }

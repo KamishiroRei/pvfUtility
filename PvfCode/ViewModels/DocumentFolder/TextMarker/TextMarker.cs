@@ -1,6 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using ICSharpCode.AvalonEdit.Document;
@@ -9,28 +7,19 @@ namespace PvfCode.ViewModels.DocumentFolder.TextMarker;
 
 public sealed class TextMarker : TextSegment, ITextMarker
 {
-	private readonly TextMarkerService h9IShoVmy0;
+	private readonly TextMarkerService service;
 
-	[CompilerGenerated]
-	private EventHandler zndSvcv41q;
+	private Color? backgroundColor;
 
-	private Color? rZaSB682II;
+	private Color? foregroundColor;
 
-	private Color? t4CSFR77C1;
+	private FontWeight? fontWeight;
 
-	private FontWeight? AQjSrYHj7m;
+	private FontStyle? fontStyle;
 
-	private FontStyle? pejSWpfNBg;
+	private TextMarkerTypes markerTypes;
 
-	[CompilerGenerated]
-	private object VRbSm8OkqN;
-
-	private TextMarkerTypes ENRS2lyOWY;
-
-	private Color eqoSfOj9KM;
-
-	[CompilerGenerated]
-	private object QGXS5Ypdee;
+	private Color markerColor;
 
 	public bool IsDeleted => !base.IsConnectedToCollection;
 
@@ -38,14 +27,14 @@ public sealed class TextMarker : TextSegment, ITextMarker
 	{
 		get
 		{
-			return rZaSB682II;
+			return backgroundColor;
 		}
 		set
 		{
-			if (rZaSB682II != value)
+			if (backgroundColor != value)
 			{
-				rZaSB682II = value;
-				w7pSHMeWEV();
+				backgroundColor = value;
+				Redraw();
 			}
 		}
 	}
@@ -54,14 +43,14 @@ public sealed class TextMarker : TextSegment, ITextMarker
 	{
 		get
 		{
-			return t4CSFR77C1;
+			return foregroundColor;
 		}
 		set
 		{
-			if (t4CSFR77C1 != value)
+			if (foregroundColor != value)
 			{
-				t4CSFR77C1 = value;
-				w7pSHMeWEV();
+				foregroundColor = value;
+				Redraw();
 			}
 		}
 	}
@@ -70,14 +59,14 @@ public sealed class TextMarker : TextSegment, ITextMarker
 	{
 		get
 		{
-			return AQjSrYHj7m;
+			return fontWeight;
 		}
 		set
 		{
-			if (AQjSrYHj7m != value)
+			if (fontWeight != value)
 			{
-				AQjSrYHj7m = value;
-				w7pSHMeWEV();
+				fontWeight = value;
+				Redraw();
 			}
 		}
 	}
@@ -86,44 +75,32 @@ public sealed class TextMarker : TextSegment, ITextMarker
 	{
 		get
 		{
-			return pejSWpfNBg;
+			return fontStyle;
 		}
 		set
 		{
-			if (pejSWpfNBg != value)
+			if (fontStyle != value)
 			{
-				pejSWpfNBg = value;
-				w7pSHMeWEV();
+				fontStyle = value;
+				Redraw();
 			}
 		}
 	}
 
-	public object Tag
-	{
-		[CompilerGenerated]
-		get
-		{
-			return VRbSm8OkqN;
-		}
-		[CompilerGenerated]
-		set
-		{
-			VRbSm8OkqN = value;
-		}
-	}
+	public object Tag { get; set; }
 
 	public TextMarkerTypes MarkerTypes
 	{
 		get
 		{
-			return ENRS2lyOWY;
+			return markerTypes;
 		}
 		set
 		{
-			if (ENRS2lyOWY != value)
+			if (markerTypes != value)
 			{
-				ENRS2lyOWY = value;
-				w7pSHMeWEV();
+				markerTypes = value;
+				Redraw();
 			}
 		}
 	}
@@ -132,61 +109,21 @@ public sealed class TextMarker : TextSegment, ITextMarker
 	{
 		get
 		{
-			return eqoSfOj9KM;
+			return markerColor;
 		}
 		set
 		{
-			if (eqoSfOj9KM != value)
+			if (markerColor != value)
 			{
-				eqoSfOj9KM = value;
-				w7pSHMeWEV();
+				markerColor = value;
+				Redraw();
 			}
 		}
 	}
 
-	public object ToolTip
-	{
-		[CompilerGenerated]
-		get
-		{
-			return QGXS5Ypdee;
-		}
-		[CompilerGenerated]
-		set
-		{
-			QGXS5Ypdee = value;
-		}
-	}
+	public object ToolTip { get; set; }
 
-	public event EventHandler Deleted
-	{
-		[CompilerGenerated]
-		add
-		{
-			EventHandler eventHandler = zndSvcv41q;
-			EventHandler eventHandler2;
-			do
-			{
-				eventHandler2 = eventHandler;
-				EventHandler value2 = (EventHandler)Delegate.Combine(eventHandler2, value);
-				eventHandler = Interlocked.CompareExchange(ref zndSvcv41q, value2, eventHandler2);
-			}
-			while ((object)eventHandler != eventHandler2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			EventHandler eventHandler = zndSvcv41q;
-			EventHandler eventHandler2;
-			do
-			{
-				eventHandler2 = eventHandler;
-				EventHandler value2 = (EventHandler)Delegate.Remove(eventHandler2, value);
-				eventHandler = Interlocked.CompareExchange(ref zndSvcv41q, value2, eventHandler2);
-			}
-			while ((object)eventHandler != eventHandler2);
-		}
-	}
+	public event EventHandler Deleted;
 
 	public TextMarker(TextMarkerService service, int startOffset, int length)
 	{
@@ -194,28 +131,25 @@ public sealed class TextMarker : TextSegment, ITextMarker
 		{
 			throw new ArgumentNullException("service");
 		}
-		h9IShoVmy0 = service;
+		this.service = service;
 		base.StartOffset = startOffset;
 		base.Length = length;
-		ENRS2lyOWY = TextMarkerTypes.None;
+		markerTypes = TextMarkerTypes.None;
 	}
 
 	public void Delete()
 	{
-		h9IShoVmy0.Remove(this);
+		service.Remove(this);
 	}
 
-	internal void sXFSCtUS7y()
+	internal void OnDeleted()
 	{
-		if (zndSvcv41q != null)
-		{
-			zndSvcv41q(this, EventArgs.Empty);
-		}
+		Deleted?.Invoke(this, EventArgs.Empty);
 	}
 
-	private void w7pSHMeWEV()
+	private void Redraw()
 	{
-		h9IShoVmy0.Ymo5NGv8tI(this);
+		service.Redraw(this);
 	}
 
 	int ITextMarker.StartOffset => base.StartOffset;
