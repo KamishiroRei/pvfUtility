@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -10,28 +9,9 @@ namespace PvfCode.ViewModels.Login;
 
 public class LoginViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private Action qYWm7grJoH;
+	private Window LoginWindow { get; set; }
 
-	[CompilerGenerated]
-	private Window aiOmXUqXMK;
-
-	[CompilerGenerated]
-	private RegIsteredAccountRes oUFmpEPYDq;
-
-	public Action Close
-	{
-		[CompilerGenerated]
-		get
-		{
-			return qYWm7grJoH;
-		}
-		[CompilerGenerated]
-		set
-		{
-			qYWm7grJoH = value;
-		}
-	}
+	public Action Close { get; set; }
 
 	public bool IsLoading
 	{
@@ -53,7 +33,7 @@ public class LoginViewModel : ViewModelBase
 		}
 		set
 		{
-			SetProperty(() => ViewType, value, wDbmZh1lVP);
+			SetProperty(() => ViewType, value, OnViewTypeChanged);
 		}
 	}
 
@@ -79,19 +59,7 @@ public class LoginViewModel : ViewModelBase
 		}
 	}
 
-	public RegIsteredAccountRes RegIsteredModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return oUFmpEPYDq;
-		}
-		[CompilerGenerated]
-		set
-		{
-			oUFmpEPYDq = value;
-		}
-	}
+	public RegIsteredAccountRes RegIsteredModel { get; set; }
 
 	public string PasswordCaption
 	{
@@ -105,26 +73,12 @@ public class LoginViewModel : ViewModelBase
 		}
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private Window l3tmJat4iN()
-	{
-		return aiOmXUqXMK;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void EoZmkLlA8v(Window P_0)
-	{
-		aiOmXUqXMK = P_0;
-	}
-
 	public void Loaded(Window win)
 	{
-		EoZmkLlA8v(win);
+		LoginWindow = win;
 	}
 
-	private void wDbmZh1lVP()
+	private void OnViewTypeChanged()
 	{
 		RaisePropertyChanged("Title");
 		RaisePropertyChanged("PasswordCaption");
@@ -167,7 +121,7 @@ public class LoginViewModel : ViewModelBase
 			title = AppSetting.Instance.GetIlogger().GetStr("LoginWindow_FindPasswordLoading");
 			break;
 		}
-		WindowLoading windowLoading = AppCore.CreateLoading(title, l3tmJat4iN());
+		WindowLoading windowLoading = AppCore.CreateLoading(title, LoginWindow);
 		windowLoading.Show();
 		try
 		{
