@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -21,50 +20,11 @@ namespace PvfCode.ViewModels;
 
 public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 {
-	[CompilerGenerated]
-	private TextDocument AO0F1qyve0;
-
-	[CompilerGenerated]
-	private IHighlightingDefinition lbeFwssjAy;
-
-	[CompilerGenerated]
-	private PVfTreeChildrenSelector YbhFoNrL3D;
-
-	[CompilerGenerated]
-	private ObservableConcurrentDictionaryEx<string, SettingMenuItem> PgOFsceOCF;
-
-	[CompilerGenerated]
-	private TextDocument HsJFLFVtWS;
-
 	internal bool mf9FnuluQs;
 
-	public TextDocument ScriptFileContentFormattingDocument
-	{
-		[CompilerGenerated]
-		get
-		{
-			return AO0F1qyve0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			AO0F1qyve0 = value;
-		}
-	}
+	public TextDocument ScriptFileContentFormattingDocument { get; set; }
 
-	public IHighlightingDefinition Highlighting
-	{
-		[CompilerGenerated]
-		get
-		{
-			return lbeFwssjAy;
-		}
-		[CompilerGenerated]
-		set
-		{
-			lbeFwssjAy = value;
-		}
-	}
+	public IHighlightingDefinition Highlighting { get; set; }
 
 	public bool ShowSaveButton
 	{
@@ -78,33 +38,9 @@ public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public PVfTreeChildrenSelector ChildNodesSelector
-	{
-		[CompilerGenerated]
-		get
-		{
-			return YbhFoNrL3D;
-		}
-		[CompilerGenerated]
-		set
-		{
-			YbhFoNrL3D = value;
-		}
-	}
+	public PVfTreeChildrenSelector ChildNodesSelector { get; set; }
 
-	public ObservableConcurrentDictionaryEx<string, SettingMenuItem> TreeMenu
-	{
-		[CompilerGenerated]
-		get
-		{
-			return PgOFsceOCF;
-		}
-		[CompilerGenerated]
-		set
-		{
-			PgOFsceOCF = value;
-		}
-	}
+	public ObservableConcurrentDictionaryEx<string, SettingMenuItem> TreeMenu { get; set; }
 
 	public KeyValuePair<string, SettingMenuItem> TreeSelectedItem
 	{
@@ -114,7 +50,7 @@ public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 		}
 		set
 		{
-			SetProperty<KeyValuePair<string, SettingMenuItem>>(() => TreeSelectedItem, value, pY6FgADB64);
+			SetProperty<KeyValuePair<string, SettingMenuItem>>(() => TreeSelectedItem, value, UpdateSaveButtonVisibility);
 		}
 	}
 
@@ -130,39 +66,27 @@ public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public TextDocument ItemCodeHoverDocument
-	{
-		[CompilerGenerated]
-		get
-		{
-			return HsJFLFVtWS;
-		}
-		[CompilerGenerated]
-		set
-		{
-			HsJFLFVtWS = value;
-		}
-	}
+	public TextDocument ItemCodeHoverDocument { get; set; }
 
 	public WindowPublicSettingViewModel()
 	{
 		mf9FnuluQs = true;
 		TreeMenu = new ObservableConcurrentDictionaryEx<string, SettingMenuItem>();
-		ChildNodesSelector = new PVfTreeChildrenSelector(prLFatUyHh);
+		ChildNodesSelector = new PVfTreeChildrenSelector(GetChildNodes);
 		ScriptFileContentFormattingDocument = new TextDocument();
 		ItemCodeHoverDocument = new TextDocument();
 		ReadScriptFileContentFormatting();
-		V8LF66WI2N();
+		ReadItemCodeHoverXml();
 		Highlighting = ThemeSwitcher.Instance.GetHighlightingDefinition("XML");
 	}
 
-	private IEnumerable prLFatUyHh(object P_0)
+	private IEnumerable GetChildNodes(object item)
 	{
-		if (P_0 == null)
+		if (item == null)
 		{
 			return null;
 		}
-		KeyValuePair<string, SettingMenuItem> keyValuePair = (KeyValuePair<string, SettingMenuItem>)P_0;
+		KeyValuePair<string, SettingMenuItem> keyValuePair = (KeyValuePair<string, SettingMenuItem>)item;
 		if (!keyValuePair.Value.HaveChildren())
 		{
 			return null;
@@ -170,7 +94,7 @@ public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 		return keyValuePair.Value.Children;
 	}
 
-	private void pY6FgADB64()
+	private void UpdateSaveButtonVisibility()
 	{
 		if (TreeSelectedItem.Key == "代码智能提示" && TreeSelectedItem.Value.Parname == "文本编辑器")
 		{
@@ -263,7 +187,7 @@ public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private void V8LF66WI2N()
+	private void ReadItemCodeHoverXml()
 	{
 		try
 		{
@@ -307,7 +231,7 @@ public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 	{
 		if (AppSetting.Instance.EditConfig.ItemCodeConvertItemNameConfiger.XmlToModel(showErrDialog: true))
 		{
-			V8LF66WI2N();
+			ReadItemCodeHoverXml();
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_ReloadSuccess"));
 		}
 	}
