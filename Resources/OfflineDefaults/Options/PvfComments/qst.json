@@ -148,7 +148,7 @@
       "Section": "int data",
       "Title": "int数据",
       "Comment": "int数据\n在任务.qst中\n当 [type] = `[seeking]`时\n两个数值\n分别为: 所需物品 所需物品数量\n\n当 [type] = `[condition under clear]` 时\n三个数值\n分别为: 副本代码 副本難度 组队人数\n也可以只填写前2个参数 副本代码 副本难度\n\n当[type]=[hunt monster]时\n四个数值\n分别为 副本代码 难度 怪物ID 怪物数量\n\n当type=[[custom quest]]时\n三个数值\n1 0 1未知 有时最后一个数可能是任务怪物ID\n\n`不修改前辈已有信息的补充：部分怪物会把机制信息写在int数据而不是\natk info里，想修改的话，有个笨方法，一个一个改，改对了就记住`",
-      "OfficialDescription": "#### 官方示例: questsample.qst\n\n```pvf\n[int data] // 整数资料。用法参考最底部的注释。\n38 3\n29 2\n[/int data] // 闭合。\n```\n\n```pvf\n[int data] // APC解救任务的情况下，[int data]中写入\u003c需通关的地图索引\u003e和\u003capc的索引\u003e。\n\u003c需通关的地图索引\u003e \u003capc的索引\u003e\n[/int data]\n```\n\n```pvf\n[int data]\n\u003c地城索引\u003e \u003c难度\u003e \u003c对象索引\u003e \u003c对象种类\u003e \u003c对象数量\u003e //// \u003c对象种类\u003e怪物为1，APC为2，被动对象为3。\n[/int data]\n```",
+      "OfficialDescription": "#### 官方示例: questsample.qst\n\n```pvf\n[int data] // 整数资料。用法参考最底部的注释。\n38 3\n29 2\n[/int data] // 闭合。\n```\n\n```pvf\n[int data] // APC解救任务的情况下，[int data]中写入\u003c需通关的地图索引\u003e和\u003capc的索引\u003e。\n\u003c需通关的地图索引\u003e \u003capc的索引\u003e\n[/int data]\n```\n\n```pvf\n[int data]\n\u003c地城索引\u003e \u003c难度\u003e \u003c对象索引\u003e \u003c对象种类\u003e \u003c对象数量\u003e //// \u003c对象种类\u003e怪物为1，APC为2，被动对象为3。\n[/int data]\n```\n\n 0 : [0]地下城索引 [1]地下城难度 [2]最大通关时间(s)\n//                 1 : [0]地下城索引 [1]地下城难度 [2]最大被击数\n//                 2 : [0]地下城索引 [1]地下城难度 [2]最低技巧评分(%)\n//                 3 : [0]地下城索引 [1]地下城难度 [2]最低风格评分(%)\n//                 4 : [0]地下城索引 [1]地下城难度\n//                 5 : [0]地下城索引 [1]地下城难度 [2]队伍人数\n//                 6 : [0]地下城索引 [1]地下城难度\n//                 7 : [0]地下城索引 [1]地下城难度 [2]最低连击评分（旧版数值，当前已意义 - SSS:105 SS:95 S:85 A:70 B:55 C:45 D:40 E:35 F:0）\n//             8 : [0]地下城索引 [1]地下城难度 [2]最低背击成功次数\n//             9 : [0]地下城索引 [1]地下城难度 [2]最低破招成功次数\n//             10 : [0]地下城索引 [1]地下城难度 [2]需达成的最大连击次数\n//             11 : [0]地下城索引 [1]地下城难度 [2]需通关的地图数量\n//             12 : [0]地下城索引 [1]地下城难度 [2]技能索引(需注意角色区分) [3]最少用次数(0 或 -1 则处理为不使用)\n//             13 : [0]地下城索引 [1]地下城难度 [2]物品索引(0 或 -1 则涵盖所有消耗品) [4]使用限制次数(0 或 -1 则处理为不使用)，使用负数则表示必须使用该次数才能通关\n//             14 : [0]地下城索引 [1]地下城难度 [2]物品索引(0 或 -1 则涵盖所有材料道具) [4]使用限制次数(0 或 -1 则处理为不使用)，使用负数则表示必须使用该次数才能通关\n//             15 : [0]地下城索引 [1]地下城难度 [2]单次攻击需击中的最低怪物数(0 或 -1 则无关怪物数量) [4]成功次数(0 或 -1 则处理为 1 次)\n//             16 : [0]地下城索引 [1]地下城难度 [2]被动对象索引(0 或 -1 则任意对象均可) [4]限制数量(0 或 -1 则表示不破坏任何对象通关)",
       "Closing": true,
       "Authors": "Xiti Fox"
     },
@@ -289,6 +289,16 @@
       "Title": "类型",
       "Comment": "[type]任务完成条件类型\n`[condition under clear]`过图\n`[seeking]`需要道具\n`[hunt monster]`击杀怪物次数\n`[meet npc]`对话NPC\n`[custom quest]`按字面意思应该是自定任务 暂且叫私人任务或者个人任务吧 学习技能或者加点时使用 对话时也出现了\n`[disjoint item]`分解装备\n`[clear map]` 任务在地图里找人",
       "OfficialDescription": "#### 官方示例: questsample.qst\n\n```pvf\n// 任务完成条件。\n[type] `[seeking]` // 任务的类型。可选择 `[seeking]` `[condition under clear]` `[hunt monster]` `[hunt enemy]` `[clear map]` `[meet npc]` `[pvp rank]` `[powerwar win]` `[powerwar point]` 之一。\n```\n\n```pvf\n// ※ APC相关任务用法\n// APC同行（解救后同行条件相同）。\n[type] `[clear map]`\n```\n\n```pvf\n// apc简单解救。\n[type] `[hunt enemy]`\n```",
+      "Closing": false,
+      "Authors": "Like浪浪：547314354|dongjak|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "condition under clear",
+      "Title": "限定条件通关",
+      "Comment": "若无关难度，则难度填 -1",
+      "OfficialDescription": "#### 官方示例: questsample.qst\n\n[子类型]:\n 0:限时通关\n//                 1 : 累计被击数低于指定量\n//                 2 : 技巧评分高于指定量\n//                 3 : 风格评分高于指定量\n//                 4 : 不使用复活币通关\n//                 5 : 指定队伍人数通关（通关时判定）\n//                 6 : 直接通关\n//                 7 : 达到特定连击评分\n//             8 : 背击成功次数达到指定数以上\n//             9 : 破招成功次数达到指定数以上\n//             10 : 最大连击数达到指定数以上\n//             11 : 通关指定数量的地图\n//             12 : 限制技能使用次数\n//             13 : 限制消耗品使用\n//             14 : 限制材料道具使用（主要指无色小晶块）\n//             15 : 限制多重攻击次数\n//             16 : 限制破坏被动对象的数量",
       "Closing": false,
       "Authors": "Like浪浪：547314354|dongjak|Xiti Fox"
     },
