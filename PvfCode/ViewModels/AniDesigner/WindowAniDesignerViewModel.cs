@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,27 +59,9 @@ public class WindowAniDesignerViewModel : ViewModelBase
 		}
 	}
 
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass22_0
-	{
-		public AniFileGroup HnsEvETV5P;
+	private CancellationTokenSource PlaybackCancellationTokenSource { get; set; }
 
-		public WinOpenAniFileDialogViewModel MBeEBEDVD9;
-
-		public _003C_003Ec__DisplayClass22_0()
-		{
-		}
-
-		internal Task<bool>? tJOEhqiMJu()
-		{
-			return HnsEvETV5P.LoadData(AppCore.ViewModelBase.PVF.GetFile(MBeEBEDVD9.FilePath), isDesigner: true);
-		}
-	}
-
-	[CompilerGenerated]
-	private CancellationTokenSource sh0QjUwLWC;
-
-	private readonly AsyncLock gkOQT2QFXa;
+	private readonly AsyncLock playbackLock;
 
 	public bool IsLoading
 	{
@@ -182,7 +163,7 @@ public class WindowAniDesignerViewModel : ViewModelBase
 
 	public WindowAniDesignerViewModel()
 	{
-		gkOQT2QFXa = new AsyncLock();
+		playbackLock = new AsyncLock();
 	}
 
 	public void LoadAniFileGroup(AniFileGroup aniFileGroup)
@@ -200,13 +181,12 @@ public class WindowAniDesignerViewModel : ViewModelBase
 		};
 		if (winOpenAniFileDialog.ShowDialog().Value)
 		{
-			_003C_003Ec__DisplayClass22_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass22_0();
-			CS_0024_003C_003E8__locals5.HnsEvETV5P = new AniFileGroup();
-			CS_0024_003C_003E8__locals5.MBeEBEDVD9 = winOpenAniFileDialog.DataContext as WinOpenAniFileDialogViewModel;
+			AniFileGroup aniFileGroup = new AniFileGroup();
+			WinOpenAniFileDialogViewModel dialogViewModel = winOpenAniFileDialog.DataContext as WinOpenAniFileDialogViewModel;
 			IsLoading = true;
 			WindowLoading loading = AppCore.CreateLoading("载入中...", win);
 			loading.Show();
-			if (!(await Task.Run(() => CS_0024_003C_003E8__locals5.HnsEvETV5P.LoadData(AppCore.ViewModelBase.PVF.GetFile(CS_0024_003C_003E8__locals5.MBeEBEDVD9.FilePath), isDesigner: true))))
+			if (!(await Task.Run(() => aniFileGroup.LoadData(AppCore.ViewModelBase.PVF.GetFile(dialogViewModel.FilePath), isDesigner: true))))
 			{
 				IsLoading = false;
 				loading.Close();
@@ -214,7 +194,7 @@ public class WindowAniDesignerViewModel : ViewModelBase
 			else
 			{
 				loading.Close();
-				AniFileGroup = CS_0024_003C_003E8__locals5.HnsEvETV5P;
+				AniFileGroup = aniFileGroup;
 				IsLoading = false;
 			}
 		}
@@ -228,7 +208,7 @@ public class WindowAniDesignerViewModel : ViewModelBase
 	[Command]
 	public void OnClose()
 	{
-		b4dxNqenQa();
+		CancelPlayback();
 		AniFileGroup = null;
 	}
 
@@ -243,25 +223,11 @@ public class WindowAniDesignerViewModel : ViewModelBase
 	{
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private CancellationTokenSource iX3xzScRuG()
-	{
-		return sh0QjUwLWC;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void efIQDWaZ50(CancellationTokenSource P_0)
-	{
-		sh0QjUwLWC = P_0;
-	}
-
 	public async void PlayStart(bool isStop)
 	{
 		if (isStop)
 		{
-			iX3xzScRuG().Cancel();
+			PlaybackCancellationTokenSource.Cancel();
 		}
 		else
 		{
@@ -269,17 +235,17 @@ public class WindowAniDesignerViewModel : ViewModelBase
 			{
 				return;
 			}
-			using (await gkOQT2QFXa.LockAsync())
+			using (await playbackLock.LockAsync())
 			{
 				while (IsPlay)
 				{
-					if (!iX3xzScRuG().IsCancellationRequested)
+					if (!PlaybackCancellationTokenSource.IsCancellationRequested)
 					{
-						iX3xzScRuG()?.Cancel();
+						PlaybackCancellationTokenSource?.Cancel();
 					}
 					await Task.Delay(10);
 				}
-				efIQDWaZ50(new CancellationTokenSource());
+				PlaybackCancellationTokenSource = new CancellationTokenSource();
 				await Task.Run((Action)PlayTask);
 			}
 		}
@@ -290,33 +256,33 @@ public class WindowAniDesignerViewModel : ViewModelBase
 		IsPlay = true;
 		try
 		{
-			while (iX3xzScRuG() != null && !iX3xzScRuG().IsCancellationRequested)
+			while (PlaybackCancellationTokenSource != null && !PlaybackCancellationTokenSource.IsCancellationRequested)
 			{
-				List<FRAMEModel> list = AniFileGroup?.AniFileData?.Items;
-				if (list == null)
+				List<FRAMEModel> frames = AniFileGroup?.AniFileData?.Items;
+				if (frames == null)
 				{
-					iX3xzScRuG()?.Cancel();
+					PlaybackCancellationTokenSource?.Cancel();
 					continue;
 				}
-				FRAMEModel[] array = list.ToArray();
-				foreach (FRAMEModel fRAMEModel in array)
+				FRAMEModel[] frameSnapshot = frames.ToArray();
+				foreach (FRAMEModel frame in frameSnapshot)
 				{
-					if (iX3xzScRuG().IsCancellationRequested)
+					if (PlaybackCancellationTokenSource.IsCancellationRequested)
 					{
 						break;
 					}
-					SelectedFrame = fRAMEModel;
-					if (fRAMEModel.DELAY < 10)
+					SelectedFrame = frame;
+					if (frame.DELAY < 10)
 					{
 						await Task.Delay(20);
 					}
-					else if (fRAMEModel.DELAY > 10000)
+					else if (frame.DELAY > 10000)
 					{
 						await Task.Delay(5000);
 					}
 					else
 					{
-						await Task.Delay(fRAMEModel.DELAY);
+						await Task.Delay(frame.DELAY);
 					}
 				}
 			}
@@ -328,8 +294,8 @@ public class WindowAniDesignerViewModel : ViewModelBase
 		IsPlay = false;
 	}
 
-	private void b4dxNqenQa()
+	private void CancelPlayback()
 	{
-		iX3xzScRuG()?.Cancel();
+		PlaybackCancellationTokenSource?.Cancel();
 	}
 }
