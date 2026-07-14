@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,36 +21,7 @@ namespace PvfCode.Views;
 
 public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConnector
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass3_0
-	{
-		public WindowPublicSettingViewModel XotwNNp99a;
-
-		public WindowPublicSetting nv5wzQ37NG;
-
-		public _003C_003Ec__DisplayClass3_0()
-		{
-		}
-
-		internal void WkewR4Rlhg()
-		{
-			foreach (KeyValuePair<string, SettingMenuItem> item in (IEnumerable<KeyValuePair<string, SettingMenuItem>>)XotwNNp99a.TreeMenu)
-			{
-				if (item.Key == "通用")
-				{
-					XotwNNp99a.TreeSelectedItem = item;
-					nv5wzQ37NG.tree.SelectedItems = new List<KeyValuePair<string, SettingMenuItem>> { item };
-				}
-			}
-			nv5wzQ37NG.tree.View.ExpandAllNodes();
-			if (!string.IsNullOrEmpty(nv5wzQ37NG.MJsCiy1j7P))
-			{
-				nv5wzQ37NG.I3mCYpGIRU(nv5wzQ37NG.MJsCiy1j7P);
-			}
-		}
-	}
-
-	private readonly string? MJsCiy1j7P;
+	private readonly string? initialMenuKey;
 
 	internal WindowPublicSetting win;
 
@@ -63,7 +33,7 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 
 	internal ContentControl contentPanel;
 
-	private bool LBaCuTy0vJ;
+	private bool _contentLoaded;
 
 	public WindowPublicSetting(string? menuKey = null)
 	{
@@ -74,7 +44,7 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		double primaryScreenWidth = SystemParameters.PrimaryScreenWidth;
 		base.Height = primaryScreenHeight * 0.5;
 		base.Width = primaryScreenWidth * 0.5;
-		MJsCiy1j7P = menuKey;
+		initialMenuKey = menuKey;
 	}
 
 	protected override void OnClosed(EventArgs e)
@@ -82,39 +52,37 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		base.OnClosed(e);
 		WindowPublicSettingViewModel obj = base.DataContext as WindowPublicSettingViewModel;
 		obj.Dispose();
-		obj.mf9FnuluQs = false;
+		obj.showLanguageRestartPrompt = false;
 		contentPanel.Content = null;
 		base.DataContext = null;
 		Application.Current.MainWindow.Activate();
 	}
 
-	private async void RDmC2jF5Bq(object P_0, RoutedEventArgs P_1)
+	private async void OnLoaded(object sender, RoutedEventArgs e)
 	{
-		_003C_003Ec__DisplayClass3_0 CS_0024_003C_003E8__locals10 = new _003C_003Ec__DisplayClass3_0();
-		CS_0024_003C_003E8__locals10.nv5wzQ37NG = this;
-		lbJCfIC6gA();
-		CS_0024_003C_003E8__locals10.XotwNNp99a = (WindowPublicSettingViewModel)base.DataContext;
-		CS_0024_003C_003E8__locals10.XotwNNp99a.TreeMenu.NotifyObserversOfChange();
+		PopulateTreeMenu();
+		WindowPublicSettingViewModel viewModel = (WindowPublicSettingViewModel)base.DataContext;
+		viewModel.TreeMenu.NotifyObserversOfChange();
 		await Task.Delay(100);
 		await ((DispatcherObject)this).Dispatcher.BeginInvoke((Delegate)(Action)delegate
 		{
-			foreach (KeyValuePair<string, SettingMenuItem> item in (IEnumerable<KeyValuePair<string, SettingMenuItem>>)CS_0024_003C_003E8__locals10.XotwNNp99a.TreeMenu)
+			foreach (KeyValuePair<string, SettingMenuItem> item in (IEnumerable<KeyValuePair<string, SettingMenuItem>>)viewModel.TreeMenu)
 			{
 				if (item.Key == "通用")
 				{
-					CS_0024_003C_003E8__locals10.XotwNNp99a.TreeSelectedItem = item;
-					CS_0024_003C_003E8__locals10.nv5wzQ37NG.tree.SelectedItems = new List<KeyValuePair<string, SettingMenuItem>> { item };
+					viewModel.TreeSelectedItem = item;
+					tree.SelectedItems = new List<KeyValuePair<string, SettingMenuItem>> { item };
 				}
 			}
-			CS_0024_003C_003E8__locals10.nv5wzQ37NG.tree.View.ExpandAllNodes();
-			if (!string.IsNullOrEmpty(CS_0024_003C_003E8__locals10.nv5wzQ37NG.MJsCiy1j7P))
+			tree.View.ExpandAllNodes();
+			if (!string.IsNullOrEmpty(initialMenuKey))
 			{
-				CS_0024_003C_003E8__locals10.nv5wzQ37NG.I3mCYpGIRU(CS_0024_003C_003E8__locals10.nv5wzQ37NG.MJsCiy1j7P);
+				NavigateToMenu(initialMenuKey);
 			}
 		}, Array.Empty<object>());
 	}
 
-	private void lbJCfIC6gA()
+	private void PopulateTreeMenu()
 	{
 		ObservableConcurrentDictionaryEx<string, SettingMenuItem> treeMenu = ((WindowPublicSettingViewModel)base.DataContext).TreeMenu;
 		treeMenu.Add(AppSetting.Instance.GetIlogger()?.GetStr("ViewGlobalOptions_TreeMenu_Common"), new SettingMenuItem
@@ -202,7 +170,7 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		});
 	}
 
-	private void tAtC5kxQKJ(object P_0, EditValueChangedEventArgs P_1)
+	private void OnEditorHighlightColorChanged(object sender, EditValueChangedEventArgs e)
 	{
 		ThemeSwitcher.Instance.UpdateTextEditorColorOptions();
 		foreach (DocumentBase document in AppCore.ViewModelBase.RootDocument.Documents)
@@ -214,40 +182,40 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		}
 	}
 
-	private void OZXCS4Sh78(object P_0, RoutedEventArgs P_1)
+	private void OnCancelClick(object sender, RoutedEventArgs e)
 	{
 		Close();
 	}
 
-	private async void WjOCASXqep(object P_0, RoutedEventArgs P_1)
+	private async void OnSaveClick(object sender, RoutedEventArgs e)
 	{
-		if (wjuC4P6Nj6())
+		if (ValidateSettings())
 		{
 			await AppSetting.Instance.SaveSetting();
 			Close();
 		}
 	}
 
-	private bool wjuC4P6Nj6()
+	private bool ValidateSettings()
 	{
 		_ = (WindowPublicSettingViewModel)base.DataContext;
 		if (AppSetting.Instance.BookMarkGroup.IsShare)
 		{
 			if (string.IsNullOrEmpty(AppSetting.Instance.BookMarkGroup.Title))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_BookMark);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_BookMark);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputBookmarkName"));
 				return false;
 			}
 			if (string.IsNullOrEmpty(AppSetting.Instance.BookMarkGroup.Instructions))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_BookMark);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_BookMark);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputBookmarkDescription"));
 				return false;
 			}
 			if (string.IsNullOrEmpty(AppSetting.Instance.BookMarkGroup.DetailedInstructions))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_BookMark);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_BookMark);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputBookmarkDetail"));
 				return false;
 			}
@@ -256,19 +224,19 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		{
 			if (string.IsNullOrEmpty(AppSetting.Instance.StoreOptions.FileListComment.Title))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_FileExplorerComment);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_FileExplorerComment);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputExplorerAnnotationName"));
 				return false;
 			}
 			if (string.IsNullOrEmpty(AppSetting.Instance.StoreOptions.FileListComment.Description))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_FileExplorerComment);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_FileExplorerComment);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputExplorerAnnotationDescription"));
 				return false;
 			}
 			if (string.IsNullOrEmpty(AppSetting.Instance.StoreOptions.FileListComment.DetailedInstructions))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_FileExplorerComment);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_FileExplorerComment);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputExplorerAnnotationDetail"));
 				return false;
 			}
@@ -277,19 +245,19 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		{
 			if (string.IsNullOrEmpty(AppSetting.Instance.StoreOptions.TabComment.Title))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_TagTranslation);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_TagTranslation);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputTagTranslationName"));
 				return false;
 			}
 			if (string.IsNullOrEmpty(AppSetting.Instance.StoreOptions.TabComment.Description))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_TagTranslation);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_TagTranslation);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputTagTranslationDescription"));
 				return false;
 			}
 			if (string.IsNullOrEmpty(AppSetting.Instance.StoreOptions.TabComment.DetailedInstructions))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_TagTranslation);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_TagTranslation);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputTagTranslationDetail"));
 				return false;
 			}
@@ -298,19 +266,19 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		{
 			if (string.IsNullOrEmpty(AppSetting.Instance.StoreOptions.ItemCodeHoverConfig.Title))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_CodeIntelliSense);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_CodeIntelliSense);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputCodeIntelliSenseName"));
 				return false;
 			}
 			if (string.IsNullOrEmpty(AppSetting.Instance.StoreOptions.ItemCodeHoverConfig.Description))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_CodeIntelliSense);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_CodeIntelliSense);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputCodeIntelliSenseDescription"));
 				return false;
 			}
 			if (string.IsNullOrEmpty(AppSetting.Instance.StoreOptions.ItemCodeHoverConfig.DetailedInstructions))
 			{
-				I3mCYpGIRU(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_CodeIntelliSense);
+				NavigateToMenu(AppSetting.Instance.LuanguageOptions.GoToStoreShareOption_CodeIntelliSense);
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseInputCodeIntelliSenseDetail"));
 				return false;
 			}
@@ -318,18 +286,18 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		return true;
 	}
 
-	private bool I3mCYpGIRU(string P_0)
+	private bool NavigateToMenu(string menuPath)
 	{
 		WindowPublicSettingViewModel windowPublicSettingViewModel = (WindowPublicSettingViewModel)base.DataContext;
 		tree.View.ExpandAllNodes();
-		string[] array = P_0.Split("\\", StringSplitOptions.RemoveEmptyEntries);
-		P_0 = array[0];
+		string[] array = menuPath.Split("\\", StringSplitOptions.RemoveEmptyEntries);
+		menuPath = array[0];
 		SettingMenuItem value;
 		if (array.Length == 1)
 		{
 			foreach (KeyValuePair<string, SettingMenuItem> item in (IEnumerable<KeyValuePair<string, SettingMenuItem>>)windowPublicSettingViewModel.TreeMenu)
 			{
-				if (item.Key == P_0)
+				if (item.Key == menuPath)
 				{
 					windowPublicSettingViewModel.TreeSelectedItem = item;
 					tree.SelectedItems = new List<KeyValuePair<string, SettingMenuItem>> { item };
@@ -352,10 +320,10 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		return false;
 	}
 
-	private void t8QCy3X0Is(object P_0, DragEventArgs P_1)
+	private void OnGameClientPathDrop(object sender, DragEventArgs e)
 	{
 		_ = (WindowPublicSettingViewModel)base.DataContext;
-		string[] array = (string[])P_1.Data.GetData(DataFormats.FileDrop);
+		string[] array = (string[])e.Data.GetData(DataFormats.FileDrop);
 		if (array == null || array.Length == 0)
 		{
 			return;
@@ -391,9 +359,9 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!LBaCuTy0vJ)
+		if (!_contentLoaded)
 		{
-			LBaCuTy0vJ = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/views/windowpublicsetting.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -408,7 +376,7 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		{
 		case 1:
 			win = (WindowPublicSetting)target;
-			win.Loaded += RDmC2jF5Bq;
+			win.Loaded += OnLoaded;
 			break;
 		case 22:
 			tree = (TreeListControl)target;
@@ -423,13 +391,13 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 			contentPanel = (ContentControl)target;
 			break;
 		case 26:
-			((Button)target).Click += WjOCASXqep;
+			((Button)target).Click += OnSaveClick;
 			break;
 		case 27:
-			((Button)target).Click += OZXCS4Sh78;
+			((Button)target).Click += OnCancelClick;
 			break;
 		default:
-			LBaCuTy0vJ = true;
+			_contentLoaded = true;
 			break;
 		}
 	}
@@ -442,64 +410,64 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 		switch (connectionId)
 		{
 		case 2:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 3:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 4:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 5:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 6:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 7:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 8:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 9:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 10:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 11:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 12:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 13:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 14:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 15:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 16:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 17:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 18:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 19:
-			((PopupColorEdit)target).EditValueChanged += tAtC5kxQKJ;
+			((PopupColorEdit)target).EditValueChanged += OnEditorHighlightColorChanged;
 			break;
 		case 20:
-			((ButtonEdit)target).Drop += t8QCy3X0Is;
+			((ButtonEdit)target).Drop += OnGameClientPathDrop;
 			break;
 		case 21:
-			((Image)target).Drop += t8QCy3X0Is;
+			((Image)target).Drop += OnGameClientPathDrop;
 			break;
 		}
 	}

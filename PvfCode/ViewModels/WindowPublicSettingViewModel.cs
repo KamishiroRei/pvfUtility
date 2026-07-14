@@ -20,7 +20,7 @@ namespace PvfCode.ViewModels;
 
 public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 {
-	internal bool mf9FnuluQs;
+	internal bool showLanguageRestartPrompt;
 
 	public TextDocument ScriptFileContentFormattingDocument { get; set; }
 
@@ -70,7 +70,7 @@ public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 
 	public WindowPublicSettingViewModel()
 	{
-		mf9FnuluQs = true;
+		showLanguageRestartPrompt = true;
 		TreeMenu = new ObservableConcurrentDictionaryEx<string, SettingMenuItem>();
 		ChildNodesSelector = new PVfTreeChildrenSelector(GetChildNodes);
 		ScriptFileContentFormattingDocument = new TextDocument();
@@ -314,7 +314,7 @@ public class WindowPublicSettingViewModel : ViewModelBase, IDisposable
 			{
 			}
 		}
-		if (mf9FnuluQs)
+		if (showLanguageRestartPrompt)
 		{
 			MessageBox.Show(Application.Current.MainWindow, "切换语言后建议重新启动：pvfUtility\r\n언어 전환 후 재시작 권장: pvfUtility\r\nA restart is recommended after switching languages: pvfUtility");
 		}
