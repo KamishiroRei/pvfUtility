@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using Collections.Pooled;
 using DevExpress.Mvvm;
@@ -18,21 +17,6 @@ namespace PvfCode.Views.BatchOperation;
 
 public class BatchOperationViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private IHighlightingDefinition ewXBT7ICa8;
-
-	[CompilerGenerated]
-	private BatchOperationConfig WQuBCRFkvb;
-
-	[CompilerGenerated]
-	private PvfTreeViewModel VKgBHYsRtj;
-
-	[CompilerGenerated]
-	private List<BatchOperationConfig>? Ix1Bh2fi1b;
-
-	[CompilerGenerated]
-	private bool nb1BvfbCB2;
-
 	public bool RecordingLoading
 	{
 		get
@@ -45,47 +29,11 @@ public class BatchOperationViewModel : ViewModelBase
 		}
 	}
 
-	public IHighlightingDefinition Highlighting
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ewXBT7ICa8;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ewXBT7ICa8 = value;
-		}
-	}
+	public IHighlightingDefinition Highlighting { get; set; }
 
-	public BatchOperationConfig Config
-	{
-		[CompilerGenerated]
-		get
-		{
-			return WQuBCRFkvb;
-		}
-		[CompilerGenerated]
-		set
-		{
-			WQuBCRFkvb = value;
-		}
-	}
+	public BatchOperationConfig Config { get; set; }
 
-	public PvfTreeViewModel TreeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return VKgBHYsRtj;
-		}
-		[CompilerGenerated]
-		set
-		{
-			VKgBHYsRtj = value;
-		}
-	}
+	public PvfTreeViewModel TreeViewModel { get; set; }
 
 	public TreeFilesSourceType FilesSourceType
 	{
@@ -105,19 +53,9 @@ public class BatchOperationViewModel : ViewModelBase
 		TreeFilesSourceType.选中文件
 	};
 
-	private List<BatchOperationConfig>? rVPvzqZIDb
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Ix1Bh2fi1b;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Ix1Bh2fi1b = value;
-		}
-	}
+	private List<BatchOperationConfig>? RecordedBatchOperationConfigs { get; set; }
+
+	private bool IncludeSourceFilesInRecordedMacro { get; set; }
 
 	public BatchOperationViewModel()
 	{
@@ -193,7 +131,7 @@ public class BatchOperationViewModel : ViewModelBase
 			}
 			break;
 		}
-		IEnumerable<string> fileList = ONsv3WO3ih();
+		IEnumerable<string> fileList = GetSourceFiles();
 		if (fileList == null)
 		{
 			return;
@@ -210,7 +148,7 @@ public class BatchOperationViewModel : ViewModelBase
 			if (RecordingLoading)
 			{
 				BatchOperationConfig batchOperationConfig = Config.CloneData();
-				if (RjoBD9PpQY())
+				if (IncludeSourceFilesInRecordedMacro)
 				{
 					batchOperationConfig.SourceFiles = fileList.ToHashSet();
 				}
@@ -218,23 +156,23 @@ public class BatchOperationViewModel : ViewModelBase
 				{
 					batchOperationConfig.SourceFiles = null;
 				}
-				rVPvzqZIDb.Add(batchOperationConfig);
+				RecordedBatchOperationConfigs.Add(batchOperationConfig);
 			}
 			if (resultData2.Data != null && resultData2.Data.Any())
 			{
 				IEnumerable<string> data = resultData2.Data;
 				List<KeyValuePair<string, PvfTreeFileBase>> rows = AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.FilePathGetTreeNode(data);
-				wmUvVBBLW3(rows);
+				NotifyFileNamesChanged(rows);
 				rows = AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData.FilePathGetTreeNode(data);
-				wmUvVBBLW3(rows);
+				NotifyFileNamesChanged(rows);
 				rows = TreeViewModel.TreeGroupData.FilePathGetTreeNode(data);
-				wmUvVBBLW3(rows);
+				NotifyFileNamesChanged(rows);
 			}
 		}
 		TreeViewModel.TreeGroupData.Loading = false;
 	}
 
-	private void wmUvVBBLW3(List<KeyValuePair<string, PvfTreeFileBase>> rows)
+	private void NotifyFileNamesChanged(List<KeyValuePair<string, PvfTreeFileBase>> rows)
 	{
 		if (rows == null)
 		{
@@ -249,7 +187,7 @@ public class BatchOperationViewModel : ViewModelBase
 	[Command]
 	public async void SelectedMacro(KeyValuePair<string, MacroData> row)
 	{
-		IEnumerable<string> enumerable = ONsv3WO3ih();
+		IEnumerable<string> enumerable = GetSourceFiles();
 		if (enumerable == null || AppCore.Logger.ShowDialog(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ExecuteMacroForWaitFile"), row.Key)) != MessageResult.Yes)
 		{
 			return;
@@ -268,7 +206,7 @@ public class BatchOperationViewModel : ViewModelBase
 		TreeViewModel.TreeGroupData.Loading = false;
 	}
 
-	private IEnumerable<string> ONsv3WO3ih()
+	private IEnumerable<string> GetSourceFiles()
 	{
 		if (TreeViewModel.TreeGroupData.Trees == null || !TreeViewModel.TreeGroupData.Trees.Any())
 		{
@@ -294,32 +232,18 @@ public class BatchOperationViewModel : ViewModelBase
 		return selectedFilePaths;
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private bool RjoBD9PpQY()
-	{
-		return nb1BvfbCB2;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void PcHBlA1D24(bool P_0)
-	{
-		nb1BvfbCB2 = P_0;
-	}
-
 	[Command]
 	public async void SetRecordingLoading(bool isLoading)
 	{
 		if (isLoading)
 		{
-			rVPvzqZIDb = new List<BatchOperationConfig>();
-			PcHBlA1D24(false);
+			RecordedBatchOperationConfigs = new List<BatchOperationConfig>();
+			IncludeSourceFilesInRecordedMacro = false;
 		}
-		else if (RecordingLoading && rVPvzqZIDb != null && rVPvzqZIDb.Count > 0)
+		else if (RecordingLoading && RecordedBatchOperationConfigs != null && RecordedBatchOperationConfigs.Count > 0)
 		{
 			MacroData macroData = new MacroData();
-			macroData.SetData(rVPvzqZIDb);
+			macroData.SetData(RecordedBatchOperationConfigs);
 			macroData.MacroType = MacroType.批量处理;
 			await AppCore.SaveMacroData(macroData, AppSetting.Instance.GetIlogger()?.GetStr("mess_NewMacro"), Application.Current.MainWindow);
 		}
