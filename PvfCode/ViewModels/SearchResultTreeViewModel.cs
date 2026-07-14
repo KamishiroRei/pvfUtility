@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using Collections.Pooled;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -23,25 +21,7 @@ namespace PvfCode.ViewModels;
 
 public class SearchResultTreeViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private ViewSearchPvfViewModel gXWFusTP67;
-
-	[CompilerGenerated]
-	private PvfTreeViewModel u9IFGp73RG;
-
-	public ViewSearchPvfViewModel SearchUiViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return gXWFusTP67;
-		}
-		[CompilerGenerated]
-		set
-		{
-			gXWFusTP67 = value;
-		}
-	}
+	public ViewSearchPvfViewModel SearchUiViewModel { get; set; }
 
 	public ConcurrentObservableDictionary<string, SearchResultGroup> SearchReusltData
 	{
@@ -75,23 +55,11 @@ public class SearchResultTreeViewModel : ViewModelBase
 		}
 		set
 		{
-			SetProperty<string>(() => SelectedItem, value, s3nF4sc8cR);
+			SetProperty<string>(() => SelectedItem, value, OnSelectedItemChanged);
 		}
 	}
 
-	public PvfTreeViewModel TreeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return u9IFGp73RG;
-		}
-		[CompilerGenerated]
-		set
-		{
-			u9IFGp73RG = value;
-		}
-	}
+	public PvfTreeViewModel TreeViewModel { get; set; }
 
 	public PooledList<string> GetSelectedFileList()
 	{
@@ -122,7 +90,7 @@ public class SearchResultTreeViewModel : ViewModelBase
 		TreeViewModel = new PvfTreeViewModel(TreeViewType.SearchResult);
 		SearchReusltData.Add("未命名", new SearchResultGroup());
 		SelectedItem = SearchReusltData.Keys[0];
-		TreeViewModel.RemoveSelectedItemsEvent += GOEFyvhfYL;
+		TreeViewModel.RemoveSelectedItemsEvent += OnRemoveSelectedItems;
 	}
 
 	public void AddSearchResult(PooledList<string> fileList, string? key = null)
@@ -146,7 +114,7 @@ public class SearchResultTreeViewModel : ViewModelBase
 		}
 		if (SelectedItem == key)
 		{
-			s3nF4sc8cR();
+			OnSelectedItemChanged();
 			return;
 		}
 		SelectedItem = key;
@@ -174,7 +142,7 @@ public class SearchResultTreeViewModel : ViewModelBase
 		}
 	}
 
-	private async void s3nF4sc8cR()
+	private async void OnSelectedItemChanged()
 	{
 		TreeViewModel.TreeGroupData.Trees = null;
 		if (SelectedItem == null || !SearchReusltData.ContainsKey(SelectedItem))
@@ -187,10 +155,10 @@ public class SearchResultTreeViewModel : ViewModelBase
 		ResultCount = item.FileList.Count;
 		if (TreeViewModel.TreeGroupData.FileCount < 5000)
 		{
-			((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)delegate
+			Application.Current.Dispatcher.BeginInvoke((Action)delegate
 			{
 				TreeViewModel.Service.ExpandAllNodes();
-			}, Array.Empty<object>());
+			});
 		}
 		TreeViewModel.GoToFirstOrDefault();
 	}
@@ -339,11 +307,11 @@ public class SearchResultTreeViewModel : ViewModelBase
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_TxtContentIsEmpty"));
 				return;
 			}
-			PooledList<string> pooledList = rgRFY04C7a(text);
-			if (pooledList != null && pooledList.Count != 0)
+			PooledList<string> fileList = ParseFileList(text);
+			if (fileList != null && fileList.Count != 0)
 			{
 				string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(dialog.FileName);
-				AddSearchResult(pooledList, fileNameWithoutExtension);
+				AddSearchResult(fileList, fileNameWithoutExtension);
 			}
 		}
 		catch (Exception ex)
@@ -352,41 +320,35 @@ public class SearchResultTreeViewModel : ViewModelBase
 		}
 	}
 
-	private PooledList<string> rgRFY04C7a(string P_0)
+	private PooledList<string> ParseFileList(string text)
 	{
-		if (string.IsNullOrEmpty(P_0))
+		if (string.IsNullOrEmpty(text))
 		{
 			return null;
 		}
-		PooledSet<string> pooledSet = new PooledSet<string>();
-		string[] array = P_0.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
-		foreach (string item in array)
+		PooledSet<string> filePaths = new PooledSet<string>();
+		string[] lines = text.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
+		foreach (string line in lines)
 		{
-			pooledSet.Add(item);
+			filePaths.Add(line);
 		}
-		return new PooledList<string>(pooledSet);
+		return new PooledList<string>(filePaths);
 	}
 
-	private void GOEFyvhfYL(PooledSet<string> P_0)
+	private void OnRemoveSelectedItems(PooledSet<string> fileList)
 	{
-		if (string.IsNullOrEmpty(SelectedItem) || P_0 == null || P_0.Count <= 0 || !SearchReusltData.TryGetValue(SelectedItem, out SearchResultGroup value))
+		if (string.IsNullOrEmpty(SelectedItem) || fileList == null || fileList.Count <= 0 || !SearchReusltData.TryGetValue(SelectedItem, out SearchResultGroup group))
 		{
 			return;
 		}
-		foreach (string item in P_0)
+		foreach (string filePath in fileList)
 		{
-			value.FileList.Remove(item);
+			group.FileList.Remove(filePath);
 		}
 	}
 
 	~SearchResultTreeViewModel()
 	{
-		TreeViewModel.RemoveSelectedItemsEvent -= GOEFyvhfYL;
-	}
-
-	[CompilerGenerated]
-	private void EfSFi2pWbw()
-	{
-		TreeViewModel.Service.ExpandAllNodes();
+		TreeViewModel.RemoveSelectedItemsEvent -= OnRemoveSelectedItems;
 	}
 }
