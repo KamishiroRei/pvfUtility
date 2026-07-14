@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -18,19 +17,7 @@ namespace PvfCode.ViewModels.LstTools;
 
 public class WinLstToolsViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private TextDocument lQtmESCmdF;
-
-	[CompilerGenerated]
-	private TextDocument Es4mOex8tJ;
-
-	[CompilerGenerated]
-	private IHighlightingDefinition wEemK7Elp9;
-
-	private readonly KeyValuePair<string, string>? xG1m9DREy2;
-
-	[CompilerGenerated]
-	private AddArrayLstModel knGmP1LjtQ;
+	private readonly KeyValuePair<string, string>? initialSelectedItem;
 
 	public KeyValuePair<string, string>? SelectedItem
 	{
@@ -56,63 +43,15 @@ public class WinLstToolsViewModel : ViewModelBase
 		}
 	}
 
-	public TextDocument Document
-	{
-		[CompilerGenerated]
-		get
-		{
-			return lQtmESCmdF;
-		}
-		[CompilerGenerated]
-		set
-		{
-			lQtmESCmdF = value;
-		}
-	}
+	public TextDocument Document { get; set; }
 
-	public TextDocument DeleteDocument
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Es4mOex8tJ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Es4mOex8tJ = value;
-		}
-	}
+	public TextDocument DeleteDocument { get; set; }
 
-	public IHighlightingDefinition Highlighting
-	{
-		[CompilerGenerated]
-		get
-		{
-			return wEemK7Elp9;
-		}
-		[CompilerGenerated]
-		set
-		{
-			wEemK7Elp9 = value;
-		}
-	}
+	public IHighlightingDefinition Highlighting { get; set; }
 
 	private PvfGroup Pvf => AppCore.ViewModelBase.PVF;
 
-	public AddArrayLstModel AddArrayLstModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return knGmP1LjtQ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			knGmP1LjtQ = value;
-		}
-	}
+	public AddArrayLstModel AddArrayLstModel { get; set; }
 
 	public WinLstToolsViewModel(KeyValuePair<string, string>? selectedItem = null)
 	{
@@ -121,14 +60,14 @@ public class WinLstToolsViewModel : ViewModelBase
 		{
 			Text = "//代码格式：可以用换行符分割:\r\n1\r\n2\r\n3\r\n//也可以用制表符分割：1\t2\t3\t\r\n\r\n//lst行格式：\r\n10018\t`character/common/jacket/cloth/vest_owool.equ`\r\n10019\t`character/common/jacket/cloth/vest_wool.equ`\r\n10020\t`character/common/jacket/cloth/robe_cfiber.equ`\r\n\r\n//文件完整路径格式：\r\nstackable/10000418_10000586.stk\r\nstackable/10000418_10000587.stk\r\nstackable//10000418_10000590.stk"
 		};
-		xG1m9DREy2 = selectedItem;
+		initialSelectedItem = selectedItem;
 		Document = new TextDocument();
 		Highlighting = ThemeSwitcher.Instance.GetHighlightingDefinition(PvfFileType.lst);
 	}
 
 	public void Loaded()
 	{
-		SelectedItem = xG1m9DREy2;
+		SelectedItem = initialSelectedItem;
 	}
 
 	[Command]
@@ -346,13 +285,7 @@ public class WinLstToolsViewModel : ViewModelBase
 		StringBuilder stringBuilder2 = new StringBuilder("#PVF_File\r\n");
 		foreach (KeyValuePair<string, int> item2 in dictionary)
 		{
-			StringBuilder stringBuilder3 = stringBuilder2;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(3, 2, stringBuilder3);
-			handler.AppendFormatted(item2.Value);
-			handler.AppendLiteral("\t`");
-			handler.AppendFormatted(item2.Key);
-			handler.AppendLiteral("`");
-			stringBuilder3.AppendLine(ref handler);
+			stringBuilder2.AppendLine($"{item2.Value}\t`{item2.Key}`");
 		}
 		AppCore.ViewModelBase.PVF.SaveFileText(filePath, stringBuilder2.ToString());
 		Document.Text = stringBuilder.ToString();
@@ -374,12 +307,7 @@ public class WinLstToolsViewModel : ViewModelBase
 			PvfFile file = pvfGroup.GetFile(value.FullPath);
 			if (file != null)
 			{
-				StringBuilder stringBuilder2 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(1, 2, stringBuilder2);
-				handler.AppendFormatted(value.ItemCode);
-				handler.AppendLiteral("\t");
-				handler.AppendFormatted(pvfGroup.GetItemName(file));
-				stringBuilder2.AppendLine(ref handler);
+				stringBuilder.AppendLine($"{value.ItemCode}\t{pvfGroup.GetItemName(file)}");
 			}
 		}
 		Document.Text = stringBuilder.ToString();
@@ -429,7 +357,7 @@ public class WinLstToolsViewModel : ViewModelBase
 			{
 				stringBuilder2.AppendLine(item2.Value.ToLstRow());
 			}
-			AuJmepse83(stringBuilder2.ToString(), file.FileName);
+			SaveSortedLst(stringBuilder2.ToString(), file.FileName);
 			return;
 		}
 		StringBuilder stringBuilder3 = new StringBuilder();
@@ -457,22 +385,22 @@ public class WinLstToolsViewModel : ViewModelBase
 		{
 			stringBuilder4.AppendLine(item4.Value.ToLstRow());
 		}
-		AuJmepse83(stringBuilder4.ToString(), file.FileName);
+		SaveSortedLst(stringBuilder4.ToString(), file.FileName);
 	}
 
-	private void AuJmepse83(string P_0, string P_1)
+	private void SaveSortedLst(string content, string filePath)
 	{
-		Pvf.SaveFileText(P_1, P_0);
-		Document.Text = AppSetting.Instance.GetIlogger()?.GetStr("mess_SortSuccessAndSaved") + P_0;
-		if (AppCore.ViewModelBase.RootDocument.CheckIsOpen(P_1, out DocumentBase docu) && docu != null && docu is PvfFileDocument pvfFileDocument)
+		Pvf.SaveFileText(filePath, content);
+		Document.Text = AppSetting.Instance.GetIlogger()?.GetStr("mess_SortSuccessAndSaved") + content;
+		if (AppCore.ViewModelBase.RootDocument.CheckIsOpen(filePath, out DocumentBase document) && document != null && document is PvfFileDocument pvfFileDocument)
 		{
 			pvfFileDocument.RefDocumentText();
 		}
 	}
 
-	private void uPfmts75ra(string P_0)
+	private void SetOutput(string output)
 	{
-		Document.Text = P_0;
+		Document.Text = output;
 	}
 
 	[Command]
@@ -500,7 +428,7 @@ public class WinLstToolsViewModel : ViewModelBase
 			}, StringSplitOptions.RemoveEmptyEntries);
 			if (array == null || array.Length == 1)
 			{
-				uPfmts75ra(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_AddFailed"), array[0]));
+				SetOutput(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_AddFailed"), array[0]));
 				return;
 			}
 			List<KeyValuePair<int, string>> addDic = new List<KeyValuePair<int, string>>();
@@ -511,18 +439,18 @@ public class WinLstToolsViewModel : ViewModelBase
 				string text = array[num2];
 				if (num2 + 1 >= num)
 				{
-					uPfmts75ra(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_AddFailedFormatError"), text));
+					SetOutput(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_AddFailedFormatError"), text));
 					return;
 				}
 				if (!int.TryParse(text, out var result))
 				{
-					uPfmts75ra(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_AddFailedNotNumber"), text));
+					SetOutput(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_AddFailedNotNumber"), text));
 					return;
 				}
 				string text2 = array[num2 + 1];
 				if (text2[0] != '`' || text2[text2.Length - 1] != '`')
 				{
-					uPfmts75ra(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_AddFailedNotPath"), text2));
+					SetOutput(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_AddFailedNotPath"), text2));
 					return;
 				}
 				addDic.Add(new KeyValuePair<int, string>(result, text2));
@@ -532,14 +460,14 @@ public class WinLstToolsViewModel : ViewModelBase
 			ResultData<Dictionary<int, string>> resultData = await Pvf.LstFileTabCodeDic(filePath);
 			if (resultData.IsError)
 			{
-				uPfmts75ra(resultData.Msg);
+				SetOutput(resultData.Msg);
 				return;
 			}
 			Dictionary<int, string> codeDic = resultData.Data;
 			ResultData<Dictionary<string, int>> resultData2 = await Pvf.LstFileTabPathDic(filePath);
 			if (resultData2.IsError)
 			{
-				uPfmts75ra(resultData2.Msg);
+				SetOutput(resultData2.Msg);
 				return;
 			}
 			Dictionary<string, int> data = resultData2.Data;
@@ -567,7 +495,7 @@ public class WinLstToolsViewModel : ViewModelBase
 						stringBuilder3 = stringBuilder2;
 						StringBuilder stringBuilder4 = stringBuilder3;
 						handler = new StringBuilder.AppendInterpolatedStringHandler(1, 2, stringBuilder3);
-						handler.AppendFormatted(zZxmbQDY4G(item));
+						handler.AppendFormatted(FormatLstEntry(item));
 						handler.AppendLiteral(" ");
 						handler.AppendFormatted(AppSetting.Instance.GetIlogger()?.GetStr("mess_DuplicationOfCode"));
 						stringBuilder4.AppendLine(ref handler);
@@ -585,7 +513,7 @@ public class WinLstToolsViewModel : ViewModelBase
 						stringBuilder3 = stringBuilder2;
 						StringBuilder stringBuilder5 = stringBuilder3;
 						handler = new StringBuilder.AppendInterpolatedStringHandler(1, 2, stringBuilder3);
-						handler.AppendFormatted(zZxmbQDY4G(item));
+						handler.AppendFormatted(FormatLstEntry(item));
 						handler.AppendLiteral(" ");
 						handler.AppendFormatted(AppSetting.Instance.GetIlogger()?.GetStr("mess_DuplicationOfCode"));
 						stringBuilder5.AppendLine(ref handler);
@@ -602,7 +530,7 @@ public class WinLstToolsViewModel : ViewModelBase
 						stringBuilder3 = stringBuilder2;
 						StringBuilder stringBuilder6 = stringBuilder3;
 						handler = new StringBuilder.AppendInterpolatedStringHandler(1, 2, stringBuilder3);
-						handler.AppendFormatted(zZxmbQDY4G(item));
+						handler.AppendFormatted(FormatLstEntry(item));
 						handler.AppendLiteral(" ");
 						handler.AppendFormatted(AppSetting.Instance.GetIlogger()?.GetStr("mess_FilePathNotExist_3"));
 						stringBuilder6.AppendLine(ref handler);
@@ -626,22 +554,14 @@ public class WinLstToolsViewModel : ViewModelBase
 			{
 				string fileText = Pvf.GetFileText(file);
 				PvfGroup pvfGroup = Pvf;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 2);
-				defaultInterpolatedStringHandler.AppendFormatted(fileText);
-				defaultInterpolatedStringHandler.AppendLiteral("\r\n");
-				defaultInterpolatedStringHandler.AppendFormatted(stringBuilder);
-				pvfGroup.SaveFileText(file, defaultInterpolatedStringHandler.ToStringAndClear());
+				pvfGroup.SaveFileText(file, $"{fileText}\r\n{stringBuilder}");
 			}
-			uPfmts75ra(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_OperationComplete"), num3, addDic.Count - num3, stringBuilder2, stringBuilder));
+			SetOutput(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_OperationComplete"), num3, addDic.Count - num3, stringBuilder2, stringBuilder));
 		}
 	}
 
-	private string zZxmbQDY4G(KeyValuePair<int, string> keyValuePair)
+	private string FormatLstEntry(KeyValuePair<int, string> entry)
 	{
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(1, 2);
-		defaultInterpolatedStringHandler.AppendFormatted(keyValuePair.Key);
-		defaultInterpolatedStringHandler.AppendLiteral("\t");
-		defaultInterpolatedStringHandler.AppendFormatted(keyValuePair.Value);
-		return defaultInterpolatedStringHandler.ToStringAndClear();
+		return $"{entry.Key}\t{entry.Value}";
 	}
 }
