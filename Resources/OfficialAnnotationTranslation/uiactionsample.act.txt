@@ -1,0 +1,86 @@
+// 条件：检查条件，决定是否执行行为
+[TRIGGER]
+	[LIMIT] 1			         	// 触发检查次数（每次调用 DO BEHAVIOR 时计数，为 0 时无限）
+	[FRAME] 1 1						// 帧检查（为 1 1 则在第 1 帧执行触发器，在 ANIMATION 控件中使用时非常有用）
+
+	// 在动作开始后的时间点执行条件语句
+	[ON TIMING][START MAP] 100 100  	// 开始时间和结束时间相同，则仅在该时间执行一次
+	[ON TIMING][SET ACTION]  1000 1500	 // 从动作设置的时间（控件创建的时间）起，在 1000 ~ 1500 毫秒内触发执行
+	[ON TIMING][SET ACTION]  1000 -1 	// 第二个参数为 -1 时，则以 1000 毫秒为周期触发执行
+	// 可用的起始点模式
+	// ([SET ACTION] : 控件最初创建时开始，[START MAP] : 地图开始时开始，
+	//  [ENTER MOUSE] : 鼠标进入控件时开始，[LEAVE MOUSE] : 鼠标离开控件时开始，
+ 	//  [SET VISIBLE] : 控件开始显示时开始 )
+
+	[ON ENTER MOUSE]		     	// 鼠标进入控件时触发
+	[ON LEAVE MOUSE]		   	 // 鼠标进入控件后又离开时触发
+	
+	// 指定特定目标
+	[WHICH][MY CONTROL]					// 我的控件
+		   [MY GROUP]					// 属于同一父控件的所有控件
+		   [ALL CONTROLS]				// 所有控件（注意性能下降！）
+		 
+	[CHECKUP]							
+		[IS TYPE] [balloon]			// 检查控件类型（与 UI 自动化中填写的控件类型字符串相同）
+				  [button]
+		[IS MOUSE LBUP]					// 检查目标控件是否发生左键鼠标 UP
+		[IS NAME] `IDC_BUTTON1`			// 检查在 *.UI 文件中定义的控件名称
+		[IS ME]							// 检查是否是我的控件
+		[IS VISIBLE]	1				// 检查是否可见 (1 : 可见则通过，0 : 不可见则通过)
+		[IS ENABLE]		1				// 检查是否激活 (1 : 激活状态则通过，0 : 非激活状态则通过)
+		[CHECK FUNC]					// 自定义函数检查（仅通过检查的目标才通过）
+			1							// 函数模式（索引）
+			5 3 5						// 自定义参数（请咨询负责客户端开发人员）
+		[/CHECK FUNC]
+	[/CHECKUP]	
+	
+	[CHECKED NO] [<] 1 // 检查通过检查的对象数量。可以使用检查符号 ([<=], [=], [>=] 等)
+	
+	[DO BEHAVIOR][CHECKUP CONTROL] 1	// 调用 BEHAVIOR，以通过检查的控件为参数
+	[DO BEHAVIOR][DROPOUT CONTROL] 0	// 调用 BEHAVIOR，以未通过检查的控件为参数
+	[DO BEHAVIOR][MY CONTROL] 0	// 调用 BEHAVIOR，执行行为的对象，BEHAVIOR 编号
+[/TRIGGER]
+
+// 行为：由 TRIGGER 调用，实际执行命令
+[BEHAVIOR]
+	[INTERPOLATION]
+		[SCALE] 			// ([MOVEMENT], [ROTATION] , [ALPHA] 等可用)
+		[DURATION] 250
+		[FIRST ARG] -1.0 -1.0		// 第一个参数：插值前 X 比例，插值前 Y 比例（输入 -1.0 则取当前值）
+		[SECOND ARG] 1.0 1.0		// 第二个参数：插值后 X 比例，插值后 Y 比例
+	[/INTERPOLATION]
+	[INTERPOLATION]
+		[ROTATION]	
+		[DURATION] 250
+		[FIRST ARG] -1.0 -1.0		// 第一个参数：插值前 X 角度(DEGREE)，-1.0（不使用）
+		[SECOND ARG] 360 -1.0	// 第二个参数：插值后 X 角度(DEGREE)，-1.0（不使用）
+	[/INTERPOLATION]
+
+	[INTERPOLATION]
+		[ALPHA]	
+		[DURATION] 100
+		[FIRST ARG] 255.0 -1.0	// 第一个参数：插值前 Alpha 值，-1.0（不使用）
+		[SECOND ARG] 0.0 1.0		// 第二个参数：插值后 Alpha 值，-1.0（不使用）	
+	[/INTERPOLATION]
+	[INTERPOLATION]
+		[ALPHA]			// 注意：在同一 BEHAVIOR 中使用相同类型的 INTERPOLATION 标签时，先声明的插值先执行！
+		[DURATION] 100
+		[FIRST ARG] 255.0 -1.0	// 第一个参数：插值前 Alpha 值，-1.0（不使用）
+		[SECOND ARG] 0.0 1.0		// 第二个参数：插值后 Alpha 值，-1.0（不使用）	
+	[/INTERPOLATION]
+
+	[SET GRAPHICEFFECT][NONE] ([DODGE], [LINEARDODGE])		// 更改控件的图形效果
+	[RESET][TRIGGER] 0							// 重置触发器次数（与 LIMIT 一起使用）
+	[RESET][CONTROL]							// 将控件重置为初始状态
+	[REWIND]									// 倒带动画等控件			
+	[SET TRACKING MODE] `莱纳斯` 10 10					// UI 位置固定模式，要固定的对象名称，x偏移，y偏移
+	
+	[RETURN]									// 结束动作。（之后所有的触发器和行为不再执行）
+	[SET TITLE]	`确认`							// 更改标题（例如：按钮）
+
+	[CALL FUNC]							// 执行自定义函数
+		1								// 函数模式（索引）
+		5 3 5							// 自定义参数（请咨询负责客户端开发人员）
+	[/CALL FUNC]	
+	[SET TRANS CENTER] 0 0		// 指定变换（旋转/缩放）中心点，默认为中心
+[/BEHAVIOR]

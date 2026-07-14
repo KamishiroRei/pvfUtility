@@ -83,6 +83,27 @@ public class DockLayoutManagerService : ServiceBase, IDockLayoutManagerService
 		return panel != null && LayoutManager.DockController.CreateNewDocumentGroup(panel, Orientation.Horizontal);
 	}
 
+	public bool DockAsTab(object panelViewModel, object targetViewModel)
+	{
+		DocumentPanel panel = LayoutManager.GetItems()
+			.OfType<DocumentPanel>()
+			.FirstOrDefault(it => it.DataContext == panelViewModel);
+		DocumentPanel target = LayoutManager.GetItems()
+			.OfType<DocumentPanel>()
+			.FirstOrDefault(it => it.DataContext == targetViewModel);
+		if (panel == null || target == null)
+		{
+			return false;
+		}
+		if (ReferenceEquals(panel.Parent, target.Parent))
+		{
+			return true;
+		}
+
+		LayoutManager.DockController.Dock(panel, target, DockType.Fill);
+		return true;
+	}
+
 	public void SetFloatPanelAutoHeight(object panelViewModel, SizeToContent sizeToContent)
 	{
 		if (LayoutManager.FloatGroups == null)

@@ -10,6 +10,7 @@ using Markdig.Extensions.Tables;
 using Markdig.Extensions.TaskLists;
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
+using PvfCode.OfficialAnnotations;
 using MdBlock = Markdig.Syntax.Block;
 using MdTable = Markdig.Extensions.Tables.Table;
 using MdTableCell = Markdig.Extensions.Tables.TableCell;
@@ -105,14 +106,14 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 			titleParagraph.Margin = new Thickness(0, 0, 0, 10);
 			document.Blocks.Add(titleParagraph);
 		}
-		AppendMarkdown(document.Blocks, markdown);
+		AppendMarkdown(document.Blocks, OfficialAnnotationLinks.LinkifyOfficialExamples(markdown));
 		if (!string.IsNullOrWhiteSpace(officialDescription))
 		{
 			if (document.Blocks.Count > 0)
 			{
 				document.Blocks.Add(CreateThematicBreak());
 			}
-			AppendMarkdown(document.Blocks, officialDescription);
+			AppendMarkdown(document.Blocks, OfficialAnnotationLinks.LinkifyOfficialExamples(officialDescription));
 		}
 		return document;
 	}
@@ -511,6 +512,12 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		hyperlink.NavigateUri = uri;
 		hyperlink.RequestNavigate += (_, args) =>
 		{
+			if (OfficialAnnotationLinks.TryGetFileName(args.Uri, out string fileName))
+			{
+				OfficialAnnotationLinks.RequestOpen(fileName);
+				args.Handled = true;
+				return;
+			}
 			try
 			{
 				Process.Start(new ProcessStartInfo(args.Uri.AbsoluteUri) { UseShellExecute = true });

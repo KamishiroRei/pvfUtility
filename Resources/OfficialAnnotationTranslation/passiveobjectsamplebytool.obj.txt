@@ -1,0 +1,435 @@
+//////////////////////////////////////////////////////////
+//@ mkjung 创建日期 20120523
+//@ 应用程序使用 被动对象脚本文件语法检查
+//////////////////////////////////////////////////////////
+
+{exp}对象的名称{/exp}[name]
+    {must1}{exp}字符串索引{/exp}{string}
+[!name]
+
+{exp}浮空高度{/exp}[floating height]
+    {must1}{exp}在空中悬浮的高度(像素){/exp}{int(:)}
+[!floating height]
+
+{exp}怪物的碰撞检测范围{/exp}[width]
+    {must1}{int(:)}
+    {must2}{int(:)}
+[!width]
+
+{exp}绘制图层{/exp}[layer]
+    {must1}[normal]
+    {must1}[bottom]
+    {must1}[close]
+    {must1}[closeback]
+    {must1}[middleback]
+    {must1}[distantback]
+[!layer]
+
+{exp}图层层级{/exp}[layer level]
+    {must1}{exp}数值越高位置越靠前{/exp}{int(:)}
+[!layer level]
+
+[pass type]
+    {must1}[none]
+    {must1}[pass all]
+    {must1}[pass only float type]
+    {must1}[do not pass]
+    {must1}[pass only red team]
+    {must1}[pass only blue team]
+    {must1}{string}
+[!pass type]
+
+{exp}攻击时的穿透力{/exp}[piercing power]
+    {must1}攻击成功概率{int(:)}
+[!piercing power]
+
+{exp}{/exp}[piercing tolerance]
+    {must1}{exp}穿透抗性{/exp}{int(:)}
+[!piercing tolerance]
+
+{exp}HP值(无HP值则完全不会受到伤害){/exp}[hp max]
+    {must1}{int(:)}
+[!hp max]
+
+{exp}HP耗尽时是否破坏{/exp}[hp destroy]
+    {must1}{exp}0: 不破坏, 1: 破坏{/exp}{int(0:1)}
+[!hp destroy]
+
+{exp}碰撞时是否消失{/exp}[vanish on move collision]
+    {must1}{exp}0: 不消失, 1: 消失[默认]{/exp}{int(0:1)}
+[!vanish on move collision]
+
+[category]
+{exp}所属类别列表{exp}[category]
+    {opt1}{exp}人形{/exp}[human]
+    {opt2}{exp}野兽{/exp}[beast]
+    {opt3}{exp}植物{/exp}[plant]
+    {opt4}{exp}昆虫{/exp}[insect]
+    {opt5}{exp}机械{/exp}[machine]
+    {opt6}{exp}有机体{/exp}[organic]
+    {opt7}{exp}复合体{/exp}[hybrid]
+    {opt8}{exp}不死族{/exp}[undead]
+    {opt9}{exp}恶魔{/exp}[devil]
+    {opt10}{exp}精灵{/exp}[spirit]
+    {opt11}{exp}龙族{/exp}[dragon]
+    {opt12}{exp}近战AI{/exp}[melee combat]
+    {opt13}{exp}远程AI{/exp}[range combat]
+    {opt14}{exp}消极AI{/exp}[close-passive]
+    {opt15}{exp}谨慎AI{/exp}[close-carefully]
+    {opt16}{exp}完全超级护甲AI{/exp}[full-superarmor]
+    {opt17}{exp}冒失AI{/exp}[close-tough]
+    {opt18}{exp}威胁AI{/exp}[close-manace]
+    {opt19}{exp}人类护甲{/exp}[human armor]
+    {opt20}{exp}建筑护甲{/exp}[fort armor]
+    {opt21}{exp}圣灵护甲{/exp}[divine armor]
+    {opt22}{exp}哥布林{/exp}[goblin]
+    {opt23}{exp}牛头怪{/exp}[tau]
+    {opt24}{exp}卢加鲁{/exp}[lugaru]
+    {opt25}{exp}固定型{/exp}[fixture]
+    {opt26}{exp}驻留{/exp}[stay]
+    {opt27}{exp}近战被动对象类型{/exp}[melee]
+    {opt28}{exp}导弹被动对象类型{/exp}[missile]
+    {opt29}{exp}能量被动对象类型{/exp}[energy]
+    {opt30}{exp}物理被动对象类型{/exp}[physical]
+    {opt31}{exp}魔法被动对象类型{/exp}[magical]
+    {opt32}{exp}子弹被动对象类型{/exp}[bullet]
+    {opt33}{exp}加农被动对象类型{/exp}[cannon]
+    {opt34}{exp}爆炸被动对象类型{/exp}[explosion]
+    {opt35}{exp}燃烧被动对象类型{/exp}[inflame]
+    {opt36}{exp}非燃烧被动对象类型{/exp}[non inflame]
+    {opt37}{exp}光被动对象类型{/exp}[light]
+    {opt38}{exp}暗被动对象类型{/exp}[dark]
+    {opt39}{exp}水被动对象类型{/exp}[water]
+    {opt40}{exp}火被动对象类型{/exp}[fire]
+    {opt41}{exp}堡垒被动对象类型{/exp}[fort]
+[/category]
+
+{exp}基本动作{/exp}[basic motion]
+    {must1}{exp}动画文件名{/exp}{string}
+[!basic motion]
+
+{exp}硬编码用动作{/exp}[etc motion]
+    {exp}动画文件名列表{/exp}{string}
+    {!string}
+[/etc motion]
+
+{exp}基本动作{/exp}[basic action]
+    {must1}{exp}文件路径{/exp}{string}
+[!basic action]
+
+{exp}为此被动对象设置的攻击信息{/exp}[attack info]
+    {must1}{exp}攻击信息文件路径{/exp}{string}
+[!attack info]
+
+{exp}对象没有攻击，因此不使用[action list]而只使用[etc action]。{/exp}[etc action]
+    {exp}自定义动作列表{/exp}{string}
+    {!string}
+[/etc action]
+
+[team]
+    {must1}{exp}角色队伍100~ : 怪物队伍200~ : 中立队伍{/exp}{int(0:)}
+[!team]
+
+{exp}是否为陷阱{/exp}[trap]
+    {must1}{exp}为1则必须破坏才能通关。{/exp}{int(:)}
+[!trap]
+
+{exp}在破坏前必须执行一次的动作{/exp}[last action]
+    {must1}{exp}文件路径{/exp}{string}
+[!last action]
+
+{exp}破坏时生成的（一次性）粒子脚本{/exp}[destroy particle]
+    {exp}文件路径{/exp}{string}
+    {!string}
+[/destroy particle]
+
+[homing]
+    [homing use]
+        {must1}{int(:)}
+    [!homing use]
+
+    [homing follow]
+        {must1}[ME]
+        {must1}[ENEMY]
+        {must1}[CHARACTER]
+        {must1}[MONSTER]
+        {prereq}[CHARACTER]{/prereq}{must1}{exp}队伍索引{/exp}{int(0:)}
+        {prereq}[MONSTER]{/prereq}{must1}{exp}用于使其跟随特定怪物的索引{/exp}{int(0:)}
+    [!homing follow]
+
+    [homing velocity]
+        {must1}{exp}速度{/exp}{int(:)}
+        {must2}{exp}加速度{/exp}{int(:)}
+    [!homing velocity]
+
+    {exp}追踪中的目标位置检查时间间隔{/exp}[homing check gap]
+        {must1}{exp}(1/1000)秒{/exp}{int(:)}
+    [!homing check gap]
+
+    {exp}是否根据移动方向对齐动画{/exp}[sync animation rotation]
+        {must1}{exp}(默认值 0){/exp}{int(0:1)}
+    [!sync animation rotation]
+
+    {exp}每秒最大可旋转角度{/exp}[max rotation]
+        {must1}{exp}角度(0则为无限旋转){/exp}{int(0:)}
+    [!max rotation]
+
+    {exp}对象生成时的旋转角度{/exp}[init rotation]
+        {must1}{exp}角度(默认值 0){/exp}{int(0:)}
+    [!init rotation]
+
+    {exp}可感知目标的角度{/exp}[diff rotation]
+        {must1}{exp}角度(默认值 180){/exp}{int(0:)}
+    [!diff rotation]
+
+    {exp}制导功能生效的时间{/exp}[homing time]
+        {must1}{exp}时间(0则为无限, 默认值 0){/exp}{int(0:)}
+    [!homing time]
+
+    {exp}制导功能期间，若目标移动，则实时移动该距离{/exp}{etc}[sync target move]
+[/homing]
+
+[sound category]
+    {exp}对象创建后立即播放声音时{/exp}[after object create]
+        {must1}{exp}声音{/exp}{string}
+        {must2}{exp}对象索引{/exp}{int(0:)}
+    [!after object create]
+
+    {exp}对象超过一定帧数时{/exp}[on frame]
+        {must1}{exp}声音{/exp}{string}
+        {must2}{exp}对象索引{/exp}{int(0:)}
+        {must3}{exp}帧编号{/exp}{int(0:)}
+    [!on frame]
+
+    {exp}与其他对象碰撞时{/exp}[on attack]
+        {must1}{exp}声音{/exp}{string}
+        {must2}{exp}对象索引{/exp}{int(0:)}
+    [!on attack]
+
+    {exp}对象受到伤害时{/exp}[on damage]
+        {must1}{exp}声音{/exp}{string}
+        {must2}{exp}对象索引{/exp}{int(0:)}
+    [!on damage]
+
+    {exp}对象被破坏时{/exp}[on destroyobject]
+        {must1}{exp}声音(请勿循环){/exp}{string}
+        {must2}{exp}对象索引{/exp}{int(0:)}
+    [!on destroyobject]
+[/sound category]
+
+[add object effect]
+    {exp}图层文件名{/exp}{string}
+        {must1}{exp}附加的顺序{/exp}{int(0:)}
+    {!string}
+[/add object effect]
+
+[add particles]
+    [particle]
+        {must1}{exp}粒子脚本位置{/exp}[file]
+            {must1}{string}
+        [!file]
+
+        {exp}被动对象生成后到粒子特效出现为止的延迟{/exp}[create delay]
+            {must1}{exp}延迟值{/exp}{int(0:)}
+        [!create delay]
+
+        [create sound]
+            {must1}{exp}粒子生成时输出的声音(不支持循环){/exp}{string}
+        [!create sound]
+
+        {exp}将粒子的生成位置改为距离被动对象特定位置偏移的位置{/exp}[follow parent]
+            {must1}{exp}X{/exp}{int(:)}
+            {must2}{exp}Y{/exp}{int(:)}
+            {must3}{exp}Z{/exp}{int(:)}
+        [!follow parent]
+
+        [loop]
+            {must1}{exp}l{/exp}{int(0:)}
+        [!loop]
+    [/particle]
+[/add particles]
+
+[object destroy condition]
+    [destroy condition]
+        {must1}{exp}动画结束后删除对象{/exp}[on end of animation]
+        {must1}{exp}接触地面时删除对象{/exp}[z pos equal zero]
+        {must1}{exp}经过时间后删除{/exp}[time limite]
+        {must1}[not destroy and z pos equal zero]
+        {prereq}[time limite]{/prereq}{must2}{exp}时间{/exp}{int(0:)}
+    [!destroy condition]
+
+    [destroy action]
+        {must1}{exp}自身破坏{/exp}[only destroy]
+        {must1}{exp}自身破坏后生成其他对象{/exp}[object create after destroy]
+    [!destroy action]
+
+    [on attack]
+        {must1}{exp}自身破坏{/exp}[only destroy]
+        {must1}{exp}自身破坏后生成其他对象{/exp}[object create after destroy]
+    [!on attack]
+
+    {exp}要新生成的对象索引{/exp}[add object index]
+        {int(:)}
+        {!int(:)}
+    [/add object index]
+
+    {exp}要新生成的对象索引{/exp}[add object index on attack]
+        {int(:)}
+        {!int(:)}
+    [/add object index on attack]
+[/object destroy condition]
+
+{exp}设为1并放置在门前，则门不会打开。{/exp}[is blocking obj]
+    {must1}{int(1:)}
+[!is blocking obj]
+
+{exp}为1则根据难度改变HP{/exp}[is hp by difficulty]
+    {must1}{int(1:)}
+[!is hp by difficulty]
+
+{exp}为1则绘制HP条{/exp}[hp gage]
+    {must1}{int(1:)}
+[!hp gage]
+
+{exp}被火属性武器终结时输出的特效路径{/exp}[burning death path]
+    {must1}{string}
+[!burning death path]
+
+{exp}具有该索引的怪物攻击时才会受到伤害{/exp}[can beat index]
+    {int(0:)}
+    {!int(0:)}
+[/can beat index]
+
+{exp}应用动力学{/exp}[apply physics]
+    {must1}{exp}刚体的牛顿值(默认 1500N){/exp}{int(0:)}
+[!apply physics]
+
+[follow parent]
+    {must1}{exp}进入门时随机位置{/exp}[from parent]
+    {must1}{exp}与PARENT精确重叠的位置{/exp}[path gate]
+    {must1}{exp}保持与PARENT的相对位置{/exp}[parent]
+    {must1}{exp}保持坐标{/exp}[keep position]
+    {must1}{exp}不跟随(默认){/exp}[none]
+[!follow parent]
+
+{exp}恶灵之云用速度控制被动对象{/exp}[speed control passive objects]
+    [passive object]
+        [index]
+            {must1}{exp}控制速度的对象索引{/exp}{int(0:)}
+        [!index]
+
+        [speed]
+            {must1}{exp}速度增加{/exp}[up]
+            {must1}{exp}速度减少{/exp}[down]
+        [!speed]
+    [/passive object]
+[/speed control passive objects]
+
+{exp}被动对象生成器{/exp}[objects]
+    {exp}注册要生成的对象{/exp}[object]
+        {exp}用于模式的ID{/exp}[id]
+            {must1}{int(0:)}
+        [!id]
+
+        {exp}要生成的对象索引{/exp}[index]
+            {must1}{exp}索引{/exp}{int(0:)}
+        [!index]
+
+        {exp}对象生成的概率{/exp}[probability]
+            {must1}{exp}概率{/exp}{float(:)}
+        [!probability]
+
+        {exp}是否显示警告标记{/exp}[warning]
+            {must1}{exp}`true` or 'false'{/exp}{string}
+        [!warning]
+    [/object]
+[/objects]
+
+{exp}按类别记录模式{/exp}[patterns]
+    {exp}指定模式{/exp}[pattern]
+        {exp}模式的唯一名称{/exp}[name]
+            {must1}{string}
+        [!name]
+
+        {exp}对象生成的时间周期{/exp}[interval]
+            {must1}{exp}毫秒单位{/exp}{int(0:)}
+        [!interval]
+
+        {exp}一个周期内生成的模式单位数量。{/exp}[columns]
+            {must1}{exp}数量。{/exp}{int(0:)}
+        [!columns]
+        {exp}指定模式数据{/exp}[data]
+            {exp}0为空位，1为要生成的被动对象{/exp}{int(0:1)}
+                {must1}{variableInt(0:1)}
+            {!int(0:1)}
+        [/data]
+    [/pattern]
+[/patterns]
+
+{exp}指定模式出现的顺序{/exp}[sequences]
+    {exp}按顺序放出指定的模式{/exp}[pattern]
+        {must1}{exp}模式名称{/exp}{string}
+        {must2}{exp}模式持续的时间(毫秒单位){/exp}{int(0:)}
+    [!pattern][/pattern]
+[/sequences]
+
+//mkjung 120627 添加
+[int data]
+    {int(:)}
+        {opt1}{variableInt(:)}
+    {!int(:)}
+[/int data]
+
+[string data]
+    {string}
+    {!string}
+[/string data]
+
+[under gravity]
+    {must1}{exp}{/exp}{int(0:)}
+[!under gravity]
+
+[transparent on meet player]
+    {must1}{exp}{/exp}{int(0:)}
+[!transparent on meet player]
+
+[pvp room transparent value for observer]
+    {must1}{exp}{/exp}{int(0:)}
+[!pvp room transparent value for observer]
+
+[etc attack info]
+    {exp}{/exp}{string}
+    {!string}
+[/etc attack info]
+
+[SNIPER TYPE]
+    [WAIT TIME],[INVOKE TIME],[INIT VELOCITY],[INVOKE CHECK TIME],[INVOKE DELAY TIME],[SHOT DISTANCE]
+        {must1}{exp}时间{/exp}{int(0:)}
+    [!WAIT TIME],[!INVOKE TIME],[!INIT VELOCITY],[!INVOKE CHECK TIME],[!INVOKE DELAY TIME],[!SHOT DISTANCE]
+[/SNIPER TYPE]
+
+[warning]
+    [min distance]
+        {must1}{exp}{/exp}{int(0:)}
+        {must2}{exp}{/exp}{int(0:)}
+        {must3}{exp}{/exp}{int(0:)}
+    [!min distance]
+
+    [max distance]
+        {must1}{exp}{/exp}{int(0:)}
+        {must2}{exp}{/exp}{int(0:)}
+        {must3}{exp}{/exp}{int(0:)}
+    [!max distance]
+[/warning]
+
+[quest type]
+    {must1}[must be destroyed]
+[!quest type]
+
+[for tournament]
+    {must1}{exp}{/exp}{int(0:)}
+[!for tournament]
+
+[create sound]
+    {must1}{string}
+[!create sound]

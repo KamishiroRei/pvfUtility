@@ -410,5 +410,8 @@
           CopyToOutputDirectory="PreserveNewest"
           CopyToPublishDirectory="PreserveNewest"
           TargetPath="Defaults\Options\PvfComments\%(Filename)%(Extension)" />
+    <None Update="Resources\OfficialAnnotationTranslation\**\*"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

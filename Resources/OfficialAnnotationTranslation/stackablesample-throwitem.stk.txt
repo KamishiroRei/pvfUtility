@@ -1,0 +1,33 @@
+[name] `回旋镖`
+[explain]
+`回旋镖`
+[grade] 1
+[creation rate] 90
+[weight] 5
+[usable job]
+`[all]`
+[/usable job]
+[minimum level] 1
+
+[stackable type] `[throw]` 0			// 类型为 `[throw]`
+
+[icon] `Item/IconMaterial.img` 38
+[field image] `Item/FieldImage.img` 23
+
+[move wav] `BONE_TOUCH`
+
+[applying range] 200 // 以像素为单位的正圆形半径，虽然不是专为投掷物品设置的标签，但常用于赋予特殊效果的物品
+
+[int data]
+50001					// 要创建的被动对象索引
+0					// 创建被动对象时输入的参数
+0					// 发射前延迟 (如果想在发射前长时间蓄力，则增加此变量。默认值 0)
+450					// 发射后延迟 (如果想增加发射后的硬直时间，则增加此变量。默认值 500 左右)
+0					// 要反映的速度类型 (0:攻击速度, 1:施法速度)
+100					// 基本速度倍数 (%) (如果想更快地发射动作，则填写 100 以上。速度 = 要反映的速度类型 * 倍数 / 100)
+[/int data]
+
+[string data]
+`PassiveObject/ThrowItem/Particle/Boomerang.ptl`	// 指定对象路径的粒子脚本。绝对路径
+`THROW`							// 投掷时发出的音效标签
+[/string data]

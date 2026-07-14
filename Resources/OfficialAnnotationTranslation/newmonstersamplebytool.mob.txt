@@ -1,0 +1,1306 @@
+//////////////////////////////////////////////////////////
+//@ mkjung 创建日期 20120523
+//@ 应用程序使用 怪物基本信息、特性指定脚本语法检查
+//////////////////////////////////////////////////////////
+
+{exp}怪物的碰撞检测范围{/exp}[width]
+    {must1}{exp}X坐标{/exp}{int(:)}
+    {must2}{exp}Y坐标{/exp}{int(:)}
+[!width]
+
+{exp}monster.kor.str 文件内的索引{/exp}[name]
+    {must1}{exp}名称空间{/exp}{string}
+[!name]
+
+{exp}怪物脸部信息{/exp}[face image]
+    {must1}{exp}图像文件{/exp}{string}
+    {must2}{exp}帧索引{/exp}{int(0:)}
+[!face image]
+
+{exp}死亡时显示的特效指定{/exp}[die effect]
+    {must1}{exp}0-有死亡效果（有[die effect]标签时必须设为0）{/exp}{int(0:)}
+    {must2}{exp}肉块的色号{/exp}{int(:)}
+    {must3}{exp}死亡效果中不显示的部分的位值{/exp}{int(0:)}
+[!die effect]
+
+{exp}跟随的能力值表索引（默认值0）{/exp}[ability table]
+    {must1}{exp}0:基本, 1:召唤物, 2:竞争地牢{/exp}{int(0:2)}
+[!ability table]
+
+{exp}召唤技能 1级时能力值上升率(%){/exp}[summon skill status up rate]
+    {must1}{exp}力量{/exp}{float(:)}
+    {must2}{exp}体力{/exp}{float(:)}
+    {must3}{exp}智力{/exp}{float(:)}
+    {must4}{exp}精神{/exp}{float(:)}
+    {must5}{exp}HP{/exp}{float(:)}
+    {must6}{exp}MP{/exp}{float(:)}
+    {must7}{exp}物理攻击{/exp}{float(:)}
+    {must8}{exp}物理防御{/exp}{float(:)}
+    {must9}{exp}魔法攻击{/exp}{float(:)}
+    {must10}{exp}魔法防御{/exp}{float(:)}
+[!summon skill status up rate]
+
+{exp}一般冠军可拥有的元素属性种类{/exp}[common champion elemental property]
+    {opt1}{etc}[fire element]
+    {opt2}{etc}[water element]
+    {opt3}{etc}[dark element]
+    {opt4}{etc}[light element]
+    {opt5}{etc}[no element]
+[/common champion elemental property]
+
+[ability category]
+    {exp}能力值{exp}[HP MAX]
+        {opt1}{exp}加绝对值{/exp}[+]
+        {opt1}{exp}按百分比相乘{/exp}[*]
+        {opt2}{exp}数值{/exp}{int(:)}
+    [!HP MAX]
+    {exp}力量{/exp}[PHYSICAL_ATTACK]
+        {opt1}{exp}加绝对值{/exp}[+]
+        {opt1}{exp}按百分比相乘{/exp}[*]
+        {opt2}{exp}数值{/exp}{int(:)}
+    [!PHYSICAL_ATTACK]
+    {exp}体力{/exp}[PHYSICAL_DEFENSE]
+        {opt1}{exp}加绝对值{/exp}[+]
+        {opt1}{exp}按百分比相乘{/exp}[*]
+        {opt2}{exp}数值{/exp}{int(:)}
+    [!PHYSICAL_DEFENSE]
+    {exp}智力{/exp}[MAGICAL_ATTACK]
+        {opt1}{exp}加绝对值{/exp}[+]
+        {opt1}{exp}按百分比相乘{/exp}[*]
+        {opt2}{exp}数值{/exp}{int(:)}
+    [!MAGICAL_ATTACK]
+    {exp}精神力{/exp}[MAGICAL_DEFENSE]
+        {opt1}{exp}加绝对值{/exp}[+]
+        {opt1}{exp}按百分比相乘{/exp}[*]
+        {opt2}{exp}数值{/exp}{int(:)}
+    [!MAGICAL_DEFENSE]
+    {exp}物理攻击力{/exp}[EQUIPMENT_PHYSICAL_ATTACK]
+        {opt1}{exp}加绝对值{/exp}[+]
+        {opt1}{exp}按百分比相乘{/exp}[*]
+        {opt2}{exp}数值{/exp}{int(:)}
+    [!EQUIPMENT_PHYSICAL_ATTACK]
+    {exp}物理防御力{/exp}[EQUIPMENT_PHYSICAL_DEFENSE]
+        {opt1}{exp}加绝对值{/exp}[+]
+        {opt1}{exp}按百分比相乘{/exp}[*]
+        {opt2}{exp}数值{/exp}{int(:)}
+    [!EQUIPMENT_PHYSICAL_DEFENSE]
+    {exp}魔法攻击（我们系统中没有魔法攻击项目，不运作）{/exp}[EQUIPMENT_MAGICAL_ATTACK]
+        {opt1}{exp}加绝对值{/exp}[+]
+        {opt1}{exp}按百分比相乘{/exp}[*]
+        {opt2}{exp}数值{/exp}{int(:)}
+    [!EQUIPMENT_MAGICAL_ATTACK]
+    [EQUIPMENT_MAGICAL_DEFENSE],[ATTACK_SPEED],[HP MAX BOSS]
+        {opt1}{exp}加绝对值{/exp}[+]
+        {opt1}{exp}按百分比相乘{/exp}[*]
+        {opt2}{exp}数值{/exp}{int(:)}
+    [!EQUIPMENT_MAGICAL_DEFENSE],[!ATTACK_SPEED],[!HP MAX BOSS]
+[/ability category]
+
+{exp}所属类别列表{exp}[category]
+    {opt1}{exp}人形{/exp}[human]
+    {opt2}{exp}野兽{/exp}[beast]
+    {opt3}{exp}植物{/exp}[plant]
+    {opt4}{exp}昆虫{/exp}[insect]
+    {opt5}{exp}机械{/exp}[machine]
+    {opt6}{exp}有机体{/exp}[organic]
+    {opt7}{exp}复合体{/exp}[hybrid]
+    {opt8}{exp}不死族{/exp}[undead]
+    {opt9}{exp}恶魔{/exp}[devil]
+    {opt10}{exp}精灵{/exp}[spirit]
+    {opt11}{exp}龙族{/exp}[dragon]
+    {opt12}{exp}近战专用怪物{/exp}[melee combat]
+    {opt13}{exp}射击专用怪物{/exp}[range combat]
+    {opt14}{exp}消极的怪物{/exp}[close-passive]
+    {opt15}{exp}谨慎的怪物{/exp}[close-carefully]
+    {opt16}{exp}接近AI冒失、威胁怪物时完全超级护甲{/exp}[full-superarmor]
+    {opt17}{exp}冒失的怪物{/exp}[close-tough]
+    {opt18}{exp}具有威胁性的怪物{/exp}[close-manace]
+    {opt19}{exp}人类护甲（适用屠杀选项）{/exp}[human armor]
+    {opt20}{exp}建筑护甲（适用破坏选项）{/exp}[fort armor]
+    {opt21}{exp}圣灵护甲（防御力急剧增加）{/exp}[divine armor]
+    {opt22}{exp}哥布林{/exp}[goblin]
+    {opt23}{exp}牛头怪{/exp}[tau]
+    {opt24}{exp}卢加鲁{/exp}[lugaru]
+    {opt25}{exp}固定型{/exp}[fixture]
+    {opt26}{exp}在初始位置不移动{/exp}[stay]
+    {opt27}{exp}PASSIVEOBJECT_TYPE_MELEE{/exp}[melee]
+    {opt28}{exp}PASSIVEOBJECT_TYPE_MISSILE{/exp}[missile]
+    {opt29}{exp}PASSIVEOBJECT_TYPE_ENERGY{/exp}[energy]
+    {opt30}{exp}PASSIVEOBJECT_TYPE_PHYSICAL{/exp}[physical]
+    {opt31}{exp}PASSIVEOBJECT_TYPE_MAGICAL{/exp}[magical]
+    {opt32}{exp}PASSIVEOBJECT_TYPE_BULLET{/exp}[bullet]
+    {opt33}{exp}PASSIVEOBJECT_TYPE_CANON{/exp}[cannon]
+    {opt34}{exp}PASSIVEOBJECT_TYPE_EXPLOSION{/exp}[explosion]
+    {opt35}{exp}PASSIVEOBJECT_TYPE_INFLAME{/exp}[inflame]
+    {opt36}{exp}PASSIVEOBJECT_TYPE_INFLAME{/exp}[non inflame]
+    {opt37}{exp}PASSIVEOBJECT_TYPE_LIGHT{/exp}[light]
+    {opt38}{exp}PASSIVEOBJECT_TYPE_DARK{/exp}[dark]
+    {opt39}{exp}PASSIVEOBJECT_TYPE_WATER{/exp}[water]
+    {opt40}{exp}PASSIVEOBJECT_TYPE_FIRE{/exp}[fire]
+    {opt41}{exp}PASSIVEOBJECT_TYPE_FORT{/exp}[fort]
+    {opt42}{exp}{/exp}[unbeatable]
+    {opt43}{exp}天使{/exp}[angel]
+[/category]
+
+{exp}等级{/exp}[level]
+    {must1}{exp}最小等级{/exp}{int(:)}
+    {must2}{exp}最大等级{/exp}{int(:)}
+[!level]
+
+{exp}HP能力值{/exp}[HP MAX]
+    {must1}{exp}最小等级能力值{/exp}{int(:)}
+    {must2}{exp}最大等级能力值{/exp}{int(:)}
+[!HP MAX]
+
+{exp}MP能力值{/exp}[MP MAX]
+    {must1}{exp}最小等级能力值{/exp}{int(:)}
+    {must2}{exp}最大等级能力值{/exp}{int(:)}
+[!MP MAX]
+
+// 元素属性。为0则可不写。 //
+{exp}火属性{/exp}[fire resistance]
+    {must1}{int(:)}
+    {must2}{int(:)}
+[!fire resistance]
+
+{exp}水属性{/exp}[water resistance]
+    {must1}{int(:)}
+    {must2}{int(:)}
+[!water resistance]
+
+{exp}暗属性{/exp}[dark resistance]
+    {must1}{int(:)}
+    {must2}{int(:)}
+[!dark resistance]
+
+{exp}光属性{/exp}[light resistance]
+    {must1}{int(:)}
+    {must2}{int(:)}
+[!light resistance]
+
+// 特殊属性。为0则可不写。 //
+{exp}缓速{/exp}[slow resistance]
+    {must1}{int(:)}
+    {must2}{int(:)}
+[!slow resistance]
+
+{exp}冰冻{/exp}[freeze resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!freeze resistance]
+
+{exp}中毒{/exp}[poison resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!poison resistance]
+
+{exp}眩晕{/exp}[stun resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!stun resistance]
+
+{exp}诅咒{/exp}[curse resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!curse resistance]
+
+{exp}失明{/exp}[blind resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!blind resistance]
+
+{exp}感电{/exp}[lightning resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!lightning resistance]
+
+{exp}石化{/exp}[stone resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!stone resistance]
+
+{exp}睡眠{/exp}[sleep resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!sleep resistance]
+
+{exp}出血{/exp}[bleeding resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!bleeding resistance]
+
+{exp}穿透{/exp}[piercing resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!piercing resistance]
+
+{exp}僵直{/exp}[stuck resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!stuck resistance]
+
+{exp}混乱{/exp}[confuse resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!confuse resistance]
+
+{exp}束缚{/exp}[hold resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!hold resistance]
+
+[deelement resistance], [deadlystrike resistance]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!deelement resistance], [!deadlystrike resistance]
+
+// 非公开信息
+{exp}HP每秒恢复率{/exp}[HP regen speed]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!HP regen speed]
+
+{exp}MP每秒恢复率{/exp}[MP regen speed]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!MP regen speed]
+
+{exp}移动速度（1000为100%，单位：px/sec）{/exp}[move speed]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!move speed]
+
+{exp}攻击速度（1000为100%）{/exp}[attack speed]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!attack speed]
+
+{exp}施放速度（1000为100%）{/exp}[cast speed]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!cast speed]
+
+[hit recovery]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!hit recovery]
+
+{exp}重量（单位：1g）{/exp}[weight]
+    {opt1}{int(0:)}
+    {opt2}{int(0:)}
+[!weight]
+
+// 怪物击杀计数。
+{exp}怪物死亡伤害计数{/exp}[destroy count]
+    {must1}{exp}?次伤害则{/exp}{int(:)}
+[!destroy count]
+
+{exp}无论受到什么攻击，对怪物造成的伤害计数{/exp}[destroy count damage]
+    {must1}{exp}伤害计数{/exp}{int(:)}
+[!destroy count damage]
+
+{exp}锁定目标奖励指定{/exp}[targeting bonus]
+    {must1}{exp}距离近的奖励{/exp}{int(:)}
+    {must2}{exp}最近一次攻击我的{/exp}{int(:)}
+    {must3}{exp}攻击我最多次的{/exp}{int(:)}
+    {must4}{exp}近程攻击者{/exp}{int(:)}
+    {must5}{exp}远程攻击者{/exp}{int(:)}
+    {must6}{exp}物理攻击力低的{/exp}{int(:)}
+    {must7}{exp}物理攻击力高的{/exp}{int(:)}
+    {must8}{exp}物理防御力低的{/exp}{int(:)}
+    {must9}{exp}物理防御力高的{/exp}{int(:)}
+    {must10}{exp}魔法攻击力低的{/exp}{int(:)}
+    {must11}{exp}魔法攻击力高的{/exp}{int(:)}
+    {must12}{exp}魔法防御力低的{/exp}{int(:)}
+    {must13}{exp}魔法防御力高的{/exp}{int(:)}
+    {must14}{exp}血量低的{/exp}{int(:)}
+    {must15}{exp}血量高的{/exp}{int(:)}
+    {must16}{exp}X轴距离近的奖励{/exp}{int(:)}
+    {must17}{exp}Y轴距离近的奖励{/exp}{int(:)}
+    {must18}{exp}若是可抓取的敌人则奖励{/exp}{int(:)}
+    {must19}{exp}若是超级护甲状态则奖励{/exp}{int(:)}
+    {must20}{exp}浮空越高奖励越高{/exp}{int(:)}
+    {must21}{exp}检查状态给予的奖励{/exp}{int(:)}
+        {opt1}{exp}特定状态的敌人的奖励{/exp}[stand]
+        {opt2}{exp}特定状态的敌人的奖励{/exp}[sit]
+        {opt3}{exp}特定状态的敌人的奖励{/exp}[sit forever]
+        {opt4}{exp}特定状态的敌人的奖励{/exp}[damage]
+        {opt5}{exp}特定状态的敌人的奖励{/exp}[down]
+        {opt6}{exp}特定状态的敌人的奖励{/exp}[die]
+        {opt7}{exp}特定状态的敌人的奖励{/exp}[jump]
+        {opt8}{exp}特定状态的敌人的奖励{/exp}[jump attack]
+        {opt9}{exp}特定状态的敌人的奖励{/exp}[attack]
+        {opt10}{exp}特定状态的敌人的奖励{/exp}[hold]
+        {opt11}{exp}特定状态的敌人的奖励{/exp}[throw]
+        {opt12}{exp}特定状态的敌人的奖励{/exp}[dash]
+        {opt13}{exp}特定状态的敌人的奖励{/exp}[dash attack]
+        {opt14}{exp}特定状态的敌人的奖励{/exp}[get item]
+        {opt15}{exp}特定状态的敌人的奖励{/exp}[buff]
+    {!int(:)}
+    {must22}{exp}检查当前状态变化给予的奖励{/exp}{int(:)}
+        {opt1}{exp}特定状态变化的敌人的奖励{/exp}[slow]
+        {opt2}{exp}特定状态变化的敌人的奖励{/exp}[freeze]
+        {opt3}{exp}特定状态变化的敌人的奖励{/exp}[poison]
+        {opt4}{exp}特定状态变化的敌人的奖励{/exp}[stun]
+        {opt5}{exp}特定状态变化的敌人的奖励{/exp}[curse]
+        {opt6}{exp}特定状态变化的敌人的奖励{/exp}[blind]
+        {opt7}{exp}特定状态变化的敌人的奖励{/exp}[lightning]
+        {opt8}{exp}特定状态变化的敌人的奖励{/exp}[stone]
+        {opt9}{exp}特定状态变化的敌人的奖励{/exp}[sleep]
+        {opt10}{exp}特定状态变化的敌人的奖励{/exp}[burn]
+        {opt11}{exp}特定状态变化的敌人的奖励{/exp}[weapon break]
+        {opt12}{exp}特定状态变化的敌人的奖励{/exp}[bleeding]
+        {opt13}{exp}特定状态变化的敌人的奖励{/exp}[haste]
+        {opt14}{exp}特定状态变化的敌人的奖励{/exp}[bless]
+        {opt15}{exp}特定状态变化的敌人的奖励{/exp}[element]
+        {opt16}{exp}特定状态变化的敌人的奖励{/exp}[confuse]
+        {opt17}{exp}特定状态变化的敌人的奖励{/exp}[hold]
+        {opt18}{exp}特定状态变化的敌人的奖励{/exp}[armor break]
+    {!int(:)}
+[/targeting bonus]
+
+{exp}怪物的称号{/exp}[monster title]
+    {must1}{string}
+[!monster title]
+
+{exp}与目标在X轴上保持距离{/exp}[keep distance with target]
+    {must1}X轴保持距离{int(:)}
+[!keep distance with target]
+
+{exp}与目标保持距离范围{/exp}[keep range distance with target]
+    {must1}X轴保持距离{int(:)}
+    {must2}Y轴保持距离{int(:)}
+    {must3}X轴随机半径{rndint(:)}
+    {must4}Y轴随机半径{rndint(:)}
+[!keep range distance with target]
+
+{exp}怪物的智力数值{/exp}[intelligence]
+    {must1}{exp}触发action list中注册的动作的概率{/exp}{int(:)}
+    {must2}{exp}按脚本移动的概率{/exp}{int(:)}
+    {must3}{exp}进行智力计算的时间间隔{/exp}{int(:)}
+[!intelligence]
+
+[vision]
+    {must1}{exp}怪物的视野距离（短则可能无法抓住目标）{/exp}{int(:)}
+[!vision]
+
+{exp}是否将后面的对象设为目标{exp}[back vision]
+    {must1}{exp}通常0，不想锁定目标则设为-1{/exp}{int(:)}
+[!back vision]
+
+{exp}调整物品掉落位置{/exp}[drop item offset]
+    {must1}{exp}怪物X坐标 + ?{/exp}{int(:)}
+    {must2}{exp}怪物Y坐标 + ?{/exp}{int(:)}
+[!drop item offset]
+
+[stuckbonus on damage]
+    {must1}{exp}受到远程攻击时的僵直奖励 %{/exp}{int(0:)}
+    {must2}{exp}最低等级 / 最高等级{/exp}{int(:)}
+    {must3}{exp}受到近战攻击时的僵直奖励 %{/exp}{int(0:)}
+    {must4}{exp}最低等级 / 最高等级{/exp}{int(:)}
+[!stuckbonus on damage]
+
+[ambient sound]
+    {must1}{string}
+[!ambient sound]
+
+[attack sound]
+    {must1}{string}
+[!attack sound]
+
+[appear sound]
+    {must1}{string}
+[!appear sound]
+
+[damage sound]
+    {must1}{string}
+[!damage sound]
+
+[die sound]
+    {must1}{string}
+[!die sound]
+
+{exp}怪物生成时是否固定面向方向{/exp}[fix direction]
+    {opt1}{exp}1: 固定, 0: 不固定{/exp}{int(0:1)}
+    {opt2}{exp}固定型怪物总是看向左侧{/exp}[left]
+    {opt2}{exp}固定型怪物总是看向右侧{/exp}[right]
+[!fix direction]
+
+{exp}是否绘制浮游型怪物下方的标记{/exp}[flying mark]
+    {must1}{exp}1: 输出, 0: 不输出{/exp}{int(0:1)}
+[!flying mark]
+
+{exp}杀死怪物时掉落的指定物品{/exp}[item]
+    {exp}物品索引{exp}{int(:)}
+        {must1}{exp}概率{/exp}{int(:)}
+    {!int(:)}
+[/item]
+
+{exp}一般冠军掉落的物品列表{/exp}[common champion drop item]
+    {exp}物品索引{/exp}{int(:)}
+        {must1}{exp}概率{/exp}{int(:)}
+    {!int(:)}
+[/common champion drop item]
+
+{exp}怪物死亡时特殊出现的物品指定{/exp}[specific gen rate item]
+    {opt1}{exp}基准概率{/exp}{int(0:)}
+    {exp}物品索引{/exp}{int(:)}
+        {must1}{exp}概率{/exp}{int(:)}
+    {!int(:)}
+[/specific gen rate item]
+
+{exp}死亡之塔的物品掉落{/exp}[death tower item]
+    {opt1}{exp}物品索引{/exp}{int(0:)}
+        {must1}{exp}概率{/exp}{int(0:)}
+    {!int(0:)}
+[/death tower item]
+
+{exp}固定高度设置{/exp}[fixed height]
+    {must1}{exp}高度{/exp}{int(0:)}
+[!fixed height]
+
+{exp}指定动作文件开始触发的视野范围{/exp}[come in action]
+    {must1}{exp}要使用的动作文件{/exp}{string}
+    {must2}{exp}X轴半径{/exp}{int(0:)}
+    {must3}{exp}Y轴半径{/exp}{int(0:)}
+[!come in action]
+
+{exp}指定动作文件想执行特定动画时开始触发的视野范围{/[come in action ex]
+    {must1}{exp}要使用的动作文件{/exp}{string}
+    {must2}{exp}指定了特定动画的动作文件{/exp}{string}
+    {must3}{exp}X轴半径{/exp}{int(:)}
+    {must4}{exp}Y轴半径{/exp}{int(:)}
+[!come in action ex]
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// 动作指定（若通过动作指定）。没有的可以不写。或用 `` 输入则视为没有 //
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+{exp}指定待机动作{/exp}[waiting action]
+    {must1}{exp}waiting动作文件路径{/exp}{string}
+[!waiting action]
+
+{opt1}{exp}指定移动动作{/exp}[move action]
+    {must1}{exp}move动作文件路径{/exp}{string}
+[!move action]
+
+{exp}指定后退动作{/exp}[moveback action]
+    {must1}{exp}moveback动作文件路径{/exp}{string}
+[!move action]
+
+{exp}指定冲刺动作{/exp}[dash action]
+    {must1}{exp}dash动作文件路径{/exp}{string}
+[!dash action]
+
+{exp}指定冲刺攻击动作{/exp}[dashattack action]
+    {must1}{exp}dashattack动作文件路径{/exp}{string}
+[!dashattack action]
+
+{exp}指定坐下动作{/exp}[sit action]
+    {must1}{exp}sit动作文件路径{/exp}{string}
+[!sit action]
+
+{exp}指定受伤动作1{/exp}[damage action 1]
+    {must1}{exp}damage1动作文件路径{/exp}{string}
+[!damage action 1]
+
+{exp}指定受伤动作2{/exp}[damage action 2]
+    {must1}{exp}damage2动作文件路径{/exp}{string}
+[!damage action 2]
+
+{exp}指定倒地动作{/exp}[down action]
+    {must1}{exp}down动作文件路径{/exp}{string}
+[!down action]
+
+{exp}指定被翻转动作{/exp}[overturn action]
+    {must1}{exp}overturn动作文件路径{/exp}{string}
+[!overturn action]
+
+{opt1}{exp}指定基本动作（move和stay动作不可重复使用）{/exp}[basic action]
+    {must1}{exp}basic动作文件路径{/exp}{string}
+[!basic action]
+
+{exp}指定Proc动作（proc动作不检查动画）{/exp}[proc action]
+    {must1}{exp}Proc动作文件路径{/exp}{string}
+[!proc action]
+
+{exp}指定在破坏前必须执行一次的动作{/exp}[last action]
+    {must1}{exp}Last动作路径{/exp}{string}
+[!last action]
+
+{exp}乘坐动作（载具专用）{/exp}[mounting action]
+    {must1}{exp}动作路径{/exp}{string}
+[!mounting action]
+
+{exp}乘坐后动作（载具专用）{/exp}[mounted action]
+    {must1}{exp}动作路径{/exp}{string}
+[!mounted action]
+
+{exp}下车动作（载具专用）{/exp}[unmounting action]
+    {must1}{exp}动作路径{/exp}{string}
+[!unmounting action]
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+{exp}主要用作攻击的动作文件列表{/exp}[action list]
+    {exp}这里写明的动作在触发时若受到攻击则会进行反击检查{/exp}{string}
+    {!string}
+[/action list]
+
+[attack action]
+    {string}
+    {!string}
+[/attack action]
+
+{exp}将动作列表的索引模式化{/exp}[pattern]
+    {int(0:)}
+    {!int(:)}
+[/pattern]
+
+// action list中注册的动作将使用的冷却时间指定。标签内指定的顺序与动作列表1:1匹配。
+{exp}action list中注册的动作将使用的冷却时间指定{/exp}[cooltime]
+    {opt1}{exp}冷却时间模式可不写！默认设置为0。{/exp}[Pattern]
+        {must1}{int(0:)}
+    [!Pattern]
+    {exp}按顺序与动作列表1:1匹配{/exp}{int(0:)}
+    {!int(:)}
+[/cooltime]
+
+{exp}各动作文件的攻击信息{/exp}[attack info]
+    {exp}按顺序与动作列表1:1匹配{/exp}{string}
+    {!string}
+[/attack info]
+
+{exp}用于非攻击目的的其他动作列表{/exp}[etc action]
+    {string}
+    {!string}
+[/etc action]
+
+[lie frame]
+    {must1}{exp}躺下上升的帧{/exp}{int(0:)}
+    {must2}{exp}躺下下降的帧{/exp}{int(0:)}
+    {must3}{exp}躺下弹起的帧{/exp}{int(0:)}
+    {must4}{exp}躺下弹起后下落时的帧{/exp}{int(0:)}
+    {must5}{exp}躺下的帧。{/exp}{int(0:)}
+[!lie frame]
+
+{exp}是否不会被其他队伍的目标锁定{/exp}[non targeted]
+    {must1}{exp}0 : 被锁定, 1: 不被锁定{/exp}{int(0:1)}
+[!non targeted]
+
+{exp}是否更改目标{/exp}[no change target]
+    {must1}{exp}0: 不更改目标 1: 更改{/exp}{int(0:1)}
+[!no change target]
+
+{exp}被动对象用户控制（载具专用）{/exp}[control passive object]
+    {exp}索引{/exp}[index]
+        {must1}{int(0:)}
+    [!index]
+    {exp}可移动区域左上角的相对X坐标{/exp}[x pos]
+        {must1}{int(:)}
+    [!x pos]
+    {exp}可移动区域左上角的相对Y坐标{/exp}[y pos]
+        {must1}{int(:)}
+    [!y pos]
+    {exp}可移动区域的宽度{/exp}[width]
+        {must1}{int(0:)}
+    [!width]
+    {exp}可移动区域的高度{/exp}[height]
+        {must1}{int(0:)}
+    [!height]
+    {exp}控制时X轴移动速度{/exp}[velocity x]
+        {must1}{float(:)}
+    [!velocity x]
+    {exp}控制时Y轴移动速度（convert y to z选项时：Z轴移动速度）{/exp}[velocity y]
+        {must1}{float(:)}
+    [!velocity y]
+    {exp}控制时的方向固定{/exp}[fix direction]
+        {must1}[left]
+        {must1}[right]
+    [!fix direction]
+    {exp}将Y轴改为基于Z轴{/exp}[option]
+        {must1}{string}
+    [!option]
+    [transparency]
+        [master]
+            {must1}{int(0:)}
+        [!master]
+        [others]
+            {must1}{int(0:)}
+        [!others]
+        [option]
+            {must1}{string}
+        [!option]
+    [/transparency]
+[/control passive object]
+
+////////////////////////////////////////////////////////// 怪物的AI文件指定
+
+{exp}以毫秒为单位的目标设定{/exp}[think term]
+    {must1}{int(0:)}
+[!think term]
+
+{exp}以毫秒为单位决定要移动的位置{/exp}[destination change term]
+    {must1}{int(0:)}
+[!destination change term]
+
+{exp}是否根据目标位置改变方向{/exp}[change direction by target]
+    {must1}{exp}0: 固定, 1: 根据目标的位置改变方向{/exp}{int(0:1)}
+[!change direction by target]
+
+{exp}是否看着目标移动{/exp}[is direction to move]
+    {must1}{exp}0: 看着目标移动, 1: 朝移动的方向看并移动{/exp}{int(0:1)}
+[!is direction to move]
+
+{exp}为副本的难度指定不同的AI{/exp}[ai pattern]
+    [normal]
+        {string}
+        {!string}
+    [/normal]
+    [master]
+        {string}
+        {!string}
+    [/master]
+    [expert]
+        {string}
+        {!string}
+    [/expert]
+    [king]
+        {string}
+        {!string}
+    [/king]
+    [easy]
+        {string}
+        {!string}
+    [/easy]
+    [hard]
+        {string}
+        {!string}
+    [/hard]
+    [medium]
+        {string}
+        {!string}
+    [/medium]
+    [ultimate]
+        {string}
+        {!string}
+    [/ultimate]
+    [hero]
+        {string}
+        {!string}
+    [/hero]
+    {string}
+    {!string}
+[/ai pattern]
+
+{exp}由事件触发的超级护甲条件{/exp}[event super on scr]
+    [on time],[on hp],[conunter]
+        {must1}{exp}触发条件索引{/exp}{int(:)}
+        {must2}{exp}持续时间{/exp}{int(0:)}
+        {must3}{exp}重新激活与否{/exp}{int(0:1)}
+    [!on time],[!on hp],[!conunter]
+    [always]
+        {must1}{exp}触发条件索引{/exp}{int(:)}
+        {must2}{exp}持续时间{/exp}{int(0:)}
+    [!always]
+    [breakable],[unbreakable]
+        {must1}{exp}耐久度{/exp}{int(:)}
+        {must2}{exp}恢复力{/exp}{int(:)}
+        {must3}{exp}近程防御力{/exp}{int(:)}
+        {must4}{exp}远程防御力{/exp}{int(:)}
+    [!breakable],[!unbreakable]
+    [half]
+        {must1}{int(:)}
+        {must2}{int(:)}
+        {must3}{int(:)}
+        {must4}{int(:)}
+    [!half]
+    {exp}与光龙的咆哮一起触发{/exp}{etc}[with blast]
+[/event super on scr]
+
+[strong]
+    {must1}{exp}承受的伤害值{/exp}{int(0:)}
+    {must2}{exp}%额外伤害{/exp}{int(0:)}
+[!strong]
+
+[weak]
+    {must1}{exp}承受的伤害值{/exp}{int(0:)}
+    {must2}{exp}%额外伤害{/exp}{int(0:)}
+[!weak]
+
+////////////////////////////////////////////////////////// 其他信息
+[is grabable]
+    {must1}{exp}0: 不可抓取的怪物, 1: 可抓取的怪物{/exp}{int(0:1)}
+[!is grabable]
+
+{exp}应用于战争区域出现的怪物身上的值。{/exp}[spawn prob]
+    {must1}{exp}竞争地牢生成概率{/exp}{int(0:)}
+[!spawn prob]
+
+[hp regen rate]
+    {must1}{exp}锁定目标时的恢复比率{/exp}{float(:)}
+    {must2}{exp}无目标时的恢复比率{/exp}{float(:)}
+[!hp regen rate]
+
+{exp}event.ai 中检查伤害的间隔{/exp}[set damage check]
+    {must1}{exp}间隔{/exp}{int(0:)}
+[!set damage check]
+
+{exp}独立掉落系统{/exp}[independent drop]
+    {must1}{exp}索引（加载列表时设为1）{/exp}{int(0:)}
+    {must2}{exp}普通%{/exp}{int(0:)}
+    {must3}{exp}专家%{/exp}{int(0:)}
+    {must4}{exp}大师%{/exp}{int(0:)}
+    {must5}{exp}王者%{/exp}{int(0:)}
+    {must6}{exp}次数(1人){/exp}{int(0:)}
+    {must7}{exp}次数(2人){/exp}{int(0:)}
+    {must8}{exp}次数(3人){/exp}{int(0:)}
+    {must9}{exp}次数(4人){/exp}{int(0:)}
+    {must10}{exp}最大掉落数{/exp}{int(0:)}
+    {must11}{exp}是否加载列表(0: 不加载, 1: 加载){/exp}{int(0:1)}
+    [list]
+        {must1}{exp}{/exp}{int(:)}
+        {must2}{exp}{/exp}{int(:)}
+    [/list]
+[/independent drop]
+
+{exp}对象反射{/exp}[reflection object]
+    {exp}要反射对象的索引{/exp}{int(:)}
+        {must1}{exp}概率{/exp}{int(0:)}
+    {!int(:)}
+[/reflection object]
+
+{exp}空中施加重力{/exp}[add gravity in aerial]
+    {must1}{exp}激活与否(0:不激活, 1:激活){/exp}{int(:)}
+    {must2}{exp}空中伤害多少以上时触发(%){/exp}{float(:)}
+    {must3}{exp}修正触发后每1%伤害所受重力的大小{/exp}{float(:)}
+[!add gravity in aerial]
+
+{exp}只锁定特定附加效果的单位{/exp}[target appendage]
+    {must1}{exp}例)238(只锁定被黑暗纹章附加的单位){/exp}{int(0:)}
+[!target appendage]
+
+{exp}设置初始目标{/exp}[initial target]
+    [PASSIVE],[MONSTER],[CHARACTER],[MARKED]
+        {must1}{exp}对象索引{/exp}{int(0:)}
+    [!PASSIVE],[!MONSTER],[!CHARACTER],[!MARKED]
+[/initial target]
+
+{exp}根据难度的物攻修正表{/exp}[physical attack besed on diff]
+    {exp}level{/exp}{int(0:)}
+        {must1}{exp}normal{/exp}{float(:)}
+        {must2}{exp}expert{/exp}{float(:)}
+        {must3}{exp}master{/exp}{float(:)}
+        {must4}{exp}kings{/exp}{float(:)}
+        {must5}{exp}heros{/exp}{float(:)}
+    {!int(0:)}
+[/physical attack besed on diff]
+
+[level of difficulty]
+    [easy],[hard],[medium],[ultimate],[expert],[normal],[ex],[master],[king],[hero]
+        {must1}{exp}额外好战性{/exp}{int(:)}
+        {must2}{exp}额外冷却时间{/exp}{int(:)}
+    [!easy],[!hard],[!medium],[!ultimate],[!expert],[!normal],[!ex],[!master],[!king],[!hero]
+[/level of difficulty]
+
+[sight],[targeting nearest],[warlike],[attack delay]
+    {must1}{int(0:)}
+[!sight]
+
+[attack kind]
+    {float(:)}
+        {must1}{float(:)}
+        {must2}{float(:)}
+        {must3}{int(:)}
+        {must4}{int(:)}
+        {must5}{int(:)}
+        {must6}{int(:)}
+        {must7}{int(:)}
+        {must8}{int(:)}
+        {must9}{int(:)}
+        {must10}{int(:)}
+        {must11}{int(:)}
+    {!float(:)}
+[/attack kind]
+
+[waiting motion],[move motion],[sit motion],[damage motion 1],[damage motion 2],[down motion],[overturn motion]
+    {must1}{string}
+[!waiting motion],[!move motion],[!sit motion],[!damage motion 1],[!damage motion 2],[!down motion],[!overturn motion]
+
+[attack motion]
+    {string}
+    {!string}
+[/attack motion]
+
+[speech on situation]
+    [on revenge],[on etc],[on village],[on attack],[on appear],[on damage],[on go to help],[on disappear],[on die]
+        {must1}{string}
+        {must2}{int(0:)}
+    [!on revenge],[!on etc],[!on village],[!on attack],[!on appear],[!on damage],[!on go to help],[!on disappear],[!on die]
+[/speech on situation]
+
+{exp}投掷攻击怪物时追加的内容{/exp}[throw attack]
+    {exp}攻击索引{/exp}[attack index]
+        {must1}{int(0:)}
+    [!attack index]
+    {exp}粒子文件数{/exp}[passive object number]
+        {must1}{int(0:)}
+    [!passive object number]
+    {exp}投掷的对象文件路径{/exp}[passive object filename]
+        {string}
+        {!string}
+    [/passive object filename]
+    {exp}投掷的对象类型{/exp}[object type]
+        {must1}{exp}0:被动对象, 1:粒子{/exp}{int(0:)}
+    [!object type]
+    {exp}投掷的对象索引{/exp}[passive object index]
+        {must1}{int(0:)}
+    [!passive object index]
+    {exp}魔法等级{/exp}[power]
+        {must1}{int(0:)}
+    [!power]
+    {exp}怪物在第几帧时对象发出的标志{/exp}[throw frame]
+        {must1}{int(0:)}
+    [!throw frame]
+    {exp}投掷对象出发点x坐标{/exp}[passive object start x cood]
+        {must1}{variableInt(:)}
+    [!passive object start x cood]
+    {exp}投掷对象出发点y坐标{/exp}[passive object start y cood]
+        {must1}{variableInt(:)}
+    [!passive object start y cood]
+    {exp}投掷对象出发点z坐标{/exp}[passive object start z cood]
+        {must1}{variableInt(:)}
+    [!passive object start z cood]
+    {exp}一次攻击投掷次数{/exp}[attack number]
+        {must1}{int(0:)}
+    [!attack number]
+    {exp}投掷音效{/exp}[throw sound]
+        {must1}{string}
+    [!throw sound]
+[/throw attack]
+
+[equipment]
+    {must1}{int(0:)}
+    {exp}{/exp}{string}
+    {!string}
+[/equipment]
+
+[int data]
+    {int(:)}
+        {opt1}{int(0:)}
+        {opt2}{int(0:)}
+    {!int(:)}
+[/int data]
+
+[ready action]
+    {exp}对应的攻击动作索引{/exp}[motion index]
+        {must1}{int(0:)}
+    [!motion index]
+    [effect ani file & layer index]
+        {must1}{exp}文件数{/exp}{int(0:)}
+        {string}
+            {must1}{int(:)}
+        {!string}
+    [/effect ani file & layer index]
+[/ready action]
+
+[curse resistance]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+[!curse resistance]
+
+[targeting high level]
+    {must1}{int(0:)}
+[!targeting high level]
+
+[etc motion]
+    {string}
+    {!string}
+[/etc motion]
+
+[targeting time term]
+    {must1}{int(0:)}
+[!targeting time term]
+
+[superarmor on attack]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+[!superarmor on attack]
+
+[floating height]
+    {must1}{int(0:)}
+[!floating height]
+
+[atk super on scr]
+    {int(:)}
+        {must1}[breakable]
+        {must1}[unbreakable]
+        {must1}[half]
+        {must2}{int(:)}
+        {must3}{int(:)}
+        {must4}{int(:)}
+        {must5}{int(:)}
+    {!int(:)}
+[/atk super on scr]
+
+[etc attack info]
+    {string}
+    {!string}
+[/etc attack info]
+
+[dash attack]
+    [function index]
+        {must1}{int(0:)}
+    [!function index]
+    [attack index]
+        {must1}{int(0:)}
+    [!attack index]
+    [shakeable]
+        {must1}{int(:)}
+        {must2}{int(:)}
+        {must31}{int(:)}
+    [!shakeable]
+    [first speed]
+        {must1}{int(0:)}
+    [!first speed]
+    [last speed]
+        {must1}{int(0:)}
+    [!last speed]
+    [dash time]
+        {must1}{int(0:)}
+    [!dash time]
+    [dash ready time]
+        {must1}{int(0:)}
+    [!dash ready time]
+    [animation first index]
+        {must1}{int(0:)}
+    [!animation first index]
+[/dash attack]
+
+[jump power],[jump speed]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+[!jump power],[!jump speed]
+
+[jump motion]
+    {must1}{string}
+[!jump motion]
+
+[targeting low level]
+    {must1}{int(0:)}
+[!targeting low level]
+
+[targeting low HP]
+    {must1}{int(0:)}
+[!targeting low HP]
+
+[burn resistance]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+[!burn resistance]
+
+[summon skill status up type]
+    {must1}{int(0:1)}
+[!summon skill status up type]
+
+[keep distance]
+    {must1}{int(0:)}
+[!keep distance]
+
+[attack down prob]
+    {exp}攻击概率{/exp}{int(0:)}
+    {!int(0:)}
+[/attack down prob]
+
+{exp}超级冠军掉落的物品列表{/exp}[super champion drop item]
+    {exp}物品索引{/exp}{int(:)}
+        {must1}{exp}概率{/exp}{int(:)}
+    {!int(:)}
+[/super champion drop item]
+
+[jumpattack motion]
+    {must1}{string}
+[!jump motion]
+
+[jumpattack info]
+    {must1}{string}
+[!jump info]
+
+[jump action]
+    {must1}{string}
+[!jump action]
+
+{exp}攻击反击{/exp}[counter attack]
+    {must1}{exp}攻击反击{/exp}{int(0:)}
+    [probability]
+        {must1}{exp}反击概率{/exp}{int(0:100)}
+    [!probability]
+    [attack index]
+        {must1}{exp}反击时的攻击索引{/exp}{int(0:)}
+    [!attack index]
+    [damage type]
+        {must1}[approach attack]
+        {must1}[range attack]
+        {must1}[all attack]
+    [!damage type]
+    [need hp]
+        {must1}{int(0:)}
+    [!need hp]
+[/counter attack]
+
+{exp}捕获掉落物品{/exp}[catch item]
+    {int(0:)}
+        {must1}{int(0:)}
+        {must2}{int(0:)}
+    {!int(:)}
+[/catch item]
+
+[hell monster]
+    {int(0:)}
+    {!int(:)}
+[!hell monster]
+
+[weapon break resistance]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+[!weapon break resistance]
+
+[targeting high HP]
+    {must1}{int(0:)}
+[!targeting high HP]
+
+[come in motion]
+    {must1}{string}
+    {must2}{int(0:)}
+    {must3}{int(0:)}
+[!come in motion]
+
+[out of targetting]
+    {must1}{int(0:)}
+[!out of targetting]
+
+[jump attack]
+    [attack index]
+        {must1}{int(0:)}
+    [!attack index]
+    [start frame index]
+        {must1}{int(0:)}
+    [!start frame index]
+    [end frame index]
+        {must1}{int(0:)}
+    [!end frame index]
+    [jump type]
+        {must1}{int(0:)}
+    [!jump type]
+    [jump height]
+        {must1}{int(0:)}
+    [!jump height]
+    [jump speed]
+        {must1}{int(0:)}
+    [!jump speed]
+    [jump direction]
+        {must1}{int(0:)}
+    [!jump direction]
+    [on collision custom animation index]
+        {must1}{int(0:)}
+    [!on collision custom animation index]
+    [ememy distance rate]
+        {must1}{float(:)}
+    [!ememy distance rate]
+    [limited x cood]
+        {must1}{int(:)}
+    [!limited x cood]
+    [limited y cood]
+        {must1}{int(:)}
+    [!limited y cood]
+[/jump attack]
+
+[targeting downed]
+    {must1}{int(0:)}
+[!targeting downed]
+
+[targeting low physical defense]
+    {must1}{exp}1则为锁定物理防御力低的敌人{/exp}{int(0:)}
+[!targeting low physical defense]
+
+[targeting attacker]
+    {must1}{exp}1则为锁定最后攻击自己的敌人{/exp}{int(0:)}
+[!targeting attacker]
+
+[overhead gauge type]
+    {must1}{int(0:)}
+[!overhead gauge type]
+
+[base table]
+    {must1}{string}
+[!base table]
+
+[can beat index]
+    {int(0:)}
+    {!int(:)}
+[/can beat index]
+
+[damage time balance]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+    {must3}{int(0:)}
+    {must4}{int(0:)}
+[!damage time balance]
+
+[stun time balance]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+    {must3}{int(0:)}
+    {must4}{int(0:)}
+[!stun time balance]
+
+{exp}与目标保持距离范围{/exp}[keep range distance with target 1]
+    {must1}X轴保持距离{int(:)}
+    {must2}Y轴保持距离{int(:)}
+    {must3}X轴随机半径{rndint(:)}
+    {must4}Y轴随机半径{rndint(:)}
+[!keep range distance with target 1]
+
+[ridableskill definition]
+    [pattern]
+        {must1}{int(0:)}
+    [!pattern]
+    [image path]
+        {must1}{string}
+    [!image path]
+    [skill]
+        {int(:)}
+            {opt1}{int(:)}
+            {opt2}{string}
+            {opt3}{int(:)}
+            {opt4}{int(:)}
+        {!int(:)}
+    [/skill]
+[/ridableskill definition]
+
+[ridableskill explanation]
+    [pattern]
+        {must1}{int(0:)}
+    [!pattern]
+    [title]
+        {must1}{string}
+    [!title]
+    [subtitle]
+        {must1}{string}
+    [!subtitle]
+    [category]
+        {must1}{string}
+    [!category]
+    [detail]
+        {must1}{string}
+    [!detail]
+[/ridableskill explanation]
+
+[jumpattack action]
+    {string}
+    {!string}
+[!jumpattack action]
+
+[is on the object]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+[!is on the object]
+
+{etc}[No Combo Rate Monster]
+
+[targeting from direction]
+    {must1}{int(0:)}
+[!targeting from direction]
+
+[etc sound]
+    {must1}{string}
+[!etc sound]
+
+[diving sight]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+[!diving sight]
+
+[hold attack]
+    [function index]
+        {must1}{int(0:)}
+    [!function index]
+    [attack index]
+        {must1}{int(0:)}
+    [!attack index]
+    [offset]
+        {must1}{int(0:)}
+        {must2}{int(0:)}
+    [!offset]
+    [animation index]
+        {must1}{int(0:)}
+    [!animation index]
+    [min hold]
+        {must1}{int(0:)}
+    [!min hold]
+    [max hold]
+        {must1}{int(0:)}
+    [!max hold]
+[/hold attack]
+
+[warp attack]
+    [function index]
+        {must1}{variableInt(0:)}
+    [!function index]
+    [attack index]
+        {must1}{int(0:)}
+    [!attack index]
+    [warp style]
+        {must1}{exp}0: 无条件移动到角色背后(Whisp)，1: 以角色的方向为基准向后(妙真){/exp}{int(0:1)}
+    [!warp style]
+    {exp}与目标分离后应出现的距离{/exp}[target offset]
+        {must1}{int(0:)}
+    [!target offset]
+    {exp}相位变化后要攻击的索引{/exp}[after attack]
+        {must1}{int(0:)}
+    [!after attack]
+    {exp}消失后要出现的时间{/exp}[after appear time]
+        {must1}{exp}300以下无效{/exp}{int(0:)}
+    [!after appear time]
+    {exp}相位变化的冷却时间{/exp}[cool time]
+        {must1}{int(0:)}
+    [!cool time]
+[/warp attack]
+
+[forced knockback]
+    {must1}{int(0:)}
+[!forced knockback]
+
+[normal dash speed]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+[!normal dash speed]
+
+[slant dash speed]
+    {must1}{int(0:)}
+    {must2}{int(0:)}
+[!slant dash speed]
+
+[pvp]
+    [int data]
+        {int(:)}
+            {opt1}{int(0:)}
+            {opt2}{int(0:)}
+        {!int(:)}
+    [/int data]
+    {exp}召唤技能 1级时能力值上升率(%){/exp}[summon skill status up rate]
+        {must1}{exp}力量{/exp}{float(:)}
+        {must2}{exp}体力{/exp}{float(:)}
+        {must3}{exp}智力{/exp}{float(:)}
+        {must4}{exp}精神{/exp}{float(:)}
+        {must5}{exp}HP{/exp}{float(:)}
+        {must6}{exp}MP{/exp}{float(:)}
+        {must7}{exp}物理攻击{/exp}{float(:)}
+        {must8}{exp}物理防御{/exp}{float(:)}
+        {must9}{exp}魔法攻击{/exp}{float(:)}
+        {must10}{exp}魔法防御{/exp}{float(:)}
+    [!summon skill status up rate]
+[/pvp]
+
+[explain]
+    {must1}{string}
+[!explain]

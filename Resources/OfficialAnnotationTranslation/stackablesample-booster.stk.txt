@@ -1,0 +1,101 @@
+// 消耗品脚本文件样本 //
+
+[packagable] 0	// 无法邮寄包裹，默认值为可以邮寄，请注意
+
+[name] `药水`
+[name2] `Potion'
+[explain]					// 消耗品的说明。可以换行。
+`药水
+是临死时
+该喝的东西`
+[flavor text]
+`传说临死时喝下会有好处`
+[grade] 6				// 消耗品的等级
+[attach type] `[free]`				// 绑定类型 在 `[free]` `[trade]` `[trade delete]` `[sealing]` 中选择一个
+[creation rate] 2				// 生成比率 (注意：不要使用过大的数值。建议 10 以下)
+[rarity] 0				// 稀有度。 0:普通 1:罕见 2:稀有 3:独特 4:史诗
+[weight] 5				// 重量 (单位：10g)
+[usable job]			// 可使用角色列表的开始
+`[all]`					// 有 `[swordman]` `[fighter]` `[all]` 等选择
+[/usable job]			// 必须用这个来结束
+[minimum level] 0				// 使用所需的最低等级
+
+[icon] `StackableIcon.img` 2		// 图标图像文件和帧索引
+[field image] `StackableField.img` 1	// 掉落在地上时的图像文件和帧索引
+
+[stackable type] `[waste]` 14			// 消耗品的类型
+// `[waste]` `[material]` `[recipe]` `[throw]` `[set]` `[legacy]` `[quest]` `[etc]` `[creature]` `[feed]`
+// `[cera package]` `[package]` `[cera booster]` `[booster]`
+					// 后面的数字是价格表索引。如果没有价格则输入0。
+					// 即使单独输入价格，卖出/修理价格也会遵循这个索引
+[price] 100				// 价格。如果从价格表读取则无需填写
+[cash] 1200				// 现金价格
+[medal] 5				// 勋章价格
+[value] 50				// 用户在商店卖出的金额
+[finish point price] 10			// FP价格
+
+[cool time] 1000				// 使用后禁止使用主动技能和消耗品的时间。以毫秒为单位，仅对 `[waste]` 和 `[throw]` 有效
+[쿨타입 그룹] 0				// 所属的冷却时间组。如果是-1或不写，则没有组，仅应用于自身
+[party cooltime] 1			// 如果为1则应用组队冷却时间
+
+[move wav] `MOVE_SOUND`		// 掉落在地上、移动道具时(包括装备)发出的声音
+
+[use wav] `使用时将出现的效果音标签`
+
+[int data]				// 用于硬编码的整数数据
+3
+4
+[/int data]
+
+[string data]				// 用于硬编码的字符串数据
+`ASDF.ptl`
+`ASDF2.ptl`
+[/string data]
+
+[applying range] 100				// 应用范围
+
+
+
+[booster info]		// 增益道具信息
+[avatar]		// 抽取外观
+2			// 从外观抽取几个
+39000	1000	1	0	0	// 道具索引	相对概率	数量	期限	属性
+39000	1000	1	0	0
+39000	1000	1	0	0
+39000	1000	1	0	0
+[/avatar]
+[cera]
+1
+8	1000	10			// 道具索引	相对概率	数量
+[/cera]
+// 可能的标签
+[creature]
+1
+8	1000	10
+[/creature]
+1
+8	1000	10
+[equipment]
+1
+8	1000	10
+[/equipment]
+1
+8	1000	10
+[stackable]
+1
+8	1000	10
+[/stackable]
+[etc]
+1
+8	1000	10
+[/etc]
+[/booster info]
+
+
+
+//
+// 如果该道具是 `[cera package]` 或 `[package]` 时
+[package data]
+整数:道具索引 整数:道具数量
+[/package data]
+//

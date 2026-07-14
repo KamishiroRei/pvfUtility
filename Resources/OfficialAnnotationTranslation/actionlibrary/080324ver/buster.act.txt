@@ -1,0 +1,34 @@
+[MOTION]
+	[BASE ANI] `../Animation/Buster.ani`
+	[SUB ANI]
+		`../Animation/CastEffect.ani` 0 1
+		`../Animation/CastEffectGlow.ani` 0 2
+	[/SUB ANI]
+[/MOTION]
+// [DEFAULT ATTACK INFO] `../Attackinfo/Cast.atk`
+
+[TRIGGER]
+	[FRAME] 0 0
+	[WHICH] [ME]
+	[DO BEHAVIOR] [ME] 0
+[/TRIGGER]
+
+[TRIGGER]
+	[FRAME] 1 2
+	[DO BEHAVIOR] [TARGET] 1
+[/TRIGGER]
+
+
+[BEHAVIOR] // 0号
+[CASTING] 1500 2 // 时间, 行为编号.
+[/BEHAVIOR]
+
+[BEHAVIOR] // 1号
+	[CREATE PASSIVEOBJECT]	// 创建被动对象.
+		[INDEX] 23013	//索引编号
+		[PARTICLE FILENAME] `../Particle/ShootingStarPath.ptl`	// 被动对象创建粒子
+		[LEVEL] 32						// 魔法等级.
+		[POS] 0 0 300 // 父坐标的相对坐标 x y z
+		[WARNING MARK] 330 0 100 2 // WarningMark 校准. x位置校准 y 校准位置 延迟, 警告标记种类.
+	[/CREATE PASSIVEOBJECT]
+[/BEHAVIOR]

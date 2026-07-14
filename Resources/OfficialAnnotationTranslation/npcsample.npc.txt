@@ -1,0 +1,110 @@
+[small face] `slainer.img` 0 // 窗口中显示的小脸部图像文件名和帧索引。
+[big face] `slainer.img` 1 // 窗口中显示的大脸部图像文件名和帧索引。
+[popup face] `slainer.img` 2 // 弹出菜单中显示的小脸部图像文件名和帧索引。
+[field animation] `Animation/slainer.ani` // 在场景中显示的动画的相对路径。
+[field wav] `STATIC_SOUND` // 在场景中时始终存在的效果音。
+[popup wav] `NPC_SOUND` `NPC_END_SOUND` // 打开菜单时、关闭菜单时播放的效果音。
+[look around] 0 // 在场景中是否转向对话方向。1（转身看）为默认值。
+
+[chaos team]
+`[red team]` 或 `[blue team]` 或 `[neutral team]` // 混乱模式中使用的NPC队伍指定。
+
+[role] // NPC的角色列表。交替写入所需的角色名称和索引。顺序没有意义。
+`[item shop]` 3 // 物品商店。普通商店和修理商店通用。索引是物品商店索引。
+`[secret shop]` 1002 // 秘密商店。像加百列那样在地城中不规则出现的NPC。索引是物品商店索引。
+`[recover stamina]` 0 // 恢复体力。索引必须为0。
+`[sera shop]` 0 // 赛拉商店。索引必须为0。
+`[guild]` 0 // 公会管理。索引必须为0。
+`[upgrade item]` 0 // 物品升级。索引必须为0。
+`[disjoint item]` 0 // 物品分解。索引必须为0。
+`[product item]` 17 // 物品生产。索引是物品商店索引。
+`[item storage]` 0 // 仓库。索引必须为0。
+`[post box]` 0 // 邮箱。索引必须为0。
+`[move town]` 2 // 城镇移动。要移动到的town index。
+`[convert avatar]` 0 // 装扮转换。索引必须为0。
+`[genuine damage upgrade]` 0 // 武器真伤升级。索引必须为0。
+`[play quest movie]` 0 // 任务影片回放。
+[/role]
+
+[skill] // 可教授的职业技能。
+`[fighter]` // 职业。选择 `[swordman]` `[fighter]` `[common]` 之一。
+1 // 可教授的职业技能索引列表。
+34
+27
+33
+[/skill]
+[skill]
+`[common]`
+127
+138
+140
+[/skill]
+
+[name] `승민` // 名称。
+[field name] `프로그래머 승민` // 在场景中显示的名称。
+[quest speech]
+`哎呀，这可是机不可失，时不再来啊。 // 任务提示窗口中显示的默认对话。
+趁我好言相劝时赶快去执行吧~`
+
+[speech] // 一段对话开始。
+1 // 索引。初次对话时从1号对话开始。
+3 5 // 对话显示的等级。（例如：3~5）若无等级限制则填写0 0或1 99。
+`关于NDS` // 标题（按钮上显示的文字。简短一行。）
+`NDS是最棒的！ // 内容（若无内容，只有选择项则使用 ``
+你也买一个！
+买两个！`
+3 4 // 子对话索引列表。没有则可不写。
+[/speech]
+[speech]
+2
+1 99
+`关于PSP`
+`PSP也很酷！
+如果不买NDS的话就买PSP吧！`
+[/speech]
+[speech]
+3
+3 5
+`NDS多人游戏`
+`NDS只需一个卡带就能进行多人游戏！`
+[/speech]
+[speech]
+4
+3 5
+`GBA扩展`
+`NDS也能玩GBA卡带！`
+[/speech]
+
+[dialog]
+4 // 对话索引。
+1 99 // 等级限制。
+-1 // 要列出的职业数量，职业索引(1(鬼剑士) 1(开启)/0(关闭) 2(格斗家) 1(开启)/0(关闭).... 5(圣职者) 1(开启)/0(关闭))，要对所有职业开启则使用-1。
+0 // 体力：是否考虑OTL状态，是则为1，否则为0。
+0 // 对以上4种条件进行OR运算则为1，进行AND运算则为0。
+<8::dialog_Ser_MDL_1> // 对话。
+1 // 相关任务索引，可按需添加。
+[/dialog]
+
+// 设置在首领房间中，地城通关前不可见，地城通关后才可见。
+[visible on dungeon clear] 1
+
+// 为NPC显示点击标记的功能。可以设置2个以上。
+// 第一个参数是点击标记显示的条件，其余为各条件的数据。
+// 如果条件为0号，则任务进行中显示点击标记。后面跟着的数字是任务索引。
+[click mark]
+0 1016
+0 2000
+[/click mark]
+
+[move town limit str] // NPC区域移动限制弹出窗口字符串。
+<8::marlene_arad_movetown_limit> // 弹出窗口中显示的内容。
+
+[move town confirm str] // NPC区域移动前确认弹出窗口字符串。
+<8::marlene_arad_movetown_confirm> // 确认窗口中显示的内容。
+
+// NPC消息气泡随机显示。
+[random message balloon]
+`[random message animation]` `Animation/ChristmasSanta_Random.ani` // 随机消息出现时显示的动画。
+`[random message probability]` 20 // 随机消息出现的概率。
+`[random message list]` 3 <8::random_message_1> <8::random_message_2> <8::random_message_3> // 数量 消息字符串。
+[/random message balloon]

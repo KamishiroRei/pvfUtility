@@ -1,0 +1,251 @@
+[map name] <6::map_name_455> //地图的名称
+
+[player name] 1 4 //最少人数，最多人数
+
+[is character escape] //角色卡死逃脱例外
+
+[show dust] //灰尘和脚印效果
+`Common/CommonEffect/Animation/SandDust.ani` //输出的灰尘路径
+`Common/CommonEffect/Animation/FootPrintOnSand.ani` //输出的脚印路径
+
+[sort bottom] 1 //除一般图层外是否使用其他图层排序 1:使用 其他:不使用
+
+[pvp start area] //pvp开始地点定义 (X坐标, Y坐标, 宽度, 高度 顺序)
+0 0 0 0 //个人战开始地点
+0 0 0 0 //1队的开始地点
+0 0 0 0 //2队的开始地点
+
+[pvp practice start area] //pvp练习模式开始地点定义 (X坐标, Y坐标, 宽度, 高度 顺序)
+112 201 69 231 //1队的开始地点
+497 205 69 226 //2队的开始地点
+
+[tournament start area] 1 760 270 2 //武斗场地图开始坐标定义 (入场人数, X坐标, Y坐标, 队伍(1:角色, 2:怪物))
+
+
+
+[shadow type] `[mirror]`, `[more darker]` //影子模式 : 设置为 `[mirror]` 时绘制上层、下层影子。
+//当前PVP、酒馆中使用 `[mirror]` 模式
+
+[dungeon] //使用此地图的副本列表
+1507
+[/dungeon]
+
+[type] `[normal]`, `[boss]`, `[dummy]` //类型设置 : 普通房间, 首领房间, 虚拟房间 (诱惑之村哈梅伦中使用 : 首领用硬编码)
+
+[background pos] 80 //扩展为800*600时，在原有背景绘制位置上提升该数值进行绘制。通常设置为80
+
+[greed] //设置在地牢的哪种网格类型中使用此地图
+`┿ ┿`
+
+[tile] //地图基本地砖 - 在近景图层绘制。
+`Tile/hm01_1.til`
+`Tile/hm01_1.til`
+`Tile/hm01_1.til`
+`Tile/hm01_1.til`
+[/tile]
+
+[extended tile] //扩展地砖列表 附加在地砖下方的扩展地砖列表
+`Tile/tileex01.til` //横向排列 [tile] 标签的地砖后，剩余部分排列在下方。
+`Tile/tileex01.til`
+`Tile/tileex01.til`
+`Tile/tileex01.til`
+`Tile/tileex01.til`
+`Tile/tileex03.til`
+`Tile/tileex03.til`
+`Tile/tileex03.til`
+`Tile/tileex03.til`
+`Tile/tileex03.til`
+[/extended tile]
+
+[elemental property] `[fire element]`, `[water element]`, `[dark element]`, `[light element]` //为地图指定属性。
+
+// 图层的滚动速度。(滚动速度默认值为100)
+[far sight scroll] 60 // 地砖滚动速度与远景滚动速度的比率 (%) 100则为一起滚动，0则不滚动
+[middle sight scroll] 80 // 地砖滚动速度与中景滚动速度的比率 (%) 100则为一起滚动，0则不滚动
+[near sight scroll] 120 // 地砖滚动速度与近景滚动速度的比率 (%) 100则为一起滚动，0则不滚动
+
+// 从0, 0坐标开始自动重复绘制的背景动画。
+// 图层可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]`，
+// 若为 `[below]` 则在该图层的动画和对象绘制之前，
+// 若为 `[upper]` 则在该图层的动画和对象绘制之后进行绘制。
+// `[close]` 的情况下，若为 `[below]` 则在地砖绘制之前绘制。
+[background animation]
+	[ani info]
+		[filename] `Animation/far1.ani` //动画路径
+		[layer] `[distantback]` //绘制的图层
+		[order] `[below]`
+		[loop y axis] 1 //是否持续沿Y坐标向下重复
+		[screen pos] 0 80 //以屏幕坐标基准设置起始坐标
+	[/ani info]
+[/background animation]
+
+//+ 等候室用地图专用数据 +//
+[town movable area] // 等候室用起始区域的列表。
+0 30 150 100 1 1 // 依次为x坐标, y坐标, x大小, y大小, 移动城镇索引, AREA索引
+300 20 150 100 -1 -1 // 将移动城镇索引和AREA索引指定为-1则不是AREA移动，而是副本开始
+[/town movable area]
+
+[virtual movable area] // 等候室用角色可移动的方形区域列表。依次为x坐标, y坐标, x大小, y大小
+0 100 1500 300 // 可在列表的并集区域内移动。
+100 0 1300 500
+[/virtual movable area]
+//- 等候室用地图专用数据 -//
+
+[guild agit entrance info] //公会据点进/出场用AREA区域 x坐标,y坐标,x大小,y大小,放入-2, -2
+833 196 78 61 -2 -2
+[/guild agit entrance info]
+
+[pathgate pos] //放置通道对象的坐标
+0 200 //左侧对象 x, y
+1000 200 //右侧对象 x, y
+500 0 //上方对象 x, y
+500 400 //下方对象 x, y
+
+[dungeon start area] 950 219 114 172 //在地牢起始地图设置，角色开始地牢时位置的x坐标,y坐标,x大小,y大小
+
+[static player start pos] //固定的地图起始位置。在指定的精确坐标开始。
+	[player 1] 100 120 200 //玩家, x, y, z
+	[player 2] 200 120 400
+	[player 3] 300 120 600
+	[player 4] 400 120 800
+[/static player start pos]
+
+[opening bgm] `M_BAKALCASTLE_BOSS_INTRO` 30000 //标签名 声音播放时间(播放30秒后播放主BGM)
+
+[sound] //进入地图时输出的声音标签列表
+`AMBIENT_FOREST`
+`BGM_FOREST`
+[/sound]
+
+[animation] //指定放置在地图上的动画。没有则不写也可以。
+`Lawn.ani` `[bottom]` 30 100 0 //依次为动画文件名, 图层, x坐标, y坐标, z坐标
+`Picture.ani` `[closeback]` 30 0 30 //图层可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]`
+[/animation]
+
+[passive object] //指定放置在地图上的被动对象。没有则不写也可以。
+37 100 27 0 //依次为对象索引, x坐标, y坐标, z坐标
+38 270 100 72
+39 1020 183 -1
+[/passive object]
+
+[monster] //指定放置在地图上的怪物。没有则不写也可以。
+1 1 10 1003 37 0 1 1 `[fixed]` `[normal]` //怪物索引, 等级自动指定与否, 等级, x坐标, y坐标, Z坐标, 随机物品掉落次数, 指定物品掉落次数, 复制类型, 怪物类型
+71 1 15 173 28 0 2 2 `[half]` `[champion]` 0 //若等级自动指定，则等级为修正值，否则为绝对值
+3 0 15 188 57 0 1 1 `[ratio]` `[boss]` //复制类型为 `[fixed]` 则固定1只，`[half]` 则为玩家数的一半 (1, 2人 - 1只, 3, 4人 - 2只)，`[ratio]` 则为玩家数
+//怪物类型可选择 `[normal]` `[champion]` `[super champion]` `[boss]`
+//使用 `[champion]`, `[super champion]` 时在后面指定特性个数及特性。
+//物品掉落次数 是什么？
+//新增参数，如果是3，则最少出现0个最多出现3个物品
+63024 1 0 523 268 0 1 1 `[fixed]` `[NPC]` 1020 `[boss]`
+//在怪物类型前输入 `[NPC]` NPC编号，则击杀此怪物后，此NPC会出现。
+[/monster] //必须用此标签闭合。
+
+[monster condition] //地图上出现的条件怪物 与 [monster] 标签相同
+[/monster condition] //参考黑曜石墓地、影子迷宫
+
+[blood monster] //怪物索引,召唤前(5秒前)出现的演出对象索引,x,y,z坐标,将复活多久,
+62001 0 792 258 0 10000 3000 1 0 3 //复活数字增加的时机(1000为1秒),血战开始时召唤的怪物数量,
+62001 0 792 258 0 7000 3000 1 0 2 //怪物复活数字增加的程度, 怪物增加的总次数
+[/blood monster]
+
+[ultimate monster] //与[blood monster]相同
+[/ultimate monster]
+
+[tournament monster] //武斗场出现的怪物列表
+1 //几人的武斗场？(目前仅1人可能)
+56156 900 //怪物索引, 抽取点数 (越低越容易在初期比赛中遇到)
+56045 600
+[/tournament monster]
+
+[blood phase time] //第几轮, 血战怪物列表索引(-1是从列表中随机..),
+0 0 3000 1.1 0 0 //移动到下一轮的时间 (-1则指定最后的血战，使其通关…,将变强几倍?(2则为2倍,最大4倍)
+0 1 2000 1.1 1 3 //轮内召唤的列表的顺序
+0 2 2000 1.1 1 1 //轮内连续召唤的怪物列表的数量
+0 3 2000 1.1 1 1
+[/blood phase time]
+
+[ultimate phase time] //与[blood phase time]相同，但在最后放入难度 'A', 'B', 'C', 'D', 'E'
+0 0 5000 1.5 0 0 `A`
+[/ultimate phase time]
+
+[heroes mode map index] 13091 //英雄模式时代替出现的地图索引
+
+[monster team] //地图上出现的怪物的队伍。无特别指定时不需要。
+0 //依次输入。0则为角色队。角色一方。
+100 //100则为怪物队。一般的怪物。
+[/monster team] //输入与怪物数量相同，并且必须用此标签闭合。
+
+[monster specific AI] //地图上有巡逻、区域防御AI的怪物放置时指定。没有则无需指定。怪物AI指定按声明的顺序。
+`[normal]` //怪物按一般AI移动时指定。
+//以下两种AI在CHAOS模式中使用
+`[zone defence]` 100 100 //在100, 100处等待直到怪物视野内出现目标。丢失目标则返回100, 100处。
+`[roaming]` 4 100 100 150 150 200 100 250 150 //坐标个数 X1 Y1 X2 Y2 X3 Y3 X4 Y4 怪物在无目标时从X1 Y1开始按顺序移动，跑完一遍后返回起点。
+[/monster AI specific]
+
+[champion] 11 //冠军怪物数量
+
+[special passive object]
+222 400 172 //被动对象索引, x坐标 , y坐标
+3 //要创建的对象数量
+`[monster]` 202 16 -1 -1 1 //怪物索引, 怪物等级, 生成概率1, 生成概率2 (以生成概率1/生成概率2生成), 是否跳出(-1则跳出)
+`[trap]` 48003 5 -1 -1 -1 //陷阱被动的索引, 陷阱的魔法等级, 生成概率1, 生成概率2 (以生成概率1/生成概率2生成), 未使用
+`[item]` 1 -1 -1 -1 -1 //dungeon script的[special passive object item]中的索引,指定掉落生成尝试次数,随机掉落生成尝试次数,物品箱索引,未使用
+`[hellparty]` //地狱派对索引, 相对概率, 组号
+101 25 1 //Blaze
+102 25 1 //Vapor
+103 25 1 //Overgrowth
+`[/hellparty]`
+[/special passive object]
+
+[NPC] //指定放置在地图上的NPC。没有则不写也可以。
+2 `[left]` 300 200 //依次为索引, 朝向, x坐标, y坐标
+1001 `[right]` 352 127 //朝向可选择 `[left]` `[right]`
+[/NPC]
+
+//竞争地牢用
+[monster spawn pos]
+5 //出现坐标的数量
+50 100 30 //x坐标, y坐标, 出现概率
+50 100 30
+50 100 30
+50 100 30
+50 100 30
+
+[ai character]
+20301 494 252 0 `[monster]` `[normal]` 1 0 //AI怪物索引, x坐标, y坐标, z坐标, 队伍, 怪物类型('[monster]` 标签参考), 随机物品生成次数, 指定物品生成次数
+20301 494 252 0 `[monster]` `[NPC]` 5 `[normal]` 1 0 //APC死亡后若有召唤的NPC，则在队伍后放入[NPC]标签。
+[/ai character]
+
+[event monster position] //活动怪物生成坐标
+257 239 0 //x坐标, y坐标, z坐标
+441 233 0
+944 235 0
+1164 238 0
+[/event monster position]
+
+//加载此地图时显示的图像
+//img为800*640大小，
+//0号为正文，1号为背景构成。按1号>0号顺序绘制，
+//此时若没有1号则只绘制正文。
+[map loading image path] `sprite/map/loadingimage/samui_otoko.img`
+
+[quest animation] //可以通过任务控制动画显示或不显示。
+`Animation/Village_0.ani` `[normal]` 636 180 0 2490 //Animation路径, 图层, x坐标, y坐标, z坐标, 任务编号(完成此任务则播放)
+[/quest animation]
+
+[attacked monster info] //城镇袭击怪物信息
+1 433 346 0 557 20000 153 //怪物索引, x坐标, y坐标, z坐标(未使用), 生成比例(总和需为10000), 地牢编号, 通关限制时间
+1016 433 346 0 429 20001 184 //地牢编号和通关限制时间用途无法确认，恳请后续添加。
+262 433 346 0 286 20002 230
+5005 433 346 0 143 20003 275
+17 433 346 0 13 20020 306
+5 883 266 0 557 20000 153
+1016 883 266 0 429 20001 184
+[/attacked monster info]
+
+[move layered map] //上下重叠的地图 (layered map) 移动条件。
+	[all dead case passable] //队员全灭时可自动移动 (无此标签则停留在当前地图)
+	[zpos under] -300 // [zpos under] -300 : z值在-300以下时
+[/move layered map]
+
+[map dialog] <11::despair_dummy_03> //进入地图时出现的对话

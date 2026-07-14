@@ -1,0 +1,68 @@
+光环示例~
+
+//1// 必须存在 1 个
+//0// 可以不存在
+//*// 可以不存在，也可以多次出现
+
+
+
+标签整理
+
+[type] `include`                    //1// 在 `include`, `exclude`, `alone` 中选择 1 个
+
+[range]    600                        //1// 光环范围（半径 px）
+
+[duration] 1000                        //0// 持续时间（ms）0 或不写则为无限
+
+[destroy method]                    //0// 消除光环的条件（当 delegator 被销毁时必定消除）
+`duration`                            //0// 持续时间结束时
+`source destory`                    //0// 源消失时
+[/destroy method]
+
+[event time]                        //0// 光环事件发生的时间（ms）没有此标签则立即发生
+    `first`        500                    //0// - 首次事件发生的等待时间
+    `repeat`    250                    //0// - 重复事件的间隔时间（0 或不写则忽略）
+    `update`    250                    //0// - 更新事件的间隔时间（此选项需与程序员协商）
+[/event time]
+
+[overlab type] `overlab`            //1// `overlab`, `update`, `skip` //`update` 未实现!!
+
+[target]                            //0//
+    [object type] `all`                //*// `all`, `character`, `apc`, `monster`, 不写则为 `all`
+    [ally type] `dont-care`            //0// `dont-care`, `ally`, `enemy`, 不写则为 `dont-care`
+    [max target number]    0            //0// 最大目标数，0 或不写则为无限 //未实现!!
+    [object index] 0                //*// 对象索引，0 或不写则忽略。依赖于 [object type]
+[/target]
+
+[event]                                //1//
+    `appendage`            2455        //*// 要触发的事件，1 个以上即可
+    `appendage`            2456        //*// 第一个参数在 `appendage`, `passive object`, `aura` 中选择1个
+    `aura`                1000        //*// 第二个参数是脚本化的索引号
+    `passive object        5121        //*// 例如，此行的内容是生成 5121 号被动对象
+[/event]
+
+[effect]                            //*// 此标签可以重复使用
+    [attach target]    `delegator`        //1// `delegator`, `target`
+    [type] `animation`                //1// `animation`, `particle`
+    [attach pos] `bottom`            //1// `bottom`, `middle`, `top`
+    [z revision] -10                 //0// z 轴移动距离（px）不写则忽略
+    [index] -1                        //1// <animation> 附加的图层位置
+    [option]                        //0// animation 选项
+        `keep direction`            //0// animation 选项（固定方向）
+        `floor`                        //0// animation 选项（绘制于地面：如魔法阵等）
+        `auto remove`                //0// animation 选项（动画结束后自动移除）
+        `apply custom color`        //0// animation 选项（跟随对象颜色：如迷彩等）
+        `sync speed`                //0// animation 选项（与对象动画速度同步）
+        `copy horizon`                //0// animation 选项（动画横向复制）
+        `copy vertical`                //0// animation 选项（动画纵向复制）
+        `resize`                    //0// animation 选项（根据光环范围调整大小）未实现!!!
+    [/option]
+    [file name] `effect/animation/aura_range.ani`    //1// 该效果的路径和文件名
+[/effect]
+
+[effect]
+    [attach target]    `target`
+    [type] `particle`
+    [attach pos] `middle`
+    [file name] `effect/particle/aura_particle.prt`
+[/effect]

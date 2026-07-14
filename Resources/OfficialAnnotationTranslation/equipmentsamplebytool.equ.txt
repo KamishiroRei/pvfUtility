@@ -1,0 +1,643 @@
+// 条件(if)##########################
+[if] 	
+	//####1.1.1 trigger ######
+	//1.1.1.1 attack success #
+	{exp}攻击成功时的值{/exp}[attack success]
+		{must1}{exp}值为 2 时使用 attack condition 的 stuck{/exp}{int(1:2)}
+	[!attack success]
+	
+	//1.1.1.2 check damage #
+	{exp}受击时 HP 总扣除伤害 %{/exp}[check damage]
+		{must1}{exp}% 或 +{/exp}{string}
+		{must2}{exp}数值{/exp}{int(0:)}
+	[!check damage]
+
+	//1.1.1.3 event attack success #
+	{prereq}[increase damage]|[increase critical damage]|[weakness]{/prereq}{exp}仅在与 increase damage, increase critical damage, weakness 标签组合时使用{/exp}[event attack success]
+		{must1}{exp}攻击成功时的值{/exp}{int(0:)}
+	[!event attack success]
+
+	//1.1.1.4 after attack #
+	{prereq}[combo]|[aerial]{/prereq}{exp}仅在与 combo, aerial 标签组合时使用{/exp}[after attack]
+		{must1}{exp}攻击成功时的值{/exp}{int(0:)}
+	[!after attack]
+
+	//1.1.1.5 hit #
+	[hit]
+		{must1}{exp}受击时的值{/exp}{int(0:)}
+	[!hit]
+
+	//1.1.1.6 event hit #
+	[event hit]
+		{must1}{exp}受击时的值{/exp}{int(0:)}
+	[!event hit]
+
+	//1.1.1.7 my active status on #
+	[my active status on]
+		{must1}{exp}状态变化{/exp}{string}
+	[!my active status on]
+
+	//1.1.1.8 casting #
+	[casting]
+		{must1}{exp}施放技能使用时的情况检查{/exp}{int(0:)}
+	[!casting]
+
+	//1.1.1.9 use skill #
+	[use skill]
+		{must1}{exp}职业{/exp}{string}
+		{must2}{exp}技能编号{/exp}{int(0:)}
+	[!use skill]
+
+	//1.1.1.10 event use skill #
+	[event use skill]
+		{must1}{exp}职业{/exp}{string}
+		{must2}{exp}技能编号{/exp}{int(0:)}
+	[!event use skill]
+	
+	//1.1.1.11 my death #(标签弃用)
+	//2010-02-10 之后禁止使用
+	
+	//1.1.1.12 party death #
+	{exp}指定队友死亡时{/exp}[party death]
+		{must1}{exp}{/exp}{int(1:1)}
+	[!party death]
+
+	//1.1.1.13 use command #
+	{exp}指定输入指令时{/exp}[use command]
+		{must1}{exp}{/exp}{int(1:1)}
+	[!use command]
+
+	//1.1.1.14 revive #
+	{exp}指定自己复活时{/exp}[revive]
+		{must1}{exp}{/exp}{int(1:1)}
+	[!revive]
+
+	//1.1.1.15 time #	
+	[time]
+		{must1}{exp}时间间隔{/exp}{int(0:)}
+		{must2}{exp}循环与否{/exp}{int(0:1)}
+		{must3}{exp}先冷却时间 {/exp}{int(0:)}
+	[!time]
+
+	//1.1.1.16 set my state #
+	{exp}指定自己状态变更时{/exp}[set my state]
+		{must1}{exp}{/exp}{int(1:1)}
+	[!set my state]
+
+	//1.1.1.17 change status #
+	{exp}条件符合时应用选项{/exp}[change status]
+		{must1}{exp}状态{/exp}{string}
+		{must2}{exp}比较方法{/exp}{string}
+		{must3}{exp}比较单位{/exp}{string}
+		{must4}{exp}数值{/exp}{int(0:)}
+	[!change status]
+
+	//1.1.1.18 change status in range #
+	{prereq}[apply status in range]{/prereq}{exp}数值1~数值2符合时应用选项{/exp}[change status in range]
+		{must1}{exp}状态{/exp}{string}
+		{must2}{exp}数值1{/exp}{int(0:)}
+		{must3}{exp}数值2{/exp}{int(0:)}
+	[!change status in range]
+
+	//1.1.1.19 skill frame trigger #
+	[skill frame trigger]
+		{must1}{exp}职业{/exp}{string}
+		{must2}{exp}技能索引{/exp}{int(0:)}
+		{must3}{exp}动画名称{/exp}{string}
+		{must4}{exp}帧{/exp}{int(0:)}
+	[!skill frame trigger]
+
+	//####1.1.2 state ######
+	//1.1.2.1 module #
+	{exp}模块{/exp}[module]
+		{string}
+		{!string}
+	[/module]
+
+	//1.1.2.2 attacker #
+	{exp}攻击成功时控制攻击类型{/exp}[attacker]
+		{must1}{exp}类型{/exp}{string}
+		{must2}{exp}技能索引{/exp}{int(0:)}
+	[!attacker]
+
+	//1.1.2.3 element #
+	{prereq}[attack success]|[hit]{/prereq}{exp}攻击成功时控制攻击类型{/exp}[element]
+		{must1}{exp}属性{/exp}{string}
+	[!element]
+
+	//1.1.2.4 character #
+	{exp}只有自己是该职业时才检查条件{/exp}[character]
+		{must1}{exp}职业{/exp}{string}
+	[!character]
+	
+	//1.1.2.5 distance #
+	{prereq}[attack success]|[hit]{/prereq}{exp}距离{/exp}[distance]
+		{must1}{exp}{/exp}{int(0:)}
+	[!distance]
+
+	//1.1.2.6 my active status #
+	{exp}检查自己的状态变化{/exp}[my active status]
+		{must1}{exp}状态{/exp}{string}
+	[!my active status]
+
+	//1.1.2.7 my state #
+	{exp}检查自己的状态{/exp}[my state]
+		{must1}{exp}状态{/exp}{string}
+	[!my state]
+
+	//1.1.2.8 target state #
+	{exp}检查敌人状态{/exp}[target state]
+		{must1}{exp}状态{/exp}{string}
+	[!target state]
+
+	//1.1.2.9 target active status #
+	{exp}检查自己攻击的敌人的状态变化{/exp}[target active status]
+		{must1}{exp}状态变化{/exp}{string}
+	[!target active status]
+
+	//1.1.2.10 attack type #
+	{prereq}[attack success]|[hit]{/prereq}{exp}{/exp}[attacker type]
+		{must1}{exp}类型{/exp}{string}
+	[!attacker type]
+
+	//1.1.2.11 target type #
+	{prereq}[attack success]{/prereq}{exp}检查自己攻击的敌人的类型{/exp}[target type]
+		{must1}{exp}类型{/exp}{string}
+	[!target type]
+
+	//1.1.2.12 target grade #
+	{prereq}[attack success]{/prereq}{exp}检查自己攻击的敌人的等级{/exp}[target grade]
+		{must1}{exp}等级{/exp}{string}
+	[!target grade]
+
+	//1.1.2.13 attack condition #
+	{prereq}[attack success]|[hit]{/prereq}[attack condition]
+		{must1}{exp}攻击条件{/exp}{string}
+	[!attack condition]
+
+	//1.1.2.14 skill #
+	{prereq}[attack success]|[hit]{/prereq}[skill]
+		{must1}{exp}职业{/exp}{string}
+		{must2}{exp}技能索引{/exp}{int(0:)}
+	[!skill]
+
+	//1.1.2.15 stat change #
+	[stat change]
+		{must1}{exp}状态{/exp}{string}
+		{must2}{exp}比较方法{/exp}{string}
+		{must3}{exp}比较单位{/exp}{string}
+		{must4}{exp}数值{/exp}{int(0:)}
+	[!stat change]
+
+	//1.1.2.16 target stat #
+	[target stat]
+		{must1}{exp}状态{/exp}{string}
+		{must2}{exp}比较方法{/exp}{string}
+		{must3}{exp}比较单位{/exp}{string}
+		{must4}{exp}数值{/exp}{int(0:)}
+	[!target stat]
+
+	//1.1.2.17 cooltime #
+	{exp}冷却时间内不检查条件{/exp}[cooltime]
+		{must1}{exp}冷却时间单位: ms{/exp}{int(0:)}
+	[!cooltime]
+
+	//1.1.2.18 start cooltime #
+	{exp}每次装备时应用该冷却时间{/exp}[start cooltime]
+		{must1}{exp}冷却时间单位: ms{/exp}{int(0:)}
+	[!start cooltime]
+
+	//1.1.2.19 target death #
+	{prereq}[attack success]{/prereq}{exp}指定自己攻击的敌人死亡时{/exp}[target death]
+		{must1}{exp}{/exp}{int(1:1)}
+	[!target death]
+
+	//1.1.2.20 combo #
+	{exp}指定连击达到数值时{/exp}[combo]
+		{must1}{exp}数值{/exp}{int(0:)}
+	[!combo]
+
+	//1.1.2.21 aerial #
+	{exp}指定空中连击达到数值时{/exp}[aerial]
+		{must1}{exp}{/exp}{string}
+	[!aerial]
+
+	//1.1.2.22 overkill #
+	{exp}指定自己攻击的敌人以 Overkill 方式死亡时{/exp}[overkill]
+		{must1}{exp}{/exp}{string}
+	[!overkill]
+
+	//1.1.2.23 party count #
+	{exp}队友数量{/exp}[party count]
+		{must1}{exp}数量{/exp}{int(0:)}
+	[!party count]
+
+	//1.1.2.24 my appendage #
+	{exp}检查自己身上有 n 号附加物时{/exp}[my appendage]
+		{must1}{exp}附加物索引{/exp}{int(0:)}
+	[!my appendage]
+
+	//1.1.2.25 skill frame state #
+	{exp}该动画开始~结束帧之间成功。{/exp}[skill frame state]
+		{must1}{exp}职业{/exp}{string}
+		{must2}{exp}技能索引{/exp}{int(0:)}
+		{must3}{exp}动画名称{/exp}{string}
+		{must4}{exp}开始帧{/exp}{int(0:)}
+		{must5}{exp}结束帧{/exp}{int(0:)}
+	[!skill frame state]
+
+	//1.1.2.26 skill cooltime  #
+	{exp}用于限制技能初始化范围的状态{/exp}[skill cooltime]
+		{must1}{exp}比较方法{/exp}{string}
+		{must2}{exp}冷却时间{/exp}{int(0:)}
+	[!skill cooltime]
+
+[/if] 
+
+//2 效果(than)##########################
+[then] 
+	//1.2.1 consume item #
+	{exp}消耗该索引的道具{/exp}[consume item ]
+		{must1}{exp}索引{/exp}{int(0:)}
+		{must2}{exp}数量{/exp}{int(0:)}
+	[!consume item ]
+	
+	//1.2.2 target #
+	{exp}指定效果发生在哪个目标身上{/exp}[target]
+		{must1}{exp}种类{/exp}{string}
+		{must2}{exp}范围(单位: px){/exp}{int(0:)}
+	[!target]
+
+	//1.2.3 duration #
+	{exp}指定效果持续多久{/exp}[duration]
+		{must1}{exp}数值(单位 : ms){/exp}{int(0:)}
+	[!duration]
+
+	//1.2.4 equipment duration #
+	{exp}指定效果持续多久{/exp}[equipment duration]
+		{must1}{exp}数值(单位 : ms){/exp}{int(0:)}
+	[!equipment duration]
+
+	//1.2.5 delay #
+	{exp}指定效果延迟多久发动{/exp}[delay]
+		{must1}{exp}数值(单位 : ms){/exp}{int(0:)}
+	[!delay]
+
+	//1.2.6 probability #
+	{exp}指定效果发动的概率{exp}[probability]
+		{must1}{exp}默认 100{/exp}{int(0:)}
+	[!probability]
+
+	//1.2.7 active status #
+	{exp}{/exp}[active status]
+		{must1}{exp}状态变化{/exp}{string}
+		{opt1}{exp}等级{/exp}{int(0:)}
+		{opt2}{exp}强度{/exp}{int(0:)}
+	[!active status]
+
+	//1.2.8 disenchant #
+	{exp}解除目标所有状态变化和增益{/exp}[disenchant]
+		{must1}{exp}{/exp}{int(1:1)}
+	[!disenchant]
+
+	//1.2.9 buff #
+	[buff]
+		{must1}{exp}种类{/exp}{string}
+		{must2}{exp}等级{/exp}{int(0:)}
+	[!buff]
+
+	//1.2.10 appendage #
+	{exp}给目标施加该索引的增益{/exp}[appendage]
+		{must1}{exp}索引{/exp}{int(0:)}
+	[!appendage]
+
+	//1.2.11 add absolute damage #
+	[add absolute damage]
+		{must1}{exp}类型{/exp}{string}
+		{must2}{exp}数值单位{/exp}{string}
+		{must3}{exp}数值{/exp}{int(0:)}
+	[!add absolute damage]
+
+	//1.2.12 increase damage #
+	[increase damage]
+		{must1}{exp}比率 {/exp}{string}
+		{must2}{exp}数值{/exp}{int(0:)}
+	[!increase damage]
+
+	//1.2.13 increase critical damage #
+	[increase critical damage]
+		{must1}{exp}比率 {/exp}{string}
+		{must2}{exp}数值{/exp}{int(0:)}
+	[!increase critical damage]
+	
+	//1.2.14 weakness #
+	[weakness]
+		{must1}{exp}数值{/exp}{int(0:)}
+	[!weakness]
+
+	//1.2.15 add absolute defence #
+	[add absolute defence]
+		{must1}{exp}类型{/exp}{string}
+		{must2}{exp}数值单位{/exp}{string}
+		{must3}{exp}数值{/exp}{int(0:)}
+	[!add absolute defence]
+
+	//1.2.16 add absolute defence percent #
+	{exp}受击时减少伤害数值%{/exp}[add absolute defence percent]
+		{must1}{exp}类型{/exp}{string}
+		{must2}{exp}数值{/exp}{int(0:)}
+	[!add absolute defence percent]
+
+	//1.2.17 aura active #
+	[aura active]
+		{must1}{exp}光环种类{/exp}{string}
+		{must2}{exp}数值单位{/exp}{string}
+		{must3}{exp}数值{/exp}{int(0:)}
+		{must4}{exp}光环范围(X轴像素单位数值){/exp}{int(0:)}
+	[!aura active]
+
+	//1.2.18 stat #
+	[stat]
+		{must1}{exp}状态种类{/exp}{string}
+		{must2}{exp}数值单位{/exp}{string}
+		{must3}{exp}数值{/exp}{int(0:)}
+	[!stat]
+
+	//1.2.19 restore #
+	[restore]
+		{must1}{exp}状态种类{/exp}{string}
+		{must2}{exp}数值单位{/exp}{string}
+		{must3}{exp}数值{/exp}{int(0:)}
+		{must4}{exp}恢复速度: 时间(单位:ms){/exp}{int(0:)}
+	[!restore]
+
+	//1.2.20 active status resistance #
+	[active status resistance]
+		{must1}{exp}状态变化 {/exp}{string}
+		{must2}{exp}数值单位{/exp}{string}
+		{must3}{exp}数值{/exp}{int(0:)}
+	[!active status resistance]
+
+	//1.2.21 element resistance #
+	[element resistance]
+		{must1}{exp}属性{/exp}{string}
+		{must2}{exp}数值单位{/exp}{string}
+		{must3}{exp}数值{/exp}{int(0:)}
+	[!element resistance]
+
+	//1.2.22 damage rate(未实现) #
+	[damage rate]
+		{must1}{exp}种类{/exp}{string}
+		{must2}{exp}数值 : 百分比变化值{/exp}{int(0:)}
+	[!damage rate]
+
+	//1.2.23 summon monster #
+	[summon monster]
+		{must1}{exp}索引{/exp}{string}
+		{must2}{exp}等级{/exp}{string}
+		{must3}{exp}最大数量{/exp}{int(0:)}
+	[!summon monster]
+
+	//1.2.24 passive object #
+	[passive object]
+		{must1}{exp}索引{/exp}{int(0:)}
+		{must2}{exp}x轴坐标{/exp}{int(0:)}
+		{must3}{exp}y轴坐标{/exp}{int(0:)}
+		{must4}{exp}z轴坐标{/exp}{int(0:)}
+		{must5}{exp}等级 {/exp}{int(0:)}
+		{must6}{exp}文件名 {/exp}{string}
+	[!passive object]
+
+	//1.2.25 skill #
+	[skill]
+		{must1}{exp}职业{/exp}{string}
+		{must2}{exp}技能索引{/exp}{int(0:)}
+		{must3}{exp}等级{/exp}{int(0:)}
+	[!skill]
+
+	//1.2.26 skill levelup #
+	[skill levelup]
+		{exp}职业{/exp}{string}
+			{must1}{exp}技能索引{/exp}{int(0:)}
+			{must2}{exp}等级变化量 {/exp}{int(0:)}
+		{!string}
+	[/skill levelup]
+
+	//1.2.27 thorn #
+	{prereq}按百分比将伤害返还给敌人{/prereq}{exp}按百分比将伤害返还给敌人{/exp}[thorn]
+		{must1}{exp}数值{/exp}{int(0:)}
+	[!thorn]
+
+	//1.2.28 knockback #
+	[knockback]
+		{must1}{exp}数值{/exp}{int(0:)}
+	[!knockback]
+
+	//1.2.29 reduction #
+	[reduction]
+		{must1}{exp}种类{/exp}{string}
+		{must2}{exp}要减少的耐久度数值{/exp}{int(0:)}
+	[!reduction]
+
+	//1.2.30 elemental weapon #
+	{exp}赋予武器属性{/exp}[elemental weapon]
+		{must1}{exp}属性{/exp}{string}
+	[!elemental weapon]
+
+	//1.2.31 stat by condition #
+	{exp}• 使增益图标实时显示{/exp}[stat by condition]
+		{must1}{exp}状态种类{/exp}{string}
+		{must2}{exp}数值单位{/exp}{string}
+		{must3}{exp}数值{/exp}{int(0:)}
+	[!stat by condition]
+
+	//1.2.32 apply status in range #
+	[apply status in range]
+		{must1}{exp}状态种类{/exp}{string}
+		{must2}{exp}数值单位{/exp}{string}
+		{must3}{exp}数值1{/exp}{int(0:)}
+		{must4}{exp}数值2{/exp}{int(0:)}
+	[!apply status in range]
+
+	//1.2.33 skill super armor  #
+	{exp}使技能施放动作变为霸体状态{/exp}[skill super armor]
+		{must1}{exp}职业{/exp}{string}
+		{must2}{exp}技能索引{/exp}{int(0:)}
+	[!skill super armor]
+
+	//1.2.34 skill unbreakable  #
+	{exp}使技能施放动作变为无敌状态{/exp}[skill unbreakable]
+		{must1}{exp}技能索引{/exp}{int(0:)}
+	[!skill unbreakable]
+
+	//1.2.35 skill duration  #
+	[skill duration]
+		{must1}{exp}职业{/exp}{string}
+		{must2}{exp}技能索引{/exp}{int(0:)}
+		{must3}{exp}应用参数{/exp}{string}
+		{must4}{exp}参数索引{/exp}{int(0:)}
+	[!skill duration]
+
+	//1.2.36 speech on  #
+	{exp}对话气泡{/exp}[speech on]
+		{must1}{exp}数值1(ms){/exp}{int(0:)}
+		{must2}{exp}数值2(ms){/exp}{int(0:)}
+		{must3}{exp}输出内容 {/exp}{string}
+	[!speech on]
+
+	//1.2.37 skill cooltime reset  #
+	{exp}技能冷却时间重置{/exp}[skill cooltime reset]
+		{must1}{exp}{/exp}{int(1:2)}
+	[!skill cooltime reset]
+[/then] 
+
+///////////////////////////////////////////////////////////////
+//EquipmentSample.equ/////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+[character name y revision]
+	{must1}{int(0:)}
+	{must2}{int(0:)}
+[!character name y revision]
+
+[effect]
+	[attach target]
+		{opt1}{string}
+	[!attach target]
+
+	[type]
+		{must1}{string}
+	[!type]
+
+	[attach pos]
+		{must1}{string}
+	[!attach pos]
+
+	[z revision]
+		{must1}{int(:)}
+	[!z revision]
+	
+	[index]
+		{must1}{int(:)}
+	[!index]
+
+	[option]	
+		{string}
+		{!string}
+	[/option]
+
+	[module]
+		{must1}{string}
+	[!module]
+
+	[file name]
+		{must1}{string}
+	[!file name]
+[/effect]
+
+
+[change type ultimateSkillCurScene]
+	{must1}{int(0:)}
+[!change type ultimateSkillCurScene]
+
+///////////////////////////////////////////////////////////////
+//EquipmentSample-change status on change hp.equ///////////////////////
+///////////////////////////////////////////////////////////////
+[change status on change hp]
+	{opt1}{exp}要应用的能力值{/exp}{string}
+	{int(:)}
+		{must1}{int(:)}
+	{!int(:)}
+[/change status on change hp]
+
+///////////////////////////////////////////////////////////////
+//EquipmentSample-gunnerweapon.equ//////////////////////////////////
+///////////////////////////////////////////////////////////////
+{exp}硬编码中使用的自定义动画文件名{/exp}[custom animation]
+	{string}
+	{!string}
+[!custom animation]
+
+[piercing resistance]
+	{must1}{int(0:)}
+[!piercing resistance]
+
+[jump power]
+	{must1}{int(0:)}
+[!jump power]
+
+{exp}攻击修正值{/exp}[elemental property]
+	{opt1}{string}
+[!elemental property]
+
+[push aside]
+	{must1}{int(0:)}
+[!push aside]
+
+[lift up]
+	{must1}{int(0:)}
+[!lift up]
+
+[ignore defense]
+	{must1}{int(0:)}
+[!ignore defense]
+
+{exp}自定义音效列表{/exp}[custom wav]
+	{string}
+	{!string}
+[/custom wav]
+
+{exp}硬编码用整数数据{/exp}[int data]
+	{int(:)}
+	{!int(:)}
+[/int data]
+
+{exp}硬编码用字符串数据{/exp}[string data]
+	{string}
+	{!string}
+[/string data]
+
+{exp}硬编码用浮点数数据{/exp}[float data]
+	{float(:)}
+	{!float(:)}
+[/float data]
+
+////////////////////////////////////////////////////////////////////////////
+// [set~]
+// 标签本身即可使用..
+// 如 [ME] 一样。
+// (为此需是行标签且参数可选处理)
+// 例外 set item (参数 : n int值列表 -> int 行标签是子标签，所以用 /(块标签)处理)
+////////////////////////////////////////////////////////////////////////////
+[set name]
+	{opt1}{string}
+[!set name]
+
+{exp}与该道具形成套装的道具索引列表{/exp}[set item]	
+	{opt1}{int(0:)}
+	{!int(0:)}
+[/set item]
+
+[set item master]
+	{opt1}{int(0:)}
+[!set item master]
+
+{exp}此后能力值被视为套装道具装备时的追加能力值{/exp}{etc}[set ability]
+
+
+///////////////////////////////////////////////////////////////////////////////
+//3.1 skill data up #
+//•  将 skill data up 功能附加物化
+//•	目的是在一定时间内可使用
+//[type] `skill data up` //类型名称
+//[duration] 20000  // 持续时间 //  与原功能相同/
+//[buff] 1 // 1 为增益否则为 0 非增益则无法被驱散解除 // 与原功能相同
+//[icon image] `` 0 // 图像文件名, 索引 : 没有则不写 // 与原功能相同
+//[max overlap] 1  // 最大可重叠数量 0 为无限 // 与原功能相同
+
+//[int data]
+//`[swordman`] 1 `[all]` `[cooltime]` 0 `+` 10000 // 与原 skill data up 功能相同
+//职业, 技能索引, 应用到的内容, 要修改的参数, 参数索引, 数值单位, 数值
+//[/int data] 
+
+//[string data] // 不使用
+//[float data

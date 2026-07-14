@@ -1,0 +1,34 @@
+[MOTION]
+	[BASE ANI] `../animation/ShoulderAttack.ani`
+[/MOTION]
+
+
+[TRIGGER]
+[FRAME] 0 0 // 帧编号 ?~?
+[DO BEHAVIOR] [ME] 0
+[/TRIGGER]
+
+
+[TRIGGER]
+[ON END BEHAVIOR] // behavior结束时执行下方内容
+[DO BEHAVIOR] [ME] 1
+[/TRIGGER]
+
+
+// 0
+[BEHAVIOR]
+	[WHICH] [ALL ENEMY] // 优先级 1 : 类别 //为了指定互动关系的目标，可以在behavior内指定目标
+
+	[CHECKUP]
+		[DISTANCE] [<=] 500 // 优先级 2 : 特定距离内
+		[LAST TARGET PRIORITY] [LOW]
+		//[LAST ATTACK PRIORITY] [LOW] // ( [LOW] or [HIGH] or [NEVER] or [ALWAYS] ) 优先级 4 : 对最后一次攻击的优先级
+	[/CHECKUP]
+
+	[MOVE TO] [TARGET] 500
+[/BEHAVIOR]
+
+// 1
+[BEHAVIOR]
+	[SET ACTION] [ATTACK] 1 [NOW]
+[/BEHAVIOR]

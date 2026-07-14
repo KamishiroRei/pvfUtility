@@ -1,0 +1,227 @@
+[ancient dungeon] 1            // 如果是远古地下城则为1，否则可以没有
+[herosmode enable] 1            // 是否有英雄模式？有 1 无 0
+
+[monsterapc diff table]    `Monster/MonsterApcTableForLorien.tbl`    // 自定义怪物-APC难度表（不添加此标签则应用默认文件）
+
+[entering title]  `Title.ani`        // 用作标题的动画。将动画中心对准屏幕中央。
+[revision table]  `Dungeon/Act1/table/Lorien.tbl` // 指定修正表路径。
+[cutscene image]  `CutScene.img` 0    // 过场图像文件名，帧索引
+[minimap image]  `MiniMap.img`        // 小地图图像包的文件名
+
+// 注意 [worldmap info] : 旧版本, [worldmap pattern info] : 改版后版本, 只能使用其中一个。
+[worldmap info]             // 要显示在世界地图上的信息
+200 302                    // 未激活地图的坐标
+210 312                    // 已激活地图的坐标
+`Godae.img`                // 世界地图中要使用的图像包
+
+[worldmap pattern info] 1 5        // 改进版世界地图顺序：图案类型 图案索引（从1开始）
+`WorldMap/Act1/elvengard.img` 0        // 世界地图中要使用的图像包，图像包内的索引
+
+[boss room entrance condition]        // 首领房间进入条件
+`[hunt monster]`            // 去狩猎怪物!!!!（目前仅此...以后可扩展）
+2                    // 怪物数量..
+31 1 1                    // 怪物索引 出现数量 需要击杀数量
+22 1 1                    // 怪物索引 出现数量 需要击杀数量
+
+[minimum required level]  11        // 进入地下城所需的最低要求等级
+[required item] 10003 1 1        // 进入地下城所需的物品。索引，数量，是否消耗。消耗为0则不消耗
+                    // 不想指定则移除标签或将物品索引设为65535
+[coin limit] 3                // 地下城中复活币限制使用次数。（队伍全体）移除标签或设为-1则无限制
+[character coin limit] 3        // 地下城中复活币限制次数。（个人可使用的复活币限制）移除标签或设为-1则无限制
+[basis level]  4            // 怪物的标准等级
+[experience increasing point]  1.3    // 经验值权重
+[champion]  10 15 20 30            // 各难度下整个地下城中将出现的冠军怪物数量
+[item]                     // 地下城通关时掉落的物品列表
+323 30                    // 索引，概率
+222 15
+[/item]
+[pathgate object]             // 通道被动对象索引。不存在的对象为 -1
+100 101 102                // 左侧普通通道 / 首领通道 / 墙壁
+200 201 202                // 右侧普通通道 / 首领通道 / 墙壁
+300 301                    // 上方普通通道 / 首领通道
+400 401                    // 下方普通通道 / 首领通道
+
+[maze info]                 // 表示一个迷宫信息开始。
+[quest connection] 0 4003 -1        // 进行0 完成1，任务编号，难度（ -1 所有难度，0 普通，1 冒险，2 王者，3 英雄）
+[size]  3 5                // 横向地图大小，纵向地图大小（最大 50x50）
+[greed]                 // 地下城网格形状表示
+`┼┾╅
+ ┾╅╂
+ ┼╊╉
+ ┾╃╂
+ ┾┿╃`
+
+[map specification]             // 指定特定网格中出现的地图列表。未指定的网格随机选择
+1 2                    // 坐标（x, y）坐标以左上角为0, 0
+10001                    // 地图索引列表
+10002                    // 如果是可选作首领地图的网格，则必须包含是首领地图时和不是首领地图时的
+10003                    // 所有地图索引。
+[/map specification]
+[map specification]             // 根据需要重复。
+2 2
+10011
+[/map specification]
+[boss map specification]             // 指定当地图作为首领地图出现时的地图列表。
+1 2                // 坐标
+20011                // 地图索引们
+[/boss map specification]
+[start map]             // 可设置为起始地图的网格列表（x, y）
+2 2
+1 2
+0 0
+[/start map]
+[boss map]             // 可设置为首领地图的网格列表（x, y）
+2 3
+1 1
+[/boss map]
+[maze info]             // 表示一个迷宫信息开始。
+[size]  5 3            // 横向地图大小，纵向地图大小
+[greed]             // 地下城网格形状表示
+`┼┾╅
+ ┾╅╂
+ ┼╊╉
+ ┾╃╂
+ ┾┿╃`
+
+[map specification]             // 指定特定网格中出现的地图列表。未指定的网格随机选择
+1 2                // 坐标（x, y）坐标以左上角为0, 0
+10001                // 地图索引列表
+10002                // 如果是可选作首领地图的网格，则必须包含是首领地图时和不是首领地图时的
+10003                // 所有地图索引。
+[/map specification]
+[map specification]             // 根据需要重复。
+2 2
+10011
+[/map specification]
+[start map]             // 可设置为起始地图的网格列表（x, y）
+2 2
+1 2
+0 0
+[/start map]
+[boss map]             // 可设置为首领地图的网格列表（x, y）
+2 3
+1 1
+[/boss map]
+
+
+[name]  `远古洞穴`        // 地下城的名称
+[explain]                 // 地下城的说明。可换行。
+`古代就有的洞穴
+气氛阴森 难度为B级
+等等...`
+
+/////////////////////////////////////////////////////////////////////
+// 竞赛地下城专用数据
+
+// 竞赛地下城中要使用的地图索引
+[warroom map index] 1000
+
+// 怪物类型选择概率
+[monster type spawn prob] 50 20 20 10    // 普通，普通冠军，超级冠军，首领
+
+// 怪物类型消耗资源
+[monster type spawn cost] 2 4 6 10        // 普通，普通冠军，超级冠军，首领
+
+// 生成的普通怪物索引
+[spawn common monster index]
+1
+[/spawn common monster index]
+
+// 生成的普通冠军索引
+[spawn common champion index]
+3000
+[/spawn common champion index]
+
+// 生成的超级冠军索引
+[spawn super champion index]
+3001
+[/spawn super champion index]
+
+// 生成的首领索引
+[spawn boss index]
+50000
+[/spawn boss index]
+
+// 最大生成阶段
+[spawn step max] 5
+
+// 各生成阶段资源池，按 [spawn step max] 指定的数量指定
+[spawn step resource pool]
+30
+40
+50
+60
+70
+
+// 各种计算中使用的击杀数常数
+[kill count const] 500
+
+// 入场费
+[join cost gold] 5000
+
+// 金币掉落率
+[gold drop prob] 50
+
+// 普通怪物物品掉落率
+[common monster item drop prob] 10
+
+// 普通冠军物品掉落率
+[common champion item drop prob] 20
+
+// 超级冠军物品掉落率
+[super champion item drop prob] 40
+
+// 首领物品掉落率
+[boss item drop prob] 50
+
+// 普通怪物经验值计算常数
+[common monster exp const] 500
+
+// 普通冠军经验值计算常数
+[common champion exp const] 1000
+
+// 超级冠军经验值计算常数
+[super champion exp const] 2000
+
+// 首领经验值计算常数
+[boss exp const] 3000
+
+// 普通怪物物品掉落列表
+[common monster item drop list]
+1015
+3037
+[/common monster item drop list]
+
+// 普通冠军物品掉落列表
+[common champion item drop list]
+1015
+3038
+[/common champion item drop list]
+
+// 超级冠军物品掉落列表
+[super champion item drop list]
+1000
+1001
+[/super champion item drop list]
+
+// 首领物品掉落列表
+[boss item drop list]
+2000
+3000
+[/boss item drop list]
+
+// 玩家之间互相击杀时的 finishPoint 计算常数
+[player kc] 1000
+
+// 战斗限制时间 60000 = 1分钟
+[battle spawn time] 60000
+/////////////////////////////////////////////////////////////////////
+
+[evil high level] 100 150 200 250 270  // 高等级用抗魔力（65级以上）
+[evil] 100 200 300 400  // 抗魔力数值（按难度）
+
+[evil rate]            // 抗魔力最大最小比率
+0    10        // 0时 10% 的下限
+200    150        // 200 时 150% 的上限
+
+[gold card use] 0 // 该地下城通关时是否使用黄金卡。0:不使用 1:使用

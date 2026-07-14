@@ -1,0 +1,69 @@
+//2008-12-12 金敏洙
+//根据体力变化的装备能力值示例
+
+
+[change status on change hp]
+`[magical attack]`	// 要应用的能力值 : 魔法攻击力
+50 5				// hp 为 50% 时应用 5% 的值。（实际增加魔法攻击力 100 的道具，则 hp 50% 时只获得 5 的能力值。）
+10 10				// hp 为 10% 时应用 10% 的值。（实际增加魔法攻击力 100 的道具，则 hp 10% 时只获得 10 的能力值。）
+				// hp 在 50% 和 10% 之间时，数值会进行线性插值。
+`[magical defense]`
+50 5
+10 10
+
+`[equipment physical defense]`
+50 5
+10 10
+[/change status on change hp]
+
+
+
+//------------------------------------------------------------------------------//
+// 整数参数
+// 第一个、第三个参数是 hp 的最大值和最小值。两者之间进行插值，超出该范围则应用最大值或最小值。
+// 第二个、第四个参数是 hp 为最小值或最大值时所应用值的比率。两者之间进行线性插值。
+
+
+// 可应用的能力值类型如下。
+`[equipment physical attack]`
+`[equipment physical defense]`
+`[equipment magical attack]`
+`[equipment magical defense]`
+`[physical absolute damage]`
+`[physical damage reduce]`
+`[physical absolute defense]`
+`[magical absolute damage]`
+`[magical damage reduce]`
+`[magical absolute defense]`
+`[fire resistance]`
+`[water resistance]`
+`[dark resistance]`
+`[light resistance]`
+`[all elemental resistance]`
+`[slow resistance]`
+`[freeze resistance]`
+`[poison resistance]`
+`[stun resistance]`
+`[curse resistance]`
+`[blind resistance]`
+`[lightning resistance]`
+`[stone resistance]`
+`[sleep resistance]`
+`[burn resistance]`
+`[weapon break resistance]`
+`[bleeding resistance]`
+`[all activestatus resistance]`
+`[piercing resistance]`
+`[stuck resistance]`
+`[confuse resistance]`
+`[hold resistance]`
+`[armor break resistance]`
+`[inventory limit]`
+`[HP regen speed]`
+`[MP regen speed]`
+`[MP regen speed rate]`
+`[move speed]`
+`[attack speed]`
+`[cast speed]`
+`[hit recovery]`
+`[jump power]`

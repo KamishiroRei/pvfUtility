@@ -1,0 +1,465 @@
+// 装备脚本文件示例 //
+
+// 装备脚本文件示例 //
+
+
+
+[packagable] 0	// 无法邮寄，注意默认是可邮寄的
+
+[avatar select ability]
+`[MOVE_SPEED]`	`+`	100		
+`[HP MAX]`	`+`	1.0
+`[MAGICAL_DEFENSE]`	`*`	2.0
+`[SKILL_LEVEL]`	`[swordman]`	40	2	// 职业，索引，等级
+[/avatar select ability]
+
+
+// 在 [avatar select ability] 中可使用以下项目
+`[HP MAX]`					
+`[MP MAX]`					
+
+`[PHYSICAL_ATTACK]`						
+`[PHYSICAL_DEFENSE]`						
+`[MAGICAL_ATTACK]`						
+`[MAGICAL_DEFENSE]`					
+`[EQUIPMENT_PHYSICAL_ATTACK]`				
+`[EQUIPMENT_PHYSICAL_DEFENSE]`				
+`[EQUIPMENT_MAGICAL_ATTACK]`				
+`[EQUIPMENT_MAGICAL_DEFENSE]`				
+
+`[ELEMENT_TOLERANCE_FIRE]`				
+`[ELEMENT_TOLERANCE_WATER]`				
+`[ELEMENT_TOLERANCE_DARK]`				
+`[ELEMENT_TOLERANCE_LIGHT]`				
+`[ELEMENT_TOLERANCE_ALL]`			
+
+`[ACTIVESTATUS_TOLERANCE_SLOW]`				
+`[ACTIVESTATUS_TOLERANCE_FREEZE]`				
+`[ACTIVESTATUS_TOLERANCE_POISON]`				
+`[ACTIVESTATUS_TOLERANCE_STUN]`				
+`[ACTIVESTATUS_TOLERANCE_CURSE]`				
+`[ACTIVESTATUS_TOLERANCE_BLIND]`			
+`[ACTIVESTATUS_TOLERANCE_LIGHTNING]`			
+`[ACTIVESTATUS_TOLERANCE_STONE]`				
+`[ACTIVESTATUS_TOLERANCE_SLEEP]`				
+`[ACTIVESTATUS_TOLERANCE_DEELEMENT]`			
+`[ACTIVESTATUS_TOLERANCE_DEADLYSTRIKE]`	
+`[ACTIVESTATUS_TOLERANCE_BLEEDING]`				
+`[ACTIVESTATUS_TOLERANCE_PIERCE]`				
+`[ACTIVESTATUS_TOLERANCE_STUCK]`			
+`[ACTIVESTATUS_TOLERANCE_CONFUSE]`					
+`[ACTIVESTATUS_TOLERANCE_HOLD]`				
+`[ACTIVESTATUS_TOLERANCE_ALL]`		
+
+`[INVENTORY_MAX_WEIGHT]`				
+`[HP_REGENRATE]`				
+`[MP_REGENRATE]`				
+`[MP_REGENRATE_PERCENT_UP]`			
+`[MOVE_SPEED]`				
+`[ATTACK_SPEED]`				
+`[CAST_SPEED]`				
+`[HIT_RECOVERY]`				
+`[JUMP_POWER]`					
+
+`[CRITICAL]`		
+`[SKILL_LEVEL]`		
+
+/*
+仅允许使用 + 的值
+HP 恢复率
+MP 恢复率
+移动速度
+攻击速度
+施放速度
+暴击几率
+MP恢复率增加
+所有状态异常抗性增加
+所有属性抗性增加
+装备物理攻击
+装备物理防御
+装备魔法攻击
+装备魔法防御
+技能等级
+*/
+
+
+
+
+[name] `修罗道`
+[name2] `Blade of Sura`
+[basic explain]					// 装备的简单说明。可以换行。
+`修罗道是
+布拉布拉布拉布拉
+..据说`
+[detail explain]				// 装备的详细说明。可以换行。
+`修罗道是
+布拉布拉布拉布拉
+布拉布拉布拉布拉
+布拉布拉布拉布拉
+..据说`
+[flavor text]
+`据说曾被修罗使用`
+[grade] 3					// 装备的等级 (佩戴等级 +0:普通, +2:稀有 +3:传说 +4:神器 +5:史诗)
+[spectrum] 255 0 0 255 1000			// 有残影效果时需要的标签。没有残影则不需要写。目前只用于遗物。
+						// [spectrum] R G B A 残影残留时间
+[attach type] `[free]`				// 归属类型 `[free]` `[trade]` `[trade delete]` `[sealing]` 中选择一个
+[creation rate] 3				// 生成比率
+[rarity] 0					// 稀有度. 0:普通 1:高级 2:稀有 3:神器 4:史诗 5:传说)
+[anti evil] 50					// 异界抗性。异界地下城所需的属性。只出现在 50 级以上的装备上。
+[weight] 3000					// 重量 (单位 : g)
+[usable job]					// 可使用的角色列表开始
+`[swordman]`					// `[swordman]` `[fighter]` `[gunner]` `[at gunner]` `[mage]` `[priest]` `[all]` 中选择
+[/usable job]					// 必须用这个结束
+[minimum level] 37				// 使用所需的最低等级。
+[required skill] 128				// 使用所需的技能。没有则删除此项或填 -1
+
+[icon] `EquipmentIcon.img` 0			// 图标图像文件和帧索引
+[icon mark] `Item/IconMark.img` 5		// 图标标记图像文件和帧索引 (例如：遗物标记)
+[extra icon] `EquipmentIcon.img` 1		// 附加图标图像文件和帧索引	// 透明时装 // 穿戴后（复制时）
+[field image] `EquipmentField.img` 1		// 掉落在地上时的图像文件和帧索引
+[custom animation]				// 硬编码中使用的自定义动画文件名。仅用于称号。
+`Title.ani`
+[/custom animation]
+
+[usable even peace] 1			// 待机时（战争地区，决斗场），某些功能（如米歇尔念动力椅子召唤）不会生效。但
+								// 若想此时也生效，则使用本标签。
+
+[equipment type] `[weapon]` 2			// `[hat avatar]` `[hair avatar]` `[breast avatar]` `[face avatar]`
+						// `[waist avatar]` `[coat avatar]` `[pants avatar]` `[shoes avatar]`
+						// `[weapon]` `[title name]` `[coat]` `[shoulder]` `[pants]` `[shoes]` `[waist]`
+						// `[amulet]` `[wrist]` `[ring]`中选择一个
+						// 后面的数字是价格表索引。没有价格或要单独输入价格则输入 0。
+
+[hide equipment] `[hat avatar]`			// 穿戴时要隐藏的装备指定。也需要指定图层。没有要隐藏的装备则不需要。
+						// `[hat avatar]` `[hair avatar]` `[breast avatar]` `[face avatar]`
+						// `[waist avatar]` `[coat avatar]` `[pants avatar]` `[shoes avatar]`
+						// `[weapon]` 中选择一个。
+
+[hide layer] 					// 要隐藏的装备的图层指定。可指定的图层数量没有限制。没有要隐藏的装备则不需要。
+800
+2000
+[/hide layer]					// 结束后请关闭。
+
+[sub type] 1					// 装备的子类型。(例如：剑、斧头、钝器) 不需要则不写也可以。
+						// 称号的情况下，0：自由，1：强制（无法脱下）
+[durability] 133				// 耐久度。0 为无限。
+[price] 100					// 价格。如果从表中读取则不需要写。
+[value] 50					// 玩家卖给商店的金额
+[repair price] 50				// 修理费
+						// 未单独指定时，以 [value] 的值替代；若 [value] 也未指定，则以 [price] 的值替代。
+[need material] 3043  2				// 所需材料道具索引，材料道具数量 (例，黑莲 2个)
+[cash] 1200					// 点券价格
+[medal] 3					// 勋章价格
+[finish point price] 10				// FP价格
+[cool time] 1000				// 装备时冷却时间
+
+// 变化能力值。变化量为 0 的可以不写。前面的 + 号可以省略 //
+[HP MAX] +10					// HP 最大值
+[MP MAX] +27					// MP 最大值
+[physical attack] +100				// 力量
+[physical defense] +10				// 体力
+[magical attack] -10				// 智力
+[magical defense] -26				// 精神
+[equipment physical attack] +100 +100		// 物理攻击力(地下城) 物理攻击力(决斗场)
+[equipment physical defense] +25 +25		// 物理防御力(地下城) 物理防御力(决斗场)
+[equipment magical attack] +100 +100		// 魔法攻击力(地下城) 魔法攻击力(决斗场)
+[equipment magical defense] +38 +38		// 魔法防御力(地下城) 魔法防御力(决斗场)
+[physical absolute damage] 100			// 物理绝对伤害
+[physical damage reduce] 100			// 物理伤害修正
+[physical absolute defense] 20.0		// 物理绝对防御。%值
+[magical absolute damage] 100			// 魔法绝对伤害
+[magical damage reduce] 100			// 魔法伤害修正
+[magical absolute defense] 20.0			// 魔法绝对防御。%值
+
+[fire resistance] +17				// 火属性抗性
+[water resistance] +3				// 水属性抗性
+[dark resistance] +37				// 暗属性抗性
+[light resistance] -37				// 光属性抗性
+[all elemental resistance] +10			// 所有属性抗性
+
+[fire attack] +100				// 火属性强化
+[water attack] +101				// 水属性强化
+[dark attack] +102				// 暗属性强化
+[light attack] +103				// 光属性强化
+
+[slow resistance] 18				// 减速抗性
+[freeze resistance] 39				// 冰冻抗性
+[poison resistance] 11				// 中毒抗性
+[stun resistance] 33				// 眩晕抗性
+[curse resistance] 10				// 诅咒抗性
+[blind resistance] 10				// 失明抗性
+[lightning resistance] 24			// 感电抗性
+[stone resistance] 3				// 石化抗性
+[sleep resistance] 33				// 睡眠抗性
+[bleeding resistance] 32			// 出血抗性
+[confuse resistance] 33				// 混乱抗性
+[hold resistance] -3				// 束缚抗性
+[burn resistance] 10				// 灼伤抗性
+[weapon break resistance]			// 武器破坏抗性
+[armor break resistance]			// 防具破坏抗性
+[deelement resistance] 1			// 现在不用
+[deadlystrike resistance] 2			// 现在不用
+[all activestatus resistance] 2			// 所有状态异常抗性
+
+[piercing resistance] 12			// 破招抗性
+[stuck resistance] 33		 		// 回避率 (0.1% 单位)
+
+[active status control info] `bleeding` 10 20 30 n	// 出血概率增加(10%) 等级增加(20) 持续时间增加(30%) 其他信息(出血的情况下是伤害增加率 n%)
+							// freeze, stun, sleep, haste, bless, confuse, hold : 无其他信息
+							// poison, lightning, stone, bleeding : 其他信息 1个(伤害增加率)
+							// curse : 其他信息 1个(属性减少比率), weapon break, armor break : 其他信息 1个(耐久度消耗检查次数)
+							// slow : 其他信息 2个(移动速度减少比率, 攻击速度减少比率), blind : 其他信息 2个(视野减少率,僵直率增加率)
+							// burn : 其他信息 3个(伤害增加率, 周围伤害, 周围伤害应用间隔)
+
+
+[inventory limit] 30				// 物品栏上限增加 (g 单位)
+[HP regen speed] 40				// HP恢复速度 (输入数值*0.6为实际数值，输入40则实际HP恢复为40*0.6=24)
+[MP regen speed] 8				// MP恢复速度 (输入数值*3为实际数值，输入8则实际MP恢复为8*3=24)
+[MP regen speed rate] 0.1			// %增加 (临时例外处理)
+[move speed] 10					// 移动速度 (0.1% 单位)
+[x move dash speed] 0.5				// X轴移动速度增加 50%
+[y move dash speed] -0.5			// Y轴移动速度减少 -50%
+[attack speed] 20				// 攻击速度 (0.1% 单位)
+[cast speed] 30					// 施放速度 (0.1% 单位)
+[hit recovery] 3				// 硬直恢复
+[rigidity] +1000				// 僵直度 (硬直恢复的反概念)
+[jump power] 10					// 跳跃力
+[room list move speed rate] +1.0		// 在城镇中的移动速度指定
+
+// 攻击修正值 : 仅对武器有效。没有或为 0 则可以不写 //
+[elemental property] `[dark element]`		// `[no element]` `[fire element]` `[water element]` `[dark element]` `[light element]` 中选择一个。`[no element]` 则可以不写。
+[item aura] `dark element` `+` 20 300		// 装备时发动的物品光环。
+						// `要变化的能力值` `+` 变化数值 光环范围
+[active status] `[curse]` 37.3 100		// 状态异常改版前使用的标签。现在不使用。
+
+[push aside] +10				// 击退力量
+[lift up] +27					// 浮空力量
+[physical critical hit] 5			// 物理暴击率上升值
+[magical critical hit] 5			// 魔法暴击率上升值
+[stuck] -1					// 命中率。填写负数值。 -1 : 命中率+1%
+[ignore defense] 1				// 现在不用的标签
+[human damage rate] +2.5			// 对人形伤害比率变化值。%值
+[fort damage rate] -31.2			// 对建筑伤害比率变化值。%值
+[monster damage rate] 100.0			// 对怪物 (护甲类别为0个的单位准备的) 攻击比率。可为小数，%值，100为默认
+
+[HP drain] 1					// HP 吸收
+[MP drain] 1					// MP 吸收
+
+[skill data up]					// 控制技能脚本特定数据的标签
+`[fighter]` 12 `[dungeon]` `[static]` 2 `+` 20
+// 职业
+// 技能索引，
+// 应用到的内容 : dungeon, pvp, all
+// 要更改的数据类型 : static, level, mp, cooltime, skill consume item, casting time
+// 数据索引
+// 数值应用 : `+`, 比率应用 : `%`
+// 数值
+[/skill data up]
+
+[skill levelup]					// 装备时提升的技能和等级限制。
+`[swordman]` 10 1				// 职业 技能索引 等级
+`[fighter]` 1 33
+[/skill levelup]
+
+[animation job] `[gunner]`			// 使用该动画的职业。只有异性角色共享一个脚本时才需要写。
+[variation] 0 1					// 动画变化索引
+[layer variation] 2600 `revc`			// 图层索引及图层文件夹名
+///不要使用下面的标签///<include> `equipment/character/gunner.lay`	// 动画列表文件(*.lay) 路径
+[equipment ani script] `equipment/character/gunner.lay`	// 动画列表文件(*.lay) 路径
+[move wav] `MOVE_SOUND`				// 掉落在地上、移动道具时（包含装备）发出的声音
+[use wav] `USE_SOUND`				// 使用道具时发出的声音
+
+// 自定义音效列表
+[custom wav]
+`WHIP_SOUND`
+`HIT_SOUND`
+[/custom wav]
+
+[set name] `拳击套装`				// 套装名
+
+[set item]					// 与此道具形成套装的道具索引列表（包含自身）
+112
+113
+114
+[/set item]					// 以此关闭
+
+[set ability]					// 加上这个，则此后能力值被视为套装道具穿戴时的追加能力值。
+// ... 中间省略。基本能力值中可以写的都可以。格式相同
+[fullset basic explain]				// 集齐套装道具时出现的基本说明
+`集齐这些的话，糊涂兄会哇喔。`
+[fullset detail explain]			// 集齐套装道具时出现的详细说明
+`集齐这些的话，帅气的糊涂兄会哇喔哇喔哇喔哇喔。`
+[set item master] 111				// 如果某个道具用 [set item] 指定了自身，
+						// 则必须用此标签写下该道具的索引。
+						// 写这个时不需要写 [set item] [set ability]。
+[/set ability]					// 套装效果结束
+
+[piece set ability] 3				// 3件套效果
+// ... 中间省略。基本能力值中可以写的都可以。格式相同
+[parameter basic explain]			// 集齐 3 件套时出现的基本说明
+`集齐3件套的话，善华会请喝饮料。`
+[parameter detail explain]			// 集齐 3 件套时出现的详细说明
+`集齐3件套的话，善华会请喝又贵又好喝的饮料。`
+
+[/piece set ability]				// 部分套装效果结束，部分套装没有主道具。
+
+[part set index] 0				// etc/equipmentPartset.etc 中指定的数据的部件套装索引。
+
+[hardcoding cooltime] 5000 			// 硬编码用冷却时间
+
+[int data]					// 硬编码用整数数据
+3
+4
+[/int data]
+
+[string data]					// 硬编码用字符串数据
+`ASDF.ptl`
+`ASDF2.ptl`
+[/string data]
+
+[attack info] `AttackInfo/equipment_01.atk`	// 追加攻击信息 路径/文件名
+
+
+// 改变其他部位图像的设置
+[expand ani] 9 1 0 1				// 第一个是要改变部位的索引，第二个是优先级，第三个是是否使用攻击范围，第四个是是否重新设置音效
+						// 0:帽子，1:头发，2:脸部，3:上衣，4:下装，5:鞋子，6:颈部胸部，7:腰部，8:身体颜色，9:武器
+						// 优先级越高越优先绘制。要替换穿戴装备的图像需要 1 以上的优先级。
+						// 攻击范围使用与否设置为 0 则不使用设定动画的攻击范围，而使用原装备的攻击范围。
+						// 音效设置设为 0 则使用原装备对应的音效，设为 1 则根据 [expand ani] 内设定的 [custom wav] 和 [sub type] 决定音效。
+
+[animation job] `[fighter]`			// 动画的职业。equ 中只有一个职业动画的话可以没有。
+[variation] 1 1
+[layer variation] 2600 `tonfac`
+///不要使用下面的标签///<include> `equipment/character/fighter.lay`
+[equipment ani script] `equipment/character/fighter.lay`
+[layer variation] 650 `tonfab`
+//<include> `equipment/character/fighter.lay`
+
+[animation job] `[at fighter]`			// 动画的职业。equ 中只有一个职业动画的话可以没有。
+[variation] 2 3
+[layer variation] 2600 `knuckleb`
+///不要使用下面的标签///<include> `equipment/character/atfighter.lay`
+[equipment ani script] `equipment/character/atfighter.lay`
+[layer variation] 650 `knucklea`
+///不要使用下面的标签///<include> `equipment/character/atfighter.lay`
+[equipment ani script] `equipment/character/atfighter.lay`
+
+[sub type] 2
+
+[custom wav]
+`WHIP_SOUND`
+`HIT_SOUND`
+[/custom wav]
+
+[expand path] `equipment/character/fighter/weapon/tonfa/`
+
+[/expand ani]
+
+
+// 攻击时 1% 几率使自己 30 秒内僵直度增加 10000。
+[if] 
+[cooltime] 60000
+[attack success] 1
+[/if] 
+[then] 
+[target] `myself`
+[duration] 30000
+[probability] 1
+[stat] `rigidity` `+` 10000
+[/then] 
+
+[character name y revision]  10  20
+
+//1// 必须有且仅有一个
+//0// 可以没有
+//*// 可以没有，可以出现多次
+[effect]							//*// 该标签可重复使用
+	[attach target]	`delegator`		//0// `delegator`, `target`
+	[type] `animation`				//1// `animation`, `particle`
+	[attach pos] `bottom`			//1// `bottom`, `middle`, `top`
+	[z revision] -10 				//0// z 轴移动距离(px) 没有则忽略
+	[index] -1						//1// <animation> 附加的图层位置
+	[option]						//0// animation 选项
+		`keep direction`			//0// animation 选项 (固定方向)
+		`floor`						//0// animation 选项 (画在地面上：地板效果等)
+		`auto remove`				//0// animation 选项 (动画结束后自动移除)
+		`apply custom color`		//0// animation 选项 (应用对象颜色：迷彩等)
+		`sync speed`				//0// animation 选项 (与对象动画速度同步)
+		`copy horizon`				//0// animation 选项 (动画横向复制)
+		`copy vertical`				//0// animation 选项 (动画纵向复制)
+		`resize`					//0// animation 选项 (根据光环范围调整大小) 未实现!!!
+	[/option]
+	[module] `[room list]`			//0// 效果出现的模块 (没有则所有模块)
+	[file name] `effect/animation/aura_range.ani`	//1// 该效果路径及文件名
+[/effect]
+
+
+[effect]							//*// 该标签可重复使用
+	[type] `animation`				//1// `animation`, `particle`, `range`
+	[attach pos] `top`				//1// `bottom`, `middle`, `top`
+	[index] 1						//1// <animation> 附加的图层位置
+	[option]						//0// animation 选项
+		`apply custom color`		//0// animation 选项 (应用对象颜色：迷彩等)
+		`sync speed`				//0// animation 选项 (与对象动画速度同步)
+	[/option]
+	[module] `[room list]`			//0// 效果出现的模块 (没有则所有模块)
+	[file name] `Character/Common/Animation/go2.ani`	//1// 该效果路径及文件名
+[/effect]
+
+
+[change type ultimateSkillCurScene]	0	//觉醒技能过场图像类型 ( 0: 使徒 )
+//说明: 用于变更觉醒技能过场图像时的类型。
+//追加时必须做的事情:
+//	第一，添加脚本的同时必须修改 UltimateSkillCutScene.etc 脚本。( 必须与 [CHANGE ULTIMATECUTSCENE ANI FILE] 类型一致 )
+//	第二，请在源代码中增加 eTYPEULTIMATECUTSCENE 的类型。
+
+[item category]
+`monster card`		// 是怪物卡片吗？
+`cannot bind`		// 是否可以绑定？
+`boss drop`		// 用于在装备词典中区分是否为 BOSS 掉落的史诗装备。
+[/item category]
+
+// 强化/增幅/锻造 等级限制
+[limit upgradable level]
+`normal upgrade` x y        // 强化限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)
+`amplify upgrade` x y       // 增幅限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)
+`separate upgrade` x y      // 锻造限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)
+`3rd chronicle upgrade` x y // 3次传说赋予限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)
+`all upgrade` x y			// 将以上所有限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)
+[/limit upgradable  level]
+
+
+// 等级线性能力值应用 ex) 成长型武器，旧版账号绑定道具中使用
+// ->  x1 x2 : 应用能力值的角色最低等级~最高等级
+//     n1 n3 : 地下城攻击力最小值~最大值
+//     n2 n4 : 决斗场攻击力最小值~最大值
+[level linear ability] x1 x2
+        [grade] +min +max
+        [equipment physical attack] +n1 +n2 +n3 +n4
+        [separate attack] +n1 +n2 +n3 +n4
+        [phisical aatack] +n1 +n2 +n3 +n4
+[/level linear ability]
+
+// 按等级区间应用能力值
+// x1 : 等级区间 (像 0, 10, 20, 30... 这样使用)
+// +n1 +n2 : 能力值最小值，最大值
+// 能力值标签可以使用所有现有的
+[level section ability] x1
+        [equipment physical attack] +n1 +n2
+        [separate attack] +n1 +n2
+        [phisical aatack] +n1 +n2
+		//...
+[/level section ability]
+
+// 按等级区间应用不同的装备动画
+// x1 : 应用该动画的等级
+// `str` : 该动画应应用的职业 (因异性职业，此处必须标明)
+[level section ani] x1  `[swordman]`
+       [equipment type] `[weapon]` 23
+       [variation] 7 0
+       [layer variation] 2790 `swdc`
+       [equipment ani script] `equipment/character/swordman.lay`
+       [layer variation] 650 `ssdb`
+       [equipment ani script] `equipment/character/swordman.lay`
+       [subtype] 0
+[/ level section ani]

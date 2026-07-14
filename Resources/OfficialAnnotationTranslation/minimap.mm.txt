@@ -1,0 +1,37 @@
+[world]
+	[index]	1									// 世界索引
+	[level]	40	50								// 推荐最低/最高等级
+	[point]	1	1								// 小地图坐标点(x,y)
+[/world]
+
+[town]
+	[index] 1									// 城镇索引
+	[area]
+		[index]	2								// area 索引
+		[type]	1								// area 类型   0 普通, 1 传送门, 2 钓鱼点, 3 酒馆, 4 地下城入口
+		[real rect]		1	1	100	100			// 实际可移动范围 开始/结束点(x,y)
+		[project rect]	1	1	10	10			// 小地图坐标 开始/结束点(x,y)
+		[npc]			10	10	20				// npc 索引, x, y
+	[/area]
+[/town]
+
+
+[npc]
+	[index] 1									// npc 索引
+	[name]	`吉莎`								// npc 名称
+	[role]
+		`[item shop]`
+		`[recover stamina]`
+		`[sera shop]`
+		`[guild]`
+		`[upgrade item]`
+		`[disjoint item]`
+		`[product item]`
+		`[mouse register]`		// 吉莎添加了此项
+	[/role]
+	[shop] 2									// 商店类型(0 武器商店, 1 防具商店, 2 饰品商店, 3 材料商店, 4 杂货商店, 5 抽奖商店, 6 神器商店
+		[level]	30	40							// 最低等级, 最高等级
+		[job]	0	1	2	[/job]				// 0剑士, 1格斗家, 2枪手, 3法师, 4 精灵骑士
+	[/shop]
+	[skill]	5									// 0剑士, 1格斗家, 2枪手, 3法师, 4 精灵骑士, 5女枪手, 6通用, 7盗贼, 8公会
+[/npc]

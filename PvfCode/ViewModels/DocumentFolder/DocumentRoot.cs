@@ -104,6 +104,26 @@ public class DocumentRoot : ViewModelBase
 		SplitPreviewRight(preview, sourceDocument, 0);
 	}
 
+	public void OpenOfficialAnnotation(string fileName = null)
+	{
+		OfficialAnnotationDocument document = Documents.OfType<OfficialAnnotationDocument>().FirstOrDefault();
+		if (document == null)
+		{
+			if (!Documents.Any(item => item is not PvfPreviewDocument))
+			{
+				AddControl(PvfFileDocumentType.起始页);
+			}
+			document = new OfficialAnnotationDocument();
+			Documents.Add(document);
+			DockOfficialAnnotationRight(document, 0);
+		}
+		if (!string.IsNullOrWhiteSpace(fileName))
+		{
+			document.SelectFile(fileName);
+		}
+		document.IsActive = true;
+	}
+
 	private void OnPvfDocumentActivated(object sender, EventArgs e)
 	{
 		if (sender is PvfFileDocument sourceDocument)
@@ -124,7 +144,11 @@ public class DocumentRoot : ViewModelBase
 			{
 				return;
 			}
-			if (AppCore.ViewModelBase.DockLayoutManagerService.SplitRight(preview))
+			OfficialAnnotationDocument officialAnnotation = Documents.OfType<OfficialAnnotationDocument>().FirstOrDefault();
+			bool placed = officialAnnotation != null
+				? AppCore.ViewModelBase.DockLayoutManagerService.DockAsTab(preview, officialAnnotation)
+				: AppCore.ViewModelBase.DockLayoutManagerService.SplitRight(preview);
+			if (placed)
 			{
 				sourceDocument.IsActive = true;
 				return;
@@ -132,6 +156,35 @@ public class DocumentRoot : ViewModelBase
 			if (attempt < 8)
 			{
 				SplitPreviewRight(preview, sourceDocument, attempt + 1);
+			}
+		}, attempt == 0 ? DispatcherPriority.Loaded : DispatcherPriority.Background);
+	}
+
+	private void DockOfficialAnnotationRight(OfficialAnnotationDocument document, int attempt)
+	{
+		if (Application.Current == null)
+		{
+			return;
+		}
+		Application.Current.Dispatcher.BeginInvoke((Action)delegate
+		{
+			if (!Documents.Contains(document))
+			{
+				return;
+			}
+
+			PvfPreviewDocument preview = Documents.OfType<PvfPreviewDocument>().FirstOrDefault();
+			bool placed = preview != null
+				? AppCore.ViewModelBase.DockLayoutManagerService.DockAsTab(document, preview)
+				: AppCore.ViewModelBase.DockLayoutManagerService.SplitRight(document);
+			if (placed)
+			{
+				document.IsActive = true;
+				return;
+			}
+			if (attempt < 8)
+			{
+				DockOfficialAnnotationRight(document, attempt + 1);
 			}
 		}, attempt == 0 ? DispatcherPriority.Loaded : DispatcherPriority.Background);
 	}

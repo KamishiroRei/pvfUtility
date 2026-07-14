@@ -1,0 +1,102 @@
+// 消耗品脚本文件示例//
+
+[packagable] 0	// 无法邮寄包裹，默认值为可以邮寄，请注意
+
+[name] `药水`
+[name2] `Potion'
+[explain]					// 消耗品的说明。可以换行。
+`药水
+是临死时
+该喝的东西`
+[flavor text]
+`传说临死时喝下会有好处`
+[grade] 6				// 消耗品的等级
+[attach type] `[free]`				// 绑定类型 在 `[free]` `[trade]` `[trade delete]` `[sealing]` 中选择一个
+[creation rate] 2				// 生成比率 (注意：不要使用过大的数值。建议 10 以下)
+[rarity] 0				// 稀有度。 0:普通 1:罕见 2:稀有 3:独特 4:史诗
+[weight] 5				// 重量 (单位：10g)
+[usable job]			// 可使用角色列表的开始
+`[all]`					// 有 `[swordman]` `[fighter]` `[all]` 等选择
+[/usable job]			// 必须用这个来结束
+[minimum level] 0				// 使用所需的最低等级
+
+[icon] `StackableIcon.img` 2		// 图标图像文件和帧索引
+[field image] `StackableField.img` 1	// 掉落在地上时的图像文件和帧索引
+
+[stackable type] `[waste]` 14			// 消耗品的类型
+// `[waste]` `[material]` `[recipe]` `[throw]` `[set]` `[legacy]` `[quest]` `[etc]` `[creature]` `[feed]`
+// `[cera package]` `[package]`
+//`[material export job]` `[global effect]` `[disguise]` `[unlimited etc]` `[avatar jewel]`
+// `[quest receive]`	// 接受任务的道具
+// `[dye]`	//染色剂
+					// 后面的数字是价格表索引。如果没有价格则输入0。
+					// 即使单独输入价格，卖出/修理价格也会遵循这个索引
+[sub type]	0			// 消耗品的子类型。默认为0
+[price] 100				// 价格。如果从价格表读取则无需填写
+[cash] 1200				// 现金价格
+[medal] 5				// 勋章价格
+[need material] 3043  2			// 所需材料道具索引，材料道具个数 (例，黑莲 2个)
+[value] 50				// 用户在商店卖出的金额
+[finish point price] 10			// FP价格
+
+[cool time] 1000				// 使用后禁止使用主动技能和消耗品的时间。以毫秒为单位，仅对 `[waste]` 和 `[throw]` 有效
+[쿨타입 그룹] 0				// 所属的冷却时间组。如果是-1或不写，则没有组，仅应用于自身
+[party cooltime] 1			// 如果为1则应用组队冷却时间
+
+[move wav] `MOVE_SOUND`		// 掉落在地上、移动道具时(包括装备)发出的声音
+
+[use wav] `使用时将出现的效果音标签`
+
+[int data]				// 用于硬编码的整数数据
+3
+4
+[/int data]
+
+[string data]				// 用于硬编码的字符串数据
+`ASDF.ptl`
+`ASDF2.ptl`
+[/string data]
+
+[applying range] 100				// 应用范围
+
+[stack limit]	1000			// 持有数量限制 '0' 表示无限制
+//
+// 如果该道具是 `[cera package]` 或 `[package]` 时
+[package data]
+整数:道具索引 整数:道具数量
+[/package data]
+//
+
+
+// 对自身应用以下效果，持续60秒
+[stat change]
+`+` 1000 `rigidity`	// 使用消耗品时僵直度增加 1000
+`+` 100 `fire attack`	// 使用消耗品时火属性攻击力增加 100
+`+` 101 `water attack`	// 使用消耗品时水属性攻击力增加 101
+`+` 102 `dark attack`	// 使用消耗品时暗属性攻击力增加 102
+`+` 103 `light attack`	// 使用消耗品时光属性攻击力增加 103
+[/stat change]
+[stat change duration] 60000 `myself`
+
+[linking quest index] 1000	// 当 [stackable type] 为 `[quest receive]` 时，指定此标签则在使用消耗品时接受指定任务
+
+// 使用具有功能的消耗品
+[action type]
+`[megaphone]`		// 功能的类型
+100			// 需要的 int 数据
+100
+[/action type]
+
+// 可使用地点 (如果未指定，默认是城镇)
+[action usable place]
+`[village]`		// 城镇 (普通频道)
+`[dungeon]`		// 地下城
+`[pvp]`			// 决斗场频道
+[/action usable place]
+
+[dye type] 0 //0:随机染色剂，1:单色，2:多色
+[dye info]
+1   1000	// 颜色索引，概率千分比 (仅用于随机，其余忽略)
+10  2000
+3   3000
+[/dye info]

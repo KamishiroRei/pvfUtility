@@ -1,0 +1,12 @@
+[MOTION]
+[BASE ANI] ../Animation_Kinol/throw.ani
+[/MOTION]
+
+[TRIGGER]
+[FRAME] 2 2 // 帧编号 ?~? 范围
+[DO BEHAVIOR] [ME] 0
+
+[/TRIGGER]
+[BEHAVIOR]
+[SHAKING] 10 800 // 屏幕震动 第一个：震动强度，第二个：震动时间（1/1000秒）
+[/BEHAVIOR]

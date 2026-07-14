@@ -1,0 +1,30 @@
+// 世界地图脚本示例 //
+
+[name] `格兰·弗洛里斯`		// 名称
+[map image] `Map.img` 0	// 地图图像文件名称，帧索引
+[dungeon]				// 要列出的地下城
+1 -1				// 地下城索引，为显示而需要接收或清除的任务索引
+2 -1
+3 -1
+4 -1
+5 102
+6 [in progress] 203		// 在地下城索引和任务索引之间插入 [in progress]，则仅在任务进行中时才显示该地下城
+[/dungeon]
+
+
+
+
+[hell dungeon] 1	// 世界中是否存在地狱地下城 (1:有，0:无)
+
+[hell quest]		// 地狱任务索引：必须完成该任务才能进入地狱地下城
+2601
+[/hell quest]
+
+[item condition]	// 进入地狱地下城时消耗的物品索引、数量
+4150 1			// 如果没有该物品，则无法进入地狱地下城。
+[/item condition]
+
+[minimap points]
+1000	100			// 位置(x, y)  step 0
+100		10			// 位置(x, y)  step 1
+[/minimap points]

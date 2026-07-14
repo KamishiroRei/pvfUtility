@@ -1,0 +1,35 @@
+// 神兽脚本文件示例 //
+
+[name] `仓鼠` // 神兽的名称
+[width] 10 10 // 依次为 X轴, Y轴 宽度 (像素值)
+[floating height] 0 // 0则为地面型，1以上则为浮游型 (值 = 浮游高度)
+
+[layer] `[bottom]` // 绘制图层。可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。
+
+[recovery time] 10000 // 一次攻击后再次进入攻击待机状态所需的时间
+[direction correct] 1 // 是否让其面向当前移动的方向 (默认值 1)
+[move speed] // 移动速度
+286 238 // X轴 基本，对角线
+114 95 // Y轴 基本，对角线
+70 // Z轴
+[gravity] 1500 // 重力值。默认为 1500
+
+// 动画列表。没有的可以不写。或用 `` 输入则视为没有。
+[basic motion] `Stay.ani` // 基本动作动画文件名
+[etc motion] // 硬编码用动作动画文件名列表 (顺序重要)
+`Attack.ani`
+[/etc motion] // 必须用此标签闭合。
+
+// 攻击信息列表。没有的可以不写。或用 `` 输入则视为没有。
+[attack info] // 硬编码用攻击信息
+`Fire.atk`
+[/attack info] // 必须用此标签闭合。
+
+[int data] // 硬编码中使用的整数资料列表
+600
+234
+[/int data] // 必须用此标签闭合。
+
+[string data] // 硬编码中使用的字符串资料列表
+`DESTROY_SOUND`
+[/string data] // 必须用此标签闭合。

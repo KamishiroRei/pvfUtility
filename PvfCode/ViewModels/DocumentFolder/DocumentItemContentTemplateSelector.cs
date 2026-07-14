@@ -7,6 +7,7 @@ namespace PvfCode.ViewModels.DocumentFolder;
 public class DocumentItemContentTemplateSelector : DataTemplateSelector
 {
 	private static readonly DataTemplate PreviewTemplate = CreatePreviewTemplate();
+	private static readonly DataTemplate OfficialAnnotationTemplate = CreateTemplate(typeof(OfficialAnnotationDocumentView));
 
 	public DataTemplate PvfFileDocumentDataTemplate { get; set; }
 
@@ -34,6 +35,10 @@ public class DocumentItemContentTemplateSelector : DataTemplateSelector
 		{
 			return PreviewTemplate;
 		}
+		if (item is OfficialAnnotationDocument)
+		{
+			return OfficialAnnotationTemplate;
+		}
 		return ((DocumentBase)item).DocumentType switch
 		{
 			PvfFileDocumentType.PVF文档 => PvfFileDocumentDataTemplate, 
@@ -60,9 +65,11 @@ public class DocumentItemContentTemplateSelector : DataTemplateSelector
 
 	private static DataTemplate CreatePreviewTemplate()
 	{
-		return new DataTemplate
-		{
-			VisualTree = new FrameworkElementFactory(typeof(PvfPreviewDocumentView))
-		};
+		return CreateTemplate(typeof(PvfPreviewDocumentView));
+	}
+
+	private static DataTemplate CreateTemplate(System.Type viewType)
+	{
+		return new DataTemplate { VisualTree = new FrameworkElementFactory(viewType) };
 	}
 }

@@ -27,6 +27,7 @@
 - `Options/AiAssistant.json`：PVF AI 助手的 Base URL、模型和输出上限；不包含 API Key。
 - `Options/Bookmarks.json`：本地书签树。
 - `Options/PvfComments/<后缀>.json`：严格按 PVF 文件后缀隔离的标签注释；查询不会回退到其他后缀的同名标签。标签悬浮提示和标签翻译管理器会显示 `Title`、Markdown 格式的 `Comment`，以及 Markdown 格式的 `OfficialDescription`，并提供对应编辑与预览界面。
+- `Resources/OfficialAnnotationTranslation/`：官方样例的只读翻译文档。工具菜单中的“官方注释文档”会在主编辑区右侧打开阅读页签；标签注释中的“官方示例：文件名”可直接跳转到对应文档。
 
 新安装的初始数据来自相邻 `pvf-parser-ts` 工程，打包副本位于 `Resources/OfflineDefaults/Options/`。更新源数据后可重新生成：
 
@@ -159,6 +160,7 @@ SourceLibraries\.build\
 - `SourceLibraries/`：22 个恢复源码项目、独立解决方案和源码库构建规则。
 - `lib/`：原发布包中的托管 DLL、原生 DLL、卫星资源和其他运行文件。
 - `Resources/pvfUtility.g.resources`：主程序原始的已编译 WPF 资源。
+- `Resources/OfficialAnnotationTranslation/`：随构建和发布输出复制的官方注释只读文档。
 - `images/`、`styles/`、`themes/`、`iconfont/` 等资源目录。
 - `Directory.Build.targets`：负责恢复资源、BAML 间接依赖和本地运行文件的构建规则。
 - `global.json`、`pvfUtility.csproj`、`pvfUtility.sln` 和 `SourceLibraries/pvfUtility.SourceLibraries.sln`。
@@ -176,7 +178,7 @@ SourceLibraries\.build\
 | `PvfCode/` | 主程序的主要恢复源码。 |
 | `controls/`、`views/`、`styles/`、`themes/` | 从主程序集恢复出的可读 XAML。 |
 | `lib/` | 外部商业/开源托管依赖、原生 DLL、主题、卫星资源、可选运行文件和 `Binary` 回退模式所需的原发布 DLL。默认 `All` 模式不会把已由 20 个源码项目提供的同名 DLL 发布两次。 |
-| `Resources/` | 主程序集的原始编译资源容器和 AI 知识包；其中 `pvfUtility.g.resources` 是正式构建输入。 |
+| `Resources/` | 主程序集的原始编译资源容器、官方注释只读文档和 AI 知识包；其中 `pvfUtility.g.resources` 是正式构建输入。 |
 | `PvfCode/Compatibility/` | 程序集解析、DevExpress 试用初始化和 `.NET 10` WPF 兼容代码。 |
 | `SourceLibraries/` | 从 22 个托管 DLL 恢复出的独立源码项目、解决方案和目录级构建配置。 |
 | `scripts/` | 启动验证和字符串恢复工具。 |

@@ -1,0 +1,86 @@
+// 攻击信息脚本示例 //
+
+[damage] 100            // 伤害。
+[absolute damage] 30        // 无视防御的绝对伤害
+[damage bonus] 10        // 伤害加成。%值
+[attack type] [physic]        // 攻击类型。在 [physic] [magic] [ignore defense] 中选择1个
+[weapon damage apply] 1        // 是否应用武器伤害。默认值 0。[ignore defense] 时应用物理伤害。
+// 按攻击目标设定是否攻击。默认值可不写 //
+[attack myself] 0            // 是否攻击自己。默认值 0
+[attack friend] 0            // 是否攻击友军。默认值 0
+[attack enemy] 1            // 是否攻击敌人（除自己和友军外的所有目标）。默认值 1
+[elemental property] [no element]            // 攻击的元素属性。在 [no element] [fire element] [water element] [dark element] [light element] 中选择1个。不写则默认 [no element]1
+[damage reaction] [damage]        // 受到攻击时的反应。在 [none] [damage] [down] [damage except human] 中选择1个
+[push aside] 200            // 向后方击退的力度
+[lift up] 30            // 向上击飞的力度
+[knuck back] 1            // 击退类型。0:普通 1:大幅击退 -1:不击退
+// 以下值为 1 或 0
+[weakness]    3.0 5.5        // 有 3.0% 的概率造成 HP 5.5% 的伤害。
+[bounce] 1            // 是否弹起。设为 1 则弹起时应用 [lift up] 的力度。
+[HP drain] 0        // 未实现
+[MP drain] 1        // 未实现
+[ignore defense] 1
+[human damage rate] 100.0    // 对人形（对人类）攻击比率。可为小数，%值，默认 100
+[fort damage rate] 100.0    // 对建筑（对建筑物）攻击比率。可为小数，%值，默认 100
+
+[monster damage rate] 100.0    // 对怪兽（为护甲类别为0的目标设置）攻击比率。可为小数，%值，默认 100
+
+[critical hit] +2.7        // 暴击率变化值
+[stuck] +2.2            // 硬直率变化值
+[stuck prob increase] 1        // 每次攻击命中时硬直率是否增加。默认值 0
+[hit wav] `HIT_SOUND`    // 命中时播放的音效标签
+[attack direction] [hit lift up]        // 攻击方向。在 [hit lift up] [hit horizon] [hit down] 中选择1个
+[hit info] [cut] [blood] 50 1.0// 第一个是打击种类。在 [cut] [blow] [burn] [etc] [mana burn] 中选择1个，跟随武器子类型请用 ``
+                //[mana burn] 时不减少 hp 而消耗 mp
+                // 第二个是是否溅血。在 [blood] [no blood] 中选择1个
+                // 第三个是命中时短暂停顿时间。跟随武器子类型请用 -1
+                // 第四个是受击延迟时间倍数。跟随武器子类型请用 -1
+
+
+[active status] [curse] 37 100    // 最前面是攻击附带的异常状态种类。
+                    // 从下面中选择一个
+                    // 第二个是触发概率（写了 `[none] 则随意填写）
+                    // 第三个是触发强度（写了 `[none] 则随意填写）
+
+[active status] [blind] 100 20 3000 10 100        // 概率, 等级, 持续时间, 视野（%）, 硬直率增加（+）
+[active status] [freeze] 100 20 3000            // 概率, 等级, 持续时间
+[active status] [stun] 100 20 3000            // 概率, 等级, 持续时间
+[active status] [slow] 100 20 10000 50 50        // 概率, 等级, 持续时间, 移速（%）, 攻速（%）
+[active status] [haste] 100 20 3000 50 50        // 概率, 等级, 持续时间, 移速（%）, 攻速（%）
+[active status] [stone] 100 20 3000 50        // 概率, 等级, 持续时间, 伤害值（+）
+[active status] [sleep] 100 20 3000            // 概率, 等级, 持续时间
+[active status] [confuse] 100 20 3000 1        // 概率, 等级, 持续时间, 为1时怪物陷入混乱，会攻击同伴。
+[active status] [hold] 100 20 3000            // 概率, 等级, 持续时间
+[active status] [weakness] 100 20 50            // 概率, 等级, 伤害减少比率（基于剩余 HP）
+[active status] [armor break] 100 20 10000 15        // 概率, 等级, 持续时间, 耐久度消耗检查次数
+[active status] [weapon break] 100 20 10000 15    // 概率, 等级, 持续时间, 耐久度消耗检查次数
+[active status] [poison] 100 10 20000 1000         // 概率, 等级, 持续时间, 伤害
+[active status] [lightning] 100 10 2000 100         // 概率, 等级, 持续时间, 伤害
+[active status] [bleeding] 100 10 5000 10         // 概率, 等级, 持续时间, 伤害
+[active status] [burn] 100 10 20000 1000 10 1 3000    // 概率, 等级, 持续时间, 伤害, 周围伤害, 周围伤害选项（为1时只对敌军造成周围伤害）, 周围伤害应用间隔（时间）
+[active status] [bless] 100 10 5000 10 10 10 10    // 概率, 等级, 持续时间, 力量,体力,智力,精神
+[active status] [curse] 100 10 5000 20 20 20 20    // 概率, 等级, 持续时间, 力量,体力,智力,精神
+
+
+///// 攻击信息 (.atk) /////
+[active status] [curse] 100 10 5000 20 20 20 20
+- 使用方法与 equ 相同，但 `.atk` 文件中不包含 target 信息。
+
+/// 为决斗场状态修正而添加的内容。
+[human active status rate] 70.0 // 对人形护甲施加 70.0% 的较弱状态变化效果。数值的 1/10
+
+[is hit number increasing] 0    //1 则受击数增加，0 则不增加。
+
+[ignore diehard] 1         //是否无视不死被动。默认值 0
+
+//mkissue 120531 添加
+[max target hit number] 1
+[ignore super armor] 1
+[ignore weight] 1
+
+[pvp]
+    [damage bonus] -10    // 技能固有的攻击力
+[/pvp]
+
+//mkissue 120601 添加
+[hit direction] [front]

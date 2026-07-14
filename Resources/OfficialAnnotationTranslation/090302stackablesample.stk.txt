@@ -1,0 +1,76 @@
+// 消耗品脚本文件示例 //
+
+[packagable] 0    // 不能邮寄，注意默认值为可以邮寄，因此需要特别指定
+
+[name] `药水`
+[name2] `Potion`
+[explain]                    // 消耗品的说明。可以换行。
+`药水
+快死了的时候
+喝的东西`
+[flavor text]
+`传说快死的时候喝比较好`
+[grade] 6                // 消耗品的品级
+[attach type] `[free]`                // 绑定类型
+[creation rate] 2                // 生成比率
+[rarity] 0                // 稀有度
+[weight] 5                // 重量
+[usable job]            // 可使用角色列表的开始
+`[all]`                    // 有 `[swordman]` `[fighter]` `[all]` 等选择
+[/usable job]            // 必须以此关闭
+[minimum level] 0                // 使用所需的最低等级。
+
+[icon] `StackableIcon.img` 2        // 图标图像文件和帧索引
+[icon mark] `IconMark.img` 2        // 图标标记图像文件和帧索引
+[field image] `StackableField.img` 1    // 掉落在地上时的图像文件和帧索引
+
+[stackable type] `[waste]` 14            // 消耗品的类型。
+                    // 后面的数字是价格表索引。如果没有价格则输入0。
+                    // 即使单独输入了价格，回购/修理价格也将遵循此值。
+[sub type]    0            // 消耗品的子类型。默认为0
+[price] 100                // 价格。如果从表里读取则无需填写。
+[cash] 1200                // 点券价格
+[medal] 5                // 勋章价格
+[need material] 3043  2            // 需要的材料物品索引，材料物品数量（例如，黑莲 2个）
+[value] 50                // 用户向商店出售的价格
+[finish point price] 10            // FP价格
+
+[stack limit] 1000            //堆叠数量限制
+
+[cool time] 1000                // 使用后阻止主动技能和消耗品使用的时间。单位为毫秒，仅对 `[waste]` 和 `[throw]` 有效。
+[冷却时间分组] 0                // 所属的冷却时间组。若为-1或不写，则无组，仅应用于自身。
+[party cooltime] 1            // 若为1，则应用队伍冷却时间
+
+[move wav] `MOVE_SOUND`        // 掉落在地上、移动物品时（包括装备）发出的声音
+
+[use wav] `使用时产生的效果音标签`
+
+[hp recovery] `+` 200 1000 `myself`    //hp 恢复。200点，在1秒内对自己恢复
+[mp recovery] `+` 200 1000 `myself`    //mp 恢复。200点，在1秒内对自己恢复
+
+[active status recovery] `stun` 55 `myself`    //状态异常恢复。状态异常种类，最大等级，目标
+[my status] `poison` 10 7000 10 90    //使自己进入状态异常。状态异常种类，概率，持续时间，等级，根据状态异常种类的变量（最多4个）
+[buff] `superarmor` 5000 `myself`    //使自己进入状态异常（基本以外的那些）。状态异常种类，持续时间，目标
+
+// 对自己应用以下效果，持续60秒
+[stat change]
+`+` 1000 `rigidity`    // 使用消耗品时硬直度增加1000
+`+` 100 `fire attack`    // 使用消耗品时火属性攻击力增加100
+`+` 101 `water attack`    // 使用消耗品时水属性攻击力增加101
+`+` 102 `dark attack`    // 使用消耗品时暗属性攻击力增加102
+`+` 103 `light attack`    // 使用消耗品时光属性攻击力增加103
+[/stat change]
+[stat change duration] 60000 `myself`
+
+[monster summons] 123 1 20 50000 2    //召唤怪物。怪物索引，最低等级，最高等级，持续时间，最大召唤数量
+[summon apc] 20404 -1 -1 300000 1    //召唤APC。等级为-1时，召唤与自身等级相匹配的APC
+
+[consume item]    //需要消耗的物品。物品索引，数量。可以添加多个
+3037 10
+[/consume item]
+
+
+//此后有大量的 int data，这无法通过Excel操作
+//对于手动输入的标签，如果能做特定标记，以便工具运行时不被删除就好了。这是关键！！！
+[int data]
+[/int data]

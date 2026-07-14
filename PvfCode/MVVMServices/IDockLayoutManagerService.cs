@@ -21,4 +21,6 @@ public interface IDockLayoutManagerService
 	void ShowContextMenu(object panelViewModel);
 
 	bool SplitRight(object panelViewModel);
+
+	bool DockAsTab(object panelViewModel, object targetViewModel);
 }

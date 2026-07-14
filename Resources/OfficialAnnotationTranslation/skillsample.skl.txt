@@ -1,0 +1,189 @@
+// 技能脚本文件示例 //
+
+[name] // 指定技能名称的标签，通常与<12:: > Skill.kor.str文件链接。
+[name2] // 指定技能的英文名或汉字名的标签。
+[basic explain] // 指定技能基本说明的标签。
+[explain] // 指定技能详细说明的标签。
+[basic explain ex] // 指定ex被动技能基本说明的标签。
+[explain ex] // 指定ex被动技能详细说明的标签。
+
+[feature skill type] 1 // 决定特性技能的标签，1则为特性，0或没有此标签则为普通技能。
+
+[feature skill index] 140 // 指定关联的特性被动技能的标签，后面写索引。140号成为与此技能联动的特性技能。
+
+[purchase cost] // 各级别购买所需的SP。此数值的数量即成为最大等级的数量。
+100 // 获得等级1所需的SP。
+200 // 获得等级1后获得等级2所需的SP。
+200 // 若中途截断，则之后均使用该值。
+[/purchase cost] // 必须用此标签闭合。
+
+[special purchase cost] // 若有此标签，则购买需要TP而非SP。
+1 // 各级别购买所需的TP数值。
+[/special purchase cost]
+
+[required level] 10 // 学习技能所需角色的最低等级。
+[required level range] 3 // 需求等级的区间。
+
+[pre required skill] // 学习技能前必须先学习的技能列表。
+3 2 // 依次为技能索引，等级。
+11 1
+[/pre required skill] // 必须用此标签闭合。
+
+[type] `[active]` // 技能的类型。可选择 `[active]` 和 `[passive]` 之一。
+[skill class] 1 // 将类似技能归为一组的技能系列索引 [例: 街头, 魔法, 体术 ]。
+[growtype fitness] 0 0 0 10 // 按成长类型的适应度。0为一般，30则只需70%的SP（几乎？完全？未使用）。
+[maximum level] 10 // 通过所有手段可提升的最大等级（包含物品、Buff等）。
+[growtype maximum level] 2 2 2 3 // 通过技能购买可获得的最高等级。
+
+[skill fitness growtype] // 注册可正式学习技能的成长类型编号。
+3
+[/skill fitness growtype]
+
+// - 与原有的[growtype fitness]用法相同 [目前没有使用的地方]。
+// 可学习技能的适应成长类型。
+[second growtype fitness] 0 0 1 0 0 0 0 0 0 0
+
+// - 与原有的[growtype maximum level]用法相同（在此指定觉醒技能。1次、2次觉醒）。
+[second growtype maximum level] 0 0 1 0 0 0 0 0 0 0
+
+// - 与原有的[skill fitness growtype]用法相同。
+[skill fitness second growtype]
+2
+[/skill fitness second growtype]
+
+[consume MP] 10.0 300.0 // 每次消耗的MP。等级1和最高等级时的值。
+[maintain MP] 20.0 600.0 // 每秒消耗的MP。仅在具有持续MP消耗的技能中使用。
+
+[shake screen] 2 200 // 在特定情况下震动屏幕。
+// 2 == 屏幕震动强度。
+// 200 == 屏幕震动时间。
+// 注意：屏幕震动是硬编码，因此。
+// 若输入了此值，必须告知程序员。
+// 在何种情况下需要震动屏幕。
+
+[casting time] 1000 500 // 咏唱时间。毫秒单位。等级1，最终等级。
+
+[seal enable] 1 // 技能是否可被功能封印。
+
+[consume item] // 使用技能所需的物品。
+1001 1 1 // 物品索引，等级1时的消耗数，最高等级时的消耗数（通常登记无色小晶块）。
+1002 2 5
+[/consume item]
+[limit count] // 每个地城的次数限制。若为0或不写则为无限。
+1 // 按等级填写。
+2
+3
+4
+5
+6
+[/limit count] // 若中途截断，则之后均使用该值。
+[auto limit count reduce] 0 // 是否自动减少限制次数。1为默认值。
+
+[cool time] 1000 2000 // 使用后阻止主动技能和消耗品使用的时间。毫秒单位，仅对主动技能有效。
+// 等级1，满级。
+[skill under cooltime effect] // 此技能发动时，同时进入冷却时间的技能列表。
+12
+11
+[/skill under cooltime effect]
+[auto cooltime apply] 0 // 是否自动应用冷却时间。1为默认值，0则需硬编码应用冷却时间，-1则需硬编码应用冷却时间，且在手动应用前技能将处于Disable状态。
+
+[weapon effect type] `[none]` // MP、冷却时间将跟随武器的哪种参数。可选择 `[none]` `[physical]` `[magical]` 之一。
+
+[icon]
+`SkillIcon.img` 0 // 图标图像文件和帧索引。
+`SkillIcon.img` 1 // 禁用图标图像文件和帧索引。
+
+[command] // 操作方法。
+(SKILL) (ATTACK) & // 写入按下时需要按住的键，最后用&结束。没有则不写也可以。
+(LEFT) 100, (DOWN)! (RIGHT) // 由键列表中键的组合和延迟时间构成一个输入。
+`DOWN` // 输入之间用 !（150ms）、（300ms）~（1000ms）之一分隔。
+// 检查类型可选择 `DOWN` `DOWN ONCE` `UP` `UP ONCE` 之一。
+// 可输入的指令：(LEFT) (RIGHT) (UP) (DOWN) (SKILL) (ATTACK) (JUMP) (CREATURE) (BUFF)。
+[/command]
+
+[command key explain] `指令: → ← ⓩ` // 指定指令说明的标签。
+
+[skill command advantage] 10 20 // 冷却时间减少比率（0.1%单位），MP消耗量减少比率（0.1%单位） // 通过指令输入技能时可获得的增益。
+
+[static data] // 硬编码中使用的固定资料集合（技能等级提升也不改变的值）。
+1
+10
+100
+300
+300
+400
+[/static data]
+
+[level info] // 硬编码中使用的各级别资料集合（技能等级不同值也不同的资料）。
+2 // 各级别资料的数量。
+// 资料1 资料2
+1 20 // 第一行为等级1。依次写下资料1和2。
+2 30 // 重复至满级。
+4 40
+6 50
+8 60
+[/level info]
+
+//0.等级 1.独立攻击力 2.中毒攻击力 3.出血攻击力 4.灼伤攻击力 5.感电攻击力 6.石化攻击力。
+
+[level property] // 技能特性说明。
+1 10 // 适用的等级区间。
+`以<整数>%概率格挡<小数1>%的物理攻击。` // 说明。放置参数的部分选择<整数> <小数1> <小数2>之一填写。
+// <小数1>显示小数点后1位，<小数2>显示小数点后2位。
+0 1 1.0 // 第二个要放入的参数的整数资料索引。等级1~满级，相乘的值。下同重复。
+2 3 1.0 // 第二个要放入的参数的整数资料索引。等级1~满级，相乘的值。下同重复，最多5行。
+-1 0 1.0 // 第一个值为-1则从[level info]读取。第二个值是参考第几个资料。
+// -1 百分比伤害。
+// -2 独立。
+// -3 中毒。
+// -4 出血。
+// -5 灼伤。
+// -6 感电。
+// -7 石化。
+[/level property]
+
+[level property] // 技能特性说明。
+11 99 // 适用的等级区间。
+`以<整数>%概率格挡<小数1>%的物理攻击，以<整数>%概率格挡<小数2>%的魔法攻击。`
+0 1 1.0 // 第一个要放入的参数的整数资料索引。等级1~满级，相乘的值。
+2 3 1.0 // 第二个要放入的参数的整数资料索引。等级1~满级，相乘的值。下同重复。
+0 1 1.0
+4 5 1.0
+[/level property]
+
+[skill preloading image] // 预先想要加载的文件写在此处。（例如枪手的凝固汽油弹的情况）。
+`Character/Gunner/Effect/NapalmBombShoot.img`
+`Character/Gunner/Effect/NapalmBombExplosionNormal.img`
+`Character/Gunner/Effect/NapalmBombExplosionDodge.img`
+`Character/Gunner/Effect/NapalmBombAreaFire2.img`
+`Character/Gunner/Effect/NapalmBombAreaFire1.img`
+`Character/Gunner/Effect/NapalmBombArea.img`
+[/skill preloading image]
+
+[start cool time] 10000 // 若希望决斗场、死亡之塔、战争区域等一开始就处于冷却时间，在此输入大于0的数字。
+
+[feature skill type] 1 // 是特性技能还是普通技能（0:普通技能 1:特性技能）。
+
+[special level up]
+-1 0 `+` 50 // 0: 若为-1则为level info，其余为static info。
+1 1 `-` 50 // 1: 第几个数据 2: 运算符 3: 运算数值。
+2 2 `%` 150
+[/special level up]
+
+[feature skill index] 140 // 若该技能存在特性技能，则指定特性技能索引。
+
+[dungeon]
+// 此标签内的数值仅在地城中适用。若没有此类标签，则默认在地城中适用。
+[/dungeon]
+
+[pvp]
+// 此标签内的数值仅在决斗场中适用。
+[/pvp]
+
+[death tower]
+// 此标签内的数值在死亡之塔中适用。
+[/death tower]
+
+[warroom]
+// 此标签内的数值仅在战争房间中适用。
+[/warroom]

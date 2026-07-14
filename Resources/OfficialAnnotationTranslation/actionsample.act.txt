@@ -1,0 +1,1112 @@
+**[MOTION]** // 动作部分
+    **[BASE ANI]** `../Animation_Kinol/throw.ani`
+    **[SUB ANI]**
+    `../../../equipment/monster/goblin/LKinolPantsAnimation/move_100.ani` 0 100    // 路径, 起始帧, 图层。
+    `../../../equipment/monster/goblin/weapon09-animation/move_100.ani` 0 100
+    **[/SUB ANI]**
+
+    //mkjung 120516 [SUB ANI WITH XY] add
+    **[SUB ANI WITH XY]**
+        `../Animation/ScasaShout1-1.ani` 0 13 390 -160
+        `../Animation/ScasaShout1-2.ani` 0 13 390 -160
+        `../Animation/ScasaShout2-1.ani` 0 13 390 -160
+        `../Animation/ScasaShout2-2.ani` 0 13 390 -160
+    **[/SUB ANI WITH XY]**
+
+
+    **[SPEECH]**
+    `字符串（可用<.str字符串>替换）` 0 30  // 台词, 起始帧, 说话概率。
+    `字符串（可用<.str字符串>替换）` 1 50  // 台词, 起始帧, 说话概率。
+    **[/SPEECH]**
+
+    **[SPEECH POS]**
+    `字符串（可用<.str字符串>替换）` 0 30  // 台词, 起始帧, 说话概率。 x坐标, y坐标
+    **[/SPEECH POS]**
+
+    **[SOUND]**
+    `SOUND_TAG` 0 // 音效, 起始帧。
+    **[/SOUND]**
+
+    **[SOUND PROBABILITY]**
+    `SOUND_TAG` 0 50 // 音效, 起始帧。 概率。
+    **[/SOUND PROBABILITY]**
+**[/MOTION]**    // 到这里是动作部分。工具内部读取的部分。
+
+////////////////// **[SPEECH]** 和 **[SOUND]** 必须包含在 **[MOTION]** 标签内！
+
+**[HOLD POSITION]** （AI Character 使用）当执行此动作期间不移动时添加
+
+**[DEFAULT ATTACKINFO]** `../AttackInfo/sample.atk`    // 当前动作中使用的默认攻击信息
+
+//其他 下面的三个标签可以在 behavior 中用键名代替数字使用。也有不能使用的部分，使用前请咨询吴英旭。
+// [RANDOM] x y // 在 x ~ y 值中随机产生。
+// [RANDOM SELECT] x1 x2 x3 x4... [/RANDOM SELECT] 这些值中随机使用一个
+// [RANDOM INDIVIDUAL] x1 y1 x2 y2 x3 y3 ...  [/RANDOM INDIVIDUAL]  x值按 y 概率比例随机使用。（未实现）
+
+// 条件控制部
+**[TRIGGER]**
+    // 触发器激活控制部
+    **[LIMIT]**    1            // 总共执行次数。0 为无限次执行。
+                    //注意！通过 [CHANGE ACTION FILE] 切换动作并返回原动作时会重置！
+    **[ENABLE]** [ON] (或 [OFF])     // 决定触发器的初始 ENABLE 状态
+    **[CHECK TIME]** 1000        //时间  //每隔时间进行检测
+    // 需要与其他触发器混合使用的标签
+    **[FRAME]** 2 2        // 帧编号 ?~? 范围
+
+    **[CHECK GHOST]**        //检查鬼剑士系技能
+    **[CHECK BUFF]**        //检查是否有增益效果
+    **[CHECK SPECIFIC BUFF]**  [附加状态字符串ID]    // 检查特定 ID 的附加状态（ID 请咨询负责客户端开发者）
+
+    **[CHECK SPECIFIC BUFF]**  [ANGER] 2 200        // 只有附带愤怒附加状态且第2层索引的Alpha值超过200时通过！
+
+    // 由事件触发的触发器（以 ON 开头的标签不能重复）
+    **[ON DAMAGE]**         // 受到攻击时检查
+    **[ON ATTACKSUCCESS]**    // 攻击成功时检查
+    **[IS MEET PROB]**    60    // 触发器检查概率
+    **[CHECK STUCK]** 1        // 检查是否为硬直，必须有 [ON DAMAGE] 或 [ON ATTACKSUCCESS] 标签才能触发（1: 硬直, 0: 非硬直）
+    **[IS STUCK]**            // 功能删除、整合 -> [CHECK STUCK]
+    **[NOT STUCK]**            // 功能删除、整合 -> [CHECK STUCK]
+    **[IS MOUNT]** 1        // 是否乘坐载具（1: 已乘坐, 0: 未乘坐）
+    **[ON CREATE OBJECT]**    // 某个对象创建时
+    **[ON DESTROY OBJECT]**    // 某个对象被破坏时
+    **[ON DESTROY ME]**        // 自身被破坏时：能工作，但被破坏时若向自己发送 send do behavior，信息到达时对象已破坏，不能正常工作。
+    **[ON REMOVE ACTION]**    // 动作结束时：能工作，但结束时若向自己发送 send do behavior，信息到达时动作已改变，不能正常工作。
+    **[ON SET ACTION]**        // 动作开始时
+    **[ON SHAKE INPUT]**    // 输入晃动指令时
+    **[ON MOVE COLLISION]**    // 撞到无法通行的地方时。
+    **[IF]** `变量` [=] `变量` [+] 数字 **[/IF]**         // IF语句。可以使用变量和算式。可以用 [GET TIME] 获取时间。
+    **[IS AI TARGET]** 1        // 检查当前 AI 是否有目标 1 ：有则为 true, 0 ：无则为 true
+    // 目标条件检查部分（大类）
+    **[TRIGGER CHECK]** 1 [ON] (或 [OFF])    // 检查1号触发器是否可用。
+
+    // 目标条件检查部分（大类）
+    **[WHICH]**      [ME]    // 自身
+             [SUMMON MASTER]        // 召唤主
+             [SUMMON OBJECT]        // 召唤物（被动对象, 怪物）
+             [TARGET]            // AI 中锁定的目标。
+             [LAST ATTACKER]            // 最后攻击自己的攻击者
+             [LAST ACTIVE ATTACKER]        // 最后攻击自己的攻击者（主动对象）
+             [LAST ATTACKSUCCESS]        // 自己最后给予伤害的对象
+             [LAST ATTACKSUCCESSES]        // 自己最后给予伤害的对象们
+             [LAST ACTIVE ATTACKSUCCESS]    // 自己最后给予伤害的 ACTIVE 对象
+            //mkjung 120515 add.
+             [CHARACTER ATTACKSUCCESS]    // 最后攻击成功的角色
+
+             [LAST ATTACKERS]    1000  0    // 指定时间内攻击自己的攻击者们 第一个参数是时间，第二个参数为0时取攻击者，为1时取主动对象。
+             [ALL OUR TEAM]         // 我方队伍
+             [ALL ENEMY]            // 除我方队伍外所有
+             [ALL MONSTER TEAM]        // 怪物队伍
+             [ALL CHARACTER TEAM]        // 角色队伍
+             [CHARACTER]            // 所有角色
+                 [MONSTER]            // 所有怪物
+             //mkjung 120514 modi.
+             [PASSIVE]            // 所有被动对象
+                 [AI CHARACTER]            // 所有 AI 角色
+             [CREATE OBJECT]        // 创建的对象 // 仅在 ON CREATE OBJECT 中使用。
+             [DESTROY OBJECT]         // 被破坏的对象 // 仅在 ON DESTROY OBJECT 中使用
+             [LOAD TARGET] 0         // 读取保存的对象来使用。0号是保存时使用的索引。
+
+             [PARTY TARGET]            // 选择特定队伍成员
+                [INDEX] 0        // [INDEX]: 队伍成员的索引（0 ~ 3）（必需参数）
+                [CHECK NEXT] 1        // [CHECK NEXT]: 如果没有，是否将下一个位置的成员设为目标？1为变更，0为不变更（参数可省略）
+                [INCLUDE DEAD] 1        // [INCLUDE DEAD]: 是否检查已死亡队员？1为检查，0为不检查（参数可省略）
+             **[/PARTY TARGET]**
+
+             [PLAYER]             // 所有角色（排除 AI 角色的实际队员）
+
+    // 目标条件检查部分（子类）
+    **[CHECKUP]**
+        **[IS NAME]** `哥布林` `霍德尔` **[/IS NAME]**
+        **[IS CATEGORY]** `野兽` `机器人` `等等` **[/IS CATEGORY]**
+
+            [human],// CATEGORY_TRIBE_HUMAN
+            [beast],// CATEGORY_TRIBE_BEAST
+            [plant],// CATEGORY_TRIBE_PLANT
+            [insect],// CATEGORY_TRIBE_INSECT
+            [machine],// CATEGORY_TRIBE_MACHINE
+            [organic],                        // CATEGORY_TRIBE_ORGANIC
+            [hybrid],                        // CATEGORY_TRIBE_HYBRID
+            [undead],                        // CATEGORY_TRIBE_UNDEAD
+            [devil],                        // CATEGORY_TRIBE_DEVIL
+            [spirit],                        // CATEGORY_TRIBE_SPIRIT
+                    [dragon],                        // CATEGORY_TRIBE_DRAGON
+            [melee combat],                // CATEGORY_AI_MELEE_ATTACK
+            [range combat],                // CATEGORY_AI_RANGE_ATTACK
+            [close-passive],                // CATEGORY_AI_NEGATIVE
+            [close-carefully],            // CATEGORY_AI_CAREFUL
+            [full-superarmor],            // CATEGORY_AI_FULLSUPERARMOR
+            [close-tough],                // CATEGORY_AI_RASH
+            [close-manace],                // CATEGORY_AI_MANACE
+            [human armor],                // CATEGORY_ARMOR_HUNAN
+            [fort armor],                 // CATEGORY_ARMOR_FORT
+            [divine armor],               // CATEGORY_ARMOR_DIVINE
+            [goblin],                     // CATEGORY_ETC_GOBLIN
+                    [tau],                         // CATEGORY_ETC_TAU
+            [lugaru],                     // CATEGORY_ETC_LUGARU
+            [fixture],                    // CATEGORY_ETC_FIXTURE
+            [stay],                        // CATEGORY_ETC_STAY : 在初始位置不移动
+
+            [melee],                    // CATEGORY_PASSIVEOBJECT_TYPE_MELEE
+            [missile],                    // CATEGORY_PASSIVEOBJECT_TYPE_MISSILE
+            [energy],                    // CATEGORY_PASSIVEOBJECT_TYPE_ENERGY
+            [physical],                    // CATEGORY_PASSIVEOBJECT_TYPE_PHYSICAL
+            [magical],                    // CATEGORY_PASSIVEOBJECT_TYPE_MAGICAL
+            [bullet],                    // CATEGORY_PASSIVEOBJECT_TYPE_BULLET
+            [cannon],                    // CATEGORY_PASSIVEOBJECT_TYPE_CANON
+            [explosion],                    // CATEGORY_PASSIVEOBJECT_TYPE_EXPLOSION
+            [inflame],                    // CATEGORY_PASSIVEOBJECT_TYPE_INFLAME
+            [non inflame],                    // CATEGORY_PASSIVEOBJECT_TYPE_NONINFLAME
+            [light],                    // CATEGORY_PASSIVEOBJECT_TYPE_LIGHT
+            [dark],                    // CATEGORY_PASSIVEOBJECT_TYPE_DARK
+            [water],                    // CATEGORY_PASSIVEOBJECT_TYPE_WATER
+            [fire],                    // CATEGORY_PASSIVEOBJECT_TYPE_FIRE
+            [fort],
+
+        **[IS INDEX]** 1 2 3    **[/IS INDEX]**
+        **[IS NOT INDEX]** 1 2 3    **[/IS NOT INDEX]**    // 只检查不是写入的索引的对象
+
+        **[IS OBJECT TYPE]** [PASSIVE OBJECT] [CHARACTER] 等等 **[/IS OBJECT TYPE]**
+        **[IS TEAM]** [MY TEAM] [ENEMY TEAM] [MONSTER TEAM] [CHARACTER TEAM] ... **[/TEAM]**
+        **[CHECKED NO]** [<] 1 // 检查被选中对象的数量。可以使用 [<] 等比较符
+
+           **[IS END MAP]**                // 判断是否为地图左右边界的标签
+        **[IS END MAP VERTICALLY]**         // 判断是否为地图上下边界的标签
+        **[IS IN POS]** 100 200 0            // 确认当前目标是否在所写的坐标内
+        **[IS IN AREA]**                // 确认当前目标是否在所写的区域内
+            [POS] 100 200 0            // （基准坐标X,基准坐标Y,基准坐标Z）
+            [RANGE] 10 10 10        // （X区域, Y区域, Z区域）
+            [COORDINATE] `RELATIVE`        // `RELATIVE`, `ABSOLUTE` （省略时默认值: ABSOLUTE）
+        **[/IS IN AREA]**
+        **[IS TARGET STATE]** 3            // 检查目标的状态（站立、被束缚等）的标签
+                            // 0. 站立,移动 1.坐下 2. 坐着 3. 受击, 4.倒地, 5.死亡, 6. 跳跃, 7. 跳跃攻击, 8. 攻击, 9. 束缚, 10.召唤开始, 11. 召唤完成,
+                            // 12. 投掷, 13. 冲刺, 14. 冲刺攻击, 15. 拾取物品, 16. 增益, 17. 快速起身
+
+        **[IS NOT TARGET STATE]** 4        // 检查目标的状态是否为指定的状态（不为该状态时通过检查，与 [IS TARGET STATE] 相反）
+
+        **[X SPEED]** [比较符号] 0    // X轴速度 ：不支持由粒子移动控制的部分
+        **[Y SPEED]** [比较符号] 0    // Y轴速度 ：不支持由粒子移动控制的部分
+        **[Z SPEED]** [比较符号] 0    // Z轴速度 ：不支持由粒子移动控制的部分
+        **[CHARGED TIME]** [比较符号] 0 // 蓄力时间
+        **[ZPOS]** [>]([=], [<], [>=], [<=], [=>], [=<]) 0    // Z坐标检查。
+        **[HP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 50 [%](或 [POINT])    // HP检查。
+        **[MP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 100 [%](或 [POINT])    // MP检查。
+        **[DISTANCE]** [<=] 500    // 检查与目标的距离。可使用比较符号/
+        **[CHECK DISTANCE]** 400 400  //检查敌人是否靠近 x轴, y轴
+        **[TRIGGER CHECK]** [STAY] 1 [ON] (或 [OFF])    // 检查 stay 动作的1号触发器是否可用。
+                [MOVE] 0 [ON] (或 [OFF])    // 检查 move 动作的0号触发器是否可用
+                [SIT] 触发器编号 [ON] (或 [OFF])
+                [DOWN] 触发器编号 [ON] (或 [OFF])
+                [DAMAGE] 1 3 [ON] (或 [OFF])    // 检查1号 damage 动作的3号触发器是否可用
+                [ATTACK] 3 2 [ON] (或 [OFF])    // 检查3号 attack 动作的2号触发器是否可用
+                [CUSTOM] 动作编号 触发器编号 [ON] (或 [OFF])
+                [DEFAULT] 触发器编号 [ON] (或 [OFF])
+                [PROC] 触发器编号 [ON] (或 [OFF])
+        **[CHECK THREAT]**    200               // 检查范围区域内是否有范围技能或带有攻击判定等的对象（范围）
+        **[AXIS INDEX]** 0  - 与 ON MOVE COLLISION 一起使用，如果没有，则自动检查 x, y 轴的碰撞。
+                - 0 是 x轴 1 是 y轴 2 是 z轴的碰撞检查。
+                - 在发生碰撞的期间会持续检查 ON MOVE COLLISION。
+
+        **[IS OURTEAMATTACKED]**  // 我方被攻击时感知
+
+        //    ACTIVESTATUS_SLOW = 0,          /// 缓慢
+        //    ACTIVESTATUS_FREEZE = 1,        /// 冰冻
+        //    ACTIVESTATUS_POISON = 2,        /// 中毒
+        //    ACTIVESTATUS_STUN = 3,          /// 眩晕
+        //    ACTIVESTATUS_CURSE = 4,         /// 诅咒
+        //    ACTIVESTATUS_BLIND = 5,         /// 失明
+        //    ACTIVESTATUS_LIGHTNING = 6,     /// 感电
+        //    ACTIVESTATUS_STONE = 7,         /// 石化
+        //    ACTIVESTATUS_SLEEP,         /// 睡眠
+        //    ACTIVESTATUS_BURN,            /// 灼伤
+        //    ACTIVESTATUS_WEAPON_BREAK,    /// 武器破坏
+        //    ACTIVESTATUS_BLEEDING,      /// 出血
+        //    ACTIVESTATUS_HASTE,         /// 加速
+        //    ACTIVESTATUS_BLESS,         /// 祝福
+        //    ACTIVESTATUS_ELEMENT,       /// 虚弱
+        //    ACTIVESTATUS_CONFUSE,        /// 混乱
+        //    ACTIVESTATUS_HOLD,            /// 束缚
+        //    ACTIVESTATUS_ARMOR_BREAK,    /// 护甲破坏
+                **[IS TARGETACTIVESTATUS]** 3 // 感知目标的状态变化，示例中写了3，所以是眩晕时为真
+        **[FRONTSIDE]**        //搜索面对我的怪物和被动对象
+        **[BACKSIDE]**        //搜索背对我的怪物和被动对象
+        **[IS LEFT]**        //是否在左侧
+        **[IS RIGHT]**        //是否在右侧
+        **[WITHIN SIGHT]**    //搜索我所面对的怪物和被动对象
+        **[OUT OF SIGHT]**    //搜索我背对的怪物和被动对象
+        **[CHECK SYMBOL]** 1 1    // 符号检查 0（检查假）/1（检查真） 1（检查符号是否为1？）
+        **[IS CHILD]** 1        // 检查是否是子对象（1: 是子对象, 0: 不是子对象）
+
+        **[CHECK PLAYER NUM]**        // 检查队员数量
+            [COUNT] 1        // 指定的队员数量
+            [INCLUDE DEAD] 0    // 是否包含已死亡队员（1: 包含, 0: 不包含），标签省略时默认值 = 0
+        **[/CHECK PLAYER NUM]**
+
+        //mkjung 120511 add.
+        **[LAST TARGET PRIORITY]** [LOW]
+        //[LAST ATTACK PRIORITY] [LOW] // （ [LOW] 或 [HIGH] 或 [NEVER] 或 [ALWAYS] ）优先级 4 ：对最后攻击的优先级
+
+        //mkjung 120514 add.
+        **[IS FRONTPOS]**
+        **[FACE TO FACE]**
+        **[IS GRABABLE]** 10
+
+        //mkjung 120517 add.
+        **[CHECK AREA]** 0 100 0 0 //检查对象的范围，（x轴前，x轴后，y轴上，y轴下）
+        **[IS DAMAGE ENABLE]**    // 只筛选出可攻击的对象（使用无敌技能的跳过！！将使用无敌技能的对象作为攻击目标会出现问题）
+        **[IS DAMAGEBOX ENABLE]** 0    // 只筛选出没有伤害判定的对象
+
+    **[/CHECKUP]**
+
+    //mkjung 120511 add.
+    **[MOVE TO]** [TARGET] 500
+
+    **[GET TARGET]** 2 [HP] [LOW] // 按 HP 从低到高设置。
+    **[GET TARGET]** 1 [MP] [HIGH] // 按 MP 从高到低设置
+     **[GET TARGET]** 3 [LEVEL] [HIGH] // 按等级从高到低设置
+    **[GET TARGET]** 1 [DISTANCE] [LOW] // 已实现。
+    **[GET TARGET]** 5 [RANDOM] //随机设置5名 - 随机没有高低之分。
+    **[GET TARGET]** 1 [LAST ATTACKSUCCESS] [HIGH] //按最近攻击成功的时间从近到远设置，[LOW]则从最久远开始
+
+    // 命令执行控制部分
+    **[DO BEHAVIOR]**    [目标]    0                // 对哪个目标执行第几个行为？
+            [ME]                    // 自己
+            [CHECKUP OBJECT]            // 通过目标条件检查的对象
+            [DROPOUT OBJECT]            // 未通过目标条件检查的对象
+            [TARGET]                // 通过目标条件检查的对象的攻击目标
+            [LAST ATTACKER]                // 最后攻击通过目标条件检查的对象的敌人
+                  [LAST ACTIVE ATTACKER]            // 最后攻击自己的攻击者（主动对象）
+            [LAST ATTACKSUCCESS]            // 通过目标条件检查的对象最后攻击的敌人
+            [SUMMON MASTER]            // 通过目标条件检查的对象的召唤主
+            [LOAD TARGET] %x             // 通过目标条件检查的对象保存的第x号目标。
+            //mkjung 120516 add
+            [LAST ATTACKSUCCESSES]
+            //mkjung 120518 add
+            [LAST ACTIVE ATTACKSUCCESS]
+            [CHARACTER ATTACKSUCCESS]
+    // PROC 动作的命令执行控制部分
+    **[DO PROC BEHAVIOR]**    [目标]    0                // 对哪个目标执行第几个行为？
+                [ME]                    // 自己
+                [CHECKUP OBJECT]            // 通过目标条件检查的对象
+                [DROPOUT OBJECT]            // 未通过目标条件检查的对象
+                [TARGET]                // 通过目标条件检查的对象的攻击目标
+                [LAST ATTACKER]                // 最后攻击通过目标条件检查的对象的敌人
+                [LAST ACTIVE ATTACKER]            // 最后攻击自己的攻击者（主动对象）
+                [LAST ATTACKSUCCESS]            // 通过目标条件检查的对象最后攻击的敌人
+                [SUMMON MASTER]            // 通过目标条件检查的对象的召唤主
+                [LOAD TARGET] %x             // 通过目标条件检查的对象保存的第x号目标。
+                //mkjung 120516 add
+                [LAST ATTACKSUCCESSES]
+                //mkjung 120518 add
+                [LAST ACTIVE ATTACKSUCCESS]
+                [CHARACTER ATTACKSUCCESS]
+
+    // 命令执行控制部分
+    // 命令执行控制部分
+    **[DIRECT DO BEHAVIOR]**    [ME]                0
+                [CHECKUP OBJECT]        0
+                [DROPOUT OBJECT]        0
+                [TARGET]            0
+                [LAST ATTACKER]            0
+                [LAST ACTIVE ATTACKER]        0
+                [LAST ATTACKSUCCESS]        0
+                [SUMMON MASTER]        0
+                [LAST ATTACKSUCCESSES]        0
+                [LAST ACTIVE ATTACKSUCCESS]    0
+                [CHARACTER ATTACKSUCCESS]    0
+                [LOAD TARGET] 0 0
+
+    // 命令执行控制部分
+    **[DELAY DO BEHAVIOR]**    [目标]    0  1000            // 对哪个目标执行第几个行为？延迟指定时间后执行。
+                                // 两个整数参数（行为索引，延迟时间（单位：毫秒））
+                [ME]
+                [CHECKUP OBJECT]                // 通过目标条件检查的对象
+                [DROPOUT OBJECT]                // 未通过目标条件检查的对象
+                [TARGET]                    // 通过目标条件检查的对象的攻击目标
+                [LAST ATTACKER]                // 最后攻击通过目标条件检查的对象的敌人
+                [LAST ACTIVE ATTACKER]            // 最后攻击自己的攻击者（主动对象）
+                [LAST ATTACKSUUCCESS]            // 通过目标条件检查的对象攻击过的敌人
+                [SUMMON MASTER]                // 通过目标条件检查的对象的召唤主
+                [LOAD TARGET] %x                 // 通过目标条件检查的对象保存的第x号目标。
+                //mkjung 120516 [LAST ATTACKSUCCESSES] add
+                [LAST ATTACKSUCCESSES]
+
+    **[SAVE TARGET OBJECT]** 0                    // 这些对象中的第一个对象（仅限一个）保存到该编号中。
+//                          △ 在这中间加入下面的标签的话..
+                [TARGET]                // 通过目标条件检查的对象的攻击目标
+                [LAST ATTACKER]                // 最后攻击通过目标条件检查的对象的敌人
+                [LAST ACTIVE ATTACKER]    // 最后攻击自己的攻击者（主动对象）
+                [LAST ATTACKSUUCCESS]            // 通过目标条件检查的对象攻击过的敌人
+                [SUMMON MASTER]                // 通过目标条件检查的对象的召唤主
+                //mkjung 120516 [LAST ATTACKSUCCESSES] add
+                [LAST ATTACKSUCCESSES]
+
+                //mkjung 120517 add
+                [SUMMON MASTER] 10
+
+    **[IS MISSILE DAMAGE]** //是否为远程攻击
+    **[IS PHYSICAL DAMAGE]** //是否为物理攻击
+    **[IS MAGICAL DAMAGE]** //是否为魔法攻击
+    **[IS ABSOLUTE DAMAGE]** //是否为无视防御攻击
+    **[IS FIRE DAMAGE]** //是否为火属性攻击
+    **[IS WATER DAMAGE]** //是否为水属性攻击
+    **[IS DARK DAMAGE]** //是否为暗属性攻击
+    **[IS LIGHT DAMAGE]** //是否为光属性攻击
+    **[IS NONE DAMAGE]** //是否为无属性攻击
+
+    **[IS DIRECTION LEFT]** //是否看向左边
+    **[IS DIRECTION RIGHT]** //是否看向右边
+
+    **[RANDOM CHECK]** 1 10  // 左数字/右数字 概率通过的条件
+
+
+    **[CHECK PARTYMEMBERS STATE]**[ALL ALIVE]        // 只有全部存活时通过
+    **[CHECK PARTYMEMBERS STATE]**[EVEN ONE DEATH]    // 只要有一个死亡则通过，否则不通过
+
+**[/TRIGGER]**    // 关闭。
+
+**[TRIGGER]**        // 可以使用多个触发器，有多个触发器时各自独立触发。
+**[/TRIGGER]**
+
+// 行为控制部。在触发器中被执行的命令。从上到下顺序从0开始编号索引
+
+**[BEHAVIOR]**
+
+    **[CREATE PASSIVEOBJECT]**    // 创建被动对象。 // INDEX, 粒子文件名, LEVEL, POS 必须按顺序输入。其余输入与否均可。
+        [INDEX] 30001                        //索引编号
+        [PARTICLE FILENAME] `../Particle/ThrowStone.ptl`    // 被动对象创建粒子
+        [LEVEL] 0                        // 魔法等级。
+        [POS] 20 0 60                        // 父坐标的相对坐标 x y z
+        [USE ANGLE] 40 350 550 2                // 角度，Z推力，速度，地面碰撞时的处理（0. 穿透, 1. 滑行, 2. 停止, 3. 消失） - 注意：obj文件中 is vanish 属性需为0
+        //[USE NEUTRAL TEAM]                // 以中立队伍出现（不能与 [USE TARGET TEAM] 同时使用！）
+        //[USE TARGET TEAM]                    // 以目标的队伍出现。（默认是主人的队伍。）
+        //[USE MY DIRECTION]                    // 决定坐标基准 X 轴移动是否依据自己面对的方向。（默认是目标方向）
+        //[USE MY BASEPOS]                    // 指定相对坐标移动是否以自身坐标为准（默认是目标坐标）
+        //[FIX DIRECTION] [LEFT] [RIGHT] [RANDOM] [NEUTRAL]            // 指定生成时面对的方向。
+        //[USE MAP POS]                        // 坐标移动使用地图绝对坐标。
+        //[WARNING MARK] 330 0 100 2                // WarningMark 校准。x位置校准，y位置校准，延迟，警告标记种类（1: 红色普通, 2: 红色大型, 3: 红色普通（仅友军可见）, 4: 红色大型（仅友军可见）, 5: 绿色普通, 6: 绿色大型）
+        //[USE OBJECT ZPOS]                    // 修改为跟随对象的 Z 坐标。
+        [FOLLOWING TARGET]                    // 设置为跟随目标（指的是调用 BEHAVIOR 时传递的目标）
+        [MOVABLE POS ONLY]                    // 检查地图上是否可移动位置（创建位置不可移动则不创建）
+        //mkjung 120514 add.
+        [NO EFFECT]                        // 无召唤特效出现
+    **[/CREATE PASSIVEOBJECT]**
+
+    **[SUMMON MONSTER]**            // INDEX, LEVEL, POS 必须按顺序输入。其余输入与否均可。
+        [INDEX] 30001 //索引编号
+        [LEVEL] 0
+
+        [POS] 20 0 60 //x y z
+
+        [NO EFFECT]                    // 无召唤特效出现。
+        //[MAGIC CIRCLE]                // 绘制魔法阵召唤。默认值。
+        //[JUMP OUT] 0 0 0 [LEFT] [UP]            // 像怪物跳出一样召唤。
+                                // x 速度, y 速度, 高度
+                                // [NEUTRAL] 或 [LEFT] 或 [RIGHT] 或 [RANDOM]
+                                // [NEUTRAL] 或 [UP] 或 [DOWN] 或 [RANDOM]
+        //[USE TARGET TEAM]                // 以目标的队伍出现。（默认是主人的队伍。）
+        //[USE MY DIRECTION]                // 决定坐标基准 X 轴移动是否依据自己面对的方向。（默认是目标方向）
+        //[USE MY BASEPOS]                // 指定相对坐标移动是否以自身坐标为准（默认是目标坐标）
+        //[NOT USE OBJECT DIRECTION]            // 不进行方向修正
+        //[USE MAP POS]                    // 坐标移动使用地图绝对坐标。
+        //[TEAM] 100                     // 指定队伍 0~ 为角色队伍 100~ 怪物队伍 200~ 中立
+        //[USE OBJECT ZPOS]                // 修改为跟随对象的 Z 坐标。
+        //[SUMMON TIME] 1000                //设置召唤物存活时间
+
+        //mkjung 120518 add.
+        [SUMMON MARK] 0                    // 不显示地面召唤标记 //必须在 [SUMMON TIME] 之后书写
+        [FIX DIRECTION] [LEFT] [RIGHT] [RANDOM] [NEUTRAL]        // 指定面对的方向。
+
+    **[/SUMMON MONSTER]**
+
+    **[SUMMON APC]**            // INDEX, LEVEL, POS 必须输入。其余输入与否均可。
+        [INDEX] 30001//索引编号
+        [LEVEL] 0
+        [POS] 20 0 60//x y z
+
+        [NO EFFECT]                    // 无召唤特效出现。
+        //[MAGIC CIRCLE]                // 绘制魔法阵召唤。默认值。
+        //[JUMP OUT] 0 0 0 [LEFT] [UP]            // 像怪物跳出一样召唤。
+                                // x 速度, y 速度, 高度
+                                // [NEUTRAL] 或 [LEFT] 或 [RIGHT] 或 [RANDOM]
+                                // [NEUTRAL] 或 [UP] 或 [DOWN] 或 [RANDOM]
+        //[USE TARGET TEAM]                // 以目标的队伍出现。（默认是主人的队伍。）
+        //[USE MY DIRECTION]                // 决定坐标基准 X 轴移动是否依据自己面对的方向。（默认是目标方向）
+        //[USE MY BASEPOS]                // 指定相对坐标移动是否以自身坐标为准（默认是目标坐标）
+        //[NOT USE OBJECT DIRECTION]            // 不进行方向修正
+        //[USE MAP POS]                    // 坐标移动使用地图绝对坐标。
+        //[USE OBJECT ZPOS]                // 修改为跟随对象的 Z 坐标。（APC 无效。）
+        //[SUMMON TIME] 1000                //设置召唤物存活时间
+        //[FOLLOW SUMMONER]                //使用此标签则召唤者穿越地图时跟随，否则不跟随
+        //[SUMMON TYPE] ([WITHOUT SUMMONER NONE] - 召唤者死亡无变化， [WITHOUT SUMMONER NEUTRAL] - 召唤者死亡变为中立， [WITHOUT SUMMONER DIE] - 召唤者死亡则消失)
+    **[/SUMMON APC]**
+
+* 注意事项：apc 可以用与召唤怪物相同的脚本处理，但部分功能不支持。登场时使用魔法阵或跳跃登场，即使通过脚本编写也没有问题，但不会应用。
+
+    **[BOOSTER APPENDAGE]**                    // 助推器附加状态（各子标签可省略）
+        [ZPOS CAMERA VIEW]                // 是否根据高度跟踪摄像机（省略时初始值：不跟踪）
+        [BOOSTER ACCEL] 0                // 助推器的加速度（省略时初始值：0）
+        [BOOSTER VELOCITY] 1000                // 助推器的初始速度（省略时初始值：0）
+        [BOOSTER USING TIME] 5000            // 助推器能量消耗时间（单位：ms，省略时初始值：5000）
+        [BOOSTER RECOVERY TIME] 10000            // 助推器能量恢复时间（单位：ms，省略时初始值：10000）
+        [EVADE ACCEL] 1500                // 回避加速度（> 0 省略时初始值：0）
+        [GRAVITY] 1500                    // 重力加速度（>= 0，省略时初始值：10）
+        [FALLING INIT VELOCITY] 1000            // 下落初始速度（>= 0）
+        [TERMINAL VELOCITY] 3000            // 终端速度（> 0，省略时初始值：0）
+        [HEIGHT] 200000                    // 下落初始高度（> 0，省略时初始值：0）
+        [LIMIT HEIGHT] 2000                // 下落中为使场景切换，摄像机停止的高度（> 0，省略时初始值：0）
+        [INIT POS] 400 120 200000            // 初始位置（依次为 X, Y, Z 位置）
+        [LINE GAP] 200                    // 移动时各线之间的距离（省略时初始值：200）
+        [DISABLE KEYINPUT]                // 是否阻止按键输入（省略时可按键输入）
+        [DEFAULT ANI] `Character\Common\Animation\fallingeffect_default.ani`
+        [BOOSTING ANI] `Character\Common\Animation\fallingeffect_boost.ani`
+    **[/BOOSTER APPENDAGE]**
+
+    **[SET MOVABLE AREA]**        // 以中心坐标 [POS] 为基准，以 [RANGE] 各值的 1/2 作为 +/- 范围
+        [POS] 600 120 150    // （省略时，默认值：0 0 0）
+        [RANGE] 400 200 200    // （省略时，默认值：0 0 0，值均 >= 0，不为偶数则产生1像素误差）
+        [COORDINATE] `RELATIVE` // 相对坐标：`RELATIVE` 绝对坐标：`ABSOLUTE` （省略时，为绝对坐标基准）
+    **[/SET MOVABLE AREA]**
+
+    **[CHANGE GRAVITY]** 0        // 将重力值更改为指定的 int 值（需每帧调用才能维持重力值）
+
+    **[SHOW HITGAUGE]**
+        [COUNT] 12        // 受到伤害时，用于显示逐渐消失的计量条的分割数量（省略时，依据实际 HP 和伤害显示）
+        [POS] 0 0        // 相对坐标（X, Y）
+        [TIME] 0        // 显示计量条的时间限制
+    **[/SHOW HITGAUGE]**
+
+    **[TELEPORT]**                    // 进行传送。
+        [POS] 0 0 0                // 要移动到的坐标。（中心轴）
+        //[USE MY DIRECTION]            // 决定坐标基准 X 轴移动是否依据自己面对的方向。（默认是目标方向）
+        //[USE MY BASEPOS]            // 指定相对坐标移动是否以自身坐标为准（默认是目标坐标）
+        //[NOT USE OBJECT DIRECTION]        // 不进行方向修正
+        //[USE MAP POS]                // 坐标移动使用地图绝对坐标。
+        //[NOT USE OBJECT ZPOS]        // 不使用基准对象的 Z 位置
+        //[MOVE ME]                // 自己移动到该坐标基准处
+        //[MOVE TARGET]                // 目标移动到该坐标基准处。（默认）
+        [ALLOW FIXTURE]            // 允许固定型怪物传送
+
+        //mkjung 120518 add
+        [USE EFFECT]
+    **[/TELEPORT]**
+
+    //mkjung 120511 modi.
+    **[DIM]** `time1` [=] [GET TIME] **[/DIM]**
+    **[DIM]** `position` [=] 0 **[/DIM]**
+    **[DIM]** `count2` [=] 60 [-] `count1` **[/DIM]**
+    **[DIM]** `count1` [=] `count1` [+] 1 **[/DIM]**
+
+    **[CHANGE ATTACKINFO]**    `../AttackInfo/Attack2.atk`    // 更改 attackInfo 文件。
+    **[CHANGE ATTACKINFO]**    [DEFAULT]            // 恢复到 [DEFAULT ATTACK INFO] 指定的默认攻击信息
+
+    **[SET SPEED]**                    // 指定速度。
+        [X AXIS] 500                // X轴速度（非必需）
+        [Y AXIS] 2000                // Y轴速度
+        [Z AXIS] 300                // Z轴速度
+        //[NOT USE DIRECTION]            // 与方向无关时。绝对方向默认向右和向下。
+        [USE MY DIRECTION]            // 使用自己的方向时。
+    **[/SET SPEED]**
+
+    **[SET ACCEL]**                    // 指定加速度。（当前未使用。2010.9.2）
+        [X AXIS] 0                // X轴加速度
+        [Y AXIS] 0                // Y轴加速度
+        [USE MY DIRECTION]            // 使用自己的方向时。
+    **[/SET ACCEL]**
+
+    **[PARTICLE]** `../particle/sample.ptl` 0 0 0         //粒子文件的相对路径，粒子生成的相对坐标（x,y,z）
+    **[TRIGGER]** 1 [ON] (或 [OFF] 或 [RESET])            // 触发器 ENABLE 的开关。RESET 是执行次数重置。
+                                    //注意！通过 [CHANGE ACTION FILE] 切换动作并返回原动作时会重置！
+    **[TRIGGER]** [STAY] 1 [ON] // 打开 stay 动作的1号触发器
+          [MOVE] 0 [OFF] // 关闭 move 动作的0号触发器
+          [SIT] 触发器编号 [ON] (或 [OFF] 或 [RESET])
+          [DOWN] 触发器编号 [ON] (或 [OFF] 或 [RESET])
+          [DAMAGE] 1 3 [RESET]    // 重置1号 damage 动作的3号触发器
+          [ATTACK] 3 2 [RESET]    // 重置3号 attack 动作的2号触发器
+          [CUSTOM] 动作编号 触发器编号 [ON] (或 [OFF] 或 [RESET])
+          [PROC] 触发器编号 [ON] (或 [OFF] 或 [RESET])
+
+    **[CHANGE FLOATING HEIGHT]**    10    // 变更浮空型对象高度    参数1：高度
+
+    **[RESTORE]** [HP]  (或[MP] 100 [POINT](或 [%])        // 恢复 ：仅当目标是怪物或角色时有效。
+    **[DESTROY]**                        // 被破坏。不出现碎片等直接消失。
+    **[DESTROY BY FORCE]**                    // 与 [DESTROY] 相同，但即使不是该对象的主人也能够执行。
+                                // 误用可能导致错误动作，因此请尽量克制使用此标签（需要咨询客户端部门）
+
+    **[SEND DO BEHAVIOR]** [CHECKUP OBJECT] 1                        // 让目标执行行为（中间是要执行的目标）
+    **[ATTACKRECT]** [RESET] (或 [ON] 或 [OFF])            // 开启、关闭或重置攻击判定
+
+    //mkjung 120511 add.
+    **[SET SAVED TARGET]** 0
+    **[MOVE TO TARGET]** 500
+
+    **[SET HP]** 1000                        // 强制将 HP 更改为指定的数字
+    **[SET DIRECTION]** [LEFT] (或 [RIGHT] 或 [TO TARGET] 或 [RANDOM] 或 [REVERSE] 或 [MY DIRECTION] 或 [MY OPPOSITE DIRECTION] 或 [MY CURRENT DIRECTION])    // 改变目标的方向
+    **[CASTING]** 5000 2                    // 出现施法条后自动执行指定的行为。施法条持续时间，行为索引
+    **[ABS CASTING]** 5000 2                    // 即使动作中途改变，施法也会继续，执行施法时当前动作的行为
+
+    **[CASTING EX]**
+        2000                // 施法时间
+        3                    // 施法后要执行的行为索引
+        [NORMAL]            // 普通施法（动作改变则施法中断）
+        [DISPLAY TARGET]     // (或 [DISPLAY ME]) // 在目标身上显示施法条
+            [DISPLAY SCREEN]    //在屏幕中央下方显示施法条。
+        [DO ME]                // 施法后调用 behavior 的目标对象（此情况下施法后调用自己的 behavior）
+    **[/CASTING EX]**
+
+    **[SET ACTION]**    [STAND]             [NOW] (或 [END])
+            [DAMAGE]
+                [DIRECTION] [LEFT]            //  or [RIGHT] or [RANDOM] or [REVERSE] or [MY DIRECTION] or [MY OPPOSITE DIRECTION]
+                [HIT DELAY] 10
+                [DAMAGE MOTION] 0             // 伤害动作文件索引
+                [HIT TYPE] [KNOCK]            //  or [SLASH] or [BURN] or [CUSTOM] or [MANA BURN]
+                [RIGIDITY] 0                // 硬直度
+                [FORCE HIT STUN TIME] 0
+                [KNOCK BACK TYPE] [NORMAL]    //  or [KNOCK BACK] or [SHORT KNOCK BACK] or [PIXEL WITHOUT DAMAGE TIME] or [NOT BACK]
+                [KNOCK BACK PIXEL] 0
+            **[/DAMAGE]**
+             [HOLD]
+             [DOWN]     ([DEFAULT], [LEFT], [RIGHT], [RANDOM],[MY DIRECTION],[MY OPPOSITE DIRECTION]) 数字1 ([FORCE], [BOUNCE], [VALUE]) 数字2, 数字3
+             [SIT]
+             [DIE]
+             [ATTACK] INDEX
+             [CUSTOM] INDEX
+             [PATTERN] INDEX // 执行 mob 文件中注册的模式索引
+    **[SET FRAME]** 0                         // 强制移动动作的帧。
+    **[SAY SPEECH]** `speech`                    // 输出台词。
+    **[SAY SPEECH WITH POSITION]**`speech` 10 20        // 输出台词。X坐标, Y坐标
+    **[SHAKING]** 1 1000                    // 震动的强度，震动持续时间
+    **[SHAKE INPUT]** [ON]                     // 也可使用 [OFF]。是否显示晃动输入提示。
+    **[FLIP HOLD ANIMATION]**                     // 目标被束缚时，切换束缚动画和受击动作。仅在抓取中使用。
+    **[APPEND HIT]** 0 0 0                     // 无视攻击判定和伤害判定的碰撞，强制攻击。即，该坐标上的对象无故被 HIT。
+
+    **[SAVE POSITION]**                // 保存当前位置，与 [LOAD POSITION] 标签一起使用
+    **[SET POS FORCE]**                  // 强制指定目标位置。按帧使用。没有 END 则固定在一个位置。有 END 则在 START->END 之间移动。
+        [X START] 0                    // X 起点
+        [X END] 0                     // X 终点
+        [Y START] 0                     // Y 起点
+        [Y END] 0                     // Y 终点
+        [Z START] 0                     // Z 起点
+        [Z END] 0                     // Z 终点
+
+        // 可以像上面那样使用，也可以使用 [LOAD POSITION]。
+        // 必须使用 [SAVE POSITION] 后才能使用。
+        // [LASTATTACK POSITION] 保存最后攻击的敌人的相对坐标
+        // 两个标签是一个数字对应一个标签，1:1 匹配。请注意
+        [X START][LOAD POSITION]    或是     [LASTATTACK POSITION]
+        [X END][LOAD POSITION] 或是 [LASTATTACK POSITION]
+
+        //[USE MY DIRECTION]    // 决定坐标基准 X 轴移动是否依据自己面对的方向。（默认是目标方向）
+        //[USE MY BASEPOS]    // 指定相对坐标移动是否以自身坐标为准（默认是目标坐标）
+        //[USE TARGET POS]    // 相对坐标移动以目标的坐标为准。（默认。不写就是这个。想明确说明时使用也无妨）
+        //[NOT USE OBJECT DIRECTION] // 不参照对象的方向
+        //[USE MAP POS]        // 坐标移动使用地图绝对坐标。
+        //[MOVE UNIFORM]    // 线性移动到目标坐标
+        //[MOVE ACCELATE]    // 加速移动到目标坐标
+        //[MOVE REDUCE]        // 减速移动到目标坐标。
+        //[MOVE ME]        // 将自己的坐标匹配到目标。请务必使用 [USE TARGET POS]，或不要使用 [USE MY BASEPOS]
+        //[MOVE TARGET]        // 将目标的坐标匹配到自己。请务必使用 [USE MY BASEPOS]。否则这是默认。
+    **[/SET POS FORCE]**
+
+    //发送消息
+    **[SEND MESSAGE]**    [ATTACK_COMMAND] 0            //攻击索引
+            [MOVE_COMMAND]                 //尚未完成
+            [ETC_COMMAND] 1    1 5000            //命令索引, 目标指定（1: 发送对象的攻击目标，0: 接收对象的攻击目标）, 命令持续时间
+            [DIE_COMMAND] 0 //怪物死亡方式 1: 执行最后的动作后死亡。 0: 不执行最后的动作直接死亡
+
+    //移除分类
+    //[REMOVE CATEGORY] 0                     //要删除的分类索引
+    **[REMOVE CATEGORY]** [FIXTURE]                 //要删除的分类 [FIXTURE]
+    //[ADD CATEGORY] 24                     //要插入的分类索引 24: fixture
+    **[ADD CATEGORY]** [FIXTURE]                 //要插入的分类 [FIXTURE]
+
+    //状态异常
+    **[ACTIVE STATUS]** [blind] 100 20 3000 10 100        // 概率, 等级, 持续时间, 视野（%）, 硬直率增加（+）
+    **[ACTIVE STATUS]** [freeze] 100 20 3000        // 概率, 等级, 持续时间
+    **[ACTIVE STATUS]** [stun] 100 20 3000            // 概率, 等级, 持续时间
+    **[ACTIVE STATUS]** [slow] 100 20 10000 50 50        // 概率, 等级, 持续时间, 移动速度（%）, 攻击速度（%）
+    **[ACTIVE STATUS]** [haste] 100 20 3000 50 50        // 概率, 等级, 持续时间, 移动速度（%）, 攻击速度（%）
+    **[ACTIVE STATUS]** [stone] 100 20 3000 50        // 概率, 等级, 持续时间, 伤害值（+）
+    **[ACTIVE STATUS]** [sleep] 100 20 3000        // 概率, 等级, 持续时间
+    **[ACTIVE STATUS]** [confuse] 100 20 3000 1        // 概率, 等级, 持续时间, 1 表示怪物混乱时攻击同伴。
+    **[ACTIVE STATUS]** [hold] 100 20 3000            // 概率, 等级, 持续时间
+    //mkjung 120704 [weakness]-->[element] 变更
+    //[ACTIVE STATUS] [weakness] 100 20 50        // 概率, 等级, 伤害减少比率（基于剩余 HP）
+    **[ACTIVE STATUS]** [element] 100 20 50        // 概率, 等级, 伤害减少比率（基于剩余 HP）
+    **[ACTIVE STATUS]** [armor break] 100 20 10000 15    // 概率, 等级, 持续时间, 耐久度消耗检查次数
+    **[ACTIVE STATUS]** [weapon break] 100 20 10000 15    // 概率, 等级, 持续时间, 耐久度消耗检查次数
+    **[ACTIVE STATUS]** [poison] 100 10 20000 1000         // 概率, 等级, 持续时间, 伤害
+    **[ACTIVE STATUS]** [lightning] 100 10 2000 100         // 概率, 等级, 持续时间, 伤害
+    **[ACTIVE STATUS]** [bleeding] 100 10 5000 10         // 概率, 等级, 持续时间, 伤害
+    **[ACTIVE STATUS]** [burn] 100 10 20000 1000 10 1 3000    // 概率, 等级, 持续时间, 伤害, 周围伤害, 周围伤害选项（1 表示只对敌军造成周围伤害）, 周围伤害应用间隔（时间）
+    **[ACTIVE STATUS]** [bless] 100 10 5000 10 10 10 10    // 概率, 等级, 持续时间, 力量,体力,智力,精神
+    **[ACTIVE STATUS]** [curse] 100 10 5000 20 20 20 20    // 概率, 等级, 持续时间, 力量,体力,智力,精神
+
+    //更改目标的属性
+    **[APPENDAGE]** 5000                // 时间（0 为无限）
+        [physical attack] [+] 100.0             // 力量增减方式 强度
+        [magical attack] [%] 100.0            // 智力
+        [physical defense] [%] 100.0            // 体力
+        [magical defense] [%] 100.0            // 精神
+        [equipment physical attack] [%] 100.0        // 物理攻击
+        [equipment physical defense] [%] 100.0        // 物理防御
+        [jump power] [%] 100.0                // 跳跃力
+        [attack speed] [%] 100.0            // 攻击速度
+        [move speed] [%] 100.0                // 移动速度
+        [cast speed] [%] 100.0                // 施法速度
+        [hp max] [%] 100.0                // HP
+        [hp regen rate] [%] 100.0            // HP恢复率
+        [magical critical hit rate] [%] 100.0        // 魔法攻击暴击率
+        [physical critical hit rate] [%] 100.0        // 物理攻击暴击率
+        [physical back attack critical rate] [%] 100.0    // 物理背击暴击率
+        [magical back attack critical rate] [%] 100.0    // 魔法背击暴击率
+        [fire element] [%] 100.0            // 火属性抗性
+        [water element] [%] 100.0            // 水属性抗性
+        [dark element] [%] 100.0            // 暗属性抗性
+        [light element] [+] 100.0            // 光属性抗性
+        [stuck] [%] 100.0                // 硬直率（受击时）
+        [good hit] [%] 100.0                // 硬直率（攻击时）
+        [mp regen rate] [%] 100.0            // MP恢复率
+        [hit recovery] [%] 100.0            // 受击恢复
+        [equipment magical attack] [%] 100.0        // 魔法攻击
+        [equipment magical defense] [%] 100.0        // 魔法防御
+        [all active status resistance] [%] 100.0    // 所有状态异常抗性
+        [all element] [%] 100.0                // 所有属性抗性
+
+        [fire element attack]  [+] 100.0        // 火属性强化
+        [water element attack]  [+] 100.0        // 水属性强化
+        [dark element attack]  [+] 100.0        // 暗属性强化
+        [light element attack]  [+] 100.0        // 光属性强化
+        [all element attack]  [+] 100.0            // 所有属性强化
+        [separate physical attack]  [+] 100.0    // 独立物理攻击力
+        [separate magical attack]  [+] 100.0    // 独立魔法攻击力
+        [separate all attack]  [+] 100.0        // 独立所有攻击力（物理，魔法）
+        [antievil]  [+] 100.0                    // 实际抗魔力数值
+        [physical absolute damage]  [+] 100.0    // 物理绝对伤害 or 物理无视防御伤害
+        [village moving speed]  [+] 100.0        // 城镇移动速度
+    **[/APPENDAGE]**
+
+    **[MASTER APPENDAGE]** 0 300 [ENEMY TEAM]              //顺序为 - 时间（0则持续），范围，仅对我方生效则用 [MY TEAM]，
+                                //仅对敌人生效则用[ENEMY TEAM]
+        [physical attack] [+] 100.0             // 力量增减方式 强度
+        [magical attack] [%] 100.0            // 智力
+        [physical defense] [%] 100.0            // 体力
+        [magical defense] [%] 100.0            // 精神
+        [equipment physical attack] [%] 100.0        // 物理攻击
+        [equipment physical defense] [%] 100.0        // 物理防御
+        [jump power] [%] 100.0                // 跳跃力
+        [attack speed] [%] 100.0            // 攻击速度
+        [move speed] [%] 100.0                // 移动速度
+        [cast speed] [%] 100.0                // 施法速度
+        [hp max] [%] 100.0                // HP
+        [hp regen rate] [%] 100.0            // HP恢复率
+        [magical critical hit rate] [%] 100.0        // 魔法攻击暴击率
+        [physical critical hit rate] [%] 100.0        // 物理攻击暴击率
+        [physical back attack critical rate] [%] 100.0    // 物理背击暴击率
+        [magical back attack critical rate] [%] 100.0    // 魔法背击暴击率
+        [fire element] [%] 100.0            // 火属性抗性
+        [water element] [%] 100.0            // 水属性抗性
+        [dark element] [%] 100.0            // 暗属性抗性
+        [light element] [+] 100.0            // 光属性抗性
+        [stuck] [%] 100.0                // 硬直率
+        [mp regen rate] [%] 100.0            // MP恢复率
+        [hit recovery] [%] 100.0            // 受击恢复
+        [equipment magical attack] [%] 100.0        // 魔法攻击
+        [equipment magical defense] [%] 100.0        // 魔法防御
+        [all active status resistance] [%] 100.0    // 所有状态异常抗性
+        [all element] [%] 100.0                // 所有属性抗性
+
+        [fire element attack]  [+] 100.0        // 火属性强化
+        [water element attack]  [+] 100.0        // 水属性强化
+        [dark element attack]  [+] 100.0        // 暗属性强化
+        [light element attack]  [+] 100.0        // 光属性强化
+        [all element attack]  [+] 100.0            // 所有属性强化
+        [separate physical attack]  [+] 100.0    // 独立物理攻击力
+        [separate magical attack]  [+] 100.0    // 独立魔法攻击力
+        [separate all attack]  [+] 100.0        // 独立所有攻击力（物理，魔法）
+        [antievil]  [+] 100.0                    // 实际抗魔力数值
+        [physical absolute damage]  [+] 100.0    // 物理绝对伤害 or 物理无视防御伤害
+        [village moving speed]  [+] 100.0        // 城镇移动速度
+    **[/MASTER APPENDAGE]**
+
+    //mkjung 120511 add.
+    **[DELETE APPENDAGE]** 0
+        [equipment physical defense] [%] 5000.0        // 物理防御
+        [equipment magical defense] [%] 5000.0        // 魔法防御
+        [stuck] [%] 30.0                // 硬直率
+    **[/DELETE APPENDAGE]**
+
+    **[SET COLOR]** 255 255 255                 //RGB颜色值
+
+    **[ICE APPENDAGE]** 1000 1000 1000                //伤害，范围，伤害间隔
+    **[CURSE APPENDAGE]** 1000 1000 1000 1000             //伤害，范围，伤害间隔，诅咒间隔
+    **[MIND CONTROL APPENDAGE]** 10 1000 1000                //等级，朝一定方向移动的时间，持续时间
+    **[TELEKINESIS APPENDAGE]** 25000 1000 30 50 80 100 4000    // 附加状态维持时间（ms），操作失误时能承受的时间（ms），升力变动值0~3（像素/s^2），落地时受到的伤害
+
+    // 0. 感知对象索引
+    // 1. 对象受击时上升的计量条数值
+    // 2. 超过5格时下一次攻击受到的伤害
+    // 3. 感染计量减少一格的时间
+    // 4. 附加状态持续时间（想设为无限时请给一个非常大的数字）
+    **[INFECTION APPENDAGE]** 2123     1 200 4000 10000
+
+    **[CHANGE DIRECTION BY TARGET]** 0                //决定怪物是否看向目标的标志（0 ：则保持目标刚生成时面对的方向
+    **[DISEASE APPENDAGE]** 30000 300 100 1000 // 疾病持续时间，疾病伤害，疾病感染范围，暴露于疾病 x 秒后感染
+    **[IS DIRECTION TO MOVE]** 1                 //1则面向移动方向移动，0则面向目标移动（默认为0）
+                                                       (1 ：则看向目标)
+    **[CHANGE ACTION FILE]** [STAY] `动作文件名`
+            [DAMAGE] INDEX `动作文件名`    // 伤害索引仅使用 0号 1号
+             [HOLD] `动作文件名`
+             [DOWN] `动作文件名`
+             [SIT] `动作文件名`
+             [DIE] `动作文件名`
+             [ATTACK] INDEX `动作文件名`    // 攻击数量超过则行为无法保证。
+             [CUSTOM] INDEX `动作文件名`    // 输入超过自定义动作数量的 INDEX 则行为无法保证。
+
+             [MOVE] `动作文件名`
+             [LAST] `动作文件名`
+             [MOVEBACK] `动作文件名`
+             [DASH] `动作文件名`
+             [DASHATTACK] `动作文件名`
+             [JUMP] `动作文件名`
+             [JUMPATTACK] `动作文件名`
+
+//    **[ADD LAYER ANIMATION]** `` 100                 // 在某个图层创建并附加该路径的动画。（未实现）
+                                      // 但是什么时候移除呢？
+//    **[REMOVE ANIMATION]** [SUB] 0                 // （未实现）
+//    **[REMOVE ANIMATION]** [LAYER] 0                 // （未实现）
+//    **[CREATE ANIMATION]** `` x,y                   // （未实现）
+    **[SET OVERTURN]**                        // 将被束缚目标的动画更改为翻身动画。
+    **[SET HOLD DAMAGEANI]** INDEX                // 将被束缚目标的动画更改为伤害动画，使用1号或0号。
+    **[SET HOLD DOWNANI]**                    // 将被束缚目标的动画更改为倒地动画。
+
+    **[WIND APPENDAGE]** 5.0 0.0 2 0 5000   X轴移动速度（小数）, Y轴移动速度（小数）, X轴移动方向, Y轴移动方向, 时间
+    X轴移动方向 - 0: 不移动, 1: 向右, 2: 向左
+    Y轴移动方向 - 0: 不移动, 1: 向上, 2: 向下
+
+    **[PULL APPENDAGE]**         // 将角色队伍拉向目标
+    //2.0 0.0 2000  //x轴强度, //y轴强度, //时间
+    // 注意！！时间输入负值则会变为速度 WIND 模式。速度模式必须设置6以上
+    // 例 [PULL APPENDAGE] 6.1 6.1 -200
+
+    // 注意！！：请遵守标签顺序！
+    **[PULL APPENDAGE EX]**     // 将角色队伍拉向目标
+        [SPEED] 2.0 0.0        // x轴强度, y轴强度
+        [VALIDTIME] 2000
+        [USE TARGET] 1        // 是否将拉拽的原点设为目标（1: 目标, 0: 动作父对象）
+        [OFFSET POS] 0 0     // 偏移坐标（不写默认为0）
+        [MIN DISTANCE]     30    // 拉拽所需的最小范围（不写默认为30）
+    **[/PULL APPENDAGE EX]**
+
+    **[COLOR CHANGE EFFECT]**
+        [EFFECT BLUE START] 255    // 蓝色起始值（有 RED GREEN BLUE ALPHA）。不输入数据则为0
+        [EFFECT BLUE END]    //mkjung 120516 add
+        [EFFECT RED START]    //mkjung 120516 add
+        [EFFECT RED END] 255    // 红色结束值（有 START 和 END）
+        [EFFECT GREEN START]    //mkjung 120516 add
+        [EFFECT GREEN END]    //mkjung 120516 add
+        [EFFECT ALPHA START]    //mkjung 120516 add
+        [EFFECT ALPHA END] 255    // Alpha 结束值
+        [CHANGE SIZE START] 100    // 100% 起始缩放比例 %。不指定则从上一次设置的值开始。
+        [CHANGE SIZE END] 100    // 100% 最终缩放比例 %。
+        [CHANGE TIME] 1000    // 变化时间。在1秒内变化 /1000 秒。
+        [LIFE TIME] 2000    // 附着时间。不指定则跟随 CHANGE TIME，指定为0则持续到怪物消失（或再次进行颜色变化特效之前）。
+    **[/COLOR CHANGE EFFECT]**
+
+    **[HP APPENDAGE]**
+        5000 //时间
+        300 //范围
+        [ALL] //目标       [MY TEAM], [ENEMY TEAM], [ALL]
+        [%]   //应用方法  [%], [+]
+        [HP MAX] //基准 hp [HP MAX], [HP] 两种
+        -10    //应用量   //造成伤害用 -，治疗用 +
+        500    //应用间隔
+    **[/HP APPENDAGE]**
+
+    **[FLASH SCREEN]** 1000 2000 1000 150 0 0 0  //变为指定颜色的时间，颜色保持时间，恢复原状的时间
+                      最大Alpha值（透明度），想要颜色的 red, green, blue值
+
+    **[FLASH SCREEN EX]** 1000 2000 1000 150 0 0 0 0 //变为指定颜色的时间，颜色保持时间，恢复原状的时间
+                      最大Alpha值（透明度），想要颜色的 red, green, blue值，颜色变更显示的图层 <0（边界）, 1（近景）, 2（中景）, 3（远景）>
+
+    **[SET GRABABLE]** 1  //1为可被抓取的怪物, 0为不可被抓取的怪物
+
+    //伤害检查开始（action文件）
+    **[SET DAMAGE CHECK]** 1  1000//1开始伤害检查, 0停止伤害检查 //检查时间设置
+
+    //图层添加移除（action文件）
+    **[ADD LAYER]** 100 0 0 0    //图层的索引值, [etc motion]中动画的索引值, x坐标, y坐标
+    **[REMOVE LAYER]** 0 //[etc motion]中动画的索引值
+
+    **[SET OUTLINE]** 1 255 255 255 2 //1为绘制0为擦除, Red, green, blue, depth默认值为2
+
+    **[SET PASSTYPE]**  [pass all]     // 改变通行类型。仅被动对象有效。与被动对象脚本的 [pass type] 相同。均可通行
+            [pass only float type] // 仅浮空型可通行
+            [do not pass] // 不可通行
+            [pass only red team] // 仅红队可通行（混沌专用）
+            [pass only blue team] // 仅蓝队可通行（混沌专用）
+
+    **[SET WIDTH]** %d %d // xWidth, yWidth 顺序。可以指定宽度。可用于怪物被动对象。怪物没有宽度时会穿透地图，使用时请注意
+
+    **[SET RANDOM TARGET]** //随机变更目标
+
+    **[SET PARTY TARGET]** 1 1 // 队伍的索引号（0 ~ 3），没有时是否将下一个位置的成员设为目标？1为变更，0为不变更
+    //将目标变更为特定队员
+
+    **[HELLOFHEAL APPENDAGE]** 200 1000 // 在范围内恢复时造成伤害。需要用 DISTANCE 检查后使用
+                    // 倍数（200则为2倍），应用间隔（1000则为1秒）
+
+    **[THORNS APPENDAGE]** 3000 70 6 2000 99 4 600000 //决定愤怒等级增减的时间间隔，火焰伤害反射率（%），
+                                 //愤怒炸弹爆炸所需的连续打击次数，愤怒炸弹的打击次数减少间隔，
+                                 //愤怒炸弹的等级，愤怒等级下降所需的打击次数，持续时间
+
+    **[MUCU LIMIT CONTROL]** 10000 //沉默，技能使用限制，后面写上时间则在该时间内无法使用技能。
+
+    **[JUMP TO TARGET]** -1 500 -1500 1.2 1000 600 0 1 2 // 向目标跳跃。根据参数可调整跳跃轨迹。
+                                 // 速度，跳跃高度，自定义重力，与目标距离保持比率，最大X，最大Y，上升时帧，下降时帧，落地时帧
+                                 // （2009/09/28 李元满，功能添加及修改）
+                                 // 注意：.mob文件中必须注册有 [jump action]！
+
+    **[CHANGE MY TARGET]**         // 将行为主体更改为目标。例如，通过 [DO BEHAVIOR] [LAST ATTACKER] 调用行为，
+                          // 则是将最后攻击自己的人设为目标。
+    **[TAKE IT]** 10086 -1 -1 -1 -1 // 将行为主体吞噬。（必须指定5个索引，没有则填 -1）
+    **[THROW ITS OWN]**               // 吐出吞噬的对象。
+
+    **[SET USE HOMING]** 0             // 0. 不使用自动追踪, 1. 使用自动追踪
+
+    **[BOUNCE FROM THE WALL]** 1 30     // 0. 上下墙壁反弹, 1. 左右墙壁反弹, 反弹角（角度以水平线为基准逆时针方向）
+    **[SET VISIBLITY]** 1             // 0 : 设为不可见, 1 : 设为可见。
+                                // 注意！！：请仅在想要完全不可见时使用！
+                                // 变为不可见状态后，动作检查等可能无法正常工作！
+
+    **[MAKE VIBRATION]** 0.2 6.0 `CHAR1_VIBRATION`     // 振动持续时间（秒），振幅（像素），振动ID
+    **[CHARACTER COOLTIME RESET]** 0 //0为全部技能，1为无色技能，2为觉醒技能
+
+    **[SET INTERPOLATION]** 0  //0为停止插值，1为使用插值
+    **[DEBUFF]**            //移除目标的增益效果
+    **[DEBUFF GHOST]**        //吞噬鬼剑士系技能
+    **[REFLECTBUFF APPENDAGE]**    1000 // 附加状态异常反射附加状态，持续时间（ms）
+    **[ZOOM IT]** 2000 150        // 对指定的 TARGET 进行变焦，变焦持续时间（毫秒），放大比例（例：200% 时为2倍）
+
+    **[AURA]** 1  //使用光环机器 1. 索引
+    **[CENTER MSG]** `中央显示的信息`     5000 // 中央显示的信息，显示时间
+
+             // 总时间，伤害反射%，恢复%，目标怪物索引，初始伤害值（未使用），造成伤害的时间间隔，
+     // 伤害增加未知项，伤害增加未知项2（超过临界点时），附加状态之前的时间间隔，附加状态之前的范围
+        **[DARKSCALP APPENDAGE]** 15000 20 500 56721 0 1000 2 3 10000 300
+    **[DESOLATEPAIN APPENDAGE]** 3000 3000 60000 200 60 40 20 61232  // 有效时间，检查间隔，绝对伤害，分配伤害的距离，2人队伍时%，3人队伍时%，4人队伍时%，造成伤害时召唤的爆炸索引
+
+    **[SUB ANI FLAG]** 0 1 //设置是否绘制子动画 [SUB ANI FLAG] 动画索引, 1为使用 0为不使用（初始值为使用）
+    **[VIRTUALHP APPENDAGE]**    10 50 10 1        // 移除虚拟 HP 所需的打击次数，移除虚拟 HP 所需的伤害，移除虚拟 HP 的条件（0:打击次数, 1:伤害, 2: 两者均满足），虚拟 HP 运作时每次打击减少的 HP
+    **[REMOVE VIRTUALHP]**                // 移除虚拟 HP
+    **[TERROR APPENDAGE]** 60 5000 10000        // 等级，僵硬所需时间，持续时间
+    **[SHAKING GAGE]** 50000 10000 5 10 500         // 晃动动作：通过晃动方向键避免计量条积满的动作
+                            // 状态保持时间，放置不动时计量条积满的时间，每秒需要晃动的次数，
+                            // 晃动成功时减少的计量条百分比，计量条积满失败时受到的伤害
+    **[CHANGE TEAM]** 1 5000 100            // 背叛：要更换的队伍号（1~4），更换时间，更换的 HP 比率（%）
+    **[DEFAULT TEAM]**                    // 将队伍恢复原状。
+    **[CHANGE SIGHT]**                    // 视野交换：随机交换队员间的视野。
+    **[DEFAULT SIGHT]**                    // 将视野恢复原状。
+    **[RHYTHM ACTION]** 4 5000 1021            // 节奏动作 总输入指令数/ 总可输入时间 / 生成的被动对象索引
+        [PATTERN] [RIGHT] 1000 0        // 指令模式方向，输入等待时间，对象的帧号
+        [PATTERN] [UP] 500 0
+        [PATTERN] [LEFT] 800 0
+        [PATTERN] [DOWN] 1200 0
+        [IF SUCCESS] 1 0 0 0            // 成功时生成的对象索引，以对象为基准的 X,Y,Z 坐标
+        [IF FAIL] 2 0 0 10            // 失败时生成的对象索引，以对象为基准的 X,Y,Z 坐标
+    **[/RHYTHM ACTION]**
+    **[SET DAMAGE BOX]**[OFF]                        // 因透明状态而关闭伤害判定
+    **[ANGER APPENDAGE]**    1 10000 3000 2 20 50000    // 感知图层索引，超过5格时受到的伤害，感染计量减少一格的时间，受击时上升的格数，Alpha减少量，附加状态持续时间
+    **[SET WHOLE ALPHA]**                    150        // 更改目标的Alpha值。
+    **[SET WHOLE DAMAGETYPE]**  0                     // 设置伤害类型（0 普通, 1. 霸体, 2. 无敌）
+    **[ATTACKABLEAREA APPENDAGE]** 0 200 1000 -1 0            // 可攻击区域附加状态，模式（0. 近战打击模式, 1. 远程打击模式），基准距离，图像输出有效距离，反射伤害% （输入 -1 则一击必杀），持续时间（输入0则无限）
+    **[REFRESH MOVEINFO]**                    // 更新移动信息
+    **[DESPAIR APPENDAGE]** 500 5000 123 600 50            // 需要互相造成的伤害，可以互相攻击的时间，清除失败时生成的对象，清除失败时炸弹伤害，清除失败时受到的伤害（%）
+    **[CHANGE DISGUISER]** 63500 10000                // 要变身的怪物索引（必须事先在源码中注册），变身时间
+
+    **[REMOVE ACTIVE STATUS]** `ACTIVE STATUS ID`     // ID 请咨询客户端开发者！
+    **[REMOVE APPENDAGE]**[附加状态ID]             // ID 请咨询客户端开发者！
+    **[SET RESPAWN POS]** 100 200                // 可以指定复活位置 x, y （输入 -1 则重置）
+    **[SET CASTING GAUGEPOS]** 100 0 100        // 可以指定施法条位置（基准对象位置）
+    **[CHANGE RIDABLESKILL PATTERN]** 1            // 改变变身怪物的技能模式，模式索引
+    **[RESTART COOLTIME]**                        // 重新开始当前动作的冷却时间
+
+    **[NAME HIDE ON]**             // 隐藏怪物、APC 的名字。
+    **[NAME HIDE OFF]**            // 显示怪物、APC 的名字。
+
+    **[RESTORE TARGET]**            // 变更为初始目标（继续前进）
+
+    //受击时屏幕颜色改变，超过一定受击次数时
+    //在目标周围播放动画并造成指定数值的伤害的附加状态
+    //`*.ani文件路径`, 动画坐标x, 动画坐标y, red, green, blue, 受击时Alpha减少值, 受击次数, 最终受击后造成的伤害, 附加状态发动体力（最小）, 附加状态发动体力（最大）
+    **[HIT APPENDAGE]**    `Common/CommonEffect/Animation/Blast1.ani` 0 100 0 0 0 50 5 100 0 50
+    **[CHANGE AI]**[NORMAL] 2 `aaa2.ai`        // 将 AI 更改为指定的文件，[AI 难度]，要更改的索引，替代的 AI 文件路径
+    **[CHANGE AI]** [NORMAL] 2 `Action2.ai`        // 将 AI 更改为指定的文件，[AI 难度]，要更改的索引，替代的 AI 文件路径
+    **[CHANGE AI]** [EXPERT] 2 `Action2.ai`
+    **[CHANGE AI]** [MASTER] 2 `Action2.ai`
+    **[CHANGE AI]** [KING] 2 `Action2.ai`
+    **[CHANGE AI]** [HERO] 2 `Action2.ai`
+
+    **[SET SAVED OBJECT]** 0             // 将 TARGET 设为触发器中 [SAVE TARGET OBJECT] 保存的对象，保存的对象索引
+    **[SET SYMBOL]** 1                    // 设置目标对象的符号。
+
+    // 施法累积时间，受击间隔，受击时减少的计量条程度（0-100%），轮廓颜色 R, G, B，可攻击时轮廓颜色 R, G, B，最大轮廓粗细，攻击力增加，攻速增加，移速增加
+    // 减少速度（输入0则瞬间减少）
+    **[DAMAGE APPENDAGE]** 10000 1000 10 100 100 100 255 255 255 5 100 100 100 250
+
+
+    **[RESOLUTION APPENDAGE]**
+        2         // 对象数量
+        221     // 对象索引
+        10         // x
+        10         // y
+        30         // z
+        221     // 对象索引
+        -10     // x
+        50         // y
+        30         // z
+        20         // RPM
+        50         // RPM 最大
+        500        // RPM 变化时间0
+        500        // RPM 恢复时间0
+        10         // HP 每减少1%时增加的 RPM 量
+        20         // MIN 半径
+        500        // MAX 半径
+        250        // 距离校准基准因子（例：输入100则距离100时为100% RPM，1000时为10% RPM）
+        0.5f    // 半径变化敏感度
+    //将目标直线移动的标签。各选项指定顺序无关。
+    **[STRAIGHT MOVE]**
+        [AXIS] [X]        //要直线移动的坐标轴 [X],[Y],[Z] 中选一
+        [MOVING MOTION] [JUMP]    //移动中采取的动作。[STAND],[JUMP],[DAMAGE],[SIT],[OVERTURN],[DOWN] 中选一
+        [RELEASE MOTION]    //移动结束后立即采取的动作。选项与 [MOVING MOTION] 相同。
+
+        //可以指定移动的时间和距离。
+        //只指定[TIME]时：在该时间内进行“匀加速”运动
+        //只指定[DISTANCE]时：移动该距离的“匀加速”运动
+        //两者都指定时：在该时间内移动到该距离的“匀速”运动
+        [TIME] 3000        //要移动的时间。单位 ms。
+        [DISTANCE] 1000        //要移动的距离。单位 pixel。可为负。
+
+        [DAMAGE HP] 50        //移动后造成伤害。%单位。
+
+        //移动后返回的坐标。未指定则不返回，停留在移动处。
+        [RETURN XPOS] 100    //x坐标
+        [RETUNN YPOS] 200    //y坐标
+        [RETURN ZPOS] 300    //z坐标
+
+        [ACCELERATE] 100    //指定移动时的加速度。[TIME]和[DISTANCE]同时指定时为匀速运动，无意义。
+    **[/STRAIGHT MOVE]**
+
+    **[MOVE APPENDAGE]** 200 500 1 20000 -1   //多少秒不动则造成伤害，HP减少的时间，减少的 HP%，附加状态持续时间，目标身上生成的被动对象索引
+    **[FREEZE APPENDAGE]** 1 500 1 20000 -1   //0-限制所有移动 1-允许跳跃，HP减少的时间，减少的 HP%，附加状态持续时间，目标身上生成的被动对象索引
+    **[TRAP APPENDAGE]**             // 束缚目标的移动，直到发动的对象消失为止无法移动
+
+    **[RANDOM GENERATE PASSIVE OBJECT]**   // 在特定区域内随机生成被动对象的功能
+        [GENERATE AREA] -100 100 -100 100 0 0    // 被动对象生成的区域（x坐标起始，x坐标结束，y坐标起始，y坐标结束，z坐标起始，y坐标结束）
+        [CREATE FREQUENCE] 0 500            // 生成频率（类型，时间）
+                     1 30000            // 0 ：规则地每隔时间生成1个对象。
+                                 // 1:以时间为结束点，随机时机生成对象。
+        [PASSIVE OBJECT INDEX]            //要生成的对象列表（编号，数量）
+            10334 100
+            10335 30
+            10336 20
+        **[/PASSIVE OBJECT INDEX]**
+        [USE TARGET X POS]        // 是否将生成 AREA 与目标的 X坐标同步？
+        [USE TARGET Y POS]        // 是否将生成 AREA 与目标的 Y坐标同步？
+        [USE TARGET Z POS]        // 是否将生成 AREA 与目标的 Z坐标同步？
+    **[/RANDOM GENERATE PASSIVE OBJECT]**
+
+    **[EXCHANGE HP RATE]**             // 交换目标与我的 HP 比率。当有多个目标时，取 HP 最大的目标进行交换。
+
+    **[MOVE PATTERN]**                // 使目标途经特定点或
+        [TYPE] 0
+        [VELOCITY] 300
+        [STAY TIME] 1000
+        [AREA] 100 0 0 800 400 0
+    **[/MOVE PATTERN]**
+
+    **[MOVE PATTERN]**                // 使目标途经特定点或徘徊的模式标签
+        [TYPE] 0                // 0, 1 ：按照 [POS] 标签输入的点进行直线（0）、曲线（1）移动。2,3 ：按照 [AREA] 标签输入的区域进行直线（2）、曲线（3）移动。
+        [LOOP] 1                // 是否循环输入的点？
+        [VELOCITY] 400            // 移动速度，（曲线移动时指平均速度）
+        [STAY TIME] 1000            // 移动到一个点后在那里停留的时间
+        [AREA] 100 0 0 800 400 0        // 可移动的区域
+        [POS] 30 50 20            // 要移动的点们
+        [POS] 440 40 40
+        [POS] 230 150 60
+        [POS] 530 270 60            // *********** [注意] ：请将怪物移动 destination.ai 设置为 -1 ***********************
+        [POS] 30 50 20
+        [MIN MOVE DISTANCE]        // 随机移动时一次移动的最小距离
+    **[/MOVE PATTERN]**
+
+    **[MOVE PATTERN OFF]**                //结束 [MOVE PATTERN] 标签。
+
+    **[SUFFOCATION APPENDAGE]**            // 窒息附加状态
+        [LEVEL] 70            // 等级
+        [APPEND DELAY TIME] 10000    // 开始受到伤害前的延迟时间
+        [FREQUENCY TIME] 1000        // 受到伤害的时间间隔
+        [DAMAGE] 100            // 伤害
+    **[/SUFFOCATION APPENDAGE]**
+
+    **[GUARD APPENDAGE]**
+        [DAMAGE]
+            [PHYSICAL] 25.0 //物防防御比率（百分比）
+            [MAGICAL] 25.0  //魔防防御比率（百分比）
+        **[/DAMAGE]**
+        [TIME] 1000            //附加状态持续时间（0:无限）
+        [KNOCK BACK] 1000    //击退值
+        [BACK ATTACK] 1        //背击时是否适用（0:不适用 1:适用）
+    **[/GUARD APPENDAGE]**
+    //mkjung 120514 add.
+    **[SET TEAM]** 1000
+
+    //mkjung 120514 add.
+    **[CUT SCENE]**
+        [FLIP TYPE]         1        // 0 ：无 1 ：根据角色方向 2 ：根据角色位置
+        [START POSITION]    -400 600        // 起始 x,y坐标
+        [ANI FILE]      `Monster/NewMonsters/dimensiongate/blackearth/michaela/animation/cutscene.ani`
+        [MOVE DIR]
+              -5 600 500    // 要停止的位置 x,y ，速度（速度 = 1/10 秒移动距离
+               7 600 50    // 要停止的位置 x,y ，速度（速度 = 1/10 秒移动距离
+              -5 600 50    // 要停止的位置 x,y ，速度（速度 = 1/10 秒移动距离
+              -5 600 800    // 停止，要停止的时间
+               7 600 50    // 要停止的位置 x,y ，速度（速度 = 1/10 秒移动距离
+            -400 600 500    // 要停止的位置 x,y ，速度
+            -400 600 2000    // 要停止的位置 x,y ，速度
+        **[/MOVE DIR]**
+    **[/CUT SCENE]**
+
+    //mkjung 120516 add.
+    **[CAMOUFLAGE]** 0 0
+    **[TRIGGER QUESTEVENT]** 0
+    **[START KEYSTROKE MODE]** 8 9 0 0 1    // 从属 attack 动作索引，终结 attack 动作索引，连击模式 0: 瞬时按键模式, 1: 累积按键模式，执行一次从属动作需要按下的次数，从属动作循环限制
+
+    **[LOCK QUEST UNTIL]**[CHANGE MODULE]    6650        // 锁定成就
+
+    //mkjung 120517 add.
+    **[SET MOVEVELS]**
+        [X NORMAL] 0
+        [X SLANT] 0
+        //mkjung 120518 add
+        [Y NORMAL] 0
+        [Y SLANT] 0
+    **[/SET MOVEVELS]**
+
+    //mkjung 120518 add.
+    **[END KEYSTROKE MODE]**
+    **[DESTROY BY FORCE]**
+
+**[/BEHAVIOR]**     // 关闭行为
+
+//////////////////////////////////////////////////////////////////////////
+* 方向相关标签
+[DEFAULT] : 中立方向
+[LEFT] : 左边方向
+[RIGHT] : 右边方向
+[RANDOM] : 随机（左、右中择一）
+[MY DIRECTION] : 当前施放者的方向
+[MY OPPOSITE DIRECTION] : 当前施放者的相反方向
+
+* 倒地状态
+0 : 第一次倒地
+1 : 在地面弹起的状态（弹起高度减少到1/4）
+2 : 躺在地上的状态（x移动及弹起高度为0）

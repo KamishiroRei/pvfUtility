@@ -1,0 +1,48 @@
+[name] `查普的蛋`
+[name2] `An Egg of Charp`
+[creature species] 7        // 种族名索引
+[grade] 1
+[attach type] `[free]`
+[creation rate] 0
+[weight] 0
+[usable job]
+`[all]`
+[/usable job]
+[minimum level] 1
+
+[icon] `Item/IconAcc.img` 66
+[field image] `Item/FieldImage.img` 6
+
+[equipment type] `[creature]` 10
+[sub type] 1            // 0 : 宠物，1 : 蛋，2 : 胶囊
+[price] 100
+[cool time] 10000
+
+[creature minimum level] 10            // 使用宠物所需的最低等级
+
+[creature physical attack] 10            // 宠物物理攻击力
+[creature magical attack] 10            // 宠物魔法攻击力
+[creature skill consume mp rate] -10.00        // 宠物技能消耗MP比率（%）
+[creature skill charge time rate] -10.00    // 宠物蓄力时间比率（%）
+[creature skill over charge time rate] -10.00    // 宠物过载蓄力时间比率（%）
+[creature experience amount rate] 10.00        // 宠物经验值获得量比率（%）
+[creature physical critical hit] 5.0        // 宠物物理暴击率
+[creature magical critical hit] 5.0        // 宠物魔法暴击率
+[creature stuck] -3.0                // 宠物硬直率
+
+[MP MAX rate] 30.0        // 装备时 MP 最大值增加比率（%）
+
+[move wav] `NECKLACE_TOUCH`        // 移动/拾取音效
+
+[set item master] -1        // 套装主物品索引，-1 表示无
+
+[hatch item id] 63003        // 从宠物蛋中孵化时生成的宠物索引
+
+[int data]
+63006    1000            // 宠物胶囊中开出的宠物蛋索引和相对概率
+63007    1000
+
+300                // 饱食度满时的增益时间（秒）
+-20                // 增益时宠物蓄力时间比率（%，包含过载时间）
+30                 // 使用饲料时饱食度增加量
+[/int data]

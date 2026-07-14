@@ -1,0 +1,21 @@
+//鬼剑士 极·鬼剑术·暴风式
+[SKILL INDEX] 	 0 86		// 职业编号，技能索引 (例如: 0 5 = 鬼剑士 鬼斩)
+[ONAIR ONLY] 	 0		// 是否仅为广播比赛专用 (0 : 否，1: 是，默认 : 0)
+[FLIP TYPE]   	  1		// 0 : 无 1 : 根据角色方向 2 : 根据角色位置
+[START POSITION]    -400 480	// 起始 x,y 坐标
+[ANI FILE]      `etc/UltimateSkillAni/Ghost_Weapon.Ani` //要使用的动画文件
+[MOVE DIR]
+  -5 480 500	// 停止位置 x,y , 速度 (速度 = 1/10 每秒移动距离)
+   7 480 50	// 停止位置 x,y , 速度 (速度 = 1/10 每秒移动距离)
+  -5 480 50	// 停止位置 x,y , 速度 (速度 = 1/10 每秒移动距离)
+  -5 480 800	// 停止，停止时间
+   7 480 50	// 停止位置 x,y , 速度 (速度 = 1/10 每秒移动距离)
+-400 480 500	// 停止位置 x,y , 速度
+-400 480 2000	// 停止位置 x,y , 速度
+[/MOVE DIR]
+
+
+[CHANGE ULTIMATECUTSCENE ANI FILE]
+0					// 0 : 要更改的觉醒技能过场图像类型 (要添加，请在 eTYPEULTIMATECUTSCENE 中增加类型)
+`etc/UltimateSkillAni/Thief_Rogue.Ani`	// 要更改的觉醒技能过场动画文件路径
+[/CHANGE ULTIMATECUTSCENE ANI FILE]

@@ -1,0 +1,83 @@
+// 物品分解脚本示例
+[cube index]    // 小晶块的物品索引列表
+`[no element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个
+10001        // 索引列表。按低等级物品分解结果依次填写
+10002
+10003
+10004
+10005
+[/cube index]
+[cube index]    // 小晶块的物品索引列表
+`[fire element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个
+10011        // 索引列表。按低等级物品分解结果依次填写
+10012
+10013
+10014
+10015
+[/cube index]
+[cube index]    // 小晶块的物品索引列表
+`[water element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个
+10021        // 索引列表。按低等级物品分解结果依次填写
+10022
+10023
+10024
+10025
+[/cube index]
+[cube index]    // 小晶块的物品索引列表
+`[light element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个
+10031        // 索引列表。按低等级物品分解结果依次填写
+10032
+10033
+10034
+10035
+[/cube index]
+[cube index]    // 小晶块的物品索引列表
+`[dark element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个
+10041        // 索引列表。按低等级物品分解结果依次填写
+10042
+10043
+10044
+10045
+[/cube index]
+
+[legacy info]    // 抽取信息
+1        // 第一个整数数据是抽取数据的品级。从1开始。（1 = 1~10, 2=11~20...）
+        // 之后格式与抽取物品的整数数据相同。
+
+1001                    // 未抽中任何物品时的默认产出物品。
+
+10001 288                // 产出物品的索引和概率。概率为万分比（0.001%）
+2342 301                // 例：2342号物品 0.301% 概率产出
+3222 1                    // 例：3222号物品 0.001% 概率产出
+4222 5000
+2222 243
+[/legacy info]
+
+[legacy info]    // 抽取信息
+2        // 第一个整数数据是抽取数据的品级。从1开始。
+        // 之后格式与抽取物品的整数数据相同。
+
+1001                    // 未抽中任何物品时的默认产出物品。
+
+10001 288                // 产出物品的索引和概率。概率为万分比（0.001%）
+2342 301                // 例：2342号物品 0.301% 概率产出
+3222 1                    // 例：3222号物品 0.001% 概率产出
+4222 5000
+2222 243
+[/legacy info]
+
+[skill info]    // 与分解相关的技能信息
+33        // 最前面是主分解技能索引
+`[swordman]`        // 对应职业。在 `[swordman]` `[fighter]` `[gunner]` 中选择一个
+2        // 成长类型
+73        // 技能索引
+`[fire element]`        // 技能影响的小晶块属性。在 `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个
+
+`[fighter]`    // 同上重复
+1
+11
+`[water element]`
+[/skill info]
+
+[skill prob] 1.0 5.0    // 技能影响的概率。%值，可为小数。
+            // 前面的值是1级时，后面的值是最大等级时。

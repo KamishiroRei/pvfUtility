@@ -1,0 +1,325 @@
+*** .key 文件是什么？**
+由于AI角色在程序层面上与用户角色几乎完全相同，因此要执行任何动作都需要输入按键。
+所以，为了通过脚本实现一系列按键输入并自由定制，我们使用 .key 脚本。
+________________________________________
+*** 标签类型**
+[input]：决定输入哪个按键的标签。
+[loop start], [loop end] 对：将包含在此代码块内的 [input] 标签重复指定次数。
+应用在哪里？用于实现鬼剑士的刺击后连击或普通连击攻击。
+*** 可在 [input] 标签中输入的按键类型**
+技能 z
+攻击 x
+跳跃 c
+增益 space
+技能快捷栏 a, s, d, f, g, h
+绝对方向键 up, down, left, right
+相对方向键 current direction, opposite direction, target current direction, target opposite direction
+自动连击键 combo attack
+使用物品 1, 2, 3, 4, 5, 6
+无按键输入 ``
+% 关于相对方向键，例如 current direction
+用于需要按下角色当前面对方向的情况。
+例) 卡赞的命令是 → → Z 时
+输入 current direction current direction Z
+即可发动卡赞。
+% 注意：对于自动连击键，"按住的时间"代表连击次数！
+此外，如果对像元素法师这样只有2段连击的角色指示进行4段连击，
+系统会自动调整为最大连击次数，因此不会出现问题。
+________________________________________
+*** 示例**
+% 请参考 [input] 标签示例进行理解。难度：海豚级别。
+[input]
+c 30 // 按住 c 键 30 毫秒
+time 300 // 经过 300 毫秒后，执行下一个按键。
+// 像 time 这样的命令称为传递命令。
+[input]
+// 从上面经过 300 毫秒后到达这里。
+x 30 // 按住 x 键 30 毫秒。
+time 300 // 经过 300 毫秒后，执行下一个按键。
+[input]
+x 30
+pass 0 // 立即执行下一个按键。
+[input]
+x 30
+random 30 100 // 以 30% 的概率执行下一个按键。
+// 如果概率检查失败，则在此停止并结束动作。
+[input]
+x 30
+enemy distance -100 // 负数 = 如果与当前目标的距离小于等于 100，则执行下一个按键。
+[input]
+x 30
+enemy distance 200 // 正数 = 如果与当前目标的距离大于等于 200，则执行下一个按键。
+[input]
+x 30
+my zheight 50 // 如果我的 z轴高度 大于等于 50，则执行下一个按键。
+[input]
+combo attack 3 // 执行基本的 3 段连击攻击。例：鬼剑士
+time 1000
+% [loop start], [loop end] 标签示例。难度：海豚级别。
+[input]
+c 30
+time 300
+[loop start] 10
+text
+[input]
+`x` 30
+`time` 50
+[loop end]
+[input]
+z 30
+time 300
+-> 以上述脚本用鬼剑士举例说明：
+按下 c 键跳跃后，
+x 键被重复按下 10 次，执行普通连击攻击，
+然后按下 z 键，使用鬼斩结束。
+________________________________________
+*** 传递命令 类型**
+time
+pass
+random
+enemy distance
+my zheight
+event
+animation frame
+截至 070423，已实现的命令如上。
+________________________________________
+*** AI角色的快捷栏物品使用**
+1.	
+o	添加 1~6 号按键：在 key 目录下创建 1.key ~ 6.key 文件，
+并在 *.aic 文件的 [key stream] 中，连同文件路径一起插入 1.key ~ 6.key。
+例)
+[key stream]
+AICharacter/cuwaki/key/triple attack.key
+AICharacter/cuwaki/key/a.key
+AICharacter/cuwaki/key/s.key
+AICharacter/cuwaki/key/d.key
+text
+`AICharacter/cuwaki/key/1.key`
+`AICharacter/cuwaki/key/2.key`
+`AICharacter/cuwaki/key/3.key`
+`AICharacter/cuwaki/key/4.key`
+`AICharacter/cuwaki/key/5.key`
+`AICharacter/cuwaki/key/6.key`
+
+[/key stream]
+2) - 为槽位指定物品：在 *.aic 文件的 [quick item] 中，按槽位分别指定物品编号和数量。
+例)
+// 将要放入快捷栏的物品
+[quick item]
+// 物品编号, 数量
+6004 100 // 1号槽位
+1106 100 // 2号槽位
+6001 100 // 3号槽位
+1001 100 // 4号槽位
+1004 100 // 5号槽位
+1011 100 // 6号槽位
+[/quick item]
+3.	
+o	最后，在编写 Action.ai 文件的脚本时，在 [return] 后面指定在 [key stream] 中定义的
+按键索引，AI 角色就会使用相应的物品。
+例)
+[return] 5 // 由于在 1) 中，5号索引对应的按键指向 2号槽位，
+// 因此会使用在 [quick item] 中第二个指定的 1106 号物品。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==============================================================================
+==============================================================================
+
+
+* .key 이건 무엇인가?
+
+ai캐릭터는 프로그램적으로 유저캐릭터와 거의 완전히 동일하기때문에
+어떤 동작을 시키기 위해서는 key 를 입력해야한다.
+따라서 일련의 key 입력을 스크립트로 만들어서 자유롭게 구현하기 위해
+.key 스크립트 를 사용한다.
+
+
+==============================================================================
+==============================================================================
+
+* 태그의 종류
+
+[input] : 어떤 키를 입력할지 결정하는 태그
+
+[loop start], [loop end] 의 쌍 : 블럭 안에 들어있는 [input] 태그들을 지정된 횟수만큼 반복시킨다.
+어디에 활용할까? 귀검사의 쓰러스트 후 연타 또는 기본연타공격을 하기위해서 사용함.
+
+
+
+
+* [input] 태그로 입력가능한 키의 종류
+스킬		`z`
+공격		`x`
+점프		`c`
+버프		`space`
+스킬퀵슬롯	`a`, `s`, `d`, `f`, `g`, `h`
+절대 방향키	`up`, `down`, `left`, `right`
+상대 방향키	`current direction`, `opposite direction`, `target current direction`, `target opposite direction`
+자동콤보키	`combo attack`
+아이템 사용	`1`, `2`, `3`, `4`, `5`, `6`
+키입력없음	``
+
+% 상대방향키 `current direction` 같은 것은
+  바라보고 있는 방향을 눌러야하는 경우에 사용된다.
+  예) 카잔의 커맨드는 → → Z 일 때
+      `current direction` `current direction` `Z`
+      라는 식으로 입력하면 카잔이 발동된다.
+
+% 자동콤보키 의 경우에는 "눌려있을시간" 이 콤보횟수를 나타내므로 주의!
+  또한 엘리멘탈마스터와 같이 2단콤보만 있는 캐릭에게 4단콤보를 지시하였을 경우
+  자동으로 최대콤보횟수로 맞춰지므로 문제는 일어나지 않는다.
+
+
+==============================================================================
+==============================================================================
+
+
+* 예제
+
+% [input] 태그 예제를 보고 터득하세요. 난이도 : 돌고래 수준.
+
+[input]
+`c` 30		// c 키를 30 mSec 동안 눌러라
+`time` 300	// 시간이 300 mSec 지나면 다음 키로 넘어가라.
+		// `time` 과 같은 명령어를 pass command 라 한다.
+
+[input]
+		// 위에서 300 mSec 후에 여기로 넘어왔다.
+`x` 30		// x 키를 30 mSec 동안 눌러라.
+`time` 300	// 시간이 300 mSec 지나면 다음 키로 넘어가라.
+
+[input]
+`x` 30
+`pass` 0	// 곧바로 다음 키로 넘어가라.
+
+[input]
+`x` 30
+`random` 30 100	// 30% 확율로 다음으로 넘어가라.
+		// 확율체크에 실패하면 여기서 끝나고 동작을 멈춘다.
+
+[input]
+`x` 30
+`enemy distance` -100	// 음수 = 현재 타겟과의 거리가 100 이하라면 넘어가라.
+
+[input]
+`x` 30
+`enemy distance` 200	// 양수 = 현재 타겟과의 거리가 200 이상이라면 넘어가라.
+
+[input]
+`x` 30
+`my zheight` 50		// 나의 z높이가 50 이상이면 다음으로 넘어가라.
+
+[input]
+`combo attack` 3	// 기본 3단 콤보 공격을 한다. 예 : 귀검사
+`time` 1000
+
+
+
+
+% [loop start], [loop end] 태그 예제. 난이도 : 돌고래 수준.
+
+[input]
+`c` 30
+`time` 300
+
+[loop start] 10
+
+	[input]
+	`x` 30
+	`time` 50
+
+[loop end]
+
+[input]
+`z` 30
+`time` 300
+
+-> 위의 스크립트를 귀검사의 예로 설명
+ c 키가 눌러져 점프를 한 후
+ x 키가 10회 반복되어 눌러지면서 기본연타공격이 나가게 되고
+ z 키가 눌려지면서 귀참이 써지며 마무리 된다.
+
+==============================================================================
+==============================================================================
+
+
+* pass command 의 종류
+
+`time`
+`pass`
+`random`
+
+`enemy distance`
+`my zheight`
+
+`event`
+`animation frame`
+
+070423 현재까지 구현된 것은 위와 같음.
+
+
+==============================================================================
+==============================================================================
+
+
+* AI캐릭터의 퀵 슬롯 아이템의 사용
+
+ 1) - 1~6번 키의 추가 : key 디렉토리에 1.key ~ 6.key를 만들고,
+		 *.aic 파일의 [key stream]에 파일 경로와 함께 1.key ~ 6.key를 삽입해 준다
+
+예)
+	[key stream]
+	`AICharacter/cuwaki/key/triple attack.key`
+	`AICharacter/cuwaki/key/a.key`
+	`AICharacter/cuwaki/key/s.key`
+	`AICharacter/cuwaki/key/d.key`
+
+	`AICharacter/cuwaki/key/1.key`
+	`AICharacter/cuwaki/key/2.key`
+	`AICharacter/cuwaki/key/3.key`
+	`AICharacter/cuwaki/key/4.key`
+	`AICharacter/cuwaki/key/5.key`
+	`AICharacter/cuwaki/key/6.key`
+
+	[/key stream]
+
+
+ 2) - 슬롯에 아이템 지정 : *.aic 파일에서 [quick item]에 슬롯별로 아이템번호와 개수를 지정해 준다
+
+예)
+	// 퀵슬롯에 들어갈 아이템
+	[quick item]
+	// 아이템번호, 개수
+	6004	100	// 1슬롯
+	1106	100	// 2슬롯
+	6001	100	// 3슬롯
+	1001	100	// 4슬롯
+	1004	100	// 5슬롯
+	1011	100	// 6슬롯
+	[/quick item]
+
+ 3) - 마지막으로 Action.ai 파일에서 스크립트를 작성할 때 `[return]` 뒤에 [key stream]에서 지정한
+	key 인덱스를 지정해 주면 AI 캐릭터가 아이템을 사용하게 됩니다
+
+예)
+	`[return]` 5	// 1)에서 5번 인덱스에 해당하는 키가 2번 슬롯 이므로
+			// [quick item]에서 두번째 지정한 1106번 아이템을 사용합니다
+
+
+070626 현재까지 구현된 것은 위와 같음.
+
+
+

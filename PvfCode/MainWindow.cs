@@ -25,6 +25,7 @@ using PvfCode.Controls;
 using PvfCode.Dot.Desktop;
 using PvfCode.Dot.Desktop.Enums;
 using PvfCode.Models.Options;
+using PvfCode.OfficialAnnotations;
 using PvfCode.Services;
 using PvfCode.ViewModels;
 using PvfCode.ViewModels.DocumentFolder;
@@ -108,16 +109,19 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 		PvfSkillTreeColorBehavior.Initialize();
 		base.DataContext = (AppCore.ViewModelBase = new MainWindowViewModel());
 		InitializeComponent();
+		OfficialAnnotationLinks.OpenRequested += OnOfficialAnnotationOpenRequested;
 		EnsureAiAssistantPanelDocked(restoreFindView: true);
 		HideOnlineFeatures();
 		EnableAiAssistantToolbarItem();
 		EnsureDropRateManagementMenuItem();
+		EnsureOfficialAnnotationMenuItem();
 		HideDevelopmentTestButton();
 		Dispatcher.BeginInvoke((Action)(() =>
 		{
 			HideOnlineFeatures();
 			EnableAiAssistantToolbarItem();
 			EnsureDropRateManagementMenuItem();
+			EnsureOfficialAnnotationMenuItem();
 			EnsureAiAssistantPanelDocked();
 			HideDevelopmentTestButton();
 		}), DispatcherPriority.ApplicationIdle);
@@ -212,6 +216,52 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 				"BarsVm.OnOpenViewIndependent_dropCommand",
 				StringComparison.Ordinal))?.index ?? -1;
 		toolsMenu.ItemLinks.Insert(independentDropIndex + 1, item);
+	}
+
+	private void EnsureOfficialAnnotationMenuItem()
+	{
+		BarManager barManager = Content as BarManager ?? BarManager.GetBarManager(this);
+		if (barManager == null)
+		{
+			return;
+		}
+
+		BarSubItem toolsMenu = FindToolsMenuItem(this) ?? barManager.Items.OfType<BarSubItem>()
+			.FirstOrDefault(menu => menu.Content?.ToString()?.StartsWith("工具", StringComparison.Ordinal) == true);
+		if (toolsMenu == null || toolsMenu.ItemLinks.Any(link =>
+			string.Equals(link.Item?.Content?.ToString(), "官方注释文档", StringComparison.Ordinal)))
+		{
+			return;
+		}
+
+		BarButtonItem item = new()
+		{
+			Content = "官方注释文档",
+			Command = new DelegateCommand(OpenOfficialAnnotationDocument)
+		};
+		int publishIndex = toolsMenu.ItemLinks
+			.Select((link, index) => new { link, index })
+			.FirstOrDefault(value => string.Equals(
+				BindingOperations.GetBindingExpression(value.link.Item, BarItem.CommandProperty)?.ParentBinding.Path?.Path,
+				"BarsVm.OnPvfReleaseCommand",
+				StringComparison.Ordinal) || string.Equals(
+				value.link.Item?.Content?.ToString(),
+				Application.Current?.TryFindResource("mainWin_bar_Main_subItem_Tools_Publish")?.ToString(),
+				StringComparison.Ordinal))?.index ?? -1;
+		toolsMenu.ItemLinks.Insert(publishIndex >= 0 ? publishIndex + 1 : toolsMenu.ItemLinks.Count, item);
+	}
+
+	private static void OpenOfficialAnnotationDocument()
+	{
+		AppCore.ViewModelBase.RootDocument.OpenOfficialAnnotation();
+	}
+
+	private void OnOfficialAnnotationOpenRequested(string fileName)
+	{
+		Dispatcher.BeginInvoke((Action)(() =>
+		{
+			AppCore.ViewModelBase.RootDocument.OpenOfficialAnnotation(fileName);
+		}), DispatcherPriority.Normal);
 	}
 
 	private static BarSubItem FindToolsMenuItem(DependencyObject parent)
@@ -711,6 +761,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			return;
 		}
 		SaveLayout();
+		OfficialAnnotationLinks.OpenRequested -= OnOfficialAnnotationOpenRequested;
 		try
 		{
 			WebApiServer.Instance.Stop();

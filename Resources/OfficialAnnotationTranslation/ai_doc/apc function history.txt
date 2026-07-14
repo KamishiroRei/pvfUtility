@@ -1,0 +1,304 @@
+该文档记录了APC（自动玩家角色）功能添加及改进事项的历史。
+开发人员在添加及改进功能时，请在文档最上方留下记录。
+
+2008年7月2日 吴英旭
+* APC的被动对象生成禁止功能。
+1. 在aic文件中指定被动对象索引。
+指定方法：
+[limit passiveobject] 
+1    // 索引
+1    // 索引
+....
+[/limit passiveobject]
+
+2. 用于在APC执行特定行为时，代替指定的对象而创建其他对象。
+
+2007年10月25日 郑延五
+* APC的组队指定功能
+1. 在aic文件中指定固定队伍成员。
+    - 固定队伍成员的成员索引从1开始使用。
+    - 指定的固定队伍成员不可更改。
+    - 固定队伍成员数量限制实际上没有限制。
+指定方法：
+    [party member]    // 成员索引，APC索引
+        1    20402        // 1号是白虎
+        2    5004        // 2号是阿拉德的格斗家
+        3    605        // 3号是骨剑士杰诺
+    [/party member]
+
+2. 自动注册：在没有特别指定的情况下自动注册。
+    - 0号指向自己。
+    - 按-1, -2, -3号顺序注册。
+    - 当队伍成员消失（死亡时），为填补空缺编号会重新分配索引。
+    - 自动注册队伍成员数量限制实际上没有限制。
+
+3. 使用已注册队伍成员的方法：
+    - 在ai文件中使用牧师队伍增益功能前指定队伍成员。
+    - [set party member] {成员索引}：指定增益技能的目标队伍成员。
+
+4. 相关的附加功能：在ai文件中使用。
+    - [party member alive]：检查指定成员是否存活。
+    - [party member hp] {比较符} {数值}：检查指定成员的HP。
+
+5. 使用示例：ai文件
+[think] [set party member] 2    // 指定2号注册的队伍成员
+    [think] [party member alive]
+        [true]
+            [think] [party member hp] `%>` 50
+                [true] [return] `a`    // 对2号队伍成员使用a槽中指定的快速治愈技能。
+                [false] [return] -1
+            [/think]
+        [false]
+            [return] -1
+    [/think]
+[/think]
+
+2007年10月23日 郑延五
+    - 在ai文件中，可以使用[check skill on]来检查特定技能的开启/关闭状态。
+    - 使用[check skill on]可以检查的技能列表，请参考"on off skill list.rtf"文件。
+使用示例：
+        [think] [check skill on] 52    // 检查杀意波动的开启/关闭状态
+            [true]    // 如果杀意波动开启
+                [return] `a`
+            [false]    // 如果杀意波动关闭
+                [return] `s`
+        [/think]
+
+2007年10月12日 郑延五
+    - *.ai文件中的[return]可以输入键名代替数字，其功能与[return str]相同。
+示例：
+        [return] `test`    // 可以正常工作
+
+2007年10月12日 郑延五
+    - 在*.aic文件的[key stream]中添加了键名及键文件设置功能。
+使用示例：
+[key stream]
+`combo` `combo.key`    // 名称 combo，文件名 combo.key
+
+以下写法与上述相同：
+使用示例：
+[key stream]
+`` `combo.key` // 如果将键名设置为空白，则从键文件名中移除路径和扩展名，将combo设为名称。
+
+另一个使用示例：
+[key stream]
+`AICharacter/cuwaki/key/combo.key`    // 如果未输入键名，则从键文件中移除路径和扩展名，将combo设为名称。
+    - 注意事项：键名不能以`.key`结尾，如果以`.key`结尾，会被识别为键文件名。
+
+2007年10月10日 郑延五
+    - 添加了脚本key中调用其他key文件的功能。
+使用方法：[import key] `key 文件名`
+            [import key]可以在可以出现[input]的位置使用。
+注意事项：注意无限循环。
+
+    - 在key文件中添加概率开关功能。
+使用方法：使用[switch]、[/switch]、[percent]。
+使用示例：
+        [switch]
+            [percent] 50
+            [import key] `a.key`
+            [percent] 30
+            [import key] `s.key`
+            [percent] 20
+            [exit]
+        [/switch]
+注意事项：在switch语句内部不能直接使用switch语句。如需在switch语句内部使用switch语句，请将文件分离，并使用[import key]。
+          循环功能同样不能在循环内部使用循环。请使用[import key]。
+          但是，在switch语句内部使用循环，或在循环内部使用switch语句是可以的。
+
+    - 在key文件中添加强制退出功能。
+使用方法：[exit]
+
+2007年10月8日 郑延五
+    - 添加了脚本ai中调用其他ai文件的功能。
+使用方法：[import ai] `ai 文件名`
+            [import ai]可以在可以出现[think]的位置使用。
+注意事项：调用的ai文件与被调用的ai文件都必须具备ai文件的完整形式。
+           注意无限循环（a.ai -> b.ai -> c.ai -> a.ai->b.ai ...）- APC加载后执行时陷入无限循环会导致宕机。
+参考事项：调用的ai文件与被调用的ai文件分别独立加载，错误信息也会分别输出。
+变更事项：ai文件开头的[ai pattern]可以删除。
+
+2007年10月1日 郑延五
+    - 添加了脚本[check use skill]：检查是否可以使用特定技能。
+使用方法：[check use skill] {技能编号}
+        技能输入技能编号即可。
+
+2007年8月20日 郑延五
+    - 添加了脚本 `number of in attack area()`
+使用方法：[void] `number of in attack area()`  {前} {后} {上} {下} {`enemy`/`neutral`/`friend`/`all`} {`monster`/`character`/`apc`/`passive object`/`summon`/`all`} {索引（-1则不检查）或名称}
+        索引或名称如果是`character`，则可以输入职业（职业名称请参考OperatingValue.lst）。
+
+2007年8月20日 郑延五
+    - 使aic中的[warlike]设置被忽略（移除好战性影响）。
+    - 在目的地决定方法中添加了迂回追踪。
+        在DestinationSelect.ai中返回10，则进行迂回追踪。
+
+2007年8月20日 郑延五
+    - 添加了脚本[my hp down]、[my mp down]。
+        - [my hp down] = 检查HP减少的瞬间。
+        使用方法：[my hp down] {`+` 或 `%`} {数值}
+
+        - [my mp down] = 检查MP减少的瞬间。
+        使用方法：[my mp down] {`+` 或 `%`} {数值}
+
+2007年8月17日 郑延五
+    - 添加了GM命令save list：一次性执行save list item/monster/aicharacter/passiveobject/skill。
+
+
+
+
+
+
+
+
+
+
+
+이 문서는 APC의 기능 추가 및 개선 사항에 대한 히스토리를 적어 놓은 것입니다
+개발자는 기능 추가 및 개선 시 문서의 가장 윗 부분에 기록을 남기도록 합니다
+
+2008년 7월 2일 오영욱
+* APC의 패시브 오브젝트 생성 금지 기능.
+1. aic파일에 패시브 오브젝트 인덱스를 지정한다.
+지정방법
+[limit passiveobject] 
+1	// 인덱스
+1	// 인덱스
+....
+[/limit passiveobject]
+
+2. apc가 특정행동을 할 때 지정 오브젝트 대신 다른 오브젝트를 만들게 하기 위해서 사용한다.
+
+2007년 10월 25일 정연오
+* APC의 파티 지정 기능
+1. aic파일에 고정 파티원을 지정한다
+	- 고정 파티원의 멤버 인덱스는 1부터 사용한다
+	- 지정된 고정 파티원은 변경되지 않는다
+	- 고정 파티원 수 제한은 실질적으로 없습니다
+지정방법)
+	[party member]	// 멤버 인덱스, APC 인덱스
+		1	20402		// 1번은 백호
+		2	5004		// 2번은 아라드의 격투가
+		3	605		// 3번은 뼈검사 제노
+	[/party member]
+
+2. 자동 등록 : 특별히 지정하지 않고 자동으로 등록된다
+	- 0번은 자기 자신을 가리킵니다
+	- -1, -2, -3번 순으로 등록됩니다
+	- 파티원이 사라질 경우(죽었을 때), 빈 번호를 채워주기 위해 인덱스가 다시 할당됩니다
+	- 자동 등록 파티원 수 제한은 실질적으로 없습니다
+
+3. 등록된 파티원을 사용하는 방법
+	- ai파일에서 프리스트 파티 버프 기능을 사용하기 전에 파티원을 지정한다
+	- [set party member] {멤버 인덱스} : 버프 스킬 대상 파티원 지정
+
+4. 연관된 추가 기능 : ai파일에서 사용
+	- [party member alive] : 지정된 멤버가 살아있는지 여부를 체크
+	- [party member hp] {비교} {수치} : 지정된 멤버의 hp를 체크
+
+5. 사용 예 : ai파일
+[think] [set party member] 2	// 2번에 등록된 파티원을 지정
+	[think] [party member alive]
+		[true]
+			[think] [party member hp] `%>` 50
+				[true] [return] `a`	// 2번 파티원에게 a슬롯에 지정된 패스트 힐 스킬을 사용한다.
+				[false] [return] -1
+			[/think]
+		[false]
+			[return] -1
+	[/think]
+[/think]
+
+2007년 10월 23일 정연오
+	- ai파일에서 [check skill on]을 이용하여 특정 스킬의 온/오프 상태를 확인할 수 있다
+	- [check skill on]을 이용하여 체크 가능한 스킬 리스트는 "on off skill list.rtf" 파일을 참조한다
+	사용 예)
+		[think] [check skill on] 52	// 살의의 파동의 온/오프 여부를 체크한다
+			[true]	// 살의의 파동이 켜져 있으면
+				[return] `a`
+			[false]	// 살의의 파동이 꺼져 있으면
+				[return] `s`
+		[/think]
+
+2007년 10월 12일 정연오
+	- *.ai파일의 [return]에서 숫자대신 키이름을 입력하면 [return str]과 동일한 기능을 수행한다
+	예)
+		[return] `test`	// 문제 없이 작동한다
+
+2007년 10월 12일 정연오
+	- *.aic파일의 [key stream]에서 키이름 및 키파일 설정 기능 추가
+	사용 예)
+	[key stream]
+	`combo` `combo.key`	// 이름 combo, 파일 명 combo.key
+
+	다음과 같이 써도 위와 동일합니다
+	사용 예)
+	[key stream]
+	`` `combo.key` // 키이름을 공백으로 설정하면 키파일명에서 경로와 확장자를 제거하고 combo를 이름으로 설정함
+
+	또 다른 사용 예)
+	[key stream]
+	`AICharacter/cuwaki/key/combo.key`	// 키이름을 입력하지 않으면 키파일에서 경로와 확장자를 제거하고 combo를 이름으로 설정함
+	 - 주의사항 : 키이름이 `.key`로 끝나면 안됨, `.key`로 끝나면 키파일명으로 인식하게 됨
+
+2007년 10월 10일 정연오
+	- 스크립트 key에서 다른 key파일을 호출하는 기능 추가
+	사용방법) [import key] `key 파일명`
+			[import key]는 [input]이 나올 수 있는 위치에서 사용 가능함
+	주의사항) 무한 루프 주의
+
+	- key 파일 내에서 확률 스위치
+	사용방법) [switch], [/switch], [percent] 이용
+	사용예)
+		[switch]
+			[percent] 50
+			[import key] `a.key`
+			[percent] 30
+			[import key] `s.key`
+			[percent] 20
+			[exit]
+		[/switch]
+	주의사항) 스위치 구문 안에서 직접 스위치 구문을 사용할 수 없습니다. 스위치 구문 안에서 스위치 구문을 사용하실려면 파일을 분리해서, [import key]를 사용해 주세요.
+		  루프 기능 역시 루프 안에서 루프를 사용할 수 없습니다. [import key]를 이용해 주세요.
+		  단, 스위치 구문 안에서 루프, 루프 안에서 스위치 구문은 사용가능합니다.
+
+	- key 파일에서 강제 종료
+	사용방법) [exit]
+
+2007년 10월 8일 정연오
+	- 스크립트 ai에서 다른 ai파일을 호출하는 기능 추가
+	사용방법) [import ai] `ai 파일명`
+			[import ai]는 [think]가 나올 수 있는 위치에서 사용 가능함
+	주의사항) 호출하는 ai파일과 호출되는 ai파일 모두 ai파일로서 완전한 형태를 취하고 있어야 한다
+		   무한 루프 (a.ai -> b.ai -> c.ai -> a.ai->b.ai ... ) 주의 - APC 로딩 후 실행 시 무한 루프에 빠져 다운 됨
+	참고사항) 호출하는 ai파일과 호출되는 ai파일은 각각 따로 로딩되며, 에러 메시지 또한 개별적으로 출력된다
+	변경사항) ai파일 처음에 나오는 [ai pattern]은 삭제해도 됨
+
+2007년 10월 1일 정연오
+	- 스크립트 [check use skill] 추가 : 특정한 스킬을 사용가능한 지 알아냄
+	사용방법) [check use skill] {스킬번호}
+		스킬은 스킬 번호를 입력하면 됩니다
+
+2007년 8월 20일 정연오
+	- 스크립트 `number of in attack area()` 추가
+	사용방법) [void] `number of in attack area()`  {앞} {뒤} {위} {아래} {`enemy`/`neutral`/`friend`/`all`} {`monster`/`character`/`apc`/`passive object`/`summon`/`all`} {인덱스(-1이면 체크안함) or 이름}
+		인덱스나 이름은 `character`일 경우에는 직업을 쓰면 됩니다(직업명은 OperatingValue.lst 참고)
+
+
+2007년 8월 20일 정연오
+	- aic에서 [warlike] 설정을 무시하게 함(호전성 영향을 제거)
+	- 목적지 결정 방법에 우회 추적 추가
+		DestinationSelect.ai에서 10을 리턴하면 우회 추적함
+
+2007년 8월 20일 정연오
+	- 스크립트 [my hp down], [my mp down] 추가
+		- [my hp down] = hp가 감소하는 순간을 체크함
+		사용방법) [my hp down] {`+` or `%`} {수치값}
+
+		- [my hp down] = hp가 감소하는 순간을 체크함
+		사용방법) [my hp down] {`+` or `%`} {수치값}
+
+
+2007년 8월 17일 정연오
+	- GM 명령어 save list 추가 : save list item/monster/aicharacter/passiveobject/skill 을 한 꺼번에 수행함
+

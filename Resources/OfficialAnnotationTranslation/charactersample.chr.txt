@@ -1,0 +1,353 @@
+// 角色脚本文件示例 //
+
+[job] `[swordman]`        // 在 `[swordman]` `[fighter]` 中选择其一
+[growtype name] `基础` `成长1剑士` `成长2剑士` `成长3剑士` // 各成长类型的成长类型名称
+[width] 40 10        // 依次为 X轴，Y轴宽度（像素值）
+
+[initial value]        // 此标识之后的数值为初始创建时的属性。可输入到小数点后第一位
+[HP MAX] 1000
+[MP MAX] 2000
+[physical attack] 100.5
+[physical defense] 120.3
+[magical attack] 110
+[magical defense] 130.7
+
+// 元素属性。为0可不填写。 //
+[fire resistance] 99.2
+[water resistance] 30.3
+[dark resistance] -20
+[light resistance] -30
+
+// 特殊属性。为0可不填写。 //
+[slow resistance] 18
+[freeze resistance] 39
+[poison resistance] 11
+[stun resistance] 33
+[curse resistance] 10
+[blind resistance] 10
+[lightning resistance] 24
+[stone resistance] 3
+[sleep resistance] 33
+[deelement resistance] 1
+[deadlystrike resistance] 2
+[bleeding resistance] 32.3
+[piercing resistance] 12
+[stuck resistance] 11    // 0.1% 单位
+[confuse resistance] 10
+[hold resistance] 10
+
+[inventory limit] 3000    // （单位：10g）
+
+[HP regen speed] 0
+[MP regen speed] 1000
+
+[move speed] 1000    // 以 1000 为基准值
+[attack speed] 1000
+[cast speed] 1000
+[hit recovery] 0
+[jump power] 1000
+[weight] 6000        // （单位：10g）
+
+[skill]            // 初始赋予技能列表
+3 1            // 技能索引，等级
+22 1
+27 1
+[/skill]
+
+[category]        // 所属类别列表
+`[human]`
+[/category]
+// 类别列表
+// 种族：`[human]` `[beast]` `[plant]` `[insect]` `[machine]` `[hybrid]` `[undead]` `[devil]` `[spirit]` `[dragon]`
+// AI：`[melee combat]` `[range combat]` `[close-passive]` `[close-carefully]` `[close-tough]` `[close-manace]`
+// 护甲：`[human armor]` `[fort armor]` `[divine armor]`
+// 其他：`[goblin]` `[tau]` `[lugaru]`
+
+[module damage rate] 1.0 1.0 1.0    // PVP，战场，混沌模式下的伤害比率
+                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。
+
+[growtype 1]        // 之后的数值为转职前的属性成长值
+[HP MAX] 10
+[MP MAX] 20
+[physical attack] 1
+[physical defense] 12
+[magical attack] 1
+[magical defense] 10
+
+// 元素属性。为0可不填写。 //
+[fire resistance] 1
+[water resistance] 2
+[dark resistance] 3
+[light resistance] 0
+
+// 特殊属性。为0可不填写。 //
+[slow resistance] 18
+[freeze resistance] 39
+[poison resistance] 11
+[stun resistance] 33
+[curse resistance] 10
+[blind resistance] 10
+[lightning resistance] 24
+[stone resistance] 3
+[sleep resistance] 33
+[deelement resistance] 1
+[deadlystrike resistance] 2
+[bleeding resistance] 32
+[piercing resistance] 12
+
+[inventory limit] 1
+
+// 私有信息。 //
+[HP regen speed] 0
+[MP regen speed] 2
+[move speed] 3
+[attack speed] 15
+[cast speed] 2
+[hit recovery] 4
+[jump power] 0
+[weight] 2
+
+[growtype 2]        // 之后的数值为第一次转职时的属性
+[HP MAX] 20
+[MP MAX] 30
+[physical attack] 1
+[physical defense] 12
+[magical attack] 1
+[magical defense] 10
+
+// 元素属性。为0可不填写。 //
+[fire resistance] 1
+[water resistance] 2
+[dark resistance] 3
+[light resistance] 0
+
+// 特殊属性。为0可不填写。 //
+[slow resistance] 18
+[freeze resistance] 39
+[poison resistance] 11
+[stun resistance] 33
+[curse resistance] 10
+[blind resistance] 10
+[lightning resistance] 24
+[stone resistance] 3
+[sleep resistance] 33
+[deelement resistance] 1
+[deadlystrike resistance] 2
+[bleeding resistance] 32
+[piercing resistance] 12
+
+[inventory limit] 1
+
+// 私有信息。 //
+[HP regen speed] 0
+[MP regen speed] 2
+[move speed] 3
+[attack speed] 15
+[cast speed] 2
+[hit recovery] 4
+[jump power] 0
+[weight] 2
+
+[skill]            // 转职时赋予的技能
+34 1            // 技能索引，等级
+123 1
+127 1
+[/skill]
+
+[category]    // 转职时获得的护甲类别。不能与 initial value 中的重复。
+`[armor]`
+[/category]
+[module damage rate] 1.0 0.3 0.0    // PVP，战场，混沌模式下的伤害比率
+                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。
+
+[growtype 3]        // 之后的数值为第二次转职时的属性
+[HP MAX] 30
+[MP MAX] 40
+[physical attack] 1
+[physical defense] 12
+[magical attack] 1
+[magical defense] 10
+
+// 元素属性。为0可不填写。 //
+[fire resistance] 1
+[water resistance] 2
+[dark resistance] 3
+[light resistance] 0
+
+// 特殊属性。为0可不填写。 //
+[slow resistance] 18
+[freeze resistance] 39
+[poison resistance] 11
+[stun resistance] 33
+[curse resistance] 10
+[blind resistance] 10
+[lightning resistance] 24
+[stone resistance] 3
+[sleep resistance] 33
+[deelement resistance] 1
+[deadlystrike resistance] 2
+[bleeding resistance] 32
+[piercing resistance] 12
+
+[inventory limit] 1
+
+// 私有信息。 //
+[HP regen speed] 0
+[MP regen speed] 2
+[move speed] 3
+[attack speed] 15
+[cast speed] 2
+[hit recovery] 4
+[jump power] 0
+[weight] 2
+
+[growtype 4]        // 之后的数值为第三次转职时的属性
+[HP MAX] 40
+[MP MAX] 50
+[physical attack] 1
+[physical defense] 12
+[magical attack] 1
+[magical defense] 10
+
+// 元素属性。为0可不填写。 //
+[fire resistance] 1
+[water resistance] 2
+[dark resistance] 3
+[light resistance] 0
+
+// 特殊属性。为0可不填写。 //
+[slow resistance] 18
+[freeze resistance] 39
+[poison resistance] 11
+[stun resistance] 33
+[curse resistance] 10
+[blind resistance] 10
+[lightning resistance] 24
+[stone resistance] 3
+[sleep resistance] 33
+[deelement resistance] 1
+[deadlystrike resistance] 2
+[bleeding resistance] 32
+[piercing resistance] 12
+
+[inventory limit] 1
+
+// 私有信息。 //
+[MP regen speed] 2
+[move speed] 3
+[attack speed] 15
+[cast speed] 2
+[hit recovery] 4
+[jump power] 0
+[weight] 2
+
+[growtype 5]        // 之后的数值为第四次转职时的属性
+[HP MAX] 40
+[MP MAX] 50
+[physical attack] 1
+[physical defense] 12
+[magical attack] 1
+[magical defense] 10
+
+// 元素属性。为0可不填写。 //
+[fire resistance] 1
+[water resistance] 2
+[dark resistance] 3
+[light resistance] 0
+
+// 特殊属性。为0可不填写。 //
+[slow resistance] 18
+[freeze resistance] 39
+[poison resistance] 11
+[stun resistance] 33
+[curse resistance] 10
+[blind resistance] 10
+[lightning resistance] 24
+[stone resistance] 3
+[sleep resistance] 33
+[deelement resistance] 1
+[deadlystrike resistance] 2
+[bleeding resistance] 32
+[piercing resistance] 12
+
+[inventory limit] 1
+
+// 私有信息。 //
+[MP regen speed] 2
+[move speed] 3
+[attack speed] 15
+[cast speed] 2
+[hit recovery] 4
+[jump power] 0
+[weight] 2
+
+// 动画列表。没有的可不填写。或用 `` 表示没有 //
+[waiting motion] `BodyStay.ani`        // 待机动作动画文件名
+[move motion] `BodyMove.ani`        // 移动动作动画文件名
+[sit motion] `BodySit.ani`        // 坐下动作动画文件名
+[damage motion 1] `BodyDamage1.ani`    // 受击动作1动画文件名
+[damage motion 2] `BodyDamage2.ani`    // 受击动作2动画文件名
+[down motion] `BodyDown.ani`        // 倒地动作动画文件名
+[overturn motion] `BodyOverturn.ani`        // 翻身动作动画文件名
+[jump motion] `BodyJump.ani`        // 跳跃动作动画文件名
+[jumpattack motion] `BodyJumpAttack.ani`    // 跳跃攻击动作动画文件名
+[rest motion] `BodyRest.ani`        // 休息动作动画文件名
+[throw motion 1-1] `BodyThrow1.ani`        // 投掷动作1蓄力动画文件名
+[throw motion 1-2] `BodyThrow2.ani`        // 投掷动作1发射动画文件名
+[throw motion 2-1] `BodyCast1.ani`        // 投掷动作2蓄力动画文件名
+[throw motion 2-2] `BodyCast2.ani`        // 投掷动作2发射动画文件名
+[dash motion] `BodyDash.ani`        // 冲刺动作动画文件名
+[dashattack motion] `BodyDashAttack.ani`    // 冲刺攻击动作动画文件名
+[getitem motion] `BodyGetItem.ani`    // 拾取物品动作动画文件名
+[buff motion] `BodyBuff.ani`        // 增益效果使用动作动画文件名
+[attack motion]                // 攻击动作动画文件名列表
+`Attack1.ani`
+`Attack2.ani`
+[/attack motion]                // 必须用此关闭
+[etc motion]                // 硬编码用动作动画文件名列表（顺序重要）
+`Magic.ani`
+`PowerUp.ani`
+[/etc motion]                // 必须用此关闭
+
+// 攻击信息列表。没有的可不填写。或用 `` 表示没有 //
+[jumpattack info] `JumpAttack.atk`    // 跳跃攻击的攻击信息
+[dashattack info] `DashAttack.atk`    // 冲刺攻击的攻击信息
+[attack info]                // 基础攻击动作的攻击信息
+`Attack1.atk`
+`Attack2.atk`
+[/attack info]            // 必须用此关闭
+[etc attack info]                // 其他硬编码用攻击信息
+`Magic.atk`
+[/etc attack info]            // 必须用此关闭
+
+// 音效列表
+[weapon wav]                // 武器子类型1的自定义音效列表
+`SHORT_SWORD_WHIP`
+`SHORT_SWORD_HIT`
+[/weapon wav]                // 必须用此关闭
+[weapon wav]                // 武器子类型2的自定义音效列表
+`LONG_SWORD_WHIP`
+`LONG_SWORD_HIT`
+[/weapon wav]                // 必须用此关闭
+[weapon wav]                // 武器子类型3的自定义音效列表
+`BLUNT_SWORD_WHIP`
+`BLUNT_SWORD_HIT`
+[/weapon wav]                // 必须用此关闭
+
+[weapon hit info]            // 武器的子类型信息（详情请参考 AttackInfo 示例）
+`[blow]` `[no blood]` 50 1.0
+`[blow]` `[no blood]` 50 1.0
+`[blow]` `[blood]` 10 1.0
+`[blow]` `[no blood]` 50 1.0
+`[blow]` `[no blood]` 100 2.0
+`[cut]` `[no blood]` 100 2.0
+[/weapon hit info]            // 必须用此关闭
+
+[weapon skill info]    // 武器的子类型对应的武器技能 MP，冷却时间信息。
+1.0 1.0 1.0 1.0        // 物理 MP，物理冷却，魔法 MP，魔法冷却比率
+1.0 1.0 1.0 1.0
+1.0 1.0 1.0 1.0
+1.0 1.0 1.0 1.0
+1.0 1.0 1.0 1.0
+1.0 1.0 1.0 1.0
+[/weapon skill info]

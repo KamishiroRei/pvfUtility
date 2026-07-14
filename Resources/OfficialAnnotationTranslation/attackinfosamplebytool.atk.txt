@@ -1,0 +1,244 @@
+//////////////////////////////////////////////////////////
+//@ mkjung 创建日期 20120523 
+//@ 用途 攻击信息指定脚本语法检查
+//////////////////////////////////////////////////////////
+
+{exp}基本伤害{/exp}[damage]
+    {must1}{exp}伤害数值{/exp}{int(:)}
+[!damage]
+
+{exp}无视防御的绝对伤害{/exp}[absolute damage]
+    {must1}{exp}伤害数值{/exp}{int(:)}
+[!absolute damage]
+
+{exp}按照所写的百分比增加伤害(输入20则比当前伤害多造成20%的伤害){/exp}[damage bonus]
+    //mkjung 120601 int-->float 修改
+    {must1}{exp}要增加百分之多少的伤害？{/exp}{float(:)}
+[!damage bonus]
+
+{exp}攻击类型{/exp}[attack type]
+    {must1}{exp}物理攻击{/exp}[physic]
+    {must1}{exp}魔法攻击{/exp}[magic]
+    {must1}{exp}无视防御攻击{/exp}[ignore defense]
+    //mkjung 120531 添加
+    {must1}[weapon]
+
+[!attack type]
+
+{exp}是否应用武器伤害{/exp}[weapon damage apply]
+    {must1}{exp}默认值 0 [ignore defense] 时应用物理伤害{/exp}{int(:)}
+[!weapon damage apply]
+
+// 按攻击目标设定是否攻击。默认值可不写 //
+{exp}是否攻击自己{/exp}[attack myself]
+    {must1}{exp}默认值 0{/exp}{int(:)}
+[!attack myself]
+
+{exp}是否攻击友军{/exp}[attack friend]
+    {must1}{exp}默认值 0{/exp}{int(:)}
+[!attack friend]
+
+{exp}是否攻击敌人（除自己和友军外的所有目标）{/exp}[attack enemy]
+    {must1}{exp}默认值 1{/exp}{int(:)}
+[!attack enemy]
+
+{exp}攻击的元素属性（不写则默认 [no element]）{/exp}[elemental property]
+    {opt1}[no element]
+    {opt1}[fire element]
+    {opt1}[water element]
+    {opt1}[dark element]
+    {opt1}[light element]
+    //mkjung 120531 添加
+    {opt1}[no elemental]
+[!elemental property]
+
+{exp}受到攻击时的反应{/exp}[damage reaction]
+    {must1}{exp}无任何反应{/exp}[none]
+    {must1}{exp}设置为伤害动作{/exp}[damage]
+    {must1}{exp}使其倒地{/exp}[down]    
+    {must1}{exp}除人形类型外设置为伤害动作{/exp}[damage except human]
+[!damage reaction]
+
+{exp}向后方击退的力度（仅在使其倒地时应用此力度）{/exp}[push aside]
+    {must1}{int(:)}
+[!push aside]
+
+{exp}向上击飞的力度{/exp}[lift up]
+    {must1}{int(:)}
+[!lift up]
+
+{exp}击退类型{/exp}[knuck back]
+    {must1}{exp}0:普通 1:大幅击退 -1:不击退{/exp}{int(-1:0)}
+[!knuck back]
+
+// 以下值为 1 或 0
+{exp}X的概率造成HP百分比值的伤害{/exp}[weakness]
+    {must1}{exp}概率{/exp}{float(:)}
+    //mkjung 120531 修改 must1--> must2
+    {must2}{exp}HP百分比值{/exp}{float(:)}
+[!weakness]
+
+{exp}是否弹起{/exp}[bounce]
+    {must1}{exp}设为1则弹起时应用 [lift up] 的力度{/exp}{int(0:1)}
+[!bounce]
+
+{exp}设置为吸收被攻击者HP的攻击{/exp}[HP drain]
+    {must1}{exp}伤害的百分之多少作为HP吸收？{/exp}{float(0:1)}
+[!HP drain]
+
+{exp}设置为吸收被攻击者MP的攻击{/exp}[MP drain]
+    {must1}{exp}伤害的百分之多少作为MP吸收？{/exp}{float(0:1)}
+[!MP drain]
+
+{exp}{/exp}[ignore defense]
+    {must1}{int(0:1)}
+[!ignore defense]
+
+{exp}对人形（对人类）攻击比率{/exp}[human damage rate]
+    {must1}{exp}可为小数，%值，默认 100{/exp}{float(:)}
+[!human damage rate]
+
+{exp}对建筑（对建筑物）攻击比率{/exp}[fort damage rate]
+    {must1}{exp}可为小数，%值，默认 100{/exp}{float(:)}
+[!fort damage rate]
+
+{exp}对怪兽（为护甲类别为0的目标设置）攻击比率{/exp}[monster damage rate]
+    {must1}{exp}可为小数，%值，默认 100{/exp}{float(:)}
+[!monster damage rate]
+
+{exp}暴击率变化值{/exp}[critical hit]
+    {must1}{exp}变化值{/exp}{float(:)}
+[!critical hit]
+
+{exp}硬直率变化值{/exp}[stuck]
+    {must1}{exp}变化值{/exp}{float(:)}
+[!stuck]
+
+{exp}每次攻击命中时硬直率是否增加{/exp}[stuck prob increase]
+    {must1}{exp}默认值 0{/exp}{int(0:1)}
+[!stuck prob increase]
+
+{exp}命中时播放的音效标签{/exp}[hit wav]
+    {must1}{string}
+[!hit wav]
+
+{exp}攻击方向{/exp}[attack direction]
+    {must1}[hit lift up]
+    {must1}[hit horizon]
+    {must1}[hit down]
+    //mkjung 120531 添加
+    {must1}[hit horizontal]
+    {must1}[horizontal]
+    {must1}[damage]
+[!attack direction]
+
+{exp}第一个是打击种类{/exp}[hit info]
+    {must1}{exp}打击种类{/exp}[cut]
+    {must1}{exp}打击种类{/exp}[blow]
+    {must1}{exp}打击种类{/exp}[burn]
+    {must1}{exp}打击种类{/exp}[etc]
+    {must1}{exp}打击种类（不减少 hp 而消耗 mp）{/exp}[mana burn]
+    {must1}{exp}跟随武器子类型请用``{/exp}{string}
+
+    //mkjung 120531 添加
+    {must1}{exp}{/exp}[slash]
+    {must1}{exp}{/exp}[knock]
+
+    {must2}{exp}是否溅血（出血）{/exp}[blood]
+    {must2}{exp}是否溅血（不出血）{/exp}[no blood]
+    //mkjung 120601
+    {must2}{exp}{/exp}{string}
+
+    //mkjung 120531 int-->float 修改
+    //mkjung 120531 must-->opt 修改
+    {opt1}{exp}命中时短暂停顿时间（跟随武器子类型请用 -1）{/exp}{float(:)}
+    {opt2}{exp}受击延迟时间倍数（跟随武器子类型请用 -1）{/exp}{float(:)}
+    //mkjung 120601
+    {opt3}{float(:)}
+    {opt4}{float(:)}
+[!hit info]
+
+[active status]
+    {must1}[blind]
+    {must1}[freeze]
+    {must1}[stun]
+    {must1}[slow]
+    {must1}[haste]
+    {must1}[stone]
+    {must1}[sleep]
+    {must1}[confuse]
+    {must1}[hold]
+    {must1}[weakness]
+    {must1}[armor break]
+    {must1}[weapon break]
+    {must1}[poison]
+    {must1}[lightning]
+    {must1}[bleeding]
+    {must1}[burn]
+    {must1}[bless]
+    {must1}[curse]
+    {must1}[none]    
+
+    //mkjung 120601 添加
+    {must1}{exp}{/exp}{string}
+
+    {opt1}{exp}概率（写了 none 则随意填写）{/exp}{int(0:)}
+    {opt2}{exp}等级（写了 none 则随意填写）{int(0:)}
+    {opt3}{int(0:)}
+    {opt4}{int(0:)}
+    {opt5}{int(0:)}
+    {opt6}{int(0:)}
+    {opt7}{int(0:)}
+[!active status]
+
+/// 为决斗场状态修正而添加的内容。
+{exp}对人形护甲施加 X% 的较弱状态变化效果（数值的 1/10）{/exp}[human active status rate]
+    {must2}{exp}概率{/exp}{float(:)}
+[!human active status rate]
+
+{exp}受击数是否增加{/exp}[is hit number increasing]
+    {must1}{exp}1:受击数增加, 0:不增加{/exp}{int(0:1)}
+[!is hit number increasing]
+
+{exp}是否无视不死被动{/exp}[ignore diehard]
+    {must1}{exp}是否无视（1: 是, 0:否）{/exp}{int(0:1)}
+[!ignore diehard]
+
+{exp}设置为破坏对方霸体的攻击{/exp}[ignore super armor]
+    {must1}{exp}是否为破坏霸体的攻击（1: 是, 0:否）{/exp}{int(0:1)}
+[!ignore super armor]
+
+{exp}设置为无视对方重量的攻击{/exp}[ignore weight]
+    {must1}{exp}是否无视（1: 是, 0:否）{/exp}{int(0:)}
+[!ignore weight]
+
+{exp}pvp相关设置{/exp}[pvp]
+    {exp}技能固有的攻击力{/exp}[damage bonus]
+        //mkjung 120601 int-->float 修改
+        {must1}{exp}{/exp}{float(:)}
+    [!damage bonus]
+
+    //mkjung 120601 添加
+    {exp}攻击信息{/exp}[hit info]        
+        {must1}{exp}打击特效输出{/exp}[blow]
+        {must1}{exp}斩击特效输出{/exp}[cut]
+        {must1}{exp}灼烧特效输出{/exp}[burn]
+        {must1}{exp}打击种类（不减少 hp 而消耗 mp）{/exp}[mana burn]
+        {must1}{exp}使用自定义特效（主要在代码中定义）{/exp}[etc]                
+
+        {must2}{exp}是否溅血（出血）{/exp}[blood]
+        {must2}{exp}是否溅血（不出血）{/exp}[no blood]
+
+        {opt1}{exp}命中时短暂停顿时间（跟随武器子类型请用 -1）{/exp}{float(:)}
+        {opt2}{exp}受击延迟时间倍数（跟随武器子类型请用 -1）{/exp}{float(:)}
+    [!hit info]
+[/pvp]
+                                
+
+{exp}设置此攻击的攻击方向{/exp}[hit direction] 
+    {must1}{exp}根据与被攻击者的方向自动判断{/exp}[auto]
+    {must1}{exp}设置为向前攻击{/exp}[front]
+    {must1}{exp}设置为向后攻击{/exp}[back]
+    {must1}{exp}设置为向外侧攻击{/exp}[outer]
+    {must1}{exp}设置为向内侧攻击{/exp}[inner]
+[!hit direction]

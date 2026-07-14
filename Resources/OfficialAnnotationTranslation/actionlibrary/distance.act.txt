@@ -1,0 +1,42 @@
+// 此脚本是在角色移动超过300像素时对其投下陨石的脚本。
+[MOTION]
+[BASE ANI] `../Animation_Kinol/Move.ani`
+[SUB ANI]
+`../../../equipment/monster/goblin/LKinolPantsAnimation/move_100.ani` 0 100
+`../../../equipment/monster/goblin/weapon09-animation/move_100.ani` 0 200
+[/SUB ANI]
+[/MOTION]
+
+[TRIGGER]
+	[LIMIT] 1
+[CHECKUP] [CHARACTER]
+	[DISTANCE] [>] 300
+[/CHECKUP]
+[DO BEHAVIOR] [CHECKUP OBJECT] 0
+[/TRIGGER]
+[BEHAVIOR] // 0
+	[CREATE PASSIVEOBJECT]
+		[INDEX] 40004//索引编号
+		[PARTICLE FILENAME] `../../../PassiveObject/Common/Particle/ShootingStarPath.ptl`
+		[LEVEL] 40
+		[POS] 0 0 300//x y z //目标地点高度以位置为准。
+		//[USE TARGET TEAM] //
+		//[USE MY DIRECTION]
+		//[USE MY BASEPOS]
+		[WARNING MARK] 330 0 100 2 // WarningMark 校准。 x位置校准 y 校准位置 延迟，警告标记种类。
+	[/CREATE PASSIVEOBJECT]
+	[TRIGGER] 1 [RESET]
+	[TRIGGER] 1 [ON]
+[/BEHAVIOR]
+[TRIGGER]
+[ENABLE] [OFF]
+[LIMIT] 1
+[CHECKUP] [CHARACTER]
+	[DISTANCE] [=<] 300
+[/CHECKUP]
+[DO BEHAVIOR] [ME] 1
+[/TRIGGER]
+[BEHAVIOR]
+	[TRIGGER] 0 [RESET]
+	[TRIGGER] 0 [ON]
+[/BEHAVIOR]

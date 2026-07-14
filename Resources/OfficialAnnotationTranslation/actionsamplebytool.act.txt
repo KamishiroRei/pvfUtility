@@ -1,0 +1,2651 @@
+{exp}动作部分{/exp}[MOTION]
+	[BASE ANI]
+		{must1}{string}
+	[!BASE ANI]
+	
+	// 添加string标签。
+	[SUB ANI]
+		{exp}路径{/exp}{string}
+			{must1}{exp}起始帧{/exp}{int(0:)}
+			{must2}{exp}图层{/exp}{int(0:)}
+		{!string}
+	[/SUB ANI]
+
+	//mkjung 120516 添加
+	[SUB ANI WITH XY]
+		{exp}路径{/exp}{string}
+			{must1}{exp}起始帧{/exp}{int(0:)}
+			{must2}{exp}图层{/exp}{int(0:)}
+			{must3}{exp}X坐标{/exp}{int(:)}
+			{must4}{exp}Y坐标{/exp}{int(:)}
+		{!string}
+	[/SUB ANI WITH XY]
+
+	//mkjung 120517 添加
+	[SUB ANI WITH XYZ]
+		{exp}路径{/exp}{string}
+			{must1}{exp}起始帧{/exp}{int(0:)}
+			{must2}{exp}图层{/exp}{int(0:)}
+			{must3}{exp}X坐标{/exp}{int(:)}
+			{must4}{exp}Y坐标{/exp}{int(:)}
+			{must5}{exp}Z坐标{/exp}{int(:)}
+		{!string}
+	[/SUB ANI WITH XYZ]
+
+
+	// [SPEECH]和[SOUND]必须放在[MOTION]标签内！
+	[SPEECH]
+		{exp}台词标签{/exp}{string}
+			{must1}{exp}起始帧{/exp}{int(0:)}
+			{opt1}{exp}说话概率(%){/exp}{int(0:)}
+		{!string}
+	[/SPEECH]
+	
+	[SPEECH POS]
+		{exp}台词标签{/exp}{string}
+			{must1}{exp}起始帧{/exp}{int(0:)}
+			{must2}{exp}说话概率(%){/exp}{int(0:)}
+			{must3}{exp}台词输出的X坐标{/exp}{int(:)}
+			{must4}{exp}台词输出的Y坐标{/exp}{int(:)}
+		{!string}
+	[/SPEECH POS]
+	
+	[SOUND]
+		{exp}音效标签{/exp}{string}
+			{must1}{exp}起始帧{/exp}{int(0:)}
+		{!string}
+	[/SOUND]
+	
+	[SOUND PROBABILITY]
+		{exp}音效标签{/exp}{string}
+			{must1}{exp}起始帧{/exp}{int(0:)}
+			{must2}{exp}概率{/exp}{int(0:)}
+		{!string}
+	[/SOUND PROBABILITY]
+[/MOTION]
+
+{exp}此动作执行期间不移动时添加{/exp}[HOLD POSITION]
+	{must1}{string}
+[!HOLD POSITION]
+
+{exp}当前动作中要使用的基本攻击信息{/exp}[DEFAULT ATTACKINFO]
+	{must1}{string}
+[!DEFAULT ATTACKINFO]
+
+//mkjung 120516 添加
+[AUTOEND]
+	{must1}{int(:)}
+[!AUTOEND]
+
+{exp}条件控制部分，放入各种条件来筛选要执行行为的对象{/exp}[TRIGGER]
+	{exp}执行检查的总次数，可通过BEHAVIOR的[TRIGGER]标签重置次数{/exp}[LIMIT]
+		{must1}{exp}若为0则无限检查{/exp}{int(:)}
+	[!LIMIT]	
+
+	{exp}决定初始触发器的ENABLE状态{/exp}[ENABLE]
+		{must1}{exp}触发器运作（默认）{/exp}[ON]
+		{must1}{exp}触发器不运作{/exp}[OFF]
+	[!ENABLE]	
+		
+	{exp}检查触发器的帧编号，每帧仅检查一次，不写则持续检查{/exp}[FRAME]
+		{must1}{exp}起始帧索引{/exp}{int(0:)}
+		{must2}{exp}结束帧索引{/exp}{int(0:)}
+	[!FRAME]
+	
+	// 选项标签集合开始 //////////////////////////////////////////
+	
+	// 由事件激活的触发器（以ON开头的标签之间不可重复）
+	{opt1}{exp}仅在受到攻击时检查{/exp}[ON DAMAGE]
+	{opt1}{exp}仅在攻击成功时检查{/exp}[ON ATTACKSUCCESS]
+	{opt1}{exp}某个物体生成时检查{/exp}[ON CREATE OBJECT]
+	{opt1}{exp}某个物体被破坏时检查{/exp}[ON DESTROY OBJECT]
+	{opt1}{exp}自身被破坏时检查{/exp}[ON DESTROY ME]
+	{opt1}{exp}动作结束时检查{/exp}[ON REMOVE ACTION]
+	{opt1}{exp}动作开始时检查{/exp}[ON SET ACTION]
+	{opt1}{exp}收到摇晃输入时检查{/exp}[ON SHAKE INPUT]
+	{opt1}{exp}撞到无法通过的地方时检查{/exp}[ON MOVE COLLISION]
+		
+	{opt2}{exp}仅远程攻击时通过{/exp}{etc}[IS MISSILE DAMAGE]
+	{opt2}{exp}仅物理攻击时通过{/exp}{etc}[IS PHYSICAL DAMAGE]
+	{opt2}{exp}仅魔法攻击时通过{/exp}{etc}[IS MAGICAL DAMAGE]
+	{opt2}{exp}仅无视防御攻击时通过{/exp}{etc}[IS ABSOLUTE DAMAGE]
+	{opt2}{exp}仅火属性攻击时通过{/exp}{etc}[IS FIRE DAMAGE]
+	{opt2}{exp}仅水属性攻击时通过{/exp}{etc}[IS WATER DAMAGE]
+	{opt2}{exp}仅暗属性攻击时通过{/exp}{etc}[IS DARK DAMAGE]
+	{opt2}{exp}仅光属性攻击时通过{/exp}{etc}[IS LIGHT DAMAGE]
+	{opt2}{exp}仅无属性攻击时通过{/exp}{etc}[IS NONE DAMAGE]
+	
+	{opt3}{exp}检查是否朝向左侧{/exp}{etc}[IS DIRECTION LEFT]
+	{opt3}{exp}检查是否朝向右侧{/exp}{etc}[IS DIRECTION RIGHT]
+	
+	// 选项标签集合结束 ////////////////////////////////////////////
+	
+	{exp}每隔时间检查{/exp}[CHECK TIME]
+		{must1}{exp}检查的时间间隔（ms）{/exp}{int(0:)}
+	[!CHECK TIME] 	
+	
+	{exp}拥有幽灵系技能时才通过{/exp}{etc}[CHECK GHOST]
+	{exp}拥有有益BUFF时才通过{/exp}{etc}[CHECK BUFF]
+
+	{exp}检查特定的附加效果{/exp}[CHECK SPECIFIC BUFF]
+		{must1}{exp}特定ID{/exp}{string}
+		{must1}{exp}激怒附加效果{/exp}[ANGER]
+		//mkjung 120516 添加。
+		{must1}[DARKSCALP]
+		//mkjung 120518 添加。
+		{must1}[AGAMEMNON TELEKINESIS]	
+		{prereq}[ANGER]{/prereq}{must2}{exp}索引{/exp}{int(:)}
+		{prereq}[ANGER]{/prereq}{must3}{exp}图层的Alpha值{/exp}{int(:)}
+	[!CHECK SPECIFIC BUFF]
+
+	{exp}触发器检查概率{/exp}[IS MEET PROB]
+		{must1}{exp}概率(%){/exp}{int(0:)}
+	[!IS MEET PROB]
+	
+	//必须要有[ON DAMAGE]或[ON ATTACKSUCCESS]标签才能激活
+	{prereq}[ON DAMAGE]|[ON ATTACKSUCCESS]{/prereq}{exp}检查是否为硬直{/exp}[CHECK STUCK]
+		{must1}{exp}1：仅硬直时通过，0：仅非硬直时通过{/exp}{int(0:1)}
+	[!CHECK STUCK]
+	
+	{exp}检查是否发生硬直的标签{/exp}{etc}[IS STUCK]
+	{exp}检查是否未发生硬直的标签{/exp}{etc}[NOT STUCK]
+	
+	{exp}是否骑乘坐骑{/exp}[IS MOUNT]
+		{must1}{exp}1：已骑乘，0：未骑乘{/exp}{int(0:1)}
+	[!IS MOUNT]
+
+	//mkjung 120511 修改。 {}为必需。
+	{exp}IF语句。可使用变量和数学式。可用[GET TIME]获取时间{/exp}[IF]
+
+		//{`变量` 运算符 数字} 运算符 ([GET TIME] or 数字)
+		{must1}{exp}ID字符串{/exp}{string}
+		{must2}{exp}加法运算符{/exp}[+]
+		{must2}{exp}减法运算符{/exp}[-]
+		{must2}{exp}乘法运算符{/exp}[*]
+
+		//添加。
+		{must2}[/]
+		{must2}[>]
+		{must2}[=]
+		{must2}[<]
+		{must2}[>=]
+		{must2}[<=]
+		{must2}[=>]
+		{must2}[=<]
+
+		{must3}{exp}要应用的数值{/exp}{int(:)}
+		
+		//
+		{opt1}[+]
+		{opt1}[-]
+		{opt1}[*]
+		{opt1}[/]
+		{opt1}[>]
+		{opt1}[=]
+		{opt1}[<]
+		{opt1}[>=]
+		{opt1}[<=]
+		{opt1}[=>]
+		{opt1}[=<]
+		{opt2}{exp}获取当前时间（ms）{/exp}[GET TIME]
+		{opt2}{exp}时间功能{/exp}{int(0:)}
+
+		//{must4}{exp}若ID大于等于后侧参数？{/exp}[>=]
+		//{must4}{exp}若ID小于等于后侧参数？{/exp}[<=]
+		//{must4}{exp}是否相同{/exp}[=]
+		//{must5}{exp}获取当前时间（ms）{/exp}[GET TIME]
+		//{must5}{exp}时间功能{/exp}{int(:)}
+	[!IF][/IF]
+	
+	{exp}检查我是否拥有AI目标{/exp}[IS AI TARGET]
+		{must1}{exp}1：有AI目标时才通过，0：没有AI目标时才通过{/exp}{int(0:1)}
+	[!IS AI TARGET]
+
+	{exp}检查X号触发器是否可用。（触发器可通过BEHAVIOR的[TRIGGER]标签开启/关闭）{/exp}[TRIGGER CHECK]
+		{must1}{exp}触发器编号{/exp}{int(0:)}
+		{must2}{exp}可用{/exp}[ON]
+		{must2}{exp}不可用{/exp}[OFF]
+	[!TRIGGER CHECK]
+
+	{exp}指定触发器检查的目标范围{/exp}[WHICH]
+		{must1}{exp}自己{/exp}[ME]
+		{must1}{exp}召唤主{/exp}[SUMMON MASTER]
+		{must1}{exp}召唤物（被动、怪物）{/exp}[SUMMON OBJECT]
+		{must1}{exp}所有被动物体{/exp}[PASSIVE]
+		{must1}{exp}所有AI角色{/exp}[AI CHARACTER]
+		{must1}{exp}生成的物体{/exp}[CREATE OBJECT]	//{prereq}[ON CREATE OBJECT]{/prereq}
+		{must1}{exp}被破坏的物体{/exp}[DESTROY OBJECT]	//{prereq}[ON DESTROY OBJECT]{/prereq}
+		{must1}{exp}AI上持有的目标{/exp}[TARGET]
+		{must1}{exp}在几秒内攻击过自己的攻击者{/exp}[LAST ATTACKER]
+		{must1}{exp}在几秒内攻击过自己的攻击者们{/exp}[LAST ATTACKERS]
+		{must1}{exp}自己最后造成伤害的物体{/exp}[LAST ATTACKSUCCESS]
+		{must1}{exp}自己最后造成伤害的物体们{/exp}[LAST ATTACKSUCCESSES]
+		{must1}{exp}最后攻击自己的攻击者（主动物体）{/exp}[LAST ACTIVE ATTACKER]
+		{must1}{exp}自己最后造成伤害的ACTIVE物体{/exp}[LAST ACTIVE ATTACKSUCCESS]
+		//mkjung 120515 添加。
+		{must1}{exp}自己最后造成伤害的角色（包括APC）{/exp}[CHARACTER ATTACKSUCCESS]
+		
+		{must1}{exp}我方队伍{/exp}[ALL OUR TEAM]
+		{must1}{exp}除我方队伍外的所有{/exp}[ALL ENEMY]
+		{must1}{exp}怪物队伍{/exp}[ALL MONSTER TEAM]
+		{must1}{exp}角色队伍{/exp}[ALL CHARACTER TEAM]
+		{must1}{exp}所有角色{/exp}[CHARACTER]
+		{must1}{exp}所有怪物{/exp}[MONSTER]
+		//mkjung 120512 添加。
+		{must1}{exp}通过CHECKUP条件检查的物体{/exp}[CHECKUP OBJECT]
+		{must1}{exp}未通过CHECKUP条件检查的物体{/exp}[DROPOUT OBJECT]
+
+		{must1}{exp}所有角色（除AI角色外的实际队员）{/exp}[PLAYER]
+		{must1}{exp}载入保存的物体并使用{/exp}[LOAD TARGET]
+
+		// 在几秒内攻击过自己的攻击者们。第一个参数是时间，第二个参数为0时是攻击者，为1时是获取主动物体。
+		{prereq}[LAST ATTACKERS]{/prereq}{must2}{exp}时间{/exp}{int(0:)}
+		{prereq}[LAST ATTACKERS]{/prereq}{must3}{exp}0-攻击者 1-主动物体{/exp}{int(0:1)}
+		// 载入保存的物体并使用。0号是保存时使用的索引。
+		{prereq}[LOAD TARGET]{/prereq}{must2}{exp}使用的索引{/exp}{int(:)}
+
+		{must1}{exp}选择特定队员{/exp}[PARTY TARGET]
+		[!PARTY TARGET][/PARTY TARGET]
+		//[!PARTY TARGET]
+		{prereq}[PARTY TARGET]{/prereq}{must2}{exp}索引{/exp}[INDEX]
+		{prereq}[INDEX]{/prereq}{must3}{exp}索引{/exp}{int(0:3)}
+		{prereq}[PARTY TARGET]{/prereq}{opt1}{exp}队员的索引{/exp}[CHECK NEXT]
+		{prereq}[CHECK NEXT]{/prereq}{must5}{exp}(0 ~ 3){/exp}{int(0:3)}
+		{prereq}[PARTY TARGET]{/prereq}{opt2}{exp}是否也检查死亡的队员{/exp}[INCLUDE DEAD]
+		{prereq}[INCLUDE DEAD]{/prereq}{must7}{exp}0:不检查，1:检查{/exp}{int(0:1)}
+	[!WHICH]
+
+	{prereq}[WHICH]{/prereq}{exp}利用条件标签，从[WHICH]语句设定的目标中进行筛选{/exp}[CHECKUP]
+		{exp}检查名称是否相同{/exp}[IS NAME]
+			{variableString}
+		[!IS NAME][/IS NAME]
+		
+		{exp}检查类别是否相同{/exp}[IS CATEGORY]
+			{opt1}{exp}人形{/exp}[human]
+			{opt2}{exp}野兽{/exp}[beast]
+			{opt3}{exp}植物{/exp}[plant]
+			{opt4}{exp}昆虫{/exp}[insect]
+			{opt5}{exp}机械{/exp}[machine]
+			{opt6}{exp}有机物{/exp}[organic]
+			{opt7}{exp}复合体{/exp}[hybrid]
+			{opt8}{exp}不死族{/exp}[undead]
+			{opt9}{exp}恶魔{/exp}[devil]
+			{opt10}{exp}精灵{/exp}[spirit]
+			{opt11}{exp}龙族{/exp}[dragon]
+			{opt12}{exp}近战专用怪物{/exp}[melee combat]
+			{opt13}{exp}射击专用怪物{/exp}[range combat]
+			{opt14}{exp}消极型怪物{/exp}[close-passive]
+			{opt15}{exp}谨慎型怪物{/exp}[close-carefully]
+			{opt16}{exp}近战AI强袭、威胁型怪物时为满超级护甲{/exp}[full-superarmor]
+			{opt17}{exp}强袭型怪物{/exp}[close-tough]
+			{opt18}{exp}威胁型怪物{/exp}[close-manace]
+			{opt19}{exp}人类护甲（适用杀伤选项）{/exp}[human armor]
+			{opt20}{exp}建筑物护甲（适用破坏选项）{/exp}[fort armor]
+			{opt21}{exp}圣灵护甲（防御力急剧增加）{/exp}[divine armor]
+			{opt22}{exp}哥布林{/exp}[goblin]
+			{opt23}{exp}牛头怪{/exp}[tau]
+			{opt24}{exp}卢卡鲁{/exp}[lugaru]
+			{opt25}{exp}固定型{/exp}[fixture]
+			{opt26}{exp}不从初始位置移动{/exp}[stay]
+			{opt27}{exp}CATEGORY_PASSIVEOBJECT_TYPE_MELEE{/exp}[melee]
+			{opt28}{exp}CATEGORY_PASSIVEOBJECT_TYPE_MISSILE{/exp}[missile]
+			{opt29}{exp}CATEGORY_PASSIVEOBJECT_TYPE_ENERGY{/exp}[energy]
+			{opt30}{exp}CATEGORY_PASSIVEOBJECT_TYPE_PHYSICAL{/exp}[physical]
+			{opt31}{exp}CATEGORY_PASSIVEOBJECT_TYPE_MAGICAL{/exp}[magical]
+			{opt32}{exp}CATEGORY_PASSIVEOBJECT_TYPE_BULLET{/exp}[bullet]
+			{opt33}{exp}CATEGORY_PASSIVEOBJECT_TYPE_CANON{/exp}[cannon]
+			{opt34}{exp}CATEGORY_PASSIVEOBJECT_TYPE_EXPLOSION{/exp}[explosion]
+			{opt35}{exp}CATEGORY_PASSIVEOBJECT_TYPE_INFLAME{/exp}[inflame]
+			{opt36}{exp}CATEGORY_PASSIVEOBJECT_TYPE_INFLAME{/exp}[non inflame]
+			{opt37}{exp}CATEGORY_PASSIVEOBJECT_TYPE_LIGHT{/exp}[light]
+			{opt38}{exp}CATEGORY_PASSIVEOBJECT_TYPE_DARK{/exp}[dark]
+			{opt39}{exp}CATEGORY_PASSIVEOBJECT_TYPE_WATER{/exp}[water]
+			{opt40}{exp}CATEGORY_PASSIVEOBJECT_TYPE_FIRE{/exp}[fire]
+			{opt41}{exp}CATEGORY_PASSIVEOBJECT_TYPE_FORT{/exp}[fort]
+			//mkjung 120620 添加。
+			{opt42}{exp}无敌{/exp}[unbeatable]
+			//mkjung 120621 添加。
+			{opt43}{exp}天使{/exp}[angel]
+		[!IS CATEGORY][/IS CATEGORY]
+		
+		{exp}仅检查输入的索引的物体（被动、怪物、APC不区分）{/exp}[IS INDEX]
+			{variableInt(:)}
+		[!IS INDEX][/IS INDEX]
+		
+		{exp}仅检查非输入索引的物体（被动、怪物、APC不区分）{/exp}[IS NOT INDEX]
+			{variableInt(:)}
+		[!IS NOT INDEX][/IS NOT INDEX]
+
+		{exp}检查我的物体类型{/exp}[IS OBJECT TYPE]
+			{opt1}{exp}自己{/exp}[ME]
+			{opt2}{exp}召唤主{/exp}[SUMMON MASTER]
+			{opt3}{exp}召唤物（被动、怪物）{/exp}[SUMMON OBJECT]
+			//mkjung 120514 [PASSIVE--> PASSIVE OBJECT] 修改。
+			{opt4}{exp}所有被动物体{/exp}[PASSIVE OBJECT]
+			{opt5}{exp}所有AI角色{/exp}[AI CHARACTER]
+			{opt6}{exp}生成的物体{/exp}[CREATE OBJECT]		//{prereq}[ON CREATE OBJECT]{/prereq}
+			{opt7}{exp}被破坏的物体{/exp}[DESTROY OBJECT]		//{prereq}[ON DESTROY OBJECT]{/prereq}
+			{opt8}{exp}AI上持有的目标{/exp}[TARGET]
+			{opt9}{exp}在几秒内攻击过自己的攻击者{/exp}[LAST ATTACKER]
+			{opt10}{exp}在几秒内攻击过自己的攻击者们{/exp}[LAST ATTACKERS]
+			{opt11}{exp}自己最后造成伤害的物体{/exp}[LAST ATTACKSUCCESS]
+			{opt12}{exp}自己最后造成伤害的物体们{/exp}[LAST ATTACKSUCCESSES]
+			{opt13}{exp}最后攻击自己的攻击者（主动物体）{/exp}[LAST ACTIVE ATTACKER]
+			{opt14}{exp}自己最后造成伤害的ACTIVE物体{/exp}[LAST ACTIVE ATTACKSUCCESS]
+			//mkjung 120515 [CHARACTER ATTACKSUCCESS] 添加。
+			{opt15}{exp}自己最后造成伤害的角色（包括APC）{/exp}[CHARACTER ATTACKSUCCESS]
+			{opt16}{exp}我方队伍{/exp}[ALL OUR TEAM]
+			{opt17}{exp}除我方队伍外的所有{/exp}[ALL ENEMY]
+			{opt18}{exp}怪物队伍{/exp}[ALL MONSTER TEAM]
+			{opt19}{exp}角色队伍{/exp}[ALL CHARACTER TEAM]
+			{opt20}{exp}所有角色{/exp}[CHARACTER]
+			{opt21}{exp}所有怪物{/exp}[MONSTER]
+			//mkjung 120512 [CHECKUP OBJECT] 添加。
+			{opt22}{exp}通过CHECKUP条件检查的物体{/exp}[CHECKUP OBJECT]
+			{opt23}{exp}未通过CHECKUP条件检查的物体{/exp}[DROPOUT OBJECT]
+			{opt24}{exp}所有角色（除AI角色外的实际队员）{/exp}[PLAYER]
+		[!IS OBJECT TYPE][/IS OBJECT TYPE]
+
+		{exp}检查队伍是否相同{/exp}[IS TEAM]
+			{opt1}[MY TEAM]
+			{opt2}[ENEMY TEAM]
+			{opt3}[MONSTER TEAM]
+			{opt4}[CHARACTER TEAM]
+		[!IS TEAM][/IS TEAM]		
+
+		{exp}是否为地图左右尽头{/exp}{etc}[IS END MAP]
+		{exp}是否为地图上下尽头{/exp}{etc}[IS END MAP VERTICALLY]
+
+		{exp}检查当前目标是否位于输入的坐标处{/exp}[IS IN POS]
+			{must1}{exp}检查的X坐标{/exp}{int(:)}
+			{must2}{exp}检查的Y坐标{/exp}{int(:)}
+			{must3}{exp}检查的Z坐标{/exp}{int(:)}
+		[!IS IN POS]
+
+		{exp}检查当前目标是否位于输入的区域内{/exp}[IS IN AREA]
+			{opt1}{exp}基准坐标{/exp}[POS]
+				{must1}{exp}基准X坐标{/exp}{int(:)}
+				{must2}{exp}基准Y坐标{/exp}{int(:)}
+				{must3}{exp}基准Z坐标{/exp}{int(:)}
+			[!POS]
+			{opt2}{exp}区域{/exp}[RANGE]
+				{must1}{exp}基准X区域{/exp}{int(:)}
+				{must2}{exp}基准Y区域{/exp}{int(:)}
+				{must3}{exp}基准Z区域{/exp}{int(:)}
+			[!RANGE]
+			{opt3}{exp}坐标系{/exp}[COORDINATE]
+				{must1}{exp}`RELATIVE`, `ABSOLUTE`（省略时默认：ABSOLUTE）{/exp}{string}
+			[!COORDINATE]
+		[/IS IN AREA]
+
+		{exp}检查目标的状态{/exp}[IS TARGET STATE]
+			{must1}{exp}0. 站立，移动 1.坐下 2.坐着 3.受击， 4.倒地， 5.死亡， 6.跳跃， 7.跳跃攻击， 8.攻击， 9.抓取， 10.召唤开始， 11.召唤完成， 12.投掷， 13.冲刺， 14.冲刺攻击， 15.拾取物品， 16.增益状态， 17.快速起身{/exp}{int(0:17)}
+		[!IS TARGET STATE]
+
+		{exp}检查是否不是目标的状态{/exp}[IS NOT TARGET STATE]
+			{must1}{exp}0. 站立，移动 1.坐下 2.坐着 3.受击， 4.倒地， 5.死亡， 6.跳跃， 7.跳跃攻击， 8.攻击， 9.抓取， 10.召唤开始， 11.召唤完成， 12.投掷， 13.冲刺， 14.冲刺攻击， 15.拾取物品， 16.增益状态， 17.快速起身{/exp}{int(0:17)}
+		[!IS NOT TARGET STATE]
+
+		{exp}X轴速度比较{/exp}[X SPEED]
+			{must1}{exp}X轴速度大于检查速度{/exp}[>]
+			{must1}{exp}X轴速度等于检查速度{/exp}[=]
+			{must1}{exp}X轴速度小于检查速度{/exp}[<]
+			{must1}{exp}X轴速度大于等于检查速度{/exp}[>=]
+			{must1}{exp}X轴速度小于等于检查速度{/exp}[<=]
+			{must1}{exp}X轴速度大于等于检查速度{/exp}[=>]
+			{must1}{exp}X轴速度小于等于检查速度{/exp}[=<]
+			{must2}{exp}检查的X速度（像素/s）{int(0:)}
+		[!X SPEED]
+
+		{exp}Y轴速度比较{/exp}[Y SPEED]
+			{must1}{exp}Y轴速度大于检查速度{/exp}[>]
+			{must1}{exp}Y轴速度等于检查速度{/exp}[=]
+			{must1}{exp}Y轴速度小于检查速度{/exp}[<]
+			{must1}{exp}Y轴速度大于等于检查速度{/exp}[>=]
+			{must1}{exp}Y轴速度小于等于检查速度{/exp}[<=]
+			{must1}{exp}Y轴速度大于等于检查速度{/exp}[=>]
+			{must1}{exp}Y轴速度小于等于检查速度{/exp}[=<]
+			{must2}{exp}检查的Y速度（像素/s）{int(0:)}
+		[!Y SPEED]
+
+		{exp}Z轴速度比较{/exp}[Z SPEED]
+			{must1}{exp}X轴速度大于检查速度{/exp}[>]
+			{must1}{exp}X轴速度等于检查速度{/exp}[=]
+			{must1}{exp}X轴速度小于检查速度{/exp}[<]
+			{must1}{exp}X轴速度大于等于检查速度{/exp}[>=]
+			{must1}{exp}X轴速度小于等于检查速度{/exp}[<=]
+			{must1}{exp}X轴速度大于等于检查速度{/exp}[=>]
+			{must1}{exp}X轴速度小于等于检查速度{/exp}[=<]
+			{must2}{exp}检查的Z速度（像素/s）{int(0:)}
+		[!Z SPEED]
+
+		{exp}蓄力时间检查{/exp}[CHARGED TIME]
+			{must1}{exp}蓄力时间大于检查时间{/exp}[>]
+			{must1}{exp}蓄力时间等于检查时间{/exp}[=]
+			{must1}{exp}蓄力时间小于检查时间{/exp}[<]
+			{must1}{exp}蓄力时间大于等于检查时间{/exp}[>=]
+			{must1}{exp}蓄力时间小于等于检查时间{/exp}[<=]
+			{must1}{exp}蓄力时间大于等于检查时间{/exp}[=>]
+			{must1}{exp}蓄力时间小于等于检查时间{/exp}[=<]
+			{must2}{exp}检查的时间（ms）{int(0:)}
+		[!CHARGED TIME]
+
+
+		{exp}检查目标与自身之间的距离{/exp}[DISTANCE]
+			{must1}{exp}目标与自身之间的距离大于检查距离{/exp}[>]
+			{must1}{exp}目标与自身之间的距离等于检查距离{/exp}[=]
+			{must1}{exp}目标与自身之间的距离小于检查距离{/exp}[<]
+			{must1}{exp}目标与自身之间的距离大于等于检查距离{/exp}[>=]
+			{must1}{exp}目标与自身之间的距离小于等于检查距离{/exp}[<=]
+			{must1}{exp}目标与自身之间的距离大于等于检查距离{/exp}[=>]
+			{must1}{exp}目标与自身之间的距离小于等于检查距离{/exp}[=<]
+			{must2}{exp}检查的距离（像素）{/exp}{int(0:)}
+		[!DISTANCE]
+
+		{exp}按左侧数字/右侧数字概率通过的条件{/exp}[RANDOM CHECK]
+			{must1}{exp}左侧{/exp}{int(0:)}
+			{must2}{exp}右侧{/exp}{int(0:)}
+		[!RANDOM CHECK]
+
+		{exp}检查目标的Z坐标{/exp}[ZPOS]
+			{must1}{exp}大于检查数字{/exp}[>]
+			{must1}{exp}等于检查数字{/exp}[=]
+			{must1}{exp}小于检查数字{/exp}[<]
+			{must1}{exp}大于等于检查数字{/exp}[>=]
+			{must1}{exp}小于等于检查数字{/exp}[<=]
+			{must1}{exp}大于等于检查数字{/exp}[=>]
+			{must1}{exp}小于等于检查数字{/exp}[=<]
+			{must2}{exp}检查的数字{/exp}{int(:)}
+		[!ZPOS]
+		
+		[HP],[MP]
+			{must1}{exp}大于检查数字{/exp}[>]
+			{must1}{exp}等于检查数字{/exp}[=]
+			{must1}{exp}小于检查数字{/exp}[<]
+			{must1}{exp}大于等于检查数字{/exp}[>=]
+			{must1}{exp}小于等于检查数字{/exp}[<=]
+			{must1}{exp}大于等于检查数字{/exp}[=>]
+			{must1}{exp}小于等于检查数字{/exp}[=<]
+			{must2}{exp}检查的数字{/exp}{int(:)}
+			{must3}{exp}按比率检查？{/exp}[%]
+			{must3}{exp}按数值检查？{/exp}[POINT]
+		[!HP],[!MP]
+
+		{exp}检查敌人是否在我的范围内{/exp}[CHECK DISTANCE]
+			{must1}{exp}X轴范围{/exp}{int(:)}
+			{must2}{exp}Y轴范围{/exp}{int(:)}
+		[!CHECK DISTANCE]
+		
+		{exp}检查特定动作的特定触发器{/exp}[TRIGGER CHECK]
+			{must1}{exp}stay动作{/exp}[STAY]
+			{must1}{exp}move动作{/exp}[MOVE]
+			{must1}{exp}sit动作{/exp}[SIT]
+			{must1}{exp}down动作{/exp}[DOWN]
+			{must1}{exp}damage动作{/exp}[DAMAGE]
+			{must1}{exp}attack动作{/exp}[ATTACK]
+			{must1}{exp}custom动作{/exp}[CUSTOM]
+			{must1}{exp}default动作{/exp}[DEFAULT]
+			{must1}{exp}proc动作{/exp}[PROC]
+			
+			//[动作]的[X号]触发器on.off.reset
+			{prereq}[STAY]|[MOVE]|[SIT]|[DOWN]|[DEFAULT]|[PROC]{/prereq}{must2}{exp}触发器编号{/exp}{int(0:)}
+			{prereq}[STAY]|[MOVE]|[SIT]|[DOWN]|[DEFAULT]|[PROC]{/prereq}{must3}{exp}开启{/exp}[ON]
+			{prereq}[STAY]|[MOVE]|[SIT]|[DOWN]|[DEFAULT]|[PROC]{/prereq}{must3}{exp}关闭{/exp}[OFF]
+			{prereq}[STAY]|[MOVE]|[SIT]|[DOWN]|[DEFAULT]|[PROC]{/prereq}{must3}{exp}重置{/exp}[RESET]
+			//[X号] [动作]的[X号]触发器on.off.reset
+			{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must2}{exp}动作编号{/exp}{int(0:)}
+			{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must3}{exp}触发器编号{/exp}{int(0:)}
+			{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must4}{exp}开启{/exp}[ON]
+			{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must4}{exp}关闭{/exp}[OFF]
+			{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must4}{exp}重置{/exp}[RESET]
+		[!TRIGGER CHECK]
+
+		{exp}检查是否有威胁因素（检查攻击范围内是否有攻击吸引力）{/exp}[CHECK THREAT]
+			{must1}{exp}检查的距离（像素）{/exp}{int(:)}
+		[!CHECK THREAT]
+		
+		{exp}碰撞检查：碰撞发生时持续检查ON MOVE COLLISION{/exp}[AXIS INDEX]
+			{must1}{exp}0:X轴 1:Y轴 2:Z轴{/exp}{int(0:2)}
+		[!AXIS INDEX]
+		
+		{exp}检查目标同伙是否正在受击（是否为DAMAGE状态）{/exp}{etc}[IS OURTEAMATTACKED]
+
+		{exp}感知目标的状态变化{/exp}{etc}[IS TARGETACTIVESTATUS]
+			{must1}{exp}SLOW(0), FREEZE(1), POISON(2), STUN(3), CURSE(4), BLIND(5), LIGHTNING(6), STONE(7), SLEEP(8), BURN(9), WEAPON_BREAK(10), BLEEDING(11), HASTE(12), BLESS(13), ELEMENT(14), CONFUSE(15), HOLD(16), ARMOR_BREAK(17){/exp}{int(0:)}
+		[!IS TARGETACTIVESTATUS]
+
+		{opt1}{exp}搜索正面向我的对象（怪物、被动、角色）{/exp}{etc}[FRONTSIDE]
+		{opt1}{exp}搜索背向我的对象（怪物、被动、角色）{/exp}{etc}[BACKSIDE]
+		{opt2}{exp}搜索我视野内的对象（怪物、被动、角色）{/exp}{etc}[WITHIN SIGHT]
+		{opt2}{exp}搜索我视野外的对象（怪物、被动、角色）{/exp}{etc}[OUT OF SIGHT]
+		{opt3}{exp}搜索在我左侧的对象（怪物、被动、角色）{/exp}[IS LEFT]
+		{opt3}{exp}搜索在我右侧的对象（怪物、被动、角色）{/exp}[IS RIGHT]
+
+		{exp}自定义符号检查（检查用[SET SYMBOL]设置的对象）{/exp}[CHECK SYMBOL]
+			//mkjung 120704 说明修改。
+			//符号值可以是任意int值，不仅是0,1
+			{must1}{exp}符号值{/exp}{int(0:)}
+			{must2}{exp}0（检查），1（不检查）{/exp}{int(0:1)}
+		[!CHECK SYMBOL]
+
+		//mkjung 120511 CHECKUP 添加。
+		{prereq}[CHECKUP]{/prereq}{exp}检查通过的对象数量{/exp}[CHECKED NO]
+			{must1}{exp}检查通过的对象大于检查数字{/exp}[>]
+			{must1}{exp}检查通过的对象等于检查数字{/exp}[=]
+			{must1}{exp}检查通过的对象小于检查数字{/exp}[<]
+			{must1}{exp}检查通过的对象大于等于检查数字{/exp}[>=]
+			{must1}{exp}检查通过的对象小于等于检查数字{/exp}[<=]
+			{must1}{exp}检查通过的对象大于等于检查数字{/exp}[=>]
+			{must1}{exp}检查通过的对象小于等于检查数字{/exp}[=<]
+			{must2}{exp}检查的数字{/exp}{int(:)}
+		[!CHECKED NO]	
+
+		//mkjung 120511 添加。
+		{exp}最后一次攻击的优先级{/exp}[LAST TARGET PRIORITY]
+			{must1}[LOW]
+			{must1}[HIGH]
+			{must1}[NEVER]
+			{must1}[ALWAYS]
+		[!LAST TARGET PRIORITY]
+		
+		//mkjung 120514 添加。
+		{exp}{/exp}{etc}[IS FRONTPOS]
+		{exp}{/exp}{etc}[FACE TO FACE]
+		[IS GRABABLE]
+			{must1}{int(:)}
+		[!IS GRABABLE]
+
+		//mkjung 120517 添加。
+		{exp}检查目标的范围{/exp}[CHECK AREA]
+			{must1}{exp}X轴前{/exp}{int(:)}
+			{must2}{exp}X轴后{/exp}{int(:)}
+			{must3}{exp}Y轴上{/exp}{int(:)}
+			{must4}{exp}Y轴下{/exp}{int(:)}
+		[!CHECK AREA]
+
+		//mkjung 120517 添加。
+		{exp}检查是否是可攻击的对象{/exp}{etc}[IS DAMAGE ENABLE]
+
+		{exp}伤害判定框有无{/exp}[IS DAMAGEBOX ENABLE]
+			{must1}{exp}0则为无，1则为有{/exp}{int(0:1)}
+		[!IS DAMAGEBOX ENABLE]
+
+		//mkjung 120518 添加
+		[IS CHILD]
+			{must1}{exp}0则为无，1则为有{/exp}{int(0:1)}
+		[!IS CHILD]
+	[/CHECKUP]
+
+	//mkjung 120511 添加。
+	[MOVE TO]
+		{must1}[TARGET]
+		{must2}{int(:)}
+	[!MOVE TO]
+
+	//mkjung  120512 TRIGGER except。
+	{prereq}[CHECKUP]{/prereq}{exp}检查通过的对象数量{/exp}[CHECKED NO]
+		{must1}{exp}检查通过的对象大于检查数字{/exp}[>]
+		{must1}{exp}检查通过的对象等于检查数字{/exp}[=]
+		{must1}{exp}检查通过的对象小于检查数字{/exp}[<]
+		{must1}{exp}检查通过的对象大于等于检查数字{/exp}[>=]
+		{must1}{exp}检查通过的对象小于等于检查数字{/exp}[<=]
+		{must1}{exp}检查通过的对象大于等于检查数字{/exp}[=>]
+		{must1}{exp}检查通过的对象小于等于检查数字{/exp}[=<]
+		{must2}{exp}检查的数字{/exp}{int(:)}
+	[!CHECKED NO]	
+
+	
+	{exp}将目标按特定条件升序/降序排列后选取{/exp}[GET TARGET]
+		{must1}{exp}要选取几个？{/exp}{int(0:)}
+		{must2}{exp}按HP排序{/exp}[HP]
+		{must2}{exp}按MP排序{/exp}[MP]
+		{must2}{exp}按等级排序{/exp}[LEVEL]
+		{must2}{exp}按与我的距离排序{/exp}[DISTANCE]
+		{must2}{exp}随机（不排序，随机选取）{/exp}[RANDOM]
+		{must2}{exp}按我攻击过的对象排序{/exp}[LAST ATTACKSUCCESS]
+		//[RANDOM]不包含高/低。
+		{prereq}[HP]|[MP]|[LEVEL]|[DISTANCE]|[LAST ATTACKSUCCESS]{/prereq}{must3}{exp}按降序（低者优先）排序{/exp}[LOW]
+		{prereq}[HP]|[MP]|[LEVEL]|[DISTANCE]|[LAST ATTACKSUCCESS]{/prereq}{must3}{exp}按升序（高者、最近攻击者优先）排序{/exp}[HIGH]
+	[!GET TARGET]
+
+
+	//mkjung 120511 添加。
+	{etc}[ON END BEHAVIOR]	
+
+	//mkjung 120518 [DO BEHAVIOR],[DO PROC BEHAVIOR],[DIRECT DO BEHAVIOR]目标参数范围修改。
+	//mkjung 120518 [DIRECT DO BEHAVIOR] 目标参数范围、参数修改。
+	//mkjung 120521 [DIRECT DO BEHAVIOR]目标参数恢复原样
+	{exp}命令执行控制部分{/exp}[DO BEHAVIOR],[DO PROC BEHAVIOR],[DIRECT DO BEHAVIOR]
+		{must1}{exp}自己{/exp}[ME]
+		{must1}{exp}在几秒内攻击过自己的攻击者{/exp}[LAST ATTACKER]
+		{must1}{exp}最后攻击自己的攻击者（主动物体）{/exp}[LAST ACTIVE ATTACKER]
+		{must1}[LAST ATTACKSUCCESS]
+		{must1}[CHARACTER ATTACKSUCCESS]
+		{must1}[LAST ATTACKSUCCESSES]
+		{must1}[LAST ACTIVE ATTACKSUCCESS]
+		{must1}[SUMMON MASTER]
+		{must1}[TARGET]
+		{must1}[CHECKUP OBJECT]
+		{must1}[DROPOUT OBJECT]
+		{must1}[LOAD TARGET]
+		{prereq}[ME]|[LAST ATTACKER]|[LAST ACTIVE ATTACKER]|[LAST ATTACKSUCCESS]|[CHARACTER ATTACKSUCCESS]|[LAST ATTACKSUCCESSES]|[LAST ACTIVE ATTACKSUCCESS]|[SUMMON MASTER]|[TARGET]|[CHECKUP OBJECT]|[DROPOUT OBJECT]{/prereq}{must2}{rndint(:)}
+		{prereq}[LOAD TARGET]{/prereq}{must2}{rndint(:)}
+		{prereq}[LOAD TARGET]{/prereq}{must3}{int(:)}
+	[!DO BEHAVIOR],[!DO PROC BEHAVIOR],[!DIRECT DO BEHAVIOR]
+	
+	
+	{exp}经过输入的时间后调用BEHAVIOR{/exp}[DELAY DO BEHAVIOR]
+		{must1}{exp}自己{/exp}[ME]
+		{must1}{exp}召唤主{/exp}[SUMMON MASTER]
+		{must1}{exp}通过CHECKUP条件检查的对象{/exp}[CHECKUP OBJECT]
+		{must1}{exp}未通过CHECKUP条件检查的对象{/exp}[DROPOUT OBJECT]
+		{must1}{exp}AI上持有的目标{/exp}[TARGET]
+		{must1}{exp}在几秒内攻击过自己的攻击者{/exp}[LAST ATTACKER]
+		{must1}{exp}最后攻击自己的攻击者（主动物体）{/exp}[LAST ACTIVE ATTACKER]
+		{must1}{exp}自己最后造成伤害的物体{/exp}[LAST ATTACKSUCCESS]
+		{must1}{exp}载入保存的物体并使用{/exp}[LOAD TARGET]
+		//mkjung 120516 [LAST ATTACKSUCCESSES] 添加
+		{must1}{exp}自己最后造成伤害的物体们{/exp}[LAST ATTACKSUCCESSES]
+
+		//行为索引
+		{prereq}[ME]|[SUMMON MASTER]|[CHECKUP OBJECT]|[DROPOUT OBJECT]|[TARGET]|[LAST ATTACKER]|[LAST ACTIVE ATTACKER]|[LAST ATTACKSUCCESS]|[LAST ATTACKSUCCESSES]{/prereq}{must2}{exp}行为索引{/exp}{rndint(:)}
+		//延迟时间
+		{prereq}[ME]|[SUMMON MASTER]|[CHECKUP OBJECT]|[DROPOUT OBJECT]|[TARGET]|[LAST ATTACKER]|[LAST ACTIVE ATTACKER]|[LAST ATTACKSUCCESS]|[LAST ATTACKSUCCESSES]{/prereq}{must3}{exp}延迟时间（ms单位）{/exp}{int(0:)}
+
+		{prereq}[LOAD TARGET]{/prereq}{must2}{exp}目标索引{/exp}{int(:)}
+		{prereq}[LOAD TARGET]{/prereq}{must3}{exp}行为索引{/exp}{int(:)}
+		{prereq}[LOAD TARGET]{/prereq}{must4}{exp}延迟时间（ms单位）{/exp}{int(0:)}
+	[!DELAY DO BEHAVIOR]
+
+	//mkjung 120517 {must1 int}-->must2 修改
+	{exp}将特定物体保存起来。以后可用[LOAD TARGET]标签调用{/exp}[SAVE TARGET OBJECT]
+		{must1}{exp}该物体中仅第一个物体保存到[X号]{/exp}{int(0:)}
+		{must1}{exp}AI上持有的目标{/exp}[TARGET]
+		{must1}{exp}在几秒内攻击过自己的攻击者{/exp}[LAST ATTACKER]
+		{must1}{exp}最后攻击自己的攻击者（主动物体）[LAST ACTIVE ATTACKER]
+		{must1}{exp}自己最后造成伤害的物体{/exp}[LAST ATTACKSUCCESS]
+		{must1}{exp}召唤主{/exp}[SUMMON MASTER]
+		//mkjung 120516 [LAST ATTACKSUCCESSES] 添加
+		{must1}{exp}自己最后造成伤害的物体们{/exp}[LAST ATTACKSUCCESSES]
+		{opt1}{exp}将该物体保存到[X号]{/exp}{int(0:)}
+	[!SAVE TARGET OBJECT]
+
+	//mkjung 120516 添加。
+	{exp}快速炮-闪电检查{/exp}[REALDUNGEON CHECKUP]
+		{must1}{int(:)}
+		{must2}{int(:)}
+		{must3}{int(:)}
+	[!REALDUNGEON CHECKUP]
+	
+	//mkjung 120516 添加。
+	[CHECK PARTYMEMBERS STATE]
+		{must1}{exp}全员存活时才通过{/exp}[ALL ALIVE]
+		{must1}{exp}有一人死亡则通过，否则不通过{/exp}[EVEN ONE DEATH]
+	[!CHECK PARTYMEMBERS STATE]
+[/TRIGGER]
+
+{exp}行为控制部分，控制从[TRIGGER]传递过来的目标{/exp}[BEHAVIOR]
+	
+	{exp}召唤被动物体{/exp}[CREATE PASSIVEOBJECT]
+		//INDEX, 粒子文件名, LEVEL, POS 必须按顺序输入。其他可输可不输。
+		{must1}{exp}被动物体索引编号{/exp}[INDEX]
+			//mkjung 120516 int->rndint 修改。
+			{must1}{exp}索引编号{/exp}{rndint(:)}
+		[!INDEX]
+		{must2}{exp}粒子路径设置{/exp}[PARTICLE FILENAME]
+			{must1}{exp}粒子路径名{/exp}{string}
+		[!PARTICLE FILENAME]
+		{must3}{exp}要召唤的被动物体等级{/exp}[LEVEL]
+			{must1}{exp}要召唤的等级{/exp}{int(0:)}
+		[!LEVEL]
+		{must4}{exp}召唤坐标设置{/exp}[POS]
+			{must1}{exp}召唤的X坐标{/exp}{rndint(:)}
+			{must2}{exp}召唤的Y坐标{/exp}{rndint(:)}
+			{must3}{exp}召唤的Z坐标{/exp}{rndint(:)}
+		[!POS]
+		{opt1}{exp}使用角度下落模式{/exp}[USE ANGLE]
+			{must1}{exp}下落角度（度）{/exp}{int(0:360)}
+			{must2}{exp}初始Z坐标{/exp}{int(0:)}
+			{must3}{exp}下落速度（像素/s）{/exp}{int(0:)}
+			{must4}{exp}与地面碰撞时的处理（0.穿透，1.滑动，2.停止，3.消失）{/exp}{int(0:3)}
+		[!USE ANGLE]
+		//mkjung 120517 添加。
+		{opt2}{etc}[USE MY TEAM]
+		{opt2}{exp}以中立队伍出现{/exp}{etc}[USE NEUTRAL TEAM]
+		{opt2}{exp}以目标的队伍出现（默认是主人的队伍）{/exp}[USE TARGET TEAM]
+		{opt3}{exp}召唤物的方向使用我的方向{/exp}{etc}[USE MY DIRECTION]
+		//mkjung 120517 添加。
+		{opt3}{exp}不进行方向修正{/exp}{etc}[NOT USE OBJECT DIRECTION]
+		{opt4}{exp}以我为准设定坐标，仅在设置粒子路径时应用（相对坐标）{/exp}{etc}[USE MY BASEPOS]
+		{opt4}{exp}以地图为准设定坐标（绝对坐标）{/exp}{etc}[USE MAP POS]
+		{opt5}{exp}指定生成时要看向的方向{/exp}[FIX DIRECTION]
+			{must1}{exp}中立{/exp}[NEUTRAL]
+			{must1}{exp}左侧{/exp}[LEFT]
+			{must1}{exp}右侧{/exp}[RIGHT]
+			{must1}{exp}随机方向{/exp}[RANDOM]
+		[!FIX DIRECTION]
+		{opt6}{exp}WarningMark修正{/exp}[WARNING MARK]
+			{must1}{exp}x位置修正{/exp}{int(:)}
+			{must2}{exp}y位置修正{/exp}{int(:)}
+			//mkjung 120517 int-->rndint
+			{must3}{exp}延迟{/exp}{rndint(:)}
+			{must4}{exp}警告标记种类（1:红色普通，2:红色大型，3:红色普通（仅友军可见），4:红色大型（仅友军可见），5:绿色普通，6:绿色大型）{/exp}{int(1:6)}
+		[!WARNING MARK]
+		{opt7}{exp}是否以目标的Z坐标为基准设定坐标{/exp}{etc}[USE OBJECT ZPOS]
+		{opt8}{exp}设置为跟随目标{/exp}{etc}[FOLLOWING TARGET]
+		{opt9}{exp}检查是否为地图上可移动的位置{/exp}{etc}[MOVABLE POS ONLY]
+		//mkjung 120514 添加。
+		{opt10}{exp}无召唤效果出现{/exp}{etc}[NO EFFECT]
+	[/CREATE PASSIVEOBJECT]	
+	
+	{exp}召唤怪物{/exp}[SUMMON MONSTER]
+		//INDEX, LEVEL, POS 必须按顺序输入。其他可输可不输。
+		{must1}{exp}索引编号{/exp}[INDEX]
+		//mkjung 120515 int->rndint 修改。
+			{must1}{rndint(:)}
+		[!INDEX]
+		{must2}{exp}魔法等级{/exp}[LEVEL]
+			{must1}{int(0:)}
+		[!LEVEL]
+		{must3}{exp}父坐标的相对坐标{/exp}[POS]
+			{must1}{exp}召唤的X坐标（相对坐标）{/exp}{rndint(:)}
+			{must2}{exp}召唤的Y坐标（相对坐标）{/exp}{rndint(:)}
+			{must3}{exp}召唤的Z坐标（相对坐标）{/exp}{rndint(:)}
+		[!POS]
+		{opt1}{exp}无召唤效果出现{/exp}{etc}[NO EFFECT]
+		{opt2}{exp}绘制魔法阵同时召唤{/exp}{etc}[MAGIC CIRCLE]
+		{opt3}{exp}怪物如跳出般召唤{/exp}[JUMP OUT]
+			{must1}{exp}X速度{/exp}{rndint(:)}
+			{must2}{exp}Y速度{/exp}{rndint(:)}
+			//mkjung 120515 int->rndint 修改。
+			{must3}{exp}高度{/exp}{rndint(:)}
+			{must4}{exp}中立{/exp}[NEUTRAL]
+			{must4}{exp}左侧{/exp}[LEFT]
+			{must4}{exp}右侧{/exp}[RIGHT]
+			{must4}{exp}随机方向{/exp}[RANDOM]
+			{must5}{exp}中立{/exp}[NEUTRAL]
+			{must5}{exp}上{/exp}[UP]
+			{must5}{exp}下{/exp}[DOWN]
+			{must5}{exp}随机方向{/exp}[RANDOM]
+		[!JUMP OUT]
+		{opt4}{exp}以目标的队伍出现。（默认是主人的队伍。）{/exp}{etc}[USE TARGET TEAM]
+		{opt5}{exp}坐标基准X轴移动是否按自己朝向的方向决定{/exp}{etc}[USE MY DIRECTION]
+		{opt6}{exp}指定相对坐标移动是否以自己的坐标为基准{/exp}{etc}[USE MY BASEPOS]
+		{opt7}{exp}不进行方向修正{/exp}{etc}[NOT USE OBJECT DIRECTION]
+		{opt8}{exp}坐标移动使用地图绝对坐标{/exp}{etc}[USE MAP POS]
+		{opt9}{exp}队伍指定{/exp}[TEAM]
+			{must1}{exp}0~：角色队伍 100~：怪物队伍 200~：中立{/exp}{int(0:)}
+		[!TEAM]
+		{opt10}{exp}Z坐标跟随物体坐标修改{/exp}{etc}[USE OBJECT ZPOS]
+		{opt11}{exp}设置召唤物的存活时间{/exp}[SUMMON TIME]
+			{must1}{exp}存活时间（ms）{/exp}{int(0:)}
+		[!SUMMON TIME]
+
+		//mkjung 120518 添加。
+		{opt12}[SUMMON MARK]
+			{must1}{exp}召唤标记显示的值{/exp}{int(0:)} // 不显示地面召唤标记 //
+		[!SUMMON MARK]
+		
+		//mkjung 120518 添加。
+		{exp}指定要看向的方向{/exp}[FIX DIRECTION]
+			{must1}{exp}中立{/exp}[NEUTRAL]
+			{must1}{exp}左侧{/exp}[LEFT]
+			{must1}{exp}右侧{/exp}[RIGHT]
+			{must1}{exp}随机方向{/exp}[RANDOM]
+		[!FIX DIRECTION]
+	[/SUMMON MONSTER]
+
+	{exp}召唤APC{/exp}[SUMMON APC]
+		//INDEX, LEVEL, POS 必须按顺序输入。其他可输可不输。
+		{must1}{exp}索引编号{/exp}[INDEX]
+			{must1}{int(0:)}
+		[!INDEX]
+		{must2}{exp}魔法等级{/exp}[LEVEL]
+			{must1}{int(0:)}
+		[!LEVEL]
+		{must3}{exp}父坐标的相对坐标{/exp}[POS]
+			{must1}{exp}召唤的X坐标（相对坐标）{/exp}{int(:)}
+			{must2}{exp}召唤的Y坐标（相对坐标）{/exp}{int(:)}
+			{must3}{exp}召唤的Z坐标（相对坐标）{/exp}{int(:)}
+		[!POS]
+		{opt1}{exp}无召唤效果出现{/exp}{etc}[NO EFFECT]
+		{opt2}{exp}绘制魔法阵同时召唤{/exp}{etc}[MAGIC CIRCLE]
+		{opt3}[JUMP OUT]
+			{must1}{exp}x速度{/exp}{int(:)}
+			{must2}{exp}y速度{/exp}{int(:)}
+			{must3}{exp}高度{/exp}{int(:)}
+			{must4}[NEUTRAL]
+			{must4}[LEFT]
+			{must4}[RIGHT]
+			{must4}[RANDOM]
+			{must5}[NEUTRAL]
+			{must5}[UP]
+			{must5}[DOWN]
+			{must5}[RANDOM]
+		[!JUMP OUT]
+		{opt4}{exp}以目标的队伍出现。（默认是主人的队伍。）{/exp}{etc}[USE TARGET TEAM]
+		{opt5}{exp}坐标基准X轴移动是否按自己朝向的方向决定{/exp}{etc}[USE MY DIRECTION]
+		{opt6}{exp}指定相对坐标移动是否以自己的坐标为基准{/exp}{etc}[USE MY BASEPOS]
+		{opt7}{exp}不进行方向修正{/exp}{etc}[NOT USE OBJECT DIRECTION]
+		{opt8}{exp}坐标移动使用地图绝对坐标{/exp}{etc}[USE MAP POS]
+		{opt9}{exp}Z坐标跟随物体坐标修改{/exp}{etc}[USE OBJECT ZPOS]
+		{opt10}{exp}设置召唤物的存活时间{/exp}[SUMMON TIME]
+			{must1}{exp}时间{/exp}{int(0:)}
+		[!SUMMON TIME]
+		{opt11}{exp}使用此标签则召唤主越过地图时跟随，不用则不跟随{/exp}{etc}[FOLLOW SUMMONER]
+		{opt12}{etc}[SUMMON TYPE]
+			{must1}{exp}召唤主死亡则变为中立{/exp}[WITHOUT SUMMONER NONE]
+			{must1}{exp}召唤主死亡则消失{/exp}[WITHOUT SUMMONER DIE]
+		[!SUMMON TYPE]
+	[/SUMMON APC]
+
+	{exp}推进器附加效果{/exp}[BOOSTER APPENDAGE]
+		{opt1}{exp}是否根据高度跟踪相机（省略时初始值：不跟踪）{/exp}{etc}[ZPOS CAMERA VIEW]
+		{opt2}{exp}推进器的加速度{/exp}[BOOSTER ACCEL]
+			{must1}{exp}省略时初始值：0{/exp}{int(0:)}
+		[!BOOSTER ACCEL]
+		{opt3}{exp}推进器的初始速度{/exp}[BOOSTER VELOCITY]
+			{must1}{exp}省略时初始值：0{/exp}{int(0:)}
+		[!BOOSTER VELOCITY]
+		{opt4}{exp}推进器槽消耗时间（单位：ms）{/exp}[BOOSTER USING TIME]
+			{must1}{exp}省略时初始值：0{/exp}{int(0:)}
+		[!BOOSTER USING TIME]
+		{opt5}{exp}推进器槽恢复时间（单位：ms）{/exp}[BOOSTER RECOVERY TIME]
+			{must1}{exp}省略时初始值：0{/exp}{int(0:)}
+		[!BOOSTER RECOVERY TIME]
+		{opt6}{exp}回避加速度（> 0）{/exp}[EVADE ACCEL]
+			{must1}{exp}，省略时初始值：0{/exp}{int(0:)}
+		[!EVADE ACCEL]
+		{opt7}{exp}重力加速度（>= 0）{/exp}[GRAVITY]
+			{must1}{exp}省略时初始值：0{/exp}{int(0:)}
+		[!GRAVITY]
+		{opt8}{exp}下落初始速度（>= 0）{/exp}[FALLING INIT VELOCITY]
+			{must1}{exp}省略时初始值：0{/exp}{int(0:)}
+		[![FALLING INIT VELOCITY]
+		{opt9}{exp}终端速度（> 0）{/exp}[TERMINAL VELOCITY]
+			{must1}{exp}省略时初始值：0{/exp}{int(0:)}
+		[!TERMINAL VELOCITY]
+		{opt10}{exp}下落初始高度（> 0）{/exp}[HEIGHT]
+			{must1}{exp}省略时初始值：0{/exp}{int(0:)}
+		[!HEIGHT]
+		{opt11}{exp}下落过程中为了切换场景相机停止的高度（> 0）{/exp}[LIMIT HEIGHT]
+			{must1}{exp}省略时初始值：0{/exp}{int(0:)}
+		[!LIMIT HEIGHT]
+		{opt12}{exp}初始位置{/exp}[INIT POS]
+			{must1}{exp}初始X坐标{/exp}{int(:)}
+			{must2}{exp}初始Y坐标{/exp}{int(:)}
+			{must3}{exp}初始Z坐标{/exp}{int(:)}
+		[!INIT POS]
+		{opt13}{exp}移动时各线之间的距离（> 0）{/exp}[LINE GAP]
+			{must1}{exp}省略时初始值：200{/exp}{int(0:)}
+		[!LINE GAP]
+		{opt14}{exp}是否屏蔽按键输入{/exp}{etc}[DISABLE KEYINPUT]
+		{opt15}[DEFAULT ANI]
+			{must1}{exp}路径{/exp}{string}
+		[!DEFAULT ANI]
+		{opt16}[BOOSTING ANI]
+			{must1}{exp}路径{/exp}{string}
+		[!BOOSTING ANI]
+	[/BOOSTER APPENDAGE]
+
+	{exp}中心坐标{/exp}[SET MOVABLE AREA]
+		{exp}基准坐标（省略时，默认值：0 0 0）{/exp}[POS]
+			{must1}{exp}基准X坐标{/exp}{int(:)}
+			{must2}{exp}基准Y坐标{/exp}{int(:)}
+			{must3}{exp}基准Z坐标{/exp}{int(:)}
+		[!POS]
+		{exp}以各值的1/2作为+/-范围（>= 0，若非偶数则会产生1px误差）{/exp}[RANGE]
+			{must1}{exp}X宽度（范围宽度的1/2）{/exp}{int(0:)}
+			{must2}{exp}Y宽度（范围宽度的1/2）{/exp}{int(0:)}
+			{must3}{exp}Z宽度（范围宽度的1/2）{/exp}{int(0:)}
+		[!RANGE]
+		{exp}设定是相对坐标还是绝对坐标{/exp}[COORDINATE]
+			{must1}{exp}相对坐标：`RELATIVE` 绝对坐标：`ABSOLUTE`{/exp}{string}
+		[!COORDINATE]
+	[/SET MOVABLE AREA]
+	
+	{exp}将重力值更改为指定的int值{/exp}[CHANGE GRAVITY]
+		{must1}{int(0:)}
+	[!CHANGE GRAVITY]
+		
+	{exp}将目标或自己传送{/exp}[TELEPORT]
+		{must1}{exp}要移动的坐标（中心轴）{/exp}[POS]
+			{must1}{exp}要移动的X坐标{/exp}{rndint(:)}
+			{must2}{exp}要移动的Y坐标{/exp}{rndint(:)}
+			{must3}{exp}要移动的Z坐标{/exp}{rndint(:)}
+		[!POS]
+		{opt1}{exp}坐标基准X轴移动是否按我朝向的方向{/exp}{etc}[USE MY DIRECTION]
+		{opt1}{exp}不设置方向（强制为右侧）{/exp}{etc}[NOT USE OBJECT DIRECTION]
+		{opt2}{exp}是否以我的坐标为基准移动{/exp}{etc}[USE MY BASEPOS]
+		{opt2}{exp}是否以地图坐标为基准移动{/exp}{etc}[USE MAP POS]
+		{opt3}{exp}不使用基准物体的Z位置{/exp}{etc}[NOT USE OBJECT ZPOS]
+		{opt4}{exp}传送自己{/exp}{etc}[MOVE ME]
+		{opt4}{exp}传送目标{/exp}{etc}[MOVE TARGET]
+		{opt5}{exp}也允许传送固定型怪物{/exp}{etc}[ALLOW FIXTURE]
+		//mkjung 120518 添加
+		{opt6}[USE EFFECT]
+	[/TELEPORT]
+	
+	//mkjung 120511 添加。
+	//mkjugn 120516 修改。
+	{exp}将算式、数值或对象的当前时间赋给变量（动态地给对象特定数据赋值）{/exp}[DIM]
+
+		//{`变量` [=] 数字 or`变量`} [+] 数字
+		{must1}{exp}要赋值的变量名{/exp}{string}
+		{must2}{exp}赋值运算符{/exp}[=]
+
+		{must3}{exp}获取当前时间（ms）{/exp}[GET TIME]
+		{must3}{exp}要应用的数值{/exp}{int(:)}
+		{must3}{exp}要赋值的变量名{/exp}{string}
+		
+		{opt1}[+]
+		{opt1}[-]
+		{opt1}[*]
+		{opt1}[/]
+		{opt1}[>]
+		{opt1}[<]
+		{opt1}[>=]
+		{opt1}[<=]
+		{opt1}[=>]
+		{opt1}[=<]
+		{opt2}{exp}要赋值的变量名{/exp}{string}
+		{opt2}{exp}要应用的数值{/exp}{int(:)}
+	[!DIM][/DIM]
+
+	
+	{exp}更改attackInfo文件{/exp}[CHANGE ATTACKINFO]
+		{must1}{exp}要更改的文件路径名{/exp}{string}
+		{must1}{exp}恢复到[DEFAULT ATTACKINFO]中指定的基本攻击信息{/exp}[DEFAULT]
+	[!CHANGE ATTACKINFO]
+
+	
+	{exp}指定目标的速度{/exp}[SET SPEED]
+		{opt1}{exp}X轴速度{/exp}[X AXIS] // 非必须时 {opt编号}
+			{must1}{rndint(0:)}
+		[!X AXIS]
+		{opt2}{exp}Y轴速度{/exp}[Y AXIS]
+			{must1}{rndint(0:)}
+		[!Y AXIS]
+		{opt3}{exp}Z轴速度{/exp}[Z AXIS]
+			{must1}{rndint(0:)}
+		[!Z AXIS]
+		{opt4}{exp}与方向无关时。绝对方向默认是右侧和下方{/exp}{etc}[NOT USE DIRECTION]
+		{opt4}{exp}方向调整为我的方向{/exp}{etc}[USE MY DIRECTION]
+	[/SET SPEED]
+
+	{exp}指定目标的加速度{/exp}[SET ACCEL]
+		{exp}{/exp}[X AXIS]
+			{must1}{int(0:)}
+		[!X AXIS]
+		{exp}{/exp}[Y AXIS]
+			{must1}{int(0:)}
+		[!Y AXIS]
+		{exp}方向调整为我的方向{/exp}{etc}[USE MY DIRECTION]
+	[/SET ACCEL]
+
+	{exp}创建粒子{/exp}[PARTICLE]
+		{must1}{exp}粒子文件的相对路径{/exp}{string}
+		//mkjung 120518 must-->opt 修改
+		{opt1}{exp}创建粒子的X坐标{/exp}{int(:)}
+		{opt2}{exp}创建粒子的Y坐标{/exp}{int(:)}
+		{opt3}{exp}创建粒子的Z坐标{/exp}{int(:)}
+	[!PARTICLE]
+		
+	{exp}接收特定动作的触发器索引，进行[ON][OFF]的功能{/exp}[TRIGGER]
+		{must1}{exp}触发器编号{/exp}{int(0:)}
+		{must1}{exp}stay动作{/exp}[STAY]
+		{must1}{exp}move动作{/exp}[MOVE]
+		{must1}{exp}sit动作{/exp}[SIT]
+		{must1}{exp}down动作{/exp}[DOWN]
+		{must1}{exp}damage动作{/exp}[DAMAGE]
+		{must1}{exp}attack动作{/exp}[ATTACK]
+		{must1}{exp}custom动作{/exp}[CUSTOM]
+		{must1}{exp}default动作{/exp}[DEFAULT]
+		{must1}{exp}proc动作{/exp}[PROC]
+
+		//[X号]触发器 on.off.reset
+		{prereq}{int}{/prereq}{must2}{exp}开启{/exp}[ON]
+		{prereq}{int}{/prereq}{must2}{exp}关闭{/exp}[OFF]
+		{prereq}{int}{/prereq}{must2}{exp}LIMIT次数重置{/exp}[RESET]
+		//[动作]的[X号]触发器 on.off.reset
+		{prereq}[STAY]|[MOVE]|[SIT]|[DOWN]|[DEFAULT]|[PROC]{/prereq}{must2}{exp}触发器编号{/exp}{int(0:)}
+		{prereq}[STAY]|[MOVE]|[SIT]|[DOWN]|[DEFAULT]|[PROC]{/prereq}{must3}{exp}开启{/exp}[ON]
+		{prereq}[STAY]|[MOVE]|[SIT]|[DOWN]|[DEFAULT]|[PROC]{/prereq}{must3}{exp}关闭{/exp}[OFF]
+		{prereq}[STAY]|[MOVE]|[SIT]|[DOWN]|[DEFAULT]|[PROC]{/prereq}{must3}{exp}LIMIT次数重置{/exp}[RESET]
+		//[X号] [动作]的[X号]触发器 on.off.reset
+		{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must2}{exp}动作编号{/exp}{int(0:)}
+		{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must3}{exp}触发器编号{/exp}{int(0:)}
+		{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must4}{exp}开启{/exp}[ON]
+		{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must4}{exp}关闭{/exp}[OFF]
+		{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must4}{exp}LIMIT次数重置{/exp}[RESET]
+	[!TRIGGER]
+
+	{exp}更改浮游型物体的高度{/exp}[CHANGE FLOATING HEIGHT]
+		{must1}{exp}浮游高度（像素）{/exp}{int(0:)}
+	[!CHANGE FLOATING HEIGHT]
+
+	{exp}恢复HP或MP。输入负数时也有削减效果。会输出效果{/exp}[RESTORE]
+		{must1}[HP]
+		{must1}[MP]
+		{must2}{exp}正数：恢复，负数：削减{/exp}{int(:)}
+		{must3}{exp}数值基准{/exp}[POINT]
+		{must3}{exp}百分比基准{/exp}[%]
+	[!RESTORE]
+
+	{exp}将目标彻底摧毁，不留残骸{/exp}{etc}[DESTROY]
+	
+	{exp}执行行为{/exp}[SEND DO BEHAVIOR]
+		{must1}{exp}自己{/exp}[ME]
+		{must1}{exp}通过CHECKUP条件检查的对象{/exp}[CHECKUP OBJECT]
+		{must1}{exp}未通过CHECKUP条件检查的对象{/exp}[DROPOUT OBJECT]
+		{must1}{exp}我的目标{/exp}[TARGET]
+		{must1}{exp}在几秒内攻击过自己的攻击者（物体）{/exp}[LAST ATTACKER]
+		{must1}{exp}最后攻击自己的攻击者（主动物体）{/exp}[LAST ACTIVE ATTACKER]
+		{must1}{exp}我最后攻击的物体{/exp}[LAST ATTACKSUCCESS]
+		{must1}{exp}召唤我的召唤主{/exp}[SUMMON MASTER]
+		{must1}{exp}此动作中保存的物体{/exp}[LOAD TARGET]
+		{must2}{exp}要执行的行为索引{/exp}{int(:)}
+	[!SEND DO BEHAVIOR]
+	
+	//mkjung 120511 修改。
+	{exp}开启或关闭或重置攻击判定框{/exp}[ATTACKRECT]
+		{must1}{exp}开启攻击判定框。可以造成打击{/exp}[ON]
+		{must1}{exp}关闭攻击判定框。无法造成打击{/exp}[OFF]
+		//mkjung 120511 添加。
+		{must1}{exp}重置攻击判定框。一个动作中只能攻击一次，想连击时使用{/exp}[RESET]
+	[!ATTACKRECT]
+
+	//mkjung 120511 添加。
+	[SET SAVED TARGET]
+		{must1}{int(:)}
+	[!SET SAVED TARGET]
+
+	//mkjung 120511 添加。
+	[MOVE TO TARGET]
+		{must1}{int(:)}
+	[!MOVE TO TARGET]
+
+	{exp}强制将HP更改为指定数值{/exp}[SET HP]
+		{must1}{exp}要设置的HP数值{/exp}{int(0:)}
+	[!SET HP]
+
+	{exp}改变目标的方向{/exp}[SET DIRECTION]
+		{must1}[LEFT]
+		{must1}[RIGHT]
+		{must1}{exp}按当前AI目标改变目标的方向{/exp}[TO TARGET]
+		{must1}[RANDOM]
+		{must1}{exp}将目标的方向改为当前方向的相反方向{/exp}[REVERSE]
+		{must1}{exp}将目标的方向改为我的方向{/exp}[MY DIRECTION]
+		{must1}{exp}将目标的方向改为我的相反方向{/exp}[MY OPPOSITE DIRECTION]
+		//mkjung 120518 添加
+		{must1}[MY CURRENT DIRECTION]
+	[!SET DIRECTION]
+
+	{exp}施法条出现后自动执行指定的行为{/exp}[CASTING]
+		{must1}{exp}施法条持续时间{/exp}{int(:)}
+		{must2}{exp}行为索引{/exp}{int(:)}
+	[!CASTING]
+
+	{exp}即使动作中途改变，施法仍会继续{/exp}[ABS CASTING]
+		{must1}{exp}施法持续时间{/exp}{rndint(0:)}
+		{must2}{exp}行为索引{/exp}{int(:)}
+	[!ABS CASTING]
+
+	{exp}绘制施法条并进行施法{/exp}[CASTING EX]
+		{must1}{exp}施法时间{/exp}{int(0:)}
+		{must2}{exp}施法后要执行的BEHAVIOR索引{/exp}{int(:)}
+		{must3}{exp}一般施法（动作改变则施法中断）{/exp}[NORMAL]
+		{must3}{exp}绝对施法（即使动作改变施法也维持。参考公主动作）{/exp}[ABSOLUTE]
+		{must4}{exp}对目标附着施法条{/exp}[DISPLAY TARGET]
+		{must4}{exp}对我附着施法条{/exp}[DISPLAY ME]
+		{must5}{exp}在屏幕中央下方显示施法条{/exp}[DISPLAY SCREEN]
+		{must6}{exp}施法后调用我的behavior{/exp}[DO ME]
+	[/CASTING EX]
+
+	{exp}改变当前动作。可以立即改变，也可以在当前动作结束后改变（对于被动物体，即使改变动作，该动作结束后也会回到基本动作）{/exp}[SET ACTION]
+		{must1}[STAND]
+		{must1}[DAMAGE]
+		{must1}[HOLD]
+		{must1}[DOWN]
+		{must1}[SIT]
+		{must1}[DIE]
+		{must1}[ATTACK]
+		{must1}[CUSTOM]
+		{must1}[PATTERN]
+
+		{prereq}[STAND]|[HOLD]|[SIT]|[DIE]{/prereq}{must2}{exp}立即改变{/exp}[NOW]
+		{prereq}[STAND]|[HOLD]|[SIT]|[DIE]{/prereq}{must2}{exp}等待当前动作的动画结束后再改变{/exp}[END]
+		
+
+		{prereq}[DAMAGE]{/prereq}{must2}{exp}采取伤害动作的方向{/exp}[DIRECTION]
+		{prereq}[DAMAGE]{/prereq}{must2}{exp}受击延迟恢复{/exp}[HIT DELAY]
+		{prereq}[DAMAGE]{/prereq}{must2}{exp}伤害动作编号 0, 1{/exp}[DAMAGE MOTION]
+		{prereq}[DAMAGE]{/prereq}{must2}{exp}伤害类型{/exp}[HIT TYPE]
+		{prereq}[DAMAGE]{/prereq}{must2}{exp}僵直度{/exp}[RIGIDITY]
+		{prereq}[DAMAGE]{/prereq}{must2}{exp}无视受击延迟恢复，强制僵直的时间（ms）{/exp}[FORCE HIT STUN TIME]
+		{prereq}[DAMAGE]{/prereq}{must2}{exp}击退类型{/exp}[KNOCK BACK TYPE]
+		{prereq}[DAMAGE]{/prereq}{must2}{exp}击退的像素{/exp}[KNOCK BACK PIXEL]
+
+		
+		{prereq}[DIRECTION]{/prereq}{must3}[LEFT]
+		{prereq}[DIRECTION]{/prereq}{must3}[RIGHT]
+		{prereq}[DIRECTION]{/prereq}{must3}[RANDOM]
+		{prereq}[DIRECTION]{/prereq}{must3}[REVERSE]
+		{prereq}[DIRECTION]{/prereq}{must3}[MY DIRECTION]
+		{prereq}[DIRECTION]{/prereq}{must3}[MY OPPOSITE DIRECTION]
+		{prereq}[DIRECTION]{/prereq}{must4}{exp}立即改变{/exp}[NOW]
+		{prereq}[DIRECTION]{/prereq}{must4}{exp}等待当前动作的动画结束后再改变{/exp}[END]
+
+		{prereq}[HIT DELAY]|[DAMAGE MOTION]|[RIGIDITY]|[FORCE HIT STUN TIME]|[KNOCK BACK PIXEL]{/prereq}{must3}{int(:)}
+		{prereq}[HIT DELAY]|[DAMAGE MOTION]|[RIGIDITY]|[FORCE HIT STUN TIME]|[KNOCK BACK PIXEL]{/prereq}{must4}{exp}立即改变{/exp}[NOW]
+		{prereq}[HIT DELAY]|[DAMAGE MOTION]|[RIGIDITY]|[FORCE HIT STUN TIME]|[KNOCK BACK PIXEL]{/prereq}{must4}{exp}等待当前动作的动画结束后再改变{/exp}[END]
+
+		{prereq}[HIT TYPE]{/prereq}{must3}{exp}击倒效果{/exp}[KNOCK]
+		{prereq}[HIT TYPE]{/prereq}{must3}{exp}斩击效果{/exp}[SLASH]
+		{prereq}[HIT TYPE]{/prereq}{must3}{exp}燃烧效果{/exp}[BURN]
+		{prereq}[HIT TYPE]{/prereq}{must3}{exp}自定义效果{/exp}[CUSTOM]
+		{prereq}[HIT TYPE]{/prereq}{must3}{exp}法力燃烧效果{/exp}[MANA BURN]
+
+		{prereq}[KNOCK BACK TYPE]{/prereq}{must3}{exp}一般{/exp}[NORMAL]
+		{prereq}[KNOCK BACK TYPE]{/prereq}{must3}{exp}向后较大击退{/exp}[KNOCK BACK]
+		{prereq}[KNOCK BACK TYPE]{/prereq}{must3}{exp}向后较小击退{/exp}[SHORT KNOCK BACK]
+		{prereq}[KNOCK BACK TYPE]{/prereq}{must3}{exp}150ms内向后击退。移动中僵直解除则移动也停止{/exp}[PIXEL WITHOUT DAMAGE TIME]
+		{prereq}[KNOCK BACK TYPE]{/prereq}{must3}{exp}不向后击退{/exp}[NOT BACK]
+		{prereq}[HIT TYPE]|[KNOCK BACK TYPE]{/prereq}{must4}{exp}立即改变{/exp}[NOW]
+		{prereq}[HIT TYPE]|[KNOCK BACK TYPE]{/prereq}{must4}{exp}等待当前动作的动画结束后再改变{/exp}[END]
+
+		{prereq}[DOWN]{/prereq}{must2}{exp}中立方向{/exp}[DEFAULT]
+		{prereq}[DOWN]{/prereq}{must2}{exp}左侧方向{/exp}[LEFT]
+		{prereq}[DOWN]{/prereq}{must2}{exp}右侧方向{/exp}[RIGHT]
+		{prereq}[DOWN]{/prereq}{must2}{exp}随机（左，右中选择）{/exp}[RANDOM]
+		{prereq}[DOWN]{/prereq}{must2}{exp}当前施放者的方向{/exp}[MY DIRECTION]
+		{prereq}[DOWN]{/prereq}{must2}{exp}当前施放者的相反方向{/exp}[MY OPPOSITE DIRECTION]
+
+		{prereq}[DOWN]{/prereq}{must3}{exp}内部使用的参数。默认 0{int(0:2)}
+		{prereq}[DOWN]{/prereq}{must4}{exp}使用向后击飞的力和向上浮起的力{/exp}[FORCE]
+		{prereq}[DOWN]{/prereq}{must4}{exp}施加力量但不立即使用，而是在地面弹起时使用{/exp}[BOUNCE]
+		{prereq}[DOWN]{/prereq}{must4}{exp}输入向后击飞的速度和向上浮起的高度{/exp}[VALUE]
+		{prereq}[FORCE]|BOUNCE[]|[VALUE]{/prereq}{must5}{exp}[FORCE], [BOUNCE]：向后击飞的力，[VALUE]：向后击飞的速度（像素/s）{/exp}{int(:)}
+		{prereq}[FORCE]|BOUNCE[]|[VALUE]{/prereq}{must6}{exp}[FORCE], [BOUNCE]：向上浮起的力，[VALUE]：向上浮起的高度（像素）{/exp}{int(:)}
+		{prereq}[FORCE]|BOUNCE[]|[VALUE]{/prereq}{must7}{exp}立即改变{/exp}[NOW]
+		{prereq}[FORCE]|BOUNCE[]|[VALUE]{/prereq}{must7}{exp}等待当前动作的动画结束后再改变{/exp}[END]
+		
+
+		{prereq}[ATTACK]|[CUSTOM]|[PATTERN]{/prereq}{must2}{exp}索引{/exp}{rndint(:)}
+		{prereq}[ATTACK]|[CUSTOM]|[PATTERN]{/prereq}{must3}{exp}立即改变{/exp}[NOW]
+		{prereq}[ATTACK]|[CUSTOM]|[PATTERN]{/prereq}{must3}{exp}等待当前动作的动画结束后再改变{/exp}[END]
+	[!SET ACTION]
+	
+	
+
+	{exp}强制设置此动作的动画帧{/exp}[SET FRAME]
+		{must1}{exp}要设置的动画帧索引{/exp}{int(0:)}
+	[!SET FRAME]
+
+	{exp}输出台词{/exp}[SAY SPEECH]
+		{must1}{exp}要输出的台词{/exp}{string}
+	[!SAY SPEECH]
+
+	{exp}在该位置输出台词{/exp}[SAY SPEECH WITH POSITION]
+		{must1}{exp}要输出的台词{/exp}{string}
+		{must2}{exp}输出台词的X坐标{/exp}{int(:)}
+		{must3}{exp}输出台词的Y坐标{/exp}{int(:)}
+	[!SAY SPEECH WITH POSITION]
+	
+	{exp}震动屏幕{/exp}[SHAKING]
+		{must1}{exp}强度{/exp}{int(0:)}
+		{must2}{exp}持续时间（ms）{/exp}{int(0:)}
+	[!SHAKING]
+	
+	{exp}是否显示摇晃输入{/exp}[SHAKE INPUT]
+		{must1}[ON]
+		{must1}[OFF]
+	[!SHAKE INPUT]
+
+	{exp}目标被抓取时，将抓取动画与伤害动作互相替换{/exp}{etc}[FLIP HOLD ANIMATION]
+	{exp}强制攻击位于该坐标的物体，无任何理由进行HIT{/exp}[APPEND HIT]
+		{must1}{exp}X坐标{/exp}{int(:)}
+		{must2}{exp}Y坐标{/exp}{int(:)}
+		{must3}{exp}Z坐标{/exp}{int(:)}
+	[!APPEND HIT]
+
+	{exp}保存当前的位置（X,Y,Z坐标）。与[LOAD POSITION]标签一起使用{/exp}{etc}[SAVE POSITION]
+
+	//mkjung 120511 修改。（END标签opt处理）
+	//mkjung 120516 修改（tag all opt处理）
+	{exp}强制指定目标的位置（按帧单位）。END为X：固定在一个位置。END为O：在START->END之间移动{/exp}[SET POS FORCE]
+			
+		{opt1}{exp}设置X坐标起始点{/exp}[X START]
+			{must1}{exp}可随机{/exp}{rndint(:)}
+		[!X START]
+		
+		{opt2}{exp}设置X坐标结束点{/exp}[X END]
+			{must1}{exp}可随机{/exp}{rndint(:)}
+		[!X END]
+
+		{opt3}{exp}设置Y坐标起始点{/exp}[Y START]
+			{must1}{exp}可随机{/exp}{rndint(:)}
+		[!Y START]
+		
+		{opt4}{exp}设置Y坐标结束点{/exp}[Y END]
+			{must1}{exp}可随机{/exp}{rndint(:)}
+		[!Y END]
+		
+		{opt5}{exp}设置Z坐标起始点{/exp}[Z START]
+			{must1}{exp}可随机{/exp}{rndint(:)}
+		[!Z START]
+		
+		{opt6}{exp}设置Z坐标结束点{/exp}[Z END]
+			{must1}{exp}可随机{/exp}{rndint(:)}
+		[!Z END]
+
+		{opt7}{exp}坐标基准X轴移动是否按自己朝向的方向{/exp}{etc}[USE MY DIRECTION]
+		
+		//三者选一
+		{opt8}{exp}指定相对坐标移动是否以自己的坐标为基准（默认是目标坐标）{/exp}{etc}[USE MY BASEPOS]
+		{opt8}{exp}相对坐标移动以目标的坐标为基准{/exp}{etc}[USE TARGET POS]
+		{opt8}{exp}坐标移动使用地图绝对坐标{/exp}{etc}[USE MAP POS]
+		
+		{opt9}{exp}不参照物体的方向{/exp}{etc}[NOT USE OBJECT DIRECTION]
+
+		//三者选一
+		{opt10}{exp}向目标坐标匀速移动{/exp}{etc}[MOVE UNIFORM]
+		{opt10}{exp}向目标坐标加速移动{/exp}{etc}[MOVE ACCELATE]
+		{opt10}{exp}向目标坐标减速移动{/exp}{etc}[MOVE REDUCE]
+		
+		//二者选一
+		{opt11}{exp}移动自己{/exp}{etc}[MOVE ME]
+		{opt11}{exp}移动目标{/exp}{etc}[MOVE TARGET]
+	[/SET POS FORCE]
+
+	{exp}发送消息{/exp}[SEND MESSAGE]
+		{must1}[ATTACK_COMMAND]
+		{must1}[MOVE_COMMAND]
+		{must1}[ETC_COMMAND]
+		{must1}[DIE_COMMAND]
+		{must2}{exp}索引{/exp}{int(:)}
+		//mkjung 120512 修改 - 目标、命令持续时间参数，所有命令都进行相应opt处理。
+		//{prereq}[ETC_COMMAND]{/prereq}{must3}{exp}目标（1:发送方，0:接收方）{/exp}{int(0:1)}
+		//{prereq}[ETC_COMMAND]{/prereq}{must4}{exp}命令持续时间{/exp}{int(0:)}
+		{opt1}{exp}目标（1:发送方，0:接收方）{/exp}{int(0:1)}
+		{opt2}{exp}命令持续时间{/exp}{int(0:)}
+	[!SEND MESSAGE]
+
+	{exp}删除怪物的相应目录属性{/exp}[REMOVE CATEGORY]
+		//mkjung 120703 仅使用FIXTURE
+		//{must1}索引{int(0:)}
+		//mkjung 120514 添加。
+		{must1}{exp}固定型怪物的情况下，静止的怪物会开始移动{/exp}[FIXTURE]
+	[!REMOVE CATEGORY]
+
+	{exp}插入怪物的相应目录属性{/exp}[ADD CATEGORY]
+		//mkjung 120703 仅使用FIXTURE
+		//{must1}索引{int(0:)}
+		//mkjung 120511 添加。
+		{must1}{exp}具有固定型目录的怪物情况下，怪物会停止{/exp}[FIXTURE]
+	[!ADD CATEGORY]
+
+	{exp}状态异常{/exp}[ACTIVE STATUS]
+		//mkjung 120521
+		//ActionScript脚本格式统一更改-->('[x]' => [x])
+		//{must1}{exp}ACTIVE STATUS ID{/exp}{string}-> [tag]
+				
+		//{must1}{exp}缓慢{/exp}[slow]
+		//{must1}{exp}冰冻{/exp}[freeze]
+		//{must1}{exp}中毒{/exp}[poison]		//ACTIVESTATUS_POISON
+		//{must1}{exp}眩晕{/exp}[stun]			//ACTIVESTATUS_STUN
+		//{must1}{exp}诅咒{/exp}[curse]		//ACTIVESTATUS_CURSE
+		//{must1}{exp}失明{/exp}[blind]		//ACTIVESTATUS_BLIND
+		//{must1}{exp}感电{/exp}[lightning]		//ACTIVESTATUS_LIGHTNING
+		//{must1}{exp}石化{/exp}[stone]		//ACTIVESTATUS_STONE
+		//{must1}{exp}睡眠{/exp}[sleep]		//ACTIVESTATUS_SLEEP
+		//{must1}{exp}灼伤{/exp}[burn]		//ACTIVESTATUS_BURN
+		//{must1}{exp}武器破坏{/exp}[weapon break]	//ACTIVESTATUS_WEAPON_BREAK
+		//{must1}{exp}出血{/exp}[bleeding]		//ACTIVESTATUS_BLEEDING
+		//{must1}{exp}加速{/exp}[haste]		//ACTIVESTATUS_HASTE
+		//{must1}{exp}祝福{/exp}[bless]		//ACTIVESTATUS_BLESS
+		//{must1}{exp}属性强化{/exp}[element]			//ACTIVESTATUS_ELEMENT
+		//{must1}{exp}混乱{/exp}[confuse]		//ACTIVESTATUS_CONFUSE
+		//{must1}{exp}束缚{/exp}[hold]			//ACTIVESTATUS_HOLD
+		//{must1}{exp}护甲破坏{/exp}[armor break]	//ACTIVESTATUS_ARMOR_BREAK
+
+		//{must1}{string}
+		//{must2}{exp}概率{/exp}{int(0:)}
+		//{must3}{exp}等级{/exp}{int(0:)}
+		//{must4}{exp}持续时间{/exp}{int(0:)}
+		//mkjung 120511 修改
+		//[burn],[bless],[curse]的情况下
+		//输入4个int值。
+		//{opt1}{int(0:)}
+		//{opt2}{int(0:)}
+		//{opt3}{int(0:)}
+		//{opt4}{int(0:)}
+		
+		//mkjung 120704
+		//参考DNF Client Source结构变更。
+		//ACTIVESTATUS_SLOW
+		{must1}{exp}缓慢{/exp}[slow]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}移动速度（%）{/exp}{int(0:)}
+			{must5}{exp}攻击速度（%）{/exp}{int(0:)}
+		[!slow]
+		
+		//ACTIVESTATUS_FREEZE
+		{must1}{exp}冰冻{/exp}[freeze]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+		[!freeze]
+
+		{must1}{exp}中毒{/exp}[poison]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}伤害{/exp}{int(0:)}
+		[!poison]
+
+		{must1}{exp}眩晕{/exp}[stun]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}伤害{/exp}{int(0:)}
+		[!stun]
+
+		{must1}{exp}诅咒{/exp}[curse]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}力量{/exp}{int(0:)}
+			{must5}{exp}体力{/exp}{int(0:)}
+			{must6}{exp}智力{/exp}{int(0:)}
+			{must7}{exp}精神{/exp}{int(0:)}
+		[!curse]
+
+		{must1}{exp}失明{/exp}[blind]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}视野（%）{/exp}{int(0:)}
+			{must5}{exp}硬直率增加（+）{/exp}{int(0:)}
+		[!blind]
+
+		{must1}{exp}感电{/exp}[lightning]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must3}{exp}伤害{/exp}{int(0:)}
+		[!lightning]
+
+		{must1}{exp}石化{/exp}[stone]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}伤害{/exp}{int(0:)}
+		[!stone]
+
+		{must1}{exp}睡眠{/exp}[sleep]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+		[!sleep]
+		
+		{must1}{exp}灼伤{/exp}[burn]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}伤害{/exp}{int(0:)}
+			{must5}{exp}周围伤害{/exp}{int(0:)}
+			{must6}{exp}周围伤害选项（1则仅对敌军应用周围伤害）{/exp}{int(0:)}
+			{must7}{exp}周围伤害应用间隔（时间）{/exp}{int(0:)}
+		[!burn]
+
+		{must1}{exp}武器破坏{/exp}[weapon break]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}耐久度消耗检查次数{/exp}{int(0:)}
+		[!weapon break]
+
+		{must1}{exp}出血{/exp}[bleeding]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}伤害{/exp}{int(0:)}
+		[!bleeding]
+
+		{must1}{exp}加速{/exp}[haste]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}移动速度（%）{/exp}{int(0:)}
+			{must5}{exp}攻击速度（%）{/exp}{int(0:)}
+		[!haste]
+
+		{must1}{exp}祝福{/exp}[bless]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}力量{/exp}{int(0:)}
+			{must5}{exp}体力{/exp}{int(0:)}
+			{must6}{exp}智力{/exp}{int(0:)}
+			{must7}{exp}精神{/exp}{int(0:)}
+		[!bless]
+
+		//mkjung 120704 [weakness]-->[element] 更改
+		//参考TuningProc.h确认。
+		//RDARScriptAction.cpp 审核。
+		{must1}{exp}属性强化{/exp}[element]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}伤害减少比率（以剩余HP为基准）{/exp}{int(0:)}
+		[!element]
+
+		{must1}{exp}混乱{/exp}[confuse]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}1则怪物陷入混乱时，攻击同伙{/exp}{int(0:)}
+		[!confuse]
+
+		{must1}{exp}束缚{/exp}[hold]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+		[!hold]
+
+		{must1}{exp}护甲破坏{/exp}[armor break]
+			{must1}{exp}概率{/exp}{int(0:)}
+			{must2}{exp}等级{/exp}{int(0:)}
+			{must3}{exp}持续时间{/exp}{int(0:)}
+			{must4}{exp}耐久度消耗检查次数{/exp}{int(0:)}
+		[!armor break]
+	[!ACTIVE STATUS]
+
+	//mkjung 120413 修改。（childdata标签添加。）
+	//mkjung 120511 [DELETE APPENDAGE] tag 添加。
+	[APPENDAGE],[MASTER APPENDAGE],[DELETE APPENDAGE]
+		{childdata1}{exp}时间{/exp}{int(0:)}
+		{prereq}[MASTER APPENDAGE]{/prereq}{childdata2}{exp}范围{/exp}{int(0:)}
+		{prereq}[MASTER APPENDAGE]{/prereq}{childdata3}{exp}以我方队伍为目标{/exp}[MY TEAM]
+		{prereq}[MASTER APPENDAGE]{/prereq}{childdata3}{exp}以敌方队伍为目标{/exp}[ENEMY TEAM]
+		{prereq}[MASTER APPENDAGE]{/prereq}{childdata3}{exp}以怪物队伍为目标{/exp}[MONSTER TEAM]
+		{prereq}[MASTER APPENDAGE]{/prereq}{childdata3}{exp}以角色队伍为目标{/exp}[CHARACTER TEAM]
+
+		{opt1}[physical attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!physical attack]
+
+		{opt2}[magical attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!magical attack]
+
+		{opt3}[physical defense]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!physical defense]
+		
+		{opt4}[magical defense]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!magical defense]
+
+		{opt5}[equipment physical attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!equipment physical attack]
+
+		{opt6}[equipment physical defense]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!equipment physical defense]
+
+		{opt7}[jump power]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!jump power]
+
+		{opt8}[attack speed]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!attack speed]
+
+		{opt9}[move speed]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!move speed]
+
+		{opt10}[cast speed]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!cast speed]
+
+		{opt11}[hp max]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!hp max]
+
+		{opt12}[hp regen rate]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!hp regen rate]
+		
+		{opt13}[magical critical hit rate]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!magical critical hit rate]
+
+		{opt14}[physical critical hit rate]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!physical critical hit rate]
+
+		{opt15}[physical back attack critical rate]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!physical back attack critical rate]
+
+		{opt16}[magical back attack critical rate]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!magical back attack critical rate]
+
+		{opt17}[fire element]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!fire element]
+
+		{opt18}[water element]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!water element]
+
+		{opt19}[dark element]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!dark element]
+		
+		{opt20}[light element]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!light element]
+
+		{opt21}[stuck]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!stuck]
+
+		{opt22}[good hit]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!good hit]
+
+		{opt23}[mp regen rate]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!mp regen rate]
+
+		{opt24}[hit recovery]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!hit recovery]
+
+		{opt25}[equipment magical attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!equipment magical attack]
+
+		{opt26}[equipment magical defense]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!equipment magical defense]
+
+		{opt27}[all active status resistance]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!all active status resistance]
+
+		{opt28}[all element]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!all element]
+
+		{opt29}[fire element attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!fire element attack]
+
+		{opt30}[water element attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!water element attack]
+
+		{opt31}[dark element attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!dark element attack]
+
+		{opt32}[light element attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!light element attack]
+
+		{opt33}[all element attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!all element attack]
+
+		{opt34}[separate physical attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!separate physical attack]
+
+		{opt35}[separate magical attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!separate magical attack]
+
+		{opt36}[separate all attack]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!separate all attack]
+
+		{opt37}[antievil]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!antievil]
+
+		{opt38}[physical absolute damage]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!physical absolute damage]
+
+		{opt39}[village moving speed]
+			{must1}[+]
+			{must1}[%]
+			{must2}{float(:)}
+		[!village moving speed]
+	[/APPENDAGE],[/MASTER APPENDAGE],[/DELETE APPENDAGE]
+
+	{exp}在停止时间内设置身体颜色（颜色值）{/exp}[SET COLOR]
+		{must1}{exp}Red{/exp}{int(0:255)}
+		{must2}{exp}Green{/exp}{int(0:255)}
+		{must3}{exp}Blue{/exp}{int(0:255)}
+	[!SET COLOR]
+
+	[ICE APPENDAGE]
+		{must1}{exp}伤害{/exp}{int(0:)}
+		{must2}{exp}范围{/exp}{int(0:)}
+		{must3}{exp}伤害间隔{/exp}{int(0:)}
+	[!ICE APPENDAGE]
+
+	[CURSE APPENDAGE]
+		{must1}{exp}伤害{/exp}{int(0:)}
+		{must2}{exp}范围{/exp}{int(0:)}
+		{must3}{exp}伤害间隔{/exp}{int(0:)}
+		{must4}{exp}诅咒间隔{/exp}{int(0:)}
+	[!CURSE APPENDAGE]
+
+	[MIND CONTROL APPENDAGE]
+		{must1}{exp}等级{/exp}{int(0:)}
+		{must2}{exp}朝一定方向移动的时间{/exp}{int(0:)}
+		{must3}{exp}持续时间{/exp}{int(0:)}
+	[!MIND CONTROL APPENDAGE]
+
+	{exp}念动力附加效果，极限祭坛的阿伽门农使用{/exp}[TELEKINESIS APPENDAGE]
+		{must1}{exp}伤害{/exp}{int(0:)}
+		{must2}{exp}范围{/exp}{int(0:)}
+		{must3}{exp}伤害间隔{/exp}{int(0:)}
+		{must4}{exp}附加效果维持时间（ms）{/exp}{int(0:)}
+		{must5}{exp}操纵失败时坚持的时间（ms）{/exp}{int(0:)}
+		{must6}{exp}升力变动值0~3（像素/s^2）{/exp}{int(0:)}
+		{must7}{exp}掉落地面时的伤害{/exp}{int(0:)}
+		{must8}{exp}成功时调用的攻击动作索引{/exp}{int(0:)}
+		{must8}{exp}失败时调用的攻击动作索引{/exp}{int(0:)}
+	[!TELEKINESIS APPENDAGE]
+
+	{exp}感染附加效果，异界缝隙的茵瑟特使用{/exp}[INFECTION APPENDAGE]
+		{must1}{exp}识别物体索引{/exp}{int(:)}
+		{must2}{exp}物体受击时上升的槽数{/exp}{int(0:)}
+		{must3}{exp}5格以上满时下次打击造成的伤害{/exp}{int(:)}
+		{must4}{exp}感染槽减少一格的时间{/exp}{int(0:)}
+		{must5}{exp}附加效果持续时间{/exp}{int(0:)}
+	[!INFECTION APPENDAGE]
+
+	{exp}怪物是否看向AI目标的决定标志{/exp}[CHANGE DIRECTION BY TARGET]
+		{must1}{exp}0：则维持AI目标最初生成时看向的方向{/exp}{int(0:)}
+	[!CHANGE DIRECTION BY TARGET]
+
+	{exp}疾病附加效果，痛苦之村的莱斯芬中狄瑞吉使用{/exp}[DISEASE APPENDAGE]
+		{must1}{exp}疾病持续时间{/exp}{int(0:)}
+		{must2}{exp}疾病伤害{/exp}{int(:)}
+		{must3}{exp}疾病感染范围{/exp}{int(:)}
+		{must4}{exp}暴露在疾病下X秒后感染{/exp}{int(0:)}
+	[!DISEASE APPENDAGE]
+
+	{exp}1则看向移动的方向移动，0则看向AI目标移动{/exp}[IS DIRECTION TO MOVE]
+		{must1}{exp}（默认为0）{/exp}{int(0:)}
+	[!IS DIRECTION TO MOVE]
+
+
+	{exp}更改与特定动作匹配的动作文件{/exp}[CHANGE ACTION FILE]
+		{must1}[STAY]
+		{must1}[DOWN]
+		{must1}[DAMAGE]
+		{must1}[ATTACK]
+		{must1}[CUSTOM]
+		{must1}[DEFAULT]
+		{must1}[PROC]
+		//mkjung 120511 添加。
+		{must1}[MOVE]
+		{must1}[LAST]
+		{must1}[MOVEBACK]
+		{must1}[DASH]
+		{must1}[DASHATTACK]
+		{must1}[JUMP]
+		{must1}[JUMPATTACK]
+		//mkjung 120515 [OVERTURN], [SIT] 添加。
+		{must1}[OVERTURN]
+		{must1}[SIT]
+		{prereq}[OVERTURN]|[SIT]|[MOVE]|[LAST]|[MOVEBACK]|[DASH]|[DASHATTACK]|[JUMP]|[JUMPATTACK]|[STAY]|[DOWN]|[DEFAULT]|[PROC]{/prereq}{must2}{exp}动作文件名{/exp}{string}
+		{prereq}[DAMAGE]{/prereq}{must2}{exp}伤害动作索引{/exp}{int(0:1)}
+		{prereq}[ATTACK]|[CUSTOM]{/prereq}{must2}{exp}索引{/exp}{int(:)}
+		{prereq}[DAMAGE]|[ATTACK]|[CUSTOM]{/prereq}{must3}{exp}要更改的动作文件名{/exp}{string}
+	[!CHANGE ACTION FILE]
+
+	{exp}创建动画并附加{/exp}[ADD LAYER ANIMATION]
+		{must1}{exp}动画路径（Script/之后的路径）{/exp}{string}
+		{must2}{exp}图层索引{/exp}{int(0:)}
+	[!ADD LAYER ANIMATION]
+
+	{exp}将被抓取目标的动画更改为翻身动画{/exp}{etc}[SET OVERTURN]
+	
+	{exp}将被抓取目标的动画更改为伤害动画{/exp}[SET HOLD DAMAGEANI]
+		{must1}{exp}输入0则为0号伤害动作，输入1则为1号伤害动作{/exp}{int(0:1)}
+	[!SET HOLD DAMAGEANI]
+	
+	{exp}将被抓取目标的动画更改为倒地动画{/exp}{etc}[SET HOLD DOWNANI]
+	
+	[WIND APPENDAGE]
+		{must1}{exp}X轴移动速度（小数）{/exp}{float(:)}
+		{must2}{exp}Y轴移动速度（小数）{/exp}{float(:)}
+		{must3}{exp}X轴移动方向（0：不移动，1：右侧，2：左侧）{/exp}{int(0:2)}
+		{must4}{exp}Y轴移动方向（0：不移动，1：上方，2：下方）{/exp}{int(0:2)}
+		{must5}{exp}时间{/exp}{int(0:)}
+	[!WIND APPENDAGE]
+
+	{exp}对目标吸引角色队伍{/exp}[PULL APPENDAGE]
+		{must1}{exp}x轴强度{/exp}{float(:)}
+		{must2}{exp}y轴强度{/exp}{float(:)}
+		{must3}{exp}时间（输入负值则以速度WIND模式进行。速度模式必须设置6以上）{/exp}{int(0:)}
+	[!PULL APPENDAGE]
+
+	{exp}对目标吸引角色队伍（扩展版本）{/exp}[PULL APPENDAGE EX]
+		{opt1}[SPEED]
+			{must1}{exp}x轴强度{/exp}{float(:)}
+			{must2}{exp}y轴强度{/exp}{float(:)}
+		[!SPEED]
+		{opt2}[VALIDTIME]
+			{must1}{exp}时间{/exp}{int(:)}
+		[!VALIDTIME]
+		{opt3}{exp}吸引的原点是否以目标为准{/exp}[USE TARGET]
+			{must1}{exp}（1：目标，0：动作父级）{/exp}{int(0:1)}
+		[!USE TARGET]
+		{opt4}{exp}偏移坐标（不写则默认0）{/exp}[OFFSET POS]
+			{must1}{int(:)}
+			{must2}{int(:)}
+		[!OFFSET POS]
+		{opt5}{exp}吸引所需的最小范围（不写则默认30）{/exp}[MIN DISTANCE]
+			{must1}{int(0:)}
+		[!MIN DISTANCE]
+	[/PULL APPENDAGE EX]
+
+
+	[COLOR CHANGE EFFECT]
+		{opt1}{exp}蓝色起始值{/exp}[EFFECT BLUE START]
+			{must1}{exp}不输入数据则为0{/exp}{int(0:255)}
+		[!EFFECT BLUE START]
+		//mkjung 120516 [EFFECT BLUE END] 添加。
+		{opt2}{exp}蓝色结束值{/exp}[EFFECT BLUE END]
+			{must1}{exp}不输入数据则为0{/exp}{int(0:255)}
+		[!EFFECT BLUE END]
+		
+		//mkjung 120516 [EFFECT RED START] 添加。
+		{opt3}{exp}红色起始值{/exp}[EFFECT RED START]
+			{must1}{exp}不输入数据则为0{/exp}{int(0:255)}
+		[!EFFECT RED START]
+		{opt4}{exp}红色结束值{/exp}[EFFECT RED END]
+			{must1}{exp}不输入数据则为0{/exp}{int(0:255)}
+		[!EFFECT RED END]
+
+		//mkjung 120516 [EFFECT GREEN START], [EFFECT GREEN END] 添加。
+		{opt5}{exp}红色起始值{/exp}[EFFECT GREEN START]
+			{must1}{exp}不输入数据则为0{/exp}{int(0:255)}
+		[!EFFECT GREEN START]
+		{opt6}{exp}红色结束值{/exp}[EFFECT GREEN END]
+			{must1}{exp}不输入数据则为0{/exp}{int(0:255)}
+		[!EFFECT GREEN END]
+
+
+		//mkjung 120516 [EFFECT ALPHA START] 添加
+		{opt7}{exp}Alpha起始值{/exp}[EFFECT ALPHA START]
+			{must1}{exp}不输入数据则为0{/exp}{int(0:255)}
+		[!EFFECT ALPHA START]
+		{opt8}{exp}Alpha结束值{/exp}[EFFECT ALPHA END]
+			{must1}{exp}不输入数据则为0{/exp}{int(0:255)}
+		[!EFFECT ALPHA END]
+		
+		{opt9}{exp}起始缩放比例值（%）{/exp}[CHANGE SIZE START]
+			{must1}{exp}不指定则从之前设定的值开始{/exp}{int(0:100)}
+		[!CHANGE SIZE START]
+		{opt10}{exp}1最终缩放比例值（%）{/exp}[CHANGE SIZE END]
+			{must1}{int(0:100)}
+		[!CHANGE SIZE END]
+		
+		{opt10}{exp}设置变化的时间。（1/1000秒单位 例：4000：经过4秒变化）{/exp}[CHANGE TIME]
+			{must1}{int(0:)}
+		[!CHANGE TIME]
+		
+		{opt11}{exp}变形效果维持的时间{/exp}[LIFE TIME]
+			{must1}{exp}指定为0则直到怪物消失为止（或直到进行新的颜色变化效果为止）持续维持{/exp}{int(0:)}
+		[!LIFE TIME]
+	[/COLOR CHANGE EFFECT]
+	
+	{exp}对特定目标附加调整HP的附加效果{/exp}[HP APPENDAGE]
+		{must1}{exp}时间{/exp}{int(0:)}
+		{must2}{exp}范围{/exp}{int(0:)}
+		{must3}{exp}对我方队伍{/exp}[MY TEAM]
+		{must3}{exp}对敌方队伍{/exp}[ENEMY TEAM]
+		{must3}{exp}对怪物队伍{/exp}[MONSTER TEAM]
+		{must3}{exp}对角色队伍{/exp}[CHARACTER TEAM]
+		{must3}{exp}对地图上所有人{/exp}[ALL]
+		{must4}{exp}应用方法（%）{/exp}[%]
+		{must4}{exp}应用方法（+）{/exp}[+]
+		{must5}{exp}基准hp（HP）{/exp}[HP]
+		{must5}{exp}基准hp（HP MAX）{/exp}[HP MAX]
+		{must6}{exp}应用量{/exp}{int(:)}
+		{must7}{exp}应用间隔{/exp}{int(:)}
+	[/HP APPENDAGE]
+
+	{exp}整个屏幕闪烁{/exp}[FLASH SCREEN],[FLASH SCREEN EX]
+		{must1}{exp}变为期望颜色的时间{/exp}{int(0:)}
+		{must2}{exp}变化维持的时间{/exp}{int(0:)}
+		{must3}{exp}恢复原状的时间{/exp}{int(0:)}
+		{must4}{exp}最大Alpha值（透明度）{/exp}{int(0:)}
+		{must5}{exp}想要改变的red色{/exp}{int(0:255)}
+		{must6}{exp}想要改变的green色{/exp}{int(0:255)}
+		{must7}{exp}想要改变的blue值色{/exp}{int(0:255)}
+		{prereq}[FLASH SCREEN EX]{/prereq}{must8}{exp}变化显示的图层 <0（近界），1（近景），2（中景），3（远景）>{/exp}{int(0:3)}
+	[!FLASH SCREEN],[!FLASH SCREEN EX]
+
+	{exp}用户使用抓取技能时，该怪物是否适用抓取技能{/exp}[SET GRABABLE]
+		{must1}{exp}1（设置为可被抓取），0（设置为不可被抓取）{/exp}{int(0:1)}
+	[!SET GRABABLE]
+	
+	{exp}开始伤害检查（action文件）{/exp}[SET DAMAGE CHECK]
+		{must1}{exp}1则开始伤害检查，0则停止伤害检查{/exp}{int(0:1)}
+		{must2}{exp}检查时间{/exp}{int(0:)}
+	[!SET DAMAGE CHECK]
+		
+	{exp}将[etc motion]中的一个动画作为当前动作的子动画附加{/exp}[ADD LAYER]
+		{must1}{exp}图层的索引值{/exp}{int(0:)}
+		{must2}{exp}[etc motion]中动画的索引值{/exp}{int(0:)}
+		//mkjung 120516 X,Y坐标 int->rndint 修改。
+		{must3}{exp}要附加的LAYER的X坐标{/exp}{rndint(:)}
+		{must4}{exp}要附加的LAYER的Y坐标{/exp}{rndint(:)}
+	[!ADD LAYER]
+
+	{exp}分离附加为子动画的[etc motion]动画{/exp}[REMOVE LAYER]
+		{must1}{exp}通过[ADD LAYER]附加的[etc motion]中动画的索引值{/exp}{int(0:)}
+	[!REMOVE LAYER]
+	
+	{exp}设置目标的外轮廓线{/exp}[SET OUTLINE]
+		{must1}{exp}1：绘制，0：擦除{/exp}{int(0:1)}
+		{must2}{exp}Red{/exp}{int(0:255)}
+		{must3}{exp}Green{/exp}{int(0:255)}
+		{must4}{exp}Blue{/exp}{int(0:255)}
+		{must5}{exp}轮廓线粗细（默认值2）{/exp}{int(0:)}
+	[!SET OUTLINE]	
+	
+	//mkjung 0521 修改。
+	{exp}改变路径类型（仅限被动物体）{/exp}[SET PASSTYPE]
+		//{opt1}{string}
+		{opt1}{exp}全部通过{/exp}[pass all]
+		{opt2}{exp}仅浮游型通过{/exp}[pass only float type]
+		{opt3}{exp}无法通过{/exp}[do not pass]
+		{opt4}{exp}仅红队可通过（用于混沌）{/exp}[pass only red team]
+		{opt5}{exp}仅蓝队可通过（用于混沌）{/exp}[pass only blue team]
+	[!SET PASSTYPE]
+	
+	{exp}为了检查该物体是否卡在特定地点、物体等，指定目标的宽度（怪物被动物体均可使用）{/exp}[SET WIDTH]
+		{must1}{exp}xWidth{/exp}{int(0:)}
+		{must2}{exp}yWidth{/exp}{int(0:)}
+	[!SET WIDTH]	
+	
+	{exp}随机更改AI目标{/exp}{etc}[SET RANDOM TARGET]
+	
+	//mkjung 120704 修改。
+	//①必需输入1：队伍槽（队员）的索引（PARTY_PLAYER_MAX = 4 （索引：0~3））
+	//②必需输入2：一般设置、绝对设置模式下的队伍目标设定与否
+
+	//（下一位角色的目标设定与否）
+	//- 一般设置模式（0,1）的情况：怪物若无法更改目标设置，则无法设定目标。
+	//- 绝对设置模式（2,3）：即使怪物无法更改目标设置，也进行目标设定。
+
+	//该槽索引的队员不存在时
+	//-0：不对下一位角色进行目标设定。
+	//-1：（一般设置模式）对下一位角色进行目标设定。
+	//-2：不对下一位角色进行目标设定。
+	//-3：（绝对设置模式）对下一位角色进行目标设定。
+	{exp}将AI目标更改为特定队员{/exp}[SET PARTY TARGET]
+		{must1}{exp}队伍槽（队员）的索引（0~3）{/exp}{int(0:3)}
+		{must2}{exp}该索引没有队员时是否对下一位角色进行目标设定（一般设置模式（0:不改变，1:改变），绝对设置模式（2:不改变，3:改变））{/exp}{int(0:3)}
+	[!SET PARTY TARGET]
+
+	{exp}在范围内恢复时造成伤害。必须用DISTANCE检查后使用{/exp}[HELLOFHEAL APPENDAGE]
+		{must1{exp}倍数（200则为2倍）{/exp}}{int(0:)}
+		{must2}{exp}应用间隔（1000则为1秒）{/exp}{int(0:)}
+	[!HELLOFHEAL APPENDAGE]
+
+	[THORNS APPENDAGE]
+		{must1}{exp}决定愤怒等级增减的时间间隔{/exp}{int(0:)}
+		{must2}{exp}火焰伤害反射率（%）{/exp}{int(0:)}
+		{must3}{exp}愤怒炸弹爆炸所需的连续打击次数{/exp}{int(0:)}
+		{must4}{exp}愤怒炸弹的打击次数减少间隔{/exp}{int(0:)}
+		{must5}{exp}愤怒炸弹的等级{/exp}{int(0:)}
+		{must6}{exp}愤怒等级下降所需的打击数{/exp}{int(0:)}
+		{must7}{exp}持续时间{/exp}{int(0:)}
+	[!THORNS APPENDAGE]
+
+	{exp}沉默（限制技能使用）{/exp}[MUCU LIMIT CONTROL]
+		{must1}{exp}时间（该时间内无法使用技能）{/exp}{int(0:)}
+	[!MUCU LIMIT CONTROL]
+
+	{exp}向目标跳跃（可根据参数调整跳跃轨迹，必须在.mob文件中注册[jump action]）{/exp}[JUMP TO TARGET]
+		{must1}{exp}速度{/exp}{int(:)}
+		{must2}{exp}跳跃高度{/exp}{int(:)}
+		{must3}{exp}自定义重力{/exp}{int(:)}
+		{must4}{exp}与目标保持距离的比例{/exp}{float(:)}
+		{must5}{exp}最大X{/exp}{int(:)}
+		{must6}{exp}最大Y{/exp}{int(:)}
+		{must7}{exp}上升时帧{/exp}{int(0:)}
+		{must8}{exp}下降时帧{/exp}{int(0:)}
+		{must9}{exp}落地时帧{/exp}{int(0:)}
+	[!JUMP TO TARGET]
+
+	{exp}将目标设定为我的AI目标{/exp}{etc}[CHANGE MY TARGET]
+
+	{exp}吃掉目标。（指定5个索引）{/exp}[TAKE IT]
+		{must1}{exp}没有则为-1{/exp}{int(:)}
+		{must2}{exp}没有则为-1{/exp}{int(:)}
+		{must3}{exp}没有则为-1{/exp}{int(:)}
+		{must4}{exp}没有则为-1{/exp}{int(:)}
+		{must5}{exp}没有则为-1{/exp}{int(:)}
+	[!TAKE IT]
+
+	{exp}吐出吃掉的物体{/exp}{etc}[THROW ITS OWN]
+
+	{exp}是否使用追踪{/exp}[SET USE HOMING]
+		{must1}{exp}0：不使用，1：使用 {/exp}{int(0:1)}
+	[!SET USE HOMING]
+
+	{exp}墙壁反射设置{/exp}[BOUNCE FROM THE WALL]
+		{must1}{exp}0：上下墙壁反射，1：左右墙壁反射{/exp}{int(0:1)}
+		{must2}{exp}反射角（以水平线为基准逆时针方向）{/exp}{int(0:)}
+	[!BOUNCE FROM THE WALL]
+
+	{exp}设置目标的可视性{/exp}[SET VISIBLITY]
+		{must1}{exp}0：使其不可见，1：使其可见。{/exp}{int(0:1)}
+	[!SET VISIBLITY]
+
+	{exp}创建使怪物在指定时间、幅度内振动的振动进程{/exp}[MAKE VIBRATION]
+		{must1}{exp}振动持续时间（秒）{/exp}{float(:)}
+		{must2}{exp}振幅（像素）{/exp}{float(:)}
+		{must3}{exp}振动ID{/exp}{string}
+	[!MAKE VIBRATION]
+
+	{exp}重置目标角色的冷却时间{/exp}[CHARACTER COOLTIME RESET]
+		{must1}{exp}0：全部技能，1：仅无色技能，2：仅觉醒技能{/exp}{int(0:2)}
+	[!CHARACTER COOLTIME RESET]
+
+	{exp}是否对目标的当前动画进行*插值（将大小、位置、角度、Alpha值校正为下一帧的值）{/exp}[SET INTERPOLATION]
+		{must1}{exp}0（停止），1（使用）{/exp}{int(0:1)}
+	[!SET INTERPOLATION]
+
+	{exp}移除目标的有益BUFF{/exp}{etc}[DEBUFF]
+	{exp}吞噬幽灵系技能{/exp}{etc}[DEBUFF GHOST]
+
+	{exp}附加状态异常反射附加效果{/exp}[REFLECTBUFF APPENDAGE]
+		{must1}{exp}持续时间（ms）{/exp}{int(0:)}
+	[!REFLECTBUFF APPENDAGE]
+
+	{exp}以目标为中心缩放{/exp}[ZOOM IT]
+		{must1}{exp}缩放持续时间（ms）{/exp}{int(0:)}
+		{must2}{exp}放大比率（%）{/exp}{int(0:)}
+	[!ZOOM IT]
+
+	{exp}加载ora脚本创建光环机{/exp}[AURA]
+		{must1}{exp}索引{/exp}{int(:)}
+	[!AURA]
+
+	{exp}在中央输出消息{/exp}[CENTER MSG]
+		{must1}{exp}要在中央输出的消息{/exp}{string}
+		{must2}{exp}输出时间（ms）{/exp}{int(0:)}
+	[!CENTER MSG]
+
+	{exp}黑暗的烙印附加效果，在巴卡尔之城使用{/exp}[DARKSCALP APPENDAGE]
+		{must1}{exp}总时间{/exp}{int(0:)}
+		{must2}{exp}伤害反射%{/exp}{int(0:)}
+		{must3}{exp}恢复%{/exp}{int(0:)}
+		{must4}{exp}目标怪物索引{/exp}{int(:)}
+		{must5}{exp}初始造成的伤害值（不使用）{/exp}{int(:)}
+		{must6}{exp}造成伤害的时间间隔{/exp}{int(0:)}
+		{must7}{exp}伤害增加未知项{/exp}{int(:)}
+		{must8}{exp}伤害增加未知项2（超过临界点时）{/exp}{int(:)}
+		{must9}{exp}附加效果转移时间间隔{/exp}{int(0:)}
+		{must10}{exp}附加效果转移范围{/exp}{int(:)}
+	[!DARKSCALP APPENDAGE]
+
+	[DESOLATEPAIN APPENDAGE]
+		{must1}{exp}有效时间{/exp}{int(0:)}
+		{must2}{exp}检查间隔{/exp}{int(:)}
+		{must3}{exp}绝对伤害{/exp}{int(:)}
+		{must4}{exp}分摊伤害的距离{/exp}{int(:)}
+		{must5}{exp}2人队伍时%{/exp}{int(0:)}
+		{must6}{exp}3人队伍时%{/exp}{int(0:)}
+		{must7}{exp}4人队伍时%{/exp}{int(0:)}
+		{must8}{exp}造成伤害时召唤的爆炸索引{/exp}{int(:)}
+	[!DESOLATEPAIN APPENDAGE]
+
+	{exp}设置是否绘制相应索引的子动画{/exp}[SUB ANI FLAG]
+		{must1}{exp}动画索引{/exp}{int(:)}
+		{must2}{exp}1（使用），0（不使用）（初始值为使用）{/exp}{int(0:1)}
+	[!SUB ANI FLAG]
+
+	[VIRTUALHP APPENDAGE]
+		{must1}{exp}为消除虚拟HP所需的打击数{/exp}{int(:)}
+		{must2}{exp}为消除虚拟HP所需的伤害{/exp}{int(:)}
+		{must3}{exp}虚拟HP消除条件（0：打击数，1：伤害，2：两者都满足）{/exp}{int(0:2)}
+		{must4}{exp}虚拟HP运作时每次打击削减的HP{/exp}{int(:)}
+	[!VIRTUALHP APPENDAGE]
+	
+	{exp}消除虚拟HP{/exp}{etc}[REMOVE VIRTUALHP]
+
+	[TERROR APPENDAGE]
+		{must1}{exp}等级{/exp}{int(0:)}
+		{must2}{exp}变硬所需的时间{/exp}{int(0:)}
+		{must3}{exp}持续时间{/exp}{int(0:)}
+	[!TERROR APPENDAGE]
+
+	{exp}摇晃动作（摇晃方向键以避免槽满的动作）{/exp}[SHAKING GAGE]
+		{must1}{exp}状态维持时间{/exp}{int(0:)}
+		{must2}{exp}放着不动时槽满的时间{/exp}{int(0:)}
+		{must3}{exp}每秒需要摇晃的次数{/exp}{int(0:)}
+		{must4}{exp}摇晃成功时削减的槽的百分比{/exp}{int(0:)}
+		{must5}{exp}槽满失败时受到的伤害{/exp}{int(:)}
+	[!SHAKING GAGE]
+
+	{exp}暂时改变队伍{/exp}[CHANGE TEAM]
+		{must1}{exp}背叛：要改变的队伍编号{/exp}{int(1:4)}
+		{must2}{exp}改变的时间（ms）{/exp}{int(0:)}
+		//mkjung 120517 修改 遗漏参数添加
+		{must3}{exp}要改变的HP的比率（%）{/exp}{int(0:)}
+	[!CHANGE TEAM]
+
+	{exp}将队伍恢复原样{/exp}{etc}[DEFAULT TEAM]
+	{exp}视野交换（队员之间随机交换视野）{/exp}{etc}[CHANGE SIGHT]
+	{exp}将视野恢复原样{/exp}{etc}[DEFAULT SIGHT]
+
+
+	{exp}节奏动作，巴卡尔之城副本中巴卡尔使用{/exp}[RHYTHM ACTION]
+		{childdata1}{exp}总输入命令数{/exp}{int(0:)}
+		{childdata2}{exp}总可输入时间{/exp}{int(0:)}
+		{childdata3}{exp}生成的被动物体索引{/exp}{int(:)}
+
+		{exp}命令模式方向{/exp}[PATTERN]
+			{must1}{exp}向右侧{/exp}[RIGHT]
+			{must1}{exp}向上方{/exp}[UP]
+			{must1}{exp}向左侧{/exp}[LEFT]
+			{must1}{exp}向下方{/exp}[DOWN]
+			{must2}{exp}输入等待时间{/exp}{int(0:)}
+			{must3}{exp}物体的帧编号{/exp}{int(0:)}
+		[!PATTERN]
+		{opt1}{exp}成功时生成的物体{/exp}[IF SUCCESS]
+			{must1}{exp}索引{/exp}{int(:)}
+			{must2}{exp}以目标为基准的X坐标{/exp}{int(:)}
+			{must3}{exp}Y坐标{/exp}{int(:)}
+			{must4}{exp}Z坐标{/exp}{int(:)}
+		[!IF SUCCESS]
+		{opt2}{exp}失败时生成的物体{/exp}[IF FAIL]
+			{must1}{exp}索引{/exp}{int(:)}
+			{must2}{exp}以目标为基准的X坐标{/exp}{int(:)}
+			{must3}{exp}Y坐标{/exp}{int(:)}
+			{must4}{exp}Z坐标{/exp}{int(:)}
+		[!IF FAIL]
+	[/RHYTHM ACTION]
+	
+
+	{exp}关闭和开启伤害判定框。关闭伤害判定框则不会受到攻击{/exp}[SET DAMAGE BOX]
+		{must1}{exp}开启伤害判定框。可以受到攻击{/exp}[ON]
+		{must1}{exp}关闭伤害判定框。变为无敌状态{/exp}[OFF]
+	[!SET DAMAGE BOX]
+
+	{exp}激怒附加效果，每次受击时槽上升，特定图层变得不透明{/exp}[ANGER APPENDAGE]
+		{must1}{exp}识别图层索引（例如：激怒槽升高想要变红时，放入红色图层后在此处记录索引）{/exp}{int(:)}
+		{must2}{exp}5格以上满时受到的伤害{/exp}{int(:)}
+		{must3}{exp}感染槽减少一格的时间{/exp}{int(0:)}
+		{must4}{exp}受击时上升的格数{/exp}{int(0:)}
+		{must5}{exp}Alpha减少量{/exp}{int(0:)}
+		{must6}{exp}附加效果持续时间{/exp}{int(0:)}
+	[!ANGER APPENDAGE]
+
+	{exp}改变目标的Alpha值{/exp}[SET WHOLE ALPHA]
+		{must1}{exp}要改变的Alpha值{/exp}{int(0:255)}
+	[!SET WHOLE ALPHA]
+
+	{exp}设置伤害类型{/exp}[SET WHOLE DAMAGETYPE]
+		{must1}{exp}0：一般。伴有受击动作和伤害，1：超级护甲。无受击动作但有伤害，2：无敌。既无受击动作也无伤害{/exp}{int(0:2)}
+	[!SET WHOLE DAMAGETYPE]
+	
+	{exp}可攻击区域附加效果{/exp}[ATTACKABLEAREA APPENDAGE]
+		{must1}{exp}模式（0：近战打击，1：远程打击）{/exp}{int(0:1)}
+		{must2}{exp}基准距离{/exp}{int(0:)}
+		{must3}{exp}图像输出有效距离{/exp}{int(0:)}
+		{must4}{exp}反射伤害%（输入-1则为一击必杀）{/exp}{int(:)}
+		{must5}{exp}持续时间（输入0则为无限）{/exp}{int(0:)}
+	[!ATTACKABLEAREA APPENDAGE]
+
+	{exp}更新移动信息{/exp}{etc}[REFRESH MOVEINFO]
+	
+	[DESPAIR APPENDAGE]
+		{must1}{exp}互相必须打击的伤害{/exp}{int(:)}
+		{must2}{exp}互相可打击的时间{/exp}{int(0:)}
+		{must3}{exp}消除失败时生成的物体{/exp}{int(:)}
+		{must4}{exp}消除失败时炸弹伤害{/exp}{int(:)}
+		{must5}{exp}消除失败时受到的伤害（%）{/exp}{int(0:)}
+	[!DESPAIR APPENDAGE]
+
+	{exp}将目标变身成怪物的功能{/exp}[CHANGE DISGUISER]
+		{must1}{{exp}要变身的怪物的索引（变身怪物索引必须由客户端开发人员预先设置）{/exp}int(:)}
+		{must2}{exp}变身的时间（ms）{/exp}{int(0:)}
+	[!CHANGE DISGUISER]
+
+	{exp}主动物体时，移除主动状态的功能{/exp}[REMOVE ACTIVE STATUS]
+		//mkjung 120521
+		//ActionScript脚本格式统一更改-->('[x]' => [x])
+		//{must1}{exp}ACTIVE STATUS ID{/exp}{string}-> [tag]
+		//mkjung 120704
+		//参考DNF Client Source
+		{must1}{exp}缓慢{/exp}[slow]		//ACTIVESTATUS_SLOW
+		{must1}{exp}冰冻{/exp}[freeze]		//ACTIVESTATUS_FREEZE
+		{must1}{exp}中毒{/exp}[poison]		//ACTIVESTATUS_POISON
+		{must1}{exp}眩晕{/exp}[stun]			//ACTIVESTATUS_STUN
+		{must1}{exp}诅咒{/exp}[curse]		//ACTIVESTATUS_CURSE
+		{must1}{exp}失明{/exp}[blind]		//ACTIVESTATUS_BLIND
+		{must1}{exp}感电{/exp}[lightning]		//ACTIVESTATUS_LIGHTNING
+		{must1}{exp}石化{/exp}[stone]		//ACTIVESTATUS_STONE
+		{must1}{exp}睡眠{/exp}[sleep]		//ACTIVESTATUS_SLEEP
+		{must1}{exp}灼伤{/exp}[burn]		//ACTIVESTATUS_BURN
+		{must1}{exp}武器破坏{/exp}[weapon break]	//ACTIVESTATUS_WEAPON_BREAK
+		{must1}{exp}出血{/exp}[bleeding]		//ACTIVESTATUS_BLEEDING
+		{must1}{exp}加速{/exp}[haste]		//ACTIVESTATUS_HASTE
+		{must1}{exp}祝福{/exp}[bless]		//ACTIVESTATUS_BLESS
+		//mkjung 120704 [weakness]-->[element] 更改
+		//参考TuningProc.h确认。
+		//RDARScriptAction.cpp 审核。
+		{must1}{exp}属性强化{/exp}[element]		//ACTIVESTATUS_ELEMENT
+		{must1}{exp}混乱{/exp}[confuse]		//ACTIVESTATUS_CONFUSE
+		{must1}{exp}束缚{/exp}[hold]			//ACTIVESTATUS_HOLD
+		{must1}{exp}护甲破坏{/exp}[armor break]	//ACTIVESTATUS_ARMOR_BREAK
+		//mkjung 120704 [ALL] 添加。
+		//参考TuningProc.h确认。
+		//RDARScriptAction.cpp 审核。
+		{must1}{exp}全部{/exp}[ALL]
+	[!REMOVE ACTIVE STATUS]
+	
+	{exp}}附加效果ID删除{exp}[REMOVE APPENDAGE]
+		//{must1}{exp}附加效果ID{/exp}{string}
+		//mkjung 120518 修改。
+		{must1}[ALL]
+		{must1}[AGAMEMNON TELEKINESIS]
+		{must1}[ANGER]
+		{must1}[DARKSCALP]
+		{must1}[CHANGE GRAVITY]
+		{must1}[ICE APPENDAGE]
+		{must1}[SUFFOCATION APPENDAGE]
+		{must1}[physical attack]
+		{must1}[magical attack]
+		{must1}[physical defense]
+		{must1}[magical defense]
+		{must1}[equipment physical attack]
+		{must1}[equipment physical defense]
+		{must1}[jump power]
+		{must1}[attack speed]
+		{must1}[move speed]
+		{must1}[cast speed]
+		{must1}[hp max]
+		{must1}[hp regen rate]
+		{must1}[magical critical hit rate]
+		{must1}[physical critical hit rate]
+		{must1}[physical back attack critical rate]
+		{must1}[magical back attack critical rate]
+		{must1}[fire element]
+		{must1}[water element]
+		{must1}[dark element]
+		{must1}[light element]
+		{must1}[stuck]
+		{must1}[mp regen rate]
+		{must1}[hit recovery]
+		{must1}[equipment magical attack]
+		{must1}[equipment magical defense]
+		{must1}[good hit]
+		{must1}[all active status resistance]
+		{must1}[all element]
+		{must1}[fire element attack]
+		{must1}[water element attack]
+		{must1}[dark element attack]
+		{must1}[light element attack]
+		{must1}[all element attack]
+		{must1}[mp max]
+		{must1}[separate attack]
+		{must1}[separate physical attack]
+		{must1}[separate magical attack]
+		{must1}[separate all attack]
+		{must1}[antievil]
+		{must1}[physical absolute damage]
+		{must1}[village moving speed]
+	[!REMOVE APPENDAGE]
+
+	{exp}设置复活的位置，X、Y都输入-1则为不使用{/exp}[SET RESPAWN POS]
+		{must1}{exp}X坐标{/exp}{int(:)}
+		{must2}{exp}Y坐标{/exp}{int(:)}
+	[!SET RESPAWN POS]
+
+	{exp}设置施法条位置{/exp}[SET CASTING GAUGEPOS]
+		{must1}{exp}基准物体位置X{/exp}{int(:)}
+		{must2}{exp}基准物体位置Y{/exp}{int(:)}
+		{must3}{exp}基准物体位置Z{/exp}{int(:)}
+	[!SET CASTING GAUGEPOS]
+
+	{exp}改变变身怪物的技能模式{/exp}[CHANGE RIDABLESKILL PATTERN]
+		{must1}{exp}模式索引{/exp}{int(:)}
+	[!CHANGE RIDABLESKILL PATTERN]
+
+	{exp}重新开始当前动作的冷却时间{/exp}{etc}[RESTART COOLTIME]
+	{exp}隐藏怪物、APC的名字{/exp}{etc}[NAME HIDE ON]
+	{exp}显示怪物、APC的名字{/exp}{etc}[NAME HIDE OFF]
+	{exp}更改为初始AI目标（继续原路）{/exp}{etc}[RESTORE TARGET]
+
+	{exp}受击时屏幕颜色改变，超过一定受击次数时{/exp}[HIT APPENDAGE]
+		{must1}{exp}.ani文件路径{/exp}{string}
+		{must2}{exp}动画坐标X{/exp}{int(:)}
+		{must3}{exp}动画坐标Y{/exp}{int(:)}
+		{must4}{exp}Red{/exp}{int(0:255)}
+		{must5}{exp}Green{/exp}{int(0:255)}
+		{must6}{exp}Blue{/exp}{int(0:255)}
+		{must7}{exp}受击时Alpha减少值{/exp}{int(0:)}
+		{must8}{exp}受击次数{/exp}{int(0:)}
+		{must9}{exp}最终受击后造成的伤害{/exp}{int(:)}
+		{must10}{exp}附加效果发动体力（最小）{/exp}{int(:)}
+		{must11}{exp}附加效果发动体力（最大）{/exp}{int(:)}
+	[!HIT APPENDAGE]
+
+	{exp}将mob文件中设置的AI更改为所需的文件{/exp}[CHANGE AI]
+		{must1}{exp}要更改的难度{/exp}[EASY]
+		{must1}{exp}要更改的难度{/exp}[MEDIUM]
+		{must1}{exp}要更改的难度{/exp}[HARD]
+		{must1}{exp}要更改的难度{/exp}[ULTIMATE]
+		//mkjung 120518 添加
+		{must1}{exp}要更改的难度{/exp}[NORMAL]
+		{must1}{exp}要更改的难度{/exp}[EXPERT]
+		{must1}{exp}要更改的难度{/exp}[MASTER]
+		{must1}{exp}要更改的难度{/exp}[KING]
+		{must1}{exp}要更改的难度{/exp}[HERO]
+
+		{must2}{exp}要更改的索引（0. Event, 1. DestinationSelect, 2. Action, 3. MoveMethod）{/exp}{int(:)}
+		{must3}{exp}替代的AI文件路径{/exp}{string}
+	[!CHANGE AI]
+	
+	{exp}设置为[SAVE TARGET OBJECT]中保存的物体{/exp}[SET SAVED OBJECT]
+		{must1}{exp}保存的物体索引{/exp}{int(:)}
+	[!SET SAVED OBJECT]
+ 
+	{exp}对目标物体设置符号（区分值），用[CHECK SYMBOL]检查{/exp}[SET SYMBOL]
+		//mkjung 120704 说明修改。
+		//符号值可以是任意int值，不仅是0,1
+		{must1}{exp}符号值{/exp}[{int(0:)}
+	[!SET SYMBOL]
+
+	{exp}对目标附加附加效果，每次攻击时改变能力并给予轮廓线{/exp}[DAMAGE APPENDAGE]
+		{must1}{exp}施法槽充满的时间{/exp}{int(0:)}
+		{must2}{exp}打击间隔{/exp}{int(:)}
+		{must3}{exp}打击时减少的槽程度（0-100%）{/exp}{int(0:)}
+		{must4}{exp}轮廓线颜色R{/exp}{int(0:255)}
+		{must5}{exp}轮廓线颜色G{/exp}{int(0:255)}
+		{must6}{exp}轮廓线颜色B{/exp}{int(0:255)}
+		{must7}{exp}可以攻击时轮廓线颜色R{/exp}{int(0:255)}
+		{must8}{exp}可以攻击时轮廓线颜色G{/exp}{int(0:255)}
+		{must9}{exp}可以攻击时轮廓线颜色B{/exp}{int(0:255)}
+		{must10}{exp}最大轮廓线粗细{/exp}{int(0:)}
+		{must11}{exp}攻击力增加{/exp}{int(:)}
+		{must12}{exp}攻击速度增加{/exp}{int(:)}
+		{must13}{exp}移动速度增加{/exp}{int(:)}
+		{must14}{exp}减少的速度（输入0则急剧减少）{/exp}{int(0:)}
+	[!DAMAGE APPENDAGE]
+
+	
+	{exp}调出物体使该物体绕目标公转{/exp}[RESOLUTION APPENDAGE]
+		{must1}{exp}物体数量{/exp}{int(0:)}
+		{must2}{exp}物体索引{/exp}{int(:)}
+		{must3}{exp}X坐标{/exp}{int(:)}
+		{must4}{exp}Y坐标{/exp}{int(:)}
+		{must5}{exp}Z坐标{/exp}{int(:)}
+		{must6}{exp}RPM{/exp}{int(:)}
+		{must7}{exp}RPM最大{/exp}{int(0:)}
+		{must8}{exp}RPM变化时间{/exp}{int(0:)}
+		{must9}{exp}RPM恢复时间{/exp}{int(0:)}
+		{must10}{exp}HP每减少1%时增加的RPM量{/exp}{int(0:)}
+		{must11}{exp}MIN半径{/exp}{int(0:)}
+		{must12}{exp}MAX半径{/exp}{int(0:)}
+		{must13}{exp}距离补偿基准参数{/exp}{int(:)}
+		{must14}{exp}半径变化敏感度{/exp}{float(:)}
+	[!RESOLUTION APPENDAGE]
+
+	[STRAIGHT MOVE]
+		{exp}直线移动的坐标轴[{/exp}[AXIS]
+			{must1}{exp}X轴{/exp}[X]
+			{must1}{exp}Y轴{/exp}[Y]
+			{must1}{exp}Z轴{/exp}[Z]
+		[!AXIS]
+		
+		{exp}移动中采取的动作{/exp}[MOVING MOTION]
+			{must1}[STAND]
+			{must1}[JUMP]
+			{must1}[DAMAGE]
+			{must1}[SIT]
+			{must1}[OVERTURN]
+			{must1}[DOWN]
+		[!MOVING MOTION]
+		
+		{exp}移动结束后立即采取的动作{/exp}[RELEASE MOTION]
+			{must1}[STAND]
+			{must1}[JUMP]
+			{must1}[DAMAGE]
+			{must1}[SIT]
+			{must1}[OVERTURN]
+			{must1}[DOWN]
+		[!RELEASE MOTION]
+
+		{exp}设置移动的时间{/exp}[TIME]
+			{must1}{exp}单位：ms{/exp}{int(0:)}
+		[!TIME]
+
+		{exp}设置要移动的距离{/exp}[DISTANCE]
+			{must1}{exp}单位：pixel{/exp}{int(:)}
+		[!DISTANCE]
+
+		{exp}移动后造成伤害{/exp}[DAMAGE HP]
+			{must1}{exp}单位：%{/exp}{int(0:)}
+		[!DAMAGE HP]
+
+
+		{exp}移动后返回的坐标。（未指定：不返回，停留在移动的地方）{/exp}[RETURN XPOS],[RETUNN YPOS],[RETUNN ZPOS]
+			{must1}{int(:)}
+		[!RETURN XPOS],[!RETUNN YPOS],[!RETUNN ZPOS]
+
+		{exp}设置移动时的加速度{/exp}[ACCELERATE]
+			{must1}{int(0:)}
+		[!ACCELERATE]
+
+	[/STRAIGHT MOVE]
+
+	[MOVE APPENDAGE]
+		{must1}{exp}多少秒内不动则？{/exp}{int(0:)}
+		{must2}{exp}HP减少的时间{/exp}{int(0:)}
+		{must3}{exp}减少的HP%{/exp}{int(0:)}
+		{must4}{exp}附加效果持续时间{/exp}{int(0:)}
+		{must5}{exp}对目标生成的被动索引{/exp}{int(:)}
+	[!MOVE APPENDAGE]
+
+	[FREEZE APPENDAGE]
+		{must1}{exp}0：限制所有移动 1：允许跳跃{/exp}{int(0:1)}
+		{must2}{exp}HP减少的时间{/exp}{int(0:)}
+		{must3}{exp}减少的HP%{/exp}{int(0:)}
+		{must4}{exp}附加效果持续时间{/exp}{int(0:)}
+		{must5}{exp}对目标生成的被动索引{/exp}{int(:)}
+	[!FREEZE APPENDAGE]
+
+	{exp}发动的物体消失前无法移动{/exp}{etc}[TRAP APPENDAGE]
+
+	{exp}在特定区域内随机生成被动物体{/exp}[RANDOM GENERATE PASSIVE OBJECT]
+		{exp}被动物体生成区域{/exp}[GENERATE AREA]
+			{must1}{exp}X坐标起始{/exp}{int(:)}
+			{must2}{exp}X坐标结束{/exp}{int(:)}
+			{must3}{exp}Y坐标起始{/exp}{int(:)}
+			{must4}{exp}Y坐标结束{/exp}{int(:)}
+			{must5}{exp}Z坐标起始{/exp}{int(:)}
+			{must6}{exp}Z坐标结束{/exp}{int(:)}
+		[!GENERATE AREA]
+
+		{exp}生成频率{/exp}[CREATE FREQUENCE]
+			{must1}{exp}类型{/exp}{int(0:)}
+			{must2}{exp}时间{/exp}{int(0:)}
+		[!CREATE FREQUENCE]
+
+		{exp}要生成的物体列表{/exp}[PASSIVE OBJECT INDEX]
+			{must1}{exp}编号{/exp}{int(0:)}
+			{must2}{exp}个数{/exp}{int(0:)}
+		[!PASSIVE OBJECT INDEX]
+
+		{exp}目标X坐标与生成AREA同步？{/exp}{etc}[USE TARGET X POS]
+		{exp}目标Y坐标与生成AREA同步？{/exp}{etc}[USE TARGET Y POS]
+		{exp}目标Z坐标与生成AREA同步？{/exp}{etc}[USE TARGET Z POS]
+	[/RANDOM GENERATE PASSIVE OBJECT]
+
+	{exp}交换目标与我的HP比率{/exp}{etc}[EXCHANGE HP RATE]
+
+	{exp}目标经过特定点或徘徊的模式标签{/exp}[MOVE PATTERN]
+		{exp}类型{/exp}[TYPE]
+			{must1}{exp}[POS] 输入点按直线（0），曲线（1） [AREA] 输入区域按直线（2），曲线（3）{/exp}{int(0:3)}
+		[!TYPE]
+		
+		{exp}输入的点是否循环？{/exp}[LOOP]
+			{must1}{int(0:1)}
+		[!LOOP]
+
+		{exp}移动速度，（曲线移动时则为平均速度）{/exp}[VELOCITY]
+			{must1}}{int(0:)}
+		[!VELOCITY]
+		
+		{exp}移动一个点后在那里停留的时间{/exp}[STAY TIME]
+			{must1}{int(0:)}
+		[!STAY TIME]
+		
+		{exp}可移动区域{/exp}[AREA]
+			{must1}{exp}X起始{/exp}{int(:)}
+			{must2}{exp}X结束{/exp}{int(:)}
+			{must3}{exp}Y起始{/exp}{int(:)}
+			{must4}{exp}Y结束{/exp}{int(:)}
+			{must5}{exp}Z起始{/exp}{int(:)}
+			{must6}{exp}Z结束{/exp}{int(:)}
+		[!AREA]
+
+		{exp}要移动的点位置坐标{/exp}[POS]
+			{must1}{exp}X坐标{/exp}{int(:)}
+			{must2}{exp}Y坐标{/exp}{int(:)}
+			{must3}{exp}Z坐标{/exp}{int(:)}
+		[!POS]
+		{exp}一次移动最少移动的距离{/exp}{etc}
+		//mkjung 120521 修改 etc-->line tag
+		[MIN MOVE DISTANCE]
+			{must1}{exp}距离{/exp}{int(0:)}
+		[!MIN MOVE DISTANCE]
+	[/MOVE PATTERN]	
+
+	{exp}结束[MOVE PATTERN]标签{/exp}{etc}[MOVE PATTERN OFF]
+
+	//mkjung 120425 添加。
+	{exp}窒息附加效果{/exp}[SUFFOCATION APPENDAGE]
+		[LEVEL]
+			{must1}{exp}等级{/exp}{int(0:)}
+		[!LEVEL]
+
+		[APPEND DELAY TIME]
+			{must1}{exp}开始受到伤害前要延迟的时间{/exp}{int(0:)}
+		[!APPEND DELAY TIME]
+
+		[FREQUENCY TIME]
+			{must1}{exp}受到伤害的时间间隔{/exp}{int(:)}
+		[!FREQUENCY TIME]
+
+		[DAMAGE]
+			{must1}{exp}伤害{/exp}{int(:)}
+		[!DAMAGE]
+	[/SUFFOCATION APPENDAGE]
+	
+	//mkjung 120517 添加
+	[GUARD APPENDAGE]
+		[DAMAGE]
+			{opt1}[PHYSICAL]
+				{must1}{exp}物伤{/exp}{int(:)}
+				{must2}{exp}防御比率（百分比）{/exp}{int(:)}
+			[!PHYSICAL]
+			{opt2}[MAGICAL]
+				{must1}{exp}魔伤{/exp}{int(:)}
+				{must2}{exp}防御比率（百分比）{/exp}{int(:)}
+			[!MAGICAL]
+		[/DAMAGE]
+
+		//mkjung 120518 添加。
+		{exp}附加效果附着的时间{/exp}[TIME]
+			{must1}{exp}0：无限{/exp}{int(0:)}
+		[!TIME]
+
+		[KNOCK BACK]
+			{must1}{exp}击退值{/exp}{int(0:)}
+		[!KNOCK BACK]
+
+		[BACK ATTACK]
+			{must1}{exp}背击时是否适用{/exp}{int(0:1)}
+		[!BACK ATTACK]
+	[/GUARD APPENDAGE]
+	//mkjung 120514 添加。
+	[SET TEAM]
+		{must1}{exp}{/exp}{int(0:)}
+	[!SET TEAM]
+
+	//mkjung 120514 添加。
+	[CUT SCENE]
+		{exp}翻转类型{/exp}[FLIP TYPE]
+			{must1}{exp}0：无 1：根据角色方向 2：根据角色位置{/exp}{int(0:2)}
+		[!FLIP TYPE]
+		{exp}起始y坐标{/exp}[START POSITION]
+			{must1}{exp}X坐标{/exp}{int(:)}
+			{must2}{exp}Y坐标{/exp}{int(:)}
+		[!START POSITION]
+		[ANI FILE]
+			{must1}{exp}动画文件路径{/exp}{string}
+		[!ANI FILE]
+		//怎么办？
+		[MOVE DIR]
+			{exp}停止的位置X{/exp}{int(:)}
+				{must1}{exp}停止的位置Y{/exp}{int(:)}
+				{must2}{exp}速度（1/10秒移动距离）{/exp}{int(:)}
+			{!int(:)}
+		[/MOVE DIR]
+	[/CUT SCENE]
+
+	//mkjung 120516 添加。
+	[CAMOUFLAGE]
+		{must1}{int(:)}
+		{must2}{int(:)}
+	[!CAMOUFLAGE]
+
+	//mkjung 120516 添加。
+	[TRIGGER QUESTEVENT]
+		{must1}{int(:)}
+	[!TRIGGER QUESTEVENT]
+
+	//mkjung 120516 添加。
+	[START KEYSTROKE MODE]
+		{must1}{exp}从属攻击动作索引{/exp}{int(:)}
+		{must2}{exp}结束攻击动作索引{/exp}{int(:)}
+		{must3}{exp}连打模式 0：瞬间按键模式，1：累计按键模式{/exp}{int(:)}
+		{must4}{exp}执行一次从属动作需要按下的次数{/exp}{int(:)}
+		{must5}{exp}从属动作循环上限{/exp}{int(:)}
+	[!START KEYSTROKE MODE]
+	
+	//mkjung 120516 添加。
+	[UNLOCK QUEST]
+		{must1}{int(:)}
+	[!UNLOCK QUEST]
+	
+	//mkjung 120516 添加。
+	{exp}锁定成就直到{/exp}[LOCK QUEST UNTIL]
+		{must1}[CHANGE MODULE]
+		{must2}{int(:)}
+	[!LOCK QUEST UNTIL]
+
+	//mkjung 120517 添加。
+	//mkjung 120518 修改。 [Y NORMAL],[Y SLANT]添加。
+	[SET MOVEVELS]
+		[X NORMAL]
+			{must1}{int(:)}
+		[!X NORMAL]
+		[Y NORMAL]
+			{must1}{int(:)}
+		[!Y NORMAL]
+		[X SLANT]
+			{must1}{int(:)}
+		[!X SLANT]
+		[Y SLANT]
+			{must1}{int(:)}
+		[!Y SLANT]
+	[/SET MOVEVELS]
+	
+	//mkjung 120518 添加。
+	{etc}[END KEYSTROKE MODE]
+	{etc}[DESTROY BY FORCE]
+[/BEHAVIOR]

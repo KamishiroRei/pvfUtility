@@ -1,0 +1,46 @@
+[name] `丹&帕配方`
+[explain]
+`制作丹&帕的方法！`
+[grade] 1
+[creation rate] 90
+[weight] 5
+[usable job]
+`[all]`
+[/usable job]
+[minimum level] 1
+
+[stackable type] `[recipe]` 0		// 类型为 `[recipe]`
+
+[icon] `Item/IconMaterial.img` 38
+[field image] `Item/FieldImage.img` 23
+
+[move wav] `BONE_TOUCH`
+
+[int data]
+3					// 所需物品种类数
+27 1					// 物品索引，物品数量。(按所需物品种类重复)
+28 4					// 例) 现在需要 27号 1个 28号 4个 29号 2个
+29 2
+
+2					// 生成物品种类数
+10001 1					// 物品索引，物品数量。(按生成物品种类重复)
+77 3					// 例) 现在生成 10001号 1个，77号 3个
+
+2					// 所需技能种类数 (如果没有则为0，与职业无关，仅按索引检查)
+140 1					// 技能索引，最低等级 (按所需技能种类重复)
+142 7					// 例) 现在需要 140号技能 1级，142号技能 7级以上
+
+1					// 所需等级。0:皆可 1:高级 2:专家职业。不写则为0
+[/int data]
+
+[string data]
+// 配方类型。
+// 精工 - [craftmanship]
+// 织造 - [weaving]
+// 机械 - [machinary]
+// 化学 - [chemistry]
+// 附魔 - [enchant]
+// 从以上选择
+// 注意大小写准确！！
+`[craftmanship]`
+[/string data]

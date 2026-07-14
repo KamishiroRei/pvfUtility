@@ -1,0 +1,124 @@
+//////////////////////////////////////////////////////////
+//@ mkjung create date 20120531 
+//@ application uses 动画信息指定脚本语法检查
+//////////////////////////////////////////////////////////
+
+{exp}当前动画循环{/exp}[LOOP]
+	{must1}{exp}0:不循环 1:循环{/exp}{int(0:1)}
+[!LOOP]
+
+{exp}是否使用阴影{/exp}[SHADOW]
+	{must1}{exp}0:不使用 1:使用{/exp}{int(0:1)}
+[!SHADOW]
+
+{exp}总帧数{/exp}[FRAME MAX]
+	{must1}{exp}若为3，最后一帧必须以FRAME002结尾{/exp}{int(0:)}
+[!FRAME MAX]
+
+{exp}是否使用残影功能{/exp}[SPECTRUM]
+	{must1}{exp}0:不使用,1:使用{/exp}{int(0:1)}
+[!SPECTRUM]
+
+{exp}残影生成间隔{/exp}[SPECTRUM TERM]
+	{must1}{exp}1/1000秒{/exp}{int(0:)}
+[!SPECTRUM TERM]
+
+{exp}残影持续时间{/exp}[SPECTRUM LIFE TIME]
+	{must1}{exp}1/1000秒{/exp}{int(0:)}
+[!SPECTRUM LIFE TIME]
+
+{exp}残影颜色{/exp}[SPECTRUM COLOR]
+	{must1}{exp}{/exp}{int(0:)}
+	{must2}{exp}{/exp}{int(0:)}
+	{must3}{exp}{/exp}{int(0:)}
+	{must4}{exp}{/exp}{int(0:)}
+[!SPECTRUM COLOR]
+		
+{exp}效果类型{/exp}[SPECTRUM EFFECT] 
+	{must1}{exp}NONE 或 DODGE 或 LINEARDODGE 或 DARK 或 XOR 或 MONOCHROME，其他会出错{/exp}{string}
+[!SPECTRUM EFFECT]
+
+
+// 当前帧编号 = [FRAME i(nt N)]
+//[FRAME000]
+
+{exp}图像{/exp}[IMAGE]
+	{must1}{exp}路径{/exp}{string}
+	{must2}{exp}帧编号{/exp}{int(0:)}
+[!IMAGE]
+
+{exp}图像位置{/exp}[IMAGE POS]
+	{must1}{exp}{/exp}{int(:)}
+	{must2}{exp}{/exp}{int(:)}
+[!IMAGE POS]
+
+{exp}图像缩放{/exp}[IMAGE RATE]
+	{must1}{exp}{/exp}{float(:)}
+	{must1}{exp}{/exp}{float(:)}
+[!IMAGE RATE]
+
+{exp}图像旋转{/exp}[IMAGE ROTATE]
+	{must1}{exp}{/exp}{float(:)}
+[!IMAGE ROTATE]
+
+{exp}颜色{/exp}[RGBA]
+	{must1}{exp}红{/exp}{int(0:)}
+	{must2}{exp}绿{/exp}{int(0:)}
+	{must3}{exp}蓝{/exp}{int(0:)}
+	{must4}{exp}透明度{/exp}{int(0:)}
+[!RGBA]
+
+{exp}是否插值{/exp}[INTERPOLATION]
+	{must1}{exp}0:不使用,1:使用{/exp}{int(0:1)}
+[!INTERPOLATION]
+
+{exp}效果类型{/exp}[GRAPHIC EFFECT]
+	{must1}{exp}NONE 或 DODGE 或 LINEARDODGE 或 DARK 或 XOR 或 MONOCHROME{/exp}{string}
+[!GRAPHIC EFFECT]
+
+{exp}帧持续时间{/exp}[DELAY]
+	{must1}{exp}时间{/exp}{int(0:)}
+[!DELAY]
+
+{exp}伤害类型{/exp}[DAMAGE TYPE]
+	{must1}{exp}NORMAL 或 SUPERARMOR 或 UNBREAKABLE{/exp}{string}
+[!DAMAGE TYPE]
+	
+{exp}攻击盒大小{/exp}[ATTACK BOX]
+	{must1}{exp}起始X{/exp}{int(:)}
+	{must2}{exp}起始Y{/exp}{int(:)}
+	{must3}{exp}结束X{/exp}{int(:)}
+	{must4}{exp}结束Y{/exp}{int(:)}
+	{must5}{exp}宽度{/exp}{int(:)}
+	{must6}{exp}高度{/exp}{int(:)}
+[!ATTACK BOX]
+
+{exp}播放音效{/exp}[PLAY SOUND]
+	{must1}{exp}音效标签名{/exp}{string}
+[!PLAY SOUND]
+
+{exp}将图像按指定方向镜像{/exp}[FLIP TYPE]
+	{must1}{exp}ALL 或 HORIZON 或 VERTICAL{/exp}{string}
+[!FLIP TYPE]
+
+{exp}在特定帧中指定特定值{/exp}[SET FLAG]
+	{must1}{exp}{/exp}{int(:)}
+	{must2}{exp}{/exp}{int(:)}
+[!SET FLAG]
+
+// 从包含 [LOOP START] 的帧开始
+// 到包含 [LOOP END] "次数" 的帧为止，重复指定的次数。
+// 注意：与复杂代码交织的 ANI 使用时可能会发生异常。
+// 建议仅用于简单的特效等。
+[LOOP START]
+[!LOOP START]
+[LOOP END]
+	{must1}{exp}次数{/exp}{int(0:)}
+[!LOOP END]
+
+{exp}设置剪裁矩形，仅绘制该矩形内的图像{/exp}[CLIP]
+	{must1}{exp}起始X{/exp}{int(:)}
+	{must2}{exp}起始Y{/exp}{int(:)}	
+	{must3}{exp}宽度{/exp}{int(0:)}
+	{must4}{exp}高度{/exp}{int(0:)}
+[!CLIP]

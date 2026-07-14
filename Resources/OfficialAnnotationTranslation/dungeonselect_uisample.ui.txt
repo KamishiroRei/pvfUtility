@@ -1,0 +1,124 @@
+// UI 脚本示例 //
+// 制作 : bizarre
+// 系统咨询 : 地下城客户端组
+
+// 1号标签 : 设置地下城选择画面背景的标签
+// 其他内容请不要修改（其他内容为硬编码，由客户端组设置），仅修改背景 img 路径及索引即可。
+[ui controls]
+    `[image]`
+    `IDC_WORLDMAP_BACKGROUND`    // 控件名称
+    0            //X
+    0            //Y
+    1            //string 数据数量
+    `WorldMap/AradCartel.img`
+    1            //int 数据数量
+    0            //图像索引
+    //[common action]  `Action/banner_common.act`
+[/ui controls]
+
+// 2号标签 : 设置地下城选择画面中地狱派对背景的标签
+// 其他内容请不要修改（其他内容为硬编码，由客户端组设置），仅修改背景 img 路径及索引即可。
+[ui controls]
+    `[image]`
+    `IDC_WORLDMAP_HELLPARTY_MODE_BACKGROUND`    // 地狱派对背景
+    0            // X
+    0            // Y
+    1            // string 数据数量
+    `Interface2/SelectDungeon/SelectDungeonHell/SelectDungeonHell.img`
+    3            // int 数据数量
+    0            // 图像索引
+    0            // 初始显示时显示
+    0            // 横幅不应接收事件，因此 Enable 属性设为 false
+    [common action]  `Action/background_event.act`
+[/ui controls]
+
+// 3号标签 : 设置地下城选择画面中练习模式背景的标签
+// 其他内容请不要修改（其他内容为硬编码，由客户端组设置），仅修改背景 img 路径及索引即可。
+[ui controls]
+    `[image]`
+    `IDC_WORLDMAP_EXERCISE_MODE_BACKGROUND`    // 地下城练习模式背景
+    0            // X
+    0            // Y
+    1            // string 数据数量
+    `Interface2/DungeonExercise/DungeonExercise.img`
+    3            // int 数据数量
+    0            // 图像索引
+    0            // 初始显示时显示
+    0            // 横幅不应接收事件，因此 Enable 属性设为 false
+    [common action]  `Action/background_event.act`
+[/ui controls]
+
+// 4号标签 : 设置地下城选择画面中异次元裂缝扩展（改异界地下城）背景的标签
+// 其他内容请不要修改（其他内容为硬编码，由客户端组设置），仅修改背景 img 路径及索引即可。
+[ui controls]
+    `[image]`
+    `IDC_WORLDMAP_EXPAND_DIMENSION_BACKGROUND`    // 异次元裂缝扩展背景
+    0            // X
+    0            // Y
+    1            // string 数据数量
+    `Interface2/DungeonExercise/DungeonExercise.img`
+    3            // int 数据数量
+    2            // 图像索引
+    0            // 初始显示时显示
+    0            // 横幅不应接收事件，因此 Enable 属性设为 false
+    [common action]  `Action/background_event.act`
+[/ui controls]
+
+// 从这里开始设置地下城选择画面图像（气泡图像）
+// 按钮图像定义（奥德赛城市战）
+[ui controls]
+    `[balloon]`        // ui控件具有的属性（`balloon` 类的控件用于地下城选择画面）
+    `IDC_WORLDMAP_BUTTON1`    // 控件名称（不可重复！！ // 从0开始写也可以，但建议从1开始写）
+    451            // X （气泡的 x 坐标）
+    158            // Y （气泡的 y 坐标）
+    1            // string 数据数量（请勿修改！咨询客户端组）
+    `WorldMap/selectdungeon02.img`    // （请勿修改！！咨询客户端组）
+    3            // int 数据数量（请勿修改！！咨询客户端组）
+    1            // 气泡控件类型（0. 普通气泡，1. 地下城选择气泡） //（请勿修改！！使用1号即可）
+    2            // 气泡控件图案（显示与 WorldMapPatternTable2ND.tbl 中设置的图案匹配的气泡形状）
+                // 目前有0~17号图案，如需额外添加形状，请咨询地下城客户端组。
+                // 0~17号图案形状可参考 \\192.168.20.35\dnfshare\graphic\2_완성본\02_interface\UI_ver03\UI\SelectDungeon_ver2.0\png
+                // 文件夹中的 030~047 文件图像。
+    60            // 要显示的地下城索引
+    [common action]  `Action/worldmap_balloon.act`    // 气泡动作路径（请勿修改！！咨询客户端组）
+[/ui controls]
+
+// 按钮图像定义（绿色都市 格罗兹尼）
+[ui controls]
+    `[balloon]`
+    `IDC_WORLDMAP_BUTTON2`    // 控件名称
+    288            // X
+    428            // Y
+    1            // string 数据数量
+    `WorldMap/selectdungeon02.img`
+    3            // int 数据数量
+    1            // 气泡控件类型（0. 普通气泡，1. 地下城选择气泡）
+    3            // 气泡控件图案
+    61        // 要显示的地下城索引
+    [common action]  `Action/worldmap_balloon.act`
+[/ui controls]
+
+// 按钮图像定义
+[ui controls]
+    `[switchbox]`
+    `IDC_WORLDMAP_SWITCHBOX`    // 控件名称
+    400            // X
+    100            // Y
+    1            // string 数据数量
+    `WorldMap/selectdungeon02.img`
+    14            // int 数据数量
+    1            // 开关控件类型（0. 普通开关，1. 地下城选择开关）
+    24            // 主体部分索引
+    3            // 上一个按钮（普通）
+    4            // 上一个按钮（鼠标悬停）
+    5            // 上一个按钮（鼠标按下）
+    6            // 上一个按钮（禁用）
+    7            // 下一个按钮（普通）
+    8           // 下一个按钮（鼠标悬停）
+    9           // 下一个按钮（鼠标按下）
+    10          // 下一个按钮（禁用）
+    11            // 普通
+    12            // 冒险
+    13            // 王者
+    14            // 英雄
+[/ui controls]

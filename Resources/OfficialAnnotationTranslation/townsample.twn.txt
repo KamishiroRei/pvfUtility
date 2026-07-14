@@ -1,0 +1,39 @@
+// 村庄脚本文件示例 //
+
+[name] `亨顿迈尔`				// 名称
+
+[entering title] `TitleAnimation/HendonMyre.ani`	// 用作标题的动画。将动画的中心对准屏幕中央。
+[cutscene image] `CutScene.img` 0			// 过场图像文件名称，帧索引
+
+[dungeon what must be cleared] -1					// 为进入而必须清除的地下城索引。-1 表示无
+
+[area]						// 区域 (AREA) 的一个信息
+0						// 索引。从 0 开始并使用连续的值
+`Town/HendonMyre/Gate.map`			// 地图脚本文件名称 (Script/Map 下的相对路径)
+`[minimap rect]`
+1000	100		2500	500			// 起点(x, y) 终点(x, y) step 0
+100		10		250		50			// 起点(x, y) 终点(x, y) step 1
+`[/minimap rect]`
+`[gate]`					// 区域类型。在 `[normal]` `[gate]` `[fishing place]` `[pub]` `[dungeon gate]` 中选择
+273						// 根据区域类型的整数数据。使用方法在最底部
+222
+[/area]
+
+[area]
+1
+`Town/HendonMyre/Square.map`
+`[normal]`
+[/area]
+
+
+// 整数数据使用方法
+//
+// `[normal]`	: 不使用
+//
+// `[gate]`	: [0]初始起始x坐标 [1]初始起始y坐标
+//
+// `[fishing place]`	: 钓鱼可获得的物品概率。可以使用与抽取物品的整数数据相同的格式。
+//
+// `[pub]`	: 不使用
+//
+// `[dungeon gate]`	: [0]要进入的世界地图 [1]要进入的世界地图上的区域索引

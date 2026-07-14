@@ -1,0 +1,128 @@
+//[name] `测试怪物卡片`
+//[name2] `Sample of monster cards`
+[explain]
+`燃烧的格拉卡拉克`									// 怪物出没地下城
+[flavor text]
+`本想不制造bug的... - 千年任务`
+[grade] 3
+[attach type] `[free]`
+[weight] 10
+[usable job]
+`[all]`
+[/usable job]
+
+[icon] `Item/IconStackable.img` 16
+[field image] `Item/FieldImage.img` 23
+
+[stackable type] `[material]` 4
+[sub type] 1										// 表示是怪物卡片！！
+[price] 120
+
+[move wav] `BONE_TOUCH`
+
+[string data]
+`Interface/MonsterCard/cut_cardimage.img`	// 怪物卡片图像包
+`[weapon]`					// 附魔目标 (装备部位)
+`[foil]` 					// 箔
+`[unlimited challenge]`				// 事件名称
+[/string data]
+
+[int data]
+1				// 怪物卡片图像索引
+3000			// 怪物索引
+[/int data]
+
+[enchant]
+	// 变化能力值。变化量为0的可以不写。 //
+	[HP MAX] +10				// 前面的+号可以省略
+	[MP MAX] +27
+	[physical attack] +100
+	[physical defense] +10
+	[magical attack] -10
+	[magical defense] -26
+	[equipment physical attack] 100
+	[equipment physical defense] 25
+	[equipment magical attack] 100
+	[equipment magical defense] 38
+	[physical absolute damage] 100		// 物理绝对伤害
+	[physical damage reduce] 100		// 物理伤害修正
+	[physical absolute defense] 20.0	// 物理绝对防御。%值
+	[magical absolute damage] 100		// 魔法绝对伤害
+	[magical damage reduce] 100		// 魔法伤害修正
+	[magical absolute defense] 20.0		// 魔法绝对防御。%值
+
+	[fire resistance] +17
+	[water resistance] +3
+	[dark resistance] +37
+	[light resistance] -37
+	[all elemental resistance] +10
+
+	[slow resistance] 18
+	[freeze resistance] 39
+	[poison resistance] 11
+	[stun resistance] 33
+	[curse resistance] 10
+	[blind resistance] 10
+	[lightning resistance] 24
+	[stone resistance] 3
+	[sleep resistance] 33
+	[deelement resistance] 1
+	[deadlystrike resistance] 2
+	[bleeding resistance] 32
+	[confuse resistance] 33
+	[hold resistance] -3
+	[all activestatus resistance] +2
+
+	[piercing resistance] 12
+	[stuck resistance] 33 // (0.1%单位)
+
+	[inventory limit] +30
+	[HP regen speed] +2
+	[MP regen speed] -2
+	[MP regen speed rate] 0.1	// %增加 (临时例外处理)
+	[move speed] +1
+	[attack speed] +2
+	[cast speed] +3
+	[hit recovery] +3
+	[jump power] +10
+	[room list move speed rate] +1.0	// 指定在村庄中的移动速度
+
+	// 攻击修正值：仅对武器有效。没有或0则可以不写 //
+	[elemental property] `[dark element]`				// 在 `[no element]` `[fire element]` `[water element]` `[dark element]` `[light element]` 中选择。`[no element]` 则可以不写
+	[active status] `[curse]` 37.3 100	// 最前面是攻击时触发的状态异常种类。
+					// `[none]` `[slow]` `[freeze]` `[poison]` `[stun]` `[curse]` `[blind]`
+					// `[lightning]` `[stone]` `[sleep]` `[deelement]` `[deadlystrike]` `[bleeding]`
+					// `[haste]` `[bless]` `[element]`
+					// 中选择 (`[none]` 则可以不写)
+					// 第二个是触发概率 (如果写了 `[none]`，则可以任意填写)
+					// 第三个是触发强度 (如果写了 `[none]`，则可以任意填写)
+
+
+
+	[skill data up] `[fighter]` 12 `[static]` 2 1 200
+	// 职业
+	// 技能索引，
+	// 要更改的数据类型[static data, level info]
+	// 数据索引
+	// 数值适用(0)，比率适用%(1)
+	// 数值
+
+
+
+	[push aside] +10
+	[lift up] +27
+	[critical hit] +5.0		// 暴击命中概率上升值
+	[stuck] -1.0			// 卡住概率变化值
+	[ignore defense] 1
+	[human damage rate] +2.5	// 对人类伤害比率变化值。%值
+	[fort damage rate] -31.2	// 对建筑伤害比率变化值。%值
+	[monster damage rate] 100.0	// 对怪兽 (针对装甲类别为0的家伙) 攻击比率。可小数，%值，100为默认
+
+	[HP drain] 1
+	[MP drain] 1
+
+	[skill levelup]				// 装备时提升的技能和等级列表。
+	`[swordman]` 10 1				// 职业 (`[swordman]` `[fighter]` `[common]`) 技能索引 等级
+	`[fighter]` 1 33
+	[/skill levelup]
+[/enchant]

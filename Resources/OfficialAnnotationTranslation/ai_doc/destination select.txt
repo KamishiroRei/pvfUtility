@@ -1,0 +1,208 @@
+**AI角色目的地决定方法追加**
+
+* **目的地决定方式**
+ - DestinationSelect.ai中return值对应的目的地决定方式如下：
+
+0	追踪目标
+1	与目标保持一定距离
+2	逃离目标
+3	在目标周围徘徊
+4	随意游荡
+5	移动到特定友方角色
+6	移动到特定怪物
+7	在特定友方角色周围移动
+8	在特定友方物体周围移动
+9	在特定怪物周围移动
+10	迂回追踪
+11	与目标保持一定距离（应用随机值）
+12	追踪特定目标（追踪is target object in area()中找到的物体）
+13	追踪最近的友方怪物
+14.	与目标保持距离的扩展版本（与[keep range distance with target]一起使用）
+15.	与目标保持距离的扩展版本（与[keep range distance with target 1]一起使用）
+16.	与目标保持距离的扩展版本（与[keep range distance with target 2]一起使用）
+17.	与目标保持距离的扩展版本（与[keep range distance with target 3]一起使用）
+18.	与目标保持距离的扩展版本（与[keep range distance with target 4]一起使用）
+19 	追踪至敌人后方（如果正面对敌，会刻意绕到背后）
+20 	若与敌人在同一直线上，则向上或向下躲避
+21	逃跑时优先向Y轴上方或下方逃跑
+22	上下呈Z字形移动
+23	附近有友军靠近时彼此分散
+24	在敌人周围保持一定距离聚集。（不聚集在一处，彼此保持间隔，同时与敌人也保持一定距离）
+25 	躲藏在附近目标的被动物体后面。
+26	保持距离的同时时而接近时而远离
+27	逃到看不见敌人的地方后，向Y轴上方或下方躲避
+28	从两侧墙壁处逃离
+29	追踪特定坐标
+30	与特定坐标保持距离
+31	从特定坐标逃离
+32	在特定坐标周围徘徊（未实现）
+33	迂回追踪特定坐标
+34	从特定坐标逃离时向Y轴方向
+35	在特定坐标周围保持距离聚集
+36	跟随友方物体
+
+* **目标及移动范围指定**
+
+**1. 指定友方角色**
+[set friend character] {AI角色}
+ - 目前友方角色只能指定AI角色，可通过数字或名称设置。
+ - AI角色名称表格在 \Script\AICharacterName.lst 中自动生成。
+    （用于手动更新表格的GM命令：//save list aicharacter）
+ - 设置的友方角色在return值为5或7时使用。
+ - 指定的值在[think]到[/think]之间有效，最近设置的值优先应用。
+    （此方式同样适用于[set target monster]、[set friend object]、[set bound]）
+ - 示例：
+
+//	未指定 friend character
+
+    [think] [set friend character] `索洛多斯`
+//	friend character 是 索洛多斯
+
+        [think] [set friend character] `索洛多斯2`
+//	friend character 是 索洛多斯2
+        [/think]
+
+//	friend character 恢复为 索洛多斯
+    [/think]
+
+//	friend character 变为未指定
+
+**2. 指定特定怪物**
+[set target monster] {怪物} {队伍}
+ - 怪物可通过数字或名称设置。
+ - 怪物名称表格在 \Script\MonsterName.lst 中自动生成。
+    （用于手动更新表格的GM命令：//save list monster）
+ - 设置的怪物在return值为6或9时使用。
+ - 队伍可通过数字或名称设置，有`enemy`、`neutral`、`friend`三种值。
+    （各自对应的数字值为 -1, 0, 1）
+ - 若要输入文字形式的队伍，需要覆盖 \\ask027\DNF_TESTRUN\Script\OperatingValue.lst 文件。
+
+**3. 指定友方物体**
+[set friend object] {被动物体}
+ - 被动物体可通过数字或名称设置。
+ - 被动物体名称表格在 \Script\PassiveObjectName.lst 中自动生成。
+    （用于手动更新表格的GM命令：//save list passiveobject）
+ - 设置的物体在return值为8时使用。
+
+**4. 指定移动范围**
+[set bound] {前方视野距离} {后方视野距离} {上方视野距离} {下方视野距离}
+ - 视野距离以屏幕像素为单位。
+
+**5. 指定目标坐标**
+[set target position] {x坐标} {y坐标}
+ - 当想以特定坐标而非某个物体为目标时使用。
+ - 设置的坐标用于return值29~35的情况。
+
+
+
+
+
+
+
+
+
+AI 캐릭터 목적지 결정 방법 추가
+
+
+* 목적지 결정 방식
+ - DestinationSelect.ai에서 return 값에 대응되는 목적지 결정방식은 아래와 같습니다
+
+0	타겟추적하기
+1	타겟과 일정 거리 유지하기
+2	타겟으로부터 도망가기
+3	타겟 주변을 맴돌기
+4	그냥 떠돌기
+5	특정 아군 캐릭터로 이동하기
+6	특정 몬스터로 이동하기
+7	특정 아군 캐릭터 주변에서 움직이기
+8	특정 아군 오브젝트 주변에서 움직이기
+9	특정 몬스터 주변에서 움직이기
+10	우회 추척
+11	타겟과 일정 거리 유지하기(랜덤 값 적용) 
+12	특정 타겟 추적하기(is target object in area() 에서 찾은 오브젝트를 추적)
+13	가장 가까운 아군 몬스터 추적하기
+14.	타겟과 거리 유지하기 확장버전( [keep range distance with target] 과 함께 쓰임)
+15.	타겟과 거리 유지하기 확장버전( [keep range distance with target 1] 과 함께 쓰임)
+16.	타겟과 거리 유지하기 확장버전( [keep range distance with target 2] 과 함께 쓰임)
+17.	타겟과 거리 유지하기 확장버전( [keep range distance with target 3] 과 함께 쓰임)
+18.	타겟과 거리 유지하기 확장버전( [keep range distance with target 4] 과 함께 쓰임)
+19 	적의 후방을 보도록 추적한다(정면에 있다면 굳이 뒤로 돌아가 등을 보려고 한다.)
+20 	적과 일직선 상에 있으면 위나 아래로 회피
+21	도망칠 때 우선적으로 y축 상단이나 하단으로 도망친다
+22	위 아래로 지그재그로 움직인다
+23	근처에 아군이 오면 서로 흩어짐
+24	적 주변으로 일정 거리를 유지하며 뭉친다. (한 곳에 뭉치지 않고 서로 간격을 유지하며, 적과도 일정거리를 유지한다)
+25 	근처 타겟 패시브 오브젝트 뒤로 숨는다.
+26	거리 유지하면서 다가갔다 떨어졌다 하기 
+27	적이 안보이는 곳으로 도망친 후, y축 위/아래로 피한다
+28	양쪽 벽에서 벗어나기
+29	특정 좌표를 추적
+30	특정 좌표와 거리 유지하기
+31	특정 좌표로부터 도주 
+32	특정 좌표 주변을 맴돌기(미구현)
+33	특정 좌표를 우회추적
+34	특정 좌표로부터 도주시 y축 방향으로
+35	특정 좌표 주변으로 거리 유지하며 모임
+36	아군 오브젝트를 따라가기
+
+* 타겟 및 이동 범위 지정
+
+1. 아군 캐릭터 지정
+[set friend character] {AI캐릭터}
+ - 현재 아군 캐릭터 지정은 AI캐릭터만 설정할 수 있으며, 숫자 또는 이름으로 설정 가능합니다
+ - AI캐릭터 이름 테이블은 \Script\AICharacterName.lst 에 자동 생성됩니다
+	(테이블 수동 갱신을 위한 GM명령어 : //save list aicharacter)
+ - 설정된 아군 캐릭터는 5나 7이 return될 때 사용됩니다
+ - 지정된 값은 [think]에서 [/think] 사이에 유효하며 가장 최근에 설정된 값이 우선적으로 적용됩니다
+	(이 방식은 [set target monster], [set friend object], [set bound]에도 그대로 적용됩니다)
+ - 예)
+
+//	friend character 는 지정 되지 않음
+
+	[think] [set friend character] `솔로도스`
+//	friend character 는 솔로도스
+
+		[think] [set friend character] `솔로도스2`
+//	friend character 는 솔로도스2
+		[/think]
+
+//	friend character 는 다시 솔로도스
+	[/think]
+
+//	friend character 는 지정되지 않음
+
+
+2. 특정 몬스터 지정
+[set target monster] {몬스터} {팀}
+ - 몬스터는 숫자 또는 이름으로 설정 가능합니다
+ - 몬스터 이름 테이블은 \Script\MonsterName.lst 에 자동 생성됩니다
+	(테이블 수동 갱신을 위한 GM명령어 : //save list monster)
+ - 설정된 몬스터는 6이나 9가 return될 때 사용됩니다
+ - 팀은 숫자 또는 이름으로 설정 가능하며, `enemy`, `neutral`, `friend`의 3가지 값이 존재합니다
+	(각각에 설정된 숫자값은 -1, 0, 1 입니다)
+ - 팀을 문자로 입력하기 위해서는 \\ask027\DNF_TESTRUN\Script\OperatingValue.lst 를 덮어써야 합니다
+
+
+3. 아군 오브젝트 지정
+[set friend object] {패시브 오브젝트}
+ - 패시브 오브젝트는 숫자 또는 이름으로 설정 가능합니다
+ - 패시브 오브젝트 이름 테이블은 \Script\PassiveObjectName.lst 에 자동 생성됩니다
+	(테이블 수동 갱신을 위한 GM명령어 : //save list passiveobject)
+ - 설정된 오브젝트는 8이 return될 때 사용됩니다
+
+
+4. 이동 범위 지정
+[set bound] {앞 시야거리} {뒤 시야거리} {위 시야거리} {아래 시야거리}
+ - 시야 거리는 스크린의 픽셀단위입니다
+
+5. 목표 좌표 지정
+[set target position] {x좌표} {y좌표}
+- 어떤 오브젝트가 아닌 특정 좌표를 목표로 설정하고 싶을 때 사용합니다.
+- 설정된 좌표는 29~35의 return값에 사용됩니다.
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+// 装备部件套装脚本文件示例 //
+// 所有部件的脚本中都必须包含以下标签。 //
+
+[piece set ability] 2
+    * 功能们
+    [parameter basic explain] 基本说明
+    [parameter detail explain] 详细说明
+[/piece set ability]
+
+[piece set ability] 5
+    * 功能们
+    [parameter basic explain] 基本说明
+    [parameter detail explain] 详细说明
+[/piece set ability]
+
+// 原有套装物品与变更事项 //
+
+- 原有：指定除大师外的套装物品索引
+- 变更：指定包括大师在内的套装物品索引
+
+[set item]
+12097
+14095
+18082
+16081
+17050
+[/set item]
+
+// [2011-06-14] 添加事项!!!
+// 对于没有大师的部件套装，若不单独指定构成物品的数量，
+// 而是想遵循 Etc/EquipmentPartSet.etc 内的构成物品总数，
+// 则在索引处指定 -1。
+// (这种情况下，即使文件内存在 -1 以外的其他索引也会被忽略。)
+
+[piece set ability] -1
+    * 功能们
+    [parameter basic explain] 基本说明
+    [parameter detail explain] 详细说明
+[/piece set ability]

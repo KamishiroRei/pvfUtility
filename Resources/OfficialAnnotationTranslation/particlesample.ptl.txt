@@ -1,0 +1,60 @@
+// 粒子脚本示例 //
+
+[creation pos] 100 127 0 // 生成 x, y, z 坐标
+
+[x axis] // 要编辑移动的轴。此标记之后的值是X轴。
+[move type] `[sin]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。
+[move variable 1] 100 102 // 移动变量 1。初始值和最终值（移动速度 / 振动最大值）。
+[move variable 2] 150 152 // 移动变量 2。初始值和最终值（未使用 / 振动周期）。
+
+[y axis] // 要编辑移动的轴。此标记之后的值是Y轴。
+[move type] `[straight line]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。
+[move variable 1] 172 113 // 移动变量 1。初始值和最终值。
+
+[z axis] // 要编辑移动的轴。此标记之后的值是Z轴。
+[move type] `[stop]` // 移动类型。可选择 `[stop]` `[straight line]` `[sin]` `[cos]` 之一。
+
+[changing term] 1000 // 初始值和最终值之间的变化间隔。
+[changing type] `[keep changing]` // 初始值和最终值之间的移动类型。可选择 `[keep changing]` `[keep last value]` `[ping pong]` 之一。
+
+[gravity] 10 // 重力值。
+
+[rotation angle] 30 10 0 // 旋转角度。水平角 / 垂直角 / 旋转角。
+
+水平角 : 生成角度值 - 水平旋转值（Z轴固定 x->y 方向）。
+垂直角 : 生成角度值 - 垂直旋转值（Y轴固定 x->z 方向）。
+旋转角 : 生成角度值 - X轴旋转值（X轴固定 z->y 方向）。
+
+[life time] 1000 // 生命周期。
+
+[landing type] `[vanish]` // 接触地面时的处理。可选择 `[pierce]` `[slide]` `[stop]` `[vanish]` 之一。
+
+[transparent value] 100 0 // 起始 / 结束透明度（%值）。结束的基准是生命周期。
+
+[creation frequency] 0.5 // 每秒粒子生成频率（-1则按最大生成数量生成）。
+[maximum create number] 100 // 粒子最大生成数量（0则为无限）。
+[maximum create time] 0 // 粒子最大生成时间（0则为无限）。
+
+[create area size] 100 10 0 // 生成空间大小。
+[create area rotation angle] 100 32 0 // 生成空间旋转角度。
+
+[rotation angle range type] `[rectangle]` // 指定生成角度范围的方法。可选择 `[rectangle]` 和 `[circle]` 之一。
+[rotation angle variable] 300 10 // 生成角度的变量 1, 2（水平角度范围/直径角，垂直角度范围/未使用）。
+
+[random range] 10 // 随机范围（%值）。
+
+[create pos correct] 1 // 是否校正生成坐标。
+
+[how to create object] `[randomize]` 或 `[in order]` // 两者择一。
+
+[object type] `[animation]` // 要生成的对象的类型。可选择 `[animation]` 和 `[passive object]` 之一。
+[object] // 对象列表。
+`abcd.img` 3 // 写入要生成的对象的字符串 / 整数数据。
+`abc.ani` -1 // 指定动画时，整数值为-1（动画从相对路径读取）。
+// `` 3 // 被动对象的情况下，整数值放入对象索引。
+[/object] // 必须用此标签闭合。
+
+[layer] `[bottom]` // 生成的粒子的图层。仅当生成对象为 `[animation]` 时有效。
+// 可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。
+
+[display effect rate] 50 75 100 // 特效等级（低-中-高）时生成的粒子比例。%值（默认是100 100 100）。

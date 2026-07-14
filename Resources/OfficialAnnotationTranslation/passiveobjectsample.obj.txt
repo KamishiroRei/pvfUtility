@@ -1,0 +1,213 @@
+// 被动对象脚本文件示例 //
+
+[name] (字符串索引) // 对象的名称。
+[width] 40 10 // 怪物的碰撞检测范围。
+
+[layer] `[bottom]` // 绘制图层。可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]` 之一。
+[layer level] -500 // 图层层级。此数值越高则位置越靠前。即此数值低则会被数值高的对象遮挡。
+[pass type] `[pass all]` // 选择 `[pass all]` `[pass only float type]` `[do not pass]` 之一。添加 `[pass only red team]`、`[pass only blue team]`（势力战用）。
+[piercing power] 50 // 攻击时的穿透力。攻击成功时计算概率，失败则对象消失。
+[piercing tolerance] 1 // 穿透抗性。
+
+[hp max] 5000 // 被动对象的HP值。若无此值则完全不会受到伤害（障碍物概念）。
+[hp destroy] 1 // HP耗尽时是否破坏。0则不破坏，1则破坏。
+// 若想制作有打击感但不应被破坏的对象，可将 [hp max] 设为0以上的适当值，[hp destroy] 设为0，则攻击时有反应但绝不会破坏。
+
+[vanish on move collision] 1 // 碰撞时是否消失 (1: 消失[默认] 0: 不消失)。
+
+[category] // 该对象的所属类别列表。
+`[undead]`
+[/category]
+// 类别列表
+// 种族 : `[human]` `[beast]` `[plant]` `[insect]` `[machine]` `[hybrid]` `[undead]` `[devil]` `[spirit]` `[dragon]`
+// AI : `[melee combat]` `[range combat]` `[close-passive]` `[close-carefully]` `[close-tough]` `[close-manace]`
+// 护甲 : `[human armor]` `[fort armor]` `[divine armor]`
+// 其他 : `[goblin]` `[tau]` `[lugaru]`, `[fixture]`, `[stay]` 添加 [stay] 是在原地不动。
+
+// 动画列表。没有的可以不写。或用 `` 输入则视为没有。
+[basic motion] `Lawn.ani` // 基本动作动画文件名。
+[etc motion] // 硬编码用动作动画文件名列表（顺序重要）。
+`Burn.ani`
+[/etc motion] // 必须用此标签闭合。
+
+[basic action] `blah/basic.act` // 基本动作的路径和文件名。
+
+[etc action] // 对象基本没有攻击，因此不使用 [action list] 标签，只使用 [etc action] 标签。
+`blah/action1.act` // 自定义动作 - 可通过动作文件的 [SET ACTION] [CUSTOM] 访问的动作，从前到后依次为 0, 1 顺序。
+`blah/action2.act` // 自定义动作。
+[/etc action]
+[team] 0 // 队伍编号 0~ : 角色队伍 100~ : 怪物队伍 200~ : 中立队伍。
+[trap] 1 // 是否为陷阱。为1则必须破坏才能通关。
+[last action] `pangya.act` // 在破坏前必须执行一次的动作的文件路径。
+
+[destroy particle]
+`Particle/Destroy.ptl` // 破坏时生成的（一次性）粒子脚本文件名。相对路径。
+[/destroy particle]
+
+// 制导功能。
+[homing]
+[homing use] 1
+[homing follow] `[ENEMY]` // `[ME]` `[ENEMY]` //`[CHARACTER]` 0 - 若是角色，则放入队伍索引。
+// `[MONSTER]` 1 - 为使其跟随特定怪物，数字为索引。
+[homing velocity] 100 50 // 速度，加速度。
+[homing check gap] 200 // 追踪中的目标位置检查时间间隔（1/1000）秒。
+[sync animation rotation] 1 // 是否根据移动方向对齐动画（默认值 0）。
+[max rotation] 200 // 每秒最大可旋转角度（0则为无限旋转）。
+[init rotation] 0 // 对象生成时的旋转角度（默认值 0）。
+[diff rotation] 100 // 可感知目标的角度（默认值 180）- 当 [max rotation] 不为0时生效。
+[homing time] 10000 // 制导功能生效的时间（0则为无限，默认值 0）。
+[sync target move] // 制导功能期间，若目标移动，则实时移动该距离，使制导轨迹不变的功能。
+[/homing]
+
+[sound category]
+`[after object create]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象创建后立即播放声音时。
+`[on frame]` `ZOMBIE_EYEROLLING_LOOP` 43739 1 // 对象超过一定帧数时，最后为起始帧编号。
+`[on attack]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 与其他对象碰撞时。
+`[on damage]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象受到伤害时。
+`[on destroyobject]` `ZOMBIE_EYEROLLING_LOOP` 43739 // 对象被破坏时。
+// `[类别]` `声音标签名称` [对象索引]（若要使循环声音只播放一次则为-1，无任何条件则为-2）
+// 破坏声音请勿循环。
+[/sound category]
+
+[add object effect]
+`Ani/ZEyeBallGlow.ani` 100 // 图层文件名，附加的顺序。
+[/add object effect]
+
+[add particles]
+[particle]
+[file]`a.ptl` // 粒子的生成位置为被动对象的生成位置 + 粒子脚本的生成位置。
+[/particle]
+[particle]
+[file] `b.ptl`
+[create delay] 1000 // 被动对象生成后到粒子特效出现为止的延迟。
+[create sound] `SOUND_TAG` // 粒子生成时输出的声音（不支持循环）。
+[follow parent] 10 10 10 // 将粒子的生成位置改为距离被动对象特定位置偏移的位置。<移动类型：仅最后声明的移动类型有效>
+[/particle]
+[/add particles]
+
+[object destroy condition]
+`[destroy condition]` `[time limite]` 4000
+
+// 若为 [on end of animation] 则为动画结束后删除对象，此外无需输入。
+// 例>>[on end of animation]
+// 若为 [z pos equal zero] 则为接触地面时删除对象，此外无需输入。
+// 例>>[z pos equal zero]
+// 若为 [time limite] 则为经过时间后删除，仅在 [time limite] 处输入时间。
+// 例>>[time limite] 400
+
+`[destroy action]` `[only destroy]`
+// [only destroy] 则为自身破坏。
+// [object create after destroy] 则为自身破坏后生成其他对象。
+`[add object index]`
+1
+30005 // 要新生成的对象索引。
+
+// 对象碰撞时的处理，若无额外选项则可不写。
+`[on attack]` `[object create after destroy]`
+`[add object index on attack]`
+1
+30005 // 要新生成的对象索引。
+[/object destroy condition]
+
+[is blocking obj] 1 // 设为1并放置在门前，则门不会打开。
+[is hp by difficulty] 1 // 为1则根据难度改变HP：普通 * 1.0 - 专家 * 2.0 - 大师 * 3.0 - 王者 * 4.0 - 英雄 - * 5.0。
+
+[hp gage] 1 // 为1则绘制HP条。
+
+[burning death path] `PassiveObject/Common/Animation/SunkenRock.ani` // 被火属性武器终结时输出的特效路径（写入此标签则仅在火属性时死亡）。
+
+[can beat index] // 只有具有此标签内索引的怪物攻击时才会受到伤害。
+65523
+61902
+[/can beat index]
+
+[apply physics] 1500 // 应用动力学，刚体的牛顿值（默认 1500N）。
+
+[follow parent] `[from parent]` // `[path gate]` 进入门时随机位置。
+// `[parent]` 与PARENT精确重叠的位置。
+// `[from parent]` 保持与PARENT的相对位置。
+// `[keep position]` 保持坐标。
+// `[none]` 默认值。不跟随。
+
+// 恶灵之云用速度控制被动对象（可注册多个[passive object]，顺序无关）。
+// 恶灵之云的[int data]中的速度增加键对象索引（第4个）、速度减少键对象索引（第6个）必须都为-1，此标签才生效。
+[speed control passive objects]
+[passive object]
+[index] 9165 // 控制速度的对象索引。
+[speed] `[up]` // 速度增加。
+[/passive object]
+[passive object]
+[index] 51332 // 控制速度的对象索引。
+[speed] `[down]` // 速度减少。
+[/passive object]
+[/speed control passive objects]
+
+// 用于周期性地生成被动对象的被动对象生成器的标签 //////////////
+// 注册要生成的对象。
+[objects]
+[object]
+[id] 1 // 用于[data]模式的ID。用此值区分模式中出现的对象。
+[index] 9974 // 要生成的对象索引。
+[probability] 0.25 // 对象生成的概率。
+[warning] `true` // 是否显示警告标记。
+[/object]
+[/objects]
+// 在[patterns]中按类别记录模式，在[sequences]中指定这些模式出现的顺序。
+[patterns]
+[pattern] // -> 可以指定模式。也可以有多个。
+[name] `A` // -> 模式的唯一名称。必须是唯一的名称。
+[interval] 500 // -> 对象生成的时间周期。毫秒单位。
+[columns] 3 // -> 一个周期内生成的模式单位数量。
+[data] // -> 在此指定模式数据。0为空位，1表示要生成的被动对象。
+0 1 1 // 省略 [data] 标签时，对象随机出现。
+0 1 0 // 当[columns]值为3时，将数据每3个数字分割一次生成模式。
+1 0 1 // 因此数据数量必须是column的倍数。
+0 1 1
+1 0 1
+[/data]
+[/pattern] // -> 至此为一个模式。
+[/patterns]
+[sequences] // -> 按顺序放出上面指定的模式。
+[pattern] `A` 3000 [/pattern] // 第一个参数是模式名称，必须是上面[patterns]标签中指定的名称。
+[pattern] `B` 3000 [/pattern] // 第二个参数是模式持续的时间，毫秒单位。
+[pattern] `A` 3000 [/pattern] // 示例中，模式以 A-B-A-A-B-R-A 的顺序每3秒变化一次。
+[pattern] `A` 3000 [/pattern] // 模式全部结束后，再从开始重复。
+[pattern] `B` 3000 [/pattern]
+[pattern] `R` 3000 [/pattern]
+[pattern] `A` 3000 [/pattern]
+[/sequences]
+
+//mkjung 120627
+[string data] // 这里是用于声音等的空间。
+``
+``
+``
+`WOOD_HIT`
+`WOOD_CRASH`
+[/string data]
+
+[under gravity] 1
+
+[transparent on meet player] 1
+
+[pvp room transparent value for observer] 100 // 若有此标签，则对象仅对观察者以此值透明显示。
+
+[SNIPER TYPE]
+[WAIT TIME] 12000
+[INVOKE TIME] 20000
+[INIT VELOCITY] 700
+[INVOKE CHECK TIME] 250
+[INVOKE DELAY TIME] 2000
+[SHOT DISTANCE] 10
+[/SNIPER TYPE]
+
+[warning]
+[min distance] 0 0 500
+[max distance] 0 0 1500
+[/warning]
+
+[quest type][must be destroyed]
+
+[for tournament] 1
+
+[create sound] `CROSSCRASH`

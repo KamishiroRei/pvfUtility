@@ -1,0 +1,127 @@
+// 时装脚本示例文件
+// 时装脚本示例文件
+
+[name] <3::name_44801>            // 时装韩文名称索引
+[name2] <3::name2_44801>        // 时装英文名称索引
+[explain] <3::basic_explain_44801>    // 时装说明索引
+[grade] 2                // 时装品级 // 1 普通，2 高级，3 稀有
+[attach type] `[free]`            // 交换许可 // free 可交换，trade 不可交换
+[rarity] 2
+[usable job]                // 可穿戴职业
+`[fighter]`
+[/usable job]
+[minimum level] 1            // 可穿戴最低等级
+[usable period] 15            // 时效性（天数）
+
+[icon] `item/avatar/fighter/ft_acoat.img` 171    // 图标图像路径
+
+[equipment type] `[coat avatar]` 0    // 穿戴部位
+
+[avatar func filter] 0            // 时装功能 // 0 全部不可，1 可合成，2 可分解，3 可合成、可分解
+
+[avatar type select]            // 购买时类型选择
+7 0 0 1700 0                // 期限=金币=胜点=点券=孔数=孔信息
+30 0 0 3400 0
+0 0 0 6800 0
+0 0 0 7480 2 `[C socket]` `[C socket]`
+[/avatar type select]
+
+[variation] 54 0                // 穿戴图像图层编号
+[layer variation] 1800 `coat_a`
+////请勿使用，已更改为下方标签 /////<include> `equipment/character/fighter.lay`
+[equipment ani script] `equipment/character/fighter.lay`
+[layer variation] 500 `coat_d`
+////请勿使用，已更改为下方标签 /////<include> `equipment/character/fighter.lay`
+[equipment ani script] `equipment/character/fighter.lay`
+
+[move wav] `CLOTH_TOUCH`        // 移动/拾取时音效
+
+[part set index] 2                // 普通套装编号 // 2 高级套装，3 稀有套装
+
+[set name] <3::set_name_44801>            // 套装名称（如果指定了套装）
+[set item]                    // 构成套装效果的其他部件索引（如果指定了套装）
+43138
+43575
+43909
+44317
+44801
+45197
+45516
+45976
+46212
+[/set item]
+
+[set ability]                    // 套装时装效果（如果指定了套装）
+[HP MAX] 150
+[MP MAX] 150
+[physical attack] +15
+[physical defense] +15
+[magical attack] +15
+[magical defense] +15
+[inventory limit] 6000
+[HP regen speed] 20
+[MP regen speed] 4
+[move speed] 20
+[attack speed] 20
+[cast speed] 20
+[skill levelup] 
+`[fighter]` 5 1
+[/skill levelup] 
+[/set ability]
+
+[avatar select ability]                // 时装选择属性
+`[SKILL_LEVEL]` `[fighter]` 30 1
+`[SKILL_LEVEL]` `[fighter]` 20 1
+`[SKILL_LEVEL]` `[fighter]` 1 1
+`[SKILL_LEVEL]` `[fighter]` 3 1
+`[SKILL_LEVEL]` `[fighter]` 45 1
+`[SKILL_LEVEL]` `[fighter]` 22 1
+`[SKILL_LEVEL]` `[fighter]` 10 1
+`[SKILL_LEVEL]` `[fighter]` 51 1
+`[SKILL_LEVEL]` `[fighter]` 50 1
+`[SKILL_LEVEL]` `[fighter]` 11 1
+`[SKILL_LEVEL]` `[fighter]` 37 1
+`[SKILL_LEVEL]` `[fighter]` 43 1
+`[SKILL_LEVEL]` `[fighter]` 49 1
+`[SKILL_LEVEL]` `[fighter]` 36 1
+`[SKILL_LEVEL]` `[fighter]` 31 1
+`[SKILL_LEVEL]` `[fighter]` 4 1
+`[SKILL_LEVEL]` `[fighter]` 38 1
+`[SKILL_LEVEL]` `[fighter]` 18 1
+`[SKILL_LEVEL]` `[fighter]` 42 1
+`[SKILL_LEVEL]` `[fighter]` 52 1
+`[SKILL_LEVEL]` `[fighter]` 39 1
+`[SKILL_LEVEL]` `[fighter]` 44 1
+`[SKILL_LEVEL]` `[fighter]` 40 1
+`[SKILL_LEVEL]` `[fighter]` 19 1
+`[SKILL_LEVEL]` `[fighter]` 14 1
+`[SKILL_LEVEL]` `[fighter]` 54 1
+`[SKILL_LEVEL]` `[fighter]` 15 1
+`[SKILL_LEVEL]` `[fighter]` 16 1
+`[SKILL_LEVEL]` `[fighter]` 60 1
+`[SKILL_LEVEL]` `[fighter]` 62 1
+`[SKILL_LEVEL]` `[fighter]` 69 1
+`[SKILL_LEVEL]` `[fighter]` 68 1
+`[SKILL_LEVEL]` `[fighter]` 74 1
+`[SKILL_LEVEL]` `[fighter]` 75 1
+`[SKILL_LEVEL]` `[fighter]` 76 1
+`[SKILL_LEVEL]` `[fighter]` 77 1
+`[SKILL_LEVEL]` `[fighter]` 78 1
+`[SKILL_LEVEL]` `[fighter]` 79 1
+`[SKILL_LEVEL]` `[fighter]` 90 1
+`[SKILL_LEVEL]` `[fighter]` 80 1
+`[SKILL_LEVEL]` `[fighter]` 91 1
+`[SKILL_LEVEL]` `[fighter]` 83 1
+`[SKILL_LEVEL]` `[fighter]` 82 1
+`[SKILL_LEVEL]` `[fighter]` 81 1
+`[SKILL_LEVEL]` `[fighter]` 87 1
+`[SKILL_LEVEL]` `[fighter]` 89 1
+`[SKILL_LEVEL]` `[fighter]` 88 1
+[/avatar select ability]
+
+// 光环时装附加功能
+// `[none]` // 无附加功能的光环时装
+// `[party teleport]` index  // 队伍瞬间移动（队伍移动冷却时间）
+[aura ability]
+`[party teleport]` 600 
+[/aura ability]

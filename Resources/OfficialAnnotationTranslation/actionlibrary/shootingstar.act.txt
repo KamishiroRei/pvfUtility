@@ -1,0 +1,24 @@
+[MOTION]
+[BASE ANI] `../Animation_Kinol/Attack1.ani`
+[SUB ANI]
+`../../../equipment/monster/goblin/LKinolPantsAnimation/attack1_100.ani` 0 100
+`../../../equipment/monster/goblin/weapon09-animation/attack1_100.ani` 0 200
+[/SUB ANI]
+[/MOTION]
+//[DEFAULT ATTACKINFO]	`../AttackInfo/Attack2.atk`
+
+[TRIGGER]
+[FRAME] 2 2 // 在第2帧
+[CHECKUP] [CHARACTER] //仅检查角色
+[/CHECKUP]
+[DO BEHAVIOR] [CHECKED OBJECT] 0 // 对检查到的角色施放
+[/TRIGGER]
+[BEHAVIOR] // 0
+	[CREATE PASSIVEOBJECT]
+		[INDEX] 40004//索引编号 40004 号 流星。
+		[PARTICLE FILENAME] `../../Common/Particle/ShootingStarPath.ptl` 流星的粒子路径
+		[LEVEL] 40	// 流星的魔法等级
+		[POS] 0 0 300 // 相对坐标。目标地点高度以位置为准。
+		[WARNING MARK] 330 0 100 2 // WarningMark 校准。x位置校准 y 校准位置 延迟，警告标记种类。魔法阵在以上POS指定的坐标处生成
+	[/CREATE PASSIVEOBJECT]
+[/BEHAVIOR]

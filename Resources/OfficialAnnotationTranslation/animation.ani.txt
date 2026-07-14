@@ -1,0 +1,108 @@
+[LOOP] 1	// 当前动画是否循环 (0:不循环 1:循环)
+[SHADOW] 1	// 是否使用阴影 (0:不使用 1:使用)
+[FRAME MAX] 3	// 总帧数：下面使用的 FRAME00X 编号数量必须与此相同。
+		// 例如) [FRAME MAX] 3 的情况下，最后一帧必须以 FRAME002 结尾。
+
+// * 残影功能 * 
+// 如果不使用，则删除下面整个语句即可。
+[SPECTRUM] 1			// 是否使用残影功能 (0:不使用,1:使用)
+[SPECTRUM TERM] 100		// 残影生成间隔 1/1000秒
+[SPECTRUM LIFE TIME] 500	// 残影持续时间 1/1000秒
+[SPECTRUM COLOR] 255 0 0 155	// 残影颜色，根据 [SPECTRUM EFFECT] 类型可能不适用。
+				// 例如) NONE 类型的情况下，仅使用 alpha 值。
+[SPECTRUM EFFECT] `LINEARDODGE` // 效果类型
+				// `NONE`	 : 原样复制角色形象。
+				// `DODGE`	 
+				// `LINEARDODGE`
+				// `DARK`
+				// `XOR`
+				// `MONOCHROME`
+				// 其他功能会出错
+
+
+[FRAME000]							// 当前帧编号
+[IMAGE] `Monster/Golem/PassiveObject/GolemBullet.img` 0		// 图像路径,帧编号
+[IMAGE POS] -51 -50						// 图像位置
+[IMAGE RATE] 1.000000 1.000000					// 图像缩放
+[IMAGE ROTATE] 0.000000						// 图像旋转
+[RGBA] 255 255 255 255						// 颜色
+[INTERPOLATION] 1						//
+[GRAPHIC EFFECT] `NONE`						// 效果类型 `NONE` , `DODGE` , `LINEARDODGE` , `DARK` , `XOR` , `MONOCHROME`
+[DELAY] 70							// 帧持续时间
+[DAMAGE TYPE] `NORMAL`						//
+[ATTACK BOX] -12 -7 -12 28 14 28				// 攻击盒大小
+
+[FRAME001]
+[IMAGE] `Monster/Golem/PassiveObject/GolemBullet.img` 0
+[IMAGE POS] -51 -50
+[IMAGE RATE] 1.000000 1.000000
+[IMAGE ROTATE] -1.256637
+[RGBA] 255 255 255 255
+[INTERPOLATION] 1
+[GRAPHIC EFFECT] `NONE`
+[DELAY] 70
+[DAMAGE TYPE] `NORMAL`
+[ATTACK BOX] -12 -7 -12 28 14 28
+
+[FRAME002]
+[IMAGE] `Monster/Golem/PassiveObject/GolemBullet.img` 0
+[IMAGE POS] -51 -50
+[IMAGE ROTATE] -2.513274
+[INTERPOLATION] 1
+[DELAY] 70
+[ATTACK BOX] -12 -7 -12 28 14 28
+
+// 播放音效。
+[PLAY SOUND] `音效标签名`
+
+// 将指定帧的图像按指定方向镜像。
+// 为 ALL 时，左右上下全部镜像。
+// 注意：存在 bug，如果不位于正中央时，`ALL` 和 `VERTICAL` 会出现奇怪现象。
+[FLIP TYPE] `ALL` or `HORIZON` or `VERTICAL`
+
+// 在特定帧中指定特定值，用于编程时减少硬编码。
+[SET FLAG] 0 ~ 65535
+
+// 从包含 [LOOP START] 的帧开始
+// 到包含 [LOOP END] "次数" 的帧为止，重复指定的次数。
+// 注意：与复杂代码交织的 ANI 使用时可能会发生异常。
+// 建议仅用于简单的特效等。
+[LOOP START]
+[LOOP END] "次数"
+
+
+// 从指定帧的值到下一帧的值（位置、大小、颜色、角度）进行“线性插值”。
+// 受影响的标签为
+// [RGBA]
+// [IMAGE POS]
+// [IMAGE RATE]
+// [IMAGE ROTATE]
+// [CLIP]
+[INTERPOLATION] 1
+
+
+
+
+// 设置剪裁矩形，仅绘制该矩形内的图像。
+// 矩形的坐标以动画基准点为基准。
+[CLIP] 0 0 100 100	// SX SY WIDTH HEIGHT
+
+
+
+
+/***
+
+其他 .ani 脚本的外部功能有
+
+Auto Layer System = als。
+
+动画脚本可以对自己
+
+在特定时间点
+
+	附加
+	分离
+	或创建为 DrawOnly 对象
+
+等操作。
+*/
