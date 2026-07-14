@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,88 +34,11 @@ public class NpcShopEditorViewModel : ViewModelBase
 		public string NeedMaterialSection = string.Empty;
 	}
 
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass47_0
-	{
-		public ConcurrentObservableCollection<NpcShopItem> RVBdHnWW2O;
-
-		public int YXEdhHh8ZP;
-
-		public List<NpcShopPageViewModel> pY9dvhrrIo;
-
-		public List<string> VgPdBTsMfM;
-
-		public _003C_003Ec__DisplayClass47_0()
-		{
-		}
-
-		internal void qyEdC09jS8(int code)
-		{
-			if (code == -2)
-			{
-				int count = RVBdHnWW2O.Count;
-				if (count % 7 != 0)
-				{
-					for (int i = 0; i < 7 - count % 7; i++)
-					{
-						RVBdHnWW2O.Add(new NpcShopItem());
-					}
-				}
-				RVBdHnWW2O = new ConcurrentObservableCollection<NpcShopItem>();
-				YXEdhHh8ZP++;
-				pY9dvhrrIo.Add(new NpcShopPageViewModel(PKHmaI3tNd(VgPdBTsMfM, YXEdhHh8ZP), RVBdHnWW2O));
-			}
-			else
-			{
-				RVBdHnWW2O.Add(new NpcShopItem(code));
-			}
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass56_0
-	{
-		public AutoSuggestEditQuerySubmittedEventArgs Si3drpR7Ex;
-
-		public _003C_003Ec__DisplayClass56_0()
-		{
-		}
-
-		internal bool LBZdFMiuw8(FindNpcShopSource it)
-		{
-			return it.Find(Si3drpR7Ex.Text);
-		}
-	}
-
-	[CompilerGenerated]
-	private PvfFile V5xm6k5wqU;
-
-	private List<FindNpcShopSource> hf7m1JSlp9;
-
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<NpcShopItemSource> PhdmwBFTGd;
-
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<NpcShopItemSource> CywmoC0ED0;
-
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<NpcShopPageViewModel> lbDmsLwH65;
+	private List<FindNpcShopSource> npcShopList;
 
 	private NpcShopPageViewModel? observedCurrentPage;
 
-	public PvfFile File
-	{
-		[CompilerGenerated]
-		get
-		{
-			return V5xm6k5wqU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			V5xm6k5wqU = value;
-		}
-	}
+	public PvfFile File { get; set; }
 
 	private PvfGroup Pvf => AppCore.ViewModelBase.PVF;
 
@@ -148,10 +70,7 @@ public class NpcShopEditorViewModel : ViewModelBase
 			PvfFile pvfFile = Pvf.ListFileTable.ItemCodeConvertPvfFile(Pvf, NpcId, new string[1] { "npc" });
 			if (pvfFile == null)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(6, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("未知NPC：");
-				defaultInterpolatedStringHandler.AppendFormatted(NpcId);
-				return defaultInterpolatedStringHandler.ToStringAndClear();
+				return $"未知NPC：{NpcId}";
 			}
 			return Pvf.GetItemName(pvfFile);
 		}
@@ -181,7 +100,7 @@ public class NpcShopEditorViewModel : ViewModelBase
 		{
 			SetProperty<FindNpcShopSource>(() => CurrentNpcShop, value);
 			RaisePropertyChanged("ShopIsOpen");
-			uxumQwudkj();
+			LoadCurrentShop();
 		}
 	}
 
@@ -189,55 +108,19 @@ public class NpcShopEditorViewModel : ViewModelBase
 	{
 		get
 		{
-			if (hf7m1JSlp9 == null)
+			if (npcShopList == null)
 			{
-				hf7m1JSlp9 = FindNpcShopSource.Create();
+				npcShopList = FindNpcShopSource.Create();
 			}
-			return hf7m1JSlp9;
+			return npcShopList;
 		}
 	}
 
-	public ConcurrentObservableCollection<NpcShopItemSource> EquItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return PhdmwBFTGd;
-		}
-		[CompilerGenerated]
-		set
-		{
-			PhdmwBFTGd = value;
-		}
-	}
+	public ConcurrentObservableCollection<NpcShopItemSource> EquItems { get; set; }
 
-	public ConcurrentObservableCollection<NpcShopItemSource> StkItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return CywmoC0ED0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			CywmoC0ED0 = value;
-		}
-	}
+	public ConcurrentObservableCollection<NpcShopItemSource> StkItems { get; set; }
 
-	public ConcurrentObservableCollection<NpcShopPageViewModel> Pages
-	{
-		[CompilerGenerated]
-		get
-		{
-			return lbDmsLwH65;
-		}
-		[CompilerGenerated]
-		set
-		{
-			lbDmsLwH65 = value;
-		}
-	}
+	public ConcurrentObservableCollection<NpcShopPageViewModel> Pages { get; set; }
 
 	public NpcShopPageViewModel? CurrentPage
 	{
@@ -382,11 +265,11 @@ public class NpcShopEditorViewModel : ViewModelBase
 	public void OnLoaded()
 	{
 		IsLoaded = true;
-		Task.Run((Action)e9NmG0Y3i9);
+		Task.Run((Action)LoadItemSources);
 		IsLoaded = false;
 	}
 
-	private void e9NmG0Y3i9()
+	private void LoadItemSources()
 	{
 		foreach (KeyValuePair<string, PvfFile> item in Pvf.FileList.Where<KeyValuePair<string, PvfFile>>((KeyValuePair<string, PvfFile> it) => it.Value.FilePathHeader == "equipment" && it.Value.ItemCode.HasValue))
 		{
@@ -398,7 +281,7 @@ public class NpcShopEditorViewModel : ViewModelBase
 		}
 	}
 
-	private void IqEmx2a4Ib()
+	private void ResetCurrentShop()
 	{
 		foreach (NpcShopItemSource item in EquItems.Concat(StkItems).Where(item => item.IsPurchaseDataModified))
 		{
@@ -410,10 +293,9 @@ public class NpcShopEditorViewModel : ViewModelBase
 		RaisePropertyChanged("NpcName");
 	}
 
-	private void uxumQwudkj()
+	private void LoadCurrentShop()
 	{
-		_003C_003Ec__DisplayClass47_0 CS_0024_003C_003E8__locals22 = new _003C_003Ec__DisplayClass47_0();
-		IqEmx2a4Ib();
+		ResetCurrentShop();
 		if (CurrentNpcShop == null || CurrentNpcShop.File == null)
 		{
 			return;
@@ -445,13 +327,7 @@ public class NpcShopEditorViewModel : ViewModelBase
 				list.Add(BitConverter.ToInt32(File.Data, i + 1));
 				continue;
 			}
-			StringBuilder stringBuilder2 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(31, 2, stringBuilder2);
-			handler.AppendLiteral("商店物品数据类型只能是int 已忽略该值类型：");
-			handler.AppendFormatted(b);
-			handler.AppendLiteral(" file://");
-			handler.AppendFormatted(File.FileName);
-			stringBuilder2.AppendLine(ref handler);
+			stringBuilder.AppendLine($"商店物品数据类型只能是int 已忽略该值类型：{b} file://{File.FileName}");
 		}
 		if (stringBuilder.Length > 0)
 		{
@@ -462,62 +338,59 @@ public class NpcShopEditorViewModel : ViewModelBase
 			NpcId = npcId;
 			RaisePropertyChanged("NpcName");
 		}
-		if (!File.GetSectionTypeIsStrArray(Pvf, "[tab name]", out CS_0024_003C_003E8__locals22.VgPdBTsMfM))
+		if (!File.GetSectionTypeIsStrArray(Pvf, "[tab name]", out List<string> tabNames))
 		{
-			CS_0024_003C_003E8__locals22.VgPdBTsMfM = new List<string>();
+			tabNames = new List<string>();
 		}
-		CS_0024_003C_003E8__locals22.YXEdhHh8ZP = 0;
-		CS_0024_003C_003E8__locals22.RVBdHnWW2O = new ConcurrentObservableCollection<NpcShopItem>();
-		CS_0024_003C_003E8__locals22.pY9dvhrrIo = new List<NpcShopPageViewModel>();
-		CS_0024_003C_003E8__locals22.pY9dvhrrIo.Add(new NpcShopPageViewModel(PKHmaI3tNd(CS_0024_003C_003E8__locals22.VgPdBTsMfM, CS_0024_003C_003E8__locals22.YXEdhHh8ZP), CS_0024_003C_003E8__locals22.RVBdHnWW2O)
+		int pageIndex = 0;
+		ConcurrentObservableCollection<NpcShopItem> pageItems = new ConcurrentObservableCollection<NpcShopItem>();
+		List<NpcShopPageViewModel> pages = new List<NpcShopPageViewModel>();
+		pages.Add(new NpcShopPageViewModel(GetPageTitle(tabNames, pageIndex), pageItems)
 		{
 			IsSelected = true
 		});
-		list.ForEach(delegate(int code)
+		list.ForEach(code =>
 		{
 			if (code == -2)
 			{
-				int count2 = CS_0024_003C_003E8__locals22.RVBdHnWW2O.Count;
+				int count2 = pageItems.Count;
 				if (count2 % 7 != 0)
 				{
 					for (int j = 0; j < 7 - count2 % 7; j++)
 					{
-						CS_0024_003C_003E8__locals22.RVBdHnWW2O.Add(new NpcShopItem());
+						pageItems.Add(new NpcShopItem());
 					}
 				}
-				CS_0024_003C_003E8__locals22.RVBdHnWW2O = new ConcurrentObservableCollection<NpcShopItem>();
-				CS_0024_003C_003E8__locals22.YXEdhHh8ZP++;
-				CS_0024_003C_003E8__locals22.pY9dvhrrIo.Add(new NpcShopPageViewModel(PKHmaI3tNd(CS_0024_003C_003E8__locals22.VgPdBTsMfM, CS_0024_003C_003E8__locals22.YXEdhHh8ZP), CS_0024_003C_003E8__locals22.RVBdHnWW2O));
+				pageItems = new ConcurrentObservableCollection<NpcShopItem>();
+				pageIndex++;
+				pages.Add(new NpcShopPageViewModel(GetPageTitle(tabNames, pageIndex), pageItems));
 			}
 			else
 			{
-				CS_0024_003C_003E8__locals22.RVBdHnWW2O.Add(new NpcShopItem(code));
+				pageItems.Add(new NpcShopItem(code));
 			}
 		});
-		if (CS_0024_003C_003E8__locals22.pY9dvhrrIo.Count > 0)
+		if (pages.Count > 0)
 		{
-			int count = CS_0024_003C_003E8__locals22.pY9dvhrrIo.Last().Items.Count;
+			int count = pages.Last().Items.Count;
 			if (count % 7 != 0)
 			{
 				for (int num = 0; num < 7 - count % 7; num++)
 				{
-					CS_0024_003C_003E8__locals22.RVBdHnWW2O.Add(new NpcShopItem());
+					pageItems.Add(new NpcShopItem());
 				}
 			}
 		}
-		Pages.AddRange(CS_0024_003C_003E8__locals22.pY9dvhrrIo);
+		Pages.AddRange(pages);
 		CurrentPage = Pages.FirstOrDefault();
 	}
 
-	private static string PKHmaI3tNd(List<string> P_0, int P_1)
+	private static string GetPageTitle(List<string> tabNames, int pageIndex)
 	{
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 1);
-		defaultInterpolatedStringHandler.AppendLiteral("商店");
-		defaultInterpolatedStringHandler.AppendFormatted(P_1);
-		string text = defaultInterpolatedStringHandler.ToStringAndClear();
-		if (P_0 != null && P_0.Any() && P_1 < P_0.Count)
+		string text = $"商店{pageIndex}";
+		if (tabNames != null && tabNames.Any() && pageIndex < tabNames.Count)
 		{
-			text = P_0[P_1];
+			text = tabNames[pageIndex];
 			if (string.IsNullOrEmpty(text))
 			{
 				text = "商店";
@@ -780,12 +653,11 @@ public class NpcShopEditorViewModel : ViewModelBase
 	[Command]
 	public void FindNpsShopQuerySubmitted(Tuple<object, object> tuple)
 	{
-		_003C_003Ec__DisplayClass56_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass56_0();
-		CS_0024_003C_003E8__locals4.Si3drpR7Ex = (AutoSuggestEditQuerySubmittedEventArgs)tuple.Item2;
+		AutoSuggestEditQuerySubmittedEventArgs query = (AutoSuggestEditQuerySubmittedEventArgs)tuple.Item2;
 		AutoSuggestEdit autoSuggestEdit = (AutoSuggestEdit)tuple.Item1;
-		if (CS_0024_003C_003E8__locals4.Si3drpR7Ex.Text != null && CS_0024_003C_003E8__locals4.Si3drpR7Ex.Text.Length > 0)
+		if (query.Text != null && query.Text.Length > 0)
 		{
-			IEnumerable<FindNpcShopSource> enumerable = NpcShopList.Where((FindNpcShopSource it) => it.Find(CS_0024_003C_003E8__locals4.Si3drpR7Ex.Text));
+			IEnumerable<FindNpcShopSource> enumerable = NpcShopList.Where(it => it.Find(query.Text));
 			if (enumerable != null && enumerable.Any())
 			{
 				autoSuggestEdit.ItemsSource = enumerable;

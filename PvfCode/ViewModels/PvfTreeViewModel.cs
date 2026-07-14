@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -64,158 +63,6 @@ public class PvfTreeViewModel : ViewModelBase
 
 	public delegate void SetFocuNode(TreeListNode node);
 
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass104_0
-	{
-		public PvfTreeViewModel WBks8XnqmV;
-
-		public KeyValuePair<string, PvfTreeFileBase>? UYOsMBjXf8;
-
-		public _003C_003Ec__DisplayClass104_0()
-		{
-		}
-
-		internal async void gj7scjJM1m()
-		{
-			TreeListNode treeListNode = WBks8XnqmV.Service.ContentToNode(UYOsMBjXf8.Value);
-			WBks8XnqmV.SelectedNodesBindBase = null;
-			WBks8XnqmV.SelectedNodesBindBase = new ObservableCollection<KeyValuePair<string, PvfTreeFileBase>>();
-			if (treeListNode == null)
-			{
-				WBks8XnqmV.YOUB3nq5qd(UYOsMBjXf8.Value.Value.FullPath);
-				treeListNode = WBks8XnqmV.Service.ContentToNode(UYOsMBjXf8.Value);
-			}
-			WBks8XnqmV.Service.SetFocusableNode(treeListNode);
-			WBks8XnqmV.SelectedNodeBindgBase = UYOsMBjXf8;
-			WBks8XnqmV.SelectedNodesBindBase.Add(UYOsMBjXf8.Value);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass124_0
-	{
-		public PvfTreeViewModel XbNs3gj9Fn;
-
-		public string ytUsRkM01r;
-
-		public _003C_003Ec__DisplayClass124_0()
-		{
-		}
-
-		internal Task<int>? AyHsVUdHA0()
-		{
-			return XbNs3gj9Fn.TreeGroupData.SearchFileList(ytUsRkM01r);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass127_0
-	{
-		public PvfTreeViewModel PyXszAmjjb;
-
-		public string QX5LDqIyPJ;
-
-		public _003C_003Ec__DisplayClass127_0()
-		{
-		}
-
-		internal async Task fxbsNfRXrP()
-		{
-			await PyXszAmjjb.TreeGroupData.CreateTrees(new PooledList<string> { QX5LDqIyPJ });
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass128_0
-	{
-		public PvfTreeViewModel NBMLjBXN4r;
-
-		public List<string> I2bLTVohwZ;
-
-		public _003C_003Ec__DisplayClass128_0()
-		{
-		}
-
-		internal async Task dbxLlhtXBX()
-		{
-			await NBMLjBXN4r.TreeGroupData.CreateTrees(new PooledList<string>(I2bLTVohwZ));
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass137_0
-	{
-		public ResultData<List<PostalSendRes>> UYyLH5sARl;
-
-		public _003C_003Ec__DisplayClass137_0()
-		{
-		}
-
-		internal async Task? EMrLCSc4dA()
-		{
-			DnfSqlService dnfSqlService = new DnfSqlService(AppSetting.Instance.GameOptions.GameServerOptions.GetDb());
-			List<CharacInfoDto> list = await dnfSqlService.FindCharac(new FindUserDto
-			{
-				FindUserType = FindUserType.OnLineCharac
-			});
-			if (list == null || list.Count == 0)
-			{
-				AppCore.ShowMsg("没有在线角色无法发送");
-				return;
-			}
-			ResultData<string> resultData = await dnfSqlService.SendPostal(list, UYyLH5sARl.Data, AppSetting.Instance.GMToolOptions.PostalSendTitle, AppSetting.Instance.GMToolOptions.PostalSendText);
-			AppCore.Logger.Warning("邮件发送回调：" + resultData.Data);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass82_0
-	{
-		public string hlsLvI1aeU;
-
-		public _003C_003Ec__DisplayClass82_0()
-		{
-		}
-
-		internal void E5oLhMt3RN(string it)
-		{
-			AppCore.ShowExtractLstWindow(hlsLvI1aeU);
-		}
-	}
-
-	[CompilerGenerated]
-	private DelegateDropFile TevFvjfYjL;
-
-	[CompilerGenerated]
-	private DataTemplate tdrFB7h60x;
-
-	[CompilerGenerated]
-	private Style SBoFFfPLBX;
-
-	[CompilerGenerated]
-	private TreeViewType eJmFrvf0Dg;
-
-	[CompilerGenerated]
-	private TreeGroup whgFWeE87q;
-
-	[CompilerGenerated]
-	private SelectedRowChangedDelegate j5ZFmrSlL2;
-
-	[CompilerGenerated]
-	private List<KeyValuePair<string, PvfTreeFileBase>> i5XF2iknTV;
-
-	[CompilerGenerated]
-	private NodeDoubleClickDelegate gNZFfonSBa;
-
-	[CompilerGenerated]
-	private DelegateOpenDocument ergF58gtUV;
-
-	[CompilerGenerated]
-	private RemoveSelectedItemsDelegate eDfFSZJKUi;
-
-	[CompilerGenerated]
-	private DiffEvents.DiffExtractSelectedDelegate uYYFAoMGLM;
-
 	public ITreeListService Service => GetService<ITreeListService>();
 
 	public string ExtractDefaultPath => AppSetting.Instance.PvfConfig.ExtractConfig.TargetPath;
@@ -234,61 +81,13 @@ public class PvfTreeViewModel : ViewModelBase
 
 	public List<string> SearchComboBoxItems => new List<string>();
 
-	public DataTemplate TreeColumnDataTemplate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return tdrFB7h60x;
-		}
-		[CompilerGenerated]
-		set
-		{
-			tdrFB7h60x = value;
-		}
-	}
+	public DataTemplate TreeColumnDataTemplate { get; set; }
 
-	public Style FileListRowStyle
-	{
-		[CompilerGenerated]
-		get
-		{
-			return SBoFFfPLBX;
-		}
-		[CompilerGenerated]
-		set
-		{
-			SBoFFfPLBX = value;
-		}
-	}
+	public Style FileListRowStyle { get; set; }
 
-	public TreeViewType TreeType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return eJmFrvf0Dg;
-		}
-		[CompilerGenerated]
-		set
-		{
-			eJmFrvf0Dg = value;
-		}
-	}
+	public TreeViewType TreeType { get; set; }
 
-	public TreeGroup TreeGroupData
-	{
-		[CompilerGenerated]
-		get
-		{
-			return whgFWeE87q;
-		}
-		[CompilerGenerated]
-		set
-		{
-			whgFWeE87q = value;
-		}
-	}
+	public TreeGroup TreeGroupData { get; set; }
 
 	public bool ShowSelectionRectangle
 	{
@@ -302,19 +101,7 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 	}
 
-	public List<KeyValuePair<string, PvfTreeFileBase>> VisibleItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return i5XF2iknTV;
-		}
-		[CompilerGenerated]
-		set
-		{
-			i5XF2iknTV = value;
-		}
-	}
+	public List<KeyValuePair<string, PvfTreeFileBase>> VisibleItems { get; set; }
 
 	public KeyValuePair<string, PvfTreeFileBase>? SelectedNodeBindgBase
 	{
@@ -324,7 +111,7 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 		set
 		{
-			SetProperty<KeyValuePair<string, PvfTreeFileBase>?>(() => SelectedNodeBindgBase, value, sUhBXsk0yX);
+			SetProperty<KeyValuePair<string, PvfTreeFileBase>?>(() => SelectedNodeBindgBase, value, OnSelectedNodeChanged);
 		}
 	}
 
@@ -372,7 +159,7 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 		set
 		{
-			SetProperty<string>(() => SearchKeyword, value, gWABz80lcj);
+			SetProperty<string>(() => SearchKeyword, value, OnSearchKeywordChanged);
 		}
 	}
 
@@ -384,191 +171,23 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 		set
 		{
-			SetProperty(() => SearchPanelVisibility, value, DTsBNrVHPe);
+			SetProperty(() => SearchPanelVisibility, value, OnSearchPanelVisibilityChanged);
 		}
 	}
 
 	public List<TreeFileListSearchType> SearchTreeTypes => EnumberHelper.EnumToEnumList<TreeFileListSearchType>();
 
-	public event DelegateDropFile EventDropFile
-	{
-		[CompilerGenerated]
-		add
-		{
-			DelegateDropFile delegateDropFile = TevFvjfYjL;
-			DelegateDropFile delegateDropFile2;
-			do
-			{
-				delegateDropFile2 = delegateDropFile;
-				DelegateDropFile value2 = (DelegateDropFile)Delegate.Combine(delegateDropFile2, value);
-				delegateDropFile = Interlocked.CompareExchange(ref TevFvjfYjL, value2, delegateDropFile2);
-			}
-			while ((object)delegateDropFile != delegateDropFile2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			DelegateDropFile delegateDropFile = TevFvjfYjL;
-			DelegateDropFile delegateDropFile2;
-			do
-			{
-				delegateDropFile2 = delegateDropFile;
-				DelegateDropFile value2 = (DelegateDropFile)Delegate.Remove(delegateDropFile2, value);
-				delegateDropFile = Interlocked.CompareExchange(ref TevFvjfYjL, value2, delegateDropFile2);
-			}
-			while ((object)delegateDropFile != delegateDropFile2);
-		}
-	}
+	public event DelegateDropFile EventDropFile;
 
-	public event SelectedRowChangedDelegate SelectedRowChangedEvent
-	{
-		[CompilerGenerated]
-		add
-		{
-			SelectedRowChangedDelegate selectedRowChangedDelegate = j5ZFmrSlL2;
-			SelectedRowChangedDelegate selectedRowChangedDelegate2;
-			do
-			{
-				selectedRowChangedDelegate2 = selectedRowChangedDelegate;
-				SelectedRowChangedDelegate value2 = (SelectedRowChangedDelegate)Delegate.Combine(selectedRowChangedDelegate2, value);
-				selectedRowChangedDelegate = Interlocked.CompareExchange(ref j5ZFmrSlL2, value2, selectedRowChangedDelegate2);
-			}
-			while ((object)selectedRowChangedDelegate != selectedRowChangedDelegate2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			SelectedRowChangedDelegate selectedRowChangedDelegate = j5ZFmrSlL2;
-			SelectedRowChangedDelegate selectedRowChangedDelegate2;
-			do
-			{
-				selectedRowChangedDelegate2 = selectedRowChangedDelegate;
-				SelectedRowChangedDelegate value2 = (SelectedRowChangedDelegate)Delegate.Remove(selectedRowChangedDelegate2, value);
-				selectedRowChangedDelegate = Interlocked.CompareExchange(ref j5ZFmrSlL2, value2, selectedRowChangedDelegate2);
-			}
-			while ((object)selectedRowChangedDelegate != selectedRowChangedDelegate2);
-		}
-	}
+	public event SelectedRowChangedDelegate SelectedRowChangedEvent;
 
-	public event NodeDoubleClickDelegate EventNodeDoubleClick
-	{
-		[CompilerGenerated]
-		add
-		{
-			NodeDoubleClickDelegate nodeDoubleClickDelegate = gNZFfonSBa;
-			NodeDoubleClickDelegate nodeDoubleClickDelegate2;
-			do
-			{
-				nodeDoubleClickDelegate2 = nodeDoubleClickDelegate;
-				NodeDoubleClickDelegate value2 = (NodeDoubleClickDelegate)Delegate.Combine(nodeDoubleClickDelegate2, value);
-				nodeDoubleClickDelegate = Interlocked.CompareExchange(ref gNZFfonSBa, value2, nodeDoubleClickDelegate2);
-			}
-			while ((object)nodeDoubleClickDelegate != nodeDoubleClickDelegate2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			NodeDoubleClickDelegate nodeDoubleClickDelegate = gNZFfonSBa;
-			NodeDoubleClickDelegate nodeDoubleClickDelegate2;
-			do
-			{
-				nodeDoubleClickDelegate2 = nodeDoubleClickDelegate;
-				NodeDoubleClickDelegate value2 = (NodeDoubleClickDelegate)Delegate.Remove(nodeDoubleClickDelegate2, value);
-				nodeDoubleClickDelegate = Interlocked.CompareExchange(ref gNZFfonSBa, value2, nodeDoubleClickDelegate2);
-			}
-			while ((object)nodeDoubleClickDelegate != nodeDoubleClickDelegate2);
-		}
-	}
+	public event NodeDoubleClickDelegate EventNodeDoubleClick;
 
-	public event DelegateOpenDocument EventOpenDocumenting
-	{
-		[CompilerGenerated]
-		add
-		{
-			DelegateOpenDocument delegateOpenDocument = ergF58gtUV;
-			DelegateOpenDocument delegateOpenDocument2;
-			do
-			{
-				delegateOpenDocument2 = delegateOpenDocument;
-				DelegateOpenDocument value2 = (DelegateOpenDocument)Delegate.Combine(delegateOpenDocument2, value);
-				delegateOpenDocument = Interlocked.CompareExchange(ref ergF58gtUV, value2, delegateOpenDocument2);
-			}
-			while ((object)delegateOpenDocument != delegateOpenDocument2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			DelegateOpenDocument delegateOpenDocument = ergF58gtUV;
-			DelegateOpenDocument delegateOpenDocument2;
-			do
-			{
-				delegateOpenDocument2 = delegateOpenDocument;
-				DelegateOpenDocument value2 = (DelegateOpenDocument)Delegate.Remove(delegateOpenDocument2, value);
-				delegateOpenDocument = Interlocked.CompareExchange(ref ergF58gtUV, value2, delegateOpenDocument2);
-			}
-			while ((object)delegateOpenDocument != delegateOpenDocument2);
-		}
-	}
+	public event DelegateOpenDocument EventOpenDocumenting;
 
-	public event RemoveSelectedItemsDelegate RemoveSelectedItemsEvent
-	{
-		[CompilerGenerated]
-		add
-		{
-			RemoveSelectedItemsDelegate removeSelectedItemsDelegate = eDfFSZJKUi;
-			RemoveSelectedItemsDelegate removeSelectedItemsDelegate2;
-			do
-			{
-				removeSelectedItemsDelegate2 = removeSelectedItemsDelegate;
-				RemoveSelectedItemsDelegate value2 = (RemoveSelectedItemsDelegate)Delegate.Combine(removeSelectedItemsDelegate2, value);
-				removeSelectedItemsDelegate = Interlocked.CompareExchange(ref eDfFSZJKUi, value2, removeSelectedItemsDelegate2);
-			}
-			while ((object)removeSelectedItemsDelegate != removeSelectedItemsDelegate2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			RemoveSelectedItemsDelegate removeSelectedItemsDelegate = eDfFSZJKUi;
-			RemoveSelectedItemsDelegate removeSelectedItemsDelegate2;
-			do
-			{
-				removeSelectedItemsDelegate2 = removeSelectedItemsDelegate;
-				RemoveSelectedItemsDelegate value2 = (RemoveSelectedItemsDelegate)Delegate.Remove(removeSelectedItemsDelegate2, value);
-				removeSelectedItemsDelegate = Interlocked.CompareExchange(ref eDfFSZJKUi, value2, removeSelectedItemsDelegate2);
-			}
-			while ((object)removeSelectedItemsDelegate != removeSelectedItemsDelegate2);
-		}
-	}
+	public event RemoveSelectedItemsDelegate RemoveSelectedItemsEvent;
 
-	public event DiffEvents.DiffExtractSelectedDelegate EventDiffExtractSelected
-	{
-		[CompilerGenerated]
-		add
-		{
-			DiffEvents.DiffExtractSelectedDelegate diffExtractSelectedDelegate = uYYFAoMGLM;
-			DiffEvents.DiffExtractSelectedDelegate diffExtractSelectedDelegate2;
-			do
-			{
-				diffExtractSelectedDelegate2 = diffExtractSelectedDelegate;
-				DiffEvents.DiffExtractSelectedDelegate value2 = (DiffEvents.DiffExtractSelectedDelegate)Delegate.Combine(diffExtractSelectedDelegate2, value);
-				diffExtractSelectedDelegate = Interlocked.CompareExchange(ref uYYFAoMGLM, value2, diffExtractSelectedDelegate2);
-			}
-			while ((object)diffExtractSelectedDelegate != diffExtractSelectedDelegate2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			DiffEvents.DiffExtractSelectedDelegate diffExtractSelectedDelegate = uYYFAoMGLM;
-			DiffEvents.DiffExtractSelectedDelegate diffExtractSelectedDelegate2;
-			do
-			{
-				diffExtractSelectedDelegate2 = diffExtractSelectedDelegate;
-				DiffEvents.DiffExtractSelectedDelegate value2 = (DiffEvents.DiffExtractSelectedDelegate)Delegate.Remove(diffExtractSelectedDelegate2, value);
-				diffExtractSelectedDelegate = Interlocked.CompareExchange(ref uYYFAoMGLM, value2, diffExtractSelectedDelegate2);
-			}
-			while ((object)diffExtractSelectedDelegate != diffExtractSelectedDelegate2);
-		}
-	}
+	public event DiffEvents.DiffExtractSelectedDelegate EventDiffExtractSelected;
 
 	public PvfTreeViewModel(TreeViewType treeType)
 	{
@@ -614,8 +233,7 @@ public class PvfTreeViewModel : ViewModelBase
 		CurrentSelectedTreePath = string.Empty;
 	}
 
-	[SpecialName]
-	private PvfTreeFileBase UtFFHl2Drj()
+	private PvfTreeFileBase GetSelectedTreeFile()
 	{
 		if (SelectedNodeBindgBase.HasValue)
 		{
@@ -624,11 +242,11 @@ public class PvfTreeViewModel : ViewModelBase
 		return null;
 	}
 
-	private void sUhBXsk0yX()
+	private void OnSelectedNodeChanged()
 	{
 		if (SelectedNodeBindgBase.HasValue)
 		{
-			j5ZFmrSlL2?.Invoke(SelectedNodeBindgBase.Value);
+			SelectedRowChangedEvent?.Invoke(SelectedNodeBindgBase.Value);
 			CurrentSelectedTreePath = SelectedNodeBindgBase.Value.Value.FullPath;
 		}
 		else
@@ -651,13 +269,13 @@ public class PvfTreeViewModel : ViewModelBase
 	{
 		KeyValuePair<string, PvfTreeFileBase> row = (KeyValuePair<string, PvfTreeFileBase>)nodeClickArgs.Item;
 		PvfTreeFileBase value = row.Value;
-		gNZFfonSBa?.Invoke(row);
+		EventNodeDoubleClick?.Invoke(row);
 		if (value.IsFile)
 		{
 			switch (TreeType)
 			{
 			case TreeViewType.ImportFiles:
-				d4OBpQ84tu(value);
+				OpenImportDocument(value);
 				return;
 			case TreeViewType.PvfDiffLeft:
 			case TreeViewType.PvfDiffRight:
@@ -665,7 +283,7 @@ public class PvfTreeViewModel : ViewModelBase
 			}
 			if (AppCore.ViewModelBase.PVF.PvfIsOpen)
 			{
-				HV0BUUJvdK(value);
+				OpenPvfDocument(value);
 			}
 		}
 		else
@@ -678,27 +296,24 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 	}
 
-	private void d4OBpQ84tu(PvfTreeFileBase P_0)
+	private void OpenImportDocument(PvfTreeFileBase treeFile)
 	{
-		if (ergF58gtUV != null)
-		{
-			ergF58gtUV(P_0);
-		}
+		EventOpenDocumenting?.Invoke(treeFile);
 	}
 
-	private void HV0BUUJvdK(PvfTreeFileBase P_0)
+	private void OpenPvfDocument(PvfTreeFileBase treeFile)
 	{
-		PvfFile file = AppCore.ViewModelBase.PVF.GetFile(P_0.FullPath);
+		PvfFile file = AppCore.ViewModelBase.PVF.GetFile(treeFile.FullPath);
 		if (file == null)
 		{
-			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileNotExist"), P_0.FullPath), isError: true);
+			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileNotExist"), treeFile.FullPath), isError: true);
 			return;
 		}
 		AppCore.ViewModelBase.RootDocument.AddDocument(file);
 		if (TreeType == TreeViewType.SearchResult)
 		{
 			PvfTreeViewModel pvfFileTreeViewModel = AppCore.ViewModelBase.PvfFileTreeViewModel;
-			pvfFileTreeViewModel.GoToNode(pvfFileTreeViewModel.TreeGroupData.FilePathGetTreeNode(P_0.FullPath));
+			pvfFileTreeViewModel.GoToNode(pvfFileTreeViewModel.TreeGroupData.FilePathGetTreeNode(treeFile.FullPath));
 		}
 	}
 
@@ -758,9 +373,9 @@ public class PvfTreeViewModel : ViewModelBase
 	{
 		try
 		{
-			if (TreeType == TreeViewType.SearchResult && eDfFSZJKUi != null)
+			if (TreeType == TreeViewType.SearchResult && RemoveSelectedItemsEvent != null)
 			{
-				eDfFSZJKUi(GetSelectedFilePaths(GetTreeType.File));
+				RemoveSelectedItemsEvent(GetSelectedFilePaths(GetTreeType.File));
 			}
 			TreeGroupData.DeleteTreeNodes(SelectedNodesBindBase);
 			TreeGroupData.UpdateFileCount();
@@ -771,7 +386,7 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 	}
 
-	private void lSCBc70DGM()
+	private void RefreshSingleSelection()
 	{
 		if (SelectedNodesBindBase.Count == 1)
 		{
@@ -782,7 +397,7 @@ public class PvfTreeViewModel : ViewModelBase
 	[Command]
 	public void OnRenameNode()
 	{
-		if (UtFFHl2Drj() != null)
+		if (GetSelectedTreeFile() != null)
 		{
 			ViewRenameNode viewRenameNode = new ViewRenameNode(SelectedNodeBindgBase.Value);
 			viewRenameNode.Owner = Application.Current.MainWindow;
@@ -806,12 +421,12 @@ public class PvfTreeViewModel : ViewModelBase
 	[Command]
 	public void OnEditComment()
 	{
-		if (UtFFHl2Drj() == null)
+		if (GetSelectedTreeFile() == null)
 		{
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseSelectFileToEditComment"));
 			return;
 		}
-		ViewEditTreeComment viewEditTreeComment = new ViewEditTreeComment(UtFFHl2Drj());
+		ViewEditTreeComment viewEditTreeComment = new ViewEditTreeComment(GetSelectedTreeFile());
 		viewEditTreeComment.Owner = Application.Current.MainWindow;
 		viewEditTreeComment.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 		viewEditTreeComment.Show();
@@ -861,7 +476,7 @@ public class PvfTreeViewModel : ViewModelBase
 			{
 				if (TreeType == TreeViewType.PvfDiffLeft || TreeType == TreeViewType.PvfDiffRight)
 				{
-					uYYFAoMGLM?.Invoke(TreeType, files);
+					EventDiffExtractSelected?.Invoke(TreeType, files);
 				}
 				else
 				{
@@ -880,7 +495,6 @@ public class PvfTreeViewModel : ViewModelBase
 	{
 		try
 		{
-			_003C_003Ec__DisplayClass82_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass82_0();
 			if (!IsSelectedNodes)
 			{
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseSelectFile"), isError: true);
@@ -898,18 +512,18 @@ public class PvfTreeViewModel : ViewModelBase
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_NoFileToExtractToLst"), isError: true);
 				return;
 			}
-			CS_0024_003C_003E8__locals4.hlsLvI1aeU = ServiceItemCodeTable.FilesToLstItemsToString(AppCore.ViewModelBase.PVF, files, out var count);
-			if (string.IsNullOrEmpty(CS_0024_003C_003E8__locals4.hlsLvI1aeU))
+			string lstItems = ServiceItemCodeTable.FilesToLstItemsToString(AppCore.ViewModelBase.PVF, files, out var count);
+			if (string.IsNullOrEmpty(lstItems))
 			{
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_NoFileToExtractToLst"), isError: true);
 				return;
 			}
-			AppCore.CopyString(CS_0024_003C_003E8__locals4.hlsLvI1aeU);
+			AppCore.CopyString(lstItems);
 			string text = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ExtractedLstCount"), count);
 			AppCore.Logger.Success(text);
 			await AppCore.Logger.ShowNotification(new NotificationViewModel<string>(AppSetting.Instance.AppName, text, Res.Instance.VisualStudioBlendLogo2015Pre_16x, AppSetting.Instance.GetIlogger()?.GetStr("mess_ViewDetails"), new DelegateCommand<string>(delegate
 			{
-				AppCore.ShowExtractLstWindow(CS_0024_003C_003E8__locals4.hlsLvI1aeU);
+				AppCore.ShowExtractLstWindow(lstItems);
 			})));
 		}
 		catch (Exception e)
@@ -921,9 +535,9 @@ public class PvfTreeViewModel : ViewModelBase
 	[Command]
 	public void OnGoTreeNode()
 	{
-		if (UtFFHl2Drj() != null)
+		if (GetSelectedTreeFile() != null)
 		{
-			AppCore.ViewModelBase.PvfFileTreeViewModel.GoToNode(UtFFHl2Drj().FullPath);
+			AppCore.ViewModelBase.PvfFileTreeViewModel.GoToNode(GetSelectedTreeFile().FullPath);
 		}
 	}
 
@@ -932,7 +546,7 @@ public class PvfTreeViewModel : ViewModelBase
 	{
 		try
 		{
-			PvfTreeFileBase pvfTreeFileBase = UtFFHl2Drj();
+			PvfTreeFileBase pvfTreeFileBase = GetSelectedTreeFile();
 			if (pvfTreeFileBase == null)
 			{
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseSelectFile"));
@@ -996,7 +610,7 @@ public class PvfTreeViewModel : ViewModelBase
 	{
 		try
 		{
-			PvfTreeFileBase pvfTreeFileBase = UtFFHl2Drj();
+			PvfTreeFileBase pvfTreeFileBase = GetSelectedTreeFile();
 			if (pvfTreeFileBase == null)
 			{
 				AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseSelectFile"));
@@ -1150,11 +764,11 @@ public class PvfTreeViewModel : ViewModelBase
 	{
 		try
 		{
-			if (UtFFHl2Drj() == null)
+			if (GetSelectedTreeFile() == null)
 			{
 				return;
 			}
-			string fullPath = UtFFHl2Drj().FullPath;
+			string fullPath = GetSelectedTreeFile().FullPath;
 			string text = AppCore.ViewModelBase.PVF.GetItemName(fullPath);
 			if (string.IsNullOrEmpty(text))
 			{
@@ -1217,14 +831,14 @@ public class PvfTreeViewModel : ViewModelBase
 	{
 		try
 		{
-			if (UtFFHl2Drj() == null)
+			if (GetSelectedTreeFile() == null)
 			{
 				return;
 			}
 			string rootPath;
-			if (UtFFHl2Drj().IsFile)
+			if (GetSelectedTreeFile().IsFile)
 			{
-				if (UtFFHl2Drj().Level == 0)
+				if (GetSelectedTreeFile().Level == 0)
 				{
 					_ = TreeGroupData.Trees;
 					rootPath = null;
@@ -1243,8 +857,8 @@ public class PvfTreeViewModel : ViewModelBase
 			}
 			else
 			{
-				_ = UtFFHl2Drj().Children;
-				rootPath = UtFFHl2Drj().FullPath;
+				_ = GetSelectedTreeFile().Children;
+				rootPath = GetSelectedTreeFile().FullPath;
 			}
 			WinAddNewPvfFile winAddNewPvfFile = new WinAddNewPvfFile(rootPath)
 			{
@@ -1294,7 +908,7 @@ public class PvfTreeViewModel : ViewModelBase
 			if (row.Value.Level != 0)
 			{
 				TreeListNode treeListNode = Service.ContentToNode(row);
-				keyValuePair = zETFl4aec5(treeListNode.ParentNode.Content);
+				keyValuePair = GetNodeData(treeListNode.ParentNode.Content);
 			}
 		}
 		else
@@ -1313,13 +927,13 @@ public class PvfTreeViewModel : ViewModelBase
 		switch (type)
 		{
 		case 0:
-			aU7B8iW8Zq();
+			CutFiles();
 			break;
 		case 1:
-			mAtBMgerKR();
+			CopyFiles();
 			break;
 		case 2:
-			BwHBVswmDu();
+			PasteFiles();
 			break;
 		}
 	}
@@ -1347,11 +961,11 @@ public class PvfTreeViewModel : ViewModelBase
 	{
 		try
 		{
-			if (UtFFHl2Drj() == null)
+			if (GetSelectedTreeFile() == null)
 			{
 				return;
 			}
-			string fullPath = UtFFHl2Drj().FullPath;
+			string fullPath = GetSelectedTreeFile().FullPath;
 			KeyValuePair<string, string>? selectedItem = null;
 			foreach (KeyValuePair<string, string> lstFilePath in AppCore.ViewModelBase.PVF.ListFileTable.LstFilePaths)
 			{
@@ -1375,16 +989,16 @@ public class PvfTreeViewModel : ViewModelBase
 	[Command]
 	public void OnOpenViewFileAttributes()
 	{
-		if (UtFFHl2Drj() != null)
+		if (GetSelectedTreeFile() != null)
 		{
-			WinPvfFileAttributes winPvfFileAttributes = new WinPvfFileAttributes(UtFFHl2Drj());
+			WinPvfFileAttributes winPvfFileAttributes = new WinPvfFileAttributes(GetSelectedTreeFile());
 			winPvfFileAttributes.Owner = Application.Current.MainWindow;
 			winPvfFileAttributes.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			winPvfFileAttributes.Show();
 		}
 	}
 
-	private async void aU7B8iW8Zq()
+	private async void CutFiles()
 	{
 		if (!IsSelectedNodes)
 		{
@@ -1404,7 +1018,7 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 	}
 
-	private async void mAtBMgerKR()
+	private async void CopyFiles()
 	{
 		if (!IsSelectedNodes)
 		{
@@ -1424,18 +1038,18 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 	}
 
-	private void BwHBVswmDu()
+	private void PasteFiles()
 	{
 		try
 		{
-			if (UtFFHl2Drj() == null)
+			if (GetSelectedTreeFile() == null)
 			{
 				return;
 			}
 			string text;
-			if (UtFFHl2Drj().IsFile)
+			if (GetSelectedTreeFile().IsFile)
 			{
-				if (UtFFHl2Drj().Level == 0)
+				if (GetSelectedTreeFile().Level == 0)
 				{
 					text = null;
 				}
@@ -1452,7 +1066,7 @@ public class PvfTreeViewModel : ViewModelBase
 			}
 			else
 			{
-				text = UtFFHl2Drj().FullPath;
+				text = GetSelectedTreeFile().FullPath;
 			}
 			qjqilnF7lAFbCxZ5lIf.Instance.PasteFiles(text);
 		}
@@ -1469,7 +1083,7 @@ public class PvfTreeViewModel : ViewModelBase
 			TreeListNode treeListNode = Service.FirstOrDefaultNode();
 			if (treeListNode != null)
 			{
-				GoToNode(zETFl4aec5(treeListNode.Content));
+				GoToNode(GetNodeData(treeListNode.Content));
 			}
 		}
 	}
@@ -1506,33 +1120,30 @@ public class PvfTreeViewModel : ViewModelBase
 
 	public void GoToNode(KeyValuePair<string, PvfTreeFileBase>? row)
 	{
-		_003C_003Ec__DisplayClass104_0 CS_0024_003C_003E8__locals16 = new _003C_003Ec__DisplayClass104_0();
-		CS_0024_003C_003E8__locals16.WBks8XnqmV = this;
-		CS_0024_003C_003E8__locals16.UYOsMBjXf8 = row;
-		if (!CS_0024_003C_003E8__locals16.UYOsMBjXf8.HasValue)
+		if (!row.HasValue)
 		{
 			return;
 		}
 		((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)async delegate
 		{
-			TreeListNode treeListNode = CS_0024_003C_003E8__locals16.WBks8XnqmV.Service.ContentToNode(CS_0024_003C_003E8__locals16.UYOsMBjXf8.Value);
-			CS_0024_003C_003E8__locals16.WBks8XnqmV.SelectedNodesBindBase = null;
-			CS_0024_003C_003E8__locals16.WBks8XnqmV.SelectedNodesBindBase = new ObservableCollection<KeyValuePair<string, PvfTreeFileBase>>();
+			TreeListNode treeListNode = Service.ContentToNode(row.Value);
+			SelectedNodesBindBase = null;
+			SelectedNodesBindBase = new ObservableCollection<KeyValuePair<string, PvfTreeFileBase>>();
 			if (treeListNode == null)
 			{
-				CS_0024_003C_003E8__locals16.WBks8XnqmV.YOUB3nq5qd(CS_0024_003C_003E8__locals16.UYOsMBjXf8.Value.Value.FullPath);
-				treeListNode = CS_0024_003C_003E8__locals16.WBks8XnqmV.Service.ContentToNode(CS_0024_003C_003E8__locals16.UYOsMBjXf8.Value);
+				ExpandNodePath(row.Value.Value.FullPath);
+				treeListNode = Service.ContentToNode(row.Value);
 			}
-			CS_0024_003C_003E8__locals16.WBks8XnqmV.Service.SetFocusableNode(treeListNode);
-			CS_0024_003C_003E8__locals16.WBks8XnqmV.SelectedNodeBindgBase = CS_0024_003C_003E8__locals16.UYOsMBjXf8;
-			CS_0024_003C_003E8__locals16.WBks8XnqmV.SelectedNodesBindBase.Add(CS_0024_003C_003E8__locals16.UYOsMBjXf8.Value);
+			Service.SetFocusableNode(treeListNode);
+			SelectedNodeBindgBase = row;
+			SelectedNodesBindBase.Add(row.Value);
 		}, Array.Empty<object>());
 	}
 
-	private void YOUB3nq5qd(string P_0)
+	private void ExpandNodePath(string filePath)
 	{
 		List<KeyValuePair<string, PvfTreeFileBase>> list = new List<KeyValuePair<string, PvfTreeFileBase>>();
-		string[] array = P_0.Split('/');
+		string[] array = filePath.Split('/');
 		string text = null;
 		for (int i = 0; i < array.Length; i++)
 		{
@@ -1567,7 +1178,7 @@ public class PvfTreeViewModel : ViewModelBase
 			}
 			break;
 		default:
-			TevFvjfYjL?.Invoke(files);
+			EventDropFile?.Invoke(files);
 			break;
 		case TreeViewType.SearchResult:
 			break;
@@ -1581,16 +1192,16 @@ public class PvfTreeViewModel : ViewModelBase
 			TreeViewType treeType = TreeType;
 			if ((uint)(treeType - 8) <= 1u)
 			{
-				gtxBR5x09e(e);
+				SetDiffScrollBarAnnotation(e);
 			}
 		}
 	}
 
-	private void gtxBR5x09e(ScrollBarCustomRowAnnotationEventArgs P_0)
+	private void SetDiffScrollBarAnnotation(ScrollBarCustomRowAnnotationEventArgs args)
 	{
 		try
 		{
-			PvfTreeFileDiff pvfTreeFileDiff = (PvfTreeFileDiff)((KeyValuePair<string, PvfTreeFileBase>)P_0.Row).Value;
+			PvfTreeFileDiff pvfTreeFileDiff = (PvfTreeFileDiff)((KeyValuePair<string, PvfTreeFileBase>)args.Row).Value;
 			if (pvfTreeFileDiff.Diffs != null && pvfTreeFileDiff.Diffs.Count > 0)
 			{
 				ScrollBarAnnotationAlignment alignment = ScrollBarAnnotationAlignment.Left;
@@ -1604,7 +1215,7 @@ public class PvfTreeViewModel : ViewModelBase
 				{
 					brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#b9d7ac"));
 				}
-				P_0.ScrollBarAnnotationInfo = new ScrollBarAnnotationInfo
+				args.ScrollBarAnnotationInfo = new ScrollBarAnnotationInfo
 				{
 					Alignment = alignment,
 					Brush = brush,
@@ -1623,7 +1234,7 @@ public class PvfTreeViewModel : ViewModelBase
 	{
 	}
 
-	private void DTsBNrVHPe()
+	private void OnSearchPanelVisibilityChanged()
 	{
 		if (!SearchPanelVisibility)
 		{
@@ -1631,7 +1242,7 @@ public class PvfTreeViewModel : ViewModelBase
 		}
 	}
 
-	private void gWABz80lcj()
+	private void OnSearchKeywordChanged()
 	{
 		if (TreeGroupData != null)
 		{
@@ -1649,20 +1260,18 @@ public class PvfTreeViewModel : ViewModelBase
 	[Command]
 	public void OnSearchTreeFileList()
 	{
-		l0JFDclKyA();
+		SearchTreeAsync();
 	}
 
-	private async void l0JFDclKyA()
+	private async void SearchTreeAsync()
 	{
-		_003C_003Ec__DisplayClass124_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass124_0();
-		CS_0024_003C_003E8__locals5.XbNs3gj9Fn = this;
-		CS_0024_003C_003E8__locals5.ytUsRkM01r = SearchKeyword;
-		if (!string.IsNullOrEmpty(CS_0024_003C_003E8__locals5.ytUsRkM01r))
+		string keyword = SearchKeyword;
+		if (!string.IsNullOrEmpty(keyword))
 		{
 			TreeGroupData.Loading = true;
 			TreeGroupData._SearchResultTrees = null;
 			TreeGroupData._SearchResultTrees = new ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>();
-			int num = await Task.Run(() => CS_0024_003C_003E8__locals5.XbNs3gj9Fn.TreeGroupData.SearchFileList(CS_0024_003C_003E8__locals5.ytUsRkM01r));
+			int num = await Task.Run(() => TreeGroupData.SearchFileList(keyword));
 			TreeGroupData.Loading = false;
 			if (num > 0)
 			{
@@ -1686,20 +1295,17 @@ public class PvfTreeViewModel : ViewModelBase
 
 	public async Task<bool> WebApiImportFile(Stream stream, string filePath)
 	{
-		_003C_003Ec__DisplayClass127_0 CS_0024_003C_003E8__locals11 = new _003C_003Ec__DisplayClass127_0();
-		CS_0024_003C_003E8__locals11.PyXszAmjjb = this;
-		CS_0024_003C_003E8__locals11.QX5LDqIyPJ = filePath;
-		CS_0024_003C_003E8__locals11.QX5LDqIyPJ = CS_0024_003C_003E8__locals11.QX5LDqIyPJ.ToLower();
+		filePath = filePath.ToLower();
 		PvfGroup pVF = AppCore.ViewModelBase.PVF;
-		if (pVF.FileAny(CS_0024_003C_003E8__locals11.QX5LDqIyPJ))
+		if (pVF.FileAny(filePath))
 		{
-			return pVF.ImportUpdateFile(pVF.GetFile(CS_0024_003C_003E8__locals11.QX5LDqIyPJ), stream, CS_0024_003C_003E8__locals11.QX5LDqIyPJ, compileScript: true, compileBinaryAni: true, convertChinese: false);
+			return pVF.ImportUpdateFile(pVF.GetFile(filePath), stream, filePath, compileScript: true, compileBinaryAni: true, convertChinese: false);
 		}
-		if (pVF.ImportNewFile(CS_0024_003C_003E8__locals11.QX5LDqIyPJ, stream, compileScript: true, compileBinaryAni: true, convertChinese: false))
+		if (pVF.ImportNewFile(filePath, stream, compileScript: true, compileBinaryAni: true, convertChinese: false))
 		{
 			await ((DispatcherObject)Application.Current).Dispatcher.Invoke<Task>((Func<Task>)async delegate
 			{
-				await CS_0024_003C_003E8__locals11.PyXszAmjjb.TreeGroupData.CreateTrees(new PooledList<string> { CS_0024_003C_003E8__locals11.QX5LDqIyPJ });
+				await TreeGroupData.CreateTrees(new PooledList<string> { filePath });
 			});
 			return true;
 		}
@@ -1708,8 +1314,6 @@ public class PvfTreeViewModel : ViewModelBase
 
 	public async Task<ResultData<IEnumerable<string>>> WebApiImportFiles(IEnumerable<ImportFileRes> fileDataList)
 	{
-		_003C_003Ec__DisplayClass128_0 CS_0024_003C_003E8__locals6 = new _003C_003Ec__DisplayClass128_0();
-		CS_0024_003C_003E8__locals6.NBMLjBXN4r = this;
 		ResultData<IEnumerable<string>> result = new ResultData<IEnumerable<string>>();
 		PvfGroup pVF = AppCore.ViewModelBase.PVF;
 		try
@@ -1725,7 +1329,7 @@ public class PvfTreeViewModel : ViewModelBase
 				result.Msg = AppSetting.Instance.GetIlogger().GetStr("mess_ImportListCannotBeEmpty");
 				return result;
 			}
-			CS_0024_003C_003E8__locals6.I2bLTVohwZ = new List<string>();
+			List<string> newFilePaths = new List<string>();
 			foreach (ImportFileRes fileData in fileDataList)
 			{
 				Stream stream = BytesHelper.StringToStream(fileData.FileContent);
@@ -1738,7 +1342,7 @@ public class PvfTreeViewModel : ViewModelBase
 				}
 				else if (pVF.ImportNewFile(fileData.FilePath, stream, compileScript: true, compileBinaryAni: true, convertChinese: false))
 				{
-					CS_0024_003C_003E8__locals6.I2bLTVohwZ.Add(fileData.FilePath);
+					newFilePaths.Add(fileData.FilePath);
 				}
 				else
 				{
@@ -1746,11 +1350,11 @@ public class PvfTreeViewModel : ViewModelBase
 				}
 			}
 			result.Data = list;
-			if (CS_0024_003C_003E8__locals6.I2bLTVohwZ.Count > 0)
+			if (newFilePaths.Count > 0)
 			{
 				await ((DispatcherObject)Application.Current).Dispatcher.Invoke<Task>((Func<Task>)async delegate
 				{
-					await CS_0024_003C_003E8__locals6.NBMLjBXN4r.TreeGroupData.CreateTrees(new PooledList<string>(CS_0024_003C_003E8__locals6.I2bLTVohwZ));
+					await TreeGroupData.CreateTrees(new PooledList<string>(newFilePaths));
 				});
 			}
 		}
@@ -1761,13 +1365,13 @@ public class PvfTreeViewModel : ViewModelBase
 		return result;
 	}
 
-	private KeyValuePair<string, PvfTreeFileBase>? zETFl4aec5(object P_0)
+	private KeyValuePair<string, PvfTreeFileBase>? GetNodeData(object content)
 	{
-		if (P_0 == null)
+		if (content == null)
 		{
 			return null;
 		}
-		return (KeyValuePair<string, PvfTreeFileBase>)P_0;
+		return (KeyValuePair<string, PvfTreeFileBase>)content;
 	}
 
 	public async void TreeList_Drop(object sender, DragEventArgs e)
@@ -1801,7 +1405,7 @@ public class PvfTreeViewModel : ViewModelBase
 			TreeListDropGroup.Instance.Source = TreeType;
 			TreeListDropGroup.Instance.Items = SelectedNodesBindBase;
 			DragDrop.DoDragDrop((DependencyObject)(object)dragSource, "TreeListDropGroup：15427586-86B6-5410-5D88-7F139C0C1E9E", DragDropEffects.Copy);
-			if (!TreeListDropGroup.Instance.Success && UtFFHl2Drj() != null && Service.ContentToNode(SelectedNodeBindgBase) != null)
+			if (!TreeListDropGroup.Instance.Success && GetSelectedTreeFile() != null && Service.ContentToNode(SelectedNodeBindgBase) != null)
 			{
 				if (!SelectedNodesBindBase.Contains(SelectedNodeBindgBase.Value))
 				{
@@ -1858,16 +1462,15 @@ public class PvfTreeViewModel : ViewModelBase
 	[Command]
 	public async void OnSendPostal()
 	{
-		_003C_003Ec__DisplayClass137_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass137_0();
 		if (!IsSelectedNodes)
 		{
 			AppCore.ShowMsg("请先选中要发送的物品");
 			return;
 		}
-		CS_0024_003C_003E8__locals4.UYyLH5sARl = abrFTjlTIu();
-		if (CS_0024_003C_003E8__locals4.UYyLH5sARl.IsError)
+		ResultData<List<PostalSendRes>> postalItems = CreatePostalItems();
+		if (postalItems.IsError)
 		{
-			AppCore.ShowMsg(CS_0024_003C_003E8__locals4.UYyLH5sARl.Msg);
+			AppCore.ShowMsg(postalItems.Msg);
 			return;
 		}
 		await Task.Run(async delegate
@@ -1883,13 +1486,13 @@ public class PvfTreeViewModel : ViewModelBase
 			}
 			else
 			{
-				ResultData<string> resultData = await dnfSqlService.SendPostal(list, CS_0024_003C_003E8__locals4.UYyLH5sARl.Data, AppSetting.Instance.GMToolOptions.PostalSendTitle, AppSetting.Instance.GMToolOptions.PostalSendText);
+				ResultData<string> resultData = await dnfSqlService.SendPostal(list, postalItems.Data, AppSetting.Instance.GMToolOptions.PostalSendTitle, AppSetting.Instance.GMToolOptions.PostalSendText);
 				AppCore.Logger.Warning("邮件发送回调：" + resultData.Data);
 			}
 		});
 	}
 
-	private ResultData<List<PostalSendRes>> abrFTjlTIu()
+	private ResultData<List<PostalSendRes>> CreatePostalItems()
 	{
 		ResultData<List<PostalSendRes>> resultData = new ResultData<List<PostalSendRes>>();
 		IEnumerable<PvfFile> enumerable = from it in SelectedNodesBindBase
@@ -1913,7 +1516,7 @@ public class PvfTreeViewModel : ViewModelBase
 				ItemName = pVF.GetItemName(item),
 				add_info = 1
 			};
-			EDWFCojmVG(postalSendRes, item, pVF);
+			InitializePostalItem(postalSendRes, item, pVF);
 			list.Add(postalSendRes);
 		}
 		if (list.Count == 0)
@@ -1925,27 +1528,27 @@ public class PvfTreeViewModel : ViewModelBase
 		return resultData;
 	}
 
-	private void EDWFCojmVG(PostalSendRes P_0, PvfFile P_1, PvfGroup P_2)
+	private void InitializePostalItem(PostalSendRes postalItem, PvfFile file, PvfGroup pvf)
 	{
-		if (P_0.IsEqu.HasValue && P_0.IsEqu.Value)
+		if (postalItem.IsEqu.HasValue && postalItem.IsEqu.Value)
 		{
-			switch (P_1.GetEquType(P_2))
+			switch (file.GetEquType(pvf))
 			{
 			case EquTypeDefault.Default:
-				P_0.PostalType = PostalType.普通邮件;
+				postalItem.PostalType = PostalType.普通邮件;
 				break;
 			case EquTypeDefault.Avatar:
-				P_0.PostalType = PostalType.时装邮件;
+				postalItem.PostalType = PostalType.时装邮件;
 				break;
 			case EquTypeDefault.Pet:
 			case EquTypeDefault.PetEqu:
-				P_0.PostalType = PostalType.宠物;
+				postalItem.PostalType = PostalType.宠物;
 				break;
 			case EquTypeDefault.PetEgg:
-				P_0.PostalType = PostalType.宠物蛋;
+				postalItem.PostalType = PostalType.宠物蛋;
 				break;
 			}
 		}
-		P_0.Init();
+		postalItem.Init();
 	}
 }

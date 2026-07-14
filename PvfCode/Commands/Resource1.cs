@@ -12,20 +12,20 @@ namespace PvfCode.Commands;
 [CompilerGenerated]
 internal class Resource1
 {
-	private static ResourceManager QVU6e3GV8Y;
+	private static ResourceManager resourceMan;
 
-	private static CultureInfo gan6tsBpJu;
+	private static CultureInfo resourceCulture;
 
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
 	internal static ResourceManager ResourceManager
 	{
 		get
 		{
-			if (QVU6e3GV8Y == null)
+			if (resourceMan == null)
 			{
-				QVU6e3GV8Y = new ResourceManager("Commands.Resource1", typeof(Resource1).Assembly);
+				resourceMan = new ResourceManager("Commands.Resource1", typeof(Resource1).Assembly);
 			}
-			return QVU6e3GV8Y;
+			return resourceMan;
 		}
 	}
 
@@ -34,15 +34,15 @@ internal class Resource1
 	{
 		get
 		{
-			return gan6tsBpJu;
+			return resourceCulture;
 		}
 		set
 		{
-			gan6tsBpJu = value;
+			resourceCulture = value;
 		}
 	}
 
-	internal static string ItemCodeHoverConfig => ResourceManager.GetString("ItemCodeHoverConfig", gan6tsBpJu);
+	internal static string ItemCodeHoverConfig => ResourceManager.GetString("ItemCodeHoverConfig", resourceCulture);
 
 	internal Resource1()
 	{

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,183 +21,9 @@ namespace PvfCode.ViewModels.TreeFolder;
 
 public class ViewReNmaeNodesViewMode : ViewModelBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass29_0
-	{
-		public TreeListControl tree;
+	private PooledList<string> fileList;
 
-		public _003C_003Ec__DisplayClass29_0()
-		{
-		}
-
-		internal void O3Hnza4d5v()
-		{
-			tree.View.ExpandAllNodes();
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass40_0
-	{
-		public ViewReNmaeNodesViewMode a52qlpNwhM;
-
-		public char[] lMcqjD8Tth;
-
-		public _003C_003Ec__DisplayClass40_0()
-		{
-		}
-
-		internal void vvSqDB77eb(string fullPath, ParallelLoopState ct)
-		{
-			ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = a52qlpNwhM.Trees;
-			string[] array = fullPath.Split(lMcqjD8Tth);
-			short num = 0;
-			int num2 = array.Length - 1;
-			StringBuilder stringBuilder = new StringBuilder();
-			string[] array2 = array;
-			foreach (string text in array2)
-			{
-				lock (a52qlpNwhM)
-				{
-					if (num == 0)
-					{
-						stringBuilder.Append(text);
-					}
-					else
-					{
-						stringBuilder.Append("/");
-						stringBuilder.Append(text);
-					}
-					if (observableConcurrentDictionaryEx.TryGetValue(text, out var value))
-					{
-						observableConcurrentDictionaryEx = value.Children;
-					}
-					else
-					{
-						PvfTreeFileRename pvfTreeFileRename = new PvfTreeFileRename(a52qlpNwhM.Pvf, stringBuilder.ToString(), text, num == num2, num);
-						observableConcurrentDictionaryEx.AddTry(text, pvfTreeFileRename);
-						observableConcurrentDictionaryEx = pvfTreeFileRename.Children;
-					}
-				}
-				num++;
-			}
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass41_0
-	{
-		public string CyLqCaP9Dt;
-
-		public _003C_003Ec__DisplayClass41_0()
-		{
-		}
-
-		internal bool XwZqT7tukI(KeyValuePair<string, PvfTreeFileBase> it)
-		{
-			return it.Key == CyLqCaP9Dt;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass42_0
-	{
-		public string FvIqh0uhaL;
-
-		public _003C_003Ec__DisplayClass42_0()
-		{
-		}
-
-		internal bool HdRqHitxCr(KeyValuePair<string, PvfTreeFileBase> it)
-		{
-			return it.Key == FvIqh0uhaL;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass43_0
-	{
-		public IEnumerable<KeyValuePair<string, PvfTreeFileBase>> FQ5qB7W0sg;
-
-		public ViewReNmaeNodesViewMode sD3qFll5rA;
-
-		public _003C_003Ec__DisplayClass43_0()
-		{
-		}
-
-		internal void JAIqvHRBQ6(ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> trees)
-		{
-			foreach (KeyValuePair<string, PvfTreeFileBase> item in FQ5qB7W0sg)
-			{
-				string fullPath = item.Value.FullPath;
-				if (fullPath.IndexOf("/") < 0)
-				{
-					trees.RemoveTry(item.Key);
-					continue;
-				}
-				ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = trees;
-				string[] array = fullPath.Split(sD3qFll5rA.QbnrN34bwm, StringSplitOptions.RemoveEmptyEntries);
-				PvfTreeFileBase value = null;
-				for (int i = 0; i < array.Length - 1; i++)
-				{
-					string key = array[i];
-					if (observableConcurrentDictionaryEx.TryGetValue(key, out value))
-					{
-						observableConcurrentDictionaryEx = value.Children;
-					}
-				}
-				observableConcurrentDictionaryEx.RemoveTry(array[^1]);
-			}
-			trees.NotifyObserversOfChange();
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass44_0
-	{
-		public KeyValuePair<string, PvfTreeFileBase> F18qWPKU24;
-
-		public ViewReNmaeNodesViewMode IBeqmfPbBu;
-
-		public _003C_003Ec__DisplayClass44_0()
-		{
-		}
-
-		internal void w10qrZPSYQ(ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> trees)
-		{
-			if (trees == null)
-			{
-				return;
-			}
-			string fullPath = F18qWPKU24.Value.FullPath;
-			if (fullPath.IndexOf("/") < 0)
-			{
-				trees.RemoveTry(F18qWPKU24.Key);
-				return;
-			}
-			ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = trees;
-			string[] array = fullPath.Split(IBeqmfPbBu.QbnrN34bwm, StringSplitOptions.RemoveEmptyEntries);
-			for (int i = 0; i < array.Length - 1; i++)
-			{
-				string key = array[i];
-				if (observableConcurrentDictionaryEx.TryGetValue(key, out var value))
-				{
-					observableConcurrentDictionaryEx = value.Children;
-				}
-			}
-			observableConcurrentDictionaryEx.RemoveTry(array[^1]);
-		}
-	}
-
-	[CompilerGenerated]
-	private PVfTreeChildrenSelector S6krVJ71X5;
-
-	[CompilerGenerated]
-	private ObservableCollection<KeyValuePair<string, PvfTreeFileBase>> FZAr3pn25F;
-
-	private PooledList<string> El4rRcvveP;
-
-	private readonly char[] QbnrN34bwm;
+	private readonly char[] pathSeparators;
 
 	public bool IsLoaded
 	{
@@ -212,19 +37,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		}
 	}
 
-	public PVfTreeChildrenSelector ChildNodesSelector
-	{
-		[CompilerGenerated]
-		get
-		{
-			return S6krVJ71X5;
-		}
-		[CompilerGenerated]
-		set
-		{
-			S6krVJ71X5 = value;
-		}
-	}
+	public PVfTreeChildrenSelector ChildNodesSelector { get; set; }
 
 	public ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> Trees
 	{
@@ -274,38 +87,26 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		}
 	}
 
-	public ObservableCollection<KeyValuePair<string, PvfTreeFileBase>> SelectedItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return FZAr3pn25F;
-		}
-		[CompilerGenerated]
-		set
-		{
-			FZAr3pn25F = value;
-		}
-	}
+	public ObservableCollection<KeyValuePair<string, PvfTreeFileBase>> SelectedItems { get; set; }
 
 	private PvfGroup Pvf => AppCore.ViewModelBase.PVF;
 
 	public ViewReNmaeNodesViewMode(PooledList<string> fileList)
 	{
-		El4rRcvveP = new PooledList<string>();
-		QbnrN34bwm = new char[2] { '\\', '/' };
+		this.fileList = new PooledList<string>();
+		pathSeparators = new char[2] { '\\', '/' };
 		SelectedItems = new ObservableCollection<KeyValuePair<string, PvfTreeFileBase>>();
-		El4rRcvveP = fileList;
-		ChildNodesSelector = new PVfTreeChildrenSelector(AE2rk65Ju4);
+		this.fileList = fileList;
+		ChildNodesSelector = new PVfTreeChildrenSelector(GetChildren);
 	}
 
-	private IEnumerable AE2rk65Ju4(object P_0)
+	private IEnumerable GetChildren(object node)
 	{
-		if (P_0 == null)
+		if (node == null)
 		{
 			return null;
 		}
-		KeyValuePair<string, PvfTreeFileBase>? keyValuePair = (KeyValuePair<string, PvfTreeFileBase>)P_0;
+		KeyValuePair<string, PvfTreeFileBase>? keyValuePair = (KeyValuePair<string, PvfTreeFileBase>)node;
 		if (!keyValuePair.HasValue)
 		{
 			return null;
@@ -320,18 +121,13 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 	[Command]
 	public async void Loaded(TreeListControl tree)
 	{
-		_003C_003Ec__DisplayClass29_0 CS_0024_003C_003E8__locals3 = new _003C_003Ec__DisplayClass29_0();
-		CS_0024_003C_003E8__locals3.tree = tree;
 		Trees = new ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>();
 		IsLoaded = true;
-		await Task.Run((Func<Task?>)VZkrUMAMh9);
+		await Task.Run(CreateTreeAsync);
 		Trees.NotifyObserversOfChange();
 		IsLoaded = false;
-		El4rRcvveP.Dispose();
-		((DispatcherObject)CS_0024_003C_003E8__locals3.tree).Dispatcher.BeginInvoke((Delegate)(Action)delegate
-		{
-			CS_0024_003C_003E8__locals3.tree.View.ExpandAllNodes();
-		}, Array.Empty<object>());
+		fileList.Dispose();
+		((DispatcherObject)tree).Dispatcher.BeginInvoke((Delegate)(Action)(() => tree.View.ExpandAllNodes()), Array.Empty<object>());
 	}
 
 	[Command]
@@ -354,7 +150,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 	public async void OnSave(Window win)
 	{
 		IsLoaded = true;
-		ResultData<IEnumerable<string>> result = await Task.Run((Func<Task<ResultData<IEnumerable<string>>>?>)iQcr0IpN9E);
+		ResultData<IEnumerable<string>> result = await Task.Run(ApplyRenamesAsync);
 		if (result.IsError)
 		{
 			IsLoaded = false;
@@ -371,10 +167,10 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		win.Close();
 	}
 
-	private Task<ResultData<IEnumerable<string>>> iQcr0IpN9E()
+	private Task<ResultData<IEnumerable<string>>> ApplyRenamesAsync()
 	{
 		ResultData<IEnumerable<string>> resultData = new ResultData<IEnumerable<string>>();
-		Dictionary<string, PvfTreeFileRename> dictionary = jXJr7H8nmY();
+		Dictionary<string, PvfTreeFileRename> dictionary = GetChangedFiles();
 		if (dictionary.Count == 0)
 		{
 			return Task.FromResult(resultData);
@@ -396,7 +192,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		return Task.FromResult(resultData);
 	}
 
-	private Dictionary<string, PvfTreeFileRename> jXJr7H8nmY()
+	private Dictionary<string, PvfTreeFileRename> GetChangedFiles()
 	{
 		Dictionary<string, PvfTreeFileRename> dictionary = new Dictionary<string, PvfTreeFileRename>();
 		foreach (KeyValuePair<string, PvfTreeFileBase> item in (IEnumerable<KeyValuePair<string, PvfTreeFileBase>>)Trees)
@@ -410,7 +206,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 				}
 				continue;
 			}
-			Dictionary<string, PvfTreeFileRename> dictionary2 = lgZrX7TbvB(item.Value.Children);
+			Dictionary<string, PvfTreeFileRename> dictionary2 = GetChangedFiles(item.Value.Children);
 			if (dictionary2.Count <= 0)
 			{
 				continue;
@@ -426,7 +222,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		return dictionary;
 	}
 
-	private Dictionary<string, PvfTreeFileRename> lgZrX7TbvB(IEnumerable<KeyValuePair<string, PvfTreeFileBase>> trees)
+	private Dictionary<string, PvfTreeFileRename> GetChangedFiles(IEnumerable<KeyValuePair<string, PvfTreeFileBase>> trees)
 	{
 		Dictionary<string, PvfTreeFileRename> dictionary = new Dictionary<string, PvfTreeFileRename>();
 		foreach (KeyValuePair<string, PvfTreeFileBase> tree in trees)
@@ -440,7 +236,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 				}
 				continue;
 			}
-			Dictionary<string, PvfTreeFileRename> dictionary2 = lgZrX7TbvB(tree.Value.Children);
+			Dictionary<string, PvfTreeFileRename> dictionary2 = GetChangedFiles(tree.Value.Children);
 			if (dictionary2.Count <= 0)
 			{
 				continue;
@@ -495,7 +291,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		{
 			text = (result + 1).ToString();
 		}
-		KeyValuePair<string, PvfTreeFileBase>? keyValuePair = TVircB26By(pvfTreeFileRename.FullPath);
+		KeyValuePair<string, PvfTreeFileBase>? keyValuePair = GetNextNode(pvfTreeFileRename.FullPath);
 		if (!keyValuePair.HasValue)
 		{
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_End"), isError: true);
@@ -550,7 +346,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		{
 			text = (result - 1).ToString();
 		}
-		KeyValuePair<string, PvfTreeFileBase>? keyValuePair = Oxwr8EVegX(pvfTreeFileRename.FullPath);
+		KeyValuePair<string, PvfTreeFileBase>? keyValuePair = GetPreviousNode(pvfTreeFileRename.FullPath);
 		if (!keyValuePair.HasValue)
 		{
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_End"), isError: true);
@@ -569,21 +365,19 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 	[Command]
 	public void OnCancel(Window win)
 	{
-		BVFrpD14vs();
+		Clear();
 		win.Close();
 	}
 
-	private void BVFrpD14vs()
+	private void Clear()
 	{
 		Trees.Dispose();
 		Trees = null;
 	}
 
-	private Task VZkrUMAMh9()
+	private Task CreateTreeAsync()
 	{
-		_003C_003Ec__DisplayClass40_0 CS_0024_003C_003E8__locals6 = new _003C_003Ec__DisplayClass40_0();
-		CS_0024_003C_003E8__locals6.a52qlpNwhM = this;
-		if (!El4rRcvveP.Any())
+		if (!fileList.Any())
 		{
 			return Task.CompletedTask;
 		}
@@ -591,7 +385,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		{
 			MaxDegreeOfParallelism = 1
 		};
-		if (El4rRcvveP.Count() >= 100)
+		if (fileList.Count() >= 100)
 		{
 			parallelOptions.MaxDegreeOfParallelism = 100;
 		}
@@ -599,18 +393,17 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		{
 			parallelOptions.MaxDegreeOfParallelism = 1;
 		}
-		CS_0024_003C_003E8__locals6.lMcqjD8Tth = QbnrN34bwm;
-		Parallel.ForEach(El4rRcvveP, parallelOptions, delegate(string fullPath, ParallelLoopState ct)
+		Parallel.ForEach(fileList, parallelOptions, (fullPath, loopState) =>
 		{
-			ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = CS_0024_003C_003E8__locals6.a52qlpNwhM.Trees;
-			string[] array = fullPath.Split(CS_0024_003C_003E8__locals6.lMcqjD8Tth);
+			ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = Trees;
+			string[] array = fullPath.Split(pathSeparators);
 			short num = 0;
 			int num2 = array.Length - 1;
 			StringBuilder stringBuilder = new StringBuilder();
 			string[] array2 = array;
 			foreach (string text in array2)
 			{
-				lock (CS_0024_003C_003E8__locals6.a52qlpNwhM)
+				lock (this)
 				{
 					if (num == 0)
 					{
@@ -627,7 +420,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 					}
 					else
 					{
-						PvfTreeFileRename pvfTreeFileRename = new PvfTreeFileRename(CS_0024_003C_003E8__locals6.a52qlpNwhM.Pvf, stringBuilder.ToString(), text, num == num2, num);
+						PvfTreeFileRename pvfTreeFileRename = new PvfTreeFileRename(Pvf, stringBuilder.ToString(), text, num == num2, num);
 						observableConcurrentDictionaryEx.AddTry(text, pvfTreeFileRename);
 						observableConcurrentDictionaryEx = pvfTreeFileRename.Children;
 					}
@@ -638,11 +431,10 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		return Task.CompletedTask;
 	}
 
-	private KeyValuePair<string, PvfTreeFileBase>? TVircB26By(string P_0)
+	private KeyValuePair<string, PvfTreeFileBase>? GetNextNode(string fullPath)
 	{
-		_003C_003Ec__DisplayClass41_0 CS_0024_003C_003E8__locals2 = new _003C_003Ec__DisplayClass41_0();
 		ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = Trees;
-		string[] array = P_0.Split(QbnrN34bwm);
+		string[] array = fullPath.Split(pathSeparators);
 		for (int i = 0; i < array.Length - 1; i++)
 		{
 			if (observableConcurrentDictionaryEx.TryGetValue(array[i], out var value))
@@ -650,12 +442,12 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 				observableConcurrentDictionaryEx = value.Children;
 			}
 		}
-		CS_0024_003C_003E8__locals2.CyLqCaP9Dt = array[^1];
+		string fileName = array[^1];
 		List<KeyValuePair<string, PvfTreeFileBase>> list = (from it in observableConcurrentDictionaryEx
 			orderby it.Key
 			orderby it.Value.IsFile
 			select it).ToList();
-		int num = list.IndexOf((KeyValuePair<string, PvfTreeFileBase> it) => it.Key == CS_0024_003C_003E8__locals2.CyLqCaP9Dt);
+		int num = list.IndexOf((KeyValuePair<string, PvfTreeFileBase> it) => it.Key == fileName);
 		if (num == -1)
 		{
 			return null;
@@ -667,11 +459,10 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 		return null;
 	}
 
-	private KeyValuePair<string, PvfTreeFileBase>? Oxwr8EVegX(string P_0)
+	private KeyValuePair<string, PvfTreeFileBase>? GetPreviousNode(string fullPath)
 	{
-		_003C_003Ec__DisplayClass42_0 CS_0024_003C_003E8__locals2 = new _003C_003Ec__DisplayClass42_0();
 		ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = Trees;
-		string[] array = P_0.Split(QbnrN34bwm);
+		string[] array = fullPath.Split(pathSeparators);
 		for (int i = 0; i < array.Length - 1; i++)
 		{
 			if (observableConcurrentDictionaryEx.TryGetValue(array[i], out var value))
@@ -679,12 +470,12 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 				observableConcurrentDictionaryEx = value.Children;
 			}
 		}
-		CS_0024_003C_003E8__locals2.FvIqh0uhaL = array[^1];
+		string fileName = array[^1];
 		List<KeyValuePair<string, PvfTreeFileBase>> list = (from it in observableConcurrentDictionaryEx
 			orderby it.Key
 			orderby it.Value.IsFile
 			select it).ToList();
-		int num = list.IndexOf((KeyValuePair<string, PvfTreeFileBase> it) => it.Key == CS_0024_003C_003E8__locals2.FvIqh0uhaL);
+		int num = list.IndexOf((KeyValuePair<string, PvfTreeFileBase> it) => it.Key == fileName);
 		if (num == -1)
 		{
 			return null;
@@ -698,12 +489,9 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 
 	public void DeleteTreeNodes(IEnumerable<KeyValuePair<string, PvfTreeFileBase>> selecteddic)
 	{
-		_003C_003Ec__DisplayClass43_0 obj = new _003C_003Ec__DisplayClass43_0();
-		obj.FQ5qB7W0sg = selecteddic;
-		obj.sD3qFll5rA = this;
-		Action<ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>> action = delegate(ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> trees)
+		Action<ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>> action = trees =>
 		{
-			foreach (KeyValuePair<string, PvfTreeFileBase> item in obj.FQ5qB7W0sg)
+			foreach (KeyValuePair<string, PvfTreeFileBase> item in selecteddic)
 			{
 				string fullPath = item.Value.FullPath;
 				if (fullPath.IndexOf("/") < 0)
@@ -713,7 +501,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 				else
 				{
 					ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = trees;
-					string[] array = fullPath.Split(obj.sD3qFll5rA.QbnrN34bwm, StringSplitOptions.RemoveEmptyEntries);
+					string[] array = fullPath.Split(pathSeparators, StringSplitOptions.RemoveEmptyEntries);
 					PvfTreeFileBase value = null;
 					for (int i = 0; i < array.Length - 1; i++)
 					{
@@ -736,22 +524,19 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 
 	public void DeleteTreeNode(KeyValuePair<string, PvfTreeFileBase> node)
 	{
-		_003C_003Ec__DisplayClass44_0 obj = new _003C_003Ec__DisplayClass44_0();
-		obj.F18qWPKU24 = node;
-		obj.IBeqmfPbBu = this;
-		((Action<ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>>)delegate(ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> trees)
+		((Action<ObservableConcurrentDictionaryEx<string, PvfTreeFileBase>>)(trees =>
 		{
 			if (trees != null)
 			{
-				string fullPath = obj.F18qWPKU24.Value.FullPath;
+				string fullPath = node.Value.FullPath;
 				if (fullPath.IndexOf("/") < 0)
 				{
-					trees.RemoveTry(obj.F18qWPKU24.Key);
+					trees.RemoveTry(node.Key);
 				}
 				else
 				{
 					ObservableConcurrentDictionaryEx<string, PvfTreeFileBase> observableConcurrentDictionaryEx = trees;
-					string[] array = fullPath.Split(obj.IBeqmfPbBu.QbnrN34bwm, StringSplitOptions.RemoveEmptyEntries);
+					string[] array = fullPath.Split(pathSeparators, StringSplitOptions.RemoveEmptyEntries);
 					for (int i = 0; i < array.Length - 1; i++)
 					{
 						string key = array[i];
@@ -763,7 +548,7 @@ public class ViewReNmaeNodesViewMode : ViewModelBase
 					observableConcurrentDictionaryEx.RemoveTry(array[^1]);
 				}
 			}
-		})(Trees);
+		}))(Trees);
 		Trees.NotifyObserversOfChange();
 	}
 }

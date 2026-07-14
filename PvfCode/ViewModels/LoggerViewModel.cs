@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,171 +22,43 @@ namespace PvfCode.ViewModels;
 
 public class LoggerViewModel : ViewModelBase, Ilogger
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass30_0
-	{
-		public LoggerViewModel IbGsCmPVb1;
+	private CancellationTokenSource cancellationTokenSource;
 
-		public List<ErrorItem> hqBsH9HNIJ;
+	private TextDocument document;
 
-		public _003C_003Ec__DisplayClass30_0()
-		{
-		}
+	private IHighlightingDefinition highlighting;
 
-		internal void QVCsTlB0BA()
-		{
-			IbGsCmPVb1.ErrorItems.AddRange(hqBsH9HNIJ);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass39_0
-	{
-		public LoggerViewModel tcNsvj0PpC;
-
-		public string w6wsB4LqLn;
-
-		public _003C_003Ec__DisplayClass39_0()
-		{
-		}
-
-		internal void nH3sh5Hq7U()
-		{
-			tcNsvj0PpC.Document.Insert(tcNsvj0PpC.Document.TextLength, DateTime.Now.ToString("HH:mm:ss") + " " + w6wsB4LqLn + "\r\n");
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass48_0
-	{
-		public Window kW1srETLCC;
-
-		public _003C_003Ec__DisplayClass48_0()
-		{
-		}
-
-		internal void slcsFw75Ca()
-		{
-			kW1srETLCC = Application.Current.MainWindow;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass49_0
-	{
-		public Window win;
-
-		public _003C_003Ec__DisplayClass49_0()
-		{
-		}
-
-		internal void acIsWFQhol()
-		{
-			win.Show();
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass50_0
-	{
-		public Window win;
-
-		public _003C_003Ec__DisplayClass50_0()
-		{
-		}
-
-		internal void iwosmMfaZE()
-		{
-			win.Close();
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass58_0
-	{
-		public string hkBsfDjPD3;
-
-		public bool JBNs5aybFS;
-
-		public _003C_003Ec__DisplayClass58_0()
-		{
-		}
-
-		internal void xg9s2JPBnp()
-		{
-			AppCore.ViewModelBase.RootDocument.AddDocument(hkBsfDjPD3, JBNs5aybFS);
-		}
-	}
-
-	private CancellationTokenSource QXNBgpOZN8;
-
-	[CompilerGenerated]
-	private bool RDjB6wZrV4;
-
-	[CompilerGenerated]
-	private DelegateCommand xOqB1NKMBD;
-
-	private TextDocument h5XBwI05d2;
-
-	private IHighlightingDefinition E5XBosMDun;
-
-	private ConcurrentObservableCollection<ErrorItem> iULBsyGNpy;
-
-	private int OaoBLq9VIP;
+	private ConcurrentObservableCollection<ErrorItem> errorItems;
 
 	public CancellationTokenSource TaskCancellationTokenSource
 	{
 		get
 		{
-			if (QXNBgpOZN8 == null)
+			if (cancellationTokenSource == null)
 			{
-				QXNBgpOZN8 = new CancellationTokenSource();
+				cancellationTokenSource = new CancellationTokenSource();
 			}
-			return QXNBgpOZN8;
+			return cancellationTokenSource;
 		}
 		set
 		{
-			QXNBgpOZN8 = value;
+			cancellationTokenSource = value;
 		}
 	}
 
-	public bool TaskIsWork
-	{
-		[CompilerGenerated]
-		get
-		{
-			return RDjB6wZrV4;
-		}
-		[CompilerGenerated]
-		set
-		{
-			RDjB6wZrV4 = value;
-		}
-	}
+	public bool TaskIsWork { get; set; }
 
-	public DelegateCommand ClearOutPutCommand
-	{
-		[CompilerGenerated]
-		get
-		{
-			return xOqB1NKMBD;
-		}
-		[CompilerGenerated]
-		set
-		{
-			xOqB1NKMBD = value;
-		}
-	}
+	public DelegateCommand ClearOutPutCommand { get; set; }
 
 	public TextDocument Document
 	{
 		get
 		{
-			return h5XBwI05d2;
+			return document;
 		}
 		set
 		{
-			h5XBwI05d2 = value;
+			document = value;
 			RaisePropertyChanged("_Document");
 		}
 	}
@@ -196,11 +67,11 @@ public class LoggerViewModel : ViewModelBase, Ilogger
 	{
 		get
 		{
-			return E5XBosMDun;
+			return highlighting;
 		}
 		set
 		{
-			E5XBosMDun = value;
+			highlighting = value;
 			RaisePropertyChanged("Highlighting");
 		}
 	}
@@ -209,11 +80,11 @@ public class LoggerViewModel : ViewModelBase, Ilogger
 	{
 		get
 		{
-			return iULBsyGNpy;
+			return errorItems;
 		}
 		set
 		{
-			iULBsyGNpy = value;
+			errorItems = value;
 			RaisePropertyChanged("ErrorItems");
 		}
 	}
@@ -236,20 +107,20 @@ public class LoggerViewModel : ViewModelBase, Ilogger
 		Document = new TextDocument();
 		Document.Text = "PvfUtility：\r\n";
 		ClearOutPutCommand = new DelegateCommand(ClearMessage);
-		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += RlLBxQxy20;
+		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += OnThemeChanged;
 	}
 
 	public void Loaded(object obj)
 	{
-		s8OBQ9A9pU();
+		UpdateHighlighting();
 	}
 
-	private void RlLBxQxy20()
+	private void OnThemeChanged()
 	{
-		s8OBQ9A9pU();
+		UpdateHighlighting();
 	}
 
-	private void s8OBQ9A9pU()
+	private void UpdateHighlighting()
 	{
 		IThemedHighlightingManager service = AppSetting.Instance.GetService<IThemedHighlightingManager>();
 		Highlighting = service.GetDefinition("LOG");
@@ -257,18 +128,12 @@ public class LoggerViewModel : ViewModelBase, Ilogger
 
 	public void Error(List<ErrorItem> errs)
 	{
-		_003C_003Ec__DisplayClass30_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass30_0();
-		CS_0024_003C_003E8__locals4.IbGsCmPVb1 = this;
-		CS_0024_003C_003E8__locals4.hqBsH9HNIJ = errs;
-		((DispatcherObject)Application.Current).Dispatcher.Invoke((Action)delegate
-		{
-			CS_0024_003C_003E8__locals4.IbGsCmPVb1.ErrorItems.AddRange(CS_0024_003C_003E8__locals4.hqBsH9HNIJ);
-		});
+		((DispatcherObject)Application.Current).Dispatcher.Invoke(() => ErrorItems.AddRange(errs));
 	}
 
 	public void Error(string msg)
 	{
-		SBABaiIBAr("Error：" + msg);
+		WriteMessage("Error：" + msg);
 		Trace.WriteLine(msg);
 	}
 
@@ -310,7 +175,7 @@ public class LoggerViewModel : ViewModelBase, Ilogger
 
 	public void Debug(string msg)
 	{
-		SBABaiIBAr(msg);
+		WriteMessage(msg);
 	}
 
 	public void Debug(object obj)
@@ -318,18 +183,12 @@ public class LoggerViewModel : ViewModelBase, Ilogger
 		Debug(obj?.ToString());
 	}
 
-	private void SBABaiIBAr(string P_0)
+	private void WriteMessage(string message)
 	{
-		_003C_003Ec__DisplayClass39_0 CS_0024_003C_003E8__locals6 = new _003C_003Ec__DisplayClass39_0();
-		CS_0024_003C_003E8__locals6.tcNsvj0PpC = this;
-		CS_0024_003C_003E8__locals6.w6wsB4LqLn = P_0;
 		try
 		{
-			Trace.WriteLine(CS_0024_003C_003E8__locals6.w6wsB4LqLn);
-			((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)delegate
-			{
-				CS_0024_003C_003E8__locals6.tcNsvj0PpC.Document.Insert(CS_0024_003C_003E8__locals6.tcNsvj0PpC.Document.TextLength, DateTime.Now.ToString("HH:mm:ss") + " " + CS_0024_003C_003E8__locals6.w6wsB4LqLn + "\r\n");
-			}, Array.Empty<object>());
+			Trace.WriteLine(message);
+			((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)(() => Document.Insert(Document.TextLength, DateTime.Now.ToString("HH:mm:ss") + " " + message + "\r\n")), Array.Empty<object>());
 		}
 		catch (Exception)
 		{
@@ -339,17 +198,17 @@ public class LoggerViewModel : ViewModelBase, Ilogger
 	public void ClearMessage()
 	{
 		Document.Text = "";
-		SBABaiIBAr(AppCore.ViewModelBase.AppName + ":");
+		WriteMessage(AppCore.ViewModelBase.AppName + ":");
 	}
 
 	public void Warning(string msg)
 	{
-		SBABaiIBAr("Warning：" + msg);
+		WriteMessage("Warning：" + msg);
 	}
 
 	public void Success(string msg)
 	{
-		SBABaiIBAr("Success：" + msg);
+		WriteMessage("Success：" + msg);
 	}
 
 	public async Task ShowNotification(NotificationViewModel vm)
@@ -381,38 +240,23 @@ public class LoggerViewModel : ViewModelBase, Ilogger
 
 	public Window CreateLoadingWindow(string title, Window? owner = null)
 	{
-		_003C_003Ec__DisplayClass48_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass48_0();
-		CS_0024_003C_003E8__locals4.kW1srETLCC = owner;
-		if (CS_0024_003C_003E8__locals4.kW1srETLCC == null)
+		if (owner == null)
 		{
-			((DispatcherObject)Application.Current).Dispatcher.Invoke((Action)delegate
-			{
-				CS_0024_003C_003E8__locals4.kW1srETLCC = Application.Current.MainWindow;
-			});
+			((DispatcherObject)Application.Current).Dispatcher.Invoke(() => owner = Application.Current.MainWindow);
 		}
-		return AppCore.CreateLoading(title, CS_0024_003C_003E8__locals4.kW1srETLCC);
+		return AppCore.CreateLoading(title, owner);
 	}
 
 	public void ShowLoadingWindow(Window win)
 	{
-		_003C_003Ec__DisplayClass49_0 CS_0024_003C_003E8__locals2 = new _003C_003Ec__DisplayClass49_0();
-		CS_0024_003C_003E8__locals2.win = win;
-		((DispatcherObject)Application.Current).Dispatcher.Invoke((Action)delegate
-		{
-			CS_0024_003C_003E8__locals2.win.Show();
-		});
+		((DispatcherObject)Application.Current).Dispatcher.Invoke(() => win.Show());
 	}
 
 	public void CloseLoadingWindow(Window win)
 	{
-		_003C_003Ec__DisplayClass50_0 CS_0024_003C_003E8__locals3 = new _003C_003Ec__DisplayClass50_0();
-		CS_0024_003C_003E8__locals3.win = win;
-		if (CS_0024_003C_003E8__locals3.win != null)
+		if (win != null)
 		{
-			((DispatcherObject)Application.Current).Dispatcher.Invoke((Action)delegate
-			{
-				CS_0024_003C_003E8__locals3.win.Close();
-			});
+			((DispatcherObject)Application.Current).Dispatcher.Invoke(() => win.Close());
 		}
 	}
 
@@ -459,13 +303,7 @@ public class LoggerViewModel : ViewModelBase, Ilogger
 
 	public void SetDocumentFocused(string filePath, bool goToNode = false)
 	{
-		_003C_003Ec__DisplayClass58_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass58_0();
-		CS_0024_003C_003E8__locals4.hkBsfDjPD3 = filePath;
-		CS_0024_003C_003E8__locals4.JBNs5aybFS = goToNode;
-		((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)delegate
-		{
-			AppCore.ViewModelBase.RootDocument.AddDocument(CS_0024_003C_003E8__locals4.hkBsfDjPD3, CS_0024_003C_003E8__locals4.JBNs5aybFS);
-		}, Array.Empty<object>());
+		((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)(() => AppCore.ViewModelBase.RootDocument.AddDocument(filePath, goToNode)), Array.Empty<object>());
 	}
 
 	public async Task AddFileListToCurrentSearchPanel(IEnumerable<string> filleList, bool expandAllNodes = true)

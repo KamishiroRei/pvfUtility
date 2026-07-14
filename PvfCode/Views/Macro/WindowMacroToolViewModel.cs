@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -21,110 +20,21 @@ namespace PvfCode.Views.Macro;
 
 public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass61_0
-	{
-		public TreeListNode JFCoq98bxk;
-
-		public WindowMacroToolViewModel nkKoddgCa3;
-
-		public KeyValuePair<string, MacroData>? NhgoevYVKG;
-
-		public _003C_003Ec__DisplayClass61_0()
-		{
-		}
-
-		internal void kUgonojoFl()
-		{
-			if (JFCoq98bxk == null)
-			{
-				nkKoddgCa3.MMjhSXTjcc(NhgoevYVKG.Value);
-			}
-			nkKoddgCa3.Service.UnselectAll();
-			nkKoddgCa3.SelectedNodeBindgBase = NhgoevYVKG;
-			nkKoddgCa3.SelectedNodesBindBase?.Clear();
-			nkKoddgCa3.SelectedNodesBindBase.Add(NhgoevYVKG.Value);
-		}
-	}
-
-	[CompilerGenerated]
-	private string aXQh4haJmm;
-
-	[CompilerGenerated]
-	private bool YT7hY4o9EU;
-
-	[CompilerGenerated]
-	private bool rXkhyFJEwr;
-
 	private readonly Action Close;
-
-	[CompilerGenerated]
-	private MacroGroup OB4hiY7SN5;
 
 	public Window Win;
 
-	private PVfTreeChildrenSelector T84hu002an;
-
-	[CompilerGenerated]
-	private bool mcnhGcrgKB;
+	private PVfTreeChildrenSelector childNodesSelector;
 
 	public ITreeListService Service => GetService<ITreeListService>();
 
-	public string Title
-	{
-		[CompilerGenerated]
-		get
-		{
-			return aXQh4haJmm;
-		}
-		[CompilerGenerated]
-		set
-		{
-			aXQh4haJmm = value;
-		}
-	}
+	public string Title { get; set; }
 
-	public bool IsUpdate
-	{
-		[CompilerGenerated]
-		get
-		{
-			return YT7hY4o9EU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			YT7hY4o9EU = value;
-		}
-	}
+	public bool IsUpdate { get; set; }
 
-	public bool IsTreeList
-	{
-		[CompilerGenerated]
-		get
-		{
-			return rXkhyFJEwr;
-		}
-		[CompilerGenerated]
-		set
-		{
-			rXkhyFJEwr = value;
-		}
-	}
+	public bool IsTreeList { get; set; }
 
-	public MacroGroup Group
-	{
-		[CompilerGenerated]
-		get
-		{
-			return OB4hiY7SN5;
-		}
-		[CompilerGenerated]
-		set
-		{
-			OB4hiY7SN5 = value;
-		}
-	}
+	public MacroGroup Group { get; set; }
 
 	public ObservableConcurrentDictionaryEx<string, MacroData> Trees
 	{
@@ -142,11 +52,11 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 	{
 		get
 		{
-			return T84hu002an;
+			return childNodesSelector;
 		}
 		set
 		{
-			T84hu002an = value;
+			childNodesSelector = value;
 			RaisePropertyChanged("ChildNodesSelector");
 		}
 	}
@@ -199,19 +109,7 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public bool IsSelect
-	{
-		[CompilerGenerated]
-		get
-		{
-			return mcnhGcrgKB;
-		}
-		[CompilerGenerated]
-		set
-		{
-			mcnhGcrgKB = value;
-		}
-	}
+	public bool IsSelect { get; set; }
 
 	public bool SaveLoading
 	{
@@ -234,7 +132,7 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 		Group = json.JsonToObject<MacroGroup>();
 		if (IsTreeList)
 		{
-			ChildNodesSelector = new PVfTreeChildrenSelector(OTbhWZ0xtZ);
+			ChildNodesSelector = new PVfTreeChildrenSelector(GetFolderChildren);
 			Title = AppSetting.Instance.GetIlogger().GetStr("mess_SelectMacroSavePath");
 			KeyValuePair<string, MacroData>[] array = Group.Trees.ToArray();
 			for (int i = 0; i < array.Length; i++)
@@ -248,18 +146,18 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 		}
 		else
 		{
-			ChildNodesSelector = new PVfTreeChildrenSelector(AhJhrEs6Qp);
+			ChildNodesSelector = new PVfTreeChildrenSelector(GetChildren);
 			Title = AppSetting.Instance.GetIlogger().GetStr("WindowMacroTool_Title");
 		}
 	}
 
-	private IEnumerable AhJhrEs6Qp(object P_0)
+	private IEnumerable GetChildren(object node)
 	{
-		if (P_0 == null)
+		if (node == null)
 		{
 			return null;
 		}
-		KeyValuePair<string, MacroData> keyValuePair = (KeyValuePair<string, MacroData>)P_0;
+		KeyValuePair<string, MacroData> keyValuePair = (KeyValuePair<string, MacroData>)node;
 		if (keyValuePair.Value.IsFile || !keyValuePair.Value.HaveChildren())
 		{
 			return null;
@@ -267,24 +165,24 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 		return keyValuePair.Value.Children;
 	}
 
-	private IEnumerable OTbhWZ0xtZ(object P_0)
+	private IEnumerable GetFolderChildren(object node)
 	{
-		if (P_0 == null)
+		if (node == null)
 		{
 			return null;
 		}
-		KeyValuePair<string, MacroData> keyValuePair = (KeyValuePair<string, MacroData>)P_0;
+		KeyValuePair<string, MacroData> keyValuePair = (KeyValuePair<string, MacroData>)node;
 		if (keyValuePair.Value.IsFile || !keyValuePair.Value.HaveChildren())
 		{
 			return null;
 		}
-		return gTahmCyMNF(keyValuePair.Value.Children);
+		return GetFolders(keyValuePair.Value.Children);
 	}
 
-	private Dictionary<string, MacroData> gTahmCyMNF(IDictionary<string, MacroData> P_0)
+	private Dictionary<string, MacroData> GetFolders(IDictionary<string, MacroData> nodes)
 	{
 		Dictionary<string, MacroData> dictionary = new Dictionary<string, MacroData>();
-		foreach (KeyValuePair<string, MacroData> item in P_0)
+		foreach (KeyValuePair<string, MacroData> item in nodes)
 		{
 			if (!item.Value.IsFile)
 			{
@@ -329,12 +227,12 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 				string value = windowEditMarcoName.Input.Value;
 				MacroData bookMarkData = new MacroData
 				{
-					Sort = Y0KhfsTZIw(children.Values),
+					Sort = GetNextSort(children.Values),
 					IsFile = false
 				};
 				KeyValuePair<string, MacroData> newNode = Group.AddNode(value, bookMarkData, children);
 				IsUpdate = true;
-				J11h5x8lRy(newNode);
+				RefreshAndSelectNode(newNode);
 			}
 		}
 	}
@@ -351,7 +249,7 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 		{
 			children = ((KeyValuePair<string, MacroData>?)treeListNode.ParentNode.Content).Value.Value.Children;
 		}
-		newData.Sort = Y0KhfsTZIw(children.Values);
+		newData.Sort = GetNextSort(children.Values);
 		newData.IsFile = true;
 		Group.AddNode(title, newData, children);
 		string key = Trees.ToList()[0].Key;
@@ -397,7 +295,7 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 			}
 			KeyValuePair<string, MacroData> newNode = Group.AddNode(value, bookMarkData, children);
 			IsUpdate = true;
-			J11h5x8lRy(newNode);
+			RefreshAndSelectNode(newNode);
 		}
 	}
 
@@ -406,11 +304,11 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 	{
 		if (IsSelectedNodes && AppCore.Logger.ShowDialog(AppSetting.Instance.GetIlogger()?.GetStr("mess_ConfirmDeleteSelectedNode")) == MessageResult.Yes)
 		{
-			Tjnh2qC2so();
+			DeleteSelectedNodes();
 		}
 	}
 
-	private void Tjnh2qC2so()
+	private void DeleteSelectedNodes()
 	{
 		bool flag = false;
 		KeyValuePair<string, MacroData>[] array = SelectedNodesBindBase.ToArray();
@@ -430,7 +328,7 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 			TreeListNode parentNode = treeListNode.ParentNode;
 			if (parentNode != null)
 			{
-				KeyValuePair<string, MacroData> keyValuePair2 = ltohA6QRxd(parentNode.Content);
+				KeyValuePair<string, MacroData> keyValuePair2 = GetNodeData(parentNode.Content);
 				if (keyValuePair2.Value.Children.ContainsKey(keyValuePair.Key))
 				{
 					keyValuePair2.Value.Children.Remove(keyValuePair.Key);
@@ -460,7 +358,7 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 			int num = parentNode.Nodes.IndexOf(treeListNode);
 			if (num != 0)
 			{
-				KeyValuePair<string, MacroData> keyValuePair = ltohA6QRxd(parentNode.Nodes[num - 1].Content);
+				KeyValuePair<string, MacroData> keyValuePair = GetNodeData(parentNode.Nodes[num - 1].Content);
 				int sort = keyValuePair.Value.Sort;
 				int sort2 = focuRow.Sort;
 				focuRow.Sort = sort;
@@ -471,13 +369,13 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private int Y0KhfsTZIw(IEnumerable<MacroData> P_0)
+	private int GetNextSort(IEnumerable<MacroData> nodes)
 	{
-		if (!P_0.Any())
+		if (!nodes.Any())
 		{
 			return 0;
 		}
-		return P_0.Max((MacroData it) => it.Sort) + 1;
+		return nodes.Max((MacroData it) => it.Sort) + 1;
 	}
 
 	[Command]
@@ -495,7 +393,7 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 			int num = parentNode.Nodes.IndexOf(treeListNode);
 			if (num != parentNode.Nodes.Count - 1)
 			{
-				KeyValuePair<string, MacroData> keyValuePair = ltohA6QRxd(parentNode.Nodes[num + 1].Content);
+				KeyValuePair<string, MacroData> keyValuePair = GetNodeData(parentNode.Nodes[num + 1].Content);
 				int sort = keyValuePair.Value.Sort;
 				int sort2 = focuRow.Sort;
 				focuRow.Sort = sort;
@@ -543,7 +441,7 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 		Close();
 	}
 
-	private async void J11h5x8lRy(KeyValuePair<string, MacroData> newNode)
+	private async void RefreshAndSelectNode(KeyValuePair<string, MacroData> newNode)
 	{
 		Trees.NotifyObserversOfChange();
 		await Task.Delay(20);
@@ -552,32 +450,29 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 
 	public void GoToNode(KeyValuePair<string, MacroData>? row)
 	{
-		_003C_003Ec__DisplayClass61_0 CS_0024_003C_003E8__locals15 = new _003C_003Ec__DisplayClass61_0();
-		CS_0024_003C_003E8__locals15.nkKoddgCa3 = this;
-		CS_0024_003C_003E8__locals15.NhgoevYVKG = row;
-		if (!CS_0024_003C_003E8__locals15.NhgoevYVKG.HasValue)
+		if (!row.HasValue)
 		{
 			return;
 		}
-		CS_0024_003C_003E8__locals15.JFCoq98bxk = Service.ContentToNode(CS_0024_003C_003E8__locals15.NhgoevYVKG);
-		if (CS_0024_003C_003E8__locals15.JFCoq98bxk == null)
+		TreeListNode treeListNode = Service.ContentToNode(row);
+		if (treeListNode == null)
 		{
 			return;
 		}
 		((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)delegate
 		{
-			if (CS_0024_003C_003E8__locals15.JFCoq98bxk == null)
+			if (treeListNode == null)
 			{
-				CS_0024_003C_003E8__locals15.nkKoddgCa3.MMjhSXTjcc(CS_0024_003C_003E8__locals15.NhgoevYVKG.Value);
+				ExpandNodePath(row.Value);
 			}
-			CS_0024_003C_003E8__locals15.nkKoddgCa3.Service.UnselectAll();
-			CS_0024_003C_003E8__locals15.nkKoddgCa3.SelectedNodeBindgBase = CS_0024_003C_003E8__locals15.NhgoevYVKG;
-			CS_0024_003C_003E8__locals15.nkKoddgCa3.SelectedNodesBindBase?.Clear();
-			CS_0024_003C_003E8__locals15.nkKoddgCa3.SelectedNodesBindBase.Add(CS_0024_003C_003E8__locals15.NhgoevYVKG.Value);
+			Service.UnselectAll();
+			SelectedNodeBindgBase = row;
+			SelectedNodesBindBase?.Clear();
+			SelectedNodesBindBase.Add(row.Value);
 		}, Array.Empty<object>());
 	}
 
-	private void MMjhSXTjcc(KeyValuePair<string, MacroData> bookmarkNode)
+	private void ExpandNodePath(KeyValuePair<string, MacroData> bookmarkNode)
 	{
 		TreeListNode treeListNode = Service.ContentToNode(bookmarkNode);
 		List<TreeListNode> list = new List<TreeListNode>();
@@ -598,9 +493,9 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private KeyValuePair<string, MacroData> ltohA6QRxd(object P_0)
+	private KeyValuePair<string, MacroData> GetNodeData(object content)
 	{
-		return (KeyValuePair<string, MacroData>)P_0;
+		return (KeyValuePair<string, MacroData>)content;
 	}
 
 	public string SelectNodeToPath()
@@ -610,7 +505,7 @@ public class WindowMacroToolViewModel : ViewModelBase, IDisposable
 		List<string> list = new List<string> { value.Key };
 		while (parentNode != null)
 		{
-			list.Add(ltohA6QRxd(parentNode.Content).Key);
+			list.Add(GetNodeData(parentNode.Content).Key);
 			parentNode = parentNode.ParentNode;
 		}
 		list.Reverse();

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -22,175 +21,25 @@ namespace PvfCode.ViewModels.GMTool;
 
 public class GMToolMainViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<AccountDto> oDd2s40U8Z;
+	public ConcurrentObservableCollection<AccountDto> AccountItems { get; set; }
 
-	[CompilerGenerated]
-	private List<AccountDto> AvA2LQhI0p;
+	public List<AccountDto> SelectedAccountItems { get; set; }
 
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<CharacInfoDto> Pdy2nhWvmq;
+	public ConcurrentObservableCollection<CharacInfoDto> CharacItems { get; set; }
 
-	[CompilerGenerated]
-	private List<CharacInfoDto> wuB2qMC5q8;
+	public List<CharacInfoDto> SelectedCharacInfoItems { get; set; }
 
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<ItemCodePostalData> dkF2dtOjVV;
+	public ConcurrentObservableCollection<ItemCodePostalData> PostalItemCodeItems { get; set; }
 
-	[CompilerGenerated]
-	private List<ItemCodePostalData> LrF2e0QUox;
+	public List<ItemCodePostalData> SelectedPostalItemCodeItems { get; set; }
 
-	[CompilerGenerated]
-	private FindUserDto H0s2tDlJaM;
+	public FindUserDto FindDto { get; set; }
 
-	[CompilerGenerated]
-	private ItemCodeFindRes Jct2bmvod4;
+	public ItemCodeFindRes ItemCodeFindRes { get; set; }
 
-	[CompilerGenerated]
-	private PostalSendRes r8B2IYb5so;
+	public PostalSendRes PostaSendResData { get; set; }
 
-	[CompilerGenerated]
-	private OutPutViewModel cVX2EapAny;
-
-	public ConcurrentObservableCollection<AccountDto> AccountItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return oDd2s40U8Z;
-		}
-		[CompilerGenerated]
-		set
-		{
-			oDd2s40U8Z = value;
-		}
-	}
-
-	public List<AccountDto> SelectedAccountItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return AvA2LQhI0p;
-		}
-		[CompilerGenerated]
-		set
-		{
-			AvA2LQhI0p = value;
-		}
-	}
-
-	public ConcurrentObservableCollection<CharacInfoDto> CharacItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Pdy2nhWvmq;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Pdy2nhWvmq = value;
-		}
-	}
-
-	public List<CharacInfoDto> SelectedCharacInfoItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return wuB2qMC5q8;
-		}
-		[CompilerGenerated]
-		set
-		{
-			wuB2qMC5q8 = value;
-		}
-	}
-
-	public ConcurrentObservableCollection<ItemCodePostalData> PostalItemCodeItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return dkF2dtOjVV;
-		}
-		[CompilerGenerated]
-		set
-		{
-			dkF2dtOjVV = value;
-		}
-	}
-
-	public List<ItemCodePostalData> SelectedPostalItemCodeItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return LrF2e0QUox;
-		}
-		[CompilerGenerated]
-		set
-		{
-			LrF2e0QUox = value;
-		}
-	}
-
-	public FindUserDto FindDto
-	{
-		[CompilerGenerated]
-		get
-		{
-			return H0s2tDlJaM;
-		}
-		[CompilerGenerated]
-		set
-		{
-			H0s2tDlJaM = value;
-		}
-	}
-
-	public ItemCodeFindRes ItemCodeFindRes
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Jct2bmvod4;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Jct2bmvod4 = value;
-		}
-	}
-
-	public PostalSendRes PostaSendResData
-	{
-		[CompilerGenerated]
-		get
-		{
-			return r8B2IYb5so;
-		}
-		[CompilerGenerated]
-		set
-		{
-			r8B2IYb5so = value;
-		}
-	}
-
-	public OutPutViewModel OutPutViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return cVX2EapAny;
-		}
-		[CompilerGenerated]
-		set
-		{
-			cVX2EapAny = value;
-		}
-	}
+	public OutPutViewModel OutPutViewModel { get; set; }
 
 	public GMToolMainViewModel()
 	{
@@ -298,7 +147,7 @@ public class GMToolMainViewModel : ViewModelBase
 	{
 		if (SelectedCharacInfoItems.Count != 0)
 		{
-			List<PostalSendRes> postalItems = QEY2wOVyfN();
+			List<PostalSendRes> postalItems = CreatePostalItems();
 			ResultData<string> resultData = await new DnfSqlService(AppSetting.Instance.GameOptions.GameServerOptions.GetDb()).SendPostal(SelectedCharacInfoItems, postalItems, AppSetting.Instance.GMToolOptions.PostalSendTitle, AppSetting.Instance.GMToolOptions.PostalSendText);
 			if (resultData.IsError)
 			{
@@ -311,7 +160,7 @@ public class GMToolMainViewModel : ViewModelBase
 		}
 	}
 
-	private List<PostalSendRes> QEY2wOVyfN()
+	private List<PostalSendRes> CreatePostalItems()
 	{
 		List<PostalSendRes> list = new List<PostalSendRes>();
 		PostalSendRes postaSendResData = PostaSendResData;
@@ -321,7 +170,7 @@ public class GMToolMainViewModel : ViewModelBase
 			PostalSendRes postalSendRes = postaSendResData.Clone();
 			postalSendRes.IsEqu = itemCodePostalData.IsEqu;
 			postalSendRes.ItemName = itemCodePostalData.ItemName;
-			WZf2oAAo39(postalSendRes, itemCodePostalData);
+			InitializePostalItem(postalSendRes, itemCodePostalData);
 			list.Add(postalSendRes);
 		}
 		else if (SelectedPostalItemCodeItems.Count > 1)
@@ -332,7 +181,7 @@ public class GMToolMainViewModel : ViewModelBase
 				postalSendRes2.item_id = selectedPostalItemCodeItem.ItemCode;
 				postalSendRes2.IsEqu = selectedPostalItemCodeItem.IsEqu;
 				postalSendRes2.ItemName = selectedPostalItemCodeItem.ItemName;
-				WZf2oAAo39(postalSendRes2, selectedPostalItemCodeItem);
+				InitializePostalItem(postalSendRes2, selectedPostalItemCodeItem);
 				list.Add(postalSendRes2);
 			}
 		}
@@ -357,28 +206,28 @@ public class GMToolMainViewModel : ViewModelBase
 		return list;
 	}
 
-	private void WZf2oAAo39(PostalSendRes P_0, ItemCodePostalData P_1)
+	private void InitializePostalItem(PostalSendRes postalItem, ItemCodePostalData itemCodeData)
 	{
-		if (P_1.IsEqu)
+		if (itemCodeData.IsEqu)
 		{
-			switch (P_1.EquType)
+			switch (itemCodeData.EquType)
 			{
 			case EquTypeDefault.Default:
-				P_0.PostalType = PostalType.普通邮件;
+				postalItem.PostalType = PostalType.普通邮件;
 				break;
 			case EquTypeDefault.Avatar:
-				P_0.PostalType = PostalType.时装邮件;
+				postalItem.PostalType = PostalType.时装邮件;
 				break;
 			case EquTypeDefault.Pet:
 			case EquTypeDefault.PetEqu:
-				P_0.PostalType = PostalType.宠物;
+				postalItem.PostalType = PostalType.宠物;
 				break;
 			case EquTypeDefault.PetEgg:
-				P_0.PostalType = PostalType.宠物蛋;
+				postalItem.PostalType = PostalType.宠物蛋;
 				break;
 			}
 		}
-		P_0.Init();
+		postalItem.Init();
 	}
 
 	[Command]
@@ -404,11 +253,7 @@ public class GMToolMainViewModel : ViewModelBase
 	{
 		if (job < 10 && job > -1)
 		{
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(38, 1);
-			defaultInterpolatedStringHandler.AppendLiteral("/images/pngs/dnfcharacdefaulticon/");
-			defaultInterpolatedStringHandler.AppendFormatted(job);
-			defaultInterpolatedStringHandler.AppendLiteral(".png");
-			return defaultInterpolatedStringHandler.ToStringAndClear();
+			return $"/images/pngs/dnfcharacdefaulticon/{job}.png";
 		}
 		return null;
 	}

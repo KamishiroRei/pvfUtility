@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using ICSharpCode.AvalonEdit.Document;
 using PvfCode.Controls.TextEditorFolder;
@@ -20,19 +19,7 @@ public class DocumentsSearchManager : ViewModelBase
 {
 	internal class wFHHWYenfs8COlq055l
 	{
-		public ObservableConcurrentDictionaryEx<string, SearchResultNode> bgWeeuunAw;
-
-		public ObservableConcurrentDictionaryEx<string, SearchResultNode> Tree
-		{
-			get
-			{
-				return bgWeeuunAw;
-			}
-			set
-			{
-				bgWeeuunAw = value;
-			}
-		}
+		public ObservableConcurrentDictionaryEx<string, SearchResultNode> Tree { get; set; }
 
 		public void Create(string filePath, IEnumerable<ISearchResult> searchResult)
 		{
@@ -96,27 +83,17 @@ public class DocumentsSearchManager : ViewModelBase
 
 	public ISearchStrategy Strategy;
 
-	private List<SearchResult> vEWSIcyT8s;
+	private bool resetSearchState;
 
-	[CompilerGenerated]
-	private bool ofjSEDuT33;
+	private bool IsReplacing { get; set; }
 
-	private bool rEkSOgMyxy;
+	private int? FirstResultEndOffset { get; set; }
 
-	[CompilerGenerated]
-	private int? OW3SKrYbkB;
+	private string FirstResultFilePath { get; set; }
 
-	[CompilerGenerated]
-	private string NeyS9eubh9;
+	private int CurrentOffset { get; set; }
 
-	[CompilerGenerated]
-	private ISearchResult iykSPjMQC4;
-
-	[CompilerGenerated]
-	private int PMoSZa9Nju;
-
-	[CompilerGenerated]
-	private string fQmSJ1tEd4;
+	private string CurrentFilePath { get; set; }
 
 	public AllSearchResultViewModel AllSearchResultViewModel
 	{
@@ -135,47 +112,31 @@ public class DocumentsSearchManager : ViewModelBase
 	public DocumentsSearchManager()
 	{
 		AllSearchResultViewModel = new AllSearchResultViewModel();
-		vEWSIcyT8s = new List<SearchResult>();
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private bool e2bSunvJMq()
-	{
-		return ofjSEDuT33;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void oPLSGNF1Xe(bool P_0)
-	{
-		ofjSEDuT33 = P_0;
 	}
 
 	public void Clear()
 	{
-		oPLSGNF1Xe(false);
+		IsReplacing = false;
 		Strategy = null;
-		fm1S1whJ05(null);
-		SEDSa59Psy(null);
-		LZlStqyl4R(null);
-		OCPSq7DBI8(0);
-		rEkSOgMyxy = true;
+		FirstResultFilePath = null;
+		FirstResultEndOffset = null;
+		CurrentFilePath = null;
+		CurrentOffset = 0;
+		resetSearchState = true;
 		AllSearchResultViewModel.Clear();
 	}
 
 	public void RefSetData(SearchConfig config, string filePath)
 	{
-		if (JSfS6Zlt9g() != filePath || rEkSOgMyxy)
+		if (FirstResultFilePath != filePath || resetSearchState)
 		{
-			rEkSOgMyxy = false;
-			fm1S1whJ05(filePath);
-			SEDSa59Psy(null);
-			LZlStqyl4R(null);
-			OCPSq7DBI8(0);
+			resetSearchState = false;
+			FirstResultFilePath = filePath;
+			FirstResultEndOffset = null;
+			CurrentFilePath = null;
+			CurrentOffset = 0;
 		}
 		Config = config;
-		e2bSunvJMq();
 	}
 
 	public async void ReplaceAll()
@@ -199,7 +160,7 @@ public class DocumentsSearchManager : ViewModelBase
 			AppCore.Logger.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_FindParamError"), isError: true);
 			return;
 		}
-		oPLSGNF1Xe(true);
+		IsReplacing = true;
 		int num = 0;
 		foreach (PvfFileDocument value in Documents.Values)
 		{
@@ -220,82 +181,12 @@ public class DocumentsSearchManager : ViewModelBase
 		{
 			AppCore.Logger.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ReplaceSuccessCount"), num));
 		}
-		oPLSGNF1Xe(false);
+		IsReplacing = false;
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private int? dGmSQe7Hi4()
+	private PvfFileDocument GetDocument(string filePath)
 	{
-		return OW3SKrYbkB;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void SEDSa59Psy(int? P_0)
-	{
-		OW3SKrYbkB = P_0;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private string JSfS6Zlt9g()
-	{
-		return NeyS9eubh9;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void fm1S1whJ05(string P_0)
-	{
-		NeyS9eubh9 = P_0;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private ISearchResult dEESo6PvQg()
-	{
-		return iykSPjMQC4;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void L3LSs4cgJ1(ISearchResult P_0)
-	{
-		iykSPjMQC4 = P_0;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private int HViSneFSpo()
-	{
-		return PMoSZa9Nju;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void OCPSq7DBI8(int P_0)
-	{
-		PMoSZa9Nju = P_0;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private string vW5Se90EeO()
-	{
-		return fQmSJ1tEd4;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void LZlStqyl4R(string P_0)
-	{
-		fQmSJ1tEd4 = P_0;
-	}
-
-	private PvfFileDocument s80SS00yml(string P_0)
-	{
-		Documents.TryGetValue(P_0, out PvfFileDocument value);
+		Documents.TryGetValue(filePath, out PvfFileDocument value);
 		return value;
 	}
 
@@ -308,64 +199,64 @@ public class DocumentsSearchManager : ViewModelBase
 			return;
 		}
 		Strategy = resultData.Data;
-		if (!qvESYKLqvX())
+		if (!HasAnyResult())
 		{
 			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_CannotFindSearchResult"), Config.FindKeyword));
 			return;
 		}
-		if (!dGmSQe7Hi4().HasValue)
+		if (!FirstResultEndOffset.HasValue)
 		{
-			UowS4p9EQh(nowFile, replace);
+			StartSearch(nowFile, replace);
 			return;
 		}
-		PvfFileDocument pvfFileDocument = s80SS00yml(nowFile);
-		eZsSA9ItlF(pvfFileDocument, replace);
+		PvfFileDocument pvfFileDocument = GetDocument(nowFile);
+		FindNextInDocument(pvfFileDocument, replace);
 	}
 
-	private int eZsSA9ItlF(PvfFileDocument P_0, bool P_1)
+	private int FindNextInDocument(PvfFileDocument document, bool replace)
 	{
-		if (P_0.GetEditor().TextArea.Caret.Offset > HViSneFSpo())
+		if (document.GetEditor().TextArea.Caret.Offset > CurrentOffset)
 		{
-			OCPSq7DBI8(P_0.GetEditor().TextArea.Caret.Offset);
+			CurrentOffset = document.GetEditor().TextArea.Caret.Offset;
 		}
-		ISearchResult searchResult = Strategy.FindNext(P_0.Document, HViSneFSpo(), P_0.Document.TextLength);
+		ISearchResult searchResult = Strategy.FindNext(document.Document, CurrentOffset, document.Document.TextLength);
 		if (searchResult == null)
 		{
-			PvfFileDocument pvfFileDocument = RdRSytynxu(P_0.FullPath);
+			PvfFileDocument pvfFileDocument = GetAdjacentDocument(document.FullPath);
 			pvfFileDocument.GetEditor().TextArea.Caret.Offset = 0;
-			OCPSq7DBI8(pvfFileDocument.GetEditor().TextArea.Caret.Offset);
-			return eZsSA9ItlF(pvfFileDocument, P_1);
+			CurrentOffset = pvfFileDocument.GetEditor().TextArea.Caret.Offset;
+			return FindNextInDocument(pvfFileDocument, replace);
 		}
-		P_0.SearchPanel.SelectResult(searchResult);
-		P_0.IsActive = true;
-		OCPSq7DBI8(searchResult.EndOffset);
-		LZlStqyl4R(P_0.FullPath);
-		P_0.SearchPanel.ShowSearchPanel(Config, P_1);
-		if (P_1)
+		document.SearchPanel.SelectResult(searchResult);
+		document.IsActive = true;
+		CurrentOffset = searchResult.EndOffset;
+		CurrentFilePath = document.FullPath;
+		document.SearchPanel.ShowSearchPanel(Config, replace);
+		if (replace)
 		{
-			TextEdit editor = P_0.GetEditor();
+			TextEdit editor = document.GetEditor();
 			string text = Strategy.ReplaceNext(editor.Document, searchResult.Offset, searchResult.Length, Config.FindKeyword, Config.ReplaceKeyword, Config.RegularExpression);
 			if (!string.IsNullOrEmpty(text))
 			{
 				editor.Select(searchResult.Offset, text.Length);
 			}
 		}
-		if (JSfS6Zlt9g() == P_0.FullPath && dGmSQe7Hi4().HasValue && dGmSQe7Hi4() == searchResult.EndOffset)
+		if (FirstResultFilePath == document.FullPath && FirstResultEndOffset.HasValue && FirstResultEndOffset == searchResult.EndOffset)
 		{
-			SEDSa59Psy(null);
+			FirstResultEndOffset = null;
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_CannotFindSearchResult_PleaseSearchAgain2"));
 		}
-		else if (!dGmSQe7Hi4().HasValue)
+		else if (!FirstResultEndOffset.HasValue)
 		{
-			SEDSa59Psy(searchResult.EndOffset);
-			fm1S1whJ05(P_0.FullPath);
+			FirstResultEndOffset = searchResult.EndOffset;
+			FirstResultFilePath = document.FullPath;
 		}
 		return searchResult.EndOffset;
 	}
 
-	private void UowS4p9EQh(string P_0, bool P_1)
+	private void StartSearch(string filePath, bool replace)
 	{
-		PvfFileDocument pvfFileDocument = s80SS00yml(P_0);
+		PvfFileDocument pvfFileDocument = GetDocument(filePath);
 		if (pvfFileDocument == null)
 		{
 			return;
@@ -374,11 +265,11 @@ public class DocumentsSearchManager : ViewModelBase
 		string selectedText = editor.SelectedText;
 		if (selectedText != null && selectedText == Config.FindKeyword)
 		{
-			LZlStqyl4R(P_0);
-			SEDSa59Psy(editor.SelectionStart + editor.SelectionLength);
-			OCPSq7DBI8(dGmSQe7Hi4().Value);
-			fm1S1whJ05(P_0);
-			if (P_1)
+			CurrentFilePath = filePath;
+			FirstResultEndOffset = editor.SelectionStart + editor.SelectionLength;
+			CurrentOffset = FirstResultEndOffset.Value;
+			FirstResultFilePath = filePath;
+			if (replace)
 			{
 				TextDocument document = pvfFileDocument.Document;
 				int selectionStart = editor.SelectionStart;
@@ -392,12 +283,12 @@ public class DocumentsSearchManager : ViewModelBase
 		}
 		else
 		{
-			OCPSq7DBI8(editor.GetCaretLineOffset());
+			CurrentOffset = editor.GetCaretLineOffset();
 		}
-		eZsSA9ItlF(pvfFileDocument, P_1);
+		FindNextInDocument(pvfFileDocument, replace);
 	}
 
-	private bool qvESYKLqvX()
+	private bool HasAnyResult()
 	{
 		foreach (PvfFileDocument value in Documents.Values)
 		{
@@ -409,7 +300,7 @@ public class DocumentsSearchManager : ViewModelBase
 		return false;
 	}
 
-	private PvfFileDocument RdRSytynxu(string P_0)
+	private PvfFileDocument GetAdjacentDocument(string filePath)
 	{
 		bool flag = false;
 		if (Config.SearchType == SearchType.Next)
@@ -420,7 +311,7 @@ public class DocumentsSearchManager : ViewModelBase
 				{
 					return value;
 				}
-				if (value.FullPath == P_0)
+				if (value.FullPath == filePath)
 				{
 					flag = true;
 				}
@@ -435,7 +326,7 @@ public class DocumentsSearchManager : ViewModelBase
 			{
 				return item;
 			}
-			if (item.FullPath == P_0)
+			if (item.FullPath == filePath)
 			{
 				flag = true;
 			}

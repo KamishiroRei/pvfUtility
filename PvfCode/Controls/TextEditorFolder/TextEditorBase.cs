@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,94 +28,17 @@ namespace PvfCode.Controls.TextEditorFolder;
 
 public class TextEditorBase : TextEdit, IComponentConnector
 {
-	private delegate Task VfCpNbOF2aZ7tZoelHH();
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass13_0
-	{
-		public int offset;
-
-		public HighlightingType BscOW8Yxue;
-
-		public _003C_003Ec__DisplayClass13_0()
-		{
-		}
-
-		internal bool ganOrOUAY8(HighlightedSection s)
-		{
-			if (s.Offset <= offset && s.Offset + s.Length >= offset)
-			{
-				return s.Color.Name == BscOW8Yxue.ToString();
-			}
-			return false;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass14_0
-	{
-		public int offset;
-
-		public HighlightingType feQO2Al1lh;
-
-		public _003C_003Ec__DisplayClass14_0()
-		{
-		}
-
-		internal bool OkLOmCY6ht(HighlightedSection s)
-		{
-			if (s.Offset <= offset && s.Offset + s.Length >= offset)
-			{
-				return s.Color.Name == feQO2Al1lh.ToString();
-			}
-			return false;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass15_0
-	{
-		public int offset;
-
-		public HighlightingType Nj1O563b46;
-
-		public _003C_003Ec__DisplayClass15_0()
-		{
-		}
-
-		internal bool hkpOf7HoBT(HighlightedSection s)
-		{
-			if (s.Offset <= offset && s.Offset + s.Length >= offset)
-			{
-				return s.Color.Name == Nj1O563b46.ToString();
-			}
-			return false;
-		}
-	}
-
-	[CompilerGenerated]
-	private bool XDqgkYIa5e;
-
-	[CompilerGenerated]
-	private SectionCommentElementGenerator A7hg0O73Xy;
-
 	private ScriptCodeCompletionBase codeCompletion;
 
 	private new bool IsLoaded;
 
-	[CompilerGenerated]
-	private bool NFkgXji2sH;
+	private EditorHoverTooltipManager? hoverTooltipManager;
 
-	private EditorHoverTooltipManager? MxqgpWMI0q;
+	private PeriodicTimer foldingTimer;
 
-	private PeriodicTimer xIpgUUn2C1;
-
-	private object omTgcZvJwL;
+	private object foldingTimerLock;
 
 	public FoldingStrategyBase FoldingStrategyBaseHelper;
-
-	[CompilerGenerated]
-	private bool SHrg81k72M;
 
 	public static readonly DependencyProperty TextIsChangedProperty;
 
@@ -126,7 +48,7 @@ public class TextEditorBase : TextEdit, IComponentConnector
 
 	public static readonly DependencyProperty FocusCaretProperty;
 
-	private bool kc2gMsb3hf;
+	private bool scrollViewerInitialized;
 
 	public static readonly DependencyProperty VerticalOffsetExProperty;
 
@@ -142,35 +64,15 @@ public class TextEditorBase : TextEdit, IComponentConnector
 
 	public static readonly DependencyProperty PvfFileProperty;
 
-	private bool WH7gVLLxBG;
+	private bool _contentLoaded;
 
-	public bool CodeCompletionIsOpen
-	{
-		[CompilerGenerated]
-		get
-		{
-			return XDqgkYIa5e;
-		}
-		[CompilerGenerated]
-		set
-		{
-			XDqgkYIa5e = value;
-		}
-	}
+	private SectionCommentElementGenerator SectionCommentElementGenerator { get; set; }
 
-	public bool AllowUpdateFolding
-	{
-		[CompilerGenerated]
-		get
-		{
-			return SHrg81k72M;
-		}
-		[CompilerGenerated]
-		set
-		{
-			SHrg81k72M = value;
-		}
-	}
+	private bool ScrollChangedSubscribed { get; set; }
+
+	public bool CodeCompletionIsOpen { get; set; }
+
+	public bool AllowUpdateFolding { get; set; }
 
 	public DocumentHighlighter GetDocumentHighlighter
 	{
@@ -324,40 +226,23 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		}
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private SectionCommentElementGenerator PTjgbEXWL4()
-	{
-		return A7hg0O73Xy;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void Xi9gIQurEA(SectionCommentElementGenerator P_0)
-	{
-		A7hg0O73Xy = P_0;
-	}
-
 	public TextEditorBase()
 	{
-		omTgcZvJwL = new object();
-		SHrg81k72M = true;
+		foldingTimerLock = new object();
+		AllowUpdateFolding = true;
 		InitializeComponent();
 		base.Encoding = Encoding.GetEncoding((int)AppSetting.Instance.PvfConfig.DefaultEncoding);
 		base.TextArea.TextView.ElementGenerators.Add(new TruncateLongLines());
-		base.Loaded += CK0gQEN48X;
+		base.Loaded += OnLoaded;
 		base.Unloaded += TextEditorBase_Unloaded;
 	}
 
 	public bool OffSetIsHiglig(HighlightingType type, int offset)
 	{
-		_003C_003Ec__DisplayClass13_0 CS_0024_003C_003E8__locals6 = new _003C_003Ec__DisplayClass13_0();
-		CS_0024_003C_003E8__locals6.offset = offset;
-		CS_0024_003C_003E8__locals6.BscOW8Yxue = type;
 		try
 		{
-			DocumentLine lineByOffset = base.Document.GetLineByOffset(CS_0024_003C_003E8__locals6.offset);
-			return GetDocumentHighlighter.HighlightLine(lineByOffset.LineNumber).Sections.Any((HighlightedSection s) => s.Offset <= CS_0024_003C_003E8__locals6.offset && s.Offset + s.Length >= CS_0024_003C_003E8__locals6.offset && s.Color.Name == CS_0024_003C_003E8__locals6.BscOW8Yxue.ToString());
+			DocumentLine lineByOffset = base.Document.GetLineByOffset(offset);
+			return GetDocumentHighlighter.HighlightLine(lineByOffset.LineNumber).Sections.Any(s => s.Offset <= offset && s.Offset + s.Length >= offset && s.Color.Name == type.ToString());
 		}
 		catch (Exception e)
 		{
@@ -368,12 +253,9 @@ public class TextEditorBase : TextEdit, IComponentConnector
 
 	public bool OffSetIsHiglig(HighlightingType type, IEnumerable<HighlightedSection> sections, int offset)
 	{
-		_003C_003Ec__DisplayClass14_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass14_0();
-		CS_0024_003C_003E8__locals5.offset = offset;
-		CS_0024_003C_003E8__locals5.feQO2Al1lh = type;
 		try
 		{
-			return sections?.Any((HighlightedSection s) => s.Offset <= CS_0024_003C_003E8__locals5.offset && s.Offset + s.Length >= CS_0024_003C_003E8__locals5.offset && s.Color.Name == CS_0024_003C_003E8__locals5.feQO2Al1lh.ToString()) ?? false;
+			return sections?.Any(s => s.Offset <= offset && s.Offset + s.Length >= offset && s.Color.Name == type.ToString()) ?? false;
 		}
 		catch (Exception e)
 		{
@@ -384,13 +266,10 @@ public class TextEditorBase : TextEdit, IComponentConnector
 
 	public HighlightedSection GetHigSection(HighlightingType type, int offset)
 	{
-		_003C_003Ec__DisplayClass15_0 CS_0024_003C_003E8__locals6 = new _003C_003Ec__DisplayClass15_0();
-		CS_0024_003C_003E8__locals6.offset = offset;
-		CS_0024_003C_003E8__locals6.Nj1O563b46 = type;
 		try
 		{
-			DocumentLine lineByOffset = base.Document.GetLineByOffset(CS_0024_003C_003E8__locals6.offset);
-			return GetDocumentHighlighter.HighlightLine(lineByOffset.LineNumber).Sections.FirstOrDefault((HighlightedSection s) => s.Offset <= CS_0024_003C_003E8__locals6.offset && s.Offset + s.Length >= CS_0024_003C_003E8__locals6.offset && s.Color.Name == CS_0024_003C_003E8__locals6.Nj1O563b46.ToString());
+			DocumentLine lineByOffset = base.Document.GetLineByOffset(offset);
+			return GetDocumentHighlighter.HighlightLine(lineByOffset.LineNumber).Sections.FirstOrDefault(s => s.Offset <= offset && s.Offset + s.Length >= offset && s.Color.Name == type.ToString());
 		}
 		catch (Exception e)
 		{
@@ -466,7 +345,7 @@ public class TextEditorBase : TextEdit, IComponentConnector
 	{
 		try
 		{
-			TextViewPosition? textViewPosition = oufgxu6L5T();
+			TextViewPosition? textViewPosition = GetMousePosition();
 			if (!textViewPosition.HasValue)
 			{
 				return null;
@@ -480,7 +359,17 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		}
 	}
 
+	private TextViewPosition? GetMousePosition()
+	{
+		return GetCurrentMousePosition();
+	}
+
 	internal TextViewPosition? oufgxu6L5T()
+	{
+		return GetCurrentMousePosition();
+	}
+
+	private TextViewPosition? GetCurrentMousePosition()
 	{
 		try
 		{
@@ -503,21 +392,7 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		}
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private bool fKygP4hgAj()
-	{
-		return NFkgXji2sH;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void TaZgZRheUT(bool P_0)
-	{
-		NFkgXji2sH = P_0;
-	}
-
-	private async void CK0gQEN48X(object P_0, RoutedEventArgs P_1)
+	private async void OnLoaded(object sender, RoutedEventArgs eventArgs)
 	{
 		try
 		{
@@ -526,16 +401,16 @@ public class TextEditorBase : TextEdit, IComponentConnector
 				IsLoaded = true;
 				if (base.Document != null)
 				{
-					base.Document.TextChanged += SmGgLfSInl;
+					base.Document.TextChanged += OnDocumentTextChanged;
 				}
 				if (base.EditorType == TextEditorType.Diff)
 				{
-					base.TextArea.Caret.PositionChanged += X93gnL7Pqh;
+					base.TextArea.Caret.PositionChanged += OnCaretPositionChanged;
 				}
 				if (PvfFile != null && FileType == PvfFileType.lst && !AppSetting.Instance.EditConfig.NotUseFileListTooltip.Contains(PvfFile.FileName))
 				{
-					Xi9gIQurEA(new SectionCommentElementGenerator(this, PvfFile));
-					base.TextArea.TextView.ElementGenerators.Add(PTjgbEXWL4());
+					SectionCommentElementGenerator = new SectionCommentElementGenerator(this, PvfFile);
+					base.TextArea.TextView.ElementGenerators.Add(SectionCommentElementGenerator);
 				}
 				if (AllowCompletion && FileType.HasValue)
 				{
@@ -559,7 +434,7 @@ public class TextEditorBase : TextEdit, IComponentConnector
 				default:
 					if ((PvfFile != null && PvfFile.FileName != "stringtable.bin") || (PvfFile != null && FileType == PvfFileType.lst && AppSetting.Instance.PvfConfig.LstFileUseScriptFile.Contains(PvfFile.FileName)))
 					{
-						MxqgpWMI0q = new EditorHoverTooltipManager(this, PvfFile);
+						hoverTooltipManager = new EditorHoverTooltipManager(this, PvfFile);
 					}
 					break;
 				case PvfFileType.txt:
@@ -569,21 +444,21 @@ public class TextEditorBase : TextEdit, IComponentConnector
 				}
 				if (AllowFolding)
 				{
-					kFLg6a8Ffy();
+					InitializeFolding();
 					UpdateFolding();
 				}
 			}
-			if (!fKygP4hgAj())
+			if (!ScrollChangedSubscribed)
 			{
 				ScrollViewer getScrollViewer = base.GetScrollViewer;
 				if (getScrollViewer != null)
 				{
-					kc2gMsb3hf = true;
-					getScrollViewer.ScrollChanged += fIcgdKj2iI;
-					TaZgZRheUT(true);
+					scrollViewerInitialized = true;
+					getScrollViewer.ScrollChanged += OnScrollChanged;
+					ScrollChangedSubscribed = true;
 				}
 			}
-			await o5CgoPaD3B();
+			await StartFoldingTimerAsync();
 		}
 		catch (Exception e)
 		{
@@ -620,12 +495,12 @@ public class TextEditorBase : TextEdit, IComponentConnector
 
 	public void TextEditorBase_Unloaded(object sender, RoutedEventArgs e)
 	{
-		KVqgwmoMK4();
+		StopFoldingTimer();
 	}
 
-	private Point Q8hgg5wbOq(MouseEventArgs P_0)
+	private Point GetPopupPosition(MouseEventArgs e)
 	{
-		Point position = P_0.GetPosition(this);
+		Point position = e.GetPosition(this);
 		TextViewPosition? positionFromPoint = GetPositionFromPoint(position);
 		Point point;
 		if (positionFromPoint.HasValue)
@@ -641,7 +516,7 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		return point.TransformFromDevice(this);
 	}
 
-	private void kFLg6a8Ffy()
+	private void InitializeFolding()
 	{
 		try
 		{
@@ -665,12 +540,12 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		}
 	}
 
-	private async Task lr6g1uqW5C()
+	private async Task RunFoldingTimerAsync()
 	{
 		int errId = 0;
 		try
 		{
-			if (xIpgUUn2C1 == null)
+			if (foldingTimer == null)
 			{
 				return;
 			}
@@ -678,10 +553,10 @@ public class TextEditorBase : TextEdit, IComponentConnector
 			{
 				while (true)
 				{
-					bool flag = xIpgUUn2C1 != null;
+					bool flag = foldingTimer != null;
 					if (flag)
 					{
-						flag = await xIpgUUn2C1.WaitForNextTickAsync();
+						flag = await foldingTimer.WaitForNextTickAsync();
 					}
 					if (flag)
 					{
@@ -704,10 +579,7 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		catch (Exception e)
 		{
 			LoggerViewModel logger = AppCore.Logger;
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(13, 1);
-			defaultInterpolatedStringHandler.AppendLiteral("折叠定时任务 ErrId:");
-			defaultInterpolatedStringHandler.AppendFormatted(errId);
-			logger.ErrorUploadDialog(e, defaultInterpolatedStringHandler.ToStringAndClear());
+			logger.ErrorUploadDialog(e, $"折叠定时任务 ErrId:{errId}");
 		}
 	}
 
@@ -734,16 +606,16 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		}
 	}
 
-	private void KVqgwmoMK4()
+	private void StopFoldingTimer()
 	{
-		lock (omTgcZvJwL)
+		lock (foldingTimerLock)
 		{
-			if (xIpgUUn2C1 != null)
+			if (foldingTimer != null)
 			{
 				try
 				{
-					xIpgUUn2C1?.Dispose();
-					xIpgUUn2C1 = null;
+					foldingTimer?.Dispose();
+					foldingTimer = null;
 					return;
 				}
 				catch (Exception e)
@@ -755,31 +627,31 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		}
 	}
 
-	private async Task o5CgoPaD3B()
+	private async Task StartFoldingTimerAsync()
 	{
-		if (xIpgUUn2C1 == null)
+		if (foldingTimer == null)
 		{
-			xIpgUUn2C1 = new PeriodicTimer(TimeSpan.FromSeconds(3.0));
-			await lr6g1uqW5C();
+			foldingTimer = new PeriodicTimer(TimeSpan.FromSeconds(3.0));
+			await RunFoldingTimerAsync();
 		}
 	}
 
-	private static void lgBgs4DB2P(DependencyObject P_0, DependencyPropertyChangedEventArgs P_1)
+	private static void OnTextIsChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
 	{
-		TextEditorBase textEditorBase = (TextEditorBase)(object)P_0;
-		if (textEditorBase != null && (bool)P_1.NewValue)
+		TextEditorBase textEditorBase = (TextEditorBase)(object)dependencyObject;
+		if (textEditorBase != null && (bool)e.NewValue)
 		{
 			textEditorBase.AllowUpdateFolding = true;
 		}
 	}
 
-	private void SmGgLfSInl(object? sender, EventArgs P_1)
+	private void OnDocumentTextChanged(object? sender, EventArgs e)
 	{
 		TextIsChanged = true;
 		AllowUpdateFolding = true;
 	}
 
-	private void X93gnL7Pqh(object? sender, EventArgs P_1)
+	private void OnCaretPositionChanged(object? sender, EventArgs e)
 	{
 		if (base.TextArea != null)
 		{
@@ -787,17 +659,17 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		}
 	}
 
-	private static void Ux5gqfBVZV(DependencyObject P_0, DependencyPropertyChangedEventArgs P_1)
+	private static void OnFocusCaretLineChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
 	{
-		TextEditorBase textEditorBase = (TextEditorBase)(object)P_0;
-		if (textEditorBase != null && P_1.NewValue != null)
+		TextEditorBase textEditorBase = (TextEditorBase)(object)dependencyObject;
+		if (textEditorBase != null && e.NewValue != null)
 		{
-			int line = (int)P_1.NewValue;
+			int line = (int)e.NewValue;
 			textEditorBase.TextArea.Caret.Line = line;
 		}
 	}
 
-	private void fIcgdKj2iI(object P_0, ScrollChangedEventArgs P_1)
+	private void OnScrollChanged(object sender, ScrollChangedEventArgs eventArgs)
 	{
 		try
 		{
@@ -808,7 +680,7 @@ public class TextEditorBase : TextEdit, IComponentConnector
 				ViewportSizeEx = getScrollViewer.ViewportHeight;
 				VerticalOffsetEx = base.VerticalOffset;
 			}
-			_ = kc2gMsb3hf;
+			_ = scrollViewerInitialized;
 			ScrollViewer = getScrollViewer;
 		}
 		catch (Exception e)
@@ -817,20 +689,20 @@ public class TextEditorBase : TextEdit, IComponentConnector
 		}
 	}
 
-	private static void qWvgePBRGk(DependencyObject P_0, DependencyPropertyChangedEventArgs P_1)
+	private static void OnVerticalOffsetChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
 	{
-		TextEditorBase textEditorBase = (TextEditorBase)(object)P_0;
-		if (textEditorBase != null && P_1.NewValue != null)
+		TextEditorBase textEditorBase = (TextEditorBase)(object)dependencyObject;
+		if (textEditorBase != null && e.NewValue != null)
 		{
-			double offset = (double)P_1.NewValue;
+			double offset = (double)e.NewValue;
 			textEditorBase.ScrollToVerticalOffset(offset);
 		}
 	}
 
-	private static void FYwgtShVSk(DependencyObject P_0, DependencyPropertyChangedEventArgs P_1)
+	private static void OnIsActiveChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
 	{
-		TextEditorBase textEditorBase = (TextEditorBase)(object)P_0;
-		if (textEditorBase != null && !Convert.ToBoolean(P_1.NewValue) && textEditorBase.codeCompletion != null)
+		TextEditorBase textEditorBase = (TextEditorBase)(object)dependencyObject;
+		if (textEditorBase != null && !Convert.ToBoolean(e.NewValue) && textEditorBase.codeCompletion != null)
 		{
 			textEditorBase.codeCompletion.CloseWindow();
 		}
@@ -840,15 +712,15 @@ public class TextEditorBase : TextEdit, IComponentConnector
 	{
 		try
 		{
-			base.GetScrollViewer.ScrollChanged -= fIcgdKj2iI;
-			base.TextArea.Caret.PositionChanged += X93gnL7Pqh;
-			base.Loaded -= CK0gQEN48X;
+			base.GetScrollViewer.ScrollChanged -= OnScrollChanged;
+			base.TextArea.Caret.PositionChanged += OnCaretPositionChanged;
+			base.Loaded -= OnLoaded;
 			base.Unloaded -= TextEditorBase_Unloaded;
-			base.Document.TextChanged -= SmGgLfSInl;
-			KVqgwmoMK4();
+			base.Document.TextChanged -= OnDocumentTextChanged;
+			StopFoldingTimer();
 			FoldingStrategyBaseHelper?.Dispose();
 			codeCompletion?.Dispose();
-			MxqgpWMI0q?.Dispose();
+			hoverTooltipManager?.Dispose();
 			base.TextArea.TextView.ElementGenerators?.Clear();
 			base.TextArea.TextView.BackgroundRenderers.Clear();
 			Dispose();
@@ -863,9 +735,9 @@ public class TextEditorBase : TextEdit, IComponentConnector
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!WH7gVLLxBG)
+		if (!_contentLoaded)
 		{
-			WH7gVLLxBG = true;
+			_contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/controls/texteditorfolder/texteditorbase.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -883,20 +755,20 @@ public class TextEditorBase : TextEdit, IComponentConnector
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	void IComponentConnector.Connect(int connectionId, object target)
 	{
-		WH7gVLLxBG = true;
+		_contentLoaded = true;
 	}
 
 	static TextEditorBase()
 	{
-		TextIsChangedProperty = DependencyProperty.Register("TextIsChanged", typeof(bool), typeof(TextEditorBase), new PropertyMetadata((object)false, new PropertyChangedCallback(lgBgs4DB2P)));
+		TextIsChangedProperty = DependencyProperty.Register("TextIsChanged", typeof(bool), typeof(TextEditorBase), new PropertyMetadata((object)false, new PropertyChangedCallback(OnTextIsChanged)));
 		AllowCompletionProperty = DependencyProperty.Register("AllowCompletion", typeof(bool), typeof(TextEditorBase), new PropertyMetadata((object)false));
 		AllowFoldingProperty = DependencyProperty.Register("AllowFolding", typeof(bool), typeof(TextEditorBase), new PropertyMetadata((object)true));
-		FocusCaretProperty = DependencyProperty.Register("FocusCaretLine", typeof(int), typeof(TextEditorBase), new PropertyMetadata((object)0, new PropertyChangedCallback(Ux5gqfBVZV)));
-		VerticalOffsetExProperty = DependencyProperty.Register("VerticalOffsetEx", typeof(double), typeof(TextEditorBase), new PropertyMetadata((object)0.0, new PropertyChangedCallback(qWvgePBRGk)));
+		FocusCaretProperty = DependencyProperty.Register("FocusCaretLine", typeof(int), typeof(TextEditorBase), new PropertyMetadata((object)0, new PropertyChangedCallback(OnFocusCaretLineChanged)));
+		VerticalOffsetExProperty = DependencyProperty.Register("VerticalOffsetEx", typeof(double), typeof(TextEditorBase), new PropertyMetadata((object)0.0, new PropertyChangedCallback(OnVerticalOffsetChanged)));
 		MaxNumExProperty = DependencyProperty.Register("MaxNumEx", typeof(double), typeof(TextEditorBase), new PropertyMetadata((object)0.0));
 		ViewportSizeExProperty = DependencyProperty.Register("ViewportSizeEx", typeof(double), typeof(TextEditorBase), new PropertyMetadata((object)0.0));
 		ScrollViewerProperty = DependencyProperty.Register("ScrollViewer", typeof(ScrollViewer), typeof(TextEditorBase), new PropertyMetadata((PropertyChangedCallback)null));
-		IsActiveProperty = DependencyProperty.Register("IsActive", typeof(bool), typeof(TextEditorBase), new PropertyMetadata((object)false, new PropertyChangedCallback(FYwgtShVSk)));
+		IsActiveProperty = DependencyProperty.Register("IsActive", typeof(bool), typeof(TextEditorBase), new PropertyMetadata((object)false, new PropertyChangedCallback(OnIsActiveChanged)));
 		FileTypeProperty = DependencyProperty.Register("FileType", typeof(PvfFileType?), typeof(TextEditorBase), new PropertyMetadata((PropertyChangedCallback)null));
 		PvfFileProperty = DependencyProperty.Register("PvfFile", typeof(PvfFile), typeof(TextEditorBase), new PropertyMetadata((PropertyChangedCallback)null));
 	}

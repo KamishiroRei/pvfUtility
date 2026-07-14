@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,102 +26,11 @@ namespace PvfCode.ViewModels.PvfDiffTool;
 
 public class PvfDiffToolViewModel : DocumentBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass42_0
-	{
-		public PvfDiffToolViewModel zjnqkFYms1;
+	private Dictionary<string, List<PvfFileDiffType>?>? leftPathDiffs;
 
-		public string AMyq00ByHo;
+	private Dictionary<string, List<PvfFileDiffType>?>? rightPathDiffs;
 
-		public _003C_003Ec__DisplayClass42_0()
-		{
-		}
-
-		internal Task<bool>? k6KqJYGnqK()
-		{
-			return zjnqkFYms1.Pvf.OpenPvfPack(AMyq00ByHo, AppCore.ViewModelBase.MainProgress);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass44_0
-	{
-		public IDictionary<string, List<PvfFileDiffType>?> ql0qXJZ3Vy;
-
-		public PvfDiffToolViewModel AT2qpq0EiF;
-
-		public IDictionary<string, List<PvfFileDiffType>?> N6kqUbsLeL;
-
-		public _003C_003Ec__DisplayClass44_0()
-		{
-		}
-
-		internal void uWtq7YuFUl()
-		{
-			ql0qXJZ3Vy = AT2qpq0EiF.YtXWM3pwVp(true);
-			N6kqUbsLeL = AT2qpq0EiF.YtXWM3pwVp(false);
-			AT2qpq0EiF.TreeViewModelLeft.ForbidVerticalScrollBarAnnotation = AT2qpq0EiF.LeftDiffCount > 20000;
-			AT2qpq0EiF.TreeViewModelRight.ForbidVerticalScrollBarAnnotation = AT2qpq0EiF.RightDiffCount > 20000;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass57_0
-	{
-		public PvfGroup paCq87emy2;
-
-		public PvfDiffToolViewModel dZnqM1HhSg;
-
-		public _003C_003Ec__DisplayClass57_0()
-		{
-		}
-
-		internal void RM5qc3CPWL(string item)
-		{
-			if (paCq87emy2.FileContentDiff(paCq87emy2.FileList[item], dZnqM1HhSg.Pvf, dZnqM1HhSg.Pvf.FileList[item], out List<PvfFileDiffType> diffs))
-			{
-				dZnqM1HhSg.lAjmhV4X6Y.TryAdd(item, diffs);
-			}
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass63_0
-	{
-		public PvfGroup pvf;
-
-		public string a4eq3XNPfI;
-
-		public _003C_003Ec__DisplayClass63_0()
-		{
-		}
-
-		internal Task<ResultData>? nsXqVOLIbi()
-		{
-			return pvf.SavePvfPack(a4eq3XNPfI, isFastMode: false, AppCore.ViewModelBase.MainProgress);
-		}
-	}
-
-	[CompilerGenerated]
-	private PvfGroup IydmvZvseq;
-
-	[CompilerGenerated]
-	private PvfTreeViewModel oA0mBlufql;
-
-	[CompilerGenerated]
-	private PvfTreeViewModel TGNmFU52tx;
-
-	[CompilerGenerated]
-	private List<PvfDiffTreeShowFilesType> nKEmr7TjRC;
-
-	[CompilerGenerated]
-	private Dictionary<string, List<PvfFileDiffType>?>? iJQmW6U9kB;
-
-	[CompilerGenerated]
-	private Dictionary<string, List<PvfFileDiffType>?>? jMFmmOSR7X;
-
-	[CompilerGenerated]
-	private ConcurrentDictionary<string, List<PvfFileDiffType>?>? eLlm26h84b;
+	private ConcurrentDictionary<string, List<PvfFileDiffType>?>? contentDiffs;
 
 	public new bool IsLoading
 	{
@@ -136,47 +44,11 @@ public class PvfDiffToolViewModel : DocumentBase
 		}
 	}
 
-	public PvfGroup Pvf
-	{
-		[CompilerGenerated]
-		get
-		{
-			return IydmvZvseq;
-		}
-		[CompilerGenerated]
-		set
-		{
-			IydmvZvseq = value;
-		}
-	}
+	public PvfGroup Pvf { get; set; }
 
-	public PvfTreeViewModel TreeViewModelLeft
-	{
-		[CompilerGenerated]
-		get
-		{
-			return oA0mBlufql;
-		}
-		[CompilerGenerated]
-		set
-		{
-			oA0mBlufql = value;
-		}
-	}
+	public PvfTreeViewModel TreeViewModelLeft { get; set; }
 
-	public PvfTreeViewModel TreeViewModelRight
-	{
-		[CompilerGenerated]
-		get
-		{
-			return TGNmFU52tx;
-		}
-		[CompilerGenerated]
-		set
-		{
-			TGNmFU52tx = value;
-		}
-	}
+	public PvfTreeViewModel TreeViewModelRight { get; set; }
 
 	public bool SelectedSynchronization
 	{
@@ -198,7 +70,7 @@ public class PvfDiffToolViewModel : DocumentBase
 		}
 		set
 		{
-			SetProperty(() => ForbidVerticalScrollBarAnnotation, value, M3IWJR1jSo);
+			SetProperty(() => ForbidVerticalScrollBarAnnotation, value, UpdateScrollBarAnnotations);
 		}
 	}
 
@@ -210,23 +82,11 @@ public class PvfDiffToolViewModel : DocumentBase
 		}
 		set
 		{
-			SetProperty(() => PvfDiffTreeShowFilesType, value, dmrWk4So6a);
+			SetProperty(() => PvfDiffTreeShowFilesType, value, OnShowFilesTypeChanged);
 		}
 	}
 
-	public List<PvfDiffTreeShowFilesType> PvfDiffTreeShowFilesTypeslist
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nKEmr7TjRC;
-		}
-		[CompilerGenerated]
-		set
-		{
-			nKEmr7TjRC = value;
-		}
-	}
+	public List<PvfDiffTreeShowFilesType> PvfDiffTreeShowFilesTypeslist { get; set; }
 
 	public int LeftDiffCount
 	{
@@ -252,60 +112,18 @@ public class PvfDiffToolViewModel : DocumentBase
 		}
 	}
 
-	private Dictionary<string, List<PvfFileDiffType>?>? w28mD55mXu
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iJQmW6U9kB;
-		}
-		[CompilerGenerated]
-		set
-		{
-			iJQmW6U9kB = value;
-		}
-	}
-
-	private Dictionary<string, List<PvfFileDiffType>?>? zosmTlp0Bp
-	{
-		[CompilerGenerated]
-		get
-		{
-			return jMFmmOSR7X;
-		}
-		[CompilerGenerated]
-		set
-		{
-			jMFmmOSR7X = value;
-		}
-	}
-
-	private ConcurrentDictionary<string, List<PvfFileDiffType>?>? lAjmhV4X6Y
-	{
-		[CompilerGenerated]
-		get
-		{
-			return eLlm26h84b;
-		}
-		[CompilerGenerated]
-		set
-		{
-			eLlm26h84b = value;
-		}
-	}
-
-	private void M3IWJR1jSo()
+	private void UpdateScrollBarAnnotations()
 	{
 		TreeViewModelLeft.ForbidVerticalScrollBarAnnotation = ForbidVerticalScrollBarAnnotation;
 		TreeViewModelRight.ForbidVerticalScrollBarAnnotation = ForbidVerticalScrollBarAnnotation;
 	}
 
-	private async void dmrWk4So6a()
+	private async void OnShowFilesTypeChanged()
 	{
 		IsLoading = true;
 		WindowLoading win = AppCore.CreateLoading(AppSetting.Instance.GetIlogger()?.GetStr("mess_Loading"), Application.Current.MainWindow);
 		win.Show();
-		await A2sWcQMOnq();
+		await RefreshTreesAsync();
 		win.Close();
 		IsLoading = false;
 	}
@@ -316,13 +134,13 @@ public class PvfDiffToolViewModel : DocumentBase
 		base.DocumentType = PvfFileDocumentType.PVF差异比较器;
 		Pvf = new PvfGroup();
 		TreeViewModelLeft = new PvfTreeViewModel(TreeViewType.PvfDiffLeft);
-		TreeViewModelLeft.SelectedRowChangedEvent += lsCWpLmlUq;
-		TreeViewModelLeft.EventNodeDoubleClick += fx6WXKPqtR;
-		TreeViewModelLeft.EventDiffExtractSelected += DBjW0ZjUq3;
+		TreeViewModelLeft.SelectedRowChangedEvent += OnLeftSelectedRowChanged;
+		TreeViewModelLeft.EventNodeDoubleClick += OnLeftNodeDoubleClick;
+		TreeViewModelLeft.EventDiffExtractSelected += ExtractSelectedFiles;
 		TreeViewModelRight = new PvfTreeViewModel(TreeViewType.PvfDiffRight);
-		TreeViewModelRight.EventNodeDoubleClick += F8PW75uC7p;
-		TreeViewModelRight.SelectedRowChangedEvent += fRfWUoniAe;
-		TreeViewModelRight.EventDiffExtractSelected += DBjW0ZjUq3;
+		TreeViewModelRight.EventNodeDoubleClick += OnRightNodeDoubleClick;
+		TreeViewModelRight.SelectedRowChangedEvent += OnRightSelectedRowChanged;
+		TreeViewModelRight.EventDiffExtractSelected += ExtractSelectedFiles;
 		PvfDiffTreeShowFilesType = PvfDiffTreeShowFilesType.所有文件;
 		PvfDiffTreeShowFilesTypeslist = new List<PvfDiffTreeShowFilesType>();
 		foreach (EnumberEntity item in EnumberHelper.EnumToList<PvfDiffTreeShowFilesType>())
@@ -334,15 +152,15 @@ public class PvfDiffToolViewModel : DocumentBase
 		AppCore.Logger.Warning(AppSetting.Instance.GetIlogger()?.GetStr("PvfDiff_ToolTip3"));
 	}
 
-	private void DBjW0ZjUq3(TreeViewType P_0, IEnumerable<string> P_1)
+	private void ExtractSelectedFiles(TreeViewType treeViewType, IEnumerable<string> filePaths)
 	{
-		ViewExtractFiles viewExtractFiles = new ViewExtractFiles((P_0 == TreeViewType.PvfDiffLeft) ? AppCore.ViewModelBase.PVF : Pvf, P_1);
+		ViewExtractFiles viewExtractFiles = new ViewExtractFiles((treeViewType == TreeViewType.PvfDiffLeft) ? AppCore.ViewModelBase.PVF : Pvf, filePaths);
 		viewExtractFiles.Owner = Application.Current.MainWindow;
 		viewExtractFiles.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 		viewExtractFiles.Show();
 	}
 
-	private void F8PW75uC7p(KeyValuePair<string, PvfTreeFileBase> row)
+	private void OnRightNodeDoubleClick(KeyValuePair<string, PvfTreeFileBase> row)
 	{
 		if (row.Value.IsFile)
 		{
@@ -356,7 +174,7 @@ public class PvfDiffToolViewModel : DocumentBase
 		}
 	}
 
-	private void fx6WXKPqtR(KeyValuePair<string, PvfTreeFileBase> row)
+	private void OnLeftNodeDoubleClick(KeyValuePair<string, PvfTreeFileBase> row)
 	{
 		if (row.Value.IsFile)
 		{
@@ -370,7 +188,7 @@ public class PvfDiffToolViewModel : DocumentBase
 		}
 	}
 
-	private void lsCWpLmlUq(KeyValuePair<string, PvfTreeFileBase> selectedRow)
+	private void OnLeftSelectedRowChanged(KeyValuePair<string, PvfTreeFileBase> selectedRow)
 	{
 		if (SelectedSynchronization && TreeViewModelRight.TreeGroupData.Any(selectedRow.Value.FullPath))
 		{
@@ -378,7 +196,7 @@ public class PvfDiffToolViewModel : DocumentBase
 		}
 	}
 
-	private void fRfWUoniAe(KeyValuePair<string, PvfTreeFileBase> selectedRow)
+	private void OnRightSelectedRowChanged(KeyValuePair<string, PvfTreeFileBase> selectedRow)
 	{
 		if (SelectedSynchronization && TreeViewModelLeft.TreeGroupData.Any(selectedRow.Value.FullPath))
 		{
@@ -389,10 +207,7 @@ public class PvfDiffToolViewModel : DocumentBase
 	[Command]
 	public async void OnOpenPvf(string filePath)
 	{
-		_003C_003Ec__DisplayClass42_0 CS_0024_003C_003E8__locals10 = new _003C_003Ec__DisplayClass42_0();
-		CS_0024_003C_003E8__locals10.zjnqkFYms1 = this;
-		CS_0024_003C_003E8__locals10.AMyq00ByHo = filePath;
-		if (string.IsNullOrEmpty(CS_0024_003C_003E8__locals10.AMyq00ByHo))
+		if (string.IsNullOrEmpty(filePath))
 		{
 			CommonOpenFileDialog commonOpenFileDialog = new CommonOpenFileDialog
 			{
@@ -408,17 +223,17 @@ public class PvfDiffToolViewModel : DocumentBase
 			{
 				return;
 			}
-			CS_0024_003C_003E8__locals10.AMyq00ByHo = commonOpenFileDialog.FileName;
+			filePath = commonOpenFileDialog.FileName;
 		}
-		if (!File.Exists(CS_0024_003C_003E8__locals10.AMyq00ByHo))
+		if (!File.Exists(filePath))
 		{
-			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileNotExist"), CS_0024_003C_003E8__locals10.AMyq00ByHo), isError: true);
-			if (AppSetting.Instance.PathConfig.PvfOpenLog.ContainsKey(CS_0024_003C_003E8__locals10.AMyq00ByHo))
+			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileNotExist"), filePath), isError: true);
+			if (AppSetting.Instance.PathConfig.PvfOpenLog.ContainsKey(filePath))
 			{
-				AppSetting.Instance.PathConfig.PvfOpenLog.Remove(CS_0024_003C_003E8__locals10.AMyq00ByHo);
+				AppSetting.Instance.PathConfig.PvfOpenLog.Remove(filePath);
 			}
 		}
-		else if (!(await Task.Run(() => CS_0024_003C_003E8__locals10.zjnqkFYms1.Pvf.OpenPvfPack(CS_0024_003C_003E8__locals10.AMyq00ByHo, AppCore.ViewModelBase.MainProgress))))
+		else if (!(await Task.Run(() => Pvf.OpenPvfPack(filePath, AppCore.ViewModelBase.MainProgress))))
 		{
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_CannotOpenPvfPack"), isError: true);
 		}
@@ -438,41 +253,37 @@ public class PvfDiffToolViewModel : DocumentBase
 		}
 		WindowLoading win = AppCore.CreateLoading(AppSetting.Instance.GetIlogger()?.GetStr("mess_PvfDiffing"), Application.Current.MainWindow);
 		win.Show();
-		await Task.Run((Func<Task?>)w9JW8fyFPs);
-		await A2sWcQMOnq();
+		await Task.Run(CalculateDiffsAsync);
+		await RefreshTreesAsync();
 		win.Close();
 	}
 
-	private async Task A2sWcQMOnq()
+	private async Task RefreshTreesAsync()
 	{
-		_003C_003Ec__DisplayClass44_0 CS_0024_003C_003E8__locals13 = new _003C_003Ec__DisplayClass44_0();
-		CS_0024_003C_003E8__locals13.AT2qpq0EiF = this;
 		if (Pvf.PvfIsOpen)
 		{
 			TreeViewModelLeft.Clear();
 			TreeViewModelRight.Clear();
-			CS_0024_003C_003E8__locals13.ql0qXJZ3Vy = null;
-			CS_0024_003C_003E8__locals13.N6kqUbsLeL = null;
-			await Task.Run(delegate
+			IDictionary<string, List<PvfFileDiffType>?> leftFiles = null;
+			IDictionary<string, List<PvfFileDiffType>?> rightFiles = null;
+			await Task.Run(() =>
 			{
-				CS_0024_003C_003E8__locals13.ql0qXJZ3Vy = CS_0024_003C_003E8__locals13.AT2qpq0EiF.YtXWM3pwVp(true);
-				CS_0024_003C_003E8__locals13.N6kqUbsLeL = CS_0024_003C_003E8__locals13.AT2qpq0EiF.YtXWM3pwVp(false);
-				CS_0024_003C_003E8__locals13.AT2qpq0EiF.TreeViewModelLeft.ForbidVerticalScrollBarAnnotation = CS_0024_003C_003E8__locals13.AT2qpq0EiF.LeftDiffCount > 20000;
-				CS_0024_003C_003E8__locals13.AT2qpq0EiF.TreeViewModelRight.ForbidVerticalScrollBarAnnotation = CS_0024_003C_003E8__locals13.AT2qpq0EiF.RightDiffCount > 20000;
+				leftFiles = GetVisibleFiles(true);
+				rightFiles = GetVisibleFiles(false);
+				TreeViewModelLeft.ForbidVerticalScrollBarAnnotation = LeftDiffCount > 20000;
+				TreeViewModelRight.ForbidVerticalScrollBarAnnotation = RightDiffCount > 20000;
 			});
-			await TreeViewModelLeft.TreeGroupData.DiffCreateTrees(CS_0024_003C_003E8__locals13.ql0qXJZ3Vy, TreeViewType.PvfDiffLeft);
-			await TreeViewModelRight.TreeGroupData.DiffCreateTrees(CS_0024_003C_003E8__locals13.N6kqUbsLeL, TreeViewType.PvfDiffRight);
+			await TreeViewModelLeft.TreeGroupData.DiffCreateTrees(leftFiles, TreeViewType.PvfDiffLeft);
+			await TreeViewModelRight.TreeGroupData.DiffCreateTrees(rightFiles, TreeViewType.PvfDiffRight);
 		}
 	}
 
-	private Task w9JW8fyFPs()
+	private Task CalculateDiffsAsync()
 	{
-		_003C_003Ec__DisplayClass57_0 CS_0024_003C_003E8__locals7 = new _003C_003Ec__DisplayClass57_0();
-		CS_0024_003C_003E8__locals7.dZnqM1HhSg = this;
 		IsLoading = true;
-		w28mD55mXu = new Dictionary<string, List<PvfFileDiffType>>();
-		zosmTlp0Bp = new Dictionary<string, List<PvfFileDiffType>>();
-		lAjmhV4X6Y = new ConcurrentDictionary<string, List<PvfFileDiffType>>();
+		leftPathDiffs = new Dictionary<string, List<PvfFileDiffType>>();
+		rightPathDiffs = new Dictionary<string, List<PvfFileDiffType>>();
+		contentDiffs = new ConcurrentDictionary<string, List<PvfFileDiffType>>();
 		IEnumerable<string?> first = AppCore.ViewModelBase.PVF.FileList.Keys.DefaultIfEmpty();
 		Dictionary<string, PvfFile>.KeyCollection keys = Pvf.FileList.Keys;
 		IEnumerable<string> enumerable = first.Intersect<string>(keys);
@@ -480,37 +291,37 @@ public class PvfDiffToolViewModel : DocumentBase
 		IEnumerable<string> source2 = keys.Except(enumerable);
 		foreach (string item in source.ToHashSet())
 		{
-			w28mD55mXu.Add(item, new List<PvfFileDiffType> { PvfFileDiffType.FilePath });
+			leftPathDiffs.Add(item, new List<PvfFileDiffType> { PvfFileDiffType.FilePath });
 		}
 		foreach (string item2 in source2.ToHashSet())
 		{
-			zosmTlp0Bp.Add(item2, new List<PvfFileDiffType> { PvfFileDiffType.FilePath });
+			rightPathDiffs.Add(item2, new List<PvfFileDiffType> { PvfFileDiffType.FilePath });
 		}
-		CS_0024_003C_003E8__locals7.paCq87emy2 = AppCore.ViewModelBase.PVF;
-		Parallel.ForEach(enumerable.ToHashSet(), delegate(string item)
+		PvfGroup mainPvf = AppCore.ViewModelBase.PVF;
+		Parallel.ForEach(enumerable.ToHashSet(), item =>
 		{
-			if (CS_0024_003C_003E8__locals7.paCq87emy2.FileContentDiff(CS_0024_003C_003E8__locals7.paCq87emy2.FileList[item], CS_0024_003C_003E8__locals7.dZnqM1HhSg.Pvf, CS_0024_003C_003E8__locals7.dZnqM1HhSg.Pvf.FileList[item], out List<PvfFileDiffType> diffs))
+			if (mainPvf.FileContentDiff(mainPvf.FileList[item], Pvf, Pvf.FileList[item], out List<PvfFileDiffType> diffs))
 			{
-				CS_0024_003C_003E8__locals7.dZnqM1HhSg.lAjmhV4X6Y.TryAdd(item, diffs);
+				contentDiffs.TryAdd(item, diffs);
 			}
 		});
 		IsLoading = false;
 		return Task.CompletedTask;
 	}
 
-	private IDictionary<string, List<PvfFileDiffType>?> YtXWM3pwVp(bool P_0)
+	private IDictionary<string, List<PvfFileDiffType>?> GetVisibleFiles(bool isLeft)
 	{
-		if (w28mD55mXu == null)
+		if (leftPathDiffs == null)
 		{
 			return null;
 		}
-		Dictionary<string, PvfFile>.KeyCollection keyCollection = (P_0 ? AppCore.ViewModelBase.PVF.FileList.Keys : Pvf.FileList.Keys);
+		Dictionary<string, PvfFile>.KeyCollection keyCollection = (isLeft ? AppCore.ViewModelBase.PVF.FileList.Keys : Pvf.FileList.Keys);
 		ConcurrentDictionary<string, List<PvfFileDiffType>> concurrentDictionary = new ConcurrentDictionary<string, List<PvfFileDiffType>>();
 		switch (PvfDiffTreeShowFilesType)
 		{
 		case PvfDiffTreeShowFilesType.路径差异:
-			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(P_0 ? w28mD55mXu : zosmTlp0Bp);
-			if (P_0)
+			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(isLeft ? leftPathDiffs : rightPathDiffs);
+			if (isLeft)
 			{
 				LeftDiffCount = concurrentDictionary.Count;
 			}
@@ -520,8 +331,8 @@ public class PvfDiffToolViewModel : DocumentBase
 			}
 			break;
 		case PvfDiffTreeShowFilesType.文件内容差异:
-			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(lAjmhV4X6Y);
-			if (P_0)
+			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(contentDiffs);
+			if (isLeft)
 			{
 				LeftDiffCount = concurrentDictionary.Count;
 			}
@@ -531,9 +342,9 @@ public class PvfDiffToolViewModel : DocumentBase
 			}
 			break;
 		case PvfDiffTreeShowFilesType.路径差异和文件差异:
-			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(P_0 ? w28mD55mXu : zosmTlp0Bp);
-			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(lAjmhV4X6Y);
-			if (P_0)
+			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(isLeft ? leftPathDiffs : rightPathDiffs);
+			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(contentDiffs);
+			if (isLeft)
 			{
 				LeftDiffCount = concurrentDictionary.Count;
 			}
@@ -543,9 +354,9 @@ public class PvfDiffToolViewModel : DocumentBase
 			}
 			break;
 		case PvfDiffTreeShowFilesType.所有文件:
-			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(P_0 ? w28mD55mXu : zosmTlp0Bp);
-			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(lAjmhV4X6Y);
-			if (P_0)
+			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(isLeft ? leftPathDiffs : rightPathDiffs);
+			concurrentDictionary.AddRange<KeyValuePair<string, List<PvfFileDiffType>>>(contentDiffs);
+			if (isLeft)
 			{
 				LeftDiffCount = concurrentDictionary.Count;
 			}
@@ -590,13 +401,13 @@ public class PvfDiffToolViewModel : DocumentBase
 			win = AppCore.CreateLoading(AppSetting.Instance.GetIlogger()?.GetStr("mess_CleaningGarbage"), Application.Current.MainWindow);
 			win.Show();
 		}
-		lAjmhV4X6Y = null;
-		w28mD55mXu = null;
-		zosmTlp0Bp = null;
+		contentDiffs = null;
+		leftPathDiffs = null;
+		rightPathDiffs = null;
 		Pvf.Clear();
 		TreeViewModelLeft.Clear();
 		TreeViewModelRight.Clear();
-		await Task.Run((Func<Task?>)FbAW30ZQhf);
+		await Task.Run(ClearMemoryAsync);
 		if (showDialog)
 		{
 			win?.Close();
@@ -618,15 +429,12 @@ public class PvfDiffToolViewModel : DocumentBase
 	public async void SavePvfPack(bool isLeft)
 	{
 		PvfGroup pvfGroup = (isLeft ? AppCore.ViewModelBase.PVF : Pvf);
-		await W4dWVD8Ffc(pvfGroup.PvfPackFilePath, pvfGroup);
+		await SavePvfPackAsync(pvfGroup.PvfPackFilePath, pvfGroup);
 	}
 
-	private async Task W4dWVD8Ffc(string P_0, PvfGroup P_1)
+	private async Task SavePvfPackAsync(string filePath, PvfGroup pvf)
 	{
-		_003C_003Ec__DisplayClass63_0 obj = new _003C_003Ec__DisplayClass63_0();
-		obj.pvf = P_1;
-		obj.a4eq3XNPfI = P_0;
-		ResultData resultData = await Task.Run(() => obj.pvf.SavePvfPack(obj.a4eq3XNPfI, isFastMode: false, AppCore.ViewModelBase.MainProgress));
+		ResultData resultData = await Task.Run(() => pvf.SavePvfPack(filePath, isFastMode: false, AppCore.ViewModelBase.MainProgress));
 		if (resultData.IsError)
 		{
 			AppCore.ShowMsg(resultData.Msg);
@@ -648,11 +456,11 @@ public class PvfDiffToolViewModel : DocumentBase
 		bool? flag = saveFileDialog.ShowDialog(Application.Current.MainWindow);
 		if (flag.HasValue && flag.Value)
 		{
-			await W4dWVD8Ffc(saveFileDialog.FileName, pvfGroup);
+			await SavePvfPackAsync(saveFileDialog.FileName, pvfGroup);
 		}
 	}
 
-	private Task FbAW30ZQhf()
+	private Task ClearMemoryAsync()
 	{
 		WindowsEx.ClearMemorySilent(Process.GetCurrentProcess());
 		return Task.CompletedTask;
@@ -670,7 +478,7 @@ public class PvfDiffToolViewModel : DocumentBase
 			if (file.GetStackableType(pVF, out var type) && type == StackableType.消耗品_点卷礼包_0)
 			{
 				string itemName = pVF.GetItemName(file);
-				if (string.IsNullOrEmpty(itemName) || !xngWRuU7cy(itemName))
+				if (string.IsNullOrEmpty(itemName) || !ContainsChinese(itemName))
 				{
 					list.Add(file);
 				}
@@ -679,7 +487,7 @@ public class PvfDiffToolViewModel : DocumentBase
 		foreach (PvfFile item2 in list)
 		{
 			string itemName2 = Pvf.GetItemName(item2.FileName);
-			if (!string.IsNullOrEmpty(itemName2) && xngWRuU7cy(itemName2))
+			if (!string.IsNullOrEmpty(itemName2) && ContainsChinese(itemName2))
 			{
 				string fileText = pVF.GetFileText(item2);
 				if (!string.IsNullOrEmpty(fileText))
@@ -702,7 +510,7 @@ public class PvfDiffToolViewModel : DocumentBase
 			if (value == EquipmentType.称号 || (uint)(value - 12) <= 1u || (uint)(value - 17) <= 9u)
 			{
 				string itemName3 = pVF.GetItemName(file2);
-				if (!string.IsNullOrEmpty(itemName3) && !xngWRuU7cy(itemName3))
+				if (!string.IsNullOrEmpty(itemName3) && !ContainsChinese(itemName3))
 				{
 					list2.Add(file2);
 				}
@@ -711,7 +519,7 @@ public class PvfDiffToolViewModel : DocumentBase
 		foreach (PvfFile item4 in list2)
 		{
 			string itemName4 = Pvf.GetItemName(item4.FileName);
-			if (string.IsNullOrEmpty(itemName4) || !xngWRuU7cy(itemName4))
+			if (string.IsNullOrEmpty(itemName4) || !ContainsChinese(itemName4))
 			{
 				continue;
 			}
@@ -732,20 +540,20 @@ public class PvfDiffToolViewModel : DocumentBase
 		}
 	}
 
-	private static bool xngWRuU7cy(string P_0)
+	private static bool ContainsChinese(string text)
 	{
-		return Regex.IsMatch(P_0, "\\p{IsCJKUnifiedIdeographs}");
+		return Regex.IsMatch(text, "\\p{IsCJKUnifiedIdeographs}");
 	}
 
 	public override void Dispose()
 	{
 		Clear(showDialog: false);
-		TreeViewModelLeft.SelectedRowChangedEvent -= lsCWpLmlUq;
-		TreeViewModelLeft.EventNodeDoubleClick -= fx6WXKPqtR;
-		TreeViewModelLeft.EventDiffExtractSelected += DBjW0ZjUq3;
-		TreeViewModelRight.EventNodeDoubleClick -= F8PW75uC7p;
-		TreeViewModelRight.SelectedRowChangedEvent -= fRfWUoniAe;
-		TreeViewModelRight.EventDiffExtractSelected -= DBjW0ZjUq3;
+		TreeViewModelLeft.SelectedRowChangedEvent -= OnLeftSelectedRowChanged;
+		TreeViewModelLeft.EventNodeDoubleClick -= OnLeftNodeDoubleClick;
+		TreeViewModelLeft.EventDiffExtractSelected += ExtractSelectedFiles;
+		TreeViewModelRight.EventNodeDoubleClick -= OnRightNodeDoubleClick;
+		TreeViewModelRight.SelectedRowChangedEvent -= OnRightSelectedRowChanged;
+		TreeViewModelRight.EventDiffExtractSelected -= ExtractSelectedFiles;
 	}
 
 	~PvfDiffToolViewModel()

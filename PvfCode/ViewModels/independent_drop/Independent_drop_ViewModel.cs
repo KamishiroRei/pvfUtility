@@ -2,7 +2,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,82 +25,29 @@ namespace PvfCode.ViewModels.independent_drop;
 
 public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass92_0
-	{
-		public Independent_drop_ViewModel uW9d68d3lP;
-
-		public ConcurrentBag<DropListRowData> wtDd1bE8ZY;
-
-		public _003C_003Ec__DisplayClass92_0()
-		{
-		}
-
-		internal void xPZdg90Mb6(DropListRowData item)
-		{
-			if (item.Search(uW9d68d3lP.Config))
-			{
-				wtDd1bE8ZY.Add(item);
-			}
-		}
-	}
-
 	private readonly Action Close;
 
-	[CompilerGenerated]
-	private bool vUm22OxQ0V;
+	private DropListRowData selectedItem;
 
-	private DropListRowData G9B2fTtnoC;
-
-	[CompilerGenerated]
-	private List<DropListRowData> pMj257O2wd;
-
-	private ConcurrentObservableCollection<DropListRowData> uxL2Ssr2Qf;
+	private ConcurrentObservableCollection<DropListRowData> allDropItems;
 
 	private ConcurrentObservableCollection<DropListRowData> SearchResult;
 
 	private const string FilePath = "etc/independent_drop.etc";
 
-	[CompilerGenerated]
-	private Dictionary<int, KeyValuePair<List<ListItem>, LstItem>> l9c2AbpPFc;
-
-	[CompilerGenerated]
-	private Dungeon_drop_rate_balance Vh324gvnLU;
-
-	[CompilerGenerated]
-	private DropListRowData anP2Yd2t6s;
-
-	[CompilerGenerated]
-	private List<ListItem> lU72y56Ukf;
-
-	[CompilerGenerated]
-	private SearchConfig utr2iIjkMY;
-
 	protected virtual IMessageBoxService MessageBoxService => GetService<IMessageBoxService>(ServiceSearchMode.PreferParents);
 
-	public bool DeleteWork
-	{
-		[CompilerGenerated]
-		get
-		{
-			return vUm22OxQ0V;
-		}
-		[CompilerGenerated]
-		set
-		{
-			vUm22OxQ0V = value;
-		}
-	}
+	public bool DeleteWork { get; set; }
 
 	public DropListRowData SelectedItem
 	{
 		get
 		{
-			return G9B2fTtnoC;
+			return selectedItem;
 		}
 		set
 		{
-			G9B2fTtnoC = value;
+			selectedItem = value;
 			if (!DeleteWork)
 			{
 				RaisePropertyChanged("SelectedItem");
@@ -109,19 +55,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public List<DropListRowData> SelectedItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return pMj257O2wd;
-		}
-		[CompilerGenerated]
-		set
-		{
-			pMj257O2wd = value;
-		}
-	}
+	public List<DropListRowData> SelectedItems { get; set; }
 
 	public int DropItemsCount
 	{
@@ -161,47 +95,23 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 	{
 		get
 		{
-			if (Sls2vgbFJn())
+			if (HasSearchKeyword)
 			{
 				return SearchResult;
 			}
-			return uxL2Ssr2Qf;
+			return allDropItems;
 		}
 		set
 		{
-			uxL2Ssr2Qf = value;
+			allDropItems = value;
 			RaisePropertyChanged("DropItems");
 			RaisePropertyChanged("DropItemsCount");
 		}
 	}
 
-	private Dictionary<int, KeyValuePair<List<ListItem>, LstItem>> c5V2W6kKho
-	{
-		[CompilerGenerated]
-		get
-		{
-			return l9c2AbpPFc;
-		}
-		[CompilerGenerated]
-		set
-		{
-			l9c2AbpPFc = value;
-		}
-	}
+	private Dictionary<int, KeyValuePair<List<ListItem>, LstItem>> IndependentDropLists { get; set; }
 
-	public Dungeon_drop_rate_balance Dungeon_drop_rate_balance
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Vh324gvnLU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Vh324gvnLU = value;
-		}
-	}
+	public Dungeon_drop_rate_balance Dungeon_drop_rate_balance { get; set; }
 
 	private PvfGroup PVF => AppCore.ViewModelBase.PVF;
 
@@ -217,19 +127,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public DropListRowData SelectedItem2
-	{
-		[CompilerGenerated]
-		get
-		{
-			return anP2Yd2t6s;
-		}
-		[CompilerGenerated]
-		set
-		{
-			anP2Yd2t6s = value;
-		}
-	}
+	public DropListRowData SelectedItem2 { get; set; }
 
 	public ListItem ItemCodeSelectedItem
 	{
@@ -255,19 +153,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public List<ListItem> ItemCodeSelectedItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return lU72y56Ukf;
-		}
-		[CompilerGenerated]
-		set
-		{
-			lU72y56Ukf = value;
-		}
-	}
+	public List<ListItem> ItemCodeSelectedItems { get; set; }
 
 	public int SetSelectedItemsDropWeightValue
 	{
@@ -289,39 +175,23 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		}
 		set
 		{
-			SetProperty<string>(() => SearchKeyword, value, PGu2TharCD);
+			SetProperty<string>(() => SearchKeyword, value, OnSearchKeywordChanged);
 		}
 	}
 
-	public SearchConfig Config
-	{
-		[CompilerGenerated]
-		get
-		{
-			return utr2iIjkMY;
-		}
-		[CompilerGenerated]
-		set
-		{
-			utr2iIjkMY = value;
-		}
-	}
+	public SearchConfig Config { get; set; }
 
 	public void Dispose()
 	{
 		SelectedItem = null;
 		SelectedItems = null;
-		uxL2Ssr2Qf = null;
+		allDropItems = null;
 		SearchResult = null;
 		DropItems = null;
-		c5V2W6kKho = null;
+		IndependentDropLists = null;
 	}
 
-	[SpecialName]
-	private bool Sls2vgbFJn()
-	{
-		return !string.IsNullOrEmpty(SearchKeyword);
-	}
+	private bool HasSearchKeyword => !string.IsNullOrEmpty(SearchKeyword);
 
 	public Independent_drop_ViewModel(Action close)
 	{
@@ -344,7 +214,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 	public async void Init()
 	{
 		IsLoading = true;
-		ResultData resultData = kVwm3RK2mb();
+		ResultData resultData = LoadIndependentDropLists();
 		if (resultData.IsError)
 		{
 			AppCore.Logger.Error(resultData.Msg);
@@ -356,7 +226,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 			});
 			return;
 		}
-		ResultData resultData2 = await II1mNo2qGF();
+		ResultData resultData2 = await LoadIndependentDropDataAsync();
 		if (resultData2.IsError)
 		{
 			AppCore.Logger.Error(resultData2.Msg);
@@ -373,7 +243,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private ResultData kVwm3RK2mb()
+	private ResultData LoadIndependentDropLists()
 	{
 		ResultData resultData = new ResultData();
 		if (!PVF.FileAny("etc/independentdrop.lst"))
@@ -384,7 +254,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		ResultData<Dictionary<int, LstItem>> lstDicTable = PVF.GetLstDicTable("etc/independentdrop.lst");
 		if (!lstDicTable.IsError)
 		{
-			c5V2W6kKho = new Dictionary<int, KeyValuePair<List<ListItem>, LstItem>>();
+			IndependentDropLists = new Dictionary<int, KeyValuePair<List<ListItem>, LstItem>>();
 			foreach (KeyValuePair<int, LstItem> datum in lstDicTable.Data)
 			{
 				if (!PVF.FileList.TryGetValue(datum.Value.FullPath, out PvfFile value))
@@ -392,45 +262,45 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 					resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstItemPathNotExist"), datum.Value.ItemPath);
 					return resultData;
 				}
-				ResultData<List<ListItem>> resultData2 = g5EmRQcbQd(value);
+				ResultData<List<ListItem>> resultData2 = ParseIndependentDropList(value);
 				if (resultData2.IsError)
 				{
 					return resultData2;
 				}
-				if (!c5V2W6kKho.ContainsKey(datum.Key))
+				if (!IndependentDropLists.ContainsKey(datum.Key))
 				{
-					c5V2W6kKho.Add(datum.Key, new KeyValuePair<List<ListItem>, LstItem>(resultData2.Data, datum.Value));
+					IndependentDropLists.Add(datum.Key, new KeyValuePair<List<ListItem>, LstItem>(resultData2.Data, datum.Value));
 				}
 			}
 		}
 		return lstDicTable;
 	}
 
-	private ResultData<List<ListItem>> g5EmRQcbQd(PvfFile P_0)
+	private ResultData<List<ListItem>> ParseIndependentDropList(PvfFile file)
 	{
 		ResultData<List<ListItem>> resultData = new ResultData<List<ListItem>>();
-		ScriptFileParserNew scriptFileParserNew = new ScriptFileParserNew(P_0, PVF);
+		ScriptFileParserNew scriptFileParserNew = new ScriptFileParserNew(file, PVF);
 		scriptFileParserNew.PraseStructureMain();
 		List<SectionBase> sections = scriptFileParserNew.Sections;
 		if (sections.Count != 1)
 		{
-			resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError"), P_0.FileName);
+			resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError"), file.FileName);
 			return resultData;
 		}
 		if (sections[0].GetSectionName() != "[list]")
 		{
-			resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoListTag"), P_0.FileName);
+			resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoListTag"), file.FileName);
 			return resultData;
 		}
 		sections = sections[0].Children;
 		if (sections.Count == 0)
 		{
-			resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError"), P_0.FileName);
+			resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError"), file.FileName);
 			return resultData;
 		}
 		if (sections.Count % 2 != 0)
 		{
-			resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoPair"), P_0.FileName);
+			resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoPair"), file.FileName);
 			return resultData;
 		}
 		int num = 0;
@@ -449,7 +319,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 			{
 				if (!int.TryParse(itemText, out var result))
 				{
-					resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoInt32"), P_0.FileName, itemText);
+					resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoInt32"), file.FileName, itemText);
 					return resultData;
 				}
 				num++;
@@ -471,7 +341,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		return resultData;
 	}
 
-	private async Task<ResultData> II1mNo2qGF()
+	private async Task<ResultData> LoadIndependentDropDataAsync()
 	{
 		ResultData re = new ResultData();
 		if (!PVF.FileList.TryGetValue("etc/independent_drop.etc", out PvfFile value))
@@ -490,7 +360,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 				string sectionName = sectionBase.GetSectionName();
 				if (sectionName == "[independent drop]")
 				{
-					ResultData resultData = await bskmzWBiBU(scriptFileParserNew, sectionBase);
+					ResultData resultData = await ParseIndependentDropSectionAsync(scriptFileParserNew, sectionBase);
 					if (resultData.IsError)
 					{
 						return resultData;
@@ -498,7 +368,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 				}
 				else if (sectionName == "[dungeon drop rate balance]")
 				{
-					ResultData resultData2 = bOv2llJkyY(sectionBase);
+					ResultData resultData2 = ParseDungeonDropRateBalance(sectionBase);
 					if (resultData2.IsError)
 					{
 						return resultData2;
@@ -512,17 +382,17 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		return re;
 	}
 
-	private async Task<ResultData> bskmzWBiBU(ScriptFileParserNew P_0, SectionBase P_1)
+	private async Task<ResultData> ParseIndependentDropSectionAsync(ScriptFileParserNew parser, SectionBase section)
 	{
 		ResultData re = new ResultData();
-		int count = P_1.Children.Count;
+		int count = section.Children.Count;
 		int num = 0;
 		List<string> list = new List<string>();
 		ConcurrentObservableCollection<DropListRowData> items = new ConcurrentObservableCollection<DropListRowData>();
 		DropListRowData dropListRowData = null;
 		for (int i = 1; i < count; i++)
 		{
-			SectionBase sectionBase = P_1.Children[i];
+			SectionBase sectionBase = section.Children[i];
 			if (sectionBase is PvfSection)
 			{
 				if (list.Count != 17)
@@ -532,7 +402,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 				}
 				if (dropListRowData.DropType == DropType.List)
 				{
-					ResultData resultData = dKY2DryQZD(sectionBase, dropListRowData);
+					ResultData resultData = ParseInlineDropList(sectionBase, dropListRowData);
 					if (resultData.IsError)
 					{
 						return resultData;
@@ -560,17 +430,17 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 						re.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstDataError_NotInt32"), itemText);
 						return re;
 					}
-					if (!c5V2W6kKho.TryGetValue(result, out KeyValuePair<List<ListItem>, LstItem> value))
+					if (!IndependentDropLists.TryGetValue(result, out KeyValuePair<List<ListItem>, LstItem> value))
 					{
 						value = new KeyValuePair<List<ListItem>, LstItem>(new List<ListItem>(), new LstItem("aaa", "bbb", -1));
 					}
-					RequiredValidationRule.DIC = c5V2W6kKho;
-					dropListRowData.DropList_independentdrop = new DropList_independentdrop(result, value.Key, value.Value.FullPath, c5V2W6kKho);
+					RequiredValidationRule.DIC = IndependentDropLists;
+					dropListRowData.DropList_independentdrop = new DropList_independentdrop(result, value.Key, value.Value.FullPath, IndependentDropLists);
 				}
 			}
 			else
 			{
-				ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? P_1.Children[i + 1].Item : null);
+				ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[i + 1].Item : null);
 				string itemText2 = sectionBase.Item.GetItemText(PVF, nextItem);
 				if (itemText2 == "[/list]")
 				{
@@ -586,7 +456,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 				if (num == 17)
 				{
 					num = 0;
-					dropListRowData = new DropListRowData(list, new DropList_independentdrop(-1, new List<ListItem>(), "", c5V2W6kKho));
+					dropListRowData = new DropListRowData(list, new DropList_independentdrop(-1, new List<ListItem>(), "", IndependentDropLists));
 					items.Add(dropListRowData);
 				}
 				if (i == count && num != 17)
@@ -599,35 +469,35 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		DropItems = new ConcurrentObservableCollection<DropListRowData>();
 		await Task.Delay(1);
 		DropItems.AddRange(items);
-		Nbf2jrU5ue();
+		RaiseDropItemsCountChanged();
 		return re;
 	}
 
-	private ResultData dKY2DryQZD(SectionBase P_0, DropListRowData P_1)
+	private ResultData ParseInlineDropList(SectionBase section, DropListRowData row)
 	{
 		ResultData resultData = new ResultData();
-		int count = P_0.Children.Count;
+		int count = section.Children.Count;
 		int num = 0;
 		ConcurrentObservableCollection<ListItem> concurrentObservableCollection = new ConcurrentObservableCollection<ListItem>();
 		DropListList dropListList = new DropListList(concurrentObservableCollection);
 		ListItem listItem = new ListItem();
 		List<int> list = new List<int>();
-		P_1.DropListList = dropListList;
+		row.DropListList = dropListList;
 		for (int i = 1; i < count; i++)
 		{
-			SectionBase sectionBase = P_0.Children[i];
+			SectionBase sectionBase = section.Children[i];
 			if (sectionBase is PvfSection)
 			{
-				resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstDataError_ExtraTag"), string.Join("\t", P_1.Datas), sectionBase.GetSectionName());
+				resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstDataError_ExtraTag"), string.Join("\t", row.Datas), sectionBase.GetSectionName());
 				return resultData;
 			}
-			ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? P_0.Children[i + 1].Item : null);
+			ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[i + 1].Item : null);
 			string itemText = sectionBase.Item.GetItemText(PVF, nextItem);
 			if (!(itemText == "[/list]"))
 			{
 				if (!int.TryParse(itemText, out var result))
 				{
-					resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoInt32_2"), itemText, string.Join("\t", P_1.Datas));
+					resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoInt32_2"), itemText, string.Join("\t", row.Datas));
 					return resultData;
 				}
 				num++;
@@ -647,7 +517,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 				list.Add(result);
 				if (i == count && num != 2)
 				{
-					resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoInt32_2_2"), string.Join("\t", P_1.Datas));
+					resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstFormatError_NoInt32_2_2"), string.Join("\t", row.Datas));
 					return resultData;
 				}
 			}
@@ -655,22 +525,22 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		return resultData;
 	}
 
-	private ResultData bOv2llJkyY(SectionBase P_0)
+	private ResultData ParseDungeonDropRateBalance(SectionBase section)
 	{
 		ResultData resultData = new ResultData();
 		try
 		{
 			List<int> list = new List<int>();
-			int count = P_0.Children.Count;
+			int count = section.Children.Count;
 			for (int i = 1; i < count; i++)
 			{
-				SectionBase sectionBase = P_0.Children[i];
+				SectionBase sectionBase = section.Children[i];
 				if (sectionBase is PvfSection)
 				{
 					resultData.Msg = AppSetting.Instance.GetIlogger().GetStr("mess_IndependentdropLstFormatError_NoInt32_3");
 					return resultData;
 				}
-				ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? P_0.Children[i + 1].Item : null);
+				ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[i + 1].Item : null);
 				string itemText = sectionBase.Item.GetItemText(PVF, nextItem);
 				if (!(itemText == "[/dungeon drop rate balance]"))
 				{
@@ -713,7 +583,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		IsLoading = true;
 		StringBuilder stringBuilder = new StringBuilder("#PVF_File\r\n");
 		stringBuilder.AppendLine("[independent drop]");
-		foreach (DropListRowData item in uxL2Ssr2Qf)
+		foreach (DropListRowData item in allDropItems)
 		{
 			stringBuilder.AppendLine(item.GetText());
 		}
@@ -735,21 +605,21 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		if (SelectedItems != null && SelectedItems.Any() && AppCore.Logger.ShowDialogResult(MessageBoxService, string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_DeleteMonsterConfirm"), SelectedItems.Count)) == MessageResult.Yes)
 		{
 			DeleteWork = true;
-			uxL2Ssr2Qf.RemoveRange(SelectedItems.ToArray());
-			if (Sls2vgbFJn())
+			allDropItems.RemoveRange(SelectedItems.ToArray());
+			if (HasSearchKeyword)
 			{
 				SearchResult.RemoveRange(SelectedItems.ToArray());
 			}
 			DeleteWork = false;
 			RaisePropertyChanged("SelectedItem");
-			Nbf2jrU5ue();
+			RaiseDropItemsCountChanged();
 		}
 	}
 
 	[Command]
 	public void OnAddMonster()
 	{
-		DropListRowData dropListRowData = new DropListRowData("0\t-1\t0\t1000000\t1000000\t1000000\t1000000\t1000000\t1\t1\t1\t1\t1\t0\t0\t-1\t1\t".Split("\t", StringSplitOptions.RemoveEmptyEntries).ToList(), new DropList_independentdrop(-1, new List<ListItem>(), "", c5V2W6kKho));
+		DropListRowData dropListRowData = new DropListRowData("0\t-1\t0\t1000000\t1000000\t1000000\t1000000\t1000000\t1\t1\t1\t1\t1\t0\t0\t-1\t1\t".Split("\t", StringSplitOptions.RemoveEmptyEntries).ToList(), new DropList_independentdrop(-1, new List<ListItem>(), "", IndependentDropLists));
 		dropListRowData.DropListList = new DropListList(new ConcurrentObservableCollection<ListItem>
 		{
 			new ListItem
@@ -760,13 +630,13 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		});
 		if (AppSetting.Instance.InsertIndependent_drop_ListOrder == InsertListOrder.首行插入)
 		{
-			uxL2Ssr2Qf.Insert(0, dropListRowData);
+			allDropItems.Insert(0, dropListRowData);
 		}
 		else
 		{
-			uxL2Ssr2Qf.Add(dropListRowData);
+			allDropItems.Add(dropListRowData);
 		}
-		if (Sls2vgbFJn())
+		if (HasSearchKeyword)
 		{
 			if (AppSetting.Instance.InsertIndependent_drop_ListOrder == InsertListOrder.首行插入)
 			{
@@ -781,7 +651,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		SelectedItems.Add(dropListRowData);
 		SelectedItem2 = dropListRowData;
 		RaisePropertyChanged("SelectedItem2");
-		Nbf2jrU5ue();
+		RaiseDropItemsCountChanged();
 	}
 
 	[Command]
@@ -795,7 +665,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private void Nbf2jrU5ue()
+	private void RaiseDropItemsCountChanged()
 	{
 		RaisePropertyChanged("DropItemsCount");
 	}
@@ -909,13 +779,13 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 		AppCore.CopyString(name);
 	}
 
-	private void PGu2TharCD()
+	private void OnSearchKeywordChanged()
 	{
 		if (string.IsNullOrEmpty(SearchKeyword))
 		{
 			SearchResult = new ConcurrentObservableCollection<DropListRowData>();
 			RaisePropertyChanged("DropItems");
-			Nbf2jrU5ue();
+			RaiseDropItemsCountChanged();
 		}
 	}
 
@@ -927,40 +797,26 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 			Config.SearchKeyword = SearchKeyword;
 			Config.SearchType = searchType;
 			Config.KeywordConvertNumberList();
-			await Task.Run((Func<Task?>)Go02C9ECyy);
+			await Task.Run(SearchAsync);
 		}
 	}
 
-	private Task Go02C9ECyy()
+	private Task SearchAsync()
 	{
-		_003C_003Ec__DisplayClass92_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass92_0();
-		CS_0024_003C_003E8__locals5.uW9d68d3lP = this;
-		CS_0024_003C_003E8__locals5.wtDd1bE8ZY = new ConcurrentBag<DropListRowData>();
-		Parallel.ForEach(uxL2Ssr2Qf, delegate(DropListRowData item)
+		ConcurrentBag<DropListRowData> results = new ConcurrentBag<DropListRowData>();
+		Parallel.ForEach(allDropItems, item =>
 		{
-			if (item.Search(CS_0024_003C_003E8__locals5.uW9d68d3lP.Config))
+			if (item.Search(Config))
 			{
-				CS_0024_003C_003E8__locals5.wtDd1bE8ZY.Add(item);
+				results.Add(item);
 			}
 		});
 		SearchResult = new ConcurrentObservableCollection<DropListRowData>();
 		ConcurrentObservableCollection<DropListRowData> searchResult = SearchResult;
-		IEnumerable<DropListRowData> array = CS_0024_003C_003E8__locals5.wtDd1bE8ZY;
+		IEnumerable<DropListRowData> array = results;
 		searchResult.AddRange(in array);
 		RaisePropertyChanged("DropItems");
-		Nbf2jrU5ue();
+		RaiseDropItemsCountChanged();
 		return Task.CompletedTask;
-	}
-
-	[CompilerGenerated]
-	private void sbE2H4NNEw()
-	{
-		Close();
-	}
-
-	[CompilerGenerated]
-	private void QxS2hJ8ehr()
-	{
-		Close();
 	}
 }

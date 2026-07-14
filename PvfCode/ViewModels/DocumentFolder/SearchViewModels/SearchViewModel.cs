@@ -1,7 +1,5 @@
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Xpf.Editors;
@@ -20,45 +18,21 @@ namespace PvfCode.ViewModels.DocumentFolder.SearchViewModels;
 
 public class SearchViewModel : ViewModelBase, IDisposable
 {
-	[CompilerGenerated]
-	private TextEditorBase xRGAAc2Wtq;
-
-	[CompilerGenerated]
-	private SearchResultBackgroundRenderer KyWA4hWSkO;
-
-	private ISearchStrategy nCcAYv6YwD;
-
-	[CompilerGenerated]
-	private bool LrDAyREWb6;
-
-	[CompilerGenerated]
-	private Action uHBAiDuF04;
+	private ISearchStrategy searchStrategy;
 
 	private readonly string FilePath;
 
-	private bool q1OAunDcr4;
+	private bool visibility;
 
-	[CompilerGenerated]
-	private SearchPanelVisibilityChanged A6xAGxHsua;
+	private bool showReplacePanel;
 
-	private bool VEHAx8vweP;
+	private TextEditorBase Editor { get; set; }
 
-	[CompilerGenerated]
-	private bool uR6AQ45kBN;
+	private SearchResultBackgroundRenderer SearchRenderer { get; set; }
 
-	private TextEditorBase Editor
-	{
-		[CompilerGenerated]
-		get
-		{
-			return xRGAAc2Wtq;
-		}
-		[CompilerGenerated]
-		set
-		{
-			xRGAAc2Wtq = value;
-		}
-	}
+	private bool IsReplacing { get; set; }
+
+	private bool IsUpdatingConfig { get; set; }
 
 	private TextArea textArea => Editor.TextArea;
 
@@ -70,7 +44,7 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 		set
 		{
-			SetProperty<SearchConfig>(() => Config, value, f6HSUNFLma);
+			SetProperty<SearchConfig>(() => Config, value, OnConfigChanged);
 		}
 	}
 
@@ -80,7 +54,7 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		{
 			if (Config.SourceType != SourceType.所有打开的文档)
 			{
-				if (KuPABJDoNI() != null && KuPABJDoNI().Segments != null && KuPABJDoNI().Segments.Count != 0)
+			if (SearchRenderer != null && SearchRenderer.Segments != null && SearchRenderer.Segments.Count != 0)
 				{
 					return true;
 				}
@@ -90,35 +64,23 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public Action SetFindKeywordFocused
-	{
-		[CompilerGenerated]
-		get
-		{
-			return uHBAiDuF04;
-		}
-		[CompilerGenerated]
-		set
-		{
-			uHBAiDuF04 = value;
-		}
-	}
+	public Action SetFindKeywordFocused { get; set; }
 
 	public bool Visibility
 	{
 		get
 		{
-			return q1OAunDcr4;
+			return visibility;
 		}
 		set
 		{
-			q1OAunDcr4 = value;
+			visibility = value;
 			RaisePropertyChanged("Visibility");
 			if (!value)
 			{
-				KuPABJDoNI().Segments.Clear();
+				SearchRenderer.Segments.Clear();
 			}
-			A6xAGxHsua?.Invoke(value);
+			EventSearchPanelVisibilityChanged?.Invoke(value);
 		}
 	}
 
@@ -126,11 +88,11 @@ public class SearchViewModel : ViewModelBase, IDisposable
 	{
 		get
 		{
-			return VEHAx8vweP;
+			return showReplacePanel;
 		}
 		set
 		{
-			VEHAx8vweP = value;
+			showReplacePanel = value;
 			RaisePropertyChanged("ShowReplacePanel");
 		}
 	}
@@ -140,11 +102,11 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		get
 		{
 			RaisePropertyChanged("ExistFind");
-			if (KuPABJDoNI() == null || KuPABJDoNI().Segments == null || KuPABJDoNI().Segments.Count == 0)
+			if (SearchRenderer == null || SearchRenderer.Segments == null || SearchRenderer.Segments.Count == 0)
 			{
 				return 0;
 			}
-			return KuPABJDoNI().Segments.Count;
+			return SearchRenderer.Segments.Count;
 		}
 	}
 
@@ -172,73 +134,13 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public event SearchPanelVisibilityChanged EventSearchPanelVisibilityChanged
-	{
-		[CompilerGenerated]
-		add
-		{
-			SearchPanelVisibilityChanged searchPanelVisibilityChanged = A6xAGxHsua;
-			SearchPanelVisibilityChanged searchPanelVisibilityChanged2;
-			do
-			{
-				searchPanelVisibilityChanged2 = searchPanelVisibilityChanged;
-				SearchPanelVisibilityChanged value2 = (SearchPanelVisibilityChanged)Delegate.Combine(searchPanelVisibilityChanged2, value);
-				searchPanelVisibilityChanged = Interlocked.CompareExchange(ref A6xAGxHsua, value2, searchPanelVisibilityChanged2);
-			}
-			while ((object)searchPanelVisibilityChanged != searchPanelVisibilityChanged2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			SearchPanelVisibilityChanged searchPanelVisibilityChanged = A6xAGxHsua;
-			SearchPanelVisibilityChanged searchPanelVisibilityChanged2;
-			do
-			{
-				searchPanelVisibilityChanged2 = searchPanelVisibilityChanged;
-				SearchPanelVisibilityChanged value2 = (SearchPanelVisibilityChanged)Delegate.Remove(searchPanelVisibilityChanged2, value);
-				searchPanelVisibilityChanged = Interlocked.CompareExchange(ref A6xAGxHsua, value2, searchPanelVisibilityChanged2);
-			}
-			while ((object)searchPanelVisibilityChanged != searchPanelVisibilityChanged2);
-		}
-	}
+	public event SearchPanelVisibilityChanged EventSearchPanelVisibilityChanged;
 
-	[SpecialName]
-	private TextDocument lEaAh3iJDQ()
-	{
-		return Editor.Document;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private SearchResultBackgroundRenderer KuPABJDoNI()
-	{
-		return KyWA4hWSkO;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void shuAFfN5Mi(SearchResultBackgroundRenderer P_0)
-	{
-		KyWA4hWSkO = P_0;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private bool IXCAWXgKM1()
-	{
-		return LrDAyREWb6;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void R7QAm7n6Kt(bool P_0)
-	{
-		LrDAyREWb6 = P_0;
-	}
+	private TextDocument Document => Editor.Document;
 
 	public bool InTheWork()
 	{
-		return IXCAWXgKM1();
+		return IsReplacing;
 	}
 
 	public SearchViewModel(TextEditorBase editor, string filePath)
@@ -246,19 +148,19 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		FilePath = filePath;
 		Editor = editor;
 		Config = new SearchConfig();
-		shuAFfN5Mi(new SearchResultBackgroundRenderer());
-		if (lEaAh3iJDQ() != null)
+		SearchRenderer = new SearchResultBackgroundRenderer();
+		if (Document != null)
 		{
-			lEaAh3iJDQ().TextChanged += dLuSNs4TUR;
+			Document.TextChanged += OnDocumentTextChanged;
 		}
-		textArea.DocumentChanged += SwOSzNjBGZ;
-		Config.EventDelegateConfigChanged += f6HSUNFLma;
-		editor.TextArea.TextView.BackgroundRenderers.Add(KuPABJDoNI());
+		textArea.DocumentChanged += OnTextAreaDocumentChanged;
+		Config.EventDelegateConfigChanged += OnConfigChanged;
+		editor.TextArea.TextView.BackgroundRenderers.Add(SearchRenderer);
 	}
 
-	private void f6HSUNFLma()
+	private void OnConfigChanged()
 	{
-		vHvAD6rsky();
+		RefreshSearchResults();
 	}
 
 	[Command]
@@ -274,12 +176,12 @@ public class SearchViewModel : ViewModelBase, IDisposable
 				{
 					Config.FindKeyword = selectedText;
 				}
-				vHvAD6rsky();
+				RefreshSearchResults();
 				SetFindKeywordFocused?.Invoke();
 			}
 			else
 			{
-				KuPABJDoNI().Clear();
+				SearchRenderer.Clear();
 				textArea.TextView.InvalidateLayer(KnownLayer.Background);
 				AppCore.ViewModelBase.RootDocument.DocumentsSearchManager.Clear();
 			}
@@ -309,29 +211,15 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private bool m3pAfohNwj()
-	{
-		return uR6AQ45kBN;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void IOEA56onrd(bool P_0)
-	{
-		uR6AQ45kBN = P_0;
-	}
-
 	public void ShowSearchPanel(SearchConfig config, bool showReplacePanel)
 	{
 		try
 		{
-			IOEA56onrd(true);
+			IsUpdatingConfig = true;
 			Visibility = true;
-			Config.EventDelegateConfigChanged -= f6HSUNFLma;
+			Config.EventDelegateConfigChanged -= OnConfigChanged;
 			Config = config.ToJson().JsonToObject<SearchConfig>();
-			Config.EventDelegateConfigChanged += f6HSUNFLma;
+			Config.EventDelegateConfigChanged += OnConfigChanged;
 			if (showReplacePanel)
 			{
 				ShowReplacePanel = showReplacePanel;
@@ -340,7 +228,7 @@ public class SearchViewModel : ViewModelBase, IDisposable
 			{
 				SetFindKeywordFocused?.Invoke();
 			}
-			IOEA56onrd(false);
+			IsUpdatingConfig = false;
 		}
 		catch (Exception e)
 		{
@@ -366,23 +254,23 @@ public class SearchViewModel : ViewModelBase, IDisposable
 	{
 		try
 		{
-			mOPScX2Q71();
+			AddSearchKeywordLog();
 			switch (Config.SearchType)
 			{
 			case SearchType.Next:
-				SvESMeO1IR();
+				FindNext();
 				break;
 			case SearchType.Previous:
-				BZmSVMryol();
+				FindPrevious();
 				break;
 			case SearchType.All:
 				if (Config.SourceType == SourceType.所有打开的文档)
 				{
 					AppCore.ViewModelBase.RootDocument.DocumentsSearchManager.FindAll();
 				}
-				else if (KuPABJDoNI().Segments.Any())
+				else if (SearchRenderer.Segments.Any())
 				{
-					AppCore.ViewModelBase.RootDocument.DocumentsSearchManager.AllSearchResultViewModel.AddResult(FilePath, KuPABJDoNI().Segments);
+					AppCore.ViewModelBase.RootDocument.DocumentsSearchManager.AllSearchResultViewModel.AddResult(FilePath, SearchRenderer.Segments);
 				}
 				else
 				{
@@ -391,7 +279,7 @@ public class SearchViewModel : ViewModelBase, IDisposable
 				break;
 			}
 			SearchType searchType = Config.SearchType;
-			if ((uint)searchType <= 1u && Config.SourceType != SourceType.所有打开的文档 && !KuPABJDoNI().Segments.Any() && AppSetting.Instance.EditConfig.SearchPanelFindNotFoundAllowMessageBox)
+			if ((uint)searchType <= 1u && Config.SourceType != SourceType.所有打开的文档 && !SearchRenderer.Segments.Any() && AppSetting.Instance.EditConfig.SearchPanelFindNotFoundAllowMessageBox)
 			{
 				AppCore.Logger.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_CannotFindSearchResult"), Config.FindKeyword));
 			}
@@ -402,7 +290,7 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private void mOPScX2Q71()
+	private void AddSearchKeywordLog()
 	{
 		try
 		{
@@ -422,11 +310,11 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private void oG6S85k4sX()
+	private void AddReplaceKeywordLog()
 	{
 		try
 		{
-			mOPScX2Q71();
+			AddSearchKeywordLog();
 			if (AppCore.EditorReplaceKeywordLog.Contains(Config.ReplaceKeyword))
 			{
 				AppCore.EditorReplaceKeywordLog.Remove(Config.ReplaceKeyword);
@@ -450,11 +338,11 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		OnFindMain();
 	}
 
-	private void SvESMeO1IR()
+	private void FindNext()
 	{
 		try
 		{
-			if (xdWS3pqTxo())
+			if (IsFindKeywordEmpty())
 			{
 				return;
 			}
@@ -462,10 +350,10 @@ public class SearchViewModel : ViewModelBase, IDisposable
 			{
 			case SourceType.当前文档:
 			{
-				SearchResult searchResult = KuPABJDoNI().Segments.FindFirstSegmentWithStartAfter(textArea.Caret.Offset + 1);
+				SearchResult searchResult = SearchRenderer.Segments.FindFirstSegmentWithStartAfter(textArea.Caret.Offset + 1);
 				if (searchResult == null)
 				{
-					searchResult = KuPABJDoNI().Segments.FirstSegment;
+					searchResult = SearchRenderer.Segments.FirstSegment;
 				}
 				if (searchResult != null)
 				{
@@ -486,23 +374,23 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private void BZmSVMryol()
+	private void FindPrevious()
 	{
 		try
 		{
 			switch (Config.SourceType)
 			{
 			case SourceType.当前文档:
-				if (!xdWS3pqTxo())
+				if (!IsFindKeywordEmpty())
 				{
-					SearchResult searchResult = KuPABJDoNI().Segments.FindFirstSegmentWithStartAfter(textArea.Caret.Offset);
+					SearchResult searchResult = SearchRenderer.Segments.FindFirstSegmentWithStartAfter(textArea.Caret.Offset);
 					if (searchResult != null)
 					{
-						searchResult = KuPABJDoNI().Segments.GetPreviousSegment(searchResult);
+						searchResult = SearchRenderer.Segments.GetPreviousSegment(searchResult);
 					}
 					if (searchResult == null)
 					{
-						searchResult = KuPABJDoNI().Segments.LastSegment;
+						searchResult = SearchRenderer.Segments.LastSegment;
 					}
 					if (searchResult != null)
 					{
@@ -523,7 +411,7 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private bool xdWS3pqTxo()
+	private bool IsFindKeywordEmpty()
 	{
 		return string.IsNullOrEmpty(Config.FindKeyword);
 	}
@@ -533,15 +421,15 @@ public class SearchViewModel : ViewModelBase, IDisposable
 	{
 		try
 		{
-			oG6S85k4sX();
-			if (Config.SourceType != SourceType.所有打开的文档 && !KuPABJDoNI().Segments.Any())
+			AddReplaceKeywordLog();
+			if (Config.SourceType != SourceType.所有打开的文档 && !SearchRenderer.Segments.Any())
 			{
 				AppCore.Logger.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_CannotFindSearchResult"), Config.FindKeyword));
 				return;
 			}
 			if (isReplaceAll)
 			{
-				BAiSRTV9lf();
+				ReplaceAll();
 				return;
 			}
 			if (Config.SourceType == SourceType.所有打开的文档)
@@ -549,14 +437,14 @@ public class SearchViewModel : ViewModelBase, IDisposable
 				AppCore.ViewModelBase.RootDocument.DocumentsSearchManager.FindNext(FilePath, replace: true);
 				return;
 			}
-			SearchResult searchResult = KuPABJDoNI().Segments.FindFirstSegmentWithStartAfter(textArea.Caret.Offset);
+			SearchResult searchResult = SearchRenderer.Segments.FindFirstSegmentWithStartAfter(textArea.Caret.Offset);
 			if (searchResult == null)
 			{
-				searchResult = KuPABJDoNI().Segments.FirstSegment;
+				searchResult = SearchRenderer.Segments.FirstSegment;
 			}
 			if (searchResult != null)
 			{
-				string text = nCcAYv6YwD.ReplaceNext(lEaAh3iJDQ(), searchResult.StartOffset, searchResult.Length, Config.FindKeyword, Config.ReplaceKeyword, Config.RegularExpression);
+				string text = searchStrategy.ReplaceNext(Document, searchResult.StartOffset, searchResult.Length, Config.FindKeyword, Config.ReplaceKeyword, Config.RegularExpression);
 				if (!string.IsNullOrEmpty(text))
 				{
 					searchResult.Length = text.Length;
@@ -570,7 +458,7 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private void BAiSRTV9lf()
+	private void ReplaceAll()
 	{
 		try
 		{
@@ -578,13 +466,13 @@ public class SearchViewModel : ViewModelBase, IDisposable
 			{
 				int searchResultCount = SearchResultCount;
 				textArea.TextView.InvalidateLayer(KnownLayer.Selection);
-				R7QAm7n6Kt(true);
+				IsReplacing = true;
 				Editor.BeginChange();
 				TextDocument document = Editor.Document;
-				nCcAYv6YwD.ReplaceAll(document, Config);
+				searchStrategy.ReplaceAll(document, Config);
 				Editor.EndChange();
-				R7QAm7n6Kt(false);
-				vHvAD6rsky();
+				IsReplacing = false;
+				RefreshSearchResults();
 				AppCore.Logger.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ReplaceSuccessCount"), searchResultCount));
 			}
 			else if (Config.SourceType == SourceType.所有打开的文档)
@@ -598,49 +486,49 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private void dLuSNs4TUR(object? sender, EventArgs P_1)
+	private void OnDocumentTextChanged(object? sender, EventArgs e)
 	{
 		if (!InTheWork())
 		{
-			vHvAD6rsky();
+			RefreshSearchResults();
 		}
 	}
 
-	private void SwOSzNjBGZ(object? sender, EventArgs P_1)
+	private void OnTextAreaDocumentChanged(object? sender, EventArgs e)
 	{
-		if (lEaAh3iJDQ() != null)
+		if (Document != null)
 		{
-			lEaAh3iJDQ().TextChanged -= dLuSNs4TUR;
+			Document.TextChanged -= OnDocumentTextChanged;
 		}
-		if (lEaAh3iJDQ() != null)
+		if (Document != null)
 		{
-			lEaAh3iJDQ().TextChanged += dLuSNs4TUR;
+			Document.TextChanged += OnDocumentTextChanged;
 			if (!InTheWork())
 			{
-				oqKAjFIaUZ(false);
+				DoSearch(false);
 			}
 		}
 	}
 
-	private void vHvAD6rsky()
+	private void RefreshSearchResults()
 	{
 		try
 		{
-			if (Config.SourceType == SourceType.所有打开的文档 && !m3pAfohNwj())
+			if (Config.SourceType == SourceType.所有打开的文档 && !IsUpdatingConfig)
 			{
 				AppCore.ViewModelBase.RootDocument.DocumentsSearchManager.RefSetData(Config, FilePath);
 			}
-			if (!IXCAWXgKM1())
+			if (!IsReplacing)
 			{
 				textArea.TextView.InvalidateLayer(KnownLayer.Background);
-				if (KuPABJDoNI() != null)
+				if (SearchRenderer != null)
 				{
-					KuPABJDoNI().Clear();
+					SearchRenderer.Clear();
 				}
 				RaisePropertyChanged("SearchResultCount");
-				if (!xdWS3pqTxo())
+				if (!IsFindKeywordEmpty())
 				{
-					I6DAlBcMOj();
+					CreateSearchStrategy();
 				}
 			}
 		}
@@ -650,9 +538,9 @@ public class SearchViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private async void I6DAlBcMOj()
+	private async void CreateSearchStrategy()
 	{
-		KuPABJDoNI().Segments.Any();
+		SearchRenderer.Segments.Any();
 		try
 		{
 			ResultData<ISearchStrategy> resultData = await SearchStrategyFactory.Create(Config);
@@ -661,19 +549,19 @@ public class SearchViewModel : ViewModelBase, IDisposable
 				AppCore.ShowMsg(resultData.Msg);
 				return;
 			}
-			nCcAYv6YwD = resultData.Data;
+			searchStrategy = resultData.Data;
 		}
 		catch (Exception ex)
 		{
 			AppCore.Logger.Error(ex.Message);
 			IsPopupOpen = true;
-			nCcAYv6YwD = null;
+			searchStrategy = null;
 			return;
 		}
-		oqKAjFIaUZ(true);
+		DoSearch(true);
 	}
 
-	private void oqKAjFIaUZ(bool P_0)
+	private void DoSearch(bool selectNextResult)
 	{
 		try
 		{
@@ -682,24 +570,24 @@ public class SearchViewModel : ViewModelBase, IDisposable
 				RaisePropertyChanged("ExistFind");
 				return;
 			}
-			KuPABJDoNI().Segments.Clear();
+			SearchRenderer.Segments.Clear();
 			if (!string.IsNullOrEmpty(Config.FindKeyword))
 			{
 				int offset = textArea.Caret.Offset;
-				if (P_0)
+				if (selectNextResult)
 				{
 					textArea.ClearSelection();
 				}
-				foreach (SearchResult item in nCcAYv6YwD.FindAll(textArea.Document, 0, textArea.Document.TextLength))
+				foreach (SearchResult item in searchStrategy.FindAll(textArea.Document, 0, textArea.Document.TextLength))
 				{
-					if (P_0 && item.StartOffset >= offset)
+					if (selectNextResult && item.StartOffset >= offset)
 					{
 						_ = Editor.CodeCompletionIsOpen;
-						P_0 = false;
+						selectNextResult = false;
 					}
-					KuPABJDoNI().Segments.Add(item);
+					SearchRenderer.Segments.Add(item);
 				}
-				KuPABJDoNI().Segments.Any();
+				SearchRenderer.Segments.Any();
 			}
 			textArea.TextView.InvalidateLayer(KnownLayer.Selection);
 			RaisePropertyChanged("SearchResultCount");
@@ -754,9 +642,9 @@ public class SearchViewModel : ViewModelBase, IDisposable
 
 	public void Dispose()
 	{
-		lEaAh3iJDQ().TextChanged -= dLuSNs4TUR;
-		textArea.DocumentChanged -= SwOSzNjBGZ;
-		Config.EventDelegateConfigChanged -= f6HSUNFLma;
-		KuPABJDoNI().Segments.Clear();
+		Document.TextChanged -= OnDocumentTextChanged;
+		textArea.DocumentChanged -= OnTextAreaDocumentChanged;
+		Config.EventDelegateConfigChanged -= OnConfigChanged;
+		SearchRenderer.Segments.Clear();
 	}
 }

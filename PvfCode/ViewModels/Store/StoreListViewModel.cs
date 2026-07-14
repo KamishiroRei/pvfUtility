@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
@@ -23,73 +22,13 @@ namespace PvfCode.ViewModels.Store;
 
 public class StoreListViewModel : DocumentBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass27_0
-	{
-		public KeyValuePair<string, ItemCodeHoverInfoBase> g0OqfXLVVQ;
-
-		public _003C_003Ec__DisplayClass27_0()
-		{
-		}
-
-		internal bool B2Lq2HWWHv(KeyValuePair<string, ItemCodeHoverInfoBase> it)
-		{
-			return it.Key == g0OqfXLVVQ.Key;
-		}
-	}
-
 	private bool IsLoaded;
 
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<StoreListDto> c1KWWwkgbq;
+	public ConcurrentObservableCollection<StoreListDto> Items { get; set; }
 
-	[CompilerGenerated]
-	private StoreListDto FuLWmZ03Lu;
+	public StoreListDto SelectedItem { get; set; }
 
-	[CompilerGenerated]
-	private GetStoreListQueryData LscW294dAV;
-
-	public ConcurrentObservableCollection<StoreListDto> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return c1KWWwkgbq;
-		}
-		[CompilerGenerated]
-		set
-		{
-			c1KWWwkgbq = value;
-		}
-	}
-
-	public StoreListDto SelectedItem
-	{
-		[CompilerGenerated]
-		get
-		{
-			return FuLWmZ03Lu;
-		}
-		[CompilerGenerated]
-		set
-		{
-			FuLWmZ03Lu = value;
-		}
-	}
-
-	public GetStoreListQueryData QueryData
-	{
-		[CompilerGenerated]
-		get
-		{
-			return LscW294dAV;
-		}
-		[CompilerGenerated]
-		set
-		{
-			LscW294dAV = value;
-		}
-	}
+	public GetStoreListQueryData QueryData { get; set; }
 
 	public bool PreviewButtonVisibility
 	{
@@ -117,20 +56,20 @@ public class StoreListViewModel : DocumentBase
 	[Command]
 	public void Loaded()
 	{
-		QueryData.StoreTypeChanged += kKHWlDZR5V;
+		QueryData.StoreTypeChanged += OnStoreTypeChanged;
 		if (!IsLoaded)
 		{
 			IsLoaded = true;
 			lock (this)
 			{
-				kKHWlDZR5V(QueryData.Type);
+				OnStoreTypeChanged(QueryData.Type);
 			}
 		}
 	}
 
-	private void kKHWlDZR5V(StoreType P_0)
+	private void OnStoreTypeChanged(StoreType storeType)
 	{
-		if (P_0 == StoreType.书签 || (uint)(P_0 - 2) <= 2u)
+		if (storeType == StoreType.书签 || (uint)(storeType - 2) <= 2u)
 		{
 			PreviewButtonVisibility = true;
 		}
@@ -168,19 +107,19 @@ public class StoreListViewModel : DocumentBase
 			switch (resultData.Data.Type)
 			{
 			case StoreType.书签:
-				await KGTWFiFwk0(resultData.Data);
+				await DownloadBookMarksAsync(resultData.Data);
 				break;
 			case StoreType.宏:
-				await Rt0Wr1r4p3(resultData.Data);
+				await DownloadMacroAsync(resultData.Data);
 				break;
 			case StoreType.文件资源管理器注释:
-				await JH0WBZV7pc(resultData.Data);
+				await DownloadFileListCommentsAsync(resultData.Data);
 				break;
 			case StoreType.脚本文件标签翻译:
-				await G6HWvWAWkv(resultData.Data);
+				await DownloadTabCommentsAsync(resultData.Data);
 				break;
 			case StoreType.代码智能提示:
-				await dGuWhH83bh(resultData.Data);
+				await DownloadItemCodeHoverAsync(resultData.Data);
 				break;
 			}
 		}
@@ -217,16 +156,16 @@ public class StoreListViewModel : DocumentBase
 				switch (resultData.Data.Type)
 				{
 				case StoreType.书签:
-					hx0Wj2L0Zi(resultData.Data);
+					PreviewBookMarks(resultData.Data);
 					break;
 				case StoreType.文件资源管理器注释:
-					NlFWTuGIbi(resultData.Data);
+					PreviewFileListComments(resultData.Data);
 					break;
 				case StoreType.脚本文件标签翻译:
-					QYhWCGRMKu(resultData.Data);
+					PreviewTabComments(resultData.Data);
 					break;
 				case StoreType.代码智能提示:
-					EMCWH9xiI6(resultData.Data);
+					PreviewItemCodeHover(resultData.Data);
 					break;
 				}
 			}
@@ -268,11 +207,11 @@ public class StoreListViewModel : DocumentBase
 		}
 	}
 
-	private void hx0Wj2L0Zi(StoreListDto P_0)
+	private void PreviewBookMarks(StoreListDto storeData)
 	{
 		BookMarkGroupDto previewSource = new BookMarkGroupDto
 		{
-			Trees = P_0.ToData<ObservableConcurrentDictionaryEx<string, BookMarkDto>>()
+			Trees = storeData.ToData<ObservableConcurrentDictionaryEx<string, BookMarkDto>>()
 		};
 		BookMarkEditView bookMarkEditView = new BookMarkEditView(isTreeList: false, isPreview: true, previewSource);
 		bookMarkEditView.Owner = Application.Current.MainWindow;
@@ -280,37 +219,37 @@ public class StoreListViewModel : DocumentBase
 		bookMarkEditView.Show();
 	}
 
-	private void NlFWTuGIbi(StoreListDto P_0)
+	private void PreviewFileListComments(StoreListDto storeData)
 	{
-		PreviewFileListComment previewFileListComment = new PreviewFileListComment(P_0.ToData<Dictionary<string, TreelistCommentRes>>());
+		PreviewFileListComment previewFileListComment = new PreviewFileListComment(storeData.ToData<Dictionary<string, TreelistCommentRes>>());
 		previewFileListComment.Owner = Application.Current.MainWindow;
 		previewFileListComment.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 		previewFileListComment.Show();
 	}
 
-	private void QYhWCGRMKu(StoreListDto P_0)
+	private void PreviewTabComments(StoreListDto storeData)
 	{
-		PreviewTabCommentView previewTabCommentView = new PreviewTabCommentView(P_0.ToData<List<PvfCommentDto>>());
+		PreviewTabCommentView previewTabCommentView = new PreviewTabCommentView(storeData.ToData<List<PvfCommentDto>>());
 		previewTabCommentView.Owner = Application.Current.MainWindow;
 		previewTabCommentView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 		previewTabCommentView.Show();
 	}
 
-	private void EMCWH9xiI6(StoreListDto P_0)
+	private void PreviewItemCodeHover(StoreListDto storeData)
 	{
 		JsonSerializerSettings settings = new JsonSerializerSettings
 		{
 			TypeNameHandling = TypeNameHandling.All
 		};
-		P_0.Data.ToString();
-		Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>> source = JsonConvert.DeserializeObject<Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>>>(P_0.Data.ToString(), settings);
+		storeData.Data.ToString();
+		Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>> source = JsonConvert.DeserializeObject<Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>>>(storeData.Data.ToString(), settings);
 		PreviewItemCodeHoverView previewItemCodeHoverView = new PreviewItemCodeHoverView(AppSetting.Instance.EditConfig.ItemCodeConvertItemNameConfiger.ModelToXml(source));
 		previewItemCodeHoverView.Owner = Application.Current.MainWindow;
 		previewItemCodeHoverView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 		previewItemCodeHoverView.Show();
 	}
 
-	private async Task dGuWhH83bh(StoreListDto P_0)
+	private async Task DownloadItemCodeHoverAsync(StoreListDto storeData)
 	{
 		bool value = new StoreDownLoadOptions(AppSetting.Instance.GetIlogger()?.GetStr("mess_MergeConfig"), AppSetting.Instance.GetIlogger()?.GetStr("mess_OverrideConfig"))
 		{
@@ -320,7 +259,7 @@ public class StoreListViewModel : DocumentBase
 		Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>> dictionary = JsonConvert.DeserializeObject<Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>>>(settings: new JsonSerializerSettings
 		{
 			TypeNameHandling = TypeNameHandling.All
-		}, value: P_0.Data.ToString());
+		}, value: storeData.Data.ToString());
 		if (value)
 		{
 			XmlDocument xmlDocument = new XmlDocument();
@@ -333,21 +272,18 @@ public class StoreListViewModel : DocumentBase
 				if (AppSetting.Instance.EditConfig.ItemCodeConvertItemNameConfiger.DIC.ContainsKey(item.Key))
 				{
 					List<KeyValuePair<string, ItemCodeHoverInfoBase>> list = AppSetting.Instance.EditConfig.ItemCodeConvertItemNameConfiger.DIC[item.Key];
-					using List<KeyValuePair<string, ItemCodeHoverInfoBase>>.Enumerator enumerator2 = item.Value.GetEnumerator();
-					while (enumerator2.MoveNext())
+					foreach (KeyValuePair<string, ItemCodeHoverInfoBase> incomingItem in item.Value)
 					{
-						_003C_003Ec__DisplayClass27_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass27_0();
-						CS_0024_003C_003E8__locals5.g0OqfXLVVQ = enumerator2.Current;
-						List<KeyValuePair<string, ItemCodeHoverInfoBase>> list2 = list.FindAll((KeyValuePair<string, ItemCodeHoverInfoBase> it) => it.Key == CS_0024_003C_003E8__locals5.g0OqfXLVVQ.Key);
+						List<KeyValuePair<string, ItemCodeHoverInfoBase>> list2 = list.FindAll(it => it.Key == incomingItem.Key);
 						if (list2 == null)
 						{
-							list.Add(CS_0024_003C_003E8__locals5.g0OqfXLVVQ);
+							list.Add(incomingItem);
 							continue;
 						}
 						bool flag = true;
 						foreach (KeyValuePair<string, ItemCodeHoverInfoBase> item2 in list2)
 						{
-							if (item2.Value.EqualsData(item2, xmlDocument, xmlDocument.CreateElement("File"), CS_0024_003C_003E8__locals5.g0OqfXLVVQ))
+							if (item2.Value.EqualsData(item2, xmlDocument, xmlDocument.CreateElement("File"), incomingItem))
 							{
 								flag = false;
 								break;
@@ -355,7 +291,7 @@ public class StoreListViewModel : DocumentBase
 						}
 						if (flag)
 						{
-							list.Add(CS_0024_003C_003E8__locals5.g0OqfXLVVQ);
+							list.Add(incomingItem);
 						}
 					}
 				}
@@ -374,9 +310,9 @@ public class StoreListViewModel : DocumentBase
 		AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_DownloadSuccess"));
 	}
 
-	private async Task G6HWvWAWkv(StoreListDto P_0)
+	private async Task DownloadTabCommentsAsync(StoreListDto storeData)
 	{
-		List<PvfCommentDto> list = P_0.ToData<List<PvfCommentDto>>();
+		List<PvfCommentDto> list = storeData.ToData<List<PvfCommentDto>>();
 		if (!new StoreDownLoadOptions(AppSetting.Instance.GetIlogger()?.GetStr("mess_MergeConfigComment"), AppSetting.Instance.GetIlogger()?.GetStr("mess_OverrideConfigComment"))
 		{
 			WindowStartupLocation = WindowStartupLocation.CenterOwner,
@@ -396,14 +332,14 @@ public class StoreListViewModel : DocumentBase
 		AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_DownloadSuccess"));
 	}
 
-	private async Task JH0WBZV7pc(StoreListDto P_0)
+	private async Task DownloadFileListCommentsAsync(StoreListDto storeData)
 	{
 		bool value = new StoreDownLoadOptions(AppSetting.Instance.GetIlogger()?.GetStr("mess_MergeConfigComment"), AppSetting.Instance.GetIlogger()?.GetStr("mess_OverrideConfigComment"))
 		{
 			WindowStartupLocation = WindowStartupLocation.CenterOwner,
 			Owner = Application.Current.MainWindow
 		}.ShowDialog().Value;
-		Dictionary<string, TreelistCommentRes> dictionary = P_0.ToData<Dictionary<string, TreelistCommentRes>>();
+		Dictionary<string, TreelistCommentRes> dictionary = storeData.ToData<Dictionary<string, TreelistCommentRes>>();
 		if (value)
 		{
 			foreach (KeyValuePair<string, TreelistCommentRes> item in dictionary)
@@ -422,28 +358,28 @@ public class StoreListViewModel : DocumentBase
 		AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_DownloadSuccess"));
 	}
 
-	private async Task KGTWFiFwk0(StoreListDto P_0)
+	private async Task DownloadBookMarksAsync(StoreListDto storeData)
 	{
 		bool value = new WinDownLoadBookMarkOptions
 		{
 			WindowStartupLocation = WindowStartupLocation.CenterScreen,
 			Owner = Application.Current.MainWindow
 		}.ShowDialog().Value;
-		AppSetting.Instance.BookMarkGroup.DownSaveBookMark(P_0.ToData<ObservableConcurrentDictionaryEx<string, BookMarkDto>>(), value);
+		AppSetting.Instance.BookMarkGroup.DownSaveBookMark(storeData.ToData<ObservableConcurrentDictionaryEx<string, BookMarkDto>>(), value);
 		await AppSetting.Instance.SaveSetting();
 		AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_DownloadSuccess"));
 	}
 
-	private async Task Rt0Wr1r4p3(StoreListDto P_0)
+	private async Task DownloadMacroAsync(StoreListDto storeData)
 	{
-		await AppCore.SaveMacroData(P_0.ToData<MacroData>(), P_0.Title, AppCore.MainWin, showShareCheckBox: false);
+		await AppCore.SaveMacroData(storeData.ToData<MacroData>(), storeData.Title, AppCore.MainWin, showShareCheckBox: false);
 		await AppSetting.Instance.SaveSetting();
 	}
 
 	[Command]
 	public void Unloaded()
 	{
-		QueryData.StoreTypeChanged -= kKHWlDZR5V;
+		QueryData.StoreTypeChanged -= OnStoreTypeChanged;
 	}
 
 	public override void Dispose()

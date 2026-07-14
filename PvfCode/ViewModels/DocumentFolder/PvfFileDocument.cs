@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,188 +41,6 @@ public class PvfFileDocument : DocumentBase
 {
 	public event EventHandler PreviewContentChanged;
 
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass51_0
-	{
-		public string QHPelojyTg;
-
-		public PvfFileDocument D2WejrvI73;
-
-		public _003C_003Ec__DisplayClass51_0()
-		{
-		}
-
-		internal void tcHeDCUgrV()
-		{
-			D2WejrvI73.Document.Text = QHPelojyTg;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass69_0
-	{
-		public string KqZeCTxUbb;
-
-		public string ljreH6ilvr;
-
-		public HashSet<int> Ss3eh96r4k;
-
-		public List<VerticalScrollBarHighlightedData> fkVev7f78h;
-
-		public double MOkeByij0B;
-
-		public _003C_003Ec__DisplayClass69_0()
-		{
-		}
-
-		internal void xUIeTGTnjS()
-		{
-			TextDocument textDocument = new TextDocument
-			{
-				Text = ljreH6ilvr
-			};
-			foreach (DocumentLine line in textDocument.Lines)
-			{
-				if (line.Length > 0 && textDocument.GetText(line).IndexOf(KqZeCTxUbb, 0, StringComparison.Ordinal) != -1)
-				{
-					Ss3eh96r4k.Add(line.LineNumber);
-				}
-			}
-			foreach (int item in Ss3eh96r4k)
-			{
-				fkVev7f78h.Add(new VerticalScrollBarHighlightedData((double)(item - 1) * MOkeByij0B, 3, VerticalScrollBarHighlightedType.同音词));
-			}
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass72_0
-	{
-		public PvfFileDocument HEherawOGs;
-
-		public HighlightedSection V0seW7VQWi;
-
-		public _003C_003Ec__DisplayClass72_0()
-		{
-		}
-
-		internal void sLfeFupwHY()
-		{
-			HEherawOGs.Editor.Select(V0seW7VQWi.Offset, V0seW7VQWi.Length);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass76_0
-	{
-		public PvfFileDocument TRke25VixJ;
-
-		public Dictionary<int, string> K3RefcuG1X;
-
-		public _003C_003Ec__DisplayClass76_0()
-		{
-		}
-
-		internal Task? VAjemW3doK()
-		{
-			return AppCore.ViewModelBase.PVF.Strtable.DocumentSave(K3RefcuG1X, AppCore.ViewModelBase.PVF);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass76_1
-	{
-		public string vvpeSQWnWF;
-
-		public _003C_003Ec__DisplayClass76_0 FsOeAxHtvW;
-
-		public _003C_003Ec__DisplayClass76_1()
-		{
-		}
-
-		internal void HH0e5Ptgta()
-		{
-			TextDocument textDocument = new TextDocument
-			{
-				Text = vvpeSQWnWF
-			};
-			DocumentHighlighter documentHighlighter = new DocumentHighlighter(textDocument, FsOeAxHtvW.TRke25VixJ.Highlighting);
-			foreach (DocumentLine line in textDocument.Lines)
-			{
-				if (line.Length <= 0)
-				{
-					continue;
-				}
-				HighlightedLine highlightedLine = documentHighlighter.HighlightLine(line.LineNumber);
-				if (highlightedLine != null && highlightedLine.Sections != null && highlightedLine.Sections.Count == 2)
-				{
-					IList<HighlightedSection> sections = highlightedLine.Sections;
-					if (sections[0].Color.Name != "Section")
-					{
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(20, 1);
-						defaultInterpolatedStringHandler.AppendLiteral("第：");
-						defaultInterpolatedStringHandler.AppendFormatted(line.LineNumber);
-						defaultInterpolatedStringHandler.AppendLiteral("行 起始类型不是字符串索引 请检查！");
-						AppCore.ShowMsg(defaultInterpolatedStringHandler.ToStringAndClear(), isError: true);
-						break;
-					}
-					if (sections[1].Color.Name != "String")
-					{
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(19, 1);
-						defaultInterpolatedStringHandler2.AppendLiteral("第：");
-						defaultInterpolatedStringHandler2.AppendFormatted(line.LineNumber);
-						defaultInterpolatedStringHandler2.AppendLiteral("行 第二个类型不是字符串 请检查！");
-						AppCore.ShowMsg(defaultInterpolatedStringHandler2.ToStringAndClear(), isError: true);
-						break;
-					}
-					if (sections[0].Length == 2)
-					{
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler3 = new DefaultInterpolatedStringHandler(15, 1);
-						defaultInterpolatedStringHandler3.AppendLiteral("第：");
-						defaultInterpolatedStringHandler3.AppendFormatted(line.LineNumber);
-						defaultInterpolatedStringHandler3.AppendLiteral("行 索引中没有编号 请检查");
-						AppCore.ShowMsg(defaultInterpolatedStringHandler3.ToStringAndClear(), isError: true);
-						break;
-					}
-					string text = textDocument.GetText(sections[0]);
-					if (!int.TryParse(text.Substring(1, text.Length - 2), out var result))
-					{
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler4 = new DefaultInterpolatedStringHandler(17, 1);
-						defaultInterpolatedStringHandler4.AppendLiteral("第：");
-						defaultInterpolatedStringHandler4.AppendFormatted(line.LineNumber);
-						defaultInterpolatedStringHandler4.AppendLiteral("行 索引中不是int型 请检查");
-						AppCore.ShowMsg(defaultInterpolatedStringHandler4.ToStringAndClear(), isError: true);
-						break;
-					}
-					if (result < 0)
-					{
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler5 = new DefaultInterpolatedStringHandler(16, 1);
-						defaultInterpolatedStringHandler5.AppendLiteral("第：");
-						defaultInterpolatedStringHandler5.AppendFormatted(line.LineNumber);
-						defaultInterpolatedStringHandler5.AppendLiteral("行 索引值不能小于0 请检查");
-						AppCore.ShowMsg(defaultInterpolatedStringHandler5.ToStringAndClear(), isError: true);
-						break;
-					}
-					if (FsOeAxHtvW.K3RefcuG1X.ContainsKey(result))
-					{
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler6 = new DefaultInterpolatedStringHandler(18, 2);
-						defaultInterpolatedStringHandler6.AppendLiteral("第：");
-						defaultInterpolatedStringHandler6.AppendFormatted(line.LineNumber);
-						defaultInterpolatedStringHandler6.AppendLiteral("行 与索引：[");
-						defaultInterpolatedStringHandler6.AppendFormatted(result);
-						defaultInterpolatedStringHandler6.AppendLiteral("] 重复请检查！ ");
-						AppCore.ShowMsg(defaultInterpolatedStringHandler6.ToStringAndClear(), isError: true);
-						break;
-					}
-					FsOeAxHtvW.K3RefcuG1X.Add(result, textDocument.GetText(sections[1]).Replace("`", string.Empty).Replace("\\n", "\r\n"));
-				}
-			}
-		}
-	}
-
-	[CompilerGenerated]
-	private PvfFile T7L5m9WtNU;
-
 	private bool IsLoaded;
 
 	public EncodingType NowEncoding
@@ -234,7 +51,7 @@ public class PvfFileDocument : DocumentBase
 		}
 		set
 		{
-			SetProperty(() => NowEncoding, value, qg0fNntIPb);
+			SetProperty(() => NowEncoding, value, OnEncodingChanged);
 			RaisePropertyChanged("EditorEdcoding");
 		}
 	}
@@ -281,19 +98,7 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
-	public PvfFile File
-	{
-		[CompilerGenerated]
-		get
-		{
-			return T7L5m9WtNU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			T7L5m9WtNU = value;
-		}
-	}
+	public PvfFile File { get; set; }
 
 	public string FullPath => File?.FileName;
 
@@ -330,7 +135,7 @@ public class PvfFileDocument : DocumentBase
 		set
 		{
 			SetProperty(() => TextIsChanged, value);
-			Sy2fzpfUqV();
+			RefreshIcon();
 		}
 	}
 
@@ -390,7 +195,7 @@ public class PvfFileDocument : DocumentBase
 		}
 		set
 		{
-			SetProperty(() => FocusCaretLine, value, Ju3f3ldpmP);
+			SetProperty(() => FocusCaretLine, value, OnFocusCaretLineChanged);
 		}
 	}
 
@@ -466,16 +271,12 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
-	private void w3MfVLPjEt()
+	private void RefreshRarity()
 	{
 		RaisePropertyChanged("Rarity");
 	}
 
-	[SpecialName]
-	private IHighlighter BCo5rRKg8l()
-	{
-		return new DocumentHighlighter(Document, Highlighting);
-	}
+	private IHighlighter Highlighter => new DocumentHighlighter(Document, Highlighting);
 
 	public PvfFileDocument(PvfFile file)
 		: base(file.FileName)
@@ -503,7 +304,7 @@ public class PvfFileDocument : DocumentBase
 		TextIsChanged = false;
 	}
 
-	private void Ju3f3ldpmP()
+	private void OnFocusCaretLineChanged()
 	{
 		if (Document != null && Editor != null && VerticalScrollBarHighlightedMagager != null)
 		{
@@ -528,10 +329,8 @@ public class PvfFileDocument : DocumentBase
 				AppCore.Logger.ErrorUploadDialog(new Exception("DocumentIsNull"), "PvfFileDocument.RefDocumentText");
 				return;
 			}
-			await Task.Run(async delegate
+			await Task.Run(async () =>
 			{
-				_003C_003Ec__DisplayClass51_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass51_0();
-				CS_0024_003C_003E8__locals4.D2WejrvI73 = this;
 				PvfGroup pvf = AppCore.ViewModelBase.PVF;
 				if (FullPath == null)
 				{
@@ -543,8 +342,7 @@ public class PvfFileDocument : DocumentBase
 				}
 				else
 				{
-					string qHPelojyTg = ((!(FullPath == "stringtable.bin")) ? pvf.GetFileText(File, NowEncoding) : (await AppCore.ViewModelBase.PVF.Strtable.GetDocumentText()));
-					CS_0024_003C_003E8__locals4.QHPelojyTg = qHPelojyTg;
+					string documentText = ((!(FullPath == "stringtable.bin")) ? pvf.GetFileText(File, NowEncoding) : (await AppCore.ViewModelBase.PVF.Strtable.GetDocumentText()));
 					if (FullPath == "stringtable.bin")
 					{
 						await (pvf.Strtable?.LoadQuote(pvf));
@@ -553,10 +351,7 @@ public class PvfFileDocument : DocumentBase
 					{
 						await (pvf.Strview?.InitStringViewQuote(pvf, FullPath));
 					}
-					await ((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)delegate
-					{
-						CS_0024_003C_003E8__locals4.D2WejrvI73.Document.Text = CS_0024_003C_003E8__locals4.QHPelojyTg;
-					}, Array.Empty<object>());
+					await ((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)(() => Document.Text = documentText), Array.Empty<object>());
 				}
 			});
 			TextIsChanged = false;
@@ -568,7 +363,7 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
-	private void eoDfRKFuDC()
+	private void HighlightLstValidationErrors()
 	{
 		Stopwatch stopwatch = new Stopwatch();
 		stopwatch.Start();
@@ -667,11 +462,7 @@ public class PvfFileDocument : DocumentBase
 		textView.LineTransformers.Add(textMarkerService);
 		textView.Services.AddService(typeof(TextMarkerService), textMarkerService);
 		LoggerViewModel logger = AppCore.Logger;
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(8, 1);
-		defaultInterpolatedStringHandler.AppendLiteral("程序耗时:'");
-		defaultInterpolatedStringHandler.AppendFormatted(elapsed);
-		defaultInterpolatedStringHandler.AppendLiteral("'秒");
-		logger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
+		logger.Error($"程序耗时:'{elapsed}'秒");
 	}
 
 	[Command]
@@ -707,7 +498,7 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
-	private void qg0fNntIPb()
+	private void OnEncodingChanged()
 	{
 		RefDocumentText();
 	}
@@ -722,16 +513,16 @@ public class PvfFileDocument : DocumentBase
 			IsLoaded = true;
 			Editor = (TextEditorBase)sender;
 			SearchPanel = new SearchViewModel(Editor, FullPath);
-			Editor.TextArea.SelectionChanged += iPd5jDePU5;
-			Editor.TextArea.Caret.PositionChanged += j3Z5l8Bm4b;
-			Editor.TextArea.TextView.Drop += llF5vRk3y2;
-			Editor.TextArea.MouseDoubleClick += Q795T3kTJ8;
-			Sy2fzpfUqV();
+			Editor.TextArea.SelectionChanged += OnSelectionChanged;
+			Editor.TextArea.Caret.PositionChanged += OnCaretPositionChanged;
+			Editor.TextArea.TextView.Drop += OnEditorDrop;
+			Editor.TextArea.MouseDoubleClick += OnMouseDoubleClick;
+			RefreshIcon();
 			switch (fileType)
 			{
 			case PvfFileType.ani:
 				TextEditorPreviewViewModelBase = new TextEditorPreviewViewModelAni(Editor, File);
-				Editor.TextArea.TextView.ElementGenerators.Add(new AniNpkElementGenerator(BCo5rRKg8l()));
+				Editor.TextArea.TextView.ElementGenerators.Add(new AniNpkElementGenerator(Highlighter));
 				break;
 			case PvfFileType.str:
 				Editor.TextArea.TextView.ElementGenerators.Add(new KorFileElementGenerator(Editor.GetDocumentHighlighter, File));
@@ -810,7 +601,7 @@ public class PvfFileDocument : DocumentBase
 		}, DispatcherPriority.Background);
 	}
 
-	private async void Sy2fzpfUqV()
+	private async void RefreshIcon()
 	{
 		try
 		{
@@ -839,7 +630,7 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
-	private void j3Z5l8Bm4b(object? sender, EventArgs P_1)
+	private void OnCaretPositionChanged(object? sender, EventArgs e)
 	{
 		try
 		{
@@ -862,43 +653,42 @@ public class PvfFileDocument : DocumentBase
 		return Editor;
 	}
 
-	private async void iPd5jDePU5(object? sender, EventArgs P_1)
+	private async void OnSelectionChanged(object? sender, EventArgs e)
 	{
-		_003C_003Ec__DisplayClass69_0 CS_0024_003C_003E8__locals15 = new _003C_003Ec__DisplayClass69_0();
 		VerticalScrollBarHighlightedMagager.Remove(VerticalScrollBarHighlightedType.同音词);
-		CS_0024_003C_003E8__locals15.KqZeCTxUbb = Editor.SelectedText;
-		if (string.IsNullOrEmpty(CS_0024_003C_003E8__locals15.KqZeCTxUbb) || CS_0024_003C_003E8__locals15.KqZeCTxUbb.Length >= 1000 || Document.LineCount > 5000)
+		string selectedText = Editor.SelectedText;
+		if (string.IsNullOrEmpty(selectedText) || selectedText.Length >= 1000 || Document.LineCount > 5000)
 		{
 			return;
 		}
-		CS_0024_003C_003E8__locals15.ljreH6ilvr = Document.Text;
-		CS_0024_003C_003E8__locals15.fkVev7f78h = new List<VerticalScrollBarHighlightedData>();
-		CS_0024_003C_003E8__locals15.Ss3eh96r4k = new HashSet<int>();
-		CS_0024_003C_003E8__locals15.MOkeByij0B = Editor.MaxNumEx / (double)Document.LineCount;
+		string documentText = Document.Text;
+		List<VerticalScrollBarHighlightedData> highlights = new List<VerticalScrollBarHighlightedData>();
+		HashSet<int> lineNumbers = new HashSet<int>();
+		double lineHeight = Editor.MaxNumEx / (double)Document.LineCount;
 		lock (this)
 		{
 		}
-		await Task.Run(delegate
+		await Task.Run(() =>
 		{
 			TextDocument textDocument = new TextDocument
 			{
-				Text = CS_0024_003C_003E8__locals15.ljreH6ilvr
+				Text = documentText
 			};
 			foreach (DocumentLine line in textDocument.Lines)
 			{
-				if (line.Length > 0 && textDocument.GetText(line).IndexOf(CS_0024_003C_003E8__locals15.KqZeCTxUbb, 0, StringComparison.Ordinal) != -1)
+				if (line.Length > 0 && textDocument.GetText(line).IndexOf(selectedText, 0, StringComparison.Ordinal) != -1)
 				{
-					CS_0024_003C_003E8__locals15.Ss3eh96r4k.Add(line.LineNumber);
+					lineNumbers.Add(line.LineNumber);
 				}
 			}
-			foreach (int item in CS_0024_003C_003E8__locals15.Ss3eh96r4k)
+			foreach (int item in lineNumbers)
 			{
-				CS_0024_003C_003E8__locals15.fkVev7f78h.Add(new VerticalScrollBarHighlightedData((double)(item - 1) * CS_0024_003C_003E8__locals15.MOkeByij0B, 3, VerticalScrollBarHighlightedType.同音词));
+				highlights.Add(new VerticalScrollBarHighlightedData((double)(item - 1) * lineHeight, 3, VerticalScrollBarHighlightedType.同音词));
 			}
 		});
-		if (CS_0024_003C_003E8__locals15.fkVev7f78h.Count <= 1000)
+		if (highlights.Count <= 1000)
 		{
-			VerticalScrollBarHighlightedMagager.Items.AddRange(CS_0024_003C_003E8__locals15.fkVev7f78h);
+			VerticalScrollBarHighlightedMagager.Items.AddRange(highlights);
 		}
 	}
 
@@ -910,44 +700,39 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
-	private void Q795T3kTJ8(object P_0, MouseButtonEventArgs P_1)
+	private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
 	{
-		S625CmQKDe(P_1);
+		SelectHighlightedString(e);
 	}
 
-	private void S625CmQKDe(MouseButtonEventArgs P_0)
+	private void SelectHighlightedString(MouseButtonEventArgs e)
 	{
-		_003C_003Ec__DisplayClass72_0 CS_0024_003C_003E8__locals11 = new _003C_003Ec__DisplayClass72_0();
-		CS_0024_003C_003E8__locals11.HEherawOGs = this;
 		if (Editor.GetMouseOffset().HasValue)
 		{
 			return;
 		}
 		int caretOffset = Editor.CaretOffset;
 		DocumentLine lineByOffset = Document.GetLineByOffset(caretOffset);
-		HighlightedLine highlightedLine = BCo5rRKg8l().HighlightLine(lineByOffset.LineNumber);
+		HighlightedLine highlightedLine = Highlighter.HighlightLine(lineByOffset.LineNumber);
 		if (highlightedLine == null || highlightedLine.Sections == null || highlightedLine.Sections.Count <= 0)
 		{
 			return;
 		}
-		CS_0024_003C_003E8__locals11.V0seW7VQWi = highlightedLine.Sections[highlightedLine.Sections.Count - 1];
-		if (Document.GetCharAt(CS_0024_003C_003E8__locals11.V0seW7VQWi.Offset) == '`' && Document.GetCharAt(CS_0024_003C_003E8__locals11.V0seW7VQWi.EndOffset) == '`')
+		HighlightedSection section = highlightedLine.Sections[highlightedLine.Sections.Count - 1];
+		if (Document.GetCharAt(section.Offset) == '`' && Document.GetCharAt(section.EndOffset) == '`')
 		{
-			if (CS_0024_003C_003E8__locals11.V0seW7VQWi.Length == 2)
+			if (section.Length == 2)
 			{
 				return;
 			}
-			CS_0024_003C_003E8__locals11.V0seW7VQWi = new HighlightedSection
+			section = new HighlightedSection
 			{
-				Offset = CS_0024_003C_003E8__locals11.V0seW7VQWi.Offset + 1,
-				Length = CS_0024_003C_003E8__locals11.V0seW7VQWi.Length - 1
+				Offset = section.Offset + 1,
+				Length = section.Length - 1
 			};
 		}
-		((DispatcherObject)Editor).Dispatcher.BeginInvoke((Delegate)(Action)delegate
-		{
-			CS_0024_003C_003E8__locals11.HEherawOGs.Editor.Select(CS_0024_003C_003E8__locals11.V0seW7VQWi.Offset, CS_0024_003C_003E8__locals11.V0seW7VQWi.Length);
-		}, Array.Empty<object>());
-		P_0.Handled = true;
+		((DispatcherObject)Editor).Dispatcher.BeginInvoke((Delegate)(Action)(() => Editor.Select(section.Offset, section.Length)), Array.Empty<object>());
+		e.Handled = true;
 	}
 
 	[Command]
@@ -995,7 +780,7 @@ public class PvfFileDocument : DocumentBase
 			}
 			if (FullPath == "stringtable.bin")
 			{
-				TnA5hQnSic();
+				SaveSuccessChangeData();
 				return;
 			}
 			if (File.FileType == PvfFileType.nut && AppSetting.Instance.EditConfig.SaveBeautifyNutCode)
@@ -1006,14 +791,14 @@ public class PvfFileDocument : DocumentBase
 			bool isUpdated = File.IsUpdated;
 			if (AppCore.ViewModelBase.PVF.SaveFileText(File, Document.Text, NowEncoding))
 			{
-				TnA5hQnSic();
+				SaveSuccessChangeData();
 				PreviewContentChanged?.Invoke(this, EventArgs.Empty);
 			}
 			if (fileText == AppCore.ViewModelBase.PVF.GetFileText(File, NowEncoding) && !isUpdated)
 			{
 				File.IsUpdated = false;
 			}
-			w3MfVLPjEt();
+			RefreshRarity();
 		}
 		catch (Exception e)
 		{
@@ -1021,24 +806,20 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
-	private async Task Vgy5H0kDYW()
+	private async Task SaveStringTableAsync()
 	{
-		_003C_003Ec__DisplayClass76_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass76_0();
-		CS_0024_003C_003E8__locals5.TRke25VixJ = this;
 		base.IsLoading = true;
-		CS_0024_003C_003E8__locals5.K3RefcuG1X = new Dictionary<int, string>();
+		Dictionary<int, string> strings = new Dictionary<int, string>();
 		if (!string.IsNullOrEmpty(Document.Text))
 		{
-			_003C_003Ec__DisplayClass76_1 obj = new _003C_003Ec__DisplayClass76_1();
-			obj.FsOeAxHtvW = CS_0024_003C_003E8__locals5;
-			obj.vvpeSQWnWF = Document.Text;
-			await Task.Run(delegate
+			string documentText = Document.Text;
+			await Task.Run(() =>
 			{
 				TextDocument textDocument = new TextDocument
 				{
-					Text = obj.vvpeSQWnWF
+					Text = documentText
 				};
-				DocumentHighlighter documentHighlighter = new DocumentHighlighter(textDocument, obj.FsOeAxHtvW.TRke25VixJ.Highlighting);
+				DocumentHighlighter documentHighlighter = new DocumentHighlighter(textDocument, Highlighting);
 				foreach (DocumentLine line in textDocument.Lines)
 				{
 					if (line.Length > 0)
@@ -1049,76 +830,50 @@ public class PvfFileDocument : DocumentBase
 							IList<HighlightedSection> sections = highlightedLine.Sections;
 							if (sections[0].Color.Name != "Section")
 							{
-								DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(20, 1);
-								defaultInterpolatedStringHandler.AppendLiteral("第：");
-								defaultInterpolatedStringHandler.AppendFormatted(line.LineNumber);
-								defaultInterpolatedStringHandler.AppendLiteral("行 起始类型不是字符串索引 请检查！");
-								AppCore.ShowMsg(defaultInterpolatedStringHandler.ToStringAndClear(), isError: true);
+								AppCore.ShowMsg($"第：{line.LineNumber}行 起始类型不是字符串索引 请检查！", isError: true);
 								break;
 							}
 							if (sections[1].Color.Name != "String")
 							{
-								DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(19, 1);
-								defaultInterpolatedStringHandler2.AppendLiteral("第：");
-								defaultInterpolatedStringHandler2.AppendFormatted(line.LineNumber);
-								defaultInterpolatedStringHandler2.AppendLiteral("行 第二个类型不是字符串 请检查！");
-								AppCore.ShowMsg(defaultInterpolatedStringHandler2.ToStringAndClear(), isError: true);
+								AppCore.ShowMsg($"第：{line.LineNumber}行 第二个类型不是字符串 请检查！", isError: true);
 								break;
 							}
 							if (sections[0].Length == 2)
 							{
-								DefaultInterpolatedStringHandler defaultInterpolatedStringHandler3 = new DefaultInterpolatedStringHandler(15, 1);
-								defaultInterpolatedStringHandler3.AppendLiteral("第：");
-								defaultInterpolatedStringHandler3.AppendFormatted(line.LineNumber);
-								defaultInterpolatedStringHandler3.AppendLiteral("行 索引中没有编号 请检查");
-								AppCore.ShowMsg(defaultInterpolatedStringHandler3.ToStringAndClear(), isError: true);
+								AppCore.ShowMsg($"第：{line.LineNumber}行 索引中没有编号 请检查", isError: true);
 								break;
 							}
 							string text = textDocument.GetText(sections[0]);
 							if (!int.TryParse(text.Substring(1, text.Length - 2), out var result))
 							{
-								DefaultInterpolatedStringHandler defaultInterpolatedStringHandler4 = new DefaultInterpolatedStringHandler(17, 1);
-								defaultInterpolatedStringHandler4.AppendLiteral("第：");
-								defaultInterpolatedStringHandler4.AppendFormatted(line.LineNumber);
-								defaultInterpolatedStringHandler4.AppendLiteral("行 索引中不是int型 请检查");
-								AppCore.ShowMsg(defaultInterpolatedStringHandler4.ToStringAndClear(), isError: true);
+								AppCore.ShowMsg($"第：{line.LineNumber}行 索引中不是int型 请检查", isError: true);
 								break;
 							}
 							if (result < 0)
 							{
-								DefaultInterpolatedStringHandler defaultInterpolatedStringHandler5 = new DefaultInterpolatedStringHandler(16, 1);
-								defaultInterpolatedStringHandler5.AppendLiteral("第：");
-								defaultInterpolatedStringHandler5.AppendFormatted(line.LineNumber);
-								defaultInterpolatedStringHandler5.AppendLiteral("行 索引值不能小于0 请检查");
-								AppCore.ShowMsg(defaultInterpolatedStringHandler5.ToStringAndClear(), isError: true);
+								AppCore.ShowMsg($"第：{line.LineNumber}行 索引值不能小于0 请检查", isError: true);
 								break;
 							}
-							if (obj.FsOeAxHtvW.K3RefcuG1X.ContainsKey(result))
+							if (strings.ContainsKey(result))
 							{
-								DefaultInterpolatedStringHandler defaultInterpolatedStringHandler6 = new DefaultInterpolatedStringHandler(18, 2);
-								defaultInterpolatedStringHandler6.AppendLiteral("第：");
-								defaultInterpolatedStringHandler6.AppendFormatted(line.LineNumber);
-								defaultInterpolatedStringHandler6.AppendLiteral("行 与索引：[");
-								defaultInterpolatedStringHandler6.AppendFormatted(result);
-								defaultInterpolatedStringHandler6.AppendLiteral("] 重复请检查！ ");
-								AppCore.ShowMsg(defaultInterpolatedStringHandler6.ToStringAndClear(), isError: true);
+								AppCore.ShowMsg($"第：{line.LineNumber}行 与索引：[{result}] 重复请检查！ ", isError: true);
 								break;
 							}
-							obj.FsOeAxHtvW.K3RefcuG1X.Add(result, textDocument.GetText(sections[1]).Replace("`", string.Empty).Replace("\\n", "\r\n"));
+							strings.Add(result, textDocument.GetText(sections[1]).Replace("`", string.Empty).Replace("\\n", "\r\n"));
 						}
 					}
 				}
 			});
 		}
-		else if (CS_0024_003C_003E8__locals5.K3RefcuG1X.Count == 0 && AppCore.Logger.ShowDialog("当前字符串表为空 确定要继续保存？") != MessageResult.Yes)
+		else if (strings.Count == 0 && AppCore.Logger.ShowDialog("当前字符串表为空 确定要继续保存？") != MessageResult.Yes)
 		{
 			return;
 		}
-		await Task.Run(() => AppCore.ViewModelBase.PVF.Strtable.DocumentSave(CS_0024_003C_003E8__locals5.K3RefcuG1X, AppCore.ViewModelBase.PVF));
+		await Task.Run(() => AppCore.ViewModelBase.PVF.Strtable.DocumentSave(strings, AppCore.ViewModelBase.PVF));
 		base.IsLoading = false;
 	}
 
-	private void TnA5hQnSic()
+	private void SaveSuccessChangeData()
 	{
 		try
 		{
@@ -1210,7 +965,7 @@ public class PvfFileDocument : DocumentBase
 		{
 			if (File.FileType == PvfFileType.nut)
 			{
-				new ScriptCommentController(BCo5rRKg8l(), Editor).CommentCode();
+				new ScriptCommentController(Highlighter, Editor).CommentCode();
 			}
 		}
 		catch (Exception ex)
@@ -1226,7 +981,7 @@ public class PvfFileDocument : DocumentBase
 		{
 			if (File.FileType == PvfFileType.nut)
 			{
-				new ScriptCommentController(BCo5rRKg8l(), Editor).ClearComments();
+				new ScriptCommentController(Highlighter, Editor).ClearComments();
 			}
 		}
 		catch (Exception ex)
@@ -1277,13 +1032,7 @@ public class PvfFileDocument : DocumentBase
 		try
 		{
 			string extension = File.Extension;
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(6, 3);
-			defaultInterpolatedStringHandler.AppendFormatted(AppSetting.Instance.GetIlogger()?.GetStr("PvfFileScriptName"));
-			defaultInterpolatedStringHandler.AppendLiteral(" (*");
-			defaultInterpolatedStringHandler.AppendFormatted(extension);
-			defaultInterpolatedStringHandler.AppendLiteral(")|*");
-			defaultInterpolatedStringHandler.AppendFormatted(extension);
-			string filter = defaultInterpolatedStringHandler.ToStringAndClear();
+			string filter = $"{AppSetting.Instance.GetIlogger()?.GetStr("PvfFileScriptName")} (*{extension})|*{extension}";
 			SaveFileDialog saveFileDialog = new SaveFileDialog
 			{
 				Filter = filter,
@@ -1307,7 +1056,7 @@ public class PvfFileDocument : DocumentBase
 	{
 		if (AppCore.ViewModelBase.PVF.SaveFileAsBinaryAni(File, Document.Text))
 		{
-			TnA5hQnSic();
+			SaveSuccessChangeData();
 		}
 	}
 
@@ -1316,7 +1065,7 @@ public class PvfFileDocument : DocumentBase
 	{
 		if (AppCore.ViewModelBase.PVF.SaveFileAsScript(File, Document.Text))
 		{
-			TnA5hQnSic();
+			SaveSuccessChangeData();
 		}
 	}
 
@@ -1390,11 +1139,7 @@ public class PvfFileDocument : DocumentBase
 				int lstNumMax = AppCore.ViewModelBase.PVF.ListFileTable.GetLstNumMax(File.FileName);
 				TextDocument document = Document;
 				int textLength = Document.TextLength;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(5, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("\r\n");
-				defaultInterpolatedStringHandler.AppendFormatted(lstNumMax + 1);
-				defaultInterpolatedStringHandler.AppendLiteral("\t``");
-				document.Insert(textLength, defaultInterpolatedStringHandler.ToStringAndClear());
+				document.Insert(textLength, $"\r\n{lstNumMax + 1}\t``");
 				Editor.TextArea.Caret.Offset = Document.TextLength - 1;
 				Editor.ScrollToLine(Document.LineCount);
 			}
@@ -1466,12 +1211,12 @@ public class PvfFileDocument : DocumentBase
 		}
 	}
 
-	private void llF5vRk3y2(object P_0, DragEventArgs P_1)
+	private void OnEditorDrop(object sender, DragEventArgs e)
 	{
-		string text = (string)P_1.Data.GetData(typeof(string));
+		string text = (string)e.Data.GetData(typeof(string));
 		if (text != null && text == "TreeListDropGroup：15427586-86B6-5410-5D88-7F139C0C1E9E")
 		{
-			P_1.Handled = true;
+			e.Handled = true;
 			TreeListDropGroup.Instance.DropDocument(TreeListDropGroup.Instance.GetFilePaths(), Editor, this);
 		}
 	}
@@ -1483,9 +1228,9 @@ public class PvfFileDocument : DocumentBase
 			SearchPanel?.Dispose();
 			if (Editor != null)
 			{
-				Editor.TextArea.SelectionChanged -= iPd5jDePU5;
-				Editor.TextArea.Caret.PositionChanged -= j3Z5l8Bm4b;
-				Editor.TextArea.MouseDoubleClick -= Q795T3kTJ8;
+				Editor.TextArea.SelectionChanged -= OnSelectionChanged;
+				Editor.TextArea.Caret.PositionChanged -= OnCaretPositionChanged;
+				Editor.TextArea.MouseDoubleClick -= OnMouseDoubleClick;
 			}
 			if (SearchPanel != null)
 			{
@@ -1503,43 +1248,5 @@ public class PvfFileDocument : DocumentBase
 			Editor = null;
 			File = null;
 		}
-	}
-
-	[CompilerGenerated]
-	private async Task? f1X5BRv7xh()
-	{
-		_003C_003Ec__DisplayClass51_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass51_0();
-		CS_0024_003C_003E8__locals4.D2WejrvI73 = this;
-		PvfGroup pvf = AppCore.ViewModelBase.PVF;
-		if (FullPath == null)
-		{
-			AppCore.Logger.ErrorUploadDialog(new Exception("Document文件路径不能为Null"), "PvfFileDocument.RefDocumentText");
-			return;
-		}
-		if (pvf == null)
-		{
-			AppCore.Logger.ErrorUploadDialog(new Exception("pvf已关闭"), "PvfFileDocument.RefDocumentText");
-			return;
-		}
-		string qHPelojyTg = ((!(FullPath == "stringtable.bin")) ? pvf.GetFileText(File, NowEncoding) : (await AppCore.ViewModelBase.PVF.Strtable.GetDocumentText()));
-		CS_0024_003C_003E8__locals4.QHPelojyTg = qHPelojyTg;
-		if (FullPath == "stringtable.bin")
-		{
-			await (pvf.Strtable?.LoadQuote(pvf));
-		}
-		else if (FullPath.Contains("kor.str"))
-		{
-			await (pvf.Strview?.InitStringViewQuote(pvf, FullPath));
-		}
-		await ((DispatcherObject)Application.Current).Dispatcher.BeginInvoke((Delegate)(Action)delegate
-		{
-			CS_0024_003C_003E8__locals4.D2WejrvI73.Document.Text = CS_0024_003C_003E8__locals4.QHPelojyTg;
-		}, Array.Empty<object>());
-	}
-
-	[CompilerGenerated]
-	private ResultData<ImageSource> mdt5FFKA0b()
-	{
-		return AppCore.ViewModelBase.PVF.GetScriptIconSource(File);
 	}
 }

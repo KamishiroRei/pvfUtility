@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -49,46 +48,9 @@ namespace PvfCode.ViewModels.Bars;
 
 public class BarViewModel : ViewModelBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass58_0
-	{
-		public string A9TETD5UQ5;
+	private readonly AsyncLock treeLoadLock;
 
-		public _003C_003Ec__DisplayClass58_0()
-		{
-		}
-
-		internal Task<bool>? UtyEj3XIQs()
-		{
-			return AppCore.ViewModelBase.PVF.OpenPvfPack(A9TETD5UQ5, AppCore.ViewModelBase.MainProgress);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass63_0
-	{
-		public string aXZEHemSwu;
-
-		public _003C_003Ec__DisplayClass63_0()
-		{
-		}
-
-		internal Task<ResultData>? Xi1ECSQlY6()
-		{
-			return AppCore.ViewModelBase.PVF.SavePvfPack(aXZEHemSwu, isFastMode: false, AppCore.ViewModelBase.MainProgress, notButtonClick: false);
-		}
-	}
-
-	[CompilerGenerated]
-	private WinNewDiffEditor zWTxXTQLIC;
-
-	[CompilerGenerated]
-	private bool FctxpshNB5;
-
-	[CompilerGenerated]
-	private WinNewDiffViewModel DkExUxsJVI;
-
-	private readonly AsyncLock uJ3xcpPIRg;
+	private WinNewDiffEditor DiffEditor { get; set; }
 
 	public ImageSource ThemeDarkImageSource => (ImageSource)new ThemePaletteGlyphConverter().Convert(ThemeType.VS2019Dark.ToString(), null, null, CultureInfo.CurrentCulture);
 
@@ -109,37 +71,13 @@ public class BarViewModel : ViewModelBase
 		}
 	}
 
-	public bool DiffIsOpen
-	{
-		[CompilerGenerated]
-		get
-		{
-			return FctxpshNB5;
-		}
-		[CompilerGenerated]
-		set
-		{
-			FctxpshNB5 = value;
-		}
-	}
+	public bool DiffIsOpen { get; set; }
 
-	public WinNewDiffViewModel WindowDiffViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return DkExUxsJVI;
-		}
-		[CompilerGenerated]
-		set
-		{
-			DkExUxsJVI = value;
-		}
-	}
+	public WinNewDiffViewModel WindowDiffViewModel { get; set; }
 
 	public BarViewModel()
 	{
-		uJ3xcpPIRg = new AsyncLock();
+		treeLoadLock = new AsyncLock();
 		SelectedTheme = AppSetting.Instance.NowThemeType;
 	}
 
@@ -295,20 +233,6 @@ public class BarViewModel : ViewModelBase
 		windowMacroTool.Show();
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private WinNewDiffEditor USjxkDhoAk()
-	{
-		return zWTxXTQLIC;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void R8Tx0hphas(WinNewDiffEditor P_0)
-	{
-		zWTxXTQLIC = P_0;
-	}
-
 	[Command]
 	public void OnOpenDiffWindow()
 	{
@@ -319,22 +243,22 @@ public class BarViewModel : ViewModelBase
 	{
 		if (!WindowsEx.CheckIsInsertMicrosoftEdgeRuntime())
 		{
-			cAkx9QPmBC();
+			ShowEdgeRuntimeRequired();
 			return;
 		}
 		if (DiffIsOpen)
 		{
-			USjxkDhoAk().Activate();
+			DiffEditor.Activate();
 		}
 		else
 		{
 			WindowDiffViewModel = new WinNewDiffViewModel();
-			R8Tx0hphas(new WinNewDiffEditor(WindowDiffViewModel)
+			DiffEditor = new WinNewDiffEditor(WindowDiffViewModel)
 			{
 				Owner = Application.Current.MainWindow,
 				WindowStartupLocation = WindowStartupLocation.CenterOwner
-			});
-			USjxkDhoAk().Show();
+			};
+			DiffEditor.Show();
 			DiffIsOpen = true;
 		}
 		if (source != null)
@@ -355,22 +279,22 @@ public class BarViewModel : ViewModelBase
 	{
 		if (!WindowsEx.CheckIsInsertMicrosoftEdgeRuntime())
 		{
-			cAkx9QPmBC();
+			ShowEdgeRuntimeRequired();
 			return;
 		}
 		if (DiffIsOpen)
 		{
-			USjxkDhoAk().Activate();
+			DiffEditor.Activate();
 		}
 		else
 		{
 			WindowDiffViewModel = new WinNewDiffViewModel();
-			R8Tx0hphas(new WinNewDiffEditor(WindowDiffViewModel)
+			DiffEditor = new WinNewDiffEditor(WindowDiffViewModel)
 			{
 				Owner = Application.Current.MainWindow,
 				WindowStartupLocation = WindowStartupLocation.CenterOwner
-			});
-			USjxkDhoAk().Show();
+			};
+			DiffEditor.Show();
 			DiffIsOpen = true;
 		}
 		WindowDiffViewModel.LeftSource = leftSource;
@@ -378,7 +302,7 @@ public class BarViewModel : ViewModelBase
 		WindowDiffViewModel.RefEditor();
 	}
 
-	private void cAkx9QPmBC()
+	private void ShowEdgeRuntimeRequired()
 	{
 		WindowInsertMicrosoftEdgeRuntime windowInsertMicrosoftEdgeRuntime = new WindowInsertMicrosoftEdgeRuntime();
 		windowInsertMicrosoftEdgeRuntime.Owner = Application.Current.MainWindow;
@@ -442,7 +366,7 @@ public class BarViewModel : ViewModelBase
 			await AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(pvf.FileList.Keys));
 			AppCore.Logger.Success(AppSetting.Instance.GetIlogger()?.GetStr("mess_NewPvfPackSuccess"));
 			pvf.PvfPackFilePath = openFileDialog.FileName;
-			NFbxZBiaRO(openFileDialog.FileName);
+			SavePvfFile(openFileDialog.FileName);
 		}
 	}
 
@@ -459,7 +383,7 @@ public class BarViewModel : ViewModelBase
 	public async void OnRefTreeList()
 	{
 		AppCore.ViewModelBase.PvfFileTreeViewModel.Clear();
-		await kOlxPaPXEo();
+		await ReloadTreeAsync();
 	}
 
 	public void ApiRefTree()
@@ -480,9 +404,7 @@ public class BarViewModel : ViewModelBase
 	[Command]
 	public async void OnOpenPvfFile(string filePath)
 	{
-		_003C_003Ec__DisplayClass58_0 CS_0024_003C_003E8__locals11 = new _003C_003Ec__DisplayClass58_0();
-		CS_0024_003C_003E8__locals11.A9TETD5UQ5 = filePath;
-		if (string.IsNullOrEmpty(CS_0024_003C_003E8__locals11.A9TETD5UQ5))
+		if (string.IsNullOrEmpty(filePath))
 		{
 			string initialDirectory = "";
 			int count = AppSetting.Instance.PathConfig.PvfOpenLog.Count;
@@ -505,35 +427,35 @@ public class BarViewModel : ViewModelBase
 			{
 				return;
 			}
-			CS_0024_003C_003E8__locals11.A9TETD5UQ5 = commonOpenFileDialog.FileName;
+			filePath = commonOpenFileDialog.FileName;
 		}
 		else if (AppCore.ViewModelBase.PVF.PvfIsOpen)
 		{
-			if (AppCore.Logger.ShowDialog(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_LoadPvfPackDialog"), CS_0024_003C_003E8__locals11.A9TETD5UQ5)) != MessageResult.Yes)
+			if (AppCore.Logger.ShowDialog(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_LoadPvfPackDialog"), filePath)) != MessageResult.Yes)
 			{
 				return;
 			}
 			await AppCore.ViewModelBase.Clear();
 		}
-		if (!File.Exists(CS_0024_003C_003E8__locals11.A9TETD5UQ5))
+		if (!File.Exists(filePath))
 		{
-			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileNotExist"), CS_0024_003C_003E8__locals11.A9TETD5UQ5), isError: true);
-			if (AppSetting.Instance.PathConfig.PvfOpenLog.ContainsKey(CS_0024_003C_003E8__locals11.A9TETD5UQ5))
+			AppCore.ShowMsg(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileNotExist"), filePath), isError: true);
+			if (AppSetting.Instance.PathConfig.PvfOpenLog.ContainsKey(filePath))
 			{
-				AppSetting.Instance.PathConfig.PvfOpenLog.Remove(CS_0024_003C_003E8__locals11.A9TETD5UQ5);
+				AppSetting.Instance.PathConfig.PvfOpenLog.Remove(filePath);
 			}
 			return;
 		}
-		AppCore.Logger.Warning(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_PvfPackLoading"), CS_0024_003C_003E8__locals11.A9TETD5UQ5));
-		bool isOpen = await Task.Run(() => AppCore.ViewModelBase.PVF.OpenPvfPack(CS_0024_003C_003E8__locals11.A9TETD5UQ5, AppCore.ViewModelBase.MainProgress));
+		AppCore.Logger.Warning(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_PvfPackLoading"), filePath));
+		bool isOpen = await Task.Run(() => AppCore.ViewModelBase.PVF.OpenPvfPack(filePath, AppCore.ViewModelBase.MainProgress));
 		if (!isOpen)
 		{
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_CannotOpenPvfPack"), isError: true);
 			return;
 		}
 		AppCore.ViewModelBase.PVF.PvfIsOpen = true;
-		await kOlxPaPXEo();
-		AppSetting.Instance.PathConfig.AddPvfOpenLog(CS_0024_003C_003E8__locals11.A9TETD5UQ5);
+		await ReloadTreeAsync();
+		AppSetting.Instance.PathConfig.AddPvfOpenLog(filePath);
 		if (isOpen)
 		{
 			if (AppSetting.Instance.PvfConfig.AutoTheBackupPvfConfig.AutoTheBackupPvfIsOpen)
@@ -549,9 +471,9 @@ public class BarViewModel : ViewModelBase
 		AppCore.ClearMemory();
 	}
 
-	private async Task kOlxPaPXEo()
+	private async Task ReloadTreeAsync()
 	{
-		using (await uJ3xcpPIRg.LockAsync())
+		using (await treeLoadLock.LockAsync())
 		{
 			await AppCore.ViewModelBase.PvfFileTreeViewModel.TreeGroupData.CreateTrees(new PooledList<string>(AppCore.ViewModelBase.PVF.FileList.Keys));
 		}
@@ -571,7 +493,7 @@ public class BarViewModel : ViewModelBase
 				return;
 			}
 		}
-		NFbxZBiaRO(filePath);
+		SavePvfFile(filePath);
 	}
 
 	[Command]
@@ -587,17 +509,15 @@ public class BarViewModel : ViewModelBase
 		bool? flag = saveFileDialog.ShowDialog();
 		if (flag.HasValue && flag.Value)
 		{
-			NFbxZBiaRO(saveFileDialog.FileName);
+			SavePvfFile(saveFileDialog.FileName);
 		}
 	}
 
-	private async void NFbxZBiaRO(string P_0)
+	private async void SavePvfFile(string filePath)
 	{
-		_003C_003Ec__DisplayClass63_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass63_0();
-		CS_0024_003C_003E8__locals5.aXZEHemSwu = P_0;
-		if (string.IsNullOrEmpty(CS_0024_003C_003E8__locals5.aXZEHemSwu))
+		if (string.IsNullOrEmpty(filePath))
 		{
-			CS_0024_003C_003E8__locals5.aXZEHemSwu = AppCore.ViewModelBase.PVF.PvfPackFilePath;
+			filePath = AppCore.ViewModelBase.PVF.PvfPackFilePath;
 		}
 		if (AppCore.ViewModelBase.RootDocument.CheckNotSavedDocumentIsAny())
 		{
@@ -611,10 +531,10 @@ public class BarViewModel : ViewModelBase
 				return;
 			}
 		}
-		ResultData resultData = await Task.Run(() => AppCore.ViewModelBase.PVF.SavePvfPack(CS_0024_003C_003E8__locals5.aXZEHemSwu, isFastMode: false, AppCore.ViewModelBase.MainProgress, notButtonClick: false));
+		ResultData resultData = await Task.Run(() => AppCore.ViewModelBase.PVF.SavePvfPack(filePath, isFastMode: false, AppCore.ViewModelBase.MainProgress, notButtonClick: false));
 		if (!resultData.IsError)
 		{
-			AppCore.Logger.Debug(AppSetting.Instance.GetIlogger()?.GetStr("mess_SavePvfPackSuccess") + CS_0024_003C_003E8__locals5.aXZEHemSwu);
+			AppCore.Logger.Debug(AppSetting.Instance.GetIlogger()?.GetStr("mess_SavePvfPackSuccess") + filePath);
 			return;
 		}
 		AppCore.ShowMsg(resultData.Msg, isError: true);
