@@ -88,7 +88,7 @@ runtime output, Node/native modules, and post-deploy automation. Workbench
 program code was not copied.
 
 At build and publish time, `Directory.Build.targets` synchronizes the package to
-`AgentKnowledge/`. The destination is removed and recreated from the allowlisted
+`Resources/AgentKnowledge/`. The destination is removed and recreated from the allowlisted
 source items, so deleted knowledge files cannot remain as stale output.
 `KnowledgePackService` reads `indexes/knowledge-index.json`, routes to the best
 matching compact topics, and fails closed when the packaged index cannot be

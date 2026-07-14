@@ -19,10 +19,6 @@ public class MarkdownEditorPreview : Grid
 		typeof(MarkdownEditorPreview),
 		new PropertyMetadata(string.Empty, OnPreviewTitleChanged));
 
-	private static readonly SolidColorBrush EditorBackground = CreateFrozenBrush("#303030");
-	private static readonly SolidColorBrush EditorForeground = CreateFrozenBrush("#F2F2F2");
-	private static readonly SolidColorBrush EditorBorder = CreateFrozenBrush("#686868");
-
 	private readonly TextBox editor;
 	private readonly MarkdownDocumentViewer preview;
 	private bool updating;
@@ -63,13 +59,13 @@ public class MarkdownEditorPreview : Grid
 			TextWrapping = TextWrapping.Wrap,
 			VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
 			HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-			Background = EditorBackground,
-			Foreground = EditorForeground,
-			BorderBrush = EditorBorder,
 			BorderThickness = new Thickness(1),
 			FontFamily = new FontFamily("Consolas"),
 			Padding = new Thickness(8)
 		};
+		editor.SetResourceReference(Control.BackgroundProperty, "EditorBackground");
+		editor.SetResourceReference(Control.ForegroundProperty, "EditorForeground");
+		editor.SetResourceReference(Control.BorderBrushProperty, "EditorFoldingMarkerBrush");
 		editor.TextChanged += OnEditorTextChanged;
 		body.Children.Add(editor);
 
@@ -77,9 +73,9 @@ public class MarkdownEditorPreview : Grid
 		{
 			Width = 5,
 			HorizontalAlignment = HorizontalAlignment.Stretch,
-			VerticalAlignment = VerticalAlignment.Stretch,
-			Background = EditorBorder
+			VerticalAlignment = VerticalAlignment.Stretch
 		};
+		splitter.SetResourceReference(Panel.BackgroundProperty, "EditorFoldingMarkerBrush");
 		Grid.SetColumn(splitter, 1);
 		body.Children.Add(splitter);
 
@@ -244,10 +240,4 @@ public class MarkdownEditorPreview : Grid
 		preview.Title = PreviewTitle ?? string.Empty;
 	}
 
-	private static SolidColorBrush CreateFrozenBrush(string color)
-	{
-		SolidColorBrush brush = new((Color)ColorConverter.ConvertFromString(color));
-		brush.Freeze();
-		return brush;
-	}
 }

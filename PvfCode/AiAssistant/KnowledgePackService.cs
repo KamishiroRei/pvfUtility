@@ -17,6 +17,8 @@ public sealed class KnowledgePackService
 
 	private readonly string _rootDirectory;
 
+	public static string DefaultRootDirectory => Path.Combine(AppContext.BaseDirectory, "Resources", "AgentKnowledge");
+
 	private readonly string _rootPrefix;
 
 	private readonly bool _allowUnindexedFallback;
@@ -31,7 +33,7 @@ public sealed class KnowledgePackService
 
 	public KnowledgePackService(string? rootDirectory = null, bool allowUnindexedFallback = false)
 	{
-		_rootDirectory = Path.GetFullPath(rootDirectory ?? Path.Combine(AppContext.BaseDirectory, "AgentKnowledge"));
+		_rootDirectory = Path.GetFullPath(rootDirectory ?? DefaultRootDirectory);
 		_rootPrefix = Path.TrimEndingDirectorySeparator(_rootDirectory) + Path.DirectorySeparatorChar;
 		_allowUnindexedFallback = allowUnindexedFallback;
 	}

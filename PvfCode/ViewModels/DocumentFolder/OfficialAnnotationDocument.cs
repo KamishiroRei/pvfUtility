@@ -17,6 +17,12 @@ public sealed class OfficialAnnotationDocument : DocumentBase
 
 	public IReadOnlyList<string> AvailableFiles => catalog.Files;
 
+	public bool WordWrap
+	{
+		get => GetProperty(() => WordWrap);
+		set => SetProperty(() => WordWrap, value);
+	}
+
 	public IHighlightingDefinition Highlighting
 	{
 		get => GetProperty(() => Highlighting);
@@ -54,6 +60,7 @@ public sealed class OfficialAnnotationDocument : DocumentBase
 	{
 		this.catalog = catalog ?? new OfficialAnnotationCatalog();
 		DocumentType = PvfFileDocumentType.官方注释文档;
+		WordWrap = AppSetting.Instance.EditConfig.WordWrap;
 		Content = string.Empty;
 		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += OnThemeChanged;
 

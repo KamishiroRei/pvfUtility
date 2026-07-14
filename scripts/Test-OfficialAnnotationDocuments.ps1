@@ -165,17 +165,35 @@ try {
 
     $filePicker = $null
     $reader = $null
+    $wordWrap = $null
     $documentHost = $null
     $deadline = [DateTime]::UtcNow.AddSeconds(15)
-    while ([DateTime]::UtcNow -lt $deadline -and ($null -eq $filePicker -or $null -eq $reader)) {
+    while ([DateTime]::UtcNow -lt $deadline -and
+        ($null -eq $filePicker -or $null -eq $reader -or $null -eq $wordWrap)) {
         Start-Sleep -Milliseconds 250
         $filePicker = Find-ByAutomationId -Root $mainWindow -AutomationId "OfficialAnnotationFilePicker"
         $reader = Find-ByAutomationId -Root $mainWindow -AutomationId "OfficialAnnotationReader"
+        $wordWrap = Find-ByAutomationId -Root $mainWindow -AutomationId "OfficialAnnotationWordWrap"
         $documentHost = Find-ByAutomationId -Root $mainWindow -AutomationId "DocumentHost"
     }
-    if ($null -eq $filePicker -or $null -eq $reader -or $null -eq $documentHost) {
+    if ($null -eq $filePicker -or $null -eq $reader -or $null -eq $wordWrap -or $null -eq $documentHost) {
         throw "Official-annotation document controls did not appear."
     }
+
+    $togglePattern = $null
+    if (-not $wordWrap.TryGetCurrentPattern([System.Windows.Automation.TogglePattern]::Pattern, [ref]$togglePattern)) {
+        throw "Official-annotation word-wrap control does not support toggling."
+    }
+    $initialWrapState = $togglePattern.Current.ToggleState
+    $togglePattern.Toggle()
+    $deadline = [DateTime]::UtcNow.AddSeconds(3)
+    while ([DateTime]::UtcNow -lt $deadline -and $togglePattern.Current.ToggleState -eq $initialWrapState) {
+        Start-Sleep -Milliseconds 100
+    }
+    if ($togglePattern.Current.ToggleState -eq $initialWrapState) {
+        throw "Official-annotation word-wrap state did not change after toggling."
+    }
+    $togglePattern.Toggle()
 
     $hostBounds = $documentHost.Current.BoundingRectangle
     $readerBounds = $reader.Current.BoundingRectangle
@@ -237,7 +255,7 @@ try {
         throw "Selecting actionsample.act.txt did not update the read-only reader. Picker=$pickerText Status=$statusText ReaderLength=$($readerText.Length)"
     }
 
-    Write-Output "PASS: official-annotation menu order, right-side document, file selection, and content loading verified."
+    Write-Output "PASS: official-annotation menu order, right-side document, word-wrap toggle, file selection, and content loading verified."
 }
 finally {
     if (-not $process.HasExited) {

@@ -50,7 +50,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Import-PvfParserIn
 - `OPENAI_BASE_URL` 和 `OPENAI_MODEL` 可覆盖本地配置。远程服务必须使用 HTTPS，HTTP 仅允许本机回环地址。
 - “允许 AI 读取当前 PVF”默认关闭。只有用户在当前会话中明确勾选后，模型才能调用 PVF 只读工具并接收对应内容。
 - 模型只有知识检索和白名单 PVF 只读工具，没有保存、替换、发布、部署、客户端写入、进程执行或通用文件系统工具。
-- 构建输出中的 `AgentKnowledge/` 固定来自 `PVF-Agent-Workbench` clean commit 的 273 条 manifest 项和一份 CC0 许可，不包含 `.env`、真实 PVF、Node runtime、本地工作区输出或部署脚本。
+- 构建输出中的 `Resources/AgentKnowledge/` 固定来自 `PVF-Agent-Workbench` clean commit 的 273 条 manifest 项和一份 CC0 许可，不包含 `.env`、真实 PVF、Node runtime、本地工作区输出或部署脚本。
 
 当前适配器保留传统 Chat Completions 兼容面；不同提供方对模型名称、`max_tokens` 和 function tools 的支持可能不同，模型名称应按实际服务配置。实现结构、工具边界、知识来源和验证方法见 `docs/AI_ASSISTANT.md`。
 

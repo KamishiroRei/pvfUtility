@@ -132,8 +132,8 @@
 
     <None Remove="$(RecoveredResourceDirectory)\AiAssistant\KnowledgePack\**\*" />
     <Content Include="$(RecoveredResourceDirectory)\AiAssistant\KnowledgePack\**\*">
-      <Link>AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)</Link>
-      <TargetPath>AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)</TargetPath>
+      <Link>Resources\AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <TargetPath>Resources\AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)</TargetPath>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -212,16 +212,18 @@
           AfterTargets="Build"
           Condition="'$(AssemblyName)' == 'pvfUtility' And '@(AiAssistantKnowledge)' != ''">
     <RemoveDir Directories="$(TargetDir)AgentKnowledge" />
+    <RemoveDir Directories="$(TargetDir)Resources\AgentKnowledge" />
     <Copy SourceFiles="@(AiAssistantKnowledge)"
-          DestinationFiles="@(AiAssistantKnowledge->'$(TargetDir)AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)')" />
+          DestinationFiles="@(AiAssistantKnowledge->'$(TargetDir)Resources\AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 
   <Target Name="SynchronizeAiAssistantKnowledgePublish"
           AfterTargets="Publish"
           Condition="'$(AssemblyName)' == 'pvfUtility' And '$(PublishDir)' != '' And '@(AiAssistantKnowledge)' != ''">
     <RemoveDir Directories="$(PublishDir)AgentKnowledge" />
+    <RemoveDir Directories="$(PublishDir)Resources\AgentKnowledge" />
     <Copy SourceFiles="@(AiAssistantKnowledge)"
-          DestinationFiles="@(AiAssistantKnowledge->'$(PublishDir)AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)')" />
+          DestinationFiles="@(AiAssistantKnowledge->'$(PublishDir)Resources\AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 
 </Project>

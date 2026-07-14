@@ -36,7 +36,6 @@ public class CodeCompletionToolTip : PopupEx, IComponentConnector
 		preview.SetBinding(MarkdownDocumentViewer.TitleProperty, new Binding("Comment.Title"));
 		preview.SetBinding(MarkdownDocumentViewer.MarkdownProperty, new Binding("Comment.Comment"));
 		preview.SetBinding(MarkdownDocumentViewer.OfficialDescriptionProperty, new Binding("Comment.OfficialDescription"));
-		preview.SetBinding(MarkdownDocumentViewer.BackgroundProperty, new Binding("Background") { Source = commentGrid });
 		Style style = new(typeof(MarkdownDocumentViewer));
 		style.Setters.Add(new Setter(VisibilityProperty, Visibility.Visible));
 		DataTrigger editing = new() { Binding = new Binding("IsEditorComment"), Value = true };

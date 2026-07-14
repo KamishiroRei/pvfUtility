@@ -3,15 +3,12 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
 using PvfCode.ViewModels.DocumentFolder.EditorHoverTooltip;
 
 namespace PvfCode.Controls;
 
 public class PvfCommentTooltipView : Border
 {
-	private static readonly SolidColorBrush TooltipBackground = CreateTooltipBackground();
-
 	private readonly Grid readPanel;
 	private readonly Grid editPanel;
 	private ToolTipViewModel_SectionComment viewModel;
@@ -23,8 +20,8 @@ public class PvfCommentTooltipView : Border
 		MinWidth = 420;
 		Padding = new Thickness(1);
 		BorderThickness = new Thickness(1);
-		BorderBrush = Brushes.Gray;
-		Background = TooltipBackground;
+		SetResourceReference(BorderBrushProperty, "EditorFoldingMarkerBrush");
+		SetResourceReference(BackgroundProperty, "EditorBackground");
 		Grid root = new();
 		readPanel = CreateReadPanel();
 		editPanel = CreateEditPanel();
@@ -33,13 +30,6 @@ public class PvfCommentTooltipView : Border
 		Child = root;
 		DataContextChanged += OnDataContextChanged;
 		UpdateMode();
-	}
-
-	private static SolidColorBrush CreateTooltipBackground()
-	{
-		SolidColorBrush brush = new(Color.FromRgb(0x2D, 0x2D, 0x30));
-		brush.Freeze();
-		return brush;
 	}
 
 	private Grid CreateReadPanel()
@@ -53,7 +43,8 @@ public class PvfCommentTooltipView : Border
 		viewer.SetBinding(MarkdownDocumentViewer.OfficialDescriptionProperty, new Binding("Comment.OfficialDescription"));
 		panel.Children.Add(viewer);
 		DockPanel footer = new() { Margin = new Thickness(10, 4, 10, 8) };
-		TextBlock metadata = new() { Foreground = System.Windows.Media.Brushes.Gray, VerticalAlignment = VerticalAlignment.Center };
+		TextBlock metadata = new() { VerticalAlignment = VerticalAlignment.Center };
+		metadata.SetResourceReference(TextBlock.ForegroundProperty, "EditorFoldingMarkerBrush");
 		metadata.SetBinding(TextBlock.TextProperty, new Binding("Comment.Authors") { StringFormat = "Author: {0}" });
 		footer.Children.Add(metadata);
 		Button edit = new() { Content = "Edit", MinWidth = 72, Margin = new Thickness(12, 0, 0, 0) };

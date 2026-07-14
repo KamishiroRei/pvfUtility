@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
 using ICSharpCode.AvalonEdit;
@@ -23,9 +24,13 @@ public sealed class OfficialAnnotationDocumentView : UserControl
 		root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 		root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
+		Grid toolbar = new();
+		toolbar.ColumnDefinitions.Add(new ColumnDefinition());
+		toolbar.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
 		ComboBox filePicker = new()
 		{
-			Margin = new Thickness(8),
+			Margin = new Thickness(8, 8, 4, 8),
 			MinWidth = 220,
 			HorizontalAlignment = HorizontalAlignment.Stretch,
 			IsEditable = true,
@@ -39,8 +44,26 @@ public sealed class OfficialAnnotationDocumentView : UserControl
 			Mode = BindingMode.TwoWay,
 			UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
 		});
-		Grid.SetRow(filePicker, 0);
-		root.Children.Add(filePicker);
+		toolbar.Children.Add(filePicker);
+
+		CheckBox wordWrap = new()
+		{
+			Content = "自动换行",
+			Margin = new Thickness(8, 8, 10, 8),
+			VerticalAlignment = VerticalAlignment.Center
+		};
+		wordWrap.SetResourceReference(Control.ForegroundProperty, "EditorForeground");
+		AutomationProperties.SetAutomationId(wordWrap, "OfficialAnnotationWordWrap");
+		wordWrap.SetBinding(ToggleButton.IsCheckedProperty, new Binding(nameof(OfficialAnnotationDocument.WordWrap))
+		{
+			Mode = BindingMode.TwoWay,
+			UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+		});
+		Grid.SetColumn(wordWrap, 1);
+		toolbar.Children.Add(wordWrap);
+
+		Grid.SetRow(toolbar, 0);
+		root.Children.Add(toolbar);
 
 		editor = new TextEdit
 		{
@@ -58,9 +81,8 @@ public sealed class OfficialAnnotationDocumentView : UserControl
 			Source = AppSetting.Instance,
 			Mode = BindingMode.OneWay
 		});
-		editor.SetBinding(TextEditor.WordWrapProperty, new Binding("EditConfig.WordWrap")
+		editor.SetBinding(TextEditor.WordWrapProperty, new Binding(nameof(OfficialAnnotationDocument.WordWrap))
 		{
-			Source = AppSetting.Instance,
 			Mode = BindingMode.OneWay
 		});
 		editor.SetBinding(TextEdit.ShowSpacesProperty, new Binding("EditConfig.ShowSpaces")

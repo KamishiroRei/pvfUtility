@@ -43,14 +43,11 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		.Build();
 
 	private static readonly FontFamily CodeFontFamily = new("Consolas");
-	private static readonly SolidColorBrush ViewerBackground = CreateFrozenBrush("#424242");
-	private static readonly SolidColorBrush DefaultForeground = CreateFrozenBrush("#F2F2F2");
-	private static readonly SolidColorBrush MutedForeground = CreateFrozenBrush("#BDBDBD");
-	private static readonly SolidColorBrush LinkForeground = CreateFrozenBrush("#8EC5FF");
-	private static readonly SolidColorBrush CodeBackground = CreateFrozenBrush("#303030");
-	private static readonly SolidColorBrush TableHeaderBackground = CreateFrozenBrush("#4A4A4A");
-	private static readonly SolidColorBrush TableBorderBrush = CreateFrozenBrush("#686868");
-	private static readonly SolidColorBrush QuoteBorderBrush = CreateFrozenBrush("#8A8A8A");
+	private const string EditorBackgroundResource = "EditorBackground";
+	private const string EditorForegroundResource = "EditorForeground";
+	private const string CodeBackgroundResource = "EditorFindKeyWordTextBoxBackBrush";
+	private const string LinkForegroundResource = "EditorLinkTextForegroundBrush";
+	private const string MutedForegroundResource = "EditorFoldingMarkerBrush";
 
 	public string Title
 	{
@@ -76,8 +73,8 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 		HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
 		Padding = new Thickness(12);
-		Background = ViewerBackground;
-		Foreground = DefaultForeground;
+		SetResourceReference(BackgroundProperty, EditorBackgroundResource);
+		SetResourceReference(ForegroundProperty, EditorForegroundResource);
 		RebuildDocument();
 	}
 
@@ -94,10 +91,17 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 			PagePadding = new Thickness(0),
 			FontFamily = fontFamily ?? SystemFonts.MessageFontFamily,
 			FontSize = fontSize,
-			Foreground = foreground ?? DefaultForeground,
-			Background = ViewerBackground,
 			TextAlignment = TextAlignment.Left
 		};
+		document.SetResourceReference(FlowDocument.BackgroundProperty, EditorBackgroundResource);
+		if (foreground == null)
+		{
+			document.SetResourceReference(FlowDocument.ForegroundProperty, EditorForegroundResource);
+		}
+		else
+		{
+			document.Foreground = foreground;
+		}
 		if (!string.IsNullOrWhiteSpace(title))
 		{
 			Paragraph titleParagraph = CreateParagraph(title.Trim());
@@ -125,7 +129,7 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 
 	private void RebuildDocument()
 	{
-		Document = RenderDocument(Title, Markdown, OfficialDescription, FontFamily, FontSize, Foreground);
+		Document = RenderDocument(Title, Markdown, OfficialDescription, FontFamily, FontSize);
 	}
 
 	private static void AppendMarkdown(BlockCollection blocks, string markdown)
@@ -213,10 +217,10 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		{
 			Margin = new Thickness(0, 6, 0, 6),
 			Padding = new Thickness(10, 2, 0, 2),
-			BorderThickness = new Thickness(3, 0, 0, 0),
-			BorderBrush = QuoteBorderBrush,
-			Foreground = MutedForeground
+			BorderThickness = new Thickness(3, 0, 0, 0)
 		};
+		section.SetResourceReference(Section.BorderBrushProperty, MutedForegroundResource);
+		section.SetResourceReference(Section.ForegroundProperty, MutedForegroundResource);
 		AppendBlocks(section.Blocks, quote);
 		return section;
 	}
@@ -264,14 +268,14 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 			{
 				WpfTableCell cell = new()
 				{
-					BorderBrush = TableBorderBrush,
 					BorderThickness = new Thickness(1),
 					Padding = new Thickness(8, 5, 8, 5),
 					ColumnSpan = Math.Max(1, sourceCell.ColumnSpan)
 				};
+				cell.SetResourceReference(WpfTableCell.BorderBrushProperty, MutedForegroundResource);
 				if (sourceRow.IsHeader)
 				{
-					cell.Background = TableHeaderBackground;
+					cell.SetResourceReference(WpfTableCell.BackgroundProperty, CodeBackgroundResource);
 					cell.FontWeight = FontWeights.SemiBold;
 				}
 				AppendBlocks(cell.Blocks, sourceCell);
@@ -340,11 +344,11 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		Paragraph paragraph = new()
 		{
 			FontFamily = CodeFontFamily,
-			Background = CodeBackground,
-			Foreground = Brushes.White,
 			Padding = new Thickness(9),
 			Margin = new Thickness(0, 7, 0, 8)
 		};
+		paragraph.SetResourceReference(Paragraph.BackgroundProperty, CodeBackgroundResource);
+		paragraph.SetResourceReference(Paragraph.ForegroundProperty, EditorForegroundResource);
 		string text = code.Lines.ToString().TrimEnd('\r', '\n');
 		string[] lines = text.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
 		for (int i = 0; i < lines.Length; i++)
@@ -360,12 +364,13 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 
 	private static BlockUIContainer CreateThematicBreak()
 	{
-		return new BlockUIContainer(new Border
+		Border border = new()
 		{
 			Height = 1,
-			Margin = new Thickness(0, 10, 0, 10),
-			Background = TableBorderBrush
-		});
+			Margin = new Thickness(0, 10, 0, 10)
+		};
+		border.SetResourceReference(Border.BackgroundProperty, MutedForegroundResource);
+		return new BlockUIContainer(border);
 	}
 
 	private static Paragraph CreateParagraph(ContainerInline inline)
@@ -407,12 +412,10 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 			target.Add(new Run(literal.Content.ToString()));
 			break;
 		case CodeInline code:
-			target.Add(new Run(code.Content)
-			{
-				FontFamily = CodeFontFamily,
-				Background = CodeBackground,
-				Foreground = Brushes.White
-			});
+			Run codeRun = new(code.Content) { FontFamily = CodeFontFamily };
+			codeRun.SetResourceReference(Run.BackgroundProperty, CodeBackgroundResource);
+			codeRun.SetResourceReference(Run.ForegroundProperty, EditorForegroundResource);
+			target.Add(codeRun);
 			break;
 		case EmphasisInline emphasis:
 			target.Add(CreateEmphasis(emphasis));
@@ -433,11 +436,9 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 			target.Add(new Run(html.Tag));
 			break;
 		case TaskList task:
-			target.Add(new Run(task.Checked ? "[x] " : "[ ] ")
-			{
-				FontFamily = CodeFontFamily,
-				Foreground = MutedForeground
-			});
+			Run taskRun = new(task.Checked ? "[x] " : "[ ] ") { FontFamily = CodeFontFamily };
+			taskRun.SetResourceReference(Run.ForegroundProperty, MutedForegroundResource);
+			target.Add(taskRun);
 			break;
 		case ContainerInline nested:
 			AppendInlines(target, nested);
@@ -476,15 +477,20 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		if (link.IsImage)
 		{
 			Span imageText = new();
-			imageText.Inlines.Add(new Run("Image: ") { Foreground = MutedForeground });
+			Run imageLabel = new("Image: ");
+			imageLabel.SetResourceReference(Run.ForegroundProperty, MutedForegroundResource);
+			imageText.Inlines.Add(imageLabel);
 			AppendInlines(imageText.Inlines, link);
 			if (!string.IsNullOrWhiteSpace(link.Url))
 			{
-				imageText.Inlines.Add(new Run(" (" + link.Url + ")") { Foreground = MutedForeground });
+				Run imageUrl = new(" (" + link.Url + ")");
+				imageUrl.SetResourceReference(Run.ForegroundProperty, MutedForegroundResource);
+				imageText.Inlines.Add(imageUrl);
 			}
 			return imageText;
 		}
-		WpfHyperlink hyperlink = new() { Foreground = LinkForeground };
+		WpfHyperlink hyperlink = new();
+		hyperlink.SetResourceReference(WpfHyperlink.ForegroundProperty, LinkForegroundResource);
 		AppendInlines(hyperlink.Inlines, link);
 		if (hyperlink.Inlines.Count == 0 && !string.IsNullOrWhiteSpace(link.Url))
 		{
@@ -497,7 +503,8 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 	private static Span CreateAutolink(AutolinkInline autolink)
 	{
 		string urlText = autolink.Url.ToString();
-		WpfHyperlink hyperlink = new(new Run(urlText)) { Foreground = LinkForeground };
+		WpfHyperlink hyperlink = new(new Run(urlText));
+		hyperlink.SetResourceReference(WpfHyperlink.ForegroundProperty, LinkForegroundResource);
 		string url = autolink.IsEmail ? "mailto:" + urlText : urlText;
 		AttachNavigation(hyperlink, url);
 		return hyperlink;
@@ -530,10 +537,4 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		};
 	}
 
-	private static SolidColorBrush CreateFrozenBrush(string color)
-	{
-		SolidColorBrush brush = new((Color)ColorConverter.ConvertFromString(color));
-		brush.Freeze();
-		return brush;
-	}
 }
