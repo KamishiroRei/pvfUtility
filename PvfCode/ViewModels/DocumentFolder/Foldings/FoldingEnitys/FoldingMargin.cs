@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,9 +16,6 @@ namespace PvfCode.ViewModels.DocumentFolder.Foldings.FoldingEnitys;
 
 public class FoldingMargin : AbstractMargin
 {
-	[CompilerGenerated]
-	private FoldingManager qu8Y8rShUV;
-
 	public static readonly DependencyProperty FoldingMarkerBrushProperty;
 
 	public static readonly DependencyProperty FoldingMarkerBackgroundBrushProperty;
@@ -28,25 +24,13 @@ public class FoldingMargin : AbstractMargin
 
 	public static readonly DependencyProperty SelectedFoldingMarkerBackgroundBrushProperty;
 
-	private List<FoldingMarginMarker> zeQYMUyf5O;
+	private List<FoldingMarginMarker> markers;
 
-	private Pen sDgYVCGGG7;
+	private Pen foldingControlPen;
 
-	private Pen iLjY3Petma;
+	private Pen selectedFoldingControlPen;
 
-	public FoldingManager FoldingManager
-	{
-		[CompilerGenerated]
-		get
-		{
-			return qu8Y8rShUV;
-		}
-		[CompilerGenerated]
-		set
-		{
-			qu8Y8rShUV = value;
-		}
-	}
+	public FoldingManager FoldingManager { get; set; }
 
 	public Brush FoldingMarkerBrush
 	{
@@ -96,7 +80,7 @@ public class FoldingMargin : AbstractMargin
 		}
 	}
 
-	protected override int VisualChildrenCount => zeQYMUyf5O.Count;
+	protected override int VisualChildrenCount => markers.Count;
 
 	public static Brush GetFoldingMarkerBrush(DependencyObject obj)
 	{
@@ -138,35 +122,35 @@ public class FoldingMargin : AbstractMargin
 		obj.SetValue(SelectedFoldingMarkerBackgroundBrushProperty, (object)value);
 	}
 
-	private static void KcwYZvppKh(DependencyObject P_0, DependencyPropertyChangedEventArgs P_1)
+	private static void OnUpdateBrushes(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
 	{
 		FoldingMargin foldingMargin = null;
-		if (P_0 is FoldingMargin)
+		if (dependencyObject is FoldingMargin)
 		{
-			foldingMargin = (FoldingMargin)(object)P_0;
+			foldingMargin = (FoldingMargin)dependencyObject;
 		}
-		else if (P_0 is TextEditor)
+		else if (dependencyObject is TextEditor)
 		{
-			foldingMargin = ((TextEditor)(object)P_0).TextArea.LeftMargins.FirstOrDefault((UIElement c) => c is FoldingMargin) as FoldingMargin;
+			foldingMargin = ((TextEditor)dependencyObject).TextArea.LeftMargins.FirstOrDefault((UIElement c) => c is FoldingMargin) as FoldingMargin;
 		}
 		if (foldingMargin != null)
 		{
-			if (P_1.Property.Name == FoldingMarkerBrushProperty.Name)
+			if (e.Property.Name == FoldingMarkerBrushProperty.Name)
 			{
-				foldingMargin.sDgYVCGGG7 = oNAYkLbqlF((Brush)P_1.NewValue);
+				foldingMargin.foldingControlPen = MakeFrozenPen((Brush)e.NewValue);
 			}
-			if (P_1.Property.Name == SelectedFoldingMarkerBrushProperty.Name)
+			if (e.Property.Name == SelectedFoldingMarkerBrushProperty.Name)
 			{
-				foldingMargin.iLjY3Petma = oNAYkLbqlF((Brush)P_1.NewValue);
+				foldingMargin.selectedFoldingControlPen = MakeFrozenPen((Brush)e.NewValue);
 			}
 		}
 	}
 
 	protected override Size MeasureOverride(Size availableSize)
 	{
-		foreach (FoldingMarginMarker item in zeQYMUyf5O)
+		foreach (FoldingMarginMarker marker in markers)
 		{
-			item.Measure(availableSize);
+			marker.Measure(availableSize);
 		}
 		double value = 1.3333333333333333 * (double)((DependencyObject)this).GetValue(TextBlock.FontSizeProperty);
 		Size pixelSize = PixelSnapHelpers.GetPixelSize(this);
@@ -176,18 +160,18 @@ public class FoldingMargin : AbstractMargin
 	protected override Size ArrangeOverride(Size finalSize)
 	{
 		Size pixelSize = PixelSnapHelpers.GetPixelSize(this);
-		foreach (FoldingMarginMarker item in zeQYMUyf5O)
+		foreach (FoldingMarginMarker marker in markers)
 		{
-			int visualColumn = item.yyfyla81Gf.GetVisualColumn(item.MfLyj1x2j1.StartOffset - item.yyfyla81Gf.FirstDocumentLine.Offset);
-			TextLine textLine = item.yyfyla81Gf.GetTextLine(visualColumn);
-			double num = item.yyfyla81Gf.GetTextLineVisualYPosition(textLine, VisualYPosition.TextMiddle) - base.TextView.VerticalOffset;
+			int visualColumn = marker.VisualLine.GetVisualColumn(marker.FoldingSection.StartOffset - marker.VisualLine.FirstDocumentLine.Offset);
+			TextLine textLine = marker.VisualLine.GetTextLine(visualColumn);
+			double num = marker.VisualLine.GetTextLineVisualYPosition(textLine, VisualYPosition.TextMiddle) - base.TextView.VerticalOffset;
 			double num2 = num;
-			Size desiredSize = item.DesiredSize;
+			Size desiredSize = marker.DesiredSize;
 			num = num2 - desiredSize.Height / 2.0;
 			double width = finalSize.Width;
-			desiredSize = item.DesiredSize;
+			desiredSize = marker.DesiredSize;
 			double num3 = (width - desiredSize.Width) / 2.0;
-			item.Arrange(new Rect(PixelSnapHelpers.Round(new Point(num3, num), pixelSize), item.DesiredSize));
+			marker.Arrange(new Rect(PixelSnapHelpers.Round(new Point(num3, num), pixelSize), marker.DesiredSize));
 		}
 		return base.ArrangeOverride(finalSize);
 	}
@@ -196,23 +180,23 @@ public class FoldingMargin : AbstractMargin
 	{
 		if (oldTextView != null)
 		{
-			oldTextView.VisualLinesChanged -= iWMYJYOfN2;
+			oldTextView.VisualLinesChanged -= TextViewVisualLinesChanged;
 		}
 		base.OnTextViewChanged(oldTextView, newTextView);
 		if (newTextView != null)
 		{
-			newTextView.VisualLinesChanged += iWMYJYOfN2;
+			newTextView.VisualLinesChanged += TextViewVisualLinesChanged;
 		}
-		iWMYJYOfN2(null, null);
+		TextViewVisualLinesChanged(null, null);
 	}
 
-	private void iWMYJYOfN2(object P_0, EventArgs P_1)
+	private void TextViewVisualLinesChanged(object sender, EventArgs e)
 	{
-		foreach (FoldingMarginMarker item in zeQYMUyf5O)
+		foreach (FoldingMarginMarker marker in markers)
 		{
-			RemoveVisualChild(item);
+			RemoveVisualChild(marker);
 		}
-		zeQYMUyf5O.Clear();
+		markers.Clear();
 		InvalidateVisual();
 		if (base.TextView == null || FoldingManager == null || !base.TextView.VisualLinesValid)
 		{
@@ -223,15 +207,15 @@ public class FoldingMargin : AbstractMargin
 			FoldingSection nextFolding = FoldingManager.GetNextFolding(visualLine.FirstDocumentLine.Offset);
 			if (nextFolding != null && nextFolding.StartOffset <= visualLine.LastDocumentLine.Offset + visualLine.LastDocumentLine.Length)
 			{
-				FoldingMarginMarker esjaYkYR4eyUNhP8sbg = new FoldingMarginMarker
+				FoldingMarginMarker marker = new FoldingMarginMarker
 				{
 					IsExpanded = !nextFolding.IsFolded,
-					yyfyla81Gf = visualLine,
-					MfLyj1x2j1 = nextFolding
+					VisualLine = visualLine,
+					FoldingSection = nextFolding
 				};
-				zeQYMUyf5O.Add(esjaYkYR4eyUNhP8sbg);
-				AddVisualChild(esjaYkYR4eyUNhP8sbg);
-				esjaYkYR4eyUNhP8sbg.IsMouseDirectlyOverChanged += (DependencyPropertyChangedEventHandler)delegate
+				markers.Add(marker);
+				AddVisualChild(marker);
+				marker.IsMouseDirectlyOverChanged += (DependencyPropertyChangedEventHandler)delegate
 				{
 					InvalidateVisual();
 				};
@@ -242,12 +226,12 @@ public class FoldingMargin : AbstractMargin
 
 	protected override Visual GetVisualChild(int index)
 	{
-		return zeQYMUyf5O[index];
+		return markers[index];
 	}
 
-	private static Pen oNAYkLbqlF(Brush P_0)
+	private static Pen MakeFrozenPen(Brush brush)
 	{
-		Pen pen = new Pen(P_0, 1.0);
+		Pen pen = new Pen(brush, 1.0);
 		((Freezable)pen).Freeze();
 		return pen;
 	}
@@ -259,14 +243,14 @@ public class FoldingMargin : AbstractMargin
 			List<TextLine> list = base.TextView.VisualLines.SelectMany((VisualLine vl) => vl.TextLines).ToList();
 			Pen[] array = new Pen[list.Count + 1];
 			Pen[] array2 = new Pen[list.Count];
-			bnOY0BYZkf(list, array, array2);
-			DZvY7sV2gO(list, array, array2);
-			fOZYX0AKvW(drawingContext, array, array2);
+			CalculateFoldLinesForFoldingsActiveAtStart(list, array, array2);
+			CalculateFoldLinesForMarkers(list, array, array2);
+			DrawFoldLines(drawingContext, array, array2);
 			base.OnRender(drawingContext);
 		}
 	}
 
-	private void bnOY0BYZkf(List<TextLine> P_0, Pen[] P_1, Pen[] P_2)
+	private void CalculateFoldLinesForFoldingsActiveAtStart(List<TextLine> allTextLines, Pen[] colors, Pen[] endMarker)
 	{
 		int offset = base.TextView.VisualLines[0].FirstDocumentLine.Offset;
 		int endOffset = base.TextView.VisualLines.Last().LastDocumentLine.EndOffset;
@@ -281,10 +265,10 @@ public class FoldingMargin : AbstractMargin
 				{
 					return;
 				}
-				int num2 = FMmYUbowut(P_0, endOffset2);
+				int num2 = GetTextLineIndexFromOffset(allTextLines, endOffset2);
 				if (num2 >= 0)
 				{
-					P_2[num2] = sDgYVCGGG7;
+					endMarker[num2] = foldingControlPen;
 				}
 			}
 			if (endOffset2 > num && item.StartOffset < offset)
@@ -298,83 +282,83 @@ public class FoldingMargin : AbstractMargin
 		}
 		if (num > endOffset)
 		{
-			for (int i = 0; i < P_1.Length; i++)
+			for (int i = 0; i < colors.Length; i++)
 			{
-				P_1[i] = sDgYVCGGG7;
+				colors[i] = foldingControlPen;
 			}
 			return;
 		}
-		int num3 = FMmYUbowut(P_0, num);
+		int num3 = GetTextLineIndexFromOffset(allTextLines, num);
 		for (int j = 0; j <= num3; j++)
 		{
-			P_1[j] = sDgYVCGGG7;
+			colors[j] = foldingControlPen;
 		}
 	}
 
-	private void DZvY7sV2gO(List<TextLine> P_0, Pen[] P_1, Pen[] P_2)
+	private void CalculateFoldLinesForMarkers(List<TextLine> allTextLines, Pen[] colors, Pen[] endMarker)
 	{
-		foreach (FoldingMarginMarker item in zeQYMUyf5O)
+		foreach (FoldingMarginMarker marker in markers)
 		{
-			int endOffset = item.MfLyj1x2j1.EndOffset;
-			int num = FMmYUbowut(P_0, endOffset);
-			if (!item.MfLyj1x2j1.IsFolded && num >= 0)
+			int endOffset = marker.FoldingSection.EndOffset;
+			int num = GetTextLineIndexFromOffset(allTextLines, endOffset);
+			if (!marker.FoldingSection.IsFolded && num >= 0)
 			{
-				if (item.IsMouseDirectlyOver)
+				if (marker.IsMouseDirectlyOver)
 				{
-					P_2[num] = iLjY3Petma;
+					endMarker[num] = selectedFoldingControlPen;
 				}
-				else if (P_2[num] == null)
+				else if (endMarker[num] == null)
 				{
-					P_2[num] = sDgYVCGGG7;
+					endMarker[num] = foldingControlPen;
 				}
 			}
-			int num2 = FMmYUbowut(P_0, item.MfLyj1x2j1.StartOffset);
+			int num2 = GetTextLineIndexFromOffset(allTextLines, marker.FoldingSection.StartOffset);
 			if (num2 < 0)
 			{
 				continue;
 			}
-			for (int i = num2 + 1; i < P_1.Length && i - 1 != num; i++)
+			for (int i = num2 + 1; i < colors.Length && i - 1 != num; i++)
 			{
-				if (item.IsMouseDirectlyOver)
+				if (marker.IsMouseDirectlyOver)
 				{
-					P_1[i] = iLjY3Petma;
+					colors[i] = selectedFoldingControlPen;
 				}
-				else if (P_1[i] == null)
+				else if (colors[i] == null)
 				{
-					P_1[i] = sDgYVCGGG7;
+					colors[i] = foldingControlPen;
 				}
 			}
 		}
 	}
 
-	private void fOZYX0AKvW(DrawingContext P_0, Pen[] P_1, Pen[] P_2)
+	private void DrawFoldLines(DrawingContext drawingContext, Pen[] colors, Pen[] endMarker)
 	{
 		Size pixelSize = PixelSnapHelpers.GetPixelSize(this);
 		Size renderSize = base.RenderSize;
 		double num = PixelSnapHelpers.PixelAlign(renderSize.Width / 2.0, pixelSize.Width);
 		double num2 = 0.0;
-		Pen pen = P_1[0];
+		Pen pen = colors[0];
 		int num3 = 0;
 		foreach (VisualLine visualLine in base.TextView.VisualLines)
 		{
 			foreach (TextLine textLine in visualLine.TextLines)
 			{
-				if (P_2[num3] != null)
+				if (endMarker[num3] != null)
 				{
-					double num4 = AycYpfmZbG(visualLine, textLine, pixelSize.Height);
-					Pen pen2 = P_2[num3];
+					double num4 = GetVisualPos(visualLine, textLine, pixelSize.Height);
+					Pen pen2 = endMarker[num3];
 					Point point = new Point(num - pixelSize.Width / 2.0, num4);
 					renderSize = base.RenderSize;
-					P_0.DrawLine(pen2, point, new Point(renderSize.Width, num4));
+					drawingContext.DrawLine(pen2, point, new Point(renderSize.Width, num4));
 				}
-				if (P_1[num3 + 1] != pen)
+				if (colors[num3 + 1] != pen)
 				{
-					double num5 = AycYpfmZbG(visualLine, textLine, pixelSize.Height);
+					double num5 = GetVisualPos(visualLine, textLine, pixelSize.Height);
 					if (pen != null)
 					{
-						P_0.DrawLine(pen, new Point(num, num2 + pixelSize.Height / 2.0), new Point(num, num5 - pixelSize.Height / 2.0));
+						drawingContext.DrawLine(pen, new Point(num, num2 + pixelSize.Height / 2.0), new Point(num, num5 - pixelSize.Height / 2.0));
 					}
-					pen = P_1[num3 + 1];
+					pen = colors[num3 + 1];
 					num2 = num5;
 				}
 				num3++;
@@ -385,46 +369,40 @@ public class FoldingMargin : AbstractMargin
 			Pen pen3 = pen;
 			Point point2 = new Point(num, num2 + pixelSize.Height / 2.0);
 			renderSize = base.RenderSize;
-			P_0.DrawLine(pen3, point2, new Point(num, renderSize.Height));
+			drawingContext.DrawLine(pen3, point2, new Point(num, renderSize.Height));
 		}
 	}
 
-	private double AycYpfmZbG(VisualLine P_0, TextLine P_1, double P_2)
+	private double GetVisualPos(VisualLine visualLine, TextLine textLine, double pixelHeight)
 	{
-		return PixelSnapHelpers.PixelAlign(P_0.GetTextLineVisualYPosition(P_1, VisualYPosition.TextMiddle) - base.TextView.VerticalOffset, P_2);
+		return PixelSnapHelpers.PixelAlign(visualLine.GetTextLineVisualYPosition(textLine, VisualYPosition.TextMiddle) - base.TextView.VerticalOffset, pixelHeight);
 	}
 
-	private int FMmYUbowut(List<TextLine> P_0, int P_1)
+	private int GetTextLineIndexFromOffset(List<TextLine> textLines, int offset)
 	{
-		int lineNumber = base.TextView.Document.GetLineByOffset(P_1).LineNumber;
+		int lineNumber = base.TextView.Document.GetLineByOffset(offset).LineNumber;
 		VisualLine visualLine = base.TextView.GetVisualLine(lineNumber);
 		if (visualLine != null)
 		{
-			int relativeTextOffset = P_1 - visualLine.FirstDocumentLine.Offset;
+			int relativeTextOffset = offset - visualLine.FirstDocumentLine.Offset;
 			TextLine textLine = visualLine.GetTextLine(visualLine.GetVisualColumn(relativeTextOffset));
-			return P_0.IndexOf(textLine);
+			return textLines.IndexOf(textLine);
 		}
 		return -1;
 	}
 
 	public FoldingMargin()
 	{
-		zeQYMUyf5O = new List<FoldingMarginMarker>();
-		sDgYVCGGG7 = oNAYkLbqlF((Brush)FoldingMarkerBrushProperty.DefaultMetadata.DefaultValue);
-		iLjY3Petma = oNAYkLbqlF((Brush)SelectedFoldingMarkerBrushProperty.DefaultMetadata.DefaultValue);
+		markers = new List<FoldingMarginMarker>();
+		foldingControlPen = MakeFrozenPen((Brush)FoldingMarkerBrushProperty.DefaultMetadata.DefaultValue);
+		selectedFoldingControlPen = MakeFrozenPen((Brush)SelectedFoldingMarkerBrushProperty.DefaultMetadata.DefaultValue);
 	}
 
 	static FoldingMargin()
 	{
-		FoldingMarkerBrushProperty = DependencyProperty.RegisterAttached("FoldingMarkerBrush", typeof(Brush), typeof(FoldingMargin), (PropertyMetadata)(object)new FrameworkPropertyMetadata(Brushes.Gray, FrameworkPropertyMetadataOptions.Inherits, new PropertyChangedCallback(KcwYZvppKh)));
-		FoldingMarkerBackgroundBrushProperty = DependencyProperty.RegisterAttached("FoldingMarkerBackgroundBrush", typeof(Brush), typeof(FoldingMargin), (PropertyMetadata)(object)new FrameworkPropertyMetadata(Brushes.White, FrameworkPropertyMetadataOptions.Inherits, new PropertyChangedCallback(KcwYZvppKh)));
-		SelectedFoldingMarkerBrushProperty = DependencyProperty.RegisterAttached("SelectedFoldingMarkerBrush", typeof(Brush), typeof(FoldingMargin), (PropertyMetadata)(object)new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.Inherits, new PropertyChangedCallback(KcwYZvppKh)));
-		SelectedFoldingMarkerBackgroundBrushProperty = DependencyProperty.RegisterAttached("SelectedFoldingMarkerBackgroundBrush", typeof(Brush), typeof(FoldingMargin), (PropertyMetadata)(object)new FrameworkPropertyMetadata(Brushes.White, FrameworkPropertyMetadataOptions.Inherits, new PropertyChangedCallback(KcwYZvppKh)));
-	}
-
-	[CompilerGenerated]
-	private void MVnYcnabCK(object P_0, DependencyPropertyChangedEventArgs P_1)
-	{
-		InvalidateVisual();
+		FoldingMarkerBrushProperty = DependencyProperty.RegisterAttached("FoldingMarkerBrush", typeof(Brush), typeof(FoldingMargin), (PropertyMetadata)(object)new FrameworkPropertyMetadata(Brushes.Gray, FrameworkPropertyMetadataOptions.Inherits, new PropertyChangedCallback(OnUpdateBrushes)));
+		FoldingMarkerBackgroundBrushProperty = DependencyProperty.RegisterAttached("FoldingMarkerBackgroundBrush", typeof(Brush), typeof(FoldingMargin), (PropertyMetadata)(object)new FrameworkPropertyMetadata(Brushes.White, FrameworkPropertyMetadataOptions.Inherits, new PropertyChangedCallback(OnUpdateBrushes)));
+		SelectedFoldingMarkerBrushProperty = DependencyProperty.RegisterAttached("SelectedFoldingMarkerBrush", typeof(Brush), typeof(FoldingMargin), (PropertyMetadata)(object)new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.Inherits, new PropertyChangedCallback(OnUpdateBrushes)));
+		SelectedFoldingMarkerBackgroundBrushProperty = DependencyProperty.RegisterAttached("SelectedFoldingMarkerBackgroundBrush", typeof(Brush), typeof(FoldingMargin), (PropertyMetadata)(object)new FrameworkPropertyMetadata(Brushes.White, FrameworkPropertyMetadataOptions.Inherits, new PropertyChangedCallback(OnUpdateBrushes)));
 	}
 }
