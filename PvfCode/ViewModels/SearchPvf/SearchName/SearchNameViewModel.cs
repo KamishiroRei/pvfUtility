@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using Collections.Pooled;
@@ -13,76 +12,13 @@ namespace PvfCode.ViewModels.SearchPvf.SearchName;
 
 public class SearchNameViewModel<TItem> : SearchNameViewModelBase<TItem> where TItem : ItemNameSearchResultBase, new()
 {
-	[CompilerGenerated]
-	private bool JfkWIfTIeQ;
+	public bool ShowGroupPanel { get; set; }
 
-	[CompilerGenerated]
-	private bool PWvWE6mgop;
+	public bool ShowSelectYesOrCancelPanel { get; set; }
 
-	[CompilerGenerated]
-	private SearchNameViewModelType xrZWOBPifN;
+	public SearchNameViewModelType Type { get; set; }
 
-	[CompilerGenerated]
-	private string wx1WKr66kQ;
-
-	[CompilerGenerated]
-	private List<TItem> u1dW9mgVSI;
-
-	public bool ShowGroupPanel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return JfkWIfTIeQ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			JfkWIfTIeQ = value;
-		}
-	}
-
-	public bool ShowSelectYesOrCancelPanel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return PWvWE6mgop;
-		}
-		[CompilerGenerated]
-		set
-		{
-			PWvWE6mgop = value;
-		}
-	}
-
-	public SearchNameViewModelType Type
-	{
-		[CompilerGenerated]
-		get
-		{
-			return xrZWOBPifN;
-		}
-		[CompilerGenerated]
-		set
-		{
-			xrZWOBPifN = value;
-		}
-	}
-
-	public string Title
-	{
-		[CompilerGenerated]
-		get
-		{
-			return wx1WKr66kQ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			wx1WKr66kQ = value;
-		}
-	}
+	public string Title { get; set; }
 
 	public ConcurrentObservableCollection<TItem> GroupItems
 	{
@@ -122,19 +58,7 @@ public class SearchNameViewModel<TItem> : SearchNameViewModelBase<TItem> where T
 		}
 	}
 
-	public List<TItem> GroupSelectedItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return u1dW9mgVSI;
-		}
-		[CompilerGenerated]
-		set
-		{
-			u1dW9mgVSI = value;
-		}
-	}
+	public List<TItem> GroupSelectedItems { get; set; }
 
 	public bool AddGroupCheckRepeat
 	{
@@ -178,16 +102,16 @@ public class SearchNameViewModel<TItem> : SearchNameViewModelBase<TItem> where T
 		}
 		if (AddGroupCheckRepeat)
 		{
-			List<TItem> list = new List<TItem>();
-			HashSet<string> hashSet = GroupItems.Select((TItem it) => it.FilePath).ToHashSet();
+			List<TItem> itemsToAdd = new List<TItem>();
+			HashSet<string> existingPaths = GroupItems.Select((TItem item) => item.FilePath).ToHashSet();
 			foreach (TItem selectedItem in base.SelectedItems)
 			{
-				if (!hashSet.Contains(selectedItem.FilePath))
+				if (!existingPaths.Contains(selectedItem.FilePath))
 				{
-					list.Add(selectedItem);
+					itemsToAdd.Add(selectedItem);
 				}
 			}
-			GroupItems.AddRange(list);
+			GroupItems.AddRange(itemsToAdd);
 		}
 		else
 		{
@@ -211,10 +135,10 @@ public class SearchNameViewModel<TItem> : SearchNameViewModelBase<TItem> where T
 	{
 		if (e.Item != null && AppCore.ViewModelBase.PVF.PvfIsOpen)
 		{
-			ItemNameSearchResultBase itemNameSearchResultBase = (ItemNameSearchResultBase)e.Item;
-			if (itemNameSearchResultBase != null)
+			ItemNameSearchResultBase item = (ItemNameSearchResultBase)e.Item;
+			if (item != null)
 			{
-				AppCore.ViewModelBase.RootDocument.AddDocument(itemNameSearchResultBase.FilePath, gotoNode: true);
+				AppCore.ViewModelBase.RootDocument.AddDocument(item.FilePath, gotoNode: true);
 			}
 		}
 	}
@@ -237,39 +161,38 @@ public class SearchNameViewModel<TItem> : SearchNameViewModelBase<TItem> where T
 	[Command]
 	public virtual void OnRemoveDuplicate()
 	{
-		IEnumerable<string> enumerable = GroupItems.Select((TItem it) => it.FilePath);
-		if (enumerable == null || !enumerable.Any())
+		IEnumerable<string> filePaths = GroupItems.Select((TItem item) => item.FilePath);
+		if (filePaths == null || !filePaths.Any())
 		{
 			return;
 		}
-		List<TItem> list = new List<TItem>();
-		foreach (string item in enumerable.ToHashSet())
+		List<TItem> uniqueItems = new List<TItem>();
+		foreach (string filePath in filePaths.ToHashSet())
 		{
-			list.Add(new TItem
+			uniqueItems.Add(new TItem
 			{
-				FilePath = item
+				FilePath = filePath
 			});
 		}
 		GroupItems.Clear();
-		GroupItems.AddRange(list);
+		GroupItems.AddRange(uniqueItems);
 		UpdateGroupItemsCount();
 	}
 
 	[Command]
 	public void OnRemoveItemCodeIsNull()
 	{
-		TItem[] array = GroupItems.ToArray();
+		TItem[] items = GroupItems.ToArray();
 		GroupItems.Clear();
-		List<TItem> list = new List<TItem>();
-		TItem[] array2 = array;
-		foreach (TItem val in array2)
+		List<TItem> itemsWithCode = new List<TItem>();
+		foreach (TItem item in items)
 		{
-			if (val.ItemCode.HasValue)
+			if (item.ItemCode.HasValue)
 			{
-				list.Add(val);
+				itemsWithCode.Add(item);
 			}
 		}
-		GroupItems.AddRange(list);
+		GroupItems.AddRange(itemsWithCode);
 		UpdateGroupItemsCount();
 	}
 
@@ -279,10 +202,9 @@ public class SearchNameViewModel<TItem> : SearchNameViewModelBase<TItem> where T
 		if (GroupSelectedItems.Count > 0)
 		{
 			StringBuilder stringBuilder = new StringBuilder();
-			TItem[] array = GroupSelectedItems.ToArray();
-			foreach (TItem val in array)
+			foreach (TItem item in GroupSelectedItems.ToArray())
 			{
-				stringBuilder.AppendLine(val.ItemName);
+				stringBuilder.AppendLine(item.ItemName);
 			}
 			AppCore.CopyString(stringBuilder.ToString());
 		}
@@ -296,16 +218,11 @@ public class SearchNameViewModel<TItem> : SearchNameViewModelBase<TItem> where T
 			return;
 		}
 		StringBuilder stringBuilder = new StringBuilder();
-		TItem[] array = GroupSelectedItems.ToArray();
-		foreach (TItem val in array)
+		foreach (TItem item in GroupSelectedItems.ToArray())
 		{
-			if (val.ItemCode.HasValue)
+			if (item.ItemCode.HasValue)
 			{
-				StringBuilder stringBuilder2 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder2);
-				handler.AppendFormatted(val.ItemCode);
-				handler.AppendLiteral("\t");
-				stringBuilder2.AppendLine(ref handler);
+				stringBuilder.AppendLine($"{item.ItemCode}\t");
 			}
 		}
 		AppCore.CopyString(stringBuilder.ToString());
