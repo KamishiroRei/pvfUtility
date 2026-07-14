@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,31 +22,9 @@ namespace PvfCode.ViewModels.SearchPvf;
 
 public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass35_0
-	{
-		public string rs2qgk5NEj;
-
-		public _003C_003Ec__DisplayClass35_0()
-		{
-		}
-
-		internal bool lf0qaCUXxq(string x)
-		{
-			return Regex.IsMatch(x, Regex.Escape(rs2qgk5NEj), RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
-		}
-	}
-
 	public Action CloseAction;
 
-	[CompilerGenerated]
-	private SearchConfig qWkWwOZkMl;
-
-	[CompilerGenerated]
-	private SearchConfig CRsWoBwRew;
-
-	[CompilerGenerated]
-	private List<SearchConfig>? YSaWsOuUUT;
+	private List<SearchConfig>? RecordedSearchConfigs { get; set; }
 
 	public bool RecordingLoading
 	{
@@ -97,33 +74,9 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public SearchConfig Config
-	{
-		[CompilerGenerated]
-		get
-		{
-			return qWkWwOZkMl;
-		}
-		[CompilerGenerated]
-		set
-		{
-			qWkWwOZkMl = value;
-		}
-	}
+	public SearchConfig Config { get; set; }
 
-	public SearchConfig MainWindowSearchConfig
-	{
-		[CompilerGenerated]
-		get
-		{
-			return CRsWoBwRew;
-		}
-		[CompilerGenerated]
-		set
-		{
-			CRsWoBwRew = value;
-		}
-	}
+	public SearchConfig MainWindowSearchConfig { get; set; }
 
 	public string SelectedSourceItem
 	{
@@ -149,20 +102,6 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	private List<SearchConfig>? hXxW1b79X0
-	{
-		[CompilerGenerated]
-		get
-		{
-			return YSaWsOuUUT;
-		}
-		[CompilerGenerated]
-		set
-		{
-			YSaWsOuUUT = value;
-		}
-	}
-
 	public ViewSearchPvfViewModel()
 	{
 		Config = new SearchConfig();
@@ -172,16 +111,16 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 		{
 			Type = SearchType.Strings
 		};
-		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += u2RWxWKrAb;
-		OLpWQiIaI2();
+		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += OnThemeChanged;
+		UpdateHighlighting();
 	}
 
-	private void u2RWxWKrAb()
+	private void OnThemeChanged()
 	{
-		OLpWQiIaI2();
+		UpdateHighlighting();
 	}
 
-	private void OLpWQiIaI2()
+	private void UpdateHighlighting()
 	{
 		Highlighting = ThemeSwitcher.Instance.GetHighlightingDefinition(PvfFileType.equ);
 	}
@@ -196,10 +135,10 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 	[Command]
 	public void OnSelectedFolder()
 	{
-		string text = AppCore.SelectPvfFolderPath();
-		if (text != null)
+		string selectedFolderPath = AppCore.SelectPvfFolderPath();
+		if (selectedFolderPath != null)
 		{
-			Config.SearchFolder = text;
+			Config.SearchFolder = selectedFolderPath;
 		}
 	}
 
@@ -232,34 +171,33 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 			{
 				AutoSuggestEdit autoSuggestEdit = (AutoSuggestEdit)sender;
 				autoSuggestEdit.ItemsSource = null;
-				PvfGroup pVF = AppCore.ViewModelBase.PVF;
+				PvfGroup pvf = AppCore.ViewModelBase.PVF;
 				if (!string.IsNullOrEmpty(e.Text))
 				{
-					_003C_003Ec__DisplayClass35_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass35_0();
-					CS_0024_003C_003E8__locals4.rs2qgk5NEj = ((AppSetting.Instance.PvfConfig.DefaultEncoding == EncodingType.TW) ? ChineseHelper.ToTraditional(e.Text) : e.Text);
-					IEnumerable<string> itemsSource = null;
+					string keyword = ((AppSetting.Instance.PvfConfig.DefaultEncoding == EncodingType.TW) ? ChineseHelper.ToTraditional(e.Text) : e.Text);
+					IEnumerable<string> suggestions = null;
 					switch (Config.Type)
 					{
 					case SearchType.Strings:
 						if (AppSetting.Instance.PublicSearchServiceOptions.OpenStringAndSectionCompletion)
 						{
-							itemsSource = pVF.Strtable.SearchPanelGetKeywords(CS_0024_003C_003E8__locals4.rs2qgk5NEj);
+							suggestions = pvf.Strtable.SearchPanelGetKeywords(keyword);
 						}
 						break;
 					case SearchType.FileName:
 						if (AppSetting.Instance.PublicSearchServiceOptions.OpenFilePathCompletion)
 						{
-							itemsSource = AppCore.ViewModelBase.PVF.FileList.Keys.Where((string x) => Regex.IsMatch(x, Regex.Escape(CS_0024_003C_003E8__locals4.rs2qgk5NEj), RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace)).Take(AppSetting.Instance.PublicSearchServiceOptions.TakeNumber);
+							suggestions = AppCore.ViewModelBase.PVF.FileList.Keys.Where((string filePath) => Regex.IsMatch(filePath, Regex.Escape(keyword), RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace)).Take(AppSetting.Instance.PublicSearchServiceOptions.TakeNumber);
 						}
 						break;
 					case SearchType.Name:
 						if (AppSetting.Instance.PublicSearchServiceOptions.OpenNameCompletion)
 						{
-							itemsSource = pVF.Strtable.SearchPanelGetKeywords(CS_0024_003C_003E8__locals4.rs2qgk5NEj);
+							suggestions = pvf.Strtable.SearchPanelGetKeywords(keyword);
 						}
 						break;
 					}
-					autoSuggestEdit.ItemsSource = itemsSource;
+					autoSuggestEdit.ItemsSource = suggestions;
 				}
 				if (autoSuggestEdit.ItemsSource == null)
 				{
@@ -294,13 +232,13 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 					AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PleaseSelectSearchResult"));
 					return;
 				}
-				PooledList<string> pooledList = AppCore.ViewModelBase.SearchResultViewModel?.GetFileList(SelectedSourceItem);
-				if (pooledList == null || pooledList.Count == 0)
+				PooledList<string> sourceFiles = AppCore.ViewModelBase.SearchResultViewModel?.GetFileList(SelectedSourceItem);
+				if (sourceFiles == null || sourceFiles.Count == 0)
 				{
 					AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("选中的搜索结果中没有可搜索的文件"), isError: true);
 					return;
 				}
-				Config.SearchResult = pooledList.ToHashSet();
+				Config.SearchResult = sourceFiles.ToHashSet();
 			}
 			if (Config.Type == SearchType.ScriptContent)
 			{
@@ -343,26 +281,26 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 				CloseAction?.Invoke();
 			}
 			AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData.Loading = true;
-			ResultData<HashSet<string>> resultData = await Task.Run((Func<Task<ResultData<HashSet<string>>>?>)searchService.Search);
-			if (resultData.IsError)
+			ResultData<HashSet<string>> searchResult = await Task.Run((Func<Task<ResultData<HashSet<string>>>?>)searchService.Search);
+			if (searchResult.IsError)
 			{
 				AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData.Loading = false;
-				AppCore.ShowMsg(resultData.Msg, isError: true);
+				AppCore.ShowMsg(searchResult.Msg, isError: true);
 				return;
 			}
 			if (Config.Type != SearchType.ScriptContent)
 			{
-				RlBWaCy0hJ(KeywordLog, Config.Keyword);
+				AddSearchHistoryEntry(KeywordLog, Config.Keyword);
 				if (!Config.IsUseLikeSearchPath)
 				{
-					RlBWaCy0hJ(FolderLog, Config.SearchFolder);
+					AddSearchHistoryEntry(FolderLog, Config.SearchFolder);
 				}
 			}
-			AppCore.ViewModelBase.SearchResultViewModel?.AddSearchResult(resultData.Data.ToPooledList());
+			AppCore.ViewModelBase.SearchResultViewModel?.AddSearchResult(searchResult.Data.ToPooledList());
 			AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData.Loading = false;
 			if (RecordingLoading)
 			{
-				hXxW1b79X0.Add(Config.CloneData());
+				RecordedSearchConfigs.Add(Config.CloneData());
 			}
 		}
 		catch (Exception ex)
@@ -376,30 +314,30 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 	{
 		AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData.Loading = true;
 		MainWindowSearchConfig.IsUseLikeSearchPath = string.IsNullOrEmpty(MainWindowSearchConfig.SearchFolder);
-		ResultData<HashSet<string>> resultData = await Task.Run((Func<Task<ResultData<HashSet<string>>>?>)new SearchService(MainWindowSearchConfig, AppCore.ViewModelBase.PVF).Search);
-		if (resultData.IsError)
+		ResultData<HashSet<string>> searchResult = await Task.Run((Func<Task<ResultData<HashSet<string>>>?>)new SearchService(MainWindowSearchConfig, AppCore.ViewModelBase.PVF).Search);
+		if (searchResult.IsError)
 		{
 			AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData.Loading = false;
-			AppCore.ShowMsg(resultData.Msg, isError: true);
+			AppCore.ShowMsg(searchResult.Msg, isError: true);
 			return;
 		}
 		if (MainWindowSearchConfig.Type != SearchType.ScriptContent)
 		{
-			RlBWaCy0hJ(KeywordLog, MainWindowSearchConfig.Keyword);
+			AddSearchHistoryEntry(KeywordLog, MainWindowSearchConfig.Keyword);
 			if (!MainWindowSearchConfig.IsUseLikeSearchPath)
 			{
-				RlBWaCy0hJ(FolderLog, MainWindowSearchConfig.SearchFolder);
+				AddSearchHistoryEntry(FolderLog, MainWindowSearchConfig.SearchFolder);
 			}
 		}
-		AppCore.ViewModelBase.SearchResultViewModel?.AddSearchResult(resultData.Data.ToPooledList(), MainWindowSearchConfig.Keyword);
+		AppCore.ViewModelBase.SearchResultViewModel?.AddSearchResult(searchResult.Data.ToPooledList(), MainWindowSearchConfig.Keyword);
 		AppCore.ViewModelBase.SearchResultViewModel.TreeViewModel.TreeGroupData.Loading = false;
 	}
 
 	public async Task MacroSearchTask(KeyValuePair<string, MacroData> row)
 	{
-		List<SearchConfig> list = row.Value.Data.ToString().JsonToObject<List<SearchConfig>>();
+		List<SearchConfig> searchConfigs = row.Value.Data.ToString().JsonToObject<List<SearchConfig>>();
 		HashSet<string> fileList = new HashSet<string>();
-		foreach (SearchConfig config in list)
+		foreach (SearchConfig config in searchConfigs)
 		{
 			if (config.SourceType != SearchSourceType.AllFiles)
 			{
@@ -409,18 +347,18 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 				}
 				config.SearchResult = fileList;
 			}
-			ResultData<HashSet<string>> resultData = await Task.Run((Func<Task<ResultData<HashSet<string>>>?>)new SearchService(config, AppCore.ViewModelBase.PVF).Search);
-			if (resultData.IsError)
+			ResultData<HashSet<string>> searchResult = await Task.Run((Func<Task<ResultData<HashSet<string>>>?>)new SearchService(config, AppCore.ViewModelBase.PVF).Search);
+			if (searchResult.IsError)
 			{
 				AppCore.Logger.Error(AppSetting.Instance.GetIlogger()?.GetStr("mess_ExecuteSearchMacro"));
 			}
 			else if (config.SourceType == SearchSourceType.AllFiles)
 			{
-				fileList.AddRange(resultData.Data.ToArray());
+				fileList.AddRange(searchResult.Data.ToArray());
 			}
 			else
 			{
-				fileList = resultData.Data;
+				fileList = searchResult.Data;
 			}
 		}
 		AppCore.ViewModelBase.SearchResultViewModel?.AddSearchResult(fileList.ToPooledList(), row.Key);
@@ -431,36 +369,36 @@ public class ViewSearchPvfViewModel : ViewModelBase, IDisposable
 	{
 		if (isLoading)
 		{
-			hXxW1b79X0 = new List<SearchConfig>();
+			RecordedSearchConfigs = new List<SearchConfig>();
 		}
-		else if (RecordingLoading && hXxW1b79X0 != null && hXxW1b79X0.Count > 0)
+		else if (RecordingLoading && RecordedSearchConfigs != null && RecordedSearchConfigs.Count > 0)
 		{
 			MacroData macroData = new MacroData();
-			macroData.SetData(hXxW1b79X0);
+			macroData.SetData(RecordedSearchConfigs);
 			macroData.MacroType = MacroType.全局搜索;
 			await AppCore.SaveMacroData(macroData, AppSetting.Instance.GetIlogger()?.GetStr("mess_NewMacro"), Application.Current.MainWindow);
 		}
 		RecordingLoading = isLoading;
 	}
 
-	private void RlBWaCy0hJ(ObservableCollection<string> P_0, string P_1)
+	private void AddSearchHistoryEntry(ObservableCollection<string> history, string entry)
 	{
-		if (!string.IsNullOrEmpty(P_1))
+		if (!string.IsNullOrEmpty(entry))
 		{
-			if (P_0.Contains(P_1))
+			if (history.Contains(entry))
 			{
-				P_0.Remove(P_1);
+				history.Remove(entry);
 			}
-			P_0.Add(P_1);
-			if (P_0.Count > 20)
+			history.Add(entry);
+			if (history.Count > 20)
 			{
-				P_0.RemoveAt(0);
+				history.RemoveAt(0);
 			}
 		}
 	}
 
 	public void Dispose()
 	{
-		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent -= u2RWxWKrAb;
+		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent -= OnThemeChanged;
 	}
 }
