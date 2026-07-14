@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using DevExpress.Mvvm;
@@ -12,13 +11,9 @@ namespace PvfCode.ViewModels.DocumentFolder.AniNpkLineElement;
 
 public class WindowPreviewAniViewModel : ViewModelBase, IDisposable
 {
-	[CompilerGenerated]
-	private List<PrivewAniData> H7iG6mqOQP;
+	private CancellationTokenSource cancellationTokenSource;
 
-	[CompilerGenerated]
-	private CancellationTokenSource zTaG1kA2NW;
-
-	private readonly AsyncLock zK8Gww6kyS;
+	private readonly AsyncLock playLock;
 
 	public bool RealLocation
 	{
@@ -32,19 +27,7 @@ public class WindowPreviewAniViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	public List<PrivewAniData> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return H7iG6mqOQP;
-		}
-		[CompilerGenerated]
-		set
-		{
-			H7iG6mqOQP = value;
-		}
-	}
+	public List<PrivewAniData> Items { get; set; }
 
 	public bool IsStart
 	{
@@ -70,23 +53,9 @@ public class WindowPreviewAniViewModel : ViewModelBase, IDisposable
 		}
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private CancellationTokenSource B3tGQcxvBV()
-	{
-		return zTaG1kA2NW;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void G2GGaIIop3(CancellationTokenSource P_0)
-	{
-		zTaG1kA2NW = P_0;
-	}
-
 	public WindowPreviewAniViewModel(IList<PrivewAniData> items)
 	{
-		zK8Gww6kyS = new AsyncLock();
+		playLock = new AsyncLock();
 		Items = new List<PrivewAniData>(items);
 		RealLocation = true;
 	}
@@ -102,7 +71,7 @@ public class WindowPreviewAniViewModel : ViewModelBase, IDisposable
 	{
 		if (isStop)
 		{
-			B3tGQcxvBV().Cancel();
+			cancellationTokenSource.Cancel();
 		}
 		else
 		{
@@ -110,32 +79,32 @@ public class WindowPreviewAniViewModel : ViewModelBase, IDisposable
 			{
 				return;
 			}
-			using (await zK8Gww6kyS.LockAsync())
+			using (await playLock.LockAsync())
 			{
 				while (IsStart)
 				{
-					if (!B3tGQcxvBV().IsCancellationRequested)
+					if (!cancellationTokenSource.IsCancellationRequested)
 					{
-						B3tGQcxvBV()?.Cancel();
+						cancellationTokenSource?.Cancel();
 					}
 					await Task.Delay(10);
 				}
-				G2GGaIIop3(new CancellationTokenSource());
-				await Task.Run((Action)MJGGxKWHlr);
+				cancellationTokenSource = new CancellationTokenSource();
+				await Task.Run((Action)PlayAnimation);
 			}
 		}
 	}
 
-	private async void MJGGxKWHlr()
+	private async void PlayAnimation()
 	{
 		IsStart = true;
 		try
 		{
-			while (B3tGQcxvBV() != null && !B3tGQcxvBV().IsCancellationRequested)
+			while (cancellationTokenSource != null && !cancellationTokenSource.IsCancellationRequested)
 			{
 				if (Items == null)
 				{
-					B3tGQcxvBV().Cancel();
+					cancellationTokenSource.Cancel();
 				}
 				else
 				{
@@ -145,14 +114,14 @@ public class WindowPreviewAniViewModel : ViewModelBase, IDisposable
 					}
 					foreach (PrivewAniData item in Items)
 					{
-						PrivewAniData privewAniData = (Item = item);
-						if (privewAniData.Delay < 10)
+						PrivewAniData currentItem = (Item = item);
+						if (currentItem.Delay < 10)
 						{
 							await Task.Delay(20);
 						}
 						else
 						{
-							await Task.Delay(privewAniData.Delay);
+							await Task.Delay(currentItem.Delay);
 						}
 					}
 				}

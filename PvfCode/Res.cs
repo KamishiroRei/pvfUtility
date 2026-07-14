@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -11,34 +10,25 @@ namespace PvfCode;
 
 public class Res : IRes
 {
-	private static Res t0dlt03dM7;
+	private static Res instance;
 
-	private CharacJobAvatar pevlb6LMoW;
+	private CharacJobAvatar characJobAvatar;
 
-	private ImageSource? U8klIxPlPJ;
+	private ImageSource? imageSealingMark;
 
-	private ImageSource? p0xlEImTe8;
+	private ImageSource? itemImageSourceSelected;
 
-	[CompilerGenerated]
-	private ResTreeFileTypes sOhlOwrxKx;
-
-	[CompilerGenerated]
-	private ResSearch gaqlKkFJG3;
-
-	[CompilerGenerated]
-	private ResEditor eCkl9C4luQ;
-
-	private ImageSource? qdZlPIBnaX;
+	private ImageSource? readNull;
 
 	public static Res Instance
 	{
 		get
 		{
-			if (t0dlt03dM7 == null)
+			if (instance == null)
 			{
-				t0dlt03dM7 = new Res();
+				instance = new Res();
 			}
-			return t0dlt03dM7;
+			return instance;
 		}
 	}
 
@@ -46,15 +36,15 @@ public class Res : IRes
 	{
 		get
 		{
-			if (pevlb6LMoW == null)
+			if (characJobAvatar == null)
 			{
-				pevlb6LMoW = new CharacJobAvatar();
+				characJobAvatar = new CharacJobAvatar();
 			}
-			return pevlb6LMoW;
+			return characJobAvatar;
 		}
 		set
 		{
-			pevlb6LMoW = value;
+			characJobAvatar = value;
 		}
 	}
 
@@ -62,7 +52,7 @@ public class Res : IRes
 	{
 		get
 		{
-			if (U8klIxPlPJ == null)
+			if (imageSealingMark == null)
 			{
 				WriteableBitmap writeableBitmap = new WriteableBitmap(new FormatConvertedBitmap(new BitmapImage(new Uri("pack://application:,,,/pvfUtility;component/images/pngs/npcshop/imagemark.png", UriKind.RelativeOrAbsolute)), PixelFormats.Bgra32, null, 0.0));
 				int pixelWidth = writeableBitmap.PixelWidth;
@@ -75,7 +65,6 @@ public class Res : IRes
 					byte b2 = array[i];
 					byte b3 = array[i + 1];
 					byte b4 = array[i + 2];
-					_ = array[i + 3];
 					if ((byte)(0.2126 * (double)(int)b4 + 0.7152 * (double)(int)b3 + 0.0722 * (double)(int)b2) < b)
 					{
 						array[i + 3] = 20;
@@ -86,10 +75,10 @@ public class Res : IRes
 					}
 				}
 				writeableBitmap.WritePixels(new Int32Rect(0, 0, pixelWidth, pixelHeight), array, pixelWidth * 4, 0);
-				U8klIxPlPJ = writeableBitmap;
-				((Freezable)U8klIxPlPJ).Freeze();
+				imageSealingMark = writeableBitmap;
+				((Freezable)imageSealingMark).Freeze();
 			}
-			return U8klIxPlPJ;
+			return imageSealingMark;
 		}
 	}
 
@@ -97,8 +86,8 @@ public class Res : IRes
 	{
 		get
 		{
-			p0xlEImTe8 = null;
-			if (p0xlEImTe8 == null)
+			itemImageSourceSelected = null;
+			if (itemImageSourceSelected == null)
 			{
 				WriteableBitmap writeableBitmap = new WriteableBitmap(new FormatConvertedBitmap(new BitmapImage(new Uri("pack://application:,,,/pvfUtility;component/images/pngs/npcshop/selecteditem.png", UriKind.RelativeOrAbsolute)), PixelFormats.Bgra32, null, 0.0));
 				int pixelWidth = writeableBitmap.PixelWidth;
@@ -111,7 +100,6 @@ public class Res : IRes
 					byte b2 = array[i];
 					byte b3 = array[i + 1];
 					byte b4 = array[i + 2];
-					_ = array[i + 3];
 					if ((byte)(0.2126 * (double)(int)b4 + 0.7152 * (double)(int)b3 + 0.0722 * (double)(int)b2) < b)
 					{
 						array[i + 3] = 20;
@@ -122,10 +110,10 @@ public class Res : IRes
 					}
 				}
 				writeableBitmap.WritePixels(new Int32Rect(0, 0, pixelWidth, pixelHeight), array, pixelWidth * 4, 0);
-				p0xlEImTe8 = writeableBitmap;
-				((Freezable)p0xlEImTe8).Freeze();
+				itemImageSourceSelected = writeableBitmap;
+				((Freezable)itemImageSourceSelected).Freeze();
 			}
-			return p0xlEImTe8;
+			return itemImageSourceSelected;
 		}
 	}
 
@@ -143,47 +131,11 @@ public class Res : IRes
 
 	public ImageSource ErrorIcon => GetSvgImage("pack://application:,,,/pvfUtility;component/images/svgs/erroricon.svg");
 
-	public ResTreeFileTypes TreeFiles
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sOhlOwrxKx;
-		}
-		[CompilerGenerated]
-		set
-		{
-			sOhlOwrxKx = value;
-		}
-	}
+	public ResTreeFileTypes TreeFiles { get; set; }
 
-	public ResSearch Search
-	{
-		[CompilerGenerated]
-		get
-		{
-			return gaqlKkFJG3;
-		}
-		[CompilerGenerated]
-		set
-		{
-			gaqlKkFJG3 = value;
-		}
-	}
+	public ResSearch Search { get; set; }
 
-	public ResEditor Editor
-	{
-		[CompilerGenerated]
-		get
-		{
-			return eCkl9C4luQ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			eCkl9C4luQ = value;
-		}
-	}
+	public ResEditor Editor { get; set; }
 
 	public ImageSource HigSectionIcon => (ImageSource)Application.Current.TryFindResource("HigSectionIcon");
 
@@ -203,18 +155,13 @@ public class Res : IRes
 	{
 		get
 		{
-			if (qdZlPIBnaX == null)
+			if (readNull == null)
 			{
-				qdZlPIBnaX = new BitmapImage(new Uri("pack://application:,,,/pvfUtility;component/images/pngs/npcshop/rednull.png", UriKind.RelativeOrAbsolute));
-				((Freezable)qdZlPIBnaX).Freeze();
+				readNull = new BitmapImage(new Uri("pack://application:,,,/pvfUtility;component/images/pngs/npcshop/rednull.png", UriKind.RelativeOrAbsolute));
+				((Freezable)readNull).Freeze();
 			}
-			return qdZlPIBnaX;
+			return readNull;
 		}
-	}
-
-	private ImageSource nlYlemf92d(string P_0)
-	{
-		return new BitmapImage(new Uri(P_0, UriKind.Relative));
 	}
 
 	public ImageSource GetSvgImage(string path)
@@ -227,8 +174,8 @@ public class Res : IRes
 
 	public Res()
 	{
-		sOhlOwrxKx = new ResTreeFileTypes();
-		gaqlKkFJG3 = new ResSearch();
-		eCkl9C4luQ = new ResEditor();
+		TreeFiles = new ResTreeFileTypes();
+		Search = new ResSearch();
+		Editor = new ResEditor();
 	}
 }
