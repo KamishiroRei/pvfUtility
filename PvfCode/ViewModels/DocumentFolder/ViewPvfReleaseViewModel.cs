@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using AnyClone;
@@ -68,8 +67,7 @@ public class ViewPvfReleaseViewModel : DocumentBase
 		}
 	}
 
-	[SpecialName]
-	private string opW5GDAeA8()
+	private string GetTargetFilePath()
 	{
 		return Path.Combine(TargetFolder, "Script.pvf");
 	}
@@ -124,17 +122,17 @@ public class ViewPvfReleaseViewModel : DocumentBase
 		{
 			FileHelper.CheckDir(TargetFolder);
 		}
-		if (opW5GDAeA8() == AppCore.ViewModelBase.PVF.PvfPackFilePath)
+		if (GetTargetFilePath() == AppCore.ViewModelBase.PVF.PvfPackFilePath)
 		{
 			AppCore.ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_PublishDirCannotSameAsPvfDir"));
 			return;
 		}
 		base.IsLoading = true;
-		await Task.Run((Func<Task?>)rg65uWfRZl);
+		await Task.Run((Func<Task?>)PublishAsync);
 		base.IsLoading = false;
 	}
 
-	private async Task rg65uWfRZl()
+	private async Task PublishAsync()
 	{
 		WaitIndicatorContent = AppSetting.Instance.GetIlogger().GetStr("mess_ClonePvfPack");
 		PvfGroup pvf = AppCore.ViewModelBase.PVF.Clone();
@@ -155,7 +153,7 @@ public class ViewPvfReleaseViewModel : DocumentBase
 			}
 			else
 			{
-				ResultData resultData2 = await pvf.SavePvfPack(opW5GDAeA8(), isFastMode: false, AppCore.ViewModelBase.MainProgress);
+				ResultData resultData2 = await pvf.SavePvfPack(GetTargetFilePath(), isFastMode: false, AppCore.ViewModelBase.MainProgress);
 				AppSetting.Instance.PvfConfig.ReleaseLog.LastReleaseType = TargetType;
 				AppSetting.Instance.PvfConfig.ReleaseLog.LastLog.Time = DateTime.Now;
 				AppSetting.Instance.PvfConfig.ReleaseLog.LastLog.TargetPath = TargetFolder;
@@ -167,7 +165,7 @@ public class ViewPvfReleaseViewModel : DocumentBase
 				else
 				{
 					AppSetting.Instance.PvfConfig.ReleaseLog.LastLog.IsSuccess = true;
-					AppCore.Logger.Success(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_PublishSuccess"), opW5GDAeA8()));
+					AppCore.Logger.Success(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_PublishSuccess"), GetTargetFilePath()));
 				}
 			}
 			await AppSetting.Instance.SaveSetting();

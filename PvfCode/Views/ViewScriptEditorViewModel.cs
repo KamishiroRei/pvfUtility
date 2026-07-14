@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
@@ -89,28 +88,22 @@ public class ViewScriptEditorViewModel : ViewModelBase, IDisposable
 			text = string.Empty;
 		}
 		Document.Text = text;
-		cCUCvE6ce7();
-		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += Ba5CBRooRR;
+		UpdateHighlighting();
+		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += OnThemeChanged;
 	}
 
-	private void cCUCvE6ce7()
+	private void UpdateHighlighting()
 	{
 		Highlighting = ThemeSwitcher.Instance.GetHighlightingDefinition(PvfFileType.equ);
 	}
 
-	private void Ba5CBRooRR()
+	private void OnThemeChanged()
 	{
-		cCUCvE6ce7();
+		UpdateHighlighting();
 	}
 
 	public void Dispose()
 	{
-		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent -= Ba5CBRooRR;
-	}
-
-	[SpecialName]
-	private IHighlighter G4gCFAYRfs()
-	{
-		return new DocumentHighlighter(Document, Highlighting);
+		ThemeSwitcher.Instance.PvfCodeThemeChangedEvent -= OnThemeChanged;
 	}
 }
