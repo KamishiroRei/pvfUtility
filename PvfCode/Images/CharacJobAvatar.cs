@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -8,80 +7,80 @@ namespace PvfCode.Images;
 
 public class CharacJobAvatar
 {
-	private BitmapSource iDYQsVIRX6;
+	private BitmapSource swordman;
 
-	private BitmapSource mC1QL0ZAg0;
+	private BitmapSource swordmanGray;
 
-	private BitmapSource hUOQnyIRfj;
+	private BitmapSource fighter;
 
-	private BitmapSource NkBQqr5Uje;
+	private BitmapSource fighterGray;
 
-	private BitmapSource HZPQdjgPBX;
+	private BitmapSource gunner;
 
-	private BitmapSource EtWQe41goS;
+	private BitmapSource gunnerGray;
 
-	private BitmapSource UylQt5lcFN;
+	private BitmapSource mage;
 
-	private BitmapSource yKTQbyOLjG;
+	private BitmapSource mageGray;
 
-	private BitmapSource FYmQIdFy0j;
+	private BitmapSource priest;
 
-	private BitmapSource YKkQEZaBuV;
+	private BitmapSource priestGray;
 
-	private BitmapSource Eq2QOecBQg;
+	private BitmapSource atGunner;
 
-	private BitmapSource GJIQKQgKUm;
+	private BitmapSource atGunnerGray;
 
-	private BitmapSource mAOQ9d9NaT;
+	private BitmapSource thief;
 
-	private BitmapSource Y6IQPGjxQ5;
+	private BitmapSource thiefGray;
 
-	private BitmapSource SYHQZhojph;
+	private BitmapSource atFighter;
 
-	private BitmapSource XjuQJj0qn7;
+	private BitmapSource atFighterGray;
 
-	private BitmapSource h11QkYV5sQ;
+	private BitmapSource atMage;
 
-	private BitmapSource zoSQ0H4SSL;
+	private BitmapSource atMageGray;
 
-	private BitmapSource uWZQ7qKMii;
+	private BitmapSource demonicSwordman;
 
-	private BitmapSource NTnQXj0N7Z;
+	private BitmapSource demonicSwordmanGray;
 
-	private BitmapSource H65Qp5EMVS;
+	private BitmapSource creatorMage;
 
-	private BitmapSource WCdQUgUNR3;
+	private BitmapSource creatorMageGray;
 
-	private BitmapSource RWXQcmrYWZ;
+	private BitmapSource atSwordman;
 
-	private BitmapSource yoSQ8Yfkir;
+	private BitmapSource atSwordmanGray;
 
-	private BitmapSource kjHQMj13VY;
+	private BitmapSource knight;
 
-	private BitmapSource GPRQV2fZ6P;
+	private BitmapSource knightGray;
 
-	private BitmapSource kvjQ344Uvr;
+	private BitmapSource demonicLancer;
 
-	private BitmapSource T9rQRqBqji;
+	private BitmapSource demonicLancerGray;
 
-	private BitmapSource VVVQNg0DIw;
+	private BitmapSource atPriest;
 
-	private BitmapSource K1DQzULkt9;
+	private BitmapSource atPriestGray;
 
-	private BitmapSource P6yaDbyhID;
+	private BitmapSource gunBlader;
 
-	private BitmapSource egcalKCZh0;
+	private BitmapSource gunBladerGray;
 
 	public BitmapSource Swordman
 	{
 		get
 		{
-			if (iDYQsVIRX6 == null)
+			if (swordman == null)
 			{
-				iDYQsVIRX6 = TI1QweO2bh(0);
-				((Freezable)iDYQsVIRX6).Freeze();
+				swordman = LoadAvatar(0);
+				((Freezable)swordman).Freeze();
 			}
-			return iDYQsVIRX6;
+			return swordman;
 		}
 	}
 
@@ -89,12 +88,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (mC1QL0ZAg0 == null)
+			if (swordmanGray == null)
 			{
-				mC1QL0ZAg0 = H8WQo1qatH(Swordman);
-				((Freezable)mC1QL0ZAg0).Freeze();
+				swordmanGray = ConvertToGrayscale(Swordman);
+				((Freezable)swordmanGray).Freeze();
 			}
-			return mC1QL0ZAg0;
+			return swordmanGray;
 		}
 	}
 
@@ -102,12 +101,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (hUOQnyIRfj == null)
+			if (fighter == null)
 			{
-				hUOQnyIRfj = TI1QweO2bh(1);
-				((Freezable)hUOQnyIRfj).Freeze();
+				fighter = LoadAvatar(1);
+				((Freezable)fighter).Freeze();
 			}
-			return hUOQnyIRfj;
+			return fighter;
 		}
 	}
 
@@ -115,12 +114,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (NkBQqr5Uje == null)
+			if (fighterGray == null)
 			{
-				NkBQqr5Uje = H8WQo1qatH(Fighter);
-				((Freezable)NkBQqr5Uje).Freeze();
+				fighterGray = ConvertToGrayscale(Fighter);
+				((Freezable)fighterGray).Freeze();
 			}
-			return NkBQqr5Uje;
+			return fighterGray;
 		}
 	}
 
@@ -128,12 +127,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (HZPQdjgPBX == null)
+			if (gunner == null)
 			{
-				HZPQdjgPBX = TI1QweO2bh(2);
-				((Freezable)HZPQdjgPBX).Freeze();
+				gunner = LoadAvatar(2);
+				((Freezable)gunner).Freeze();
 			}
-			return HZPQdjgPBX;
+			return gunner;
 		}
 	}
 
@@ -141,12 +140,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (EtWQe41goS == null)
+			if (gunnerGray == null)
 			{
-				EtWQe41goS = H8WQo1qatH(Gunner);
-				((Freezable)EtWQe41goS).Freeze();
+				gunnerGray = ConvertToGrayscale(Gunner);
+				((Freezable)gunnerGray).Freeze();
 			}
-			return EtWQe41goS;
+			return gunnerGray;
 		}
 	}
 
@@ -154,12 +153,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (UylQt5lcFN == null)
+			if (mage == null)
 			{
-				UylQt5lcFN = TI1QweO2bh(3);
-				((Freezable)UylQt5lcFN).Freeze();
+				mage = LoadAvatar(3);
+				((Freezable)mage).Freeze();
 			}
-			return UylQt5lcFN;
+			return mage;
 		}
 	}
 
@@ -167,12 +166,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (yKTQbyOLjG == null)
+			if (mageGray == null)
 			{
-				yKTQbyOLjG = H8WQo1qatH(Mage);
-				((Freezable)yKTQbyOLjG).Freeze();
+				mageGray = ConvertToGrayscale(Mage);
+				((Freezable)mageGray).Freeze();
 			}
-			return yKTQbyOLjG;
+			return mageGray;
 		}
 	}
 
@@ -180,12 +179,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (FYmQIdFy0j == null)
+			if (priest == null)
 			{
-				FYmQIdFy0j = TI1QweO2bh(4);
-				((Freezable)FYmQIdFy0j).Freeze();
+				priest = LoadAvatar(4);
+				((Freezable)priest).Freeze();
 			}
-			return FYmQIdFy0j;
+			return priest;
 		}
 	}
 
@@ -193,12 +192,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (YKkQEZaBuV == null)
+			if (priestGray == null)
 			{
-				YKkQEZaBuV = H8WQo1qatH(Priest);
-				((Freezable)YKkQEZaBuV).Freeze();
+				priestGray = ConvertToGrayscale(Priest);
+				((Freezable)priestGray).Freeze();
 			}
-			return YKkQEZaBuV;
+			return priestGray;
 		}
 	}
 
@@ -206,12 +205,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (Eq2QOecBQg == null)
+			if (atGunner == null)
 			{
-				Eq2QOecBQg = TI1QweO2bh(5);
-				((Freezable)Eq2QOecBQg).Freeze();
+				atGunner = LoadAvatar(5);
+				((Freezable)atGunner).Freeze();
 			}
-			return Eq2QOecBQg;
+			return atGunner;
 		}
 	}
 
@@ -219,12 +218,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (GJIQKQgKUm == null)
+			if (atGunnerGray == null)
 			{
-				GJIQKQgKUm = H8WQo1qatH(AtGunner);
-				((Freezable)GJIQKQgKUm).Freeze();
+				atGunnerGray = ConvertToGrayscale(AtGunner);
+				((Freezable)atGunnerGray).Freeze();
 			}
-			return GJIQKQgKUm;
+			return atGunnerGray;
 		}
 	}
 
@@ -232,12 +231,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (mAOQ9d9NaT == null)
+			if (thief == null)
 			{
-				mAOQ9d9NaT = TI1QweO2bh(6);
-				((Freezable)mAOQ9d9NaT).Freeze();
+				thief = LoadAvatar(6);
+				((Freezable)thief).Freeze();
 			}
-			return mAOQ9d9NaT;
+			return thief;
 		}
 	}
 
@@ -245,12 +244,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (Y6IQPGjxQ5 == null)
+			if (thiefGray == null)
 			{
-				Y6IQPGjxQ5 = H8WQo1qatH(Thief);
-				((Freezable)Y6IQPGjxQ5).Freeze();
+				thiefGray = ConvertToGrayscale(Thief);
+				((Freezable)thiefGray).Freeze();
 			}
-			return Y6IQPGjxQ5;
+			return thiefGray;
 		}
 	}
 
@@ -258,12 +257,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (SYHQZhojph == null)
+			if (atFighter == null)
 			{
-				SYHQZhojph = TI1QweO2bh(7);
-				((Freezable)SYHQZhojph).Freeze();
+				atFighter = LoadAvatar(7);
+				((Freezable)atFighter).Freeze();
 			}
-			return SYHQZhojph;
+			return atFighter;
 		}
 	}
 
@@ -271,12 +270,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (XjuQJj0qn7 == null)
+			if (atFighterGray == null)
 			{
-				XjuQJj0qn7 = H8WQo1qatH(AtFighter);
-				((Freezable)XjuQJj0qn7).Freeze();
+				atFighterGray = ConvertToGrayscale(AtFighter);
+				((Freezable)atFighterGray).Freeze();
 			}
-			return XjuQJj0qn7;
+			return atFighterGray;
 		}
 	}
 
@@ -284,12 +283,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (h11QkYV5sQ == null)
+			if (atMage == null)
 			{
-				h11QkYV5sQ = TI1QweO2bh(8);
-				((Freezable)h11QkYV5sQ).Freeze();
+				atMage = LoadAvatar(8);
+				((Freezable)atMage).Freeze();
 			}
-			return h11QkYV5sQ;
+			return atMage;
 		}
 	}
 
@@ -297,12 +296,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (zoSQ0H4SSL == null)
+			if (atMageGray == null)
 			{
-				zoSQ0H4SSL = H8WQo1qatH(AtMage);
-				((Freezable)zoSQ0H4SSL).Freeze();
+				atMageGray = ConvertToGrayscale(AtMage);
+				((Freezable)atMageGray).Freeze();
 			}
-			return zoSQ0H4SSL;
+			return atMageGray;
 		}
 	}
 
@@ -310,12 +309,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (uWZQ7qKMii == null)
+			if (demonicSwordman == null)
 			{
-				uWZQ7qKMii = TI1QweO2bh(9);
-				((Freezable)uWZQ7qKMii).Freeze();
+				demonicSwordman = LoadAvatar(9);
+				((Freezable)demonicSwordman).Freeze();
 			}
-			return uWZQ7qKMii;
+			return demonicSwordman;
 		}
 	}
 
@@ -323,12 +322,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (NTnQXj0N7Z == null)
+			if (demonicSwordmanGray == null)
 			{
-				NTnQXj0N7Z = H8WQo1qatH(DemonicSwordman);
-				((Freezable)NTnQXj0N7Z).Freeze();
+				demonicSwordmanGray = ConvertToGrayscale(DemonicSwordman);
+				((Freezable)demonicSwordmanGray).Freeze();
 			}
-			return NTnQXj0N7Z;
+			return demonicSwordmanGray;
 		}
 	}
 
@@ -336,12 +335,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (H65Qp5EMVS == null)
+			if (creatorMage == null)
 			{
-				H65Qp5EMVS = TI1QweO2bh(10);
-				((Freezable)H65Qp5EMVS).Freeze();
+				creatorMage = LoadAvatar(10);
+				((Freezable)creatorMage).Freeze();
 			}
-			return H65Qp5EMVS;
+			return creatorMage;
 		}
 	}
 
@@ -349,12 +348,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (WCdQUgUNR3 == null)
+			if (creatorMageGray == null)
 			{
-				WCdQUgUNR3 = H8WQo1qatH(CreatorMage);
-				((Freezable)WCdQUgUNR3).Freeze();
+				creatorMageGray = ConvertToGrayscale(CreatorMage);
+				((Freezable)creatorMageGray).Freeze();
 			}
-			return WCdQUgUNR3;
+			return creatorMageGray;
 		}
 	}
 
@@ -362,12 +361,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (RWXQcmrYWZ == null)
+			if (atSwordman == null)
 			{
-				RWXQcmrYWZ = TI1QweO2bh(11);
-				((Freezable)RWXQcmrYWZ).Freeze();
+				atSwordman = LoadAvatar(11);
+				((Freezable)atSwordman).Freeze();
 			}
-			return RWXQcmrYWZ;
+			return atSwordman;
 		}
 	}
 
@@ -375,12 +374,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (yoSQ8Yfkir == null)
+			if (atSwordmanGray == null)
 			{
-				yoSQ8Yfkir = H8WQo1qatH(AtSwordman);
-				((Freezable)yoSQ8Yfkir).Freeze();
+				atSwordmanGray = ConvertToGrayscale(AtSwordman);
+				((Freezable)atSwordmanGray).Freeze();
 			}
-			return yoSQ8Yfkir;
+			return atSwordmanGray;
 		}
 	}
 
@@ -388,12 +387,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (kjHQMj13VY == null)
+			if (knight == null)
 			{
-				kjHQMj13VY = TI1QweO2bh(12);
-				((Freezable)kjHQMj13VY).Freeze();
+				knight = LoadAvatar(12);
+				((Freezable)knight).Freeze();
 			}
-			return kjHQMj13VY;
+			return knight;
 		}
 	}
 
@@ -401,12 +400,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (GPRQV2fZ6P == null)
+			if (knightGray == null)
 			{
-				GPRQV2fZ6P = H8WQo1qatH(Knight);
-				((Freezable)GPRQV2fZ6P).Freeze();
+				knightGray = ConvertToGrayscale(Knight);
+				((Freezable)knightGray).Freeze();
 			}
-			return GPRQV2fZ6P;
+			return knightGray;
 		}
 	}
 
@@ -414,12 +413,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (kvjQ344Uvr == null)
+			if (demonicLancer == null)
 			{
-				kvjQ344Uvr = TI1QweO2bh(13);
-				((Freezable)kvjQ344Uvr).Freeze();
+				demonicLancer = LoadAvatar(13);
+				((Freezable)demonicLancer).Freeze();
 			}
-			return kvjQ344Uvr;
+			return demonicLancer;
 		}
 	}
 
@@ -427,12 +426,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (T9rQRqBqji == null)
+			if (demonicLancerGray == null)
 			{
-				T9rQRqBqji = H8WQo1qatH(DemonicLancer);
-				((Freezable)T9rQRqBqji).Freeze();
+				demonicLancerGray = ConvertToGrayscale(DemonicLancer);
+				((Freezable)demonicLancerGray).Freeze();
 			}
-			return T9rQRqBqji;
+			return demonicLancerGray;
 		}
 	}
 
@@ -440,12 +439,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (VVVQNg0DIw == null)
+			if (atPriest == null)
 			{
-				VVVQNg0DIw = TI1QweO2bh(14);
-				((Freezable)VVVQNg0DIw).Freeze();
+				atPriest = LoadAvatar(14);
+				((Freezable)atPriest).Freeze();
 			}
-			return VVVQNg0DIw;
+			return atPriest;
 		}
 	}
 
@@ -453,12 +452,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (K1DQzULkt9 == null)
+			if (atPriestGray == null)
 			{
-				K1DQzULkt9 = H8WQo1qatH(AtPriest);
-				((Freezable)K1DQzULkt9).Freeze();
+				atPriestGray = ConvertToGrayscale(AtPriest);
+				((Freezable)atPriestGray).Freeze();
 			}
-			return K1DQzULkt9;
+			return atPriestGray;
 		}
 	}
 
@@ -466,12 +465,12 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (P6yaDbyhID == null)
+			if (gunBlader == null)
 			{
-				P6yaDbyhID = TI1QweO2bh(15);
-				((Freezable)P6yaDbyhID).Freeze();
+				gunBlader = LoadAvatar(15);
+				((Freezable)gunBlader).Freeze();
 			}
-			return P6yaDbyhID;
+			return gunBlader;
 		}
 	}
 
@@ -479,29 +478,25 @@ public class CharacJobAvatar
 	{
 		get
 		{
-			if (egcalKCZh0 == null)
+			if (gunBladerGray == null)
 			{
-				egcalKCZh0 = H8WQo1qatH(GunBlader);
-				((Freezable)egcalKCZh0).Freeze();
+				gunBladerGray = ConvertToGrayscale(GunBlader);
+				((Freezable)gunBladerGray).Freeze();
 			}
-			return egcalKCZh0;
+			return gunBladerGray;
 		}
 	}
 
-	private BitmapSource TI1QweO2bh(int P_0)
+	private BitmapSource LoadAvatar(int jobIndex)
 	{
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(81, 1);
-		defaultInterpolatedStringHandler.AppendLiteral("pack://application:,,,/pvfUtility;component/images/pngs/dnfcharacdefaulticon/");
-		defaultInterpolatedStringHandler.AppendFormatted(P_0);
-		defaultInterpolatedStringHandler.AppendLiteral(".png");
-		return new BitmapImage(new Uri(defaultInterpolatedStringHandler.ToStringAndClear(), UriKind.RelativeOrAbsolute));
+		return new BitmapImage(new Uri($"pack://application:,,,/pvfUtility;component/images/pngs/dnfcharacdefaulticon/{jobIndex}.png", UriKind.RelativeOrAbsolute));
 	}
 
-	private BitmapSource H8WQo1qatH(BitmapSource P_0)
+	private BitmapSource ConvertToGrayscale(BitmapSource source)
 	{
 		FormatConvertedBitmap formatConvertedBitmap = new FormatConvertedBitmap();
 		formatConvertedBitmap.BeginInit();
-		formatConvertedBitmap.Source = P_0;
+		formatConvertedBitmap.Source = source;
 		formatConvertedBitmap.DestinationFormat = PixelFormats.Gray32Float;
 		formatConvertedBitmap.EndInit();
 		return formatConvertedBitmap;

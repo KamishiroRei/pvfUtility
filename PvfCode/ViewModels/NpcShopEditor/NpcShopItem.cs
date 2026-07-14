@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -334,10 +333,7 @@ public class NpcShopItem : ViewModelBase
 			PvfFile file = File;
 			if (file == null)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(10, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("代码对应文件不存在：");
-				defaultInterpolatedStringHandler.AppendFormatted(ItemCode);
-				ilogger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
+				ilogger.Error($"代码对应文件不存在：{ItemCode}");
 			}
 			else
 			{

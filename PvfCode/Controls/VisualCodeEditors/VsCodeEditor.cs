@@ -2,7 +2,6 @@ using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
@@ -16,28 +15,13 @@ namespace PvfCode.Controls.VisualCodeEditors;
 
 public class VsCodeEditor : WebView2, IComponentConnector
 {
-	[CompilerGenerated]
-	private bool oG9aRb1xif;
-
 	public static readonly DependencyProperty EditorLanguageProperty;
 
 	public static readonly DependencyProperty PvfCodeThemeProperty;
 
-	private bool Oi4aNHn8Sh;
+	private bool contentLoaded;
 
-	public bool IsLoadedE
-	{
-		[CompilerGenerated]
-		get
-		{
-			return oG9aRb1xif;
-		}
-		[CompilerGenerated]
-		set
-		{
-			oG9aRb1xif = value;
-		}
-	}
+	public bool IsLoadedE { get; set; }
 
 	public LanguageType EditorLanguage
 	{
@@ -68,25 +52,25 @@ public class VsCodeEditor : WebView2, IComponentConnector
 		InitializeComponent();
 		base.Visibility = Visibility.Collapsed;
 		base.Source = new Uri("about:blank");
-		base.CoreWebView2InitializationCompleted += mBWa7mGCxV;
+		base.CoreWebView2InitializationCompleted += OnCoreWebView2InitializationCompleted;
 	}
 
-	private void mBWa7mGCxV(object? sender, CoreWebView2InitializationCompletedEventArgs P_1)
+	private void OnCoreWebView2InitializationCompleted(object? sender, CoreWebView2InitializationCompletedEventArgs e)
 	{
 		base.CoreWebView2.Settings.AreDefaultContextMenusEnabled = true;
 		base.CoreWebView2.Settings.AreDevToolsEnabled = false;
-		base.CoreWebView2.DOMContentLoaded += geRaptH025;
-		base.CoreWebView2.NavigationCompleted += sTBaXQGEHZ;
+		base.CoreWebView2.DOMContentLoaded += OnDomContentLoaded;
+		base.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
 	}
 
-	private async void sTBaXQGEHZ(object? sender, CoreWebView2NavigationCompletedEventArgs P_1)
+	private async void OnNavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
 	{
 		await CheckVsCodeEditorThemeType();
 		((VsCodeEditorModelBase)base.DataContext)?.Loaded(this);
 		base.Visibility = Visibility.Visible;
 	}
 
-	private async void geRaptH025(object? sender, CoreWebView2DOMContentLoadedEventArgs P_1)
+	private async void OnDomContentLoaded(object? sender, CoreWebView2DOMContentLoadedEventArgs e)
 	{
 		IsLoadedE = true;
 		await CheckVsCodeEditorThemeType();
@@ -94,26 +78,14 @@ public class VsCodeEditor : WebView2, IComponentConnector
 
 	public async Task SetDiffLeftText(string text, LanguageType languageType)
 	{
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(5, 2);
-		defaultInterpolatedStringHandler.AppendLiteral("\"");
-		defaultInterpolatedStringHandler.AppendFormatted(HttpUtility.JavaScriptStringEncode(text));
-		defaultInterpolatedStringHandler.AppendLiteral("\",\"");
-		defaultInterpolatedStringHandler.AppendFormatted(languageType);
-		defaultInterpolatedStringHandler.AppendLiteral("\"");
-		string text2 = defaultInterpolatedStringHandler.ToStringAndClear();
-		await base.CoreWebView2.ExecuteScriptAsync("SetLeftEditorText(" + text2 + ")");
+		string arguments = $"\"{HttpUtility.JavaScriptStringEncode(text)}\",\"{languageType}\"";
+		await base.CoreWebView2.ExecuteScriptAsync("SetLeftEditorText(" + arguments + ")");
 	}
 
 	public async Task SetDiffRightText(string text, LanguageType languageType)
 	{
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(5, 2);
-		defaultInterpolatedStringHandler.AppendLiteral("\"");
-		defaultInterpolatedStringHandler.AppendFormatted(HttpUtility.JavaScriptStringEncode(text));
-		defaultInterpolatedStringHandler.AppendLiteral("\",\"");
-		defaultInterpolatedStringHandler.AppendFormatted(languageType);
-		defaultInterpolatedStringHandler.AppendLiteral("\"");
-		string text2 = defaultInterpolatedStringHandler.ToStringAndClear();
-		await base.CoreWebView2.ExecuteScriptAsync("SetRightEditorText(" + text2 + ")");
+		string arguments = $"\"{HttpUtility.JavaScriptStringEncode(text)}\",\"{languageType}\"";
+		await base.CoreWebView2.ExecuteScriptAsync("SetRightEditorText(" + arguments + ")");
 	}
 
 	public async Task SetDiffEditorText(string leftText, string rightText, LanguageType languageType)
@@ -175,14 +147,9 @@ public class VsCodeEditor : WebView2, IComponentConnector
 		await SetTheme(vsVodeEditorThemeType.Value);
 	}
 
-	private static void KhOaVYpuWO(DependencyObject P_0, DependencyPropertyChangedEventArgs P_1)
+	private static async void OnPvfCodeThemeChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
 	{
-		_ = (VsCodeEditor)(object)P_0;
-	}
-
-	private static async void XgJa3Jl8pe(DependencyObject P_0, DependencyPropertyChangedEventArgs P_1)
-	{
-		VsCodeEditor vsCodeEditor = (VsCodeEditor)(object)P_0;
+		VsCodeEditor vsCodeEditor = (VsCodeEditor)dependencyObject;
 		if (vsCodeEditor != null && vsCodeEditor.IsLoadedE)
 		{
 			await vsCodeEditor.CheckVsCodeEditorThemeType();
@@ -193,19 +160,19 @@ public class VsCodeEditor : WebView2, IComponentConnector
 	{
 		if (base.CoreWebView2 != null)
 		{
-			base.CoreWebView2.DOMContentLoaded -= geRaptH025;
-			base.CoreWebView2.NavigationCompleted -= sTBaXQGEHZ;
+			base.CoreWebView2.DOMContentLoaded -= OnDomContentLoaded;
+			base.CoreWebView2.NavigationCompleted -= OnNavigationCompleted;
 		}
-		base.CoreWebView2InitializationCompleted -= mBWa7mGCxV;
+		base.CoreWebView2InitializationCompleted -= OnCoreWebView2InitializationCompleted;
 	}
 
 	[DebuggerNonUserCode]
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	public void InitializeComponent()
 	{
-		if (!Oi4aNHn8Sh)
+		if (!contentLoaded)
 		{
-			Oi4aNHn8Sh = true;
+			contentLoaded = true;
 			Uri resourceLocator = new Uri("/pvfUtility;V2026.1.22.2;component/controls/visualcodeeditors/vscodeeditor.xaml", UriKind.Relative);
 			System.Windows.Application.LoadComponent(this, resourceLocator);
 		}
@@ -216,12 +183,12 @@ public class VsCodeEditor : WebView2, IComponentConnector
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	void IComponentConnector.Connect(int connectionId, object target)
 	{
-		Oi4aNHn8Sh = true;
+		contentLoaded = true;
 	}
 
 	static VsCodeEditor()
 	{
-		EditorLanguageProperty = DependencyProperty.Register("EditorLanguage", typeof(LanguageType), typeof(VsCodeEditor), new PropertyMetadata((object)LanguageType.ScriptLanguage, new PropertyChangedCallback(KhOaVYpuWO)));
-		PvfCodeThemeProperty = DependencyProperty.Register("PvfCodeTheme", typeof(ThemeType), typeof(VsCodeEditor), new PropertyMetadata((object)ThemeType.VS2019Blue, new PropertyChangedCallback(XgJa3Jl8pe)));
+		EditorLanguageProperty = DependencyProperty.Register("EditorLanguage", typeof(LanguageType), typeof(VsCodeEditor), new PropertyMetadata((object)LanguageType.ScriptLanguage));
+		PvfCodeThemeProperty = DependencyProperty.Register("PvfCodeTheme", typeof(ThemeType), typeof(VsCodeEditor), new PropertyMetadata((object)ThemeType.VS2019Blue, new PropertyChangedCallback(OnPvfCodeThemeChanged)));
 	}
 }
