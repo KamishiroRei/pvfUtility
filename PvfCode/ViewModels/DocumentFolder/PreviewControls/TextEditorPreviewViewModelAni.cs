@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using DevExpress.Mvvm.DataAnnotations;
@@ -11,32 +10,13 @@ namespace PvfCode.ViewModels.DocumentFolder.PreviewControls;
 
 public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass19_0
-	{
-		public TextEditorPreviewViewModelAni xDeeZouEUd;
+	private AniFileGroup PreviewAniFileGroup { get; set; }
 
-		public string pyqeJ0sSZO;
+	private CancellationTokenSource PlaybackCancellationTokenSource { get; set; }
 
-		public _003C_003Ec__DisplayClass19_0()
-		{
-		}
+	private readonly AsyncLock playbackLock;
 
-		internal Task<bool>? jTxePNhlMt()
-		{
-			return xDeeZouEUd.g2E4T5M3of().LoadData(xDeeZouEUd.File, pyqeJ0sSZO);
-		}
-	}
-
-	[CompilerGenerated]
-	private AniFileGroup quW4FjPV8S;
-
-	[CompilerGenerated]
-	private CancellationTokenSource Uau4r6Rxv8;
-
-	private readonly AsyncLock fCH4WrJSOB;
-
-	private bool Nux4mnGGmh;
+	private bool playbackStopped;
 
 	public bool ReplaceSpecialCharacters
 	{
@@ -74,40 +54,12 @@ public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 		}
 	}
 
-	[SpecialName]
-	[CompilerGenerated]
-	private AniFileGroup g2E4T5M3of()
-	{
-		return quW4FjPV8S;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void ghl4CKd20n(AniFileGroup P_0)
-	{
-		quW4FjPV8S = P_0;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private CancellationTokenSource jVE4hmShHR()
-	{
-		return Uau4r6Rxv8;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void xg54vXIiNW(CancellationTokenSource P_0)
-	{
-		Uau4r6Rxv8 = P_0;
-	}
-
 	public TextEditorPreviewViewModelAni(TextEditorBase textEditorBase, PvfFile file)
 		: base(textEditorBase, file)
 	{
-		fCH4WrJSOB = new AsyncLock();
-		Nux4mnGGmh = true;
-		xg54vXIiNW(new CancellationTokenSource());
+		playbackLock = new AsyncLock();
+		playbackStopped = true;
+		PlaybackCancellationTokenSource = new CancellationTokenSource();
 	}
 
 	public override void LoadData(string fileText)
@@ -116,7 +68,7 @@ public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 		{
 			if (AppSetting.Instance.EditConfig.ShowAniPreviewPanel)
 			{
-				LFKAzTqTFU(fileText);
+				LoadAniData(fileText);
 			}
 		}
 		catch (Exception e)
@@ -129,7 +81,7 @@ public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 	{
 		try
 		{
-			LFKAzTqTFU(fileText);
+			LoadAniData(fileText);
 		}
 		catch (Exception e)
 		{
@@ -137,40 +89,37 @@ public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 		}
 	}
 
-	private async void LFKAzTqTFU(string P_0)
+	private async void LoadAniData(string fileText)
 	{
-		_003C_003Ec__DisplayClass19_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass19_0();
-		CS_0024_003C_003E8__locals5.xDeeZouEUd = this;
-		CS_0024_003C_003E8__locals5.pyqeJ0sSZO = P_0;
 		base.IsLoading = true;
-		ghl4CKd20n(new AniFileGroup());
+		PreviewAniFileGroup = new AniFileGroup();
 		if (ImagePack2Service.Instance.Count == 0)
 		{
 			AppCore.Logger.Warning("要预览ani请载入ImagePack2模型补丁 关闭ani预览就不会再看到此提示");
 		}
-		else if (await Task.Run(() => CS_0024_003C_003E8__locals5.xDeeZouEUd.g2E4T5M3of().LoadData(CS_0024_003C_003E8__locals5.xDeeZouEUd.File, CS_0024_003C_003E8__locals5.pyqeJ0sSZO)))
+		else if (await Task.Run(() => PreviewAniFileGroup.LoadData(File, fileText)))
 		{
-			vhB4DuAlrE();
+			StartPlayback();
 			base.IsLoading = false;
 		}
 	}
 
-	private async void vhB4DuAlrE()
+	private async void StartPlayback()
 	{
 		try
 		{
-			using (await fCH4WrJSOB.LockAsync())
+			using (await playbackLock.LockAsync())
 			{
-				while (!Nux4mnGGmh)
+				while (!playbackStopped)
 				{
-					if (!jVE4hmShHR().IsCancellationRequested)
+					if (!PlaybackCancellationTokenSource.IsCancellationRequested)
 					{
-						jVE4hmShHR()?.Cancel();
+						PlaybackCancellationTokenSource?.Cancel();
 					}
 					await Task.Delay(10);
 				}
-				xg54vXIiNW(new CancellationTokenSource());
-				await Task.Run(() => NLq4lqHdiK(), jVE4hmShHR().Token);
+				PlaybackCancellationTokenSource = new CancellationTokenSource();
+				await Task.Run(() => PlayFramesAsync(), PlaybackCancellationTokenSource.Token);
 			}
 		}
 		catch (Exception e)
@@ -179,42 +128,42 @@ public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 		}
 	}
 
-	private async Task NLq4lqHdiK()
+	private async Task PlayFramesAsync()
 	{
-		Nux4mnGGmh = false;
+		playbackStopped = false;
 		try
 		{
-			while (jVE4hmShHR() != null && !jVE4hmShHR().IsCancellationRequested)
+			while (PlaybackCancellationTokenSource != null && !PlaybackCancellationTokenSource.IsCancellationRequested)
 			{
-				if (g2E4T5M3of() == null)
+				if (PreviewAniFileGroup == null)
 				{
-					jVE4hmShHR()?.Cancel();
+					PlaybackCancellationTokenSource?.Cancel();
 				}
 				else
 				{
-					if (g2E4T5M3of() == null || g2E4T5M3of().AniFileData == null)
+					if (PreviewAniFileGroup == null || PreviewAniFileGroup.AniFileData == null)
 					{
 						continue;
 					}
-					FRAMEModel[] array = g2E4T5M3of().AniFileData.Items.ToArray();
-					foreach (FRAMEModel fRAMEModel in array)
+					FRAMEModel[] frameSnapshot = PreviewAniFileGroup.AniFileData.Items.ToArray();
+					foreach (FRAMEModel frame in frameSnapshot)
 					{
-						if (jVE4hmShHR() == null || jVE4hmShHR().IsCancellationRequested)
+						if (PlaybackCancellationTokenSource == null || PlaybackCancellationTokenSource.IsCancellationRequested)
 						{
 							break;
 						}
-						Item = fRAMEModel;
-						if (fRAMEModel.DELAY < 20)
+						Item = frame;
+						if (frame.DELAY < 20)
 						{
 							await Task.Delay(20);
 						}
-						else if (fRAMEModel.DELAY > 5000)
+						else if (frame.DELAY > 5000)
 						{
 							await Task.Delay(5000);
 						}
 						else
 						{
-							await Task.Delay(fRAMEModel.DELAY);
+							await Task.Delay(frame.DELAY);
 						}
 					}
 				}
@@ -224,7 +173,7 @@ public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 		{
 			AppCore.Logger.ErrorUploadDialog(e, "TextEditorPreviewViewModelAni.XL");
 		}
-		Nux4mnGGmh = true;
+		playbackStopped = true;
 	}
 
 	[Command]
@@ -235,11 +184,11 @@ public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 	public override void Dispose()
 	{
 		Item = null;
-		g2E4T5M3of()?.Dispose();
-		ghl4CKd20n(null);
-		jVE4hmShHR()?.Cancel();
+		PreviewAniFileGroup?.Dispose();
+		PreviewAniFileGroup = null;
+		PlaybackCancellationTokenSource?.Cancel();
 		Editor = null;
-		xg54vXIiNW(null);
+		PlaybackCancellationTokenSource = null;
 		File = null;
 	}
 
@@ -251,12 +200,6 @@ public class TextEditorPreviewViewModelAni : TextEditorPreviewViewModelBase
 
 	public override void Uninstall()
 	{
-		jVE4hmShHR()?.Cancel();
-	}
-
-	[CompilerGenerated]
-	private Task? Xrl4jk8ngq()
-	{
-		return NLq4lqHdiK();
+		PlaybackCancellationTokenSource?.Cancel();
 	}
 }
