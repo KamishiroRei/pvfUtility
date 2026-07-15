@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using PvfCode.LoggerBase;
@@ -13,23 +12,22 @@ namespace PvfCode.Services;
 
 public class ScriptFileCompilerOl
 {
-	private Ilogger rffImLL3WH;
+	private Ilogger logger;
 
-	private readonly PvfGroup FxcI41eDZ0;
+	private readonly PvfGroup pvf;
 
-	[SpecialName]
-	private Ilogger jk8IFnVWb6()
+	private Ilogger GetLogger()
 	{
-		if (rffImLL3WH == null)
+		if (logger == null)
 		{
-			rffImLL3WH = AppSetting.Instance.GetService<Ilogger>();
+			logger = AppSetting.Instance.GetService<Ilogger>();
 		}
-		return rffImLL3WH;
+		return logger;
 	}
 
 	public ScriptFileCompilerOl(PvfGroup pack)
 	{
-		FxcI41eDZ0 = pack;
+		pvf = pack;
 	}
 
 	public string Decompile(PvfFile file)
@@ -37,7 +35,7 @@ public class ScriptFileCompilerOl
 		try
 		{
 			StringBuilder stringBuilder = new StringBuilder("#PVF_File\r\n");
-			xvaI6aesKU(file.Data, file.DataLen, file.FileName, stringBuilder);
+			DecompileData(file.Data, file.DataLen, file.FileName, stringBuilder);
 			return stringBuilder.ToString();
 		}
 		catch (Exception ex)
@@ -51,7 +49,7 @@ public class ScriptFileCompilerOl
 		try
 		{
 			StringBuilder stringBuilder = new StringBuilder();
-			xvaI6aesKU(scriptdata, scriptdata.Length, "", stringBuilder);
+			DecompileData(scriptdata, scriptdata.Length, "", stringBuilder);
 			return stringBuilder.ToString();
 		}
 		catch (Exception ex)
@@ -60,105 +58,93 @@ public class ScriptFileCompilerOl
 		}
 	}
 
-	private void xvaI6aesKU(byte[] P_0, int P_1, string P_2, StringBuilder P_3)
+	private void DecompileData(byte[] data, int dataLength, string fileName, StringBuilder output)
 	{
-		if (P_0 != null && P_1 >= 7)
+		if (data != null && dataLength >= 7)
 		{
-			for (int i = 2; i < P_1 - 4; i += 5)
+			for (int i = 2; i < dataLength - 4; i += 5)
 			{
-				byte b = P_0[i];
-				int num = BitConverter.ToInt32(P_0, i + 1);
+				byte b = data[i];
+				int num = BitConverter.ToInt32(data, i + 1);
 				switch (b)
 				{
 				case 5:
 				{
-					StringBuilder stringBuilder = P_3;
-					StringBuilder stringBuilder3 = stringBuilder;
-					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(4, 1, stringBuilder);
-					handler.AppendLiteral("\r\n");
-					handler.AppendFormatted(FxcI41eDZ0.Strtable.GetStringItem(num));
-					handler.AppendLiteral("\r\n");
-					stringBuilder3.Append(ref handler);
+					output.Append($"\r\n{pvf.Strtable.GetStringItem(num)}\r\n");
 					break;
 				}
 				case 10:
 				{
-					int strid = BitConverter.ToInt32(P_0, i - 4);
-					string stringItem = FxcI41eDZ0.Strtable.GetStringItem(num);
+					int strid = BitConverter.ToInt32(data, i - 4);
+					string stringItem = pvf.Strtable.GetStringItem(num);
 					if (AppSetting.Instance.PvfConfig.AutoConvertStringLink)
 					{
-						P_3.Append("`" + FxcI41eDZ0.Strview.GetStrText(strid, stringItem, autoConvertStr: true).Replace("\\n", "\r\n") + "`\r\n");
+						output.Append("`" + pvf.Strview.GetStrText(strid, stringItem, autoConvertStr: true).Replace("\\n", "\r\n") + "`\r\n");
 						break;
 					}
-					P_3.Append("<" + strid + "::" + stringItem + "`" + FxcI41eDZ0.Strview.GetStrText(strid, stringItem, autoConvertStr: true) + "`>\r\n");
+					output.Append("<" + strid + "::" + stringItem + "`" + pvf.Strview.GetStrText(strid, stringItem, autoConvertStr: true) + "`>\r\n");
 					break;
 				}
 				case 7:
 				{
-					StringBuilder stringBuilder = P_3;
-					StringBuilder stringBuilder2 = stringBuilder;
-					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(4, 1, stringBuilder);
-					handler.AppendLiteral("`");
-					handler.AppendFormatted(FxcI41eDZ0.Strtable.GetStringItem(num, autoConvertStr: true));
-					handler.AppendLiteral("`\r\n");
-					stringBuilder2.Append(ref handler);
+					output.Append($"`{pvf.Strtable.GetStringItem(num, autoConvertStr: true)}`\r\n");
 					break;
 				}
 				case 6:
 				case 8:
-					P_3.Append("{" + b + "=`" + FxcI41eDZ0.Strtable.GetStringItem(num, autoConvertStr: true) + "`}\r\n");
+					output.Append("{" + b + "=`" + pvf.Strtable.GetStringItem(num, autoConvertStr: true) + "`}\r\n");
 					break;
 				case 3:
-					P_3.Append("{" + b.ToString() + "=" + num + "}\t");
+					output.Append("{" + b.ToString() + "=" + num + "}\t");
 					break;
 				case 4:
-					P_3.Append(DataHelper.FormatFloat(BitConverter.ToSingle(P_0, i + 1)) + "\t");
+					output.Append(DataHelper.FormatFloat(BitConverter.ToSingle(data, i + 1)) + "\t");
 					break;
 				case 2:
-					P_3.Append(num + "\t");
+					output.Append(num + "\t");
 					break;
 				}
 			}
 		}
-		P_3.Append("\r\n");
+		output.Append("\r\n");
 	}
 
 	public Dictionary<string, string> DecompileDic(PvfFile file)
 	{
-		return z5TI2BW9YD(file.Data, file.DataLen);
+		return DecompileSections(file.Data, file.DataLen);
 	}
 
-	private Dictionary<string, string> z5TI2BW9YD(byte[] P_0, int P_1)
+	private Dictionary<string, string> DecompileSections(byte[] data, int dataLength)
 	{
 		Dictionary<string, StringBuilder> dictionary = new Dictionary<string, StringBuilder>();
 		bool flag = false;
 		string text = null;
-		if (P_0 != null && P_1 >= 7)
+		if (data != null && dataLength >= 7)
 		{
-			for (int i = 2; i < P_1 - 4; i += 5)
+			for (int i = 2; i < dataLength - 4; i += 5)
 			{
-				byte b = P_0[i];
-				int num = BitConverter.ToInt32(P_0, i + 1);
+				byte b = data[i];
+				int num = BitConverter.ToInt32(data, i + 1);
 				switch (b)
 				{
 				case 5:
 				{
-					string stringItem2 = FxcI41eDZ0.Strtable.GetStringItem(num);
-					if (stringItem2.Length > 2)
+					string sectionToken = pvf.Strtable.GetStringItem(num);
+					if (sectionToken.Length > 2)
 					{
-						if (stringItem2[0] == '[' && stringItem2[1] == '/')
+						if (sectionToken[0] == '[' && sectionToken[1] == '/')
 						{
 							flag = false;
 							text = null;
 						}
-						else if (stringItem2[0] == '[')
+						else if (sectionToken[0] == '[')
 						{
 							flag = true;
-							if (!dictionary.ContainsKey(stringItem2))
+							if (!dictionary.ContainsKey(sectionToken))
 							{
-								dictionary.Add(stringItem2, new StringBuilder());
+								dictionary.Add(sectionToken, new StringBuilder());
 							}
-							text = stringItem2;
+							text = sectionToken;
 						}
 						else
 						{
@@ -175,40 +161,40 @@ public class ScriptFileCompilerOl
 				}
 				case 10:
 				{
-					int strid = BitConverter.ToInt32(P_0, i - 4);
-					string stringItem = FxcI41eDZ0.Strtable.GetStringItem(num);
+					int strid = BitConverter.ToInt32(data, i - 4);
+					string stringItem = pvf.Strtable.GetStringItem(num);
 					if (flag)
 					{
 						if (AppSetting.Instance.PvfConfig.AutoConvertStringLink)
 						{
-							AhkIBY2Cjl(dictionary, text, "`" + FxcI41eDZ0.Strview.GetStrText(strid, stringItem, autoConvertStr: true).Replace("\\n", "\r\n") + "`");
+							AppendSectionValue(dictionary, text, "`" + pvf.Strview.GetStrText(strid, stringItem, autoConvertStr: true).Replace("\\n", "\r\n") + "`");
 							break;
 						}
-						AhkIBY2Cjl(dictionary, text, "<" + strid + "::" + stringItem + "`" + FxcI41eDZ0.Strview.GetStrText(strid, stringItem, autoConvertStr: true) + "`>");
+						AppendSectionValue(dictionary, text, "<" + strid + "::" + stringItem + "`" + pvf.Strview.GetStrText(strid, stringItem, autoConvertStr: true) + "`>");
 					}
 					break;
 				}
 				case 7:
 					if (flag)
 					{
-						AhkIBY2Cjl(dictionary, text, "`" + FxcI41eDZ0.Strtable.GetStringItem(num, autoConvertStr: true) + "`");
+						AppendSectionValue(dictionary, text, "`" + pvf.Strtable.GetStringItem(num, autoConvertStr: true) + "`");
 					}
 					break;
 				case 6:
 				case 8:
 					if (flag)
 					{
-						AhkIBY2Cjl(dictionary, text, "{" + b + "=`" + FxcI41eDZ0.Strtable.GetStringItem(num, autoConvertStr: true) + "`}\r\n");
+						AppendSectionValue(dictionary, text, "{" + b + "=`" + pvf.Strtable.GetStringItem(num, autoConvertStr: true) + "`}\r\n");
 					}
 					break;
 				case 3:
-					AhkIBY2Cjl(dictionary, text, "{" + b.ToString() + "=" + num + "}\t");
+					AppendSectionValue(dictionary, text, "{" + b.ToString() + "=" + num + "}\t");
 					break;
 				case 4:
-					AhkIBY2Cjl(dictionary, text, DataHelper.FormatFloat(BitConverter.ToSingle(P_0, i + 1)) + "\t");
+					AppendSectionValue(dictionary, text, DataHelper.FormatFloat(BitConverter.ToSingle(data, i + 1)) + "\t");
 					break;
 				case 2:
-					AhkIBY2Cjl(dictionary, text, num + "\t");
+					AppendSectionValue(dictionary, text, num + "\t");
 					break;
 				}
 			}
@@ -223,11 +209,11 @@ public class ScriptFileCompilerOl
 		return dictionary2;
 	}
 
-	private void AhkIBY2Cjl(Dictionary<string, StringBuilder> P_0, string P_1, string P_2)
+	private void AppendSectionValue(Dictionary<string, StringBuilder> sections, string sectionName, string valueText)
 	{
-		if (P_1 != null && P_0.TryGetValue(P_1, out StringBuilder value))
+		if (sectionName != null && sections.TryGetValue(sectionName, out StringBuilder value))
 		{
-			value.Append(P_2);
+			value.Append(valueText);
 		}
 	}
 
@@ -236,8 +222,8 @@ public class ScriptFileCompilerOl
 		MemoryStream memoryStream = new MemoryStream();
 		memoryStream.WriteByte(176);
 		memoryStream.WriteByte(208);
-		List<ErrorItem> list = lmvIvCLGxk(obj.FileName, scriptText, false, memoryStream, compileChinaScriptFile);
-		Ilogger? logger = jk8IFnVWb6();
+		List<ErrorItem> list = CompileScript(obj.FileName, scriptText, false, memoryStream, compileChinaScriptFile);
+		Ilogger? logger = GetLogger();
 		string unknownDataFormat = logger?.GetStrNoReplace("mess_UnknownData") ?? "Unknown data: {0}";
 		foreach (ErrorItem item in list)
 		{
@@ -256,31 +242,31 @@ public class ScriptFileCompilerOl
 	public (bool success, byte[] data) EncryptScriptText(string scriptText, bool readOnly, bool notShowError = false)
 	{
 		MemoryStream memoryStream = new MemoryStream();
-		List<ErrorItem> list = lmvIvCLGxk("", scriptText, readOnly, memoryStream, false);
+		List<ErrorItem> list = CompileScript("", scriptText, readOnly, memoryStream, false);
 		if (list.Count > 0 && !notShowError)
 		{
-			jk8IFnVWb6().Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_ScriptCompilerError2"), list.Count));
-			jk8IFnVWb6().Error(list);
+			GetLogger().Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_ScriptCompilerError2"), list.Count));
+			GetLogger().Error(list);
 		}
 		return (success: list.Count == 0, data: memoryStream.ToArray());
 	}
 
-	private static string jFZIUsKJfK(string P_0)
+	private static string NormalizeScriptContent(string scriptContent)
 	{
-		if (P_0 == null)
+		if (scriptContent == null)
 		{
 			return string.Empty;
 		}
 		try
 		{
-			P_0 = Regex.Replace(P_0, "//[^\\r\\n]*", "\r\n");
-			P_0 = Regex.Replace(P_0, "(\\[name\\])<", "$1\r\n<");
-			P_0 = Regex.Replace(P_0, "\\]\\s", "]\t\r\n");
+			scriptContent = Regex.Replace(scriptContent, "//[^\\r\\n]*", "\r\n");
+			scriptContent = Regex.Replace(scriptContent, "(\\[name\\])<", "$1\r\n<");
+			scriptContent = Regex.Replace(scriptContent, "\\]\\s", "]\t\r\n");
 			bool flag = false;
 			bool flag2 = false;
 			bool flag3 = false;
-			StringBuilder stringBuilder = new StringBuilder(P_0.Length);
-			string text = P_0;
+			StringBuilder stringBuilder = new StringBuilder(scriptContent.Length);
+			string text = scriptContent;
 			foreach (char c in text)
 			{
 				switch (c)
@@ -340,16 +326,16 @@ public class ScriptFileCompilerOl
 				"\n",
 				"\r"
 			}, StringSplitOptions.None);
-			StringBuilder stringBuilder2 = new StringBuilder();
+			StringBuilder normalizedContent = new StringBuilder();
 			string[] array2 = array;
 			foreach (string value in array2)
 			{
 				if (!string.IsNullOrWhiteSpace(value))
 				{
-					stringBuilder2.AppendLine(value);
+					normalizedContent.AppendLine(value);
 				}
 			}
-			return stringBuilder2.ToString();
+			return normalizedContent.ToString();
 		}
 		catch (Exception ex)
 		{
@@ -357,10 +343,10 @@ public class ScriptFileCompilerOl
 		}
 	}
 
-	private List<ErrorItem> lmvIvCLGxk(string P_0, string P_1, bool P_2, Stream P_3, bool P_4)
+	private List<ErrorItem> CompileScript(string fileName, string scriptText, bool readOnly, Stream output, bool compileChinaScriptFile)
 	{
-		P_1 = new Regex("<(\\d+::.+?)`.+?`>").Replace(P_1, "<$1``>");
-		string[] array = P_1.Split(new string[2]
+		scriptText = new Regex("<(\\d+::.+?)`.+?`>").Replace(scriptText, "<$1``>");
+		string[] array = scriptText.Split(new string[2]
 		{
 			"\r\n",
 			"\n"
@@ -381,28 +367,28 @@ public class ScriptFileCompilerOl
 				text += text3;
 				byte b;
 				byte[] buffer;
-				if (P_2)
+				if (readOnly)
 				{
-					(b, buffer) = T4nIifindq(text);
+					(b, buffer) = ParseReadOnlyToken(text);
 				}
-				else if (P_4)
+				else if (compileChinaScriptFile)
 				{
-					(b, buffer) = MhcIXQhNUJ(text);
+					(b, buffer) = ParseChinaToken(text);
 				}
 				else
 				{
-					(b, buffer) = zh1IWMZuxg(text);
+					(b, buffer) = ParseToken(text);
 				}
 				switch (b)
 				{
 				case 10:
-					if (P_4)
+					if (compileChinaScriptFile)
 					{
-						FVgIo2MPim(text, P_3, P_2);
+						WriteChinaStringLink(text, output, readOnly);
 					}
 					else
 					{
-						FKPItt2lX3(text, P_3, P_2);
+						WriteStringLink(text, output, readOnly);
 					}
 					text = "";
 					break;
@@ -410,12 +396,12 @@ public class ScriptFileCompilerOl
 					text += "\r\n";
 					break;
 				case byte.MaxValue:
-					list.Add(new ErrorItem(text, i + 1, P_0));
+					list.Add(new ErrorItem(text, i + 1, fileName));
 					text = "";
 					break;
 				default:
-					P_3.WriteByte(b);
-					P_3.Write(buffer, 0, 4);
+					output.WriteByte(b);
+					output.Write(buffer, 0, 4);
 					text = "";
 					break;
 				case 0:
@@ -426,26 +412,26 @@ public class ScriptFileCompilerOl
 		return list;
 	}
 
-	private (byte, byte[]) zh1IWMZuxg(string P_0)
+	private (byte, byte[]) ParseToken(string token)
 	{
-		char c = P_0[0];
+		char c = token[0];
 		byte result;
 		byte[] bytes;
 		if ((uint)c <= 91u)
 		{
 			if (c != '<')
 			{
-				if (c != '[' || P_0[P_0.Length - 1] != ']')
+				if (c != '[' || token[token.Length - 1] != ']')
 				{
 					goto IL_0308;
 				}
 				result = 5;
-				int stringTableId = FxcI41eDZ0.Strtable.GetStringTableId(P_0);
-				bytes = BitConverter.GetBytes((uint)((stringTableId == -1) ? FxcI41eDZ0.Strtable.AddStringItem(P_0) : stringTableId));
+				int stringTableId = pvf.Strtable.GetStringTableId(token);
+				bytes = BitConverter.GetBytes((uint)((stringTableId == -1) ? pvf.Strtable.AddStringItem(token) : stringTableId));
 			}
 			else
 			{
-				if (P_0[P_0.Length - 1] != '>')
+				if (token[token.Length - 1] != '>')
 				{
 					goto IL_0308;
 				}
@@ -455,22 +441,22 @@ public class ScriptFileCompilerOl
 		}
 		else if (c != '`')
 		{
-			if (c != '{' || P_0[P_0.Length - 1] != '}')
+			if (c != '{' || token[token.Length - 1] != '}')
 			{
 				goto IL_0308;
 			}
-			string dataFromFormat = DataHelper.GetDataFromFormat(P_0, "{", "=");
-			string dataFromFormat2 = DataHelper.GetDataFromFormat(P_0, "=", "}");
+			string dataFromFormat = DataHelper.GetDataFromFormat(token, "{", "=");
+			string valueText = DataHelper.GetDataFromFormat(token, "=", "}");
 			byte.TryParse(dataFromFormat, out result);
 			bytes = BitConverter.GetBytes(0);
 			if (result == 0)
 			{
 				return (result, bytes);
 			}
-			if (dataFromFormat2[0] != '`' || dataFromFormat2[dataFromFormat2.Length - 1] != '`')
+			if (valueText[0] != '`' || valueText[valueText.Length - 1] != '`')
 			{
 				int result2;
-				bool num = int.TryParse(dataFromFormat2, out result2);
+				bool num = int.TryParse(valueText, out result2);
 				bytes = BitConverter.GetBytes(result2);
 				if (!num)
 				{
@@ -479,21 +465,21 @@ public class ScriptFileCompilerOl
 			}
 			else
 			{
-				string text = DataHelper.GetDataFromFormat(dataFromFormat2, "`", "`");
-				if (string.IsNullOrEmpty(text))
+				string stringValue = DataHelper.GetDataFromFormat(valueText, "`", "`");
+				if (string.IsNullOrEmpty(stringValue))
 				{
-					text = " ";
+					stringValue = " ";
 				}
-				int stringTableId2 = FxcI41eDZ0.Strtable.GetStringTableId(text);
-				bytes = BitConverter.GetBytes((uint)((stringTableId2 != -1) ? stringTableId2 : FxcI41eDZ0.Strtable.AddStringItem(text)));
+				int stringTableId = pvf.Strtable.GetStringTableId(stringValue);
+				bytes = BitConverter.GetBytes((uint)((stringTableId != -1) ? stringTableId : pvf.Strtable.AddStringItem(stringValue)));
 			}
 		}
-		else if (P_0[P_0.Length - 1] == '`')
+		else if (token[token.Length - 1] == '`')
 		{
 			result = 7;
-			string dataFromFormat3 = DataHelper.GetDataFromFormat(P_0, "`", "`");
-			int stringTableId3 = FxcI41eDZ0.Strtable.GetStringTableId(dataFromFormat3);
-			bytes = BitConverter.GetBytes((uint)((stringTableId3 != -1) ? stringTableId3 : FxcI41eDZ0.Strtable.AddStringItem(dataFromFormat3)));
+			string stringValue = DataHelper.GetDataFromFormat(token, "`", "`");
+			int stringTableId = pvf.Strtable.GetStringTableId(stringValue);
+			bytes = BitConverter.GetBytes((uint)((stringTableId != -1) ? stringTableId : pvf.Strtable.AddStringItem(stringValue)));
 		}
 		else
 		{
@@ -504,11 +490,11 @@ public class ScriptFileCompilerOl
 		IL_0355:
 		return (result, bytes);
 		IL_0308:
-		if (P_0.IndexOf('.') < 0)
+		if (token.IndexOf('.') < 0)
 		{
 			result = 2;
 			int result3;
-			bool num2 = int.TryParse(P_0, out result3);
+			bool num2 = int.TryParse(token, out result3);
 			bytes = BitConverter.GetBytes(result3);
 			if (!num2)
 			{
@@ -519,7 +505,7 @@ public class ScriptFileCompilerOl
 		{
 			result = 4;
 			float result4;
-			bool num3 = float.TryParse(P_0, NumberStyles.Float, CultureInfo.InvariantCulture, out result4);
+			bool num3 = float.TryParse(token, NumberStyles.Float, CultureInfo.InvariantCulture, out result4);
 			bytes = BitConverter.GetBytes(result4);
 			if (!num3)
 			{
@@ -529,24 +515,24 @@ public class ScriptFileCompilerOl
 		goto IL_0355;
 	}
 
-	private (byte, byte[]) T4nIifindq(string P_0)
+	private (byte, byte[]) ParseReadOnlyToken(string token)
 	{
 		byte result = byte.MaxValue;
 		byte[] bytes = BitConverter.GetBytes(0);
-		if (string.IsNullOrEmpty(P_0))
+		if (string.IsNullOrEmpty(token))
 		{
 			return (result, bytes);
 		}
-		char c = P_0[0];
+		char c = token[0];
 		if ((uint)c <= 91u)
 		{
 			if (c != '<')
 			{
-				if (c != '[' || P_0[P_0.Length - 1] != ']')
+				if (c != '[' || token[token.Length - 1] != ']')
 				{
 					goto IL_02a1;
 				}
-				int stringTableId = FxcI41eDZ0.Strtable.GetStringTableId(P_0);
+				int stringTableId = pvf.Strtable.GetStringTableId(token);
 				if (stringTableId == -1)
 				{
 					return (result, bytes);
@@ -556,7 +542,7 @@ public class ScriptFileCompilerOl
 			}
 			else
 			{
-				if (P_0[P_0.Length - 1] != '>')
+				if (token[token.Length - 1] != '>')
 				{
 					goto IL_02a1;
 				}
@@ -566,60 +552,60 @@ public class ScriptFileCompilerOl
 		}
 		else if (c != '`')
 		{
-			if (c != '{' || P_0[P_0.Length - 1] != '}')
+			if (c != '{' || token[token.Length - 1] != '}')
 			{
 				goto IL_02a1;
 			}
-			string dataFromFormat = DataHelper.GetDataFromFormat(P_0, "{", "=");
-			string dataFromFormat2 = DataHelper.GetDataFromFormat(P_0, "=", "}");
+			string dataFromFormat = DataHelper.GetDataFromFormat(token, "{", "=");
+			string valueText = DataHelper.GetDataFromFormat(token, "=", "}");
 			byte.TryParse(dataFromFormat, out result);
 			if (result == 0)
 			{
 				return (result, bytes);
 			}
-			if (dataFromFormat2[0] != '`' || dataFromFormat2[dataFromFormat2.Length - 1] != '`')
+			if (valueText[0] != '`' || valueText[valueText.Length - 1] != '`')
 			{
-				int.TryParse(dataFromFormat2, out var result2);
+				int.TryParse(valueText, out var result2);
 				bytes = BitConverter.GetBytes(result2);
 			}
 			else
 			{
-				string dataFromFormat3 = DataHelper.GetDataFromFormat(dataFromFormat2, "`", "`");
-				int stringTableId2 = FxcI41eDZ0.Strtable.GetStringTableId(dataFromFormat3);
-				if (stringTableId2 != -1)
+				string stringValue = DataHelper.GetDataFromFormat(valueText, "`", "`");
+				int stringTableId = pvf.Strtable.GetStringTableId(stringValue);
+				if (stringTableId != -1)
 				{
-					bytes = BitConverter.GetBytes((uint)stringTableId2);
+					bytes = BitConverter.GetBytes((uint)stringTableId);
 				}
 			}
 		}
 		else
 		{
-			if (P_0[P_0.Length - 1] != '`')
+			if (token[token.Length - 1] != '`')
 			{
 				goto IL_02a1;
 			}
-			string dataFromFormat4 = DataHelper.GetDataFromFormat(P_0, "`", "`");
-			int stringTableId3 = FxcI41eDZ0.Strtable.GetStringTableId(dataFromFormat4);
-			if (stringTableId3 == -1)
+			string stringValue = DataHelper.GetDataFromFormat(token, "`", "`");
+			int stringTableId = pvf.Strtable.GetStringTableId(stringValue);
+			if (stringTableId == -1)
 			{
 				return (result, bytes);
 			}
 			result = 7;
-			bytes = BitConverter.GetBytes((uint)stringTableId3);
+			bytes = BitConverter.GetBytes((uint)stringTableId);
 		}
 		goto IL_02e4;
 		IL_02a1:
-		if (P_0.IndexOf('.') < 0)
+		if (token.IndexOf('.') < 0)
 		{
 			result = 2;
-			int.TryParse(P_0, out var result3);
+			int.TryParse(token, out var result3);
 			bytes = BitConverter.GetBytes(result3);
 		}
 		else
 		{
 			result = 4;
 			float result4;
-			bool num = float.TryParse(P_0, NumberStyles.Float, CultureInfo.InvariantCulture, out result4);
+			bool num = float.TryParse(token, NumberStyles.Float, CultureInfo.InvariantCulture, out result4);
 			bytes = BitConverter.GetBytes(result4);
 			if (!num)
 			{
@@ -631,70 +617,70 @@ public class ScriptFileCompilerOl
 		return (result, bytes);
 	}
 
-	private void FKPItt2lX3(string P_0, Stream P_1, bool P_2)
+	private void WriteStringLink(string token, Stream output, bool readOnly)
 	{
-		uint.TryParse(DataHelper.GetDataFromFormat(P_0, "<", "::"), out var result);
-		string dataFromFormat = DataHelper.GetDataFromFormat(P_0, "::", "`");
-		P_1.WriteByte(9);
-		P_1.Write(BitConverter.GetBytes(result), 0, 4);
-		P_1.WriteByte(10);
-		int stringTableId = FxcI41eDZ0.Strtable.GetStringTableId(dataFromFormat);
+		uint.TryParse(DataHelper.GetDataFromFormat(token, "<", "::"), out var result);
+		string dataFromFormat = DataHelper.GetDataFromFormat(token, "::", "`");
+		output.WriteByte(9);
+		output.Write(BitConverter.GetBytes(result), 0, 4);
+		output.WriteByte(10);
+		int stringTableId = pvf.Strtable.GetStringTableId(dataFromFormat);
 		if (stringTableId != -1)
 		{
-			P_1.Write(BitConverter.GetBytes((uint)stringTableId), 0, 4);
+			output.Write(BitConverter.GetBytes((uint)stringTableId), 0, 4);
 		}
-		else if (!P_2)
+		else if (!readOnly)
 		{
-			P_1.Write(BitConverter.GetBytes((uint)FxcI41eDZ0.Strtable.AddStringItem(dataFromFormat)), 0, 4);
+			output.Write(BitConverter.GetBytes((uint)pvf.Strtable.AddStringItem(dataFromFormat)), 0, 4);
 		}
 		else
 		{
-			P_1.Write(BitConverter.GetBytes(0u), 0, 4);
+			output.Write(BitConverter.GetBytes(0u), 0, 4);
 		}
 	}
 
-	private void FVgIo2MPim(string P_0, Stream P_1, bool P_2)
+	private void WriteChinaStringLink(string token, Stream output, bool readOnly)
 	{
-		uint.TryParse(DataHelper.GetDataFromFormat(P_0, "<", "::"), out var result);
-		string dataFromFormat = DataHelper.GetDataFromFormat(P_0, "::", ">");
-		P_1.WriteByte(9);
-		P_1.Write(BitConverter.GetBytes(result), 0, 4);
-		P_1.WriteByte(10);
-		int stringTableId = FxcI41eDZ0.Strtable.GetStringTableId(dataFromFormat);
+		uint.TryParse(DataHelper.GetDataFromFormat(token, "<", "::"), out var result);
+		string dataFromFormat = DataHelper.GetDataFromFormat(token, "::", ">");
+		output.WriteByte(9);
+		output.Write(BitConverter.GetBytes(result), 0, 4);
+		output.WriteByte(10);
+		int stringTableId = pvf.Strtable.GetStringTableId(dataFromFormat);
 		if (stringTableId != -1)
 		{
-			P_1.Write(BitConverter.GetBytes((uint)stringTableId), 0, 4);
+			output.Write(BitConverter.GetBytes((uint)stringTableId), 0, 4);
 		}
-		else if (!P_2)
+		else if (!readOnly)
 		{
-			P_1.Write(BitConverter.GetBytes((uint)FxcI41eDZ0.Strtable.AddStringItem(dataFromFormat)), 0, 4);
+			output.Write(BitConverter.GetBytes((uint)pvf.Strtable.AddStringItem(dataFromFormat)), 0, 4);
 		}
 		else
 		{
-			P_1.Write(BitConverter.GetBytes(0u), 0, 4);
+			output.Write(BitConverter.GetBytes(0u), 0, 4);
 		}
 	}
 
-	private (byte, byte[]) MhcIXQhNUJ(string P_0)
+	private (byte, byte[]) ParseChinaToken(string token)
 	{
-		char c = P_0[0];
+		char c = token[0];
 		byte result;
 		byte[] bytes;
 		if ((uint)c <= 91u)
 		{
 			if (c != '<')
 			{
-				if (c != '[' || P_0[P_0.Length - 1] != ']')
+				if (c != '[' || token[token.Length - 1] != ']')
 				{
 					goto IL_0380;
 				}
 				result = 5;
-				int stringTableId = FxcI41eDZ0.Strtable.GetStringTableId(P_0);
-				bytes = BitConverter.GetBytes((uint)((stringTableId == -1) ? FxcI41eDZ0.Strtable.AddStringItem(P_0) : stringTableId));
+				int stringTableId = pvf.Strtable.GetStringTableId(token);
+				bytes = BitConverter.GetBytes((uint)((stringTableId == -1) ? pvf.Strtable.AddStringItem(token) : stringTableId));
 			}
 			else
 			{
-				if (P_0[P_0.Length - 1] != '>')
+				if (token[token.Length - 1] != '>')
 				{
 					goto IL_0380;
 				}
@@ -704,22 +690,22 @@ public class ScriptFileCompilerOl
 		}
 		else if (c != '`')
 		{
-			if (c != '{' || P_0[P_0.Length - 1] != '}')
+			if (c != '{' || token[token.Length - 1] != '}')
 			{
 				goto IL_0380;
 			}
-			string dataFromFormat = DataHelper.GetDataFromFormat(P_0, "{", "=");
-			string dataFromFormat2 = DataHelper.GetDataFromFormat(P_0, "=", "}");
+			string dataFromFormat = DataHelper.GetDataFromFormat(token, "{", "=");
+			string valueText = DataHelper.GetDataFromFormat(token, "=", "}");
 			byte.TryParse(dataFromFormat, out result);
 			bytes = BitConverter.GetBytes(0);
 			if (result == 0)
 			{
 				return (result, bytes);
 			}
-			if (dataFromFormat2[0] != '`' || dataFromFormat2[dataFromFormat2.Length - 1] != '`')
+			if (valueText[0] != '`' || valueText[valueText.Length - 1] != '`')
 			{
 				int result2;
-				bool num = int.TryParse(dataFromFormat2, out result2);
+				bool num = int.TryParse(valueText, out result2);
 				bytes = BitConverter.GetBytes(result2);
 				if (!num)
 				{
@@ -728,30 +714,30 @@ public class ScriptFileCompilerOl
 			}
 			else
 			{
-				string text = DataHelper.GetDataFromFormat(dataFromFormat2, "`", "`");
-				if (string.IsNullOrEmpty(text))
+				string stringValue = DataHelper.GetDataFromFormat(valueText, "`", "`");
+				if (string.IsNullOrEmpty(stringValue))
 				{
-					text = " ";
+					stringValue = " ";
 				}
-				int stringTableId2 = FxcI41eDZ0.Strtable.GetStringTableId(text);
-				bytes = BitConverter.GetBytes((uint)((stringTableId2 != -1) ? stringTableId2 : FxcI41eDZ0.Strtable.AddStringItem(text)));
+				int stringTableId = pvf.Strtable.GetStringTableId(stringValue);
+				bytes = BitConverter.GetBytes((uint)((stringTableId != -1) ? stringTableId : pvf.Strtable.AddStringItem(stringValue)));
 			}
 		}
-		else if (P_0[P_0.Length - 1] == '`')
+		else if (token[token.Length - 1] == '`')
 		{
-			if (P_0.Length > 4 && P_0[1] == '<' && P_0[P_0.Length - 2] == '>')
+			if (token.Length > 4 && token[1] == '<' && token[token.Length - 2] == '>')
 			{
-				P_0 = P_0.Remove(P_0.Length - 2, 2).Remove(0, 2);
+				token = token.Remove(token.Length - 2, 2).Remove(0, 2);
 				result = 7;
-				int stringTableId3 = FxcI41eDZ0.Strtable.GetStringTableId(P_0);
-				bytes = BitConverter.GetBytes((uint)((stringTableId3 != -1) ? stringTableId3 : FxcI41eDZ0.Strtable.AddStringItem(P_0)));
+				int stringTableId = pvf.Strtable.GetStringTableId(token);
+				bytes = BitConverter.GetBytes((uint)((stringTableId != -1) ? stringTableId : pvf.Strtable.AddStringItem(token)));
 			}
 			else
 			{
 				result = 7;
-				string dataFromFormat3 = DataHelper.GetDataFromFormat(P_0, "`", "`");
-				int stringTableId4 = FxcI41eDZ0.Strtable.GetStringTableId(dataFromFormat3);
-				bytes = BitConverter.GetBytes((uint)((stringTableId4 != -1) ? stringTableId4 : FxcI41eDZ0.Strtable.AddStringItem(dataFromFormat3)));
+				string stringValue = DataHelper.GetDataFromFormat(token, "`", "`");
+				int stringTableId = pvf.Strtable.GetStringTableId(stringValue);
+				bytes = BitConverter.GetBytes((uint)((stringTableId != -1) ? stringTableId : pvf.Strtable.AddStringItem(stringValue)));
 			}
 		}
 		else
@@ -761,11 +747,11 @@ public class ScriptFileCompilerOl
 		}
 		goto IL_03cd;
 		IL_0380:
-		if (P_0.IndexOf('.') < 0)
+		if (token.IndexOf('.') < 0)
 		{
 			result = 2;
 			int result3;
-			bool num2 = int.TryParse(P_0, out result3);
+			bool num2 = int.TryParse(token, out result3);
 			bytes = BitConverter.GetBytes(result3);
 			if (!num2)
 			{
@@ -776,7 +762,7 @@ public class ScriptFileCompilerOl
 		{
 			result = 4;
 			float result4;
-			bool num3 = float.TryParse(P_0, NumberStyles.Float, CultureInfo.InvariantCulture, out result4);
+			bool num3 = float.TryParse(token, NumberStyles.Float, CultureInfo.InvariantCulture, out result4);
 			bytes = BitConverter.GetBytes(result4);
 			if (!num3)
 			{

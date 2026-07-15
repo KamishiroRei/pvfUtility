@@ -13,178 +13,159 @@ public static class ServiceItemCodeTable
 	{
 		pvf.ListFileTable.CodeDic = new Dictionary<string, Dictionary<int, LstItem>>();
 		pvf.ListFileTable.LstCountCode = new Dictionary<string, int>();
-		List<PvfFile> list = pvf.FileList.Where<KeyValuePair<string, PvfFile>>(delegate(KeyValuePair<string, PvfFile> item)
-		{
-			KeyValuePair<string, PvfFile> keyValuePair = item;
-			string key = keyValuePair.Key;
-			keyValuePair = item;
-			string text = PathsHelper.PathFix(keyValuePair.Value.DirectoryName);
-			keyValuePair = item;
-			return key == text + keyValuePair.Value.DirectoryName + ".lst";
-		}).Select(delegate(KeyValuePair<string, PvfFile> item)
-		{
-			KeyValuePair<string, PvfFile> keyValuePair = item;
-			return keyValuePair.Value;
-		}).ToList();
+		List<PvfFile> lstFiles = pvf.FileList
+			.Where(entry => entry.Key == PathsHelper.PathFix(entry.Value.DirectoryName) + entry.Value.DirectoryName + ".lst")
+			.Select(entry => entry.Value)
+			.ToList();
 		if (pvf.FileAny("n_quest/quest.lst"))
 		{
-			list.Add(pvf.GetFile("n_quest/quest.lst"));
+			lstFiles.Add(pvf.GetFile("n_quest/quest.lst"));
 		}
 		if (pvf.FileAny("pvp_mission/mission.lst"))
 		{
-			list.Add(pvf.GetFile("pvp_mission/mission.lst"));
+			lstFiles.Add(pvf.GetFile("pvp_mission/mission.lst"));
 		}
 		if (pvf.FileAny("etc/independentdrop.lst"))
 		{
-			list.Add(pvf.GetFile("etc/independentdrop.lst"));
+			lstFiles.Add(pvf.GetFile("etc/independentdrop.lst"));
 		}
-		foreach (PvfFile item in list)
+		foreach (PvfFile lstFile in lstFiles)
 		{
-			l5AefSxFwx(item, pvf);
+			LoadLstFile(lstFile, pvf);
 		}
-		foreach (PvfFile item2 in n50eTZnvhd(pvf))
+		foreach (PvfFile skillLstFile in GetSkillLstFiles(pvf))
 		{
-			l5AefSxFwx(item2, pvf);
+			LoadLstFile(skillLstFile, pvf);
 		}
 	}
 
-	internal static void l5AefSxFwx(PvfFile P_0, PvfGroup P_1)
+	internal static void LoadLstFile(PvfFile file, PvfGroup pvf)
 	{
-		if (P_0 == null || P_1 == null)
+		if (file == null || pvf == null)
 		{
 			return;
 		}
-		Stringtable strtable = P_1.Strtable;
+		Stringtable strtable = pvf.Strtable;
 		if (strtable == null)
 		{
 			return;
 		}
-		string text = P_0.DirectoryName;
-		string text2 = text;
-		bool flag = P_0.IsSkillLst();
-		if (flag)
+		string directoryName = file.DirectoryName;
+		string tableKey = directoryName;
+		bool isSkillLst = file.IsSkillLst();
+		if (isSkillLst)
 		{
-			text = "skill";
-			text2 = LpueZvDmGI(P_1, P_0);
-			if (text2 == null)
+			directoryName = "skill";
+			tableKey = GetSkillDirectory(pvf, file);
+			if (tableKey == null)
 			{
-				text2 = "skill";
+				tableKey = "skill";
 			}
 		}
-		if (P_0.FileName == "etc/independentdrop.lst")
+		if (file.FileName == "etc/independentdrop.lst")
 		{
-			text2 = "independentdrop";
+			tableKey = "independentdrop";
 		}
-		if (string.IsNullOrWhiteSpace(text2) || !P_0.FileName.Contains(text))
+		if (string.IsNullOrWhiteSpace(tableKey) || !file.FileName.Contains(directoryName))
 		{
 			return;
 		}
-		if (P_1.ListFileTable.CodeDic.ContainsKey(text2))
+		if (pvf.ListFileTable.CodeDic.ContainsKey(tableKey))
 		{
-			P_1.ListFileTable.CodeDic[text2].Clear();
+			pvf.ListFileTable.CodeDic[tableKey].Clear();
 		}
 		else
 		{
-			P_1.ListFileTable.CodeDic.Add(text2, new Dictionary<int, LstItem>());
+			pvf.ListFileTable.CodeDic.Add(tableKey, new Dictionary<int, LstItem>());
 		}
-		if (!P_1.ListFileTable.LstFilePaths.ContainsKey(text2))
+		if (!pvf.ListFileTable.LstFilePaths.ContainsKey(tableKey))
 		{
-			P_1.ListFileTable.LstFilePaths.Add(text2, P_0.FileName);
+			pvf.ListFileTable.LstFilePaths.Add(tableKey, file.FileName);
 		}
-		if (P_1.ListFileTable.LstCountCode.ContainsKey(P_0.FileName))
+		if (pvf.ListFileTable.LstCountCode.ContainsKey(file.FileName))
 		{
-			P_1.ListFileTable.LstCountCode.Remove(P_0.FileName);
+			pvf.ListFileTable.LstCountCode.Remove(file.FileName);
 		}
-		Dictionary<int, LstItem> dictionary = P_1.ListFileTable.CodeDic[text2];
-		int dataLen = P_0.DataLen;
-		if (!P_0.IsScriptFile || dataLen < 12)
+		Dictionary<int, LstItem> lstItems = pvf.ListFileTable.CodeDic[tableKey];
+		int dataLen = file.DataLen;
+		if (!file.IsScriptFile || dataLen < 12)
 		{
 			return;
 		}
-		string text3 = PathsHelper.PathFix(text);
+		string normalizedDirectory = PathsHelper.PathFix(directoryName);
 		for (int i = 2; i < dataLen - 5; i += 10)
 		{
-			int num = BitConverter.ToInt32(P_0.Data, i + 1);
-			string stringItem = strtable.GetStringItem(BitConverter.ToInt32(P_0.Data, i + 1 + 5));
-			if (stringItem == null)
+			int itemCode = BitConverter.ToInt32(file.Data, i + 1);
+			string itemPath = strtable.GetStringItem(BitConverter.ToInt32(file.Data, i + 1 + 5));
+			if (itemPath == null)
 			{
 				continue;
 			}
-			if (!dictionary.ContainsKey(num))
+			if (!lstItems.ContainsKey(itemCode))
 			{
-				dictionary.Add(num, new LstItem(text, stringItem, num));
+				lstItems.Add(itemCode, new LstItem(directoryName, itemPath, itemCode));
 			}
-			string key = text3 + stringItem.Replace('\\', '/').ToLower();
-			if (P_1.FileList == null)
+			string filePath = normalizedDirectory + itemPath.Replace('\\', '/').ToLower();
+			if (pvf.FileList == null)
 			{
 				continue;
 			}
-			P_1.FileList.TryGetValue(key, out PvfFile value);
-			if (value != null)
+			pvf.FileList.TryGetValue(filePath, out PvfFile referencedFile);
+			if (referencedFile != null)
 			{
-				value.ItemCode = num;
-				if (flag)
+				referencedFile.ItemCode = itemCode;
+				if (isSkillLst)
 				{
-					value.SkillLstItemPath = stringItem;
+					referencedFile.SkillLstItemPath = itemPath;
 				}
 			}
 		}
-		if (P_1.ListFileTable.LstCountCode.ContainsKey(P_0.FileName))
+		if (pvf.ListFileTable.LstCountCode.ContainsKey(file.FileName))
 		{
-			P_1.ListFileTable.LstCountCode.Remove(P_0.FileName);
+			pvf.ListFileTable.LstCountCode.Remove(file.FileName);
 		}
-		P_1.ListFileTable.LstCountCode.Add(P_0.FileName, dictionary.Keys.ToList().Max());
+		pvf.ListFileTable.LstCountCode.Add(file.FileName, lstItems.Keys.ToList().Max());
 	}
 
-	internal static string t3Te7YyP9f(PvfFile P_0, PvfGroup P_1)
+	private static List<PvfFile> GetSkillLstFiles(PvfGroup pvf)
 	{
-		string result = P_0.DirectoryName;
-		if (P_0.IsSkillLst())
-		{
-			result = LpueZvDmGI(P_1, P_0);
-		}
-		return result;
-	}
-
-	private static List<PvfFile> n50eTZnvhd(PvfGroup P_0)
-	{
-		List<PvfFile> list = new List<PvfFile>();
-		PvfFile file = P_0.GetFile("skill/skilllist.lst");
+		List<PvfFile> skillLstFiles = new List<PvfFile>();
+		PvfFile file = pvf.GetFile("skill/skilllist.lst");
 		if (file == null)
 		{
-			return list;
+			return skillLstFiles;
 		}
 		int dataLen = file.DataLen;
 		if (!file.IsScriptFile || dataLen < 12)
 		{
-			return list;
+			return skillLstFiles;
 		}
 		for (int i = 2; i < dataLen - 5; i += 10)
 		{
-			string key = ("skill/" + P_0.Strtable.GetStringItem(BitConverter.ToInt32(file.Data, i + 1 + 5))).Replace('\\', '/').ToLower();
-			P_0.FileList.TryGetValue(key, out PvfFile value);
-			if (value != null)
+			string filePath = ("skill/" + pvf.Strtable.GetStringItem(BitConverter.ToInt32(file.Data, i + 1 + 5))).Replace('\\', '/').ToLower();
+			pvf.FileList.TryGetValue(filePath, out PvfFile skillLstFile);
+			if (skillLstFile != null)
 			{
-				list.Add(value);
+				skillLstFiles.Add(skillLstFile);
 			}
 		}
-		return list;
+		return skillLstFiles;
 	}
 
-	private static string LpueZvDmGI(PvfGroup P_0, PvfFile P_1)
+	private static string GetSkillDirectory(PvfGroup pvf, PvfFile file)
 	{
-		int dataLen = P_1.DataLen;
-		if (!P_1.IsScriptFile || dataLen < 12)
+		int dataLen = file.DataLen;
+		if (!file.IsScriptFile || dataLen < 12)
 		{
 			return null;
 		}
 		for (int i = 2; i < dataLen - 5; i += 10)
 		{
-			string stringItem = P_0.Strtable.GetStringItem(BitConverter.ToInt32(P_1.Data, i + 1 + 5));
-			int num = stringItem.IndexOf('/');
-			if (num != -1)
+			string skillPath = pvf.Strtable.GetStringItem(BitConverter.ToInt32(file.Data, i + 1 + 5));
+			int separatorIndex = skillPath.IndexOf('/');
+			if (separatorIndex != -1)
 			{
-				return ("skill/" + stringItem.Substring(0, num)).ToLower();
+				return ("skill/" + skillPath.Substring(0, separatorIndex)).ToLower();
 			}
 		}
 		return null;
@@ -206,19 +187,19 @@ public static class ServiceItemCodeTable
 		{
 			return null;
 		}
-		Dictionary<int, string> dictionary = new Dictionary<int, string>();
+		Dictionary<int, string> lstItems = new Dictionary<int, string>();
 		foreach (PvfFile file in fileList)
 		{
 			if (file.ItemCode.HasValue)
 			{
-				pvf.ListFileTable.CodeDic.TryGetValue(file.GetLstPathHeader(), out Dictionary<int, LstItem> value);
-				if (value != null && value.TryGetValue(file.ItemCode.Value, out var value2) && !dictionary.ContainsKey(file.ItemCode.Value))
+				pvf.ListFileTable.CodeDic.TryGetValue(file.GetLstPathHeader(), out Dictionary<int, LstItem> codeTable);
+				if (codeTable != null && codeTable.TryGetValue(file.ItemCode.Value, out var lstItem) && !lstItems.ContainsKey(file.ItemCode.Value))
 				{
-					dictionary.Add(file.ItemCode.Value, value2.ItemPath);
+					lstItems.Add(file.ItemCode.Value, lstItem.ItemPath);
 				}
 			}
 		}
-		return dictionary;
+		return lstItems;
 	}
 
 	public static string FilesToLstItemsToString(PvfGroup pvf, IEnumerable<string> files, out int count)
@@ -228,27 +209,27 @@ public static class ServiceItemCodeTable
 		{
 			return null;
 		}
-		return FAnehQuUHj(FilesToLstItems(pvf, files), out count);
+		return FormatLstItems(FilesToLstItems(pvf, files), out count);
 	}
 
 	public static string FilesToLstItemsToString(PvfGroup pvf, IEnumerable<PvfFile> files, out int count)
 	{
-		return FAnehQuUHj(FilesToLstItems(pvf, files), out count);
+		return FormatLstItems(FilesToLstItems(pvf, files), out count);
 	}
 
-	private static string FAnehQuUHj(Dictionary<int, string> P_0, out int P_1)
+	private static string FormatLstItems(Dictionary<int, string> lstItems, out int count)
 	{
-		if (P_0 == null)
+		if (lstItems == null)
 		{
-			P_1 = 0;
+			count = 0;
 			return null;
 		}
-		P_1 = P_0.Count;
-		StringBuilder stringBuilder = new StringBuilder();
-		foreach (KeyValuePair<int, string> item in P_0)
+		count = lstItems.Count;
+		StringBuilder output = new StringBuilder();
+		foreach (KeyValuePair<int, string> item in lstItems)
 		{
-			stringBuilder.AppendLine(item.Key + "\t`" + item.Value + "`");
+			output.AppendLine(item.Key + "\t`" + item.Value + "`");
 		}
-		return stringBuilder.ToString();
+		return output.ToString();
 	}
 }

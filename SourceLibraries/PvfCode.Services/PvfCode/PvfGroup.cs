@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,15 +23,15 @@ namespace PvfCode;
 
 public class PvfGroup : PvfPack
 {
-	private readonly Ilogger xapgPoPUS;
+	private readonly Ilogger logger;
 
-	private readonly byte[] uRdz1sJCA;
+	private readonly byte[] footerSignature;
 
-	private readonly AsyncLock rLrIuFtK03;
+	private readonly AsyncLock saveLock;
 
 	public PvfGroup()
 	{
-		uRdz1sJCA = new byte[41]
+		footerSignature = new byte[41]
 		{
 			0, 84, 104, 105, 115, 32, 112, 118, 102, 32,
 			80, 97, 99, 107, 32, 119, 97, 115, 32, 99,
@@ -40,8 +39,8 @@ public class PvfGroup : PvfPack
 			112, 118, 102, 85, 116, 105, 108, 105, 116, 121,
 			46
 		};
-		rLrIuFtK03 = new AsyncLock();
-		xapgPoPUS = AppSetting.Instance.GetService<Ilogger>();
+		saveLock = new AsyncLock();
+		logger = AppSetting.Instance.GetService<Ilogger>();
 	}
 
 	public void Clear()
@@ -64,135 +63,125 @@ public class PvfGroup : PvfPack
 		if (AppSetting.Instance.PvfConfig.SavePvfLoadingDisableMainWindow && !notButtonClick)
 		{
 			AppSetting.Instance.MainWindowIsEnabled = false;
-			loadingWin = xapgPoPUS.CreateLoadingWindow(AppSetting.Instance.GetIlogger()?.GetStr("mess_SavingPackage"));
-			xapgPoPUS.ShowLoadingWindow(loadingWin);
+			loadingWin = logger.CreateLoadingWindow(AppSetting.Instance.GetIlogger()?.GetStr("mess_SavingPackage"));
+			logger.ShowLoadingWindow(loadingWin);
 		}
-		ResultData resultData = await K5TVSpbde(filePath, progress, notButtonClick);
+		ResultData resultData = await SavePvfPackCore(filePath, progress, notButtonClick);
 		if (resultData.IsError)
 		{
 			string directoryName = Path.GetDirectoryName(filePath);
 			string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath);
-			int num = 1;
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(6, 2);
-			defaultInterpolatedStringHandler.AppendFormatted(fileNameWithoutExtension);
-			defaultInterpolatedStringHandler.AppendLiteral("(");
-			defaultInterpolatedStringHandler.AppendFormatted(num);
-			defaultInterpolatedStringHandler.AppendLiteral(").pvf");
-			string text = Path.Combine(directoryName, defaultInterpolatedStringHandler.ToStringAndClear());
-			while (File.Exists(text))
+			int suffix = 1;
+			string fallbackPath = Path.Combine(directoryName, $"{fileNameWithoutExtension}({suffix}).pvf");
+			while (File.Exists(fallbackPath))
 			{
-				num++;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(6, 2);
-				defaultInterpolatedStringHandler2.AppendFormatted(fileNameWithoutExtension);
-				defaultInterpolatedStringHandler2.AppendLiteral("(");
-				defaultInterpolatedStringHandler2.AppendFormatted(num);
-				defaultInterpolatedStringHandler2.AppendLiteral(").pvf");
-				text = Path.Combine(directoryName, defaultInterpolatedStringHandler2.ToStringAndClear());
+				suffix++;
+				fallbackPath = Path.Combine(directoryName, $"{fileNameWithoutExtension}({suffix}).pvf");
 			}
-			xapgPoPUS.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_SavePvfError"), resultData.Msg));
-			string msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_SavePvfError2"), text);
+			logger.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_SavePvfError"), resultData.Msg));
+			string msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_SavePvfError2"), fallbackPath);
 			if (!notButtonClick)
 			{
-				xapgPoPUS.ShowMsg(msg);
+				logger.ShowMsg(msg);
 			}
-			xapgPoPUS.Warning(msg);
-			resultData = await K5TVSpbde(text, progress, notButtonClick);
+			logger.Warning(msg);
+			resultData = await SavePvfPackCore(fallbackPath, progress, notButtonClick);
 		}
 		AppSetting.Instance.MainWindowIsEnabled = true;
-		xapgPoPUS.CloseLoadingWindow(loadingWin);
+		logger.CloseLoadingWindow(loadingWin);
 		return resultData;
 	}
 
-	private async Task<ResultData> K5TVSpbde(string P_0, IProgress<double> P_1, bool P_2)
+	private async Task<ResultData> SavePvfPackCore(string filePath, IProgress<double> progress, bool notButtonClick)
 	{
-		ResultData re = new ResultData();
+		ResultData result = new ResultData();
 		try
 		{
-			using (await rLrIuFtK03.LockAsync())
+			using (await saveLock.LockAsync())
 			{
-				using Stream output = File.Create(P_0);
+				using Stream output = File.Create(filePath);
 				if (base.Strtable.IsStringTableUpdated)
 				{
 					GetFile("stringtable.bin")?.WriteFileData(base.Strtable.CreateStringTable());
 				}
-				List<PvfFile> list = base.FileList.Values.OrderBy((PvfFile x) => x.FileNameBytesChecksum).ToList();
-				int count = list.Count;
+				List<PvfFile> files = base.FileList.Values.OrderBy(file => file.FileNameBytesChecksum).ToList();
+				int fileCount = files.Count;
 				using BinaryWriter binaryWriter = new BinaryWriter(output);
 				binaryWriter.Write(BitConverter.GetBytes(base._guidLen), 0, 4);
 				binaryWriter.Write(base.Guid, 0, base._guidLen);
 				binaryWriter.Write(BitConverter.GetBytes(base.FileVersion), 0, 4);
-				byte[] sourceBytes = pjPkXF2mR(list, P_1);
-				base._fileTreeChecksum = PvfAlgorithmHelper.CreateBuffKey(sourceBytes, base._fileTreeLength, (uint)base.FileList.Count);
+				byte[] fileTreeData = CreateFileTreeData(files, progress);
+				base._fileTreeChecksum = PvfAlgorithmHelper.CreateBuffKey(fileTreeData, base._fileTreeLength, (uint)base.FileList.Count);
 				binaryWriter.Write(BitConverter.GetBytes(base._fileTreeLength), 0, 4);
 				binaryWriter.Write(BitConverter.GetBytes(base._fileTreeChecksum), 0, 4);
 				binaryWriter.Write(BitConverter.GetBytes(base.FileList.Count), 0, 4);
-				binaryWriter.Write(PvfAlgorithmHelper.EncryptionPvf(sourceBytes, base._fileTreeLength, base._fileTreeChecksum), 0, base._fileTreeLength);
-				int num = 0;
-				foreach (PvfFile item in list)
+				binaryWriter.Write(PvfAlgorithmHelper.EncryptionPvf(fileTreeData, base._fileTreeLength, base._fileTreeChecksum), 0, base._fileTreeLength);
+				int processedFileCount = 0;
+				foreach (PvfFile file in files)
 				{
-					int blockLength = item.GetBlockLength();
+					int blockLength = file.GetBlockLength();
 					if (blockLength > 0)
 					{
-						binaryWriter.Write(PvfAlgorithmHelper.EncryptionPvf(item.Data, blockLength, item.Checksum), 0, blockLength);
+						binaryWriter.Write(PvfAlgorithmHelper.EncryptionPvf(file.Data, blockLength, file.Checksum), 0, blockLength);
 					}
-					if (num % 512 == 0)
+					if (processedFileCount % 512 == 0)
 					{
-						P_1?.Report(ProgressHelper.GetProgressNum(count + num, count * 2));
+						progress?.Report(ProgressHelper.GetProgressNum(fileCount + processedFileCount, fileCount * 2));
 					}
-					num++;
+					processedFileCount++;
 				}
-				binaryWriter.Write(uRdz1sJCA);
+				binaryWriter.Write(footerSignature);
 				binaryWriter.Flush();
-				P_1?.Report(100.0);
+				progress?.Report(100.0);
 			}
 		}
 		catch (Exception ex)
 		{
-			re.Msg = ex.Message;
+			result.Msg = ex.Message;
 		}
-		return re;
+		return result;
 	}
 
-	private byte[] pjPkXF2mR(IEnumerable<PvfFile> P_0, IProgress<double> P_1)
+	private byte[] CreateFileTreeData(IEnumerable<PvfFile> files, IProgress<double> progress)
 	{
-		base._fileTreeLength = (base.FileList.Aggregate<KeyValuePair<string, PvfFile>, int>(0, (int num3, KeyValuePair<string, PvfFile> fileObj) => num3 + fileObj.Value.FileNameLen + 20) + 3) & -4;
-		int num = 0;
-		int num2 = 0;
+		base._fileTreeLength = (base.FileList.Aggregate<KeyValuePair<string, PvfFile>, int>(0, (length, fileEntry) => length + fileEntry.Value.FileNameLen + 20) + 3) & -4;
+		int processedFileCount = 0;
+		int dataOffset = 0;
 		using MemoryStream memoryStream = new MemoryStream(base._fileTreeLength);
 		memoryStream.SetLength(base._fileTreeLength);
-		foreach (PvfFile item in P_0)
+		foreach (PvfFile file in files)
 		{
-			int fileNameLen = item.FileNameLen;
-			int blockLength = item.GetBlockLength();
-			memoryStream.Write(BitConverter.GetBytes(item.FileNameBytesChecksum), 0, 4);
+			int fileNameLen = file.FileNameLen;
+			int blockLength = file.GetBlockLength();
+			memoryStream.Write(BitConverter.GetBytes(file.FileNameBytesChecksum), 0, 4);
 			memoryStream.Write(BitConverter.GetBytes((uint)fileNameLen), 0, 4);
-			memoryStream.Write(item.FileNameBytes, 0, fileNameLen);
-			memoryStream.Write(BitConverter.GetBytes((uint)item.DataLen), 0, 4);
-			memoryStream.Write(BitConverter.GetBytes(item.Checksum), 0, 4);
-			memoryStream.Write(BitConverter.GetBytes((uint)num2), 0, 4);
-			num2 += blockLength;
-			if (num % 1024 == 0)
+			memoryStream.Write(file.FileNameBytes, 0, fileNameLen);
+			memoryStream.Write(BitConverter.GetBytes((uint)file.DataLen), 0, 4);
+			memoryStream.Write(BitConverter.GetBytes(file.Checksum), 0, 4);
+			memoryStream.Write(BitConverter.GetBytes((uint)dataOffset), 0, 4);
+			dataOffset += blockLength;
+			if (processedFileCount % 1024 == 0)
 			{
-				P_1?.Report(ProgressHelper.GetProgressNum(num, base.FileList.Count * 2));
+				progress?.Report(ProgressHelper.GetProgressNum(processedFileCount, base.FileList.Count * 2));
 			}
-			num++;
+			processedFileCount++;
 		}
 		return memoryStream.ToArray();
 	}
 
-	private bool jc4fepmkk(Stream P_0)
+	private bool HasFooterSignature(Stream stream)
 	{
-		int num = uRdz1sJCA.Length;
-		P_0.Seek(P_0.Length - num, SeekOrigin.Begin);
-		for (int i = 0; i < num; i++)
+		int signatureLength = footerSignature.Length;
+		stream.Seek(stream.Length - signatureLength, SeekOrigin.Begin);
+		for (int i = 0; i < signatureLength; i++)
 		{
-			if (uRdz1sJCA[i] != P_0.ReadByte())
+			if (footerSignature[i] != stream.ReadByte())
 			{
-				P_0.Seek(0L, SeekOrigin.Begin);
+				stream.Seek(0L, SeekOrigin.Begin);
 				return false;
 			}
 		}
-		P_0.Seek(0L, SeekOrigin.Begin);
+		stream.Seek(0L, SeekOrigin.Begin);
 		return true;
 	}
 
@@ -205,31 +194,29 @@ public class PvfGroup : PvfPack
 				base.PvfPackFilePath = path;
 				using (BinaryReader binaryReader = new BinaryReader(File.OpenRead(path)))
 				{
-					HashSet<PvfFile> hashSet = new HashSet<PvfFile>();
-					bool flag = jc4fepmkk(binaryReader.BaseStream);
+					HashSet<PvfFile> duplicateFiles = new HashSet<PvfFile>();
+					bool hasFooterSignature = HasFooterSignature(binaryReader.BaseStream);
 					base._guidLen = binaryReader.ReadInt32();
 					base.Guid = binaryReader.ReadBytes(base._guidLen);
 					base.FileVersion = binaryReader.ReadInt32();
 					base._fileTreeLength = binaryReader.ReadInt32();
 					base._fileTreeChecksum = binaryReader.ReadUInt32();
-					int num = binaryReader.ReadInt32();
+					int fileCount = binaryReader.ReadInt32();
 					base.FileList = new Dictionary<string, PvfFile>();
-					BinaryReader binaryReader2 = new BinaryReader(new MemoryStream(PvfAlgorithmHelper.DecryptionPvf(binaryReader.ReadBytes(base._fileTreeLength), base._fileTreeLength, base._fileTreeChecksum)));
-					int num2 = 0;
-					for (int i = 0; i < num; i++)
+					BinaryReader fileTreeReader = new BinaryReader(new MemoryStream(PvfAlgorithmHelper.DecryptionPvf(binaryReader.ReadBytes(base._fileTreeLength), base._fileTreeLength, base._fileTreeChecksum)));
+					for (int i = 0; i < fileCount; i++)
 					{
-						uint fileNameChecksum = binaryReader2.ReadUInt32();
-						byte[] fileNameBytes = binaryReader2.ReadBytes(binaryReader2.ReadInt32());
-						int dataLen = binaryReader2.ReadInt32();
-						uint checksum = binaryReader2.ReadUInt32();
-						int offset = binaryReader2.ReadInt32();
+						uint fileNameChecksum = fileTreeReader.ReadUInt32();
+						byte[] fileNameBytes = fileTreeReader.ReadBytes(fileTreeReader.ReadInt32());
+						int dataLen = fileTreeReader.ReadInt32();
+						uint checksum = fileTreeReader.ReadUInt32();
+						int offset = fileTreeReader.ReadInt32();
 						PvfFile pvfFile = new PvfFile(fileNameChecksum, fileNameBytes, dataLen, checksum, offset);
 						if (pvfFile.FileName.Split(new char[2] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries)[0].Contains("506807329_"))
 						{
-							num2++;
 							continue;
 						}
-						if (flag || !base.FileList.ContainsKey(pvfFile.FileName))
+						if (hasFooterSignature || !base.FileList.ContainsKey(pvfFile.FileName))
 						{
 							base.FileList.Add(pvfFile.FileName, pvfFile);
 						}
@@ -241,20 +228,20 @@ public class PvfGroup : PvfPack
 								text += "(diff)";
 							}
 							base.FileList.Add(text, pvfFile);
-							hashSet.Add(pvfFile);
+							duplicateFiles.Add(pvfFile);
 						}
 						if (i % 512 == 0)
 						{
-							progress.Report(ProgressHelper.GetProgressNum(i, num));
+							progress.Report(ProgressHelper.GetProgressNum(i, fileCount));
 						}
 					}
-					long position = binaryReader.BaseStream.Position;
+					long dataStartOffset = binaryReader.BaseStream.Position;
 					foreach (KeyValuePair<string, PvfFile> item in base.FileList.Where<KeyValuePair<string, PvfFile>>((KeyValuePair<string, PvfFile> item) => item.Value.DataLen > 0))
 					{
-						item.Value.Offset += position;
+						item.Value.Offset += dataStartOffset;
 						binaryReader.BaseStream.Seek(item.Value.Offset, SeekOrigin.Begin);
 						item.Value.InitFile(binaryReader.ReadBytes(item.Value.GetBlockLength()));
-						if (!flag && hashSet.Contains(item.Value))
+						if (!hasFooterSignature && duplicateFiles.Contains(item.Value))
 						{
 							item.Value.Rename(item.Key);
 						}
@@ -270,7 +257,7 @@ public class PvfGroup : PvfPack
 					else
 					{
 						base.Strtable.InitDefault();
-						xapgPoPUS.Error(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringTableNotFound"));
+							logger.Error(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringTableNotFound"));
 					}
 					if (FileAny(AppSetting.Instance.PvfConfig.StringLstFileName))
 					{
@@ -279,7 +266,7 @@ public class PvfGroup : PvfPack
 					else
 					{
 						base.Strview.InitDefault();
-						xapgPoPUS.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringLstNotFound"), AppSetting.Instance.PvfConfig.StringLstFileName));
+							logger.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringLstNotFound"), AppSetting.Instance.PvfConfig.StringLstFileName));
 					}
 					Task.Run(delegate
 					{
@@ -295,7 +282,7 @@ public class PvfGroup : PvfPack
 			}
 			catch (Exception ex)
 			{
-				xapgPoPUS.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_OpenPackageError"), ex.Message));
+				logger.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_OpenPackageError"), ex.Message));
 				return Task.FromResult(result: false);
 			}
 		}
@@ -309,201 +296,140 @@ public class PvfGroup : PvfPack
 		{
 			return false;
 		}
-		string text = "equipment/";
-		ScriptFileParserNew scriptFileParserNew = new ScriptFileParserNew(file, this);
-		scriptFileParserNew.PraseStructureMain();
-		if (scriptFileParserNew.Sections == null || scriptFileParserNew.Sections.Count == 0)
+		string equipmentDirectory = "equipment/";
+		ScriptFileParserNew parser = new ScriptFileParserNew(file, this);
+		parser.PraseStructureMain();
+		if (parser.Sections == null || parser.Sections.Count == 0)
 		{
 			return false;
 		}
-		StringBuilder stringBuilder = new StringBuilder();
-		foreach (PvfSection item in scriptFileParserNew.Sections.Where((SectionBase it) => it is PvfSection && it.GetSectionName() == "[equipment part set]"))
+		StringBuilder errors = new StringBuilder();
+		foreach (PvfSection partSetSection in parser.Sections.Where((SectionBase section) => section is PvfSection && section.GetSectionName() == "[equipment part set]"))
 		{
-			int num = item.Children.Count;
-			if (item.HasEndSection())
+			int childCount = partSetSection.Children.Count;
+			if (partSetSection.HasEndSection())
 			{
-				num--;
+				childCount--;
 			}
-			List<SectionBase> children = item.Children;
-			if (num <= 3)
+			List<SectionBase> children = partSetSection.Children;
+			if (childCount <= 3)
 			{
 				continue;
 			}
 			if (children[1].Item.Type != ScriptType.Int)
 			{
-				ScriptItem nextItem = ((children[1].Item.Type == ScriptType.StringLinkIndex) ? item.Children[2].Item : null);
-				StringBuilder stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder3 = stringBuilder2;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(46, 2, stringBuilder2);
-				handler.AppendLiteral("套装文件错误 [equipment part set]内应以数字编号开头 错误类型为：");
-				handler.AppendFormatted(children[1].Item.Type);
-				handler.AppendLiteral(" 值：");
-				handler.AppendFormatted(children[1].Item.GetItemText(this, nextItem));
-				stringBuilder3.AppendLine(ref handler);
+				ScriptItem linkedItem = children[1].Item.Type == ScriptType.StringLinkIndex ? partSetSection.Children[2].Item : null;
+				errors.AppendLine($"套装文件错误 [equipment part set]内应以数字编号开头 错误类型为：{children[1].Item.Type} 值：{children[1].Item.GetItemText(this, linkedItem)}");
 				continue;
 			}
-			int data = children[1].Item.Data;
+			int setIndex = children[1].Item.Data;
 			if (children[2].Item.Type != ScriptType.String)
 			{
-				ScriptItem nextItem2 = ((children[2].Item.Type == ScriptType.StringLinkIndex) ? item.Children[3].Item : null);
-				StringBuilder stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder4 = stringBuilder2;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(51, 2, stringBuilder2);
-				handler.AppendLiteral("套装文件错误 [equipment part set]内第二个参数应为String型 错误类型：");
-				handler.AppendFormatted(children[2].Item.Type);
-				handler.AppendLiteral(" 值：");
-				handler.AppendFormatted(children[2].Item.GetItemText(this, nextItem2));
-				stringBuilder4.AppendLine(ref handler);
+				ScriptItem linkedItem = children[2].Item.Type == ScriptType.StringLinkIndex ? partSetSection.Children[3].Item : null;
+				errors.AppendLine($"套装文件错误 [equipment part set]内第二个参数应为String型 错误类型：{children[2].Item.Type} 值：{children[2].Item.GetItemText(this, linkedItem)}");
 				continue;
 			}
-			string text2 = text + pvf.Strtable.GetStringItem(children[2].Item.Data);
-			PvfFile file2 = pvf.GetFile(text2);
-			if (file2 == null)
+			string partSetFilePath = equipmentDirectory + pvf.Strtable.GetStringItem(children[2].Item.Data);
+			PvfFile partSetFile = pvf.GetFile(partSetFilePath);
+			if (partSetFile == null)
 			{
-				stringBuilder.AppendLine("套装文件错误 找不到套装信息文件：" + text2);
+				errors.AppendLine("套装文件错误 找不到套装信息文件：" + partSetFilePath);
 				continue;
 			}
-			int num2 = 0;
-			Dictionary<string, EquipmentPartSet> dictionary = new Dictionary<string, EquipmentPartSet>();
-			EquipmentPartSet equipmentPartSet = new EquipmentPartSet();
-			for (int num3 = 3; num3 < num; num3++)
+			int fieldIndex = 0;
+			Dictionary<string, EquipmentPartSet> partsByEquipmentType = new Dictionary<string, EquipmentPartSet>();
+			EquipmentPartSet partSet = new EquipmentPartSet();
+			for (int childIndex = 3; childIndex < childCount; childIndex++)
 			{
-				SectionBase sectionBase = children[num3];
-				if (sectionBase == null || sectionBase is PvfSection)
+				SectionBase child = children[childIndex];
+				if (child == null || child is PvfSection)
 				{
 					continue;
 				}
-				num2++;
-				switch (num2)
+				fieldIndex++;
+				switch (fieldIndex)
 				{
 				case 1:
 				{
-					if (children[num3].Item.Type != ScriptType.String && children[num3].Item.Type != ScriptType.StringLinkIndex)
+					if (children[childIndex].Item.Type != ScriptType.String && children[childIndex].Item.Type != ScriptType.StringLinkIndex)
 					{
-						ScriptItem nextItem5 = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? item.Children[num3 + 1].Item : null);
-						StringBuilder stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder7 = stringBuilder2;
-						StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(41, 2, stringBuilder2);
-						handler.AppendLiteral("套装文件错误 套装信息从第二行开始 第一个参数为 String型 当前类型：");
-						handler.AppendFormatted(children[num3].Item.Type);
-						handler.AppendLiteral(" 值：");
-						handler.AppendFormatted(children[num3].Item.GetItemText(this, nextItem5));
-						stringBuilder7.AppendLine(ref handler);
+						ScriptItem linkedItem = child.Item.Type == ScriptType.StringLinkIndex ? partSetSection.Children[childIndex + 1].Item : null;
+						errors.AppendLine($"套装文件错误 套装信息从第二行开始 第一个参数为 String型 当前类型：{children[childIndex].Item.Type} 值：{children[childIndex].Item.GetItemText(this, linkedItem)}");
 						break;
 					}
-					ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? item.Children[num3 + 1].Item : null);
-					equipmentPartSet = new EquipmentPartSet
+					ScriptItem linkedNameItem = child.Item.Type == ScriptType.StringLinkIndex ? partSetSection.Children[childIndex + 1].Item : null;
+					partSet = new EquipmentPartSet
 					{
-						Name = children[num3].Item.GetItemTextNotChar(this, scriptItem),
-						ParFile = file2
+						Name = children[childIndex].Item.GetItemTextNotChar(this, linkedNameItem),
+						ParFile = partSetFile
 					};
-					if (scriptItem != null)
+					if (linkedNameItem != null)
 					{
-						num3++;
+						childIndex++;
 					}
 					continue;
 				}
 				case 2:
 				{
-					StringBuilder stringBuilder2;
-					StringBuilder.AppendInterpolatedStringHandler handler;
-					if (children[num3].Item.Type != ScriptType.String)
+					if (children[childIndex].Item.Type != ScriptType.String)
 					{
-						ScriptItem nextItem6 = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? item.Children[num3 + 1].Item : null);
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder8 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(41, 2, stringBuilder2);
-						handler.AppendLiteral("套装文件错误 套装信息从第二行开始 第二个参数为 String型 当前类型：");
-						handler.AppendFormatted(children[num3].Item.Type);
-						handler.AppendLiteral(" 值：");
-						handler.AppendFormatted(children[num3].Item.GetItemText(this, nextItem6));
-						stringBuilder8.AppendLine(ref handler);
+						ScriptItem linkedItem = child.Item.Type == ScriptType.StringLinkIndex ? partSetSection.Children[childIndex + 1].Item : null;
+						errors.AppendLine($"套装文件错误 套装信息从第二行开始 第二个参数为 String型 当前类型：{children[childIndex].Item.Type} 值：{children[childIndex].Item.GetItemText(this, linkedItem)}");
 						break;
 					}
-					equipmentPartSet.EquType = children[num3].Item.GetItemTextNotChar(this);
-					if (string.IsNullOrEmpty(equipmentPartSet.EquType))
+					partSet.EquType = children[childIndex].Item.GetItemTextNotChar(this);
+					if (string.IsNullOrEmpty(partSet.EquType))
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder9 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(27, 1, stringBuilder2);
-						handler.AppendLiteral("套装文件错误 套装文件的装备类型不能为空！ 套装索引：");
-						handler.AppendFormatted(data);
-						stringBuilder9.AppendLine(ref handler);
+						errors.AppendLine($"套装文件错误 套装文件的装备类型不能为空！ 套装索引：{setIndex}");
 						break;
 					}
-					if (!dictionary.ContainsKey(equipmentPartSet.EquType))
+					if (!partsByEquipmentType.ContainsKey(partSet.EquType))
 					{
 						continue;
 					}
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder10 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(33, 2, stringBuilder2);
-					handler.AppendLiteral("套装文件错误 套装文件的套装类型不能重复！ 套装索引：");
-					handler.AppendFormatted(data);
-					handler.AppendLiteral(" 重复索引：");
-					handler.AppendFormatted(equipmentPartSet.EquType);
-					stringBuilder10.AppendLine(ref handler);
+					errors.AppendLine($"套装文件错误 套装文件的套装类型不能重复！ 套装索引：{setIndex} 重复索引：{partSet.EquType}");
 					break;
 				}
 				case 3:
 				{
-					if (children[num3].Item.Type == ScriptType.Int)
+					if (children[childIndex].Item.Type == ScriptType.Int)
 					{
 						continue;
 					}
-					ScriptItem nextItem4 = ((children[num3].Item.Type == ScriptType.StringLinkIndex) ? item.Children[num3 + 1].Item : null);
-					StringBuilder stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder6 = stringBuilder2;
-					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(38, 2, stringBuilder2);
-					handler.AppendLiteral("套装文件错误 套装信息从第二行开始 第3个参数为 int型 当前类型：");
-					handler.AppendFormatted(children[num3].Item.Type);
-					handler.AppendLiteral(" 值：");
-					handler.AppendFormatted(children[num3].Item.GetItemText(this, nextItem4));
-					stringBuilder6.AppendLine(ref handler);
+					ScriptItem linkedItem = children[childIndex].Item.Type == ScriptType.StringLinkIndex ? partSetSection.Children[childIndex + 1].Item : null;
+					errors.AppendLine($"套装文件错误 套装信息从第二行开始 第3个参数为 int型 当前类型：{children[childIndex].Item.Type} 值：{children[childIndex].Item.GetItemText(this, linkedItem)}");
 					break;
 				}
 				case 4:
-					if (children[num3].Item.Type != ScriptType.Int)
+					if (children[childIndex].Item.Type != ScriptType.Int)
 					{
-						ScriptItem nextItem3 = ((children[num3].Item.Type == ScriptType.StringLinkIndex) ? item.Children[num3 + 1].Item : null);
-						StringBuilder stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder5 = stringBuilder2;
-						StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(38, 2, stringBuilder2);
-						handler.AppendLiteral("套装文件错误 套装信息从第二行开始 第4个参数为 int型 当前类型：");
-						handler.AppendFormatted(children[num3].Item.Type);
-						handler.AppendLiteral(" 值：");
-						handler.AppendFormatted(children[num3].Item.GetItemText(this, nextItem3));
-						stringBuilder5.AppendLine(ref handler);
+						ScriptItem linkedItem = children[childIndex].Item.Type == ScriptType.StringLinkIndex ? partSetSection.Children[childIndex + 1].Item : null;
+						errors.AppendLine($"套装文件错误 套装信息从第二行开始 第4个参数为 int型 当前类型：{children[childIndex].Item.Type} 值：{children[childIndex].Item.GetItemText(this, linkedItem)}");
 						break;
 					}
-					num2 = 0;
-					dictionary.Add(equipmentPartSet.EquType, equipmentPartSet);
+					fieldIndex = 0;
+					partsByEquipmentType.Add(partSet.EquType, partSet);
 					continue;
 				default:
 					continue;
 				}
 				break;
 			}
-			if (dictionary.Count > 0)
+			if (partsByEquipmentType.Count > 0)
 			{
-				if (dic.ContainsKey(data))
+				if (dic.ContainsKey(setIndex))
 				{
-					StringBuilder stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder11 = stringBuilder2;
-					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(16, 1, stringBuilder2);
-					handler.AppendLiteral("套装文件错误 套装索引编号重复：");
-					handler.AppendFormatted(data);
-					stringBuilder11.AppendLine(ref handler);
+					errors.AppendLine($"套装文件错误 套装索引编号重复：{setIndex}");
 				}
 				else
 				{
-					dic.Add(data, dictionary);
+					dic.Add(setIndex, partsByEquipmentType);
 				}
 			}
 		}
-		if (stringBuilder.Length > 0)
+		if (errors.Length > 0)
 		{
-			AppSetting.Instance.GetIlogger()?.Error(stringBuilder.ToString());
+			AppSetting.Instance.GetIlogger()?.Error(errors.ToString());
 		}
 		return dic.Count > 0;
 	}
@@ -539,8 +465,8 @@ public class PvfGroup : PvfPack
 				{
 					return items.Count > 0;
 				}
-				string stringItem = base.Strtable.GetStringItem(BitConverter.ToInt32(data, j + 1));
-				if (stringItem == "[SKILL_LEVEL]")
+				string command = base.Strtable.GetStringItem(BitConverter.ToInt32(data, j + 1));
+				if (command == "[SKILL_LEVEL]")
 				{
 					if (j + 15 < dataLen)
 					{
@@ -556,13 +482,13 @@ public class PvfGroup : PvfPack
 						{
 							return items.Count > 0;
 						}
-						string stringItem2 = base.Strtable.GetStringItem(BitConverter.ToInt32(data, j + 6));
+						string jobType = base.Strtable.GetStringItem(BitConverter.ToInt32(data, j + 6));
 						int skillId = BitConverter.ToInt32(data, j + 11);
 						int level = BitConverter.ToInt32(data, j + 16);
-						avatar_select_ability_Skill avatar_select_ability_Skill2 = new avatar_select_ability_Skill(stringItem, stringItem2, skillId, level);
-						GetJobSkillName(stringItem2, skillId, out string skillName);
-						avatar_select_ability_Skill2.SkillName = skillName;
-						items.Add(avatar_select_ability_Skill2);
+						avatar_select_ability_Skill skillAbility = new avatar_select_ability_Skill(command, jobType, skillId, level);
+						GetJobSkillName(jobType, skillId, out string skillName);
+						skillAbility.SkillName = skillName;
+						items.Add(skillAbility);
 						j += 15;
 					}
 				}
@@ -576,9 +502,9 @@ public class PvfGroup : PvfPack
 					{
 						return items.Count > 0;
 					}
-					string stringItem3 = base.Strtable.GetStringItem(BitConverter.ToInt32(data, j + 6));
+					string addType = base.Strtable.GetStringItem(BitConverter.ToInt32(data, j + 6));
 					int value = BitConverter.ToInt32(data, j + 11);
-					items.Add(new avatar_select_ability(stringItem, stringItem3, value));
+					items.Add(new avatar_select_ability(command, addType, value));
 					j += 10;
 				}
 			}
@@ -589,8 +515,8 @@ public class PvfGroup : PvfPack
 
 	public override string GetItemName(string filePath)
 	{
-		base.FileList.TryGetValue(filePath, out PvfFile value);
-		return GetItemName(value);
+		base.FileList.TryGetValue(filePath, out PvfFile file);
+		return GetItemName(file);
 	}
 
 	public override string GetItemName(PvfFile? file)
@@ -612,77 +538,77 @@ public class PvfGroup : PvfPack
 			return null;
 		}
 		PvfFileType fileType = file.FileType;
-		string text;
+		string itemName;
 		switch (fileType)
 		{
 		case PvfFileType.shp:
-			text = PfOZLi4H6(file);
+			itemName = GetShopName(file);
 			break;
 		case PvfFileType.equ:
-			text = Y8RT9piSN(base.Strtable.NameLableOrSetNameLable, file);
+			itemName = GetNameByLabels(base.Strtable.NameLableOrSetNameLable, file);
 			break;
 		default:
 		{
 			int nameLable = base.Strtable.GetNameLable(fileType);
-			text = AJu7TlQi7(nameLable, file);
+			itemName = GetNameByLabel(nameLable, file);
 			break;
 		}
 		}
-		if (!string.IsNullOrEmpty(text))
+		if (!string.IsNullOrEmpty(itemName))
 		{
-			return AppSetting.Instance.PvfConfig.FileTextTraditionalConvertSimplifiedAutoMethods(text);
+			return AppSetting.Instance.PvfConfig.FileTextTraditionalConvertSimplifiedAutoMethods(itemName);
 		}
 		return null;
 	}
 
-	private string AJu7TlQi7(int P_0, PvfFile P_1)
+	private string GetNameByLabel(int nameLabel, PvfFile file)
 	{
-		for (int i = 2; i < P_1.DataLen - 9; i += 5)
+		for (int offset = 2; offset < file.DataLen - 9; offset += 5)
 		{
-			if (P_1.Data[i] == 5 && BitConverter.ToInt32(P_1.Data, i + 1) == P_0)
+			if (file.Data[offset] == 5 && BitConverter.ToInt32(file.Data, offset + 1) == nameLabel)
 			{
-				if (i < P_1.DataLen - 14 && P_1.Data[i + 5] == 9 && P_1.Data[i + 10] == 10)
+				if (offset < file.DataLen - 14 && file.Data[offset + 5] == 9 && file.Data[offset + 10] == 10)
 				{
-					return base.Strview.GetStrText(P_1.Data[i + 6], base.Strtable.GetStringItem(BitConverter.ToInt32(P_1.Data, i + 11)));
+					return base.Strview.GetStrText(file.Data[offset + 6], base.Strtable.GetStringItem(BitConverter.ToInt32(file.Data, offset + 11)));
 				}
-				if (P_1.Data[i + 5] == 7)
+				if (file.Data[offset + 5] == 7)
 				{
-					return base.Strtable.GetStringItem(BitConverter.ToInt32(P_1.Data, i + 6));
+					return base.Strtable.GetStringItem(BitConverter.ToInt32(file.Data, offset + 6));
 				}
 			}
 		}
 		return null;
 	}
 
-	private string Y8RT9piSN(HashSet<int> P_0, PvfFile P_1)
+	private string GetNameByLabels(HashSet<int> nameLabels, PvfFile file)
 	{
-		for (int i = 2; i < P_1.DataLen - 9; i += 5)
+		for (int offset = 2; offset < file.DataLen - 9; offset += 5)
 		{
-			if (P_1.Data[i] == 5 && P_0.Contains(BitConverter.ToInt32(P_1.Data, i + 1)))
+			if (file.Data[offset] == 5 && nameLabels.Contains(BitConverter.ToInt32(file.Data, offset + 1)))
 			{
-				if (i < P_1.DataLen - 14 && P_1.Data[i + 5] == 9 && P_1.Data[i + 10] == 10)
+				if (offset < file.DataLen - 14 && file.Data[offset + 5] == 9 && file.Data[offset + 10] == 10)
 				{
-					return base.Strview.GetStrText(P_1.Data[i + 6], base.Strtable.GetStringItem(BitConverter.ToInt32(P_1.Data, i + 11)));
+					return base.Strview.GetStrText(file.Data[offset + 6], base.Strtable.GetStringItem(BitConverter.ToInt32(file.Data, offset + 11)));
 				}
-				if (P_1.Data[i + 5] == 7)
+				if (file.Data[offset + 5] == 7)
 				{
-					return base.Strtable.GetStringItem(BitConverter.ToInt32(P_1.Data, i + 6));
+					return base.Strtable.GetStringItem(BitConverter.ToInt32(file.Data, offset + 6));
 				}
 			}
 		}
 		return null;
 	}
 
-	private string PfOZLi4H6(PvfFile? file)
+	private string GetShopName(PvfFile? file)
 	{
-		if (file.GetNpcId(this, out var npcId) && base.ListFileTable.CodeDic.TryGetValue("npc", out Dictionary<int, LstItem> value) && value.TryGetValue(npcId, out var value2))
+		if (file.GetNpcId(this, out var npcId) && base.ListFileTable.CodeDic.TryGetValue("npc", out Dictionary<int, LstItem> npcFiles) && npcFiles.TryGetValue(npcId, out var npcFile))
 		{
-			string text = GetItemName(GetFile(value2.FullPath));
-			if (text != null)
+			string shopName = GetItemName(GetFile(npcFile.FullPath));
+			if (shopName != null)
 			{
-				text = AppSetting.Instance.GetIlogger()?.GetStr("mess_Shop") + "-" + text;
+				shopName = AppSetting.Instance.GetIlogger()?.GetStr("mess_Shop") + "-" + shopName;
 			}
-			return text;
+			return shopName;
 		}
 		return null;
 	}
@@ -730,7 +656,7 @@ public class PvfGroup : PvfPack
 		PvfFile file = GetFile(olFilPath);
 		if (file == null)
 		{
-			xapgPoPUS.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_RenameError"), olFilPath));
+			logger.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_RenameError"), olFilPath));
 			return;
 		}
 		base.FileList.Remove(olFilPath);
@@ -830,7 +756,7 @@ public class PvfGroup : PvfPack
 			{
 				return SaveFileAsScript(file, fileText);
 			}
-			if (xapgPoPUS.ShowDialog(AppSetting.Instance.GetIlogger()?.GetStr("mess_SaveAsScript")) == MessageResult.Yes)
+			if (logger.ShowDialog(AppSetting.Instance.GetIlogger()?.GetStr("mess_SaveAsScript")) == MessageResult.Yes)
 			{
 				return SaveFileAsScript(file, fileText);
 			}
@@ -852,7 +778,7 @@ public class PvfGroup : PvfPack
 		PvfFile file = GetFile(filePath);
 		if (file == null)
 		{
-			xapgPoPUS?.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_SaveFileError"), filePath));
+			logger?.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_SaveFileError"), filePath));
 			return false;
 		}
 		return SaveFileText(file, fileText, encoding);
@@ -875,8 +801,8 @@ public class PvfGroup : PvfPack
 				{
 					return true;
 				}
-				ServiceItemCodeTable.l5AefSxFwx(file, this);
-				xapgPoPUS?.Success(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ReloadLstSuccess"), file.FileName));
+				ServiceItemCodeTable.LoadLstFile(file, this);
+				logger?.Success(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ReloadLstSuccess"), file.FileName));
 			}
 			return true;
 		}
@@ -888,8 +814,8 @@ public class PvfGroup : PvfPack
 		var (flag, fileData, item) = BinaryAniCompiler.CompileBinaryAni(fileText, file.FileName);
 		if (!flag)
 		{
-			xapgPoPUS.Error(new List<ErrorItem> { item });
-			xapgPoPUS.Error(AppSetting.Instance.GetIlogger()?.GetStr("mess_BinaryAniReadError10"));
+			logger.Error(new List<ErrorItem> { item });
+			logger.Error(AppSetting.Instance.GetIlogger()?.GetStr("mess_BinaryAniReadError10"));
 		}
 		else
 		{
@@ -935,7 +861,7 @@ public class PvfGroup : PvfPack
 		{
 			return true;
 		}
-		xapgPoPUS.Warning(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ImportError"), fileName));
+		logger.Warning(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ImportError"), fileName));
 		return false;
 	}
 
@@ -974,7 +900,7 @@ public class PvfGroup : PvfPack
 			var (flag, fileData, item) = BinaryAniCompiler.CompileBinaryAni(text, file.FileName, compile70PlusAni);
 			if (!flag)
 			{
-				xapgPoPUS.Error(new List<ErrorItem> { item });
+				logger.Error(new List<ErrorItem> { item });
 				return false;
 			}
 			file.WriteFileData(fileData);
@@ -1021,60 +947,60 @@ public class PvfGroup : PvfPack
 				}
 				else
 				{
-					PvfFile file2 = GetFile(path);
-					if (file2 == null)
+					PvfFile sourceFile = GetFile(path);
+					if (sourceFile == null)
 					{
 						return null;
 					}
-					string text2 = newPath + file2.ShortName;
-					PvfFile pvfFile = new PvfFile();
-					while (GetFile(text2) != null)
+					string destinationPath = newPath + sourceFile.ShortName;
+					PvfFile copiedFile = new PvfFile();
+					while (GetFile(destinationPath) != null)
 					{
-						text2 += "(copy)";
+						destinationPath += "(copy)";
 					}
-					pvfFile.InitNewCopyFile(file2.Data, text2);
-					base.FileList.Add(text2, pvfFile);
-					item = text2;
+					copiedFile.InitNewCopyFile(sourceFile.Data, destinationPath);
+					base.FileList.Add(destinationPath, copiedFile);
+					item = destinationPath;
 				}
 				return new List<string> { item };
 			}
 			newPath = PathsHelper.PathFix(newPath);
 			int count = (path.Contains("/") ? (path.LastIndexOf('/') + 1) : 0);
 			path = PathsHelper.PathFix(path);
-			List<string> list = new List<string>();
+			List<string> movedFilePaths = new List<string>();
 			if (cut)
 			{
-				PvfFile[] fileObjs = GetFileObjs(path);
-				foreach (PvfFile pvfFile2 in fileObjs)
+				PvfFile[] sourceFiles = GetFileObjs(path);
+				foreach (PvfFile sourceFile in sourceFiles)
 				{
-					string text3 = newPath + pvfFile2.FileName.Remove(0, count);
-					while (GetFile(text3) != null)
+					string destinationPath = newPath + sourceFile.FileName.Remove(0, count);
+					while (GetFile(destinationPath) != null)
 					{
-						text3 += "(copy)";
+						destinationPath += "(copy)";
 					}
-					base.FileList.Remove(pvfFile2.FileName);
-					pvfFile2.Rename(text3);
-					list.Add(text3);
-					base.FileList.Add(text3, pvfFile2);
+					base.FileList.Remove(sourceFile.FileName);
+					sourceFile.Rename(destinationPath);
+					movedFilePaths.Add(destinationPath);
+					base.FileList.Add(destinationPath, sourceFile);
 				}
 			}
 			else
 			{
-				PvfFile[] fileObjs = GetFileObjs(path);
-				foreach (PvfFile pvfFile3 in fileObjs)
+				PvfFile[] sourceFiles = GetFileObjs(path);
+				foreach (PvfFile sourceFile in sourceFiles)
 				{
-					string text4 = newPath + pvfFile3.FileName.Remove(0, count);
-					while (GetFile(text4) != null)
+					string destinationPath = newPath + sourceFile.FileName.Remove(0, count);
+					while (GetFile(destinationPath) != null)
 					{
-						text4 += "(copy)";
+						destinationPath += "(copy)";
 					}
-					PvfFile pvfFile4 = new PvfFile();
-					pvfFile4.InitNewCopyFile(pvfFile3.Data, text4);
-					list.Add(pvfFile4.FileName);
-					base.FileList.Add(text4, pvfFile4);
+					PvfFile copiedFile = new PvfFile();
+					copiedFile.InitNewCopyFile(sourceFile.Data, destinationPath);
+					movedFilePaths.Add(copiedFile.FileName);
+					base.FileList.Add(destinationPath, copiedFile);
 				}
 			}
-			return list;
+			return movedFilePaths;
 		}
 	}
 
@@ -1247,7 +1173,7 @@ public class PvfGroup : PvfPack
 		{
 			return false;
 		}
-		return CdlhwhD2s(text, skillId, out skillName);
+		return TryGetSkillName(text, skillId, out skillName);
 		IL_0236:
 		if (!(jobType == "[mage]"))
 		{
@@ -1359,122 +1285,69 @@ public class PvfGroup : PvfPack
 		goto IL_0650;
 	}
 
-	private bool CdlhwhD2s(string P_0, int P_1, out string P_2)
+	private bool TryGetSkillName(string skillDirectory, int skillId, out string skillName)
 	{
-		string text = base.ListFileTable.ItemCodeConvertFilePath(P_0, P_1);
-		if (text == null)
+		string skillFilePath = base.ListFileTable.ItemCodeConvertFilePath(skillDirectory, skillId);
+		if (skillFilePath == null)
 		{
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(11, 2);
-			defaultInterpolatedStringHandler.AppendLiteral("在：");
-			defaultInterpolatedStringHandler.AppendFormatted(P_0);
-			defaultInterpolatedStringHandler.AppendLiteral("找不到 技能ID：");
-			defaultInterpolatedStringHandler.AppendFormatted(P_1);
-			P_2 = defaultInterpolatedStringHandler.ToStringAndClear();
+			skillName = $"在：{skillDirectory}找不到 技能ID：{skillId}";
 			return false;
 		}
-		P_2 = GetItemName(text);
-		if (string.IsNullOrEmpty(P_2))
+		skillName = GetItemName(skillFilePath);
+		if (string.IsNullOrEmpty(skillName))
 		{
-			P_2 = "未知技能";
+			skillName = "未知技能";
 		}
 		return true;
 	}
 
 	public async void Tr()
 	{
-		PvfFile[] fileObjs = GetFileObjs("equipment");
-		HashSet<string> hashSet = new HashSet<string>
+		PvfFile[] equipmentFiles = GetFileObjs("equipment");
+		HashSet<string> retainedFilePaths = new HashSet<string>
 		{
 			"equipment/equipment.lst",
 			"equipment/equipment.kor.str"
 		};
-		PvfFile[] array = fileObjs;
-		foreach (PvfFile pvfFile in array)
+		foreach (PvfFile equipmentFile in equipmentFiles)
 		{
-			if (pvfFile.ItemCode.HasValue)
+			if (equipmentFile.ItemCode.HasValue)
 			{
-				hashSet.Add(pvfFile.FileName);
+				retainedFilePaths.Add(equipmentFile.FileName);
 			}
 		}
-		PvfFile[] fileObjs2 = GetFileObjs("stackable");
-		hashSet.Add("stackable/stackable.kor.str");
-		hashSet.Add("stackable/stackable.lst");
-		array = fileObjs2;
-		foreach (PvfFile pvfFile2 in array)
+		PvfFile[] stackableFiles = GetFileObjs("stackable");
+		retainedFilePaths.Add("stackable/stackable.kor.str");
+		retainedFilePaths.Add("stackable/stackable.lst");
+		foreach (PvfFile stackableFile in stackableFiles)
 		{
-			if (pvfFile2.ItemCode.HasValue)
+			if (stackableFile.ItemCode.HasValue)
 			{
-				hashSet.Add(pvfFile2.FileName);
+				retainedFilePaths.Add(stackableFile.FileName);
 			}
 		}
-		PvfFile[] fileObjs3 = GetFileObjs("skill");
-		hashSet.Add("skill/skill.kor.str");
-		array = fileObjs3;
-		foreach (PvfFile pvfFile3 in array)
+		PvfFile[] skillFiles = GetFileObjs("skill");
+		retainedFilePaths.Add("skill/skill.kor.str");
+		foreach (PvfFile skillFile in skillFiles)
 		{
-			if (pvfFile3.ItemCode.HasValue || pvfFile3.FileType == PvfFileType.lst)
+			if (skillFile.ItemCode.HasValue || skillFile.FileType == PvfFileType.lst)
 			{
-				hashSet.Add(pvfFile3.FileName);
+				retainedFilePaths.Add(skillFile.FileName);
 			}
 		}
-		hashSet.Add("n_string.lst");
-		hashSet.Add("stringtable.bin");
-		hashSet.Add("etc/equipmentpartset.etc");
-		KeyValuePair<string, PvfFile>[] array2 = base.FileList.ToArray();
-		for (int i = 0; i < array2.Length; i++)
+		retainedFilePaths.Add("n_string.lst");
+		retainedFilePaths.Add("stringtable.bin");
+		retainedFilePaths.Add("etc/equipmentpartset.etc");
+		KeyValuePair<string, PvfFile>[] fileEntries = base.FileList.ToArray();
+		for (int i = 0; i < fileEntries.Length; i++)
 		{
-			KeyValuePair<string, PvfFile> keyValuePair = array2[i];
-			if (!hashSet.Contains(keyValuePair.Key))
+			KeyValuePair<string, PvfFile> fileEntry = fileEntries[i];
+			if (!retainedFilePaths.Contains(fileEntry.Key))
 			{
-				base.FileList.Remove(keyValuePair.Key);
+				base.FileList.Remove(fileEntry.Key);
 			}
 		}
 		await base.Strtable.DeletingInvalidReferences(this);
-		xapgPoPUS.ShowMsg("SUCCESS");
-	}
-
-	[CompilerGenerated]
-	private void Fl0dMnEGo()
-	{
-		if (GetFile("stringtable.bin") != null)
-		{
-			base.Strtable.Loadstringtable(GetFile("stringtable.bin").Data, base.OverAllEncodingType, this);
-		}
-		else
-		{
-			base.Strtable.InitDefault();
-			xapgPoPUS.Error(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringTableNotFound"));
-		}
-		if (FileAny(AppSetting.Instance.PvfConfig.StringLstFileName))
-		{
-			base.Strview.InitStringData(GetFile(AppSetting.Instance.PvfConfig.StringLstFileName), this, base.OverAllEncodingType);
-		}
-		else
-		{
-			base.Strview.InitDefault();
-			xapgPoPUS.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringLstNotFound"), AppSetting.Instance.PvfConfig.StringLstFileName));
-		}
-		Task.Run(delegate
-		{
-			GetEquipmentpartsetInfo(this, out Dictionary<int, Dictionary<string, EquipmentPartSet>> dic);
-			base.EquipmentPartSetTable.Init(this, dic);
-		});
-		Task.Run(delegate
-		{
-			this.Init();
-		});
-	}
-
-	[CompilerGenerated]
-	private void w2y97kNQi()
-	{
-		GetEquipmentpartsetInfo(this, out Dictionary<int, Dictionary<string, EquipmentPartSet>> dic);
-		base.EquipmentPartSetTable.Init(this, dic);
-	}
-
-	[CompilerGenerated]
-	private void FosqgQUwu()
-	{
-		this.Init();
+		logger.ShowMsg("SUCCESS");
 	}
 }
