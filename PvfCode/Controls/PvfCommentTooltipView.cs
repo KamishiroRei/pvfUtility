@@ -9,6 +9,8 @@ namespace PvfCode.Controls;
 
 public class PvfCommentTooltipView : Border
 {
+	private const double CompactReadWidth = 280;
+	private const double StandardMinWidth = 420;
 	private readonly Grid readPanel;
 	private readonly Grid editPanel;
 	private ToolTipViewModel_SectionComment viewModel;
@@ -17,7 +19,6 @@ public class PvfCommentTooltipView : Border
 	{
 		MaxWidth = 720;
 		MaxHeight = 760;
-		MinWidth = 420;
 		Padding = new Thickness(1);
 		BorderThickness = new Thickness(1);
 		SetResourceReference(BorderBrushProperty, "EditorFoldingMarkerBrush");
@@ -137,7 +138,8 @@ public class PvfCommentTooltipView : Border
 
 	private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs args)
 	{
-		if (args.PropertyName == nameof(ToolTipViewModel_SectionComment.IsEditing))
+		if (args.PropertyName == nameof(ToolTipViewModel_SectionComment.IsEditing) ||
+			args.PropertyName == nameof(ToolTipViewModel_SectionComment.Comment))
 		{
 			UpdateMode();
 		}
@@ -148,5 +150,20 @@ public class PvfCommentTooltipView : Border
 		bool editing = viewModel?.IsEditing == true;
 		readPanel.Visibility = editing ? Visibility.Collapsed : Visibility.Visible;
 		editPanel.Visibility = editing ? Visibility.Visible : Visibility.Collapsed;
+		UpdateWidth();
+	}
+
+	private void UpdateWidth()
+	{
+		bool hasReadableContent = !string.IsNullOrWhiteSpace(viewModel?.Comment?.Comment) ||
+			!string.IsNullOrWhiteSpace(viewModel?.Comment?.OfficialDescription);
+		if (viewModel?.IsEditing == true || hasReadableContent)
+		{
+			Width = double.NaN;
+			MinWidth = StandardMinWidth;
+			return;
+		}
+		MinWidth = CompactReadWidth;
+		Width = CompactReadWidth;
 	}
 }
