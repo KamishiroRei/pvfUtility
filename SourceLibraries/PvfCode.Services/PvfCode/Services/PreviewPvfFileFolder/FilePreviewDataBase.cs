@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using PvfCode.Services.PreviewPvfFileFolder.NpcShop;
@@ -9,56 +8,11 @@ namespace PvfCode.Services.PreviewPvfFileFolder;
 
 public abstract class FilePreviewDataBase : ViewModelBase
 {
-	[CompilerGenerated]
-	private PvfFile zlQjCMlwC3;
+	public PvfFile File { get; set; }
 
-	[CompilerGenerated]
-	private PvfGroup VsyjlUMGZI;
+	public PvfGroup Pvf { get; set; }
 
-	[CompilerGenerated]
-	private ImageSource Dc2jYaj1xQ;
-
-	public PvfFile File
-	{
-		[CompilerGenerated]
-		get
-		{
-			return zlQjCMlwC3;
-		}
-		[CompilerGenerated]
-		set
-		{
-			zlQjCMlwC3 = value;
-		}
-	}
-
-	public PvfGroup Pvf
-	{
-		[CompilerGenerated]
-		get
-		{
-			return VsyjlUMGZI;
-		}
-		[CompilerGenerated]
-		set
-		{
-			VsyjlUMGZI = value;
-		}
-	}
-
-	public ImageSource ImageSource
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Dc2jYaj1xQ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Dc2jYaj1xQ = value;
-		}
-	}
+	public ImageSource ImageSource { get; set; }
 
 	public FilePreviewDataBase(PvfGroup pvf, PvfFile file, ImageSource? imageSource = null)
 	{

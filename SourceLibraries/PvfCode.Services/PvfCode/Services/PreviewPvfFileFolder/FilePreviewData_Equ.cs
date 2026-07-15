@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -14,26 +13,9 @@ namespace PvfCode.Services.PreviewPvfFileFolder;
 
 public class FilePreviewData_Equ : StackableOrEquPreviewBase
 {
-	[CompilerGenerated]
-	private List<int> g7wj1LeFQy;
+	private PvfFile equGroupMasterFile;
 
-	[CompilerGenerated]
-	private PvfFile sqojyJ9lfB;
-
-	[CompilerGenerated]
-	private int JrhjHaMxrY;
-
-	[CompilerGenerated]
-	private string SlUjAqw7tV;
-
-	[CompilerGenerated]
-	private List<EquGroupItemAttributes> cChjavxp4F;
-
-	[CompilerGenerated]
-	private string? QAijKCsA6Q;
-
-	[CompilerGenerated]
-	private EquPartsetFile VbOjxfa3dX;
+	private int EquGroupMasterItemCode { get; set; }
 
 	public EquipmentType? EquipmentTypeEnum
 	{
@@ -129,19 +111,7 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 		}
 	}
 
-	public List<int> GroupItemCodeList
-	{
-		[CompilerGenerated]
-		get
-		{
-			return g7wj1LeFQy;
-		}
-		[CompilerGenerated]
-		set
-		{
-			g7wj1LeFQy = value;
-		}
-	}
+	public List<int> GroupItemCodeList { get; set; }
 
 	public EquGroupType EquGroupType
 	{
@@ -155,47 +125,9 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 		}
 	}
 
-	private PvfFile tEdjO29qtn
-	{
-		[CompilerGenerated]
-		get
-		{
-			return sqojyJ9lfB;
-		}
-		[CompilerGenerated]
-		set
-		{
-			sqojyJ9lfB = value;
-		}
-	}
+	public string EquGroupName { get; set; }
 
-	public string EquGroupName
-	{
-		[CompilerGenerated]
-		get
-		{
-			return SlUjAqw7tV;
-		}
-		[CompilerGenerated]
-		set
-		{
-			SlUjAqw7tV = value;
-		}
-	}
-
-	public List<EquGroupItemAttributes> EquGroupItemInfos
-	{
-		[CompilerGenerated]
-		get
-		{
-			return cChjavxp4F;
-		}
-		[CompilerGenerated]
-		set
-		{
-			cChjavxp4F = value;
-		}
-	}
+	public List<EquGroupItemAttributes> EquGroupItemInfos { get; set; }
 
 	public string? EquWhiteAttributes => PvfFilePreviewHelper.GetEquWhiteAttributes(base.ScriptFileParser, base.ScriptFileParser.Sections, base.Pvf);
 
@@ -210,14 +142,11 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 				ScriptFileParserNew scriptFileParserNew = base.ScriptFileParser;
 				if (EquGroupType == EquGroupType.Children)
 				{
-					if (tEdjO29qtn == null)
+					if (equGroupMasterFile == null)
 					{
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(9, 1);
-						defaultInterpolatedStringHandler.AppendLiteral("找不到套装主文件：");
-						defaultInterpolatedStringHandler.AppendFormatted(eCGj0wdnQG());
-						return defaultInterpolatedStringHandler.ToStringAndClear();
+						return $"找不到套装主文件：{EquGroupMasterItemCode}";
 					}
-					scriptFileParserNew = new ScriptFileParserNew(tEdjO29qtn, base.Pvf);
+					scriptFileParserNew = new ScriptFileParserNew(equGroupMasterFile, base.Pvf);
 					scriptFileParserNew.PraseStructureMain();
 				}
 				if (scriptFileParserNew != null && scriptFileParserNew.Sections != null && scriptFileParserNew.Sections.Any())
@@ -242,14 +171,11 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 				ScriptFileParserNew scriptFileParserNew = base.ScriptFileParser;
 				if (EquGroupType == EquGroupType.Children)
 				{
-					if (tEdjO29qtn == null)
+					if (equGroupMasterFile == null)
 					{
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(9, 1);
-						defaultInterpolatedStringHandler.AppendLiteral("找不到套装主文件：");
-						defaultInterpolatedStringHandler.AppendFormatted(eCGj0wdnQG());
-						return defaultInterpolatedStringHandler.ToStringAndClear();
+						return $"找不到套装主文件：{EquGroupMasterItemCode}";
 					}
-					scriptFileParserNew = new ScriptFileParserNew(tEdjO29qtn, base.Pvf);
+					scriptFileParserNew = new ScriptFileParserNew(equGroupMasterFile, base.Pvf);
 					scriptFileParserNew.PraseStructureMain();
 				}
 				if (scriptFileParserNew != null && scriptFileParserNew.Sections != null && scriptFileParserNew.Sections.Any())
@@ -288,33 +214,9 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 		}
 	}
 
-	public string? FullsetBasicExplain
-	{
-		[CompilerGenerated]
-		get
-		{
-			return QAijKCsA6Q;
-		}
-		[CompilerGenerated]
-		set
-		{
-			QAijKCsA6Q = value;
-		}
-	}
+	public string? FullsetBasicExplain { get; set; }
 
-	public EquPartsetFile EquPartsetFile
-	{
-		[CompilerGenerated]
-		get
-		{
-			return VbOjxfa3dX;
-		}
-		[CompilerGenerated]
-		set
-		{
-			VbOjxfa3dX = value;
-		}
-	}
+	public EquPartsetFile EquPartsetFile { get; set; }
 
 	public FilePreviewData_Equ(PvfGroup pvf, PvfFile file, ImageSource? imageSource = null)
 		: base(pvf, file, imageSource)
@@ -339,11 +241,7 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 					if (string.IsNullOrEmpty(text) || !base.Pvf.FileList.TryGetValue(text, out PvfFile value))
 					{
 						EquPartsetFile equPartsetFile = new EquPartsetFile(null, base.Pvf, null);
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(12, 1);
-						defaultInterpolatedStringHandler.AppendLiteral("装备代码：");
-						defaultInterpolatedStringHandler.AppendFormatted(item);
-						defaultInterpolatedStringHandler.AppendLiteral("对应文件不存在");
-						equPartsetFile.Name = defaultInterpolatedStringHandler.ToStringAndClear();
+						equPartsetFile.Name = $"装备代码：{item}对应文件不存在";
 						EquPartsetFile = equPartsetFile;
 					}
 					else
@@ -385,11 +283,7 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 				return;
 			}
 			EquPartsetFile equPartsetFile2 = new EquPartsetFile(null, base.Pvf, null);
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(35, 1);
-			defaultInterpolatedStringHandler2.AppendLiteral("套装索引：");
-			defaultInterpolatedStringHandler2.AppendFormatted(val);
-			defaultInterpolatedStringHandler2.AppendLiteral(" 未注册到：etc/equipmentpartset.etc");
-			equPartsetFile2.Name = defaultInterpolatedStringHandler2.ToStringAndClear();
+			equPartsetFile2.Name = $"套装索引：{val} 未注册到：etc/equipmentpartset.etc";
 			EquPartsetFile = equPartsetFile2;
 			return;
 		}
@@ -402,8 +296,8 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 				GroupItemCodeList = items2;
 				if (base.File.ItemCode.HasValue)
 				{
-					cvaj3LBaj3(base.File.ItemCode.Value);
-					tEdjO29qtn = base.File;
+					EquGroupMasterItemCode = base.File.ItemCode.Value;
+					equGroupMasterFile = base.File;
 				}
 			}
 			else
@@ -413,32 +307,31 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 		}
 		else if (base.File.GetSectionIntValue("[set item master]", base.Pvf, out val2))
 		{
-			cvaj3LBaj3(val2);
+			EquGroupMasterItemCode = val2;
 			EquGroupType = EquGroupType.Children;
 		}
 		if (EquGroupType == EquGroupType.None)
 		{
 			return;
 		}
-		eCGj0wdnQG();
-		if (tEdjO29qtn == null)
+		if (equGroupMasterFile == null)
 		{
-			string text2 = base.Pvf.ListFileTable.ItemCodeConvertFilePath("equipment", eCGj0wdnQG());
+			string text2 = base.Pvf.ListFileTable.ItemCodeConvertFilePath("equipment", EquGroupMasterItemCode);
 			if (string.IsNullOrEmpty(text2))
 			{
-				EquGroupName = "套装主代码文件不存在：" + eCGj0wdnQG();
+				EquGroupName = "套装主代码文件不存在：" + EquGroupMasterItemCode;
 			}
 			else
 			{
-				tEdjO29qtn = base.Pvf.GetFile(text2);
+				equGroupMasterFile = base.Pvf.GetFile(text2);
 			}
 		}
 		string name;
-		if (tEdjO29qtn == null)
+		if (equGroupMasterFile == null)
 		{
-			EquGroupName = "套装主代码文件不存在：" + eCGj0wdnQG();
+			EquGroupName = "套装主代码文件不存在：" + EquGroupMasterItemCode;
 		}
-		else if (tEdjO29qtn.GetNameText(base.Pvf, "[set name]", out name))
+		else if (equGroupMasterFile.GetNameText(base.Pvf, "[set name]", out name))
 		{
 			if (!string.IsNullOrEmpty(name))
 			{
@@ -453,22 +346,22 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 		{
 			EquGroupName = "未设定 套装名称";
 		}
-		Sgaj8IGgfE();
-		if (tEdjO29qtn != null && tEdjO29qtn.GetNameText(base.Pvf, "[fullset basic explain]", out string name2))
+		LoadEquGroupItems();
+		if (equGroupMasterFile != null && equGroupMasterFile.GetNameText(base.Pvf, "[fullset basic explain]", out string name2))
 		{
 			FullsetBasicExplain = name2?.Replace("\\n", "\r\n");
 		}
 	}
 
-	private void Sgaj8IGgfE()
+	private void LoadEquGroupItems()
 	{
-		if (tEdjO29qtn == null)
+		if (equGroupMasterFile == null)
 		{
 			return;
 		}
 		if (EquGroupType == EquGroupType.Children)
 		{
-			if (!tEdjO29qtn.GetSectionIntArray(base.Pvf, "[set item]", out List<int> items) || items.Count == 0)
+			if (!equGroupMasterFile.GetSectionIntArray(base.Pvf, "[set item]", out List<int> items) || items.Count == 0)
 			{
 				EquGroupName = "套装主文件未设定 [set item]";
 				return;
@@ -478,27 +371,13 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 		if (GroupItemCodeList != null && GroupItemCodeList.Count != 0)
 		{
 			EquGroupItemInfos = new List<EquGroupItemAttributes>();
-			EquGroupItemInfos.Add(new EquGroupItemAttributes(tEdjO29qtn, isRoot: true, base.Pvf, eCGj0wdnQG()));
+			EquGroupItemInfos.Add(new EquGroupItemAttributes(equGroupMasterFile, isRoot: true, base.Pvf, EquGroupMasterItemCode));
 			for (int i = 1; i < GroupItemCodeList.Count; i++)
 			{
 				PvfFile file = base.Pvf.GetFile(base.Pvf.ListFileTable.ItemCodeConvertFilePath("equipment", GroupItemCodeList[i]));
 				EquGroupItemInfos.Add(new EquGroupItemAttributes(file, isRoot: false, base.Pvf, GroupItemCodeList[i]));
 			}
 		}
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private int eCGj0wdnQG()
-	{
-		return JrhjHaMxrY;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void cvaj3LBaj3(int P_0)
-	{
-		JrhjHaMxrY = P_0;
 	}
 
 	[Command]
@@ -544,7 +423,7 @@ public class FilePreviewData_Equ : StackableOrEquPreviewBase
 		{
 			if (item.File != null)
 			{
-				if (item.ItemCode == eCGj0wdnQG())
+				if (item.ItemCode == EquGroupMasterItemCode)
 				{
 					text = item.File.FileName;
 				}

@@ -1,77 +1,16 @@
-using System.Runtime.CompilerServices;
 using PvfCode.Models.Pvf;
 
 namespace PvfCode.Services.PreviewPvfFileFolder;
 
 public class EquGroupItemAttributes
 {
-	[CompilerGenerated]
-	private int eALjcs0LjJ;
+	public int ItemCode { get; set; }
 
-	[CompilerGenerated]
-	private bool DREjsutY8Y;
+	public bool IsRoot { get; set; }
 
-	[CompilerGenerated]
-	private string X1sj5k9u9F;
+	public string Name { get; set; }
 
-	[CompilerGenerated]
-	private PvfFile OIJjGCZUnI;
-
-	public int ItemCode
-	{
-		[CompilerGenerated]
-		get
-		{
-			return eALjcs0LjJ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			eALjcs0LjJ = value;
-		}
-	}
-
-	public bool IsRoot
-	{
-		[CompilerGenerated]
-		get
-		{
-			return DREjsutY8Y;
-		}
-		[CompilerGenerated]
-		set
-		{
-			DREjsutY8Y = value;
-		}
-	}
-
-	public string Name
-	{
-		[CompilerGenerated]
-		get
-		{
-			return X1sj5k9u9F;
-		}
-		[CompilerGenerated]
-		set
-		{
-			X1sj5k9u9F = value;
-		}
-	}
-
-	public PvfFile File
-	{
-		[CompilerGenerated]
-		get
-		{
-			return OIJjGCZUnI;
-		}
-		[CompilerGenerated]
-		set
-		{
-			OIJjGCZUnI = value;
-		}
-	}
+	public PvfFile File { get; set; }
 
 	public EquGroupItemAttributes(PvfFile file, bool isRoot, PvfPack pvf, int itemCode)
 	{

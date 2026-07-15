@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using DevExpress.Mvvm.Native;
 using PvfCode.Services.PvfParsingNew;
@@ -9,102 +8,22 @@ namespace PvfCode.Services.PreviewPvfFileFolder;
 
 public class PieceSetAbility
 {
-	[CompilerGenerated]
-	private int obN8k1d6jZ;
+	public int Number { get; set; }
 
-	[CompilerGenerated]
-	private string CT78fxwfLZ;
+	public string parameter_basic_explain { get; set; }
 
-	[CompilerGenerated]
-	private List<SkillDataUp> RMZ87gskht;
+	public List<SkillDataUp> SkillDataUpItems { get; set; }
 
-	[CompilerGenerated]
-	private string? LlJ8TQEDef;
+	public string? EquWhiteAttributes { get; set; }
 
-	[CompilerGenerated]
-	private string? xZG8Znxgmd;
-
-	public int Number
-	{
-		[CompilerGenerated]
-		get
-		{
-			return obN8k1d6jZ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			obN8k1d6jZ = value;
-		}
-	}
-
-	public string parameter_basic_explain
-	{
-		[CompilerGenerated]
-		get
-		{
-			return CT78fxwfLZ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			CT78fxwfLZ = value;
-		}
-	}
-
-	public List<SkillDataUp> SkillDataUpItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return RMZ87gskht;
-		}
-		[CompilerGenerated]
-		set
-		{
-			RMZ87gskht = value;
-		}
-	}
-
-	public string? EquWhiteAttributes
-	{
-		[CompilerGenerated]
-		get
-		{
-			return LlJ8TQEDef;
-		}
-		[CompilerGenerated]
-		set
-		{
-			LlJ8TQEDef = value;
-		}
-	}
-
-	public string? EquBlueAttributes
-	{
-		[CompilerGenerated]
-		get
-		{
-			return xZG8Znxgmd;
-		}
-		[CompilerGenerated]
-		set
-		{
-			xZG8Znxgmd = value;
-		}
-	}
+	public string? EquBlueAttributes { get; set; }
 
 	public string Text
 	{
 		get
 		{
 			StringBuilder stringBuilder = new StringBuilder();
-			StringBuilder stringBuilder2 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(5, 1, stringBuilder2);
-			handler.AppendLiteral("[");
-			handler.AppendFormatted(Number);
-			handler.AppendLiteral("]套效果");
-			stringBuilder2.AppendLine(ref handler);
+			stringBuilder.AppendLine($"[{Number}]套效果");
 			if (EquWhiteAttributes != null)
 			{
 				stringBuilder.Append(EquWhiteAttributes);
@@ -141,35 +60,35 @@ public class PieceSetAbility
 		SectionBase sectionBase2 = section.Where((SectionBase it) => it is PvfSection && it.GetSectionName() == "[skill data up]").FirstOrDefault();
 		if (sectionBase2 != null)
 		{
-			Ou08bXn9vd((PvfSection)sectionBase2, pvf);
+			LoadSkillData((PvfSection)sectionBase2, pvf);
 		}
 		EquWhiteAttributes = PvfFilePreviewHelper.GetEquWhiteAttributes(scriptFileParserNew, section, pvf);
 		EquBlueAttributes = PvfFilePreviewHelper.EquBlueAttributes(scriptFileParserNew, section, pvf);
 	}
 
-	private void Ou08bXn9vd(PvfSection P_0, PvfGroup P_1)
+	private void LoadSkillData(PvfSection section, PvfGroup pvf)
 	{
 		SkillDataUpItems = new List<SkillDataUp>();
-		int num = (P_0.HasEndSection() ? (P_0.Children.Count - 2) : (P_0.Children.Count - 1));
+		int num = (section.HasEndSection() ? (section.Children.Count - 2) : (section.Children.Count - 1));
 		if (num % 7 != 0)
 		{
 			return;
 		}
 		num /= 7;
-		List<SectionBase> children = P_0.Children;
+		List<SectionBase> children = section.Children;
 		for (int i = 1; i < num; i += 7)
 		{
 			List<SectionBase> range = children.GetRange(i, 7);
-			if (nUW8VbNt1K(range))
+			if (IsSkillDataRange(range))
 			{
 				SkillDataUp item = new SkillDataUp
 				{
-					JobDefaultTypeStr = P_1.Strtable.GetStringItem(range[0].Item.Data),
+					JobDefaultTypeStr = pvf.Strtable.GetStringItem(range[0].Item.Data),
 					JobTypeIndex = range[1].Item.Data,
-					DungeonType = P_1.Strtable.GetStringItem(range[2].Item.Data),
-					SkillStyle = P_1.Strtable.GetStringItem(range[3].Item.Data),
+					DungeonType = pvf.Strtable.GetStringItem(range[2].Item.Data),
+					SkillStyle = pvf.Strtable.GetStringItem(range[3].Item.Data),
 					SkillStyleValue = range[4].Item.Data,
-					SkillAddType = P_1.Strtable.GetStringItem(range[5].Item.Data),
+					SkillAddType = pvf.Strtable.GetStringItem(range[5].Item.Data),
 					SkillAddValue = range[6].Item.Data
 				};
 				SkillDataUpItems.Add(item);
@@ -177,33 +96,33 @@ public class PieceSetAbility
 		}
 	}
 
-	private bool nUW8VbNt1K(List<SectionBase> P_0)
+	private bool IsSkillDataRange(List<SectionBase> items)
 	{
-		if (P_0[0].Item.Type != ScriptType.String)
+		if (items[0].Item.Type != ScriptType.String)
 		{
 			return false;
 		}
-		if (P_0[1].Item.Type != ScriptType.Int)
+		if (items[1].Item.Type != ScriptType.Int)
 		{
 			return false;
 		}
-		if (P_0[2].Item.Type != ScriptType.String)
+		if (items[2].Item.Type != ScriptType.String)
 		{
 			return false;
 		}
-		if (P_0[3].Item.Type != ScriptType.String)
+		if (items[3].Item.Type != ScriptType.String)
 		{
 			return false;
 		}
-		if (P_0[4].Item.Type != ScriptType.Int)
+		if (items[4].Item.Type != ScriptType.Int)
 		{
 			return false;
 		}
-		if (P_0[5].Item.Type != ScriptType.String)
+		if (items[5].Item.Type != ScriptType.String)
 		{
 			return false;
 		}
-		if (P_0[6].Item.Type != ScriptType.Int)
+		if (items[6].Item.Type != ScriptType.Int)
 		{
 			return false;
 		}

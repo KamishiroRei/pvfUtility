@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 using DevExpress.Mvvm;
@@ -14,32 +13,11 @@ namespace PvfCode.Services.PreviewPvfFileFolder;
 
 public class EquPartsetFile : ViewModelBase
 {
-	private readonly PvfFile gly8J8fd2p;
+	private readonly PvfFile file;
 
-	private readonly PvfGroup C6W8rFxEWR;
+	private readonly PvfGroup pvf;
 
-	[CompilerGenerated]
-	private List<PieceSetAbility> Ro88nfNoT8;
-
-	[CompilerGenerated]
-	private Dictionary<string, EquipmentPartSet> POQ8RxJJgL;
-
-	[CompilerGenerated]
-	private string Aq78SDjjbl;
-
-	public List<PieceSetAbility> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Ro88nfNoT8;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Ro88nfNoT8 = value;
-		}
-	}
+	public List<PieceSetAbility> Items { get; set; }
 
 	public string? ItemsText
 	{
@@ -61,33 +39,9 @@ public class EquPartsetFile : ViewModelBase
 		}
 	}
 
-	public Dictionary<string, EquipmentPartSet> EquItems
-	{
-		[CompilerGenerated]
-		get
-		{
-			return POQ8RxJJgL;
-		}
-		[CompilerGenerated]
-		set
-		{
-			POQ8RxJJgL = value;
-		}
-	}
+	public Dictionary<string, EquipmentPartSet> EquItems { get; set; }
 
-	public string Name
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Aq78SDjjbl;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Aq78SDjjbl = value;
-		}
-	}
+	public string Name { get; set; }
 
 	public EquPartsetFile(PvfFile file, PvfGroup pvf, Dictionary<string, EquipmentPartSet> equItems)
 	{
@@ -100,18 +54,18 @@ public class EquPartsetFile : ViewModelBase
 		}
 		EquItems = equItems;
 		RaisePropertyChanged("EquItems");
-		gly8J8fd2p = file;
-		C6W8rFxEWR = pvf;
-		if (gly8J8fd2p != null)
+		this.file = file;
+		this.pvf = pvf;
+		if (this.file != null)
 		{
 			Name = pvf.GetItemName(file);
-			Q3D8NuTk1q();
+			LoadItems();
 		}
 	}
 
-	private void Q3D8NuTk1q()
+	private void LoadItems()
 	{
-		ScriptFileParserNew scriptFileParserNew = new ScriptFileParserNew(gly8J8fd2p, C6W8rFxEWR);
+		ScriptFileParserNew scriptFileParserNew = new ScriptFileParserNew(file, pvf);
 		scriptFileParserNew.PraseStructureMain();
 		if (scriptFileParserNew.Sections.Count == 0)
 		{
@@ -125,7 +79,7 @@ public class EquPartsetFile : ViewModelBase
 		Items = new List<PieceSetAbility>();
 		foreach (PvfSection item in enumerable)
 		{
-			Items.Add(new PieceSetAbility(scriptFileParserNew, item.Children, C6W8rFxEWR));
+			Items.Add(new PieceSetAbility(scriptFileParserNew, item.Children, pvf));
 		}
 	}
 
@@ -151,11 +105,7 @@ public class EquPartsetFile : ViewModelBase
 		}
 		if (filePaths.Count() > 1)
 		{
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(34, 1);
-			defaultInterpolatedStringHandler.AppendLiteral("当前套装位置共有");
-			defaultInterpolatedStringHandler.AppendFormatted(filePaths.Count());
-			defaultInterpolatedStringHandler.AppendLiteral("件装备 大于10件不建议同时用文档打开 确定要打开吗");
-			if (ilogger.ShowDialog(defaultInterpolatedStringHandler.ToStringAndClear()) != MessageResult.Yes)
+			if (ilogger.ShowDialog($"当前套装位置共有{filePaths.Count()}件装备 大于10件不建议同时用文档打开 确定要打开吗") != MessageResult.Yes)
 			{
 				return;
 			}
@@ -172,20 +122,20 @@ public class EquPartsetFile : ViewModelBase
 		Ilogger ilogger = AppSetting.Instance.GetIlogger();
 		if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)
 		{
-			if (gly8J8fd2p == null)
+			if (file == null)
 			{
 				ilogger.ShowMsg("套装信息文件不存在");
 			}
 			else
 			{
-				ilogger.OpenPvfFileDocument(gly8J8fd2p.FileName);
+				ilogger.OpenPvfFileDocument(file.FileName);
 			}
 			return;
 		}
 		bool flag = (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
 		if (EquItems == null || EquItems.Count() == 0)
 		{
-			if (Name != null && Name.Contains(" 未注册到：etc/equipmentpartset.etc") && C6W8rFxEWR.FileAny("etc/equipmentpartset.etc"))
+			if (Name != null && Name.Contains(" 未注册到：etc/equipmentpartset.etc") && pvf.FileAny("etc/equipmentpartset.etc"))
 			{
 				ilogger.OpenPvfFileDocument("etc/equipmentpartset.etc");
 			}
@@ -199,13 +149,13 @@ public class EquPartsetFile : ViewModelBase
 				IEnumerable<string> filePaths = equItem.Value.GetFilePaths();
 				list.AddRange(filePaths);
 			}
-			if (gly8J8fd2p == null)
+			if (file == null)
 			{
 				ilogger.Error("套装信息文件不存在");
 			}
 			else
 			{
-				list.Add(gly8J8fd2p.FileName);
+				list.Add(file.FileName);
 			}
 			ilogger.AddFileListToNewSearchPanel(list, Name);
 			return;
@@ -214,26 +164,20 @@ public class EquPartsetFile : ViewModelBase
 		{
 			if (equItem2.Value.GetFile() == null)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(10, 2);
-				defaultInterpolatedStringHandler.AppendLiteral("套装部件：");
-				defaultInterpolatedStringHandler.AppendFormatted(equItem2.Value.Name);
-				defaultInterpolatedStringHandler.AppendLiteral(" ");
-				defaultInterpolatedStringHandler.AppendFormatted(equItem2.Value.EquType);
-				defaultInterpolatedStringHandler.AppendLiteral(" 不存在");
-				ilogger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
+				ilogger.Error($"套装部件：{equItem2.Value.Name} {equItem2.Value.EquType} 不存在");
 			}
 			else
 			{
 				ilogger.OpenPvfFileDocument(equItem2.Value.GetFile().FileName);
 			}
 		}
-		if (gly8J8fd2p == null)
+		if (file == null)
 		{
 			ilogger.Error("套装信息文件不存在");
 		}
 		else
 		{
-			ilogger.OpenPvfFileDocument(gly8J8fd2p.FileName);
+			ilogger.OpenPvfFileDocument(file.FileName);
 		}
 	}
 

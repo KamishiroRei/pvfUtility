@@ -1,44 +1,10 @@
-using System.Runtime.CompilerServices;
 using PvfCode.Models.Pvf.Enums;
 
 namespace PvfCode.Services.PreviewPvfFileFolder;
 
 public class SkillDataUp
 {
-	[CompilerGenerated]
-	private string hcs8hKVjfd;
-
-	[CompilerGenerated]
-	private int pfq8dF99DJ;
-
-	[CompilerGenerated]
-	private string zu489Xj8To;
-
-	[CompilerGenerated]
-	private string dVi8qXcbLC;
-
-	[CompilerGenerated]
-	private int fWD8g845yt;
-
-	[CompilerGenerated]
-	private string RyQ8zjYfRN;
-
-	[CompilerGenerated]
-	private int Q10juEOLJT;
-
-	public string JobDefaultTypeStr
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hcs8hKVjfd;
-		}
-		[CompilerGenerated]
-		set
-		{
-			hcs8hKVjfd = value;
-		}
-	}
+	public string JobDefaultTypeStr { get; set; }
 
 	public JobType? JobDefaultType
 	{
@@ -52,89 +18,17 @@ public class SkillDataUp
 		}
 	}
 
-	public int JobTypeIndex
-	{
-		[CompilerGenerated]
-		get
-		{
-			return pfq8dF99DJ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			pfq8dF99DJ = value;
-		}
-	}
+	public int JobTypeIndex { get; set; }
 
-	public string DungeonType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return zu489Xj8To;
-		}
-		[CompilerGenerated]
-		set
-		{
-			zu489Xj8To = value;
-		}
-	}
+	public string DungeonType { get; set; }
 
-	public string SkillStyle
-	{
-		[CompilerGenerated]
-		get
-		{
-			return dVi8qXcbLC;
-		}
-		[CompilerGenerated]
-		set
-		{
-			dVi8qXcbLC = value;
-		}
-	}
+	public string SkillStyle { get; set; }
 
-	public int SkillStyleValue
-	{
-		[CompilerGenerated]
-		get
-		{
-			return fWD8g845yt;
-		}
-		[CompilerGenerated]
-		set
-		{
-			fWD8g845yt = value;
-		}
-	}
+	public int SkillStyleValue { get; set; }
 
-	public string SkillAddType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return RyQ8zjYfRN;
-		}
-		[CompilerGenerated]
-		set
-		{
-			RyQ8zjYfRN = value;
-		}
-	}
+	public string SkillAddType { get; set; }
 
-	public int SkillAddValue
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Q10juEOLJT;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Q10juEOLJT = value;
-		}
-	}
+	public int SkillAddValue { get; set; }
 
 	public string Text
 	{
