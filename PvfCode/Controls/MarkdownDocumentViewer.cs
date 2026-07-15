@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Highlighting;
 using Markdig;
 using Markdig.Extensions.Tables;
 using Markdig.Extensions.TaskLists;
@@ -48,6 +50,7 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 	private const string CodeBackgroundResource = "EditorFindKeyWordTextBoxBackBrush";
 	private const string LinkForegroundResource = "EditorLinkTextForegroundBrush";
 	private const string MutedForegroundResource = "EditorFoldingMarkerBrush";
+	private bool isHighlightingSubscribed;
 
 	public string Title
 	{
@@ -75,6 +78,8 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		Padding = new Thickness(12);
 		SetResourceReference(BackgroundProperty, EditorBackgroundResource);
 		SetResourceReference(ForegroundProperty, EditorForegroundResource);
+		Loaded += OnLoaded;
+		Unloaded += OnUnloaded;
 		RebuildDocument();
 	}
 
@@ -85,6 +90,25 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		FontFamily fontFamily = null,
 		double fontSize = 12,
 		Brush foreground = null)
+	{
+		return RenderDocumentCore(
+			title,
+			markdown,
+			officialDescription,
+			fontFamily,
+			fontSize,
+			foreground,
+			PvfCodeHighlightingSource.Script);
+	}
+
+	private static FlowDocument RenderDocumentCore(
+		string title,
+		string markdown,
+		string officialDescription,
+		FontFamily fontFamily,
+		double fontSize,
+		Brush foreground,
+		IHighlightingDefinition pvfHighlighting)
 	{
 		FlowDocument document = new()
 		{
@@ -110,14 +134,14 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 			titleParagraph.Margin = new Thickness(0, 0, 0, 10);
 			document.Blocks.Add(titleParagraph);
 		}
-		AppendMarkdown(document.Blocks, OfficialAnnotationLinks.LinkifyOfficialExamples(markdown));
+		AppendMarkdown(document.Blocks, OfficialAnnotationLinks.LinkifyOfficialExamples(markdown), pvfHighlighting);
 		if (!string.IsNullOrWhiteSpace(officialDescription))
 		{
 			if (document.Blocks.Count > 0)
 			{
 				document.Blocks.Add(CreateThematicBreak());
 			}
-			AppendMarkdown(document.Blocks, OfficialAnnotationLinks.LinkifyOfficialExamples(officialDescription));
+			AppendMarkdown(document.Blocks, OfficialAnnotationLinks.LinkifyOfficialExamples(officialDescription), pvfHighlighting);
 		}
 		return document;
 	}
@@ -129,28 +153,65 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 
 	private void RebuildDocument()
 	{
-		Document = RenderDocument(Title, Markdown, OfficialDescription, FontFamily, FontSize);
+		Document = RenderDocumentCore(
+			Title,
+			Markdown,
+			OfficialDescription,
+			FontFamily,
+			FontSize,
+			foreground: null,
+			PvfCodeHighlightingSource.Script);
 	}
 
-	private static void AppendMarkdown(BlockCollection blocks, string markdown)
+	private void OnLoaded(object sender, RoutedEventArgs args)
+	{
+		if (isHighlightingSubscribed)
+		{
+			return;
+		}
+		PvfCodeHighlightingSource.Changed += RebuildDocument;
+		isHighlightingSubscribed = true;
+		RebuildDocument();
+	}
+
+	private void OnUnloaded(object sender, RoutedEventArgs args)
+	{
+		if (!isHighlightingSubscribed)
+		{
+			return;
+		}
+		PvfCodeHighlightingSource.Changed -= RebuildDocument;
+		isHighlightingSubscribed = false;
+	}
+
+	private static void AppendMarkdown(
+		BlockCollection blocks,
+		string markdown,
+		IHighlightingDefinition pvfHighlighting)
 	{
 		if (string.IsNullOrWhiteSpace(markdown))
 		{
 			return;
 		}
 		MarkdownDocument document = Markdig.Markdown.Parse(markdown, Pipeline);
-		AppendBlocks(blocks, document);
+		AppendBlocks(blocks, document, pvfHighlighting);
 	}
 
-	private static void AppendBlocks(BlockCollection blocks, ContainerBlock container)
+	private static void AppendBlocks(
+		BlockCollection blocks,
+		ContainerBlock container,
+		IHighlightingDefinition pvfHighlighting)
 	{
 		foreach (MdBlock block in container)
 		{
-			AppendBlock(blocks, block);
+			AppendBlock(blocks, block, pvfHighlighting);
 		}
 	}
 
-	private static void AppendBlock(BlockCollection blocks, MdBlock block)
+	private static void AppendBlock(
+		BlockCollection blocks,
+		MdBlock block,
+		IHighlightingDefinition pvfHighlighting)
 	{
 		switch (block)
 		{
@@ -167,23 +228,23 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 			blocks.Add(CreateThematicBreak());
 			break;
 		case QuoteBlock quote:
-			blocks.Add(CreateQuote(quote));
+			blocks.Add(CreateQuote(quote, pvfHighlighting));
 			break;
 		case ListBlock list:
-			blocks.Add(CreateList(list));
+			blocks.Add(CreateList(list, pvfHighlighting));
 			break;
 		case MdTable table:
-			blocks.Add(CreateTable(table));
+			blocks.Add(CreateTable(table, pvfHighlighting));
 			break;
 		case CodeBlock code:
-			blocks.Add(CreateCodeBlock(code));
+			blocks.Add(CreateCodeBlock(code, pvfHighlighting));
 			break;
 		case HtmlBlock html:
-			blocks.Add(CreateCodeBlock(html));
+			blocks.Add(CreateCodeBlock(html, null));
 			break;
 		case ContainerBlock container:
 			Section section = new() { Margin = new Thickness(0, 2, 0, 4) };
-			AppendBlocks(section.Blocks, container);
+			AppendBlocks(section.Blocks, container, pvfHighlighting);
 			if (section.Blocks.Count > 0)
 			{
 				blocks.Add(section);
@@ -211,7 +272,7 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		return paragraph;
 	}
 
-	private static Section CreateQuote(QuoteBlock quote)
+	private static Section CreateQuote(QuoteBlock quote, IHighlightingDefinition pvfHighlighting)
 	{
 		Section section = new()
 		{
@@ -221,11 +282,11 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		};
 		section.SetResourceReference(Section.BorderBrushProperty, MutedForegroundResource);
 		section.SetResourceReference(Section.ForegroundProperty, MutedForegroundResource);
-		AppendBlocks(section.Blocks, quote);
+		AppendBlocks(section.Blocks, quote, pvfHighlighting);
 		return section;
 	}
 
-	private static WpfList CreateList(ListBlock listBlock)
+	private static WpfList CreateList(ListBlock listBlock, IHighlightingDefinition pvfHighlighting)
 	{
 		WpfList list = new()
 		{
@@ -236,7 +297,7 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		foreach (ListItemBlock itemBlock in listBlock.OfType<ListItemBlock>())
 		{
 			WpfListItem item = new() { Margin = new Thickness(0, 1, 0, 2) };
-			AppendBlocks(item.Blocks, itemBlock);
+			AppendBlocks(item.Blocks, itemBlock, pvfHighlighting);
 			if (item.Blocks.Count == 0)
 			{
 				item.Blocks.Add(new Paragraph());
@@ -246,7 +307,7 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		return list;
 	}
 
-	private static WpfTable CreateTable(MdTable tableBlock)
+	private static WpfTable CreateTable(MdTable tableBlock, IHighlightingDefinition pvfHighlighting)
 	{
 		WpfTable table = new()
 		{
@@ -278,7 +339,7 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 					cell.SetResourceReference(WpfTableCell.BackgroundProperty, CodeBackgroundResource);
 					cell.FontWeight = FontWeights.SemiBold;
 				}
-				AppendBlocks(cell.Blocks, sourceCell);
+				AppendBlocks(cell.Blocks, sourceCell, pvfHighlighting);
 				if (cell.Blocks.Count == 0)
 				{
 					cell.Blocks.Add(new Paragraph());
@@ -339,7 +400,7 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		};
 	}
 
-	private static Paragraph CreateCodeBlock(LeafBlock code)
+	private static Paragraph CreateCodeBlock(LeafBlock code, IHighlightingDefinition pvfHighlighting)
 	{
 		Paragraph paragraph = new()
 		{
@@ -350,6 +411,11 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 		paragraph.SetResourceReference(Paragraph.BackgroundProperty, CodeBackgroundResource);
 		paragraph.SetResourceReference(Paragraph.ForegroundProperty, EditorForegroundResource);
 		string text = code.Lines.ToString().TrimEnd('\r', '\n');
+		if (IsPvfCodeBlock(code) && pvfHighlighting != null)
+		{
+			AppendHighlightedCode(paragraph, text, pvfHighlighting);
+			return paragraph;
+		}
 		string[] lines = text.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
 		for (int i = 0; i < lines.Length; i++)
 		{
@@ -360,6 +426,77 @@ public class MarkdownDocumentViewer : FlowDocumentScrollViewer
 			paragraph.Inlines.Add(new Run(lines[i]));
 		}
 		return paragraph;
+	}
+
+	private static bool IsPvfCodeBlock(LeafBlock code)
+	{
+		return code is FencedCodeBlock fencedCode &&
+			string.Equals(fencedCode.Info?.Trim(), "pvf", StringComparison.OrdinalIgnoreCase);
+	}
+
+	private static void AppendHighlightedCode(
+		Paragraph paragraph,
+		string text,
+		IHighlightingDefinition highlighting)
+	{
+		TextDocument document = new() { Text = text };
+		using DocumentHighlighter highlighter = new(document, highlighting);
+		foreach (DocumentLine line in document.Lines)
+		{
+			if (line.LineNumber > 1)
+			{
+				paragraph.Inlines.Add(new LineBreak());
+			}
+			HighlightedLine highlightedLine = highlighter.HighlightLine(line.LineNumber);
+			RichTextModel model = highlightedLine.ToRichTextModel();
+			foreach (HighlightedSection section in model.GetHighlightedSections(0, line.Length))
+			{
+				Run run = new(document.GetText(line.Offset + section.Offset, section.Length));
+				ApplyHighlighting(run, section.Color);
+				paragraph.Inlines.Add(run);
+			}
+		}
+	}
+
+	private static void ApplyHighlighting(Run run, HighlightingColor color)
+	{
+		if (color.Foreground != null)
+		{
+			run.Foreground = color.Foreground.GetBrush(null);
+		}
+		if (color.Background != null)
+		{
+			run.Background = color.Background.GetBrush(null);
+		}
+		if (color.FontFamily != null)
+		{
+			run.FontFamily = color.FontFamily;
+		}
+		if (color.FontSize.HasValue)
+		{
+			run.FontSize = color.FontSize.Value;
+		}
+		if (color.FontWeight.HasValue)
+		{
+			run.FontWeight = color.FontWeight.Value;
+		}
+		if (color.FontStyle.HasValue)
+		{
+			run.FontStyle = color.FontStyle.Value;
+		}
+		if (color.Underline == true || color.Strikethrough == true)
+		{
+			TextDecorationCollection decorations = new();
+			if (color.Underline == true)
+			{
+				decorations.Add(TextDecorations.Underline[0]);
+			}
+			if (color.Strikethrough == true)
+			{
+				decorations.Add(TextDecorations.Strikethrough[0]);
+			}
+			run.TextDecorations = decorations;
+		}
 	}
 
 	private static BlockUIContainer CreateThematicBreak()

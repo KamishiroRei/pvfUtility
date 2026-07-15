@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using HL.Interfaces;
 using ICSharpCode.AvalonEdit.Highlighting;
+using PvfCode.Controls;
 using PvfCode.Models.Enums;
 using ServiceLocator;
 
@@ -286,5 +287,6 @@ public class ThemeSwitcher : ModelBase
 		action(definition);
 		definition = service.GetDefinition("Lst");
 		action(definition);
+		PvfCodeHighlightingSource.NotifyChanged();
 	}
 }
