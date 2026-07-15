@@ -58,6 +58,8 @@ internal static class PvfSkillDataParameters
 		public Dictionary<string, PvfSkillDataParameterSkill> ByPath { get; } = new(StringComparer.OrdinalIgnoreCase);
 
 		public Dictionary<int, List<PvfSkillDataParameterSkill>> ByCode { get; } = new();
+
+		public Dictionary<string, string> EquipmentSetAliases { get; } = new(StringComparer.OrdinalIgnoreCase);
 	}
 
 	private const string ResourceName = "PvfCode.SkillDataParameters.json";
@@ -84,6 +86,22 @@ internal static class PvfSkillDataParameters
 		string baseName = Path.GetFileNameWithoutExtension(path);
 		return matches.FirstOrDefault(skill => Path.GetFileNameWithoutExtension(skill.Key).Equals(baseName, StringComparison.OrdinalIgnoreCase)) ??
 			(matches.Count == 1 ? matches[0] : null);
+	}
+
+	public static PvfSkillDataParameterSkill FindForEquipmentSet(PvfFile file)
+	{
+		if (file == null)
+		{
+			return null;
+		}
+		Catalog catalog = Data.Value;
+		string source = RemoveSkillPrefix(NormalizeKey(file.FileName));
+		if (catalog.EquipmentSetAliases.TryGetValue(source, out string target) &&
+			catalog.ByPath.TryGetValue(RemoveSkillPrefix(NormalizeKey(target)), out PvfSkillDataParameterSkill alias))
+		{
+			return alias;
+		}
+		return Find(file);
 	}
 
 	private static Catalog Load()
@@ -118,6 +136,18 @@ internal static class PvfSkillDataParameters
 						{
 							AddCode(catalog, value, skill);
 						}
+					}
+				}
+			}
+			if (document.RootElement.TryGetProperty("equipmentSetSkillAliases", out JsonElement aliases) && aliases.ValueKind == JsonValueKind.Object)
+			{
+				foreach (JsonProperty property in aliases.EnumerateObject())
+				{
+					if (property.Value.ValueKind == JsonValueKind.Object &&
+						property.Value.TryGetProperty("target", out JsonElement target) && target.ValueKind == JsonValueKind.String)
+					{
+						catalog.EquipmentSetAliases[RemoveSkillPrefix(NormalizeKey(property.Name))] =
+							RemoveSkillPrefix(NormalizeKey(target.GetString()));
 					}
 				}
 			}

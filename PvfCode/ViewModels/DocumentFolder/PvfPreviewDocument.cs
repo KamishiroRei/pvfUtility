@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 using ICSharpCode.AvalonEdit.Document;
+using PvfCode.Models.Pvf;
 using PvfCode.Models.Options.Editor.ItemCodeHoverConfigModels;
 using PvfCode.Services;
 using PvfCode.Services.PreviewPvfFileFolder.Stackable.Models;
@@ -378,13 +379,35 @@ public sealed class PvfPreviewDocument : DocumentBase
 		["armor break resistance"] = "防具破坏抗性", ["piercing resistance"] = "贯通抗性"
 	};
 
+	private static readonly Dictionary<string, (int Order, string Label)> EquipmentSetSlots = new(StringComparer.OrdinalIgnoreCase)
+	{
+		["weapon"] = (0, "武器"), ["coat"] = (10, "上衣"), ["shoulder"] = (11, "护肩"),
+		["pants"] = (12, "下装"), ["waist"] = (13, "腰带"), ["shoes"] = (14, "鞋"),
+		["wrist"] = (20, "手镯"), ["amulet"] = (21, "项链"), ["ring"] = (22, "戒指"),
+		["support"] = (23, "辅助装备"), ["magic stone"] = (24, "魔法石"), ["title"] = (25, "称号"),
+		["avatar hair"] = (30, "头部装扮"), ["avatar cap"] = (31, "帽子装扮"),
+		["avatar face"] = (32, "脸部装扮"), ["avatar breast"] = (33, "胸部装扮"),
+		["avatar coat"] = (34, "上衣装扮"), ["avatar pants"] = (35, "下装装扮"),
+		["avatar waist"] = (36, "腰部装扮"), ["avatar shoes"] = (37, "鞋装扮"),
+		["avatar skin"] = (38, "皮肤装扮"), ["avatar aura"] = (39, "光环装扮")
+	};
+
+	private static readonly Dictionary<string, string> EquipmentSetEffectTags = new(StringComparer.OrdinalIgnoreCase)
+	{
+		["if"] = "触发条件", ["then"] = "触发效果", ["module"] = "应用范围",
+		["use skill"] = "施放技能", ["target"] = "目标", ["duration"] = "持续时间",
+		["stat"] = "属性变化", ["probability"] = "触发几率", ["attack success"] = "攻击命中时",
+		["skill"] = "技能", ["cooltime"] = "冷却时间", ["appendage"] = "附加效果",
+		["active status"] = "异常状态", ["active status control info"] = "异常状态控制"
+	};
+
 	private static readonly Dictionary<string, string> JobLabels = new(StringComparer.OrdinalIgnoreCase)
 	{
 		["all"] = "所有职业", ["swordman"] = "鬼剑士(男)", ["at swordman"] = "鬼剑士(女)",
 		["atswordman"] = "鬼剑士(女)", ["fighter"] = "格斗家(女)", ["at fighter"] = "格斗家(男)",
 		["atfighter"] = "格斗家(男)", ["gunner"] = "神枪手(男)", ["at gunner"] = "神枪手(女)",
 		["atgunner"] = "神枪手(女)", ["mage"] = "魔法师(女)", ["at mage"] = "魔法师(男)",
-		["atmage"] = "魔法师(男)", ["priest"] = "圣职者", ["thief"] = "暗夜使者",
+		["atmage"] = "魔法师(男)", ["priest"] = "圣职者", ["thief"] = "暗夜使者", ["theif"] = "暗夜使者",
 		["demonic swordman"] = "黑暗武士", ["demonicswordman"] = "黑暗武士",
 		["creator mage"] = "缔造者", ["creatormage"] = "缔造者", ["none"] = "未转职",
 		["weaponmaster"] = "剑魂", ["soulbringer"] = "鬼泣", ["berserker"] = "狂战士", ["asura"] = "阿修罗",
@@ -393,6 +416,38 @@ public sealed class PvfPreviewDocument : DocumentBase
 		["nenmaster"] = "气功师", ["striker"] = "散打", ["streetfighter"] = "街霸", ["grappler"] = "柔道家",
 		["crusader"] = "圣骑士", ["infighter"] = "蓝拳圣使", ["exorcist"] = "驱魔师", ["avenger"] = "复仇者",
 		["rogue"] = "刺客", ["necromancer"] = "死灵术士"
+	};
+
+	private static readonly Dictionary<string, string> SkillDataScopeLabels = new(StringComparer.OrdinalIgnoreCase)
+	{
+		["all"] = "全部模式",
+		["dungeon"] = "地下城",
+		["dungeon type"] = "地下城",
+		["pvp"] = "决斗场",
+		["pvp type"] = "决斗场",
+		["fair pvp"] = "公平决斗场",
+		["war room"] = "战争房间",
+		["assault"] = "突袭模式"
+	};
+
+	private static readonly Dictionary<string, string> SkillDataTypeLabels = new(StringComparer.OrdinalIgnoreCase)
+	{
+		["static"] = "静态参数",
+		["level"] = "动态参数",
+		["mp"] = "MP 消耗",
+		["maintain mp"] = "持续 MP 消耗",
+		["cooltime"] = "冷却时间",
+		["skill consume item"] = "技能消耗物品",
+		["skill cosume item"] = "技能消耗物品",
+		["casting time"] = "施放时间",
+		["limit count"] = "次数限制"
+	};
+
+	private static readonly string[] AllSkillReferenceDirectories =
+	{
+		"skill/swordman", "skill/fighter", "skill/gunner", "skill/mage", "skill/priest",
+		"skill/atgunner", "skill/thief", "skill/atfighter", "skill/atmage",
+		"skill/demonicswordman", "skill/creatormage"
 	};
 
 	private static readonly Dictionary<string, string> StackableTypeLabels = new(StringComparer.OrdinalIgnoreCase)
@@ -731,11 +786,373 @@ public sealed class PvfPreviewDocument : DocumentBase
 	private void BuildEquipmentSet(PvfRichPreview preview)
 	{
 		preview.Subtitle = "装备套装";
-		AddEntrySection(preview, "套装部件", PvfPreviewTone.Set, true, "set item");
+		AddEquipmentSetComposition(preview);
 		AddTextSection(preview, "套装属性", PvfPreviewTone.Set, "set ability");
-		AddTextSection(preview, "件数属性", PvfPreviewTone.Set, "piece set ability");
+		if (!AddEquipmentSetAbilities(preview))
+		{
+			AddTextSection(preview, "件数属性", PvfPreviewTone.Set, "piece set ability");
+		}
 		AddTextSection(preview, "全套说明", PvfPreviewTone.Blue, "fullset basic explain", "fullset detail explain");
-		AddTextSection(preview, "参数说明", PvfPreviewTone.Blue, "parameter basic explain", "parameter detail explain");
+		if (!HasAnyTag("piece set ability"))
+		{
+			AddEquipmentSetParameterExplanations(preview);
+		}
+	}
+
+	private void AddEquipmentSetComposition(PvfRichPreview preview)
+	{
+		PvfGroup pvf = AppCore.ViewModelBase.PVF;
+		PvfPreviewTag setItemTag = FindTag("set item");
+		PvfPreviewTag compositionTag = setItemTag ?? FindTag("set name");
+		PvfPreviewSection section = new("套装组成", PvfPreviewTone.Set, compositionTag) { ShowAllEntries = true };
+		if (pvf != null && AddExplicitEquipmentSetItems(section, pvf, setItemTag))
+		{
+			preview.Sections.Add(section);
+			return;
+		}
+		string sourcePath = sourceDocument?.File?.FileName;
+		if (pvf?.EquipmentPartSetTable?.PathItems == null || string.IsNullOrEmpty(sourcePath) ||
+			!pvf.EquipmentPartSetTable.PathItems.TryGetValue(sourcePath, out Dictionary<string, EquipmentPartSet> setParts))
+		{
+			AddEntrySection(preview, "套装组成", PvfPreviewTone.Set, true, "set item");
+			return;
+		}
+
+		PvfPreviewTag tag = compositionTag;
+		foreach (KeyValuePair<string, EquipmentPartSet> part in setParts
+			.OrderBy(item => EquipmentSetSlot(item.Value?.EquType ?? item.Key).Order)
+			.ThenBy(item => item.Value?.EquType ?? item.Key, StringComparer.OrdinalIgnoreCase))
+		{
+			EquipmentPartSet item = part.Value;
+			if (item == null)
+			{
+				continue;
+			}
+			item.SetReferencesFilePack(pvf);
+			string equType = item.EquType ?? part.Key;
+			string slotLabel = EquipmentSetSlot(equType).Label;
+			bool displayedReference = false;
+			IEnumerable<EquipmentPartSet.ReferencesRowViewModel> references = item.ReferencesFiles
+				?? Enumerable.Empty<EquipmentPartSet.ReferencesRowViewModel>();
+			foreach (EquipmentPartSet.ReferencesRowViewModel reference in references)
+			{
+				PvfFile file = reference?.File;
+				if (file == null)
+				{
+					continue;
+				}
+				if (!file.ItemCode.HasValue)
+				{
+					displayedReference = true;
+					section.Lines.Add(new PvfPreviewLine(
+						$"{slotLabel} [{equType}]：{reference.ItemName} · {file.FileName}",
+						tag,
+						ResolveFileIcon(file)));
+					continue;
+				}
+				displayedReference = true;
+				section.Entries.Add(new PvfPreviewEntry(
+					file.ItemCode.Value,
+					null,
+					reference.ItemName,
+					$"{slotLabel} [{equType}] · {file.FileName}",
+					tag,
+					ResolveFileIcon(file)));
+			}
+			if (!displayedReference)
+			{
+				string name = string.IsNullOrWhiteSpace(item.Name) ? "未命名装备" : item.Name;
+				section.Lines.Add(new PvfPreviewLine($"{slotLabel} [{equType}]：{name}（未找到引用装备）", tag));
+			}
+		}
+		if (section.Entries.Count > 0 || section.Lines.Count > 0)
+		{
+			preview.Sections.Add(section);
+		}
+	}
+
+	private bool AddExplicitEquipmentSetItems(PvfPreviewSection section, PvfGroup pvf, PvfPreviewTag tag)
+	{
+		List<int> itemCodes = TagLines("set item")
+			.SelectMany(ParsePreviewValues)
+			.Select(value => int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int code) ? (int?)code : null)
+			.Where(code => code.HasValue)
+			.Select(code => code.Value)
+			.Distinct()
+			.ToList();
+		if (itemCodes.Count == 0)
+		{
+			return false;
+		}
+
+		foreach (int itemCode in itemCodes)
+		{
+			string path = pvf.ListFileTable.ItemCodeConvertFilePath("equipment", itemCode);
+			PvfFile file = string.IsNullOrWhiteSpace(path) ? null : pvf.GetFile(path);
+			if (file == null)
+			{
+				section.Lines.Add(new PvfPreviewLine($"装备代码：{itemCode}（对应文件不存在）", tag));
+				continue;
+			}
+			string name = pvf.GetItemName(file);
+			section.Entries.Add(new PvfPreviewEntry(
+				itemCode,
+				null,
+				string.IsNullOrWhiteSpace(name) ? "未命名装备" : name,
+				file.FileName,
+				tag,
+				ResolveFileIcon(file)));
+		}
+		return true;
+	}
+
+	private static (int Order, string Label) EquipmentSetSlot(string equType)
+	{
+		string normalized = LabelToken(equType);
+		return EquipmentSetSlots.TryGetValue(normalized, out (int Order, string Label) slot)
+			? slot
+			: (100, string.IsNullOrWhiteSpace(normalized) ? "未分类部位" : normalized);
+	}
+
+	private bool AddEquipmentSetAbilities(PvfRichPreview preview)
+	{
+		IReadOnlyList<PvfParsedEquipmentSetAbility> abilities = PvfEquipmentSetSkillDataParser.Parse(sourceTextDocument?.Text ?? string.Empty);
+		if (abilities.Count == 0)
+		{
+			return false;
+		}
+
+		foreach (PvfParsedEquipmentSetAbility ability in abilities)
+		{
+			PvfPreviewTag abilityTag = new(
+				"piece set ability",
+				GetLineNumber(ability.SourceOffset),
+				ability.SourceOffset,
+				"piece set ability".Length);
+			string title = ability.RequiredPieces.HasValue ? $"{ability.RequiredPieces.Value}件套效果" : "套装效果";
+			PvfPreviewSection section = new(title, PvfPreviewTone.Set, abilityTag);
+
+			foreach (string line in EquipmentSetEffectLines(ability.AdditionalEffect))
+			{
+				section.Lines.Add(new PvfPreviewLine(line, abilityTag));
+			}
+			AddEquipmentSetExplanation(section, "基本说明 [parameter basic explain]", ability.Explanation,
+				CreateEquipmentSetExplanationTag("parameter basic explain", ability.ExplanationSourceOffset, ability.ExplanationSourceLength, abilityTag));
+			AddEquipmentSetExplanation(section, "详细说明 [parameter detail explain]", ability.DetailExplanation,
+				CreateEquipmentSetExplanationTag("parameter detail explain", ability.DetailExplanationSourceOffset, ability.DetailExplanationSourceLength, abilityTag));
+
+			if (ability.SkillDataRows.Count > 0)
+			{
+				int unresolvedSkills = 0;
+				int unlabelledParameters = 0;
+				PvfPreviewTable table = new("技能数据调整 [skill data up]", abilityTag);
+				table.Headers.AddRange(new[] { "职业", "技能", "应用范围", "参数", "应用方式", "值" });
+				foreach (PvfParsedSkillDataUpRow row in ability.SkillDataRows)
+				{
+					string normalizedJob = row.Job.Equals("theif", StringComparison.OrdinalIgnoreCase) ? "thief" : row.Job;
+					IReadOnlyList<string> skillDirectories = normalizedJob.Equals("common", StringComparison.OrdinalIgnoreCase)
+						? AllSkillReferenceDirectories
+						: GetSkillReferenceDirectories(normalizedJob);
+					PvfFile skillFile = ResolveReferenceFile(row.SkillCode, "skill data up", 1, skillDirectories);
+					PvfSkillDataParameterSkill parameters = PvfSkillDataParameters.FindForEquipmentSet(skillFile);
+					string parameterText = SkillDataParameterText(row, parameters);
+					if (skillFile == null)
+					{
+						unresolvedSkills++;
+					}
+					if (parameterText.Contains("未标注", StringComparison.Ordinal))
+					{
+						unlabelledParameters++;
+					}
+					PvfPreviewTag target = CreateSkillDataUpTarget(row);
+					table.Rows.Add(new PvfPreviewTableRow(new[]
+					{
+						$"{JobLabel(row.Job)} [{row.Job}]",
+						EquipmentSetSkillText(skillFile, row.SkillCode, parameters),
+						SkillDataScopeLabels.TryGetValue(row.Scope, out string scopeLabel) ? $"{scopeLabel} [{row.Scope}]" : $"[{row.Scope}]",
+						parameterText,
+						row.Operator == "%" ? "比率 (%)" : row.Operator == "+" ? "数值 (+)" : row.Operator,
+						SkillDataValueText(row)
+					}, target));
+				}
+				section.Tables.Add(table);
+				section.Fields.Add(new PvfPreviewField("技能数据记录", ability.SkillDataRows.Count.ToString(CultureInfo.InvariantCulture), abilityTag));
+				if (unlabelledParameters > 0)
+				{
+					section.Fields.Add(new PvfPreviewField("未标注参数", unlabelledParameters.ToString(CultureInfo.InvariantCulture), abilityTag, PvfPreviewTone.Warning));
+				}
+				if (unresolvedSkills > 0)
+				{
+					section.Fields.Add(new PvfPreviewField("未解析技能", unresolvedSkills.ToString(CultureInfo.InvariantCulture), abilityTag, PvfPreviewTone.Warning));
+				}
+			}
+			preview.Sections.Add(section);
+		}
+		return true;
+	}
+
+	private void AddEquipmentSetParameterExplanations(PvfRichPreview preview)
+	{
+		foreach ((string tagName, string title) in new[]
+		{
+			("parameter basic explain", "基本说明 [parameter basic explain]"),
+			("parameter detail explain", "详细说明 [parameter detail explain]")
+		})
+		{
+			PvfPreviewTag tag = FindTag(tagName);
+			List<string> lines = TagLines(tagName)
+				.SelectMany(value => value.Replace("\\n", "\n").Split('\n'))
+				.Select(value => value.Trim())
+				.Where(value => value.Length > 0)
+				.ToList();
+			if (lines.Count == 0)
+			{
+				continue;
+			}
+			PvfPreviewSection section = new(title, PvfPreviewTone.Blue, tag);
+			foreach (string line in lines)
+			{
+				section.Lines.Add(new PvfPreviewLine(line, tag));
+			}
+			preview.Sections.Add(section);
+		}
+	}
+
+	private void AddEquipmentSetExplanation(PvfPreviewSection section, string title, string explanation, PvfPreviewTag tag)
+	{
+		if (string.IsNullOrWhiteSpace(explanation))
+		{
+			return;
+		}
+		section.Lines.Add(new PvfPreviewLine(title, tag));
+		foreach (string line in explanation.Replace("\\n", "\n").Split('\n').Select(value => value.Trim()).Where(value => value.Length > 0))
+		{
+			section.Lines.Add(new PvfPreviewLine(line, tag));
+		}
+	}
+
+	private PvfPreviewTag CreateEquipmentSetExplanationTag(string name, int offset, int length, PvfPreviewTag fallback)
+	{
+		return length > 0 ? new PvfPreviewTag(name, GetLineNumber(offset), offset, length) : fallback;
+	}
+
+	private static IEnumerable<string> EquipmentSetEffectLines(string effect)
+	{
+		foreach (string line in (effect ?? string.Empty).Replace("\\n", "\n").Split('\n'))
+		{
+			string content = line.TrimStart();
+			if (string.IsNullOrWhiteSpace(content))
+			{
+				continue;
+			}
+			int indentation = line.Length - content.Length;
+			Match tag = Regex.Match(content, @"^\[(?<close>/)?(?<name>[^\]]+)\]\s*$");
+			if (tag.Success)
+			{
+				if (tag.Groups["close"].Success)
+				{
+					continue;
+				}
+				string name = tag.Groups["name"].Value.Trim();
+				string label = EquipmentSetEffectTags.TryGetValue(name, out string knownLabel) ? knownLabel : name;
+				yield return new string(' ', indentation) + $"{label} [{name}]";
+				continue;
+			}
+
+			List<string> values = ParsePreviewValues(content);
+			if (values.Count == 0)
+			{
+				continue;
+			}
+			string first = LabelToken(values[0]);
+			if (SkillDataScopeLabels.TryGetValue(first ?? string.Empty, out string scopeLabel))
+			{
+				values[0] = $"{scopeLabel} [{first}]";
+			}
+			else if (EquipmentMagicStats.TryGetValue(first ?? string.Empty, out string statLabel) ||
+				EquipmentStats.TryGetValue(first ?? string.Empty, out statLabel))
+			{
+				values[0] = $"{statLabel} [{first}]";
+			}
+			else if (string.Equals(first, "myself", StringComparison.OrdinalIgnoreCase))
+			{
+				values[0] = "自身 [myself]";
+			}
+			yield return new string(' ', indentation) + string.Join(" ", values);
+		}
+	}
+
+	private static List<string> ParsePreviewValues(string line)
+	{
+		List<string> values = new();
+		string content = line ?? string.Empty;
+		int commentIndex = content.IndexOf("//", StringComparison.Ordinal);
+		if (commentIndex >= 0)
+		{
+			content = content.Substring(0, commentIndex);
+		}
+		foreach (Match match in ValueTokenRegex.Matches(content))
+		{
+			string value = match.Groups["backtick"].Success ? match.Groups["backtick"].Value :
+				match.Groups["double"].Success ? match.Groups["double"].Value :
+				match.Groups["single"].Success ? match.Groups["single"].Value :
+				match.Groups["plain"].Value;
+			if (!string.IsNullOrEmpty(value))
+			{
+				values.Add(value);
+			}
+		}
+		return values;
+	}
+
+	private string EquipmentSetSkillText(PvfFile skillFile, int skillCode, PvfSkillDataParameterSkill parameters)
+	{
+		string currentName = ResolveReferenceName(skillFile, skillCode);
+		if (parameters == null || string.IsNullOrWhiteSpace(parameters.Name) ||
+			string.Equals(currentName, parameters.Name, StringComparison.OrdinalIgnoreCase))
+		{
+			return $"{currentName} (ID {skillCode})";
+		}
+		return $"{currentName} (ID {skillCode}；旧套装说明技能：{parameters.Name})";
+	}
+
+	private static PvfPreviewTag CreateSkillDataUpTarget(PvfParsedSkillDataUpRow row)
+	{
+		PvfPreviewTag target = new("skill data up", row.SourceLineNumber, row.SourceOffset, row.SourceLength);
+		target.AddValue($"[{row.Job}] {row.SkillCode} [{row.Scope}] [{row.DataType}] {row.DataIndex} {row.Operator} {row.Value}");
+		return target;
+	}
+
+	private static string SkillDataParameterText(PvfParsedSkillDataUpRow row, PvfSkillDataParameterSkill parameters)
+	{
+		string typeLabel = SkillDataTypeLabels.TryGetValue(row.DataType, out string knownType) ? knownType : $"[{row.DataType}]";
+		if (row.DataType is not ("level" or "static"))
+		{
+			return $"{typeLabel}[{row.DataIndex}]";
+		}
+
+		PvfSkillDataParameterLabels labels = parameters?.GetLabels("default");
+		Dictionary<int, List<string>> labelMap = row.DataType == "level" ? labels?.LevelInfo : labels?.StaticData;
+		if (labelMap != null && labelMap.TryGetValue(row.DataIndex, out List<string> values) && values.Count > 0)
+		{
+			return $"{typeLabel}[{row.DataIndex}]：{string.Join(" / ", values)}";
+		}
+		return $"{typeLabel}[{row.DataIndex}]（未标注）";
+	}
+
+	private static string SkillDataValueText(PvfParsedSkillDataUpRow row)
+	{
+		string sign = row.Value > 0 ? "+" : string.Empty;
+		if (row.Operator == "%")
+		{
+			return $"{sign}{row.Value}%";
+		}
+		string value = $"{sign}{row.Value}";
+		if (row.Operator == "+" && row.DataType == "cooltime")
+		{
+			return $"{value}（{(row.Value / 1000d).ToString("+0.###;-0.###;0", CultureInfo.InvariantCulture)} 秒）";
+		}
+		return value;
 	}
 
 	private void BuildStackable(PvfRichPreview preview)
