@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using PvfCode.Models.Pvf;
 using PvfCode.Models.Pvf.Enums;
@@ -9,17 +8,13 @@ public class ItemCodePostalData
 {
 	public readonly PvfFile File;
 
-	private readonly PvfGroup blNMpJtYMU;
+	private readonly PvfGroup pvf;
 
 	public string ItemCodeStr
 	{
 		get
 		{
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 1);
-			defaultInterpolatedStringHandler.AppendLiteral("<");
-			defaultInterpolatedStringHandler.AppendFormatted(File.ItemCode);
-			defaultInterpolatedStringHandler.AppendLiteral(">");
-			return defaultInterpolatedStringHandler.ToStringAndClear();
+			return $"<{File.ItemCode}>";
 		}
 	}
 
@@ -40,7 +35,7 @@ public class ItemCodePostalData
 	{
 		get
 		{
-			string text = blNMpJtYMU.GetItemName(File);
+			string text = pvf.GetItemName(File);
 			if (string.IsNullOrEmpty(text))
 			{
 				text = "未设定[name]";
@@ -53,20 +48,20 @@ public class ItemCodePostalData
 	{
 		get
 		{
-			File.GetRarity((PvfPack)blNMpJtYMU, out int rarity);
+			File.GetRarity((PvfPack)pvf, out int rarity);
 			return rarity;
 		}
 	}
 
 	public bool IsEqu => File.FileType == PvfFileType.equ;
 
-	public EquTypeDefault EquType => File.GetEquType(blNMpJtYMU);
+	public EquTypeDefault EquType => File.GetEquType(pvf);
 
 	public ImageSource Icon
 	{
 		get
 		{
-			if (ImagePack2Service.Instance.TreeGetIcon(blNMpJtYMU, File, out ImageSource imageSource))
+			if (ImagePack2Service.Instance.TreeGetIcon(pvf, File, out ImageSource imageSource))
 			{
 				return imageSource;
 			}
@@ -77,6 +72,6 @@ public class ItemCodePostalData
 	public ItemCodePostalData(PvfFile file, PvfGroup pack)
 	{
 		File = file;
-		blNMpJtYMU = pack;
+		pvf = pack;
 	}
 }

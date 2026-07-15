@@ -1,76 +1,14 @@
-using System.Runtime.CompilerServices;
-
 namespace PvfCode;
 
 public class CloudOptions
 {
-	[CompilerGenerated]
-	private string dUyHK8sIA;
+	public string DocumentIndexUrl { get; set; }
 
-	[CompilerGenerated]
-	private string C76A381OK;
+	public string LogServerUrl { get; set; }
 
-	[CompilerGenerated]
-	private string qHhaxmBGw;
+	public string ApiUrl { get; set; }
 
-	[CompilerGenerated]
-	private string BRTKjS8Zl;
-
-	public string DocumentIndexUrl
-	{
-		[CompilerGenerated]
-		get
-		{
-			return dUyHK8sIA;
-		}
-		[CompilerGenerated]
-		set
-		{
-			dUyHK8sIA = value;
-		}
-	}
-
-	public string LogServerUrl
-	{
-		[CompilerGenerated]
-		get
-		{
-			return C76A381OK;
-		}
-		[CompilerGenerated]
-		set
-		{
-			C76A381OK = value;
-		}
-	}
-
-	public string ApiUrl
-	{
-		[CompilerGenerated]
-		get
-		{
-			return qHhaxmBGw;
-		}
-		[CompilerGenerated]
-		set
-		{
-			qHhaxmBGw = value;
-		}
-	}
-
-	public string Log_API_KEY_HERE
-	{
-		[CompilerGenerated]
-		get
-		{
-			return BRTKjS8Zl;
-		}
-		[CompilerGenerated]
-		set
-		{
-			BRTKjS8Zl = value;
-		}
-	}
+	public string Log_API_KEY_HERE { get; set; }
 
 	public void InitDefault()
 	{

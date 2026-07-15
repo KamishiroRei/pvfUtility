@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using PvfCode.Models.GameSqlModel;
 using PvfCode.Models.Options;
@@ -13,16 +10,6 @@ namespace PvfCode.Services.GMTool;
 
 public class Repository<T> : SimpleClient<T> where T : class, new()
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass22_0
-	{
-		public int h8UHkvLpnr;
-
-		public _003C_003Ec__DisplayClass22_0()
-		{
-		}
-	}
-
 	public ISqlSugarClient Db => base.Context;
 
 	public Repository(ISqlSugarClient context = null)
@@ -35,15 +22,7 @@ public class Repository<T> : SimpleClient<T> where T : class, new()
 		try
 		{
 			GameServerOptions gameServerOptions = AppSetting.Instance.GameOptions.GameServerOptions;
-			string text = "Server=";
-			string iP = gameServerOptions.IP;
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(117, 2);
-			defaultInterpolatedStringHandler.AppendLiteral(";Port=3306;Database=d_taiwan;Uid=");
-			defaultInterpolatedStringHandler.AppendFormatted(gameServerOptions.SqlUserName);
-			defaultInterpolatedStringHandler.AppendLiteral(";Pwd=");
-			defaultInterpolatedStringHandler.AppendFormatted(gameServerOptions.SqlPassword);
-			defaultInterpolatedStringHandler.AppendLiteral(";Charset=utf8;Convert Zero Datetime=True;Allow Zero Datetime=True;SslMode=none;");
-			string connectionString = text + iP + defaultInterpolatedStringHandler.ToStringAndClear();
+			string connectionString = $"Server={gameServerOptions.IP};Port=3306;Database=d_taiwan;Uid={gameServerOptions.SqlUserName};Pwd={gameServerOptions.SqlPassword};Charset=utf8;Convert Zero Datetime=True;Allow Zero Datetime=True;SslMode=none;";
 			base.Context = new SqlSugarClient(new ConnectionConfig
 			{
 				DbType = DbType.MySql,
@@ -173,31 +152,6 @@ public class Repository<T> : SimpleClient<T> where T : class, new()
 
 	public async Task<Accounts> UserIdToUser(int uid)
 	{
-		_003C_003Ec__DisplayClass22_0 _003C_003Ec__DisplayClass22_1 = new _003C_003Ec__DisplayClass22_0();
-		_003C_003Ec__DisplayClass22_1.h8UHkvLpnr = uid;
-		ISugarQueryable<Accounts> sugarQueryable = base.Context.Queryable<Accounts>();
-		ParameterExpression parameterExpression = Expression.Parameter(typeof(Accounts), "x");
-		return await sugarQueryable.Where(item => item.UID == _003C_003Ec__DisplayClass22_1.h8UHkvLpnr).FirstAsync();
-	}
-
-	[CompilerGenerated]
-	[DebuggerHidden]
-	private ISqlSugarClient aG5MsNtP8x()
-	{
-		return base.Context;
-	}
-
-	[CompilerGenerated]
-	[DebuggerHidden]
-	private Task<List<T>> PVLM5dvp36()
-	{
-		return base.GetListAsync();
-	}
-
-	[CompilerGenerated]
-	[DebuggerHidden]
-	private Task<List<T>> jjAMGb0w5G(Expression<Func<T, bool>> whereExpression)
-	{
-		return base.GetListAsync(whereExpression);
+		return await base.Context.Queryable<Accounts>().Where(item => item.UID == uid).FirstAsync();
 	}
 }

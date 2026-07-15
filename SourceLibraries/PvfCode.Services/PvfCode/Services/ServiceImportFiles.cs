@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Collections.Pooled;
 using PvfCode.Dot;
@@ -17,118 +16,75 @@ namespace PvfCode.Services;
 
 public class ServiceImportFiles
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass7_0
-	{
-		public ServiceImportFiles fGD3pYlSZ4;
+	private readonly PvfGroup pvf;
 
-		public bool TqZ3LZripD;
+	private readonly ImportConfig config;
 
-		public string OLE3EmWxw2;
+	private Ilogger logger;
 
-		public _003C_003Ec__DisplayClass7_0()
-		{
-		}
+	private ConcurrentHashSet<string> importedFilePaths;
 
-		internal Task<ResultData<int>>? mDd3GpD8u7()
-		{
-			return fGD3pYlSZ4.BWGeF7kTLw(TqZ3LZripD, OLE3EmWxw2);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass8_0
-	{
-		public ServiceImportFiles Gjk364h2II;
-
-		public string R0n32THe4A;
-
-		public _003C_003Ec__DisplayClass8_0()
-		{
-		}
-
-		internal Task<ResultData<int>>? Vf53wbopyV()
-		{
-			return Gjk364h2II.rlneDBSRRF(R0n32THe4A);
-		}
-	}
-
-	private readonly PvfGroup RsYeSQkwUk;
-
-	private readonly ImportConfig W7nebvOpd8;
-
-	private Ilogger rnYeVfbUiD;
-
-	private ConcurrentHashSet<string> WZPeks0hR8;
-
-	private Ilogger? ri7eRklf95
+	private Ilogger? Logger
 	{
 		get
 		{
-			if (rnYeVfbUiD == null)
+			if (logger == null)
 			{
-				rnYeVfbUiD = AppSetting.Instance.GetService<Ilogger>();
+				logger = AppSetting.Instance.GetService<Ilogger>();
 			}
-			return rnYeVfbUiD;
+			return logger;
 		}
 	}
 
 	public ServiceImportFiles(PvfGroup pvf, ImportConfig config)
 	{
-		WZPeks0hR8 = new ConcurrentHashSet<string>();
-		RsYeSQkwUk = pvf;
-		W7nebvOpd8 = config;
+		importedFilePaths = new ConcurrentHashSet<string>();
+		this.pvf = pvf;
+		this.config = config;
 	}
 
 	public async Task<ResultData> Import(bool is7z = false, string filePath7z = null)
 	{
-		_003C_003Ec__DisplayClass7_0 obj = new _003C_003Ec__DisplayClass7_0();
-		obj.fGD3pYlSZ4 = this;
-		obj.TqZ3LZripD = is7z;
-		obj.OLE3EmWxw2 = filePath7z;
-		ResultData<int> status = await Task.Run(() => obj.fGD3pYlSZ4.BWGeF7kTLw(obj.TqZ3LZripD, obj.OLE3EmWxw2));
-		ri7eRklf95.ProgressUpdate(100.0);
-		if (W7nebvOpd8.SourceFiles.Count > 0)
+		ResultData<int> status = await Task.Run(() => ImportCore(is7z, filePath7z));
+		Logger.ProgressUpdate(100.0);
+		if (config.SourceFiles.Count > 0)
 		{
-			IEnumerable<string> fileList = W7nebvOpd8.SourceFiles.Select((ImportFileItem it) => it.TreeFullPath);
-			await ri7eRklf95.TreeListAddFiles(new PooledList<string>(fileList));
-			if (W7nebvOpd8.ImportSuccessFilePathListAddToSearchPanel)
+			IEnumerable<string> fileList = config.SourceFiles.Select((ImportFileItem it) => it.TreeFullPath);
+			await Logger.TreeListAddFiles(new PooledList<string>(fileList));
+			if (config.ImportSuccessFilePathListAddToSearchPanel)
 			{
-				ri7eRklf95.AddFileListToSearchPanel(new PooledList<string>(fileList));
+				Logger.AddFileListToSearchPanel(new PooledList<string>(fileList));
 			}
-			ri7eRklf95.GoToTreeListNode(WZPeks0hR8.FirstOrDefault());
+			Logger.GoToTreeListNode(importedFilePaths.FirstOrDefault());
 		}
-		W7nebvOpd8.SourceFiles = null;
+		config.SourceFiles = null;
 		if (status.IsError)
 		{
 			status.Msg += string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ImportComplete"), status.Data);
-			ri7eRklf95.Error(status.Msg);
-			await ri7eRklf95.ShowNotification(new NotificationViewModel(AppSetting.Instance.AppName, status.Msg, AppSetting.Instance.GetRes()?.ErrorIcon));
+			Logger.Error(status.Msg);
+			await Logger.ShowNotification(new NotificationViewModel(AppSetting.Instance.AppName, status.Msg, AppSetting.Instance.GetRes()?.ErrorIcon));
 		}
 		else
 		{
-			string arg = (string.IsNullOrEmpty(W7nebvOpd8.TargetPath) ? AppSetting.Instance.GetIlogger().GetStr("mess_RootFolder") : W7nebvOpd8.TargetPath);
+			string arg = (string.IsNullOrEmpty(config.TargetPath) ? AppSetting.Instance.GetIlogger().GetStr("mess_RootFolder") : config.TargetPath);
 			string text = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ImportComplete2"), status.Data, arg);
-			ri7eRklf95.Success(text);
-			await ri7eRklf95.ShowNotification(new NotificationViewModel(AppSetting.Instance.AppName, text, AppSetting.Instance.GetRes()?.VisualStudioBlendLogo2015Pre_16x));
+			Logger.Success(text);
+			await Logger.ShowNotification(new NotificationViewModel(AppSetting.Instance.AppName, text, AppSetting.Instance.GetRes()?.VisualStudioBlendLogo2015Pre_16x));
 		}
 		return status;
 	}
 
-	private async Task<ResultData<int>> BWGeF7kTLw(bool P_0, string P_1 = null)
+	private async Task<ResultData<int>> ImportCore(bool isArchive, string archivePath = null)
 	{
-		_003C_003Ec__DisplayClass8_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass8_0();
-		CS_0024_003C_003E8__locals4.Gjk364h2II = this;
-		CS_0024_003C_003E8__locals4.R0n32THe4A = P_1;
-		ri7eRklf95?.TaskTokenStart();
-		if (W7nebvOpd8.FileTypes != null && W7nebvOpd8.FileTypes.Count > 0)
+		Logger?.TaskTokenStart();
+		if (config.FileTypes != null && config.FileTypes.Count > 0)
 		{
 			List<ImportFileItem> list = new List<ImportFileItem>();
-			if (W7nebvOpd8.RemoveOrKeepFileType == RemoveOrKeepFileType.保留)
+			if (config.RemoveOrKeepFileType == RemoveOrKeepFileType.保留)
 			{
-				foreach (ImportFileItem sourceFile in W7nebvOpd8.SourceFiles)
+				foreach (ImportFileItem sourceFile in config.SourceFiles)
 				{
-					if (W7nebvOpd8.FileTypes.Contains(sourceFile.Extension))
+					if (config.FileTypes.Contains(sourceFile.Extension))
 					{
 						list.Add(sourceFile);
 					}
@@ -136,166 +92,113 @@ public class ServiceImportFiles
 			}
 			else
 			{
-				foreach (ImportFileItem sourceFile2 in W7nebvOpd8.SourceFiles)
+				foreach (ImportFileItem sourceFile2 in config.SourceFiles)
 				{
-					if (!W7nebvOpd8.FileTypes.Contains(sourceFile2.Extension))
+					if (!config.FileTypes.Contains(sourceFile2.Extension))
 					{
 						list.Add(sourceFile2);
 					}
 				}
 			}
-			W7nebvOpd8.SourceFiles = list.ToHashSet();
+			config.SourceFiles = list.ToHashSet();
 		}
-		ResultData<int> result = ((!P_0) ? (await Task.Run((Func<ResultData<int>>)ALueQBjlw6, ri7eRklf95.TaskCancellationTokenSource.Token)) : (await Task.Run(() => CS_0024_003C_003E8__locals4.Gjk364h2II.rlneDBSRRF(CS_0024_003C_003E8__locals4.R0n32THe4A), ri7eRklf95.TaskCancellationTokenSource.Token)));
-		ri7eRklf95?.TaskTokenStop();
+		ResultData<int> result = isArchive
+			? await Task.Run(() => ImportFromArchive(archivePath), Logger.TaskCancellationTokenSource.Token)
+			: await Task.Run((Func<ResultData<int>>)ImportFromFiles, Logger.TaskCancellationTokenSource.Token);
+		Logger?.TaskTokenStop();
 		return result;
 	}
 
-	private async Task<ResultData<int>> rlneDBSRRF(string P_0)
+	private async Task<ResultData<int>> ImportFromArchive(string archivePath)
 	{
 		await Task.Delay(1);
-		ri7eRklf95.Warning(AppSetting.Instance.GetIlogger()?.GetStr("mess_ImportFrom7z"));
+		Logger.Warning(AppSetting.Instance.GetIlogger()?.GetStr("mess_ImportFrom7z"));
 		int num = 0;
 		ResultData<int> resultData = new ResultData<int>();
 		string arg = "";
 		try
 		{
 			SevenZipBase.SetLibraryPath(Environment.Is64BitProcess ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "7z64.dll") : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "7z.dll"));
-			int resolve = DataHelper.GetResolve(W7nebvOpd8.SourceFiles.Count);
-			int count = W7nebvOpd8.SourceFiles.Count;
+			int resolve = DataHelper.GetResolve(config.SourceFiles.Count);
+			int count = config.SourceFiles.Count;
 			int num2 = 0;
-			using SevenZipExtractor sevenZipExtractor = new SevenZipExtractor(P_0);
-			foreach (ImportFileItem sourceFile in W7nebvOpd8.SourceFiles)
+			using SevenZipExtractor sevenZipExtractor = new SevenZipExtractor(archivePath);
+			foreach (ImportFileItem sourceFile in config.SourceFiles)
 			{
-				if (c6remtt4r7(sourceFile, sevenZipExtractor))
+				if (ImportArchiveItem(sourceFile, sevenZipExtractor))
 				{
 					num++;
 				}
 				if (num2 % resolve == 0)
 				{
-					ri7eRklf95.ProgressUpdate((float)num2 / (float)count);
+					Logger.ProgressUpdate((float)num2 / (float)count);
 				}
 				num2++;
 			}
 		}
 		catch (Exception ex)
 		{
-			ri7eRklf95.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_UnzipError"), arg));
+			Logger.Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_UnzipError"), arg));
 			resultData.Msg = ex.Message;
 		}
 		resultData.Data = num;
 		return resultData;
 	}
 
-	private bool c6remtt4r7(ImportFileItem P_0, SevenZipExtractor P_1)
+	private bool ImportArchiveItem(ImportFileItem item, SevenZipExtractor extractor)
 	{
-		string treeFullPath = P_0.TreeFullPath;
-		PvfFile file = RsYeSQkwUk.GetFile(treeFullPath);
+		string treeFullPath = item.TreeFullPath;
+		PvfFile file = pvf.GetFile(treeFullPath);
 		using MemoryStream memoryStream = new MemoryStream();
 		if (file != null)
 		{
-			switch (W7nebvOpd8.Operation)
+			switch (config.Operation)
 			{
 			case FileOperation.Rename:
 			{
-				P_1.ExtractFile(P_0.IndexForm7zip.Value, memoryStream);
+				extractor.ExtractFile(item.IndexForm7zip.Value, memoryStream);
 				int num = 0;
-				string text = treeFullPath;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("(");
-				defaultInterpolatedStringHandler.AppendFormatted(num);
-				defaultInterpolatedStringHandler.AppendLiteral(")");
-				string text2 = text + defaultInterpolatedStringHandler.ToStringAndClear();
-				while (RsYeSQkwUk.FileAny(text2))
+				string text2 = $"{treeFullPath}({num})";
+				while (pvf.FileAny(text2))
 				{
 					num++;
-					string text3 = treeFullPath;
-					DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(2, 1);
-					defaultInterpolatedStringHandler2.AppendLiteral("(");
-					defaultInterpolatedStringHandler2.AppendFormatted(num);
-					defaultInterpolatedStringHandler2.AppendLiteral(")");
-					text2 = text3 + defaultInterpolatedStringHandler2.ToStringAndClear();
+					text2 = $"{treeFullPath}({num})";
 				}
 				treeFullPath = text2;
-				return DknerAuSDM(treeFullPath, memoryStream);
+				return AddNewFile(treeFullPath, memoryStream);
 			}
 			case FileOperation.Skip:
 				return false;
 			case FileOperation.Cancel:
 				throw new Exception(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileExists2"), treeFullPath));
 			default:
-				P_1.ExtractFile(P_0.IndexForm7zip.Value, memoryStream);
-				return RsYeSQkwUk.ImportUpdateFile(file, memoryStream, treeFullPath, W7nebvOpd8.CompileScript, W7nebvOpd8.CompileBinaryAni, W7nebvOpd8.ConvertToTraditionalChinese, W7nebvOpd8.CompileChinaPvfScriptFile, W7nebvOpd8.CompileChinaAni);
+				extractor.ExtractFile(item.IndexForm7zip.Value, memoryStream);
+				return pvf.ImportUpdateFile(file, memoryStream, treeFullPath, config.CompileScript, config.CompileBinaryAni, config.ConvertToTraditionalChinese, config.CompileChinaPvfScriptFile, config.CompileChinaAni);
 			}
 		}
-		P_1.ExtractFile(P_0.IndexForm7zip.Value, memoryStream);
-		return DknerAuSDM(treeFullPath, memoryStream);
+		extractor.ExtractFile(item.IndexForm7zip.Value, memoryStream);
+		return AddNewFile(treeFullPath, memoryStream);
 	}
 
-	private Task<bool> wg5e4lLCP9(ImportFileItem P_0, SevenZipExtractor P_1)
-	{
-		string treeFullPath = P_0.TreeFullPath;
-		PvfFile file = RsYeSQkwUk.GetFile(treeFullPath);
-		using MemoryStream memoryStream = new MemoryStream();
-		if (file != null)
-		{
-			switch (W7nebvOpd8.Operation)
-			{
-			case FileOperation.Rename:
-			{
-				P_1.ExtractFile(P_0.IndexForm7zip.Value, memoryStream);
-				int num = 0;
-				string text = treeFullPath;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("(");
-				defaultInterpolatedStringHandler.AppendFormatted(num);
-				defaultInterpolatedStringHandler.AppendLiteral(")");
-				string text2 = text + defaultInterpolatedStringHandler.ToStringAndClear();
-				while (RsYeSQkwUk.FileAny(text2))
-				{
-					num++;
-					string text3 = treeFullPath;
-					DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(2, 1);
-					defaultInterpolatedStringHandler2.AppendLiteral("(");
-					defaultInterpolatedStringHandler2.AppendFormatted(num);
-					defaultInterpolatedStringHandler2.AppendLiteral(")");
-					text2 = text3 + defaultInterpolatedStringHandler2.ToStringAndClear();
-				}
-				treeFullPath = text2;
-				return Task.FromResult(DknerAuSDM(treeFullPath, memoryStream));
-			}
-			case FileOperation.Skip:
-				return Task.FromResult(result: false);
-			case FileOperation.Cancel:
-				throw new Exception(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileExists2"), treeFullPath));
-			default:
-				P_1.ExtractFile(P_0.IndexForm7zip.Value, memoryStream);
-				return Task.FromResult(RsYeSQkwUk.ImportUpdateFile(file, memoryStream, treeFullPath, W7nebvOpd8.CompileScript, W7nebvOpd8.CompileBinaryAni, W7nebvOpd8.ConvertToTraditionalChinese));
-			}
-		}
-		P_1.ExtractFile(P_0.IndexForm7zip.Value, memoryStream);
-		return Task.FromResult(DknerAuSDM(treeFullPath, memoryStream));
-	}
-
-	private ResultData<int> ALueQBjlw6()
+	private ResultData<int> ImportFromFiles()
 	{
 		ResultData<int> resultData = new ResultData<int>();
 		int num = 0;
 		try
 		{
 			int num2 = 0;
-			int count = W7nebvOpd8.SourceFiles.Count;
+			int count = config.SourceFiles.Count;
 			int resolve = DataHelper.GetResolve(count);
-			ImportFileItem[] array = W7nebvOpd8.SourceFiles.ToArray();
+			ImportFileItem[] array = config.SourceFiles.ToArray();
 			foreach (ImportFileItem importFileItem in array)
 			{
-				if (AFPeJPTB0L(importFileItem.FullPath, importFileItem.TreeFullPath))
+				if (ImportFile(importFileItem.FullPath, importFileItem.TreeFullPath))
 				{
 					num++;
 				}
 				if (num2 % resolve == 0)
 				{
-					ri7eRklf95.ProgressUpdate((float)num2 / (float)count);
+					Logger.ProgressUpdate((float)num2 / (float)count);
 				}
 				num2++;
 			}
@@ -308,88 +211,48 @@ public class ServiceImportFiles
 		return resultData;
 	}
 
-	private ResultData<int> WyReNlOwhQ()
+	private bool ImportFile(string sourcePath, string targetPath)
 	{
-		ResultData<int> resultData = new ResultData<int>();
-		int num = 0;
-		try
-		{
-			int num2 = 0;
-			int count = W7nebvOpd8.SourceFiles.Count;
-			int resolve = DataHelper.GetResolve(count);
-			foreach (ImportFileItem sourceFile in W7nebvOpd8.SourceFiles)
-			{
-				if (AFPeJPTB0L(sourceFile.FullPath, sourceFile.TreeFullPath))
-				{
-					num++;
-				}
-				if (num2 % resolve == 0)
-				{
-					ri7eRklf95.ProgressUpdate(num2 * 100 / count);
-				}
-				num2++;
-			}
-		}
-		catch (Exception ex)
-		{
-			resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_ImportError2"), ex.Message);
-		}
-		resultData.Data = num;
-		return resultData;
-	}
-
-	private bool AFPeJPTB0L(string P_0, string P_1)
-	{
-		PvfFile file = RsYeSQkwUk.GetFile(P_1);
-		using FileStream fileStream = File.OpenRead(P_0);
+		PvfFile file = pvf.GetFile(targetPath);
+		using FileStream fileStream = File.OpenRead(sourcePath);
 		if (file != null)
 		{
-			switch (W7nebvOpd8.Operation)
+			switch (config.Operation)
 			{
 			case FileOperation.Rename:
 			{
 				int num = 0;
-				string text = P_1;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("(");
-				defaultInterpolatedStringHandler.AppendFormatted(num);
-				defaultInterpolatedStringHandler.AppendLiteral(")");
-				string text2 = text + defaultInterpolatedStringHandler.ToStringAndClear();
-				while (RsYeSQkwUk.FileAny(text2))
+				string text2 = $"{targetPath}({num})";
+				while (pvf.FileAny(text2))
 				{
 					num++;
-					string text3 = P_1;
-					DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(2, 1);
-					defaultInterpolatedStringHandler2.AppendLiteral("(");
-					defaultInterpolatedStringHandler2.AppendFormatted(num);
-					defaultInterpolatedStringHandler2.AppendLiteral(")");
-					text2 = text3 + defaultInterpolatedStringHandler2.ToStringAndClear();
+					text2 = $"{targetPath}({num})";
 				}
-				P_1 = text2;
-				return DknerAuSDM(P_1, fileStream);
+				targetPath = text2;
+				return AddNewFile(targetPath, fileStream);
 			}
 			case FileOperation.Skip:
 				return false;
 			case FileOperation.Cancel:
-				throw new Exception(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileExists2"), P_1));
+				throw new Exception(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileExists2"), targetPath));
 			default:
-				return RsYeSQkwUk.ImportUpdateFile(file, fileStream, P_1, W7nebvOpd8.CompileScript, W7nebvOpd8.CompileBinaryAni, W7nebvOpd8.ConvertToTraditionalChinese, W7nebvOpd8.CompileChinaPvfScriptFile, W7nebvOpd8.CompileChinaAni);
+				return pvf.ImportUpdateFile(file, fileStream, targetPath, config.CompileScript, config.CompileBinaryAni, config.ConvertToTraditionalChinese, config.CompileChinaPvfScriptFile, config.CompileChinaAni);
 			}
 		}
-		return DknerAuSDM(P_1, fileStream);
+		return AddNewFile(targetPath, fileStream);
 	}
 
-	private bool DknerAuSDM(string P_0, Stream P_1)
+	private bool AddNewFile(string targetPath, Stream data)
 	{
-		PvfFile pvfFile = new PvfFile(P_0);
-		bool flag = RsYeSQkwUk.ImportUpdateFile(pvfFile, P_1, P_0, W7nebvOpd8.CompileScript, W7nebvOpd8.CompileBinaryAni, W7nebvOpd8.ConvertToTraditionalChinese, W7nebvOpd8.CompileChinaPvfScriptFile, W7nebvOpd8.CompileChinaAni);
+		PvfFile pvfFile = new PvfFile(targetPath);
+		bool flag = pvf.ImportUpdateFile(pvfFile, data, targetPath, config.CompileScript, config.CompileBinaryAni, config.ConvertToTraditionalChinese, config.CompileChinaPvfScriptFile, config.CompileChinaAni);
 		if (flag)
 		{
-			P_0 = pvfFile.FileName;
+			targetPath = pvfFile.FileName;
 			lock (this)
 			{
-				RsYeSQkwUk.FileList.TryAdd(P_0, pvfFile);
-				WZPeks0hR8.Add(P_0);
+				pvf.FileList.TryAdd(targetPath, pvfFile);
+				importedFilePaths.Add(targetPath);
 			}
 		}
 		return flag;

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using PvfCode.Models.Pvf.Enums;
@@ -15,44 +14,35 @@ public class SearchConfig : ModelBase, ICloneable
 	[JsonIgnore]
 	public Regex Regex;
 
-	private string A6TegXO3BM;
+	private string searchFolder;
 
-	private string fSEezbm2sq;
+	private string keyword;
 
-	private SearchType COwCuXYjDM;
+	private SearchType type;
 
-	private SearchSourceType WHbCI695Ue;
+	private SearchSourceType sourceType;
 
-	private SearchNormalUsing h3kCeBg2rh;
+	private SearchNormalUsing normalUsing;
 
-	private bool jMSCCuybY4;
+	private bool isStartMatch;
 
-	[CompilerGenerated]
-	private HashSet<string> aIUClgIdOb;
+	private ScriptContentSearchMode scriptContentSearchMode;
 
-	private ScriptContentSearchMode KOSCYTWjiY;
+	private bool trait;
 
-	[CompilerGenerated]
-	private bool jUJC8sLhgf;
+	private bool useRegularExpression;
 
-	private bool jybCjYgt8C;
+	private bool wholeWordMatch;
 
-	private bool ASnCMVv5a9;
+	private List<string> fileTypesString;
 
-	private bool EglCOfPjb5;
+	private HashSet<string> fileTypes;
 
-	[CompilerGenerated]
-	private RemoveOrKeepFileType Vu3C0SDt6x;
+	private string scriptContent;
 
-	private List<string> sKwC3phcIU;
+	private string scriptContentStart;
 
-	private HashSet<string> K9nCPerIGX;
-
-	private string V2bC1WAjQ2;
-
-	private string VfiCydwAlY;
-
-	private string KqfCHrh8ic;
+	private string scriptContentStop;
 
 	[JsonIgnore]
 	public bool ImmediatePopup => Type switch
@@ -69,15 +59,15 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			if (A6TegXO3BM == null)
+			if (searchFolder == null)
 			{
-				A6TegXO3BM = string.Empty;
+				searchFolder = string.Empty;
 			}
-			return A6TegXO3BM;
+			return searchFolder;
 		}
 		set
 		{
-			A6TegXO3BM = value;
+			searchFolder = value;
 			DoNotify("SearchFolder");
 		}
 	}
@@ -86,15 +76,15 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			if (fSEezbm2sq == null)
+			if (keyword == null)
 			{
-				fSEezbm2sq = string.Empty;
+				keyword = string.Empty;
 			}
-			return fSEezbm2sq;
+			return keyword;
 		}
 		set
 		{
-			fSEezbm2sq = value;
+			keyword = value;
 			DoNotify("Keyword");
 		}
 	}
@@ -103,11 +93,11 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return COwCuXYjDM;
+			return type;
 		}
 		set
 		{
-			COwCuXYjDM = value;
+			type = value;
 			DoNotify("Type");
 			DoNotify("ImmediatePopup");
 		}
@@ -117,11 +107,11 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return WHbCI695Ue;
+			return sourceType;
 		}
 		set
 		{
-			WHbCI695Ue = value;
+			sourceType = value;
 			DoNotify("SourceType");
 		}
 	}
@@ -130,11 +120,11 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return h3kCeBg2rh;
+			return normalUsing;
 		}
 		set
 		{
-			h3kCeBg2rh = value;
+			normalUsing = value;
 			DoNotify("NormalUsing");
 		}
 	}
@@ -143,33 +133,21 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return jMSCCuybY4;
+			return isStartMatch;
 		}
 		set
 		{
-			jMSCCuybY4 = value;
+			isStartMatch = value;
 			DoNotify("IsStartMatch");
 			if (value)
 			{
-				EglCOfPjb5 = false;
+				wholeWordMatch = false;
 				DoNotify("WholeWordMatch");
 			}
 		}
 	}
 
-	public HashSet<string> SearchResult
-	{
-		[CompilerGenerated]
-		get
-		{
-			return aIUClgIdOb;
-		}
-		[CompilerGenerated]
-		set
-		{
-			aIUClgIdOb = value;
-		}
-	}
+	public HashSet<string> SearchResult { get; set; }
 
 	[JsonIgnore]
 	public bool ScriptContentSearchModeComBoBoxVisibility => !Trait;
@@ -181,38 +159,26 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return KOSCYTWjiY;
+			return scriptContentSearchMode;
 		}
 		set
 		{
-			KOSCYTWjiY = value;
+			scriptContentSearchMode = value;
 			DoNotify("ScriptContentSearchMode");
 		}
 	}
 
-	public bool IsUseLikeSearchPath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return jUJC8sLhgf;
-		}
-		[CompilerGenerated]
-		set
-		{
-			jUJC8sLhgf = value;
-		}
-	}
+	public bool IsUseLikeSearchPath { get; set; }
 
 	public bool Trait
 	{
 		get
 		{
-			return jybCjYgt8C;
+			return trait;
 		}
 		set
 		{
-			jybCjYgt8C = value;
+			trait = value;
 			DoNotify("Trait");
 			DoNotify("ScriptContentSearchModeComBoBoxVisibility");
 		}
@@ -222,11 +188,11 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return ASnCMVv5a9;
+			return useRegularExpression;
 		}
 		set
 		{
-			ASnCMVv5a9 = value;
+			useRegularExpression = value;
 			DoNotify("UseRegularExpression");
 		}
 	}
@@ -235,43 +201,31 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return EglCOfPjb5;
+			return wholeWordMatch;
 		}
 		set
 		{
-			EglCOfPjb5 = value;
+			wholeWordMatch = value;
 			DoNotify("WholeWordMatch");
 			if (value)
 			{
-				jMSCCuybY4 = false;
+				isStartMatch = false;
 				DoNotify("IsStartMatch");
 			}
 		}
 	}
 
-	public RemoveOrKeepFileType RemoveOrKeep
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Vu3C0SDt6x;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Vu3C0SDt6x = value;
-		}
-	}
+	public RemoveOrKeepFileType RemoveOrKeep { get; set; }
 
 	public List<string> FileTypesString
 	{
 		get
 		{
-			return sKwC3phcIU;
+			return fileTypesString;
 		}
 		set
 		{
-			sKwC3phcIU = value;
+			fileTypesString = value;
 			DoNotify("FileTypesString");
 		}
 	}
@@ -281,15 +235,15 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			if (K9nCPerIGX == null)
+			if (fileTypes == null)
 			{
-				K9nCPerIGX = new HashSet<string>();
+				fileTypes = new HashSet<string>();
 				foreach (EnumberEntity item in EnumberHelper.EnumToList<PvfFileType>())
 				{
-					K9nCPerIGX.Add("." + item.EnumName);
+					fileTypes.Add("." + item.EnumName);
 				}
 			}
-			return K9nCPerIGX;
+			return fileTypes;
 		}
 	}
 
@@ -297,15 +251,15 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			if (V2bC1WAjQ2 != null)
+			if (scriptContent != null)
 			{
-				return V2bC1WAjQ2;
+				return scriptContent;
 			}
 			return string.Empty;
 		}
 		set
 		{
-			V2bC1WAjQ2 = value;
+			scriptContent = value;
 			DoNotify("ScriptContent");
 		}
 	}
@@ -314,11 +268,11 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return VfiCydwAlY;
+			return scriptContentStart;
 		}
 		set
 		{
-			VfiCydwAlY = value;
+			scriptContentStart = value;
 			DoNotify("ScriptContentStart");
 		}
 	}
@@ -327,11 +281,11 @@ public class SearchConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return KqfCHrh8ic;
+			return scriptContentStop;
 		}
 		set
 		{
-			KqfCHrh8ic = value;
+			scriptContentStop = value;
 			DoNotify("ScriptContentStop");
 		}
 	}
@@ -374,9 +328,9 @@ public class SearchConfig : ModelBase, ICloneable
 			}
 			return "未命名";
 		}
-		if (!string.IsNullOrEmpty(fSEezbm2sq))
+		if (!string.IsNullOrEmpty(keyword))
 		{
-			return fSEezbm2sq;
+			return keyword;
 		}
 		return "未命名";
 	}

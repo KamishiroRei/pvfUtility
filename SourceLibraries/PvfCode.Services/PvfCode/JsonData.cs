@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using Collections.Pooled;
 using Newtonsoft.Json;
@@ -9,90 +8,15 @@ namespace PvfCode;
 
 public class JsonData
 {
-	[CompilerGenerated]
-	private IDictionary<string, UtImgFile> tF7mi1VIP;
+	public IDictionary<string, UtImgFile> NpkImgDIC { get; private set; }
 
-	[CompilerGenerated]
-	private Dictionary<int, string> rET4rpeMQ;
+	public Dictionary<int, string> NpkFilePathDic { get; set; }
 
-	[CompilerGenerated]
-	private Dictionary<string, Dictionary<int, ImageSource>> my6QAsHa7;
+	public Dictionary<string, Dictionary<int, ImageSource>> TreeFileIconList { get; private set; }
 
-	[CompilerGenerated]
-	private List<ImageSource> CcyNWf4P4;
+	public List<ImageSource> QuestTypeIconList { get; set; }
 
-	[CompilerGenerated]
-	private PooledDictionary<string, ImageSource> D2kJuRgWh;
-
-	public IDictionary<string, UtImgFile> NpkImgDIC
-	{
-		[CompilerGenerated]
-		get
-		{
-			return tF7mi1VIP;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			tF7mi1VIP = value;
-		}
-	}
-
-	public Dictionary<int, string> NpkFilePathDic
-	{
-		[CompilerGenerated]
-		get
-		{
-			return rET4rpeMQ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			rET4rpeMQ = value;
-		}
-	}
-
-	public Dictionary<string, Dictionary<int, ImageSource>> TreeFileIconList
-	{
-		[CompilerGenerated]
-		get
-		{
-			return my6QAsHa7;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			my6QAsHa7 = value;
-		}
-	}
-
-	public List<ImageSource> QuestTypeIconList
-	{
-		[CompilerGenerated]
-		get
-		{
-			return CcyNWf4P4;
-		}
-		[CompilerGenerated]
-		set
-		{
-			CcyNWf4P4 = value;
-		}
-	}
-
-	public PooledDictionary<string, ImageSource> EmoIconList
-	{
-		[CompilerGenerated]
-		get
-		{
-			return D2kJuRgWh;
-		}
-		[CompilerGenerated]
-		set
-		{
-			D2kJuRgWh = value;
-		}
-	}
+	public PooledDictionary<string, ImageSource> EmoIconList { get; set; }
 
 	public string ToJson()
 	{
