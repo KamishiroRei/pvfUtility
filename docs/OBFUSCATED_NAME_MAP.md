@@ -97,8 +97,8 @@ remain documented in the string maps and `BINARY_RECOVERY.md`.
 
 ## Compiler-artifact normalization
 
-Normalization restores ordinary C# structure without changing public behavior.
-Completed areas include:
+Normalization is intended to restore ordinary C# structure without changing
+public behavior. Completed areas include:
 
 - `FoldingStrategyBase`: 1,145 lines reduced to 532; four explicit display
   classes, pseudo-properties, expanded interpolation, and four unreachable private
@@ -122,6 +122,22 @@ Completed areas include:
   `ServiceConvertChinaPlusPvf`, `ServiceCloud`, `ServiceBatchOperation`,
   `ServiceExtractFiles`, `BoosterInfo`, and title-book models in recovered
   libraries.
+- Seventy-eight files selected by the
+  `using System.Runtime.CompilerServices;` audit across `PvfCode.Models`,
+  `PvfCode.Services`, `Utools`, and the main application no longer require that
+  using. Random private identifiers and `P_` parameters were renamed only when
+  their behavior or an adjacent equivalent implementation established the
+  meaning. The policy for the later batches was to retain ordinary locals such as
+  `num`, `value`, `list`, and numbered decompiler locals.
+- The final `Utools` batches restored 13 files: generated backing fields became
+  automatic properties or events, observable-dictionary and scheduler helpers
+  gained behavior-derived names, the `SystemInfo` counters were named for their
+  configured categories, and expanded interpolation was collapsed without
+  changing WMI, P/Invoke, or formatting behavior.
+- The final main-application batch restored `LineGuideLines`,
+  `ToolTipViewModel_ItemCodeHoverTooltip`, and `WinShopManagerVm`. The shop
+  helper names reuse the equivalent `GetSectionName` and `GetNextRowNumber`
+  vocabulary already present in `CreateShopItemViewModel`.
 - `VsCodeEditorModelBase`, `WindowLoadingViewModel`, `MacroHelper`, both the main
   and recovered-library `UnitViewModelBase` implementations, plus the
   recovered-library `WindowSizeConfig`, `BatchOperationLog`, `ImportFileItem`, and
@@ -175,3 +191,29 @@ recorded checkpoint was 4,369 matches in 313 files, followed by 4,147 matches in
 diagnostic comments remaining. Remaining matches are concentrated in large
 recovered UI/model files and must be handled in small behavior-verified batches;
 they are not evidence that source library substitution failed.
+
+The narrower `using System.Runtime.CompilerServices;` audit now leaves 31
+reviewed files unchanged: 19 `AssemblyInfo.cs` files, seven generated
+resource/localization accessors, one generated settings file, one module
+initializer, one `CallerMemberName` helper, and two normal handwritten or
+upstream-library files. Their compiler-services dependencies are intentional;
+generated resource backing fields and public/resource-visible names remain
+untouched even when the recovered binary exposes non-semantic private names.
+
+### Final review residuals
+
+The final `origin/master...HEAD` review identified four exceptions in earlier
+commits. They remain recorded rather than amended because the subsequent task
+constraint explicitly prohibited revisiting already committed files:
+
+- `StringView.SearchstrInFiles` changed the regex predicate from
+  `regex.IsMatch(keyWord)` to `regex.IsMatch(item.Value.Data)`. This is a public
+  behavior change, even though the former predicate appears unusual.
+- `StringView.StrListFile.ToText` still contains one explicit
+  `StringBuilder.AppendInterpolatedStringHandler` block.
+- The `TextEditConfig` follow-up renamed ordinary locals such as `list`, `value`,
+  `num`, and `solidColorBrush*`, contrary to the later instruction to avoid
+  changing non-obfuscated variable names.
+- `ServiceItemCodeTable.cs` did not contain the target using at the fixed point
+  but was included in the parsing-services batch, so that file exceeded the
+  narrow audit scope.

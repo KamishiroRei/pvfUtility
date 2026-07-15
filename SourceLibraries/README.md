@@ -98,11 +98,29 @@ build-verified:
 - `BoosterInfo` and the title-book model (`TitleBook`,
   `TitleCollectionInfoItem`, `TitleCollectionInfo`, and
   `TitleCollectionInfoHead`).
+- The `PvfCode.Models` option, PVF, string-table, preview, NPC-shop, and stackable
+  models selected by the `System.Runtime.CompilerServices` audit.
+- The remaining `PvfCode.Services` parsing, import, item-code, release, and binary
+  ANI compiler internals selected by that audit.
+- All 13 matching `Utools` files, including the observable dictionaries,
+  scheduler, system-information helpers, and time formatting helpers.
+- The three matching main-application view models: `LineGuideLines`,
+  `ToolTipViewModel_ItemCodeHoverTooltip`, and `WinShopManagerVm`.
 
-These files no longer contain explicit display-class source types, pseudo
-`[SpecialName]` accessors, expanded interpolated-string handlers, or invalid-IL
-decompiler comments. Private fields and helpers now use behavior-based semantic
-names. See `docs/OBFUSCATED_NAME_MAP.md` for the recorded mappings.
+Except for one already-committed `StringView` interpolation-handler residual
+recorded in `docs/OBFUSCATED_NAME_MAP.md`, these files no longer contain explicit
+display-class source types, pseudo `[SpecialName]` accessors, expanded
+interpolated-string handlers, or invalid-IL decompiler comments. Private fields
+and helpers now use behavior-based semantic names.
+
+The targeted `using System.Runtime.CompilerServices;` audit is complete. Of the
+remaining 31 matching files, 19 are assembly metadata, seven are generated
+resource/localization accessors, one is generated settings code, one is a module
+initializer, one is a `CallerMemberName` helper, and two are normal handwritten
+or upstream-library implementations (`PvfSkillClassifier` and AvalonEdit's
+`EmptySelection`). These files retain the using because it is required by their
+generated contract or runtime implementation; they contain no unresolved private
+obfuscation selected by this audit.
 
 Normalization is not complete across all 1,394 C# files. Model libraries and
 recovered UI dependencies still retain expanded auto-property accessors,
