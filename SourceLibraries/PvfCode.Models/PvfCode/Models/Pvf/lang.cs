@@ -12,20 +12,20 @@ namespace PvfCode.Models.Pvf;
 [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
 public class lang
 {
-	private static ResourceManager loKkMRlAo8;
+	private static ResourceManager resourceManager;
 
-	private static CultureInfo rlokapFxj9;
+	private static CultureInfo resourceCulture;
 
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
 	public static ResourceManager ResourceManager
 	{
 		get
 		{
-			if (loKkMRlAo8 == null)
+			if (resourceManager == null)
 			{
-				loKkMRlAo8 = new ResourceManager("PvfCode.Models.Pvf.lang", typeof(lang).Assembly);
+				resourceManager = new ResourceManager("PvfCode.Models.Pvf.lang", typeof(lang).Assembly);
 			}
-			return loKkMRlAo8;
+			return resourceManager;
 		}
 	}
 
@@ -34,19 +34,19 @@ public class lang
 	{
 		get
 		{
-			return rlokapFxj9;
+			return resourceCulture;
 		}
 		set
 		{
-			rlokapFxj9 = value;
+			resourceCulture = value;
 		}
 	}
 
-	public static string PraseInfo => ResourceManager.GetString("PraseInfo", rlokapFxj9);
+	public static string PraseInfo => ResourceManager.GetString("PraseInfo", resourceCulture);
 
-	public static string privatekey_pem => ResourceManager.GetString("privatekey.pem", rlokapFxj9);
+	public static string privatekey_pem => ResourceManager.GetString("privatekey.pem", resourceCulture);
 
-	public static string publickey_pem => ResourceManager.GetString("publickey.pem", rlokapFxj9);
+	public static string publickey_pem => ResourceManager.GetString("publickey.pem", resourceCulture);
 
 	public lang()
 	{

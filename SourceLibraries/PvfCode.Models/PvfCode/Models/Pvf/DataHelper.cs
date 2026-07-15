@@ -2,27 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace PvfCode.Models.Pvf;
 
 public static class DataHelper
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass2_0
-	{
-		public byte[] Pg48E1x9qu;
-
-		public _003C_003Ec__DisplayClass2_0()
-		{
-		}
-
-		internal bool dbG8LDQIlk(byte t, int i)
-		{
-			return t != Pg48E1x9qu[i];
-		}
-	}
-
 	public static int GetResolve(int num)
 	{
 		if (num > 500000)
@@ -71,25 +55,23 @@ public static class DataHelper
 
 	public static bool BytesEquals(byte[] b1, byte[] b2)
 	{
-		_003C_003Ec__DisplayClass2_0 CS_0024_003C_003E8__locals6 = new _003C_003Ec__DisplayClass2_0();
-		CS_0024_003C_003E8__locals6.Pg48E1x9qu = b2;
-		if ((b1 == null) & (CS_0024_003C_003E8__locals6.Pg48E1x9qu == null))
+		if ((b1 == null) & (b2 == null))
 		{
 			return true;
 		}
-		if ((b1 != null) & (CS_0024_003C_003E8__locals6.Pg48E1x9qu == null))
+		if ((b1 != null) & (b2 == null))
 		{
 			return false;
 		}
-		if ((b1 == null) & (CS_0024_003C_003E8__locals6.Pg48E1x9qu != null))
+		if ((b1 == null) & (b2 != null))
 		{
 			return false;
 		}
-		if (b1.Length != CS_0024_003C_003E8__locals6.Pg48E1x9qu.Length)
+		if (b1.Length != b2.Length)
 		{
 			return false;
 		}
-		return !b1.Where((byte t, int i) => t != CS_0024_003C_003E8__locals6.Pg48E1x9qu[i]).Any();
+		return !b1.Where((byte value, int index) => value != b2[index]).Any();
 	}
 
 	public static string GetDataFromFormat(string source, string header, string ending)

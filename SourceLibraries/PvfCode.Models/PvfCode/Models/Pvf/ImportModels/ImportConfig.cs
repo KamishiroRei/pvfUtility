@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -14,77 +13,36 @@ namespace PvfCode.Models.Pvf.ImportModels;
 [JsonObject(MemberSerialization.OptOut)]
 public class ImportConfig : ModelBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass46_0
-	{
-		public ParallelOptions Buj5DPOw7F;
+	private bool compileChinaPvfScriptFile;
 
-		public ImportConfig oc353BZ4Rl;
+	private bool compileChinaAni;
 
-		public string mDp5H4R4Ro;
+	private bool addImportedFilesToSearchPanel;
 
-		public ConcurrentDictionary<string, ImportFileItem> Wg057xA6Hi;
+	private string targetPath;
 
-		public Func<FileInfo, CancellationToken, ValueTask> eKO5cKpOWR;
+	private bool compileScript;
 
-		public _003C_003Ec__DisplayClass46_0()
-		{
-		}
+	private bool compileBinaryAni;
 
-		internal async ValueTask O0W55NrWTu(string path, CancellationToken ct)
-		{
-			if (Directory.Exists(path))
-			{
-				await Parallel.ForEachAsync(new DirectoryInfo(path).GetFiles("*.*", SearchOption.AllDirectories), Buj5DPOw7F, async delegate(FileInfo t, CancellationToken cancellationToken)
-				{
-					oc353BZ4Rl.wOGLBIlVUB(t.FullName, mDp5H4R4Ro, Wg057xA6Hi);
-				});
-			}
-			else if (File.Exists(path))
-			{
-				oc353BZ4Rl.wOGLBIlVUB(path, mDp5H4R4Ro, Wg057xA6Hi);
-			}
-		}
+	private bool convertToTraditionalChinese;
 
-		internal async ValueTask ue65poQJsL(FileInfo t, CancellationToken ct2)
-		{
-			oc353BZ4Rl.wOGLBIlVUB(t.FullName, mDp5H4R4Ro, Wg057xA6Hi);
-		}
-	}
+	private FileOperation? operation;
 
-	private bool XCkL4O5Pf8;
+	private RemoveOrKeepFileType? removeOrKeepFileType;
 
-	private bool sjYLCPx2mq;
-
-	private bool xNdLvbimnH;
-
-	[CompilerGenerated]
-	private HashSet<ImportFileItem> nADLbpppcv;
-
-	private string ElELVyJrnk;
-
-	private bool FlGLPenHXB;
-
-	private bool xBGLF6aAWr;
-
-	private bool uyPLXrTfp5;
-
-	private FileOperation? lt6LNEXeVw;
-
-	private RemoveOrKeepFileType? hRSLiQaOTg;
-
-	private List<string> Wg6LMJlTTn;
+	private List<string> fileTypes;
 
 	public bool CompileChinaPvfScriptFile
 	{
 		get
 		{
-			return XCkL4O5Pf8;
+			return compileChinaPvfScriptFile;
 		}
 		set
 		{
-			XCkL4O5Pf8 = value;
-			DoNotify("CompileChinaPvfScriptFile");
+			compileChinaPvfScriptFile = value;
+			DoNotify(nameof(CompileChinaPvfScriptFile));
 		}
 	}
 
@@ -92,12 +50,12 @@ public class ImportConfig : ModelBase
 	{
 		get
 		{
-			return sjYLCPx2mq;
+			return compileChinaAni;
 		}
 		set
 		{
-			sjYLCPx2mq = value;
-			DoNotify("CompileChinaAni");
+			compileChinaAni = value;
+			DoNotify(nameof(CompileChinaAni));
 		}
 	}
 
@@ -105,44 +63,32 @@ public class ImportConfig : ModelBase
 	{
 		get
 		{
-			return xNdLvbimnH;
+			return addImportedFilesToSearchPanel;
 		}
 		set
 		{
-			xNdLvbimnH = value;
-			DoNotify("ImportSuccessFilePathListAddToSearchPanel");
+			addImportedFilesToSearchPanel = value;
+			DoNotify(nameof(ImportSuccessFilePathListAddToSearchPanel));
 		}
 	}
 
 	[JsonIgnore]
-	public HashSet<ImportFileItem> SourceFiles
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nADLbpppcv;
-		}
-		[CompilerGenerated]
-		set
-		{
-			nADLbpppcv = value;
-		}
-	}
+	public HashSet<ImportFileItem> SourceFiles { get; set; }
 
 	public string TargetPath
 	{
 		get
 		{
-			if (ElELVyJrnk == null)
+			if (targetPath == null)
 			{
-				ElELVyJrnk = string.Empty;
+				targetPath = string.Empty;
 			}
-			return ElELVyJrnk;
+			return targetPath;
 		}
 		set
 		{
-			ElELVyJrnk = value;
-			DoNotify("TargetPath");
+			targetPath = value;
+			DoNotify(nameof(TargetPath));
 		}
 	}
 
@@ -150,12 +96,12 @@ public class ImportConfig : ModelBase
 	{
 		get
 		{
-			return FlGLPenHXB;
+			return compileScript;
 		}
 		set
 		{
-			FlGLPenHXB = value;
-			DoNotify("CompileScript");
+			compileScript = value;
+			DoNotify(nameof(CompileScript));
 		}
 	}
 
@@ -163,12 +109,12 @@ public class ImportConfig : ModelBase
 	{
 		get
 		{
-			return xBGLF6aAWr;
+			return compileBinaryAni;
 		}
 		set
 		{
-			xBGLF6aAWr = value;
-			DoNotify("CompileBinaryAni");
+			compileBinaryAni = value;
+			DoNotify(nameof(CompileBinaryAni));
 		}
 	}
 
@@ -176,12 +122,12 @@ public class ImportConfig : ModelBase
 	{
 		get
 		{
-			return uyPLXrTfp5;
+			return convertToTraditionalChinese;
 		}
 		set
 		{
-			uyPLXrTfp5 = value;
-			DoNotify("ConvertToTraditionalChinese");
+			convertToTraditionalChinese = value;
+			DoNotify(nameof(ConvertToTraditionalChinese));
 		}
 	}
 
@@ -189,16 +135,16 @@ public class ImportConfig : ModelBase
 	{
 		get
 		{
-			if (!lt6LNEXeVw.HasValue)
+			if (!operation.HasValue)
 			{
-				lt6LNEXeVw = FileOperation.Cover;
+				operation = FileOperation.Cover;
 			}
-			return lt6LNEXeVw.Value;
+			return operation.Value;
 		}
 		set
 		{
-			lt6LNEXeVw = value;
-			DoNotify("Operation");
+			operation = value;
+			DoNotify(nameof(Operation));
 		}
 	}
 
@@ -206,16 +152,16 @@ public class ImportConfig : ModelBase
 	{
 		get
 		{
-			if (!hRSLiQaOTg.HasValue)
+			if (!removeOrKeepFileType.HasValue)
 			{
-				hRSLiQaOTg = RemoveOrKeepFileType.保留;
+				removeOrKeepFileType = RemoveOrKeepFileType.保留;
 			}
-			return hRSLiQaOTg.Value;
+			return removeOrKeepFileType.Value;
 		}
 		set
 		{
-			hRSLiQaOTg = value;
-			DoNotify("RemoveOrKeepFileType");
+			removeOrKeepFileType = value;
+			DoNotify(nameof(RemoveOrKeepFileType));
 		}
 	}
 
@@ -223,12 +169,12 @@ public class ImportConfig : ModelBase
 	{
 		get
 		{
-			return Wg6LMJlTTn;
+			return fileTypes;
 		}
 		set
 		{
-			Wg6LMJlTTn = value;
-			DoNotify("FileTypes");
+			fileTypes = value;
+			DoNotify(nameof(FileTypes));
 		}
 	}
 
@@ -251,38 +197,37 @@ public class ImportConfig : ModelBase
 
 	public async Task DiskFileListToImportItems(List<string> diskFiles)
 	{
-		_003C_003Ec__DisplayClass46_0 CS_0024_003C_003E8__locals13 = new _003C_003Ec__DisplayClass46_0();
-		CS_0024_003C_003E8__locals13.oc353BZ4Rl = this;
-		CS_0024_003C_003E8__locals13.mDp5H4R4Ro = diskFiles[0].Remove(diskFiles[0].LastIndexOf('\\'));
-		CS_0024_003C_003E8__locals13.Wg057xA6Hi = new ConcurrentDictionary<string, ImportFileItem>();
-		CS_0024_003C_003E8__locals13.Buj5DPOw7F = new ParallelOptions
+		string rootPath = diskFiles[0].Remove(diskFiles[0].LastIndexOf('\\'));
+		ConcurrentDictionary<string, ImportFileItem> importItems = new ConcurrentDictionary<string, ImportFileItem>();
+		ParallelOptions parallelOptions = new ParallelOptions
 		{
 			MaxDegreeOfParallelism = 200
 		};
-		await Parallel.ForEachAsync(diskFiles, CS_0024_003C_003E8__locals13.Buj5DPOw7F, async delegate(string path, CancellationToken ct)
+		await Parallel.ForEachAsync(diskFiles, parallelOptions, async (path, cancellationToken) =>
 		{
 			if (Directory.Exists(path))
 			{
-				await Parallel.ForEachAsync(new DirectoryInfo(path).GetFiles("*.*", SearchOption.AllDirectories), CS_0024_003C_003E8__locals13.Buj5DPOw7F, async delegate(FileInfo t, CancellationToken cancellationToken)
+				await Parallel.ForEachAsync(new DirectoryInfo(path).GetFiles("*.*", SearchOption.AllDirectories), parallelOptions, (file, nestedCancellationToken) =>
 				{
-					CS_0024_003C_003E8__locals13.oc353BZ4Rl.wOGLBIlVUB(t.FullName, CS_0024_003C_003E8__locals13.mDp5H4R4Ro, CS_0024_003C_003E8__locals13.Wg057xA6Hi);
+					AddImportItem(file.FullName, rootPath, importItems);
+					return ValueTask.CompletedTask;
 				});
 			}
 			else if (File.Exists(path))
 			{
-				CS_0024_003C_003E8__locals13.oc353BZ4Rl.wOGLBIlVUB(path, CS_0024_003C_003E8__locals13.mDp5H4R4Ro, CS_0024_003C_003E8__locals13.Wg057xA6Hi);
+				AddImportItem(path, rootPath, importItems);
 			}
 		});
-		SourceFiles = CS_0024_003C_003E8__locals13.Wg057xA6Hi.Values.ToHashSet();
+		SourceFiles = importItems.Values.ToHashSet();
 	}
 
-	private void wOGLBIlVUB(string P_0, string P_1, ConcurrentDictionary<string, ImportFileItem> P_2)
+	private void AddImportItem(string filePath, string rootPath, ConcurrentDictionary<string, ImportFileItem> importItems)
 	{
-		if (P_2.ContainsKey(P_0))
+		if (importItems.ContainsKey(filePath))
 		{
 			return;
 		}
-		ImportFileItem importFileItem = new ImportFileItem(P_0, P_1);
+		ImportFileItem importFileItem = new ImportFileItem(filePath, rootPath);
 		if (!string.IsNullOrEmpty(TargetPath))
 		{
 			importFileItem.TreeFullPath = TargetPath + importFileItem.FilePath.Replace('\\', '/').ToLower();
@@ -295,6 +240,6 @@ public class ImportConfig : ModelBase
 				importFileItem.TreeFullPath = importFileItem.TreeFullPath.Remove(0, 1);
 			}
 		}
-		P_2.TryAdd(P_0, importFileItem);
+		importItems.TryAdd(filePath, importFileItem);
 	}
 }

@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using PvfCode.Models.Pvf.Enums;
 using Utools;
 
@@ -13,203 +11,48 @@ public abstract class PvfPack : ModelBase
 {
 	public delegate void DelegatePvfIsOpenChanged(bool pvfIsOpen);
 
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass61_0
-	{
-		public PvfFileType bVQ8i5nNTg;
+	private bool pvfIsOpen;
 
-		public _003C_003Ec__DisplayClass61_0()
-		{
-		}
-
-		internal bool qHu8NZaM1L(KeyValuePair<string, PvfFile> it)
-		{
-			return it.Value.FileType == bVQ8i5nNTg;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass62_0
-	{
-		public string SGr8aWC24W;
-
-		public _003C_003Ec__DisplayClass62_0()
-		{
-		}
-
-		internal bool VkO8MP255q(KeyValuePair<string, PvfFile> item)
-		{
-			KeyValuePair<string, PvfFile> keyValuePair = item;
-			return PathsHelper.IsPathMatch(keyValuePair.Key, SGr8aWC24W);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass63_0
-	{
-		public string svQ8UiMZc5;
-
-		public _003C_003Ec__DisplayClass63_0()
-		{
-		}
-
-		internal bool NXl8ItJ7Zf(KeyValuePair<string, PvfFile> item)
-		{
-			KeyValuePair<string, PvfFile> keyValuePair = item;
-			return PathsHelper.IsPathMatch(keyValuePair.Key, svQ8UiMZc5);
-		}
-	}
-
-	[CompilerGenerated]
-	private DelegatePvfIsOpenChanged Qmfk6XqkRy;
-
-	private bool CHykyv0NKF;
-
-	[CompilerGenerated]
-	private uint L5Zkw9D5H0;
-
-	[CompilerGenerated]
-	private int FrjkoA0hwL;
-
-	[CompilerGenerated]
-	private int DAuk28OIXJ;
-
-	[CompilerGenerated]
-	private int IwNktFiSaq;
-
-	[CompilerGenerated]
-	private byte[] jo8k9wkjl1;
-
-	[CompilerGenerated]
-	private EquipmentPartSetTable LslkRgUB3f;
-
-	private string m5dkWejnIy;
-
-	[CompilerGenerated]
-	private Dictionary<string, PvfFile> txGkq5LLem;
-
-	[CompilerGenerated]
-	private readonly Stringtable FPDkz9cTKh;
-
-	[CompilerGenerated]
-	private readonly StringView QZgLAUTQVL;
-
-	[CompilerGenerated]
-	private readonly ListFileTable KArLneOoUp;
+	private string pvfPackFilePath;
 
 	public bool PvfIsOpen
 	{
 		get
 		{
-			return CHykyv0NKF;
+			return pvfIsOpen;
 		}
 		set
 		{
-			CHykyv0NKF = value;
-			DoNotify("PvfIsOpen");
-			if (Qmfk6XqkRy != null)
-			{
-				Qmfk6XqkRy(value);
-			}
+			pvfIsOpen = value;
+			DoNotify(nameof(PvfIsOpen));
+			PvfIsOpenChanged?.Invoke(value);
 		}
 	}
 
-	public uint _fileTreeChecksum
-	{
-		[CompilerGenerated]
-		get
-		{
-			return L5Zkw9D5H0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			L5Zkw9D5H0 = value;
-		}
-	}
+	public uint _fileTreeChecksum { get; set; }
 
-	public int _fileTreeLength
-	{
-		[CompilerGenerated]
-		get
-		{
-			return FrjkoA0hwL;
-		}
-		[CompilerGenerated]
-		set
-		{
-			FrjkoA0hwL = value;
-		}
-	}
+	public int _fileTreeLength { get; set; }
 
-	public int _guidLen
-	{
-		[CompilerGenerated]
-		get
-		{
-			return DAuk28OIXJ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			DAuk28OIXJ = value;
-		}
-	}
+	public int _guidLen { get; set; }
 
-	public int FileVersion
-	{
-		[CompilerGenerated]
-		get
-		{
-			return IwNktFiSaq;
-		}
-		[CompilerGenerated]
-		set
-		{
-			IwNktFiSaq = value;
-		}
-	}
+	public int FileVersion { get; set; }
 
-	public byte[] Guid
-	{
-		[CompilerGenerated]
-		get
-		{
-			return jo8k9wkjl1;
-		}
-		[CompilerGenerated]
-		set
-		{
-			jo8k9wkjl1 = value;
-		}
-	}
+	public byte[] Guid { get; set; }
 
-	public EquipmentPartSetTable EquipmentPartSetTable
-	{
-		[CompilerGenerated]
-		get
-		{
-			return LslkRgUB3f;
-		}
-		[CompilerGenerated]
-		set
-		{
-			LslkRgUB3f = value;
-		}
-	}
+	public EquipmentPartSetTable EquipmentPartSetTable { get; set; }
 
 	public string PvfPackFilePath
 	{
 		get
 		{
-			return m5dkWejnIy;
+			return pvfPackFilePath;
 		}
 		set
 		{
-			m5dkWejnIy = value;
-			DoNotify("PvfPackFilePath");
-			DoNotify("PvfPackDir");
-			DoNotify("PvfPackDefaultExtractDir");
+			pvfPackFilePath = value;
+			DoNotify(nameof(PvfPackFilePath));
+			DoNotify(nameof(PvfPackDir));
+			DoNotify(nameof(PvfPackDefaultExtractDir));
 		}
 	}
 
@@ -237,46 +80,13 @@ public abstract class PvfPack : ModelBase
 		}
 	}
 
-	public Dictionary<string, PvfFile> FileList
-	{
-		[CompilerGenerated]
-		get
-		{
-			return txGkq5LLem;
-		}
-		[CompilerGenerated]
-		set
-		{
-			txGkq5LLem = value;
-		}
-	}
+	public Dictionary<string, PvfFile> FileList { get; set; }
 
-	public Stringtable Strtable
-	{
-		[CompilerGenerated]
-		get
-		{
-			return FPDkz9cTKh;
-		}
-	}
+	public Stringtable Strtable { get; }
 
-	public StringView Strview
-	{
-		[CompilerGenerated]
-		get
-		{
-			return QZgLAUTQVL;
-		}
-	}
+	public StringView Strview { get; }
 
-	public ListFileTable ListFileTable
-	{
-		[CompilerGenerated]
-		get
-		{
-			return KArLneOoUp;
-		}
-	}
+	public ListFileTable ListFileTable { get; }
 
 	public EncodingType OverAllEncodingType
 	{
@@ -287,7 +97,7 @@ public abstract class PvfPack : ModelBase
 		set
 		{
 			AppSetting.Instance.PvfConfig.DefaultEncoding = value;
-			DoNotify("OverAllEncodingType");
+			DoNotify(nameof(OverAllEncodingType));
 			if (PvfIsOpen && Strtable != null)
 			{
 				if (Strtable.IsStringTableUpdated)
@@ -300,41 +110,13 @@ public abstract class PvfPack : ModelBase
 		}
 	}
 
-	public event DelegatePvfIsOpenChanged PvfIsOpenChanged
-	{
-		[CompilerGenerated]
-		add
-		{
-			DelegatePvfIsOpenChanged delegatePvfIsOpenChanged = Qmfk6XqkRy;
-			DelegatePvfIsOpenChanged delegatePvfIsOpenChanged2;
-			do
-			{
-				delegatePvfIsOpenChanged2 = delegatePvfIsOpenChanged;
-				DelegatePvfIsOpenChanged value2 = (DelegatePvfIsOpenChanged)Delegate.Combine(delegatePvfIsOpenChanged2, value);
-				delegatePvfIsOpenChanged = Interlocked.CompareExchange(ref Qmfk6XqkRy, value2, delegatePvfIsOpenChanged2);
-			}
-			while ((object)delegatePvfIsOpenChanged != delegatePvfIsOpenChanged2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			DelegatePvfIsOpenChanged delegatePvfIsOpenChanged = Qmfk6XqkRy;
-			DelegatePvfIsOpenChanged delegatePvfIsOpenChanged2;
-			do
-			{
-				delegatePvfIsOpenChanged2 = delegatePvfIsOpenChanged;
-				DelegatePvfIsOpenChanged value2 = (DelegatePvfIsOpenChanged)Delegate.Remove(delegatePvfIsOpenChanged2, value);
-				delegatePvfIsOpenChanged = Interlocked.CompareExchange(ref Qmfk6XqkRy, value2, delegatePvfIsOpenChanged2);
-			}
-			while ((object)delegatePvfIsOpenChanged != delegatePvfIsOpenChanged2);
-		}
-	}
+	public event DelegatePvfIsOpenChanged PvfIsOpenChanged;
 
 	public PvfPack()
 	{
-		FPDkz9cTKh = new Stringtable();
-		QZgLAUTQVL = new StringView();
-		KArLneOoUp = new ListFileTable();
+		Strtable = new Stringtable();
+		Strview = new StringView();
+		ListFileTable = new ListFileTable();
 		EquipmentPartSetTable = new EquipmentPartSetTable();
 	}
 
@@ -387,49 +169,29 @@ public abstract class PvfPack : ModelBase
 
 	public IEnumerable<string> GetFiles(PvfFileType fileType)
 	{
-		_003C_003Ec__DisplayClass61_0 CS_0024_003C_003E8__locals2 = new _003C_003Ec__DisplayClass61_0();
-		CS_0024_003C_003E8__locals2.bVQ8i5nNTg = fileType;
 		if (FileList == null)
 		{
 			return new List<string>();
 		}
 		return from it in FileList
-			where it.Value.FileType == CS_0024_003C_003E8__locals2.bVQ8i5nNTg
+			where it.Value.FileType == fileType
 			select it.Key;
 	}
 
 	public IEnumerable<string> GetFiles(string path)
 	{
-		_003C_003Ec__DisplayClass62_0 CS_0024_003C_003E8__locals2 = new _003C_003Ec__DisplayClass62_0();
 		if (string.IsNullOrEmpty(path))
 		{
 			return FileList.Keys;
 		}
-		CS_0024_003C_003E8__locals2.SGr8aWC24W = PathsHelper.PathFix(path);
-		return FileList.Where<KeyValuePair<string, PvfFile>>(delegate(KeyValuePair<string, PvfFile> item)
-		{
-			KeyValuePair<string, PvfFile> keyValuePair = item;
-			return PathsHelper.IsPathMatch(keyValuePair.Key, CS_0024_003C_003E8__locals2.SGr8aWC24W);
-		}).Select(delegate(KeyValuePair<string, PvfFile> item)
-		{
-			KeyValuePair<string, PvfFile> keyValuePair = item;
-			return keyValuePair.Key;
-		});
+		string fixedPath = PathsHelper.PathFix(path);
+		return FileList.Where(item => PathsHelper.IsPathMatch(item.Key, fixedPath)).Select(item => item.Key);
 	}
 
 	public PvfFile[] GetFileObjs(string path)
 	{
-		_003C_003Ec__DisplayClass63_0 CS_0024_003C_003E8__locals2 = new _003C_003Ec__DisplayClass63_0();
-		CS_0024_003C_003E8__locals2.svQ8UiMZc5 = PathsHelper.PathFix(path);
-		return FileList.Where<KeyValuePair<string, PvfFile>>(delegate(KeyValuePair<string, PvfFile> item)
-		{
-			KeyValuePair<string, PvfFile> keyValuePair = item;
-			return PathsHelper.IsPathMatch(keyValuePair.Key, CS_0024_003C_003E8__locals2.svQ8UiMZc5);
-		}).Select(delegate(KeyValuePair<string, PvfFile> item)
-		{
-			KeyValuePair<string, PvfFile> keyValuePair = item;
-			return keyValuePair.Value;
-		}).ToArray();
+		string fixedPath = PathsHelper.PathFix(path);
+		return FileList.Where(item => PathsHelper.IsPathMatch(item.Key, fixedPath)).Select(item => item.Value).ToArray();
 	}
 
 	public PvfFile GetFile(string filePath)

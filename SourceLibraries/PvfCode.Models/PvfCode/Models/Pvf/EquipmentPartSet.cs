@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 
 namespace PvfCode.Models.Pvf;
@@ -10,7 +9,7 @@ public class EquipmentPartSet : ViewModelBase
 {
 	public class ReferencesRowViewModel
 	{
-		private PvfPack W5y8KpvIQ3;
+		private PvfPack pack;
 
 		public readonly PvfFile File;
 
@@ -18,7 +17,7 @@ public class EquipmentPartSet : ViewModelBase
 		{
 			get
 			{
-				string text = W5y8KpvIQ3.GetItemName(File);
+				string text = pack.GetItemName(File);
 				if (string.IsNullOrEmpty(text))
 				{
 					text = File.FileName;
@@ -31,7 +30,7 @@ public class EquipmentPartSet : ViewModelBase
 		{
 			get
 			{
-				if (File.GetRarity(W5y8KpvIQ3, out int rarity))
+				if (File.GetRarity(pack, out int rarity))
 				{
 					return rarity;
 				}
@@ -46,29 +45,16 @@ public class EquipmentPartSet : ViewModelBase
 
 		public void SetPack(PvfPack pvf)
 		{
-			if (W5y8KpvIQ3 != pvf)
+			if (pack != pvf)
 			{
-				W5y8KpvIQ3 = pvf;
+				pack = pvf;
 			}
 		}
 	}
 
-	private string btnkV2fSx5;
+	private string name;
 
-	[CompilerGenerated]
-	private string n6CkPRUODO;
-
-	[CompilerGenerated]
-	private ObservableCollection<ReferencesRowViewModel> QKakFVCtjn;
-
-	[CompilerGenerated]
-	private PvfFile uA8kXcgw5y;
-
-	[CompilerGenerated]
-	private string mLUkNL2Iwj;
-
-	[CompilerGenerated]
-	private int yWUkiPXTLE;
+	private string referencedItemName;
 
 	public string Name
 	{
@@ -76,107 +62,35 @@ public class EquipmentPartSet : ViewModelBase
 		{
 			if (ReferencesNumber == 0 || ReferencesNumber > 1)
 			{
-				return btnkV2fSx5;
+				return name;
 			}
-			if (!string.IsNullOrEmpty(RSbkCXNFpo()))
+			if (!string.IsNullOrEmpty(referencedItemName))
 			{
-				return RSbkCXNFpo();
+				return referencedItemName;
 			}
-			return btnkV2fSx5;
+			return name;
 		}
 		set
 		{
-			btnkV2fSx5 = value;
+			name = value;
 		}
 	}
 
-	public ObservableCollection<ReferencesRowViewModel> ReferencesFiles
-	{
-		[CompilerGenerated]
-		get
-		{
-			return QKakFVCtjn;
-		}
-		[CompilerGenerated]
-		set
-		{
-			QKakFVCtjn = value;
-		}
-	}
+	public ObservableCollection<ReferencesRowViewModel> ReferencesFiles { get; set; }
 
-	public PvfFile ParFile
-	{
-		[CompilerGenerated]
-		get
-		{
-			return uA8kXcgw5y;
-		}
-		[CompilerGenerated]
-		set
-		{
-			uA8kXcgw5y = value;
-		}
-	}
+	public PvfFile ParFile { get; set; }
 
-	public string EquType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return mLUkNL2Iwj;
-		}
-		[CompilerGenerated]
-		set
-		{
-			mLUkNL2Iwj = value;
-		}
-	}
+	public string EquType { get; set; }
 
-	public int ReferencesNumber
-	{
-		[CompilerGenerated]
-		get
-		{
-			return yWUkiPXTLE;
-		}
-		[CompilerGenerated]
-		set
-		{
-			yWUkiPXTLE = value;
-		}
-	}
+	public int ReferencesNumber { get; set; }
 
-	public string ReferencesNumberText
-	{
-		get
-		{
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(7, 1);
-			defaultInterpolatedStringHandler.AppendLiteral("被：");
-			defaultInterpolatedStringHandler.AppendFormatted(ReferencesNumber);
-			defaultInterpolatedStringHandler.AppendLiteral("个装备引用");
-			return defaultInterpolatedStringHandler.ToStringAndClear();
-		}
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private string RSbkCXNFpo()
-	{
-		return n6CkPRUODO;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void KClkvXjyvV(string P_0)
-	{
-		n6CkPRUODO = P_0;
-	}
+	public string ReferencesNumberText => $"被：{ReferencesNumber}个装备引用";
 
 	public void SetItemName(string name)
 	{
 		if (ReferencesNumber == 0)
 		{
-			KClkvXjyvV(name);
+			referencedItemName = name;
 		}
 	}
 
