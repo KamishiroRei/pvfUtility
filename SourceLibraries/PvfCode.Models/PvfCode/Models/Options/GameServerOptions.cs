@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using Newtonsoft.Json;
 using SqlSugar;
@@ -9,31 +8,28 @@ namespace PvfCode.Models.Options;
 [JsonObject(MemberSerialization.OptOut)]
 public class GameServerOptions : ViewModelBase
 {
-	private string n53LtsHQ4A;
+	private string ip;
 
-	private string YnwL9HIgVF;
+	private string sqlUserName;
 
-	private string ArtLRru9YM;
+	private string sqlPassword;
 
-	private int? sbOLWbS5ao;
-
-	[CompilerGenerated]
-	private string K7bLq4OudN;
+	private int? sqlPort;
 
 	public string IP
 	{
 		get
 		{
-			if (string.IsNullOrEmpty(n53LtsHQ4A))
+			if (string.IsNullOrEmpty(ip))
 			{
-				n53LtsHQ4A = "192.168.200.131";
+				ip = "192.168.200.131";
 			}
-			return n53LtsHQ4A;
+			return ip;
 		}
 		set
 		{
-			n53LtsHQ4A = value;
-			RaisePropertyChanged("IP");
+			ip = value;
+			RaisePropertyChanged(nameof(IP));
 		}
 	}
 
@@ -41,16 +37,16 @@ public class GameServerOptions : ViewModelBase
 	{
 		get
 		{
-			if (string.IsNullOrEmpty(YnwL9HIgVF))
+			if (string.IsNullOrEmpty(sqlUserName))
 			{
-				YnwL9HIgVF = "game";
+				sqlUserName = "game";
 			}
-			return YnwL9HIgVF;
+			return sqlUserName;
 		}
 		set
 		{
-			YnwL9HIgVF = value;
-			RaisePropertyChanged("SqlUserName");
+			sqlUserName = value;
+			RaisePropertyChanged(nameof(SqlUserName));
 		}
 	}
 
@@ -58,16 +54,16 @@ public class GameServerOptions : ViewModelBase
 	{
 		get
 		{
-			if (string.IsNullOrEmpty(ArtLRru9YM))
+			if (string.IsNullOrEmpty(sqlPassword))
 			{
-				ArtLRru9YM = "uu5!^%jg";
+				sqlPassword = "uu5!^%jg";
 			}
-			return ArtLRru9YM;
+			return sqlPassword;
 		}
 		set
 		{
-			ArtLRru9YM = value;
-			RaisePropertyChanged("SqlPassword");
+			sqlPassword = value;
+			RaisePropertyChanged(nameof(SqlPassword));
 		}
 	}
 
@@ -75,16 +71,16 @@ public class GameServerOptions : ViewModelBase
 	{
 		get
 		{
-			if (!sbOLWbS5ao.HasValue)
+			if (!sqlPort.HasValue)
 			{
-				sbOLWbS5ao = 3306;
+				sqlPort = 3306;
 			}
-			return sbOLWbS5ao.Value;
+			return sqlPort.Value;
 		}
 		set
 		{
-			sbOLWbS5ao = value;
-			RaisePropertyChanged("SqlPort");
+			sqlPort = value;
+			RaisePropertyChanged(nameof(SqlPort));
 		}
 	}
 
@@ -100,34 +96,14 @@ public class GameServerOptions : ViewModelBase
 		}
 	}
 
-	public string PemPublicKey
-	{
-		[CompilerGenerated]
-		get
-		{
-			return K7bLq4OudN;
-		}
-		[CompilerGenerated]
-		set
-		{
-			K7bLq4OudN = value;
-		}
-	}
+	public string PemPublicKey { get; set; }
 
 	public ISqlSugarClient GetDb()
 	{
 		try
 		{
 			GameServerOptions gameServerOptions = AppSetting.Instance.GameOptions.GameServerOptions;
-			string text = "Server=";
-			string iP = gameServerOptions.IP;
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(117, 2);
-			defaultInterpolatedStringHandler.AppendLiteral(";Port=3306;Database=d_taiwan;Uid=");
-			defaultInterpolatedStringHandler.AppendFormatted(gameServerOptions.SqlUserName);
-			defaultInterpolatedStringHandler.AppendLiteral(";Pwd=");
-			defaultInterpolatedStringHandler.AppendFormatted(gameServerOptions.SqlPassword);
-			defaultInterpolatedStringHandler.AppendLiteral(";Charset=utf8;Convert Zero Datetime=True;Allow Zero Datetime=True;SslMode=none;");
-			string connectionString = text + iP + defaultInterpolatedStringHandler.ToStringAndClear();
+			string connectionString = $"Server={gameServerOptions.IP};Port=3306;Database=d_taiwan;Uid={gameServerOptions.SqlUserName};Pwd={gameServerOptions.SqlPassword};Charset=utf8;Convert Zero Datetime=True;Allow Zero Datetime=True;SslMode=none;";
 			SqlSugarClient sqlSugarClient = new SqlSugarClient(new ConnectionConfig
 			{
 				DbType = DbType.MySql,
@@ -149,7 +125,4 @@ public class GameServerOptions : ViewModelBase
 		return null;
 	}
 
-	public GameServerOptions()
-	{
-	}
 }

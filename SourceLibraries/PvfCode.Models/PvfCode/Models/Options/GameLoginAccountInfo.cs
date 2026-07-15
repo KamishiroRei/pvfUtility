@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using Newtonsoft.Json;
 
@@ -7,12 +6,6 @@ namespace PvfCode.Models.Options;
 [JsonObject(MemberSerialization.OptOut)]
 public class GameLoginAccountInfo : ViewModelBase
 {
-	[CompilerGenerated]
-	private int h3MLojklCe;
-
-	[CompilerGenerated]
-	private string cxML21mHuU;
-
 	public string UID
 	{
 		get
@@ -78,19 +71,7 @@ public class GameLoginAccountInfo : ViewModelBase
 		}
 	}
 
-	public int ProcessId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return h3MLojklCe;
-		}
-		[CompilerGenerated]
-		set
-		{
-			h3MLojklCe = value;
-		}
-	}
+	public int ProcessId { get; set; }
 
 	public bool GameIsStop
 	{
@@ -104,21 +85,5 @@ public class GameLoginAccountInfo : ViewModelBase
 		}
 	}
 
-	public string ClientPath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return cxML21mHuU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			cxML21mHuU = value;
-		}
-	}
-
-	public GameLoginAccountInfo()
-	{
-	}
+	public string ClientPath { get; set; }
 }

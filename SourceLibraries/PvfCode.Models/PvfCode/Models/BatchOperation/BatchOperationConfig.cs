@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using Newtonsoft.Json;
 using PvfCode.Dot;
@@ -12,41 +11,38 @@ namespace PvfCode.Models.BatchOperation;
 [JsonObject(MemberSerialization.OptOut)]
 public class BatchOperationConfig : ViewModelBase, ICloneable
 {
-	private string pyVZQKqjMS;
+	private string findKeyword;
 
-	private string wRjZ69mGmQ;
+	private string replaceKeyword;
 
-	private string qyqZyluwLC;
+	private string findStartKeyword;
 
-	private string ttPZwuD573;
+	private string findEndKeyword;
 
-	private string WVaZoJgrKO;
+	private string traitReplaceKeyword;
 
-	private string B4MZ25myHZ;
+	private string addContent;
 
-	private int? vKDZtwU9En;
+	private int? deleteSectionLineNumber;
 
-	[CompilerGenerated]
-	private HashSet<string> nPsZ9JKUf0;
+	private RemoveOrKeepFileType? removeOrKeepFileType;
 
-	private RemoveOrKeepFileType? O8yZR0yBYj;
-
-	private List<string> HNPZWDhCd8;
+	private List<string> fileTypes;
 
 	public string FindKeyword
 	{
 		get
 		{
-			if (pyVZQKqjMS == null)
+			if (findKeyword == null)
 			{
-				pyVZQKqjMS = string.Empty;
+				findKeyword = string.Empty;
 			}
-			return pyVZQKqjMS;
+			return findKeyword;
 		}
 		set
 		{
-			pyVZQKqjMS = value;
-			RaisePropertyChanged("FindKeyword");
+			findKeyword = value;
+			RaisePropertyChanged(nameof(FindKeyword));
 		}
 	}
 
@@ -54,16 +50,16 @@ public class BatchOperationConfig : ViewModelBase, ICloneable
 	{
 		get
 		{
-			if (wRjZ69mGmQ == null)
+			if (replaceKeyword == null)
 			{
-				wRjZ69mGmQ = string.Empty;
+				replaceKeyword = string.Empty;
 			}
-			return wRjZ69mGmQ;
+			return replaceKeyword;
 		}
 		set
 		{
-			wRjZ69mGmQ = value;
-			RaisePropertyChanged("ReplaceKeyword");
+			replaceKeyword = value;
+			RaisePropertyChanged(nameof(ReplaceKeyword));
 		}
 	}
 
@@ -71,16 +67,16 @@ public class BatchOperationConfig : ViewModelBase, ICloneable
 	{
 		get
 		{
-			if (string.IsNullOrEmpty(qyqZyluwLC))
+			if (string.IsNullOrEmpty(findStartKeyword))
 			{
-				qyqZyluwLC = string.Empty;
+				findStartKeyword = string.Empty;
 			}
-			return qyqZyluwLC;
+			return findStartKeyword;
 		}
 		set
 		{
-			qyqZyluwLC = value;
-			RaisePropertyChanged("FindStartKeyword");
+			findStartKeyword = value;
+			RaisePropertyChanged(nameof(FindStartKeyword));
 		}
 	}
 
@@ -88,16 +84,16 @@ public class BatchOperationConfig : ViewModelBase, ICloneable
 	{
 		get
 		{
-			if (ttPZwuD573 == null)
+			if (findEndKeyword == null)
 			{
-				ttPZwuD573 = string.Empty;
+				findEndKeyword = string.Empty;
 			}
-			return ttPZwuD573;
+			return findEndKeyword;
 		}
 		set
 		{
-			ttPZwuD573 = value;
-			RaisePropertyChanged("FindEndKeyword");
+			findEndKeyword = value;
+			RaisePropertyChanged(nameof(FindEndKeyword));
 		}
 	}
 
@@ -105,16 +101,16 @@ public class BatchOperationConfig : ViewModelBase, ICloneable
 	{
 		get
 		{
-			if (WVaZoJgrKO == null)
+			if (traitReplaceKeyword == null)
 			{
-				WVaZoJgrKO = string.Empty;
+				traitReplaceKeyword = string.Empty;
 			}
-			return WVaZoJgrKO;
+			return traitReplaceKeyword;
 		}
 		set
 		{
-			WVaZoJgrKO = value;
-			RaisePropertyChanged("TraitReplaceKeyword");
+			traitReplaceKeyword = value;
+			RaisePropertyChanged(nameof(TraitReplaceKeyword));
 		}
 	}
 
@@ -122,16 +118,16 @@ public class BatchOperationConfig : ViewModelBase, ICloneable
 	{
 		get
 		{
-			if (B4MZ25myHZ != null)
+			if (addContent != null)
 			{
-				return B4MZ25myHZ;
+				return addContent;
 			}
 			return "";
 		}
 		set
 		{
-			B4MZ25myHZ = value;
-			RaisePropertyChanged("AddContent");
+			addContent = value;
+			RaisePropertyChanged(nameof(AddContent));
 		}
 	}
 
@@ -187,16 +183,16 @@ public class BatchOperationConfig : ViewModelBase, ICloneable
 	{
 		get
 		{
-			if (!vKDZtwU9En.HasValue)
+			if (!deleteSectionLineNumber.HasValue)
 			{
-				vKDZtwU9En = 1;
+				deleteSectionLineNumber = 1;
 			}
-			return vKDZtwU9En.Value;
+			return deleteSectionLineNumber.Value;
 		}
 		set
 		{
-			vKDZtwU9En = value;
-			RaisePropertyChanged("DeleteSectionLineNumber");
+			deleteSectionLineNumber = value;
+			RaisePropertyChanged(nameof(DeleteSectionLineNumber));
 		}
 	}
 
@@ -262,34 +258,22 @@ public class BatchOperationConfig : ViewModelBase, ICloneable
 		}
 	}
 
-	public HashSet<string> SourceFiles
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nPsZ9JKUf0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			nPsZ9JKUf0 = value;
-		}
-	}
+	public HashSet<string> SourceFiles { get; set; }
 
 	public RemoveOrKeepFileType RemoveOrKeepFileType
 	{
 		get
 		{
-			if (!O8yZR0yBYj.HasValue)
+			if (!removeOrKeepFileType.HasValue)
 			{
-				O8yZR0yBYj = RemoveOrKeepFileType.保留;
+				removeOrKeepFileType = RemoveOrKeepFileType.保留;
 			}
-			return O8yZR0yBYj.Value;
+			return removeOrKeepFileType.Value;
 		}
 		set
 		{
-			O8yZR0yBYj = value;
-			RaisePropertyChanged("RemoveOrKeepFileType");
+			removeOrKeepFileType = value;
+			RaisePropertyChanged(nameof(RemoveOrKeepFileType));
 		}
 	}
 
@@ -297,12 +281,12 @@ public class BatchOperationConfig : ViewModelBase, ICloneable
 	{
 		get
 		{
-			return HNPZWDhCd8;
+			return fileTypes;
 		}
 		set
 		{
-			HNPZWDhCd8 = value;
-			RaisePropertyChanged("FileTypes");
+			fileTypes = value;
+			RaisePropertyChanged(nameof(FileTypes));
 		}
 	}
 
@@ -339,9 +323,5 @@ public class BatchOperationConfig : ViewModelBase, ICloneable
 	public BatchOperationConfig CloneData()
 	{
 		return (BatchOperationConfig)Clone();
-	}
-
-	public BatchOperationConfig()
-	{
 	}
 }

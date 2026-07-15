@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Xml;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
@@ -13,43 +12,13 @@ namespace PvfCode.Models.Options.Editor;
 
 public class ItemCodeConvertItemNameConfiger
 {
-	[CompilerGenerated]
-	private string dkAEC3FJLD;
+	public string SavePath { get; set; }
 
-	[CompilerGenerated]
-	private Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>> XH3Evh6VGh;
-
-	public string SavePath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return dkAEC3FJLD;
-		}
-		[CompilerGenerated]
-		set
-		{
-			dkAEC3FJLD = value;
-		}
-	}
-
-	public Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>> DIC
-	{
-		[CompilerGenerated]
-		get
-		{
-			return XH3Evh6VGh;
-		}
-		[CompilerGenerated]
-		set
-		{
-			XH3Evh6VGh = value;
-		}
-	}
+	public Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>> DIC { get; set; }
 
 	public ItemCodeConvertItemNameConfiger()
 	{
-		dkAEC3FJLD = Path.Combine(AppSetting.AppBasePath, "ItemCodeHoverConfig.xml");
+		SavePath = Path.Combine(AppSetting.AppBasePath, "ItemCodeHoverConfig.xml");
 		DIC = new Dictionary<string, List<KeyValuePair<string, ItemCodeHoverInfoBase>>>();
 	}
 
@@ -171,10 +140,10 @@ public class ItemCodeConvertItemNameConfiger
 						itemCodeHoverInfoBase = new ItemCodeHoverInfoDefault
 						{
 							Description = attribute4,
-							IgnoreItemCodeList = LplE4p6Mvo(attribute7),
+							IgnoreItemCodeList = ParseIntegerList(attribute7),
 							ParentSectionName = attribute5,
-							IndexList = LplE4p6Mvo(attribute6),
-							LstFileNames = Hp5EB8tE8b(attribute3)
+							IndexList = ParseIntegerList(attribute6),
+							LstFileNames = ParseFileNames(attribute3)
 						};
 					}
 					else if (childNode.Name == "SectionGroup")
@@ -197,9 +166,9 @@ public class ItemCodeConvertItemNameConfiger
 									itemCodeHoverInfoGroup.ChildNodes.Add(result, new ItemCodeHoverInfoDefault
 									{
 										Description = attribute4,
-										IndexList = LplE4p6Mvo(attribute9),
-										LstFileNames = Hp5EB8tE8b(attribute3),
-										IgnoreItemCodeList = LplE4p6Mvo(attribute8)
+										IndexList = ParseIntegerList(attribute9),
+										LstFileNames = ParseFileNames(attribute3),
+										IgnoreItemCodeList = ParseIntegerList(attribute8)
 									});
 								}
 							}
@@ -214,15 +183,15 @@ public class ItemCodeConvertItemNameConfiger
 						itemCodeHoverInfoBase = new ItemCodeHoverInfoRange
 						{
 							Description = attribute4,
-							IgnoreItemCodeList = LplE4p6Mvo(attribute10),
+							IgnoreItemCodeList = ParseIntegerList(attribute10),
 							ParentSectionName = attribute5,
 							StartIndex = startIndex,
-							LstFileNames = Hp5EB8tE8b(attribute3)
+							LstFileNames = ParseFileNames(attribute3)
 						};
 					}
 					if (itemCodeHoverInfoBase != null)
 					{
-						rLcESF0SRP(itemCodeHoverInfoBase, childNode.ChildNodes);
+						LoadValidationSections(itemCodeHoverInfoBase, childNode.ChildNodes);
 						value.Add(new KeyValuePair<string, ItemCodeHoverInfoBase>(attribute2, itemCodeHoverInfoBase));
 					}
 				}
@@ -242,56 +211,56 @@ public class ItemCodeConvertItemNameConfiger
 		}
 	}
 
-	private void rLcESF0SRP(ItemCodeHoverInfoBase P_0, XmlNodeList P_1)
+	private static void LoadValidationSections(ItemCodeHoverInfoBase hoverInfo, XmlNodeList childNodes)
 	{
-		if (P_1 == null)
+		if (childNodes == null)
 		{
 			return;
 		}
-		foreach (XmlElement item2 in P_1)
+		foreach (XmlElement childNode in childNodes)
 		{
-			if (item2.Name == "ValidationSection")
+			if (childNode.Name == "ValidationSection")
 			{
-				if (P_0.ValidationSectionList == null)
+				if (hoverInfo.ValidationSectionList == null)
 				{
-					P_0.ValidationSectionList = new List<KeyValuePair<string, ValidationSectionData>>();
+					hoverInfo.ValidationSectionList = new List<KeyValuePair<string, ValidationSectionData>>();
 				}
-				string attribute = item2.GetAttribute("Index");
+				string attribute = childNode.GetAttribute("Index");
 				int? index = null;
 				if (!string.IsNullOrEmpty(attribute))
 				{
 					index = (int.TryParse(attribute, out var result) ? new int?(result) : ((int?)null));
 				}
-				string attribute2 = item2.GetAttribute("CurrentLine");
+				string attribute2 = childNode.GetAttribute("CurrentLine");
 				bool? currentLine = null;
 				if (bool.TryParse(attribute2, out var result2))
 				{
 					currentLine = result2;
 				}
-				KeyValuePair<string, ValidationSectionData> item = new KeyValuePair<string, ValidationSectionData>(item2.GetAttribute("Name"), new ValidationSectionData
+				KeyValuePair<string, ValidationSectionData> item = new KeyValuePair<string, ValidationSectionData>(childNode.GetAttribute("Name"), new ValidationSectionData
 				{
-					Value = item2.GetAttribute("Value"),
+					Value = childNode.GetAttribute("Value"),
 					Index = index,
 					CurrentLine = currentLine
 				});
-				P_0.ValidationSectionList.Add(item);
+				hoverInfo.ValidationSectionList.Add(item);
 			}
 		}
 	}
 
-	private List<string> Hp5EB8tE8b(string P_0)
+	private static List<string> ParseFileNames(string value)
 	{
-		return P_0.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList();
+		return value.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList();
 	}
 
-	private List<int>? LplE4p6Mvo(string P_0)
+	private static List<int>? ParseIntegerList(string value)
 	{
-		if (string.IsNullOrEmpty(P_0))
+		if (string.IsNullOrEmpty(value))
 		{
 			return null;
 		}
 		HashSet<int> hashSet = new HashSet<int>();
-		string[] array = P_0.Split(",", StringSplitOptions.RemoveEmptyEntries);
+		string[] array = value.Split(",", StringSplitOptions.RemoveEmptyEntries);
 		for (int i = 0; i < array.Length; i++)
 		{
 			if (int.TryParse(array[i], out var result))

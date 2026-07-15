@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
@@ -14,30 +13,15 @@ namespace PvfCode.Models.CodeCompletionModels;
 [JsonObject(MemberSerialization.OptOut)]
 public class CodeCompletionData : ModelBase, ICodeCompletionData
 {
-	private string hSeZaKOp38;
-
-	[CompilerGenerated]
-	private string QIQZIXKkpU;
-
-	[CompilerGenerated]
-	private double ybUZUeUtnu;
-
-	[CompilerGenerated]
-	private bool EY5Zl1JrmD;
-
-	[CompilerGenerated]
-	private HighlightingType bJOZfcumsE;
+	private string text;
 
 	public string _CompleteText;
 
-	private CodeCompletScriptType ENVZhDntbe;
+	private CodeCompletScriptType codeCompletScriptType;
 
-	private bool L87ZT1VM75;
+	private bool isShare;
 
-	[CompilerGenerated]
-	private PvfFileType ucHZ0yrMWs;
-
-	private string WnBZsqUuuf;
+	private string nickNames;
 
 	[JsonIgnore]
 	public ImageSource Image
@@ -59,70 +43,22 @@ public class CodeCompletionData : ModelBase, ICodeCompletionData
 	{
 		get
 		{
-			return hSeZaKOp38;
+			return text;
 		}
 		set
 		{
-			hSeZaKOp38 = value;
-			DoNotify("Text");
+			text = value;
+			DoNotify(nameof(Text));
 		}
 	}
 
-	public string Description
-	{
-		[CompilerGenerated]
-		get
-		{
-			return QIQZIXKkpU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			QIQZIXKkpU = value;
-		}
-	}
+	public string Description { get; set; }
 
-	public double Priority
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ybUZUeUtnu;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ybUZUeUtnu = value;
-		}
-	}
+	public double Priority { get; set; }
 
-	public bool HaveEndSection
-	{
-		[CompilerGenerated]
-		get
-		{
-			return EY5Zl1JrmD;
-		}
-		[CompilerGenerated]
-		set
-		{
-			EY5Zl1JrmD = value;
-		}
-	}
+	public bool HaveEndSection { get; set; }
 
-	public HighlightingType HighlightingType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return bJOZfcumsE;
-		}
-		[CompilerGenerated]
-		set
-		{
-			bJOZfcumsE = value;
-		}
-	}
+	public HighlightingType HighlightingType { get; set; }
 
 	public string CompleteText
 	{
@@ -132,7 +68,7 @@ public class CodeCompletionData : ModelBase, ICodeCompletionData
 			{
 				if (HaveEndSection)
 				{
-					return Text + "\r\n\r\n" + wDvZMlKGV3();
+					return Text + "\r\n\r\n" + GetEndSectionText();
 				}
 				return Text + "\r\n";
 			}
@@ -141,7 +77,7 @@ public class CodeCompletionData : ModelBase, ICodeCompletionData
 		set
 		{
 			_CompleteText = value;
-			DoNotify("CompleteText");
+			DoNotify(nameof(CompleteText));
 		}
 	}
 
@@ -149,12 +85,12 @@ public class CodeCompletionData : ModelBase, ICodeCompletionData
 	{
 		get
 		{
-			return ENVZhDntbe;
+			return codeCompletScriptType;
 		}
 		set
 		{
-			ENVZhDntbe = value;
-			DoNotify("CodeCompletScriptType");
+			codeCompletScriptType = value;
+			DoNotify(nameof(CodeCompletScriptType));
 		}
 	}
 
@@ -162,47 +98,35 @@ public class CodeCompletionData : ModelBase, ICodeCompletionData
 	{
 		get
 		{
-			return L87ZT1VM75;
+			return isShare;
 		}
 		set
 		{
-			L87ZT1VM75 = value;
-			DoNotify("IsShare");
+			isShare = value;
+			DoNotify(nameof(IsShare));
 		}
 	}
 
-	public PvfFileType PvfFileType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ucHZ0yrMWs;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ucHZ0yrMWs = value;
-		}
-	}
+	public PvfFileType PvfFileType { get; set; }
 
 	public string NickNames
 	{
 		get
 		{
-			if (WnBZsqUuuf == null)
+			if (nickNames == null)
 			{
-				WnBZsqUuuf = string.Empty;
+				nickNames = string.Empty;
 			}
-			return WnBZsqUuuf;
+			return nickNames;
 		}
 		set
 		{
-			WnBZsqUuuf = value;
-			DoNotify("NickNames");
+			nickNames = value;
+			DoNotify(nameof(NickNames));
 		}
 	}
 
-	private string wDvZMlKGV3()
+	private string GetEndSectionText()
 	{
 		string text = Text;
 		if (!string.IsNullOrEmpty(Text) && Text.Length > 1)
@@ -251,9 +175,5 @@ public class CodeCompletionData : ModelBase, ICodeCompletionData
 			IsShare = true,
 			CompleteText = AppSetting.Instance.GetIlogger().GetStr("mess_InsertContentWhenPressTabOrEnter")
 		};
-	}
-
-	public CodeCompletionData()
-	{
 	}
 }
