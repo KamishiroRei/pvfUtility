@@ -66,17 +66,17 @@ internal class EditorHoverTooltipManager : IDisposable
 
 	private void vB8ygbr7b2(object? sender, EventArgs P_1)
 	{
-		m4Py0Vy1J0();
+		CloseTooltip();
 	}
 
 	private void Rxyy6hXjyq(object P_0, RoutedEventArgs P_1)
 	{
-		m4Py0Vy1J0();
+		CloseTooltip();
 	}
 
 	private void mKxy18IUB2(object P_0, MouseButtonEventArgs P_1)
 	{
-		m4Py0Vy1J0();
+		CloseTooltip();
 	}
 
 	private void wh4ywjdSjh(object P_0, MouseEventArgs P_1)
@@ -122,14 +122,14 @@ internal class EditorHoverTooltipManager : IDisposable
 		{
 			return;
 		}
-		m4Py0Vy1J0();
+		CloseTooltip();
 	}
 
 	private void YBWyL20Hlt(object P_0, MouseEventArgs P_1)
 	{
 		if (ToolTip.IsOpen)
 		{
-			m4Py0Vy1J0();
+			CloseTooltip();
 		}
 		VisualLineElement visualLineElementFromPosition = Editor.TextArea.TextView.GetVisualLineElementFromPosition(P_1.GetPosition(Editor.TextArea.TextView) + Editor.TextArea.TextView.ScrollOffset);
 		if (visualLineElementFromPosition == null)
@@ -241,6 +241,11 @@ internal class EditorHoverTooltipManager : IDisposable
 			PvfCommentType = pvfCommentType,
 			Section = text
 		}, HXHynMHZCa());
+		result.OpenEditorRequested = viewModel =>
+		{
+			CloseTooltip(force: true);
+			AppCore.ViewModelBase.RootDocument.OpenPvfTagCommentEditor(viewModel.CommentRequest);
+		};
 		FlsykUFpxm(new HighlightedSection
 		{
 			Offset = segment.StartOffset,
@@ -774,10 +779,10 @@ internal class EditorHoverTooltipManager : IDisposable
 		Editor.TextArea.TextView.BackgroundRenderers.Add(itemCodeBackgroundRenderers);
 	}
 
-	private void m4Py0Vy1J0()
+	private void CloseTooltip(bool force = false)
 	{
 		tooltipCloseTimer.Stop();
-		if (ToolTip == null || ((int)Keyboard.Modifiers & 2) == 2)
+		if (ToolTip == null || (!force && ((int)Keyboard.Modifiers & 2) == 2))
 		{
 			return;
 		}
@@ -797,7 +802,7 @@ internal class EditorHoverTooltipManager : IDisposable
 
 	public void Dispose()
 	{
-		m4Py0Vy1J0();
+		CloseTooltip();
 		Editor.TextArea.TextView.MouseHover -= YBWyL20Hlt;
 		Editor.TextArea.TextView.MouseHoverStopped -= WDoysb9I3D;
 		Editor.TextArea.TextView.MouseLeftButtonDown -= mKxy18IUB2;

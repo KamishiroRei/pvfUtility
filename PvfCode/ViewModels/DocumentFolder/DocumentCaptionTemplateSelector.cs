@@ -7,7 +7,7 @@ namespace PvfCode.ViewModels.DocumentFolder;
 
 public class DocumentCaptionTemplateSelector : DataTemplateSelector
 {
-	private static readonly DataTemplate OfficialAnnotationCaption = CreateOfficialAnnotationCaption();
+	private static readonly DataTemplate FileNameCaption = CreateFileNameCaption();
 	public DataTemplate Default { get; set; }
 
 	public DataTemplate PvfFile { get; set; }
@@ -16,9 +16,9 @@ public class DocumentCaptionTemplateSelector : DataTemplateSelector
 	{
 		if (item is DocumentBase documentBase)
 		{
-			if (documentBase is OfficialAnnotationDocument)
+			if (documentBase is OfficialAnnotationDocument or PvfTagCommentDocument)
 			{
-				return OfficialAnnotationCaption;
+				return FileNameCaption;
 			}
 			if (documentBase.DocumentType == PvfFileDocumentType.PVF文档)
 			{
@@ -33,7 +33,7 @@ public class DocumentCaptionTemplateSelector : DataTemplateSelector
 	{
 	}
 
-	private static DataTemplate CreateOfficialAnnotationCaption()
+	private static DataTemplate CreateFileNameCaption()
 	{
 		FrameworkElementFactory text = new(typeof(TextBlock));
 		text.SetValue(FrameworkElement.MarginProperty, new Thickness(4, 0, 0, 0));

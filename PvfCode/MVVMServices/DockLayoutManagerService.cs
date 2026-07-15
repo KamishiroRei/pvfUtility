@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -97,7 +98,9 @@ public class DockLayoutManagerService : ServiceBase, IDockLayoutManagerService
 		}
 		if (ReferenceEquals(panel.Parent, target.Parent))
 		{
-			return true;
+			// The central editor group is named DocumentHost. A new side document
+			// must not be considered tabbed until that group has been split.
+			return panel.Parent is not DocumentGroup { Name: "DocumentHost" };
 		}
 
 		LayoutManager.DockController.Dock(panel, target, DockType.Fill);

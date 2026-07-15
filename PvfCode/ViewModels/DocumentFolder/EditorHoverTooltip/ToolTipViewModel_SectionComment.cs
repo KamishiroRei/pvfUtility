@@ -27,6 +27,10 @@ public class ToolTipViewModel_SectionComment : ToolTipViewModelBase
 		}
 	}
 
+	public PvfCommentDtoRes CommentRequest => commentRequest;
+
+	public Action<ToolTipViewModel_SectionComment> OpenEditorRequested { get; set; }
+
 	public bool IsShare
 	{
 		get
@@ -92,6 +96,11 @@ public class ToolTipViewModel_SectionComment : ToolTipViewModelBase
 		FileType = res.FileType;
 		Highlighting = ThemeSwitcher.Instance.GetHighlightingDefinition(FileType.HasValue ? FileType.Value : PvfFileType.equ);
 		NickName = AppCore.NickNameTemp;
+	}
+
+	public void OpenEditor()
+	{
+		OpenEditorRequested?.Invoke(this);
 	}
 
 	public override async void Loaded()

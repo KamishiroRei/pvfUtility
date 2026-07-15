@@ -10,6 +10,7 @@ using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Xpf.Docking;
 using DevExpress.Xpf.Docking.Base;
+using PvfCode.Dot.Desktop;
 using PvfCode.ViewModels.DocumentFolder.Enums;
 using PvfCode.ViewModels.DocumentFolder.SearchViewModels;
 using PvfCode.ViewModels.PvfDiffTool;
@@ -124,6 +125,46 @@ public class DocumentRoot : ViewModelBase
 		document.IsActive = true;
 	}
 
+	public void OpenPvfTagCommentEditor(PvfCommentDtoRes commentRequest)
+	{
+		if (commentRequest == null)
+		{
+			return;
+		}
+		string documentPath = PvfTagCommentDocument.CreateDocumentPath(commentRequest);
+		if (GetDocument(documentPath) is PvfTagCommentDocument existing)
+		{
+			existing.IsActive = true;
+			return;
+		}
+
+		PvfTagCommentDocument document = new(commentRequest);
+		document.Saved += OnPvfTagCommentSaved;
+		Documents.Add(document);
+		document.IsActive = true;
+		DockPvfTagCommentRight(document, 0);
+		_ = document.LoadAsync();
+	}
+
+	private void OnPvfTagCommentSaved(object sender, EventArgs e)
+	{
+		if (sender is not PvfTagCommentDocument document)
+		{
+			return;
+		}
+		document.Saved -= OnPvfTagCommentSaved;
+		RemoveDocument(document.DocumentPath, isShowDialog: false);
+	}
+
+	private void DockPvfTagCommentRight(PvfTagCommentDocument document, int attempt)
+	{
+		DockRightDocument(document, () => Documents.OfType<PvfPreviewDocument>().Cast<DocumentBase>().FirstOrDefault()
+				?? Documents.OfType<OfficialAnnotationDocument>().Cast<DocumentBase>().FirstOrDefault()
+				?? Documents.OfType<PvfTagCommentDocument>().Cast<DocumentBase>().FirstOrDefault(item => !ReferenceEquals(item, document)),
+			() => document.IsActive = true,
+			attempt);
+	}
+
 	private void OnPvfDocumentActivated(object sender, EventArgs e)
 	{
 		if (sender is PvfFileDocument sourceDocument)
@@ -134,33 +175,21 @@ public class DocumentRoot : ViewModelBase
 
 	private void SplitPreviewRight(PvfPreviewDocument preview, PvfFileDocument sourceDocument, int attempt)
 	{
-		if (Application.Current == null)
-		{
-			return;
-		}
-		Application.Current.Dispatcher.BeginInvoke((Action)delegate
-		{
-			if (!Documents.Contains(preview))
-			{
-				return;
-			}
-			OfficialAnnotationDocument officialAnnotation = Documents.OfType<OfficialAnnotationDocument>().FirstOrDefault();
-			bool placed = officialAnnotation != null
-				? AppCore.ViewModelBase.DockLayoutManagerService.DockAsTab(preview, officialAnnotation)
-				: AppCore.ViewModelBase.DockLayoutManagerService.SplitRight(preview);
-			if (placed)
-			{
-				sourceDocument.IsActive = true;
-				return;
-			}
-			if (attempt < 8)
-			{
-				SplitPreviewRight(preview, sourceDocument, attempt + 1);
-			}
-		}, attempt == 0 ? DispatcherPriority.Loaded : DispatcherPriority.Background);
+		DockRightDocument(preview, () => Documents.OfType<OfficialAnnotationDocument>().Cast<DocumentBase>().FirstOrDefault()
+				?? Documents.OfType<PvfTagCommentDocument>().Cast<DocumentBase>().FirstOrDefault(),
+			() => sourceDocument.IsActive = true,
+			attempt);
 	}
 
 	private void DockOfficialAnnotationRight(OfficialAnnotationDocument document, int attempt)
+	{
+		DockRightDocument(document, () => Documents.OfType<PvfPreviewDocument>().Cast<DocumentBase>().FirstOrDefault()
+				?? Documents.OfType<PvfTagCommentDocument>().Cast<DocumentBase>().FirstOrDefault(),
+			() => document.IsActive = true,
+			attempt);
+	}
+
+	private void DockRightDocument(DocumentBase document, Func<DocumentBase> targetSelector, Action onPlaced, int attempt)
 	{
 		if (Application.Current == null)
 		{
@@ -172,19 +201,24 @@ public class DocumentRoot : ViewModelBase
 			{
 				return;
 			}
-
-			PvfPreviewDocument preview = Documents.OfType<PvfPreviewDocument>().FirstOrDefault();
-			bool placed = preview != null
-				? AppCore.ViewModelBase.DockLayoutManagerService.DockAsTab(document, preview)
+			DocumentBase target = targetSelector();
+			bool placed = target != null
+				? AppCore.ViewModelBase.DockLayoutManagerService.DockAsTab(document, target)
 				: AppCore.ViewModelBase.DockLayoutManagerService.SplitRight(document);
 			if (placed)
 			{
-				document.IsActive = true;
+				onPlaced();
 				return;
 			}
 			if (attempt < 8)
 			{
-				DockOfficialAnnotationRight(document, attempt + 1);
+				DockRightDocument(document, targetSelector, onPlaced, attempt + 1);
+				return;
+			}
+			// A late layout load must still leave the editor in a right-side group.
+			if (AppCore.ViewModelBase.DockLayoutManagerService.SplitRight(document))
+			{
+				onPlaced();
 			}
 		}, attempt == 0 ? DispatcherPriority.Loaded : DispatcherPriority.Background);
 	}

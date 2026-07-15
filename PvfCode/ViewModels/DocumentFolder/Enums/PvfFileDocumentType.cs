@@ -9,6 +9,7 @@ public enum PvfFileDocumentType
 	导入文件,
 	预览,
 	官方注释文档,
+	PVF标签注释,
 	商店,
 	chatGPT
 }

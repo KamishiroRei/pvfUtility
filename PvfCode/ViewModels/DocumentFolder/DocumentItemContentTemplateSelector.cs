@@ -8,6 +8,7 @@ public class DocumentItemContentTemplateSelector : DataTemplateSelector
 {
 	private static readonly DataTemplate PreviewTemplate = CreatePreviewTemplate();
 	private static readonly DataTemplate OfficialAnnotationTemplate = CreateTemplate(typeof(OfficialAnnotationDocumentView));
+	private static readonly DataTemplate PvfTagCommentTemplate = CreateTemplate(typeof(PvfTagCommentDocumentView));
 
 	public DataTemplate PvfFileDocumentDataTemplate { get; set; }
 
@@ -38,6 +39,10 @@ public class DocumentItemContentTemplateSelector : DataTemplateSelector
 		if (item is OfficialAnnotationDocument)
 		{
 			return OfficialAnnotationTemplate;
+		}
+		if (item is PvfTagCommentDocument)
+		{
+			return PvfTagCommentTemplate;
 		}
 		return ((DocumentBase)item).DocumentType switch
 		{

@@ -11,8 +11,6 @@ public class PvfCommentTooltipView : Border
 {
 	private const double CompactReadWidth = 280;
 	private const double StandardMinWidth = 420;
-	private readonly Grid readPanel;
-	private readonly Grid editPanel;
 	private ToolTipViewModel_SectionComment viewModel;
 
 	public PvfCommentTooltipView()
@@ -24,13 +22,10 @@ public class PvfCommentTooltipView : Border
 		SetResourceReference(BorderBrushProperty, "EditorFoldingMarkerBrush");
 		SetResourceReference(BackgroundProperty, "EditorBackground");
 		Grid root = new();
-		readPanel = CreateReadPanel();
-		editPanel = CreateEditPanel();
-		root.Children.Add(readPanel);
-		root.Children.Add(editPanel);
+		root.Children.Add(CreateReadPanel());
 		Child = root;
 		DataContextChanged += OnDataContextChanged;
-		UpdateMode();
+		UpdateWidth();
 	}
 
 	private Grid CreateReadPanel()
@@ -48,78 +43,19 @@ public class PvfCommentTooltipView : Border
 		metadata.SetResourceReference(TextBlock.ForegroundProperty, "EditorFoldingMarkerBrush");
 		metadata.SetBinding(TextBlock.TextProperty, new Binding("Comment.Authors") { StringFormat = "Author: {0}" });
 		footer.Children.Add(metadata);
-		Button edit = new() { Content = "Edit", MinWidth = 72, Margin = new Thickness(12, 0, 0, 0) };
-		DockPanel.SetDock(edit, Dock.Right);
-		edit.Click += (_, _) =>
+		Button edit = new()
 		{
-			if (viewModel != null)
-			{
-				viewModel.IsEditing = true;
-			}
+			Content = "Edit",
+			MinWidth = 72,
+			Margin = new Thickness(12, 0, 0, 0),
+			ToolTip = "Open the tag editor"
 		};
+		DockPanel.SetDock(edit, Dock.Right);
+		edit.Click += (_, _) => viewModel?.OpenEditor();
 		footer.Children.Insert(0, edit);
 		Grid.SetRow(footer, 1);
 		panel.Children.Add(footer);
 		return panel;
-	}
-
-	private Grid CreateEditPanel()
-	{
-		Grid panel = new() { Margin = new Thickness(10) };
-		panel.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		panel.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		panel.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		panel.RowDefinitions.Add(new RowDefinition());
-		panel.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		panel.RowDefinitions.Add(new RowDefinition());
-		panel.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		Label titleLabel = new() { Content = "Title" };
-		panel.Children.Add(titleLabel);
-		TextBox title = new() { Margin = new Thickness(0, 0, 0, 8) };
-		title.SetBinding(TextBox.TextProperty, EditBinding("Comment.Title"));
-		Grid.SetRow(title, 1);
-		panel.Children.Add(title);
-		Label commentLabel = new() { Content = "Comment (Markdown)" };
-		Grid.SetRow(commentLabel, 2);
-		panel.Children.Add(commentLabel);
-		MarkdownEditorPreview comment = new() { MinHeight = 150 };
-		comment.SetBinding(MarkdownEditorPreview.TextProperty, EditBinding("Document.Text"));
-		comment.SetBinding(MarkdownEditorPreview.PreviewTitleProperty, new Binding("Comment.Title"));
-		Grid.SetRow(comment, 3);
-		panel.Children.Add(comment);
-		Label officialLabel = new() { Content = "Official Description (Markdown)" };
-		Grid.SetRow(officialLabel, 4);
-		panel.Children.Add(officialLabel);
-		MarkdownEditorPreview official = new() { MinHeight = 150 };
-		official.Margin = new Thickness(0, 8, 0, 8);
-		official.SetBinding(MarkdownEditorPreview.TextProperty, EditBinding("Comment.OfficialDescription"));
-		Grid.SetRow(official, 5);
-		panel.Children.Add(official);
-		StackPanel actions = new() { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
-		Button cancel = new() { Content = "Close editor", MinWidth = 90, Margin = new Thickness(0, 0, 8, 0) };
-		cancel.Click += (_, _) =>
-		{
-			if (viewModel != null)
-			{
-				viewModel.IsEditing = false;
-			}
-		};
-		Button save = new() { Content = "Save", MinWidth = 72 };
-		save.Click += (_, _) => viewModel?.Save();
-		actions.Children.Add(cancel);
-		actions.Children.Add(save);
-		Grid.SetRow(actions, 6);
-		panel.Children.Add(actions);
-		return panel;
-	}
-
-	private static Binding EditBinding(string path)
-	{
-		return new Binding(path)
-		{
-			Mode = BindingMode.TwoWay,
-			UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-		};
 	}
 
 	private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs args)
@@ -133,31 +69,22 @@ public class PvfCommentTooltipView : Border
 		{
 			viewModel.PropertyChanged += OnViewModelPropertyChanged;
 		}
-		UpdateMode();
+		UpdateWidth();
 	}
 
 	private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs args)
 	{
-		if (args.PropertyName == nameof(ToolTipViewModel_SectionComment.IsEditing) ||
-			args.PropertyName == nameof(ToolTipViewModel_SectionComment.Comment))
+		if (args.PropertyName == nameof(ToolTipViewModel_SectionComment.Comment))
 		{
-			UpdateMode();
+			UpdateWidth();
 		}
-	}
-
-	private void UpdateMode()
-	{
-		bool editing = viewModel?.IsEditing == true;
-		readPanel.Visibility = editing ? Visibility.Collapsed : Visibility.Visible;
-		editPanel.Visibility = editing ? Visibility.Visible : Visibility.Collapsed;
-		UpdateWidth();
 	}
 
 	private void UpdateWidth()
 	{
 		bool hasReadableContent = !string.IsNullOrWhiteSpace(viewModel?.Comment?.Comment) ||
 			!string.IsNullOrWhiteSpace(viewModel?.Comment?.OfficialDescription);
-		if (viewModel?.IsEditing == true || hasReadableContent)
+		if (hasReadableContent)
 		{
 			Width = double.NaN;
 			MinWidth = StandardMinWidth;
