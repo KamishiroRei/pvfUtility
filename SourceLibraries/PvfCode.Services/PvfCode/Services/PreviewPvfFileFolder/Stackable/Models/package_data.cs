@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -9,13 +8,7 @@ namespace PvfCode.Services.PreviewPvfFileFolder.Stackable.Models;
 
 public class package_data : ViewModelBase
 {
-	[CompilerGenerated]
-	private int cKhMI2Etf5;
-
-	[CompilerGenerated]
-	private int KRHMe8Uh1Y;
-
-	private readonly PvfGroup CdsMCZViOQ;
+	private readonly PvfGroup pvf;
 
 	public string ItemName
 	{
@@ -26,37 +19,13 @@ public class package_data : ViewModelBase
 			{
 				return ItemCode.ToString();
 			}
-			return CdsMCZViOQ.GetItemName(file);
+			return pvf.GetItemName(file);
 		}
 	}
 
-	public int ItemCode
-	{
-		[CompilerGenerated]
-		get
-		{
-			return cKhMI2Etf5;
-		}
-		[CompilerGenerated]
-		set
-		{
-			cKhMI2Etf5 = value;
-		}
-	}
+	public int ItemCode { get; set; }
 
-	public int ItemCount
-	{
-		[CompilerGenerated]
-		get
-		{
-			return KRHMe8Uh1Y;
-		}
-		[CompilerGenerated]
-		set
-		{
-			KRHMe8Uh1Y = value;
-		}
-	}
+	public int ItemCount { get; set; }
 
 	public int Rarity
 	{
@@ -67,7 +36,7 @@ public class package_data : ViewModelBase
 			{
 				return 0;
 			}
-			file.GetRarity((PvfPack)CdsMCZViOQ, out int rarity);
+			file.GetRarity((PvfPack)pvf, out int rarity);
 			return rarity;
 		}
 	}
@@ -81,8 +50,8 @@ public class package_data : ViewModelBase
 			{
 				return null;
 			}
-			ImagePack2Service.Instance.TreeGetIcon(CdsMCZViOQ, file, out ImageSource imageSource);
-			return FilePreviewDataBase.Create(CdsMCZViOQ, file, imageSource);
+			ImagePack2Service.Instance.TreeGetIcon(pvf, file, out ImageSource imageSource);
+			return FilePreviewDataBase.Create(pvf, file, imageSource);
 		}
 	}
 
@@ -90,12 +59,12 @@ public class package_data : ViewModelBase
 	{
 		ItemCode = itemCode;
 		ItemCount = itemCount;
-		CdsMCZViOQ = pvf;
+		this.pvf = pvf;
 	}
 
 	public PvfFile? GetFile()
 	{
-		return CdsMCZViOQ.ListFileTable.ItemCodeConvertPvfFile(CdsMCZViOQ, ItemCode);
+		return pvf.ListFileTable.ItemCodeConvertPvfFile(pvf, ItemCode);
 	}
 
 	[Command]
@@ -107,10 +76,7 @@ public class package_data : ViewModelBase
 		{
 			if (ilogger != null)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(6, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("找不到文件：");
-				defaultInterpolatedStringHandler.AppendFormatted(ItemCode);
-				ilogger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
+				ilogger.Error($"找不到文件：{ItemCode}");
 			}
 		}
 		else

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using DevExpress.Mvvm.DataAnnotations;
 using PvfCode.Models.Pvf;
@@ -11,18 +10,18 @@ namespace PvfCode.Services.PreviewPvfFileFolder;
 
 public class StackableOrEquPreviewBase : FilePreviewDataBase
 {
-	private ScriptFileParserNew BkSjEEqjUg;
+	private ScriptFileParserNew scriptFileParser;
 
 	public ScriptFileParserNew ScriptFileParser
 	{
 		get
 		{
-			if (BkSjEEqjUg == null)
+			if (scriptFileParser == null)
 			{
-				BkSjEEqjUg = new ScriptFileParserNew(base.File, base.Pvf);
-				BkSjEEqjUg.PraseStructureMain();
+				scriptFileParser = new ScriptFileParserNew(base.File, base.Pvf);
+				scriptFileParser.PraseStructureMain();
 			}
-			return BkSjEEqjUg;
+			return scriptFileParser;
 		}
 	}
 
@@ -132,10 +131,7 @@ public class StackableOrEquPreviewBase : FilePreviewDataBase
 			{
 				if (float.TryParse(weight, out var result))
 				{
-					DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 1);
-					defaultInterpolatedStringHandler.AppendFormatted(result / 1000f);
-					defaultInterpolatedStringHandler.AppendLiteral("kg");
-					return defaultInterpolatedStringHandler.ToStringAndClear();
+					return $"{result / 1000f}kg";
 				}
 				if (int.TryParse(weight, out var result2))
 				{
@@ -226,22 +222,10 @@ public class StackableOrEquPreviewBase : FilePreviewDataBase
 					string itemName = base.Pvf.GetItemName(text);
 					if (!string.IsNullOrEmpty(itemName))
 					{
-						DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(3, 2);
-						defaultInterpolatedStringHandler.AppendLiteral("[");
-						defaultInterpolatedStringHandler.AppendFormatted(itemName);
-						defaultInterpolatedStringHandler.AppendLiteral("]");
-						defaultInterpolatedStringHandler.AppendFormatted(val.Value.Value);
-						defaultInterpolatedStringHandler.AppendLiteral("个");
-						return defaultInterpolatedStringHandler.ToStringAndClear();
+						return $"[{itemName}]{val.Value.Value}个";
 					}
 				}
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(3, 2);
-				defaultInterpolatedStringHandler2.AppendLiteral("[");
-				defaultInterpolatedStringHandler2.AppendFormatted(result);
-				defaultInterpolatedStringHandler2.AppendLiteral("]");
-				defaultInterpolatedStringHandler2.AppendFormatted(val.Value.Value);
-				defaultInterpolatedStringHandler2.AppendLiteral("个");
-				return defaultInterpolatedStringHandler2.ToStringAndClear();
+				return $"[{result}]{val.Value.Value}个";
 			}
 			return null;
 		}

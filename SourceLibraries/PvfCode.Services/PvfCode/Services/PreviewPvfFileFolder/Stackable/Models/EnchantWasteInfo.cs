@@ -1,42 +1,10 @@
-using System.Runtime.CompilerServices;
-
 namespace PvfCode.Services.PreviewPvfFileFolder.Stackable.Models;
 
 public class EnchantWasteInfo
 {
-	[CompilerGenerated]
-	private string? OGPjSr6ysN;
+	public string? EquTypes { get; set; }
 
-	[CompilerGenerated]
-	private string? JrfjbWntYy;
-
-	public string? EquTypes
-	{
-		[CompilerGenerated]
-		get
-		{
-			return OGPjSr6ysN;
-		}
-		[CompilerGenerated]
-		set
-		{
-			OGPjSr6ysN = value;
-		}
-	}
-
-	public string? Text
-	{
-		[CompilerGenerated]
-		get
-		{
-			return JrfjbWntYy;
-		}
-		[CompilerGenerated]
-		set
-		{
-			JrfjbWntYy = value;
-		}
-	}
+	public string? Text { get; set; }
 
 	public EnchantWasteInfo(PvfFile file, PvfGroup group)
 	{

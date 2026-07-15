@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
 using PvfCode.LoggerBase;
@@ -9,60 +8,16 @@ namespace PvfCode.Services.PreviewPvfFileFolder.Stackable.Models;
 
 public class Usable_cera_package : ViewModelBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass7_0
-	{
-		public Ilogger kbgyZJ5602;
+	private readonly PvfGroup pvf;
 
-		public List<PvfFile> Cv1yhrq0l2;
+	private readonly PvfFile file;
 
-		public _003C_003Ec__DisplayClass7_0()
-		{
-		}
-
-		internal void FGoyTmnCjE(package_data it)
-		{
-			PvfFile file = it.GetFile();
-			if (file == null)
-			{
-				Ilogger ilogger = kbgyZJ5602;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(11, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("找不到对应文件 代码：");
-				defaultInterpolatedStringHandler.AppendFormatted(it.ItemCode);
-				ilogger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
-			}
-			else
-			{
-				Cv1yhrq0l2.Add(file);
-			}
-		}
-	}
-
-	[CompilerGenerated]
-	private List<package_data> pCljgMaIua;
-
-	private readonly PvfGroup brcjzDvagU;
-
-	private readonly PvfFile BWnMuRAh66;
-
-	public List<package_data> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return pCljgMaIua;
-		}
-		[CompilerGenerated]
-		set
-		{
-			pCljgMaIua = value;
-		}
-	}
+	public List<package_data> Items { get; set; }
 
 	public Usable_cera_package(List<int> datas, PvfFile file, PvfGroup pvf)
 	{
-		brcjzDvagU = pvf;
-		BWnMuRAh66 = file;
+		this.pvf = pvf;
+		this.file = file;
 		if (datas == null || datas.Count == 0 || datas.Count % 2 != 0)
 		{
 			AppSetting.Instance.GetIlogger().Error("数据长度不正确 [package data] file://" + file.FileName);
@@ -83,28 +38,23 @@ public class Usable_cera_package : ViewModelBase
 		{
 			return;
 		}
-		_003C_003Ec__DisplayClass7_0 CS_0024_003C_003E8__locals7 = new _003C_003Ec__DisplayClass7_0();
-		CS_0024_003C_003E8__locals7.Cv1yhrq0l2 = new List<PvfFile> { BWnMuRAh66 };
-		CS_0024_003C_003E8__locals7.kbgyZJ5602 = AppSetting.Instance.GetIlogger();
-		Items.ForEach(delegate(package_data it)
+		List<PvfFile> files = new List<PvfFile> { file };
+		Ilogger ilogger = AppSetting.Instance.GetIlogger();
+		foreach (package_data item in Items)
 		{
-			PvfFile file = it.GetFile();
-			if (file == null)
+			PvfFile itemFile = item.GetFile();
+			if (itemFile == null)
 			{
-				Ilogger ilogger = CS_0024_003C_003E8__locals7.kbgyZJ5602;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(11, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("找不到对应文件 代码：");
-				defaultInterpolatedStringHandler.AppendFormatted(it.ItemCode);
-				ilogger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
+				ilogger.Error($"找不到对应文件 代码：{item.ItemCode}");
 			}
 			else
 			{
-				CS_0024_003C_003E8__locals7.Cv1yhrq0l2.Add(file);
+				files.Add(itemFile);
 			}
-		});
-		if (CS_0024_003C_003E8__locals7.Cv1yhrq0l2.Any())
+		}
+		if (files.Any())
 		{
-			CS_0024_003C_003E8__locals7.kbgyZJ5602.AddFileListToNewSearchPanel(CS_0024_003C_003E8__locals7.Cv1yhrq0l2.Select((PvfFile it) => it.FileName), brcjzDvagU.GetItemName(BWnMuRAh66));
+			ilogger.AddFileListToNewSearchPanel(files.Select(item => item.FileName), pvf.GetItemName(file));
 		}
 	}
 }

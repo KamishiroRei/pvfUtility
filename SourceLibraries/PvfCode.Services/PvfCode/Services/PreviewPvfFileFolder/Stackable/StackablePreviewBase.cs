@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Media;
 using DevExpress.Mvvm.DataAnnotations;
@@ -11,10 +10,7 @@ namespace PvfCode.Services.PreviewPvfFileFolder.Stackable;
 
 public class StackablePreviewBase : StackableOrEquPreviewBase
 {
-	private ServiceStackable HNbjNjnb1h;
-
-	[CompilerGenerated]
-	private RecipeViewModel? tg8jJsJBMV;
+	private ServiceStackable serviceStackable;
 
 	public StackableType? StackableType
 	{
@@ -138,7 +134,7 @@ public class StackablePreviewBase : StackableOrEquPreviewBase
 	{
 		get
 		{
-			if (HNbjNjnb1h.ScriptParserNew.GetSectionValue(base.Pvf, "[stack limit]", HNbjNjnb1h.ScriptParserNew.Sections, out string val))
+			if (serviceStackable.ScriptParserNew.GetSectionValue(base.Pvf, "[stack limit]", serviceStackable.ScriptParserNew.Sections, out string val))
 			{
 				return "携带上限：" + val + "个";
 			}
@@ -158,19 +154,7 @@ public class StackablePreviewBase : StackableOrEquPreviewBase
 		}
 	}
 
-	public RecipeViewModel? RecipeViewModel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return tg8jJsJBMV;
-		}
-		[CompilerGenerated]
-		set
-		{
-			tg8jJsJBMV = value;
-		}
-	}
+	public RecipeViewModel? RecipeViewModel { get; set; }
 
 	public EnchantCardInfo? EnchantCardInfo
 	{
@@ -210,15 +194,15 @@ public class StackablePreviewBase : StackableOrEquPreviewBase
 
 	public override void InitStackable()
 	{
-		HNbjNjnb1h = new ServiceStackable(base.Pvf, base.File);
-		BoosterInfo = Ju5jFaUF9W();
-		RuAjD8rmcV();
-		tHejmnQw8Z();
-		Debj4ZtnI3();
-		KOTjQ4es8b();
+		serviceStackable = new ServiceStackable(base.Pvf, base.File);
+		BoosterInfo = GetBoosterInfo();
+		InitRecipe();
+		InitEnchantCard();
+		InitEnchantWaste();
+		InitUsableCeraPackage();
 	}
 
-	private BoosterInfo? Ju5jFaUF9W()
+	private BoosterInfo? GetBoosterInfo()
 	{
 		if (!StackableType.HasValue)
 		{
@@ -227,40 +211,40 @@ public class StackablePreviewBase : StackableOrEquPreviewBase
 		StackableType value = StackableType.Value;
 		if (value == PvfCode.Models.Pvf.Enums.Stackable.StackableType.消耗品_可选盒子_0)
 		{
-			return HNbjNjnb1h.GetBoosterSelectionInfo(out BoosterInfo? selectionInfo) ? selectionInfo : null;
+			return serviceStackable.GetBoosterSelectionInfo(out BoosterInfo? selectionInfo) ? selectionInfo : null;
 		}
 		if ((uint)(value - 25) > 3u)
 		{
 			return null;
 		}
-		if (HNbjNjnb1h.GetBoosterInfo(out BoosterInfo boosterInfo))
+		if (serviceStackable.GetBoosterInfo(out BoosterInfo boosterInfo))
 		{
 			return boosterInfo;
 		}
 		return null;
 	}
 
-	private void RuAjD8rmcV()
+	private void InitRecipe()
 	{
 		if (StackableType.HasValue)
 		{
 			StackableType value = StackableType.Value;
-			if ((uint)(value - 19) <= 3u && HNbjNjnb1h.GetRecipe(out RecipeViewModel recipe))
+			if ((uint)(value - 19) <= 3u && serviceStackable.GetRecipe(out RecipeViewModel recipe))
 			{
 				RecipeViewModel = recipe;
 			}
 		}
 	}
 
-	private void tHejmnQw8Z()
+	private void InitEnchantCard()
 	{
-		if (StackableType == PvfCode.Models.Pvf.Enums.Stackable.StackableType.材料_附魔卡片_1 && HNbjNjnb1h.GetEnchantCardInfo(out EnchantCardInfo card))
+		if (StackableType == PvfCode.Models.Pvf.Enums.Stackable.StackableType.材料_附魔卡片_1 && serviceStackable.GetEnchantCardInfo(out EnchantCardInfo card))
 		{
 			EnchantCardInfo = card;
 		}
 	}
 
-	private void Debj4ZtnI3()
+	private void InitEnchantWaste()
 	{
 		if (StackableType == PvfCode.Models.Pvf.Enums.Stackable.StackableType.消耗品_附魔宝珠_0)
 		{
@@ -268,12 +252,12 @@ public class StackablePreviewBase : StackableOrEquPreviewBase
 		}
 	}
 
-	private void KOTjQ4es8b()
+	private void InitUsableCeraPackage()
 	{
 		if (StackableType.HasValue)
 		{
 			StackableType value = StackableType.Value;
-			if ((value == PvfCode.Models.Pvf.Enums.Stackable.StackableType.消耗品_点卷礼包_0 || value == PvfCode.Models.Pvf.Enums.Stackable.StackableType.消耗品_可选属性的时装礼包_0) && HNbjNjnb1h.GetUsable_cera_package(out Usable_cera_package usable_cera_package))
+			if ((value == PvfCode.Models.Pvf.Enums.Stackable.StackableType.消耗品_点卷礼包_0 || value == PvfCode.Models.Pvf.Enums.Stackable.StackableType.消耗品_可选属性的时装礼包_0) && serviceStackable.GetUsable_cera_package(out Usable_cera_package usable_cera_package))
 			{
 				Usable_cera_package = usable_cera_package;
 			}
@@ -299,12 +283,7 @@ public class StackablePreviewBase : StackableOrEquPreviewBase
 			PvfFile file = item.GetFile();
 			if (file == null)
 			{
-				StringBuilder stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder3 = stringBuilder2;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(12, 1, stringBuilder2);
-				handler.AppendLiteral("找不到对应的文件 代码：");
-				handler.AppendFormatted(file.ItemCode);
-				stringBuilder3.AppendLine(ref handler);
+				stringBuilder.AppendLine($"找不到对应的文件 代码：{item.ItemCode}");
 			}
 			else
 			{
@@ -316,12 +295,7 @@ public class StackablePreviewBase : StackableOrEquPreviewBase
 			PvfFile file2 = RecipeViewModel.ResultItem.GetFile();
 			if (file2 == null)
 			{
-				StringBuilder stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder4 = stringBuilder2;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(12, 1, stringBuilder2);
-				handler.AppendLiteral("找不到对应的文件 代码：");
-				handler.AppendFormatted(RecipeViewModel.ResultItem.ItemCode);
-				stringBuilder4.AppendLine(ref handler);
+				stringBuilder.AppendLine($"找不到对应的文件 代码：{RecipeViewModel.ResultItem.ItemCode}");
 			}
 			else
 			{

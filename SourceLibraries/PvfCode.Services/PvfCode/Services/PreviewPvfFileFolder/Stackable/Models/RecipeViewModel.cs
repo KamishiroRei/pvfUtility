@@ -1,95 +1,19 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using PvfCode.Dot;
 
 namespace PvfCode.Services.PreviewPvfFileFolder.Stackable.Models;
 
 public class RecipeViewModel
 {
-	[CompilerGenerated]
-	private List<RecipeItem> FUrjVBr5Vb;
+	public List<RecipeItem> Items { get; set; }
 
-	[CompilerGenerated]
-	private RecipeItem fiVjkRkDQV;
+	public RecipeItem ResultItem { get; set; }
 
-	[CompilerGenerated]
-	private RecipeSubJob? RrGjf4OZDu;
+	public RecipeSubJob? SubJob { get; set; }
 
-	[CompilerGenerated]
-	private bool Wmqj71NhW0;
+	public bool HasSubJob { get; set; }
 
-	[CompilerGenerated]
-	private RecipeSubJobType zGtjTHe7gC;
-
-	public List<RecipeItem> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return FUrjVBr5Vb;
-		}
-		[CompilerGenerated]
-		set
-		{
-			FUrjVBr5Vb = value;
-		}
-	}
-
-	public RecipeItem ResultItem
-	{
-		[CompilerGenerated]
-		get
-		{
-			return fiVjkRkDQV;
-		}
-		[CompilerGenerated]
-		set
-		{
-			fiVjkRkDQV = value;
-		}
-	}
-
-	public RecipeSubJob? SubJob
-	{
-		[CompilerGenerated]
-		get
-		{
-			return RrGjf4OZDu;
-		}
-		[CompilerGenerated]
-		set
-		{
-			RrGjf4OZDu = value;
-		}
-	}
-
-	public bool HasSubJob
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Wmqj71NhW0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Wmqj71NhW0 = value;
-		}
-	}
-
-	public RecipeSubJobType SubJobType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return zGtjTHe7gC;
-		}
-		[CompilerGenerated]
-		set
-		{
-			zGtjTHe7gC = value;
-		}
-	}
+	public RecipeSubJobType SubJobType { get; set; }
 
 	public static ResultData<RecipeViewModel> Create(List<int> datas, PvfGroup pvf)
 	{

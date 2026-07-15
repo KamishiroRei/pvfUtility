@@ -1,60 +1,14 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
 namespace PvfCode.Services.PreviewPvfFileFolder.Stackable;
 
 public class EnchantCardInfoLevelIconInfo
 {
-	[CompilerGenerated]
-	private ImageSource ohNjt6S6P6;
+	public ImageSource ImageSource { get; set; }
 
-	[CompilerGenerated]
-	private int wL8johFQqo;
+	public int Width { get; set; }
 
-	[CompilerGenerated]
-	private int UydjXOKtiY;
-
-	public ImageSource ImageSource
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ohNjt6S6P6;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ohNjt6S6P6 = value;
-		}
-	}
-
-	public int Width
-	{
-		[CompilerGenerated]
-		get
-		{
-			return wL8johFQqo;
-		}
-		[CompilerGenerated]
-		set
-		{
-			wL8johFQqo = value;
-		}
-	}
-
-	public int Height
-	{
-		[CompilerGenerated]
-		get
-		{
-			return UydjXOKtiY;
-		}
-		[CompilerGenerated]
-		set
-		{
-			UydjXOKtiY = value;
-		}
-	}
+	public int Height { get; set; }
 
 	public EnchantCardInfoLevelIconInfo(ImageSource imageSource, int width, int height)
 	{

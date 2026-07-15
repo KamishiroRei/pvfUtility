@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -8,41 +7,11 @@ namespace PvfCode.Services.PreviewPvfFileFolder.Stackable.Models;
 
 public class RecipeItem : ViewModelBase
 {
-	private readonly PvfGroup wZVjZOkCjs;
+	private readonly PvfGroup pvf;
 
-	[CompilerGenerated]
-	private int K6djhPSsIJ;
+	public int ItemCode { get; set; }
 
-	[CompilerGenerated]
-	private int iSbjdD98aY;
-
-	public int ItemCode
-	{
-		[CompilerGenerated]
-		get
-		{
-			return K6djhPSsIJ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			K6djhPSsIJ = value;
-		}
-	}
-
-	public int NeedCount
-	{
-		[CompilerGenerated]
-		get
-		{
-			return iSbjdD98aY;
-		}
-		[CompilerGenerated]
-		set
-		{
-			iSbjdD98aY = value;
-		}
-	}
+	public int NeedCount { get; set; }
 
 	public string? ItemName
 	{
@@ -53,7 +22,7 @@ public class RecipeItem : ViewModelBase
 			{
 				return null;
 			}
-			string itemName = wZVjZOkCjs.GetItemName(file);
+			string itemName = pvf.GetItemName(file);
 			if (string.IsNullOrEmpty(itemName))
 			{
 				return ItemCode.ToString();
@@ -66,10 +35,7 @@ public class RecipeItem : ViewModelBase
 	{
 		get
 		{
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(2, 1);
-			defaultInterpolatedStringHandler.AppendLiteral("0/");
-			defaultInterpolatedStringHandler.AppendFormatted(NeedCount);
-			return defaultInterpolatedStringHandler.ToStringAndClear();
+			return $"0/{NeedCount}";
 		}
 	}
 
@@ -82,8 +48,8 @@ public class RecipeItem : ViewModelBase
 			{
 				return null;
 			}
-			ImagePack2Service.Instance.TreeGetIcon(wZVjZOkCjs, file, out ImageSource imageSource);
-			return FilePreviewDataBase.Create(wZVjZOkCjs, file, imageSource);
+			ImagePack2Service.Instance.TreeGetIcon(pvf, file, out ImageSource imageSource);
+			return FilePreviewDataBase.Create(pvf, file, imageSource);
 		}
 	}
 
@@ -91,17 +57,17 @@ public class RecipeItem : ViewModelBase
 	{
 		ItemCode = itemCode;
 		NeedCount = needCount;
-		wZVjZOkCjs = pvf;
+		this.pvf = pvf;
 	}
 
 	public PvfFile? GetFile()
 	{
-		string text = wZVjZOkCjs.ListFileTable.ItemCodeConvertFilePath(ItemCode);
+		string text = pvf.ListFileTable.ItemCodeConvertFilePath(ItemCode);
 		if (text == null)
 		{
 			return null;
 		}
-		if (wZVjZOkCjs.FileList.TryGetValue(text, out PvfFile value))
+		if (pvf.FileList.TryGetValue(text, out PvfFile value))
 		{
 			return value;
 		}
@@ -117,10 +83,7 @@ public class RecipeItem : ViewModelBase
 		{
 			if (ilogger != null)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(12, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("找不到对应的文件 代码：");
-				defaultInterpolatedStringHandler.AppendFormatted(ItemCode);
-				ilogger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
+				ilogger.Error($"找不到对应的文件 代码：{ItemCode}");
 			}
 		}
 		else

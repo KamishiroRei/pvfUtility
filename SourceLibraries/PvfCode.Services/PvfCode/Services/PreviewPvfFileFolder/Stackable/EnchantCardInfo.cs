@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -17,26 +16,11 @@ namespace PvfCode.Services.PreviewPvfFileFolder.Stackable;
 
 public class EnchantCardInfo : ViewModelBase
 {
-	[CompilerGenerated]
-	private string Qtnjw3kMpk;
+	private readonly PvfFile file;
 
-	[CompilerGenerated]
-	private int xDrj6fjZDb;
+	private readonly PvfGroup pvf;
 
-	[CompilerGenerated]
-	private List<string> forj22lOBW;
-
-	[CompilerGenerated]
-	private int fFDjBs3ShM;
-
-	[CompilerGenerated]
-	private MonsterCategoryType? SbKjU0twip;
-
-	private readonly PvfFile eRUjvb1MLg;
-
-	private readonly PvfGroup hZMjWVfBVu;
-
-	private readonly ScriptFileParserNew pjXjiYfgjN;
+	private readonly ScriptFileParserNew scriptFileParser;
 
 	public ImageSource BackImageSource
 	{
@@ -74,47 +58,11 @@ public class EnchantCardInfo : ViewModelBase
 		}
 	}
 
-	public string BackImgPath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Qtnjw3kMpk;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Qtnjw3kMpk = value;
-		}
-	}
+	public string BackImgPath { get; set; }
 
-	public int BackImgIndex
-	{
-		[CompilerGenerated]
-		get
-		{
-			return xDrj6fjZDb;
-		}
-		[CompilerGenerated]
-		set
-		{
-			xDrj6fjZDb = value;
-		}
-	}
+	public int BackImgIndex { get; set; }
 
-	public List<string> EquipParts
-	{
-		[CompilerGenerated]
-		get
-		{
-			return forj22lOBW;
-		}
-		[CompilerGenerated]
-		set
-		{
-			forj22lOBW = value;
-		}
-	}
+	public List<string> EquipParts { get; set; }
 
 	public string? EquipPartsText
 	{
@@ -163,27 +111,15 @@ public class EnchantCardInfo : ViewModelBase
 	{
 		get
 		{
-			return GetProperty(() => MonsterLevelMini);
+			return GetProperty(() => MonsterLevelMax);
 		}
 		set
 		{
-			SetProperty(() => MonsterLevelMini, value);
+			SetProperty(() => MonsterLevelMax, value);
 		}
 	}
 
-	public int MonsterId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return fFDjBs3ShM;
-		}
-		[CompilerGenerated]
-		set
-		{
-			fFDjBs3ShM = value;
-		}
-	}
+	public int MonsterId { get; set; }
 
 	public string EnchantPropertiesString
 	{
@@ -197,19 +133,7 @@ public class EnchantCardInfo : ViewModelBase
 		}
 	}
 
-	public MonsterCategoryType? MonsterType
-	{
-		[CompilerGenerated]
-		get
-		{
-			return SbKjU0twip;
-		}
-		[CompilerGenerated]
-		set
-		{
-			SbKjU0twip = value;
-		}
-	}
+	public MonsterCategoryType? MonsterType { get; set; }
 
 	public ImageSource? MonsterTypeImageSource
 	{
@@ -229,16 +153,16 @@ public class EnchantCardInfo : ViewModelBase
 	{
 		get
 		{
-			if (pjXjiYfgjN.Sections != null)
+			if (scriptFileParser.Sections != null)
 			{
-				SectionBase sectionBase = pjXjiYfgjN.Sections.Where((SectionBase it) => it.GetSectionName() == "[enchant]").FirstOrDefault();
+				SectionBase sectionBase = scriptFileParser.Sections.Where((SectionBase it) => it.GetSectionName() == "[enchant]").FirstOrDefault();
 				if (sectionBase == null)
 				{
 					return null;
 				}
-				string? equWhiteAttributes = PvfFilePreviewHelper.GetEquWhiteAttributes(pjXjiYfgjN, sectionBase.Children, hZMjWVfBVu);
-				string text = PvfFilePreviewHelper.EquBlueAttributes(pjXjiYfgjN, sectionBase.Children, hZMjWVfBVu);
-				if (eRUjvb1MLg.GetNameText(hZMjWVfBVu, "[stat desc]", out string name) && !string.IsNullOrEmpty(name))
+				string? equWhiteAttributes = PvfFilePreviewHelper.GetEquWhiteAttributes(scriptFileParser, sectionBase.Children, pvf);
+				string text = PvfFilePreviewHelper.EquBlueAttributes(scriptFileParser, sectionBase.Children, pvf);
+				if (file.GetNameText(pvf, "[stat desc]", out string name) && !string.IsNullOrEmpty(name))
 				{
 					name = name.Replace("\\n", "");
 				}
@@ -262,9 +186,9 @@ public class EnchantCardInfo : ViewModelBase
 
 	public EnchantCardInfo(PvfFile file, PvfGroup pvf, ScriptFileParserNew scriptFileParserNew)
 	{
-		eRUjvb1MLg = file;
-		hZMjWVfBVu = pvf;
-		pjXjiYfgjN = scriptFileParserNew;
+		this.file = file;
+		this.pvf = pvf;
+		scriptFileParser = scriptFileParserNew;
 	}
 
 	[Command]
@@ -283,12 +207,7 @@ public class EnchantCardInfo : ViewModelBase
 			ResultData<ImageSource> image = ImagePack2Service.Instance.GetImage(BackImgPath.ToLower(), BackImgIndex);
 			if (image.IsError || image.Data == null)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(15, 2);
-				defaultInterpolatedStringHandler.AppendLiteral("在NPK中找不到卡片背景图：");
-				defaultInterpolatedStringHandler.AppendFormatted(BackImgPath);
-				defaultInterpolatedStringHandler.AppendLiteral(",");
-				defaultInterpolatedStringHandler.AppendFormatted(BackImgIndex);
-				ilogger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
+				ilogger.Error($"在NPK中找不到卡片背景图：{BackImgPath},{BackImgIndex}");
 			}
 			else
 			{
@@ -296,25 +215,22 @@ public class EnchantCardInfo : ViewModelBase
 				((Freezable)BackImageSource).Freeze();
 			}
 		}
-		string text = hZMjWVfBVu.ListFileTable.ItemCodeConvertFilePath("monster", MonsterId);
-		if (text == null || !hZMjWVfBVu.FileList.TryGetValue(text, out PvfFile value) || value == null)
+		string text = pvf.ListFileTable.ItemCodeConvertFilePath("monster", MonsterId);
+		if (text == null || !pvf.FileList.TryGetValue(text, out PvfFile value) || value == null)
 		{
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(13, 1);
-			defaultInterpolatedStringHandler2.AppendLiteral("找不到卡片怪物文件 ID：");
-			defaultInterpolatedStringHandler2.AppendFormatted(MonsterId);
-			ilogger.Error(defaultInterpolatedStringHandler2.ToStringAndClear());
+			ilogger.Error($"找不到卡片怪物文件 ID：{MonsterId}");
 			return;
 		}
-		if (value.GetMonsterType(hZMjWVfBVu, out var monsterCategoryType))
+		if (value.GetMonsterType(pvf, out var monsterCategoryType))
 		{
 			MonsterType = monsterCategoryType;
 			RaisePropertyChanged("MonsterTypeImageSource");
 		}
-		if (value.GetSectionIntArray(hZMjWVfBVu, "[level]", out List<int> items) && items.Count == 2)
+		if (value.GetSectionIntArray(pvf, "[level]", out List<int> items) && items.Count == 2)
 		{
 			MonsterLevelMini = items[0];
 			MonsterLevelMax = items[1];
-			eRUjvb1MLg.GetRarity((PvfPack)hZMjWVfBVu, out RarityType? rarityType);
+			file.GetRarity((PvfPack)pvf, out RarityType? rarityType);
 			if (!rarityType.HasValue)
 			{
 				rarityType = RarityType.普通;
