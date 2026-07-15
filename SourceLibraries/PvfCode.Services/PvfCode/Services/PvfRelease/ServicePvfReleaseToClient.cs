@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Collections.Pooled;
 using PvfCode.Dot;
@@ -17,50 +16,7 @@ namespace PvfCode.Services.PvfRelease;
 
 public class ServicePvfReleaseToClient : PvfReleaseBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass29_0
-	{
-		public string BEb1PBZqFx;
-
-		public bool K7S11hef2j;
-
-		public _003C_003Ec__DisplayClass29_0()
-		{
-		}
-
-		internal bool DTg13np7iy(SectionBase it)
-		{
-			if (it is PvfSection pvfSection && pvfSection.GetSectionName() == BEb1PBZqFx)
-			{
-				return pvfSection.HasEndSection() == K7S11hef2j;
-			}
-			return false;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass30_0
-	{
-		public string zjF1HES6hG;
-
-		public bool aXZ1AlCiup;
-
-		public _003C_003Ec__DisplayClass30_0()
-		{
-		}
-
-		internal bool u4x1yPMiYy(SectionBase it)
-		{
-			if (it is PvfSection pvfSection && pvfSection.GetSectionName() == zjF1HES6hG)
-			{
-				return pvfSection.HasEndSection() == aXZ1AlCiup;
-			}
-			return false;
-		}
-	}
-
-	[SpecialName]
-	private List<string> Yeil1tQl5W()
+	private List<string> GetDropFilePaths()
 	{
 		return new List<string>
 		{
@@ -87,8 +43,8 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		ResultData status = new ResultData();
 		if (options.SetDropFileBlank)
 		{
-			tFYCV3RoxG();
-			status = await y6YCkvHE8A();
+			BlankDropFiles();
+			status = await DeleteEquipmentCreationRate();
 			if (status.IsError)
 			{
 				return status;
@@ -96,7 +52,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.AddGiftBomb)
 		{
-			status = await KCeCTfvU0Z();
+			status = await AddGiftBomb();
 			if (status.IsError)
 			{
 				return status;
@@ -104,7 +60,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.ClearQuestMonsterRewardItem)
 		{
-			status = await fVuCzlBVRv();
+			status = await ClearQuestMonsterRewardItem();
 			if (status.IsError)
 			{
 				return status;
@@ -112,7 +68,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.DeleteQuestClearRewardItem)
 		{
-			status = await X1ZluOyxVX();
+			status = await DeleteQuestClearRewardItem();
 			if (status.IsError)
 			{
 				return status;
@@ -120,7 +76,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.DeleteQuestEnemyRewardItem)
 		{
-			status = await QHslI9yEbW();
+			status = await DeleteQuestEnemyRewardItem();
 			if (status.IsError)
 			{
 				return status;
@@ -128,7 +84,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.DeleteMapDungeon)
 		{
-			status = await SySle3ee67();
+			status = await DeleteMapDungeon();
 			if (status.IsError)
 			{
 				return status;
@@ -136,7 +92,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.SetMapMonsterCode1)
 		{
-			status = await sallCQ7Per();
+			status = await SetMapMonsterCode1();
 			if (status.IsError)
 			{
 				return status;
@@ -144,7 +100,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.SetMapAiCharacterCodeRandomApcId)
 		{
-			status = await xDdllj3Zqr();
+			status = await SetMapAiCharacterCodeRandomApcId();
 			if (status.IsError)
 			{
 				return status;
@@ -152,7 +108,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.SetLotteryRate1000)
 		{
-			status = await gL0lYQLbP9();
+			status = await SetLotteryRate1000();
 			if (status.IsError)
 			{
 				return status;
@@ -160,7 +116,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.DeleteMobCommonChampionDropItem)
 		{
-			status = await sj1ljRZTkt();
+			status = await DeleteMobCommonChampionDropItem();
 			if (status.IsError)
 			{
 				return status;
@@ -168,7 +124,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.DeleteMobItem)
 		{
-			status = await FK0l8Wvrbw();
+			status = await DeleteMobItem();
 			if (status.IsError)
 			{
 				return status;
@@ -176,7 +132,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.DeletePackageSections)
 		{
-			status = await HIyCZqMeFI();
+			status = await DeletePackageSections();
 			if (status.IsError)
 			{
 				return status;
@@ -184,7 +140,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.ReplaceMoboxRandomList)
 		{
-			status = await k6gChM8Rfx();
+			status = await ReplaceMoboxRandomList();
 			if (status.IsError)
 			{
 				return status;
@@ -192,7 +148,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.DeletePetEggOutputIndex)
 		{
-			status = await gdmCfRVwc1();
+			status = await DeletePetEggOutputIndex();
 			if (status.IsError)
 			{
 				return status;
@@ -200,7 +156,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.ClearEtcRefillItem)
 		{
-			status = await VuElMmDNCu();
+			status = await ClearEtcRefillItem();
 			if (status.IsError)
 			{
 				return status;
@@ -208,7 +164,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.DeleteDungeonMapSpecification)
 		{
-			status = await muYlOHkoOJ();
+			status = await DeleteDungeonMapSpecification();
 			if (status.IsError)
 			{
 				return status;
@@ -216,7 +172,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.ConfusePetCanItem)
 		{
-			status = await Xa6Cdi4c9m();
+			status = await ConfusePetCanItem();
 			if (status.IsError)
 			{
 				return status;
@@ -224,7 +180,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.SetEquEmancipateOutput)
 		{
-			status = await TSjC73Bu9y();
+			status = await SetEquEmancipateOutput();
 			if (status.IsError)
 			{
 				return status;
@@ -232,7 +188,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (options.SetPackageOutput)
 		{
-			status = await A2AC9NPx3V();
+			status = await SetPackageOutput();
 			if (status.IsError)
 			{
 				return status;
@@ -242,9 +198,9 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return status;
 	}
 
-	private void tFYCV3RoxG()
+	private void BlankDropFiles()
 	{
-		foreach (string item in Yeil1tQl5W())
+		foreach (string item in GetDropFilePaths())
 		{
 			if (Pvf.FileList.TryGetValue(item, out PvfFile value) && value != null)
 			{
@@ -253,7 +209,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 	}
 
-	private async Task<ResultData> y6YCkvHE8A()
+	private async Task<ResultData> DeleteEquipmentCreationRate()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -292,7 +248,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	private async Task<ResultData> gdmCfRVwc1()
+	private async Task<ResultData> DeletePetEggOutputIndex()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -331,7 +287,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	private async Task<ResultData> TSjC73Bu9y()
+	private async Task<ResultData> SetEquEmancipateOutput()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -378,7 +334,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	private async Task<ResultData> KCeCTfvU0Z()
+	private async Task<ResultData> AddGiftBomb()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -461,7 +417,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	private async Task<ResultData> HIyCZqMeFI()
+	private async Task<ResultData> DeletePackageSections()
 	{
 		Dictionary<string, bool> deleteSections = new Dictionary<string, bool>
 		{
@@ -507,7 +463,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 			bool flag = false;
 			foreach (KeyValuePair<string, bool> item in deleteSections)
 			{
-				if (Yhdl3GSR3Z(scriptFileParserNew.Sections, item.Key, item.Value))
+				if (RemoveSections(scriptFileParserNew.Sections, item.Key, item.Value))
 				{
 					flag = true;
 				}
@@ -520,7 +476,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return new ResultData();
 	}
 
-	private async Task<ResultData> k6gChM8Rfx()
+	private async Task<ResultData> ReplaceMoboxRandomList()
 	{
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
 		{
@@ -598,7 +554,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return new ResultData();
 	}
 
-	private async Task<ResultData> Xa6Cdi4c9m()
+	private async Task<ResultData> ConfusePetCanItem()
 	{
 		string equLstFilePath = "equipment/equipment.lst";
 		string stackableLstFilePath = "stackable/stackable.lst";
@@ -668,7 +624,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 						{
 							value2 = new Random(Guid.NewGuid().GetHashCode()).Next(0, equOlDic.Count + 10000);
 						}
-						value2 = uTiCg02MYe(flag2 ? equNewTable : stackableNewTable, flag2 ? equOlDic : stackableOlDic, data, value2, flag2, true);
+						value2 = CopyItemWithNewCode(flag2 ? equNewTable : stackableNewTable, flag2 ? equOlDic : stackableOlDic, data, value2, flag2, true);
 						if (value2 != -1)
 						{
 							dictionary.Add(data, value2);
@@ -696,16 +652,16 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (equNewTable.Count > 0)
 		{
-			JIfCqsnU84(equLstFilePath, equNewTable);
+			InsertLstItems(equLstFilePath, equNewTable);
 		}
 		if (stackableNewTable.Count > 0)
 		{
-			JIfCqsnU84(stackableLstFilePath, stackableNewTable);
+			InsertLstItems(stackableLstFilePath, stackableNewTable);
 		}
 		return re;
 	}
 
-	private async Task<ResultData> A2AC9NPx3V()
+	private async Task<ResultData> SetPackageOutput()
 	{
 		string equLstFilePath = "equipment/equipment.lst";
 		string stackableLstFilePath = "stackable/stackable.lst";
@@ -769,7 +725,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 				{
 					value2 = new Random(Guid.NewGuid().GetHashCode()).Next(0, equOlDic.Count + 10000);
 				}
-				value2 = uTiCg02MYe(flag ? equNewTable : stackableNewTable, flag ? equOlDic : stackableOlDic, data, value2, flag, true);
+				value2 = CopyItemWithNewCode(flag ? equNewTable : stackableNewTable, flag ? equOlDic : stackableOlDic, data, value2, flag, true);
 				if (value2 != -1)
 				{
 					newItemCodeDIc.Add(data, value2);
@@ -783,41 +739,36 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		}
 		if (equNewTable.Count > 0)
 		{
-			JIfCqsnU84(equLstFilePath, equNewTable);
+			InsertLstItems(equLstFilePath, equNewTable);
 		}
 		if (stackableNewTable.Count > 0)
 		{
-			JIfCqsnU84(stackableLstFilePath, stackableNewTable);
+			InsertLstItems(stackableLstFilePath, stackableNewTable);
 		}
 		return re;
 	}
 
-	private void JIfCqsnU84(string P_0, Dictionary<int, string> P_1)
+	private void InsertLstItems(string filePath, Dictionary<int, string> items)
 	{
-		PvfFile file = Pvf.GetFile(P_0);
+		PvfFile file = Pvf.GetFile(filePath);
 		if (file == null)
 		{
-			Pvf.FileList.Add(P_0, new PvfFile(P_0));
-			AppSetting.Instance.GetIlogger()?.TreeListAddFiles(new PooledList<string> { P_0 });
+			Pvf.FileList.Add(filePath, new PvfFile(filePath));
+			AppSetting.Instance.GetIlogger()?.TreeListAddFiles(new PooledList<string> { filePath });
 		}
-		List<string> list = Pvf.GetFileText(P_0).Split("\r\n").ToList();
+		List<string> list = Pvf.GetFileText(filePath).Split("\r\n").ToList();
 		int length = (file.FilePathHeader + "/").Length;
-		foreach (KeyValuePair<int, string> item in P_1)
+		foreach (KeyValuePair<int, string> item in items)
 		{
 			int index = new Random(Guid.NewGuid().GetHashCode()).Next(0, list.Count - 1);
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(3, 2);
-			defaultInterpolatedStringHandler.AppendFormatted(item.Key);
-			defaultInterpolatedStringHandler.AppendLiteral("\t`");
-			defaultInterpolatedStringHandler.AppendFormatted(item.Value.Substring(length, item.Value.Length - length));
-			defaultInterpolatedStringHandler.AppendLiteral("`");
-			list.Insert(index, defaultInterpolatedStringHandler.ToStringAndClear());
+			list.Insert(index, $"{item.Key}\t`{item.Value.Substring(length, item.Value.Length - length)}`");
 		}
-		Pvf.SaveFileText(P_0, "#PVF_File\r\n" + string.Join("\r\n", list));
+		Pvf.SaveFileText(filePath, "#PVF_File\r\n" + string.Join("\r\n", list));
 	}
 
-	private int uTiCg02MYe(Dictionary<int, string> P_0, Dictionary<int, LstItem> P_1, int P_2, int P_3, bool P_4, bool P_5)
+	private int CopyItemWithNewCode(Dictionary<int, string> newItems, Dictionary<int, LstItem> oldItems, int oldItemCode, int newItemCode, bool isEquipment, bool cloneFile)
 	{
-		if (!P_1.TryGetValue(P_2, out LstItem value) || value == null)
+		if (!oldItems.TryGetValue(oldItemCode, out LstItem value) || value == null)
 		{
 			return -1;
 		}
@@ -828,22 +779,17 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 			return -1;
 		}
 		string itemName = Pvf.GetItemName(fullPath);
-		string value2 = (P_4 ? ".equ" : ".stk");
-		string text = Path.Combine(Path.GetDirectoryName(fullPath), $"{P_3}{value2}").Replace("\\", "/");
+		string value2 = (isEquipment ? ".equ" : ".stk");
+		string text = Path.Combine(Path.GetDirectoryName(fullPath), $"{newItemCode}{value2}").Replace("\\", "/");
 		int num = 0;
 		while (Pvf.FileAny(text))
 		{
 			num++;
 			string? directoryName = Path.GetDirectoryName(fullPath);
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(1, 3);
-			defaultInterpolatedStringHandler.AppendFormatted(P_3);
-			defaultInterpolatedStringHandler.AppendLiteral("_");
-			defaultInterpolatedStringHandler.AppendFormatted(num);
-			defaultInterpolatedStringHandler.AppendFormatted(value2);
-			text = Path.Combine(directoryName, defaultInterpolatedStringHandler.ToStringAndClear()).Replace("\\", "/");
+			text = Path.Combine(directoryName, $"{newItemCode}_{num}{value2}").Replace("\\", "/");
 		}
-		P_1.Add(P_3, null);
-		if (P_5)
+		oldItems.Add(newItemCode, null);
+		if (cloneFile)
 		{
 			PvfFile pvfFile = (PvfFile)file.Clone();
 			pvfFile.Rename(text);
@@ -854,20 +800,13 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 			Pvf.FileList.Add(text, new PvfFile(text));
 			int rarity = 0;
 			file?.GetRarity((PvfPack)Pvf, out rarity);
-			PvfGroup pvf = Pvf;
-			string filePath = text;
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(33, 2);
-			defaultInterpolatedStringHandler2.AppendLiteral("#PVF_File\r\n[name]\r\n`");
-			defaultInterpolatedStringHandler2.AppendFormatted(itemName);
-			defaultInterpolatedStringHandler2.AppendLiteral("`\r\n[rarity]\r\n");
-			defaultInterpolatedStringHandler2.AppendFormatted(rarity);
-			pvf.SaveFileText(filePath, defaultInterpolatedStringHandler2.ToStringAndClear());
+			Pvf.SaveFileText(text, $"#PVF_File\r\n[name]\r\n`{itemName}`\r\n[rarity]\r\n{rarity}");
 		}
-		P_0.Add(P_3, text);
-		return P_3;
+		newItems.Add(newItemCode, text);
+		return newItemCode;
 	}
 
-	private async Task<ResultData> fVuCzlBVRv()
+	private async Task<ResultData> ClearQuestMonsterRewardItem()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -909,7 +848,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	private async Task<ResultData> X1ZluOyxVX()
+	private async Task<ResultData> DeleteQuestClearRewardItem()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -935,7 +874,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 				IEnumerable<SectionBase> enumerable = scriptFileParserNew.Sections.Where((SectionBase it) => it is PvfSection pvfSection && pvfSection.GetSectionName() == "[clear reward item]" && it.HasEndSection());
 				if (enumerable != null)
 				{
-					e5QlPBa4B3(enumerable, "[clear reward item]", true);
+					ClearSectionContents(enumerable, "[clear reward item]", true);
 					Pvf.SaveFileText(value, scriptFileParserNew.GetText());
 				}
 			}
@@ -943,7 +882,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	private async Task<ResultData> QHslI9yEbW()
+	private async Task<ResultData> DeleteQuestEnemyRewardItem()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -977,7 +916,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	private async Task<ResultData> SySle3ee67()
+	private async Task<ResultData> DeleteMapDungeon()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -1019,7 +958,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	private async Task<ResultData> sallCQ7Per()
+	private async Task<ResultData> SetMapMonsterCode1()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -1075,7 +1014,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	private async Task<ResultData> xDdllj3Zqr()
+	private async Task<ResultData> SetMapAiCharacterCodeRandomApcId()
 	{
 		ResultData re = new ResultData();
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
@@ -1140,8 +1079,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return re;
 	}
 
-	[SpecialName]
-	private HashSet<string> PoDlHosm4T()
+	private HashSet<string> GetLotteryFilePaths()
 	{
 		return new HashSet<string>
 		{
@@ -1151,9 +1089,9 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		};
 	}
 
-	private Task<ResultData> gL0lYQLbP9()
+	private Task<ResultData> SetLotteryRate1000()
 	{
-		foreach (string item in PoDlHosm4T())
+		foreach (string item in GetLotteryFilePaths())
 		{
 			if (!Pvf.FileList.TryGetValue(item, out PvfFile value) || value == null)
 			{
@@ -1196,7 +1134,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return Task.FromResult(new ResultData());
 	}
 
-	private async Task<ResultData> FK0l8Wvrbw()
+	private async Task<ResultData> DeleteMobItem()
 	{
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
 		{
@@ -1214,7 +1152,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 			{
 				ScriptFileParserNew scriptFileParserNew = new ScriptFileParserNew(value, Pvf);
 				scriptFileParserNew.PraseStructureMain();
-				if (scriptFileParserNew.Sections != null && scriptFileParserNew.Sections.Count > 0 && Yhdl3GSR3Z(scriptFileParserNew.Sections, "[item]", true))
+				if (scriptFileParserNew.Sections != null && scriptFileParserNew.Sections.Count > 0 && RemoveSections(scriptFileParserNew.Sections, "[item]", true))
 				{
 					Pvf.SaveFileText(value, scriptFileParserNew.GetText());
 				}
@@ -1223,7 +1161,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return new ResultData();
 	}
 
-	private async Task<ResultData> sj1ljRZTkt()
+	private async Task<ResultData> DeleteMobCommonChampionDropItem()
 	{
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
 		{
@@ -1241,7 +1179,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 			{
 				ScriptFileParserNew scriptFileParserNew = new ScriptFileParserNew(value, Pvf);
 				scriptFileParserNew.PraseStructureMain();
-				if (scriptFileParserNew.Sections != null && scriptFileParserNew.Sections.Count > 0 && Yhdl3GSR3Z(scriptFileParserNew.Sections, "[common champion drop item]", true))
+				if (scriptFileParserNew.Sections != null && scriptFileParserNew.Sections.Count > 0 && RemoveSections(scriptFileParserNew.Sections, "[common champion drop item]", true))
 				{
 					Pvf.SaveFileText(value, scriptFileParserNew.GetText());
 				}
@@ -1250,7 +1188,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return new ResultData();
 	}
 
-	private Task<ResultData> VuElMmDNCu()
+	private Task<ResultData> ClearEtcRefillItem()
 	{
 		ResultData result = new ResultData();
 		if (Pvf.FileList.TryGetValue("etc/chn_server_limititemusageinfo.etc", out PvfFile value) && value != null)
@@ -1259,31 +1197,31 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 			scriptFileParserNew.PraseStructureMain();
 			if (scriptFileParserNew.Sections != null && scriptFileParserNew.Sections.Count > 0)
 			{
-				e5QlPBa4B3(scriptFileParserNew.Sections, "[refill item]", true);
+				ClearSectionContents(scriptFileParserNew.Sections, "[refill item]", true);
 				Pvf.SaveFileText(value, scriptFileParserNew.GetText());
 			}
 		}
 		return Task.FromResult(result);
 	}
 
-	private async Task<ResultData> muYlOHkoOJ()
+	private async Task<ResultData> DeleteDungeonMapSpecification()
 	{
-		ResultData resultData = await jVSl0XE6wI("[/map specification]", "dungeon", "[map specification]");
+		ResultData resultData = await SearchAndRemoveSections("[/map specification]", "dungeon", "[map specification]");
 		if (resultData.IsError)
 		{
 			return resultData;
 		}
-		resultData = await jVSl0XE6wI("[/special passive object item]", "dungeon", "[special passive object item]");
+		resultData = await SearchAndRemoveSections("[/special passive object item]", "dungeon", "[special passive object item]");
 		if (resultData.IsError)
 		{
 			return resultData;
 		}
-		resultData = await jVSl0XE6wI("[/start map]", "dungeon", "[start map]");
+		resultData = await SearchAndRemoveSections("[/start map]", "dungeon", "[start map]");
 		if (resultData.IsError)
 		{
 			return resultData;
 		}
-		resultData = await jVSl0XE6wI("[/boss map]", "dungeon", "[boss map]");
+		resultData = await SearchAndRemoveSections("[/boss map]", "dungeon", "[boss map]");
 		if (resultData.IsError)
 		{
 			return resultData;
@@ -1291,12 +1229,12 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return new ResultData();
 	}
 
-	private async Task<ResultData> jVSl0XE6wI(string P_0, string P_1, string P_2, bool P_3 = true)
+	private async Task<ResultData> SearchAndRemoveSections(string keyword, string searchFolder, string sectionName, bool hasEnding = true)
 	{
 		ResultData<HashSet<string>> resultData = await new SearchService(new SearchConfig
 		{
-			Keyword = P_0,
-			SearchFolder = P_1,
+			Keyword = keyword,
+			SearchFolder = searchFolder,
 			Type = SearchType.Strings
 		}, Pvf).Search();
 		if (resultData.IsError)
@@ -1309,7 +1247,7 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 			{
 				ScriptFileParserNew scriptFileParserNew = new ScriptFileParserNew(value, Pvf);
 				scriptFileParserNew.PraseStructureMain();
-				if (scriptFileParserNew.Sections != null && scriptFileParserNew.Sections.Count > 0 && Yhdl3GSR3Z(scriptFileParserNew.Sections, P_2, P_3))
+				if (scriptFileParserNew.Sections != null && scriptFileParserNew.Sections.Count > 0 && RemoveSections(scriptFileParserNew.Sections, sectionName, hasEnding))
 				{
 					Pvf.SaveFileText(value, scriptFileParserNew.GetText());
 				}
@@ -1318,35 +1256,29 @@ public class ServicePvfReleaseToClient : PvfReleaseBase
 		return new ResultData();
 	}
 
-	private bool Yhdl3GSR3Z(IList<SectionBase> P_0, string P_1, bool P_2)
+	private bool RemoveSections(IList<SectionBase> sections, string sectionName, bool hasEnding)
 	{
-		_003C_003Ec__DisplayClass29_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass29_0();
-		CS_0024_003C_003E8__locals4.BEb1PBZqFx = P_1;
-		CS_0024_003C_003E8__locals4.K7S11hef2j = P_2;
-		if (P_0 == null)
+		if (sections == null)
 		{
 			return false;
 		}
-		IEnumerable<SectionBase> enumerable = P_0.Where((SectionBase it) => it is PvfSection pvfSection && pvfSection.GetSectionName() == CS_0024_003C_003E8__locals4.BEb1PBZqFx && pvfSection.HasEndSection() == CS_0024_003C_003E8__locals4.K7S11hef2j);
+		IEnumerable<SectionBase> enumerable = sections.Where((SectionBase it) => it is PvfSection pvfSection && pvfSection.GetSectionName() == sectionName && pvfSection.HasEndSection() == hasEnding);
 		bool result = false;
 		if (enumerable != null)
 		{
-			P_0.RemoveRangeIfContains(enumerable.ToArray());
+			sections.RemoveRangeIfContains(enumerable.ToArray());
 			result = true;
 		}
 		return result;
 	}
 
-	private bool e5QlPBa4B3(IEnumerable<SectionBase> P_0, string P_1, bool P_2)
+	private bool ClearSectionContents(IEnumerable<SectionBase> sections, string sectionName, bool hasEnding)
 	{
-		_003C_003Ec__DisplayClass30_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass30_0();
-		CS_0024_003C_003E8__locals4.zjF1HES6hG = P_1;
-		CS_0024_003C_003E8__locals4.aXZ1AlCiup = P_2;
-		if (P_0 == null)
+		if (sections == null)
 		{
 			return false;
 		}
-		IEnumerable<SectionBase> enumerable = P_0.Where((SectionBase it) => it is PvfSection pvfSection && pvfSection.GetSectionName() == CS_0024_003C_003E8__locals4.zjF1HES6hG && pvfSection.HasEndSection() == CS_0024_003C_003E8__locals4.aXZ1AlCiup);
+		IEnumerable<SectionBase> enumerable = sections.Where((SectionBase it) => it is PvfSection pvfSection && pvfSection.GetSectionName() == sectionName && pvfSection.HasEndSection() == hasEnding);
 		bool result = false;
 		if (enumerable != null)
 		{
