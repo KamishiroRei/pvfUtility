@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -9,9 +8,9 @@ namespace PvfCode.Services.PreviewPvfFileFolder.NpcShop;
 
 public class NpcShopPreviewItem : ViewModelBase
 {
-	private readonly PvfGroup by7M1KMUtt;
+	private readonly PvfGroup pvf;
 
-	private PvfFile? BTWMP1YHZr
+	private PvfFile? File
 	{
 		get
 		{
@@ -19,7 +18,7 @@ public class NpcShopPreviewItem : ViewModelBase
 			{
 				return null;
 			}
-			return by7M1KMUtt.ListFileTable.ItemCodeConvertPvfFile(by7M1KMUtt, ItemCode);
+			return pvf.ListFileTable.ItemCodeConvertPvfFile(pvf, ItemCode);
 		}
 	}
 
@@ -39,12 +38,12 @@ public class NpcShopPreviewItem : ViewModelBase
 	{
 		get
 		{
-			PvfFile pvfFile = BTWMP1YHZr;
+			PvfFile pvfFile = File;
 			if (pvfFile == null)
 			{
 				return null;
 			}
-			ImagePack2Service.Instance.TreeGetIcon(by7M1KMUtt, pvfFile, out ImageSource imageSource);
+			ImagePack2Service.Instance.TreeGetIcon(pvf, pvfFile, out ImageSource imageSource);
 			if (imageSource != null)
 			{
 				return imageSource;
@@ -57,12 +56,12 @@ public class NpcShopPreviewItem : ViewModelBase
 	{
 		get
 		{
-			PvfFile pvfFile = BTWMP1YHZr;
+			PvfFile pvfFile = File;
 			if (pvfFile == null || pvfFile.FileType != PvfFileType.equ)
 			{
 				return false;
 			}
-			if (pvfFile.GetAttachType(by7M1KMUtt, out var attachType))
+			if (pvfFile.GetAttachType(pvf, out var attachType))
 			{
 				return attachType == AttachType.sealing;
 			}
@@ -90,20 +89,20 @@ public class NpcShopPreviewItem : ViewModelBase
 			{
 				return null;
 			}
-			PvfFile pvfFile = BTWMP1YHZr;
+			PvfFile pvfFile = File;
 			if (pvfFile == null)
 			{
 				return null;
 			}
-			ImagePack2Service.Instance.TreeGetIcon(by7M1KMUtt, pvfFile, out ImageSource imageSource);
-			return FilePreviewDataBase.Create(by7M1KMUtt, pvfFile, imageSource);
+			ImagePack2Service.Instance.TreeGetIcon(pvf, pvfFile, out ImageSource imageSource);
+			return FilePreviewDataBase.Create(pvf, pvfFile, imageSource);
 		}
 	}
 
 	public NpcShopPreviewItem(int itemCode, PvfGroup pvf)
 	{
 		ItemCode = itemCode;
-		by7M1KMUtt = pvf;
+		this.pvf = pvf;
 	}
 
 	public NpcShopPreviewItem()
@@ -117,13 +116,10 @@ public class NpcShopPreviewItem : ViewModelBase
 		if (ItemCode != -1)
 		{
 			Ilogger ilogger = AppSetting.Instance.GetIlogger();
-			PvfFile pvfFile = BTWMP1YHZr;
+			PvfFile pvfFile = File;
 			if (pvfFile == null)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(10, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("代码对应文件不存在：");
-				defaultInterpolatedStringHandler.AppendFormatted(ItemCode);
-				ilogger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
+				ilogger.Error($"代码对应文件不存在：{ItemCode}");
 			}
 			else
 			{

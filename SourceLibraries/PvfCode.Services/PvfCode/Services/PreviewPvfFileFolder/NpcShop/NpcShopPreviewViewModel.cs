@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
@@ -13,57 +12,7 @@ namespace PvfCode.Services.PreviewPvfFileFolder.NpcShop;
 
 public class NpcShopPreviewViewModel : FilePreviewDataBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass13_0
-	{
-		public ConcurrentObservableCollection<NpcShopPreviewItem> nkry9DLiHg;
-
-		public int G44yqHbwvm;
-
-		public List<NpcTabItemViewModel> KaNygkcLm5;
-
-		public List<string> uwqyzON891;
-
-		public NpcShopPreviewViewModel xMEHuXWi65;
-
-		public _003C_003Ec__DisplayClass13_0()
-		{
-		}
-
-		internal void zQjydtoER6(int code)
-		{
-			if (code == -2)
-			{
-				nkry9DLiHg = new ConcurrentObservableCollection<NpcShopPreviewItem>();
-				G44yqHbwvm++;
-				KaNygkcLm5.Add(new NpcTabItemViewModel(lPLMYWeuja(uwqyzON891, G44yqHbwvm), nkry9DLiHg));
-			}
-			else
-			{
-				nkry9DLiHg.Add(new NpcShopPreviewItem(code, xMEHuXWi65.Pvf));
-			}
-		}
-	}
-
-	[CompilerGenerated]
-	private int UQDM8PeMv4;
-
-	[CompilerGenerated]
-	private ConcurrentObservableCollection<NpcTabItemViewModel> IxRMjs78DY;
-
-	public int NpcId
-	{
-		[CompilerGenerated]
-		get
-		{
-			return UQDM8PeMv4;
-		}
-		[CompilerGenerated]
-		set
-		{
-			UQDM8PeMv4 = value;
-		}
-	}
+	public int NpcId { get; set; }
 
 	public string NpcName
 	{
@@ -76,28 +25,13 @@ public class NpcShopPreviewViewModel : FilePreviewDataBase
 			PvfFile pvfFile = base.Pvf.ListFileTable.ItemCodeConvertPvfFile(base.Pvf, NpcId, new string[1] { "npc" });
 			if (pvfFile == null)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(6, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("未知NPC：");
-				defaultInterpolatedStringHandler.AppendFormatted(NpcId);
-				return defaultInterpolatedStringHandler.ToStringAndClear();
+				return $"未知NPC：{NpcId}";
 			}
 			return base.Pvf.GetItemName(pvfFile);
 		}
 	}
 
-	public ConcurrentObservableCollection<NpcTabItemViewModel> Items
-	{
-		[CompilerGenerated]
-		get
-		{
-			return IxRMjs78DY;
-		}
-		[CompilerGenerated]
-		set
-		{
-			IxRMjs78DY = value;
-		}
-	}
+	public ConcurrentObservableCollection<NpcTabItemViewModel> Items { get; set; }
 
 	public NpcShopPreviewViewModel(PvfGroup pvf, PvfFile file, ImageSource? imageSource = null)
 		: base(pvf, file, imageSource)
@@ -109,7 +43,7 @@ public class NpcShopPreviewViewModel : FilePreviewDataBase
 	[Command]
 	public void OnPreviewLoaded()
 	{
-		Task.Run((Action)XCKMl91ujh);
+		Task.Run((Action)LoadItems);
 	}
 
 	[Command]
@@ -122,10 +56,8 @@ public class NpcShopPreviewViewModel : FilePreviewDataBase
 		}
 	}
 
-	private void XCKMl91ujh()
+	private void LoadItems()
 	{
-		_003C_003Ec__DisplayClass13_0 CS_0024_003C_003E8__locals19 = new _003C_003Ec__DisplayClass13_0();
-		CS_0024_003C_003E8__locals19.xMEHuXWi65 = this;
 		ConcurrentObservableCollection<NpcTabItemViewModel> items = Items;
 		if (items != null && items.Any())
 		{
@@ -158,13 +90,7 @@ public class NpcShopPreviewViewModel : FilePreviewDataBase
 				list.Add(BitConverter.ToInt32(base.File.Data, i + 1));
 				continue;
 			}
-			StringBuilder stringBuilder2 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(31, 2, stringBuilder2);
-			handler.AppendLiteral("商店物品数据类型只能是int 已忽略该值类型：");
-			handler.AppendFormatted(b);
-			handler.AppendLiteral(" file://");
-			handler.AppendFormatted(base.File.FileName);
-			stringBuilder2.AppendLine(ref handler);
+			stringBuilder.AppendLine($"商店物品数据类型只能是int 已忽略该值类型：{b} file://{base.File.FileName}");
 		}
 		if (stringBuilder.Length > 0)
 		{
@@ -175,31 +101,31 @@ public class NpcShopPreviewViewModel : FilePreviewDataBase
 			NpcId = npcId;
 			RaisePropertyChanged("NpcName");
 		}
-		if (!base.File.GetSectionTypeIsStrArray(base.Pvf, "[tab name]", out CS_0024_003C_003E8__locals19.uwqyzON891))
+		if (!base.File.GetSectionTypeIsStrArray(base.Pvf, "[tab name]", out List<string> tabNames))
 		{
-			CS_0024_003C_003E8__locals19.uwqyzON891 = new List<string>();
+			tabNames = new List<string>();
 		}
-		CS_0024_003C_003E8__locals19.G44yqHbwvm = 0;
-		CS_0024_003C_003E8__locals19.nkry9DLiHg = new ConcurrentObservableCollection<NpcShopPreviewItem>();
-		CS_0024_003C_003E8__locals19.KaNygkcLm5 = new List<NpcTabItemViewModel>();
-		CS_0024_003C_003E8__locals19.KaNygkcLm5.Add(new NpcTabItemViewModel(lPLMYWeuja(CS_0024_003C_003E8__locals19.uwqyzON891, CS_0024_003C_003E8__locals19.G44yqHbwvm), CS_0024_003C_003E8__locals19.nkry9DLiHg)
+		int tabIndex = 0;
+		ConcurrentObservableCollection<NpcShopPreviewItem> tabItems = new ConcurrentObservableCollection<NpcShopPreviewItem>();
+		List<NpcTabItemViewModel> tabs = new List<NpcTabItemViewModel>();
+		tabs.Add(new NpcTabItemViewModel(GetTabTitle(tabNames, tabIndex), tabItems)
 		{
 			IsSelected = true
 		});
-		list.ForEach(delegate(int code)
+		foreach (int code in list)
 		{
 			if (code == -2)
 			{
-				CS_0024_003C_003E8__locals19.nkry9DLiHg = new ConcurrentObservableCollection<NpcShopPreviewItem>();
-				CS_0024_003C_003E8__locals19.G44yqHbwvm++;
-				CS_0024_003C_003E8__locals19.KaNygkcLm5.Add(new NpcTabItemViewModel(lPLMYWeuja(CS_0024_003C_003E8__locals19.uwqyzON891, CS_0024_003C_003E8__locals19.G44yqHbwvm), CS_0024_003C_003E8__locals19.nkry9DLiHg));
+				tabItems = new ConcurrentObservableCollection<NpcShopPreviewItem>();
+				tabIndex++;
+				tabs.Add(new NpcTabItemViewModel(GetTabTitle(tabNames, tabIndex), tabItems));
 			}
 			else
 			{
-				CS_0024_003C_003E8__locals19.nkry9DLiHg.Add(new NpcShopPreviewItem(code, CS_0024_003C_003E8__locals19.xMEHuXWi65.Pvf));
+				tabItems.Add(new NpcShopPreviewItem(code, Pvf));
 			}
-		});
-		Items.AddRange(CS_0024_003C_003E8__locals19.KaNygkcLm5);
+		}
+		Items.AddRange(tabs);
 	}
 
 	public static bool Create(PvfFile file, PvfGroup pvf, out NpcShopPreviewViewModel? npcShopPreviewViewModel)
@@ -213,12 +139,12 @@ public class NpcShopPreviewViewModel : FilePreviewDataBase
 		return true;
 	}
 
-	private static string lPLMYWeuja(List<string> P_0, int P_1)
+	private static string GetTabTitle(List<string> tabNames, int tabIndex)
 	{
 		string text = "商店";
-		if (P_0 != null && P_0.Any() && P_1 < P_0.Count)
+		if (tabNames != null && tabNames.Any() && tabIndex < tabNames.Count)
 		{
-			text = P_0[P_1];
+			text = tabNames[tabIndex];
 			if (string.IsNullOrEmpty(text))
 			{
 				text = "商店";
