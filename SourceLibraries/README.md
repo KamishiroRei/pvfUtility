@@ -114,13 +114,14 @@ interpolated-string handlers, or invalid-IL decompiler comments. Private fields
 and helpers now use behavior-based semantic names.
 
 The targeted `using System.Runtime.CompilerServices;` audit is complete. Of the
-remaining 31 matching files, 19 are assembly metadata, seven are generated
-resource/localization accessors, one is generated settings code, one is a module
-initializer, one is a `CallerMemberName` helper, and two are normal handwritten
-or upstream-library implementations (`PvfSkillClassifier` and AvalonEdit's
-`EmptySelection`). These files retain the using because it is required by their
-generated contract or runtime implementation; they contain no unresolved private
-obfuscation selected by this audit.
+remaining 27 matching files, 19 are assembly metadata, four are generated
+resource/localization accessors, one is a module initializer, one is a
+`CallerMemberName` helper, and two are normal handwritten or upstream-library
+implementations (`PvfSkillClassifier` and AvalonEdit's `EmptySelection`). These
+files retain the using because it is required by their generated contract or
+runtime implementation; they contain no unresolved private obfuscation selected
+by this audit. One empty generated settings type and three unreferenced generated
+resource accessors were removed; the corresponding RESX resources remain tracked.
 
 Normalization is not complete across all 1,394 C# files. Model libraries and
 recovered UI dependencies still retain expanded auto-property accessors,
