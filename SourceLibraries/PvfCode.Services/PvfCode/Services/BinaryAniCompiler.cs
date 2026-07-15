@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using Collections.Pooled;
 using PvfCode.Dot;
@@ -17,91 +16,25 @@ namespace PvfCode.Services;
 
 public static class BinaryAniCompiler
 {
-	private class ffP2dGOSCUMNUS9ggmI
+	private class AniSection
 	{
-		[CompilerGenerated]
-		private string KQC0ueRWoG;
+		public string SectionName { get; set; }
 
-		[CompilerGenerated]
-		private List<string> mmc0I78JSr;
+		public List<string> Items { get; set; } = new List<string>();
 
-		[CompilerGenerated]
-		private List<ffP2dGOSCUMNUS9ggmI> wUF0e1WfCV;
+		public List<AniSection> Children { get; set; } = new List<AniSection>();
 
-		[CompilerGenerated]
-		private bool bC70CmZIbM;
+		public bool HasEnding { get; set; }
 
-		public string SectionName
-		{
-			[CompilerGenerated]
-			get
-			{
-				return KQC0ueRWoG;
-			}
-			[CompilerGenerated]
-			set
-			{
-				KQC0ueRWoG = value;
-			}
-		}
-
-		public ffP2dGOSCUMNUS9ggmI()
-		{
-			eEtOd4gXr1(new List<ffP2dGOSCUMNUS9ggmI>());
-			qUTOTdL0vu(new List<string>());
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public List<string> TtJO7DF1PT()
-		{
-			return mmc0I78JSr;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public void qUTOTdL0vu(List<string> P_0)
-		{
-			mmc0I78JSr = P_0;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public List<ffP2dGOSCUMNUS9ggmI> BxiOhMIJuP()
-		{
-			return wUF0e1WfCV;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public void eEtOd4gXr1(List<ffP2dGOSCUMNUS9ggmI> P_0)
-		{
-			wUF0e1WfCV = P_0;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public bool tldOqUdS1c()
-		{
-			return bC70CmZIbM;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public void mIwOgnH2HO(bool P_0)
-		{
-			bC70CmZIbM = P_0;
-		}
-
-		public ResultData uMtObuuZ1N(StringBuilder P_0, List<string> P_1)
+		public ResultData AppendConvertedText(StringBuilder output, List<string> imagePaths)
 		{
 			ResultData resultData = new ResultData();
-			if (tldOqUdS1c())
+			if (HasEnding)
 			{
-				P_0.AppendLine(SectionName);
-				foreach (ffP2dGOSCUMNUS9ggmI item in BxiOhMIJuP())
+				output.AppendLine(SectionName);
+				foreach (AniSection item in Children)
 				{
-					ResultData resultData2 = item.uMtObuuZ1N(P_0, P_1);
+					ResultData resultData2 = item.AppendConvertedText(output, imagePaths);
 					if (resultData2.IsError)
 					{
 						return resultData2;
@@ -112,9 +45,9 @@ public static class BinaryAniCompiler
 			{
 				if (SectionName == "[IMAGE POS]")
 				{
-					P_0.AppendLine(SectionName);
+					output.AppendLine(SectionName);
 					List<int> list = new List<int>();
-					foreach (string item2 in TtJO7DF1PT())
+					foreach (string item2 in Items)
 					{
 						if (double.TryParse(item2, out var result))
 						{
@@ -137,91 +70,71 @@ public static class BinaryAniCompiler
 						resultData.Msg = "转换失败 [IMAGE POS] 下的值应为2个一组";
 						return resultData;
 					}
-					StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(1, 2, P_0);
-					handler.AppendFormatted(list[0].ToString());
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(list[1].ToString());
-					P_0.AppendLine(ref handler);
+					output.AppendLine($"{list[0]}\t{list[1]}");
 				}
 				else
 				{
-					P_0.AppendLine(SectionName);
-					P_0.AppendLine(string.Join("\r\n", TtJO7DF1PT()));
+					output.AppendLine(SectionName);
+					output.AppendLine(string.Join("\r\n", Items));
 				}
 			}
 			else if (SectionName == "[IMAGE EX]")
 			{
-				if (TtJO7DF1PT().Count == 0)
+				if (Items.Count == 0)
 				{
 					resultData.Msg = "[IMAGE EX]下的值不正确 应为 2个一组";
 					return resultData;
 				}
-				P_0.AppendLine("[IMAGE]");
-				if (TtJO7DF1PT()[0] == "-1")
+				output.AppendLine("[IMAGE]");
+				if (Items[0] == "-1")
 				{
-					P_0.AppendLine("``");
-					P_0.AppendLine("0");
+					output.AppendLine("``");
+					output.AppendLine("0");
 					return resultData;
 				}
-				if (TtJO7DF1PT().Count != 2)
+				if (Items.Count != 2)
 				{
 					resultData.Msg = "[IMAGE EX]下的值不正确 应为 2个一组";
 					return resultData;
 				}
-				string text = TtJO7DF1PT()[0];
-				ResultData resultData3 = A2EOVE8Wky(P_1, text, P_0);
+				string text = Items[0];
+				ResultData resultData3 = AppendImagePath(imagePaths, text, output);
 				if (resultData3.IsError)
 				{
 					return resultData3;
 				}
-				P_0.AppendLine((int.TryParse(TtJO7DF1PT()[1], out var result2) ? result2 : 0).ToString());
+				output.AppendLine((int.TryParse(Items[1], out var result2) ? result2 : 0).ToString());
 			}
 			return resultData;
 		}
 
-		private ResultData A2EOVE8Wky(List<string> P_0, string P_1, StringBuilder P_2)
+		private ResultData AppendImagePath(List<string> imagePaths, string imageIndex, StringBuilder output)
 		{
 			ResultData resultData = new ResultData();
-			if (!int.TryParse(P_1, out var result))
+			if (!int.TryParse(imageIndex, out var result))
 			{
 				resultData.Msg = "[IMAGE EX]下的Img路径索引编号不是Int32请检查";
 				return resultData;
 			}
-			if (result >= P_0.Count)
+			if (result >= imagePaths.Count)
 			{
 				resultData.Msg = "[IMAGE EX]下的Img路径索引编号大于实际路径数量";
 				return resultData;
 			}
-			P_2.AppendLine(P_0[result]);
+			output.AppendLine(imagePaths[result]);
 			return resultData;
 		}
 	}
 
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass9_0
+	private static Ilogger logger;
+
+	private static Ilogger GetLogger()
 	{
-		public string aCj0PFm0jW;
-
-		public _003C_003Ec__DisplayClass9_0()
+		if (logger == null)
 		{
+			logger = AppSetting.Instance.GetService<Ilogger>();
 		}
-
-		internal bool bCs03BYHgG(string item)
-		{
-			return item == aCj0PFm0jW;
-		}
-	}
-
-	private static Ilogger dPVIwwJ1uu;
-
-	[SpecialName]
-	private static Ilogger PVUIL9AWaA()
-	{
-		if (dPVIwwJ1uu == null)
-		{
-			dPVIwwJ1uu = AppSetting.Instance.GetService<Ilogger>();
-		}
-		return dPVIwwJ1uu;
+		return logger;
 	}
 
 	public static bool FileTextConvertAniFile(string text, string fileName, out AniFile anifile)
@@ -230,7 +143,7 @@ public static class BinaryAniCompiler
 		if (!tuple.Item1)
 		{
 			anifile = new AniFile();
-			PVUIL9AWaA().Error(new List<ErrorItem> { tuple.Item3 });
+			GetLogger().Error(new List<ErrorItem> { tuple.Item3 });
 			return false;
 		}
 		if (tuple.Item2 == null || tuple.Item2.Length == 0)
@@ -257,88 +170,38 @@ public static class BinaryAniCompiler
 			List<string> list = new List<string>();
 			MemoryStream memoryStream = new MemoryStream(fileData);
 			StringBuilder stringBuilder = new StringBuilder("#PVF_File\r\n\r\n");
-			ushort num = LXiIx7GhpZ(memoryStream);
-			ushort num2 = LXiIx7GhpZ(memoryStream);
+			ushort num = ReadUInt16(memoryStream);
+			ushort num2 = ReadUInt16(memoryStream);
 			for (int i = 0; i < num2; i++)
 			{
-				list.Add(ocNIpPpqEv(TiAIswrodh(memoryStream), memoryStream));
+				list.Add(ReadString(ReadInt32(memoryStream), memoryStream));
 			}
-			ushort num3 = LXiIx7GhpZ(memoryStream);
-			StringBuilder stringBuilder2;
-			StringBuilder.AppendInterpolatedStringHandler handler;
+			ushort num3 = ReadUInt16(memoryStream);
 			for (int j = 0; j < num3; j++)
 			{
-				ushort num4 = LXiIx7GhpZ(memoryStream);
+				ushort num4 = ReadUInt16(memoryStream);
 				switch (num4)
 				{
 				case 0:
 				case 1:
 				{
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder4 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(7, 2, stringBuilder2);
-					handler.AppendLiteral("[");
-					handler.AppendFormatted((ANIData)num4);
-					handler.AppendLiteral("]\r\n\t");
-					handler.AppendFormatted(zQ6IKfMB6v(memoryStream));
-					handler.AppendLiteral("\r\n");
-					stringBuilder4.Append(ref handler);
+					stringBuilder.Append($"[{(ANIData)num4}]\r\n\t{ReadByte(memoryStream)}\r\n");
 					break;
 				}
 				case 3:
 				case 28:
 				{
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder3 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(7, 2, stringBuilder2);
-					handler.AppendLiteral("[");
-					handler.AppendFormatted((ANIData)num4);
-					handler.AppendLiteral("]\r\n\t");
-					handler.AppendFormatted(LXiIx7GhpZ(memoryStream));
-					handler.AppendLiteral("\r\n");
-					stringBuilder3.Append(ref handler);
+					stringBuilder.Append($"[{(ANIData)num4}]\r\n\t{ReadUInt16(memoryStream)}\r\n");
 					break;
 				}
 				case 18:
 				{
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder5 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(13, 1, stringBuilder2);
-					handler.AppendLiteral("[SPECTRUM]\r\n\t");
-					handler.AppendFormatted(zQ6IKfMB6v(memoryStream));
-					stringBuilder5.Append(ref handler);
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder6 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(22, 1, stringBuilder2);
-					handler.AppendLiteral("\r\n\t[SPECTRUM TERM]\r\n\t\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					stringBuilder6.Append(ref handler);
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder7 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(27, 1, stringBuilder2);
-					handler.AppendLiteral("\r\n\t[SPECTRUM LIFE TIME]\r\n\t\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					stringBuilder7.Append(ref handler);
+					stringBuilder.Append($"[SPECTRUM]\r\n\t{ReadByte(memoryStream)}");
+					stringBuilder.Append($"\r\n\t[SPECTRUM TERM]\r\n\t\t{ReadInt32(memoryStream)}");
+					stringBuilder.Append($"\r\n\t[SPECTRUM LIFE TIME]\r\n\t\t{ReadInt32(memoryStream)}");
 					stringBuilder.Append("\r\n\t[SPECTRUM COLOR]\r\n\t\t");
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder8 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(5, 4, stringBuilder2);
-					handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-					handler.AppendLiteral("\r\n");
-					stringBuilder8.Append(ref handler);
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder9 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(26, 1, stringBuilder2);
-					handler.AppendLiteral("\t[SPECTRUM EFFECT]\r\n\t\t`");
-					handler.AppendFormatted((Effect_Item)LXiIx7GhpZ(memoryStream));
-					handler.AppendLiteral("`\r\n");
-					stringBuilder9.Append(ref handler);
+					stringBuilder.Append($"{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\r\n");
+					stringBuilder.Append($"\t[SPECTRUM EFFECT]\r\n\t\t`{(Effect_Item)ReadUInt16(memoryStream)}`\r\n");
 					break;
 				}
 				default:
@@ -347,26 +210,20 @@ public static class BinaryAniCompiler
 					{
 						Description = string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_BinaryAniReadGlobalError"), memoryStream.Position)
 					};
-					PVUIL9AWaA().Error(new List<ErrorItem> { item });
+					GetLogger().Error(new List<ErrorItem> { item });
 					return (success: false, text: string.Empty);
 				}
 				}
 			}
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder10 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(16, 1, stringBuilder2);
-			handler.AppendLiteral("[FRAME MAX]\r\n\t");
-			handler.AppendFormatted(num);
-			handler.AppendLiteral("\r\n");
-			stringBuilder10.Append(ref handler);
+			stringBuilder.Append($"[FRAME MAX]\r\n\t{num}\r\n");
 			for (int k = 0; k < num; k++)
 			{
 				stringBuilder.Append("\r\n[FRAME" + k.ToString("D3") + "]\r\n");
-				ushort num5 = LXiIx7GhpZ(memoryStream);
+				ushort num5 = ReadUInt16(memoryStream);
 				StringBuilder stringBuilder11 = new StringBuilder();
 				for (int l = 0; l < num5; l++)
 				{
-					switch (LXiIx7GhpZ(memoryStream))
+					switch (ReadUInt16(memoryStream))
 					{
 					case 15:
 						stringBuilder11.Append("\t[ATTACK BOX]\r\n\t");
@@ -375,7 +232,7 @@ public static class BinaryAniCompiler
 						stringBuilder11.Append("\t[DAMAGE BOX]\r\n\t");
 						break;
 					default:
-						PVUIL9AWaA().Error(new List<ErrorItem>
+						GetLogger().Error(new List<ErrorItem>
 						{
 							new ErrorItem("", 0, fileName)
 							{
@@ -384,30 +241,15 @@ public static class BinaryAniCompiler
 						});
 						return (success: false, text: string.Empty);
 					}
-					stringBuilder2 = stringBuilder11;
-					StringBuilder stringBuilder12 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(7, 6, stringBuilder2);
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\r\n");
-					stringBuilder12.Append(ref handler);
+					stringBuilder11.Append($"{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\r\n");
 				}
 				stringBuilder.Append("\t[IMAGE]\r\n");
-				int num6 = PSfIcBUNmT(memoryStream);
+				int num6 = ReadInt16(memoryStream);
 				if (num6 >= 0)
 				{
 					if (num6 > list.Count - 1)
 					{
-						PVUIL9AWaA().Error(new List<ErrorItem>
+						GetLogger().Error(new List<ErrorItem>
 						{
 							new ErrorItem("", 0, fileName)
 							{
@@ -416,59 +258,29 @@ public static class BinaryAniCompiler
 						});
 						return (success: false, text: string.Empty);
 					}
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder13 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(10, 2, stringBuilder2);
-					handler.AppendLiteral("\t\t`");
-					handler.AppendFormatted(list[num6]);
-					handler.AppendLiteral("`\r\n\t\t");
-					handler.AppendFormatted(LXiIx7GhpZ(memoryStream));
-					handler.AppendLiteral("\r\n");
-					stringBuilder13.Append(ref handler);
+					stringBuilder.Append($"\t\t`{list[num6]}`\r\n\t\t{ReadUInt16(memoryStream)}\r\n");
 				}
 				else
 				{
 					stringBuilder.Append("\t\t``\r\n\t\t0\r\n");
 				}
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder14 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(19, 2, stringBuilder2);
-				handler.AppendLiteral("\t[IMAGE POS]\r\n\t\t");
-				handler.AppendFormatted(TiAIswrodh(memoryStream));
-				handler.AppendLiteral("\t");
-				handler.AppendFormatted(TiAIswrodh(memoryStream));
-				handler.AppendLiteral("\r\n");
-				stringBuilder14.Append(ref handler);
-				ushort num7 = LXiIx7GhpZ(memoryStream);
+				stringBuilder.Append($"\t[IMAGE POS]\r\n\t\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\r\n");
+				ushort num7 = ReadUInt16(memoryStream);
 				for (int m = 0; m < num7; m++)
 				{
-					ushort num8 = LXiIx7GhpZ(memoryStream);
+					ushort num8 = ReadUInt16(memoryStream);
 					switch (num8)
 					{
 					case 0:
 					case 1:
 					case 10:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder29 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(9, 2, stringBuilder2);
-						handler.AppendLiteral("\t[");
-						handler.AppendFormatted((ANIData)num8);
-						handler.AppendLiteral("]\r\n\t\t");
-						handler.AppendFormatted(zQ6IKfMB6v(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder29.Append(ref handler);
+						stringBuilder.Append($"\t[{(ANIData)num8}]\r\n\t\t{ReadByte(memoryStream)}\r\n");
 						break;
 					}
 					case 3:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder28 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder2);
-						handler.AppendLiteral("\t[COORD]\r\n\t\t");
-						handler.AppendFormatted(LXiIx7GhpZ(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder28.Append(ref handler);
+						stringBuilder.Append($"\t[COORD]\r\n\t\t{ReadUInt16(memoryStream)}\r\n");
 						break;
 					}
 					case 17:
@@ -476,137 +288,57 @@ public static class BinaryAniCompiler
 						break;
 					case 7:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder16 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(20, 2, stringBuilder2);
-						handler.AppendLiteral("\t[IMAGE RATE]\r\n\t\t");
-						handler.AppendFormatted(U0WI5U3YUU(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(U0WI5U3YUU(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder16.Append(ref handler);
+						stringBuilder.Append($"\t[IMAGE RATE]\r\n\t\t{ReadSingle(memoryStream)}\t{ReadSingle(memoryStream)}\r\n");
 						break;
 					}
 					case 8:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder15 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(21, 1, stringBuilder2);
-						handler.AppendLiteral("\t[IMAGE ROTATE]\r\n\t\t");
-						handler.AppendFormatted(U0WI5U3YUU(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder15.Append(ref handler);
+						stringBuilder.Append($"\t[IMAGE ROTATE]\r\n\t\t{ReadSingle(memoryStream)}\r\n");
 						break;
 					}
 					case 9:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder17 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(16, 4, stringBuilder2);
-						handler.AppendLiteral("\t[RGBA]\r\n\t\t");
-						handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder17.Append(ref handler);
+						stringBuilder.Append($"\t[RGBA]\r\n\t\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\r\n");
 						break;
 					}
 					case 11:
 					{
 						stringBuilder.Append("\t[GRAPHIC EFFECT]\r\n");
-						ushort num9 = LXiIx7GhpZ(memoryStream);
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder25 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(6, 1, stringBuilder2);
-						handler.AppendLiteral("\t\t`");
-						handler.AppendFormatted((Effect_Item)num9);
-						handler.AppendLiteral("`\r\n");
-						stringBuilder25.Append(ref handler);
+						ushort num9 = ReadUInt16(memoryStream);
+						stringBuilder.Append($"\t\t`{(Effect_Item)num9}`\r\n");
 						if (num9 == 5)
 						{
-							stringBuilder2 = stringBuilder;
-							StringBuilder stringBuilder26 = stringBuilder2;
-							handler = new StringBuilder.AppendInterpolatedStringHandler(6, 3, stringBuilder2);
-							handler.AppendLiteral("\t\t");
-							handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-							handler.AppendLiteral("\t");
-							handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-							handler.AppendLiteral("\t");
-							handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-							handler.AppendLiteral("\r\n");
-							stringBuilder26.Append(ref handler);
+							stringBuilder.Append($"\t\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\r\n");
 						}
 						if (num9 == 6)
 						{
-							stringBuilder2 = stringBuilder;
-							StringBuilder stringBuilder27 = stringBuilder2;
-							handler = new StringBuilder.AppendInterpolatedStringHandler(5, 2, stringBuilder2);
-							handler.AppendLiteral("\t\t");
-							handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-							handler.AppendLiteral("\t");
-							handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-							handler.AppendLiteral("\r\n");
-							stringBuilder27.Append(ref handler);
+							stringBuilder.Append($"\t\t{ReadInt16(memoryStream)}\t{ReadInt16(memoryStream)}\r\n");
 						}
 						break;
 					}
 					case 12:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder24 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder2);
-						handler.AppendLiteral("\t[DELAY]\r\n\t\t");
-						handler.AppendFormatted(TiAIswrodh(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder24.Append(ref handler);
+						stringBuilder.Append($"\t[DELAY]\r\n\t\t{ReadInt32(memoryStream)}\r\n");
 						break;
 					}
 					case 13:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder23 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(22, 1, stringBuilder2);
-						handler.AppendLiteral("\t[DAMAGE TYPE]\r\n\t\t`");
-						handler.AppendFormatted((DAMAGE_TYPE_Item)LXiIx7GhpZ(memoryStream));
-						handler.AppendLiteral("`\r\n");
-						stringBuilder23.Append(ref handler);
+						stringBuilder.Append($"\t[DAMAGE TYPE]\r\n\t\t`{(DAMAGE_TYPE_Item)ReadUInt16(memoryStream)}`\r\n");
 						break;
 					}
 					case 16:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder22 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(21, 1, stringBuilder2);
-						handler.AppendLiteral("\t[PLAY SOUND]\r\n\t\t`");
-						handler.AppendFormatted(ocNIpPpqEv(TiAIswrodh(memoryStream), memoryStream));
-						handler.AppendLiteral("`\r\n");
-						stringBuilder22.Append(ref handler);
+						stringBuilder.Append($"\t[PLAY SOUND]\r\n\t\t`{ReadString(ReadInt32(memoryStream), memoryStream)}`\r\n");
 						break;
 					}
 					case 23:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder21 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(17, 1, stringBuilder2);
-						handler.AppendLiteral("\t[SET FLAG]\r\n\t\t");
-						handler.AppendFormatted(TiAIswrodh(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder21.Append(ref handler);
+						stringBuilder.Append($"\t[SET FLAG]\r\n\t\t{ReadInt32(memoryStream)}\r\n");
 						break;
 					}
 					case 24:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder20 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder2);
-						handler.AppendLiteral("\t[FLIP TYPE]\r\n\t\t`");
-						handler.AppendFormatted((FLIP_TYPE_Item)LXiIx7GhpZ(memoryStream));
-						handler.AppendLiteral("`\r\n");
-						stringBuilder20.Append(ref handler);
+						stringBuilder.Append($"\t[FLIP TYPE]\r\n\t\t`{(FLIP_TYPE_Item)ReadUInt16(memoryStream)}`\r\n");
 						break;
 					}
 					case 25:
@@ -614,30 +346,12 @@ public static class BinaryAniCompiler
 						break;
 					case 26:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder19 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(17, 1, stringBuilder2);
-						handler.AppendLiteral("\t[LOOP END]\r\n\t\t");
-						handler.AppendFormatted(TiAIswrodh(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder19.Append(ref handler);
+						stringBuilder.Append($"\t[LOOP END]\r\n\t\t{ReadInt32(memoryStream)}\r\n");
 						break;
 					}
 					case 27:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder18 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(16, 4, stringBuilder2);
-						handler.AppendLiteral("\t[CLIP]\r\n\t\t");
-						handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder18.Append(ref handler);
+						stringBuilder.Append($"\t[CLIP]\r\n\t\t{ReadInt16(memoryStream)}\t{ReadInt16(memoryStream)}\t{ReadInt16(memoryStream)}\t{ReadInt16(memoryStream)}\r\n");
 						break;
 					}
 					default:
@@ -646,7 +360,7 @@ public static class BinaryAniCompiler
 						{
 							Description = string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_BinaryAniReadFrameSubError"), k, memoryStream.Position)
 						};
-						PVUIL9AWaA().Error(new List<ErrorItem> { item2 });
+						GetLogger().Error(new List<ErrorItem> { item2 });
 						return (success: false, text: string.Empty);
 					}
 					}
@@ -657,7 +371,7 @@ public static class BinaryAniCompiler
 		}
 		catch (Exception ex)
 		{
-			PVUIL9AWaA().Error(new List<ErrorItem>
+			GetLogger().Error(new List<ErrorItem>
 			{
 				new ErrorItem("", 0, fileName)
 				{
@@ -685,47 +399,47 @@ public static class BinaryAniCompiler
 		{
 			List<string> list = new List<string>();
 			MemoryStream memoryStream = new MemoryStream(fileData);
-			ushort num = LXiIx7GhpZ(memoryStream);
-			ushort num2 = LXiIx7GhpZ(memoryStream);
+			ushort num = ReadUInt16(memoryStream);
+			ushort num2 = ReadUInt16(memoryStream);
 			for (int i = 0; i < num2; i++)
 			{
-				list.Add(ocNIpPpqEv(TiAIswrodh(memoryStream), memoryStream));
+				list.Add(ReadString(ReadInt32(memoryStream), memoryStream));
 			}
-			ushort num3 = LXiIx7GhpZ(memoryStream);
+			ushort num3 = ReadUInt16(memoryStream);
 			for (int j = 0; j < num3; j++)
 			{
-				switch (LXiIx7GhpZ(memoryStream))
+				switch (ReadUInt16(memoryStream))
 				{
 				case 0:
 				{
-					aniFile.LOOP = bool.TryParse(zQ6IKfMB6v(memoryStream).ToString(), out var result2) && result2;
+					aniFile.LOOP = bool.TryParse(ReadByte(memoryStream).ToString(), out var result2) && result2;
 					break;
 				}
 				case 1:
 				{
-					aniFile.SHADOW = bool.TryParse(zQ6IKfMB6v(memoryStream).ToString(), out var result) && result;
+					aniFile.SHADOW = bool.TryParse(ReadByte(memoryStream).ToString(), out var result) && result;
 					break;
 				}
 				case 3:
-					aniFile.COORD = PSfIcBUNmT(memoryStream);
+					aniFile.COORD = ReadInt16(memoryStream);
 					break;
 				case 28:
-					aniFile.OPERATION = LXiIx7GhpZ(memoryStream);
+					aniFile.OPERATION = ReadUInt16(memoryStream);
 					break;
 				case 18:
 				{
 					aniFile.SPECTRUM = new SPECTRUM
 					{
-						SPECTRUM_ = zQ6IKfMB6v(memoryStream),
-						SPECTRUM_TERM = TiAIswrodh(memoryStream),
-						SPECTRUM_LIFE_TIME = TiAIswrodh(memoryStream)
+						SPECTRUM_ = ReadByte(memoryStream),
+						SPECTRUM_TERM = ReadInt32(memoryStream),
+						SPECTRUM_LIFE_TIME = ReadInt32(memoryStream)
 					};
-					byte b = (byte)Xs3IGVl5nD(memoryStream);
-					byte b2 = (byte)Xs3IGVl5nD(memoryStream);
-					byte b3 = (byte)Xs3IGVl5nD(memoryStream);
-					byte b4 = (byte)Xs3IGVl5nD(memoryStream);
+					byte b = (byte)ReadColorComponent(memoryStream);
+					byte b2 = (byte)ReadColorComponent(memoryStream);
+					byte b3 = (byte)ReadColorComponent(memoryStream);
+					byte b4 = (byte)ReadColorComponent(memoryStream);
 					aniFile.SPECTRUM.SPECTRUM_COLOR = new RGBA((int)b, (int)b2, (int)b3, (int)b4);
-					aniFile.SPECTRUM.SPECTRUM_EFFECT = (Effect_Item)LXiIx7GhpZ(memoryStream);
+					aniFile.SPECTRUM.SPECTRUM_EFFECT = (Effect_Item)ReadUInt16(memoryStream);
 					break;
 				}
 				default:
@@ -734,7 +448,7 @@ public static class BinaryAniCompiler
 					{
 						Description = string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_BinaryAniReadGlobalError"), memoryStream.Position)
 					};
-					PVUIL9AWaA().Error(new List<ErrorItem> { item });
+					GetLogger().Error(new List<ErrorItem> { item });
 					return false;
 				}
 				}
@@ -744,19 +458,19 @@ public static class BinaryAniCompiler
 				FRAMEModel fRAMEModel = new FRAMEModel(k);
 				List<BOX_Base> list2 = new List<BOX_Base>();
 				aniFile.Items.Add(fRAMEModel);
-				ushort num4 = LXiIx7GhpZ(memoryStream);
+				ushort num4 = ReadUInt16(memoryStream);
 				for (int l = 0; l < num4; l++)
 				{
-					switch (LXiIx7GhpZ(memoryStream))
+					switch (ReadUInt16(memoryStream))
 					{
 					case 15:
-						list2.Add(new ATTACK_BOX(TiAIswrodh(memoryStream), TiAIswrodh(memoryStream), TiAIswrodh(memoryStream), TiAIswrodh(memoryStream), TiAIswrodh(memoryStream), TiAIswrodh(memoryStream)));
+						list2.Add(new ATTACK_BOX(ReadInt32(memoryStream), ReadInt32(memoryStream), ReadInt32(memoryStream), ReadInt32(memoryStream), ReadInt32(memoryStream), ReadInt32(memoryStream)));
 						continue;
 					case 14:
-						list2.Add(new DAMAGE_BOX(TiAIswrodh(memoryStream), TiAIswrodh(memoryStream), TiAIswrodh(memoryStream), TiAIswrodh(memoryStream), TiAIswrodh(memoryStream), TiAIswrodh(memoryStream)));
+						list2.Add(new DAMAGE_BOX(ReadInt32(memoryStream), ReadInt32(memoryStream), ReadInt32(memoryStream), ReadInt32(memoryStream), ReadInt32(memoryStream), ReadInt32(memoryStream)));
 						continue;
 					}
-					PVUIL9AWaA().Error(new List<ErrorItem>
+					GetLogger().Error(new List<ErrorItem>
 					{
 						new ErrorItem("", 0, fileName)
 						{
@@ -765,12 +479,12 @@ public static class BinaryAniCompiler
 					});
 					return false;
 				}
-				int num5 = PSfIcBUNmT(memoryStream);
+				int num5 = ReadInt16(memoryStream);
 				if (num5 >= 0)
 				{
 					if (num5 > list.Count - 1)
 					{
-						PVUIL9AWaA().Error(new List<ErrorItem>
+						GetLogger().Error(new List<ErrorItem>
 						{
 							new ErrorItem("", 0, fileName)
 							{
@@ -779,66 +493,66 @@ public static class BinaryAniCompiler
 						});
 						return false;
 					}
-					fRAMEModel.Image = new AniImage(list[num5], LXiIx7GhpZ(memoryStream));
+					fRAMEModel.Image = new AniImage(list[num5], ReadUInt16(memoryStream));
 				}
 				else
 				{
 					fRAMEModel.Image = new AniImage("", 0);
 				}
-				fRAMEModel.IMAGE_POS = new POINT(TiAIswrodh(memoryStream), TiAIswrodh(memoryStream));
-				ushort num6 = LXiIx7GhpZ(memoryStream);
+				fRAMEModel.IMAGE_POS = new POINT(ReadInt32(memoryStream), ReadInt32(memoryStream));
+				ushort num6 = ReadUInt16(memoryStream);
 				for (int m = 0; m < num6; m++)
 				{
-					switch (LXiIx7GhpZ(memoryStream))
+					switch (ReadUInt16(memoryStream))
 					{
 					case 0:
 					{
-						fRAMEModel.LOOP = bool.TryParse(zQ6IKfMB6v(memoryStream).ToString(), out var result4) && result4;
+						fRAMEModel.LOOP = bool.TryParse(ReadByte(memoryStream).ToString(), out var result4) && result4;
 						break;
 					}
 					case 1:
 					{
-						fRAMEModel.SHADOW = bool.TryParse(zQ6IKfMB6v(memoryStream).ToString(), out var result3) && result3;
+						fRAMEModel.SHADOW = bool.TryParse(ReadByte(memoryStream).ToString(), out var result3) && result3;
 						break;
 					}
 					case 10:
-						fRAMEModel.INTERPOLATION = zQ6IKfMB6v(memoryStream);
+						fRAMEModel.INTERPOLATION = ReadByte(memoryStream);
 						break;
 					case 3:
-						fRAMEModel.COORD = LXiIx7GhpZ(memoryStream);
+						fRAMEModel.COORD = ReadUInt16(memoryStream);
 						break;
 					case 17:
 						fRAMEModel.PRELOAD = true;
 						break;
 					case 7:
-						fRAMEModel.IMAGE_RATE = new ImageRate(U0WI5U3YUU(memoryStream), U0WI5U3YUU(memoryStream));
+						fRAMEModel.IMAGE_RATE = new ImageRate(ReadSingle(memoryStream), ReadSingle(memoryStream));
 						break;
 					case 8:
-						fRAMEModel.IMAGE_ROTATE = U0WI5U3YUU(memoryStream);
+						fRAMEModel.IMAGE_ROTATE = ReadSingle(memoryStream);
 						break;
 					case 9:
 					{
-						byte b5 = (byte)Xs3IGVl5nD(memoryStream);
-						byte b6 = (byte)Xs3IGVl5nD(memoryStream);
-						byte b7 = (byte)Xs3IGVl5nD(memoryStream);
-						byte b8 = (byte)Xs3IGVl5nD(memoryStream);
+						byte b5 = (byte)ReadColorComponent(memoryStream);
+						byte b6 = (byte)ReadColorComponent(memoryStream);
+						byte b7 = (byte)ReadColorComponent(memoryStream);
+						byte b8 = (byte)ReadColorComponent(memoryStream);
 						fRAMEModel.RGBA = new RGBA((int)b5, (int)b6, (int)b7, (int)b8);
 						break;
 					}
 					case 11:
 					{
-						Effect_Item effect_Item = (Effect_Item)LXiIx7GhpZ(memoryStream);
+						Effect_Item effect_Item = (Effect_Item)ReadUInt16(memoryStream);
 						switch (effect_Item)
 						{
 						case Effect_Item.MONOCHROME:
 							fRAMEModel.GRAPHIC_EFFECT = new GRAPHIC_EFFECT_Base
 							{
 								Type = effect_Item,
-								RGB = new RGB(Xs3IGVl5nD(memoryStream), Xs3IGVl5nD(memoryStream), Xs3IGVl5nD(memoryStream))
+								RGB = new RGB(ReadColorComponent(memoryStream), ReadColorComponent(memoryStream), ReadColorComponent(memoryStream))
 							};
 							break;
 						case Effect_Item.SPACEDISTORT:
-							fRAMEModel.GRAPHIC_EFFECT = new GRAPHIC_EFFECT_Base(PSfIcBUNmT(memoryStream), PSfIcBUNmT(memoryStream), effect_Item);
+							fRAMEModel.GRAPHIC_EFFECT = new GRAPHIC_EFFECT_Base(ReadInt16(memoryStream), ReadInt16(memoryStream), effect_Item);
 							break;
 						default:
 							fRAMEModel.GRAPHIC_EFFECT = new GRAPHIC_EFFECT_Base
@@ -850,28 +564,28 @@ public static class BinaryAniCompiler
 						break;
 					}
 					case 12:
-						fRAMEModel.DELAY = TiAIswrodh(memoryStream);
+						fRAMEModel.DELAY = ReadInt32(memoryStream);
 						break;
 					case 13:
-						fRAMEModel.DAMAGE_TYPE = (DAMAGE_TYPE_Item)LXiIx7GhpZ(memoryStream);
+						fRAMEModel.DAMAGE_TYPE = (DAMAGE_TYPE_Item)ReadUInt16(memoryStream);
 						break;
 					case 16:
-						fRAMEModel.PLAY_SOUND = ocNIpPpqEv(TiAIswrodh(memoryStream), memoryStream);
+						fRAMEModel.PLAY_SOUND = ReadString(ReadInt32(memoryStream), memoryStream);
 						break;
 					case 23:
-						fRAMEModel.SET_FLAG = TiAIswrodh(memoryStream);
+						fRAMEModel.SET_FLAG = ReadInt32(memoryStream);
 						break;
 					case 24:
-						fRAMEModel.FLIP_TYPE = (FLIP_TYPE_Item)LXiIx7GhpZ(memoryStream);
+						fRAMEModel.FLIP_TYPE = (FLIP_TYPE_Item)ReadUInt16(memoryStream);
 						break;
 					case 25:
 						fRAMEModel.LOOP_START = true;
 						break;
 					case 26:
-						fRAMEModel.LOOP_END = TiAIswrodh(memoryStream);
+						fRAMEModel.LOOP_END = ReadInt32(memoryStream);
 						break;
 					case 27:
-						fRAMEModel.CLIP = new CLIP(PSfIcBUNmT(memoryStream), PSfIcBUNmT(memoryStream), PSfIcBUNmT(memoryStream), PSfIcBUNmT(memoryStream));
+						fRAMEModel.CLIP = new CLIP(ReadInt16(memoryStream), ReadInt16(memoryStream), ReadInt16(memoryStream), ReadInt16(memoryStream));
 						break;
 					default:
 					{
@@ -879,7 +593,7 @@ public static class BinaryAniCompiler
 						{
 							Description = string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_BinaryAniReadFrameSubError"), k, memoryStream.Position)
 						};
-						PVUIL9AWaA().Error(new List<ErrorItem> { item2 });
+						GetLogger().Error(new List<ErrorItem> { item2 });
 						return false;
 					}
 					}
@@ -893,7 +607,7 @@ public static class BinaryAniCompiler
 		}
 		catch (Exception ex)
 		{
-			PVUIL9AWaA().Error(new List<ErrorItem>
+			GetLogger().Error(new List<ErrorItem>
 			{
 				new ErrorItem("", 0, fileName)
 				{
@@ -920,88 +634,38 @@ public static class BinaryAniCompiler
 			List<string> list = new List<string>();
 			MemoryStream memoryStream = new MemoryStream(file.Data);
 			StringBuilder stringBuilder = new StringBuilder("#PVF_File\r\n");
-			ushort num = LXiIx7GhpZ(memoryStream);
-			ushort num2 = LXiIx7GhpZ(memoryStream);
+			ushort num = ReadUInt16(memoryStream);
+			ushort num2 = ReadUInt16(memoryStream);
 			for (int i = 0; i < num2; i++)
 			{
-				list.Add(ocNIpPpqEv(TiAIswrodh(memoryStream), memoryStream));
+				list.Add(ReadString(ReadInt32(memoryStream), memoryStream));
 			}
-			ushort num3 = LXiIx7GhpZ(memoryStream);
-			StringBuilder stringBuilder2;
-			StringBuilder.AppendInterpolatedStringHandler handler;
+			ushort num3 = ReadUInt16(memoryStream);
 			for (int j = 0; j < num3; j++)
 			{
-				ushort num4 = LXiIx7GhpZ(memoryStream);
+				ushort num4 = ReadUInt16(memoryStream);
 				switch (num4)
 				{
 				case 0:
 				case 1:
 				{
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder4 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(7, 2, stringBuilder2);
-					handler.AppendLiteral("[");
-					handler.AppendFormatted((ANIData)num4);
-					handler.AppendLiteral("]\r\n\t");
-					handler.AppendFormatted(zQ6IKfMB6v(memoryStream));
-					handler.AppendLiteral("\r\n");
-					stringBuilder4.Append(ref handler);
+					stringBuilder.Append($"[{(ANIData)num4}]\r\n\t{ReadByte(memoryStream)}\r\n");
 					break;
 				}
 				case 3:
 				case 28:
 				{
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder3 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(7, 2, stringBuilder2);
-					handler.AppendLiteral("[");
-					handler.AppendFormatted((ANIData)num4);
-					handler.AppendLiteral("]\r\n\t");
-					handler.AppendFormatted(LXiIx7GhpZ(memoryStream));
-					handler.AppendLiteral("\r\n");
-					stringBuilder3.Append(ref handler);
+					stringBuilder.Append($"[{(ANIData)num4}]\r\n\t{ReadUInt16(memoryStream)}\r\n");
 					break;
 				}
 				case 18:
 				{
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder5 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(13, 1, stringBuilder2);
-					handler.AppendLiteral("[SPECTRUM]\r\n\t");
-					handler.AppendFormatted(zQ6IKfMB6v(memoryStream));
-					stringBuilder5.Append(ref handler);
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder6 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(22, 1, stringBuilder2);
-					handler.AppendLiteral("\r\n\t[SPECTRUM TERM]\r\n\t\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					stringBuilder6.Append(ref handler);
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder7 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(27, 1, stringBuilder2);
-					handler.AppendLiteral("\r\n\t[SPECTRUM LIFE TIME]\r\n\t\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					stringBuilder7.Append(ref handler);
+					stringBuilder.Append($"[SPECTRUM]\r\n\t{ReadByte(memoryStream)}");
+					stringBuilder.Append($"\r\n\t[SPECTRUM TERM]\r\n\t\t{ReadInt32(memoryStream)}");
+					stringBuilder.Append($"\r\n\t[SPECTRUM LIFE TIME]\r\n\t\t{ReadInt32(memoryStream)}");
 					stringBuilder.Append("\r\n\t[SPECTRUM COLOR]\r\n\t\t");
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder8 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(5, 4, stringBuilder2);
-					handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-					handler.AppendLiteral("\r\n");
-					stringBuilder8.Append(ref handler);
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder9 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(26, 1, stringBuilder2);
-					handler.AppendLiteral("\t[SPECTRUM EFFECT]\r\n\t\t`");
-					handler.AppendFormatted((Effect_Item)LXiIx7GhpZ(memoryStream));
-					handler.AppendLiteral("`\r\n");
-					stringBuilder9.Append(ref handler);
+					stringBuilder.Append($"{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\r\n");
+					stringBuilder.Append($"\t[SPECTRUM EFFECT]\r\n\t\t`{(Effect_Item)ReadUInt16(memoryStream)}`\r\n");
 					break;
 				}
 				default:
@@ -1010,27 +674,21 @@ public static class BinaryAniCompiler
 					{
 						Description = string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_BinaryAniReadGlobalError"), memoryStream.Position)
 					};
-					PVUIL9AWaA().Error(new List<ErrorItem> { item });
+					GetLogger().Error(new List<ErrorItem> { item });
 					return (success: false, null);
 				}
 				}
 			}
-			stringBuilder2 = stringBuilder;
-			StringBuilder stringBuilder10 = stringBuilder2;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(16, 1, stringBuilder2);
-			handler.AppendLiteral("[FRAME MAX]\r\n\t");
-			handler.AppendFormatted(num);
-			handler.AppendLiteral("\r\n");
-			stringBuilder10.Append(ref handler);
+			stringBuilder.Append($"[FRAME MAX]\r\n\t{num}\r\n");
 			for (int k = 0; k < num; k++)
 			{
 				PrivewAniData privewAniData = new PrivewAniData();
 				stringBuilder.Append("\r\n[FRAME" + k.ToString("D3") + "]\r\n");
-				ushort num5 = LXiIx7GhpZ(memoryStream);
+				ushort num5 = ReadUInt16(memoryStream);
 				StringBuilder stringBuilder11 = new StringBuilder();
 				for (int l = 0; l < num5; l++)
 				{
-					switch (LXiIx7GhpZ(memoryStream))
+					switch (ReadUInt16(memoryStream))
 					{
 					case 15:
 						stringBuilder11.Append("\t[ATTACK BOX]\r\n\t");
@@ -1039,7 +697,7 @@ public static class BinaryAniCompiler
 						stringBuilder11.Append("\t[DAMAGE BOX]\r\n\t");
 						break;
 					default:
-						PVUIL9AWaA().Error(new List<ErrorItem>
+						GetLogger().Error(new List<ErrorItem>
 						{
 							new ErrorItem("", 0, file.FileName)
 							{
@@ -1048,30 +706,15 @@ public static class BinaryAniCompiler
 						});
 						return (success: false, null);
 					}
-					stringBuilder2 = stringBuilder11;
-					StringBuilder stringBuilder12 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(7, 6, stringBuilder2);
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\t");
-					handler.AppendFormatted(TiAIswrodh(memoryStream));
-					handler.AppendLiteral("\r\n");
-					stringBuilder12.Append(ref handler);
+					stringBuilder11.Append($"{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\r\n");
 				}
 				stringBuilder.Append("\t[IMAGE]\r\n");
-				int num6 = PSfIcBUNmT(memoryStream);
+				int num6 = ReadInt16(memoryStream);
 				if (num6 >= 0)
 				{
 					if (num6 > list.Count - 1)
 					{
-						PVUIL9AWaA().Error(new List<ErrorItem>
+						GetLogger().Error(new List<ErrorItem>
 						{
 							new ErrorItem("", 0, file.FileName)
 							{
@@ -1080,16 +723,8 @@ public static class BinaryAniCompiler
 						});
 						return (success: false, null);
 					}
-					ushort num7 = LXiIx7GhpZ(memoryStream);
-					stringBuilder2 = stringBuilder;
-					StringBuilder stringBuilder13 = stringBuilder2;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(10, 2, stringBuilder2);
-					handler.AppendLiteral("\t\t`");
-					handler.AppendFormatted(list[num6]);
-					handler.AppendLiteral("`\r\n\t\t");
-					handler.AppendFormatted(num7);
-					handler.AppendLiteral("\r\n");
-					stringBuilder13.Append(ref handler);
+					ushort num7 = ReadUInt16(memoryStream);
+					stringBuilder.Append($"\t\t`{list[num6]}`\r\n\t\t{num7}\r\n");
 					privewAniData.Icon = list[num6];
 					privewAniData.IconIndex = num7;
 				}
@@ -1097,45 +732,23 @@ public static class BinaryAniCompiler
 				{
 					stringBuilder.Append("\t\t``\r\n\t\t0\r\n");
 				}
-				stringBuilder2 = stringBuilder;
-				StringBuilder stringBuilder14 = stringBuilder2;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(19, 2, stringBuilder2);
-				handler.AppendLiteral("\t[IMAGE POS]\r\n\t\t");
-				handler.AppendFormatted(TiAIswrodh(memoryStream));
-				handler.AppendLiteral("\t");
-				handler.AppendFormatted(TiAIswrodh(memoryStream));
-				handler.AppendLiteral("\r\n");
-				stringBuilder14.Append(ref handler);
-				ushort num8 = LXiIx7GhpZ(memoryStream);
+				stringBuilder.Append($"\t[IMAGE POS]\r\n\t\t{ReadInt32(memoryStream)}\t{ReadInt32(memoryStream)}\r\n");
+				ushort num8 = ReadUInt16(memoryStream);
 				for (int m = 0; m < num8; m++)
 				{
-					ushort num9 = LXiIx7GhpZ(memoryStream);
+					ushort num9 = ReadUInt16(memoryStream);
 					switch (num9)
 					{
 					case 0:
 					case 1:
 					case 10:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder29 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(9, 2, stringBuilder2);
-						handler.AppendLiteral("\t[");
-						handler.AppendFormatted((ANIData)num9);
-						handler.AppendLiteral("]\r\n\t\t");
-						handler.AppendFormatted(zQ6IKfMB6v(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder29.Append(ref handler);
+						stringBuilder.Append($"\t[{(ANIData)num9}]\r\n\t\t{ReadByte(memoryStream)}\r\n");
 						break;
 					}
 					case 3:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder28 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder2);
-						handler.AppendLiteral("\t[COORD]\r\n\t\t");
-						handler.AppendFormatted(LXiIx7GhpZ(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder28.Append(ref handler);
+						stringBuilder.Append($"\t[COORD]\r\n\t\t{ReadUInt16(memoryStream)}\r\n");
 						break;
 					}
 					case 17:
@@ -1143,139 +756,59 @@ public static class BinaryAniCompiler
 						break;
 					case 7:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder16 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(20, 2, stringBuilder2);
-						handler.AppendLiteral("\t[IMAGE RATE]\r\n\t\t");
-						handler.AppendFormatted(U0WI5U3YUU(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(U0WI5U3YUU(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder16.Append(ref handler);
+						stringBuilder.Append($"\t[IMAGE RATE]\r\n\t\t{ReadSingle(memoryStream)}\t{ReadSingle(memoryStream)}\r\n");
 						break;
 					}
 					case 8:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder15 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(21, 1, stringBuilder2);
-						handler.AppendLiteral("\t[IMAGE ROTATE]\r\n\t\t");
-						handler.AppendFormatted(U0WI5U3YUU(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder15.Append(ref handler);
+						stringBuilder.Append($"\t[IMAGE ROTATE]\r\n\t\t{ReadSingle(memoryStream)}\r\n");
 						break;
 					}
 					case 9:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder17 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(16, 4, stringBuilder2);
-						handler.AppendLiteral("\t[RGBA]\r\n\t\t");
-						handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder17.Append(ref handler);
+						stringBuilder.Append($"\t[RGBA]\r\n\t\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\r\n");
 						break;
 					}
 					case 11:
 					{
 						stringBuilder.Append("\t[GRAPHIC EFFECT]\r\n");
-						ushort num11 = LXiIx7GhpZ(memoryStream);
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder25 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(6, 1, stringBuilder2);
-						handler.AppendLiteral("\t\t`");
-						handler.AppendFormatted((Effect_Item)num11);
-						handler.AppendLiteral("`\r\n");
-						stringBuilder25.Append(ref handler);
+						ushort num11 = ReadUInt16(memoryStream);
+						stringBuilder.Append($"\t\t`{(Effect_Item)num11}`\r\n");
 						if (num11 == 5)
 						{
-							stringBuilder2 = stringBuilder;
-							StringBuilder stringBuilder26 = stringBuilder2;
-							handler = new StringBuilder.AppendInterpolatedStringHandler(6, 3, stringBuilder2);
-							handler.AppendLiteral("\t\t");
-							handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-							handler.AppendLiteral("\t");
-							handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-							handler.AppendLiteral("\t");
-							handler.AppendFormatted(Xs3IGVl5nD(memoryStream));
-							handler.AppendLiteral("\r\n");
-							stringBuilder26.Append(ref handler);
+							stringBuilder.Append($"\t\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\t{ReadColorComponent(memoryStream)}\r\n");
 						}
 						if (num11 == 6)
 						{
-							stringBuilder2 = stringBuilder;
-							StringBuilder stringBuilder27 = stringBuilder2;
-							handler = new StringBuilder.AppendInterpolatedStringHandler(5, 2, stringBuilder2);
-							handler.AppendLiteral("\t\t");
-							handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-							handler.AppendLiteral("\t");
-							handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-							handler.AppendLiteral("\r\n");
-							stringBuilder27.Append(ref handler);
+							stringBuilder.Append($"\t\t{ReadInt16(memoryStream)}\t{ReadInt16(memoryStream)}\r\n");
 						}
 						break;
 					}
 					case 12:
 					{
-						int num10 = TiAIswrodh(memoryStream);
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder24 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder2);
-						handler.AppendLiteral("\t[DELAY]\r\n\t\t");
-						handler.AppendFormatted(num10);
-						handler.AppendLiteral("\r\n");
-						stringBuilder24.Append(ref handler);
+						int num10 = ReadInt32(memoryStream);
+						stringBuilder.Append($"\t[DELAY]\r\n\t\t{num10}\r\n");
 						privewAniData.Delay = num10;
 						break;
 					}
 					case 13:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder23 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(22, 1, stringBuilder2);
-						handler.AppendLiteral("\t[DAMAGE TYPE]\r\n\t\t`");
-						handler.AppendFormatted((DAMAGE_TYPE_Item)LXiIx7GhpZ(memoryStream));
-						handler.AppendLiteral("`\r\n");
-						stringBuilder23.Append(ref handler);
+						stringBuilder.Append($"\t[DAMAGE TYPE]\r\n\t\t`{(DAMAGE_TYPE_Item)ReadUInt16(memoryStream)}`\r\n");
 						break;
 					}
 					case 16:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder22 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(21, 1, stringBuilder2);
-						handler.AppendLiteral("\t[PLAY SOUND]\r\n\t\t`");
-						handler.AppendFormatted(ocNIpPpqEv(TiAIswrodh(memoryStream), memoryStream));
-						handler.AppendLiteral("`\r\n");
-						stringBuilder22.Append(ref handler);
+						stringBuilder.Append($"\t[PLAY SOUND]\r\n\t\t`{ReadString(ReadInt32(memoryStream), memoryStream)}`\r\n");
 						break;
 					}
 					case 23:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder21 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(17, 1, stringBuilder2);
-						handler.AppendLiteral("\t[SET FLAG]\r\n\t\t");
-						handler.AppendFormatted(TiAIswrodh(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder21.Append(ref handler);
+						stringBuilder.Append($"\t[SET FLAG]\r\n\t\t{ReadInt32(memoryStream)}\r\n");
 						break;
 					}
 					case 24:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder20 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(20, 1, stringBuilder2);
-						handler.AppendLiteral("\t[FLIP TYPE]\r\n\t\t`");
-						handler.AppendFormatted((FLIP_TYPE_Item)LXiIx7GhpZ(memoryStream));
-						handler.AppendLiteral("`\r\n");
-						stringBuilder20.Append(ref handler);
+						stringBuilder.Append($"\t[FLIP TYPE]\r\n\t\t`{(FLIP_TYPE_Item)ReadUInt16(memoryStream)}`\r\n");
 						break;
 					}
 					case 25:
@@ -1283,30 +816,12 @@ public static class BinaryAniCompiler
 						break;
 					case 26:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder19 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(17, 1, stringBuilder2);
-						handler.AppendLiteral("\t[LOOP END]\r\n\t\t");
-						handler.AppendFormatted(TiAIswrodh(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder19.Append(ref handler);
+						stringBuilder.Append($"\t[LOOP END]\r\n\t\t{ReadInt32(memoryStream)}\r\n");
 						break;
 					}
 					case 27:
 					{
-						stringBuilder2 = stringBuilder;
-						StringBuilder stringBuilder18 = stringBuilder2;
-						handler = new StringBuilder.AppendInterpolatedStringHandler(16, 4, stringBuilder2);
-						handler.AppendLiteral("\t[CLIP]\r\n\t\t");
-						handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-						handler.AppendLiteral("\t");
-						handler.AppendFormatted(PSfIcBUNmT(memoryStream));
-						handler.AppendLiteral("\r\n");
-						stringBuilder18.Append(ref handler);
+						stringBuilder.Append($"\t[CLIP]\r\n\t\t{ReadInt16(memoryStream)}\t{ReadInt16(memoryStream)}\t{ReadInt16(memoryStream)}\t{ReadInt16(memoryStream)}\r\n");
 						break;
 					}
 					default:
@@ -1315,7 +830,7 @@ public static class BinaryAniCompiler
 						{
 							Description = string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_BinaryAniReadFrameSubError"), k, memoryStream.Position)
 						};
-						PVUIL9AWaA().Error(new List<ErrorItem> { item2 });
+						GetLogger().Error(new List<ErrorItem> { item2 });
 						return (success: false, null);
 					}
 					}
@@ -1327,7 +842,7 @@ public static class BinaryAniCompiler
 		}
 		catch (Exception ex)
 		{
-			PVUIL9AWaA().Error(new List<ErrorItem>
+			GetLogger().Error(new List<ErrorItem>
 			{
 				new ErrorItem("", 0, file.FileName)
 				{
@@ -1498,12 +1013,11 @@ public static class BinaryAniCompiler
 			list.AddRange(list5);
 			for (int num5 = 1; num5 < list4.Count; num5++)
 			{
-				_003C_003Ec__DisplayClass9_0 CS_0024_003C_003E8__locals5 = new _003C_003Ec__DisplayClass9_0();
 				List<byte> list6 = new List<byte>();
 				int num6 = 0;
 				int num7 = list4[num5 - 1];
 				int num8 = list4[num5];
-				CS_0024_003C_003E8__locals5.aCj0PFm0jW = "-1";
+				string imagePath = "-1";
 				string s = "0";
 				string s2 = "0";
 				string s3 = "0";
@@ -1545,7 +1059,7 @@ public static class BinaryAniCompiler
 					else
 					{
 						list3[num9] = "";
-						CS_0024_003C_003E8__locals5.aCj0PFm0jW = list3[num9 + 1];
+						imagePath = list3[num9 + 1];
 						s = list3[num9 + 2];
 					}
 				}
@@ -1554,15 +1068,15 @@ public static class BinaryAniCompiler
 				{
 					list.AddRange(list6);
 				}
-				if (CS_0024_003C_003E8__locals5.aCj0PFm0jW != "-1")
+				if (imagePath != "-1")
 				{
-					int value = list2.FindIndex((string text6) => text6 == CS_0024_003C_003E8__locals5.aCj0PFm0jW);
+					int value = list2.FindIndex((string text6) => text6 == imagePath);
 					list.AddRange(BitConverter.GetBytes(Convert.ToInt16(value)));
 					list.AddRange(BitConverter.GetBytes(short.Parse(s)));
 				}
 				else
 				{
-					list.AddRange(BitConverter.GetBytes(short.Parse(CS_0024_003C_003E8__locals5.aCj0PFm0jW)));
+					list.AddRange(BitConverter.GetBytes(short.Parse(imagePath)));
 				}
 				list.AddRange(BitConverter.GetBytes(int.Parse(s2)));
 				list.AddRange(BitConverter.GetBytes(int.Parse(s3)));
@@ -1856,7 +1370,7 @@ public static class BinaryAniCompiler
 		}
 		catch (Exception ex)
 		{
-			PVUIL9AWaA().Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_BinaryAniSaveError"), fileName, ex.Message));
+			GetLogger().Error(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_BinaryAniSaveError"), fileName, ex.Message));
 			return (success: false, data: null, error: null);
 		}
 	}
@@ -1883,8 +1397,8 @@ public static class BinaryAniCompiler
 			}
 			List<string> list2 = (from t in text.Replace("#PVF_File", string.Empty).Split(new char[3] { '\r', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries)
 				select t.TrimEnd()).ToList();
-			List<ffP2dGOSCUMNUS9ggmI> list3 = new List<ffP2dGOSCUMNUS9ggmI>();
-			ffP2dGOSCUMNUS9ggmI ffP2dGOSCUMNUS9ggmI2 = null;
+			List<AniSection> list3 = new List<AniSection>();
+			AniSection currentSection = null;
 			foreach (string item in list2)
 			{
 				if (item.Length > 3 && item[0] == '[')
@@ -1893,51 +1407,51 @@ public static class BinaryAniCompiler
 					{
 						break;
 					}
-					ffP2dGOSCUMNUS9ggmI2 = new ffP2dGOSCUMNUS9ggmI
+					currentSection = new AniSection
 					{
 						SectionName = item
 					};
-					list3.Add(ffP2dGOSCUMNUS9ggmI2);
+					list3.Add(currentSection);
 				}
 				else
 				{
-					ffP2dGOSCUMNUS9ggmI2?.TtJO7DF1PT().Add(item);
+					currentSection?.Items.Add(item);
 				}
 			}
 			bool flag = false;
-			ffP2dGOSCUMNUS9ggmI2 = null;
-			ffP2dGOSCUMNUS9ggmI ffP2dGOSCUMNUS9ggmI3 = null;
+			currentSection = null;
+			AniSection childSection = null;
 			foreach (string item2 in list2)
 			{
 				if (item2.Contains(value) && item2.Length > 7 && !item2.Contains(" "))
 				{
-					ffP2dGOSCUMNUS9ggmI obj = new ffP2dGOSCUMNUS9ggmI();
+					AniSection obj = new AniSection();
 					obj.SectionName = item2;
-					obj.mIwOgnH2HO(true);
-					ffP2dGOSCUMNUS9ggmI2 = obj;
-					list3.Add(ffP2dGOSCUMNUS9ggmI2);
+					obj.HasEnding = true;
+					currentSection = obj;
+					list3.Add(currentSection);
 					flag = true;
 				}
 				else if (flag)
 				{
 					if (item2.Length > 3 && item2[0] == '[')
 					{
-						ffP2dGOSCUMNUS9ggmI3 = new ffP2dGOSCUMNUS9ggmI
+						childSection = new AniSection
 						{
 							SectionName = item2
 						};
-						ffP2dGOSCUMNUS9ggmI2.BxiOhMIJuP().Add(ffP2dGOSCUMNUS9ggmI3);
+						currentSection.Children.Add(childSection);
 					}
 					else
 					{
-						ffP2dGOSCUMNUS9ggmI3.TtJO7DF1PT().Add(item2);
+						childSection.Items.Add(item2);
 					}
 				}
 			}
 			StringBuilder stringBuilder = new StringBuilder();
-			foreach (ffP2dGOSCUMNUS9ggmI item3 in list3)
+			foreach (AniSection item3 in list3)
 			{
-				ResultData resultData2 = item3.uMtObuuZ1N(stringBuilder, list);
+				ResultData resultData2 = item3.AppendConvertedText(stringBuilder, list);
 				if (resultData2.IsError)
 				{
 					return new ResultData<string>
@@ -1958,48 +1472,48 @@ public static class BinaryAniCompiler
 		}
 	}
 
-	private static byte zQ6IKfMB6v(Stream P_0)
+	private static byte ReadByte(Stream stream)
 	{
-		return (byte)P_0.ReadByte();
+		return (byte)stream.ReadByte();
 	}
 
-	private static ushort LXiIx7GhpZ(Stream P_0)
+	private static ushort ReadUInt16(Stream stream)
 	{
 		byte[] array = new byte[2];
-		P_0.Read(array, 0, 2);
+		stream.Read(array, 0, 2);
 		return BitConverter.ToUInt16(array, 0);
 	}
 
-	private static short PSfIcBUNmT(Stream P_0)
+	private static short ReadInt16(Stream stream)
 	{
 		byte[] array = new byte[2];
-		P_0.Read(array, 0, 2);
+		stream.Read(array, 0, 2);
 		return BitConverter.ToInt16(array, 0);
 	}
 
-	private static int TiAIswrodh(Stream P_0)
+	private static int ReadInt32(Stream stream)
 	{
 		byte[] array = new byte[4];
-		P_0.Read(array, 0, 4);
+		stream.Read(array, 0, 4);
 		return BitConverter.ToInt32(array, 0);
 	}
 
-	private static float U0WI5U3YUU(Stream P_0)
+	private static float ReadSingle(Stream stream)
 	{
 		byte[] array = new byte[4];
-		P_0.Read(array, 0, 4);
+		stream.Read(array, 0, 4);
 		return BitConverter.ToSingle(array, 0);
 	}
 
-	private static double Xs3IGVl5nD(Stream P_0)
+	private static double ReadColorComponent(Stream stream)
 	{
-		return (256.0 + (double)(int)zQ6IKfMB6v(P_0)) % 256.0;
+		return (256.0 + (double)(int)ReadByte(stream)) % 256.0;
 	}
 
-	private static string ocNIpPpqEv(int P_0, Stream P_1)
+	private static string ReadString(int length, Stream stream)
 	{
-		byte[] array = new byte[P_0];
-		P_1.Read(array, 0, P_0);
+		byte[] array = new byte[length];
+		stream.Read(array, 0, length);
 		return Encoding.ASCII.GetString(array);
 	}
 }
