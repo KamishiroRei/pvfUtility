@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -29,7 +28,7 @@ public class WinShopManagerVm : ViewModelBase
 			{
 				throw new Exception("没有可排序的内容");
 			}
-			int num = sOgWY0yXgP(ShopSectionType.package);
+			int num = GetNextRowNumber(ShopSectionType.package);
 			StringBuilder stringBuilder = new StringBuilder();
 			string[] array2 = array;
 			for (int i = 0; i < array2.Length; i++)
@@ -52,15 +51,15 @@ public class WinShopManagerVm : ViewModelBase
 		}
 	}
 
-	private string h5FW4h1IpM(ShopSectionType P_0)
+	private string GetSectionName(ShopSectionType sectionType)
 	{
-		return P_0.ToString() ?? "";
+		return sectionType.ToString() ?? "";
 	}
 
-	private int sOgWY0yXgP(ShopSectionType P_0)
+	private int GetNextRowNumber(ShopSectionType sectionType)
 	{
-		string text = h5FW4h1IpM(P_0);
-		int groupSize = (P_0 == ShopSectionType.package) ? 10 : 9;
+		string text = GetSectionName(sectionType);
+		int groupSize = (sectionType == ShopSectionType.package) ? 10 : 9;
 		PvfGroup pVF = AppCore.ViewModelBase.PVF;
 		if (!pVF.GetFile("etc/newcashshop.etc").GetSectionIntArray(pVF, "[" + text + "]", out List<int> items))
 		{

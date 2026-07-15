@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Rendering;
@@ -9,22 +8,7 @@ namespace ViewModels.DocumentFolder.BackgroundRenderers;
 
 public class LineGuideLines : IBackgroundRenderer
 {
-	[CompilerGenerated]
-	private List<TextSegment> PH6PvWvbZ;
-
-	public List<TextSegment> TextSegments
-	{
-		[CompilerGenerated]
-		get
-		{
-			return PH6PvWvbZ;
-		}
-		[CompilerGenerated]
-		set
-		{
-			PH6PvWvbZ = value;
-		}
-	}
+	public List<TextSegment> TextSegments { get; set; }
 
 	public KnownLayer Layer => KnownLayer.Selection;
 
@@ -45,38 +29,38 @@ public class LineGuideLines : IBackgroundRenderer
 			if (item.Length > 0)
 			{
 				string text = document.GetText(item);
-				faE9tyVWV(text);
+				CountLeadingTabs(text);
 			}
 		}
 	}
 
-	private int faE9tyVWV(string P_0)
+	private int CountLeadingTabs(string text)
 	{
-		if (P_0.Length <= 1 || P_0[0] != '\t')
+		if (text.Length <= 1 || text[0] != '\t')
 		{
 			return 0;
 		}
-		if (P_0.Length <= 2 || P_0[1] != '\t')
+		if (text.Length <= 2 || text[1] != '\t')
 		{
 			return 1;
 		}
-		if (P_0.Length <= 3 || P_0[2] != '\t')
+		if (text.Length <= 3 || text[2] != '\t')
 		{
 			return 2;
 		}
-		if (P_0.Length <= 4 || P_0[3] != '\t')
+		if (text.Length <= 4 || text[3] != '\t')
 		{
 			return 3;
 		}
-		if (P_0.Length <= 5 || P_0[4] != '\t')
+		if (text.Length <= 5 || text[4] != '\t')
 		{
 			return 4;
 		}
-		if (P_0.Length <= 6 || P_0[5] != '\t')
+		if (text.Length <= 6 || text[5] != '\t')
 		{
 			return 5;
 		}
-		if (P_0.Length <= 7 || P_0[6] != '\t')
+		if (text.Length <= 7 || text[6] != '\t')
 		{
 			return 6;
 		}

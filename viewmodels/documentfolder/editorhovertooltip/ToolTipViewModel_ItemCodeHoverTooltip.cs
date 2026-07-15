@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -15,76 +14,13 @@ namespace ViewModels.DocumentFolder.EditorHoverTooltip;
 
 public class ToolTipViewModel_ItemCodeHoverTooltip : ToolTipViewModelBase
 {
-	[CompilerGenerated]
-	private TextDocument IRvbmF4t7;
+	public TextDocument Document { get; set; }
 
-	[CompilerGenerated]
-	private IHighlightingDefinition nZXI4eyCk;
+	public IHighlightingDefinition Highlighting { get; set; }
 
-	[CompilerGenerated]
-	private string? nlJEXO1lr;
+	private string? FilePath { get; set; }
 
-	[CompilerGenerated]
-	private ItemCodeHoverInfoBase eDaOyxVP7;
-
-	[CompilerGenerated]
-	private bool gDtKAIMaL;
-
-	public TextDocument Document
-	{
-		[CompilerGenerated]
-		get
-		{
-			return IRvbmF4t7;
-		}
-		[CompilerGenerated]
-		set
-		{
-			IRvbmF4t7 = value;
-		}
-	}
-
-	public IHighlightingDefinition Highlighting
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nZXI4eyCk;
-		}
-		[CompilerGenerated]
-		set
-		{
-			nZXI4eyCk = value;
-		}
-	}
-
-	private string? FilePath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return nlJEXO1lr;
-		}
-		[CompilerGenerated]
-		set
-		{
-			nlJEXO1lr = value;
-		}
-	}
-
-	public ItemCodeHoverInfoBase Data
-	{
-		[CompilerGenerated]
-		get
-		{
-			return eDaOyxVP7;
-		}
-		[CompilerGenerated]
-		set
-		{
-			eDaOyxVP7 = value;
-		}
-	}
+	public ItemCodeHoverInfoBase Data { get; set; }
 
 	public ImageSource ImageSource
 	{
@@ -110,19 +46,7 @@ public class ToolTipViewModel_ItemCodeHoverTooltip : ToolTipViewModelBase
 		}
 	}
 
-	public bool ShowGoToButton
-	{
-		[CompilerGenerated]
-		get
-		{
-			return gDtKAIMaL;
-		}
-		[CompilerGenerated]
-		set
-		{
-			gDtKAIMaL = value;
-		}
-	}
+	public bool ShowGoToButton { get; set; }
 
 	public ToolTipViewModel_ItemCodeHoverTooltip(string? filePath, int itemCode, ItemCodeHoverInfoBase info, EditorTooltipDataTemplateSelector editorTooltipDataTemplateSelector)
 		: base(editorTooltipDataTemplateSelector)
@@ -146,13 +70,7 @@ public class ToolTipViewModel_ItemCodeHoverTooltip : ToolTipViewModelBase
 					{
 						text = text.Replace("\r\n", "");
 					}
-					TextDocument document = Document;
-					DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(3, 2);
-					defaultInterpolatedStringHandler.AppendLiteral("`");
-					defaultInterpolatedStringHandler.AppendFormatted(text);
-					defaultInterpolatedStringHandler.AppendLiteral("`\t");
-					defaultInterpolatedStringHandler.AppendFormatted(itemCode);
-					document.Text = defaultInterpolatedStringHandler.ToStringAndClear();
+					Document.Text = $"`{text}`\t{itemCode}";
 				}
 			}
 			Highlighting = ThemeSwitcher.Instance.GetHighlightingDefinition(PvfFileType.equ);
@@ -194,9 +112,4 @@ public class ToolTipViewModel_ItemCodeHoverTooltip : ToolTipViewModelBase
 		}
 	}
 
-	[CompilerGenerated]
-	private ResultData<ImageSource> Doadfep2p()
-	{
-		return AppCore.ViewModelBase.PVF.GetScriptIconSource(FilePath);
-	}
 }
