@@ -354,8 +354,8 @@ public class TextEditConfig : ModelBase
 		{
 			if (sizeUnitLabel == null)
 			{
-				ObservableCollection<ListItem> list = new ObservableCollection<ListItem>(GenerateScreenUnitList());
-				sizeUnitLabel = UnitViewModeService.CreateInstance(list, new ScreenConverter(), 0, 100.0, "#####");
+				ObservableCollection<ListItem> screenUnitItems = new ObservableCollection<ListItem>(GenerateScreenUnitList());
+				sizeUnitLabel = UnitViewModeService.CreateInstance(screenUnitItems, new ScreenConverter(), 0, 100.0, "#####");
 			}
 			_ = sizeUnitLabel.SelectedItem.DefaultValues;
 			return sizeUnitLabel;
@@ -589,9 +589,9 @@ public class TextEditConfig : ModelBase
 			{
 				pvfEditorColorOptionDictionary = new Dictionary<ThemeType, PvfEdiorHighlightingColorOptions>();
 			}
-			foreach (object value in Enum.GetValues(typeof(ThemeType)))
+			foreach (object themeValue in Enum.GetValues(typeof(ThemeType)))
 			{
-				ThemeType themeType = (ThemeType)Enum.Parse(typeof(ThemeType), value.ToString());
+				ThemeType themeType = (ThemeType)Enum.Parse(typeof(ThemeType), themeValue.ToString());
 				if (!pvfEditorColorOptionDictionary.ContainsKey(themeType))
 				{
 					pvfEditorColorOptionDictionary.Add(themeType, new PvfEdiorHighlightingColorOptions(themeType));
@@ -611,9 +611,9 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (PvfEditorColorOptionDic.TryGetValue(AppSetting.Instance.NowThemeType, out PvfEdiorHighlightingColorOptions value))
+			if (PvfEditorColorOptionDic.TryGetValue(AppSetting.Instance.NowThemeType, out PvfEdiorHighlightingColorOptions colorOptions))
 			{
-				return value;
+				return colorOptions;
 			}
 			return null;
 		}
@@ -633,30 +633,30 @@ public class TextEditConfig : ModelBase
 
 	public void SaveCompletionDatas(CodeCompletionData data)
 	{
-		int num = CompletionDatasDisk.FindIndex(item => item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
-		if (num != -1)
+		int diskIndex = CompletionDatasDisk.FindIndex(item => item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
+		if (diskIndex != -1)
 		{
-			CompletionDatasDisk.RemoveAt(num);
+			CompletionDatasDisk.RemoveAt(diskIndex);
 		}
 		CompletionDatasDisk.Add(data);
-		num = CompletionDatas.FindIndex(item => item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
-		if (num != -1)
+		int completionIndex = CompletionDatas.FindIndex(item => item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
+		if (completionIndex != -1)
 		{
-			CompletionDatas.RemoveAt(num);
+			CompletionDatas.RemoveAt(completionIndex);
 		}
 		CompletionDatas.Add(data);
 	}
 
 	public bool DeleteCompletionData(CodeCompletionData data)
 	{
-		int num = CompletionDatasDisk.FindIndex(item => item.HighlightingType == data.HighlightingType && item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
-		if (num != -1)
+		int diskIndex = CompletionDatasDisk.FindIndex(item => item.HighlightingType == data.HighlightingType && item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
+		if (diskIndex != -1)
 		{
-			CompletionDatasDisk.RemoveAt(num);
-			num = CompletionDatas.FindIndex(item => item.HighlightingType == data.HighlightingType && item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
-			if (num != -1)
+			CompletionDatasDisk.RemoveAt(diskIndex);
+			int completionIndex = CompletionDatas.FindIndex(item => item.HighlightingType == data.HighlightingType && item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
+			if (completionIndex != -1)
 			{
-				CompletionDatas.RemoveAt(num);
+				CompletionDatas.RemoveAt(completionIndex);
 			}
 			return true;
 		}
@@ -687,36 +687,36 @@ public class TextEditConfig : ModelBase
 	public void InitFoldingGuideLineBurshs(Control control)
 	{
 		FoldingGuideLineBrushs = new Dictionary<int, SolidColorBrush>();
-		SolidColorBrush solidColorBrush = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush0");
-		if (solidColorBrush != null)
+		SolidColorBrush level0Brush = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush0");
+		if (level0Brush != null)
 		{
-			((Freezable)solidColorBrush).Freeze();
+			((Freezable)level0Brush).Freeze();
 		}
-		FoldingGuideLineBrushs.Add(0, solidColorBrush);
-		SolidColorBrush solidColorBrush2 = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush1");
-		if (solidColorBrush2 != null)
+		FoldingGuideLineBrushs.Add(0, level0Brush);
+		SolidColorBrush level1Brush = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush1");
+		if (level1Brush != null)
 		{
-			((Freezable)solidColorBrush2).Freeze();
+			((Freezable)level1Brush).Freeze();
 		}
-		FoldingGuideLineBrushs.Add(1, solidColorBrush2);
-		SolidColorBrush solidColorBrush3 = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush2");
-		if (solidColorBrush3 != null)
+		FoldingGuideLineBrushs.Add(1, level1Brush);
+		SolidColorBrush level2Brush = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush2");
+		if (level2Brush != null)
 		{
-			((Freezable)solidColorBrush3).Freeze();
+			((Freezable)level2Brush).Freeze();
 		}
-		FoldingGuideLineBrushs.Add(2, solidColorBrush3);
-		SolidColorBrush solidColorBrush4 = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush3");
-		if (solidColorBrush4 != null)
+		FoldingGuideLineBrushs.Add(2, level2Brush);
+		SolidColorBrush level3Brush = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush3");
+		if (level3Brush != null)
 		{
-			((Freezable)solidColorBrush4).Freeze();
+			((Freezable)level3Brush).Freeze();
 		}
-		FoldingGuideLineBrushs.Add(3, solidColorBrush4);
-		SolidColorBrush solidColorBrush5 = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush4");
-		if (solidColorBrush5 != null)
+		FoldingGuideLineBrushs.Add(3, level3Brush);
+		SolidColorBrush level4Brush = (SolidColorBrush)control.FindResource("FoldingGuideLineBrush4");
+		if (level4Brush != null)
 		{
-			((Freezable)solidColorBrush5).Freeze();
+			((Freezable)level4Brush).Freeze();
 		}
-		FoldingGuideLineBrushs.Add(4, solidColorBrush5);
+		FoldingGuideLineBrushs.Add(4, level4Brush);
 	}
 
 	public SolidColorBrush GetFoldingGuideLineBrush(int level)
@@ -725,11 +725,11 @@ public class TextEditConfig : ModelBase
 		{
 			level = 4;
 		}
-		if (!FoldingGuideLineBrushs.TryGetValue(level, out SolidColorBrush value))
+		if (!FoldingGuideLineBrushs.TryGetValue(level, out SolidColorBrush brush))
 		{
 			return AppSetting.Instance.ToColor("red");
 		}
-		return value;
+		return brush;
 	}
 
 	public void ChangedPvfEdiorHighlightingColorOptions()
