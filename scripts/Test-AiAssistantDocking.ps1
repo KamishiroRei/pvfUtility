@@ -106,6 +106,43 @@ try {
         Start-Sleep -Milliseconds 500
     }
 
+    $buttonCondition = [System.Windows.Automation.AndCondition]::new(
+        [System.Windows.Automation.PropertyCondition]::new(
+            [System.Windows.Automation.AutomationElement]::NameProperty,
+            $aiAssistantCaption
+        ),
+        [System.Windows.Automation.PropertyCondition]::new(
+            [System.Windows.Automation.AutomationElement]::ControlTypeProperty,
+            [System.Windows.Automation.ControlType]::Button
+        )
+    )
+    $toolbarButton = $mainWindow.FindFirst(
+        [System.Windows.Automation.TreeScope]::Descendants,
+        $buttonCondition
+    )
+    if ($null -eq $toolbarButton) {
+        throw "The AI assistant toolbar button was not found."
+    }
+    if (-not $toolbarButton.Current.IsEnabled) {
+        throw "The AI assistant toolbar button is disabled."
+    }
+
+    $invoke = $null
+    if (-not $toolbarButton.TryGetCurrentPattern(
+        [System.Windows.Automation.InvokePattern]::Pattern,
+        [ref]$invoke
+    )) {
+        throw "The AI assistant toolbar button is not invokable."
+    }
+
+    $aiView = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantConversationView"
+    $aiPanel = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantView"
+    if ($null -ne $aiView -or $null -ne $aiPanel) {
+        throw "The AI assistant panel is visible before the toolbar button is clicked."
+    }
+
+    $invoke.Invoke()
+
     $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
     $aiView = Wait-ForElementByAutomationId `
         -Root $mainWindow `
@@ -116,12 +153,12 @@ try {
         -AutomationId "AiAssistantPrompt" `
         -Deadline $deadline
     if ($null -eq $aiView -or $null -eq $prompt) {
-        throw "The default AI assistant panel did not expose its conversation controls."
+        throw "The AI assistant panel did not expose its conversation controls after the toolbar button was clicked."
     }
 
     $aiPanel = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantView"
     if ($null -eq $aiPanel) {
-        throw "The AI assistant dock panel was not found."
+        throw "The AI assistant dock panel was not found after the toolbar button was clicked."
     }
 
     $imageCondition = [System.Windows.Automation.PropertyCondition]::new(
@@ -158,36 +195,6 @@ try {
         throw "The AI assistant is not the rightmost docked panel."
     }
 
-    $buttonCondition = [System.Windows.Automation.AndCondition]::new(
-        [System.Windows.Automation.PropertyCondition]::new(
-            [System.Windows.Automation.AutomationElement]::NameProperty,
-            $aiAssistantCaption
-        ),
-        [System.Windows.Automation.PropertyCondition]::new(
-            [System.Windows.Automation.AutomationElement]::ControlTypeProperty,
-            [System.Windows.Automation.ControlType]::Button
-        )
-    )
-    $toolbarButton = $mainWindow.FindFirst(
-        [System.Windows.Automation.TreeScope]::Descendants,
-        $buttonCondition
-    )
-    if ($null -eq $toolbarButton) {
-        throw "The AI assistant toolbar button was not found."
-    }
-    if (-not $toolbarButton.Current.IsEnabled) {
-        throw "The AI assistant toolbar button is disabled."
-    }
-
-    $invoke = $null
-    if (-not $toolbarButton.TryGetCurrentPattern(
-        [System.Windows.Automation.InvokePattern]::Pattern,
-        [ref]$invoke
-    )) {
-        throw "The AI assistant toolbar button is not invokable."
-    }
-    $invoke.Invoke()
-
     while ([DateTime]::UtcNow -lt $deadline -and -not $prompt.Current.HasKeyboardFocus) {
         Start-Sleep -Milliseconds 100
     }
@@ -195,7 +202,7 @@ try {
         throw "The AI assistant prompt did not receive keyboard focus."
     }
 
-    Write-Output "PASS: the complete AI conversation panel is visible by default, docked at the far right, and receives toolbar focus."
+    Write-Output "PASS: the AI conversation panel starts hidden, then opens at the far right and receives focus after the toolbar button is clicked."
 }
 finally {
     $process.Refresh()

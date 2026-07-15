@@ -10,8 +10,9 @@ The original BAML toolbar item still binds to
 `BarsVm.OnOpenChatGPTDocumentCommand`, but it no longer creates a central
 document. `MainWindow` creates a long-lived `ChatGPTDocumentVm` and an AI
 `LayoutPanel`, then docks that panel with `DockType.Right` against the root
-workspace. The complete conversation remains visible at the far right and spans
-the document and output rows.
+workspace. The panel starts hidden and is restored only when the user clicks the
+AI assistant toolbar button. Once shown, the complete conversation remains at
+the far right and spans the document and output rows.
 
 The migration does not embed the Workbench Node runtime, `pvf-bridge`, native
 bridge modules, real PVFs, local profiles, generated runtime output, deployment
@@ -109,8 +110,9 @@ deferred style BAML writes it, but ChatGPT is not routed through
 
 Saved layouts from before the migration do not contain the AI panel. After a
 layout restore or reset, `MainWindow` docks the panel at the far right when it
-is missing or still uses the earlier shared-tab layout. The toolbar command
-restores a hidden panel and focuses the conversation input.
+is missing or still uses the earlier shared-tab layout, but keeps it hidden
+until requested during the current session. The toolbar command restores the
+hidden panel and focuses the conversation input.
 
 ## Configuration
 

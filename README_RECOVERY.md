@@ -50,7 +50,7 @@ design-time metadata cannot be recovered exactly from the published executable.
 - `docs/NET10_MIGRATION.md`: target-framework migration, runtime compatibility
   work, dependency-manifest changes, and clean verification results.
 - `scripts/Test-RecoveredStartup.ps1`: UI smoke test for the populated main window.
-- `scripts/Test-AiAssistantDocking.ps1`: verifies that Find and AI share one dock tab group and can be switched from the toolbar.
+- `scripts/Test-AiAssistantDocking.ps1`: verifies that the AI panel starts hidden, then opens at the far right and receives input focus from the toolbar.
 - `scripts/Inline-ObfuscatedStrings.ps1`: recovery utility used to produce the
   string map from the pre-inlining assembly.
 - `scripts/Recover-SourceLibraryStrings.ps1`: reproducible wrapper for the three

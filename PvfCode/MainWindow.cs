@@ -68,6 +68,8 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 	private LayoutPanel _aiAssistantPanel;
 
+	private bool _aiAssistantShowRequested;
+
 	private bool _aiAssistantDisposed;
 
 	internal MainWindow mainWindow;
@@ -438,6 +440,11 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 			DemoDockContainer.DockController.Dock(_aiAssistantPanel, workspace, DockType.Right);
 			_aiAssistantPanel.ItemWidth = new GridLength(DefaultAiAssistantWidth);
 		}
+
+		if (!_aiAssistantShowRequested)
+		{
+			_aiAssistantPanel.Visibility = Visibility.Collapsed;
+		}
 	}
 
 	private void RestorePanel(LayoutPanel panel)
@@ -451,6 +458,7 @@ public class MainWindow : ThemedWindow, IComponentConnector, IStyleConnector
 
 	public void ShowAiAssistantPanel()
 	{
+		_aiAssistantShowRequested = true;
 		EnsureAiAssistantPanelDocked(restoreFindView: true);
 		if (_aiAssistantPanel == null)
 		{
