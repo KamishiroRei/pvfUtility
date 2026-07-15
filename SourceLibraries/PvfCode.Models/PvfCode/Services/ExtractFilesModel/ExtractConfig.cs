@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using PvfCode.Models.Pvf.Enums;
 
@@ -15,30 +14,27 @@ public class ExtractConfig : ModelBase, ICloneable
 
 	public string _TargetPath7z;
 
-	[CompilerGenerated]
-	private HashSet<string> GXEkKkeaR3;
+	private bool extractSuccessOpenFolder;
 
-	private bool LCHkYJOVND;
+	private FileOperation? operation;
 
-	private FileOperation? DaGkJtFdvE;
+	private bool decompileScript;
 
-	private bool KW6kdgSFrv;
+	private bool decompileBinaryAni;
 
-	private bool Cr4k1Xx1CS;
+	private bool convertConvertSimplifiedChinese;
 
-	private bool mIekGjIqEL;
+	private bool extractTo7zip;
 
-	private bool NwqkOBU4NZ;
+	private bool extractToAutoImportFileGroup;
 
-	private bool pUHkrNCCks;
+	private RemoveOrKeepFileType? removeOrKeepFileType;
 
-	private RemoveOrKeepFileType? VG1ken2x20;
+	private List<string> fileTypes;
 
-	private List<string> fa9kjgKJxc;
+	private bool extractCorrespondenceFileLst;
 
-	private bool sWjkxSuqon;
-
-	private bool vQRkmYOGob;
+	private bool useCompatibleDecompiler;
 
 	public string TargetPath
 	{
@@ -83,29 +79,17 @@ public class ExtractConfig : ModelBase, ICloneable
 	}
 
 	[JsonIgnore]
-	public HashSet<string> SourceFiles
-	{
-		[CompilerGenerated]
-		get
-		{
-			return GXEkKkeaR3;
-		}
-		[CompilerGenerated]
-		set
-		{
-			GXEkKkeaR3 = value;
-		}
-	}
+	public HashSet<string> SourceFiles { get; set; }
 
 	public bool ExtractSuccessOpenFolder
 	{
 		get
 		{
-			return LCHkYJOVND;
+			return extractSuccessOpenFolder;
 		}
 		set
 		{
-			LCHkYJOVND = value;
+			extractSuccessOpenFolder = value;
 			DoNotify("ExtractSuccessOpenFolder");
 		}
 	}
@@ -114,15 +98,15 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			if (!DaGkJtFdvE.HasValue)
+			if (!operation.HasValue)
 			{
-				DaGkJtFdvE = FileOperation.Cover;
+				operation = FileOperation.Cover;
 			}
-			return DaGkJtFdvE.Value;
+			return operation.Value;
 		}
 		set
 		{
-			DaGkJtFdvE = value;
+			operation = value;
 			DoNotify("Operation");
 		}
 	}
@@ -131,11 +115,11 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return KW6kdgSFrv;
+			return decompileScript;
 		}
 		set
 		{
-			KW6kdgSFrv = value;
+			decompileScript = value;
 			DoNotify("DecompileScript");
 		}
 	}
@@ -144,11 +128,11 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return Cr4k1Xx1CS;
+			return decompileBinaryAni;
 		}
 		set
 		{
-			Cr4k1Xx1CS = value;
+			decompileBinaryAni = value;
 			DoNotify("DecompileBinaryAni");
 		}
 	}
@@ -157,11 +141,11 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return mIekGjIqEL;
+			return convertConvertSimplifiedChinese;
 		}
 		set
 		{
-			mIekGjIqEL = value;
+			convertConvertSimplifiedChinese = value;
 			DoNotify("ConvertConvertSimplifiedChinese");
 		}
 	}
@@ -170,11 +154,11 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return NwqkOBU4NZ;
+			return extractTo7zip;
 		}
 		set
 		{
-			NwqkOBU4NZ = value;
+			extractTo7zip = value;
 			DoNotify("ExtractTo7zip");
 			DoNotify("TargetPath");
 		}
@@ -184,11 +168,11 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return pUHkrNCCks;
+			return extractToAutoImportFileGroup;
 		}
 		set
 		{
-			pUHkrNCCks = value;
+			extractToAutoImportFileGroup = value;
 			DoNotify("ExtractToAutoImportFileGroup");
 			if (value)
 			{
@@ -201,15 +185,15 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			if (!VG1ken2x20.HasValue)
+			if (!removeOrKeepFileType.HasValue)
 			{
-				VG1ken2x20 = RemoveOrKeepFileType.保留;
+				removeOrKeepFileType = RemoveOrKeepFileType.保留;
 			}
-			return VG1ken2x20.Value;
+			return removeOrKeepFileType.Value;
 		}
 		set
 		{
-			VG1ken2x20 = value;
+			removeOrKeepFileType = value;
 			DoNotify("RemoveOrKeepFileType");
 		}
 	}
@@ -218,11 +202,11 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return fa9kjgKJxc;
+			return fileTypes;
 		}
 		set
 		{
-			fa9kjgKJxc = value;
+			fileTypes = value;
 			DoNotify("FileTypes");
 		}
 	}
@@ -231,11 +215,11 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return sWjkxSuqon;
+			return extractCorrespondenceFileLst;
 		}
 		set
 		{
-			sWjkxSuqon = value;
+			extractCorrespondenceFileLst = value;
 			DoNotify("ExtractCorrespondenceFileLst");
 		}
 	}
@@ -244,11 +228,11 @@ public class ExtractConfig : ModelBase, ICloneable
 	{
 		get
 		{
-			return vQRkmYOGob;
+			return useCompatibleDecompiler;
 		}
 		set
 		{
-			vQRkmYOGob = value;
+			useCompatibleDecompiler = value;
 			DoNotify("UseCompatibleDecompiler");
 		}
 	}

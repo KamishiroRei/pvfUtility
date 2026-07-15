@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -16,53 +14,47 @@ public class TreeConfig : ViewModelBase
 {
 	public delegate void TreeShowNpkIconChanged();
 
-	[CompilerGenerated]
-	private TreeShowNpkIconChanged Rb2nh8uwqt;
+	private bool? treeShowNpkIcon;
 
-	private bool? ykQnTNO5A8;
+	private bool? useRarityColor;
 
-	private bool? Iwgn04eR3n;
+	private bool? treeListControlTopShowFilePathTextBox;
 
-	private bool? fkAnsHKRiC;
+	private bool getItemCodeSort;
 
-	private bool TDvnQ6r97U;
+	private bool getItemNameAndItemCodeIsSort;
 
-	private bool Ua9n6ZBgEv;
+	private TreeListGetItemNameAndItemCodeFormat itemNameAndItemCodeFormat;
 
-	private TreeListGetItemNameAndItemCodeFormat UrwnyfQW3i;
+	private string itemNameAndItemCodeSplitChar;
 
-	private string QmQnwHSpGm;
+	private bool? twConvertSimplified;
 
-	private bool? V9nnoe7Dgm;
+	private bool showHorizontalLines;
 
-	private bool bQyn2jagaO;
+	private bool allowHorizontalScrollingAutoWidth;
 
-	private bool JvEntGJYyl;
+	private Dictionary<ThemeType, TreeColorConfig>? treeSolidColors;
 
-	[CompilerGenerated]
-	private SolidColorBrush qxIn9W1xG3;
+	private bool importTreeListAutoExpandAllNodes;
 
-	private Dictionary<ThemeType, TreeColorConfig>? ogqnRGTuv6;
+	private bool useEvenRowBackground;
 
-	private bool wp5nW5SZpV;
-
-	private bool zb1nq92F5g;
-
-	private bool W4Ynz7k7yL;
+	private bool copyFilesSetToClipboard;
 
 	public bool TreeShowNpkIcon
 	{
 		get
 		{
-			if (!ykQnTNO5A8.HasValue)
+			if (!treeShowNpkIcon.HasValue)
 			{
-				ykQnTNO5A8 = true;
+				treeShowNpkIcon = true;
 			}
-			return ykQnTNO5A8.Value;
+			return treeShowNpkIcon.Value;
 		}
 		set
 		{
-			ykQnTNO5A8 = value;
+			treeShowNpkIcon = value;
 			RaisePropertyChanged("TreeShowNpkIcon");
 		}
 	}
@@ -71,15 +63,15 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			if (!Iwgn04eR3n.HasValue)
+			if (!useRarityColor.HasValue)
 			{
-				Iwgn04eR3n = true;
+				useRarityColor = true;
 			}
-			return Iwgn04eR3n.Value;
+			return useRarityColor.Value;
 		}
 		set
 		{
-			Iwgn04eR3n = value;
+			useRarityColor = value;
 			RaisePropertyChanged("UseRarityColor");
 		}
 	}
@@ -88,15 +80,15 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			if (!fkAnsHKRiC.HasValue)
+			if (!treeListControlTopShowFilePathTextBox.HasValue)
 			{
-				fkAnsHKRiC = true;
+				treeListControlTopShowFilePathTextBox = true;
 			}
-			return fkAnsHKRiC.Value;
+			return treeListControlTopShowFilePathTextBox.Value;
 		}
 		set
 		{
-			fkAnsHKRiC = value;
+			treeListControlTopShowFilePathTextBox = value;
 			RaisePropertyChanged("TreeListControlTopShowFilePathTextBox");
 		}
 	}
@@ -105,11 +97,11 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			return TDvnQ6r97U;
+			return getItemCodeSort;
 		}
 		set
 		{
-			TDvnQ6r97U = value;
+			getItemCodeSort = value;
 			RaisePropertyChanged("GetItemCodeSort");
 		}
 	}
@@ -118,11 +110,11 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			return Ua9n6ZBgEv;
+			return getItemNameAndItemCodeIsSort;
 		}
 		set
 		{
-			Ua9n6ZBgEv = value;
+			getItemNameAndItemCodeIsSort = value;
 			RaisePropertyChanged("GetItemNameAndItemCodeIsSort");
 		}
 	}
@@ -131,11 +123,11 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			return UrwnyfQW3i;
+			return itemNameAndItemCodeFormat;
 		}
 		set
 		{
-			UrwnyfQW3i = value;
+			itemNameAndItemCodeFormat = value;
 			RaisePropertyChanged("TreeListGetItemNameAndItemCodeFormat");
 		}
 	}
@@ -144,15 +136,15 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			if (string.IsNullOrEmpty(QmQnwHSpGm))
+			if (string.IsNullOrEmpty(itemNameAndItemCodeSplitChar))
 			{
-				QmQnwHSpGm = "----";
+				itemNameAndItemCodeSplitChar = "----";
 			}
-			return QmQnwHSpGm;
+			return itemNameAndItemCodeSplitChar;
 		}
 		set
 		{
-			QmQnwHSpGm = value;
+			itemNameAndItemCodeSplitChar = value;
 			RaisePropertyChanged("GetItemNameAndItemCodeSplitChar");
 		}
 	}
@@ -161,15 +153,15 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			if (!V9nnoe7Dgm.HasValue)
+			if (!twConvertSimplified.HasValue)
 			{
-				V9nnoe7Dgm = true;
+				twConvertSimplified = true;
 			}
-			return V9nnoe7Dgm.Value;
+			return twConvertSimplified.Value;
 		}
 		set
 		{
-			V9nnoe7Dgm = value;
+			twConvertSimplified = value;
 			RaisePropertyChanged("TwConvertSimplified");
 		}
 	}
@@ -178,11 +170,11 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			return bQyn2jagaO;
+			return showHorizontalLines;
 		}
 		set
 		{
-			bQyn2jagaO = value;
+			showHorizontalLines = value;
 			RaisePropertyChanged("ShowHorizontalLines");
 		}
 	}
@@ -191,50 +183,38 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			return JvEntGJYyl;
+			return allowHorizontalScrollingAutoWidth;
 		}
 		set
 		{
-			JvEntGJYyl = value;
+			allowHorizontalScrollingAutoWidth = value;
 			RaisePropertyChanged("AllowHorizontalScrollingAutoWidth");
 		}
 	}
 
-	public SolidColorBrush TreeFilePathForeBrush
-	{
-		[CompilerGenerated]
-		get
-		{
-			return qxIn9W1xG3;
-		}
-		[CompilerGenerated]
-		set
-		{
-			qxIn9W1xG3 = value;
-		}
-	}
+	public SolidColorBrush TreeFilePathForeBrush { get; set; }
 
 	public Dictionary<ThemeType, TreeColorConfig> TreeSolidColors
 	{
 		get
 		{
-			if (ogqnRGTuv6 == null)
+			if (treeSolidColors == null)
 			{
-				ogqnRGTuv6 = new Dictionary<ThemeType, TreeColorConfig>();
+				treeSolidColors = new Dictionary<ThemeType, TreeColorConfig>();
 			}
 			foreach (object value in Enum.GetValues(typeof(ThemeType)))
 			{
 				ThemeType themeType = (ThemeType)Enum.Parse(typeof(ThemeType), value.ToString());
-				if (!ogqnRGTuv6.ContainsKey(themeType))
+				if (!treeSolidColors.ContainsKey(themeType))
 				{
-					ogqnRGTuv6.Add(themeType, new TreeColorConfig(themeType));
+					treeSolidColors.Add(themeType, new TreeColorConfig(themeType));
 				}
 			}
-			return ogqnRGTuv6;
+			return treeSolidColors;
 		}
 		set
 		{
-			ogqnRGTuv6 = value;
+			treeSolidColors = value;
 			RaisePropertyChanged("TreeSolidColors");
 		}
 	}
@@ -256,11 +236,11 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			return wp5nW5SZpV;
+			return importTreeListAutoExpandAllNodes;
 		}
 		set
 		{
-			wp5nW5SZpV = value;
+			importTreeListAutoExpandAllNodes = value;
 			RaisePropertyChanged("ImportTreeListAutoExpandAllNodes");
 		}
 	}
@@ -269,11 +249,11 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			return zb1nq92F5g;
+			return useEvenRowBackground;
 		}
 		set
 		{
-			zb1nq92F5g = value;
+			useEvenRowBackground = value;
 			RaisePropertyChanged("UseEvenRowBackground");
 		}
 	}
@@ -282,49 +262,21 @@ public class TreeConfig : ViewModelBase
 	{
 		get
 		{
-			return W4Ynz7k7yL;
+			return copyFilesSetToClipboard;
 		}
 		set
 		{
-			W4Ynz7k7yL = value;
+			copyFilesSetToClipboard = value;
 			RaisePropertyChanged("CopyFilesSetToClipboard");
 		}
 	}
 
-	public event TreeShowNpkIconChanged EventTreeShowNpkIconChanged
-	{
-		[CompilerGenerated]
-		add
-		{
-			TreeShowNpkIconChanged treeShowNpkIconChanged = Rb2nh8uwqt;
-			TreeShowNpkIconChanged treeShowNpkIconChanged2;
-			do
-			{
-				treeShowNpkIconChanged2 = treeShowNpkIconChanged;
-				TreeShowNpkIconChanged value2 = (TreeShowNpkIconChanged)Delegate.Combine(treeShowNpkIconChanged2, value);
-				treeShowNpkIconChanged = Interlocked.CompareExchange(ref Rb2nh8uwqt, value2, treeShowNpkIconChanged2);
-			}
-			while ((object)treeShowNpkIconChanged != treeShowNpkIconChanged2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			TreeShowNpkIconChanged treeShowNpkIconChanged = Rb2nh8uwqt;
-			TreeShowNpkIconChanged treeShowNpkIconChanged2;
-			do
-			{
-				treeShowNpkIconChanged2 = treeShowNpkIconChanged;
-				TreeShowNpkIconChanged value2 = (TreeShowNpkIconChanged)Delegate.Remove(treeShowNpkIconChanged2, value);
-				treeShowNpkIconChanged = Interlocked.CompareExchange(ref Rb2nh8uwqt, value2, treeShowNpkIconChanged2);
-			}
-			while ((object)treeShowNpkIconChanged != treeShowNpkIconChanged2);
-		}
-	}
+	public event TreeShowNpkIconChanged EventTreeShowNpkIconChanged;
 
 	[Command]
 	public void TreeShowNpkIconC()
 	{
-		Rb2nh8uwqt?.Invoke();
+		EventTreeShowNpkIconChanged?.Invoke();
 	}
 
 	public void ChangedNowTreeColorConfig()

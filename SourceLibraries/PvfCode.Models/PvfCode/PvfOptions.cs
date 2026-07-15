@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using PvfCode.Dot;
 using PvfCode.Models.Enums;
@@ -14,70 +13,64 @@ namespace PvfCode;
 [JsonObject(MemberSerialization.OptOut)]
 public class PvfOptions : ModelBase
 {
-	private HashSet<string> WZqnEKchuV;
+	private HashSet<string> avatarParts;
 
-	private PvfReleaseLog WXUnZTyD84;
+	private PvfReleaseLog releaseLog;
 
-	private HashSet<string> d3mn8rLEW9;
+	private HashSet<string> lstFileUseScriptFile;
 
-	private HashSet<string> ypUnuwGq1c;
+	private HashSet<string> aniSectionNames;
 
-	private bool KV7n5XZ84w;
+	private bool savePvfPackTrimmableStringBinFile;
 
-	private bool rXunpfpmjA;
+	private bool savePvfPackTrimmableStringViewFile;
 
-	private bool hYanDBwvon;
+	private bool notPromptSavePvfPackOptionsDialog;
 
-	private HashSet<string> ML0n3ec5ie;
+	private HashSet<string> aniFrameSections;
 
-	private Dictionary<string, PvfFileType> i0VnHk3b7E;
+	private Dictionary<string, PvfFileType> lstExtensions;
 
-	private AutoTheBackupPvfOptions RBcn7WPrcH;
+	private AutoTheBackupPvfOptions autoBackupConfig;
 
 	public readonly string StringLstFileName;
 
-	private EncodingType? gFQncEUXri;
+	private EncodingType? defaultEncoding;
 
-	private bool? pGAngjIAsJ;
+	private bool? fileTextTraditionalConvertSimplified;
 
-	private List<EncodingType> BtOnK50TxJ;
+	private List<EncodingType> pvfEncodingList;
 
-	[CompilerGenerated]
-	private bool WLGnYpIL8V;
+	private bool? editorConvertTraditionalChinese;
 
-	[CompilerGenerated]
-	private bool KVSnJ7WoJg;
+	private Dictionary<string, PvfFileType> pvfFileTypeDic;
 
-	private bool? PevndeOBwg;
+	private Dictionary<string, TreelistCommentRes> treelistCommentDic;
 
-	private Dictionary<string, PvfFileType> x8vn1AQ8FU;
+	private HashSet<PvfFileType> fileTypeSet;
 
-	private Dictionary<string, TreelistCommentRes> nXYnGTgbyK;
+	private HashSet<string> fileTypes;
 
-	private HashSet<PvfFileType> IWSnOKuYmC;
+	private ExtractConfig extractConfig;
 
-	private HashSet<string> vdKnrW2u4x;
+	private ImportConfig importConfig;
 
-	private ExtractConfig NwAnecBfTM;
+	private PvfCommentPriority? pvfCommentPriority;
 
-	private ImportConfig Sm2njbnj24;
+	private bool savePvfLoadingDisableMainWindow;
 
-	private PvfCommentPriority? tpenxpJM61;
+	private bool? pvfSaveWhenTheErrorBackUp;
 
-	private bool kelnmn3VZ9;
-
-	private bool? FGEnSyvUHm;
-
-	private bool BFWnB2giU5;
+	private bool savePvfPackShowDialog;
 
 	[JsonIgnore]
 	public HashSet<string> AvatarParts
 	{
 		get
 		{
-			if (WZqnEKchuV == null)
+			if (avatarParts == null)
 			{
-				WZqnEKchuV = new HashSet<string>
+				avatarParts = new HashSet<string>
 				{
 					"[aurora avatar]",
 					"[waist avatar]",
@@ -91,7 +84,7 @@ public class PvfOptions : ModelBase
 					"[skin avatar]"
 				};
 			}
-			return WZqnEKchuV;
+			return avatarParts;
 		}
 	}
 
@@ -99,15 +92,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (WXUnZTyD84 == null)
+			if (releaseLog == null)
 			{
-				WXUnZTyD84 = new PvfReleaseLog();
+				releaseLog = new PvfReleaseLog();
 			}
-			return WXUnZTyD84;
+			return releaseLog;
 		}
 		set
 		{
-			WXUnZTyD84 = value;
+			releaseLog = value;
 		}
 	}
 
@@ -115,16 +108,16 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (d3mn8rLEW9 == null)
+			if (lstFileUseScriptFile == null)
 			{
-				d3mn8rLEW9 = new HashSet<string>
+				lstFileUseScriptFile = new HashSet<string>
 				{
 					"n_quest/dailyrandomquest.lst",
 					"n_quest/epicquest.lst",
 					"n_quest/trainingquest.lst"
 				};
 			}
-			return d3mn8rLEW9;
+			return lstFileUseScriptFile;
 		}
 	}
 
@@ -132,12 +125,12 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			return KV7n5XZ84w;
+			return savePvfPackTrimmableStringBinFile;
 		}
 		set
 		{
-			KV7n5XZ84w = value;
-			DoNotify("SavePvfPackTrimmableStringBinFile");
+			savePvfPackTrimmableStringBinFile = value;
+			DoNotify(nameof(SavePvfPackTrimmableStringBinFile));
 		}
 	}
 
@@ -145,12 +138,12 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			return rXunpfpmjA;
+			return savePvfPackTrimmableStringViewFile;
 		}
 		set
 		{
-			rXunpfpmjA = value;
-			DoNotify("SavePvfPackTrimmableStringViewFile");
+			savePvfPackTrimmableStringViewFile = value;
+			DoNotify(nameof(SavePvfPackTrimmableStringViewFile));
 		}
 	}
 
@@ -158,12 +151,12 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			return hYanDBwvon;
+			return notPromptSavePvfPackOptionsDialog;
 		}
 		set
 		{
-			hYanDBwvon = value;
-			DoNotify("NotPromptSavePvfPackOptionsDialog");
+			notPromptSavePvfPackOptionsDialog = value;
+			DoNotify(nameof(NotPromptSavePvfPackOptionsDialog));
 		}
 	}
 
@@ -172,40 +165,40 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (ypUnuwGq1c == null)
+			if (aniSectionNames == null)
 			{
-				ypUnuwGq1c = new HashSet<string>();
-				ypUnuwGq1c.Add("[SHADOW]");
-				ypUnuwGq1c.Add("[FRAME MAX]");
-				ypUnuwGq1c.Add("[LOOP]");
-				ypUnuwGq1c.Add("[COORD]");
-				ypUnuwGq1c.Add("[SPECTRUM]");
-				ypUnuwGq1c.Add("[SPECTRUM TERM]");
-				ypUnuwGq1c.Add("[SPECTRUM LIFE TIME]");
-				ypUnuwGq1c.Add("[SPECTRUM COLOR]");
-				ypUnuwGq1c.Add("[SPECTRUM EFFECT]");
-				ypUnuwGq1c.Add("[OPERATION]");
-				ypUnuwGq1c.Add("[IMAGE]");
-				ypUnuwGq1c.Add("[IMAGE POS]");
-				ypUnuwGq1c.Add("[INTERPOLATION]");
-				ypUnuwGq1c.Add("[GRAPHIC EFFECT]");
-				ypUnuwGq1c.Add("[DELAY]");
-				ypUnuwGq1c.Add("[IMAGE ROTATE]");
-				ypUnuwGq1c.Add("[ATTACK BOX]");
-				ypUnuwGq1c.Add("[IMAGE RATE]");
-				ypUnuwGq1c.Add("[RGBA]");
-				ypUnuwGq1c.Add("[SET FLAG]");
-				ypUnuwGq1c.Add("[SHADOW]");
-				ypUnuwGq1c.Add("[DAMAGE TYPE]");
-				ypUnuwGq1c.Add("[DAMAGE BOX]");
-				ypUnuwGq1c.Add("[LOOP START]");
-				ypUnuwGq1c.Add("[LOOP END]");
-				ypUnuwGq1c.Add("[PLAY SOUND]");
-				ypUnuwGq1c.Add("[FLIP TYPE]");
-				ypUnuwGq1c.Add("[CLIP]");
-				ypUnuwGq1c.Add("[PRELOAD]");
+				aniSectionNames = new HashSet<string>();
+				aniSectionNames.Add("[SHADOW]");
+				aniSectionNames.Add("[FRAME MAX]");
+				aniSectionNames.Add("[LOOP]");
+				aniSectionNames.Add("[COORD]");
+				aniSectionNames.Add("[SPECTRUM]");
+				aniSectionNames.Add("[SPECTRUM TERM]");
+				aniSectionNames.Add("[SPECTRUM LIFE TIME]");
+				aniSectionNames.Add("[SPECTRUM COLOR]");
+				aniSectionNames.Add("[SPECTRUM EFFECT]");
+				aniSectionNames.Add("[OPERATION]");
+				aniSectionNames.Add("[IMAGE]");
+				aniSectionNames.Add("[IMAGE POS]");
+				aniSectionNames.Add("[INTERPOLATION]");
+				aniSectionNames.Add("[GRAPHIC EFFECT]");
+				aniSectionNames.Add("[DELAY]");
+				aniSectionNames.Add("[IMAGE ROTATE]");
+				aniSectionNames.Add("[ATTACK BOX]");
+				aniSectionNames.Add("[IMAGE RATE]");
+				aniSectionNames.Add("[RGBA]");
+				aniSectionNames.Add("[SET FLAG]");
+				aniSectionNames.Add("[SHADOW]");
+				aniSectionNames.Add("[DAMAGE TYPE]");
+				aniSectionNames.Add("[DAMAGE BOX]");
+				aniSectionNames.Add("[LOOP START]");
+				aniSectionNames.Add("[LOOP END]");
+				aniSectionNames.Add("[PLAY SOUND]");
+				aniSectionNames.Add("[FLIP TYPE]");
+				aniSectionNames.Add("[CLIP]");
+				aniSectionNames.Add("[PRELOAD]");
 			}
-			return ypUnuwGq1c;
+			return aniSectionNames;
 		}
 	}
 
@@ -214,30 +207,30 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (ML0n3ec5ie == null)
+			if (aniFrameSections == null)
 			{
-				ypUnuwGq1c = new HashSet<string>();
-				ypUnuwGq1c.Add("[IMAGE]");
-				ypUnuwGq1c.Add("[IMAGE POS]");
-				ypUnuwGq1c.Add("[INTERPOLATION]");
-				ypUnuwGq1c.Add("[GRAPHIC EFFECT]");
-				ypUnuwGq1c.Add("[DELAY]");
-				ypUnuwGq1c.Add("[IMAGE ROTATE]");
-				ypUnuwGq1c.Add("[ATTACK BOX]");
-				ypUnuwGq1c.Add("[IMAGE RATE]");
-				ypUnuwGq1c.Add("[RGBA]");
-				ypUnuwGq1c.Add("[SET FLAG]");
-				ypUnuwGq1c.Add("[SHADOW]");
-				ypUnuwGq1c.Add("[DAMAGE TYPE]");
-				ypUnuwGq1c.Add("[DAMAGE BOX]");
-				ypUnuwGq1c.Add("[LOOP START]");
-				ypUnuwGq1c.Add("[LOOP END]");
-				ypUnuwGq1c.Add("[PLAY SOUND]");
-				ypUnuwGq1c.Add("[FLIP TYPE]");
-				ypUnuwGq1c.Add("[CLIP]");
-				ypUnuwGq1c.Add("[PRELOAD]");
+				aniFrameSections = new HashSet<string>();
+				aniFrameSections.Add("[IMAGE]");
+				aniFrameSections.Add("[IMAGE POS]");
+				aniFrameSections.Add("[INTERPOLATION]");
+				aniFrameSections.Add("[GRAPHIC EFFECT]");
+				aniFrameSections.Add("[DELAY]");
+				aniFrameSections.Add("[IMAGE ROTATE]");
+				aniFrameSections.Add("[ATTACK BOX]");
+				aniFrameSections.Add("[IMAGE RATE]");
+				aniFrameSections.Add("[RGBA]");
+				aniFrameSections.Add("[SET FLAG]");
+				aniFrameSections.Add("[SHADOW]");
+				aniFrameSections.Add("[DAMAGE TYPE]");
+				aniFrameSections.Add("[DAMAGE BOX]");
+				aniFrameSections.Add("[LOOP START]");
+				aniFrameSections.Add("[LOOP END]");
+				aniFrameSections.Add("[PLAY SOUND]");
+				aniFrameSections.Add("[FLIP TYPE]");
+				aniFrameSections.Add("[CLIP]");
+				aniFrameSections.Add("[PRELOAD]");
 			}
-			return ML0n3ec5ie;
+			return aniFrameSections;
 		}
 	}
 
@@ -245,45 +238,45 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (i0VnHk3b7E == null)
+			if (lstExtensions == null)
 			{
-				i0VnHk3b7E = new Dictionary<string, PvfFileType>();
-				i0VnHk3b7E.Add("town/town.lst", PvfFileType.twn);
-				i0VnHk3b7E.Add("aura/aura.lst", PvfFileType.ora);
-				i0VnHk3b7E.Add("region/region.lst", PvfFileType.rgn);
-				i0VnHk3b7E.Add("stagemap/stagemap.lst", PvfFileType.stm);
-				i0VnHk3b7E.Add("worldmap/worldmap.lst", PvfFileType.wdm);
-				i0VnHk3b7E.Add("appendage/appendage.lst", PvfFileType.apd);
-				i0VnHk3b7E.Add("character/character.lst", PvfFileType.chr);
-				i0VnHk3b7E.Add("equipment/equipment.lst", PvfFileType.equ);
-				i0VnHk3b7E.Add("pet/pet.lst", PvfFileType.pet);
-				i0VnHk3b7E.Add("stackable/stackable.lst", PvfFileType.stk);
-				i0VnHk3b7E.Add("aicharacter/aicharacter.lst", PvfFileType.aic);
-				i0VnHk3b7E.Add("dungeon/dungeon.lst", PvfFileType.dgn);
-				i0VnHk3b7E.Add("chatemoticon/chatemoticon.lst", PvfFileType.emo);
-				i0VnHk3b7E.Add("monster/monster.lst", PvfFileType.mob);
-				i0VnHk3b7E.Add("creature/creature.lst", PvfFileType.cre);
-				i0VnHk3b7E.Add("cashshop/cashshop.lst", PvfFileType.shp);
-				i0VnHk3b7E.Add("map/map.lst", PvfFileType.map);
-				i0VnHk3b7E.Add("npc/npc.lst", PvfFileType.npc);
-				i0VnHk3b7E.Add("itemshop/itemshop.lst", PvfFileType.shp);
-				i0VnHk3b7E.Add("passiveobject/passiveobject.lst", PvfFileType.obj);
-				i0VnHk3b7E.Add("n_quest/quest.lst", PvfFileType.qst);
-				i0VnHk3b7E.Add("pvp_mission/mission.lst", PvfFileType.msn);
-				i0VnHk3b7E.Add("etc/independentdrop.lst", PvfFileType.etc);
-				i0VnHk3b7E.Add("skill/swordmanskill.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/fighterskill.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/gunnerskill.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/mageskill.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/priestskill.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/atgunnerskill.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/thiefskill.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/atfighterskill.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/atmageskill.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/demonicswordman.lst", PvfFileType.skl);
-				i0VnHk3b7E.Add("skill/creatormage.lst", PvfFileType.skl);
+				lstExtensions = new Dictionary<string, PvfFileType>();
+				lstExtensions.Add("town/town.lst", PvfFileType.twn);
+				lstExtensions.Add("aura/aura.lst", PvfFileType.ora);
+				lstExtensions.Add("region/region.lst", PvfFileType.rgn);
+				lstExtensions.Add("stagemap/stagemap.lst", PvfFileType.stm);
+				lstExtensions.Add("worldmap/worldmap.lst", PvfFileType.wdm);
+				lstExtensions.Add("appendage/appendage.lst", PvfFileType.apd);
+				lstExtensions.Add("character/character.lst", PvfFileType.chr);
+				lstExtensions.Add("equipment/equipment.lst", PvfFileType.equ);
+				lstExtensions.Add("pet/pet.lst", PvfFileType.pet);
+				lstExtensions.Add("stackable/stackable.lst", PvfFileType.stk);
+				lstExtensions.Add("aicharacter/aicharacter.lst", PvfFileType.aic);
+				lstExtensions.Add("dungeon/dungeon.lst", PvfFileType.dgn);
+				lstExtensions.Add("chatemoticon/chatemoticon.lst", PvfFileType.emo);
+				lstExtensions.Add("monster/monster.lst", PvfFileType.mob);
+				lstExtensions.Add("creature/creature.lst", PvfFileType.cre);
+				lstExtensions.Add("cashshop/cashshop.lst", PvfFileType.shp);
+				lstExtensions.Add("map/map.lst", PvfFileType.map);
+				lstExtensions.Add("npc/npc.lst", PvfFileType.npc);
+				lstExtensions.Add("itemshop/itemshop.lst", PvfFileType.shp);
+				lstExtensions.Add("passiveobject/passiveobject.lst", PvfFileType.obj);
+				lstExtensions.Add("n_quest/quest.lst", PvfFileType.qst);
+				lstExtensions.Add("pvp_mission/mission.lst", PvfFileType.msn);
+				lstExtensions.Add("etc/independentdrop.lst", PvfFileType.etc);
+				lstExtensions.Add("skill/swordmanskill.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/fighterskill.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/gunnerskill.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/mageskill.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/priestskill.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/atgunnerskill.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/thiefskill.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/atfighterskill.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/atmageskill.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/demonicswordman.lst", PvfFileType.skl);
+				lstExtensions.Add("skill/creatormage.lst", PvfFileType.skl);
 			}
-			return i0VnHk3b7E;
+			return lstExtensions;
 		}
 	}
 
@@ -291,15 +284,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (RBcn7WPrcH == null)
+			if (autoBackupConfig == null)
 			{
-				RBcn7WPrcH = new AutoTheBackupPvfOptions();
+				autoBackupConfig = new AutoTheBackupPvfOptions();
 			}
-			return RBcn7WPrcH;
+			return autoBackupConfig;
 		}
 		set
 		{
-			RBcn7WPrcH = value;
+			autoBackupConfig = value;
 		}
 	}
 
@@ -307,15 +300,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (!gFQncEUXri.HasValue)
+			if (!defaultEncoding.HasValue)
 			{
-				gFQncEUXri = EncodingType.TW;
+				defaultEncoding = EncodingType.TW;
 			}
-			return gFQncEUXri.Value;
+			return defaultEncoding.Value;
 		}
 		set
 		{
-			gFQncEUXri = value;
+			defaultEncoding = value;
 		}
 	}
 
@@ -323,15 +316,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (!pGAngjIAsJ.HasValue)
+			if (!fileTextTraditionalConvertSimplified.HasValue)
 			{
-				pGAngjIAsJ = true;
+				fileTextTraditionalConvertSimplified = true;
 			}
-			return pGAngjIAsJ.Value;
+			return fileTextTraditionalConvertSimplified.Value;
 		}
 		set
 		{
-			pGAngjIAsJ = value;
+			fileTextTraditionalConvertSimplified = value;
 			DoNotify("FileTextTraditionalConvertSimplified");
 		}
 	}
@@ -341,60 +334,36 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (BtOnK50TxJ == null)
+			if (pvfEncodingList == null)
 			{
-				BtOnK50TxJ = new List<EncodingType>();
+				pvfEncodingList = new List<EncodingType>();
 				foreach (EnumberEntity item in EnumberHelper.EnumToList<EncodingType>())
 				{
-					BtOnK50TxJ.Add((EncodingType)item.EnumValue);
+					pvfEncodingList.Add((EncodingType)item.EnumValue);
 				}
 			}
-			return BtOnK50TxJ;
+			return pvfEncodingList;
 		}
 	}
 
 	[JsonIgnore]
-	public bool UseCompatibleDecompiler
-	{
-		[CompilerGenerated]
-		get
-		{
-			return WLGnYpIL8V;
-		}
-		[CompilerGenerated]
-		set
-		{
-			WLGnYpIL8V = value;
-		}
-	}
+	public bool UseCompatibleDecompiler { get; set; }
 
-	public bool AutoConvertStringLink
-	{
-		[CompilerGenerated]
-		get
-		{
-			return KVSnJ7WoJg;
-		}
-		[CompilerGenerated]
-		set
-		{
-			KVSnJ7WoJg = value;
-		}
-	}
+	public bool AutoConvertStringLink { get; set; }
 
 	public bool EditorConvertTraditionalChinese
 	{
 		get
 		{
-			if (!PevndeOBwg.HasValue)
+			if (!editorConvertTraditionalChinese.HasValue)
 			{
-				PevndeOBwg = true;
+				editorConvertTraditionalChinese = true;
 			}
-			return PevndeOBwg.Value;
+			return editorConvertTraditionalChinese.Value;
 		}
 		set
 		{
-			PevndeOBwg = value;
+			editorConvertTraditionalChinese = value;
 			DoNotify("EditorConvertTraditionalChinese");
 		}
 	}
@@ -404,15 +373,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (x8vn1AQ8FU == null)
+			if (pvfFileTypeDic == null)
 			{
-				x8vn1AQ8FU = new Dictionary<string, PvfFileType>();
+				pvfFileTypeDic = new Dictionary<string, PvfFileType>();
 				foreach (EnumberEntity item in EnumberHelper.EnumToList<PvfFileType>())
 				{
-					x8vn1AQ8FU.Add("." + item.EnumName.ToLower(), (PvfFileType)item.EnumValue);
+					pvfFileTypeDic.Add("." + item.EnumName.ToLower(), (PvfFileType)item.EnumValue);
 				}
 			}
-			return x8vn1AQ8FU;
+			return pvfFileTypeDic;
 		}
 	}
 
@@ -420,15 +389,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (nXYnGTgbyK == null)
+			if (treelistCommentDic == null)
 			{
-				nXYnGTgbyK = new Dictionary<string, TreelistCommentRes>();
+				treelistCommentDic = new Dictionary<string, TreelistCommentRes>();
 			}
-			return nXYnGTgbyK;
+			return treelistCommentDic;
 		}
 		set
 		{
-			nXYnGTgbyK = value;
+			treelistCommentDic = value;
 		}
 	}
 
@@ -437,18 +406,18 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (IWSnOKuYmC == null)
+			if (fileTypeSet == null)
 			{
-				IWSnOKuYmC = new HashSet<PvfFileType>();
+				fileTypeSet = new HashSet<PvfFileType>();
 				foreach (EnumberEntity item in EnumberHelper.EnumToList<PvfFileType>())
 				{
 					if (item.EnumName != "未知")
 					{
-						IWSnOKuYmC.Add((PvfFileType)item.EnumValue);
+						fileTypeSet.Add((PvfFileType)item.EnumValue);
 					}
 				}
 			}
-			return IWSnOKuYmC;
+			return fileTypeSet;
 		}
 	}
 
@@ -457,15 +426,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (vdKnrW2u4x == null)
+			if (fileTypes == null)
 			{
-				vdKnrW2u4x = new HashSet<string>();
+				fileTypes = new HashSet<string>();
 				foreach (EnumberEntity item in EnumberHelper.EnumToList<PvfFileType>())
 				{
-					vdKnrW2u4x.Add("." + item.EnumName);
+					fileTypes.Add("." + item.EnumName);
 				}
 			}
-			return vdKnrW2u4x;
+			return fileTypes;
 		}
 	}
 
@@ -473,15 +442,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (NwAnecBfTM == null)
+			if (extractConfig == null)
 			{
-				NwAnecBfTM = new ExtractConfig();
+				extractConfig = new ExtractConfig();
 			}
-			return NwAnecBfTM;
+			return extractConfig;
 		}
 		set
 		{
-			NwAnecBfTM = value;
+			extractConfig = value;
 		}
 	}
 
@@ -489,15 +458,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (Sm2njbnj24 == null)
+			if (importConfig == null)
 			{
-				Sm2njbnj24 = new ImportConfig();
+				importConfig = new ImportConfig();
 			}
-			return Sm2njbnj24;
+			return importConfig;
 		}
 		set
 		{
-			Sm2njbnj24 = value;
+			importConfig = value;
 		}
 	}
 
@@ -505,15 +474,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (!tpenxpJM61.HasValue)
+			if (!pvfCommentPriority.HasValue)
 			{
-				tpenxpJM61 = PvfCommentPriority.云端;
+				pvfCommentPriority = PvfCommentPriority.云端;
 			}
-			return tpenxpJM61.Value;
+			return pvfCommentPriority.Value;
 		}
 		set
 		{
-			tpenxpJM61 = value;
+			pvfCommentPriority = value;
 			DoNotify("PvfCommentPriority");
 		}
 	}
@@ -529,11 +498,11 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			return kelnmn3VZ9;
+			return savePvfLoadingDisableMainWindow;
 		}
 		set
 		{
-			kelnmn3VZ9 = value;
+			savePvfLoadingDisableMainWindow = value;
 			DoNotify("SavePvfLoadingDisableMainWindow");
 		}
 	}
@@ -542,15 +511,15 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			if (!FGEnSyvUHm.HasValue)
+			if (!pvfSaveWhenTheErrorBackUp.HasValue)
 			{
-				FGEnSyvUHm = true;
+				pvfSaveWhenTheErrorBackUp = true;
 			}
-			return FGEnSyvUHm.Value;
+			return pvfSaveWhenTheErrorBackUp.Value;
 		}
 		set
 		{
-			FGEnSyvUHm = value;
+			pvfSaveWhenTheErrorBackUp = value;
 			DoNotify("PvfSaveWhenTheErrorBackUp");
 		}
 	}
@@ -559,11 +528,11 @@ public class PvfOptions : ModelBase
 	{
 		get
 		{
-			return BFWnB2giU5;
+			return savePvfPackShowDialog;
 		}
 		set
 		{
-			BFWnB2giU5 = value;
+			savePvfPackShowDialog = value;
 			DoNotify("SavePvfPackShowDialog");
 		}
 	}

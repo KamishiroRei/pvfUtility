@@ -16,288 +16,67 @@ namespace PvfCode.Models.Pvf;
 
 public class Stringtable
 {
-	internal class dEOStg8lJCr53XY3219
+	internal class StringTableEntry
 	{
-		public int bpn86uISfF;
+		public int Index;
 
-		public byte[] U4W8yQrDQ6;
+		public byte[] Bytes;
 
-		[CompilerGenerated]
-		private string Ps78wJVNG0;
+		public string Text { get; set; }
 
-		[CompilerGenerated]
-		private int cHb8oQFvs9;
-
-		[SpecialName]
-		[CompilerGenerated]
-		public string JEZ8f7BM5L()
-		{
-			return Ps78wJVNG0;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public void fvJ8hOn2kH(string P_0)
-		{
-			Ps78wJVNG0 = P_0;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public int t2b808KCZm()
-		{
-			return cHb8oQFvs9;
-		}
-
-		[SpecialName]
-		[CompilerGenerated]
-		public void lJD8s7p2oJ(int P_0)
-		{
-			cHb8oQFvs9 = P_0;
-		}
-
-		public dEOStg8lJCr53XY3219()
-		{
-		}
+		public int QuoteCount { get; set; }
 	}
 
-	internal class kl82nT82GWkyXNqx1wJ
+	private Ilogger logger;
+
+	private EncodingType encoding;
+
+	private Dictionary<string, StringTableEntry> entriesByText;
+
+	private List<StringTableEntry?> entries;
+
+	private Dictionary<PvfFileType, int> nameLabelByFileType;
+
+	public int NameLabel { get; private set; }
+
+	public bool IsStringTableUpdated { get; private set; }
+
+	public int SetNameIndex { get; set; }
+
+	public HashSet<int> NameLableOrSetNameLable { get; set; }
+
+	private Ilogger GetLogger()
 	{
-		[CompilerGenerated]
-		private PvfFile QK88qgBxsq;
-
-		[CompilerGenerated]
-		private int Kht8z0jM2Z;
-
-		public PvfFile File
+		if (logger == null)
 		{
-			[CompilerGenerated]
-			get
-			{
-				return QK88qgBxsq;
-			}
-			[CompilerGenerated]
-			set
-			{
-				QK88qgBxsq = value;
-			}
+			logger = AppSetting.Instance.GetIlogger();
 		}
-
-		public int Index
-		{
-			[CompilerGenerated]
-			get
-			{
-				return Kht8z0jM2Z;
-			}
-			[CompilerGenerated]
-			set
-			{
-				Kht8z0jM2Z = value;
-			}
-		}
-
-		public kl82nT82GWkyXNqx1wJ()
-		{
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass35_0
-	{
-		public string QAJueEGxIY;
-
-		public _003C_003Ec__DisplayClass35_0()
-		{
-		}
-
-		internal bool xFNur4PlMj(string x)
-		{
-			return Regex.IsMatch(x, Regex.Escape(QAJueEGxIY), RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass37_0
-	{
-		public Regex lcbuB0kYqP;
-
-		public string Hp7u4x0WAG;
-
-		public _003C_003Ec__DisplayClass37_0()
-		{
-		}
-
-		internal bool WSsujUgd07(dEOStg8lJCr53XY3219 item)
-		{
-			return lcbuB0kYqP.IsMatch(item.JEZ8f7BM5L());
-		}
-
-		internal bool PwSuxQP0uD(dEOStg8lJCr53XY3219 item)
-		{
-			return LikeOperator.LikeString(item?.JEZ8f7BM5L(), Hp7u4x0WAG, CompareMethod.Binary);
-		}
-
-		internal bool tLaumcotBa(dEOStg8lJCr53XY3219 item)
-		{
-			if (item == null)
-			{
-				return false;
-			}
-			return item.JEZ8f7BM5L().IndexOf(Hp7u4x0WAG, StringComparison.OrdinalIgnoreCase) == 0;
-		}
-
-		internal bool ymduSu11fJ(dEOStg8lJCr53XY3219 item)
-		{
-			if (item == null)
-			{
-				return false;
-			}
-			return item.JEZ8f7BM5L().IndexOf(Hp7u4x0WAG, StringComparison.OrdinalIgnoreCase) >= 0;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass42_0
-	{
-		public ConcurrentBag<int> HCMuv0JAit;
-
-		public _003C_003Ec__DisplayClass42_0()
-		{
-		}
-
-		internal void TU6uChG36v(KeyValuePair<string, PvfFile> file)
-		{
-			file.Value.GetStringDatas(HCMuv0JAit);
-		}
-	}
-
-	private Ilogger qO3L3oRnm4;
-
-	private EncodingType rKoLHRQOAd;
-
-	private Dictionary<string, dEOStg8lJCr53XY3219> XLiL78w9aV;
-
-	private List<dEOStg8lJCr53XY3219?> xqBLcEarNI;
-
-	[CompilerGenerated]
-	private Dictionary<PvfFileType, int> NZELgav8gv;
-
-	[CompilerGenerated]
-	private int fvnLKYcvks;
-
-	[CompilerGenerated]
-	private bool CLiLYxBU1m;
-
-	[CompilerGenerated]
-	private int XpmLJdrws3;
-
-	[CompilerGenerated]
-	private HashSet<int> joLLdgLt5V;
-
-	public int NameLabel
-	{
-		[CompilerGenerated]
-		get
-		{
-			return fvnLKYcvks;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			fvnLKYcvks = value;
-		}
-	}
-
-	public bool IsStringTableUpdated
-	{
-		[CompilerGenerated]
-		get
-		{
-			return CLiLYxBU1m;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			CLiLYxBU1m = value;
-		}
-	}
-
-	public int SetNameIndex
-	{
-		[CompilerGenerated]
-		get
-		{
-			return XpmLJdrws3;
-		}
-		[CompilerGenerated]
-		set
-		{
-			XpmLJdrws3 = value;
-		}
-	}
-
-	public HashSet<int> NameLableOrSetNameLable
-	{
-		[CompilerGenerated]
-		get
-		{
-			return joLLdgLt5V;
-		}
-		[CompilerGenerated]
-		set
-		{
-			joLLdgLt5V = value;
-		}
-	}
-
-	[SpecialName]
-	private Ilogger jGMLEDTr60()
-	{
-		if (qO3L3oRnm4 == null)
-		{
-			qO3L3oRnm4 = AppSetting.Instance.GetIlogger();
-		}
-		return qO3L3oRnm4;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private Dictionary<PvfFileType, int> dU8L8PBPHr()
-	{
-		return NZELgav8gv;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private void ntPLuwJqJx(Dictionary<PvfFileType, int> P_0)
-	{
-		NZELgav8gv = P_0;
+		return logger;
 	}
 
 	public void Clear()
 	{
 		IsStringTableUpdated = false;
-		if (XLiL78w9aV != null)
+		if (entriesByText != null)
 		{
-			XLiL78w9aV.Clear();
+			entriesByText.Clear();
 		}
-		XLiL78w9aV = null;
-		xqBLcEarNI = null;
-		if (xqBLcEarNI != null)
+		entriesByText = null;
+		entries = null;
+		if (entries != null)
 		{
-			xqBLcEarNI.Clear();
+			entries.Clear();
 		}
-		XLiL78w9aV = new Dictionary<string, dEOStg8lJCr53XY3219>();
-		xqBLcEarNI = new List<dEOStg8lJCr53XY3219>();
+		entriesByText = new Dictionary<string, StringTableEntry>();
+		entries = new List<StringTableEntry>();
 	}
 
 	public void Loadstringtable(byte[] stBytes, EncodingType encoding, PvfPack pvf)
 	{
 		NameLableOrSetNameLable = new HashSet<int>();
-		rKoLHRQOAd = encoding;
-		xqBLcEarNI = new List<dEOStg8lJCr53XY3219>();
-		XLiL78w9aV = new Dictionary<string, dEOStg8lJCr53XY3219>();
+		this.encoding = encoding;
+		entries = new List<StringTableEntry>();
+		entriesByText = new Dictionary<string, StringTableEntry>();
 		if (stBytes == null)
 		{
 			AppSetting.Instance.GetIlogger()?.Error("stringtable.bin文件 是Null");
@@ -309,55 +88,55 @@ public class Stringtable
 		{
 			int num3 = BitConverter.ToInt32(stBytes, i * 4 + 4);
 			int num4 = BitConverter.ToInt32(stBytes, i * 4 + 8) - num3;
-			dEOStg8lJCr53XY3219 dEOStg8lJCr53XY3220 = new dEOStg8lJCr53XY3219
+			StringTableEntry entry = new StringTableEntry
 			{
-				bpn86uISfF = i,
-				U4W8yQrDQ6 = new byte[num4]
+				Index = i,
+				Bytes = new byte[num4]
 			};
 			if (num4 > num2)
 			{
-				jGMLEDTr60().ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringTableBinError"), isError: true);
+				GetLogger().ShowMsg(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringTableBinError"), isError: true);
 				return;
 			}
-			Buffer.BlockCopy(stBytes, num3 + 4, dEOStg8lJCr53XY3220.U4W8yQrDQ6, 0, num4);
-			dEOStg8lJCr53XY3220.fvJ8hOn2kH(AppSetting.Instance.PvfConfig.StrTableAndStrViewConvertStrContent(Encoding.GetEncoding((int)rKoLHRQOAd).GetString(dEOStg8lJCr53XY3220.U4W8yQrDQ6).TrimEnd(new char[1])));
+			Buffer.BlockCopy(stBytes, num3 + 4, entry.Bytes, 0, num4);
+			entry.Text = AppSetting.Instance.PvfConfig.StrTableAndStrViewConvertStrContent(Encoding.GetEncoding((int)this.encoding).GetString(entry.Bytes).TrimEnd(new char[1]));
 			lock (this)
 			{
-				xqBLcEarNI.Add(dEOStg8lJCr53XY3220);
+				entries.Add(entry);
 			}
-			if (!XLiL78w9aV.ContainsKey(dEOStg8lJCr53XY3220.JEZ8f7BM5L()))
+			if (!entriesByText.ContainsKey(entry.Text))
 			{
-				XLiL78w9aV.TryAdd(dEOStg8lJCr53XY3220.JEZ8f7BM5L(), dEOStg8lJCr53XY3220);
+				entriesByText.TryAdd(entry.Text, entry);
 			}
 		}
 		IsStringTableUpdated = false;
-		BW8Lk2EMZB();
-		jGMLEDTr60()?.Success(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringTableLoadSuccess"), rKoLHRQOAd));
+		InitializeNameLabels();
+		GetLogger()?.Success(string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_StringTableLoadSuccess"), this.encoding));
 	}
 
-	private void BW8Lk2EMZB()
+	private void InitializeNameLabels()
 	{
-		ntPLuwJqJx(new Dictionary<PvfFileType, int>());
+		nameLabelByFileType = new Dictionary<PvfFileType, int>();
 		NameLabel = GetStringTableId("[name]");
-		dU8L8PBPHr().Add(PvfFileType.chr, GetStringTableId("[growtype name]"));
-		dU8L8PBPHr().Add(PvfFileType.emo, GetStringTableId("[macro]"));
-		dU8L8PBPHr().Add(PvfFileType.aic, GetStringTableId("[minimum info]"));
-		dU8L8PBPHr().Add(PvfFileType.evt, GetStringTableId("[title]"));
-		dU8L8PBPHr().Add(PvfFileType.map, GetStringTableId("[map name]"));
-		dU8L8PBPHr().Add(PvfFileType.msn, GetStringTableId("[name_text]"));
+		nameLabelByFileType.Add(PvfFileType.chr, GetStringTableId("[growtype name]"));
+		nameLabelByFileType.Add(PvfFileType.emo, GetStringTableId("[macro]"));
+		nameLabelByFileType.Add(PvfFileType.aic, GetStringTableId("[minimum info]"));
+		nameLabelByFileType.Add(PvfFileType.evt, GetStringTableId("[title]"));
+		nameLabelByFileType.Add(PvfFileType.map, GetStringTableId("[map name]"));
+		nameLabelByFileType.Add(PvfFileType.msn, GetStringTableId("[name_text]"));
 		NameLableOrSetNameLable.Add(NameLabel);
 		NameLableOrSetNameLable.Add(GetStringTableId("[set name]"));
 	}
 
 	public void InitDefault()
 	{
-		XLiL78w9aV = new Dictionary<string, dEOStg8lJCr53XY3219>();
-		xqBLcEarNI = new List<dEOStg8lJCr53XY3219>();
+		entriesByText = new Dictionary<string, StringTableEntry>();
+		entries = new List<StringTableEntry>();
 	}
 
 	public int GetNameLable(PvfFileType fileType)
 	{
-		if (dU8L8PBPHr().TryGetValue(fileType, out var value))
+		if (nameLabelByFileType.TryGetValue(fileType, out var value))
 		{
 			return value;
 		}
@@ -366,100 +145,96 @@ public class Stringtable
 
 	public bool IsAny()
 	{
-		if (dU8L8PBPHr() != null && XLiL78w9aV != null)
+		if (nameLabelByFileType != null && entriesByText != null)
 		{
-			return xqBLcEarNI != null;
+			return entries != null;
 		}
 		return false;
 	}
 
 	public string GetStringItem(int tableId, bool autoConvertStr = false)
 	{
-		if (tableId < 0 || tableId >= xqBLcEarNI.Count)
+		if (tableId < 0 || tableId >= entries.Count)
 		{
 			return string.Format(AppSetting.Instance.GetIlogger()?.GetStrNoReplace("mess_StringError"), tableId);
 		}
-		if (xqBLcEarNI[tableId] != null)
+		if (entries[tableId] != null)
 		{
 			if (!autoConvertStr)
 			{
-				return xqBLcEarNI[tableId].JEZ8f7BM5L();
+				return entries[tableId].Text;
 			}
-			return AppSetting.Instance.PvfConfig.FileTextTraditionalConvertSimplifiedAutoMethods(xqBLcEarNI[tableId].JEZ8f7BM5L());
+			return AppSetting.Instance.PvfConfig.FileTextTraditionalConvertSimplifiedAutoMethods(entries[tableId].Text);
 		}
 		return string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_LocalStringTableDeleted"), tableId);
 	}
 
 	public int GetStringTableId(string str)
 	{
-		if (!XLiL78w9aV.TryGetValue(AppSetting.Instance.PvfConfig.StrTableAndStrViewConvertStrContent(str), out dEOStg8lJCr53XY3219 value))
+		if (!entriesByText.TryGetValue(AppSetting.Instance.PvfConfig.StrTableAndStrViewConvertStrContent(str), out StringTableEntry value))
 		{
 			return -1;
 		}
-		return value.bpn86uISfF;
+		return value.Index;
 	}
 
 	public IEnumerable<string> SearchPanelGetKeywords(string keyword)
 	{
-		_003C_003Ec__DisplayClass35_0 CS_0024_003C_003E8__locals2 = new _003C_003Ec__DisplayClass35_0();
-		CS_0024_003C_003E8__locals2.QAJueEGxIY = keyword;
-		if (xqBLcEarNI == null || xqBLcEarNI.Count == 0)
+		if (entries == null || entries.Count == 0)
 		{
 			return null;
 		}
-		return XLiL78w9aV.Keys.Where((string x) => Regex.IsMatch(x, Regex.Escape(CS_0024_003C_003E8__locals2.QAJueEGxIY), RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace)).Take(AppSetting.Instance.PublicSearchServiceOptions.TakeNumber);
+		return entriesByText.Keys.Where(text => Regex.IsMatch(text, Regex.Escape(keyword), RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace)).Take(AppSetting.Instance.PublicSearchServiceOptions.TakeNumber);
 	}
 
 	public int AddStringItem(string str)
 	{
 		string text = AppSetting.Instance.PvfConfig.StrTableAndStrViewConvertStrContent(str);
-		dEOStg8lJCr53XY3219 obj = new dEOStg8lJCr53XY3219();
-		obj.bpn86uISfF = xqBLcEarNI.Count;
-		obj.fvJ8hOn2kH(text);
-		obj.U4W8yQrDQ6 = Encoding.GetEncoding((int)rKoLHRQOAd).GetBytes(text);
-		dEOStg8lJCr53XY3219 dEOStg8lJCr53XY3220 = obj;
+		StringTableEntry entry = new StringTableEntry
+		{
+			Index = entries.Count,
+			Text = text,
+			Bytes = Encoding.GetEncoding((int)encoding).GetBytes(text)
+		};
 		lock (this)
 		{
-			xqBLcEarNI.Add(dEOStg8lJCr53XY3220);
-			if (XLiL78w9aV.ContainsKey(dEOStg8lJCr53XY3220.JEZ8f7BM5L()))
+			entries.Add(entry);
+			if (entriesByText.ContainsKey(entry.Text))
 			{
-				XLiL78w9aV.Remove(dEOStg8lJCr53XY3220.JEZ8f7BM5L());
+				entriesByText.Remove(entry.Text);
 			}
-			XLiL78w9aV.TryAdd(dEOStg8lJCr53XY3220.JEZ8f7BM5L(), dEOStg8lJCr53XY3220);
+			entriesByText.TryAdd(entry.Text, entry);
 			IsStringTableUpdated = true;
 		}
-		return dEOStg8lJCr53XY3220.bpn86uISfF;
+		return entry.Index;
 	}
 
 	public void FindStringItem(HashSet<int> list, string keyword, bool startMatch, bool useLike, Regex regex)
 	{
-		_003C_003Ec__DisplayClass37_0 CS_0024_003C_003E8__locals7 = new _003C_003Ec__DisplayClass37_0();
-		CS_0024_003C_003E8__locals7.lcbuB0kYqP = regex;
-		CS_0024_003C_003E8__locals7.Hp7u4x0WAG = keyword;
 		List<int> list2 = new List<int>();
-		if (CS_0024_003C_003E8__locals7.lcbuB0kYqP != null)
+		if (regex != null)
 		{
-			list2.AddRange(from item in xqBLcEarNI
-				where CS_0024_003C_003E8__locals7.lcbuB0kYqP.IsMatch(item.JEZ8f7BM5L())
-				select item.bpn86uISfF);
+			list2.AddRange(from item in entries
+				where regex.IsMatch(item.Text)
+				select item.Index);
 		}
 		else if (useLike)
 		{
-			list2.AddRange(from item in xqBLcEarNI
-				where LikeOperator.LikeString(item?.JEZ8f7BM5L(), CS_0024_003C_003E8__locals7.Hp7u4x0WAG, CompareMethod.Binary)
-				select item.bpn86uISfF);
+			list2.AddRange(from item in entries
+				where LikeOperator.LikeString(item?.Text, keyword, CompareMethod.Binary)
+				select item.Index);
 		}
 		else if (startMatch)
 		{
-			list2.AddRange(from item in xqBLcEarNI
-				where item != null && item.JEZ8f7BM5L().IndexOf(CS_0024_003C_003E8__locals7.Hp7u4x0WAG, StringComparison.OrdinalIgnoreCase) == 0
-				select item.bpn86uISfF);
+			list2.AddRange(from item in entries
+				where item != null && item.Text.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) == 0
+				select item.Index);
 		}
 		else
 		{
-			list2.AddRange(from item in xqBLcEarNI
-				where item != null && item.JEZ8f7BM5L().IndexOf(CS_0024_003C_003E8__locals7.Hp7u4x0WAG, StringComparison.OrdinalIgnoreCase) >= 0
-				select item.bpn86uISfF);
+			list2.AddRange(from item in entries
+				where item != null && item.Text.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0
+				select item.Index);
 		}
 		foreach (int item in list2)
 		{
@@ -483,59 +258,59 @@ public class Stringtable
 			AddStringItem("此StringTable由 pvfUtility 2022 或更高版本生成.");
 		}
 		int num = 0;
-		int num2 = xqBLcEarNI.Count * 4 + 4;
+		int num2 = entries.Count * 4 + 4;
 		MemoryStream memoryStream = new MemoryStream();
-		memoryStream.Write(BitConverter.GetBytes((uint)xqBLcEarNI.Count), 0, 4);
-		for (int i = 0; i < xqBLcEarNI.Count; i++)
+		memoryStream.Write(BitConverter.GetBytes((uint)entries.Count), 0, 4);
+		for (int i = 0; i < entries.Count; i++)
 		{
 			memoryStream.Write(BitConverter.GetBytes((uint)(num2 + num)), 0, 4);
-			if (xqBLcEarNI[i] != null)
+			if (entries[i] != null)
 			{
-				num += xqBLcEarNI[i].U4W8yQrDQ6.Length;
+				num += entries[i].Bytes.Length;
 			}
 		}
 		memoryStream.Write(BitConverter.GetBytes((uint)(num2 + num)), 0, 4);
-		for (int j = 0; j < xqBLcEarNI.Count; j++)
+		for (int j = 0; j < entries.Count; j++)
 		{
-			if (xqBLcEarNI[j] == null)
+			if (entries[j] == null)
 			{
 				memoryStream.Write(new byte[0], 0, 0);
 			}
 			else
 			{
-				memoryStream.Write(xqBLcEarNI[j].U4W8yQrDQ6, 0, xqBLcEarNI[j].U4W8yQrDQ6.Length);
+				memoryStream.Write(entries[j].Bytes, 0, entries[j].Bytes.Length);
 			}
 		}
 		if (encode)
 		{
-			return yHLLLxR7Qi(memoryStream.ToArray(), num + num2 + 4);
+			return EncodeStringTable(memoryStream.ToArray(), num + num2 + 4);
 		}
 		return memoryStream.ToArray();
 	}
 
-	private byte[] yHLLLxR7Qi(byte[] P_0, int P_1)
+	private byte[] EncodeStringTable(byte[] buffer, int length)
 	{
-		Encode_Stringtable(P_0, P_1, 2478138381u);
-		return P_0;
+		Encode_Stringtable(buffer, length, 2478138381u);
+		return buffer;
 	}
 
 	public Task<string> GetDocumentText()
 	{
-		if (xqBLcEarNI == null)
+		if (entries == null)
 		{
 			return Task.FromResult(string.Empty);
 		}
 		StringBuilder stringBuilder = new StringBuilder(AppSetting.Instance.GetIlogger()?.GetStr("mess_FileHeader"));
-		foreach (dEOStg8lJCr53XY3219 item in xqBLcEarNI)
+		foreach (StringTableEntry item in entries)
 		{
 			if (item != null)
 			{
 				StringBuilder stringBuilder2 = stringBuilder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(5, 2, stringBuilder2);
 				handler.AppendLiteral("[");
-				handler.AppendFormatted(item.bpn86uISfF);
+				handler.AppendFormatted(item.Index);
 				handler.AppendLiteral("]\t`");
-				handler.AppendFormatted(item.JEZ8f7BM5L().Replace("\r\n", "\\n"));
+				handler.AppendFormatted(item.Text.Replace("\r\n", "\\n"));
 				handler.AppendLiteral("`");
 				stringBuilder2.AppendLine(ref handler);
 			}
@@ -545,30 +320,27 @@ public class Stringtable
 
 	public Task LoadQuote(PvfPack pvf)
 	{
-		_003C_003Ec__DisplayClass42_0 CS_0024_003C_003E8__locals3 = new _003C_003Ec__DisplayClass42_0();
 		if (pvf.FileList == null)
 		{
 			return Task.CompletedTask;
 		}
-		if (xqBLcEarNI != null)
+		if (entries != null)
 		{
-			Parallel.ForEach(xqBLcEarNI, delegate(dEOStg8lJCr53XY3219 item)
+			Parallel.ForEach(entries, item =>
 			{
-				item.lJD8s7p2oJ(0);
+				item.QuoteCount = 0;
 			});
 		}
-		CS_0024_003C_003E8__locals3.HCMuv0JAit = new ConcurrentBag<int>();
-		Parallel.ForEach(pvf.FileList.Where<KeyValuePair<string, PvfFile>>((KeyValuePair<string, PvfFile> it) => it.Value.IsScriptFile), delegate(KeyValuePair<string, PvfFile> file)
+		ConcurrentBag<int> stringIds = new ConcurrentBag<int>();
+		Parallel.ForEach(pvf.FileList.Where(item => item.Value.IsScriptFile), file =>
 		{
-			file.Value.GetStringDatas(CS_0024_003C_003E8__locals3.HCMuv0JAit);
+			file.Value.GetStringDatas(stringIds);
 		});
-		foreach (int item in CS_0024_003C_003E8__locals3.HCMuv0JAit)
+		foreach (int item in stringIds)
 		{
-			if (item >= 0 && item < xqBLcEarNI.Count && xqBLcEarNI[item] != null)
+			if (item >= 0 && item < entries.Count && entries[item] != null)
 			{
-				dEOStg8lJCr53XY3219? obj = xqBLcEarNI[item];
-				int num = obj.t2b808KCZm();
-				obj.lJD8s7p2oJ(num + 1);
+				entries[item].QuoteCount++;
 			}
 		}
 		return Task.CompletedTask;
@@ -576,21 +348,21 @@ public class Stringtable
 
 	public int GetQuoteCount(int index)
 	{
-		if (index < 0 || index >= xqBLcEarNI.Count)
+		if (index < 0 || index >= entries.Count)
 		{
 			return 0;
 		}
-		if (xqBLcEarNI[index] == null)
+		if (entries[index] == null)
 		{
 			return 0;
 		}
-		return xqBLcEarNI[index].t2b808KCZm();
+		return entries[index].QuoteCount;
 	}
 
 	public async Task DocumentSave(IDictionary<int, string> table, PvfPack pvf)
 	{
-		List<dEOStg8lJCr53XY3219> list = new List<dEOStg8lJCr53XY3219>();
-		Dictionary<string, dEOStg8lJCr53XY3219> dictionary = new Dictionary<string, dEOStg8lJCr53XY3219>();
+		List<StringTableEntry> list = new List<StringTableEntry>();
+		Dictionary<string, StringTableEntry> dictionary = new Dictionary<string, StringTableEntry>();
 		int num = 0;
 		foreach (KeyValuePair<int, string> item in table.OrderBy<KeyValuePair<int, string>, int>((KeyValuePair<int, string> it) => it.Key))
 		{
@@ -598,56 +370,57 @@ public class Stringtable
 			{
 				list.Add(null);
 			}
-			dEOStg8lJCr53XY3219 obj = new dEOStg8lJCr53XY3219();
-			obj.bpn86uISfF = list.Count;
-			obj.fvJ8hOn2kH(item.Value);
-			obj.U4W8yQrDQ6 = Encoding.GetEncoding((int)rKoLHRQOAd).GetBytes(item.Value);
-			dEOStg8lJCr53XY3219 dEOStg8lJCr53XY3220 = obj;
-			list.Add(dEOStg8lJCr53XY3220);
+			StringTableEntry entry = new StringTableEntry
+			{
+				Index = list.Count,
+				Text = item.Value,
+				Bytes = Encoding.GetEncoding((int)encoding).GetBytes(item.Value)
+			};
+			list.Add(entry);
 			if (!dictionary.ContainsKey(item.Value))
 			{
-				dictionary.Add(item.Value, dEOStg8lJCr53XY3220);
+				dictionary.Add(item.Value, entry);
 			}
 			num++;
 		}
-		XLiL78w9aV = dictionary;
-		xqBLcEarNI = list;
+		entriesByText = dictionary;
+		entries = list;
 		IsStringTableUpdated = true;
 		await LoadQuote(pvf);
 	}
 
 	public IEnumerable<string> WebApiGetStringTab()
 	{
-		if (xqBLcEarNI == null)
+		if (entries == null)
 		{
 			return new List<string>();
 		}
-		return xqBLcEarNI.Select((dEOStg8lJCr53XY3219 it) => it.JEZ8f7BM5L());
+		return entries.Select(item => item.Text);
 	}
 
 	public async Task DeletingInvalidReferences(PvfPack pvf)
 	{
-		if (xqBLcEarNI == null || !xqBLcEarNI.Any())
+		if (entries == null || !entries.Any())
 		{
 			return;
 		}
 		await LoadQuote(pvf);
-		if (!xqBLcEarNI.Any((dEOStg8lJCr53XY3219 it) => it.t2b808KCZm() == 0))
+		if (!entries.Any(item => item.QuoteCount == 0))
 		{
 			return;
 		}
 		bool flag = false;
-		List<dEOStg8lJCr53XY3219> list = new List<dEOStg8lJCr53XY3219>();
+		List<StringTableEntry> list = new List<StringTableEntry>();
 		Dictionary<int, int> dictionary = new Dictionary<int, int>();
 		int num = 0;
-		foreach (dEOStg8lJCr53XY3219 item in xqBLcEarNI)
+		foreach (StringTableEntry item in entries)
 		{
-			if (item != null && item.t2b808KCZm() > 0)
+			if (item != null && item.QuoteCount > 0)
 			{
-				if (item.bpn86uISfF != num)
+				if (item.Index != num)
 				{
-					dictionary.Add(item.bpn86uISfF, num);
-					item.bpn86uISfF = num;
+					dictionary.Add(item.Index, num);
+					item.Index = num;
 				}
 				list.Add(item);
 				num++;
@@ -665,32 +438,28 @@ public class Stringtable
 			{
 				item2?.ReconstructNameReferenceData(dictionary);
 			}
-			Ilogger ilogger = jGMLEDTr60();
+			Ilogger ilogger = GetLogger();
 			if (ilogger != null)
 			{
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(30, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("stringtable.bin文件共裁剪");
-				defaultInterpolatedStringHandler.AppendFormatted(xqBLcEarNI.Count - dictionary.Count);
-				defaultInterpolatedStringHandler.AppendLiteral("条 未被引用的字符串");
-				ilogger.Success(defaultInterpolatedStringHandler.ToStringAndClear());
+				ilogger.Success($"stringtable.bin文件共裁剪{entries.Count - dictionary.Count}条 未被引用的字符串");
 			}
 		}
-		Dictionary<string, dEOStg8lJCr53XY3219> dictionary2 = new Dictionary<string, dEOStg8lJCr53XY3219>();
+		Dictionary<string, StringTableEntry> dictionary2 = new Dictionary<string, StringTableEntry>();
 		if (!flag && dictionary.Count <= 0)
 		{
 			return;
 		}
-		foreach (dEOStg8lJCr53XY3219 item3 in list)
+		foreach (StringTableEntry item3 in list)
 		{
-			if (!dictionary2.ContainsKey(item3.JEZ8f7BM5L()))
+			if (!dictionary2.ContainsKey(item3.Text))
 			{
-				dictionary2.Add(item3.JEZ8f7BM5L(), item3);
+				dictionary2.Add(item3.Text, item3);
 			}
 		}
-		XLiL78w9aV = dictionary2;
-		xqBLcEarNI = list;
+		entriesByText = dictionary2;
+		entries = list;
 		IsStringTableUpdated = true;
-		BW8Lk2EMZB();
+		InitializeNameLabels();
 	}
 
 	public Stringtable()
