@@ -13,14 +13,14 @@ public sealed class FoldingElementGenerator : VisualLineElementGenerator, ITextV
 {
 	public sealed class FoldingLineElement : FormattedTextElement
 	{
-		internal readonly FoldingSection Mnobn1j3iJ;
+		internal readonly FoldingSection Section;
 
 		internal Brush cbEbq3JOqa;
 
 		public FoldingLineElement(FoldingSection fs, TextLine text, int documentLength)
 			: base(text, documentLength)
 		{
-			Mnobn1j3iJ = fs;
+			Section = fs;
 		}
 
 		public FoldingLineElement(TextLine text, int documentLength)
@@ -40,7 +40,7 @@ public sealed class FoldingElementGenerator : VisualLineElementGenerator, ITextV
 		{
 			if (e.ClickCount == 2 && e.ChangedButton == MouseButton.Left)
 			{
-				Mnobn1j3iJ.IsFolded = false;
+				Section.IsFolded = false;
 				e.Handled = true;
 			}
 			else

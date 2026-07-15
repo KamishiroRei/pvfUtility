@@ -36,7 +36,7 @@ public class GeneralHoverTooltip : Popup, IComponentConnector
 		internal static extern int ENWbUUlCS9(IntPtr P_0, int P_1, int P_2, int P_3, int P_4, int P_5, int P_6);
 	}
 
-	internal VisualLineElement hYbiDkDyis;
+	internal VisualLineElement HoveredElement;
 
 	public static readonly DependencyProperty IsPositionUpdateProperty;
 
