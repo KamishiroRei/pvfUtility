@@ -3,20 +3,12 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 
 namespace Utools;
 
 public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged
 {
-	private int HWG7V8P3QH;
-
-	[CompilerGenerated]
-	private NotifyCollectionChangedEventHandler KFR79ydYLf;
-
-	[CompilerGenerated]
-	private PropertyChangedEventHandler AVu77Ldd0e;
+	private int itemIndex;
 
 	public new KeyCollection Keys => base.Keys;
 
@@ -28,11 +20,11 @@ public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INot
 	{
 		get
 		{
-			return gSi9d3lmGD(key);
+			return GetValue(key);
 		}
 		set
 		{
-			RsR9u9YL0g(key, value);
+			SetValue(key, value);
 		}
 	}
 
@@ -40,73 +32,17 @@ public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INot
 	{
 		get
 		{
-			return VE49Inr7HQ(index);
+			return GetValueAt(index);
 		}
 		set
 		{
-			Xxx9nxRIE8(index, value);
+			SetValueAt(index, value);
 		}
 	}
 
-	public event NotifyCollectionChangedEventHandler CollectionChanged
-	{
-		[CompilerGenerated]
-		add
-		{
-			NotifyCollectionChangedEventHandler notifyCollectionChangedEventHandler = KFR79ydYLf;
-			NotifyCollectionChangedEventHandler notifyCollectionChangedEventHandler2;
-			do
-			{
-				notifyCollectionChangedEventHandler2 = notifyCollectionChangedEventHandler;
-				NotifyCollectionChangedEventHandler value2 = (NotifyCollectionChangedEventHandler)Delegate.Combine(notifyCollectionChangedEventHandler2, value);
-				notifyCollectionChangedEventHandler = Interlocked.CompareExchange(ref KFR79ydYLf, value2, notifyCollectionChangedEventHandler2);
-			}
-			while ((object)notifyCollectionChangedEventHandler != notifyCollectionChangedEventHandler2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			NotifyCollectionChangedEventHandler notifyCollectionChangedEventHandler = KFR79ydYLf;
-			NotifyCollectionChangedEventHandler notifyCollectionChangedEventHandler2;
-			do
-			{
-				notifyCollectionChangedEventHandler2 = notifyCollectionChangedEventHandler;
-				NotifyCollectionChangedEventHandler value2 = (NotifyCollectionChangedEventHandler)Delegate.Remove(notifyCollectionChangedEventHandler2, value);
-				notifyCollectionChangedEventHandler = Interlocked.CompareExchange(ref KFR79ydYLf, value2, notifyCollectionChangedEventHandler2);
-			}
-			while ((object)notifyCollectionChangedEventHandler != notifyCollectionChangedEventHandler2);
-		}
-	}
+	public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-	public event PropertyChangedEventHandler PropertyChanged
-	{
-		[CompilerGenerated]
-		add
-		{
-			PropertyChangedEventHandler propertyChangedEventHandler = AVu77Ldd0e;
-			PropertyChangedEventHandler propertyChangedEventHandler2;
-			do
-			{
-				propertyChangedEventHandler2 = propertyChangedEventHandler;
-				PropertyChangedEventHandler value2 = (PropertyChangedEventHandler)Delegate.Combine(propertyChangedEventHandler2, value);
-				propertyChangedEventHandler = Interlocked.CompareExchange(ref AVu77Ldd0e, value2, propertyChangedEventHandler2);
-			}
-			while ((object)propertyChangedEventHandler != propertyChangedEventHandler2);
-		}
-		[CompilerGenerated]
-		remove
-		{
-			PropertyChangedEventHandler propertyChangedEventHandler = AVu77Ldd0e;
-			PropertyChangedEventHandler propertyChangedEventHandler2;
-			do
-			{
-				propertyChangedEventHandler2 = propertyChangedEventHandler;
-				PropertyChangedEventHandler value2 = (PropertyChangedEventHandler)Delegate.Remove(propertyChangedEventHandler2, value);
-				propertyChangedEventHandler = Interlocked.CompareExchange(ref AVu77Ldd0e, value2, propertyChangedEventHandler2);
-			}
-			while ((object)propertyChangedEventHandler != propertyChangedEventHandler2);
-		}
-	}
+	public event PropertyChangedEventHandler PropertyChanged;
 
 	public ObservableDictionary()
 	{
@@ -115,7 +51,7 @@ public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INot
 	public new void Add(TKey key, TValue value)
 	{
 		base.Add(key, value);
-		OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, wdI9JWKB5L(key), HWG7V8P3QH));
+		OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, FindItem(key), itemIndex));
 		OnPropertyChanged("Keys");
 		OnPropertyChanged("Values");
 		OnPropertyChanged("Count");
@@ -132,10 +68,10 @@ public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INot
 
 	public new bool Remove(TKey key)
 	{
-		KeyValuePair<TKey, TValue> keyValuePair = wdI9JWKB5L(key);
+		KeyValuePair<TKey, TValue> keyValuePair = FindItem(key);
 		if (base.Remove(key))
 		{
-			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, keyValuePair, HWG7V8P3QH));
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, keyValuePair, itemIndex));
 			OnPropertyChanged("Keys");
 			OnPropertyChanged("Values");
 			OnPropertyChanged("Count");
@@ -146,25 +82,25 @@ public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INot
 
 	protected void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
 	{
-		if (KFR79ydYLf != null)
+		if (CollectionChanged != null)
 		{
-			KFR79ydYLf(this, e);
+			CollectionChanged(this, e);
 		}
 	}
 
 	protected void OnPropertyChanged(string propertyName)
 	{
-		if (AVu77Ldd0e != null)
+		if (PropertyChanged != null)
 		{
-			AVu77Ldd0e(this, new PropertyChangedEventArgs(propertyName));
+			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 
-	private TValue VE49Inr7HQ(int P_0)
+	private TValue GetValueAt(int index)
 	{
 		for (int i = 0; i < Count; i++)
 		{
-			if (i == P_0)
+			if (i == index)
 			{
 				return this.ElementAt(i).Value;
 			}
@@ -172,70 +108,70 @@ public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INot
 		return default(TValue);
 	}
 
-	private void Xxx9nxRIE8(int P_0, TValue SPJyLq9O3QPNe0cZkcR)
+	private void SetValueAt(int index, TValue value)
 	{
 		try
 		{
-			RsR9u9YL0g(this.ElementAtOrDefault(P_0).Key, SPJyLq9O3QPNe0cZkcR);
+			SetValue(this.ElementAtOrDefault(index).Key, value);
 		}
 		catch (Exception)
 		{
 		}
 	}
 
-	private TValue gSi9d3lmGD(TKey M1HDCy98i3UwAwGwVai)
+	private TValue GetValue(TKey key)
 	{
-		if (ContainsKey(M1HDCy98i3UwAwGwVai))
+		if (ContainsKey(key))
 		{
-			return base[M1HDCy98i3UwAwGwVai];
+			return base[key];
 		}
 		return default(TValue);
 	}
 
-	private void RsR9u9YL0g(TKey pOMhZv9hvCPPWbhDTAj, TValue wuiLSR945F6N801VCNF)
+	private void SetValue(TKey key, TValue value)
 	{
-		if (ContainsKey(pOMhZv9hvCPPWbhDTAj))
+		if (ContainsKey(key))
 		{
-			KeyValuePair<TKey, TValue> keyValuePair = wdI9JWKB5L(pOMhZv9hvCPPWbhDTAj);
-			int hWG7V8P3QH = HWG7V8P3QH;
-			base[pOMhZv9hvCPPWbhDTAj] = wuiLSR945F6N801VCNF;
-			KeyValuePair<TKey, TValue> keyValuePair2 = wdI9JWKB5L(pOMhZv9hvCPPWbhDTAj);
-			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, keyValuePair2, keyValuePair, hWG7V8P3QH));
+			KeyValuePair<TKey, TValue> keyValuePair = FindItem(key);
+			int oldItemIndex = itemIndex;
+			base[key] = value;
+			KeyValuePair<TKey, TValue> keyValuePair2 = FindItem(key);
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, keyValuePair2, keyValuePair, oldItemIndex));
 			OnPropertyChanged("Values");
 			OnPropertyChanged("Item[]");
 		}
 		else
 		{
-			Add(pOMhZv9hvCPPWbhDTAj, wuiLSR945F6N801VCNF);
+			Add(key, value);
 		}
 	}
 
-	private KeyValuePair<TKey, TValue> wdI9JWKB5L(TKey MlsAvG90GgGKnuTFO0n)
+	private KeyValuePair<TKey, TValue> FindItem(TKey key)
 	{
-		HWG7V8P3QH = 0;
+		itemIndex = 0;
 		using (Enumerator enumerator = GetEnumerator())
 		{
 			while (enumerator.MoveNext())
 			{
 				KeyValuePair<TKey, TValue> current = enumerator.Current;
-				if (current.Key.Equals(MlsAvG90GgGKnuTFO0n))
+				if (current.Key.Equals(key))
 				{
 					return current;
 				}
-				HWG7V8P3QH++;
+				itemIndex++;
 			}
 		}
 		return default(KeyValuePair<TKey, TValue>);
 	}
 
-	private int EVg9zW6IDt(TKey MwdOdj7Yd25wikENeGp)
+	private int IndexOfKey(TKey key)
 	{
 		int num = 0;
 		using (Enumerator enumerator = GetEnumerator())
 		{
 			while (enumerator.MoveNext())
 			{
-				if (enumerator.Current.Key.Equals(MwdOdj7Yd25wikENeGp))
+				if (enumerator.Current.Key.Equals(key))
 				{
 					return num;
 				}

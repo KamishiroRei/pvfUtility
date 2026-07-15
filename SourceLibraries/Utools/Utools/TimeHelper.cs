@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 
 namespace Utools;
 
@@ -56,27 +55,7 @@ public static class TimeHelper
 	{
 		try
 		{
-			DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(5, 14);
-			defaultInterpolatedStringHandler.AppendFormatted(str[0]);
-			defaultInterpolatedStringHandler.AppendFormatted(str[1]);
-			defaultInterpolatedStringHandler.AppendFormatted(str[2]);
-			defaultInterpolatedStringHandler.AppendFormatted(str[3]);
-			defaultInterpolatedStringHandler.AppendLiteral("-");
-			defaultInterpolatedStringHandler.AppendFormatted(str[4]);
-			defaultInterpolatedStringHandler.AppendFormatted(str[5]);
-			defaultInterpolatedStringHandler.AppendLiteral("-");
-			defaultInterpolatedStringHandler.AppendFormatted(str[6]);
-			defaultInterpolatedStringHandler.AppendFormatted(str[7]);
-			defaultInterpolatedStringHandler.AppendLiteral(" ");
-			defaultInterpolatedStringHandler.AppendFormatted(str[8]);
-			defaultInterpolatedStringHandler.AppendFormatted(str[9]);
-			defaultInterpolatedStringHandler.AppendLiteral(":");
-			defaultInterpolatedStringHandler.AppendFormatted(str[10]);
-			defaultInterpolatedStringHandler.AppendFormatted(str[11]);
-			defaultInterpolatedStringHandler.AppendLiteral(":");
-			defaultInterpolatedStringHandler.AppendFormatted(str[12]);
-			defaultInterpolatedStringHandler.AppendFormatted(str[13]);
-			return Convert.ToDateTime(defaultInterpolatedStringHandler.ToStringAndClear());
+			return Convert.ToDateTime($"{str[0]}{str[1]}{str[2]}{str[3]}-{str[4]}{str[5]}-{str[6]}{str[7]} {str[8]}{str[9]}:{str[10]}{str[11]}:{str[12]}{str[13]}");
 		}
 		catch (Exception)
 		{
@@ -112,16 +91,7 @@ public static class TimeHelper
 				int value2 = num % 86400 / 3600;
 				int value3 = num % 3600 / 60;
 				int value4 = num % 60;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(6, 4);
-				defaultInterpolatedStringHandler.AppendFormatted(value);
-				defaultInterpolatedStringHandler.AppendLiteral("天");
-				defaultInterpolatedStringHandler.AppendFormatted(value2);
-				defaultInterpolatedStringHandler.AppendLiteral("小时");
-				defaultInterpolatedStringHandler.AppendFormatted(value3);
-				defaultInterpolatedStringHandler.AppendLiteral("分钟");
-				defaultInterpolatedStringHandler.AppendFormatted(value4);
-				defaultInterpolatedStringHandler.AppendLiteral("秒");
-				return defaultInterpolatedStringHandler.ToStringAndClear();
+				return $"{value}天{value2}小时{value3}分钟{value4}秒";
 			}
 			return (int)timeSpan.TotalHours + "小时" + timeSpan.Minutes + "分钟" + timeSpan.Seconds + "秒";
 		}

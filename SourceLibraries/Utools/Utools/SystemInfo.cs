@@ -7,7 +7,6 @@ using System.Management;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,64 +16,31 @@ namespace Utools;
 
 public static class SystemInfo
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass48_0
-	{
-		public AddressFamily aigMrmiWCy;
+	private static readonly PerformanceCounter cpuLoadCounter;
 
-		public _003C_003Ec__DisplayClass48_0()
-		{
-		}
+	private static readonly PerformanceCounter memoryCounter;
 
-		internal bool I30MQIhUqt(IPAddress p)
-		{
-			if (!p.IsIPv6Teredo && !p.IsIPv6LinkLocal && !p.IsIPv6Multicast && !p.IsIPv6SiteLocal)
-			{
-				return p.AddressFamily == aigMrmiWCy;
-			}
-			return false;
-		}
-	}
+	private static readonly PerformanceCounter processorCounter;
 
-	private static readonly PerformanceCounter cYy9ATsB5L;
+	private static readonly PerformanceCounter diskReadCounter;
 
-	private static readonly PerformanceCounter Tn29GC4Fde;
+	private static readonly PerformanceCounter diskWriteCounter;
 
-	private static readonly PerformanceCounter Hjd9FjwdRD;
+	private static readonly string[] networkInterfaceNames;
 
-	private static readonly PerformanceCounter lak9bpf9jA;
+	private static readonly PerformanceCounter[] networkReceivedCounters;
 
-	private static readonly PerformanceCounter vyw9yhu0FV;
+	private static readonly PerformanceCounter[] networkSentCounters;
 
-	private static readonly string[] E849PCbueB;
+	private static readonly Lazy<List<ManagementBaseObject>> processors;
 
-	private static readonly PerformanceCounter[] fDF9tBiPdF;
+	private static readonly List<DiskInfo> diskInfoCache;
 
-	private static readonly PerformanceCounter[] k1k9pFREp5;
+	private static bool UseIntegerFormatting { get; set; }
 
-	[CompilerGenerated]
-	private static bool jdw9QpUBkV;
+	public static int ProcessorCount { get; }
 
-	[CompilerGenerated]
-	private static readonly int hfk9rOvYLu;
-
-	[CompilerGenerated]
-	private static readonly long lvg9qea220;
-
-	private static readonly Lazy<List<ManagementBaseObject>> SsT9jTE9OE;
-
-	private static readonly List<DiskInfo> K7v9ZcPfXg;
-
-	public static int ProcessorCount
-	{
-		[CompilerGenerated]
-		get
-		{
-			return hfk9rOvYLu;
-		}
-	}
-
-	public static float CpuLoad => cYy9ATsB5L.NextValue();
+	public static float CpuLoad => cpuLoadCounter.NextValue();
 
 	public static long MemoryAvailable
 	{
@@ -103,34 +69,27 @@ public static class SystemInfo
 		}
 	}
 
-	public static long PhysicalMemory
-	{
-		[CompilerGenerated]
-		get
-		{
-			return lvg9qea220;
-		}
-	}
+	public static long PhysicalMemory { get; }
 
 	static SystemInfo()
 	{
-		Tn29GC4Fde = new PerformanceCounter();
-		Hjd9FjwdRD = new PerformanceCounter();
-		lak9bpf9jA = new PerformanceCounter();
-		vyw9yhu0FV = new PerformanceCounter();
-		SsT9jTE9OE = new Lazy<List<ManagementBaseObject>>(delegate
+		memoryCounter = new PerformanceCounter();
+		processorCounter = new PerformanceCounter();
+		diskReadCounter = new PerformanceCounter();
+		diskWriteCounter = new PerformanceCounter();
+		processors = new Lazy<List<ManagementBaseObject>>(delegate
 		{
 			using ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
 			using ManagementObjectCollection source = managementObjectSearcher.Get();
 			return source.AsParallel().Cast<ManagementBaseObject>().ToList();
 		});
-		K7v9ZcPfXg = new List<DiskInfo>();
-		cYy9ATsB5L = new PerformanceCounter("Processor", "% Processor Time", "_Total")
+		diskInfoCache = new List<DiskInfo>();
+		cpuLoadCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total")
 		{
 			MachineName = "."
 		};
-		cYy9ATsB5L.NextValue();
-		hfk9rOvYLu = Environment.ProcessorCount;
+		cpuLoadCounter.NextValue();
+		ProcessorCount = Environment.ProcessorCount;
 		try
 		{
 			using ManagementClass managementClass = new ManagementClass("Win32_ComputerSystem");
@@ -141,37 +100,23 @@ public static class SystemInfo
 				{
 					if (item["TotalPhysicalMemory"] != null)
 					{
-						lvg9qea220 = long.Parse(item["TotalPhysicalMemory"].ToString());
+						PhysicalMemory = long.Parse(item["TotalPhysicalMemory"].ToString());
 					}
 				}
 			}
-			E849PCbueB = new PerformanceCounterCategory("Network Interface").GetInstanceNames();
-			fDF9tBiPdF = new PerformanceCounter[E849PCbueB.Length];
-			k1k9pFREp5 = new PerformanceCounter[E849PCbueB.Length];
-			for (int num = 0; num < E849PCbueB.Length; num++)
+			networkInterfaceNames = new PerformanceCounterCategory("Network Interface").GetInstanceNames();
+			networkReceivedCounters = new PerformanceCounter[networkInterfaceNames.Length];
+			networkSentCounters = new PerformanceCounter[networkInterfaceNames.Length];
+			for (int num = 0; num < networkInterfaceNames.Length; num++)
 			{
-				fDF9tBiPdF[num] = new PerformanceCounter();
-				k1k9pFREp5[num] = new PerformanceCounter();
+				networkReceivedCounters[num] = new PerformanceCounter();
+				networkSentCounters[num] = new PerformanceCounter();
 			}
-			O1n9KH5PRp(false);
+			UseIntegerFormatting = false;
 		}
 		catch (Exception)
 		{
 		}
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private static bool EfC9MfaLCo()
-	{
-		return jdw9QpUBkV;
-	}
-
-	[SpecialName]
-	[CompilerGenerated]
-	private static void O1n9KH5PRp(bool P_0)
-	{
-		jdw9QpUBkV = P_0;
 	}
 
 	public static async Task<double> GetCpuUsageForProcess()
@@ -226,7 +171,7 @@ public static class SystemInfo
 	{
 		try
 		{
-			return SsT9jTE9OE.Value.Select((ManagementBaseObject mo) => new CpuInfo
+			return processors.Value.Select((ManagementBaseObject mo) => new CpuInfo
 			{
 				CpuLoad = CpuLoad,
 				NumberOfLogicalProcessors = ProcessorCount,
@@ -285,8 +230,8 @@ public static class SystemInfo
 
 	public static string GetProcessorData()
 	{
-		float num = P0s97N2mVh(Hjd9FjwdRD, "Processor", "% Processor Time", "_Total");
-		if (!EfC9MfaLCo())
+		float num = GetPerformanceCounterValue(processorCounter, "Processor", "% Processor Time", "_Total");
+		if (!UseIntegerFormatting)
 		{
 			return num.ToString("F") + "%";
 		}
@@ -295,38 +240,38 @@ public static class SystemInfo
 
 	public static string GetMemoryVData()
 	{
-		string text = P0s97N2mVh(Tn29GC4Fde, "Memory", "% Committed Bytes In Use", null).ToString("F") + "% (";
-		float num = P0s97N2mVh(Tn29GC4Fde, "Memory", "Committed Bytes", null);
+		string text = GetPerformanceCounterValue(memoryCounter, "Memory", "% Committed Bytes In Use", null).ToString("F") + "% (";
+		float num = GetPerformanceCounterValue(memoryCounter, "Memory", "Committed Bytes", null);
 		string text2 = text + FormatBytes(num) + " / ";
-		num = P0s97N2mVh(Tn29GC4Fde, "Memory", "Commit Limit", null);
+		num = GetPerformanceCounterValue(memoryCounter, "Memory", "Commit Limit", null);
 		return text2 + FormatBytes(num) + ") ";
 	}
 
 	public static float GetUsageVirtualMemory()
 	{
-		return P0s97N2mVh(Tn29GC4Fde, "Memory", "% Committed Bytes In Use", null);
+		return GetPerformanceCounterValue(memoryCounter, "Memory", "% Committed Bytes In Use", null);
 	}
 
 	public static float GetUsedVirtualMemory()
 	{
-		return P0s97N2mVh(Tn29GC4Fde, "Memory", "Committed Bytes", null);
+		return GetPerformanceCounterValue(memoryCounter, "Memory", "Committed Bytes", null);
 	}
 
 	public static float GetTotalVirtualMemory()
 	{
-		return P0s97N2mVh(Tn29GC4Fde, "Memory", "Commit Limit", null);
+		return GetPerformanceCounterValue(memoryCounter, "Memory", "Commit Limit", null);
 	}
 
 	public static string GetMemoryPData()
 	{
 		string value = QueryComputerSystem("totalphysicalmemory");
 		float num = Convert.ToSingle(value);
-		float num2 = P0s97N2mVh(Tn29GC4Fde, "Memory", "Available Bytes", null);
+		float num2 = GetPerformanceCounterValue(memoryCounter, "Memory", "Available Bytes", null);
 		num2 = num - num2;
-		value = (EfC9MfaLCo() ? "%" : ("% (" + FormatBytes(num2) + " / " + FormatBytes(num) + ")"));
+		value = (UseIntegerFormatting ? "%" : ("% (" + FormatBytes(num2) + " / " + FormatBytes(num) + ")"));
 		num2 /= num;
 		num2 *= 100f;
-		if (!EfC9MfaLCo())
+		if (!UseIntegerFormatting)
 		{
 			return num2.ToString("F") + value;
 		}
@@ -340,7 +285,7 @@ public static class SystemInfo
 
 	public static float GetFreePhysicalMemory()
 	{
-		return P0s97N2mVh(Tn29GC4Fde, "Memory", "Available Bytes", null);
+		return GetPerformanceCounterValue(memoryCounter, "Memory", "Available Bytes", null);
 	}
 
 	public static float GetUsedPhysicalMemory()
@@ -352,24 +297,24 @@ public static class SystemInfo
 	{
 		return dd switch
 		{
-			DiskData.ReadAndWrite => P0s97N2mVh(lak9bpf9jA, "PhysicalDisk", "Disk Read Bytes/sec", "_Total") + P0s97N2mVh(vyw9yhu0FV, "PhysicalDisk", "Disk Write Bytes/sec", "_Total"), 
-			DiskData.Write => P0s97N2mVh(vyw9yhu0FV, "PhysicalDisk", "Disk Write Bytes/sec", "_Total"), 
-			DiskData.Read => P0s97N2mVh(lak9bpf9jA, "PhysicalDisk", "Disk Read Bytes/sec", "_Total"), 
+			DiskData.ReadAndWrite => GetPerformanceCounterValue(diskReadCounter, "PhysicalDisk", "Disk Read Bytes/sec", "_Total") + GetPerformanceCounterValue(diskWriteCounter, "PhysicalDisk", "Disk Write Bytes/sec", "_Total"),
+			DiskData.Write => GetPerformanceCounterValue(diskWriteCounter, "PhysicalDisk", "Disk Write Bytes/sec", "_Total"),
+			DiskData.Read => GetPerformanceCounterValue(diskReadCounter, "PhysicalDisk", "Disk Read Bytes/sec", "_Total"),
 			_ => 0f, 
 		};
 	}
 
 	public static float GetNetData(NetData nd)
 	{
-		if (E849PCbueB.Length == 0)
+		if (networkInterfaceNames.Length == 0)
 		{
 			return 0f;
 		}
 		float num = 0f;
-		for (int i = 0; i < E849PCbueB.Length; i++)
+		for (int i = 0; i < networkInterfaceNames.Length; i++)
 		{
-			float num2 = P0s97N2mVh(fDF9tBiPdF[i], "Network Interface", "Bytes Received/sec", E849PCbueB[i]);
-			float num3 = P0s97N2mVh(k1k9pFREp5[i], "Network Interface", "Bytes Sent/sec", E849PCbueB[i]);
+			float num2 = GetPerformanceCounterValue(networkReceivedCounters[i], "Network Interface", "Bytes Received/sec", networkInterfaceNames[i]);
+			float num3 = GetPerformanceCounterValue(networkSentCounters[i], "Network Interface", "Bytes Sent/sec", networkInterfaceNames[i]);
 			num = nd switch
 			{
 				NetData.Received => num + num2, 
@@ -413,15 +358,13 @@ public static class SystemInfo
 
 	public static IPAddress GetLocalUsedIP(AddressFamily family)
 	{
-		_003C_003Ec__DisplayClass48_0 CS_0024_003C_003E8__locals2 = new _003C_003Ec__DisplayClass48_0();
-		CS_0024_003C_003E8__locals2.aigMrmiWCy = family;
 		return (from p in (from t in NetworkInterface.GetAllNetworkInterfaces()
 				orderby t.Speed descending
 				where t.NetworkInterfaceType != NetworkInterfaceType.Loopback && t.OperationalStatus == OperationalStatus.Up
 				select t.GetIPProperties() into p
 				where p.DhcpServerAddresses.Count > 0
 				select p).SelectMany((IPInterfaceProperties p) => p.UnicastAddresses)
-			select p.Address).FirstOrDefault((IPAddress p) => !p.IsIPv6Teredo && !p.IsIPv6LinkLocal && !p.IsIPv6Multicast && !p.IsIPv6SiteLocal && p.AddressFamily == CS_0024_003C_003E8__locals2.aigMrmiWCy);
+			select p.Address).FirstOrDefault((IPAddress p) => !p.IsIPv6Teredo && !p.IsIPv6LinkLocal && !p.IsIPv6Multicast && !p.IsIPv6SiteLocal && p.AddressFamily == family);
 	}
 
 	public static List<UnicastIPAddressInformation> GetLocalIPs()
@@ -440,7 +383,7 @@ public static class SystemInfo
 			bytes /= 1024.0;
 			num++;
 		}
-		string obj = (EfC9MfaLCo() ? ((int)bytes).ToString() : (bytes.ToString("F") + " "));
+		string obj = (UseIntegerFormatting ? ((int)bytes).ToString() : (bytes.ToString("F") + " "));
 		DataSizeUnit unit = (DataSizeUnit)num;
 		return obj + unit;
 	}
@@ -494,9 +437,9 @@ public static class SystemInfo
 	{
 		try
 		{
-			if (K7v9ZcPfXg.Count > 0)
+			if (diskInfoCache.Count > 0)
 			{
-				return K7v9ZcPfXg;
+				return diskInfoCache;
 			}
 			using ManagementClass managementClass = new ManagementClass("Win32_DiskDrive");
 			using ManagementObjectCollection managementObjectCollection = managementClass.GetInstances();
@@ -504,7 +447,7 @@ public static class SystemInfo
 			{
 				using (item)
 				{
-					K7v9ZcPfXg.Add(new DiskInfo
+					diskInfoCache.Add(new DiskInfo
 					{
 						Total = float.Parse(item["Size"].ToString()),
 						Model = item["Model"].ToString(),
@@ -512,7 +455,7 @@ public static class SystemInfo
 					});
 				}
 			}
-			return K7v9ZcPfXg;
+			return diskInfoCache;
 		}
 		catch (Exception)
 		{
@@ -520,12 +463,12 @@ public static class SystemInfo
 		}
 	}
 
-	private static float P0s97N2mVh(PerformanceCounter P_0, string P_1, string P_2, string P_3)
+	private static float GetPerformanceCounterValue(PerformanceCounter counter, string categoryName, string counterName, string instanceName)
 	{
-		P_0.CategoryName = P_1;
-		P_0.CounterName = P_2;
-		P_0.InstanceName = P_3;
-		return P_0.NextValue();
+		counter.CategoryName = categoryName;
+		counter.CounterName = counterName;
+		counter.InstanceName = instanceName;
+		return counter.NextValue();
 	}
 
 	[DllImport("User32")]
