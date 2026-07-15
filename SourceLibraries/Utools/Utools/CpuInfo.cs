@@ -1,195 +1,28 @@
-using System.Runtime.CompilerServices;
-
 namespace Utools;
 
 public class CpuInfo
 {
-	[CompilerGenerated]
-	private string VBeVeFYpHq;
+	public string DeviceID { get; set; }
 
-	[CompilerGenerated]
-	private string qPgVHgHoia;
+	public string Type { get; set; }
 
-	[CompilerGenerated]
-	private string joeVfC0YXh;
+	public string Manufacturer { get; set; }
 
-	[CompilerGenerated]
-	private string vw0VIIAHgY;
+	public string MaxClockSpeed { get; set; }
 
-	[CompilerGenerated]
-	private string qTdVnqyOd0;
+	public string CurrentClockSpeed { get; set; }
 
-	[CompilerGenerated]
-	private int td4VO2kLhD;
+	public int NumberOfCores { get; set; }
 
-	[CompilerGenerated]
-	private int EYiVdnNOME;
+	public int NumberOfLogicalProcessors { get; set; }
 
-	[CompilerGenerated]
-	private double pmsV8xGltU;
+	public double CpuLoad { get; set; }
 
-	[CompilerGenerated]
-	private string p49VueMaFe;
+	public string DataWidth { get; set; }
 
-	[CompilerGenerated]
-	private double wQkVhKaoaT;
+	public double Temperature { get; set; }
 
-	[CompilerGenerated]
-	private string WdcV4hoNtt;
-
-	public string DeviceID
-	{
-		[CompilerGenerated]
-		get
-		{
-			return VBeVeFYpHq;
-		}
-		[CompilerGenerated]
-		set
-		{
-			VBeVeFYpHq = value;
-		}
-	}
-
-	public string Type
-	{
-		[CompilerGenerated]
-		get
-		{
-			return qPgVHgHoia;
-		}
-		[CompilerGenerated]
-		set
-		{
-			qPgVHgHoia = value;
-		}
-	}
-
-	public string Manufacturer
-	{
-		[CompilerGenerated]
-		get
-		{
-			return joeVfC0YXh;
-		}
-		[CompilerGenerated]
-		set
-		{
-			joeVfC0YXh = value;
-		}
-	}
-
-	public string MaxClockSpeed
-	{
-		[CompilerGenerated]
-		get
-		{
-			return vw0VIIAHgY;
-		}
-		[CompilerGenerated]
-		set
-		{
-			vw0VIIAHgY = value;
-		}
-	}
-
-	public string CurrentClockSpeed
-	{
-		[CompilerGenerated]
-		get
-		{
-			return qTdVnqyOd0;
-		}
-		[CompilerGenerated]
-		set
-		{
-			qTdVnqyOd0 = value;
-		}
-	}
-
-	public int NumberOfCores
-	{
-		[CompilerGenerated]
-		get
-		{
-			return td4VO2kLhD;
-		}
-		[CompilerGenerated]
-		set
-		{
-			td4VO2kLhD = value;
-		}
-	}
-
-	public int NumberOfLogicalProcessors
-	{
-		[CompilerGenerated]
-		get
-		{
-			return EYiVdnNOME;
-		}
-		[CompilerGenerated]
-		set
-		{
-			EYiVdnNOME = value;
-		}
-	}
-
-	public double CpuLoad
-	{
-		[CompilerGenerated]
-		get
-		{
-			return pmsV8xGltU;
-		}
-		[CompilerGenerated]
-		set
-		{
-			pmsV8xGltU = value;
-		}
-	}
-
-	public string DataWidth
-	{
-		[CompilerGenerated]
-		get
-		{
-			return p49VueMaFe;
-		}
-		[CompilerGenerated]
-		set
-		{
-			p49VueMaFe = value;
-		}
-	}
-
-	public double Temperature
-	{
-		[CompilerGenerated]
-		get
-		{
-			return wQkVhKaoaT;
-		}
-		[CompilerGenerated]
-		set
-		{
-			wQkVhKaoaT = value;
-		}
-	}
-
-	public string SerialNumber
-	{
-		[CompilerGenerated]
-		get
-		{
-			return WdcV4hoNtt;
-		}
-		[CompilerGenerated]
-		set
-		{
-			WdcV4hoNtt = value;
-		}
-	}
+	public string SerialNumber { get; set; }
 
 	public CpuInfo()
 	{

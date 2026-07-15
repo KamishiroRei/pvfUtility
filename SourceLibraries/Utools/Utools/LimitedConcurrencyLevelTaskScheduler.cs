@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,72 +8,72 @@ namespace Utools;
 public class LimitedConcurrencyLevelTaskScheduler : TaskScheduler
 {
 	[ThreadStatic]
-	private static bool vquwrjew4;
+	private static bool currentThreadIsProcessingItems;
 
-	private readonly LinkedList<Task> QSKeCjTZR;
+	private readonly LinkedList<Task> tasks;
 
-	private readonly int wZ6HKZWOV;
+	private readonly int maxDegreeOfParallelism;
 
-	private int Gxif7q560;
+	private int delegatesQueuedOrRunning;
 
-	public sealed override int MaximumConcurrencyLevel => wZ6HKZWOV;
+	public sealed override int MaximumConcurrencyLevel => maxDegreeOfParallelism;
 
 	public LimitedConcurrencyLevelTaskScheduler(int maxDegreeOfParallelism)
 	{
-		QSKeCjTZR = new LinkedList<Task>();
+		tasks = new LinkedList<Task>();
 		if (maxDegreeOfParallelism < 1)
 		{
 			throw new ArgumentOutOfRangeException("maxDegreeOfParallelism");
 		}
-		wZ6HKZWOV = maxDegreeOfParallelism;
+		this.maxDegreeOfParallelism = maxDegreeOfParallelism;
 	}
 
 	protected sealed override void QueueTask(Task task)
 	{
-		lock (QSKeCjTZR)
+		lock (tasks)
 		{
-			QSKeCjTZR.AddLast(task);
-			if (Gxif7q560 < wZ6HKZWOV)
+			tasks.AddLast(task);
+			if (delegatesQueuedOrRunning < maxDegreeOfParallelism)
 			{
-				Gxif7q560++;
-				Rh73XvLkZ();
+				delegatesQueuedOrRunning++;
+				NotifyThreadPoolOfPendingWork();
 			}
 		}
 	}
 
-	private void Rh73XvLkZ()
+	private void NotifyThreadPoolOfPendingWork()
 	{
 		ThreadPool.UnsafeQueueUserWorkItem(delegate
 		{
-			vquwrjew4 = true;
+			currentThreadIsProcessingItems = true;
 			try
 			{
 				while (true)
 				{
 					Task value;
-					lock (QSKeCjTZR)
+					lock (tasks)
 					{
-						if (QSKeCjTZR.Count == 0)
+						if (tasks.Count == 0)
 						{
-							Gxif7q560--;
+							delegatesQueuedOrRunning--;
 							break;
 						}
-						value = QSKeCjTZR.First.Value;
-						QSKeCjTZR.RemoveFirst();
+						value = tasks.First.Value;
+						tasks.RemoveFirst();
 					}
 					TryExecuteTask(value);
 				}
 			}
 			finally
 			{
-				vquwrjew4 = false;
+				currentThreadIsProcessingItems = false;
 			}
 		}, null);
 	}
 
 	protected sealed override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
 	{
-		if (!vquwrjew4)
+		if (!currentThreadIsProcessingItems)
 		{
 			return false;
 		}
@@ -91,9 +90,9 @@ public class LimitedConcurrencyLevelTaskScheduler : TaskScheduler
 
 	protected sealed override bool TryDequeue(Task task)
 	{
-		lock (QSKeCjTZR)
+		lock (tasks)
 		{
-			return QSKeCjTZR.Remove(task);
+			return tasks.Remove(task);
 		}
 	}
 
@@ -102,10 +101,10 @@ public class LimitedConcurrencyLevelTaskScheduler : TaskScheduler
 		bool lockTaken = false;
 		try
 		{
-			Monitor.TryEnter(QSKeCjTZR, ref lockTaken);
+			Monitor.TryEnter(tasks, ref lockTaken);
 			if (lockTaken)
 			{
-				return QSKeCjTZR;
+				return tasks;
 			}
 			throw new NotSupportedException();
 		}
@@ -113,36 +112,8 @@ public class LimitedConcurrencyLevelTaskScheduler : TaskScheduler
 		{
 			if (lockTaken)
 			{
-				Monitor.Exit(QSKeCjTZR);
+				Monitor.Exit(tasks);
 			}
-		}
-	}
-
-	[CompilerGenerated]
-	private void qFIEZGrgt(object? P_0)
-	{
-		vquwrjew4 = true;
-		try
-		{
-			while (true)
-			{
-				Task value;
-				lock (QSKeCjTZR)
-				{
-					if (QSKeCjTZR.Count == 0)
-					{
-						Gxif7q560--;
-						break;
-					}
-					value = QSKeCjTZR.First.Value;
-					QSKeCjTZR.RemoveFirst();
-				}
-				TryExecuteTask(value);
-			}
-		}
-		finally
-		{
-			vquwrjew4 = false;
 		}
 	}
 }
