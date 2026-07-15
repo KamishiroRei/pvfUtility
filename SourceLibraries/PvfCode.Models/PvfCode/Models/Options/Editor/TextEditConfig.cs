@@ -20,82 +20,82 @@ namespace PvfCode.Models.Options.Editor;
 [JsonObject(MemberSerialization.OptOut)]
 public class TextEditConfig : ModelBase
 {
-	private EncodingType? TcZEwPsTmd;
+	private EncodingType? nutDefaultEncodingType;
 
-	private bool? FZvEoySkNO;
+	private bool? openKorStrQuote;
 
-	private bool jj7E2gQDhr;
+	private bool addEndTab;
 
-	private bool? CRPEtX0lwY;
+	private bool? lstDocumentNameGoFileNeedCtrl;
 
-	private bool? IejE9IZcZh;
+	private bool? showFirstColumnTab;
 
-	private double? BagERYg9wV;
+	private double? previewAniPanelWidth;
 
-	private double? LZ4EW0s9qU;
+	private double? previewAniPanelHeight;
 
-	private bool? Jx5Eq7Y4hX;
+	private bool? showAniPreviewPanel;
 
-	private ItemCodeConvertItemNameConfiger JFTEzWMfiJ;
+	private ItemCodeConvertItemNameConfiger itemCodeConvertItemNameConfiger;
 
-	private HashSet<string>? hSdZA2nvPg;
+	private HashSet<string>? notUseFileListTooltip;
 
-	private List<CodeCompletionData> hjrZnTcx7S;
+	private List<CodeCompletionData> completionDatas;
 
-	private List<CodeCompletionData> zdPZkJSD5S;
+	private List<CodeCompletionData> completionDatasDisk;
 
-	private HoverTooltipMode? q51ZL9Qp5i;
+	private HoverTooltipMode? editorCommentHoverTooltipMode;
 
-	private HoverTooltipMode? YsYZEu5dln;
+	private HoverTooltipMode? editorItemCodeHoverTooltipMode;
 
-	private bool jWDZZMlSCy;
+	private bool saveBeautifyNutCode;
 
-	private IUnitViewModel HjoZ84NhEg;
+	private IUnitViewModel sizeUnitLabel;
 
-	private int? YYSZuLeyRN;
+	private int? truncateLongLineLength;
 
-	private HashSet<string> gjxZ573ZTP;
+	private HashSet<string> allowLinkHighlightedTheName;
 
-	private bool IjrZpvK9nV;
+	private bool showSpaces;
 
-	private bool? i3hZDCHvTA;
+	private bool? showTabs;
 
-	private bool FEeZ3FyP8S;
+	private bool showEndOfLine;
 
-	private bool vWRZHVx5XQ;
+	private bool wordWrap;
 
-	private bool? noGZ7g41Qq;
+	private bool? enableTextDragDrop;
 
-	private bool? BiMZcLY5UQ;
+	private bool? enableVirtualSpace;
 
-	private bool fbBZgy7RXy;
+	private bool useAutoCodeFolding;
 
-	private Dictionary<int, SolidColorBrush> wKDZKmTjBK;
+	private Dictionary<int, SolidColorBrush> foldingGuideLineBrushes;
 
-	private bool? K2pZY3ddc7;
+	private bool? useFoldingGuideLines;
 
-	private bool IglZJdtSj9;
+	private bool searchPanelKeywordConvertTw;
 
-	private bool TjTZdJPXAP;
+	private bool searchPanelNameConvertCode;
 
-	private bool? IZhZ1lfvwn;
+	private bool? searchPanelFindNotFoundAllowMessageBox;
 
-	private Dictionary<ThemeType, PvfEdiorHighlightingColorOptions>? m2vZG9pInd;
+	private Dictionary<ThemeType, PvfEdiorHighlightingColorOptions>? pvfEditorColorOptionDictionary;
 
 	public EncodingType NutDefaultEncodingType
 	{
 		get
 		{
-			EncodingType? tcZEwPsTmd = TcZEwPsTmd;
-			if (tcZEwPsTmd.HasValue)
+			EncodingType? encodingType = nutDefaultEncodingType;
+			if (encodingType.HasValue)
 			{
-				return TcZEwPsTmd.Value;
+				return nutDefaultEncodingType.Value;
 			}
 			return EncodingType.KR;
 		}
 		set
 		{
-			TcZEwPsTmd = value;
+			nutDefaultEncodingType = value;
 			DoNotify("NutDefaultEncodingType");
 		}
 	}
@@ -104,15 +104,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!FZvEoySkNO.HasValue)
+			if (!openKorStrQuote.HasValue)
 			{
-				FZvEoySkNO = true;
+				openKorStrQuote = true;
 			}
-			return FZvEoySkNO.Value;
+			return openKorStrQuote.Value;
 		}
 		set
 		{
-			FZvEoySkNO = value;
+			openKorStrQuote = value;
 			DoNotify("OpenKorStrQuote");
 		}
 	}
@@ -121,11 +121,11 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			return jj7E2gQDhr;
+			return addEndTab;
 		}
 		set
 		{
-			jj7E2gQDhr = value;
+			addEndTab = value;
 			DoNotify("AddEndTab");
 		}
 	}
@@ -134,15 +134,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (CRPEtX0lwY.HasValue)
+			if (lstDocumentNameGoFileNeedCtrl.HasValue)
 			{
-				return CRPEtX0lwY.Value;
+				return lstDocumentNameGoFileNeedCtrl.Value;
 			}
 			return true;
 		}
 		set
 		{
-			CRPEtX0lwY = value;
+			lstDocumentNameGoFileNeedCtrl = value;
 			DoNotify("LstDocumentNameGoFileNeedCtrl");
 		}
 	}
@@ -151,15 +151,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!IejE9IZcZh.HasValue)
+			if (!showFirstColumnTab.HasValue)
 			{
-				IejE9IZcZh = true;
+				showFirstColumnTab = true;
 			}
-			return IejE9IZcZh.Value;
+			return showFirstColumnTab.Value;
 		}
 		set
 		{
-			IejE9IZcZh = value;
+			showFirstColumnTab = value;
 			DoNotify("ShowFirstColumnTab");
 		}
 	}
@@ -170,15 +170,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!BagERYg9wV.HasValue)
+			if (!previewAniPanelWidth.HasValue)
 			{
-				BagERYg9wV = 200.0;
+				previewAniPanelWidth = 200.0;
 			}
-			return BagERYg9wV.Value;
+			return previewAniPanelWidth.Value;
 		}
 		set
 		{
-			BagERYg9wV = value;
+			previewAniPanelWidth = value;
 			DoNotify("PreviewAniPanelWidht");
 		}
 	}
@@ -187,15 +187,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!LZ4EW0s9qU.HasValue)
+			if (!previewAniPanelHeight.HasValue)
 			{
-				LZ4EW0s9qU = 200.0;
+				previewAniPanelHeight = 200.0;
 			}
-			return LZ4EW0s9qU.Value;
+			return previewAniPanelHeight.Value;
 		}
 		set
 		{
-			LZ4EW0s9qU = value;
+			previewAniPanelHeight = value;
 			DoNotify("PreviewAniPanelHeight");
 		}
 	}
@@ -205,15 +205,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (Jx5Eq7Y4hX.HasValue)
+			if (showAniPreviewPanel.HasValue)
 			{
-				return Jx5Eq7Y4hX.Value;
+				return showAniPreviewPanel.Value;
 			}
 			return true;
 		}
 		set
 		{
-			Jx5Eq7Y4hX = value;
+			showAniPreviewPanel = value;
 			DoNotify("ShowAniPreviewPanel");
 		}
 	}
@@ -223,15 +223,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (JFTEzWMfiJ == null)
+			if (itemCodeConvertItemNameConfiger == null)
 			{
-				JFTEzWMfiJ = new ItemCodeConvertItemNameConfiger();
+				itemCodeConvertItemNameConfiger = new ItemCodeConvertItemNameConfiger();
 			}
-			return JFTEzWMfiJ;
+			return itemCodeConvertItemNameConfiger;
 		}
 		set
 		{
-			JFTEzWMfiJ = value;
+			itemCodeConvertItemNameConfiger = value;
 			DoNotify("ItemCodeConvertItemNameConfiger");
 		}
 	}
@@ -241,31 +241,31 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (hSdZA2nvPg == null)
+			if (notUseFileListTooltip == null)
 			{
-				hSdZA2nvPg = new HashSet<string>();
-				hSdZA2nvPg.Add("aicharactername.lst");
-				hSdZA2nvPg.Add("itemname.lst");
-				hSdZA2nvPg.Add("monstername.lst");
-				hSdZA2nvPg.Add("npcname.lst");
-				hSdZA2nvPg.Add("passiveobjectname.lst");
-				hSdZA2nvPg.Add("skillname0.lst");
-				hSdZA2nvPg.Add("skillname1.lst");
-				hSdZA2nvPg.Add("skillname2.lst");
-				hSdZA2nvPg.Add("skillname3.lst");
-				hSdZA2nvPg.Add("skillname4.lst");
-				hSdZA2nvPg.Add("skillname5.lst");
-				hSdZA2nvPg.Add("skillname6.lst");
-				hSdZA2nvPg.Add("skillname7.lst");
-				hSdZA2nvPg.Add("skillname8.lst");
-				hSdZA2nvPg.Add("skillname9.lst");
-				hSdZA2nvPg.Add("n_quest/epicquest.lst");
+				notUseFileListTooltip = new HashSet<string>();
+				notUseFileListTooltip.Add("aicharactername.lst");
+				notUseFileListTooltip.Add("itemname.lst");
+				notUseFileListTooltip.Add("monstername.lst");
+				notUseFileListTooltip.Add("npcname.lst");
+				notUseFileListTooltip.Add("passiveobjectname.lst");
+				notUseFileListTooltip.Add("skillname0.lst");
+				notUseFileListTooltip.Add("skillname1.lst");
+				notUseFileListTooltip.Add("skillname2.lst");
+				notUseFileListTooltip.Add("skillname3.lst");
+				notUseFileListTooltip.Add("skillname4.lst");
+				notUseFileListTooltip.Add("skillname5.lst");
+				notUseFileListTooltip.Add("skillname6.lst");
+				notUseFileListTooltip.Add("skillname7.lst");
+				notUseFileListTooltip.Add("skillname8.lst");
+				notUseFileListTooltip.Add("skillname9.lst");
+				notUseFileListTooltip.Add("n_quest/epicquest.lst");
 			}
-			return hSdZA2nvPg;
+			return notUseFileListTooltip;
 		}
 		set
 		{
-			hSdZA2nvPg = value;
+			notUseFileListTooltip = value;
 		}
 	}
 
@@ -274,15 +274,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (hjrZnTcx7S == null)
+			if (completionDatas == null)
 			{
-				hjrZnTcx7S = new List<CodeCompletionData>();
+				completionDatas = new List<CodeCompletionData>();
 			}
-			return hjrZnTcx7S;
+			return completionDatas;
 		}
 		set
 		{
-			hjrZnTcx7S = value;
+			completionDatas = value;
 		}
 	}
 
@@ -290,15 +290,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (zdPZkJSD5S == null)
+			if (completionDatasDisk == null)
 			{
-				zdPZkJSD5S = new List<CodeCompletionData>();
+				completionDatasDisk = new List<CodeCompletionData>();
 			}
-			return zdPZkJSD5S;
+			return completionDatasDisk;
 		}
 		set
 		{
-			zdPZkJSD5S = value;
+			completionDatasDisk = value;
 		}
 	}
 
@@ -306,15 +306,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!q51ZL9Qp5i.HasValue)
+			if (!editorCommentHoverTooltipMode.HasValue)
 			{
-				q51ZL9Qp5i = HoverTooltipMode.鼠标移入;
+				editorCommentHoverTooltipMode = HoverTooltipMode.鼠标移入;
 			}
-			return q51ZL9Qp5i.Value;
+			return editorCommentHoverTooltipMode.Value;
 		}
 		set
 		{
-			q51ZL9Qp5i = value;
+			editorCommentHoverTooltipMode = value;
 			DoNotify("EditorCommentHoverTooltipMode");
 		}
 	}
@@ -323,15 +323,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!YsYZEu5dln.HasValue)
+			if (!editorItemCodeHoverTooltipMode.HasValue)
 			{
-				YsYZEu5dln = HoverTooltipMode.鼠标移入;
+				editorItemCodeHoverTooltipMode = HoverTooltipMode.鼠标移入;
 			}
-			return YsYZEu5dln.Value;
+			return editorItemCodeHoverTooltipMode.Value;
 		}
 		set
 		{
-			YsYZEu5dln = value;
+			editorItemCodeHoverTooltipMode = value;
 			DoNotify("EditorItemCodeHoverTooltipMode");
 		}
 	}
@@ -340,11 +340,11 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			return jWDZZMlSCy;
+			return saveBeautifyNutCode;
 		}
 		set
 		{
-			jWDZZMlSCy = value;
+			saveBeautifyNutCode = value;
 		}
 	}
 
@@ -352,17 +352,17 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (HjoZ84NhEg == null)
+			if (sizeUnitLabel == null)
 			{
 				ObservableCollection<ListItem> list = new ObservableCollection<ListItem>(GenerateScreenUnitList());
-				HjoZ84NhEg = UnitViewModeService.CreateInstance(list, new ScreenConverter(), 0, 100.0, "#####");
+				sizeUnitLabel = UnitViewModeService.CreateInstance(list, new ScreenConverter(), 0, 100.0, "#####");
 			}
-			_ = HjoZ84NhEg.SelectedItem.DefaultValues;
-			return HjoZ84NhEg;
+			_ = sizeUnitLabel.SelectedItem.DefaultValues;
+			return sizeUnitLabel;
 		}
 		set
 		{
-			HjoZ84NhEg = value;
+			sizeUnitLabel = value;
 			DoNotify("SizeUnitLabel");
 		}
 	}
@@ -371,15 +371,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!YYSZuLeyRN.HasValue)
+			if (!truncateLongLineLength.HasValue)
 			{
-				YYSZuLeyRN = 2000;
+				truncateLongLineLength = 2000;
 			}
-			return YYSZuLeyRN.Value;
+			return truncateLongLineLength.Value;
 		}
 		set
 		{
-			YYSZuLeyRN = value;
+			truncateLongLineLength = value;
 			DoNotify("TruncateLongLineLength");
 		}
 	}
@@ -389,16 +389,16 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (gjxZ573ZTP == null)
+			if (allowLinkHighlightedTheName == null)
 			{
-				gjxZ573ZTP = new HashSet<string>
+				allowLinkHighlightedTheName = new HashSet<string>
 				{
 					"String",
 					"Section",
 					"SectionEnd"
 				};
 			}
-			return gjxZ573ZTP;
+			return allowLinkHighlightedTheName;
 		}
 	}
 
@@ -406,11 +406,11 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			return IjrZpvK9nV;
+			return showSpaces;
 		}
 		set
 		{
-			IjrZpvK9nV = value;
+			showSpaces = value;
 			DoNotify("ShowSpaces");
 		}
 	}
@@ -419,15 +419,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (i3hZDCHvTA.HasValue)
+			if (showTabs.HasValue)
 			{
-				return i3hZDCHvTA.Value;
+				return showTabs.Value;
 			}
 			return true;
 		}
 		set
 		{
-			i3hZDCHvTA = value;
+			showTabs = value;
 			DoNotify("ShowTabs");
 		}
 	}
@@ -436,11 +436,11 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			return FEeZ3FyP8S;
+			return showEndOfLine;
 		}
 		set
 		{
-			FEeZ3FyP8S = value;
+			showEndOfLine = value;
 			DoNotify("ShowEndOfLine");
 		}
 	}
@@ -449,11 +449,11 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			return vWRZHVx5XQ;
+			return wordWrap;
 		}
 		set
 		{
-			vWRZHVx5XQ = value;
+			wordWrap = value;
 			DoNotify("WordWrap");
 		}
 	}
@@ -462,15 +462,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!noGZ7g41Qq.HasValue)
+			if (!enableTextDragDrop.HasValue)
 			{
-				noGZ7g41Qq = true;
+				enableTextDragDrop = true;
 			}
-			return noGZ7g41Qq.Value;
+			return enableTextDragDrop.Value;
 		}
 		set
 		{
-			noGZ7g41Qq = value;
+			enableTextDragDrop = value;
 			DoNotify("EnableTextDragDrop");
 		}
 	}
@@ -479,15 +479,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!BiMZcLY5UQ.HasValue)
+			if (!enableVirtualSpace.HasValue)
 			{
-				BiMZcLY5UQ = false;
+				enableVirtualSpace = false;
 			}
-			return BiMZcLY5UQ.Value;
+			return enableVirtualSpace.Value;
 		}
 		set
 		{
-			BiMZcLY5UQ = value;
+			enableVirtualSpace = value;
 			DoNotify("EnableVirtualSpace");
 		}
 	}
@@ -496,11 +496,11 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			return fbBZgy7RXy;
+			return useAutoCodeFolding;
 		}
 		set
 		{
-			fbBZgy7RXy = value;
+			useAutoCodeFolding = value;
 			DoNotify("UseAutoCodeFolding");
 		}
 	}
@@ -509,15 +509,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!K2pZY3ddc7.HasValue)
+			if (!useFoldingGuideLines.HasValue)
 			{
-				K2pZY3ddc7 = true;
+				useFoldingGuideLines = true;
 			}
-			return K2pZY3ddc7.Value;
+			return useFoldingGuideLines.Value;
 		}
 		set
 		{
-			K2pZY3ddc7 = value;
+			useFoldingGuideLines = value;
 			DoNotify("UseFoldingGuideLines");
 		}
 	}
@@ -527,15 +527,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (wKDZKmTjBK == null)
+			if (foldingGuideLineBrushes == null)
 			{
-				wKDZKmTjBK = new Dictionary<int, SolidColorBrush>();
+				foldingGuideLineBrushes = new Dictionary<int, SolidColorBrush>();
 			}
-			return wKDZKmTjBK;
+			return foldingGuideLineBrushes;
 		}
 		set
 		{
-			wKDZKmTjBK = value;
+			foldingGuideLineBrushes = value;
 		}
 	}
 
@@ -543,11 +543,11 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			return IglZJdtSj9;
+			return searchPanelKeywordConvertTw;
 		}
 		set
 		{
-			IglZJdtSj9 = value;
+			searchPanelKeywordConvertTw = value;
 			DoNotify("_SearchPanelKeywordConvertTW");
 		}
 	}
@@ -556,11 +556,11 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			return TjTZdJPXAP;
+			return searchPanelNameConvertCode;
 		}
 		set
 		{
-			TjTZdJPXAP = value;
+			searchPanelNameConvertCode = value;
 		}
 	}
 
@@ -568,15 +568,15 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (!IZhZ1lfvwn.HasValue)
+			if (!searchPanelFindNotFoundAllowMessageBox.HasValue)
 			{
-				IZhZ1lfvwn = true;
+				searchPanelFindNotFoundAllowMessageBox = true;
 			}
-			return IZhZ1lfvwn.Value;
+			return searchPanelFindNotFoundAllowMessageBox.Value;
 		}
 		set
 		{
-			IZhZ1lfvwn = value;
+			searchPanelFindNotFoundAllowMessageBox = value;
 			DoNotify("SearchPanelFindNotFoundAllowMessageBox");
 		}
 	}
@@ -585,23 +585,23 @@ public class TextEditConfig : ModelBase
 	{
 		get
 		{
-			if (m2vZG9pInd == null)
+			if (pvfEditorColorOptionDictionary == null)
 			{
-				m2vZG9pInd = new Dictionary<ThemeType, PvfEdiorHighlightingColorOptions>();
+				pvfEditorColorOptionDictionary = new Dictionary<ThemeType, PvfEdiorHighlightingColorOptions>();
 			}
 			foreach (object value in Enum.GetValues(typeof(ThemeType)))
 			{
 				ThemeType themeType = (ThemeType)Enum.Parse(typeof(ThemeType), value.ToString());
-				if (!m2vZG9pInd.ContainsKey(themeType))
+				if (!pvfEditorColorOptionDictionary.ContainsKey(themeType))
 				{
-					m2vZG9pInd.Add(themeType, new PvfEdiorHighlightingColorOptions(themeType));
+					pvfEditorColorOptionDictionary.Add(themeType, new PvfEdiorHighlightingColorOptions(themeType));
 				}
 			}
-			return m2vZG9pInd;
+			return pvfEditorColorOptionDictionary;
 		}
 		set
 		{
-			m2vZG9pInd = value;
+			pvfEditorColorOptionDictionary = value;
 			DoNotify("PvfEditorColorOptionDic");
 		}
 	}

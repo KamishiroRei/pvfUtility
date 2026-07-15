@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
@@ -10,85 +9,70 @@ namespace PvfCode.Models.Options.Editor;
 [JsonObject(MemberSerialization.OptOut)]
 public class PvfEdiorHighlightingColorOptions : ViewModelBase
 {
-	[CompilerGenerated]
-	private ThemeType gxyEbmKpcB;
+	private SolidColorBrush? header;
 
-	private SolidColorBrush? ytTEVI6rii;
+	private SolidColorBrush? section;
 
-	private SolidColorBrush? KhJEPcriap;
+	private SolidColorBrush? stringBrush;
 
-	private SolidColorBrush? vKXEFGTbsb;
+	private SolidColorBrush? filePath;
 
-	private SolidColorBrush? w3TEXrjPEQ;
+	private SolidColorBrush? digits;
 
-	private SolidColorBrush? oR9ENxmyry;
+	private SolidColorBrush? comment;
 
-	private SolidColorBrush? UoREikAhiw;
+	private SolidColorBrush korStringMarkSymbol;
 
-	private SolidColorBrush oleEMXQv8E;
+	private SolidColorBrush korName;
 
-	private SolidColorBrush oYrEaIrH6f;
+	private SolidColorBrush korColon;
 
-	private SolidColorBrush vQ4EI4c9kR;
+	private SolidColorBrush? curlybraces;
 
-	private SolidColorBrush? ymBEUc9D1j;
+	private SolidColorBrush? punctuation;
 
-	private SolidColorBrush? j2hElckS33;
+	private SolidColorBrush? methodCall;
 
-	private SolidColorBrush? XSLEfJCn0U;
+	private SolidColorBrush? genObject;
 
-	private SolidColorBrush? hSKEhbH9i9;
+	private SolidColorBrush? keywords;
 
-	private SolidColorBrush? EiMETSh0dc;
+	private SolidColorBrush? keywords2;
 
-	private SolidColorBrush? V2sE0XOhSC;
+	private SolidColorBrush? lstItemNameForeBrush;
 
-	private SolidColorBrush? BvpEsup9yB;
+	private SolidColorBrush? korStrIndex;
 
-	private SolidColorBrush? YvuEQ38X2c;
+	private SolidColorBrush? korStrValue;
 
-	private SolidColorBrush? b2VE6nfEuM;
+	private SolidColorBrush? korStrAngleBrackets;
 
-	private SolidColorBrush? YmQEyfaYmu;
-
-	public ThemeType ThemeTypeChina
-	{
-		[CompilerGenerated]
-		get
-		{
-			return gxyEbmKpcB;
-		}
-		[CompilerGenerated]
-		set
-		{
-			gxyEbmKpcB = value;
-		}
-	}
+	public ThemeType ThemeTypeChina { get; set; }
 
 	public SolidColorBrush Header
 	{
 		get
 		{
-			if (ytTEVI6rii == null)
+			if (header == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					ytTEVI6rii = AppSetting.Instance.ToColor("Gray");
+					header = AppSetting.Instance.ToColor("Gray");
 					break;
 				case ThemeType.VS2019Dark:
-					ytTEVI6rii = AppSetting.Instance.ToColor("Gray");
+					header = AppSetting.Instance.ToColor("Gray");
 					break;
 				case ThemeType.VS2019Light:
-					ytTEVI6rii = AppSetting.Instance.ToColor("Gray");
+					header = AppSetting.Instance.ToColor("Gray");
 					break;
 				}
 			}
-			return ytTEVI6rii;
+			return header;
 		}
 		set
 		{
-			ytTEVI6rii = value;
+			header = value;
 			RaisePropertyChanged("Header");
 		}
 	}
@@ -97,26 +81,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (KhJEPcriap == null)
+			if (section == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					KhJEPcriap = AppSetting.Instance.ToColor("#f92672");
+					section = AppSetting.Instance.ToColor("#f92672");
 					break;
 				case ThemeType.VS2019Dark:
-					KhJEPcriap = AppSetting.Instance.ToColor("#f92672");
+					section = AppSetting.Instance.ToColor("#f92672");
 					break;
 				case ThemeType.VS2019Light:
-					KhJEPcriap = AppSetting.Instance.ToColor("#f92672");
+					section = AppSetting.Instance.ToColor("#f92672");
 					break;
 				}
 			}
-			return KhJEPcriap;
+			return section;
 		}
 		set
 		{
-			KhJEPcriap = value;
+			section = value;
 			RaisePropertyChanged("Section");
 		}
 	}
@@ -125,26 +109,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (vKXEFGTbsb == null)
+			if (stringBrush == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					vKXEFGTbsb = AppSetting.Instance.ToColor("#a31515");
+					stringBrush = AppSetting.Instance.ToColor("#a31515");
 					break;
 				case ThemeType.VS2019Dark:
-					vKXEFGTbsb = AppSetting.Instance.ToColor("#af7a66");
+					stringBrush = AppSetting.Instance.ToColor("#af7a66");
 					break;
 				case ThemeType.VS2019Light:
-					vKXEFGTbsb = AppSetting.Instance.ToColor("#a31515");
+					stringBrush = AppSetting.Instance.ToColor("#a31515");
 					break;
 				}
 			}
-			return vKXEFGTbsb;
+			return stringBrush;
 		}
 		set
 		{
-			vKXEFGTbsb = value;
+			stringBrush = value;
 			RaisePropertyChanged("String");
 		}
 	}
@@ -153,26 +137,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (w3TEXrjPEQ == null)
+			if (filePath == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					w3TEXrjPEQ = AppSetting.Instance.ToColor("#a31515");
+					filePath = AppSetting.Instance.ToColor("#a31515");
 					break;
 				case ThemeType.VS2019Dark:
-					w3TEXrjPEQ = AppSetting.Instance.ToColor("#af7a66");
+					filePath = AppSetting.Instance.ToColor("#af7a66");
 					break;
 				case ThemeType.VS2019Light:
-					w3TEXrjPEQ = AppSetting.Instance.ToColor("#a31515");
+					filePath = AppSetting.Instance.ToColor("#a31515");
 					break;
 				}
 			}
-			return w3TEXrjPEQ;
+			return filePath;
 		}
 		set
 		{
-			w3TEXrjPEQ = value;
+			filePath = value;
 			RaisePropertyChanged("FilePath");
 		}
 	}
@@ -181,26 +165,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (oR9ENxmyry == null)
+			if (digits == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					oR9ENxmyry = AppSetting.Instance.ToColor("#5b2da8");
+					digits = AppSetting.Instance.ToColor("#5b2da8");
 					break;
 				case ThemeType.VS2019Dark:
-					oR9ENxmyry = AppSetting.Instance.ToColor("#b5cea8");
+					digits = AppSetting.Instance.ToColor("#b5cea8");
 					break;
 				case ThemeType.VS2019Light:
-					oR9ENxmyry = AppSetting.Instance.ToColor("#5b2da8");
+					digits = AppSetting.Instance.ToColor("#5b2da8");
 					break;
 				}
 			}
-			return oR9ENxmyry;
+			return digits;
 		}
 		set
 		{
-			oR9ENxmyry = value;
+			digits = value;
 			RaisePropertyChanged("Digits");
 		}
 	}
@@ -209,26 +193,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (UoREikAhiw == null)
+			if (comment == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					UoREikAhiw = AppSetting.Instance.ToColor("Green");
+					comment = AppSetting.Instance.ToColor("Green");
 					break;
 				case ThemeType.VS2019Dark:
-					UoREikAhiw = AppSetting.Instance.ToColor("#3f9b4a");
+					comment = AppSetting.Instance.ToColor("#3f9b4a");
 					break;
 				case ThemeType.VS2019Light:
-					UoREikAhiw = AppSetting.Instance.ToColor("Green");
+					comment = AppSetting.Instance.ToColor("Green");
 					break;
 				}
 			}
-			return UoREikAhiw;
+			return comment;
 		}
 		set
 		{
-			UoREikAhiw = value;
+			comment = value;
 			RaisePropertyChanged("Comment");
 		}
 	}
@@ -237,26 +221,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (oleEMXQv8E == null)
+			if (korStringMarkSymbol == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					oleEMXQv8E = AppSetting.Instance.ToColor("#8064A2");
+					korStringMarkSymbol = AppSetting.Instance.ToColor("#8064A2");
 					break;
 				case ThemeType.VS2019Dark:
-					oleEMXQv8E = AppSetting.Instance.ToColor("#85A543");
+					korStringMarkSymbol = AppSetting.Instance.ToColor("#85A543");
 					break;
 				case ThemeType.VS2019Light:
-					oleEMXQv8E = AppSetting.Instance.ToColor("#8064A2");
+					korStringMarkSymbol = AppSetting.Instance.ToColor("#8064A2");
 					break;
 				}
 			}
-			return oleEMXQv8E;
+			return korStringMarkSymbol;
 		}
 		set
 		{
-			oleEMXQv8E = value;
+			korStringMarkSymbol = value;
 			RaisePropertyChanged("KorStringMarkSymbol");
 		}
 	}
@@ -265,26 +249,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (oYrEaIrH6f == null)
+			if (korName == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					oYrEaIrH6f = AppSetting.Instance.ToColor("#0A588C");
+					korName = AppSetting.Instance.ToColor("#0A588C");
 					break;
 				case ThemeType.VS2019Dark:
-					oYrEaIrH6f = AppSetting.Instance.ToColor("#C0504D");
+					korName = AppSetting.Instance.ToColor("#C0504D");
 					break;
 				case ThemeType.VS2019Light:
-					oYrEaIrH6f = AppSetting.Instance.ToColor("#0A588C");
+					korName = AppSetting.Instance.ToColor("#0A588C");
 					break;
 				}
 			}
-			return oYrEaIrH6f;
+			return korName;
 		}
 		set
 		{
-			oYrEaIrH6f = value;
+			korName = value;
 			RaisePropertyChanged("KorName");
 		}
 	}
@@ -293,26 +277,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (vQ4EI4c9kR == null)
+			if (korColon == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					vQ4EI4c9kR = AppSetting.Instance.ToColor("#FF9B98");
+					korColon = AppSetting.Instance.ToColor("#FF9B98");
 					break;
 				case ThemeType.VS2019Dark:
-					vQ4EI4c9kR = AppSetting.Instance.ToColor("#4BACC6");
+					korColon = AppSetting.Instance.ToColor("#4BACC6");
 					break;
 				case ThemeType.VS2019Light:
-					vQ4EI4c9kR = AppSetting.Instance.ToColor("#FF9B98");
+					korColon = AppSetting.Instance.ToColor("#FF9B98");
 					break;
 				}
 			}
-			return vQ4EI4c9kR;
+			return korColon;
 		}
 		set
 		{
-			vQ4EI4c9kR = value;
+			korColon = value;
 			RaisePropertyChanged("KorColon");
 		}
 	}
@@ -321,26 +305,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (ymBEUc9D1j == null)
+			if (curlybraces == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					ymBEUc9D1j = AppSetting.Instance.ToColor("#007acc");
+					curlybraces = AppSetting.Instance.ToColor("#007acc");
 					break;
 				case ThemeType.VS2019Dark:
-					ymBEUc9D1j = AppSetting.Instance.ToColor("#ffc813");
+					curlybraces = AppSetting.Instance.ToColor("#ffc813");
 					break;
 				case ThemeType.VS2019Light:
-					ymBEUc9D1j = AppSetting.Instance.ToColor("#007acc");
+					curlybraces = AppSetting.Instance.ToColor("#007acc");
 					break;
 				}
 			}
-			return ymBEUc9D1j;
+			return curlybraces;
 		}
 		set
 		{
-			ymBEUc9D1j = value;
+			curlybraces = value;
 			RaisePropertyChanged("Curlybraces");
 		}
 	}
@@ -349,26 +333,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (j2hElckS33 == null)
+			if (punctuation == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					j2hElckS33 = AppSetting.Instance.ToColor("#000000");
+					punctuation = AppSetting.Instance.ToColor("#000000");
 					break;
 				case ThemeType.VS2019Dark:
-					j2hElckS33 = AppSetting.Instance.ToColor("#b4b4b4");
+					punctuation = AppSetting.Instance.ToColor("#b4b4b4");
 					break;
 				case ThemeType.VS2019Light:
-					j2hElckS33 = AppSetting.Instance.ToColor("#000000");
+					punctuation = AppSetting.Instance.ToColor("#000000");
 					break;
 				}
 			}
-			return j2hElckS33;
+			return punctuation;
 		}
 		set
 		{
-			j2hElckS33 = value;
+			punctuation = value;
 			RaisePropertyChanged("Punctuation");
 		}
 	}
@@ -377,26 +361,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (XSLEfJCn0U == null)
+			if (methodCall == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					XSLEfJCn0U = AppSetting.Instance.ToColor("#74531f");
+					methodCall = AppSetting.Instance.ToColor("#74531f");
 					break;
 				case ThemeType.VS2019Dark:
-					XSLEfJCn0U = AppSetting.Instance.ToColor("#FFdcdcaa");
+					methodCall = AppSetting.Instance.ToColor("#FFdcdcaa");
 					break;
 				case ThemeType.VS2019Light:
-					XSLEfJCn0U = AppSetting.Instance.ToColor("#74531f");
+					methodCall = AppSetting.Instance.ToColor("#74531f");
 					break;
 				}
 			}
-			return XSLEfJCn0U;
+			return methodCall;
 		}
 		set
 		{
-			XSLEfJCn0U = value;
+			methodCall = value;
 			RaisePropertyChanged("MethodCall");
 		}
 	}
@@ -405,26 +389,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (hSKEhbH9i9 == null)
+			if (genObject == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					hSKEhbH9i9 = AppSetting.Instance.ToColor("Teal");
+					genObject = AppSetting.Instance.ToColor("Teal");
 					break;
 				case ThemeType.VS2019Dark:
-					hSKEhbH9i9 = AppSetting.Instance.ToColor("#FFd8a0df");
+					genObject = AppSetting.Instance.ToColor("#FFd8a0df");
 					break;
 				case ThemeType.VS2019Light:
-					hSKEhbH9i9 = AppSetting.Instance.ToColor("Teal");
+					genObject = AppSetting.Instance.ToColor("Teal");
 					break;
 				}
 			}
-			return XSLEfJCn0U;
+			return genObject;
 		}
 		set
 		{
-			hSKEhbH9i9 = value;
+			genObject = value;
 			RaisePropertyChanged("GGenObject");
 		}
 	}
@@ -433,26 +417,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (EiMETSh0dc == null)
+			if (keywords == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					EiMETSh0dc = AppSetting.Instance.ToColor("#8f08c4");
+					keywords = AppSetting.Instance.ToColor("#8f08c4");
 					break;
 				case ThemeType.VS2019Dark:
-					EiMETSh0dc = AppSetting.Instance.ToColor("#D8A0CC");
+					keywords = AppSetting.Instance.ToColor("#D8A0CC");
 					break;
 				case ThemeType.VS2019Light:
-					EiMETSh0dc = AppSetting.Instance.ToColor("#8f08c4");
+					keywords = AppSetting.Instance.ToColor("#8f08c4");
 					break;
 				}
 			}
-			return EiMETSh0dc;
+			return keywords;
 		}
 		set
 		{
-			EiMETSh0dc = value;
+			keywords = value;
 			RaisePropertyChanged("Keywords");
 		}
 	}
@@ -461,26 +445,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (V2sE0XOhSC == null)
+			if (keywords2 == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					V2sE0XOhSC = AppSetting.Instance.ToColor("#0000ff");
+					keywords2 = AppSetting.Instance.ToColor("#0000ff");
 					break;
 				case ThemeType.VS2019Dark:
-					V2sE0XOhSC = AppSetting.Instance.ToColor("#569CD6");
+					keywords2 = AppSetting.Instance.ToColor("#569CD6");
 					break;
 				case ThemeType.VS2019Light:
-					V2sE0XOhSC = AppSetting.Instance.ToColor("#0000ff");
+					keywords2 = AppSetting.Instance.ToColor("#0000ff");
 					break;
 				}
 			}
-			return V2sE0XOhSC;
+			return keywords2;
 		}
 		set
 		{
-			V2sE0XOhSC = value;
+			keywords2 = value;
 			RaisePropertyChanged("Keywords2");
 		}
 	}
@@ -489,26 +473,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (BvpEsup9yB == null)
+			if (lstItemNameForeBrush == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					BvpEsup9yB = AppSetting.Instance.ToColor("Gray");
+					lstItemNameForeBrush = AppSetting.Instance.ToColor("Gray");
 					break;
 				case ThemeType.VS2019Dark:
-					BvpEsup9yB = AppSetting.Instance.ToColor("Gray");
+					lstItemNameForeBrush = AppSetting.Instance.ToColor("Gray");
 					break;
 				case ThemeType.VS2019Light:
-					BvpEsup9yB = AppSetting.Instance.ToColor("Gray");
+					lstItemNameForeBrush = AppSetting.Instance.ToColor("Gray");
 					break;
 				}
 			}
-			return BvpEsup9yB;
+			return lstItemNameForeBrush;
 		}
 		set
 		{
-			BvpEsup9yB = value;
+			lstItemNameForeBrush = value;
 			RaisePropertyChanged("LstItemNameForeBrush");
 		}
 	}
@@ -517,26 +501,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (YvuEQ38X2c == null)
+			if (korStrIndex == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					KorStrIndex = AppSetting.Instance.ToColor("#f92672");
+					korStrIndex = AppSetting.Instance.ToColor("#f92672");
 					break;
 				case ThemeType.VS2019Dark:
-					KorStrIndex = AppSetting.Instance.ToColor("#f92672");
+					korStrIndex = AppSetting.Instance.ToColor("#f92672");
 					break;
 				case ThemeType.VS2019Light:
-					KorStrIndex = AppSetting.Instance.ToColor("#f92672");
+					korStrIndex = AppSetting.Instance.ToColor("#f92672");
 					break;
 				}
 			}
-			return YvuEQ38X2c;
+			return korStrIndex;
 		}
 		set
 		{
-			YvuEQ38X2c = value;
+			korStrIndex = value;
 			RaisePropertyChanged("KorStrIndex");
 		}
 	}
@@ -545,26 +529,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (b2VE6nfEuM == null)
+			if (korStrValue == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					b2VE6nfEuM = AppSetting.Instance.ToColor("#a31515");
+					korStrValue = AppSetting.Instance.ToColor("#a31515");
 					break;
 				case ThemeType.VS2019Dark:
-					b2VE6nfEuM = AppSetting.Instance.ToColor("#af7a66");
+					korStrValue = AppSetting.Instance.ToColor("#af7a66");
 					break;
 				case ThemeType.VS2019Light:
-					b2VE6nfEuM = AppSetting.Instance.ToColor("#a31515");
+					korStrValue = AppSetting.Instance.ToColor("#a31515");
 					break;
 				}
 			}
-			return b2VE6nfEuM;
+			return korStrValue;
 		}
 		set
 		{
-			b2VE6nfEuM = value;
+			korStrValue = value;
 			RaisePropertyChanged("KorStrValue");
 		}
 	}
@@ -573,26 +557,26 @@ public class PvfEdiorHighlightingColorOptions : ViewModelBase
 	{
 		get
 		{
-			if (YmQEyfaYmu == null)
+			if (korStrAngleBrackets == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					YmQEyfaYmu = AppSetting.Instance.ToColor("#5b2da8");
+					korStrAngleBrackets = AppSetting.Instance.ToColor("#5b2da8");
 					break;
 				case ThemeType.VS2019Dark:
-					YmQEyfaYmu = AppSetting.Instance.ToColor("#b5cea8");
+					korStrAngleBrackets = AppSetting.Instance.ToColor("#b5cea8");
 					break;
 				case ThemeType.VS2019Light:
-					YmQEyfaYmu = AppSetting.Instance.ToColor("#5b2da8");
+					korStrAngleBrackets = AppSetting.Instance.ToColor("#5b2da8");
 					break;
 				}
 			}
-			return YmQEyfaYmu;
+			return korStrAngleBrackets;
 		}
 		set
 		{
-			YmQEyfaYmu = value;
+			korStrAngleBrackets = value;
 			RaisePropertyChanged("KorStrAngleBrackets");
 		}
 	}

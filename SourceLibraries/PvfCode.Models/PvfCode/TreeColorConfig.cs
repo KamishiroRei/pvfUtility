@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Windows.Media;
 using DevExpress.Mvvm;
@@ -10,64 +9,49 @@ namespace PvfCode;
 [JsonObject(MemberSerialization.OptOut)]
 public class TreeColorConfig : BindableBase
 {
-	[CompilerGenerated]
-	private ThemeType uDVnCK1G1k;
+	private SolidColorBrush newFileFlagBrush;
 
-	private SolidColorBrush wdWnvvQNiH;
+	private SolidColorBrush fileNameBrush;
 
-	private SolidColorBrush JmynbrdbTl;
+	private SolidColorBrush itemNameBrush;
 
-	private SolidColorBrush wJJnVv9NkF;
+	private SolidColorBrush itemCodeBrush;
 
-	private SolidColorBrush bvLnPNSinP;
+	private SolidColorBrush commentBrush;
 
-	private SolidColorBrush PwJnFa0f0u;
+	private SolidColorBrush? selectedBackBrush;
 
-	private SolidColorBrush? EGinXBiVcI;
+	private SolidColorBrush? focusedBackBrush;
 
-	private SolidColorBrush? RFynNaTCcV;
+	private SolidColorBrush? rarityColor0;
 
-	private SolidColorBrush? mHnniCelaw;
+	private SolidColorBrush? rarityColor1;
 
-	private SolidColorBrush? JXcnMMHMhH;
+	private SolidColorBrush? rarityColor2;
 
-	private SolidColorBrush? sUBnavuj1T;
+	private SolidColorBrush? rarityColor3;
 
-	private SolidColorBrush? C4XnIIBx8D;
+	private SolidColorBrush? rarityColor4;
 
-	private SolidColorBrush? ei2nUg858t;
+	private SolidColorBrush? rarityColor5;
 
-	private SolidColorBrush? cGFnlYTjft;
+	private ICommand resetCommand;
 
-	private ICommand mUenfE5FVi;
-
-	public ThemeType ThemeTypeChina
-	{
-		[CompilerGenerated]
-		get
-		{
-			return uDVnCK1G1k;
-		}
-		[CompilerGenerated]
-		set
-		{
-			uDVnCK1G1k = value;
-		}
-	}
+	public ThemeType ThemeTypeChina { get; set; }
 
 	public SolidColorBrush NewFileFlagBrush
 	{
 		get
 		{
-			if (wdWnvvQNiH == null)
+			if (newFileFlagBrush == null)
 			{
-				wdWnvvQNiH = ko2n4sYnoE("Red");
+				newFileFlagBrush = CreateBrush("Red");
 			}
-			return wdWnvvQNiH;
+			return newFileFlagBrush;
 		}
 		set
 		{
-			wdWnvvQNiH = value;
+			newFileFlagBrush = value;
 			RaisePropertyChanged("NewFileFlagBrush");
 		}
 	}
@@ -76,26 +60,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (JmynbrdbTl == null)
+			if (fileNameBrush == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					JmynbrdbTl = ko2n4sYnoE("black");
+					fileNameBrush = CreateBrush("black");
 					break;
 				case ThemeType.VS2019Dark:
-					JmynbrdbTl = ko2n4sYnoE("White");
+					fileNameBrush = CreateBrush("White");
 					break;
 				case ThemeType.VS2019Light:
-					JmynbrdbTl = ko2n4sYnoE("black");
+					fileNameBrush = CreateBrush("black");
 					break;
 				}
 			}
-			return JmynbrdbTl;
+			return fileNameBrush;
 		}
 		set
 		{
-			JmynbrdbTl = value;
+			fileNameBrush = value;
 			RaisePropertyChanged("FileNameBrush");
 		}
 	}
@@ -104,26 +88,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (wJJnVv9NkF == null)
+			if (itemNameBrush == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					wJJnVv9NkF = ko2n4sYnoE("#a31515");
+					itemNameBrush = CreateBrush("#a31515");
 					break;
 				case ThemeType.VS2019Dark:
-					wJJnVv9NkF = ko2n4sYnoE("#af7a66");
+					itemNameBrush = CreateBrush("#af7a66");
 					break;
 				case ThemeType.VS2019Light:
-					wJJnVv9NkF = ko2n4sYnoE("#a31515");
+					itemNameBrush = CreateBrush("#a31515");
 					break;
 				}
 			}
-			return wJJnVv9NkF;
+			return itemNameBrush;
 		}
 		set
 		{
-			wJJnVv9NkF = value;
+			itemNameBrush = value;
 			RaisePropertyChanged("ItemNameBrush");
 		}
 	}
@@ -132,26 +116,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (bvLnPNSinP == null)
+			if (itemCodeBrush == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					bvLnPNSinP = ko2n4sYnoE("#5b2da8");
+					itemCodeBrush = CreateBrush("#5b2da8");
 					break;
 				case ThemeType.VS2019Dark:
-					bvLnPNSinP = ko2n4sYnoE("#b5cea8");
+					itemCodeBrush = CreateBrush("#b5cea8");
 					break;
 				case ThemeType.VS2019Light:
-					bvLnPNSinP = ko2n4sYnoE("#5b2da8");
+					itemCodeBrush = CreateBrush("#5b2da8");
 					break;
 				}
 			}
-			return bvLnPNSinP;
+			return itemCodeBrush;
 		}
 		set
 		{
-			bvLnPNSinP = value;
+			itemCodeBrush = value;
 			RaisePropertyChanged("ItemCodeBrush");
 		}
 	}
@@ -160,26 +144,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (PwJnFa0f0u == null)
+			if (commentBrush == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					PwJnFa0f0u = ko2n4sYnoE("gray");
+					commentBrush = CreateBrush("gray");
 					break;
 				case ThemeType.VS2019Dark:
-					PwJnFa0f0u = ko2n4sYnoE("gray");
+					commentBrush = CreateBrush("gray");
 					break;
 				case ThemeType.VS2019Light:
-					PwJnFa0f0u = ko2n4sYnoE("gray");
+					commentBrush = CreateBrush("gray");
 					break;
 				}
 			}
-			return PwJnFa0f0u;
+			return commentBrush;
 		}
 		set
 		{
-			PwJnFa0f0u = value;
+			commentBrush = value;
 			RaisePropertyChanged("CommentBrush");
 		}
 	}
@@ -188,26 +172,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (EGinXBiVcI == null)
+			if (selectedBackBrush == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					EGinXBiVcI = ko2n4sYnoE("#d8daeb");
+					selectedBackBrush = CreateBrush("#d8daeb");
 					break;
 				case ThemeType.VS2019Dark:
-					EGinXBiVcI = ko2n4sYnoE("#404040");
+					selectedBackBrush = CreateBrush("#404040");
 					break;
 				case ThemeType.VS2019Light:
-					EGinXBiVcI = ko2n4sYnoE("#c9def5");
+					selectedBackBrush = CreateBrush("#c9def5");
 					break;
 				}
 			}
-			return EGinXBiVcI;
+			return selectedBackBrush;
 		}
 		set
 		{
-			EGinXBiVcI = value;
+			selectedBackBrush = value;
 			RaisePropertyChanged("SelectedBackBrush");
 		}
 	}
@@ -216,26 +200,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (RFynNaTCcV == null)
+			if (focusedBackBrush == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					RFynNaTCcV = ko2n4sYnoE("#d8daeb");
+					focusedBackBrush = CreateBrush("#d8daeb");
 					break;
 				case ThemeType.VS2019Dark:
-					RFynNaTCcV = ko2n4sYnoE("#404040");
+					focusedBackBrush = CreateBrush("#404040");
 					break;
 				case ThemeType.VS2019Light:
-					RFynNaTCcV = ko2n4sYnoE("#c9def5");
+					focusedBackBrush = CreateBrush("#c9def5");
 					break;
 				}
 			}
-			return RFynNaTCcV;
+			return focusedBackBrush;
 		}
 		set
 		{
-			RFynNaTCcV = value;
+			focusedBackBrush = value;
 			RaisePropertyChanged("FocusedBackBrush");
 		}
 	}
@@ -244,26 +228,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (mHnniCelaw == null)
+			if (rarityColor0 == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					mHnniCelaw = FileNameBrush;
+					rarityColor0 = FileNameBrush;
 					break;
 				case ThemeType.VS2019Dark:
-					mHnniCelaw = FileNameBrush;
+					rarityColor0 = FileNameBrush;
 					break;
 				case ThemeType.VS2019Light:
-					mHnniCelaw = FileNameBrush;
+					rarityColor0 = FileNameBrush;
 					break;
 				}
 			}
-			return mHnniCelaw;
+			return rarityColor0;
 		}
 		set
 		{
-			mHnniCelaw = value;
+			rarityColor0 = value;
 			RaisePropertyChanged("RarityColor0");
 		}
 	}
@@ -272,26 +256,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (JXcnMMHMhH == null)
+			if (rarityColor1 == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					JXcnMMHMhH = ko2n4sYnoE("#68D5ED");
+					rarityColor1 = CreateBrush("#68D5ED");
 					break;
 				case ThemeType.VS2019Dark:
-					JXcnMMHMhH = ko2n4sYnoE("#68D5ED");
+					rarityColor1 = CreateBrush("#68D5ED");
 					break;
 				case ThemeType.VS2019Light:
-					JXcnMMHMhH = ko2n4sYnoE("#68D5ED");
+					rarityColor1 = CreateBrush("#68D5ED");
 					break;
 				}
 			}
-			return JXcnMMHMhH;
+			return rarityColor1;
 		}
 		set
 		{
-			JXcnMMHMhH = value;
+			rarityColor1 = value;
 			RaisePropertyChanged("RarityColor1");
 		}
 	}
@@ -300,26 +284,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (sUBnavuj1T == null)
+			if (rarityColor2 == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					sUBnavuj1T = ko2n4sYnoE("#B36BFF");
+					rarityColor2 = CreateBrush("#B36BFF");
 					break;
 				case ThemeType.VS2019Dark:
-					sUBnavuj1T = ko2n4sYnoE("#B36BFF");
+					rarityColor2 = CreateBrush("#B36BFF");
 					break;
 				case ThemeType.VS2019Light:
-					sUBnavuj1T = ko2n4sYnoE("#B36BFF");
+					rarityColor2 = CreateBrush("#B36BFF");
 					break;
 				}
 			}
-			return sUBnavuj1T;
+			return rarityColor2;
 		}
 		set
 		{
-			sUBnavuj1T = value;
+			rarityColor2 = value;
 			RaisePropertyChanged("RarityColor2");
 		}
 	}
@@ -328,26 +312,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (C4XnIIBx8D == null)
+			if (rarityColor3 == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					C4XnIIBx8D = ko2n4sYnoE("#DC007E");
+					rarityColor3 = CreateBrush("#DC007E");
 					break;
 				case ThemeType.VS2019Dark:
-					C4XnIIBx8D = ko2n4sYnoE("#DC007E");
+					rarityColor3 = CreateBrush("#DC007E");
 					break;
 				case ThemeType.VS2019Light:
-					C4XnIIBx8D = ko2n4sYnoE("#DC007E");
+					rarityColor3 = CreateBrush("#DC007E");
 					break;
 				}
 			}
-			return C4XnIIBx8D;
+			return rarityColor3;
 		}
 		set
 		{
-			C4XnIIBx8D = value;
+			rarityColor3 = value;
 			RaisePropertyChanged("RarityColor3");
 		}
 	}
@@ -356,26 +340,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (ei2nUg858t == null)
+			if (rarityColor4 == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					ei2nUg858t = ko2n4sYnoE("#FFB100");
+					rarityColor4 = CreateBrush("#FFB100");
 					break;
 				case ThemeType.VS2019Dark:
-					ei2nUg858t = ko2n4sYnoE("#FFB100");
+					rarityColor4 = CreateBrush("#FFB100");
 					break;
 				case ThemeType.VS2019Light:
-					ei2nUg858t = ko2n4sYnoE("#FFB100");
+					rarityColor4 = CreateBrush("#FFB100");
 					break;
 				}
 			}
-			return ei2nUg858t;
+			return rarityColor4;
 		}
 		set
 		{
-			ei2nUg858t = value;
+			rarityColor4 = value;
 			RaisePropertyChanged("RarityColor4");
 		}
 	}
@@ -384,26 +368,26 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (cGFnlYTjft == null)
+			if (rarityColor5 == null)
 			{
 				switch (ThemeTypeChina)
 				{
 				case ThemeType.VS2019Blue:
-					cGFnlYTjft = ko2n4sYnoE("#FF6666");
+					rarityColor5 = CreateBrush("#FF6666");
 					break;
 				case ThemeType.VS2019Dark:
-					cGFnlYTjft = ko2n4sYnoE("#FF6666");
+					rarityColor5 = CreateBrush("#FF6666");
 					break;
 				case ThemeType.VS2019Light:
-					cGFnlYTjft = ko2n4sYnoE("#FF6666");
+					rarityColor5 = CreateBrush("#FF6666");
 					break;
 				}
 			}
-			return cGFnlYTjft;
+			return rarityColor5;
 		}
 		set
 		{
-			cGFnlYTjft = value;
+			rarityColor5 = value;
 			RaisePropertyChanged("RarityColor5");
 		}
 	}
@@ -413,11 +397,11 @@ public class TreeColorConfig : BindableBase
 	{
 		get
 		{
-			if (mUenfE5FVi == null)
+			if (resetCommand == null)
 			{
-				mUenfE5FVi = new DelegateCommand(Reset);
+				resetCommand = new DelegateCommand(Reset);
 			}
-			return mUenfE5FVi;
+			return resetCommand;
 		}
 	}
 
@@ -426,9 +410,9 @@ public class TreeColorConfig : BindableBase
 		ThemeTypeChina = themeTypeChina;
 	}
 
-	private SolidColorBrush ko2n4sYnoE(string P_0)
+	private SolidColorBrush CreateBrush(string color)
 	{
-		return new SolidColorBrush((Color)ColorConverter.ConvertFromString(P_0));
+		return new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
 	}
 
 	public void Reset()

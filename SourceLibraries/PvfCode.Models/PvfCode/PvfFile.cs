@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using Collections.Pooled;
 using PvfCode.LoggerBase;
@@ -17,143 +16,35 @@ namespace PvfCode;
 
 public class PvfFile : ModelBase, ICloneable
 {
-	[CompilerGenerated]
-	private int? Co8k8I7ge4;
+	private bool isUpdated;
 
-	[CompilerGenerated]
-	private byte[] ncekutnfQD;
+	private bool isNewFile;
 
-	[CompilerGenerated]
-	private byte[] BJDk5ie21V;
+	public int? ItemCode { get; set; }
 
-	[CompilerGenerated]
-	private int FKhkpbAiG2;
-
-	[CompilerGenerated]
-	private long tF1kDnRAXT;
-
-	[CompilerGenerated]
-	private uint QUPk3oJTaA;
-
-	[CompilerGenerated]
-	private uint pdNkHHA1t2;
-
-	private bool b8Ek71DTBv;
-
-	[CompilerGenerated]
-	private string? En8kcCLRpt;
-
-	private bool NHJkg6h4rq;
-
-	public int? ItemCode
-	{
-		[CompilerGenerated]
-		get
-		{
-			return Co8k8I7ge4;
-		}
-		[CompilerGenerated]
-		set
-		{
-			Co8k8I7ge4 = value;
-		}
-	}
-
-	public byte[] FileNameBytes
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ncekutnfQD;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ncekutnfQD = value;
-		}
-	}
+	public byte[] FileNameBytes { get; set; }
 
 	public int FileNameLen => FileNameBytes.Length;
 
-	public byte[] Data
-	{
-		[CompilerGenerated]
-		get
-		{
-			return BJDk5ie21V;
-		}
-		[CompilerGenerated]
-		private set
-		{
-			BJDk5ie21V = value;
-		}
-	}
+	public byte[] Data { get; private set; }
 
-	public int DataLen
-	{
-		[CompilerGenerated]
-		get
-		{
-			return FKhkpbAiG2;
-		}
-		[CompilerGenerated]
-		set
-		{
-			FKhkpbAiG2 = value;
-		}
-	}
+	public int DataLen { get; set; }
 
-	public long Offset
-	{
-		[CompilerGenerated]
-		get
-		{
-			return tF1kDnRAXT;
-		}
-		[CompilerGenerated]
-		set
-		{
-			tF1kDnRAXT = value;
-		}
-	}
+	public long Offset { get; set; }
 
-	public uint Checksum
-	{
-		[CompilerGenerated]
-		get
-		{
-			return QUPk3oJTaA;
-		}
-		[CompilerGenerated]
-		set
-		{
-			QUPk3oJTaA = value;
-		}
-	}
+	public uint Checksum { get; set; }
 
-	public uint FileNameBytesChecksum
-	{
-		[CompilerGenerated]
-		get
-		{
-			return pdNkHHA1t2;
-		}
-		[CompilerGenerated]
-		set
-		{
-			pdNkHHA1t2 = value;
-		}
-	}
+	public uint FileNameBytesChecksum { get; set; }
 
 	public bool IsUpdated
 	{
 		get
 		{
-			return b8Ek71DTBv;
+			return isUpdated;
 		}
 		set
 		{
-			b8Ek71DTBv = value;
+			isUpdated = value;
 			DoNotify("IsUpdated");
 		}
 	}
@@ -205,19 +96,7 @@ public class PvfFile : ModelBase, ICloneable
 		}
 	}
 
-	public string? SkillLstItemPath
-	{
-		[CompilerGenerated]
-		get
-		{
-			return En8kcCLRpt;
-		}
-		[CompilerGenerated]
-		set
-		{
-			En8kcCLRpt = value;
-		}
-	}
+	public string? SkillLstItemPath { get; set; }
 
 	public bool IsScriptFile
 	{
@@ -250,11 +129,11 @@ public class PvfFile : ModelBase, ICloneable
 	{
 		get
 		{
-			return NHJkg6h4rq;
+			return isNewFile;
 		}
 		set
 		{
-			NHJkg6h4rq = value;
+			isNewFile = value;
 			DoNotify("IsNewFile");
 		}
 	}
@@ -610,7 +489,7 @@ public class PvfFile : ModelBase, ICloneable
 		}
 		if (FileType == PvfFileType.shp)
 		{
-			return j6LknFYrPT(pvf, out icon);
+			return GetShopNpcIcon(pvf, out icon);
 		}
 		int stringTableId;
 		switch (FileType)
@@ -660,9 +539,9 @@ public class PvfFile : ModelBase, ICloneable
 		return false;
 	}
 
-	private bool j6LknFYrPT(PvfPack P_0, out KeyValuePair<string, int>? icon)
+	private bool GetShopNpcIcon(PvfPack pvf, out KeyValuePair<string, int>? icon)
 	{
-		if (GetNpcId(P_0, out var npcId) && P_0.ListFileTable.CodeDic.TryGetValue("npc", out Dictionary<int, LstItem> value) && value.TryGetValue(npcId, out var value2) && P_0.FileList.TryGetValue(value2.FullPath, out PvfFile value3) && value3.GetIcon(P_0, out icon))
+		if (GetNpcId(pvf, out var npcId) && pvf.ListFileTable.CodeDic.TryGetValue("npc", out Dictionary<int, LstItem> value) && value.TryGetValue(npcId, out var value2) && pvf.FileList.TryGetValue(value2.FullPath, out PvfFile value3) && value3.GetIcon(pvf, out icon))
 		{
 			return true;
 		}
@@ -911,12 +790,12 @@ public class PvfFile : ModelBase, ICloneable
 
 	public bool GetName(PvfPack pvf, Name_Type name_Type, out string? name)
 	{
-		return GetNameText(pvf, IBukkpNWgb(name_Type), out name);
+		return GetNameText(pvf, GetNameSection(name_Type), out name);
 	}
 
-	private string IBukkpNWgb(Name_Type P_0)
+	private string GetNameSection(Name_Type nameType)
 	{
-		return P_0 switch
+		return nameType switch
 		{
 			Name_Type.name => "[name]", 
 			Name_Type.name2 => "[name2]", 
@@ -1390,7 +1269,7 @@ public class PvfFile : ModelBase, ICloneable
 	public bool GetUsableJob(PvfPack pvf, out List<JobType> jobs)
 	{
 		jobs = new List<JobType>();
-		if (WdBkEL22ed(pvf, "[usable job]", out List<string> list))
+		if (GetSectionStringArray(pvf, "[usable job]", out List<string> list))
 		{
 			foreach (string item in list)
 			{
@@ -2161,7 +2040,7 @@ public class PvfFile : ModelBase, ICloneable
 		}
 		if (indexOut + 5 < DataLen)
 		{
-			val = AfCkLNLLKK(indexOut);
+			val = GetNumericValue(indexOut);
 			return true;
 		}
 		return false;
@@ -2221,7 +2100,7 @@ public class PvfFile : ModelBase, ICloneable
 		}
 		if (indexOut + 10 < DataLen)
 		{
-			val = new KeyValuePair<string, string>(AfCkLNLLKK(indexOut), AfCkLNLLKK(indexOut + 5));
+			val = new KeyValuePair<string, string>(GetNumericValue(indexOut), GetNumericValue(indexOut + 5));
 			return true;
 		}
 		return false;
@@ -2289,12 +2168,12 @@ public class PvfFile : ModelBase, ICloneable
 		return false;
 	}
 
-	private string? AfCkLNLLKK(int P_0)
+	private string? GetNumericValue(int index)
 	{
-		return (ScriptType)Data[P_0 + 5] switch
+		return (ScriptType)Data[index + 5] switch
 		{
-			ScriptType.Int => BitConverter.ToInt32(Data, P_0 + 6).ToString(), 
-			ScriptType.Float => DataHelper.FormatFloat(BitConverter.ToSingle(Data, P_0 + 6)), 
+			ScriptType.Int => BitConverter.ToInt32(Data, index + 6).ToString(),
+			ScriptType.Float => DataHelper.FormatFloat(BitConverter.ToSingle(Data, index + 6)),
 			_ => null, 
 		};
 	}
@@ -2338,14 +2217,14 @@ public class PvfFile : ModelBase, ICloneable
 		return items.Count > 0;
 	}
 
-	private bool WdBkEL22ed(PvfPack P_0, string P_1, out List<string> P_2)
+	private bool GetSectionStringArray(PvfPack pvf, string sectionName, out List<string> items)
 	{
-		P_2 = new List<string>();
+		items = new List<string>();
 		if (Data == null || DataLen < 7)
 		{
 			return false;
 		}
-		int stringTableId = P_0.Strtable.GetStringTableId(P_1);
+		int stringTableId = pvf.Strtable.GetStringTableId(sectionName);
 		if (stringTableId == -1)
 		{
 			return false;
@@ -2365,16 +2244,16 @@ public class PvfFile : ModelBase, ICloneable
 			{
 				if (Data[j] == 5)
 				{
-					return P_2.Count > 0;
+					return items.Count > 0;
 				}
 				if (j < DataLen && Data[j] == 7)
 				{
-					P_2.Add(P_0.Strtable.GetStringItem(BitConverter.ToInt32(Data, j + 1)));
+					items.Add(pvf.Strtable.GetStringItem(BitConverter.ToInt32(Data, j + 1)));
 				}
 			}
-			return P_2.Count > 0;
+			return items.Count > 0;
 		}
-		return P_2.Count > 0;
+		return items.Count > 0;
 	}
 
 	public bool GetSectionTypeIsStrArray(PvfPack pvf, string sectionName, out List<string> items)
@@ -2448,12 +2327,7 @@ public class PvfFile : ModelBase, ICloneable
 				Ilogger ilogger = AppSetting.Instance.GetIlogger();
 				if (ilogger != null)
 				{
-					DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(11, 2);
-					defaultInterpolatedStringHandler.AppendLiteral("未能识别的道具类型 ");
-					defaultInterpolatedStringHandler.AppendFormatted(stringItem);
-					defaultInterpolatedStringHandler.AppendLiteral("\t");
-					defaultInterpolatedStringHandler.AppendFormatted(num);
-					ilogger.Error(defaultInterpolatedStringHandler.ToStringAndClear());
+					ilogger.Error($"未能识别的道具类型 {stringItem}\t{num}");
 				}
 				return false;
 			}

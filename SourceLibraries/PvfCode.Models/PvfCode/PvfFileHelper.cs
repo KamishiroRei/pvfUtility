@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using PvfCode.Models.Pvf;
 using PvfCode.Models.Pvf.Enums;
 using PvfCode.Models.Pvf.Enums.Stackable;
@@ -10,43 +9,43 @@ namespace PvfCode;
 
 public static class PvfFileHelper
 {
-	private static Dictionary<string, string> vjAkAZs21N;
+	private static Dictionary<string, string> avatarSelectAbilityCommandTypes;
 
 	public static Dictionary<string, string> avatar_select_abilityCommandTypeDic
 	{
 		get
 		{
-			if (vjAkAZs21N == null)
+			if (avatarSelectAbilityCommandTypes == null)
 			{
-				vjAkAZs21N = new Dictionary<string, string>();
-				vjAkAZs21N.Add("[ACTIVESTATUS_TOLERANCE_ALL]", " 所有异常状态抗性");
-				vjAkAZs21N.Add("[ACTIVESTATUS_TOLERANCE_STUCK]", " 回避率");
-				vjAkAZs21N.Add("[ATTACK_SPEED]", " 攻击速度");
-				vjAkAZs21N.Add("[CAST_SPEED]", " 施放速度");
-				vjAkAZs21N.Add("[ELEMENT_TOLERANCE_DARK]", " 暗属性抗性");
-				vjAkAZs21N.Add("[ELEMENT_TOLERANCE_FIRE]", " 火属性抗性");
-				vjAkAZs21N.Add("[ELEMENT_TOLERANCE_LIGHT]", " 光属性抗性");
-				vjAkAZs21N.Add("[ELEMENT_TOLERANCE_WATER]", " 冰属性抗性");
-				vjAkAZs21N.Add("[EQUIPMENT_MAGICAL_DEFENSE]", " 魔法防御力");
-				vjAkAZs21N.Add("[EQUIPMENT_PHYSICAL_DEFENSE]", " 物理防御力");
-				vjAkAZs21N.Add("[HIT_RECOVERY]", " 硬直");
-				vjAkAZs21N.Add("[HP MAX]", " HP最大值");
-				vjAkAZs21N.Add("[HP_REGENRATE]", " 每分钟恢复HP");
-				vjAkAZs21N.Add("[INVENTORY_MAX_WEIGHT]", " 最大负重");
-				vjAkAZs21N.Add("[JUMP_POWER]", " 跳跃力");
-				vjAkAZs21N.Add("[MAGICAL ABSOLUTE DEFENSE]", " 魔法伤害追加减少");
-				vjAkAZs21N.Add("[MAGICAL_ATTACK]", " 智力");
-				vjAkAZs21N.Add("[MAGICAL_DEFENSE]", " 精神");
-				vjAkAZs21N.Add("[MOVE_SPEED]", " 移动速度");
-				vjAkAZs21N.Add("[MP MAX]", " MP最大值");
-				vjAkAZs21N.Add("[MP_REGENRATE]", " 每分钟恢复MP");
-				vjAkAZs21N.Add("[PHYSICAL ABSOLUTE DEFENSE]", " 物理伤害追加减少");
-				vjAkAZs21N.Add("[PHYSICAL_ATTACK]", " 力量");
-				vjAkAZs21N.Add("[PHYSICAL_DEFENSE]", " 体力");
-				vjAkAZs21N.Add("[STUCK ON ATTACK]", " 命中率");
-				vjAkAZs21N.Add("[SKILL_LEVEL]", " 技能等级提升");
+				avatarSelectAbilityCommandTypes = new Dictionary<string, string>();
+				avatarSelectAbilityCommandTypes.Add("[ACTIVESTATUS_TOLERANCE_ALL]", " 所有异常状态抗性");
+				avatarSelectAbilityCommandTypes.Add("[ACTIVESTATUS_TOLERANCE_STUCK]", " 回避率");
+				avatarSelectAbilityCommandTypes.Add("[ATTACK_SPEED]", " 攻击速度");
+				avatarSelectAbilityCommandTypes.Add("[CAST_SPEED]", " 施放速度");
+				avatarSelectAbilityCommandTypes.Add("[ELEMENT_TOLERANCE_DARK]", " 暗属性抗性");
+				avatarSelectAbilityCommandTypes.Add("[ELEMENT_TOLERANCE_FIRE]", " 火属性抗性");
+				avatarSelectAbilityCommandTypes.Add("[ELEMENT_TOLERANCE_LIGHT]", " 光属性抗性");
+				avatarSelectAbilityCommandTypes.Add("[ELEMENT_TOLERANCE_WATER]", " 冰属性抗性");
+				avatarSelectAbilityCommandTypes.Add("[EQUIPMENT_MAGICAL_DEFENSE]", " 魔法防御力");
+				avatarSelectAbilityCommandTypes.Add("[EQUIPMENT_PHYSICAL_DEFENSE]", " 物理防御力");
+				avatarSelectAbilityCommandTypes.Add("[HIT_RECOVERY]", " 硬直");
+				avatarSelectAbilityCommandTypes.Add("[HP MAX]", " HP最大值");
+				avatarSelectAbilityCommandTypes.Add("[HP_REGENRATE]", " 每分钟恢复HP");
+				avatarSelectAbilityCommandTypes.Add("[INVENTORY_MAX_WEIGHT]", " 最大负重");
+				avatarSelectAbilityCommandTypes.Add("[JUMP_POWER]", " 跳跃力");
+				avatarSelectAbilityCommandTypes.Add("[MAGICAL ABSOLUTE DEFENSE]", " 魔法伤害追加减少");
+				avatarSelectAbilityCommandTypes.Add("[MAGICAL_ATTACK]", " 智力");
+				avatarSelectAbilityCommandTypes.Add("[MAGICAL_DEFENSE]", " 精神");
+				avatarSelectAbilityCommandTypes.Add("[MOVE_SPEED]", " 移动速度");
+				avatarSelectAbilityCommandTypes.Add("[MP MAX]", " MP最大值");
+				avatarSelectAbilityCommandTypes.Add("[MP_REGENRATE]", " 每分钟恢复MP");
+				avatarSelectAbilityCommandTypes.Add("[PHYSICAL ABSOLUTE DEFENSE]", " 物理伤害追加减少");
+				avatarSelectAbilityCommandTypes.Add("[PHYSICAL_ATTACK]", " 力量");
+				avatarSelectAbilityCommandTypes.Add("[PHYSICAL_DEFENSE]", " 体力");
+				avatarSelectAbilityCommandTypes.Add("[STUCK ON ATTACK]", " 命中率");
+				avatarSelectAbilityCommandTypes.Add("[SKILL_LEVEL]", " 技能等级提升");
 			}
-			return vjAkAZs21N;
+			return avatarSelectAbilityCommandTypes;
 		}
 	}
 
@@ -770,12 +769,7 @@ public static class PvfFileHelper
 				return true;
 			}
 		}
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(6, 2);
-		defaultInterpolatedStringHandler.AppendFormatted(cmd);
-		defaultInterpolatedStringHandler.AppendLiteral("\t");
-		defaultInterpolatedStringHandler.AppendFormatted(num);
-		defaultInterpolatedStringHandler.AppendLiteral(" 未能识别");
-		err = defaultInterpolatedStringHandler.ToStringAndClear();
+		err = $"{cmd}\t{num} 未能识别";
 		return false;
 	}
 
