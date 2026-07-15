@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,81 +20,6 @@ namespace PvfCode.Models.Options.Editor;
 [JsonObject(MemberSerialization.OptOut)]
 public class TextEditConfig : ModelBase
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass50_0
-	{
-		public CodeCompletionData Upw5df1MtG;
-
-		public _003C_003Ec__DisplayClass50_0()
-		{
-		}
-
-		internal bool QIi5Jce35m(CodeCompletionData it)
-		{
-			if (it.Text == Upw5df1MtG.Text)
-			{
-				return it.CodeCompletScriptType == Upw5df1MtG.CodeCompletScriptType;
-			}
-			return false;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass51_0
-	{
-		public CodeCompletionData uU75O3pq8C;
-
-		public _003C_003Ec__DisplayClass51_0()
-		{
-		}
-
-		internal bool JOv51NLUd9(CodeCompletionData it)
-		{
-			if (it.Text == uU75O3pq8C.Text)
-			{
-				return it.CodeCompletScriptType == uU75O3pq8C.CodeCompletScriptType;
-			}
-			return false;
-		}
-
-		internal bool cPk5GO4XBa(CodeCompletionData it)
-		{
-			if (it.Text == uU75O3pq8C.Text)
-			{
-				return it.CodeCompletScriptType == uU75O3pq8C.CodeCompletScriptType;
-			}
-			return false;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass52_0
-	{
-		public CodeCompletionData TXh5jqKZ02;
-
-		public _003C_003Ec__DisplayClass52_0()
-		{
-		}
-
-		internal bool YiF5rE6ijf(CodeCompletionData it)
-		{
-			if (it.HighlightingType == TXh5jqKZ02.HighlightingType && it.Text == TXh5jqKZ02.Text)
-			{
-				return it.CodeCompletScriptType == TXh5jqKZ02.CodeCompletScriptType;
-			}
-			return false;
-		}
-
-		internal bool Bhf5eRdPky(CodeCompletionData it)
-		{
-			if (it.HighlightingType == TXh5jqKZ02.HighlightingType && it.Text == TXh5jqKZ02.Text)
-			{
-				return it.CodeCompletScriptType == TXh5jqKZ02.CodeCompletScriptType;
-			}
-			return false;
-		}
-	}
-
 	private EncodingType? TcZEwPsTmd;
 
 	private bool? FZvEoySkNO;
@@ -698,45 +622,38 @@ public class TextEditConfig : ModelBase
 	public void InitCompletionDatas(List<CodeCompletionData> items)
 	{
 		CompletionDatas.AddRange(CompletionDatasDisk);
-		using List<CodeCompletionData>.Enumerator enumerator = items.GetEnumerator();
-		while (enumerator.MoveNext())
+		foreach (CodeCompletionData item in items)
 		{
-			_003C_003Ec__DisplayClass50_0 CS_0024_003C_003E8__locals4 = new _003C_003Ec__DisplayClass50_0();
-			CS_0024_003C_003E8__locals4.Upw5df1MtG = enumerator.Current;
-			if (CompletionDatas.FindIndex((CodeCompletionData it) => it.Text == CS_0024_003C_003E8__locals4.Upw5df1MtG.Text && it.CodeCompletScriptType == CS_0024_003C_003E8__locals4.Upw5df1MtG.CodeCompletScriptType) == -1)
+			if (CompletionDatas.FindIndex(existing => existing.Text == item.Text && existing.CodeCompletScriptType == item.CodeCompletScriptType) == -1)
 			{
-				CompletionDatas.Add(CS_0024_003C_003E8__locals4.Upw5df1MtG);
+				CompletionDatas.Add(item);
 			}
 		}
 	}
 
 	public void SaveCompletionDatas(CodeCompletionData data)
 	{
-		_003C_003Ec__DisplayClass51_0 CS_0024_003C_003E8__locals7 = new _003C_003Ec__DisplayClass51_0();
-		CS_0024_003C_003E8__locals7.uU75O3pq8C = data;
-		int num = CompletionDatasDisk.FindIndex((CodeCompletionData it) => it.Text == CS_0024_003C_003E8__locals7.uU75O3pq8C.Text && it.CodeCompletScriptType == CS_0024_003C_003E8__locals7.uU75O3pq8C.CodeCompletScriptType);
+		int num = CompletionDatasDisk.FindIndex(item => item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
 		if (num != -1)
 		{
 			CompletionDatasDisk.RemoveAt(num);
 		}
-		CompletionDatasDisk.Add(CS_0024_003C_003E8__locals7.uU75O3pq8C);
-		num = CompletionDatas.FindIndex((CodeCompletionData it) => it.Text == CS_0024_003C_003E8__locals7.uU75O3pq8C.Text && it.CodeCompletScriptType == CS_0024_003C_003E8__locals7.uU75O3pq8C.CodeCompletScriptType);
+		CompletionDatasDisk.Add(data);
+		num = CompletionDatas.FindIndex(item => item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
 		if (num != -1)
 		{
 			CompletionDatas.RemoveAt(num);
 		}
-		CompletionDatas.Add(CS_0024_003C_003E8__locals7.uU75O3pq8C);
+		CompletionDatas.Add(data);
 	}
 
 	public bool DeleteCompletionData(CodeCompletionData data)
 	{
-		_003C_003Ec__DisplayClass52_0 CS_0024_003C_003E8__locals7 = new _003C_003Ec__DisplayClass52_0();
-		CS_0024_003C_003E8__locals7.TXh5jqKZ02 = data;
-		int num = CompletionDatasDisk.FindIndex((CodeCompletionData it) => it.HighlightingType == CS_0024_003C_003E8__locals7.TXh5jqKZ02.HighlightingType && it.Text == CS_0024_003C_003E8__locals7.TXh5jqKZ02.Text && it.CodeCompletScriptType == CS_0024_003C_003E8__locals7.TXh5jqKZ02.CodeCompletScriptType);
+		int num = CompletionDatasDisk.FindIndex(item => item.HighlightingType == data.HighlightingType && item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
 		if (num != -1)
 		{
 			CompletionDatasDisk.RemoveAt(num);
-			num = CompletionDatas.FindIndex((CodeCompletionData it) => it.HighlightingType == CS_0024_003C_003E8__locals7.TXh5jqKZ02.HighlightingType && it.Text == CS_0024_003C_003E8__locals7.TXh5jqKZ02.Text && it.CodeCompletScriptType == CS_0024_003C_003E8__locals7.TXh5jqKZ02.CodeCompletScriptType);
+			num = CompletionDatas.FindIndex(item => item.HighlightingType == data.HighlightingType && item.Text == data.Text && item.CodeCompletScriptType == data.CodeCompletScriptType);
 			if (num != -1)
 			{
 				CompletionDatas.RemoveAt(num);

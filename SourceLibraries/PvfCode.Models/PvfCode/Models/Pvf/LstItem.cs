@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace PvfCode.Models.Pvf;
 
 public class LstItem
@@ -31,12 +29,7 @@ public class LstItem
 
 	public string ToLstRow()
 	{
-		DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(3, 2);
-		defaultInterpolatedStringHandler.AppendFormatted(ItemCode);
-		defaultInterpolatedStringHandler.AppendLiteral("\t`");
-		defaultInterpolatedStringHandler.AppendFormatted(ItemPath);
-		defaultInterpolatedStringHandler.AppendLiteral("`");
-		return defaultInterpolatedStringHandler.ToStringAndClear();
+		return $"{ItemCode}\t`{ItemPath}`";
 	}
 
 	public LstItem(string header, string itemPath, int itemCode)

@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -305,14 +304,7 @@ public class Stringtable
 		{
 			if (item != null)
 			{
-				StringBuilder stringBuilder2 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(5, 2, stringBuilder2);
-				handler.AppendLiteral("[");
-				handler.AppendFormatted(item.Index);
-				handler.AppendLiteral("]\t`");
-				handler.AppendFormatted(item.Text.Replace("\r\n", "\\n"));
-				handler.AppendLiteral("`");
-				stringBuilder2.AppendLine(ref handler);
+				stringBuilder.AppendLine($"[{item.Index}]\t`{item.Text.Replace("\r\n", "\\n")}`");
 			}
 		}
 		return Task.FromResult(stringBuilder.ToString());

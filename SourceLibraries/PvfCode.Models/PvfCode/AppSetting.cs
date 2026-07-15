@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -28,92 +27,59 @@ public class AppSetting : ModelBase
 {
 	public static string ConfigPwd;
 
-	[CompilerGenerated]
-	private string EHSYbKoRS;
+	private PvfFilePreviewOptions pvfFilePreviewOptions;
 
-	private PvfFilePreviewOptions dBRJ2UuIs;
+	private GMToolOptions gmToolOptions;
 
-	private GMToolOptions OB2drtANm;
+	private static AppSetting instance;
 
-	private static AppSetting BpI1YHVB4;
+	private AniDesignerConfig? aniDesigner;
 
-	private AniDesignerConfig? fDfGO1HnE;
+	private LangType? currentLang;
 
-	private LangType? OJdOaEIOi;
+	private LuanguageOptions languageOptions;
 
-	private LuanguageOptions tHJrh0jY4;
+	private bool? childWindowAttachmentMainWindow;
 
-	private bool? WGTekXa67;
+	private double fontSize;
 
-	private double sDpjtZBdq;
+	private GameOptions gameOptions;
 
-	[CompilerGenerated]
-	private List<double>? SecxiJm0v;
+	private ImagePacks2Options imagePacks2Options;
 
-	[CompilerGenerated]
-	private bool? rLUmFjWyu;
+	private PvfDocumentOptions pvfDocumentOptions;
 
-	private GameOptions qFnSwiUVO;
+	private StoreOptions storeOptions;
 
-	private ImagePacks2Options AoIBlg1ec;
+	private bool uploadScriptFileContentFormatting;
 
-	private PvfDocumentOptions GGB4mlnIw;
+	private WindowSizeConfigOptions windowSizeConfigOptions;
 
-	private StoreOptions ddZCGW7eZ;
+	private MacroGroup macroGroup;
 
-	[CompilerGenerated]
-	private string KX5vweOlX;
+	private BookMarkGroupDto bookMarkGroup;
 
-	private bool IZcbgZO7g;
+	private PvfOptions pvfConfig;
 
-	private WindowSizeConfigOptions hn3V5f4QM;
+	private TextEditConfig editConfig;
 
-	private MacroGroup iEcPM3FqD;
+	private TreeConfig treeSetting;
 
-	[CompilerGenerated]
-	private LoginAccountRes gVIFXSdt9;
+	private PathConfigs pathConfig;
 
-	private BookMarkGroupDto inrXQ1AyK;
+	private ClientApiOptions clientApiOptions;
 
-	private PvfOptions yEANefHAh;
+	private PublicSearchServiceOptions publicSearchServiceOptions;
 
-	private TextEditConfig WXLiqPPXl;
+	private ThemeType? nowThemeType;
 
-	private TreeConfig zB8Mj20GJ;
+	private bool? mainWindowIsEnabled;
 
-	private PathConfigs av6aSufEK;
+	private InsertListOrder insertIndependentDropListOrder;
 
-	private ClientApiOptions Cr6IoWBAp;
+	private ICommand saveCommand;
 
-	private PublicSearchServiceOptions aaXURtJOi;
-
-	[CompilerGenerated]
-	private string vf5lRd8Fh;
-
-	private ThemeType? pWuf2AIIg;
-
-	private bool? KBGhlOGL0;
-
-	private InsertListOrder k4gTDxt4T;
-
-	private ICommand g2I0ZxSLo;
-
-	[CompilerGenerated]
-	private string ylVsWX1DC;
-
-	public string Version
-	{
-		[CompilerGenerated]
-		get
-		{
-			return EHSYbKoRS;
-		}
-		[CompilerGenerated]
-		set
-		{
-			EHSYbKoRS = value;
-		}
-	}
+	public string Version { get; set; }
 
 	public static string AppBasePath
 	{
@@ -131,15 +97,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (dBRJ2UuIs == null)
+			if (pvfFilePreviewOptions == null)
 			{
-				dBRJ2UuIs = new PvfFilePreviewOptions();
+				pvfFilePreviewOptions = new PvfFilePreviewOptions();
 			}
-			return dBRJ2UuIs;
+			return pvfFilePreviewOptions;
 		}
 		set
 		{
-			dBRJ2UuIs = value;
+			pvfFilePreviewOptions = value;
 		}
 	}
 
@@ -147,15 +113,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (OB2drtANm == null)
+			if (gmToolOptions == null)
 			{
-				OB2drtANm = new GMToolOptions();
+				gmToolOptions = new GMToolOptions();
 			}
-			return OB2drtANm;
+			return gmToolOptions;
 		}
 		set
 		{
-			OB2drtANm = value;
+			gmToolOptions = value;
 		}
 	}
 
@@ -163,15 +129,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (BpI1YHVB4 == null)
+			if (instance == null)
 			{
-				BpI1YHVB4 = UrM7ft5DD();
+				instance = LoadSetting();
 			}
-			return BpI1YHVB4;
+			return instance;
 		}
 		set
 		{
-			BpI1YHVB4 = value;
+			instance = value;
 		}
 	}
 
@@ -179,15 +145,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (fDfGO1HnE == null)
+			if (aniDesigner == null)
 			{
-				fDfGO1HnE = new AniDesignerConfig();
+				aniDesigner = new AniDesignerConfig();
 			}
-			return fDfGO1HnE;
+			return aniDesigner;
 		}
 		set
 		{
-			fDfGO1HnE = value;
+			aniDesigner = value;
 			DoNotify("AniDesigner");
 		}
 	}
@@ -196,15 +162,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (!OJdOaEIOi.HasValue)
+			if (!currentLang.HasValue)
 			{
-				OJdOaEIOi = LangType.中文简体;
+				currentLang = LangType.中文简体;
 			}
-			return OJdOaEIOi.Value;
+			return currentLang.Value;
 		}
 		set
 		{
-			OJdOaEIOi = value;
+			currentLang = value;
 			DoNotify("CurrentLang");
 		}
 	}
@@ -213,15 +179,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (tHJrh0jY4 == null)
+			if (languageOptions == null)
 			{
-				tHJrh0jY4 = new LuanguageOptions();
+				languageOptions = new LuanguageOptions();
 			}
-			return tHJrh0jY4;
+			return languageOptions;
 		}
 		set
 		{
-			tHJrh0jY4 = value;
+			languageOptions = value;
 		}
 	}
 
@@ -229,15 +195,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (!WGTekXa67.HasValue)
+			if (!childWindowAttachmentMainWindow.HasValue)
 			{
-				WGTekXa67 = true;
+				childWindowAttachmentMainWindow = true;
 			}
-			return WGTekXa67.Value;
+			return childWindowAttachmentMainWindow.Value;
 		}
 		set
 		{
-			WGTekXa67 = value;
+			childWindowAttachmentMainWindow = value;
 			DoNotify("ChildWindowAttachmentMainWindow");
 		}
 	}
@@ -246,60 +212,36 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (!(sDpjtZBdq < 3.0))
+			if (!(fontSize < 3.0))
 			{
-				return sDpjtZBdq;
+				return fontSize;
 			}
 			return 12.0;
 		}
 		set
 		{
-			sDpjtZBdq = value;
+			fontSize = value;
 			DoNotify("FontSize");
 		}
 	}
 
-	public List<double>? FontSizeList
-	{
-		[CompilerGenerated]
-		get
-		{
-			return SecxiJm0v;
-		}
-		[CompilerGenerated]
-		set
-		{
-			SecxiJm0v = value;
-		}
-	}
+	public List<double>? FontSizeList { get; set; }
 
-	public bool? FirstTime
-	{
-		[CompilerGenerated]
-		get
-		{
-			return rLUmFjWyu;
-		}
-		[CompilerGenerated]
-		set
-		{
-			rLUmFjWyu = value;
-		}
-	}
+	public bool? FirstTime { get; set; }
 
 	public GameOptions GameOptions
 	{
 		get
 		{
-			if (qFnSwiUVO == null)
+			if (gameOptions == null)
 			{
-				qFnSwiUVO = new GameOptions();
+				gameOptions = new GameOptions();
 			}
-			return qFnSwiUVO;
+			return gameOptions;
 		}
 		set
 		{
-			qFnSwiUVO = value;
+			gameOptions = value;
 		}
 	}
 
@@ -307,15 +249,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (AoIBlg1ec == null)
+			if (imagePacks2Options == null)
 			{
-				AoIBlg1ec = new ImagePacks2Options();
+				imagePacks2Options = new ImagePacks2Options();
 			}
-			return AoIBlg1ec;
+			return imagePacks2Options;
 		}
 		set
 		{
-			AoIBlg1ec = value;
+			imagePacks2Options = value;
 		}
 	}
 
@@ -323,15 +265,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (GGB4mlnIw == null)
+			if (pvfDocumentOptions == null)
 			{
-				GGB4mlnIw = new PvfDocumentOptions();
+				pvfDocumentOptions = new PvfDocumentOptions();
 			}
-			return GGB4mlnIw;
+			return pvfDocumentOptions;
 		}
 		set
 		{
-			GGB4mlnIw = value;
+			pvfDocumentOptions = value;
 		}
 	}
 
@@ -339,41 +281,29 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (ddZCGW7eZ == null)
+			if (storeOptions == null)
 			{
-				ddZCGW7eZ = new StoreOptions();
+				storeOptions = new StoreOptions();
 			}
-			return ddZCGW7eZ;
+			return storeOptions;
 		}
 		set
 		{
-			ddZCGW7eZ = value;
+			storeOptions = value;
 		}
 	}
 
-	public string MAC
-	{
-		[CompilerGenerated]
-		get
-		{
-			return KX5vweOlX;
-		}
-		[CompilerGenerated]
-		set
-		{
-			KX5vweOlX = value;
-		}
-	}
+	public string MAC { get; set; }
 
 	public bool UploadScriptFileContentFormatting
 	{
 		get
 		{
-			return IZcbgZO7g;
+			return uploadScriptFileContentFormatting;
 		}
 		set
 		{
-			IZcbgZO7g = value;
+			uploadScriptFileContentFormatting = value;
 			DoNotify("UploadScriptFileContentFormatting");
 		}
 	}
@@ -382,15 +312,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (hn3V5f4QM == null)
+			if (windowSizeConfigOptions == null)
 			{
-				hn3V5f4QM = new WindowSizeConfigOptions();
+				windowSizeConfigOptions = new WindowSizeConfigOptions();
 			}
-			return hn3V5f4QM;
+			return windowSizeConfigOptions;
 		}
 		set
 		{
-			hn3V5f4QM = value;
+			windowSizeConfigOptions = value;
 		}
 	}
 
@@ -398,48 +328,36 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (iEcPM3FqD == null)
+			if (macroGroup == null)
 			{
-				iEcPM3FqD = new MacroGroup();
+				macroGroup = new MacroGroup();
 			}
-			return iEcPM3FqD;
+			return macroGroup;
 		}
 		set
 		{
-			iEcPM3FqD = value;
+			macroGroup = value;
 			DoNotify("MacroGroup");
 		}
 	}
 
 	[JsonIgnore]
-	public LoginAccountRes LoginUser
-	{
-		[CompilerGenerated]
-		get
-		{
-			return gVIFXSdt9;
-		}
-		[CompilerGenerated]
-		set
-		{
-			gVIFXSdt9 = value;
-		}
-	}
+	public LoginAccountRes LoginUser { get; set; }
 
 	[JsonIgnore]
 	public BookMarkGroupDto BookMarkGroup
 	{
 		get
 		{
-			if (inrXQ1AyK == null)
+			if (bookMarkGroup == null)
 			{
-				inrXQ1AyK = new BookMarkGroupDto();
+				bookMarkGroup = new BookMarkGroupDto();
 			}
-			return inrXQ1AyK;
+			return bookMarkGroup;
 		}
 		set
 		{
-			inrXQ1AyK = value;
+			bookMarkGroup = value;
 		}
 	}
 
@@ -447,15 +365,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (yEANefHAh == null)
+			if (pvfConfig == null)
 			{
-				yEANefHAh = new PvfOptions();
+				pvfConfig = new PvfOptions();
 			}
-			return yEANefHAh;
+			return pvfConfig;
 		}
 		set
 		{
-			yEANefHAh = value;
+			pvfConfig = value;
 		}
 	}
 
@@ -463,15 +381,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (WXLiqPPXl == null)
+			if (editConfig == null)
 			{
-				WXLiqPPXl = new TextEditConfig();
+				editConfig = new TextEditConfig();
 			}
-			return WXLiqPPXl;
+			return editConfig;
 		}
 		set
 		{
-			WXLiqPPXl = value;
+			editConfig = value;
 		}
 	}
 
@@ -479,15 +397,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (zB8Mj20GJ == null)
+			if (treeSetting == null)
 			{
-				zB8Mj20GJ = new TreeConfig();
+				treeSetting = new TreeConfig();
 			}
-			return zB8Mj20GJ;
+			return treeSetting;
 		}
 		set
 		{
-			zB8Mj20GJ = value;
+			treeSetting = value;
 		}
 	}
 
@@ -495,15 +413,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (av6aSufEK == null)
+			if (pathConfig == null)
 			{
-				av6aSufEK = new PathConfigs();
+				pathConfig = new PathConfigs();
 			}
-			return av6aSufEK;
+			return pathConfig;
 		}
 		set
 		{
-			av6aSufEK = value;
+			pathConfig = value;
 		}
 	}
 
@@ -511,15 +429,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (Cr6IoWBAp == null)
+			if (clientApiOptions == null)
 			{
-				Cr6IoWBAp = new ClientApiOptions();
+				clientApiOptions = new ClientApiOptions();
 			}
-			return Cr6IoWBAp;
+			return clientApiOptions;
 		}
 		set
 		{
-			Cr6IoWBAp = value;
+			clientApiOptions = value;
 		}
 	}
 
@@ -527,46 +445,34 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (aaXURtJOi == null)
+			if (publicSearchServiceOptions == null)
 			{
-				aaXURtJOi = new PublicSearchServiceOptions();
+				publicSearchServiceOptions = new PublicSearchServiceOptions();
 			}
-			return aaXURtJOi;
+			return publicSearchServiceOptions;
 		}
 		set
 		{
-			aaXURtJOi = value;
+			publicSearchServiceOptions = value;
 		}
 	}
 
 	[JsonIgnore]
-	public string AppName
-	{
-		[CompilerGenerated]
-		get
-		{
-			return vf5lRd8Fh;
-		}
-		[CompilerGenerated]
-		set
-		{
-			vf5lRd8Fh = value;
-		}
-	}
+	public string AppName { get; set; }
 
 	public ThemeType NowThemeType
 	{
 		get
 		{
-			if (!pWuf2AIIg.HasValue)
+			if (!nowThemeType.HasValue)
 			{
-				pWuf2AIIg = ThemeType.VS2019Dark;
+				nowThemeType = ThemeType.VS2019Dark;
 			}
-			return pWuf2AIIg.Value;
+			return nowThemeType.Value;
 		}
 		set
 		{
-			pWuf2AIIg = value;
+			nowThemeType = value;
 			DoNotify("NowThemeType");
 			TreeSetting.ChangedNowTreeColorConfig();
 			EditConfig.ChangedPvfEdiorHighlightingColorOptions();
@@ -578,15 +484,15 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (!KBGhlOGL0.HasValue)
+			if (!mainWindowIsEnabled.HasValue)
 			{
-				KBGhlOGL0 = true;
+				mainWindowIsEnabled = true;
 			}
-			return KBGhlOGL0.Value;
+			return mainWindowIsEnabled.Value;
 		}
 		set
 		{
-			KBGhlOGL0 = value;
+			mainWindowIsEnabled = value;
 			DoNotify("MainWindowIsEnabled");
 		}
 	}
@@ -595,11 +501,11 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			return k4gTDxt4T;
+			return insertIndependentDropListOrder;
 		}
 		set
 		{
-			k4gTDxt4T = value;
+			insertIndependentDropListOrder = value;
 			DoNotify("InsertIndependent_drop_ListOrder");
 		}
 	}
@@ -609,30 +515,17 @@ public class AppSetting : ModelBase
 	{
 		get
 		{
-			if (g2I0ZxSLo == null)
+			if (saveCommand == null)
 			{
-				g2I0ZxSLo = new DelegateCommand(Fu9c3XcWQ);
+				saveCommand = new DelegateCommand(SaveCommandExecuted);
 			}
-			return g2I0ZxSLo;
+			return saveCommand;
 		}
 	}
 
-	public string LangVersion
-	{
-		[CompilerGenerated]
-		get
-		{
-			return ylVsWX1DC;
-		}
-		[CompilerGenerated]
-		set
-		{
-			ylVsWX1DC = value;
-		}
-	}
+	public string LangVersion { get; set; }
 
-	[SpecialName]
-	private static string ItMgEDGMJ()
+	private static string GetConfigPath()
 	{
 		string text = Path.Combine(AppBasePath, "AppConfig.json");
 		FileHelper.CheckDir(Path.GetDirectoryName(text));
@@ -658,15 +551,15 @@ public class AppSetting : ModelBase
 		}
 	}
 
-	private static AppSetting UrM7ft5DD()
+	private static AppSetting LoadSetting()
 	{
 		try
 		{
 			OfflineDataStore.EnsureDefaults();
 			AppSetting setting;
-			if (File.Exists(ItMgEDGMJ()))
+			if (File.Exists(GetConfigPath()))
 			{
-				string text = File.ReadAllText(ItMgEDGMJ());
+				string text = File.ReadAllText(GetConfigPath());
 				if (string.IsNullOrEmpty(text))
 				{
 					setting = new AppSetting();
@@ -686,24 +579,16 @@ public class AppSetting : ModelBase
 		}
 		catch (Exception ex)
 		{
-			string failedPath = ItMgEDGMJ();
+			string failedPath = GetConfigPath();
 			if (File.Exists(failedPath))
 			{
 				string directoryName = Path.GetDirectoryName(failedPath);
 				int num = 0;
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(15, 1);
-				defaultInterpolatedStringHandler.AppendLiteral("AppConfig(");
-				defaultInterpolatedStringHandler.AppendFormatted(num);
-				defaultInterpolatedStringHandler.AppendLiteral(").json");
-				string text2 = Path.Combine(directoryName, defaultInterpolatedStringHandler.ToStringAndClear());
+				string text2 = Path.Combine(directoryName, $"AppConfig({num}).json");
 				while (File.Exists(text2))
 				{
 					num++;
-					DefaultInterpolatedStringHandler defaultInterpolatedStringHandler2 = new DefaultInterpolatedStringHandler(15, 1);
-					defaultInterpolatedStringHandler2.AppendLiteral("AppConfig(");
-					defaultInterpolatedStringHandler2.AppendFormatted(num);
-					defaultInterpolatedStringHandler2.AppendLiteral(").json");
-					text2 = Path.Combine(directoryName, defaultInterpolatedStringHandler2.ToStringAndClear());
+					text2 = Path.Combine(directoryName, $"AppConfig({num}).json");
 				}
 				try
 				{
@@ -712,13 +597,7 @@ public class AppSetting : ModelBase
 				catch (Exception)
 				{
 				}
-				DefaultInterpolatedStringHandler defaultInterpolatedStringHandler3 = new DefaultInterpolatedStringHandler(42, 2);
-				defaultInterpolatedStringHandler3.AppendLiteral("配置文件加载时发生错误：");
-				defaultInterpolatedStringHandler3.AppendFormatted(ex.Message);
-				defaultInterpolatedStringHandler3.AppendLiteral("\r\n\r\n已为您将配置文件备份到：");
-				defaultInterpolatedStringHandler3.AppendFormatted(text2);
-				defaultInterpolatedStringHandler3.AppendLiteral("\r\n\r\n请发送给作者分析修复");
-				MessageBox.Show(defaultInterpolatedStringHandler3.ToStringAndClear(), "错误", MessageBoxButton.OK, MessageBoxImage.Hand);
+				MessageBox.Show($"配置文件加载时发生错误：{ex.Message}\r\n\r\n已为您将配置文件备份到：{text2}\r\n\r\n请发送给作者分析修复", "错误", MessageBoxButton.OK, MessageBoxImage.Hand);
 			}
 			return new AppSetting();
 		}
@@ -731,7 +610,7 @@ public class AppSetting : ModelBase
 			_ = EditConfig.SizeUnitLabel.SelectedItem.DefaultValues;
 			OfflineDataStore.Save(this);
 			string contents = JsonConvert.SerializeObject(this, Formatting.Indented);
-			await File.WriteAllTextAsync(ItMgEDGMJ(), contents);
+			await File.WriteAllTextAsync(GetConfigPath(), contents);
 		}
 		catch (Exception)
 		{
@@ -758,14 +637,14 @@ public class AppSetting : ModelBase
 		return new SolidColorBrush((Color)ColorConverter.ConvertFromString(htmlColor));
 	}
 
-	private async void Fu9c3XcWQ()
+	private async void SaveCommandExecuted()
 	{
 		await SaveSetting();
 	}
 
 	public AppSetting()
 	{
-		SecxiJm0v = new List<double>
+		FontSizeList = new List<double>
 		{
 			3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0,
 			13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 22.0, 24.0,
@@ -773,7 +652,7 @@ public class AppSetting : ModelBase
 			52.0, 56.0, 60.0, 64.0, 68.0, 72.0, 76.0, 80.0, 88.0, 96.0,
 			104.0, 112.0, 120.0, 128.0, 136.0, 144.0
 		};
-		vf5lRd8Fh = "pvfUtility";
+		AppName = "pvfUtility";
 	}
 
 	static AppSetting()
