@@ -60,6 +60,22 @@ $usesDefaultOutputDirectory = [string]::IsNullOrWhiteSpace($OutputDirectory)
 if ($usesDefaultOutputDirectory) {
     $SingleFile = $true
 }
+else {
+    $resolvedOutputDirectory = if ([IO.Path]::IsPathRooted($OutputDirectory)) {
+        [IO.Path]::GetFullPath($OutputDirectory)
+    }
+    else {
+        [IO.Path]::GetFullPath((Join-Path $projectRoot $OutputDirectory))
+    }
+    $publishRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot "artifacts\publish"))
+    $publishPrefix = $publishRoot.TrimEnd(
+        [IO.Path]::DirectorySeparatorChar,
+        [IO.Path]::AltDirectorySeparatorChar
+    ) + [IO.Path]::DirectorySeparatorChar
+    if ($resolvedOutputDirectory.StartsWith($publishPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+        $SingleFile = $true
+    }
+}
 $OutputDirectory = Resolve-SingleFileTestOutputDirectory `
     -ProjectRoot $projectRoot `
     -OutputDirectory $OutputDirectory `
