@@ -133,10 +133,11 @@ public static class PvfSkillTreeColorBehavior
 			return;
 		}
 		initialized = true;
-		EventManager.RegisterClassHandler(typeof(TextBlock), FrameworkElement.LoadedEvent, new RoutedEventHandler(OnTextBlockLoaded), true);
+		// Loaded uses WPF's broadcast path and skips class handlers; SizeChanged also covers virtualized tree cells.
+		EventManager.RegisterClassHandler(typeof(TextBlock), FrameworkElement.SizeChangedEvent, new SizeChangedEventHandler(OnTextBlockSizeChanged), true);
 	}
 
-	private static void OnTextBlockLoaded(object sender, RoutedEventArgs e)
+	private static void OnTextBlockSizeChanged(object sender, SizeChangedEventArgs e)
 	{
 		if (sender is not TextBlock textBlock || textBlock.Name != "treeItemName")
 		{

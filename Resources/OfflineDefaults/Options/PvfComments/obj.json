@@ -15,6 +15,16 @@
     {
       "PvfCommentType": "Section",
       "FileType": "obj",
+      "Section": "attack info",
+      "Title": "攻击信息脚本",
+      "Comment": "攻击信息脚本路径",
+      "OfficialDescription": "",
+      "Closing": false,
+      "Authors": "Lancarus"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "obj",
       "Section": "object destroy condition",
       "Title": "对象销毁条件",
       "Comment": "对象销毁条件",
