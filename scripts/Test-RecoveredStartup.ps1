@@ -12,6 +12,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 . (Join-Path $PSScriptRoot "RecoveredSourceManifest.ps1")
+. (Join-Path $PSScriptRoot "SingleFileSmokeCopy.ps1")
 
 Add-Type -AssemblyName UIAutomationClient
 Add-Type -AssemblyName UIAutomationTypes
@@ -55,16 +56,18 @@ function Get-WindowDiagnosticText {
 }
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
-if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path `
-        $projectRoot `
-        "artifacts\publish\local\$RecoveredWpfResourceMode\$Configuration\$RuntimeIdentifier"
+$usesDefaultOutputDirectory = [string]::IsNullOrWhiteSpace($OutputDirectory)
+if ($usesDefaultOutputDirectory) {
     $SingleFile = $true
 }
-elseif (-not [IO.Path]::IsPathRooted($OutputDirectory)) {
-    $OutputDirectory = Join-Path $projectRoot $OutputDirectory
-}
-$OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory)
+$OutputDirectory = Resolve-SingleFileTestOutputDirectory `
+    -ProjectRoot $projectRoot `
+    -OutputDirectory $OutputDirectory `
+    -Scenario "startup" `
+    -RecoveredWpfResourceMode $RecoveredWpfResourceMode `
+    -Configuration $Configuration `
+    -RuntimeIdentifier $RuntimeIdentifier `
+    -UseSmokeCopy:$SingleFile
 $executable = Join-Path $OutputDirectory "pvfUtility.exe"
 $sourceAssemblyManifest = Join-Path $OutputDirectory "recovered-source-libraries.txt"
 $errorTitlePattern = "Error|Exception|$([char]0x9519)$([char]0x8BEF)|$([char]0x5F02)$([char]0x5E38)"

@@ -184,6 +184,11 @@ runtimeconfig files and checks the external data directories and recovered
 source-library manifest. `scripts/Test-GitHubReleasePackage.ps1` remains a
 compatibility wrapper over the same package validator.
 
+Runtime UI scripts resolve local packages through
+`scripts/SingleFileSmokeCopy.ps1`. Any input under `artifacts/publish` is copied
+to `artifacts/smoke/local-tests` before launch so native extraction, WebView data,
+or configuration writes cannot dirty the validated package.
+
 The pull-request/`master` workflow runs the merger regression project and the
 incomplete-SourceOnly guard, then builds, source-XAML-self-tests, and starts both
 Legacy and Hybrid single-file packages. Startup runs from a disposable smoke

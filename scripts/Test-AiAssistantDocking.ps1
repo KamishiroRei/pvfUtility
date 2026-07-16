@@ -6,6 +6,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot "SingleFileSmokeCopy.ps1")
 
 Add-Type -AssemblyName UIAutomationClient
 Add-Type -AssemblyName UIAutomationTypes
@@ -51,22 +52,83 @@ function Wait-ForProcessElementByAutomationId {
     return $null
 }
 
-$projectRoot = Split-Path -Parent $PSScriptRoot
-if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path `
-        $projectRoot `
-        "artifacts\publish\local\Hybrid\$Configuration\$RuntimeIdentifier"
-}
-elseif (-not [IO.Path]::IsPathRooted($OutputDirectory)) {
-    $OutputDirectory = Join-Path $projectRoot $OutputDirectory
+function Assert-AiAssistantStartsHidden {
+    param(
+        [string]$Executable,
+        [string]$WorkingDirectory,
+        [int]$TimeoutSeconds
+    )
+
+    $probeProcess = Start-Process `
+        -FilePath $Executable `
+        -WorkingDirectory $WorkingDirectory `
+        -PassThru
+    try {
+        $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
+        $probeWindow = $null
+        while ([DateTime]::UtcNow -lt $deadline -and $null -eq $probeWindow) {
+            $windowCondition = [System.Windows.Automation.AndCondition]::new(
+                [System.Windows.Automation.PropertyCondition]::new(
+                    [System.Windows.Automation.AutomationElement]::ProcessIdProperty,
+                    $probeProcess.Id
+                ),
+                [System.Windows.Automation.PropertyCondition]::new(
+                    [System.Windows.Automation.AutomationElement]::NameProperty,
+                    "pvfUtility"
+                )
+            )
+            $probeWindow = [System.Windows.Automation.AutomationElement]::RootElement.FindFirst(
+                [System.Windows.Automation.TreeScope]::Children,
+                $windowCondition
+            )
+            if ($null -eq $probeWindow) {
+                Start-Sleep -Milliseconds 250
+            }
+        }
+        if ($null -eq $probeWindow) {
+            throw "Main window was not observed during the AI assistant hidden-state preflight."
+        }
+
+        $aiView = Find-ProcessElementByAutomationId `
+            -ProcessId $probeProcess.Id `
+            -AutomationId "AiAssistantConversationView"
+        $aiPanel = Find-ProcessElementByAutomationId `
+            -ProcessId $probeProcess.Id `
+            -AutomationId "AiAssistantView"
+        if (($null -ne $aiView -and -not $aiView.Current.IsOffscreen) -or
+            ($null -ne $aiPanel -and -not $aiPanel.Current.IsOffscreen)) {
+            throw "The AI assistant panel is visible before the toolbar button is clicked."
+        }
+    }
+    finally {
+        $probeProcess.Refresh()
+        if (-not $probeProcess.HasExited) {
+            Stop-Process -Id $probeProcess.Id -Force
+            $probeProcess.WaitForExit()
+        }
+        $probeProcess.Dispose()
+    }
 }
 
-$OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory)
+$projectRoot = Split-Path -Parent $PSScriptRoot
+$OutputDirectory = Resolve-SingleFileTestOutputDirectory `
+    -ProjectRoot $projectRoot `
+    -OutputDirectory $OutputDirectory `
+    -Scenario "ai-assistant" `
+    -RecoveredWpfResourceMode Hybrid `
+    -Configuration $Configuration `
+    -RuntimeIdentifier $RuntimeIdentifier `
+    -UseSmokeCopy
 $executable = Join-Path $OutputDirectory "pvfUtility.exe"
 $aiAssistantCaption = "AI $([char]0x52A9)$([char]0x624B)"
 if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
     throw "Recovered executable not found: $executable"
 }
+
+Assert-AiAssistantStartsHidden `
+    -Executable $executable `
+    -WorkingDirectory $OutputDirectory `
+    -TimeoutSeconds $TimeoutSeconds
 
 $process = Start-Process `
     -FilePath $executable `
@@ -213,7 +275,7 @@ try {
         throw "The AI assistant prompt did not receive keyboard focus."
     }
 
-    Write-Output "PASS: the AI conversation panel opens at the far right and receives focus after the toolbar button is clicked."
+    Write-Output "PASS: the AI conversation panel starts hidden, then opens at the far right and receives focus after the toolbar button is clicked."
 }
 finally {
     $process.Refresh()

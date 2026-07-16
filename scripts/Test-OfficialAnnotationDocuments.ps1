@@ -5,6 +5,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot "SingleFileSmokeCopy.ps1")
 $toolsMenuPrefix = -join ([char]0x5DE5, [char]0x5177)
 $publishName = -join ([char]0x53D1, [char]0x5E03)
 $entryName = -join (
@@ -57,16 +58,14 @@ function Get-ElementText {
 }
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
-if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path `
-        $projectRoot `
-        "artifacts\publish\local\Hybrid\$Configuration\$RuntimeIdentifier"
-}
-elseif (-not [IO.Path]::IsPathRooted($OutputDirectory)) {
-    $OutputDirectory = Join-Path $projectRoot $OutputDirectory
-}
-
-$OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory)
+$OutputDirectory = Resolve-SingleFileTestOutputDirectory `
+    -ProjectRoot $projectRoot `
+    -OutputDirectory $OutputDirectory `
+    -Scenario "official-annotation" `
+    -RecoveredWpfResourceMode Hybrid `
+    -Configuration $Configuration `
+    -RuntimeIdentifier $RuntimeIdentifier `
+    -UseSmokeCopy
 $executable = Join-Path $OutputDirectory "pvfUtility.exe"
 if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
     throw "Executable not found: $executable"

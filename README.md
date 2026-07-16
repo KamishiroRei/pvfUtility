@@ -190,6 +190,8 @@ powershell -NoProfile -ExecutionPolicy Bypass `
   -SingleFile
 ```
 
+当输入位于 `artifacts/publish` 时，运行时 UI 检查会先复制到 `artifacts/smoke/local-tests`，避免启动时释放的 `7z64.dll`、WebView 数据或配置写回污染已验证的发布目录。
+
 `Properties/PublishProfiles/SingleFile.pubxml` 固定自包含、压缩、单文件、关闭裁剪与 ReadyToRun 等公共参数。`Test-GitHubReleasePackage.ps1` 现在是 `Test-SingleFilePackage.ps1` 的兼容包装。正式工作流会验证发布目录、独立冒烟副本和 ZIP 解压目录，并对单文件副本执行启动测试。
 
 `master`/PR 构建也会从干净产物复制独立冒烟目录再启动程序，随后只上传未经启动污染的原始目录；运行时释放的 `7z64.dll` 或 WebView2 数据不会进入 Actions artifact。

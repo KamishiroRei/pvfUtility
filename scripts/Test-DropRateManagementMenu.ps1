@@ -5,6 +5,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot "SingleFileSmokeCopy.ps1")
 $toolsMenuPrefix = -join ([char]0x5DE5, [char]0x5177)
 $independentDropName = -join (
     [char]0x72EC, [char]0x7ACB, [char]0x6389, [char]0x843D,
@@ -19,16 +20,14 @@ Add-Type -AssemblyName UIAutomationClient
 Add-Type -AssemblyName UIAutomationTypes
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
-if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path `
-        $projectRoot `
-        "artifacts\publish\local\Hybrid\$Configuration\$RuntimeIdentifier"
-}
-elseif (-not [IO.Path]::IsPathRooted($OutputDirectory)) {
-    $OutputDirectory = Join-Path $projectRoot $OutputDirectory
-}
-
-$OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory)
+$OutputDirectory = Resolve-SingleFileTestOutputDirectory `
+    -ProjectRoot $projectRoot `
+    -OutputDirectory $OutputDirectory `
+    -Scenario "drop-rate-menu" `
+    -RecoveredWpfResourceMode Hybrid `
+    -Configuration $Configuration `
+    -RuntimeIdentifier $RuntimeIdentifier `
+    -UseSmokeCopy
 $executable = Join-Path $OutputDirectory "pvfUtility.exe"
 if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
     throw "Executable not found: $executable"
