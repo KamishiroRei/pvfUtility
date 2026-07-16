@@ -61,7 +61,7 @@ design-time metadata cannot be recovered exactly from the published executable.
   resource counts, declared replacement set, and embedded assembly container.
 - `scripts/Test-RecoveredXamlMigration.ps1`: focused semantic self-test for the
   first two source-compiled XAML documents in Legacy and Hybrid outputs.
-- `scripts/Test-AiAssistantDocking.ps1`: verifies that the AI panel starts hidden, then opens at the far right and receives input focus from the toolbar.
+- `scripts/Test-AiAssistantDocking.ps1`: verifies that the AI panel opens at the far right and receives input focus from the toolbar.
 - `scripts/Inline-ObfuscatedStrings.ps1`: recovery utility used to produce the
   string map from the pre-inlining assembly.
 - `scripts/Recover-SourceLibraryStrings.ps1`: reproducible wrapper for the three

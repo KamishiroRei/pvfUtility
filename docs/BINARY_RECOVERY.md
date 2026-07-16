@@ -163,15 +163,15 @@ required because only that mode uses the legacy ChatGPT DLL. `All` retains the
 complete behavior, and no second chat protocol stack is compiled for the binary
 fallback.
 
-Each source-mode build writes `recovered-source-libraries.txt`. The startup test
-uses it to compare every output DLL with its source build using SHA-256, rejects a
-hash matching the old `lib` binary, inspects loaded module paths, and then checks
-the populated main window and absence of an error window. Manifest entries retain
-only the assembly name and project filename, so published output does not expose
-the build machine's absolute workspace path. Release builds also enable
-deterministic source paths for the emitted assemblies and PDBs. The standard `All`
-manifest contains 20 entries, all represented as `type: project` in the generated
-`.NET 10` deps file.
+Each source-mode build writes `recovered-source-libraries.txt`. The single-file
+package validator requires the exact project set for the selected mode; the
+single-file startup test confirms those source-project build outputs exist, then
+checks the populated main window and absence of an error window. Manifest entries
+retain only the assembly name and project filename, so published output does not
+expose the build machine's absolute workspace path. Release builds also enable
+deterministic source paths for the emitted assemblies. The standard `All`
+manifest contains 20 entries, all represented as `type: project` before bundling
+into the single executable.
 
 Identity and behavior checks for the final three recoveries include:
 

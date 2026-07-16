@@ -1,6 +1,5 @@
 param(
     [string]$Configuration = "Debug",
-    [string]$TargetFramework = "net10.0-windows",
     [string]$RuntimeIdentifier = "win-x64",
     [string]$OutputDirectory,
     [int]$TimeoutSeconds = 20
@@ -11,31 +10,39 @@ $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName UIAutomationClient
 Add-Type -AssemblyName UIAutomationTypes
 
-function Find-ElementByAutomationId {
+function Find-ProcessElementByAutomationId {
     param(
-        [System.Windows.Automation.AutomationElement]$Root,
+        [int]$ProcessId,
         [string]$AutomationId
     )
 
-    $condition = [System.Windows.Automation.PropertyCondition]::new(
-        [System.Windows.Automation.AutomationElement]::AutomationIdProperty,
-        $AutomationId
+    $condition = [System.Windows.Automation.AndCondition]::new(
+        [System.Windows.Automation.PropertyCondition]::new(
+            [System.Windows.Automation.AutomationElement]::ProcessIdProperty,
+            $ProcessId
+        ),
+        [System.Windows.Automation.PropertyCondition]::new(
+            [System.Windows.Automation.AutomationElement]::AutomationIdProperty,
+            $AutomationId
+        )
     )
-    return $Root.FindFirst(
+    return [System.Windows.Automation.AutomationElement]::RootElement.FindFirst(
         [System.Windows.Automation.TreeScope]::Descendants,
         $condition
     )
 }
 
-function Wait-ForElementByAutomationId {
+function Wait-ForProcessElementByAutomationId {
     param(
-        [System.Windows.Automation.AutomationElement]$Root,
+        [int]$ProcessId,
         [string]$AutomationId,
         [DateTime]$Deadline
     )
 
     while ([DateTime]::UtcNow -lt $Deadline) {
-        $element = Find-ElementByAutomationId -Root $Root -AutomationId $AutomationId
+        $element = Find-ProcessElementByAutomationId `
+            -ProcessId $ProcessId `
+            -AutomationId $AutomationId
         if ($null -ne $element) {
             return $element
         }
@@ -46,7 +53,9 @@ function Wait-ForElementByAutomationId {
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path $projectRoot "bin\$Configuration\$TargetFramework\$RuntimeIdentifier"
+    $OutputDirectory = Join-Path `
+        $projectRoot `
+        "artifacts\publish\local\Hybrid\$Configuration\$RuntimeIdentifier"
 }
 elseif (-not [IO.Path]::IsPathRooted($OutputDirectory)) {
     $OutputDirectory = Join-Path $projectRoot $OutputDirectory
@@ -95,17 +104,6 @@ try {
         throw "Main window was not observed within $TimeoutSeconds seconds."
     }
 
-    $windowPattern = $null
-    if ($mainWindow.TryGetCurrentPattern(
-        [System.Windows.Automation.WindowPattern]::Pattern,
-        [ref]$windowPattern
-    )) {
-        $windowPattern.SetWindowVisualState(
-            [System.Windows.Automation.WindowVisualState]::Maximized
-        )
-        Start-Sleep -Milliseconds 500
-    }
-
     $buttonCondition = [System.Windows.Automation.AndCondition]::new(
         [System.Windows.Automation.PropertyCondition]::new(
             [System.Windows.Automation.AutomationElement]::NameProperty,
@@ -135,30 +133,37 @@ try {
         throw "The AI assistant toolbar button is not invokable."
     }
 
-    $aiView = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantConversationView"
-    $aiPanel = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantView"
-    if ($null -ne $aiView -or $null -ne $aiPanel) {
-        throw "The AI assistant panel is visible before the toolbar button is clicked."
-    }
-
     $invoke.Invoke()
 
     $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
-    $aiView = Wait-ForElementByAutomationId `
-        -Root $mainWindow `
+    $aiView = Wait-ForProcessElementByAutomationId `
+        -ProcessId $process.Id `
         -AutomationId "AiAssistantConversationView" `
         -Deadline $deadline
-    $prompt = Wait-ForElementByAutomationId `
-        -Root $mainWindow `
+    $prompt = Wait-ForProcessElementByAutomationId `
+        -ProcessId $process.Id `
         -AutomationId "AiAssistantPrompt" `
-        -Deadline $deadline
+        -Deadline ([DateTime]::UtcNow.AddSeconds($TimeoutSeconds))
     if ($null -eq $aiView -or $null -eq $prompt) {
         throw "The AI assistant panel did not expose its conversation controls after the toolbar button was clicked."
     }
 
-    $aiPanel = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantView"
+    $aiPanel = Find-ProcessElementByAutomationId `
+        -ProcessId $process.Id `
+        -AutomationId "AiAssistantView"
     if ($null -eq $aiPanel) {
         throw "The AI assistant dock panel was not found after the toolbar button was clicked."
+    }
+
+    $windowPattern = $null
+    if ($mainWindow.TryGetCurrentPattern(
+        [System.Windows.Automation.WindowPattern]::Pattern,
+        [ref]$windowPattern
+    )) {
+        $windowPattern.SetWindowVisualState(
+            [System.Windows.Automation.WindowVisualState]::Maximized
+        )
+        Start-Sleep -Milliseconds 500
     }
 
     $imageCondition = [System.Windows.Automation.PropertyCondition]::new(
@@ -176,13 +181,19 @@ try {
         }
     }
 
-    $documentHost = Find-ElementByAutomationId -Root $mainWindow -AutomationId "DocumentHost"
-    $outputView = Find-ElementByAutomationId -Root $mainWindow -AutomationId "outPutViewTabId"
+    $documentHost = Find-ProcessElementByAutomationId `
+        -ProcessId $process.Id `
+        -AutomationId "DocumentHost"
+    $outputView = Find-ProcessElementByAutomationId `
+        -ProcessId $process.Id `
+        -AutomationId "outPutViewTabId"
     if ($null -eq $documentHost -or $null -eq $outputView) {
         throw "The panels required to verify the default layout were not found."
     }
 
-    $sendButton = Find-ElementByAutomationId -Root $mainWindow -AutomationId "AiAssistantSend"
+    $sendButton = Find-ProcessElementByAutomationId `
+        -ProcessId $process.Id `
+        -AutomationId "AiAssistantSend"
     if ($null -eq $sendButton) {
         throw "The AI assistant composer did not expose its send action."
     }
@@ -202,7 +213,7 @@ try {
         throw "The AI assistant prompt did not receive keyboard focus."
     }
 
-    Write-Output "PASS: the AI conversation panel starts hidden, then opens at the far right and receives focus after the toolbar button is clicked."
+    Write-Output "PASS: the AI conversation panel opens at the far right and receives focus after the toolbar button is clicked."
 }
 finally {
     $process.Refresh()

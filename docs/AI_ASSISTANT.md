@@ -141,8 +141,20 @@ fresh publish directory:
 
 ```powershell
 dotnet build .\pvfUtility.sln -c Debug --no-restore
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Test-RecoveredStartup.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Test-AiAssistantDocking.ps1
+
+.\scripts\Build-SingleFile.ps1 `
+  -Configuration Debug `
+  -RecoveredWpfResourceMode Hybrid `
+  -RecoveredSourceLibraryMode All
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Debug `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Debug\win-x64 `
+  -SingleFile
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-AiAssistantDocking.ps1 `
+  -Configuration Debug `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Debug\win-x64
 
 .\scripts\Build-SingleFile.ps1 `
   -Configuration Release `

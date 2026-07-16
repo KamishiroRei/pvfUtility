@@ -1,7 +1,10 @@
 param(
     [string]$Configuration = "Debug",
-    [string]$TargetFramework = "net10.0-windows",
     [string]$RuntimeIdentifier = "win-x64",
+
+    [ValidateSet("Legacy", "Hybrid")]
+    [string]$RecoveredWpfResourceMode = "Hybrid",
+
     [string]$OutputDirectory,
     [int]$ObservationSeconds = 15,
     [switch]$SingleFile
@@ -53,7 +56,10 @@ function Get-WindowDiagnosticText {
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path $projectRoot "bin\$Configuration\$TargetFramework\$RuntimeIdentifier"
+    $OutputDirectory = Join-Path `
+        $projectRoot `
+        "artifacts\publish\local\$RecoveredWpfResourceMode\$Configuration\$RuntimeIdentifier"
+    $SingleFile = $true
 }
 elseif (-not [IO.Path]::IsPathRooted($OutputDirectory)) {
     $OutputDirectory = Join-Path $projectRoot $OutputDirectory

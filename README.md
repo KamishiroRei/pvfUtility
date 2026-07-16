@@ -17,8 +17,7 @@
 - `Legacy` 模式仍可完整使用 126 个原始 BAML；`SourceOnly` 在迁移清单达到 126 项前会明确构建失败。
 - 原 `Recovered` 汇总目录已经移除；正式工程输入已分别归位到根目录 `Resources/`、`PvfCode/Compatibility/` 和 `SourceLibraries/`。
 - 项目不依赖 `pvfUtility-old`、`_analysis_extract`、原始程序目录或工作区外的绝对路径。
-- 目录归位后已重新验证 Debug 和 Release：20 个源码程序集哈希匹配，启动阶段观察到 14 个实际加载，主窗口保持 15 秒且没有错误窗口。
-- Debug 和 Release 发布目录都会生成 `recovered-source-libraries.txt`；启动脚本会核对 20 个 DLL 的 SHA-256，防止无意回退到 `lib` 中的旧二进制。
+- Debug 和 Release 单文件包都会生成 `recovered-source-libraries.txt`；包验证器会核对 `All` 模式对应的 20 个源码项目集合，启动检查会让主窗口保持 15 秒并拒绝任何错误窗口。
 
 ## 离线数据与联网边界
 
@@ -263,7 +262,7 @@ SourceLibraries\.build\
 | `Leaf` | 只使用 7 个叶子恢复项目。 |
 | `Binary` | 完全使用 `lib` 中的原发布 DLL，供差分诊断使用。 |
 
-恢复项目之间继续使用 39 条 `ProjectReference`。主程序在 `All` 模式下也通过 `ProjectReference` 接入上述 20 个项目；构建时会从输出内容中排除对应的旧 DLL，发布时同一路径优先保留项目或包解析出的文件。程序集名称、版本和 PublicKeyToken 已与原 DLL 核对，标准启动检查还会验证输出哈希与 `SourceLibraries/.build` 一致。
+恢复项目之间继续使用 39 条 `ProjectReference`。主程序在 `All` 模式下也通过 `ProjectReference` 接入上述 20 个项目；构建时会从输出内容中排除对应的旧 DLL，发布时同一路径优先保留项目或包解析出的文件。程序集名称、版本和 PublicKeyToken 已与原 DLL 核对；单文件包验证器会核对恢复源码清单的项目集合，启动检查负责验证完整主窗口和错误窗口边界。
 
 临时切换模式：
 
@@ -367,7 +366,7 @@ pvfUtility.sln
 
 ### 编译成功但启动时出现错误窗口
 
-先运行 `scripts/Test-RecoveredStartup.ps1`。脚本会收集错误窗口标题和可读取的异常文本，比只观察进程退出码更容易定位 BAML 或依赖问题。
+先运行 `scripts/Build-SingleFile.ps1`，再运行 `scripts/Test-RecoveredStartup.ps1`。脚本默认检查本地 Debug/Hybrid 单文件包，并会收集错误窗口标题和可读取的异常文本，比只观察进程退出码更容易定位 BAML 或依赖问题。
 
 ### 出现缺少 DLL、主题或 Pack URI 资源错误
 
@@ -375,7 +374,7 @@ pvfUtility.sln
 
 ### 修改恢复库后主程序没有变化
 
-先确认没有显式传入 `-p:RecoveredSourceLibraryMode=Binary`，并检查输出目录中的 `recovered-source-libraries.txt`。默认 `All` 模式下，清单应有 20 行；`scripts/Test-RecoveredStartup.ps1` 会进一步比较输出 DLL 与源码构建 DLL 的 SHA-256，并报告启动期间实际加载的恢复程序集数量。
+先确认没有显式传入 `-RecoveredSourceLibraryMode Binary`，并检查单文件包中的 `recovered-source-libraries.txt`。默认 `All` 模式下，清单应有 20 行；`scripts/Test-SingleFilePackage.ps1` 会核对全部项目名称和项目文件名，`scripts/Test-RecoveredStartup.ps1` 会确认对应源码构建输出存在并验证完整主窗口。
 
 ## 恢复文档
 
