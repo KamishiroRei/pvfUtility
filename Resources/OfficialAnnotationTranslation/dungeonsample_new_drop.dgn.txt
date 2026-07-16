@@ -65,7 +65,7 @@
 1 1
 [/boss map]
 
-[escape hell] 1            // 在该迷宫中不出现地狱模式
+[escape hell] 1            // 在该迷宫中不出现深渊模式
 
 [maze info]             // 表示一个迷宫信息开始。
 [size]  5 3            // 横向地图大小，纵向地图大小

@@ -136,9 +136,9 @@
       "PvfCommentType": "Section",
       "FileType": "dgn",
       "Section": "escape hell",
-      "Title": "禁用地狱模式标记",
-      "Comment": "官方说明表示该迷宫不出现地狱模式。它是副本静态开关线索，不证明深渊入口、任务、门票或服务端模式选择的最终行为。",
-      "OfficialDescription": "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[escape hell] 1            // 在该迷宫中不出现地狱模式\n```",
+      "Title": "禁用深渊模式标记",
+      "Comment": "官方说明表示该迷宫不出现深渊模式。它是副本静态开关线索，不证明深渊入口、任务、门票或服务端模式选择的最终行为。",
+      "OfficialDescription": "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n[escape hell] 1            // 在该迷宫中不出现深渊模式\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },

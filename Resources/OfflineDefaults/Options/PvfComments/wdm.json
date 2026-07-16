@@ -18,7 +18,7 @@
       "Section": "hell dungeon",
       "Title": "副本深渊开启指向 写1代表可以开启深渊",
       "Comment": "副本深渊开启指向 写1代表可以开启深渊",
-      "OfficialDescription": "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[hell dungeon] 1\t// 世界中是否存在地狱地下城 (1:有，0:无)\n```",
+      "OfficialDescription": "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[hell dungeon] 1\t// 世界中是否存在深渊地下城 (1:有，0:无)\n```",
       "Closing": false,
       "Authors": "白糖-193284563"
     },
@@ -48,7 +48,7 @@
       "Section": "item condition",
       "Title": "在worldmap中表示 深渊门票代码",
       "Comment": "在worldmap中表示  深渊门票代码，仅适用于冰雪宫殿以上的副本",
-      "OfficialDescription": "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[item condition]\t// 进入地狱地下城时消耗的物品索引、数量\n4150 1\t\t\t// 如果没有该物品，则无法进入地狱地下城。\n[/item condition]\n```",
+      "OfficialDescription": "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[item condition]\t// 进入深渊地下城时消耗的物品索引、数量\n4150 1\t\t\t// 如果没有该物品，则无法进入深渊地下城。\n[/item condition]\n```",
       "Closing": true,
       "Authors": "依旧"
     },
@@ -97,8 +97,8 @@
       "FileType": "wdm",
       "Section": "hell quest",
       "Title": "深渊任务索引",
-      "Comment": "深渊任务索引：必须完成列表中指定的任务后，才能进入该区域的深渊（地狱）模式地下城。列表中的数字为任务 ID。",
-      "OfficialDescription": "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[hell quest]\t\t// 地狱任务索引：必须完成该任务才能进入地狱地下城\n2601\n[/hell quest]\n```",
+      "Comment": "深渊任务索引：必须完成列表中指定的任务后，才能进入该区域的深渊（深渊）模式地下城。列表中的数字为任务 ID。",
+      "OfficialDescription": "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[hell quest]\t\t// 深渊任务索引：必须完成该任务才能进入深渊地下城\n2601\n[/hell quest]\n```",
       "Closing": true,
       "Authors": null
     },

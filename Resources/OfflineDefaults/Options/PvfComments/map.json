@@ -148,7 +148,7 @@
       "Section": "special passive object",
       "Title": "特殊被动对象",
       "Comment": "特殊建筑物与深渊派对配置。前三个参数为被动对象索引、x坐标、y坐标，第四个为要创建的对象数量。后续每行按类型（monster/trap/item/hellparty）指定子项参数。monster类型可指定怪物索引和生成概率，trap类型可指定陷阱索引和魔法等级，item类型可指定掉落索引，hellparty类型可指定深渊派对组。",
-      "OfficialDescription": "#### 官方示例: mapsample.map\n\n```pvf\n[special passive object]\n222 400 172 //被动对象索引, x坐标 , y坐标\n3 //要创建的对象数量\n`[monster]` 202 16 -1 -1 1 //怪物索引, 怪物等级, 生成概率1, 生成概率2 (以生成概率1/生成概率2生成), 是否跳出(-1则跳出)\n`[trap]` 48003 5 -1 -1 -1 //陷阱被动的索引, 陷阱的魔法等级, 生成概率1, 生成概率2 (以生成概率1/生成概率2生成), 未使用\n`[item]` 1 -1 -1 -1 -1 //dungeon script的[special passive object item]中的索引,指定掉落生成尝试次数,随机掉落生成尝试次数,物品箱索引,未使用\n`[hellparty]` //地狱派对索引, 相对概率, 组号\n101 25 1 //Blaze\n102 25 1 //Vapor\n103 25 1 //Overgrowth\n`[/hellparty]`\n[/special passive object]\n```",
+      "OfficialDescription": "#### 官方示例: mapsample.map\n\n```pvf\n[special passive object]\n222 400 172 //被动对象索引, x坐标 , y坐标\n3 //要创建的对象数量\n`[monster]` 202 16 -1 -1 1 //怪物索引, 怪物等级, 生成概率1, 生成概率2 (以生成概率1/生成概率2生成), 是否跳出(-1则跳出)\n`[trap]` 48003 5 -1 -1 -1 //陷阱被动的索引, 陷阱的魔法等级, 生成概率1, 生成概率2 (以生成概率1/生成概率2生成), 未使用\n`[item]` 1 -1 -1 -1 -1 //dungeon script的[special passive object item]中的索引,指定掉落生成尝试次数,随机掉落生成尝试次数,物品箱索引,未使用\n`[hellparty]` //深渊派对索引, 相对概率, 组号\n101 25 1 //Blaze\n102 25 1 //Vapor\n103 25 1 //Overgrowth\n`[/hellparty]`\n[/special passive object]\n```",
       "Closing": true,
       "Authors": "fox"
     },

@@ -376,8 +376,8 @@
       "PvfCommentType": "Section",
       "FileType": "mob",
       "Section": "hell monster",
-      "Title": "地狱怪物",
-      "Comment": "[hell monster] 地狱怪物标记\n1=是地狱怪物\n用于标记在深渊派对/地狱模式中出现的怪物\n使用示例：\n[hell monster] 1",
+      "Title": "深渊怪物",
+      "Comment": "[hell monster] 深渊怪物标记\n1=是深渊怪物\n用于标记在深渊派对/深渊模式中出现的怪物\n使用示例：\n[hell monster] 1",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[hell monster] 1\n```\n\n#### 官方示例: newmonstersamplebytool.mob\n\n```pvf\n[hell monster]\n    {int(0:)}\n    {!int(:)}\n[!hell monster]\n```",
       "Closing": false,
       "Authors": "lostluna1"

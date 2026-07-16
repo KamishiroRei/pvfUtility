@@ -16,11 +16,11 @@
     //[common action]  `Action/banner_common.act`
 [/ui controls]
 
-// 2号标签 : 设置地下城选择画面中地狱派对背景的标签
+// 2号标签 : 设置地下城选择画面中深渊派对背景的标签
 // 其他内容请不要修改（其他内容为硬编码，由客户端组设置），仅修改背景 img 路径及索引即可。
 [ui controls]
     `[image]`
-    `IDC_WORLDMAP_HELLPARTY_MODE_BACKGROUND`    // 地狱派对背景
+    `IDC_WORLDMAP_HELLPARTY_MODE_BACKGROUND`    // 深渊派对背景
     0            // X
     0            // Y
     1            // string 数据数量

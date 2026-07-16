@@ -206,8 +206,8 @@
       "PvfCommentType": "Section",
       "FileType": "aic",
       "Section": "hell monster",
-      "Title": "地狱模式怪物标记",
-      "Comment": "地狱模式怪物标记：指定APC的行为是否符合地狱模式规则。地狱怪物有特殊的战斗行为和掉落规则。",
+      "Title": "深渊模式怪物标记",
+      "Comment": "深渊模式怪物标记：指定APC的行为是否符合深渊模式规则。深渊怪物有特殊的战斗行为和掉落规则。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"

@@ -1,4 +1,4 @@
-{
+﻿{
   "SchemaVersion": 1,
   "FileType": "etc",
   "Comments": [
@@ -587,7 +587,7 @@
       "FileType": "etc",
       "Section": "hell table",
       "Title": "深渊派对表",
-      "Comment": "深渊派对表\n深渊(地狱)派对的数据表格配置，包含怪物和APC的掉落、出现概率等参数。",
+      "Comment": "深渊派对表\n深渊派对的数据表格配置，包含怪物和APC的掉落、出现概率等参数。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
