@@ -218,7 +218,7 @@ SourceLibraries\.build\
 - `Directory.Build.targets`：负责恢复资源、BAML 间接依赖和本地运行文件的构建规则。
 - `global.json`、`pvfUtility.csproj`、`pvfUtility.sln` 和 `SourceLibraries/pvfUtility.SourceLibraries.sln`。
 
-不要只复制普通 `bin` 输出中的 `pvfUtility.exe`；普通构建仍必须与同目录 DLL、原生库和资源一起运行。只有通过 `scripts/Build-SingleFile.ps1` 与 `SingleFile.pubxml` 生成的单文件 EXE 才能脱离这些独立 DLL，并且仍需保留发布包中的外置 `Options`、`Resources` 和 `Defaults` 目录。
+不要复制或运行普通 `bin` 输出；它只用于编译器和 IDE 检查，不是支持的本地运行或分发入口。通过 `scripts/Build-SingleFile.ps1` 与 `SingleFile.pubxml` 生成的单文件 EXE 仍需保留发布包中的外置 `Options`、`Resources` 和 `Defaults` 目录。
 
 旧的 `Recovered/` 不是独立工程所需目录，不要在复制后重新建立它。`SourceLibraries/.build` 是可再生输出，首次编译源码库时会自动创建。
 

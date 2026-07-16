@@ -113,22 +113,30 @@ dotnet run --project `
   .\tests\PvfResourceMerger.RegressionTests\PvfResourceMerger.RegressionTests.csproj `
   -c Release
 
-dotnet build .\pvfUtility.csproj -c Release `
-  -p:RecoveredWpfResourceMode=Legacy
+.\scripts\Build-SingleFile.ps1 `
+  -Configuration Release `
+  -RecoveredWpfResourceMode Legacy `
+  -RecoveredSourceLibraryMode All
 
-dotnet build .\pvfUtility.csproj -c Release `
-  -p:RecoveredWpfResourceMode=Hybrid
+.\scripts\Build-SingleFile.ps1 `
+  -Configuration Release `
+  -RecoveredWpfResourceMode Hybrid `
+  -RecoveredSourceLibraryMode All
 
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-RecoveredWpfResourceContainer.ps1 `
-  -Configuration Release
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Release `
+  -OutputDirectory .\artifacts\publish\local\Legacy\Release\win-x64 `
+  -SingleFile
 
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-RecoveredXamlMigration.ps1 `
-  -Configuration Release
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Release `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Release\win-x64 `
+  -SingleFile
 ```
 
-资源审计脚本必须针对最新的 Hybrid Release 输出运行，确认资源总数仍为 247、BAML 总数仍为 126、只有迁移清单声明的键发生变化，并验证最终程序集只包含一个与合并输出一致的 `pvfUtility.g.resources`。定向 XAML 自检必须在 Legacy 与 Hybrid 各自最新的输出上运行；它验证 `app.xaml` 的 11 个合并资源字典，以及 `ViewScriptEditor` 的控件树、属性和绑定。定向自检不能替代完整的 `Test-RecoveredStartup.ps1` 主窗口验证。
+`Build-SingleFile.ps1` 会自动运行包结构验证、Hybrid 资源审计和定向 XAML 自检。资源审计必须确认资源总数仍为 247、BAML 总数仍为 126、只有迁移清单声明的键发生变化，并验证最终程序集只包含一个与合并输出一致的 `pvfUtility.g.resources`。定向 XAML 自检必须在 Legacy 与 Hybrid 各自最新的单文件输出上运行；它验证 `app.xaml` 的 11 个合并资源字典，以及 `ViewScriptEditor` 的控件树、属性和绑定。定向自检不能替代完整的 `Test-RecoveredStartup.ps1` 主窗口验证。
 
 原始 BAML 的类型表和延迟资源仍引用账号、云备份、商店、ChatGPT 等遗留功能的部分 CLR 类型、枚举和模板属性。这些成员首先是反序列化兼容契约；只有 ChatGPT 工具栏绑定被明确路由为新的 PVF AI 助手，不能据此推断其他遗留联网功能也应恢复。不得仅因 C# 中没有直接调用就删除；缺失成员可能直到延迟资源实例化时才以 `WpfXamlLoader.TransformNodes` 空引用的形式失败。
 
@@ -152,7 +160,8 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 - `AssemblyName`、Version、Culture 和 PublicKeyToken 必须与替代的 DLL 兼容；
 - 对应 `lib` DLL 不能与项目输出以同一路径重复发布；
 - `recovered-source-libraries.txt` 必须列出实际接入的项目，且只能记录项目文件名，不能发布本机绝对路径；
-- `scripts/Test-RecoveredStartup.ps1` 必须通过 20 个 SHA-256 来源比较、已加载模块检查和完整主窗口检查；
+- `scripts/Test-SingleFilePackage.ps1` 必须核对 `recovered-source-libraries.txt` 中与所选模式一致的源码项目集合；
+- `scripts/Test-RecoveredStartup.ps1 -SingleFile` 必须通过完整主窗口、关键控件和错误窗口检查；
 - `Binary` 模式必须保持可用，便于区分源码恢复问题和原发布依赖问题。
 
 ### 5. 保留运行依赖和构建规则
@@ -279,7 +288,7 @@ powershell -NoProfile -ExecutionPolicy Bypass `
   -SingleFile
 ```
 
-普通 `dotnet build` 输出用于编译器、IDE 和非单文件启动回归，不是支持用户分发的交付物。CI 与 Release 必须保留普通目录启动检查，以验证独立恢复 DLL 的 SHA-256 和加载路径；正式发布以及所有用户交付构建必须使用仓库统一的 `Build-SingleFile.ps1` 和 `SingleFile.pubxml`，并验证单文件目录：
+普通 `dotnet build` 输出只用于编译器和 IDE 检查，不是支持的运行入口或用户交付物。所有本地、CI 和 GitHub Release 可运行构建必须使用仓库统一的 `Build-SingleFile.ps1` 和 `SingleFile.pubxml`，并验证单文件目录：
 
 ```powershell
 .\scripts\Build-SingleFile.ps1 `

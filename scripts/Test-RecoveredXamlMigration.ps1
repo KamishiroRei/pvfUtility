@@ -1,7 +1,10 @@
 param(
     [string]$Configuration = "Debug",
-    [string]$TargetFramework = "net10.0-windows",
     [string]$RuntimeIdentifier = "win-x64",
+
+    [ValidateSet("Legacy", "Hybrid", "SourceOnly")]
+    [string]$RecoveredWpfResourceMode = "Hybrid",
+
     [string]$OutputDirectory
 )
 
@@ -9,7 +12,9 @@ $ErrorActionPreference = "Stop"
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path $projectRoot "bin\$Configuration\$TargetFramework\$RuntimeIdentifier"
+    $OutputDirectory = Join-Path `
+        $projectRoot `
+        "artifacts\publish\local\$RecoveredWpfResourceMode\$Configuration\$RuntimeIdentifier"
 }
 elseif (-not [IO.Path]::IsPathRooted($OutputDirectory)) {
     $OutputDirectory = Join-Path $projectRoot $OutputDirectory

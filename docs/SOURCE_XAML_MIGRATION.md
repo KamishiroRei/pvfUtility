@@ -124,20 +124,26 @@ The test verifies:
 - the Title, FontSize, Document, and IsReadOnly bindings, including the two-way
   Document binding.
 
-Run it after building each mode:
+The single-file build entry runs it automatically for the selected mode. It can
+also be rerun explicitly against the default local packages:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredXamlMigration.ps1 `
-  -Configuration Release
+  -Configuration Release `
+  -RecoveredWpfResourceMode Legacy
+
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-RecoveredXamlMigration.ps1 `
+  -Configuration Release `
+  -RecoveredWpfResourceMode Hybrid
 ```
 
 The wrapper writes results through a temporary file, requires exit code zero,
-and restores the caller's environment variables. It works with normal and
-single-file output directories. Run it for both Legacy and Hybrid so the
-original and source-generated BAML paths are checked against the same semantic
-contract. This focused test supplements, but does not replace, the full UI
-Automation startup test.
+and restores the caller's environment variables. Run it for both Legacy and
+Hybrid single-file packages so the original and source-generated BAML paths are
+checked against the same semantic contract. This focused test supplements, but
+does not replace, the full UI Automation startup test.
 
 ## Single-file distribution
 
@@ -180,11 +186,11 @@ compatibility wrapper over the same package validator.
 
 The pull-request/`master` workflow runs the merger regression project and the
 incomplete-SourceOnly guard, then builds, source-XAML-self-tests, and starts both
-Legacy and Hybrid directory outputs and single-file packages. Single-file
-startup runs from a disposable smoke copy so runtime-generated files cannot
-enter the uploaded clean artifact. The tagged Release workflow performs the
-same directory checks for Hybrid, then validates a clean copied single-file
-package and the final ZIP extraction before uploading the ZIP and SHA-256 file.
+Legacy and Hybrid single-file packages. Startup runs from a disposable smoke
+copy so runtime-generated files cannot enter the uploaded clean artifact. The
+tagged Release workflow uses the same Hybrid single-file build, then validates a
+clean copied package and the final ZIP extraction before uploading the ZIP and
+SHA-256 file.
 
 ## Verification and rollback
 

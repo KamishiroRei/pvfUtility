@@ -156,15 +156,16 @@ single-file publish output. Each run kept the
 fully populated main window available for 15 seconds, found
 `BarSubItemLinksubFile`, `FilelistLayoutPanel`, and `DocumentHost`, and observed
 no error window. When a `recovered-source-libraries.txt` manifest is present, the
-script also compares all 20 output DLL hashes with their source-project `.build`
-products and checks the paths of modules loaded during startup. Published output
-can be tested explicitly with:
+single-file package validator confirms that it names the exact 20 projects used
+by `All` mode, and the startup test confirms their source build outputs exist.
+Single-file output can be tested explicitly with:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredStartup.ps1 `
   -Configuration Release `
-  -OutputDirectory <publish-directory>
+  -OutputDirectory <publish-directory> `
+  -SingleFile
 ```
 
 ## Remaining constraints

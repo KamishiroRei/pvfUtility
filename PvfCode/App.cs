@@ -52,34 +52,43 @@ public class App : Application
 	{
 		RecoveredAssemblyResolver.Register();
 		DevExpressNet10Compatibility.Apply();
-		Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-		if (!IsRecoveredXamlSelfTest)
+		if (IsRecoveredXamlSelfTest)
 		{
-			try
-			{
-				string path = Path.Combine(AppContext.BaseDirectory, "7z64.dll");
-				if (!File.Exists(path))
-				{
-					File.WriteAllBytes(path, Resource1._7z64);
-				}
-				path = Path.Combine(AppContext.BaseDirectory, "e_sqlite3.dll");
-				if (File.Exists(path))
-				{
-					File.Delete(path);
-				}
-				path = Path.Combine(AppContext.BaseDirectory, "WebView2Loader.dll");
-				if (File.Exists(path))
-				{
-					File.Delete(path);
-				}
-			}
-			catch (Exception)
-			{
-			}
-			SplashScreenManager.Create(() => new PvfCodeSplashScreenWindow()).ShowOnStartup();
+			Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+			ServiceInjector.InjectServices();
+			RegisterRecoveredServices();
+			return;
 		}
 
+		try
+		{
+			string path = Path.Combine(AppContext.BaseDirectory, "7z64.dll");
+			if (!File.Exists(path))
+			{
+				File.WriteAllBytes(path, Resource1._7z64);
+			}
+			path = Path.Combine(AppContext.BaseDirectory, "e_sqlite3.dll");
+			if (File.Exists(path))
+			{
+				File.Delete(path);
+			}
+			path = Path.Combine(AppContext.BaseDirectory, "WebView2Loader.dll");
+			if (File.Exists(path))
+			{
+				File.Delete(path);
+			}
+		}
+		catch (Exception)
+		{
+		}
+		SplashScreenManager.Create(() => new PvfCodeSplashScreenWindow()).ShowOnStartup();
 		ServiceInjector.InjectServices();
+		Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+		RegisterRecoveredServices();
+	}
+
+	private static void RegisterRecoveredServices()
+	{
 		AppCore.Logger = new LoggerViewModel();
 		ServiceContainer.Instance.AddService((Ilogger)AppCore.Logger);
 		ServiceContainer.Instance.AddService((IRes)Res.Instance);
