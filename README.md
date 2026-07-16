@@ -144,6 +144,68 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 
 目标机器运行这种发布结果时需要安装 `.NET 10 Desktop Runtime x64`。
 
+#### GitHub 单文件 Release
+
+仓库中的 `.github/workflows/release.yml` 会生成 Windows x64 自包含单文件版本。该版本把 .NET 10 Desktop Runtime、托管依赖和发布时原生依赖压缩进 `pvfUtility.exe`，不需要目标机器预先安装 .NET。为避免破坏 WPF BAML、DevExpress 和反射加载，Release 发布明确关闭裁剪和 ReadyToRun。
+
+推送以 `v` 开头的标签会自动创建或更新 GitHub Release：
+
+```powershell
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+也可以在 GitHub 的 **Actions → Build and publish Windows release → Run workflow** 中手动输入 `release_tag`。如果标签尚不存在，工作流会在所选提交上创建标签；如果标签或 Release 已存在，只有在标签仍指向本次构建提交时才覆盖同名发布资产。带连字符后缀的标签（如 `v1.0.0-beta.1`）会创建为预发布版本。
+
+每个 Release 包含 ZIP 和对应的 `.sha256` 文件。ZIP 结构如下：
+
+```text
+pvfUtility-v1.0.0-win-x64\
+├── pvfUtility.exe
+├── Options\
+├── Resources\
+├── Defaults\Options\
+└── recovered-source-libraries.txt
+```
+
+- `Options/` 从仓库维护的 `Defaults/Options/` 生成，可以直接修改；开发机上被忽略的运行时 `/Options` 永远不会进入发布包。
+- `Resources/` 只包含程序按外部路径读取的 AI 知识库和官方注释资源，可以在解压后定制。WPF BAML、图标和其他编译资源仍位于 EXE 内。
+- `Defaults/Options/` 是缺少配置文件时使用的原始模板。删除 `Options` 中的对应文件后，程序可在后续启动时重新复制默认值。
+- 首次运行可能在 EXE 旁生成 `7z64.dll` 和 `pvfUtility.exe.WebView2/` 等运行时文件；这些文件不属于原始 Release 包。
+
+本地复现单文件发布：
+
+```powershell
+dotnet restore .\pvfUtility.sln -r win-x64
+
+Remove-Item `
+  -LiteralPath .\artifacts\publish\github-win-x64 `
+  -Recurse `
+  -Force `
+  -ErrorAction SilentlyContinue
+
+dotnet publish .\pvfUtility.csproj `
+  -c Release `
+  -r win-x64 `
+  --self-contained true `
+  --no-restore `
+  -p:PublishProfile=GitHubRelease `
+  -o .\artifacts\publish\github-win-x64
+
+Copy-Item `
+  -LiteralPath .\artifacts\publish\github-win-x64\Defaults\Options `
+  -Destination .\artifacts\publish\github-win-x64\Options `
+  -Recurse
+
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Release `
+  -OutputDirectory .\artifacts\publish\github-win-x64 `
+  -SingleFile
+```
+
+正式工作流还会检查包中不存在独立 DLL、PDB、deps/runtimeconfig 文件，在未启动的干净副本上生成 ZIP，并对 ZIP 解压后的目录再次运行单文件启动测试。
+
 ## 独立复制
 
 完整复制 `pvfUtility-recovered` 目录后，可以在其他路径中直接还原、编译和运行。以下生成目录可以不复制：
@@ -165,7 +227,7 @@ SourceLibraries\.build\
 - `Directory.Build.targets`：负责恢复资源、BAML 间接依赖和本地运行文件的构建规则。
 - `global.json`、`pvfUtility.csproj`、`pvfUtility.sln` 和 `SourceLibraries/pvfUtility.SourceLibraries.sln`。
 
-不要只复制 `bin` 中的 `pvfUtility.exe`。该程序不是单文件发布，必须与发布目录中的 DLL、原生库和资源一起运行。
+不要只复制普通 `bin` 输出中的 `pvfUtility.exe`；普通构建仍必须与同目录 DLL、原生库和资源一起运行。只有通过 `GitHubRelease.pubxml` 生成的单文件 EXE 才能脱离这些独立 DLL，并且仍需保留发布包中的外置 `Options`、`Resources` 和 `Defaults` 目录。
 
 旧的 `Recovered/` 不是独立工程所需目录，不要在复制后重新建立它。`SourceLibraries/.build` 是可再生输出，首次编译源码库时会自动创建。
 

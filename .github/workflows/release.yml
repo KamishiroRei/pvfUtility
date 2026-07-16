@@ -1,0 +1,342 @@
+name: Build and publish Windows release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag to create or update (for example: v1.0.0)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}-${{ inputs.release_tag }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build, verify, and publish
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      CONFIGURATION: Release
+      RUNTIME_IDENTIFIER: win-x64
+      PUBLISH_DIRECTORY: artifacts/release/publish
+      PACKAGE_DIRECTORY: artifacts/release/package
+      SMOKE_DIRECTORY: artifacts/release/smoke
+      ARCHIVE_DIRECTORY: artifacts/release/archive
+      EXTRACT_DIRECTORY: artifacts/release/extracted
+      MANUAL_RELEASE_TAG: ${{ inputs.release_tag }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Resolve release metadata
+        id: metadata
+        run: |
+          if ($env:GITHUB_EVENT_NAME -eq "push") {
+              $releaseTag = $env:GITHUB_REF_NAME
+          }
+          else {
+              $releaseTag = $env:MANUAL_RELEASE_TAG.Trim()
+          }
+
+          if ([string]::IsNullOrWhiteSpace($releaseTag) -or -not $releaseTag.StartsWith("v")) {
+              throw "Release tags must start with 'v'."
+          }
+
+          git check-ref-format "refs/tags/$releaseTag"
+          if ($LASTEXITCODE -ne 0) {
+              throw "Invalid Git tag: $releaseTag"
+          }
+
+          $safeTag = ($releaseTag -replace '[^0-9A-Za-z._-]', '-').Trim('-')
+          if ([string]::IsNullOrWhiteSpace($safeTag)) {
+              throw "The release tag does not contain any characters usable in a Windows filename."
+          }
+
+          $packageName = "pvfUtility-$safeTag-win-x64"
+          $isPrerelease = $releaseTag.Contains("-").ToString().ToLowerInvariant()
+
+          "RELEASE_TAG=$releaseTag" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "PACKAGE_NAME=$packageName" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "IS_PRERELEASE=$isPrerelease" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "tag=$releaseTag" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "package_name=$packageName" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Restore Windows x64 dependencies
+        run: dotnet restore .\pvfUtility.sln -r $env:RUNTIME_IDENTIFIER
+
+      - name: Publish compressed self-contained executable
+        run: |
+          $publishDirectory = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:PUBLISH_DIRECTORY))
+          if (Test-Path -LiteralPath $publishDirectory) {
+              Remove-Item -LiteralPath $publishDirectory -Recurse -Force
+          }
+
+          dotnet publish .\pvfUtility.csproj `
+            -c $env:CONFIGURATION `
+            -r $env:RUNTIME_IDENTIFIER `
+            --self-contained true `
+            --no-restore `
+            -p:PublishProfile=GitHubRelease `
+            -o $publishDirectory
+          if ($LASTEXITCODE -ne 0) {
+              throw "dotnet publish failed with exit code $LASTEXITCODE."
+          }
+
+      - name: Verify ordinary directory build
+        run: |
+          powershell -NoProfile -ExecutionPolicy Bypass `
+            -File .\scripts\Test-RecoveredStartup.ps1 `
+            -Configuration $env:CONFIGURATION
+
+      - name: Assemble and validate clean release package
+        run: |
+          function Assert-DirectoryHasFiles {
+              param(
+                  [Parameter(Mandatory)] [string] $Path,
+                  [Parameter(Mandatory)] [string] $Description
+              )
+
+              if (-not (Test-Path -LiteralPath $Path -PathType Container)) {
+                  throw "$Description directory not found: $Path"
+              }
+              if ($null -eq (Get-ChildItem -LiteralPath $Path -File -Recurse | Select-Object -First 1)) {
+                  throw "$Description directory is empty: $Path"
+              }
+          }
+
+          $publishDirectory = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:PUBLISH_DIRECTORY))
+          $packageParent = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:PACKAGE_DIRECTORY))
+          $packageRoot = Join-Path $packageParent $env:PACKAGE_NAME
+          $smokeParent = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:SMOKE_DIRECTORY))
+          $smokeRoot = Join-Path $smokeParent $env:PACKAGE_NAME
+
+          foreach ($directory in @($packageParent, $smokeParent)) {
+              if (Test-Path -LiteralPath $directory) {
+                  Remove-Item -LiteralPath $directory -Recurse -Force
+              }
+              New-Item -ItemType Directory -Path $directory | Out-Null
+          }
+
+          Copy-Item -LiteralPath $publishDirectory -Destination $packageRoot -Recurse
+
+          $optionsDirectory = Join-Path $packageRoot "Options"
+          if (Test-Path -LiteralPath $optionsDirectory) {
+              Remove-Item -LiteralPath $optionsDirectory -Recurse -Force
+          }
+          Copy-Item `
+            -LiteralPath (Join-Path $packageRoot "Defaults\Options") `
+            -Destination $optionsDirectory `
+            -Recurse
+
+          $executable = Join-Path $packageRoot "pvfUtility.exe"
+          if (-not (Test-Path -LiteralPath $executable -PathType Leaf) -or (Get-Item -LiteralPath $executable).Length -le 0) {
+              throw "Published executable is missing or empty: $executable"
+          }
+
+          $executables = @(Get-ChildItem -LiteralPath $packageRoot -File -Recurse -Filter "*.exe")
+          if ($executables.Count -ne 1 -or $executables[0].FullName -ne [IO.Path]::GetFullPath($executable)) {
+              throw "The release package must contain exactly one executable at its root."
+          }
+
+          $unexpectedFiles = @(Get-ChildItem -LiteralPath $packageRoot -File -Recurse | Where-Object {
+              $_.Extension -in @(".dll", ".pdb") -or
+              $_.Name.EndsWith(".deps.json", [StringComparison]::OrdinalIgnoreCase) -or
+              $_.Name.EndsWith(".runtimeconfig.json", [StringComparison]::OrdinalIgnoreCase)
+          })
+          if ($unexpectedFiles.Count -gt 0) {
+              throw "Unexpected standalone publish files: $($unexpectedFiles.FullName -join ', ')"
+          }
+
+          foreach ($requiredFile in @(
+              "Options\AppConfig.json",
+              "Options\Bookmarks.json",
+              "Defaults\Options\AppConfig.json",
+              "Defaults\Options\Bookmarks.json",
+              "recovered-source-libraries.txt"
+          )) {
+              $requiredPath = Join-Path $packageRoot $requiredFile
+              if (-not (Test-Path -LiteralPath $requiredPath -PathType Leaf)) {
+                  throw "Required release file not found: $requiredPath"
+              }
+          }
+
+          Assert-DirectoryHasFiles -Path (Join-Path $packageRoot "Options\PvfComments") -Description "Editable PvfComments"
+          Assert-DirectoryHasFiles -Path (Join-Path $packageRoot "Defaults\Options\PvfComments") -Description "Default PvfComments"
+          Assert-DirectoryHasFiles -Path (Join-Path $packageRoot "Resources\AgentKnowledge") -Description "AI knowledge resources"
+          Assert-DirectoryHasFiles -Path (Join-Path $packageRoot "Resources\OfficialAnnotationTranslation") -Description "Official annotation resources"
+
+          $manifest = Join-Path $packageRoot "recovered-source-libraries.txt"
+          foreach ($line in Get-Content -LiteralPath $manifest) {
+              if ([string]::IsNullOrWhiteSpace($line)) {
+                  continue
+              }
+              $parts = $line -split "\|", 2
+              if ($parts.Count -ne 2 -or
+                  [string]::IsNullOrWhiteSpace($parts[0]) -or
+                  [string]::IsNullOrWhiteSpace($parts[1]) -or
+                  [IO.Path]::IsPathRooted($parts[1]) -or
+                  $parts[1] -match '[\\/]' -or
+                  [IO.Path]::GetExtension($parts[1]) -ne ".csproj") {
+                  throw "Recovered source manifest contains an invalid or machine-specific entry: $line"
+              }
+          }
+
+          Copy-Item -LiteralPath $packageRoot -Destination $smokeRoot -Recurse
+
+      - name: Verify clean single-file package copy
+        run: |
+          $smokeRoot = Join-Path `
+            ([IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:SMOKE_DIRECTORY))) `
+            $env:PACKAGE_NAME
+          powershell -NoProfile -ExecutionPolicy Bypass `
+            -File .\scripts\Test-RecoveredStartup.ps1 `
+            -Configuration $env:CONFIGURATION `
+            -OutputDirectory $smokeRoot `
+            -SingleFile
+
+      - name: Create ZIP and SHA-256 checksum
+        run: |
+          $packageRoot = Join-Path `
+            ([IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:PACKAGE_DIRECTORY))) `
+            $env:PACKAGE_NAME
+          $archiveDirectory = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:ARCHIVE_DIRECTORY))
+          if (Test-Path -LiteralPath $archiveDirectory) {
+              Remove-Item -LiteralPath $archiveDirectory -Recurse -Force
+          }
+          New-Item -ItemType Directory -Path $archiveDirectory | Out-Null
+
+          $zipPath = Join-Path $archiveDirectory "$($env:PACKAGE_NAME).zip"
+          Compress-Archive -LiteralPath $packageRoot -DestinationPath $zipPath -CompressionLevel Optimal
+
+          $checksumPath = "$zipPath.sha256"
+          $hash = Get-FileHash -LiteralPath $zipPath -Algorithm SHA256
+          "$($hash.Hash.ToLowerInvariant())  $([IO.Path]::GetFileName($zipPath))" |
+            Set-Content -LiteralPath $checksumPath -Encoding ascii
+
+          "ZIP_PATH=$zipPath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "CHECKSUM_PATH=$checksumPath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Extract and validate archived package
+        run: |
+          $extractDirectory = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:EXTRACT_DIRECTORY))
+          if (Test-Path -LiteralPath $extractDirectory) {
+              Remove-Item -LiteralPath $extractDirectory -Recurse -Force
+          }
+          Expand-Archive -LiteralPath $env:ZIP_PATH -DestinationPath $extractDirectory
+
+          $packageRoot = Join-Path $extractDirectory $env:PACKAGE_NAME
+          foreach ($requiredPath in @(
+              "pvfUtility.exe",
+              "Options\AppConfig.json",
+              "Options\Bookmarks.json",
+              "Defaults\Options\AppConfig.json",
+              "Resources\AgentKnowledge",
+              "Resources\OfficialAnnotationTranslation",
+              "recovered-source-libraries.txt"
+          )) {
+              if (-not (Test-Path -LiteralPath (Join-Path $packageRoot $requiredPath))) {
+                  throw "Archived release entry not found: $requiredPath"
+              }
+          }
+
+          $unexpectedFiles = @(Get-ChildItem -LiteralPath $packageRoot -File -Recurse | Where-Object {
+              $_.Extension -in @(".dll", ".pdb") -or
+              $_.Name.EndsWith(".deps.json", [StringComparison]::OrdinalIgnoreCase) -or
+              $_.Name.EndsWith(".runtimeconfig.json", [StringComparison]::OrdinalIgnoreCase)
+          })
+          if ($unexpectedFiles.Count -gt 0) {
+              throw "Archived release contains unexpected standalone files: $($unexpectedFiles.FullName -join ', ')"
+          }
+
+      - name: Verify extracted single-file package
+        run: |
+          $packageRoot = Join-Path `
+            ([IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:EXTRACT_DIRECTORY))) `
+            $env:PACKAGE_NAME
+          powershell -NoProfile -ExecutionPolicy Bypass `
+            -File .\scripts\Test-RecoveredStartup.ps1 `
+            -Configuration $env:CONFIGURATION `
+            -OutputDirectory $packageRoot `
+            -SingleFile
+
+      - name: Upload verified workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.metadata.outputs.package_name }}
+          path: artifacts/release/archive/*
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Ensure release tag targets this build
+        run: |
+          git fetch --tags --force
+          $tagReference = "refs/tags/$env:RELEASE_TAG"
+          git show-ref --verify --quiet $tagReference
+          if ($LASTEXITCODE -ne 0) {
+              git tag $env:RELEASE_TAG $env:GITHUB_SHA
+              git push origin $tagReference
+              if ($LASTEXITCODE -ne 0) {
+                  throw "Failed to push release tag $($env:RELEASE_TAG)."
+              }
+          }
+
+          $tagCommit = (git rev-parse "$tagReference^{commit}").Trim()
+          $buildCommit = (git rev-parse "$($env:GITHUB_SHA)^{commit}").Trim()
+          if ($tagCommit -ne $buildCommit) {
+              throw "Release tag $($env:RELEASE_TAG) targets $tagCommit, but this workflow built $buildCommit."
+          }
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY *> $null
+          if ($LASTEXITCODE -eq 0) {
+              gh release upload $env:RELEASE_TAG `
+                $env:ZIP_PATH `
+                $env:CHECKSUM_PATH `
+                --clobber `
+                --repo $env:GITHUB_REPOSITORY
+              if ($LASTEXITCODE -ne 0) {
+                  throw "Failed to replace assets on release $($env:RELEASE_TAG)."
+              }
+          }
+          else {
+              $arguments = @(
+                  "release", "create", $env:RELEASE_TAG,
+                  $env:ZIP_PATH, $env:CHECKSUM_PATH,
+                  "--verify-tag",
+                  "--title", $env:RELEASE_TAG,
+                  "--generate-notes",
+                  "--repo", $env:GITHUB_REPOSITORY
+              )
+              if ($env:IS_PRERELEASE -eq "true") {
+                  $arguments += "--prerelease"
+              }
+              else {
+                  $arguments += "--latest"
+              }
+
+              & gh @arguments
+              if ($LASTEXITCODE -ne 0) {
+                  throw "Failed to create release $($env:RELEASE_TAG)."
+              }
+          }

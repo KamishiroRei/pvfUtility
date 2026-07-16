@@ -3,7 +3,8 @@ param(
     [string]$TargetFramework = "net10.0-windows",
     [string]$RuntimeIdentifier = "win-x64",
     [string]$OutputDirectory,
-    [int]$ObservationSeconds = 15
+    [int]$ObservationSeconds = 15,
+    [switch]$SingleFile
 )
 
 $ErrorActionPreference = "Stop"
@@ -61,11 +62,18 @@ $executable = Join-Path $OutputDirectory "pvfUtility.exe"
 $sourceAssemblyManifest = Join-Path $OutputDirectory "recovered-source-libraries.txt"
 $errorTitlePattern = "Error|Exception|$([char]0x9519)$([char]0x8BEF)|$([char]0x5F02)$([char]0x5E38)"
 
+if ($ObservationSeconds -lt 15) {
+    throw "ObservationSeconds must be at least 15 seconds."
+}
 if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
     throw "Recovered executable not found: $executable"
 }
+if ($SingleFile -and -not (Test-Path -LiteralPath $sourceAssemblyManifest -PathType Leaf)) {
+    throw "Recovered source assembly manifest not found for single-file verification: $sourceAssemblyManifest"
+}
 
 $verifiedSourceAssemblies = @{}
+$verifiedSourceAssemblyCount = 0
 if (Test-Path -LiteralPath $sourceAssemblyManifest -PathType Leaf) {
     foreach ($line in Get-Content -LiteralPath $sourceAssemblyManifest) {
         if ([string]::IsNullOrWhiteSpace($line)) {
@@ -111,6 +119,10 @@ if (Test-Path -LiteralPath $sourceAssemblyManifest -PathType Leaf) {
 
         if ($null -eq $sourceAssembly) {
             throw "Recovered source assembly build output not found: $assemblyName ($sourceBuildDirectory)"
+        }
+        $verifiedSourceAssemblyCount++
+        if ($SingleFile) {
+            continue
         }
         if (-not (Test-Path -LiteralPath $outputAssembly -PathType Leaf)) {
             throw "Recovered source assembly was not copied to the application output: $outputAssembly"
@@ -228,7 +240,8 @@ try {
         }
     }
 
-    Write-Output "PASS: fully populated main window remained available for $ObservationSeconds seconds with no error window. Recovered source assemblies verified: $($verifiedSourceAssemblies.Count); loaded during startup: $loadedRecoveredAssemblies."
+    $publishMode = if ($SingleFile) { "single-file" } else { "directory" }
+    Write-Output "PASS: fully populated main window remained available for $ObservationSeconds seconds with no error window. Publish mode: $publishMode; recovered source assemblies verified: $verifiedSourceAssemblyCount; loaded during startup: $loadedRecoveredAssemblies."
 }
 finally {
     $process.Refresh()

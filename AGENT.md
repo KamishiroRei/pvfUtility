@@ -252,8 +252,46 @@ dotnet publish .\pvfUtility.csproj `
 
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Release `
   -OutputDirectory .\artifacts\publish\win-x64
 ```
+
+GitHub 自包含单文件发布必须使用仓库内的发布配置，并同时验证普通构建和单文件目录：
+
+```powershell
+dotnet restore .\pvfUtility.sln -r win-x64
+
+Remove-Item `
+  -LiteralPath .\artifacts\publish\github-win-x64 `
+  -Recurse `
+  -Force `
+  -ErrorAction SilentlyContinue
+
+dotnet publish .\pvfUtility.csproj `
+  -c Release `
+  -r win-x64 `
+  --self-contained true `
+  --no-restore `
+  -p:PublishProfile=GitHubRelease `
+  -o .\artifacts\publish\github-win-x64
+
+Copy-Item `
+  -LiteralPath .\artifacts\publish\github-win-x64\Defaults\Options `
+  -Destination .\artifacts\publish\github-win-x64\Options `
+  -Recurse
+
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Release
+
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Release `
+  -OutputDirectory .\artifacts\publish\github-win-x64 `
+  -SingleFile
+```
+
+单文件 Release 中不得包含开发机运行时生成的 `/Options`、WebView2 用户数据或启动后释放的 `7z64.dll`。可编辑 `Options` 必须从已跟踪的 `Defaults\Options` 生成；外置 `Resources` 只能来自 MSBuild 发布输出，不能复制整个源码资源树。
 
 ## 验证矩阵
 
