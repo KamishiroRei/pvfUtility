@@ -195,16 +195,6 @@
     {
       "PvfCommentType": "Section",
       "FileType": "tbl",
-      "Section": "绿徽",
-      "Title": "绿色徽章价格参数",
-      "Comment": "价格表中的绿色徽章专用参数行，包含三个数值控制项。该中文标签必须原样保留；三列与售价、修理或其他价格因子的精确对应需消费逻辑验证。",
-      "OfficialDescription": null,
-      "Closing": false,
-      "Authors": "Codex"
-    },
-    {
-      "PvfCommentType": "Section",
-      "FileType": "tbl",
       "Section": "repair cost",
       "Title": "修理费用系数",
       "Comment": "装备价格表使用的修理费用单值系数。它是价格/修理计算的静态输入之一，实际金币结果还取决于装备等级、耐久损失及运行时公式。",

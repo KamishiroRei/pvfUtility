@@ -6315,26 +6315,6 @@
     {
       "PvfCommentType": "Section",
       "FileType": "act",
-      "Section": "附加状态字符串ID",
-      "Title": "检查特定 ID 的附加状态（ID 请咨询负责客户端开发者）",
-      "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[CHECK SPECIFIC BUFF]**  [附加状态字符串ID]    // 检查特定 ID 的附加状态（ID 请咨询负责客户端开发者）\n```",
-      "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[CHECK SPECIFIC BUFF]**  [附加状态字符串ID]    // 检查特定 ID 的附加状态（ID 请咨询负责客户端开发者）\n```",
-      "Closing": false,
-      "Authors": null
-    },
-    {
-      "PvfCommentType": "Section",
-      "FileType": "act",
-      "Section": "比较符号",
-      "Title": "X轴速度",
-      "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[X SPEED]** [比较符号] 0    // X轴速度 ：不支持由粒子移动控制的部分\n```\n\n```pvf\n**[Y SPEED]** [比较符号] 0    // Y轴速度 ：不支持由粒子移动控制的部分\n```\n\n```pvf\n**[Z SPEED]** [比较符号] 0    // Z轴速度 ：不支持由粒子移动控制的部分\n```\n\n```pvf\n**[CHARGED TIME]** [比较符号] 0 // 蓄力时间\n```",
-      "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[X SPEED]** [比较符号] 0    // X轴速度 ：不支持由粒子移动控制的部分\n```\n\n```pvf\n**[Y SPEED]** [比较符号] 0    // Y轴速度 ：不支持由粒子移动控制的部分\n```\n\n```pvf\n**[Z SPEED]** [比较符号] 0    // Z轴速度 ：不支持由粒子移动控制的部分\n```\n\n```pvf\n**[CHARGED TIME]** [比较符号] 0 // 蓄力时间\n```",
-      "Closing": false,
-      "Authors": null
-    },
-    {
-      "PvfCommentType": "Section",
-      "FileType": "act",
       "Section": "=>",
       "Title": "Z坐标检查",
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ZPOS]** [>]([=], [<], [>=], [<=], [=>], [=<]) 0    // Z坐标检查。\n```\n\n```pvf\n**[HP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 50 [%](或 [POINT])    // HP检查。\n```\n\n```pvf\n**[MP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 100 [%](或 [POINT])    // MP检查。\n```",
@@ -6355,30 +6335,10 @@
     {
       "PvfCommentType": "Section",
       "FileType": "act",
-      "Section": "目标",
-      "Title": "命令执行控制部分",
-      "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n// 命令执行控制部分\n    **[DO BEHAVIOR]**    [目标]    0                // 对哪个目标执行第几个行为？\n```\n\n```pvf\n// PROC 动作的命令执行控制部分\n    **[DO PROC BEHAVIOR]**    [目标]    0                // 对哪个目标执行第几个行为？\n```\n\n```pvf\n// 命令执行控制部分\n    **[DELAY DO BEHAVIOR]**    [目标]    0  1000            // 对哪个目标执行第几个行为？延迟指定时间后执行。\n                                // 两个整数参数（行为索引，延迟时间（单位：毫秒））\n```",
-      "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n// 命令执行控制部分\n    **[DO BEHAVIOR]**    [目标]    0                // 对哪个目标执行第几个行为？\n```\n\n```pvf\n// PROC 动作的命令执行控制部分\n    **[DO PROC BEHAVIOR]**    [目标]    0                // 对哪个目标执行第几个行为？\n```\n\n```pvf\n// 命令执行控制部分\n    **[DELAY DO BEHAVIOR]**    [目标]    0  1000            // 对哪个目标执行第几个行为？延迟指定时间后执行。\n                                // 两个整数参数（行为索引，延迟时间（单位：毫秒））\n```",
-      "Closing": false,
-      "Authors": null
-    },
-    {
-      "PvfCommentType": "Section",
-      "FileType": "act",
       "Section": "pass all",
       "Title": "改变通行类型",
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[SET PASSTYPE]**  [pass all]     // 改变通行类型。仅被动对象有效。与被动对象脚本的 [pass type] 相同。均可通行\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//{opt1}{string}\n\t\t{opt1}{exp}全部通过{/exp}[pass all]\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[SET PASSTYPE]**  [pass all]     // 改变通行类型。仅被动对象有效。与被动对象脚本的 [pass type] 相同。均可通行\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//{opt1}{string}\n\t\t{opt1}{exp}全部通过{/exp}[pass all]\n```",
-      "Closing": false,
-      "Authors": null
-    },
-    {
-      "PvfCommentType": "Section",
-      "FileType": "act",
-      "Section": "附加状态ID",
-      "Title": "ID 请咨询客户端开发者！",
-      "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[REMOVE APPENDAGE]**[附加状态ID]             // ID 请咨询客户端开发者！\n```",
-      "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[REMOVE APPENDAGE]**[附加状态ID]             // ID 请咨询客户端开发者！\n```",
       "Closing": false,
       "Authors": null
     },

@@ -5,15 +5,6 @@
     {
       "PvfCommentType": "Section",
       "FileType": "chr",
-      "Section": "劍影",
-      "Title": "剑影（男鬼剑第五转职）",
-      "Comment": "剑影：男鬼剑士的第五转职职业，使用怨鬼之力的敏捷型剑士。\n\n在 [character job] 标签中作为职业 token 使用：`[swordman]` 为男鬼剑基础职业，具体转职分支通过 growtype 区分。",
-      "Closing": false,
-      "Authors": "lostluna1"
-    },
-    {
-      "PvfCommentType": "Section",
-      "FileType": "chr",
       "Section": "awakening 1",
       "Title": "第一次觉醒",
       "Comment": "第一次觉醒（一觉）：指定该职业的一觉技能、属性和外观变化配置。\n\n觉醒后角色可获得觉醒技能，并通常伴随外观变化（如觉醒装扮）。在 .chr 文件中，此块定义觉醒后追加的能力值和技能。",
