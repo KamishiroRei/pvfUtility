@@ -17,7 +17,7 @@
       "FileType": "evt",
       "Section": "end",
       "Title": "结束时间",
-      "Comment": "结束时间\n\n活动的结束日期和时间。超过此时间后活动将自动关闭。",
+      "Comment": "活动的静态结束时间字段。具体日期格式、时区和关闭逻辑必须按同文件结构与运行环境验证；静态时间不证明服务端已部署该活动。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "释然"
@@ -57,7 +57,7 @@
       "FileType": "evt",
       "Section": "mail content",
       "Title": "邮件内容",
-      "Comment": "邮件内容\n\n配置活动通过邮件发送给玩家的奖励内容、发件人名称和邮件正文文本。",
+      "Comment": "活动邮件的正文文本字段。奖励对象、数量、发件条件和有效期由相邻奖励/邮件字段控制，不能只从正文反推实际发放内容。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "无名氏"
@@ -67,7 +67,7 @@
       "FileType": "evt",
       "Section": "monster id",
       "Title": "怪物ID",
-      "Comment": "怪物ID\n\n活动副本或活动场景中出现的怪物的唯一标识号，对应 Monster.lst 或 mob 文件中的怪物编号。",
+      "Comment": "活动配置引用的怪物 ID。必须通过 monster/monster.lst 解析到目标怪物文件；裸数字和文件名都不证明怪物会在活动中实际生成。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -97,7 +97,7 @@
       "FileType": "evt",
       "Section": "Seria Blessing",
       "Title": "赛丽亚的祝福活动",
-      "Comment": "赛丽亚的祝福活动\n\n与NPC赛丽亚相关的特殊福利活动配置，通常提供每日登录奖励或新手成长支持。",
+      "Comment": "名为 Seria Blessing 的活动配置块。名称只标识该活动数据域，具体奖励、日期、登录条件或新手规则必须读取其子字段，不能仅凭活动名推断。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
@@ -107,7 +107,7 @@
       "FileType": "evt",
       "Section": "start",
       "Title": "开始时间",
-      "Comment": "开始时间\n\n活动的开始日期和时间。到达此时间后活动将自动开启。",
+      "Comment": "活动的静态开始时间字段。具体日期格式、时区和是否由服务端实际启用必须按同文件结构与运行环境验证；到达该时间不等于活动必然开放。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "释然"
@@ -131,6 +131,2306 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "required Dungeon count",
+      "Title": "所需副本次数",
+      "Comment": "活动事件数据中的 [required Dungeon count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "marking reward",
+      "Title": "连线标记奖励",
+      "Comment": "活动事件数据中的 [marking reward] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "marking mail title",
+      "Title": "连线标记邮件标题",
+      "Comment": "活动事件数据中的 [marking mail title] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "marking mail content",
+      "Title": "连线标记邮件内容",
+      "Comment": "活动事件数据中的 [marking mail content] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reset time",
+      "Title": "重置时间",
+      "Comment": "活动事件数据中的 [reset time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward time",
+      "Title": "奖励时间",
+      "Comment": "活动事件数据中的 [reward time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "db table",
+      "Title": "数据库表",
+      "Comment": "活动事件数据中的 [db table] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "mail title",
+      "Title": "邮件标题",
+      "Comment": "活动事件数据中的 [mail title] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "exclude job type list",
+      "Title": "排除职业类型列表",
+      "Comment": "活动事件数据中的 [exclude job type list] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "second grow type",
+      "Title": "第二成长类型",
+      "Comment": "活动事件数据中的 [second grow type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "max regen tick",
+      "Title": "上限恢复周期",
+      "Comment": "活动事件数据中的 [max regen tick] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "ignored area",
+      "Title": "忽略区域",
+      "Comment": "活动事件数据中的 [ignored area] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "area",
+      "Title": "区域",
+      "Comment": "活动事件数据中的 [area] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "pos",
+      "Title": "坐标",
+      "Comment": "活动事件数据中的 [pos] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "default",
+      "Title": "默认",
+      "Comment": "活动事件数据中的 [default] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "y",
+      "Title": "Y 坐标",
+      "Comment": "活动事件数据中的 [y] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "z",
+      "Title": "Z 坐标",
+      "Comment": "活动事件数据中的 [z] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "slot",
+      "Title": "槽位",
+      "Comment": "活动事件数据中的 [slot] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "shooting start hour",
+      "Title": "shooting start hour（原始标签）",
+      "Comment": "活动事件数据中的 [shooting start hour] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "shooting end hour",
+      "Title": "shooting end hour（原始标签）",
+      "Comment": "活动事件数据中的 [shooting end hour] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "base reward hour",
+      "Title": "基础奖励小时",
+      "Comment": "活动事件数据中的 [base reward hour] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "payment item",
+      "Title": "支付物品",
+      "Comment": "活动事件数据中的 [payment item] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "item",
+      "Title": "物品",
+      "Comment": "活动事件数据中的 [item] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "count",
+      "Title": "数量",
+      "Comment": "活动事件数据中的 [count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "price",
+      "Title": "价格",
+      "Comment": "活动事件数据中的 [price] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "condition account",
+      "Title": "条件账号",
+      "Comment": "活动事件数据中的 [condition account] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "condition charac",
+      "Title": "条件角色",
+      "Comment": "活动事件数据中的 [condition charac] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "condition daily",
+      "Title": "条件每日",
+      "Comment": "活动事件数据中的 [condition daily] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward str",
+      "Title": "奖励文本",
+      "Comment": "活动事件数据中的 [reward str] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "magic lamp item index",
+      "Title": "魔法神灯物品索引",
+      "Comment": "活动事件数据中的 [magic lamp item index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "group min max level",
+      "Title": "分组下限上限等级",
+      "Comment": "活动事件数据中的 [group min max level] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "group support level",
+      "Title": "分组支援等级",
+      "Comment": "活动事件数据中的 [group support level] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "level up support item",
+      "Title": "level up support item（原始标签）",
+      "Comment": "活动事件数据中的 [level up support item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "job type",
+      "Title": "职业类型",
+      "Comment": "活动事件数据中的 [job type] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "step",
+      "Title": "阶段",
+      "Comment": "活动事件数据中的 [step] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "level",
+      "Title": "等级",
+      "Comment": "活动事件数据中的 [level] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event schedule list",
+      "Title": "活动事件日程列表",
+      "Comment": "活动事件数据中的 [event schedule list] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "required condition",
+      "Title": "所需条件",
+      "Comment": "活动事件数据中的 [required condition] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "required Quest count",
+      "Title": "所需任务次数",
+      "Comment": "活动事件数据中的 [required Quest count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "quest item",
+      "Title": "任务物品",
+      "Comment": "活动事件数据中的 [quest item] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "fatigue reward",
+      "Title": "疲劳值奖励",
+      "Comment": "活动事件数据中的 [fatigue reward] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "quest reward",
+      "Title": "任务奖励",
+      "Comment": "活动事件数据中的 [quest reward] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "final reward",
+      "Title": "最终奖励奖励",
+      "Comment": "活动事件数据中的 [final reward] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "minimum sender level",
+      "Title": "最低发送方等级",
+      "Comment": "活动事件数据中的 [minimum sender level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "receiver level range",
+      "Title": "接收方等级范围",
+      "Comment": "活动事件数据中的 [receiver level range] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "max send count",
+      "Title": "上限发送数量",
+      "Comment": "活动事件数据中的 [max send count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "send gold",
+      "Title": "发送金币",
+      "Comment": "活动事件数据中的 [send gold] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "send item info",
+      "Title": "发送物品信息",
+      "Comment": "活动事件数据中的 [send item info] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "sender reward item info by count",
+      "Title": "发送方奖励物品信息按数量",
+      "Comment": "活动事件数据中的 [sender reward item info by count] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "receiver reward item info",
+      "Title": "接收方奖励物品信息",
+      "Comment": "活动事件数据中的 [receiver reward item info] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "sender mail title",
+      "Title": "发送方邮件标题",
+      "Comment": "活动事件数据中的 [sender mail title] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "sender mail content",
+      "Title": "发送方邮件内容",
+      "Comment": "活动事件数据中的 [sender mail content] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "receiver mail content",
+      "Title": "接收方邮件内容",
+      "Comment": "活动事件数据中的 [receiver mail content] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "npc list",
+      "Title": "NPC列表",
+      "Comment": "活动事件数据中的 [npc list] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示 NPC ID，必须通过 NPC registry 解析，不能按数字形状猜测。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "check time for first show ui",
+      "Title": "check time for first show ui（原始标签）",
+      "Comment": "活动事件数据中的 [check time for first show ui] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "condition fatigue",
+      "Title": "条件疲劳值",
+      "Comment": "活动事件数据中的 [condition fatigue] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "condition time",
+      "Title": "条件时间",
+      "Comment": "活动事件数据中的 [condition time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "npc reward data",
+      "Title": "NPC奖励数据",
+      "Comment": "活动事件数据中的 [npc reward data] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "facebook like wday info",
+      "Title": "facebook like wday info（原始标签）",
+      "Comment": "活动事件数据中的 [facebook like wday info] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "max proper dungeon clear count",
+      "Title": "max proper dungeon clear count（原始标签）",
+      "Comment": "活动事件数据中的 [max proper dungeon clear count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "material item info list",
+      "Title": "材料物品信息列表",
+      "Comment": "活动事件数据中的 [material item info list] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward booster item index",
+      "Title": "奖励助推器物品索引",
+      "Comment": "活动事件数据中的 [reward booster item index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "day",
+      "Title": "天数",
+      "Comment": "活动事件数据中的 [day] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "bonus item by purchase count",
+      "Title": "额外奖励物品按购买数量",
+      "Comment": "活动事件数据中的 [bonus item by purchase count] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "package id",
+      "Title": "礼包ID",
+      "Comment": "活动事件数据中的 [package id] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "challenge attendance",
+      "Title": "challenge attendance（原始标签）",
+      "Comment": "活动事件数据中的 [challenge attendance] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "weekday gift now",
+      "Title": "weekday gift now（原始标签）",
+      "Comment": "活动事件数据中的 [weekday gift now] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "weekend gift now",
+      "Title": "weekend gift now（原始标签）",
+      "Comment": "活动事件数据中的 [weekend gift now] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "weekday gift night",
+      "Title": "工作日赠礼夜间",
+      "Comment": "活动事件数据中的 [weekday gift night] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "weekend gift night",
+      "Title": "周末赠礼夜间",
+      "Comment": "活动事件数据中的 [weekend gift night] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "weekday step reward",
+      "Title": "工作日阶段奖励",
+      "Comment": "活动事件数据中的 [weekday step reward] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "weekend step reward",
+      "Title": "周末阶段奖励",
+      "Comment": "活动事件数据中的 [weekend step reward] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event object list",
+      "Title": "活动事件对象列表",
+      "Comment": "活动事件数据中的 [event object list] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "object index",
+      "Title": "对象索引",
+      "Comment": "活动事件数据中的 [object index] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "stay animation",
+      "Title": "待机动画",
+      "Comment": "活动事件数据中的 [stay animation] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "walk animation",
+      "Title": "行走动画",
+      "Comment": "活动事件数据中的 [walk animation] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "run animation",
+      "Title": "奔跑动画",
+      "Comment": "活动事件数据中的 [run animation] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "ramdom animation",
+      "Title": "随机动画（源拼写）",
+      "Comment": "活动事件数据中的 [ramdom animation] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "object max count",
+      "Title": "对象上限数量",
+      "Comment": "活动事件数据中的 [object max count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "using item",
+      "Title": "使用物品",
+      "Comment": "活动事件数据中的 [using item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "fatigue",
+      "Title": "疲劳值",
+      "Comment": "活动事件数据中的 [fatigue] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward list",
+      "Title": "奖励列表",
+      "Comment": "活动事件数据中的 [reward list] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward item mail expire",
+      "Title": "奖励物品邮件过期",
+      "Comment": "活动事件数据中的 [reward item mail expire] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "sound info",
+      "Title": "音效信息",
+      "Comment": "活动事件数据中的 [sound info] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward item",
+      "Title": "奖励物品",
+      "Comment": "活动事件数据中的 [reward item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "ani list",
+      "Title": "动画列表",
+      "Comment": "活动事件数据中的 [ani list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "finish ani",
+      "Title": "完成动画",
+      "Comment": "活动事件数据中的 [finish ani] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "finish sound",
+      "Title": "完成音效",
+      "Comment": "活动事件数据中的 [finish sound] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "Dialog",
+      "Title": "对话",
+      "Comment": "活动事件数据中的 [Dialog] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "NPC",
+      "Title": "NPC",
+      "Comment": "活动事件数据中的 [NPC] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。其中数字若表示 NPC ID，必须通过 NPC registry 解析，不能按数字形状猜测。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "common cool time",
+      "Title": "公共冷却时间",
+      "Comment": "活动事件数据中的 [common cool time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "ridable info",
+      "Title": "骑乘活动信息",
+      "Comment": "活动事件数据中的 [ridable info] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "ridable quest world drop",
+      "Title": "骑乘活动任务世界掉落",
+      "Comment": "活动事件数据中的 [ridable quest world drop] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "ridable event end",
+      "Title": "骑乘活动活动事件结束",
+      "Comment": "活动事件数据中的 [ridable event end] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "pacakege item",
+      "Title": "礼包物品（源拼写）",
+      "Comment": "活动事件数据中的 [pacakege item] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward equip item",
+      "Title": "奖励装备物品",
+      "Comment": "活动事件数据中的 [reward equip item] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "swordman",
+      "Title": "swordman（原始标签）",
+      "Comment": "活动事件数据中的 [swordman] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "fighter",
+      "Title": "女格斗家",
+      "Comment": "活动事件数据中的 [fighter] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "at fighter",
+      "Title": "男格斗家",
+      "Comment": "活动事件数据中的 [at fighter] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "gunner",
+      "Title": "男神枪手",
+      "Comment": "活动事件数据中的 [gunner] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "at gunner",
+      "Title": "女神枪手",
+      "Comment": "活动事件数据中的 [at gunner] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "mage",
+      "Title": "mage（原始标签）",
+      "Comment": "活动事件数据中的 [mage] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "priest",
+      "Title": "priest（原始标签）",
+      "Comment": "活动事件数据中的 [priest] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "at mage",
+      "Title": "男魔法师",
+      "Comment": "活动事件数据中的 [at mage] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "demonic swordman",
+      "Title": "女鬼剑士",
+      "Comment": "活动事件数据中的 [demonic swordman] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "creator mage",
+      "Title": "缔造者",
+      "Comment": "活动事件数据中的 [creator mage] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward fatigue",
+      "Title": "奖励疲劳值",
+      "Comment": "活动事件数据中的 [reward fatigue] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "gift list",
+      "Title": "赠礼列表",
+      "Comment": "活动事件数据中的 [gift list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event",
+      "Title": "活动事件",
+      "Comment": "活动事件数据中的 [event] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "title",
+      "Title": "标题",
+      "Comment": "活动事件数据中的 [title] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "explain",
+      "Title": "说明",
+      "Comment": "活动事件数据中的 [explain] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "item idx",
+      "Title": "item idx（原始标签）",
+      "Comment": "活动事件数据中的 [item idx] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "item idx start",
+      "Title": "item idx start（原始标签）",
+      "Comment": "活动事件数据中的 [item idx start] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "item idx end",
+      "Title": "item idx end（原始标签）",
+      "Comment": "活动事件数据中的 [item idx end] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "send",
+      "Title": "发送",
+      "Comment": "活动事件数据中的 [send] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "purchase start count",
+      "Title": "购买开始数量",
+      "Comment": "活动事件数据中的 [purchase start count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "purchase end count",
+      "Title": "购买结束数量",
+      "Comment": "活动事件数据中的 [purchase end count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "purchase mutiple number",
+      "Title": "购买倍数（源拼写）",
+      "Comment": "活动事件数据中的 [purchase mutiple number] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "send mail",
+      "Title": "发送邮件",
+      "Comment": "活动事件数据中的 [send mail] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "inven",
+      "Title": "背包",
+      "Comment": "活动事件数据中的 [inven] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "detail",
+      "Title": "详情",
+      "Comment": "活动事件数据中的 [detail] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "play time",
+      "Title": "游玩时间",
+      "Comment": "活动事件数据中的 [play time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "number of time",
+      "Title": "number of time（原始标签）",
+      "Comment": "活动事件数据中的 [number of time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "start tag",
+      "Title": "开始标记",
+      "Comment": "活动事件数据中的 [start tag] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "end tag",
+      "Title": "结束标记",
+      "Comment": "活动事件数据中的 [end tag] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "material item",
+      "Title": "材料物品",
+      "Comment": "活动事件数据中的 [material item] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "exchange rule",
+      "Title": "兑换规则",
+      "Comment": "活动事件数据中的 [exchange rule] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "gift npc log",
+      "Title": "赠礼NPC日志",
+      "Comment": "活动事件数据中的 [gift npc log] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "gift item log",
+      "Title": "赠礼物品日志",
+      "Comment": "活动事件数据中的 [gift item log] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "index",
+      "Title": "索引",
+      "Comment": "活动事件数据中的 [index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "can not give item",
+      "Title": "不可赠送物品",
+      "Comment": "活动事件数据中的 [can not give item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "good",
+      "Title": "喜爱",
+      "Comment": "活动事件数据中的 [good] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "bad",
+      "Title": "厌恶",
+      "Comment": "活动事件数据中的 [bad] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "new account time",
+      "Title": "新建账号时间",
+      "Comment": "活动事件数据中的 [new account time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward stackable item",
+      "Title": "奖励消耗品/材料物品",
+      "Comment": "活动事件数据中的 [reward stackable item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示消耗品/材料 ID，必须通过 stackable registry 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "recv check db table",
+      "Title": "接收检查数据库表",
+      "Comment": "活动事件数据中的 [recv check db table] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "level up",
+      "Title": "level up（原始标签）",
+      "Comment": "活动事件数据中的 [level up] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "level up reward end",
+      "Title": "level up reward end（原始标签）",
+      "Comment": "活动事件数据中的 [level up reward end] 存在标记。已见为无附加值的存在标记。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "creatable count",
+      "Title": "可创建数量",
+      "Comment": "活动事件数据中的 [creatable count] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "jumping level",
+      "Title": "跳跃角色等级",
+      "Comment": "活动事件数据中的 [jumping level] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "disable create charac",
+      "Title": "禁用创建角色",
+      "Comment": "活动事件数据中的 [disable create charac] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "job fatigue",
+      "Title": "职业疲劳值",
+      "Comment": "活动事件数据中的 [job fatigue] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event_list",
+      "Title": "活动事件列表",
+      "Comment": "活动事件数据中的 [event_list] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "record type",
+      "Title": "记录类型",
+      "Comment": "活动事件数据中的 [record type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "state",
+      "Title": "状态",
+      "Comment": "活动事件数据中的 [state] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "hero event",
+      "Title": "英雄活动事件",
+      "Comment": "活动事件数据中的 [hero event] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "mission",
+      "Title": "任务目标",
+      "Comment": "活动事件数据中的 [mission] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "type",
+      "Title": "类型",
+      "Comment": "活动事件数据中的 [type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "repeat",
+      "Title": "重复",
+      "Comment": "活动事件数据中的 [repeat] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reset",
+      "Title": "重置",
+      "Comment": "活动事件数据中的 [reset] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "condition",
+      "Title": "条件",
+      "Comment": "活动事件数据中的 [condition] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "gift growth weapon box",
+      "Title": "gift growth weapon box（原始标签）",
+      "Comment": "活动事件数据中的 [gift growth weapon box] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "growth material item",
+      "Title": "成长材料物品",
+      "Comment": "活动事件数据中的 [growth material item] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "growth material item max",
+      "Title": "成长材料物品上限",
+      "Comment": "活动事件数据中的 [growth material item max] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event bubble max",
+      "Title": "活动事件气泡上限",
+      "Comment": "活动事件数据中的 [event bubble max] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event sand max",
+      "Title": "活动事件沙粒上限",
+      "Comment": "活动事件数据中的 [event sand max] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "growth equipment reward list",
+      "Title": "成长装备奖励列表",
+      "Comment": "活动事件数据中的 [growth equipment reward list] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "gage percent",
+      "Title": "计量槽百分比",
+      "Comment": "活动事件数据中的 [gage percent] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "max gage exp",
+      "Title": "上限计量槽经验",
+      "Comment": "活动事件数据中的 [max gage exp] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "capsule id",
+      "Title": "胶囊ID",
+      "Comment": "活动事件数据中的 [capsule id] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "user type",
+      "Title": "用户类型",
+      "Comment": "活动事件数据中的 [user type] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "material",
+      "Title": "材料",
+      "Comment": "活动事件数据中的 [material] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "random reward item",
+      "Title": "随机奖励物品",
+      "Comment": "活动事件数据中的 [random reward item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "world drop",
+      "Title": "世界掉落",
+      "Comment": "活动事件数据中的 [world drop] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "Event Server LevelUp Reward",
+      "Title": "活动服务器升级奖励",
+      "Comment": "活动事件数据中的 [Event Server LevelUp Reward] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "sub type",
+      "Title": "子类型类型",
+      "Comment": "活动事件数据中的 [sub type] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "option",
+      "Title": "选项",
+      "Comment": "活动事件数据中的 [option] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "equipment item",
+      "Title": "装备物品",
+      "Comment": "活动事件数据中的 [equipment item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "stackable item",
+      "Title": "消耗品/材料物品",
+      "Comment": "活动事件数据中的 [stackable item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示消耗品/材料 ID，必须通过 stackable registry 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event id",
+      "Title": "活动事件ID",
+      "Comment": "活动事件数据中的 [event id] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "off",
+      "Title": "关闭",
+      "Comment": "活动事件数据中的 [off] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "id",
+      "Title": "ID",
+      "Comment": "活动事件数据中的 [id] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "ing",
+      "Title": "进行中",
+      "Comment": "活动事件数据中的 [ing] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "link popupwindow type",
+      "Title": "关联弹窗类型",
+      "Comment": "活动事件数据中的 [link popupwindow type] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "popupwindow design",
+      "Title": "popupwindow design（原始标签）",
+      "Comment": "活动事件数据中的 [popupwindow design] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "using ok button",
+      "Title": "using ok button（原始标签）",
+      "Comment": "活动事件数据中的 [using ok button] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "soulmate bank",
+      "Title": "灵魂伴侣储存",
+      "Comment": "活动事件数据中的 [soulmate bank] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "soulmate mind",
+      "Title": "soulmate mind（原始标签）",
+      "Comment": "活动事件数据中的 [soulmate mind] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "exp ratio",
+      "Title": "经验比率",
+      "Comment": "活动事件数据中的 [exp ratio] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "gold ratio",
+      "Title": "金币比率",
+      "Comment": "活动事件数据中的 [gold ratio] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "state up ratio",
+      "Title": "state up ratio（原始标签）",
+      "Comment": "活动事件数据中的 [state up ratio] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "christmas event start",
+      "Title": "圣诞活动活动事件开始",
+      "Comment": "活动事件数据中的 [christmas event start] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "seria room tree material list",
+      "Title": "seria room tree material list（原始标签）",
+      "Comment": "活动事件数据中的 [seria room tree material list] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "seria room deco material list",
+      "Title": "seria room deco material list（原始标签）",
+      "Comment": "活动事件数据中的 [seria room deco material list] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "christmas event end",
+      "Title": "圣诞活动活动事件结束",
+      "Comment": "活动事件数据中的 [christmas event end] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "job const",
+      "Title": "职业常量",
+      "Comment": "活动事件数据中的 [job const] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "grow type",
+      "Title": "成长类型",
+      "Comment": "活动事件数据中的 [grow type] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "awakening type",
+      "Title": "觉醒类型",
+      "Comment": "活动事件数据中的 [awakening type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "skill",
+      "Title": "技能",
+      "Comment": "活动事件数据中的 [skill] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示技能 ID，必须先确定职业分支，再通过对应职业技能 registry 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event avatar list start",
+      "Title": "活动事件装扮列表开始",
+      "Comment": "活动事件数据中的 [event avatar list start] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "avatar list",
+      "Title": "装扮列表",
+      "Comment": "活动事件数据中的 [avatar list] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event avatar list end",
+      "Title": "活动事件装扮列表结束",
+      "Comment": "活动事件数据中的 [event avatar list end] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "accumulate start time",
+      "Title": "累计开始时间",
+      "Comment": "活动事件数据中的 [accumulate start time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "accumulate end time",
+      "Title": "累计结束时间",
+      "Comment": "活动事件数据中的 [accumulate end time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "doblin start time",
+      "Title": "多宾活动开始时间",
+      "Comment": "活动事件数据中的 [doblin start time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "doblin end time",
+      "Title": "多宾活动结束时间",
+      "Comment": "活动事件数据中的 [doblin end time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "doblin reset time",
+      "Title": "多宾活动重置时间",
+      "Comment": "活动事件数据中的 [doblin reset time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "restrict dungeon",
+      "Title": "限制副本",
+      "Comment": "活动事件数据中的 [restrict dungeon] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示副本 ID，必须通过 dungeon registry 解析；静态登记不证明入口开放。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "progress period",
+      "Title": "进行周期周期",
+      "Comment": "活动事件数据中的 [progress period] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "play day count",
+      "Title": "游玩天数数量",
+      "Comment": "活动事件数据中的 [play day count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "coin info",
+      "Title": "硬币信息",
+      "Comment": "活动事件数据中的 [coin info] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "section",
+      "Title": "section（原始标签）",
+      "Comment": "活动事件数据中的 [section] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "select group",
+      "Title": "选择分组",
+      "Comment": "活动事件数据中的 [select group] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "package selection",
+      "Title": "礼包选择",
+      "Comment": "活动事件数据中的 [package selection] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "give group",
+      "Title": "发放分组",
+      "Comment": "活动事件数据中的 [give group] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "event job",
+      "Title": "活动事件职业",
+      "Comment": "活动事件数据中的 [event job] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "change able creature lev",
+      "Title": "change able creature lev（原始标签）",
+      "Comment": "活动事件数据中的 [change able creature lev] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "change infinity creature",
+      "Title": "变更无限期宠物",
+      "Comment": "活动事件数据中的 [change infinity creature] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "client infinity creature",
+      "Title": "客户端无限期宠物",
+      "Comment": "活动事件数据中的 [client infinity creature] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "create character gift",
+      "Title": "创建角色赠礼",
+      "Comment": "活动事件数据中的 [create character gift] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "apply job",
+      "Title": "适用职业",
+      "Comment": "活动事件数据中的 [apply job] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "new account event start time",
+      "Title": "新建账号活动事件开始时间",
+      "Comment": "活动事件数据中的 [new account event start time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "new account event end time",
+      "Title": "新建账号活动事件结束时间",
+      "Comment": "活动事件数据中的 [new account event end time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "create title",
+      "Title": "创建标题",
+      "Comment": "活动事件数据中的 [create title] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "create text",
+      "Title": "创建文本",
+      "Comment": "活动事件数据中的 [create text] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "apply level",
+      "Title": "适用等级",
+      "Comment": "活动事件数据中的 [apply level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "unable dungeon",
+      "Title": "不可用副本",
+      "Comment": "活动事件数据中的 [unable dungeon] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示副本 ID，必须通过 dungeon registry 解析；静态登记不证明入口开放。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "condition match",
+      "Title": "条件匹配",
+      "Comment": "活动事件数据中的 [condition match] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "job",
+      "Title": "职业",
+      "Comment": "活动事件数据中的 [job] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "end character day event",
+      "Title": "结束角色天数活动事件",
+      "Comment": "活动事件数据中的 [end character day event] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "use item",
+      "Title": "使用物品",
+      "Comment": "活动事件数据中的 [use item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "board",
+      "Title": "棋盘",
+      "Comment": "活动事件数据中的 [board] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "quiz value",
+      "Title": "问答数值",
+      "Comment": "活动事件数据中的 [quiz value] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "msg overbtn",
+      "Title": "msg overbtn（原始标签）",
+      "Comment": "活动事件数据中的 [msg overbtn] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "reward explain",
+      "Title": "奖励说明",
+      "Comment": "活动事件数据中的 [reward explain] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "item index",
+      "Title": "物品索引",
+      "Comment": "活动事件数据中的 [item index] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "quest index",
+      "Title": "任务索引",
+      "Comment": "活动事件数据中的 [quest index] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。其中数字若表示任务 ID，必须通过任务 registry 解析；静态登记不证明任务可接取或完成。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "atgunner",
+      "Title": "atgunner（原始标签）",
+      "Comment": "活动事件数据中的 [atgunner] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "atfighter",
+      "Title": "atfighter（原始标签）",
+      "Comment": "活动事件数据中的 [atfighter] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "evt",
+      "Section": "account first login end",
+      "Title": "账号首次登录结束",
+      "Comment": "活动事件数据中的 [account first login end] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

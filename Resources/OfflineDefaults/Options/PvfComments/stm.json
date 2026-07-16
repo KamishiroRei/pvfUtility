@@ -6,11 +6,91 @@
       "PvfCommentType": "Section",
       "FileType": "stm",
       "Section": "stage",
-      "Title": "阶段",
-      "Comment": "阶段（Stage）配置：定义该状态机（State Machine）中的一个阶段/状态。每个 stage 块包含该阶段下的行为定义，如动画播放、条件跳转等。",
+      "Title": "关卡节点列表",
+      "Comment": "分区内的关卡节点闭合列表，数据按“关卡/副本 ID、X 坐标、Y 坐标、节点控制值”重复。ID 必须按对应玩法 registry 复核；坐标、末列状态和入口行为需客户端/实机验证。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "无名氏"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stm",
+      "Section": "map image",
+      "Title": "选关地图图像",
+      "Comment": "选关界面的地图 IMG 路径与帧索引。PVF 引用不证明客户端资源存在、帧号有效或界面渲染正常。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stm",
+      "Section": "area",
+      "Title": "选关区域容器",
+      "Comment": "选关地图的区域闭合块，内部包含区域编号、槽位图像、槽位类型、分区、关卡节点和生存关卡等配置。必须读取 [/area]，不能把内部数字跨块解释。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stm",
+      "Section": "slot image",
+      "Title": "关卡槽位图像",
+      "Comment": "选关节点使用的槽位 IMG 路径。具体帧由 [slot type] 等相邻参数控制，客户端资源与显示需验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stm",
+      "Section": "slot type",
+      "Title": "关卡槽位类型表",
+      "Comment": "关卡槽位类型的闭合整数列表。数值与槽位图案/状态的映射尚未完全闭合，必须保留原顺序并结合客户端界面验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stm",
+      "Section": "district",
+      "Title": "关卡分区编号",
+      "Comment": "选关区域内的分区编号，后续 [append image] 与 [stage] 记录归属于该分区。它不是 dungeon ID 或 map ID。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stm",
+      "Section": "append image",
+      "Title": "分区附加图像",
+      "Comment": "分区叠加使用的 IMG 路径与帧索引，用于选关地图的附加显示层。资源与最终绘制顺序需客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stm",
+      "Section": "survival",
+      "Title": "生存关卡列表",
+      "Comment": "生存模式关卡的闭合 ID 列表。数字需按该玩法对应的副本 registry 复核；静态登记不证明入口、难度或通关流程正常。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stm",
+      "Section": "name",
+      "Title": "选关区域名称",
+      "Comment": "选关地图/区域的显示名称文本。文本存在不证明本地化、字体、界面显示或入口放行正常。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

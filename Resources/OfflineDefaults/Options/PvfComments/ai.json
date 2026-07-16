@@ -8,7 +8,7 @@
       "Section": "ai pattern",
       "Title": "AI逻辑",
       "Comment": "AI逻辑：定义AI角色行为的脚本块，用于编写攻击、增益等动作模式。返回值与.aic文件的 [key stream] 中指定的按键输入文件一一对应。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[ai pattern]\n攻击/增益等多种动作模式 // 此 ai 的目的\ntext\n`[think]` `[void]` `enemy number of in attack area()` 160.0 30.0 20.0 20.0\n\n    `[think]` `[last result]` `==` 0.0\n    `[true]` `[return]` -1\n\n    `[false]`\n        `[think]` `[last result]` `==` 1.0\n        `[true]`\n            `[think]` `[void]` `get random()` 0.0 100.0\n                `[think]` `[last result]` `>=` 50.0\n                `[true]` `[return]` 4\n                `[false]` `[return]` 3\n        `[false]`\n            `[think]` `[last result]` `>=` 3.0\n            `[true]` `[return]` 3\n\n            `[false]`\n                `[think]` `[void]` `get random()` 0.0 100.0\n                    `[think]` `[last result]` `>=` 50.0\n                    `[true]` `[return]` 1\n                    `[false]` `[return]` 2\n[/ai pattern]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[ai pattern]\n攻击/增益等多种动作模式 // 此 ai 的目的\ntext\n`[think]` `[void]` `enemy number of in attack area()` 160.0 30.0 20.0 20.0\n\n    `[think]` `[last result]` `==` 0.0\n    `[true]` `[return]` -1\n\n    `[false]`\n        `[think]` `[last result]` `==` 1.0\n        `[true]`\n            `[think]` `[void]` `get random()` 0.0 100.0\n                `[think]` `[last result]` `>=` 50.0\n                `[true]` `[return]` 4\n                `[false]` `[return]` 3\n        `[false]`\n            `[think]` `[last result]` `>=` 3.0\n            `[true]` `[return]` 3\n\n            `[false]`\n                `[think]` `[void]` `get random()` 0.0 100.0\n                    `[think]` `[last result]` `>=` 50.0\n                    `[true]` `[return]` 1\n                    `[false]` `[return]` 2\n[/ai pattern]\n```",
       "Closing": true,
       "Authors": "Xiti Fox"
     },
@@ -18,7 +18,7 @@
       "Section": "think",
       "Title": "逻辑判断块",
       "Comment": "逻辑判断块：内部比较条件并根据结果进入 [true]/[false] 分支。条件变量和值之间以比较运算符连接（如 [hp] >= 1000.0）。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [hp] >= 1000.0\n    [true] [return] 1\n    [false] [return] -1\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [hp] >= 1000.0\n    [true] [return] 1\n    [false] [return] -1\n[/think]\n```",
       "Closing": true,
       "Authors": "lostluna1"
     },
@@ -58,7 +58,7 @@
       "Section": "void",
       "Title": "无输入占位符 (void)",
       "Comment": "[void] 表示当前条件无输入变量。用于调用 get random()、enemy number of in attack area() 等函数时，不需要传入条件变量的情况。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [void] get random() 0.0 100.0\n    [think] [last result] >= 50.0\n    [true] [return] 4\n    [false] [return] 3\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [void] get random() 0.0 100.0\n    [think] [last result] >= 50.0\n    [true] [return] 4\n    [false] [return] 3\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -98,7 +98,7 @@
       "Section": "hp",
       "Title": "当前 HP 数值",
       "Comment": "当前 HP 数值 (可与 >=, <=, == 等运算符比较)。浮点数格式，如 `[hp] %>= 20.0` 表示当前HP大于等于最大HP的20%。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [hp] >= 1000.0\n    [true]...\n[/think]\n\n[think] [hp] %>= 20.0\n    [true]...\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [hp] >= 1000.0\n    [true]...\n[/think]\n\n[think] [hp] %>= 20.0\n    [true]...\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -117,7 +117,7 @@
       "FileType": "ai",
       "Section": "random",
       "Title": "0~99 随机值 (实时变化)",
-      "Comment": "旧注释将其解释为持续变化的 0～99 随机值，但当前参考解包的 .ai/.aic 文件中未检出 [random] 标签，也没有可核验的 OfficialDescription。保留为版本差异线索；取值范围、刷新频率和调用语境必须由目标版本样本确认。",
+      "Comment": "旧注释将其解释为持续变化的 0～99 随机值，但该标签缺少可核验的 OfficialDescription。保留为版本差异线索；取值范围、刷新频率和调用语境必须由目标版本样本确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -138,7 +138,7 @@
       "Section": "last result",
       "Title": "上一条指令的计算结果",
       "Comment": "上一条指令写入的计算结果。get random()、enemy number of in attack area()、number of in attack area() 等函数会将结果写入此变量，后续用 `[last result]` 读取。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [void] get random() 0.0 100.0\n    [think] [last result] >= 50.0\n    [true] [return] 4\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [void] get random() 0.0 100.0\n    [think] [last result] >= 50.0\n    [true] [return] 4\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -198,7 +198,7 @@
       "Section": "%>=",
       "Title": "百分比比较：当前值/最大值 >=",
       "Comment": "百分比比较：当前值/最大值 >= 指定百分比。用于判断当前值与最大值之比。\n例：`[think] [hp] %>= 20.0` —— 当前HP >= 最大HP的20%时为true。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [hp] %>= 20.0\n    [true]...\n[/think]\n\n// 说明：当前HP大于或等于最大HP的20%则为 true\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [hp] %>= 20.0\n    [true]...\n[/think]\n\n// 说明：当前HP大于或等于最大HP的20%则为 true\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -248,7 +248,7 @@
       "Section": "get random()",
       "Title": "生成区间随机数",
       "Comment": "生成区间随机数写入 [last result]：语法 `[void]` `get random()` min max。两个参数间无需逗号。\n例：`[void] get random() 0.0 100.0` —— 写入0~99之间的随机值。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [void] get random() 0.0 100.0\n    [think] [last result] >= 50.0    // 50% 概率\n    [true] [return] 4\n    [false] [return] 3\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [void] get random() 0.0 100.0\n    [think] [last result] >= 50.0    // 50% 概率\n    [true] [return] 4\n    [false] [return] 3\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -258,7 +258,7 @@
       "Section": "enemy number of in attack area()",
       "Title": "统计攻击区域内的敌人数量",
       "Comment": "统计攻击区域内敌人数写入 [last result]：\n语法 `[void]` `enemy number of in attack area()` 前 后 上 下\n四个参数为像素距离（浮点数），无逗号分隔。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [void] enemy number of in attack area() 160.0 30.0 20.0 20.0\n    [think] [last result] == 0.0    // 没有敌人\n    [true] [return] -1\n    [false]\n        [think] [last result] == 1.0    // 有1个敌人\n        ...\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [void] enemy number of in attack area() 160.0 30.0 20.0 20.0\n    [think] [last result] == 0.0    // 没有敌人\n    [true] [return] -1\n    [false]\n        [think] [last result] == 1.0    // 有1个敌人\n        ...\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -268,7 +268,7 @@
       "Section": "is target in attack area()",
       "Title": "检测目标是否位于攻击区域",
       "Comment": "检测目标是否位于攻击区域：语法 `[void]` `is target in attack area()` 前 后 上 下。当前目标位于指定区域时为true。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [void] is target in attack area() 100.0 15.0 50.0 50.0\n    [true] [return] 1    // 目标在攻击区域内\n    [false] [return] -1  // 目标不在攻击区域内\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [void] is target in attack area() 100.0 15.0 50.0 50.0\n    [true] [return] 1    // 目标在攻击区域内\n    [false] [return] -1  // 目标不在攻击区域内\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -278,7 +278,7 @@
       "Section": "is the skill in cooltime()",
       "Title": "检测技能是否处于冷却",
       "Comment": "检测技能是否处于冷却：语法 `[void]` `is the skill in cooltime()` 技能编号。如果指定技能正在冷却中则为true。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [void] is the skill in cooltime() 46.0\n    [true]    // 46号技能正在冷却中\n    [false]   // 46号技能不在冷却中，可以使用\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [void] is the skill in cooltime() 46.0\n    [true]    // 46号技能正在冷却中\n    [false]   // 46号技能不在冷却中，可以使用\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -288,7 +288,7 @@
       "Section": "cooltime",
       "Title": "设置动作冷却时间",
       "Comment": "设置当前 [return] 动作的附加冷却时间值。需放在同一层 [think] 且紧邻 [return] 之前。当该 [think] 的 [true] 分支中 [return] 生效时，冷却时间被应用。使用场景：Action.ai, Event.ai。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [cooltime] 5000.0    // 设置5秒冷却\n    [true] [return] 1        // 仅当此项返回生效时冷却才被应用\n[/think]\n\n// 重要：[cooltime] 必须在紧邻 [return] 之前定义才能生效\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [cooltime] 5000.0    // 设置5秒冷却\n    [true] [return] 1        // 仅当此项返回生效时冷却才被应用\n[/think]\n\n// 重要：[cooltime] 必须在紧邻 [return] 之前定义才能生效\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -298,7 +298,7 @@
       "Section": "my active status",
       "Title": "检测自身状态变化",
       "Comment": "检测自身状态变化：持续检查 (Action.ai)。用法 `[think] [my active status] 状态变化编号`。\n状态变化编号参考：slow=0, freeze=1, poison=2, stun=3, curse=4, blind=5, lightning=6, stone=7, sleep=8, burn=9, weapon break=10, bleeding=11, haste=12, bless=13, element=14, confuse=15, hold=16, armor break=17, any=18, all=100。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n// 检测自身是否进入了冰冻状态\n[think] [my active status] 1\n    [true]...    // 自身被冰冻\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n// 检测自身是否进入了冰冻状态\n[think] [my active status] 1\n    [true]...    // 自身被冰冻\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -358,7 +358,7 @@
       "Section": "check skill on",
       "Title": "检查技能开关状态",
       "Comment": "检查技能开关状态：检测特定技能当前是开启还是关闭。例如检查杀意波动(Acquiro)的开关状态。\n用法：`[think] [check skill on] 技能编号`。可检查的技能列表请参考官方文档 on off skill list。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [check skill on] 52    // 检查杀意波动的开启/关闭状态\n    [true]                      // 杀意波动开启\n        [return] a\n    [false]                     // 杀意波动关闭\n        [return] s\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [check skill on] 52    // 检查杀意波动的开启/关闭状态\n    [true]                      // 杀意波动开启\n        [return] a\n    [false]                     // 杀意波动关闭\n        [return] s\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -368,7 +368,7 @@
       "Section": "check use skill",
       "Title": "检查是否可使用特定技能",
       "Comment": "检查是否可使用特定技能 (按技能索引检测技能是否可用)。\n用法：`[think] [check use skill] 技能索引` —— 该技能可用时为true。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [check use skill] 46\n    [true]    // 46号技能可以使用\n    [false]   // 46号技能不可使用（冷却中/未学习等）\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [check use skill] 46\n    [true]    // 46号技能可以使用\n    [false]   // 46号技能不可使用（冷却中/未学习等）\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -378,7 +378,7 @@
       "Section": "use skill",
       "Title": "技能使用检测 (Event.ai)",
       "Comment": "技能使用检测：检查是否使用了特定技能 (使用技能时 - Event.ai)。与 [check use skill] 不同，[use skill] 是在技能使用触发的事件中检测使用了哪个技能。\n用法：`[think] [use skill] 技能索引`。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n// Event.ai 中检测技能使用\n[think] [use skill] 18    // 如果使用了技能索引为18的技能\n    [true]...\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n// Event.ai 中检测技能使用\n[think] [use skill] 18    // 如果使用了技能索引为18的技能\n    [true]...\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -418,7 +418,7 @@
       "Section": "set friend character",
       "Title": "设置友方角色 (DestinationSelect.ai)",
       "Comment": "设置友方角色：指定AI角色的编号或名称，用于目的地决策模式5(移动到特定友方角色)和7(在特定友方角色周围移动)。\n用法：`[set friend character] AI角色编号 或 '角色名'`。该设置仅在当前 [think] 到 [/think] 之间有效。",
-      "OfficialDescription": "#### 官方示例: destination select\n\n```pvf\n[think] [set friend character] '索洛多斯'\n    ...    // 此处友方角色为索洛多斯\n    [think] [set friend character] '索洛多斯2'\n        ...    // 此处友方角色为索洛多斯2\n    [/think]\n    ...    // 此处恢复为索洛多斯\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: destination select.rtf\n\n```pvf\n[think] [set friend character] '索洛多斯'\n    ...    // 此处友方角色为索洛多斯\n    [think] [set friend character] '索洛多斯2'\n        ...    // 此处友方角色为索洛多斯2\n    [/think]\n    ...    // 此处恢复为索洛多斯\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -428,7 +428,7 @@
       "Section": "set target monster",
       "Title": "设置目标怪物 (DestinationSelect.ai)",
       "Comment": "设置目标怪物：指定怪物的编号/名称和队伍属性，用于目的地决策模式6(移动到特定怪物)和9(在特定怪物周围移动)。\n用法：`[set target monster] 怪物编号 队伍(enemy/neutral/friend)`。队伍对应数字：enemy=-1, neutral=0, friend=1。",
-      "OfficialDescription": "#### 官方示例: destination select\n\n```pvf\n[set target monster] 1004 enemy    // 指定ID为1004的敌对怪物作为行动目标\n...\n```",
+      "OfficialDescription": "#### 官方示例: destination select.rtf\n\n```pvf\n[set target monster] 1004 enemy    // 指定ID为1004的敌对怪物作为行动目标\n...\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -448,7 +448,7 @@
       "Section": "set bound",
       "Title": "设置APC移动边界 (DestinationSelect.ai)",
       "Comment": "设置APC的移动范围：指定前、后、上、下四个方向的视野距离（屏幕像素单位）。移动范围限制在指定的矩形区域内。\n用法：`[set bound] 前方视野距离 后方视野距离 上方视野距离 下方视野距离`。",
-      "OfficialDescription": "#### 官方示例: destination select\n\n```pvf\n[set bound] 300.0 100.0 150.0 150.0\n// 前方300像素，后方100像素，上方150像素，下方150像素的移动范围\n```",
+      "OfficialDescription": "#### 官方示例: destination select.rtf\n\n```pvf\n[set bound] 300.0 100.0 150.0 150.0\n// 前方300像素，后方100像素，上方150像素，下方150像素的移动范围\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -457,7 +457,7 @@
       "FileType": "ai",
       "Section": "auto attack direction",
       "Title": "是否自动面向敌人",
-      "Comment": "旧资料将其解释为 APC 按键输入时是否自动面向敌人，并给出 0/1 开关形态；当前参考解包的 .ai/.aic 文件中未检出该标签，也无法从静态文件证明“代码层封锁”。保留为版本差异线索，使用前需目标版本和实机验证。",
+      "Comment": "旧资料将其解释为 APC 按键输入时是否自动面向敌人，并给出 0/1 开关形态，但无法从静态文件证明“代码层封锁”。保留为版本差异线索，使用前需目标版本和实机验证。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -468,7 +468,7 @@
       "Section": "my hp down",
       "Title": "检测 HP 降低瞬间",
       "Comment": "检测 HP 降低的瞬间：支持百分比模式和绝对值模式。\n用法：`[my hp down] %或+ 数值`。\n例：`[my hp down] % 90` —— 当前HP <= 最大HP的90%时触发。`[my hp down] + 100.0` —— HP降低超过100点时触发。",
-      "OfficialDescription": "#### 官方示例: how to edit ai\n\n```pvf\n[think] [my hp down] % 90\n    [true] [return] 1    // HP降到90%以下时触发\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit ai.rtf\n\n```pvf\n[think] [my hp down] % 90\n    [true] [return] 1    // HP降到90%以下时触发\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -481,6 +481,226 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "my attack",
+      "Title": "自身攻击条件",
+      "Comment": "AI数据中的 [my attack] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "skill cooltime correction",
+      "Title": "技能冷却修正",
+      "Comment": "AI数据中的 [skill cooltime correction] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "cube item number",
+      "Title": "晶块物品数量",
+      "Comment": "AI数据中的 [cube item number] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "second type",
+      "Title": "第二类型",
+      "Comment": "AI数据中的 [second type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "my level",
+      "Title": "my level（原始标签）",
+      "Comment": "AI数据中的 [my level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "set party member",
+      "Title": "设置队伍成员",
+      "Comment": "AI数据中的 [set party member] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "check party buff on",
+      "Title": "检查队伍增益状态",
+      "Comment": "AI数据中的 [check party buff on] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "party member hp",
+      "Title": "队伍成员 HP 条件",
+      "Comment": "AI数据中的 [party member hp] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "set target position",
+      "Title": "设置目标坐标",
+      "Comment": "AI数据中的 [set target position] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "check item slot cooltime",
+      "Title": "检查物品槽冷却",
+      "Comment": "AI数据中的 [check item slot cooltime] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "party member alive",
+      "Title": "队伍成员存活条件",
+      "Comment": "AI数据中的 [party member alive] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "my active status on",
+      "Title": "自身异常/增益状态条件",
+      "Comment": "AI数据中的 [my active status on] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "target active status",
+      "Title": "目标异常/增益状态条件",
+      "Comment": "AI数据中的 [target active status] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "state",
+      "Title": "状态",
+      "Comment": "AI数据中的 [state] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "check target direction",
+      "Title": "检查目标方向",
+      "Comment": "AI数据中的 [check target direction] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "stat change",
+      "Title": "属性值条件",
+      "Comment": "AI数据中的 [stat change] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "map index",
+      "Title": "地图索引",
+      "Comment": "AI数据中的 [map index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "check team",
+      "Title": "检查队伍",
+      "Comment": "AI数据中的 [check team] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "set team",
+      "Title": "设置队伍",
+      "Comment": "AI数据中的 [set team] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "command",
+      "Title": "指令",
+      "Comment": "AI数据中的 [command] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "set friend monster",
+      "Title": "设置友方怪物",
+      "Comment": "AI数据中的 [set friend monster] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ai",
+      "Section": "distance",
+      "Title": "距离",
+      "Comment": "AI数据中的 [distance] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

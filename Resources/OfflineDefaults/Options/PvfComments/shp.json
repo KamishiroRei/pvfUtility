@@ -101,6 +101,426 @@
       "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[only buy] 1\t\t\t// 商店是否可以卖东西还是只能买东西。两者都可以则为 0\n```",
       "Closing": false,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "one a day item",
+      "Title": "one a day item（原始标签）",
+      "Comment": "NPC 商店数据中的 [one a day item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "log item",
+      "Title": "日志物品",
+      "Comment": "NPC 商店数据中的 [log item] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "item",
+      "Title": "物品",
+      "Comment": "NPC 商店数据中的 [item] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "item group index",
+      "Title": "物品分组索引",
+      "Comment": "NPC 商店数据中的 [item group index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "avatar list",
+      "Title": "装扮列表",
+      "Comment": "NPC 商店数据中的 [avatar list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "pants avatar ability list",
+      "Title": "pants avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [pants avatar ability list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "avatar display",
+      "Title": "装扮显示",
+      "Comment": "NPC 商店数据中的 [avatar display] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "display avatar list",
+      "Title": "显示装扮列表",
+      "Comment": "NPC 商店数据中的 [display avatar list] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "shoes avatar ability list",
+      "Title": "shoes avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [shoes avatar ability list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "bonus",
+      "Title": "额外奖励",
+      "Comment": "NPC 商店数据中的 [bonus] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "coin",
+      "Title": "硬币",
+      "Comment": "NPC 商店数据中的 [coin] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "cargo upgrade kit",
+      "Title": "cargo upgrade kit（原始标签）",
+      "Comment": "NPC 商店数据中的 [cargo upgrade kit] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "cho service",
+      "Title": "cho service（原始标签）",
+      "Comment": "NPC 商店数据中的 [cho service] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "premium",
+      "Title": "premium（原始标签）",
+      "Comment": "NPC 商店数据中的 [premium] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "creature coupon",
+      "Title": "creature coupon（原始标签）",
+      "Comment": "NPC 商店数据中的 [creature coupon] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "creature",
+      "Title": "宠物",
+      "Comment": "NPC 商店数据中的 [creature] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。其中数字若表示宠物 ID，必须通过 creature registry 解析；静态配置不证明可获得。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "package",
+      "Title": "礼包",
+      "Comment": "NPC 商店数据中的 [package] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "avagacha coupon",
+      "Title": "avagacha coupon（原始标签）",
+      "Comment": "NPC 商店数据中的 [avagacha coupon] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "mileage item",
+      "Title": "mileage item（原始标签）",
+      "Comment": "NPC 商店数据中的 [mileage item] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "gift disallowance",
+      "Title": "gift disallowance（原始标签）",
+      "Comment": "NPC 商店数据中的 [gift disallowance] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "gift only",
+      "Title": "赠礼仅限",
+      "Comment": "NPC 商店数据中的 [gift only] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "max gift count",
+      "Title": "上限赠礼数量",
+      "Comment": "NPC 商店数据中的 [max gift count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "not stackable buy",
+      "Title": "not stackable buy（原始标签）",
+      "Comment": "NPC 商店数据中的 [not stackable buy] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示消耗品/材料 ID，必须通过 stackable registry 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "category event tag",
+      "Title": "类别活动事件标记",
+      "Comment": "NPC 商店数据中的 [category event tag] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "neck avatar ability list",
+      "Title": "neck avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [neck avatar ability list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "hair avatar ability list",
+      "Title": "hair avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [hair avatar ability list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "face avatar ability list",
+      "Title": "face avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [face avatar ability list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "Creature list",
+      "Title": "宠物列表",
+      "Comment": "NPC 商店数据中的 [Creature list] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示宠物 ID，必须通过 creature registry 解析；静态配置不证明可获得。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "coat avatar ability list",
+      "Title": "coat avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [coat avatar ability list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "cap avatar ability list",
+      "Title": "cap avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [cap avatar ability list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "belt avatar ability list",
+      "Title": "belt avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [belt avatar ability list] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "swordman",
+      "Title": "swordman（原始标签）",
+      "Comment": "NPC 商店数据中的 [swordman] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "fighter",
+      "Title": "女格斗家",
+      "Comment": "NPC 商店数据中的 [fighter] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "gunner",
+      "Title": "男神枪手",
+      "Comment": "NPC 商店数据中的 [gunner] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "mage",
+      "Title": "mage（原始标签）",
+      "Comment": "NPC 商店数据中的 [mage] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "priest",
+      "Title": "priest（原始标签）",
+      "Comment": "NPC 商店数据中的 [priest] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "thief",
+      "Title": "暗夜使者",
+      "Comment": "NPC 商店数据中的 [thief] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "at fighter",
+      "Title": "男格斗家",
+      "Comment": "NPC 商店数据中的 [at fighter] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "upper coat avatar ability list",
+      "Title": "upper coat avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [upper coat avatar ability list] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "skin avatar ability list",
+      "Title": "skin avatar ability list（原始标签）",
+      "Comment": "NPC 商店数据中的 [skin avatar ability list] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "bonus rate",
+      "Title": "额外奖励比率",
+      "Comment": "NPC 商店数据中的 [bonus rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "bonus item list",
+      "Title": "额外奖励物品列表",
+      "Comment": "NPC 商店数据中的 [bonus item list] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
     }
   ]
 }

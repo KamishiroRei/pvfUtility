@@ -41,6 +41,486 @@
       "OfficialDescription": "#### 官方示例: table/lorien.tbl\n\n```pvf\n// 死亡之塔修正表。死亡之塔用户侧。适用于用户角色和用户角色召唤的怪物。召唤物，召唤APC\n// [0]伤害 [1]防御 [2]HP [3]力量 [4]体力 [5]智力 [6]精神\n// [7]物理绝对伤害 [8]物理伤害修正 [9]魔法绝对伤害 [10]魔法伤害修正 [11]状态异常伤害修正 [12] MP\n[Revision Table] `character`\t//`monster` //`apc`\n239.80 \t50\t180.21\t29.72\t29.72\t28.96\t26.21\t4.51\t4.51\t4.51\t4.51\t47.96\t1.0\n145.04 \t25\t138.39\t18.72\t18.74\t18.43\t17.27\t4.06\t4.06\t4.06\t4.06\t29.49\t1.0\n...\n0.37\t0.51\t5.88\t0.51\t0.51\t0.51\t0.51\t0.38\t0.38\t0.38\t0.38\t0.37\t1.0\n[/Revision Table]\n```",
       "Closing": true,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "easy",
+      "Title": "简单难度修正表",
+      "Comment": "怪物/APC 难度参数中的简单难度闭合表。数据按等级与一组固定宽度的修正列重复；精确列义必须结合该表的版本和消费代码验证，不能只因大量值为 1 就认定全部无效。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "normal",
+      "Title": "普通类别修正表",
+      "Comment": "在难度/控制表中作为普通怪物或普通类别的闭合子表，也可嵌套于控制块。其数列通常按等级与修正值重复；父块不同，列义也可能不同。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "medium",
+      "Title": "中等难度修正表",
+      "Comment": "怪物/APC 难度参数中的中等难度闭合表。记录按等级展开，后续列为同一等级的多项修正参数；应整组保留。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "hard",
+      "Title": "困难难度修正表",
+      "Comment": "怪物/APC 难度参数中的困难难度闭合表。静态倍率不单独证明某项属性、伤害或 AI 在实机中的最终变化。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "ultimate",
+      "Title": "王者难度修正表",
+      "Comment": "怪物/APC 难度参数中的 ultimate 难度闭合表。名称对应旧版本难度档位；数列必须按目标版本的固定列宽解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "hero",
+      "Title": "英雄难度修正表",
+      "Comment": "怪物/APC 难度参数中的英雄难度闭合表。该块存在只说明静态难度档位参数，不能据此断言副本入口已开放。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "named",
+      "Title": "精英怪类别修正表",
+      "Comment": "难度、减速限制或血条调整结构中的精英怪类别闭合子表。父块决定数列是伤害平衡、限制值还是显示倍率，不能脱离父块统一解释。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "mesmerization damage balance",
+      "Title": "魅惑对象伤害平衡表",
+      "Comment": "针对魅惑/控制后对象的伤害平衡闭合块，内部按 normal、named、boss 类别分表并以等级和值成对展开。具体是增加、削减还是上限需结合消费逻辑验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "limit slowdown",
+      "Title": "减速限制表",
+      "Comment": "按 named、boss 等类别配置的减速限制闭合块，内部记录按等级及两个控制值重复。数值单位、上下限方向和应用时机未由表名完全闭合。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "type",
+      "Title": "修正对象类型",
+      "Comment": "Revision Table 内部的对象类型闭合子块，值可表示 character、monster、apc 等消费对象。它只选择同一修正表的目标类别，不是文件扩展名或怪物种类 ID。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "equalization",
+      "Title": "战场均衡参数表",
+      "Comment": "战场/混沌等模式的均衡闭合表，按等级区间、显示名称和长串属性倍率组织。列宽与属性顺序必须按目标表版本整体读取，不能仅凭相邻数值推断单列公式。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "slave hp equalization",
+      "Title": "从属对象 HP 均衡系数",
+      "Comment": "均衡表中的从属/召唤对象 HP 修正入口，已见为单个倍率值。slave 的精确对象范围及倍率应用顺序需运行时验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "WP TABLE",
+      "Title": "战场 WP 参数表",
+      "Comment": "战场 WP 系统的闭合数值表，内容按固定宽度的多组阈值/奖励或消耗参数展开。字段名不足以闭合每列含义，修改时必须保持组宽和顺序。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "A",
+      "Title": "世界地图图案 A 坐标表",
+      "Comment": "世界地图图案 A 的坐标序列。数值以成对坐标组织并描述多个绘制点或区域；具体坐标原点、缩放和点组边界需客户端布局逻辑验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "B",
+      "Title": "世界地图图案 B 坐标表",
+      "Comment": "世界地图图案 B 的坐标序列，与 [A] 为并列图案方案。应保持成对坐标及原有顺序，不能当作通用字母枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "绿徽",
+      "Title": "绿色徽章价格参数",
+      "Comment": "价格表中的绿色徽章专用参数行，包含三个数值控制项。该中文标签必须原样保留；三列与售价、修理或其他价格因子的精确对应需消费逻辑验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "repair cost",
+      "Title": "修理费用系数",
+      "Comment": "装备价格表使用的修理费用单值系数。它是价格/修理计算的静态输入之一，实际金币结果还取决于装备等级、耐久损失及运行时公式。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "0",
+      "Title": "编号 0 表项",
+      "Comment": "以数字 0 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "1",
+      "Title": "编号 1 表项",
+      "Comment": "以数字 1 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "2",
+      "Title": "编号 2 表项",
+      "Comment": "以数字 2 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "3",
+      "Title": "编号 3 表项",
+      "Comment": "以数字 3 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "4",
+      "Title": "编号 4 表项",
+      "Comment": "以数字 4 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "5",
+      "Title": "编号 5 表项",
+      "Comment": "以数字 5 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "6",
+      "Title": "编号 6 表项",
+      "Comment": "以数字 6 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "7",
+      "Title": "编号 7 表项",
+      "Comment": "以数字 7 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "8",
+      "Title": "编号 8 表项",
+      "Comment": "以数字 8 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "9",
+      "Title": "编号 9 表项",
+      "Comment": "以数字 9 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "10",
+      "Title": "编号 10 表项",
+      "Comment": "以数字 10 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "11",
+      "Title": "编号 11 表项",
+      "Comment": "以数字 11 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "12",
+      "Title": "编号 12 表项",
+      "Comment": "以数字 12 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "13",
+      "Title": "编号 13 表项",
+      "Comment": "以数字 13 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "14",
+      "Title": "编号 14 表项",
+      "Comment": "以数字 14 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "15",
+      "Title": "编号 15 表项",
+      "Comment": "以数字 15 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "16",
+      "Title": "编号 16 表项",
+      "Comment": "以数字 16 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "17",
+      "Title": "编号 17 表项",
+      "Comment": "以数字 17 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "18",
+      "Title": "编号 18 表项",
+      "Comment": "以数字 18 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "19",
+      "Title": "编号 19 表项",
+      "Comment": "以数字 19 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "20",
+      "Title": "编号 20 表项",
+      "Comment": "以数字 20 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "21",
+      "Title": "编号 21 表项",
+      "Comment": "以数字 21 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "22",
+      "Title": "编号 22 表项",
+      "Comment": "以数字 22 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "23",
+      "Title": "编号 23 表项",
+      "Comment": "以数字 23 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "24",
+      "Title": "编号 24 表项",
+      "Comment": "以数字 24 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "25",
+      "Title": "编号 25 表项",
+      "Comment": "以数字 25 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "26",
+      "Title": "编号 26 表项",
+      "Comment": "以数字 26 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "27",
+      "Title": "编号 27 表项",
+      "Comment": "以数字 27 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "28",
+      "Title": "编号 28 表项",
+      "Comment": "以数字 28 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "29",
+      "Title": "编号 29 表项",
+      "Comment": "以数字 29 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "tbl",
+      "Section": "30",
+      "Title": "编号 30 表项",
+      "Comment": "以数字 30 为键的 .tbl 表项。该标签会在不同表族中复用：价格表中常选择价格档位并按等级给出数值序列，世界地图图案表中则可能选择坐标方案。必须先确定父文件用途再解释，不能把数字标签视为全局枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

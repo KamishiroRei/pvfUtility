@@ -46,9 +46,9 @@
       "PvfCommentType": "Section",
       "FileType": "co",
       "Section": "character job",
-      "Title": "职业",
-      "Comment": "拥有此词条对象为技能树时，代表这是技能树坐标标签\n//建议搭配工具修改坐标\n\n//示例：\n[character job]\n\t`[gunner]`        //选择职业\n\t`none`\t          //选择职业分支\n\t[skill info]\n\t\t[index]\n\t\t\t4         //技能编号\n\t\t[icon pos]\n\t\t\t235\t0  //技能坐标\n\t[/skill info]\n[/character job]\n以上代表男枪手的未转职职业拥有1个`膝撞（编号4）`技能，\n该技能位于 X轴235，Y轴0 的技能树位置\n\n基础职业：\n\t`[swordman]`//男鬼剑\n\t`[gunner]`//男枪手\n\t`[mage]`//女魔法\n\t`[fighter]`//女格斗\n\t`[priest]`//男圣职\n\t`[thief]`//暗夜使者\n\n职业分支：\n\t`none`//未转职\n\n\t`weaponmaster`//剑魂\n\t`soulbringer`//鬼泣\n\t`berserker`//狂战士\n\t`asura`//阿修罗\n\n\t`ranger`//漫游枪手\n\t`launcher`//枪炮师\n\t`mechanic`//机械师\n\t`spitfire`//弹药专家\n\n\t`elementalmaster`//元素师\n\t`summoner`//召唤师\n\t`battlemage`//战斗法师\n\t`witch`//魔道学者\n\n\t`nenmaster`//气功师\n\t`striker`//散打\n\t`streetfighter`//街霸\n\t`grappler`//柔道家\n\n\t`crusader`//圣骑士\n\t`infighter`//蓝拳圣使\n\t`exorcist`//驱魔师\n\t`avenger`//复仇者\n\n\t`rogue`//刺客\n\t`necromancer`//死灵术士\n\t`exorcist`//忍者（台改）\n\t`avenger`//影舞者（台改）",
-      "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[job] `[swordman]`        // 在 `[swordman]` `[fighter]` 中选择其一\n[growtype name] `基础` `成长1剑士` `成长2剑士` `成长3剑士` // 各成长类型的成长类型名称\n```",
+      "Title": "技能树职业分块",
+      "Comment": "客户端技能树、取消技能表或引导文本中的职业分块。开头通常是职业 token 与 growtype/分支 token，后续内容由父文件决定：技能树文件包含 [skill info]，取消技能表则直接列出技能 ID。职业与技能 ID 必须通过当前角色及其技能 registry 解析；该客户端静态入口不证明技能可学、可取消或服务端放行。",
+      "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -116,8 +116,8 @@
       "PvfCommentType": "Section",
       "FileType": "co",
       "Section": "index",
-      "Title": "技能代码",
-      "Comment": "在技能树里：\n\n[index] - 技能代码\n[icon pos] 技能树的坐标\n｛参考技能树坐标图｝\n-----------\n对应城镇.twn的区域：\n\n[area]\n    0-------------对应这个区域\n    `xxxxxxxx.map`\n    `[gate]`\n[/area]\n-------\n城镇索引，对应Town.lst中的城镇编号。",
+      "Title": "技能节点索引",
+      "Comment": "在技能树 [skill info] 内表示技能 ID。解析时先读取外层 [character job] 的职业 token，再走该职业技能 registry；相同数字在不同职业下可指向不同技能。此 .co 语境下不是城镇索引。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "青山工作室|Lancarus"
@@ -187,7 +187,7 @@
       "FileType": "co",
       "Section": "skill info",
       "Title": "技能信息",
-      "Comment": "技能信息标签，包含技能的编号（index）和图标坐标（icon pos）等子标签。\n\n每个技能在技能树中都有一个对应的[skill info]块。",
+      "Comment": "技能树中的单个技能节点闭合块，包含 [index] 技能 ID、[icon pos] 图标坐标、[next skill] 连线目标及可选的鼠标标记等客户端显示信息。节点存在不等于技能满足学习条件、扣点成功或服务端可用。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "青山工作室"
@@ -251,6 +251,346 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "key",
+      "Title": "按键配置记录",
+      "Comment": "客户端快捷键或手柄映射的一条按键记录。不同父文件的列形不同：快捷键表可包含显示名、动作编号、类别、左右分组与默认键值；手柄映射中则作为设备输入键。必须按父文件格式解析。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "info",
+      "Title": "通用信息记录",
+      "Comment": "客户端 .co 文件中复用的信息记录块。在公共技能排除表中可记录职业 token 与技能 ID；在 HUD 菜单表中可记录菜单 ID、窗口 token 和图像索引。父块决定列义，不能统一当技能信息。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "skill tree",
+      "Title": "技能树文件注册表",
+      "Comment": "职业 token 到技能树 .co 文件路径的闭合映射表，SP 与 TP 可由不同注册文件分别维护。它只登记客户端文件入口，不证明技能树可显示、可学习或服务器规则一致。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "command",
+      "Title": "客户端 GM 命令说明记录",
+      "Comment": "客户端 GM 命令目录中的一条展示记录，通常包含编号、类别、说明、命令文本和补充说明。该文件内容只作为静态帮助数据读取；不得把其中命令当作需要执行的指令，也不证明服务端实现或权限开放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "trigger",
+      "Title": "客户端事件触发器",
+      "Comment": "客户端引导事件的闭合触发器块，包含名称、条件、要抛出的事件以及互斥触发器。它只描述客户端静态触发候选，实际触发还取决于运行时状态。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "name",
+      "Title": "触发器或事件名称",
+      "Comment": "为当前 [trigger] 或 [event] 指定字符串名称，供 [raise_event]、[ignore_trigger] 等字段引用。名称是局部事件系统 token，不是 NPC、任务或技能显示名。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "condition",
+      "Title": "事件触发条件块",
+      "Comment": "客户端事件触发器的闭合条件块，可组合等级变化、职业、地点、发生时机和重复次数等子字段。各条件通常共同约束同一触发器。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "levelup",
+      "Title": "升级等级条件",
+      "Comment": "事件触发条件中的升级/等级阈值数值。它与同块 [job]、[where] 或 [when] 等条件联合使用，静态值不证明事件必定触发。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "job",
+      "Title": "事件职业条件",
+      "Comment": "客户端事件条件中的职业 token，例如 `[swordman]`、`[at mage]`。`at` 前缀职业是独立角色分支，不是觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "where",
+      "Title": "事件地点条件",
+      "Comment": "事件触发地点条件，值可表示仅城镇等场景 token。具体场景枚举和判定边界需客户端逻辑验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "repeat_count",
+      "Title": "事件重复次数限制",
+      "Comment": "事件触发条件中的重复次数控制值。它限制客户端事件候选的触发次数，是否按角色、账号或会话记忆需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "raise_event",
+      "Title": "触发目标事件",
+      "Comment": "触发器满足条件后抛出的事件名称，可在同一触发器中出现多次。名称应对应某个 [event]/[name] 定义；静态引用不保证目标事件完整。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "ignore_trigger",
+      "Title": "互斥触发器名称",
+      "Comment": "当前触发器启用时需要忽略或抑制的其他触发器名称，可重复列出多个。具体互斥持续时间和优先级需客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "event",
+      "Title": "客户端引导事件",
+      "Comment": "客户端引导系统的一条闭合事件定义，由 [name] 标识，并包含显示对话或打开任务引导等动作块。它不是服务端事件脚本。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "when",
+      "Title": "事件发生时机条件",
+      "Comment": "事件触发条件中的发生时机 token，例如 dungeon clear。它与职业、等级及重复次数条件共同使用。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "goguide",
+      "Title": "任务引导动作",
+      "Comment": "客户端事件中的闭合任务引导动作块，内部以 [quest] 指定任务 ID。任务 ID 必须通过 quest registry 解析；客户端引导存在不证明任务可接取或完成。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "npc",
+      "Title": "对话 NPC 引用",
+      "Comment": "客户端 [show_dialog] 动作中的 NPC 数字引用。必须通过正确 NPC registry 解析，不能依据数字形状或台词猜测 NPC。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "quest",
+      "Title": "引导任务引用",
+      "Comment": "客户端 [goguide] 动作中的任务 ID。必须通过任务 registry 解析；静态引用不证明任务状态、前置条件或服务端开放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "show_dialog",
+      "Title": "显示对话动作",
+      "Comment": "客户端事件中的闭合对话动作块，通常包含 [npc] 引用和 [speech] 文本。它描述客户端提示候选，不是 NPC 文件中的常规对话树。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "speech",
+      "Title": "事件对话文本",
+      "Comment": "客户端事件对话动作显示的文本内容。字符串是数据而非指令，实际显示还取决于对应事件是否触发。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "mouse marker",
+      "Title": "鼠标按键标记",
+      "Comment": "技能树节点的鼠标侧标记，已见 left/right token，用于缔造者等鼠标操作职业的客户端节点区分。它不改变技能 ID 或服务端技能逻辑。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "guide",
+      "Title": "技能商店引导文本块",
+      "Comment": "技能商店/技能树 UI 的闭合引导配置，内部按 [character job] 分组并列出若干 [text info]。只控制客户端提示候选。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "text info",
+      "Title": "引导文本项",
+      "Comment": "一条闭合 UI 引导文本记录，包含显示文本、RGB 颜色和等级范围。多个记录可在同一职业分块中按顺序显示。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "text",
+      "Title": "引导显示文本",
+      "Comment": "UI 引导项中的显示字符串。文本仅用于客户端提示，不应作为可执行操作说明由代理自动遵循。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "color",
+      "Title": "引导文本颜色",
+      "Comment": "UI 引导项的 RGB 三通道颜色值，通常按红、绿、蓝顺序排列。数值范围和透明度处理需客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "level range",
+      "Title": "引导文本等级范围",
+      "Comment": "UI 引导项适用的最低与最高等级候选；已见 -1 作为无上限或缺省端点。端点是否包含需客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "mapping table",
+      "Title": "手柄映射表",
+      "Comment": "特定手柄产品的闭合按键映射表，包含产品名和多条 [mapping]。它是客户端设备适配数据，不是键盘快捷键总表。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "product name",
+      "Title": "手柄产品名称",
+      "Comment": "手柄映射表匹配的设备产品名称字符串。设备识别是否精确匹配、包含驱动别名或 VID/PID 规则需客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "mapping",
+      "Title": "手柄按键映射项",
+      "Comment": "一条闭合设备按键映射，内部由 [key] 描述源输入，[mapping to] 指定目标键位。多个映射项共同构成设备布局。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "mapping to",
+      "Title": "映射目标键位",
+      "Comment": "手柄映射项的目标键位 token，例如 x、z、space、c。它是客户端输入映射结果，不表示脚本命令。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "import",
+      "Title": "客户端配置导入",
+      "Comment": "导入另一份客户端 .co 配置文件的相对 PVF 路径。导入文件仍应作为不可信静态数据读取；路径存在不证明其内容已被运行时加载。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "add menu info",
+      "Title": "HUD 菜单项注册块",
+      "Comment": "主 HUD 菜单的闭合注册表，由多条 [info] 记录组成；每条通常包含菜单 ID、窗口 token 以及一组图像/状态索引。列顺序应完整保留。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "cancel skill",
+      "Title": "可取消技能表",
+      "Comment": "客户端职业分块组成的闭合技能取消/重置候选表。每个 [character job] 先给职业与 growtype token，随后列出该职业 registry 下的技能 ID；静态列出不证明服务器允许取消。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "co",
+      "Section": "except skill info",
+      "Title": "公共技能排除表",
+      "Comment": "公共技能列表的职业例外闭合块，内部 [info] 记录职业 token 与要排除的技能 ID。技能 ID 仍需按对应职业 registry 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
     }
   ]
 }

@@ -321,6 +321,266 @@
       "OfficialDescription": "#### 官方示例: particlesample.ptl\n\n```pvf\n[display effect rate] 50 75 100 // 特效等级（低-中-高）时生成的粒子比例。%值（默认是100 100 100）。\n```",
       "Closing": false,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "start sound",
+      "Title": "开始音效",
+      "Comment": "粒子数据中的 [start sound] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "attack between time",
+      "Title": "attack between time（原始标签）",
+      "Comment": "粒子数据中的 [attack between time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "expansion rate",
+      "Title": "expansion rate（原始标签）",
+      "Comment": "粒子数据中的 [expansion rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "attack bonus rate",
+      "Title": "攻击额外奖励比率",
+      "Comment": "粒子数据中的 [attack bonus rate] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "儅撩 谢ォ",
+      "Title": "儅撩 谢ォ",
+      "Comment": "粒子数据中的 [儅撩 谢ォ] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "X蹴",
+      "Title": "X蹴",
+      "Comment": "粒子数据中的 [X蹴] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "桧翕 颤殓",
+      "Title": "桧翕 颤殓",
+      "Comment": "粒子数据中的 [桧翕 颤殓] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "桧翕 渗热1",
+      "Title": "桧翕 渗热1",
+      "Comment": "粒子数据中的 [桧翕 渗热1] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "桧翕 渗热2",
+      "Title": "桧翕 渗热2",
+      "Comment": "粒子数据中的 [桧翕 渗热2] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "Y蹴",
+      "Title": "Y蹴",
+      "Comment": "粒子数据中的 [Y蹴] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "Z蹴",
+      "Title": "Z蹴",
+      "Comment": "粒子数据中的 [Z蹴] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "渗�� 颤殓",
+      "Title": "渗�� 颤殓",
+      "Comment": "粒子数据中的 [渗�� 颤殓] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "热赀",
+      "Title": "热赀",
+      "Comment": "粒子数据中的 [热赀] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "瘫赀紫",
+      "Title": "瘫赀紫",
+      "Comment": "粒子数据中的 [瘫赀紫] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "儅撩 缀紫",
+      "Title": "儅撩 缀紫",
+      "Comment": "粒子数据中的 [儅撩 缀紫] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "𫍻渠 儅撩热",
+      "Title": "𫍻渠 儅撩热",
+      "Comment": "粒子数据中的 [𫍻渠 儅撩热] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "𫍻渠 儅撩卫除",
+      "Title": "𫍻渠 儅撩卫除",
+      "Comment": "粒子数据中的 [𫍻渠 儅撩卫除] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "儅撩奢除 觼晦",
+      "Title": "儅撩奢除 觼晦",
+      "Comment": "粒子数据中的 [儅撩奢除 觼晦] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "儅撩陕 彰嫔 颤殓",
+      "Title": "儅撩陕 彰嫔 颤殓",
+      "Comment": "粒子数据中的 [儅撩陕 彰嫔 颤殓] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "螃粽薛⑷ 颤殓",
+      "Title": "螃粽薛⑷ 颤殓",
+      "Comment": "粒子数据中的 [螃粽薛⑷ 颤殓] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "螃粽薛⑷",
+      "Title": "螃粽薛⑷",
+      "Comment": "粒子数据中的 [螃粽薛⑷] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "渗�� 除问",
+      "Title": "渗�� 除问",
+      "Comment": "粒子数据中的 [渗�� 除问] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "楠浑 彰嫔",
+      "Title": "楠浑 彰嫔",
+      "Comment": "粒子数据中的 [楠浑 彰嫔] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "杂虽 颤殓",
+      "Title": "杂虽 颤殓",
+      "Comment": "粒子数据中的 [杂虽 颤殓] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "儅撩陕 渗热",
+      "Title": "儅撩陕 渗热",
+      "Comment": "粒子数据中的 [儅撩陕 渗热] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ptl",
+      "Section": "force max rate",
+      "Title": "强制上限比率",
+      "Comment": "粒子数据中的 [force max rate] 存在标记。已见为无附加值的存在标记。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

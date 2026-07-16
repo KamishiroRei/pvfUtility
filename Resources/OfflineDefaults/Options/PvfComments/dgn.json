@@ -186,8 +186,8 @@
       "PvfCommentType": "Section",
       "FileType": "dgn",
       "Section": "heaven dungeon",
-      "Title": "天界副本标记（当前解包未检出）",
-      "Comment": "旧版本的天界/天堂副本标记线索。当前参考解包的 .dgn 文件中未检出 [heaven dungeon]，也没有可核验的官方说明；不得作为当前版本可用开关。",
+      "Title": "天界副本标记",
+      "Comment": "旧版本的天界/天堂副本标记线索，没有可核验的官方说明；不得直接作为目标版本可用开关。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "无名氏"
@@ -267,7 +267,7 @@
       "FileType": "dgn",
       "Section": "monster difficulty bonus",
       "Title": "副本怪物难度修正参数块",
-      "Comment": "副本级怪物难度修正闭合块。当前参考解包的真实样本为一条扁平数值序列，并非旧注释所写的固定“多行 × 五难度”表；各列与好战性、视野、命中、HP、速度、伤害等属性的映射尚未由当前知识闭合。必须整组保留，并以同版本同类副本和实机验证列义。",
+      "Comment": "副本级怪物难度修正闭合块。已见真实样本为一条扁平数值序列，并非旧注释所写的固定“多行 × 五难度”表；各列与好战性、视野、命中、HP、速度、伤害等属性的映射尚未由知识库闭合。必须整组保留，并以同版本同类副本和实机验证列义。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "羡鱼3313140229"
@@ -851,6 +851,636 @@
       "OfficialDescription": "#### 官方示例: dungeonsample_new_drop.dgn\n\n```pvf\n// 玩家之间互相击杀时的 finishPoint 计算常数\n[player kc] 1000\n```\n\n#### 官方示例: dungeonsample.dgn\n\n```pvf\n// 玩家之间互相击杀时的 finishPoint 计算常数\n[player kc] 1000\n```",
       "Closing": false,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "point by type",
+      "Title": "点数按类型",
+      "Comment": "副本数据中的 [point by type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "monster type spawn interval rate",
+      "Title": "monster type spawn interval rate（原始标签）",
+      "Comment": "副本数据中的 [monster type spawn interval rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "monster spawn base interval",
+      "Title": "monster spawn base interval（原始标签）",
+      "Comment": "副本数据中的 [monster spawn base interval] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "monster spawn random interval",
+      "Title": "monster spawn random interval（原始标签）",
+      "Comment": "副本数据中的 [monster spawn random interval] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "max monster",
+      "Title": "上限怪物",
+      "Comment": "副本数据中的 [max monster] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "monster exp bonus per user decrease",
+      "Title": "monster exp bonus per user decrease（原始标签）",
+      "Comment": "副本数据中的 [monster exp bonus per user decrease] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "result exp bonus per user decrease",
+      "Title": "result exp bonus per user decrease（原始标签）",
+      "Comment": "副本数据中的 [result exp bonus per user decrease] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "fatigue",
+      "Title": "疲劳值",
+      "Comment": "副本数据中的 [fatigue] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "fatigue result",
+      "Title": "疲劳值结果",
+      "Comment": "副本数据中的 [fatigue result] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "herosmode required quest",
+      "Title": "herosmode required quest（原始标签）",
+      "Comment": "副本数据中的 [herosmode required quest] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "clear condition",
+      "Title": "clear condition（原始标签）",
+      "Comment": "副本数据中的 [clear condition] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "clear map",
+      "Title": "clear map（原始标签）",
+      "Comment": "副本数据中的 [clear map] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "seal door appear rate",
+      "Title": "seal door appear rate（原始标签）",
+      "Comment": "副本数据中的 [seal door appear rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "hell dungeon",
+      "Title": "hell dungeon（原始标签）",
+      "Comment": "副本数据中的 [hell dungeon] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "destroy object",
+      "Title": "destroy object（原始标签）",
+      "Comment": "副本数据中的 [destroy object] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tower of despair",
+      "Title": "tower of despair（原始标签）",
+      "Comment": "副本数据中的 [tower of despair] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tower high skill initial cool time",
+      "Title": "tower high skill initial cool time（原始标签）",
+      "Comment": "副本数据中的 [tower high skill initial cool time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tower high skill initial cool time rate",
+      "Title": "tower high skill initial cool time rate（原始标签）",
+      "Comment": "副本数据中的 [tower high skill initial cool time rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "blood max round",
+      "Title": "blood max round（原始标签）",
+      "Comment": "副本数据中的 [blood max round] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "blood dungeon",
+      "Title": "blood dungeon（原始标签）",
+      "Comment": "副本数据中的 [blood dungeon] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "limit party count",
+      "Title": "limit party count（原始标签）",
+      "Comment": "副本数据中的 [limit party count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "dungeon type",
+      "Title": "副本类型",
+      "Comment": "副本数据中的 [dungeon type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "ai character appear rate",
+      "Title": "ai character appear rate（原始标签）",
+      "Comment": "副本数据中的 [ai character appear rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tower max clear item num",
+      "Title": "tower max clear item num（原始标签）",
+      "Comment": "副本数据中的 [tower max clear item num] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "death tower map indexes",
+      "Title": "death tower map indexes（原始标签）",
+      "Comment": "副本数据中的 [death tower map indexes] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tower fp cubepiece",
+      "Title": "tower fp cubepiece（原始标签）",
+      "Comment": "副本数据中的 [tower fp cubepiece] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tower recovery",
+      "Title": "tower recovery（原始标签）",
+      "Comment": "副本数据中的 [tower recovery] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tower dialog",
+      "Title": "tower dialog（原始标签）",
+      "Comment": "副本数据中的 [tower dialog] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tower random map indexes",
+      "Title": "tower random map indexes（原始标签）",
+      "Comment": "副本数据中的 [tower random map indexes] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tower stage",
+      "Title": "tower stage（原始标签）",
+      "Comment": "副本数据中的 [tower stage] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "limit item stat",
+      "Title": "limit item stat（原始标签）",
+      "Comment": "副本数据中的 [limit item stat] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "open door even enemy",
+      "Title": "open door even enemy（原始标签）",
+      "Comment": "副本数据中的 [open door even enemy] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "limit escape character",
+      "Title": "limit escape character（原始标签）",
+      "Comment": "副本数据中的 [limit escape character] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "absolute change stat",
+      "Title": "absolute change stat（原始标签）",
+      "Comment": "副本数据中的 [absolute change stat] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "character respawn posetion",
+      "Title": "character respawn posetion（原始标签）",
+      "Comment": "副本数据中的 [character respawn posetion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "room move keep state",
+      "Title": "room move keep state（原始标签）",
+      "Comment": "副本数据中的 [room move keep state] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "use countdown",
+      "Title": "use countdown（原始标签）",
+      "Comment": "副本数据中的 [use countdown] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "usable item",
+      "Title": "usable item（原始标签）",
+      "Comment": "副本数据中的 [usable item] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "disable exit",
+      "Title": "disable exit（原始标签）",
+      "Comment": "副本数据中的 [disable exit] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "impossible skills",
+      "Title": "impossible skills（原始标签）",
+      "Comment": "副本数据中的 [impossible skills] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "randomized object creation",
+      "Title": "randomized object creation（原始标签）",
+      "Comment": "副本数据中的 [randomized object creation] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "select",
+      "Title": "选择",
+      "Comment": "副本数据中的 [select] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "regenerate",
+      "Title": "regenerate（原始标签）",
+      "Comment": "副本数据中的 [regenerate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "minimap icon",
+      "Title": "minimap icon（原始标签）",
+      "Comment": "副本数据中的 [minimap icon] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "object",
+      "Title": "对象",
+      "Comment": "副本数据中的 [object] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "map",
+      "Title": "地图",
+      "Comment": "副本数据中的 [map] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "index",
+      "Title": "索引",
+      "Comment": "副本数据中的 [index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "team",
+      "Title": "team（原始标签）",
+      "Comment": "副本数据中的 [team] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "neutral",
+      "Title": "neutral（原始标签）",
+      "Comment": "副本数据中的 [neutral] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "pos",
+      "Title": "坐标",
+      "Comment": "副本数据中的 [pos] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "named monster map pos",
+      "Title": "精英怪怪物地图坐标",
+      "Comment": "副本数据中的 [named monster map pos] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "realdungeon checkup",
+      "Title": "realdungeon checkup（原始标签）",
+      "Comment": "副本数据中的 [realdungeon checkup] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "party member coin limit",
+      "Title": "party member coin limit（原始标签）",
+      "Comment": "副本数据中的 [party member coin limit] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "dummy appear count",
+      "Title": "dummy appear count（原始标签）",
+      "Comment": "副本数据中的 [dummy appear count] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "powerwar dungeon",
+      "Title": "powerwar dungeon（原始标签）",
+      "Comment": "副本数据中的 [powerwar dungeon] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tournament round fatigue",
+      "Title": "tournament round fatigue（原始标签）",
+      "Comment": "副本数据中的 [tournament round fatigue] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "result card",
+      "Title": "结果卡片",
+      "Comment": "副本数据中的 [result card] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "reward item rate",
+      "Title": "奖励物品比率",
+      "Comment": "副本数据中的 [reward item rate] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tournament clear reward exp",
+      "Title": "tournament clear reward exp（原始标签）",
+      "Comment": "副本数据中的 [tournament clear reward exp] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "tournament clear reward gold rate",
+      "Title": "tournament clear reward gold rate（原始标签）",
+      "Comment": "副本数据中的 [tournament clear reward gold rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "layered map specification",
+      "Title": "layered map specification（原始标签）",
+      "Comment": "副本数据中的 [layered map specification] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "monster",
+      "Title": "怪物",
+      "Comment": "副本数据中的 [monster] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示怪物 ID，必须通过 monster registry 解析，不能按名称或目录反推裸 ID。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dgn",
+      "Section": "quest npc dungeon",
+      "Title": "任务NPC副本",
+      "Comment": "副本数据中的 [quest npc dungeon] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

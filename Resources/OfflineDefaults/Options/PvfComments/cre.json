@@ -61,6 +61,936 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "挚爱"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "name",
+      "Title": "名称",
+      "Comment": "宠物数据中的 [name] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "width",
+      "Title": "宽度",
+      "Comment": "宠物数据中的 [width] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "floating height",
+      "Title": "floating height（原始标签）",
+      "Comment": "宠物数据中的 [floating height] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "layer",
+      "Title": "layer（原始标签）",
+      "Comment": "宠物数据中的 [layer] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "over skill recovery time",
+      "Title": "上层技能恢复时间",
+      "Comment": "宠物数据中的 [over skill recovery time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "direction correct",
+      "Title": "direction correct（原始标签）",
+      "Comment": "宠物数据中的 [direction correct] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "move speed",
+      "Title": "移动速度",
+      "Comment": "宠物数据中的 [move speed] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "gravity",
+      "Title": "重力",
+      "Comment": "宠物数据中的 [gravity] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "start level",
+      "Title": "开始等级",
+      "Comment": "宠物数据中的 [start level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "permission level",
+      "Title": "permission level（原始标签）",
+      "Comment": "宠物数据中的 [permission level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "max level",
+      "Title": "上限等级",
+      "Comment": "宠物数据中的 [max level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "parent max level",
+      "Title": "parent max level（原始标签）",
+      "Comment": "宠物数据中的 [parent max level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "artifact slot",
+      "Title": "宠物装备槽位",
+      "Comment": "宠物数据中的 [artifact slot] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill MP",
+      "Title": "技能MP",
+      "Comment": "宠物数据中的 [skill MP] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "over skill MP",
+      "Title": "上层技能MP",
+      "Comment": "宠物数据中的 [over skill MP] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "walk motion",
+      "Title": "行走动作动画",
+      "Comment": "宠物数据中的 [walk motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "run motion",
+      "Title": "奔跑动作动画",
+      "Comment": "宠物数据中的 [run motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill motion",
+      "Title": "技能动作动画",
+      "Comment": "宠物数据中的 [skill motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "over skill motion",
+      "Title": "上层技能动作动画",
+      "Comment": "宠物数据中的 [over skill motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "response sound tag",
+      "Title": "响应音效标记",
+      "Comment": "宠物数据中的 [response sound tag] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "basic under effect",
+      "Title": "基础下层效果",
+      "Comment": "宠物数据中的 [basic under effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "basic over effect",
+      "Title": "基础上层效果",
+      "Comment": "宠物数据中的 [basic over effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill over effect",
+      "Title": "技能上层效果",
+      "Comment": "宠物数据中的 [skill over effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "etc motion",
+      "Title": "etc motion（原始标签）",
+      "Comment": "宠物数据中的 [etc motion] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "attack info",
+      "Title": "攻击信息",
+      "Comment": "宠物数据中的 [attack info] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "piercing",
+      "Title": "piercing（原始标签）",
+      "Comment": "宠物数据中的 [piercing] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill string",
+      "Title": "技能字符串",
+      "Comment": "宠物数据中的 [skill string] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "int data",
+      "Title": "int data（原始标签）",
+      "Comment": "宠物数据中的 [int data] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "string data",
+      "Title": "字符串数据",
+      "Comment": "宠物数据中的 [string data] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "evolution quest",
+      "Title": "进化任务",
+      "Comment": "宠物数据中的 [evolution quest] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "evolution creature id",
+      "Title": "进化宠物ID",
+      "Comment": "宠物数据中的 [evolution creature id] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示宠物 ID，必须通过 creature registry 解析；静态配置不证明可获得。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "evolution level",
+      "Title": "进化等级",
+      "Comment": "宠物数据中的 [evolution level] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "character span",
+      "Title": "角色角色间距",
+      "Comment": "宠物数据中的 [character span] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "get exp motion",
+      "Title": "get exp motion（原始标签）",
+      "Comment": "宠物数据中的 [get exp motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "random motion",
+      "Title": "随机动作动画",
+      "Comment": "宠物数据中的 [random motion] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "revision x",
+      "Title": "修正X 坐标",
+      "Comment": "宠物数据中的 [revision x] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "revision y",
+      "Title": "修正Y 坐标",
+      "Comment": "宠物数据中的 [revision y] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "selective grow creature",
+      "Title": "可选成长成长宠物",
+      "Comment": "宠物数据中的 [selective grow creature] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "using exp item",
+      "Title": "使用经验物品",
+      "Comment": "宠物数据中的 [using exp item] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "grow Atype item index",
+      "Title": "grow Atype item index（原始标签）",
+      "Comment": "宠物数据中的 [grow Atype item index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "grow Btype item index",
+      "Title": "grow Btype item index（原始标签）",
+      "Comment": "宠物数据中的 [grow Btype item index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "grow level",
+      "Title": "成长等级",
+      "Comment": "宠物数据中的 [grow level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "grow Atype creature id",
+      "Title": "grow Atype creature id（原始标签）",
+      "Comment": "宠物数据中的 [grow Atype creature id] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示宠物 ID，必须通过 creature registry 解析；静态配置不证明可获得。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "grow Btype creature id",
+      "Title": "grow Btype creature id（原始标签）",
+      "Comment": "宠物数据中的 [grow Btype creature id] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示宠物 ID，必须通过 creature registry 解析；静态配置不证明可获得。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill list",
+      "Title": "技能列表",
+      "Comment": "宠物数据中的 [skill list] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。其中数字若表示技能 ID，必须先确定职业分支，再通过对应职业技能 registry 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill node",
+      "Title": "skill node（原始标签）",
+      "Comment": "宠物数据中的 [skill node] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill type",
+      "Title": "技能类型",
+      "Comment": "宠物数据中的 [skill type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill name",
+      "Title": "技能名称",
+      "Comment": "宠物数据中的 [skill name] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill explain",
+      "Title": "技能说明",
+      "Comment": "宠物数据中的 [skill explain] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "learn skill level",
+      "Title": "学习技能等级",
+      "Comment": "宠物数据中的 [learn skill level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill under effect",
+      "Title": "技能下层效果",
+      "Comment": "宠物数据中的 [skill under effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill info",
+      "Title": "技能信息",
+      "Comment": "宠物数据中的 [skill info] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "using random skill",
+      "Title": "使用随机技能",
+      "Comment": "宠物数据中的 [using random skill] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "over skill over effect",
+      "Title": "上层技能上层效果",
+      "Comment": "宠物数据中的 [over skill over effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "response over effect",
+      "Title": "响应上层效果",
+      "Comment": "宠物数据中的 [response over effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "wing sound tag",
+      "Title": "翅膀音效标记",
+      "Comment": "宠物数据中的 [wing sound tag] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "over skill type",
+      "Title": "上层技能类型",
+      "Comment": "宠物数据中的 [over skill type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "skill level values",
+      "Title": "skill level values（原始标签）",
+      "Comment": "宠物数据中的 [skill level values] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "over skill level values",
+      "Title": "over skill level values（原始标签）",
+      "Comment": "宠物数据中的 [over skill level values] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "walk under effect",
+      "Title": "行走下层效果",
+      "Comment": "宠物数据中的 [walk under effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "run under effect",
+      "Title": "奔跑下层效果",
+      "Comment": "宠物数据中的 [run under effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "over skill under effect",
+      "Title": "上层技能下层效果",
+      "Comment": "宠物数据中的 [over skill under effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "response under effect",
+      "Title": "响应下层效果",
+      "Comment": "宠物数据中的 [response under effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "walk sound tag",
+      "Title": "行走音效标记",
+      "Comment": "宠物数据中的 [walk sound tag] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "run sound tag",
+      "Title": "奔跑音效标记",
+      "Comment": "宠物数据中的 [run sound tag] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "special motion",
+      "Title": "special motion（原始标签）",
+      "Comment": "宠物数据中的 [special motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "additional animation",
+      "Title": "附加动画",
+      "Comment": "宠物数据中的 [additional animation] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "default random motion rate",
+      "Title": "默认随机动作动画比率",
+      "Comment": "宠物数据中的 [default random motion rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "special over effect",
+      "Title": "special over effect（原始标签）",
+      "Comment": "宠物数据中的 [special over effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "increase random motion rate",
+      "Title": "增加随机动作动画比率",
+      "Comment": "宠物数据中的 [increase random motion rate] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "item count for levelup",
+      "Title": "物品数量用于升级",
+      "Comment": "宠物数据中的 [item count for levelup] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "event evolute creature",
+      "Title": "event evolute creature（原始标签）",
+      "Comment": "宠物数据中的 [event evolute creature] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "attack constant",
+      "Title": "攻击常量",
+      "Comment": "宠物数据中的 [attack constant] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "response delay",
+      "Title": "响应延迟",
+      "Comment": "宠物数据中的 [response delay] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "second per fill point spend",
+      "Title": "second per fill point spend（原始标签）",
+      "Comment": "宠物数据中的 [second per fill point spend] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "second per fill point charge",
+      "Title": "second per fill point charge（原始标签）",
+      "Comment": "宠物数据中的 [second per fill point charge] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "MAX fill point",
+      "Title": "上限饱食度点数",
+      "Comment": "宠物数据中的 [MAX fill point] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "fill point to eat feed",
+      "Title": "fill point to eat feed（原始标签）",
+      "Comment": "宠物数据中的 [fill point to eat feed] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "evolution fade in delay",
+      "Title": "进化淡入淡出在延迟",
+      "Comment": "宠物数据中的 [evolution fade in delay] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "evolution fade out delay",
+      "Title": "evolution fade out delay（原始标签）",
+      "Comment": "宠物数据中的 [evolution fade out delay] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "evolution delay",
+      "Title": "进化延迟",
+      "Comment": "宠物数据中的 [evolution delay] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "dying delay",
+      "Title": "dying delay（原始标签）",
+      "Comment": "宠物数据中的 [dying delay] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "ambient in room list",
+      "Title": "ambient in room list（原始标签）",
+      "Comment": "宠物数据中的 [ambient in room list] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "ambient in main game",
+      "Title": "ambient in main game（原始标签）",
+      "Comment": "宠物数据中的 [ambient in main game] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "ambient in pvp",
+      "Title": "ambient in pvp（原始标签）",
+      "Comment": "宠物数据中的 [ambient in pvp] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "damage",
+      "Title": "伤害",
+      "Comment": "宠物数据中的 [damage] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "mana",
+      "Title": "法力",
+      "Comment": "宠物数据中的 [mana] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "module damage percent",
+      "Title": "模块伤害百分比",
+      "Comment": "宠物数据中的 [module damage percent] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "assault creature damage penalty",
+      "Title": "assault creature damage penalty（原始标签）",
+      "Comment": "宠物数据中的 [assault creature damage penalty] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "default particle",
+      "Title": "默认粒子",
+      "Comment": "宠物数据中的 [default particle] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "fly motion",
+      "Title": "飞行动作动作动画",
+      "Comment": "宠物数据中的 [fly motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "equip motion",
+      "Title": "装备动作动画",
+      "Comment": "宠物数据中的 [equip motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "cre",
+      "Section": "special under effect",
+      "Title": "special under effect（原始标签）",
+      "Comment": "宠物数据中的 [special under effect] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

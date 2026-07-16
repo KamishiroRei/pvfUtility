@@ -45,8 +45,8 @@
       "PvfCommentType": "Section",
       "FileType": "chr",
       "Section": "growtype name",
-      "Title": "基本的角色 转职1 转职2 转职3",
-      "Comment": "成长类型名称定义：依次指定基础角色、一次转职、二次转职、三次转职的显示名称。用于定义各成长阶段在游戏中的职业名称字符串。四个参数依次对应：基础职业名称、一转职业名称、二转职业名称、三转职业名称。",
+      "Title": "成长类型名称列表",
+      "Comment": "定义当前角色文件内部的基础职业名称与各 growtype 分支显示名称。条目顺序只在本 .chr 及其职业 registry 上下文中解释；它不是全局转职阶段表，也不证明对应分支已在客户端、任务或服务端开放。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype name] `基础` `成长1剑士` `成长2剑士` `成长3剑士` // 各成长类型的成长类型名称\n```",
       "Closing": false,
       "Authors": "FreyaGrace"
@@ -86,7 +86,7 @@
       "FileType": "chr",
       "Section": "weapon hit info",
       "Title": "武器命中信息",
-      "Comment": "武器命中信息：定义各武器子类型的打击类型、出血视觉效果、卡肉时间和命中硬直比率。\n\n参数说明：\n- 第一组 token：`[cut]`（切割）或 `[blow]`（钝击），定义武器打击类型。\n- 第二组 token：`[blood]`（有出血视觉效果）或 `[no blood]`（无出血视觉效果）。\n- 第三个数值：普攻卡肉时间（单位毫秒）。\n- 第四个数值：命中硬直比率（1.0 为标准值），实际硬直 = 卡肉时间 × 硬直比率。\n\n每个武器子类型用一对 `[weapon hit info]...[/weapon hit info]` 标签定义。",
+      "Comment": "按武器子类型排列的命中表现参数闭合块。旧官方样例展示“打击类型、血效、hit stop、受击延迟倍率”四项；真实角色文件还可在每组后附加额外浮点列。各组顺序必须与该职业武器子类型顺序一致，扩展列未由旧样例闭合时应原样保留，不能擅自删减或套用公式。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[weapon hit info]            // 武器的子类型信息（详情请参考 AttackInfo 示例）\n`[blow]` `[no blood]` 50 1.0\n`[blow]` `[no blood]` 50 1.0\n`[blow]` `[blood]` 10 1.0\n`[blow]` `[no blood]` 50 1.0\n`[blow]` `[no blood]` 100 2.0\n`[cut]` `[no blood]` 100 2.0\n[/weapon hit info]            // 必须用此关闭\n```",
       "Closing": true,
       "Authors": "Xiti Fox"
@@ -96,7 +96,7 @@
       "FileType": "chr",
       "Section": "weapon skill info",
       "Title": "武器技能信息",
-      "Comment": "武器技能信息：定义各武器子类型对应的技能 MP 消耗比率和冷却时间比率。每行对应一个武器子类型，包含四个浮点数值：物理技能 MP 比率、物理技能冷却比率、魔法技能 MP 比率、魔法技能冷却比率。行数必须与武器子类型数量一致。",
+      "Comment": "按武器子类型排列的技能消耗/冷却倍率闭合表。基础列义以“物理 MP、物理冷却、魔法 MP、魔法冷却”四元组为主；真实文件常把多个武器子类型的四元组展平成一条长序列。必须按目标职业的武器子类型顺序分组，不能把整行误当单个武器记录。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[weapon skill info]    // 武器的子类型对应的武器技能 MP，冷却时间信息。\n1.0 1.0 1.0 1.0        // 物理 MP，物理冷却，魔法 MP，魔法冷却比率\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n1.0 1.0 1.0 1.0\n[/weapon skill info]\n```",
       "Closing": true,
       "Authors": "无名氏"
@@ -165,8 +165,8 @@
       "PvfCommentType": "Section",
       "FileType": "chr",
       "Section": "weight",
-      "Title": "负重上限",
-      "Comment": "负重上限：角色可穿戴装备的总负重上限，单位为 10g。数值 6000 代表 60kg 的负重上限。超出此限制将无法装备更多物品或导致速度惩罚。",
+      "Title": "角色自身重量",
+      "Comment": "角色自身的重量参数，官方样例标注单位为 10g。它与 [inventory limit] 的背包负重上限是不同字段；该值还可能参与击退、投掷或物理交互计算，精确运行时公式需实机验证。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[weight] 6000        // （单位：10g）\n```",
       "Closing": false,
       "Authors": null
@@ -195,8 +195,8 @@
       "PvfCommentType": "Section",
       "FileType": "chr",
       "Section": "module damage rate",
-      "Title": "PVP/战场/混沌伤害比率",
-      "Comment": "PVP/战场/混沌伤害比率：分别定义角色在玩家对战（PVP）、战场模式和混沌模式下的伤害倍率。三个浮点数值依次对应三种游戏模式。1.0 表示标准伤害，0.3 表示仅造成 30% 伤害。若转职后沿用转职前的值，可不写此标签或写为 0.0。",
+      "Title": "模式伤害倍率序列",
+      "Comment": "角色或 growtype 在不同玩法模式下使用的伤害倍率序列。旧官方样例说明前三列为 PVP、战场、混沌模式；真实角色文件可出现第四列，因此写回或分析时必须保留目标文件的完整列数，不能按旧三列样例截断。省略或写 0 是否继承上级值，也应按具体版本验证。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[module damage rate] 1.0 1.0 1.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```\n\n```pvf\n[module damage rate] 1.0 0.3 0.0    // PVP，战场，混沌模式下的伤害比率\n                    // 若转职后沿用转职前的值，可不写此标签或写为 0.0。\n```",
       "Closing": false,
       "Authors": null
@@ -205,8 +205,8 @@
       "PvfCommentType": "Section",
       "FileType": "chr",
       "Section": "growtype 1",
-      "Title": "之后的数值为转职前的属性成长值",
-      "Comment": "成长类型 1（基础职业）：此标识之后定义的属性值为转职前（基础职业）每升一级的属性成长值。每次升级时，角色各项属性将按此处定义的增长量自动提升。",
+      "Title": "成长类型 1 属性块",
+      "Comment": "当前角色文件中 growtype 1 的静态属性成长块，可包含每级成长值、默认技能、类别与模式倍率等字段。编号只在该 .chr 内部有意义，不能固定解释为“转职前”或跨职业通用阶段。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 1]        // 之后的数值为转职前的属性成长值\n```",
       "Closing": false,
       "Authors": null
@@ -215,8 +215,8 @@
       "PvfCommentType": "Section",
       "FileType": "chr",
       "Section": "growtype 2",
-      "Title": "之后的数值为第一次转职时的属性",
-      "Comment": "成长类型 2（一次转职）：此标识之后定义的属性值为第一次转职后每升一级的属性成长值。一次转职后的属性成长通常高于基础职业。",
+      "Title": "成长类型 2 属性块",
+      "Comment": "当前角色文件中 growtype 2 的静态属性成长块，可包含每级成长值、默认技能、觉醒段与模式倍率等字段。编号对应本角色的一条 growtype 分支，不表示从 growtype 1 顺序升级而来。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 2]        // 之后的数值为第一次转职时的属性\n```",
       "Closing": false,
       "Authors": null
@@ -225,8 +225,8 @@
       "PvfCommentType": "Section",
       "FileType": "chr",
       "Section": "growtype 3",
-      "Title": "之后的数值为第二次转职时的属性",
-      "Comment": "成长类型 3（二次转职）：此标识之后定义的属性值为第二次转职后每升一级的属性成长值。",
+      "Title": "成长类型 3 属性块",
+      "Comment": "当前角色文件中 growtype 3 的静态属性成长块。其名称应与同文件 [growtype name] 的对应位置一起读取；技能 ID 必须走当前职业技能 registry 解析。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 3]        // 之后的数值为第二次转职时的属性\n```",
       "Closing": false,
       "Authors": null
@@ -235,8 +235,8 @@
       "PvfCommentType": "Section",
       "FileType": "chr",
       "Section": "growtype 4",
-      "Title": "之后的数值为第三次转职时的属性",
-      "Comment": "成长类型 4（三次转职）：此标识之后定义的属性值为第三次转职后每升一级的属性成长值。",
+      "Title": "成长类型 4 属性块",
+      "Comment": "当前角色文件中 growtype 4 的静态属性成长块。该数字是角色内部的分支索引，不是“第三次转职”这一全局阶段定义。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 4]        // 之后的数值为第三次转职时的属性\n```",
       "Closing": false,
       "Authors": null
@@ -245,8 +245,8 @@
       "PvfCommentType": "Section",
       "FileType": "chr",
       "Section": "growtype 5",
-      "Title": "之后的数值为第四次转职时的属性",
-      "Comment": "成长类型 5（四次转职）：此标识之后定义的属性值为第四次转职后每升一级的属性成长值。",
+      "Title": "成长类型 5 属性块",
+      "Comment": "当前角色文件中 growtype 5 的静态属性成长块。该数字是角色内部的分支索引，不是“第四次转职”这一全局阶段定义。",
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n[growtype 5]        // 之后的数值为第四次转职时的属性\n```",
       "Closing": false,
       "Authors": null
@@ -540,6 +540,286 @@
       "OfficialDescription": "#### 官方示例: charactersample.chr\n\n```pvf\n// 私有信息。 //\n[MP regen speed] 2\n```",
       "Closing": false,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "HP MAX",
+      "Title": "HP 上限属性",
+      "Comment": "角色初始值或 growtype/觉醒块中的 HP 上限数值。位于 [initial value] 时表示初始基础值，位于成长块时通常表示该分支的成长参数；最终面板还可能受等级、装备和运行时规则影响。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "MP MAX",
+      "Title": "MP 上限属性",
+      "Comment": "角色初始值或 growtype/觉醒块中的 MP 上限数值。父块决定它是初始值还是成长参数，不能脱离上下文把所有出现位置都解释成一次性加成。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "physical attack",
+      "Title": "角色物理攻击属性",
+      "Comment": "角色初始值或 growtype/觉醒块中的物理攻击数值字段。此处属于 .chr 角色属性语境，不应套用装备文件中同名字段的解释；父块决定其为基础值或成长参数。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "physical defense",
+      "Title": "角色物理防御属性",
+      "Comment": "角色初始值或 growtype/觉醒块中的物理防御数值字段。应与同一父块的其他成长字段一起读取，静态数值不等于最终面板防御。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "magical attack",
+      "Title": "角色魔法攻击属性",
+      "Comment": "角色初始值或 growtype/觉醒块中的魔法攻击数值字段。此处属于 .chr 角色属性语境，不应套用装备文件中同名字段的解释。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "magical defense",
+      "Title": "角色魔法防御属性",
+      "Comment": "角色初始值或 growtype/觉醒块中的魔法防御数值字段。父块决定其为初始值或成长参数，最终面板仍可能受到其他系统修正。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "hit recovery",
+      "Title": "受击恢复参数",
+      "Comment": "角色初始值或成长块中的受击恢复/硬直恢复参数。数值越高通常表示受击后恢复能力更强，但精确单位和换算公式未由静态文件单独闭合。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "awakening skill",
+      "Title": "觉醒默认技能列表",
+      "Comment": "当前 growtype 的觉醒段默认技能闭合列表，记录通常按“技能 ID、等级”成对排列，也可为空。技能 ID 必须通过当前 .chr 对应职业的技能 registry 解析；条目存在不证明觉醒任务、学习或实机授予成功。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "awakening 2",
+      "Title": "第二觉醒静态分块",
+      "Comment": "当前 growtype 下的第二觉醒静态属性块，可继续包含成长字段、默认技能与模式倍率。它只描述该角色文件中的第二觉醒候选配置，不证明觉醒流程或客户端显示已开放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "awakening name",
+      "Title": "觉醒名称列表",
+      "Comment": "当前 growtype 的觉醒显示名称列表，常见为一觉与二觉两个文本项，也可能出现占位或空值。必须在同一 .chr 的 growtype 上下文中解释，不能当作全局觉醒枚举。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "attack speed",
+      "Title": "基础攻击速度",
+      "Comment": "角色初始属性中的基础攻击速度数值。它与装备、技能和模式修正共同影响最终速度；静态值的基准和上限需按目标版本验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "cast speed",
+      "Title": "基础施放速度",
+      "Comment": "角色初始属性中的基础施放速度数值。最终施放速度还会受到装备、技能、异常状态与模式规则修正。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "jump power",
+      "Title": "基础跳跃力",
+      "Comment": "角色初始属性中的跳跃力参数，用于描述起跳能力。它与 [jump speed] 是不同字段，精确单位和运动公式需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "jump speed",
+      "Title": "基础跳跃速度",
+      "Comment": "角色初始属性中的跳跃速度参数。应与 [jump power]、重力及动作配置一起理解，不能仅凭数值直接换算跳跃高度或距离。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "dark resistance",
+      "Title": "暗属性抗性",
+      "Comment": "角色初始值或成长块中的暗属性抗性字段。父块决定它是基础值还是成长参数，负值表示该静态配置允许较低的暗抗起点。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "light resistance",
+      "Title": "光属性抗性",
+      "Comment": "角色初始值或成长块中的光属性抗性字段。父块决定它是基础值还是成长参数，负值应原样保留，不能按缺省值处理。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "growtype 6",
+      "Title": "成长类型 6 属性块",
+      "Comment": "当前角色文件中 growtype 6 的静态属性成长块。它是该 .chr 内部的第六个 growtype 分支索引，不是“第五次转职”或觉醒/TP/Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "simple rest motion",
+      "Title": "简化休息动作动画",
+      "Comment": "简化表现模式使用的休息动作 .ani 路径。它与普通 [rest motion] 并列，具体在何种性能、显示或玩法条件下切换需客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "simple move motion",
+      "Title": "简化移动动作动画",
+      "Comment": "简化表现模式使用的常规移动动作 .ani 路径。它与普通 [move motion] 并列，不包含冲刺动作；触发条件需客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "back motion",
+      "Title": "后退动作动画",
+      "Comment": "角色后退或背向移动语境使用的 .ani 路径。不同职业可复用攻击动作资源，资源文件名本身不能反向证明具体输入或状态机条件。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "ghost motion",
+      "Title": "残影动作动画列表",
+      "Comment": "角色残影/幽灵表现使用的 .ani 路径闭合列表，可包含普通残影与闪避残影等多个资源。列表顺序可能由客户端硬编码消费，修改时应完整保留。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "throw motion 3-1",
+      "Title": "投掷动作 3 第一阶段动画",
+      "Comment": "第三类投掷/使用动作的第一阶段 .ani 路径，通常与 [throw motion 3-2] 成对。阶段可表现为准备、蓄力或施放前段，精确用途由调用该槽位的道具和客户端逻辑决定。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "throw motion 3-2",
+      "Title": "投掷动作 3 第二阶段动画",
+      "Comment": "第三类投掷/使用动作的第二阶段 .ani 路径，通常与 [throw motion 3-1] 成对。不能仅按文件名断定一定是“发射”阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "throw motion 4-1",
+      "Title": "投掷动作 4 第一阶段动画",
+      "Comment": "第四类投掷/使用动作的第一阶段 .ani 路径，通常与 [throw motion 4-2] 成对。缺少该槽位的职业可不配置。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "throw motion 4-2",
+      "Title": "投掷动作 4 第二阶段动画",
+      "Comment": "第四类投掷/使用动作的第二阶段 .ani 路径，通常与 [throw motion 4-1] 成对。具体道具类别和调用时机需客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "upgrade weapon attack power rate",
+      "Title": "武器强化攻击力倍率表",
+      "Comment": "按职业武器子类型排列的武器强化攻击力倍率闭合序列。条目顺序依赖该职业的武器子类型表，不能把位置当成跨职业固定武器枚举；倍率如何进入强化公式需结合强化系统验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "body image path",
+      "Title": "角色身体图像路径模板",
+      "Comment": "角色身体/皮肤 ImagePacks2 资源的路径模板，常含 `%04d` 之类编号占位符。它只登记客户端图像资源定位形式，不证明对应编号资源完整存在。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "chr",
+      "Section": "weapon durability decrease rate",
+      "Title": "武器耐久消耗倍率表",
+      "Comment": "按职业武器子类型排列的耐久消耗倍率序列。数值 1 表示基准候选，具体消耗时机、取整方式和模式覆盖需实机验证；顺序必须与职业武器子类型一致。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

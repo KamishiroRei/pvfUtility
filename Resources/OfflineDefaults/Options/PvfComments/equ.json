@@ -157,7 +157,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_SLOW",
       "Title": "减速抗性加成",
-      "Comment": "减速抗性加成",
+      "Comment": "减速抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -167,7 +167,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_FREEZE",
       "Title": "冰冻抗性加成",
-      "Comment": "冰冻抗性加成",
+      "Comment": "冰冻抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -177,7 +177,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_POISON",
       "Title": "中毒抗性加成",
-      "Comment": "中毒抗性加成",
+      "Comment": "中毒抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -187,7 +187,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_STUN",
       "Title": "眩晕抗性加成",
-      "Comment": "眩晕抗性加成",
+      "Comment": "眩晕抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -197,7 +197,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_CURSE",
       "Title": "诅咒抗性加成",
-      "Comment": "诅咒抗性加成",
+      "Comment": "诅咒抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -207,7 +207,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_BLIND",
       "Title": "失明抗性加成",
-      "Comment": "失明抗性加成",
+      "Comment": "失明抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -217,7 +217,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_LIGHTNING",
       "Title": "感电抗性加成",
-      "Comment": "感电抗性加成",
+      "Comment": "感电抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -227,7 +227,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_STONE",
       "Title": "石化抗性加成",
-      "Comment": "石化抗性加成",
+      "Comment": "石化抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -237,7 +237,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_SLEEP",
       "Title": "睡眠抗性加成",
-      "Comment": "睡眠抗性加成",
+      "Comment": "睡眠抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -247,7 +247,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_DEELEMENT",
       "Title": "元素剥离抗性加成",
-      "Comment": "元素剥离抗性加成",
+      "Comment": "元素剥离抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -257,7 +257,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_DEADLYSTRIKE",
       "Title": "致命打击抗性加成",
-      "Comment": "致命打击抗性加成",
+      "Comment": "致命打击抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -267,7 +267,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_BLEEDING",
       "Title": "出血抗性加成",
-      "Comment": "出血抗性加成",
+      "Comment": "出血抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -277,7 +277,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_PIERCE",
       "Title": "贯通抗性加成",
-      "Comment": "贯通抗性加成",
+      "Comment": "贯通抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -297,7 +297,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_CONFUSE",
       "Title": "混乱抗性加成",
-      "Comment": "混乱抗性加成",
+      "Comment": "混乱抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -307,7 +307,7 @@
       "FileType": "equ",
       "Section": "ACTIVESTATUS_TOLERANCE_HOLD",
       "Title": "束缚抗性加成",
-      "Comment": "束缚抗性加成",
+      "Comment": "束缚抗性加成的属性候选常量 token，常用于 [avatar select ability] 等父块。它不是同名根级 resistance 字段；必须连同父块、运算符和数值读取，实际抗性刻度与生效范围需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -357,7 +357,7 @@
       "FileType": "equ",
       "Section": "MP_REGENRATE_PERCENT_UP",
       "Title": "MP 回复速度百分比加成",
-      "Comment": "MP 回复速度百分比加成",
+      "Comment": "MP 回复速度百分比加成的属性候选常量 token。它通常位于可选能力或硬编码属性语境，不等同根级 [MP regen speed rate]；数值刻度和实际回复周期需结合父块验证。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -447,7 +447,7 @@
       "FileType": "equ",
       "Section": "swordman",
       "Title": "鬼剑士(男)",
-      "Comment": "鬼剑士(男)",
+      "Comment": "鬼剑士（男）职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -457,7 +457,7 @@
       "FileType": "equ",
       "Section": "fighter",
       "Title": "格斗家(女)",
-      "Comment": "格斗家(女)",
+      "Comment": "格斗家（女）职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -467,7 +467,7 @@
       "FileType": "equ",
       "Section": "at fighter",
       "Title": "格斗家(男)",
-      "Comment": "格斗家(男)",
+      "Comment": "格斗家（男）职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -477,7 +477,7 @@
       "FileType": "equ",
       "Section": "demonic swordman",
       "Title": "黑暗武士",
-      "Comment": "黑暗武士",
+      "Comment": "黑暗武士职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
@@ -487,7 +487,7 @@
       "FileType": "equ",
       "Section": "creatormage",
       "Title": "缔造者",
-      "Comment": "缔造者",
+      "Comment": "缔造者职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -497,7 +497,7 @@
       "FileType": "equ",
       "Section": "gunner",
       "Title": "神枪手(男)",
-      "Comment": "神枪手(男)",
+      "Comment": "神枪手（男）职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -507,7 +507,7 @@
       "FileType": "equ",
       "Section": "at gunner",
       "Title": "神枪手(女)",
-      "Comment": "神枪手(女)",
+      "Comment": "神枪手（女）职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -517,7 +517,7 @@
       "FileType": "equ",
       "Section": "mage",
       "Title": "魔法师(女)",
-      "Comment": "魔法师(女)",
+      "Comment": "魔法师（女）职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -527,7 +527,7 @@
       "FileType": "equ",
       "Section": "at mage",
       "Title": "魔法师(男)",
-      "Comment": "魔法师(男)",
+      "Comment": "魔法师（男）职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -537,7 +537,7 @@
       "FileType": "equ",
       "Section": "priest",
       "Title": "圣职者",
-      "Comment": "圣职者",
+      "Comment": "圣职者职业路由 token。可出现在 [usable job]、[skill data up]、[skill levelup]、动画或条件块中；它不是数字 character ID。后接技能 ID 时必须按该职业选择正确 skill registry，并保留原始空格/拼写。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -547,7 +547,7 @@
       "FileType": "equ",
       "Section": "all",
       "Title": "所有职业",
-      "Comment": "所有职业",
+      "Comment": "[all] 是多义范围 token，可表示全部职业、全部技能组、全部作用域或其他“全部”范围。必须按直接父字段解释，不能在 [usable job]、[skill group]、[skill data up]、[module] 等上下文之间借义。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -587,7 +587,7 @@
       "FileType": "equ",
       "Section": "usable even peace",
       "Title": "和平/待机区域也触发特殊效果 (1 开启)",
-      "Comment": "和平/待机区域也触发特殊效果 (1 开启)",
+      "Comment": "使特定装备功能在和平/待机类区域也参与处理的开关线索，官方样例以 1 启用。它只补充模块适用范围，不证明所有特殊效果在城镇、战争区域或决斗场均可运行。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[usable even peace] 1\t\t\t// 待机时（战争地区，决斗场），某些功能（如米歇尔念动力椅子召唤）不会生效。但\n\t\t\t\t\t\t\t\t// 若想此时也生效，则使用本标签。\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -607,7 +607,7 @@
       "FileType": "equ",
       "Section": "weapon",
       "Title": "武器",
-      "Comment": "武器",
+      "Comment": "武器类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -617,7 +617,7 @@
       "FileType": "equ",
       "Section": "hat avatar",
       "Title": "帽子(时装)",
-      "Comment": "帽子(时装)",
+      "Comment": "帽子时装类型 token，主要作为 [equipment type] 的值，也可出现在隐藏或替换时装块中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -627,7 +627,7 @@
       "FileType": "equ",
       "Section": "hair avatar",
       "Title": "发型(时装)",
-      "Comment": "发型(时装)",
+      "Comment": "发型时装类型 token，主要作为 [equipment type] 的值，也可出现在隐藏或替换时装块中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -636,8 +636,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "breast avatar",
-      "Title": "上衣(时装)",
-      "Comment": "上衣(时装)",
+      "Title": "胸部(时装)",
+      "Comment": "胸部时装类型 token，主要作为 [equipment type] 的值，也可出现在隐藏或替换时装块中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -647,7 +647,7 @@
       "FileType": "equ",
       "Section": "face avatar",
       "Title": "脸部(时装)",
-      "Comment": "脸部(时装)",
+      "Comment": "脸部时装类型 token，主要作为 [equipment type] 的值，也可出现在隐藏或替换时装块中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -657,7 +657,7 @@
       "FileType": "equ",
       "Section": "waist avatar",
       "Title": "腰带(时装)",
-      "Comment": "腰带(时装)",
+      "Comment": "腰部时装类型 token，主要作为 [equipment type] 的值，也可出现在隐藏或替换时装块中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -667,7 +667,7 @@
       "FileType": "equ",
       "Section": "coat avatar",
       "Title": "外套(时装)",
-      "Comment": "外套(时装)",
+      "Comment": "上衣时装类型 token，主要作为 [equipment type] 的值，也可出现在隐藏或替换时装块中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -677,7 +677,7 @@
       "FileType": "equ",
       "Section": "pants avatar",
       "Title": "裤子(时装)",
-      "Comment": "裤子(时装)",
+      "Comment": "裤子时装类型 token，主要作为 [equipment type] 的值，也可出现在隐藏或替换时装块中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -687,7 +687,7 @@
       "FileType": "equ",
       "Section": "shoes avatar",
       "Title": "鞋子(时装)",
-      "Comment": "鞋子(时装)",
+      "Comment": "鞋子时装类型 token，主要作为 [equipment type] 的值，也可出现在隐藏或替换时装块中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -697,7 +697,7 @@
       "FileType": "equ",
       "Section": "title name",
       "Title": "称号",
-      "Comment": "称号",
+      "Comment": "称号类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -707,7 +707,7 @@
       "FileType": "equ",
       "Section": "coat",
       "Title": "外套",
-      "Comment": "外套",
+      "Comment": "上衣类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -717,7 +717,7 @@
       "FileType": "equ",
       "Section": "shoulder",
       "Title": "肩部",
-      "Comment": "肩部",
+      "Comment": "肩部类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -727,7 +727,7 @@
       "FileType": "equ",
       "Section": "pants",
       "Title": "裤子",
-      "Comment": "裤子",
+      "Comment": "下装类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -737,7 +737,7 @@
       "FileType": "equ",
       "Section": "shoes",
       "Title": "鞋子",
-      "Comment": "鞋子",
+      "Comment": "鞋类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -747,7 +747,7 @@
       "FileType": "equ",
       "Section": "waist",
       "Title": "腰带",
-      "Comment": "腰带",
+      "Comment": "腰带类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -757,7 +757,7 @@
       "FileType": "equ",
       "Section": "amulet",
       "Title": "项链",
-      "Comment": "项链",
+      "Comment": "项链类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -767,7 +767,7 @@
       "FileType": "equ",
       "Section": "wrist",
       "Title": "手镯",
-      "Comment": "手镯",
+      "Comment": "手镯类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -777,7 +777,7 @@
       "FileType": "equ",
       "Section": "ring",
       "Title": "戒指",
-      "Comment": "戒指",
+      "Comment": "戒指类型 token，主要作为 [equipment type] 的值，部分 token 也可出现在 [hide equipment] 中。它是枚举值而非独立字段或 equipment ID；后续数字列必须按同类装备样本保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -787,7 +787,7 @@
       "FileType": "equ",
       "Section": "hide equipment",
       "Title": "穿戴时需要隐藏的其他装备部位",
-      "Comment": "穿戴时需要隐藏的其他装备部位",
+      "Comment": "穿戴时需要隐藏的装备/时装部位 token 闭合列表，必须读取 [/hide equipment]。列表只描述隐藏候选，具体图层、职业外观和客户端显示需与 [hide layer] 及资源链一起验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[hide equipment] `[hat avatar]`\t\t\t// 穿戴时要隐藏的装备指定。也需要指定图层。没有要隐藏的装备则不需要。\n\t\t\t\t\t\t// `[hat avatar]` `[hair avatar]` `[breast avatar]` `[face avatar]`\n\t\t\t\t\t\t// `[waist avatar]` `[coat avatar]` `[pants avatar]` `[shoes avatar]`\n\t\t\t\t\t\t// `[weapon]` 中选择一个。\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -797,7 +797,7 @@
       "FileType": "equ",
       "Section": "hide layer",
       "Title": "需隐藏图层编号列表",
-      "Comment": "需隐藏图层编号列表",
+      "Comment": "需要隐藏的客户端外观图层编号闭合列表，必须读取 [/hide layer]。整数只是图层编号线索，不能从数值大小推断前后遮挡顺序。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[hide layer] \t\t\t\t\t// 要隐藏的装备的图层指定。可指定的图层数量没有限制。没有要隐藏的装备则不需要。\n800\n2000\n[/hide layer]\t\t\t\t\t// 结束后请关闭。\n```",
       "Closing": true,
       "Authors": "lostluna1"
@@ -817,7 +817,7 @@
       "FileType": "equ",
       "Section": "durability",
       "Title": "耐久度",
-      "Comment": "耐久度",
+      "Comment": "装备耐久度参数；官方样例指出 0 可表示无限耐久。字段在特殊装备/称号语境可能存在额外控制含义，必须结合 [equipment type] 和同类样本解释，损耗与修理需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n// 称号的情况下，0：自由，1：强制（无法脱下）\n[durability] 133\t\t\t\t// 耐久度。0 为无限。\n```",
       "Closing": false,
       "Authors": "by：黑桃K"
@@ -847,7 +847,7 @@
       "FileType": "equ",
       "Section": "repair price",
       "Title": "维修价格",
-      "Comment": "维修价格",
+      "Comment": "装备修理价格线索。官方说明指出未单独指定时可回退到 [value]，再回退到 [price]；实际修理费用、耐久损耗和服务端结算需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[repair price] 50\t\t\t\t// 修理费\n\t\t\t\t\t\t// 未单独指定时，以 [value] 的值替代；若 [value] 也未指定，则以 [price] 的值替代。\n```",
       "Closing": false,
       "Authors": "by：黑桃K"
@@ -867,7 +867,7 @@
       "FileType": "equ",
       "Section": "cash",
       "Title": "点券/现金价格",
-      "Comment": "点券/现金价格",
+      "Comment": "点券/CERA 类价格线索。静态数值不证明商城入口、余额扣除、地区货币刻度或服务端允许购买。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[cash] 1200\t\t\t\t\t// 点券价格\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -877,7 +877,7 @@
       "FileType": "equ",
       "Section": "medal",
       "Title": "勋章价格",
-      "Comment": "勋章价格",
+      "Comment": "奖章或特殊商店货币价格线索。必须结合目标 NPC/shop 链路解释，不能从裸数字猜货币类型或购买结果。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[medal] 3\t\t\t\t\t// 勋章价格\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -887,7 +887,7 @@
       "FileType": "equ",
       "Section": "finish point price",
       "Title": "FP 价格",
-      "Comment": "FP 价格",
+      "Comment": "FP 类价格参数线索。FP 的具体货币/点数含义、显示和扣除规则依赖目标商店或系统，需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[finish point price] 10\t\t\t\t// FP价格\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -927,7 +927,7 @@
       "FileType": "equ",
       "Section": "extra icon",
       "Title": "额外/复制态图标文件 + 帧",
-      "Comment": "额外/复制态图标文件 + 帧",
+      "Comment": "额外/复制状态图标的 IMG 路径与帧索引，同一装备可重复出现。PVF 引用不证明客户端 NPK/IMG 存在、帧号有效或实际显示。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[extra icon] `EquipmentIcon.img` 1\t\t// 附加图标图像文件和帧索引\t// 透明时装 // 穿戴后（复制时）\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -947,7 +947,7 @@
       "FileType": "equ",
       "Section": "custom wav",
       "Title": "自定义音效列表",
-      "Comment": "自定义音效列表",
+      "Comment": "自定义声音标识闭合列表，可为空，也可位于 [expand ani] 内。声音标识不是文件路径；客户端音频资源和触发场景需另行验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n// 自定义音效列表\n[custom wav]\n`WHIP_SOUND`\n`HIT_SOUND`\n[/custom wav]\n```",
       "Closing": true,
       "Authors": "FreyaGrace"
@@ -986,8 +986,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "expand path",
-      "Title": "拓展路径",
-      "Comment": "拓展路径",
+      "Title": "扩展动画资源目录",
+      "Comment": "[expand ani] 内的扩展动画资源目录字符串，不能脱离外层块单独使用。目录存在只证明 PVF 引用，不证明具体 ANI/IMG 资源完整。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "慧慧"
@@ -1137,7 +1137,7 @@
       "FileType": "equ",
       "Section": "anti evil",
       "Title": "抗魔值",
-      "Comment": "抗魔值",
+      "Comment": "装备抗魔值线索，常用于异界/特殊副本要求。字段存在不证明 UI 门槛、服务端校验或所有副本采用同一公式。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[anti evil] 50\t\t\t\t\t// 异界抗性。异界地下城所需的属性。只出现在 50 级以上的装备上。\n```",
       "Closing": false,
       "Authors": "释然"
@@ -1187,7 +1187,7 @@
       "FileType": "equ",
       "Section": "physical defense",
       "Title": "体力",
-      "Comment": "体力",
+      "Comment": "装备根级或能力块中的体力增量字段。它不同于 [equipment physical defense]：后者才是装备物理防御力；具体面板换算仍需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[physical defense] +10\t\t\t\t// 体力\n```",
       "Closing": false,
       "Authors": "Cai - 263007544"
@@ -1207,7 +1207,7 @@
       "FileType": "equ",
       "Section": "magical defense",
       "Title": "精神",
-      "Comment": "精神",
+      "Comment": "装备根级或能力块中的精神增量字段。它不同于 [equipment magical defense]：后者才是装备魔法防御力；具体面板换算仍需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[magical defense] -26\t\t\t\t// 精神\n```",
       "Closing": false,
       "Authors": "Cai - 263007544"
@@ -1257,7 +1257,7 @@
       "FileType": "equ",
       "Section": "physical absolute damage",
       "Title": "物理绝对伤害",
-      "Comment": "物理绝对伤害",
+      "Comment": "物理绝对伤害数值字段。它只证明装备静态修正入口，不能据字段名直接推导最终伤害/防御公式、百分比刻度、PVP 修正或叠加上限。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[physical absolute damage] 100\t\t\t// 物理绝对伤害\n```",
       "Closing": false,
       "Authors": "FreyaGrace"
@@ -1267,7 +1267,7 @@
       "FileType": "equ",
       "Section": "physical damage reduce",
       "Title": "物理伤害修正",
-      "Comment": "物理伤害修正",
+      "Comment": "物理伤害修正数值字段。它只证明装备静态修正入口，不能据字段名直接推导最终伤害/防御公式、百分比刻度、PVP 修正或叠加上限。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[physical damage reduce] 100\t\t\t// 物理伤害修正\n```",
       "Closing": false,
       "Authors": "FreyaGrace"
@@ -1277,7 +1277,7 @@
       "FileType": "equ",
       "Section": "physical absolute defense",
       "Title": "物理伤害追加减少",
-      "Comment": "物理伤害追加减少",
+      "Comment": "物理绝对防御/伤害追加减少数值字段。它只证明装备静态修正入口，不能据字段名直接推导最终伤害/防御公式、百分比刻度、PVP 修正或叠加上限。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[physical absolute defense] 20.0\t\t// 物理绝对防御。%值\n```",
       "Closing": false,
       "Authors": "BieNao"
@@ -1287,7 +1287,7 @@
       "FileType": "equ",
       "Section": "magical absolute damage",
       "Title": "魔法绝对伤害",
-      "Comment": "魔法绝对伤害",
+      "Comment": "魔法绝对伤害数值字段。它只证明装备静态修正入口，不能据字段名直接推导最终伤害/防御公式、百分比刻度、PVP 修正或叠加上限。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[magical absolute damage] 100\t\t\t// 魔法绝对伤害\n```",
       "Closing": false,
       "Authors": "FreyaGrace"
@@ -1297,7 +1297,7 @@
       "FileType": "equ",
       "Section": "magical damage reduce",
       "Title": "魔法伤害修正",
-      "Comment": "魔法伤害修正",
+      "Comment": "魔法伤害修正数值字段。它只证明装备静态修正入口，不能据字段名直接推导最终伤害/防御公式、百分比刻度、PVP 修正或叠加上限。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[magical damage reduce] 100\t\t\t// 魔法伤害修正\n```",
       "Closing": false,
       "Authors": "FreyaGrace"
@@ -1307,7 +1307,7 @@
       "FileType": "equ",
       "Section": "magical absolute defense",
       "Title": "魔法伤害追加减少",
-      "Comment": "魔法伤害追加减少",
+      "Comment": "魔法绝对防御/伤害追加减少数值字段。它只证明装备静态修正入口，不能据字段名直接推导最终伤害/防御公式、百分比刻度、PVP 修正或叠加上限。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[magical absolute defense] 20.0\t\t\t// 魔法绝对防御。%值\n```",
       "Closing": false,
       "Authors": "BieNao"
@@ -1317,7 +1317,7 @@
       "FileType": "equ",
       "Section": "fire resistance",
       "Title": "火属性抗性",
-      "Comment": "火属性抗性",
+      "Comment": "火属性抗性的单数值字段。元素抗性/强化必须按根级或能力块上下文解释，数值单位、面板换算和最终元素结算需实机确认；不要与异常状态抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[fire resistance] +17\t\t\t\t// 火属性抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1326,8 +1326,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "water resistance",
-      "Title": "冰属性抗性",
-      "Comment": "冰属性抗性",
+      "Title": "水/冰属性抗性",
+      "Comment": "水/冰属性抗性的单数值字段。元素抗性/强化必须按根级或能力块上下文解释，数值单位、面板换算和最终元素结算需实机确认；不要与异常状态抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[water resistance] +3\t\t\t\t// 水属性抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1337,7 +1337,7 @@
       "FileType": "equ",
       "Section": "dark resistance",
       "Title": "暗属性抗性",
-      "Comment": "暗属性抗性",
+      "Comment": "暗属性抗性的单数值字段。元素抗性/强化必须按根级或能力块上下文解释，数值单位、面板换算和最终元素结算需实机确认；不要与异常状态抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[dark resistance] +37\t\t\t\t// 暗属性抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1347,7 +1347,7 @@
       "FileType": "equ",
       "Section": "light resistance",
       "Title": "光属性抗性",
-      "Comment": "光属性抗性",
+      "Comment": "光属性抗性的单数值字段。元素抗性/强化必须按根级或能力块上下文解释，数值单位、面板换算和最终元素结算需实机确认；不要与异常状态抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[light resistance] -37\t\t\t\t// 光属性抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1357,7 +1357,7 @@
       "FileType": "equ",
       "Section": "all elemental resistance",
       "Title": "所有属性抗性",
-      "Comment": "所有属性抗性",
+      "Comment": "全元素抗性的单数值字段。元素抗性/强化必须按根级或能力块上下文解释，数值单位、面板换算和最终元素结算需实机确认；不要与异常状态抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[all elemental resistance] +10\t\t\t// 所有属性抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1367,7 +1367,7 @@
       "FileType": "equ",
       "Section": "fire attack",
       "Title": "火属性强化",
-      "Comment": "火属性强化",
+      "Comment": "火属性强化的单数值字段。元素抗性/强化必须按根级或能力块上下文解释，数值单位、面板换算和最终元素结算需实机确认；不要与异常状态抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[fire attack] +100\t\t\t\t// 火属性强化\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1407,7 +1407,7 @@
       "FileType": "equ",
       "Section": "slow resistance",
       "Title": "减速抗性",
-      "Comment": "减速抗性",
+      "Comment": "减速异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[slow resistance] 18\t\t\t\t// 减速抗性\n```",
       "Closing": false,
       "Authors": "同创"
@@ -1417,7 +1417,7 @@
       "FileType": "equ",
       "Section": "freeze resistance",
       "Title": "冰冻抗性",
-      "Comment": "冰冻抗性",
+      "Comment": "冰冻异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[freeze resistance] 39\t\t\t\t// 冰冻抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1437,7 +1437,7 @@
       "FileType": "equ",
       "Section": "stun resistance",
       "Title": "眩晕抗性",
-      "Comment": "眩晕抗性",
+      "Comment": "眩晕异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[stun resistance] 33\t\t\t\t// 眩晕抗性\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1447,7 +1447,7 @@
       "FileType": "equ",
       "Section": "curse resistance",
       "Title": "诅咒抗性",
-      "Comment": "诅咒抗性",
+      "Comment": "诅咒异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[curse resistance] 10\t\t\t\t// 诅咒抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1457,7 +1457,7 @@
       "FileType": "equ",
       "Section": "blind resistance",
       "Title": "失明抗性",
-      "Comment": "失明抗性",
+      "Comment": "失明异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[blind resistance] 10\t\t\t\t// 失明抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1467,7 +1467,7 @@
       "FileType": "equ",
       "Section": "lightning resistance",
       "Title": "感电抗性",
-      "Comment": "感电抗性",
+      "Comment": "感电异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[lightning resistance] 24\t\t\t// 感电抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1477,7 +1477,7 @@
       "FileType": "equ",
       "Section": "stone resistance",
       "Title": "石化抗性",
-      "Comment": "石化抗性",
+      "Comment": "石化异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[stone resistance] 3\t\t\t\t// 石化抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1487,7 +1487,7 @@
       "FileType": "equ",
       "Section": "sleep resistance",
       "Title": "睡眠抗性",
-      "Comment": "睡眠抗性",
+      "Comment": "睡眠异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[sleep resistance] 33\t\t\t\t// 睡眠抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1507,7 +1507,7 @@
       "FileType": "equ",
       "Section": "confuse resistance",
       "Title": "混乱抗性",
-      "Comment": "混乱抗性",
+      "Comment": "混乱异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[confuse resistance] 33\t\t\t\t// 混乱抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1517,7 +1517,7 @@
       "FileType": "equ",
       "Section": "hold resistance",
       "Title": "束缚抗性",
-      "Comment": "束缚抗性",
+      "Comment": "束缚异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[hold resistance] -3\t\t\t\t// 束缚抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1527,7 +1527,7 @@
       "FileType": "equ",
       "Section": "burn resistance",
       "Title": "灼伤抗性",
-      "Comment": "灼伤抗性",
+      "Comment": "灼伤异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[burn resistance] 10\t\t\t\t// 灼伤抗性\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1537,7 +1537,7 @@
       "FileType": "equ",
       "Section": "weapon break resistance",
       "Title": "武器破坏抗性",
-      "Comment": "武器破坏抗性",
+      "Comment": "武器破坏异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[weapon break resistance]\t\t\t// 武器破坏抗性\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1547,7 +1547,7 @@
       "FileType": "equ",
       "Section": "armor break resistance",
       "Title": "防具破坏抗性",
-      "Comment": "防具破坏抗性",
+      "Comment": "防具破坏异常状态抗性的单数值字段。负值在目标样本中可能合法；覆盖范围、数值刻度、上限及 PVP 行为需实机确认，不能与元素抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[armor break resistance]\t\t\t// 防具破坏抗性\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1557,7 +1557,7 @@
       "FileType": "equ",
       "Section": "deelement resistance",
       "Title": "元素剥离抗性(未使用)",
-      "Comment": "元素剥离抗性(未使用)",
+      "Comment": "deelement 类罕见/旧式状态抗性的单数值字段，仅在样例型文件中确认。保留原始拼写；不能仅凭英文名断定“元素剥离”的完整机制或复制为通用字段。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[deelement resistance] 1\t\t\t// 现在不用\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1567,7 +1567,7 @@
       "FileType": "equ",
       "Section": "deadlystrike resistance",
       "Title": "致命打击抗性(未使用)",
-      "Comment": "致命打击抗性(未使用)",
+      "Comment": "deadlystrike 类罕见/旧式状态抗性的单数值字段，仅在样例型文件中确认。保留原始拼写；不能据此推导致命打击公式或通用抗性机制。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[deadlystrike resistance] 2\t\t\t// 现在不用\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1577,7 +1577,7 @@
       "FileType": "equ",
       "Section": "all activestatus resistance",
       "Title": "所有异常状态抗性",
-      "Comment": "所有异常状态抗性",
+      "Comment": "全异常状态抗性的单数值线索，可位于根级或套装能力块。具体覆盖哪些状态、数值单位、上限和叠加规则需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[all activestatus resistance] 2\t\t\t// 所有状态异常抗性\n```",
       "Closing": false,
       "Authors": "Cai - 263007544"
@@ -1647,7 +1647,7 @@
       "FileType": "equ",
       "Section": "MP regen speed rate",
       "Title": "MP 回复速度百分比加成",
-      "Comment": "MP 回复速度百分比加成",
+      "Comment": "MP 回复速度比率的单数值字段。必须保留原始大小写，不与 [MP regen speed] 合并；比例刻度、回复周期和面板显示需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[MP regen speed rate] 0.1\t\t\t// %增加 (临时例外处理)\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1667,7 +1667,7 @@
       "FileType": "equ",
       "Section": "x move dash speed",
       "Title": "横向冲刺速度倍率",
-      "Comment": "横向冲刺速度倍率",
+      "Comment": "X/横向移动或冲刺速度倍率线索，目标样本可见小数值。实际速度、动作取消、地图限制和客户端表现需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[x move dash speed] 0.5\t\t\t\t// X轴移动速度增加 50%\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1677,7 +1677,7 @@
       "FileType": "equ",
       "Section": "y move dash speed",
       "Title": "纵向冲刺速度倍率",
-      "Comment": "纵向冲刺速度倍率",
+      "Comment": "Y/纵向移动或冲刺速度倍率线索，目标样本可见小数值。实际速度、动作取消、地图限制和客户端表现需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[y move dash speed] -0.5\t\t\t// Y轴移动速度减少 -50%\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1717,7 +1717,7 @@
       "FileType": "equ",
       "Section": "rigidity",
       "Title": "僵直",
-      "Comment": "僵直",
+      "Comment": "旧式僵直/硬直相关单整数参数。静态样本不足以把数值换算为帧数、时间或百分比，必须保留原值并实机验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[rigidity] +1000\t\t\t\t// 僵直度 (硬直恢复的反概念)\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1727,7 +1727,7 @@
       "FileType": "equ",
       "Section": "jump power",
       "Title": "跳跃力",
-      "Comment": "跳跃力",
+      "Comment": "跳跃力修正字段。数值单位、与动作/重力的组合及实际跳跃高度需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[jump power] 10\t\t\t\t\t// 跳跃力\n```",
       "Closing": false,
       "Authors": "Cai"
@@ -1767,7 +1767,7 @@
       "FileType": "equ",
       "Section": "active status",
       "Title": "旧式状态异常设置(已弃用)",
-      "Comment": "旧式状态异常设置(已弃用)",
+      "Comment": "装备侧旧式异常状态设置入口，与 .atk 的 [active status] 和效果侧状态字段不是同一层。官方样例已标为旧式/弃用语境，状态参数不得跨文件类型照搬。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n// `要变化的能力值` `+` 变化数值 光环范围\n[active status] `[curse]` 37.3 100\t\t// 状态异常改版前使用的标签。现在不使用。\n```\n\n#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.7 active status #\n\t{exp}{/exp}[active status]\n\t\t{must1}{exp}状态变化{/exp}{string}\n\t\t{opt1}{exp}等级{/exp}{int(0:)}\n\t\t{opt2}{exp}强度{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1777,7 +1777,7 @@
       "FileType": "equ",
       "Section": "push aside",
       "Title": "击退强度",
-      "Comment": "击退强度",
+      "Comment": "旧式击退相关单整数参数。方向、距离、速度、目标重量和霸体影响未由静态文件闭合，不能按字段名直接换算。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[push aside] +10\t\t\t\t// 击退力量\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1787,7 +1787,7 @@
       "FileType": "equ",
       "Section": "lift up",
       "Title": "浮空强度",
-      "Comment": "浮空强度",
+      "Comment": "旧式浮空相关单整数参数。浮空高度、时间、重力和目标状态需实机确认，不能按字段名直接换算。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[lift up] +27\t\t\t\t\t// 浮空力量\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1827,7 +1827,7 @@
       "FileType": "equ",
       "Section": "ignore defense",
       "Title": "忽略防御(未使用时可忽略)",
-      "Comment": "忽略防御(未使用时可忽略)",
+      "Comment": "忽略防御相关单值线索，目标仅有少量样本。它不能证明百分比、固定值或最终伤害公式，未使用时也不应据名称擅自补值。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[ignore defense] 1\t\t\t\t// 现在不用的标签\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1837,7 +1837,7 @@
       "FileType": "equ",
       "Section": "human damage rate",
       "Title": "对人型伤害比率(%).",
-      "Comment": "对人型伤害比率(%).",
+      "Comment": "对玩家/人型目标的伤害比率修正字段。字段存在不证明目标分类、百分比刻度、PVP 最终公式或叠加方式，需结合父块与实机验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[human damage rate] +2.5\t\t\t// 对人形伤害比率变化值。%值\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1847,7 +1847,7 @@
       "FileType": "equ",
       "Section": "fort damage rate",
       "Title": "对要塞/破坏物伤害比率(%).",
-      "Comment": "对要塞/破坏物伤害比率(%).",
+      "Comment": "对要塞/破坏物的伤害比率修正字段。字段存在不证明目标分类、百分比刻度、PVP 最终公式或叠加方式，需结合父块与实机验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[fort damage rate] -31.2\t\t\t// 对建筑伤害比率变化值。%值\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1857,7 +1857,7 @@
       "FileType": "equ",
       "Section": "monster damage rate",
       "Title": "对怪物伤害比率(%).",
-      "Comment": "对怪物伤害比率(%).",
+      "Comment": "对怪物的伤害比率修正字段。字段存在不证明目标分类、百分比刻度、PVP 最终公式或叠加方式，需结合父块与实机验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[monster damage rate] 100.0\t\t\t// 对怪物 (护甲类别为0个的单位准备的) 攻击比率。可为小数，%值，100为默认\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1867,7 +1867,7 @@
       "FileType": "equ",
       "Section": "HP drain",
       "Title": "HP 吸收",
-      "Comment": "HP 吸收",
+      "Comment": "HP 吸收/汲取效果线索。数值是比例、固定值还是触发参数不能仅凭字段名确定，实际恢复、上限和目标条件需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[HP drain] 1\t\t\t\t\t// HP 吸收\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1877,7 +1877,7 @@
       "FileType": "equ",
       "Section": "MP drain",
       "Title": "MP 吸收",
-      "Comment": "MP 吸收",
+      "Comment": "MP 吸收/汲取效果线索。数值是比例、固定值还是触发参数不能仅凭字段名确定，实际恢复、上限和目标条件需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[MP drain] 1\t\t\t\t\t// MP 吸收\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1887,7 +1887,7 @@
       "FileType": "equ",
       "Section": "skill data up",
       "Title": "技能加成——主要出现在异界或者侍魂装备中",
-      "Comment": "技能加成——主要出现在异界或者侍魂装备中",
+      "Comment": "技能数据修改闭合块，可按职业 token、技能 ID、作用域、数据类型、参数索引、单位和值修改技能数据。技能 ID 必须按职业 registry 解析，列义需回目标 .skl；静态配置不证明冷却、伤害或 PVP 实机生效。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[skill data up]\t\t\t\t\t// 控制技能脚本特定数据的标签\n`[fighter]` 12 `[dungeon]` `[static]` 2 `+` 20\n// 职业\n// 技能索引，\n// 应用到的内容 : dungeon, pvp, all\n// 要更改的数据类型 : static, level, mp, cooltime, skill consume item, casting time\n// 数据索引\n// 数值应用 : `+`, 比率应用 : `%`\n// 数值\n[/skill data up]\n```",
       "Closing": true,
       "Authors": "牧野-QQ1320113373"
@@ -1927,7 +1927,7 @@
       "FileType": "equ",
       "Section": "attack success",
       "Title": "攻击成功",
-      "Comment": "攻击成功",
+      "Comment": "位于 [if] 的攻击成功触发条件，通常为事件标记。它只定义条件入口，不证明命中结算；需结合同一 [if] 的其他筛选和对应 [then] 效果。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//####1.1.1 trigger ######\n\t//1.1.1.1 attack success #\n\t{exp}攻击成功时的值{/exp}[attack success]\n\t\t{must1}{exp}值为 2 时使用 attack condition 的 stuck{/exp}{int(1:2)}\n```\n\n```pvf\n//1.1.2.3 element #\n\t{prereq}[attack success]|[hit]{/prereq}{exp}攻击成功时控制攻击类型{/exp}[element]\n\t\t{must1}{exp}属性{/exp}{string}\n```\n\n```pvf\n//1.1.2.5 distance #\n\t{prereq}[attack success]|[hit]{/prereq}{exp}距离{/exp}[distance]\n\t\t{must1}{exp}{/exp}{int(0:)}\n```\n\n```pvf\n//1.1.2.10 attack type #\n\t{prereq}[attack success]|[hit]{/prereq}{exp}{/exp}[attacker type]\n\t\t{must1}{exp}类型{/exp}{string}\n```\n\n```pvf\n//1.1.2.11 target type #\n\t{prereq}[attack success]{/prereq}{exp}检查自己攻击的敌人的类型{/exp}[target type]\n\t\t{must1}{exp}类型{/exp}{string}\n```\n\n```pvf\n//1.1.2.12 target grade #\n\t{prereq}[attack success]{/prereq}{exp}检查自己攻击的敌人的等级{/exp}[target grade]\n\t\t{must1}{exp}等级{/exp}{string}\n```\n\n```pvf\n//1.1.2.13 attack condition #\n\t{prereq}[attack success]|[hit]{/prereq}[attack condition]\n\t\t{must1}{exp}攻击条件{/exp}{string}\n```\n\n```pvf\n//1.1.2.14 skill #\n\t{prereq}[attack success]|[hit]{/prereq}[skill]\n\t\t{must1}{exp}职业{/exp}{string}\n\t\t{must2}{exp}技能索引{/exp}{int(0:)}\n```\n\n```pvf\n//1.1.2.19 target death #\n\t{prereq}[attack success]{/prereq}{exp}指定自己攻击的敌人死亡时{/exp}[target death]\n\t\t{must1}{exp}{/exp}{int(1:1)}\n```",
       "Closing": false,
       "Authors": "无名氏"
@@ -1947,7 +1947,7 @@
       "FileType": "equ",
       "Section": "target",
       "Title": "效果目标 (myself 等)",
-      "Comment": "效果目标 (myself 等)",
+      "Comment": "效果目标选择字段，常见目标 token 为 myself 等并带附加控制值。它只说明作用对象，不说明效果内容、范围、阵营或运行成功。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.2 target #\n\t{exp}指定效果发生在哪个目标身上{/exp}[target]\n\t\t{must1}{exp}种类{/exp}{string}\n\t\t{must2}{exp}范围(单位: px){/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -1987,7 +1987,7 @@
       "FileType": "equ",
       "Section": "character name y revision",
       "Title": "角色名称 Y 坐标修正",
-      "Comment": "角色名称 Y 坐标修正",
+      "Comment": "角色名称 Y 方向修正参数，目标样本为两个整数。两列对应的状态/场景和客户端坐标单位未定性，需外观实机验证。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n///////////////////////////////////////////////////////////////\n//EquipmentSample.equ/////////////////////////////////////////////\n///////////////////////////////////////////////////////////////\n[character name y revision]\n\t{must1}{int(0:)}\n\t{must2}{int(0:)}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2007,7 +2007,7 @@
       "FileType": "equ",
       "Section": "attach target",
       "Title": "effect 内附着目标 (delegator/target)",
-      "Comment": "effect 内附着目标 (delegator/target)",
+      "Comment": "[effect] 内的附着目标 token，例如 delegator 或 target。必须结合当前 effect 资源、[attach pos] 和模块读取，不证明运行时对象一定存在。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[attach target]\t`delegator`\t\t//0// `delegator`, `target`\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2027,7 +2027,7 @@
       "FileType": "equ",
       "Section": "attach pos",
       "Title": "附着位置 (bottom/middle/top)",
-      "Comment": "附着位置 (bottom/middle/top)",
+      "Comment": "[effect] 内的附着位置 token，例如 bottom、middle、top。它是相对位置枚举，客户端层级和实际渲染需验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[attach pos] `bottom`\t\t\t//1// `bottom`, `middle`, `top`\n```\n\n```pvf\n[attach pos] `top`\t\t\t\t//1// `bottom`, `middle`, `top`\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2037,7 +2037,7 @@
       "FileType": "equ",
       "Section": "z revision",
       "Title": "Z 高度修正",
-      "Comment": "Z 高度修正",
+      "Comment": "效果或外观的 Z 高度修正参数。坐标单位、正负方向和客户端层级需结合父块及实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[z revision] -10 \t\t\t\t//0// z 轴移动距离(px) 没有则忽略\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2057,7 +2057,7 @@
       "FileType": "equ",
       "Section": "option",
       "Title": "effect 可选项列表块",
-      "Comment": "effect 可选项列表块",
+      "Comment": "[effect] 内的可选项闭合列表。块内 token/数值只按当前效果解释，不能把 option 当作通用装备属性。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[option]\t\t\t\t\t\t//0// animation 选项\n\t\t`keep direction`\t\t\t//0// animation 选项 (固定方向)\n\t\t`floor`\t\t\t\t\t\t//0// animation 选项 (画在地面上：地板效果等)\n\t\t`auto remove`\t\t\t\t//0// animation 选项 (动画结束后自动移除)\n\t\t`apply custom color`\t\t//0// animation 选项 (应用对象颜色：迷彩等)\n\t\t`sync speed`\t\t\t\t//0// animation 选项 (与对象动画速度同步)\n\t\t`copy horizon`\t\t\t\t//0// animation 选项 (动画横向复制)\n\t\t`copy vertical`\t\t\t\t//0// animation 选项 (动画纵向复制)\n\t\t`resize`\t\t\t\t\t//0// animation 选项 (根据光环范围调整大小) 未实现!!!\n\t[/option]\n```\n\n```pvf\n[option]\t\t\t\t\t\t//0// animation 选项\n\t\t`apply custom color`\t\t//0// animation 选项 (应用对象颜色：迷彩等)\n\t\t`sync speed`\t\t\t\t//0// animation 选项 (与对象动画速度同步)\n\t[/option]\n```",
       "Closing": true,
       "Authors": "lostluna1"
@@ -2067,7 +2067,7 @@
       "FileType": "equ",
       "Section": "module",
       "Title": "限定出现模块(room list等)",
-      "Comment": "限定出现模块(room list等)",
+      "Comment": "效果或条件适用模块的闭合 token 列表，可见 room list、pvp type 等。必须读取 [/module]，不能把字段 [pvp] 与块内 token `[pvp]` 混为同一层。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[module] `[room list]`\t\t\t//0// 效果出现的模块 (没有则所有模块)\n```\n\n#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//####1.1.2 state ######\n\t//1.1.2.1 module #\n\t{exp}模块{/exp}[module]\n\t\t{string}\n\t\t{!string}\n\t[/module]\n```",
       "Closing": true,
       "Authors": "lostluna1"
@@ -2077,7 +2077,7 @@
       "FileType": "equ",
       "Section": "file name",
       "Title": "效果资源路径 (.ani)",
-      "Comment": "效果资源路径 (.ani)",
+      "Comment": "效果资源文件路径字段，常引用 .ani 等资源。PVF 路径存在不证明客户端资源完整、动画可播放或触发正常。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[file name] `effect/animation/aura_range.ani`\t//1// 该效果路径及文件名\n```\n\n```pvf\n[file name] `Character/Common/Animation/go2.ani`\t//1// 该效果路径及文件名\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2097,7 +2097,7 @@
       "FileType": "equ",
       "Section": "limit upgradable level",
       "Title": "强化/增幅/精炼 等等级限制定义块",
-      "Comment": "强化/增幅/精炼 等等级限制定义块",
+      "Comment": "强化/增幅/锻造等升级类型与等级边界的闭合块。每组由升级类型 token 和两个整数边界组成；数字不是装备 ID，必须读取完整 [/limit upgradable level]。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n// 强化/增幅/锻造 等级限制\n[limit upgradable level]\n`normal upgrade` x y        // 强化限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)\n`amplify upgrade` x y       // 增幅限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)\n`separate upgrade` x y      // 锻造限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)\n`3rd chronicle upgrade` x y // 3次传说赋予限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)\n`all upgrade` x y\t\t\t// 将以上所有限制为 x~y 等级 (x 设置为 -1 时设为 1 级，y 设置为 -1 时设为满级)\n[/limit upgradable  level]\n```",
       "Closing": true,
       "Authors": "lostluna1"
@@ -2117,7 +2117,7 @@
       "FileType": "equ",
       "Section": "level section ability",
       "Title": "等级分段成长能力块",
-      "Comment": "等级分段成长能力块",
+      "Comment": "按等级区间生效的能力闭合块，块内属性必须按成长上下文解释。必须读取结束标签，分段边界、插值和实际生效需目标装备验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n// 按等级区间应用能力值\n// x1 : 等级区间 (像 0, 10, 20, 30... 这样使用)\n// +n1 +n2 : 能力值最小值，最大值\n// 能力值标签可以使用所有现有的\n[level section ability] x1\n        [equipment physical attack] +n1 +n2\n        [separate attack] +n1 +n2\n        [phisical aatack] +n1 +n2\n\t\t//...\n[/level section ability]\n```",
       "Closing": true,
       "Authors": "lostluna1"
@@ -2127,7 +2127,7 @@
       "FileType": "equ",
       "Section": "level section ani",
       "Title": "等级/职业条件的动画覆盖块",
-      "Comment": "等级/职业条件的动画覆盖块",
+      "Comment": "按等级或职业条件切换外观动画的闭合块，可包含 variation、layer variation、equipment ani script 等字段。资源引用和分段条件需客户端验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n// 按等级区间应用不同的装备动画\n// x1 : 应用该动画的等级\n// `str` : 该动画应应用的职业 (因异性职业，此处必须标明)\n[level section ani] x1  `[swordman]`\n       [equipment type] `[weapon]` 23\n       [variation] 7 0\n       [layer variation] 2790 `swdc`\n       [equipment ani script] `equipment/character/swordman.lay`\n       [layer variation] 650 `ssdb`\n       [equipment ani script] `equipment/character/swordman.lay`\n       [subtype] 0\n[/ level section ani]\n```",
       "Closing": true,
       "Authors": "lostluna1"
@@ -2187,7 +2187,7 @@
       "FileType": "equ",
       "Section": "fullset detail explain",
       "Title": "全套详细描述",
-      "Comment": "全套详细描述",
+      "Comment": "套装全套详细说明文本。它只负责 UI/描述线索，不能替代 [set ability]、[piece set ability] 等真实效果字段。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[fullset detail explain]\t\t\t// 集齐套装道具时出现的详细说明\n`集齐这些的话，帅气的糊涂兄会哇喔哇喔哇喔哇喔。`\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2197,7 +2197,7 @@
       "FileType": "equ",
       "Section": "piece set ability",
       "Title": "套装属性内容",
-      "Comment": "套装属性内容",
+      "Comment": "按套装件数生效的能力闭合块，首值通常为所需件数，后续可含属性、技能或触发效果。目标存在少量残缺样本，正常结构仍应读取到 [/piece set ability]。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[piece set ability] 3\t\t\t\t// 3件套效果\n// ... 中间省略。基本能力值中可以写的都可以。格式相同\n[parameter basic explain]\t\t\t// 集齐 3 件套时出现的基本说明\n`集齐3件套的话，善华会请喝饮料。`\n[parameter detail explain]\t\t\t// 集齐 3 件套时出现的详细说明\n`集齐3件套的话，善华会请喝又贵又好喝的饮料。`\n\n[/piece set ability]\t\t\t\t// 部分套装效果结束，部分套装没有主道具。\n```",
       "Closing": true,
       "Authors": "137735017"
@@ -2207,7 +2207,7 @@
       "FileType": "equ",
       "Section": "parameter basic explain",
       "Title": "参数基本解释",
-      "Comment": "参数基本解释",
+      "Comment": "套装/参数块内的基础说明文本，只负责描述当前参数或件数效果。说明文字不证明同块效果实际生效。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n// ... 中间省略。基本能力值中可以写的都可以。格式相同\n[parameter basic explain]\t\t\t// 集齐 3 件套时出现的基本说明\n`集齐3件套的话，善华会请喝饮料。`\n```",
       "Closing": false,
       "Authors": "无名氏"
@@ -2217,7 +2217,7 @@
       "FileType": "equ",
       "Section": "parameter detail explain",
       "Title": "部分套装详细描述",
-      "Comment": "部分套装详细描述",
+      "Comment": "套装/参数块内的详细说明文本，只负责 UI 描述。不能从文字反推伤害、概率、叠加或服务端结算。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[parameter detail explain]\t\t\t// 集齐 3 件套时出现的详细说明\n`集齐3件套的话，善华会请喝又贵又好喝的饮料。`\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2237,7 +2237,7 @@
       "FileType": "equ",
       "Section": "hardcoding cooltime",
       "Title": "硬编码额外冷却",
-      "Comment": "硬编码额外冷却",
+      "Comment": "依赖客户端/程序硬编码的冷却参数，按毫秒语境读取，并常与相邻 [int data] 配套。不能脱离具体装备复制或推断共享范围。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[hardcoding cooltime] 5000 \t\t\t// 硬编码用冷却时间\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2247,7 +2247,7 @@
       "FileType": "equ",
       "Section": "int data",
       "Title": "整型数据列表",
-      "Comment": "整型数据列表",
+      "Comment": "装备硬编码整数数据列表，列义随装备类型和相邻字段变化；官方样例既可用于宠物胶囊候选/概率，也可用于其他硬编码参数。必须按父块整组保留，数字 ID 逐项选择正确 registry。",
       "OfficialDescription": "#### 官方示例: creaturesample.equ\n\n```pvf\n[int data]\n63006    1000            // 宠物胶囊中开出的宠物蛋索引和相对概率\n63007    1000\n\n300                // 饱食度满时的增益时间（秒）\n-20                // 增益时宠物蓄力时间比率（%，包含过载时间）\n30                 // 使用饲料时饱食度增加量\n[/int data]\n```\n\n#### 官方示例: equipmentsample.equ\n\n```pvf\n[int data]\t\t\t\t\t// 硬编码用整数数据\n3\n4\n[/int data]\n```",
       "Closing": true,
       "Authors": "lostluna1"
@@ -2257,7 +2257,7 @@
       "FileType": "equ",
       "Section": "string data",
       "Title": "字符串数据列表",
-      "Comment": "字符串数据列表",
+      "Comment": "装备硬编码字符串数据列表，含义依赖装备类型和相邻字段。字符串可为 token、参数或资源线索，不能统一解释为路径或状态名。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[string data]\t\t\t\t\t// 硬编码用字符串数据\n`ASDF.ptl`\n`ASDF2.ptl`\n[/string data]\n```",
       "Closing": true,
       "Authors": "lostluna1"
@@ -2267,7 +2267,7 @@
       "FileType": "equ",
       "Section": "attack info",
       "Title": "附加攻击信息(.atk)",
-      "Comment": "附加攻击信息(.atk)",
+      "Comment": "附加攻击信息 .atk 的路径/文件名引用。需继续闭合到 .atk、调用动作和 ANI hitbox；路径存在不证明命中、伤害或客户端资源完整。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[attack info] `AttackInfo/equipment_01.atk`\t// 追加攻击信息 路径/文件名\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2277,7 +2277,7 @@
       "FileType": "equ",
       "Section": "change type ultimateSkillCurScene",
       "Title": "觉醒技能 CutScene 类型设置",
-      "Comment": "觉醒技能 CutScene 类型设置",
+      "Comment": "觉醒技能过场场景类型的硬编码参数，目标样本可见 0。具体类型枚举和客户端过场行为未定性，必须保留原拼写与数值。",
       "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[change type ultimateSkillCurScene]\t0\t//觉醒技能过场图像类型 ( 0: 使徒 )\n//说明: 用于变更觉醒技能过场图像时的类型。\n//追加时必须做的事情:\n//\t第一，添加脚本的同时必须修改 UltimateSkillCutScene.etc 脚本。( 必须与 [CHANGE ULTIMATECUTSCENE ANI FILE] 类型一致 )\n//\t第二，请在源代码中增加 eTYPEULTIMATECUTSCENE 的类型。\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2326,8 +2326,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "dungeon check",
-      "Title": "地下城检查?",
-      "Comment": "地下城检查?",
+      "Title": "副本条件检查块",
+      "Comment": "位于 [if] 的副本条件检查闭合块。块内数字需结合具体子标签和 dungeon/map registry 解析；不得从裸数字或字段名推断进入、清算或任务条件。",
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "lostluna1"
@@ -2336,8 +2336,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "change status",
-      "Title": "改变状态",
-      "Comment": "改变状态",
+      "Title": "状态/数值比较条件",
+      "Comment": "条件侧的状态或数值比较入口，需结合父 [if]、属性 token、比较符和阈值读取。不要与施加异常状态的 [active status] 效果混用。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.1.17 change status #\n\t{exp}条件符合时应用选项{/exp}[change status]\n\t\t{must1}{exp}状态{/exp}{string}\n\t\t{must2}{exp}比较方法{/exp}{string}\n\t\t{must3}{exp}比较单位{/exp}{string}\n\t\t{must4}{exp}数值{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2346,8 +2346,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "stat by condition",
-      "Title": "按条件调整状态",
-      "Comment": "按条件调整状态",
+      "Title": "条件式属性修改",
+      "Comment": "位于 [then] 的条件式属性修改入口，必须结合目标、单位、持续和父分支读取。不能直接等同普通 [stat] 或据名称推断叠加。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.31 stat by condition #\n\t{exp}• 使增益图标实时显示{/exp}[stat by condition]\n\t\t{must1}{exp}状态种类{/exp}{string}\n\t\t{must2}{exp}数值单位{/exp}{string}\n\t\t{must3}{exp}数值{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2356,8 +2356,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "multiple then",
-      "Title": "多个 then 块",
-      "Comment": "多个 then 块",
+      "Title": "多分支效果容器",
+      "Comment": "多分支效果容器，内部包含多个完整 [then] 分支并以 [/multiple then] 结束。目标存在少量残缺样本，正常写法仍需闭合。",
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "lostluna1"
@@ -2366,8 +2366,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "then probability",
-      "Title": "then 块内的概率",
-      "Comment": "then 块内的概率",
+      "Title": "分支选择权重",
+      "Comment": "[multiple then] 各 [then] 分支内的选择权重/二次概率参数。它不替代分支中的 [probability]，两者必须分别保留并由实机验证选择算法。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -2396,8 +2396,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "target active status",
-      "Title": "目标状态异常",
-      "Comment": "目标状态异常",
+      "Title": "目标异常状态条件",
+      "Comment": "位于 [if]，检查目标是否处于指定异常状态。它不是施加异常状态的效果，必须与目标选择和对应 [then] 一起读取。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.2.9 target active status #\n\t{exp}检查自己攻击的敌人的状态变化{/exp}[target active status]\n\t\t{must1}{exp}状态变化{/exp}{string}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2407,7 +2407,7 @@
       "FileType": "equ",
       "Section": "add absolute damage",
       "Title": "增加绝对伤害",
-      "Comment": "增加绝对伤害",
+      "Comment": "位于 [then] 的附加绝对伤害字段。公式、元素、目标、叠加、PVP 修正和最终结算不能仅由静态名称确定。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.11 add absolute damage #\n\t[add absolute damage]\n\t\t{must1}{exp}类型{/exp}{string}\n\t\t{must2}{exp}数值单位{/exp}{string}\n\t\t{must3}{exp}数值{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2417,7 +2417,7 @@
       "FileType": "equ",
       "Section": "disjoint",
       "Title": "分解",
-      "Comment": "分解",
+      "Comment": "[impossible contents] 内的“禁止分解”token。它只描述该装备的禁用内容线索，不自动证明客户端提示、账号仓库、服务端操作或其他交易规则。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
@@ -2427,7 +2427,7 @@
       "FileType": "equ",
       "Section": "gift",
       "Title": "不能进行的操作-送礼",
-      "Comment": "不能进行的操作-送礼",
+      "Comment": "[impossible contents] 内的“禁止送礼”token。它只描述该装备的禁用内容线索，不自动证明客户端提示、账号仓库、服务端操作或其他交易规则。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -2437,7 +2437,7 @@
       "FileType": "equ",
       "Section": "upgrade",
       "Title": "不能进行的操作-强化",
-      "Comment": "不能进行的操作-强化",
+      "Comment": "[impossible contents] 内的“禁止强化”token。它只描述该装备的禁用内容线索，不自动证明客户端提示、账号仓库、服务端操作或其他交易规则。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -2457,7 +2457,7 @@
       "FileType": "equ",
       "Section": "separate upgrade",
       "Title": "不能进行的操作-锻造",
-      "Comment": "不能进行的操作-锻造",
+      "Comment": "[impossible contents] 内的“禁止锻造/独立强化”token。它只描述该装备的禁用内容线索，不自动证明客户端提示、账号仓库、服务端操作或其他交易规则。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -2467,7 +2467,7 @@
       "FileType": "equ",
       "Section": "charac cargo",
       "Title": "不能进行的操作-角色仓库",
-      "Comment": "不能进行的操作-角色仓库",
+      "Comment": "[impossible contents] 内的“禁止角色仓库”token。它只描述该装备的禁用内容线索，不自动证明客户端提示、账号仓库、服务端操作或其他交易规则。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -2477,7 +2477,7 @@
       "FileType": "equ",
       "Section": "possible kiri protect",
       "Title": "可以使用凯莉的保护券",
-      "Comment": "可以使用凯莉的保护券",
+      "Comment": "凯莉强化保护券适用线索，目标可见为空值/标记形态。字段存在不证明所有强化等级、失败保护、道具扣除或服务端流程均可用。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -2487,7 +2487,7 @@
       "FileType": "equ",
       "Section": "reduce probability to human armor at pvp module",
       "Title": "在 PVP 模块中减少对人型防具的概率",
-      "Comment": "在 PVP 模块中减少对人型防具的概率",
+      "Comment": "PVP 模块中针对 human armor 目标的概率缩减参数。必须与原始 [probability]、目标类型和同一 [then] 分支读取，不能外推普通地下城。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -2497,7 +2497,7 @@
       "FileType": "equ",
       "Section": "routing priority",
       "Title": "优先显示",
-      "Comment": "优先显示",
+      "Comment": "装备显示/路由优先级闭合块，目标既有空块也有“职业 token + 数字”记录。空块不能当缺失字段；具体优先级算法未定性。",
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "释然"
@@ -2527,7 +2527,7 @@
       "FileType": "equ",
       "Section": "attack condition",
       "Title": "攻击条件",
-      "Comment": "攻击条件",
+      "Comment": "位于 [if] 的攻击附加条件，例如破招、背击等筛选线索。必须与 attack success/hit 等事件入口组合读取，具体 token 和判定需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.2.13 attack condition #\n\t{prereq}[attack success]|[hit]{/prereq}[attack condition]\n\t\t{must1}{exp}攻击条件{/exp}{string}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2577,7 +2577,7 @@
       "FileType": "equ",
       "Section": "upgrade prob increase",
       "Title": "强化增幅几率增加",
-      "Comment": "强化增幅几率增加",
+      "Comment": "强化成功率增加线索。目标原始值存在倍率刻度，不能直接按百分比显示；适用强化类型、叠加和实际成功率需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "小小白"
@@ -2587,7 +2587,7 @@
       "FileType": "equ",
       "Section": "upgrade cost discount",
       "Title": "强化增幅费用折扣",
-      "Comment": "强化增幅费用折扣",
+      "Comment": "强化费用折扣线索，目标样本值与描述百分比可能相符，但适用范围、叠加和实际金币/材料扣除需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "小小白"
@@ -2607,7 +2607,7 @@
       "FileType": "equ",
       "Section": "hit",
       "Title": "被击中",
-      "Comment": "被击中",
+      "Comment": "位于 [if] 的受击触发条件，通常为事件标记。它不等同 .atk 的 [hit info]，需结合完整条件和对应效果读取。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.1.5 hit #\n\t[hit]\n\t\t{must1}{exp}受击时的值{/exp}{int(0:)}\n```\n\n```pvf\n//1.1.2.3 element #\n\t{prereq}[attack success]|[hit]{/prereq}{exp}攻击成功时控制攻击类型{/exp}[element]\n\t\t{must1}{exp}属性{/exp}{string}\n```\n\n```pvf\n//1.1.2.5 distance #\n\t{prereq}[attack success]|[hit]{/prereq}{exp}距离{/exp}[distance]\n\t\t{must1}{exp}{/exp}{int(0:)}\n```\n\n```pvf\n//1.1.2.10 attack type #\n\t{prereq}[attack success]|[hit]{/prereq}{exp}{/exp}[attacker type]\n\t\t{must1}{exp}类型{/exp}{string}\n```\n\n```pvf\n//1.1.2.13 attack condition #\n\t{prereq}[attack success]|[hit]{/prereq}[attack condition]\n\t\t{must1}{exp}攻击条件{/exp}{string}\n```\n\n```pvf\n//1.1.2.14 skill #\n\t{prereq}[attack success]|[hit]{/prereq}[skill]\n\t\t{must1}{exp}职业{/exp}{string}\n\t\t{must2}{exp}技能索引{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2656,8 +2656,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "all elemental element",
-      "Title": "所有属性抵抗",
-      "Comment": "所有属性抵抗",
+      "Title": "全元素相关字段（待父块验证）",
+      "Comment": "遗留的全元素相关 token/字段线索，当前知识未闭合其直接父块和精确语义。不得按标题直接写成“全属性抗性”，必须回目标文件确认列形和上下文。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -2666,8 +2666,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "emancipate",
-      "Title": "解除魔法封印",
-      "Comment": "解除魔法封印",
+      "Title": "装备解放/改造容器",
+      "Comment": "装备解放/改造类闭合容器，内部可含 [input]、[output] 和说明文本。材料/产出 ID 必须按各自 registry 解析；静态结构不证明改造、扣除或发放成功。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "unMen"
@@ -2686,8 +2686,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "equipment duration",
-      "Title": "效果续时间",
-      "Comment": "效果续时间",
+      "Title": "装备效果持续时间",
+      "Comment": "装备触发效果的持续时间参数，不等同通用 [duration]。单位、刷新、叠加和 PVP 行为需结合完整效果分支实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.4 equipment duration #\n\t{exp}指定效果持续多久{/exp}[equipment duration]\n\t\t{must1}{exp}数值(单位 : ms){/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "lostluna1"
@@ -2696,8 +2696,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "effect part set index",
-      "Title": "套装特效",
-      "Comment": "套装特效",
+      "Title": "效果套装关联索引",
+      "Comment": "效果套装关联号，优先匹配 ETC 效果套装映射，再读取对应 partset 效果文件。它不是普通 equipment/appendage ID，未解析值不得臆造路径。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "无名氏"
@@ -2716,8 +2716,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "add stat at once",
-      "Title": "一次添加统计",
-      "Comment": "一次添加统计",
+      "Title": "一次性属性修改效果",
+      "Comment": "位于 [then] 的属性、运算符、数值效果记录。字段名不能单独证明只执行一次；持续、刷新和叠加仍由父条件与运行逻辑决定。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -2737,7 +2737,7 @@
       "FileType": "equ",
       "Section": "party death",
       "Title": "队友死亡",
-      "Comment": "队友死亡",
+      "Comment": "位于 [if] 的队友死亡事件条件，目标样本常为单值 1。它不是自身死亡，队伍索引、观察范围和重复触发需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.1.12 party death #\n\t{exp}指定队友死亡时{/exp}[party death]\n\t\t{must1}{exp}{/exp}{int(1:1)}\n```",
       "Closing": false,
       "Authors": "春秋"
@@ -2776,8 +2776,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "output",
-      "Title": "产量",
-      "Comment": "产量",
+      "Title": "解放产出块",
+      "Comment": "[emancipate] 内的产出闭合块，常见为“equipment ID、数量”，也存在单值或残缺样本。ID 必须通过 equipment/equipment.lst 解析，不能把字段泛化为普通“产量”。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "无名氏"
@@ -2807,7 +2807,7 @@
       "FileType": "equ",
       "Section": "daily delete item",
       "Title": "每天6点删除",
-      "Comment": "每天6点删除",
+      "Comment": "每日定时删除装备/道具的规则线索，旧注释指向 6 点。静态字段不证明服务器时区、重置周期、删除范围、邮件/背包处理或服务端采用。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "By:小小白：770141757"
@@ -2826,8 +2826,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "replace avatar ani",
-      "Title": "更换头像ANI",
-      "Comment": "更换头像ANI",
+      "Title": "替换时装动画映射",
+      "Comment": "触发效果或套装能力中的时装动画替换闭合块，重复记录“avatar 部位 token、数字引用”。正数可对应部位目录文件，-1 语义需验证；不要强行按 equipment.lst ID 解释。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "无名氏"
@@ -2847,7 +2847,7 @@
       "FileType": "equ",
       "Section": "emblem socket default",
       "Title": "默认开启镶嵌槽",
-      "Comment": "默认开启镶嵌槽",
+      "Comment": "默认徽章孔闭合块，块内为 A/B/D/M 等 socket token，必须读取 [/emblem socket default]。token 只按本块解释，静态配置不证明实机可镶嵌。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "zed"
@@ -2856,8 +2856,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "event use skill",
-      "Title": "使用技能",
-      "Comment": "使用技能",
+      "Title": "技能使用事件条件",
+      "Comment": "位于 [if] 的技能使用事件条件，可连续列出“职业 token + 技能 ID”。每个 ID 必须按紧邻职业 token 选择 skill registry，触发时机需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.1.10 event use skill #\n\t[event use skill]\n\t\t{must1}{exp}职业{/exp}{string}\n\t\t{must2}{exp}技能编号{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "奶甜味儿的小颜颜"
@@ -2866,8 +2866,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "vent use skill",
-      "Title": "释放技能",
-      "Comment": "释放技能",
+      "Title": "技能使用事件条件（遗留拼写）",
+      "Comment": "疑似 [event use skill] 的遗留/截断拼写条目。必须保留目标原文并回具体装备样本确认，不能在没有证据时自动改标签或套用通用技能事件规则。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "奶甜味儿的小颜颜"
@@ -2906,8 +2906,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "upper bound level",
-      "Title": "宠物等级上限",
-      "Comment": "宠物等级上限",
+      "Title": "技能等级范围上限",
+      "Comment": "技能加成或 all skill item 块中的技能等级范围上限，需与 [lower bound level] 和外层技能条件一起读取。它不是宠物等级上限。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "等风来"
@@ -2917,7 +2917,7 @@
       "FileType": "equ",
       "Section": "prof compound rate",
       "Title": "副职业制作物品成功概率",
-      "Comment": "副职业制作物品成功概率",
+      "Comment": "副职业制作/合成成功率加成线索，需与同文件 [expertjob only] 一起读取。原始数值刻度和实际成功率不能直接按百分比外推。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "feirnova"
@@ -2926,8 +2926,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "prof material variation",
-      "Title": "副职业材料改变",
-      "Comment": "副职业材料改变",
+      "Title": "副职业材料消耗修正",
+      "Comment": "副职业材料消耗变化线索，目标样本可见负值且必须保留符号。适用专业、扣除公式和叠加方式需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "feirnova"
@@ -2966,8 +2966,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "myself",
-      "Title": "自己",
-      "Comment": "自己",
+      "Title": "自身目标 token",
+      "Comment": "效果目标选择中的“自身”token。它是枚举值，不是独立字段或对象 ID；仍需结合 [target]、范围控制值和效果内容读取。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "奶茶Bot QQ8002263"
@@ -2976,8 +2976,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "equipment/character/atfighter/weapon/boxglove/",
-      "Title": "武器外观指向文件夹路径",
-      "Comment": "武器外观指向文件夹路径",
+      "Title": "武器外观资源目录",
+      "Comment": "装备外观/动画引用中的职业武器目录字符串。它是资源目录而非 registry ID；路径存在不证明客户端 ANI/IMG 资源完整。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "墨白"
@@ -2986,8 +2986,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "camoflage",
-      "Title": "伪装",
-      "Comment": "伪装",
+      "Title": "伪装效果 token",
+      "Comment": "伪装效果的遗留拼写 token，必须原样保留。具体可见性、AI 索敌、PVP 和持续时间需结合父效果与实机验证。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "卧底"
@@ -2996,8 +2996,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "superarmor",
-      "Title": "霸体",
-      "Comment": "霸体",
+      "Title": "霸体效果 token",
+      "Comment": "霸体效果 token，通常作为 buff/状态类型值。它不是独立数值字段；持续、打断、抓取和 PVP 行为需结合父块实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "卧底"
@@ -3006,8 +3006,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "skill cool time",
-      "Title": "技能冷却的时间",
-      "Comment": "技能冷却的时间",
+      "Title": "技能冷却属性 token",
+      "Comment": "多词属性名 token，表示技能冷却时间属性。不要误当成括号标签 [skill cool time]，也不要与 [cool time]、[cooltime]、[skill cooltime] 混用。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "卧底"
@@ -3036,8 +3036,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "M socket",
-      "Title": "彩色槽",
-      "Comment": "彩色槽",
+      "Title": "M类徽章槽 token",
+      "Comment": "M socket 徽章槽 token，可位于 [avatar type select] 或 [emblem socket default]。它只按父块解释，不能仅凭旧中文“彩色槽”断定客户端颜色或镶嵌规则。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "zed"
@@ -3046,8 +3046,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "trade",
-      "Title": "不可交易",
-      "Comment": "不可交易",
+      "Title": "不可交换附着类型 token",
+      "Comment": "[attach type] 的交易/附着类型 token。资料注释指向不可交换类状态，但实际交易、封装、账号仓库和服务端规则仍需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "诗仙"
@@ -3056,8 +3056,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "enemy",
-      "Title": "敌人",
-      "Comment": "敌人",
+      "Title": "敌方目标 token",
+      "Comment": "目标选择中的“单个敌人”token。它是枚举值而非对象 ID；目标范围、阵营和选择算法取决于直接父字段。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "释然"
@@ -3066,8 +3066,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "all enemy",
-      "Title": "所有敌人",
-      "Comment": "所有敌人",
+      "Title": "所有敌方目标 token",
+      "Comment": "目标选择中的“所有敌人”范围 token。它不证明无限范围或跨房间选择，必须结合父字段、距离和模块读取。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "麻豆传媒"
@@ -3076,8 +3076,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "mt waist",
-      "Title": "板甲腰带",
-      "Comment": "板甲腰带",
+      "Title": "板甲腰带类型 token",
+      "Comment": "板甲腰带类装备/部位 token 的遗留命名线索。必须按直接父字段解释并保留原拼写，不能从 token 推导装备 ID 或完整穿戴规则。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -3086,8 +3086,8 @@
       "PvfCommentType": "Section",
       "FileType": "equ",
       "Section": "random enemy",
-      "Title": "随机敌人",
-      "Comment": "随机敌人",
+      "Title": "随机敌方目标 token",
+      "Comment": "目标选择中的“随机敌人”token。随机池、范围、是否重复和阵营过滤未由静态 token 闭合，需结合父效果与实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -3227,7 +3227,7 @@
       "FileType": "equ",
       "Section": "hatch item id",
       "Title": "从宠物蛋中孵化时生成的宠物索引",
-      "Comment": "官方样例用于记录宠物蛋孵化时生成的宠物索引。当前参考解包的 .equ 文件中未检出该标签；实际使用前必须在目标版本确认同类样本和对应 registry，不得从裸数字猜测。",
+      "Comment": "官方样例用于记录宠物蛋孵化时生成的宠物索引。实际使用前必须在目标版本确认同类样本和对应 registry，不得从裸数字猜测。",
       "OfficialDescription": "#### 官方示例: creaturesample.equ\n\n```pvf\n[hatch item id] 63003        // 从宠物蛋中孵化时生成的宠物索引\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3237,7 +3237,7 @@
       "FileType": "equ",
       "Section": "change status on change hp",
       "Title": "按HP比例调整能力值",
-      "Comment": "按当前 HP 比例分段调整指定能力值的闭合块。官方样例先给出能力类型，再给出“HP 百分比阈值、能力值应用比例”记录，阈值之间进行线性插值；当前参考解包未检出该标签，使用前需目标版本和实机验证。",
+      "Comment": "按当前 HP 比例分段调整指定能力值的闭合块。官方样例先给出能力类型，再给出“HP 百分比阈值、能力值应用比例”记录，阈值之间进行线性插值；使用前需目标版本和实机验证。",
       "OfficialDescription": "#### 官方示例: equipmentsample-change status on change hp.equ\n\n```pvf\n[change status on change hp]\n`[magical attack]`\t// 要应用的能力值 : 魔法攻击力\n50 5\t\t\t\t// hp 为 50% 时应用 5% 的值。（实际增加魔法攻击力 100 的道具，则 hp 50% 时只获得 5 的能力值。）\n10 10\t\t\t\t// hp 为 10% 时应用 10% 的值。（实际增加魔法攻击力 100 的道具，则 hp 10% 时只获得 10 的能力值。）\n\t\t\t\t// hp 在 50% 和 10% 之间时，数值会进行线性插值。\n`[magical defense]`\n50 5\n10 10\n\n`[equipment physical defense]`\n50 5\n10 10\n[/change status on change hp]\n```\n\n#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n///////////////////////////////////////////////////////////////\n//EquipmentSample-change status on change hp.equ///////////////////////\n///////////////////////////////////////////////////////////////\n[change status on change hp]\n\t{opt1}{exp}要应用的能力值{/exp}{string}\n\t{int(:)}\n\t\t{must1}{int(:)}\n\t{!int(:)}\n[/change status on change hp]\n```",
       "Closing": true,
       "Authors": "官方PVF"
@@ -3297,7 +3297,7 @@
       "FileType": "equ",
       "Section": "aerial",
       "Title": "空中连击条件(if条件)",
-      "Comment": "官方样例中的空中连击相关条件，通常与 [after attack]、[combo] 组合。当前参考解包的 .equ 文件中未检出该标签，参数形态和运行判定不得仅凭名称推测。",
+      "Comment": "官方样例中的空中连击相关条件，通常与 [after attack]、[combo] 组合。参数形态和运行判定不得仅凭名称推测。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.1.4 after attack #\n\t{prereq}[combo]|[aerial]{/prereq}{exp}仅在与 combo, aerial 标签组合时使用{/exp}[after attack]\n\t\t{must1}{exp}攻击成功时的值{/exp}{int(0:)}\n```\n\n```pvf\n//1.1.2.21 aerial #\n\t{exp}指定空中连击达到数值时{/exp}[aerial]\n\t\t{must1}{exp}{/exp}{string}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3397,7 +3397,7 @@
       "FileType": "equ",
       "Section": "skill frame trigger",
       "Title": "技能帧触发(if条件)",
-      "Comment": "官方样例中的技能动画帧触发条件，参数包含职业、技能索引、动画名称和帧号。当前参考解包的 .equ 文件中未检出该标签；技能 ID 必须按职业 registry 路由，触发时机需实机确认。",
+      "Comment": "官方样例中的技能动画帧触发条件，参数包含职业、技能索引、动画名称和帧号。技能 ID 必须按职业 registry 路由，触发时机需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.1.19 skill frame trigger #\n\t[skill frame trigger]\n\t\t{must1}{exp}职业{/exp}{string}\n\t\t{must2}{exp}技能索引{/exp}{int(0:)}\n\t\t{must3}{exp}动画名称{/exp}{string}\n\t\t{must4}{exp}帧{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3477,7 +3477,7 @@
       "FileType": "equ",
       "Section": "attacker type",
       "Title": "攻击类型条件(if状态)",
-      "Comment": "官方样例中的攻击类型条件，用于在攻击成功或受击语境下筛选攻击类型。当前参考解包的 .equ 文件中未检出该拼写；不得与真实样本中的 [attack type] 自动互换，使用前需确认目标版本原文。",
+      "Comment": "官方样例中的攻击类型条件，用于在攻击成功或受击语境下筛选攻击类型。不得与 [attack type] 静默互换，使用前需确认目标版本原文。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.2.10 attack type #\n\t{prereq}[attack success]|[hit]{/prereq}{exp}{/exp}[attacker type]\n\t\t{must1}{exp}类型{/exp}{string}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3577,7 +3577,7 @@
       "FileType": "equ",
       "Section": "skill frame state",
       "Title": "技能帧状态(if状态)",
-      "Comment": "官方样例中的技能动画帧区间条件，参数包含职业、技能索引、动画名称、开始帧和结束帧。当前参考解包的 .equ 文件中未检出该标签，技能 ID 路由和帧判定需目标版本验证。",
+      "Comment": "官方样例中的技能动画帧区间条件，参数包含职业、技能索引、动画名称、开始帧和结束帧。技能 ID 路由和帧判定需目标版本验证。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.2.25 skill frame state #\n\t{exp}该动画开始~结束帧之间成功。{/exp}[skill frame state]\n\t\t{must1}{exp}职业{/exp}{string}\n\t\t{must2}{exp}技能索引{/exp}{int(0:)}\n\t\t{must3}{exp}动画名称{/exp}{string}\n\t\t{must4}{exp}开始帧{/exp}{int(0:)}\n\t\t{must5}{exp}结束帧{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3587,7 +3587,7 @@
       "FileType": "equ",
       "Section": "skill cooltime",
       "Title": "技能冷却时间条件(if状态)",
-      "Comment": "官方样例中的技能剩余冷却比较条件，参数为比较符和毫秒阈值。当前参考解包的 .equ 文件中未检出该标签；不要与 [cool time]、[cooltime] 或 [skill cooltime reset] 混用。",
+      "Comment": "官方样例中的技能剩余冷却比较条件，参数为比较符和毫秒阈值。不要与 [cool time]、[cooltime] 或 [skill cooltime reset] 混用。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.1.2.26 skill cooltime  #\n\t{exp}用于限制技能初始化范围的状态{/exp}[skill cooltime]\n\t\t{must1}{exp}比较方法{/exp}{string}\n\t\t{must2}{exp}冷却时间{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3607,7 +3607,7 @@
       "FileType": "equ",
       "Section": "delay",
       "Title": "效果延迟(then效果)",
-      "Comment": "官方样例中的效果延迟参数，单位按毫秒读取。当前参考解包的 .equ 文件中未检出该标签；延迟作用范围、与同分支效果的执行顺序需目标版本和实机确认。",
+      "Comment": "官方样例中的效果延迟参数，单位按毫秒读取。延迟作用范围、与同分支效果的执行顺序需目标版本和实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.5 delay #\n\t{exp}指定效果延迟多久发动{/exp}[delay]\n\t\t{must1}{exp}数值(单位 : ms){/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3647,7 +3647,7 @@
       "FileType": "equ",
       "Section": "add absolute defence",
       "Title": "增加绝对防御(then效果)",
-      "Comment": "官方样例中的绝对防御增加效果，参数包含类型、单位和数值。当前参考解包的 .equ 文件中未检出该标签；不能仅凭字段名断定减伤公式、无敌效果或叠加方式。",
+      "Comment": "官方样例中的绝对防御增加效果，参数包含类型、单位和数值。不能仅凭字段名断定减伤公式、无敌效果或叠加方式。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.15 add absolute defence #\n\t[add absolute defence]\n\t\t{must1}{exp}类型{/exp}{string}\n\t\t{must2}{exp}数值单位{/exp}{string}\n\t\t{must3}{exp}数值{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3657,7 +3657,7 @@
       "FileType": "equ",
       "Section": "add absolute defence percent",
       "Title": "受击伤害减免%(then效果)",
-      "Comment": "官方样例中的百分比防御/受击伤害修正效果，参数包含目标或类型与数值。当前参考解包的 .equ 文件中未检出该标签；精确公式、正负值方向和叠加方式需目标版本验证。",
+      "Comment": "官方样例中的百分比防御/受击伤害修正效果，参数包含目标或类型与数值。精确公式、正负值方向和叠加方式需目标版本验证。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.16 add absolute defence percent #\n\t{exp}受击时减少伤害数值%{/exp}[add absolute defence percent]\n\t\t{must1}{exp}类型{/exp}{string}\n\t\t{must2}{exp}数值{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3677,7 +3677,7 @@
       "FileType": "equ",
       "Section": "active status resistance",
       "Title": "异常状态抗性(then效果)",
-      "Comment": "官方样例中的异常状态抗性修改效果，参数包含异常状态、单位和数值。当前参考解包的 .equ 文件中未检出该标签；状态 token、正负方向和抗性公式需目标版本验证。",
+      "Comment": "官方样例中的异常状态抗性修改效果，参数包含异常状态、单位和数值。状态 token、正负方向和抗性公式需目标版本验证。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.20 active status resistance #\n\t[active status resistance]\n\t\t{must1}{exp}状态变化 {/exp}{string}\n\t\t{must2}{exp}数值单位{/exp}{string}\n\t\t{must3}{exp}数值{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3687,7 +3687,7 @@
       "FileType": "equ",
       "Section": "element resistance",
       "Title": "元素抗性(then效果)",
-      "Comment": "官方样例中的元素抗性修改效果，参数包含元素、单位和数值。当前参考解包的 .equ 文件中未检出该标签；不要与根级 fire/water/dark/light resistance 字段或异常状态抗性混用。",
+      "Comment": "官方样例中的元素抗性修改效果，参数包含元素、单位和数值。不要与根级 fire/water/dark/light resistance 字段或异常状态抗性混用。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.21 element resistance #\n\t[element resistance]\n\t\t{must1}{exp}属性{/exp}{string}\n\t\t{must2}{exp}数值单位{/exp}{string}\n\t\t{must3}{exp}数值{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3697,7 +3697,7 @@
       "FileType": "equ",
       "Section": "damage rate",
       "Title": "伤害比率/未实现(then效果)",
-      "Comment": "官方工具样例标记为“未实现”的伤害比率效果，参数包含类型和百分比变化值。当前参考解包的 .equ 文件中未检出该标签，不应作为可用效果复制或据此推导伤害公式。",
+      "Comment": "官方工具样例标记为“未实现”的伤害比率效果，参数包含类型和百分比变化值。不应作为可用效果复制或据此推导伤害公式。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.22 damage rate(未实现) #\n\t[damage rate]\n\t\t{must1}{exp}种类{/exp}{string}\n\t\t{must2}{exp}数值 : 百分比变化值{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3757,7 +3757,7 @@
       "FileType": "equ",
       "Section": "skill unbreakable",
       "Title": "技能无敌(then效果)",
-      "Comment": "官方样例中的技能无敌效果，参数为技能索引线索。当前参考解包的 .equ 文件中未检出该标签；没有职业上下文时不得强行选择 skill registry，实际无敌范围和时机需实机确认。",
+      "Comment": "官方样例中的技能无敌效果，参数为技能索引线索。没有职业上下文时不得强行选择 skill registry，实际无敌范围和时机需实机确认。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.34 skill unbreakable  #\n\t{exp}使技能施放动作变为无敌状态{/exp}[skill unbreakable]\n\t\t{must1}{exp}技能索引{/exp}{int(0:)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
@@ -3791,6 +3791,1156 @@
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ\n\n```pvf\n//1.2.37 skill cooltime reset  #\n\t{exp}技能冷却时间重置{/exp}[skill cooltime reset]\n\t\t{must1}{exp}{/exp}{int(1:2)}\n```",
       "Closing": false,
       "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "stackable type",
+      "Title": "消耗品/材料类型",
+      "Comment": "装备数据中的 [stackable type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "minimum itemmaking level",
+      "Title": "minimum itemmaking level（原始标签）",
+      "Comment": "装备数据中的 [minimum itemmaking level] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "use 2nd upgrade table",
+      "Title": "使用2升级表",
+      "Comment": "装备数据中的 [use 2nd upgrade table] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "full avatar",
+      "Title": "full avatar（原始标签）",
+      "Comment": "装备数据中的 [full avatar] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "hide grow avatar",
+      "Title": "隐藏成长装扮",
+      "Comment": "装备数据中的 [hide grow avatar] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "skin emblem socket",
+      "Title": "skin emblem socket（原始标签）",
+      "Comment": "装备数据中的 [skin emblem socket] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "spectrum avatar",
+      "Title": "spectrum avatar（原始标签）",
+      "Comment": "装备数据中的 [spectrum avatar] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "LAYER",
+      "Title": "LAYER（原始标签）",
+      "Comment": "装备数据中的 [LAYER] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "waiting motion",
+      "Title": "waiting motion（原始标签）",
+      "Comment": "装备数据中的 [waiting motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "move motion",
+      "Title": "移动动作动画",
+      "Comment": "装备数据中的 [move motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "sit motion",
+      "Title": "sit motion（原始标签）",
+      "Comment": "装备数据中的 [sit motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "damage motion 1",
+      "Title": "伤害动作动画1",
+      "Comment": "装备数据中的 [damage motion 1] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "damage motion 2",
+      "Title": "伤害动作动画2",
+      "Comment": "装备数据中的 [damage motion 2] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "down motion",
+      "Title": "down motion（原始标签）",
+      "Comment": "装备数据中的 [down motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "overturn motion",
+      "Title": "overturn motion（原始标签）",
+      "Comment": "装备数据中的 [overturn motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "attack motion",
+      "Title": "攻击动作动画",
+      "Comment": "装备数据中的 [attack motion] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "etc motion",
+      "Title": "etc motion（原始标签）",
+      "Comment": "装备数据中的 [etc motion] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "output index",
+      "Title": "output index（原始标签）",
+      "Comment": "装备数据中的 [output index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "all skill item",
+      "Title": "全部技能物品",
+      "Comment": "装备数据中的 [all skill item] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "item growtype",
+      "Title": "物品成长类型",
+      "Comment": "装备数据中的 [item growtype] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "skill apply condition",
+      "Title": "技能适用条件",
+      "Comment": "装备数据中的 [skill apply condition] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "skill group",
+      "Title": "技能分组",
+      "Comment": "装备数据中的 [skill group] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "lower bound level",
+      "Title": "lower bound level（原始标签）",
+      "Comment": "装备数据中的 [lower bound level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "extra condition",
+      "Title": "extra condition（原始标签）",
+      "Comment": "装备数据中的 [extra condition] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "skill phase",
+      "Title": "skill phase（原始标签）",
+      "Comment": "装备数据中的 [skill phase] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "expiration date",
+      "Title": "expiration date（原始标签）",
+      "Comment": "装备数据中的 [expiration date] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "no random",
+      "Title": "no random（原始标签）",
+      "Comment": "装备数据中的 [no random] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "creature food consume rate",
+      "Title": "creature food consume rate（原始标签）",
+      "Comment": "装备数据中的 [creature food consume rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "jump motion",
+      "Title": "jump motion（原始标签）",
+      "Comment": "装备数据中的 [jump motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "jumpattack motion",
+      "Title": "jumpattack motion（原始标签）",
+      "Comment": "装备数据中的 [jumpattack motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "reduce duration to human armor at pvp module",
+      "Title": "reduce duration to human armor at pvp module（原始标签）",
+      "Comment": "装备数据中的 [reduce duration to human armor at pvp module] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "special monster drop",
+      "Title": "special monster drop（原始标签）",
+      "Comment": "装备数据中的 [special monster drop] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "difficulty for extra drop",
+      "Title": "difficulty for extra drop（原始标签）",
+      "Comment": "装备数据中的 [difficulty for extra drop] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "dungeon type for extra drop",
+      "Title": "dungeon type for extra drop（原始标签）",
+      "Comment": "装备数据中的 [dungeon type for extra drop] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "ice appendage",
+      "Title": "ice appendage（原始标签）",
+      "Comment": "装备数据中的 [ice appendage] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "maximum level",
+      "Title": "上限等级",
+      "Comment": "装备数据中的 [maximum level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "input",
+      "Title": "input（原始标签）",
+      "Comment": "装备数据中的 [input] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "emancipate explain",
+      "Title": "emancipate explain（原始标签）",
+      "Comment": "装备数据中的 [emancipate explain] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "minimum rank",
+      "Title": "minimum rank（原始标签）",
+      "Comment": "装备数据中的 [minimum rank] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "usable world",
+      "Title": "usable world（原始标签）",
+      "Comment": "装备数据中的 [usable world] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add skill summon",
+      "Title": "add skill summon（原始标签）",
+      "Comment": "装备数据中的 [add skill summon] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "variable stat",
+      "Title": "variable stat（原始标签）",
+      "Comment": "装备数据中的 [variable stat] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "equipment upgrade",
+      "Title": "装备升级",
+      "Comment": "装备数据中的 [equipment upgrade] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "stat change by stat",
+      "Title": "stat change by stat（原始标签）",
+      "Comment": "装备数据中的 [stat change by stat] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "summon apc",
+      "Title": "summon apc（原始标签）",
+      "Comment": "装备数据中的 [summon apc] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "command",
+      "Title": "指令",
+      "Comment": "装备数据中的 [command] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "clear avatar",
+      "Title": "clear avatar（原始标签）",
+      "Comment": "装备数据中的 [clear avatar] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "enable dye",
+      "Title": "enable dye（原始标签）",
+      "Comment": "装备数据中的 [enable dye] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "reference effect part set index",
+      "Title": "reference effect part set index（原始标签）",
+      "Comment": "装备数据中的 [reference effect part set index] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "hide avatar in town",
+      "Title": "hide avatar in town（原始标签）",
+      "Comment": "装备数据中的 [hide avatar in town] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "set effect file",
+      "Title": "set effect file（原始标签）",
+      "Comment": "装备数据中的 [set effect file] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "rest ani",
+      "Title": "休息动作动画",
+      "Comment": "装备数据中的 [rest ani] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "stay ani",
+      "Title": "待机动画",
+      "Comment": "装备数据中的 [stay ani] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "particle",
+      "Title": "粒子",
+      "Comment": "装备数据中的 [particle] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "fullset explain",
+      "Title": "fullset explain（原始标签）",
+      "Comment": "装备数据中的 [fullset explain] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "attack success effect animation",
+      "Title": "attack success effect animation（原始标签）",
+      "Comment": "装备数据中的 [attack success effect animation] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "aura",
+      "Title": "aura（原始标签）",
+      "Comment": "装备数据中的 [aura] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "msg balloon on mucu skill",
+      "Title": "msg balloon on mucu skill（原始标签）",
+      "Comment": "装备数据中的 [msg balloon on mucu skill] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "special ability",
+      "Title": "special ability（原始标签）",
+      "Comment": "装备数据中的 [special ability] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "chat emoticon index",
+      "Title": "chat emoticon index（原始标签）",
+      "Comment": "装备数据中的 [chat emoticon index] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "reduce duration at pvp module",
+      "Title": "reduce duration at pvp module（原始标签）",
+      "Comment": "装备数据中的 [reduce duration at pvp module] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "fame table",
+      "Title": "fame table（原始标签）",
+      "Comment": "装备数据中的 [fame table] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "epic routing",
+      "Title": "epic routing（原始标签）",
+      "Comment": "装备数据中的 [epic routing] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "rest motion",
+      "Title": "休息动作动作动画",
+      "Comment": "装备数据中的 [rest motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "throw motion 1-1",
+      "Title": "throw motion 1-1（原始标签）",
+      "Comment": "装备数据中的 [throw motion 1-1] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "throw motion 1-2",
+      "Title": "throw motion 1-2（原始标签）",
+      "Comment": "装备数据中的 [throw motion 1-2] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "throw motion 2-1",
+      "Title": "throw motion 2-1（原始标签）",
+      "Comment": "装备数据中的 [throw motion 2-1] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "throw motion 2-2",
+      "Title": "throw motion 2-2（原始标签）",
+      "Comment": "装备数据中的 [throw motion 2-2] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "dash motion",
+      "Title": "dash motion（原始标签）",
+      "Comment": "装备数据中的 [dash motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "dashattack motion",
+      "Title": "dashattack motion（原始标签）",
+      "Comment": "装备数据中的 [dashattack motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "getitem motion",
+      "Title": "getitem motion（原始标签）",
+      "Comment": "装备数据中的 [getitem motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "buff motion",
+      "Title": "buff motion（原始标签）",
+      "Comment": "装备数据中的 [buff motion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "required full set for chatting emoticon",
+      "Title": "required full set for chatting emoticon（原始标签）",
+      "Comment": "装备数据中的 [required full set for chatting emoticon] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "aura pos datas",
+      "Title": "aura pos datas（原始标签）",
+      "Comment": "装备数据中的 [aura pos datas] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "throw motion 3-1",
+      "Title": "throw motion 3-1（原始标签）",
+      "Comment": "装备数据中的 [throw motion 3-1] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "throw motion 3-2",
+      "Title": "throw motion 3-2（原始标签）",
+      "Comment": "装备数据中的 [throw motion 3-2] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "throw motion 4-1",
+      "Title": "throw motion 4-1（原始标签）",
+      "Comment": "装备数据中的 [throw motion 4-1] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "throw motion 4-2",
+      "Title": "throw motion 4-2（原始标签）",
+      "Comment": "装备数据中的 [throw motion 4-2] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "is awakening state",
+      "Title": "is awakening state（原始标签）",
+      "Comment": "装备数据中的 [is awakening state] 存在标记。已见为无附加值的存在标记。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "remove equip",
+      "Title": "remove equip（原始标签）",
+      "Comment": "装备数据中的 [remove equip] 存在标记。已见为无附加值的存在标记。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "end skill",
+      "Title": "结束技能",
+      "Comment": "装备数据中的 [end skill] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "attack type",
+      "Title": "攻击类型",
+      "Comment": "装备数据中的 [attack type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "perform skill",
+      "Title": "perform skill（原始标签）",
+      "Comment": "装备数据中的 [perform skill] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "ani equiped type",
+      "Title": "ani equiped type（原始标签）",
+      "Comment": "装备数据中的 [ani equiped type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "ani order",
+      "Title": "ani order（原始标签）",
+      "Comment": "装备数据中的 [ani order] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "expand attack box",
+      "Title": "expand attack box（原始标签）",
+      "Comment": "装备数据中的 [expand attack box] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "expand ani sound",
+      "Title": "expand ani sound（原始标签）",
+      "Comment": "装备数据中的 [expand ani sound] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "cooltime group",
+      "Title": "cooltime group（原始标签）",
+      "Comment": "装备数据中的 [cooltime group] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "additional effect index",
+      "Title": "附加效果索引",
+      "Comment": "装备数据中的 [additional effect index] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "BBQ",
+      "Title": "BBQ（原始标签）",
+      "Comment": "装备数据中的 [BBQ] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "usable period after unsealing",
+      "Title": "usable period after unsealing（原始标签）",
+      "Comment": "装备数据中的 [usable period after unsealing] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "rebirth",
+      "Title": "rebirth（原始标签）",
+      "Comment": "装备数据中的 [rebirth] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "hp recovery",
+      "Title": "HP恢复",
+      "Comment": "装备数据中的 [hp recovery] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "mp recovery",
+      "Title": "MP恢复",
+      "Comment": "装备数据中的 [mp recovery] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "war room point bonus",
+      "Title": "war room point bonus（原始标签）",
+      "Comment": "装备数据中的 [war room point bonus] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "prof additional gain exp",
+      "Title": "prof additional gain exp（原始标签）",
+      "Comment": "装备数据中的 [prof additional gain exp] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "quest item drop rate bonus",
+      "Title": "任务物品掉落比率额外奖励",
+      "Comment": "装备数据中的 [quest item drop rate bonus] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "disable pvp",
+      "Title": "disable pvp（原始标签）",
+      "Comment": "装备数据中的 [disable pvp] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "user power war point",
+      "Title": "user power war point（原始标签）",
+      "Comment": "装备数据中的 [user power war point] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "target check",
+      "Title": "目标检查",
+      "Comment": "装备数据中的 [target check] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "recovery status",
+      "Title": "recovery status（原始标签）",
+      "Comment": "装备数据中的 [recovery status] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "prof result variation",
+      "Title": "prof result variation（原始标签）",
+      "Comment": "装备数据中的 [prof result variation] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "prof disjoint result variation",
+      "Title": "prof disjoint result variation（原始标签）",
+      "Comment": "装备数据中的 [prof disjoint result variation] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "random option",
+      "Title": "随机选项",
+      "Comment": "装备数据中的 [random option] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "keep my state",
+      "Title": "keep my state（原始标签）",
+      "Comment": "装备数据中的 [keep my state] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "item overpower part",
+      "Title": "item overpower part（原始标签）",
+      "Comment": "装备数据中的 [item overpower part] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "reduce probability at pvp module",
+      "Title": "reduce probability at pvp module（原始标签）",
+      "Comment": "装备数据中的 [reduce probability at pvp module] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "is stat",
+      "Title": "is stat（原始标签）",
+      "Comment": "装备数据中的 [is stat] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "decrease critical damage",
+      "Title": "decrease critical damage（原始标签）",
+      "Comment": "装备数据中的 [decrease critical damage] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "curse appendage",
+      "Title": "诅咒附加状态",
+      "Comment": "装备数据中的 [curse appendage] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "swap stat",
+      "Title": "swap stat（原始标签）",
+      "Comment": "装备数据中的 [swap stat] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "appendage unique",
+      "Title": "appendage unique（原始标签）",
+      "Comment": "装备数据中的 [appendage unique] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "enchant",
+      "Title": "enchant（原始标签）",
+      "Comment": "装备数据中的 [enchant] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "hardcoding parameter",
+      "Title": "hardcoding parameter（原始标签）",
+      "Comment": "装备数据中的 [hardcoding parameter] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "ability case index",
+      "Title": "ability case index（原始标签）",
+      "Comment": "装备数据中的 [ability case index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

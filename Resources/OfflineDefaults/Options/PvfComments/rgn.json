@@ -11,6 +11,36 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "notlikeKFC"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "rgn",
+      "Section": "name",
+      "Title": "区域名称",
+      "Comment": "区域的显示名称文本。文本存在不证明客户端世界地图、字体、本地化或入口显示正常。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "rgn",
+      "Section": "english name",
+      "Title": "区域英文名称",
+      "Comment": "区域的英文名称文本，主要作为地区化/内部显示线索。不要用它替代 [name]，编码和客户端显示需另行验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "rgn",
+      "Section": "minimap",
+      "Title": "区域小地图文件",
+      "Comment": "区域对应的 .mm 小地图文件路径。需继续读取 .mm 中的 [image]、[town]、[world] 等结构；PVF 路径存在不证明客户端图像资源或交互正常。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

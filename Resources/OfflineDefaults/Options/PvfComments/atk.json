@@ -337,7 +337,7 @@
       "FileType": "atk",
       "Section": "piercing",
       "Title": "破甲状态 token（待目标验证）",
-      "Comment": "旧注释将 [piercing] 解释为破甲异常，但当前参考解包的 .atk 文件中未检出该 token，且没有可核验的 OfficialDescription。其参数列、减防方式和运行支持均未确认，只能作为旧版本/外部资料线索保留。",
+      "Comment": "旧注释将 [piercing] 解释为破甲异常，但该 token 没有可核验的 OfficialDescription。其参数列、减防方式和运行支持均未确认，只能作为旧版本/外部资料线索保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
@@ -711,6 +711,356 @@
       "OfficialDescription": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120531 添加\n    {must1}{exp}{/exp}[slash]\n```",
       "Closing": false,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "none",
+      "Title": "none（原始标签）",
+      "Comment": "攻击信息数据中的 [none] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "dark element",
+      "Title": "dark element（原始标签）",
+      "Comment": "攻击信息数据中的 [dark element] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "hit",
+      "Title": "命中",
+      "Comment": "攻击信息数据中的 [hit] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "knock",
+      "Title": "knock（原始标签）",
+      "Comment": "攻击信息数据中的 [knock] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "ignore weight",
+      "Title": "ignore weight（原始标签）",
+      "Comment": "攻击信息数据中的 [ignore weight] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "etc",
+      "Title": "etc（原始标签）",
+      "Comment": "攻击信息数据中的 [etc] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "fire element",
+      "Title": "fire element（原始标签）",
+      "Comment": "攻击信息数据中的 [fire element] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "ignore super armor",
+      "Title": "ignore super armor（原始标签）",
+      "Comment": "攻击信息数据中的 [ignore super armor] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "force hit stun time",
+      "Title": "强制命中眩晕时间",
+      "Comment": "攻击信息数据中的 [force hit stun time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "water element",
+      "Title": "water element（原始标签）",
+      "Comment": "攻击信息数据中的 [water element] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "damage except human",
+      "Title": "damage except human（原始标签）",
+      "Comment": "攻击信息数据中的 [damage except human] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "auto",
+      "Title": "auto（原始标签）",
+      "Comment": "攻击信息数据中的 [auto] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "inner",
+      "Title": "inner（原始标签）",
+      "Comment": "攻击信息数据中的 [inner] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "hit vertical",
+      "Title": "命中纵向",
+      "Comment": "攻击信息数据中的 [hit vertical] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "outer",
+      "Title": "outer（原始标签）",
+      "Comment": "攻击信息数据中的 [outer] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "magical",
+      "Title": "魔法",
+      "Comment": "攻击信息数据中的 [magical] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "none element",
+      "Title": "none element（原始标签）",
+      "Comment": "攻击信息数据中的 [none element] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "hit up",
+      "Title": "hit up（原始标签）",
+      "Comment": "攻击信息数据中的 [hit up] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "hit horiozn",
+      "Title": "hit horiozn（原始标签）",
+      "Comment": "攻击信息数据中的 [hit horiozn] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "hit horizono",
+      "Title": "hit horizono（原始标签）",
+      "Comment": "攻击信息数据中的 [hit horizono] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "physical",
+      "Title": "物理",
+      "Comment": "攻击信息数据中的 [physical] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "DDASH_HIT",
+      "Title": "DDASH_HIT（原始标签）",
+      "Comment": "攻击信息数据中的 [DDASH_HIT] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "damage increase rate",
+      "Title": "伤害增加比率",
+      "Comment": "攻击信息数据中的 [damage increase rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "pyhsic",
+      "Title": "pyhsic（原始标签）",
+      "Comment": "攻击信息数据中的 [pyhsic] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "damage bouns",
+      "Title": "damage bouns（原始标签）",
+      "Comment": "攻击信息数据中的 [damage bouns] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "noblood",
+      "Title": "noblood（原始标签）",
+      "Comment": "攻击信息数据中的 [noblood] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "mana burn",
+      "Title": "mana burn（原始标签）",
+      "Comment": "攻击信息数据中的 [mana burn] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "horizontal",
+      "Title": "横向",
+      "Comment": "攻击信息数据中的 [horizontal] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "hit horizoon",
+      "Title": "hit horizoon（原始标签）",
+      "Comment": "攻击信息数据中的 [hit horizoon] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "warter element",
+      "Title": "warter element（原始标签）",
+      "Comment": "攻击信息数据中的 [warter element] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "ice element",
+      "Title": "ice element（原始标签）",
+      "Comment": "攻击信息数据中的 [ice element] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "knock back",
+      "Title": "knock back（原始标签）",
+      "Comment": "攻击信息数据中的 [knock back] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "hit check by screen pos",
+      "Title": "hit check by screen pos（原始标签）",
+      "Comment": "攻击信息数据中的 [hit check by screen pos] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "catch object",
+      "Title": "catch object（原始标签）",
+      "Comment": "攻击信息数据中的 [catch object] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "damge",
+      "Title": "damge（原始标签）",
+      "Comment": "攻击信息数据中的 [damge] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

@@ -276,11 +276,11 @@
       "PvfCommentType": "Section",
       "FileType": "stk",
       "Section": "etc",
-      "Title": "礼盒其它类道具子模块",
-      "Comment": "礼盒类道具中 [etc] 子模块的定义\n[etc]\n1-道具代码1-概率-数量\n   道具代码2-概率-数量\n[/etc]\n\n在 booster 中，[etc] 可以放入物品、装备、装扮等的混合内容",
+      "Title": "礼盒混合奖励项",
+      "Comment": "礼盒、booster 或选择奖励结构中的混合奖励闭合子块，可容纳不同物品类别的记录。真实列形可包含类别码、对象 ID、相对权重、数量等字段；必须结合父块区分 equipment、stackable、avatar 或其他 registry，不能把全部数字统一当成同一种物品 ID。",
       "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[etc]\n1\n8  1000  10\n[/etc]\n```",
-      "Closing": false,
-      "Authors": "暖阳"
+      "Closing": true,
+      "Authors": "暖阳|Lancarus|Codex"
     },
     {
       "PvfCommentType": "Section",
@@ -427,7 +427,7 @@
       "FileType": "stk",
       "Section": "maintain ability",
       "Title": "配方能力保留参数（待验证）",
-      "Comment": "当前参考解包仅在部分 recipe 类 .stk 中检出该单整数参数，并与 [success rate]、[broadcast type]、[fail output] 等配方字段相邻。现有静态样本不足以证明它表示持续时间或效果稳定性，必须按配方系统同类样本和实机结果验证。",
+      "Comment": "部分 recipe 类 .stk 使用的单整数参数，并与 [success rate]、[broadcast type]、[fail output] 等配方字段相邻。现有静态样本不足以证明它表示持续时间或效果稳定性，必须按配方系统同类样本和实机结果验证。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -706,11 +706,11 @@
       "PvfCommentType": "Section",
       "FileType": "stk",
       "Section": "stackable",
-      "Title": "可堆叠",
-      "Comment": "道具是否可堆叠以及堆叠参数\n格式示例：42  2000   1（可堆叠组ID  堆叠上限  是否可堆叠）\n0 = 不可堆叠, 1 = 可堆叠",
+      "Title": "礼盒/奖励中的消耗品项",
+      "Comment": "礼盒、booster 或选择奖励结构中的消耗品/材料闭合子块。普通记录常按“stackable ID、数量”排列；位于 [booster info] 时还可能带类别、相对权重或其他控制列。ID 必须通过 stackable/stackable.lst 解析，不能把此标签误解为“物品是否可堆叠”的根级开关。",
       "OfficialDescription": null,
-      "Closing": false,
-      "Authors": "lostluna1"
+      "Closing": true,
+      "Authors": "lostluna1|Lancarus|Codex"
     },
     {
       "PvfCommentType": "Section",
@@ -745,16 +745,6 @@
     {
       "PvfCommentType": "Section",
       "FileType": "stk",
-      "Section": "stackable",
-      "Title": "礼盒中的道具项",
-      "Comment": "礼盒/礼包中 [stackable] 子模块\n格式：id + 数量\n\n在 booster info 中格式为：id + 相对概率 + 数量",
-      "OfficialDescription": null,
-      "Closing": false,
-      "Authors": "Lancarus"
-    },
-    {
-      "PvfCommentType": "Section",
-      "FileType": "stk",
       "Section": "equipment",
       "Title": "礼盒中的装备项",
       "Comment": "礼盒/礼包中 [equipment] 子模块\n格式：id + 数量\n\n在 booster info 中格式为：id + 相对概率 + 数量",
@@ -768,16 +758,6 @@
       "Section": "avatar",
       "Title": "礼盒中的装扮项",
       "Comment": "礼盒/礼包中 [avatar] 子模块\n格式：id + 数量\n\n在 booster info 中格式为：id + 相对概率 + 数量 + 期限 + 属性",
-      "OfficialDescription": null,
-      "Closing": false,
-      "Authors": "Lancarus"
-    },
-    {
-      "PvfCommentType": "Section",
-      "FileType": "stk",
-      "Section": "etc",
-      "Title": "礼盒中的其它项",
-      "Comment": "礼盒/礼包中 [etc] 子模块（隶属 booster select category 内部）\n可以包含物品或装备的 id + 数量\n\n在 booster info 中格式为：id + 相对概率 + 数量",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Lancarus"
@@ -991,6 +971,4666 @@
       "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[value] 50    // 用户在商店卖出的金额\n```",
       "Closing": false,
       "Authors": "preview"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "name",
+      "Title": "名称",
+      "Comment": "消耗品/材料数据中的 [name] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "name2",
+      "Title": "name2（原始标签）",
+      "Comment": "消耗品/材料数据中的 [name2] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "grade",
+      "Title": "grade（原始标签）",
+      "Comment": "消耗品/材料数据中的 [grade] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "rarity",
+      "Title": "rarity（原始标签）",
+      "Comment": "消耗品/材料数据中的 [rarity] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "appendage group",
+      "Title": "附加状态分组",
+      "Comment": "消耗品/材料数据中的 [appendage group] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "item group name",
+      "Title": "物品分组名称",
+      "Comment": "消耗品/材料数据中的 [item group name] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "cool time",
+      "Title": "冷却时间",
+      "Comment": "消耗品/材料数据中的 [cool time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "move wav",
+      "Title": "move wav（原始标签）",
+      "Comment": "消耗品/材料数据中的 [move wav] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "explain",
+      "Title": "说明",
+      "Comment": "消耗品/材料数据中的 [explain] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "icon mark",
+      "Title": "icon mark（原始标签）",
+      "Comment": "消耗品/材料数据中的 [icon mark] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "need material",
+      "Title": "need material（原始标签）",
+      "Comment": "消耗品/材料数据中的 [need material] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "flavor text",
+      "Title": "flavor text（原始标签）",
+      "Comment": "消耗品/材料数据中的 [flavor text] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "int data",
+      "Title": "int data（原始标签）",
+      "Comment": "消耗品/材料数据中的 [int data] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "cooltime group",
+      "Title": "cooltime group（原始标签）",
+      "Comment": "消耗品/材料数据中的 [cooltime group] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "mp recovery",
+      "Title": "MP恢复",
+      "Comment": "消耗品/材料数据中的 [mp recovery] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "hp recovery",
+      "Title": "HP恢复",
+      "Comment": "消耗品/材料数据中的 [hp recovery] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "use action packet",
+      "Title": "use action packet（原始标签）",
+      "Comment": "消耗品/材料数据中的 [use action packet] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "cooltime maintenance",
+      "Title": "cooltime maintenance（原始标签）",
+      "Comment": "消耗品/材料数据中的 [cooltime maintenance] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "booster info",
+      "Title": "助推器信息",
+      "Comment": "消耗品/材料数据中的 [booster info] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "summon apc",
+      "Title": "summon apc（原始标签）",
+      "Comment": "消耗品/材料数据中的 [summon apc] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "avatar package preview info",
+      "Title": "avatar package preview info（原始标签）",
+      "Comment": "消耗品/材料数据中的 [avatar package preview info] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "cera",
+      "Title": "cera（原始标签）",
+      "Comment": "消耗品/材料数据中的 [cera] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "usable period",
+      "Title": "usable period（原始标签）",
+      "Comment": "消耗品/材料数据中的 [usable period] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "chat notice gold",
+      "Title": "chat notice gold（原始标签）",
+      "Comment": "消耗品/材料数据中的 [chat notice gold] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "effect maintenance",
+      "Title": "effect maintenance（原始标签）",
+      "Comment": "消耗品/材料数据中的 [effect maintenance] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "equipment reinforcement ticket",
+      "Title": "equipment reinforcement ticket（原始标签）",
+      "Comment": "消耗品/材料数据中的 [equipment reinforcement ticket] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "do not delete",
+      "Title": "do not delete（原始标签）",
+      "Comment": "消耗品/材料数据中的 [do not delete] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "maximum level",
+      "Title": "上限等级",
+      "Comment": "消耗品/材料数据中的 [maximum level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "expert type",
+      "Title": "expert type（原始标签）",
+      "Comment": "消耗品/材料数据中的 [expert type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "shared effect",
+      "Title": "shared effect（原始标签）",
+      "Comment": "消耗品/材料数据中的 [shared effect] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "special avatar",
+      "Title": "special avatar（原始标签）",
+      "Comment": "消耗品/材料数据中的 [special avatar] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "action usable place",
+      "Title": "action usable place（原始标签）",
+      "Comment": "消耗品/材料数据中的 [action usable place] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "usable game server type",
+      "Title": "usable game server type（原始标签）",
+      "Comment": "消耗品/材料数据中的 [usable game server type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "levelup range",
+      "Title": "升级范围",
+      "Comment": "消耗品/材料数据中的 [levelup range] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "levelup mode",
+      "Title": "levelup mode（原始标签）",
+      "Comment": "消耗品/材料数据中的 [levelup mode] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "action usable server type",
+      "Title": "action usable server type（原始标签）",
+      "Comment": "消耗品/材料数据中的 [action usable server type] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "monster summons",
+      "Title": "monster summons（原始标签）",
+      "Comment": "消耗品/材料数据中的 [monster summons] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "sub type",
+      "Title": "子类型类型",
+      "Comment": "消耗品/材料数据中的 [sub type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "summon npc",
+      "Title": "summon npc（原始标签）",
+      "Comment": "消耗品/材料数据中的 [summon npc] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "random option unseal",
+      "Title": "随机选项解封",
+      "Comment": "消耗品/材料数据中的 [random option unseal] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "daily delete item",
+      "Title": "daily delete item（原始标签）",
+      "Comment": "消耗品/材料数据中的 [daily delete item] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "impossible contents",
+      "Title": "impossible contents（原始标签）",
+      "Comment": "消耗品/材料数据中的 [impossible contents] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "enchant",
+      "Title": "enchant（原始标签）",
+      "Comment": "消耗品/材料数据中的 [enchant] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "physical attack",
+      "Title": "物理攻击",
+      "Comment": "消耗品/材料数据中的 [physical attack] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "magical attack",
+      "Title": "魔法攻击",
+      "Comment": "消耗品/材料数据中的 [magical attack] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "item category",
+      "Title": "物品类别",
+      "Comment": "消耗品/材料数据中的 [item category] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "booster equipment upgrade",
+      "Title": "助推器装备升级",
+      "Comment": "消耗品/材料数据中的 [booster equipment upgrade] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "upgrade limit cube info",
+      "Title": "upgrade limit cube info（原始标签）",
+      "Comment": "消耗品/材料数据中的 [upgrade limit cube info] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "result item",
+      "Title": "结果物品",
+      "Comment": "消耗品/材料数据中的 [result item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "auction free",
+      "Title": "auction free（原始标签）",
+      "Comment": "消耗品/材料数据中的 [auction free] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "basic explain",
+      "Title": "基础说明",
+      "Comment": "消耗品/材料数据中的 [basic explain] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "attack speed",
+      "Title": "攻击速度",
+      "Comment": "消耗品/材料数据中的 [attack speed] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "repair price",
+      "Title": "修理价格",
+      "Comment": "消耗品/材料数据中的 [repair price] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "equipment physical attack",
+      "Title": "装备物理攻击",
+      "Comment": "消耗品/材料数据中的 [equipment physical attack] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "equipment magical attack",
+      "Title": "装备魔法攻击",
+      "Comment": "消耗品/材料数据中的 [equipment magical attack] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "separate attack",
+      "Title": "separate attack（原始标签）",
+      "Comment": "消耗品/材料数据中的 [separate attack] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "equipment type",
+      "Title": "装备类型",
+      "Comment": "消耗品/材料数据中的 [equipment type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "animation job",
+      "Title": "动画职业",
+      "Comment": "消耗品/材料数据中的 [animation job] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "variation",
+      "Title": "variation（原始标签）",
+      "Comment": "消耗品/材料数据中的 [variation] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "layer variation",
+      "Title": "layer variation（原始标签）",
+      "Comment": "消耗品/材料数据中的 [layer variation] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "equipment ani script",
+      "Title": "equipment ani script（原始标签）",
+      "Comment": "消耗品/材料数据中的 [equipment ani script] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "durability",
+      "Title": "durability（原始标签）",
+      "Comment": "消耗品/材料数据中的 [durability] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "routing priority",
+      "Title": "routing priority（原始标签）",
+      "Comment": "消耗品/材料数据中的 [routing priority] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "if",
+      "Title": "if（原始标签）",
+      "Comment": "消耗品/材料数据中的 [if] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "cooltime",
+      "Title": "cooltime（原始标签）",
+      "Comment": "消耗品/材料数据中的 [cooltime] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "attack success",
+      "Title": "attack success（原始标签）",
+      "Comment": "消耗品/材料数据中的 [attack success] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "then",
+      "Title": "then（原始标签）",
+      "Comment": "消耗品/材料数据中的 [then] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "target",
+      "Title": "目标",
+      "Comment": "消耗品/材料数据中的 [target] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "duration",
+      "Title": "持续时间",
+      "Comment": "消耗品/材料数据中的 [duration] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "probability",
+      "Title": "概率",
+      "Comment": "消耗品/材料数据中的 [probability] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "appendage",
+      "Title": "附加状态",
+      "Comment": "消耗品/材料数据中的 [appendage] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "possible kiri protect",
+      "Title": "possible kiri protect（原始标签）",
+      "Comment": "消耗品/材料数据中的 [possible kiri protect] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "usable avatar index",
+      "Title": "usable avatar index（原始标签）",
+      "Comment": "消耗品/材料数据中的 [usable avatar index] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "package data selection",
+      "Title": "礼包数据选择",
+      "Comment": "消耗品/材料数据中的 [package data selection] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "disable",
+      "Title": "禁用",
+      "Comment": "消耗品/材料数据中的 [disable] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "unlimited waste",
+      "Title": "unlimited waste（原始标签）",
+      "Comment": "消耗品/材料数据中的 [unlimited waste] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "consume item",
+      "Title": "consume item（原始标签）",
+      "Comment": "消耗品/材料数据中的 [consume item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "use wav",
+      "Title": "use wav（原始标签）",
+      "Comment": "消耗品/材料数据中的 [use wav] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "special monster drop",
+      "Title": "special monster drop（原始标签）",
+      "Comment": "消耗品/材料数据中的 [special monster drop] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "difficulty for extra drop",
+      "Title": "difficulty for extra drop（原始标签）",
+      "Comment": "消耗品/材料数据中的 [difficulty for extra drop] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "dungeon type for extra drop",
+      "Title": "dungeon type for extra drop（原始标签）",
+      "Comment": "消耗品/材料数据中的 [dungeon type for extra drop] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "use 2nd upgrade table",
+      "Title": "使用2升级表",
+      "Comment": "消耗品/材料数据中的 [use 2nd upgrade table] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "broadcast type",
+      "Title": "broadcast type（原始标签）",
+      "Comment": "消耗品/材料数据中的 [broadcast type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "minimum rank",
+      "Title": "minimum rank（原始标签）",
+      "Comment": "消耗品/材料数据中的 [minimum rank] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "cast speed",
+      "Title": "cast speed（原始标签）",
+      "Comment": "消耗品/材料数据中的 [cast speed] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "elemental property",
+      "Title": "elemental property（原始标签）",
+      "Comment": "消耗品/材料数据中的 [elemental property] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "stuck",
+      "Title": "stuck（原始标签）",
+      "Comment": "消耗品/材料数据中的 [stuck] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "hit recovery",
+      "Title": "命中恢复",
+      "Comment": "消耗品/材料数据中的 [hit recovery] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "light attack",
+      "Title": "光属性攻击",
+      "Comment": "消耗品/材料数据中的 [light attack] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "water attack",
+      "Title": "water attack（原始标签）",
+      "Comment": "消耗品/材料数据中的 [water attack] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "move speed",
+      "Title": "移动速度",
+      "Comment": "消耗品/材料数据中的 [move speed] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "stuck resistance",
+      "Title": "stuck resistance（原始标签）",
+      "Comment": "消耗品/材料数据中的 [stuck resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "all activestatus resistance",
+      "Title": "all activestatus resistance（原始标签）",
+      "Comment": "消耗品/材料数据中的 [all activestatus resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "all elemental resistance",
+      "Title": "全部属性抗性",
+      "Comment": "消耗品/材料数据中的 [all elemental resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "HP regen speed",
+      "Title": "HP恢复速度",
+      "Comment": "消耗品/材料数据中的 [HP regen speed] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "HP MAX",
+      "Title": "HP 上限",
+      "Comment": "消耗品/材料数据中的 [HP MAX] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "equipment magical defense",
+      "Title": "装备魔法防御",
+      "Comment": "消耗品/材料数据中的 [equipment magical defense] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "equipment physical defense",
+      "Title": "装备物理防御",
+      "Comment": "消耗品/材料数据中的 [equipment physical defense] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "except status recovery",
+      "Title": "except status recovery（原始标签）",
+      "Comment": "消耗品/材料数据中的 [except status recovery] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "bead item",
+      "Title": "bead item（原始标签）",
+      "Comment": "消耗品/材料数据中的 [bead item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "expertjob only",
+      "Title": "expertjob only（原始标签）",
+      "Comment": "消耗品/材料数据中的 [expertjob only] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "enchanter extraction",
+      "Title": "enchanter extraction（原始标签）",
+      "Comment": "消耗品/材料数据中的 [enchanter extraction] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "doll_controller extraction",
+      "Title": "doll_controller extraction（原始标签）",
+      "Comment": "消耗品/材料数据中的 [doll_controller extraction] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "alchemist extraction",
+      "Title": "alchemist extraction（原始标签）",
+      "Comment": "消耗品/材料数据中的 [alchemist extraction] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "monstercard bind",
+      "Title": "monstercard bind（原始标签）",
+      "Comment": "消耗品/材料数据中的 [monstercard bind] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "shop doll",
+      "Title": "shop doll（原始标签）",
+      "Comment": "消耗品/材料数据中的 [shop doll] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "portable disjoint",
+      "Title": "便携分解",
+      "Comment": "消耗品/材料数据中的 [portable disjoint] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "unseal scroll level limit",
+      "Title": "解封卷轴等级限制",
+      "Comment": "消耗品/材料数据中的 [unseal scroll level limit] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "disable icon",
+      "Title": "disable icon（原始标签）",
+      "Comment": "消耗品/材料数据中的 [disable icon] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "advance altar need gage",
+      "Title": "advance altar need gage（原始标签）",
+      "Comment": "消耗品/材料数据中的 [advance altar need gage] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "all skill item",
+      "Title": "全部技能物品",
+      "Comment": "消耗品/材料数据中的 [all skill item] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "item growtype",
+      "Title": "物品成长类型",
+      "Comment": "消耗品/材料数据中的 [item growtype] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "skill apply condition",
+      "Title": "技能适用条件",
+      "Comment": "消耗品/材料数据中的 [skill apply condition] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "skill group",
+      "Title": "技能分组",
+      "Comment": "消耗品/材料数据中的 [skill group] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "lower bound level",
+      "Title": "lower bound level（原始标签）",
+      "Comment": "消耗品/材料数据中的 [lower bound level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "upper bound level",
+      "Title": "upper bound level（原始标签）",
+      "Comment": "消耗品/材料数据中的 [upper bound level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "extra condition",
+      "Title": "extra condition（原始标签）",
+      "Comment": "消耗品/材料数据中的 [extra condition] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "skill phase",
+      "Title": "skill phase（原始标签）",
+      "Comment": "消耗品/材料数据中的 [skill phase] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "MP MAX",
+      "Title": "MP 上限",
+      "Comment": "消耗品/材料数据中的 [MP MAX] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "physical defense",
+      "Title": "物理防御",
+      "Comment": "消耗品/材料数据中的 [physical defense] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "skill levelup",
+      "Title": "技能升级",
+      "Comment": "消耗品/材料数据中的 [skill levelup] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "hold resistance",
+      "Title": "束缚抗性",
+      "Comment": "消耗品/材料数据中的 [hold resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "stone resistance",
+      "Title": "stone resistance（原始标签）",
+      "Comment": "消耗品/材料数据中的 [stone resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "MP regen speed",
+      "Title": "MP恢复速度",
+      "Comment": "消耗品/材料数据中的 [MP regen speed] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "magical defense",
+      "Title": "魔法防御",
+      "Comment": "消耗品/材料数据中的 [magical defense] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "all elemental attack",
+      "Title": "全部属性攻击",
+      "Comment": "消耗品/材料数据中的 [all elemental attack] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "equipment duration",
+      "Title": "装备持续时间",
+      "Comment": "消耗品/材料数据中的 [equipment duration] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示装备 ID，必须通过 equipment registry 解析；静态配置不证明物品已发放。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "active status",
+      "Title": "active status（原始标签）",
+      "Comment": "消耗品/材料数据中的 [active status] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "hit",
+      "Title": "命中",
+      "Comment": "消耗品/材料数据中的 [hit] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "dark resistance",
+      "Title": "暗属性抗性",
+      "Comment": "消耗品/材料数据中的 [dark resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "slow resistance",
+      "Title": "slow resistance（原始标签）",
+      "Comment": "消耗品/材料数据中的 [slow resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "jump power",
+      "Title": "jump power（原始标签）",
+      "Comment": "消耗品/材料数据中的 [jump power] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "fire resistance",
+      "Title": "fire resistance（原始标签）",
+      "Comment": "消耗品/材料数据中的 [fire resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "poison resistance",
+      "Title": "中毒抗性",
+      "Comment": "消耗品/材料数据中的 [poison resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "restore",
+      "Title": "restore（原始标签）",
+      "Comment": "消耗品/材料数据中的 [restore] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "pvp",
+      "Title": "pvp（原始标签）",
+      "Comment": "消耗品/材料数据中的 [pvp] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "emancipate ticket",
+      "Title": "emancipate ticket（原始标签）",
+      "Comment": "消耗品/材料数据中的 [emancipate ticket] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "passive object in stackable",
+      "Title": "passive object in stackable（原始标签）",
+      "Comment": "消耗品/材料数据中的 [passive object in stackable] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示消耗品/材料 ID，必须通过 stackable registry 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "finish point price",
+      "Title": "完成点数价格",
+      "Comment": "消耗品/材料数据中的 [finish point price] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "check usable itemlevel",
+      "Title": "check usable itemlevel（原始标签）",
+      "Comment": "消耗品/材料数据中的 [check usable itemlevel] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "pc exp bonus rate",
+      "Title": "pc exp bonus rate（原始标签）",
+      "Comment": "消耗品/材料数据中的 [pc exp bonus rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "use item emoticon index",
+      "Title": "use item emoticon index（原始标签）",
+      "Comment": "消耗品/材料数据中的 [use item emoticon index] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "avatar emblem target type",
+      "Title": "avatar emblem target type（原始标签）",
+      "Comment": "消耗品/材料数据中的 [avatar emblem target type] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "inventory limit",
+      "Title": "inventory limit（原始标签）",
+      "Comment": "消耗品/材料数据中的 [inventory limit] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "casting",
+      "Title": "施放",
+      "Comment": "消耗品/材料数据中的 [casting] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "stat",
+      "Title": "stat（原始标签）",
+      "Comment": "消耗品/材料数据中的 [stat] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "room list move speed rate",
+      "Title": "room list move speed rate（原始标签）",
+      "Comment": "消耗品/材料数据中的 [room list move speed rate] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "MP regen speed rate",
+      "Title": "MP恢复速度比率",
+      "Comment": "消耗品/材料数据中的 [MP regen speed rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "water resistance",
+      "Title": "water resistance（原始标签）",
+      "Comment": "消耗品/材料数据中的 [water resistance] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "lottery use cost",
+      "Title": "lottery use cost（原始标签）",
+      "Comment": "消耗品/材料数据中的 [lottery use cost] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "linking quest index",
+      "Title": "linking quest index（原始标签）",
+      "Comment": "消耗品/材料数据中的 [linking quest index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示任务 ID，必须通过任务 registry 解析；静态登记不证明任务可接取或完成。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "type",
+      "Title": "类型",
+      "Comment": "消耗品/材料数据中的 [type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "check",
+      "Title": "检查",
+      "Comment": "消耗品/材料数据中的 [check] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "skill",
+      "Title": "技能",
+      "Comment": "消耗品/材料数据中的 [skill] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。其中数字若表示技能 ID，必须先确定职业分支，再通过对应职业技能 registry 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "skill explain",
+      "Title": "技能说明",
+      "Comment": "消耗品/材料数据中的 [skill explain] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "太刀精通",
+      "Title": "太刀精通",
+      "Comment": "消耗品/材料数据中的 [太刀精通] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "钝器精通",
+      "Title": "钝器精通",
+      "Comment": "消耗品/材料数据中的 [钝器精通] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "change status",
+      "Title": "change status（原始标签）",
+      "Comment": "消耗品/材料数据中的 [change status] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "精灵献祭",
+      "Title": "精灵献祭",
+      "Comment": "消耗品/材料数据中的 [精灵献祭] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "契约召唤：路易丝",
+      "Title": "契约召唤：路易丝",
+      "Comment": "消耗品/材料数据中的 [契约召唤：路易丝] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "契约召唤：征服者凯西利亚斯",
+      "Title": "契约召唤：征服者凯西利亚斯",
+      "Comment": "消耗品/材料数据中的 [契约召唤：征服者凯西利亚斯] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "event use skill",
+      "Title": "活动事件使用技能",
+      "Comment": "消耗品/材料数据中的 [event use skill] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "reduce probability to human armor at pvp module",
+      "Title": "reduce probability to human armor at pvp module（原始标签）",
+      "Comment": "消耗品/材料数据中的 [reduce probability to human armor at pvp module] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "passive object",
+      "Title": "passive object（原始标签）",
+      "Comment": "消耗品/材料数据中的 [passive object] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "炫纹强压",
+      "Title": "炫纹强压",
+      "Comment": "消耗品/材料数据中的 [炫纹强压] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "炫纹融合",
+      "Title": "炫纹融合",
+      "Comment": "消耗品/材料数据中的 [炫纹融合] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "add absolute damage",
+      "Title": "追加绝对值伤害",
+      "Comment": "消耗品/材料数据中的 [add absolute damage] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "强袭流星打",
+      "Title": "强袭流星打",
+      "Comment": "消耗品/材料数据中的 [强袭流星打] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "流星闪影击",
+      "Title": "流星闪影击",
+      "Comment": "消耗品/材料数据中的 [流星闪影击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "煌龙偃月刀",
+      "Title": "煌龙偃月刀",
+      "Comment": "消耗品/材料数据中的 [煌龙偃月刀] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "自动炫纹",
+      "Title": "自动炫纹",
+      "Comment": "消耗品/材料数据中的 [自动炫纹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "连击精通",
+      "Title": "连击精通",
+      "Comment": "消耗品/材料数据中的 [连击精通] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "湮灭黑洞",
+      "Title": "湮灭黑洞",
+      "Comment": "消耗品/材料数据中的 [湮灭黑洞] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "虚无之球",
+      "Title": "虚无之球",
+      "Comment": "消耗品/材料数据中的 [虚无之球] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "天雷",
+      "Title": "天雷",
+      "Comment": "消耗品/材料数据中的 [天雷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "my appendage",
+      "Title": "my appendage（原始标签）",
+      "Comment": "消耗品/材料数据中的 [my appendage] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰墙",
+      "Title": "冰墙",
+      "Comment": "消耗品/材料数据中的 [冰墙] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "烈焰冲击",
+      "Title": "烈焰冲击",
+      "Comment": "消耗品/材料数据中的 [烈焰冲击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "雷旋",
+      "Title": "雷旋",
+      "Comment": "消耗品/材料数据中的 [雷旋] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "属性轰炸",
+      "Title": "属性轰炸",
+      "Comment": "消耗品/材料数据中的 [属性轰炸] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "元素集中",
+      "Title": "元素集中",
+      "Comment": "消耗品/材料数据中的 [元素集中] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "杰克降临",
+      "Title": "杰克降临",
+      "Comment": "消耗品/材料数据中的 [杰克降临] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "target active status",
+      "Title": "目标异常/增益状态条件",
+      "Comment": "消耗品/材料数据中的 [target active status] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "skill cooltime reset",
+      "Title": "skill cooltime reset（原始标签）",
+      "Comment": "消耗品/材料数据中的 [skill cooltime reset] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "魔法秀",
+      "Title": "魔法秀",
+      "Comment": "消耗品/材料数据中的 [魔法秀] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "移动施法",
+      "Title": "移动施法",
+      "Comment": "消耗品/材料数据中的 [移动施法] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "光电冰墙",
+      "Title": "光电冰墙",
+      "Comment": "消耗品/材料数据中的 [光电冰墙] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "虚无火山",
+      "Title": "虚无火山",
+      "Comment": "消耗品/材料数据中的 [虚无火山] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "元素点燃",
+      "Title": "元素点燃",
+      "Comment": "消耗品/材料数据中的 [元素点燃] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "邪光波动阵",
+      "Title": "邪光波动阵",
+      "Comment": "消耗品/材料数据中的 [邪光波动阵] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暗天波动眼",
+      "Title": "暗天波动眼",
+      "Comment": "消耗品/材料数据中的 [暗天波动眼] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "波动刻印",
+      "Title": "波动刻印",
+      "Comment": "消耗品/材料数据中的 [波动刻印] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "修罗邪光斩",
+      "Title": "修罗邪光斩",
+      "Comment": "消耗品/材料数据中的 [修罗邪光斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "邪光斩",
+      "Title": "邪光斩",
+      "Comment": "消耗品/材料数据中的 [邪光斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "鬼印珠",
+      "Title": "鬼印珠",
+      "Comment": "消耗品/材料数据中的 [鬼印珠] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "不动明王阵",
+      "Title": "不动明王阵",
+      "Comment": "消耗品/材料数据中的 [不动明王阵] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "地裂·波动剑",
+      "Title": "地裂·波动剑",
+      "Comment": "消耗品/材料数据中的 [地裂·波动剑] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暗影蛛丝阵",
+      "Title": "暗影蛛丝阵",
+      "Comment": "消耗品/材料数据中的 [暗影蛛丝阵] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "驱使僵尸",
+      "Title": "驱使僵尸",
+      "Comment": "消耗品/材料数据中的 [驱使僵尸] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "千魂祭",
+      "Title": "千魂祭",
+      "Comment": "消耗品/材料数据中的 [千魂祭] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暗黑仪式",
+      "Title": "暗黑仪式",
+      "Comment": "消耗品/材料数据中的 [暗黑仪式] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "降临：暴君巴拉克",
+      "Title": "降临：暴君巴拉克",
+      "Comment": "消耗品/材料数据中的 [降临：暴君巴拉克] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "巴拉克的野心",
+      "Title": "巴拉克的野心",
+      "Comment": "消耗品/材料数据中的 [巴拉克的野心] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "百鬼夜行",
+      "Title": "百鬼夜行",
+      "Comment": "消耗品/材料数据中的 [百鬼夜行] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暗魂波",
+      "Title": "暗魂波",
+      "Comment": "消耗品/材料数据中的 [暗魂波] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "信念光环",
+      "Title": "信念光环",
+      "Comment": "消耗品/材料数据中的 [信念光环] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "守护徽章",
+      "Title": "守护徽章",
+      "Comment": "消耗品/材料数据中的 [守护徽章] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "圣愈之风",
+      "Title": "圣愈之风",
+      "Comment": "消耗品/材料数据中的 [圣愈之风] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "胜利之矛",
+      "Title": "胜利之矛",
+      "Comment": "消耗品/材料数据中的 [胜利之矛] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "圣光沁盾",
+      "Title": "圣光沁盾",
+      "Comment": "消耗品/材料数据中的 [圣光沁盾] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "空斩打",
+      "Title": "空斩打",
+      "Comment": "消耗品/材料数据中的 [空斩打] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "落雷符",
+      "Title": "落雷符",
+      "Comment": "消耗品/材料数据中的 [落雷符] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "朱雀符",
+      "Title": "朱雀符",
+      "Comment": "消耗品/材料数据中的 [朱雀符] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "破魔符",
+      "Title": "破魔符",
+      "Comment": "消耗品/材料数据中的 [破魔符] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "疾空旋风破",
+      "Title": "疾空旋风破",
+      "Comment": "消耗品/材料数据中的 [疾空旋风破] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "无双击",
+      "Title": "无双击",
+      "Comment": "消耗品/材料数据中的 [无双击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "狂乱锤击",
+      "Title": "狂乱锤击",
+      "Comment": "消耗品/材料数据中的 [狂乱锤击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "狂暴锤击",
+      "Title": "狂暴锤击",
+      "Comment": "消耗品/材料数据中的 [狂暴锤击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "狮子吼",
+      "Title": "狮子吼",
+      "Comment": "消耗品/材料数据中的 [狮子吼] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "念气环绕",
+      "Title": "念气环绕",
+      "Comment": "消耗品/材料数据中的 [念气环绕] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "螺旋念气场",
+      "Title": "螺旋念气场",
+      "Comment": "消耗品/材料数据中的 [螺旋念气场] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "念兽 ： 雷龙出海",
+      "Title": "念兽 ： 雷龙出海",
+      "Comment": "消耗品/材料数据中的 [念兽 ： 雷龙出海] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "念兽 ： 猛虎震地",
+      "Title": "念兽 ： 猛虎震地",
+      "Comment": "消耗品/材料数据中的 [念兽 ： 猛虎震地] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "念兽 ： 龙虎啸",
+      "Title": "念兽 ： 龙虎啸",
+      "Comment": "消耗品/材料数据中的 [念兽 ： 龙虎啸] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "千莲怒放",
+      "Title": "千莲怒放",
+      "Comment": "消耗品/材料数据中的 [千莲怒放] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "乱舞·千叶花",
+      "Title": "乱舞·千叶花",
+      "Comment": "消耗品/材料数据中的 [乱舞·千叶花] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "念兽·龙虎啸",
+      "Title": "念兽·龙虎啸",
+      "Comment": "消耗品/材料数据中的 [念兽·龙虎啸] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "念兽 : 审判之金雷虎",
+      "Title": "念兽 : 审判之金雷虎",
+      "Comment": "消耗品/材料数据中的 [念兽 : 审判之金雷虎] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "念之奥义",
+      "Title": "念之奥义",
+      "Comment": "消耗品/材料数据中的 [念之奥义] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "念气环绕：御",
+      "Title": "念气环绕：御",
+      "Comment": "消耗品/材料数据中的 [念气环绕：御] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "幻影爆碎",
+      "Title": "幻影爆碎",
+      "Comment": "消耗品/材料数据中的 [幻影爆碎] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "perform skill",
+      "Title": "perform skill（原始标签）",
+      "Comment": "消耗品/材料数据中的 [perform skill] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "重火器精通",
+      "Title": "重火器精通",
+      "Comment": "消耗品/材料数据中的 [重火器精通] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "量子爆弹",
+      "Title": "量子爆弹",
+      "Comment": "消耗品/材料数据中的 [量子爆弹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "激光炮",
+      "Title": "激光炮",
+      "Comment": "消耗品/材料数据中的 [激光炮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "蓄电激光炮",
+      "Title": "蓄电激光炮",
+      "Comment": "消耗品/材料数据中的 [蓄电激光炮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "反坦克炮",
+      "Title": "反坦克炮",
+      "Comment": "消耗品/材料数据中的 [反坦克炮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "聚焦喷火器",
+      "Title": "聚焦喷火器",
+      "Comment": "消耗品/材料数据中的 [聚焦喷火器] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "卫星射线",
+      "Title": "卫星射线",
+      "Comment": "消耗品/材料数据中的 [卫星射线] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "X-1 压缩量子炮",
+      "Title": "X-1 压缩量子炮（原始标签）",
+      "Comment": "消耗品/材料数据中的 [X-1 压缩量子炮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "FM-92 mk2 SW榴弹",
+      "Title": "FM-92 mk2 SW榴弹（原始标签）",
+      "Comment": "消耗品/材料数据中的 [FM-92 mk2 SW榴弹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "正义审判",
+      "Title": "正义审判",
+      "Comment": "消耗品/材料数据中的 [正义审判] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "圣光十字",
+      "Title": "圣光十字",
+      "Comment": "消耗品/材料数据中的 [圣光十字] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "元素轰炸",
+      "Title": "元素轰炸",
+      "Comment": "消耗品/材料数据中的 [元素轰炸] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "属性变换",
+      "Title": "属性变换",
+      "Comment": "消耗品/材料数据中的 [属性变换] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "元素幻灭",
+      "Title": "元素幻灭",
+      "Comment": "消耗品/材料数据中的 [元素幻灭] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "旋炎破",
+      "Title": "旋炎破",
+      "Comment": "消耗品/材料数据中的 [旋炎破] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "幻魔四重奏",
+      "Title": "幻魔四重奏",
+      "Comment": "消耗品/材料数据中的 [幻魔四重奏] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "元素环绕",
+      "Title": "元素环绕",
+      "Comment": "消耗品/材料数据中的 [元素环绕] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰晶之浴",
+      "Title": "冰晶之浴",
+      "Comment": "消耗品/材料数据中的 [冰晶之浴] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "黑暗禁域",
+      "Title": "黑暗禁域",
+      "Comment": "消耗品/材料数据中的 [黑暗禁域] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "地炎",
+      "Title": "地炎",
+      "Comment": "消耗品/材料数据中的 [地炎] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "雷光屏障",
+      "Title": "雷光屏障",
+      "Comment": "消耗品/材料数据中的 [雷光屏障] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "雷光链",
+      "Title": "雷光链",
+      "Comment": "消耗品/材料数据中的 [雷光链] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰晶坠",
+      "Title": "冰晶坠",
+      "Comment": "消耗品/材料数据中的 [冰晶坠] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暗域扩张",
+      "Title": "暗域扩张",
+      "Comment": "消耗品/材料数据中的 [暗域扩张] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "旋转扫把",
+      "Title": "旋转扫把",
+      "Comment": "消耗品/材料数据中的 [旋转扫把] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "变异苍蝇拍",
+      "Title": "变异苍蝇拍",
+      "Comment": "消耗品/材料数据中的 [变异苍蝇拍] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "反重力装置",
+      "Title": "反重力装置",
+      "Comment": "消耗品/材料数据中的 [反重力装置] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "亲和 - 暗夜影猫",
+      "Title": "亲和 - 暗夜影猫",
+      "Comment": "消耗品/材料数据中的 [亲和 - 暗夜影猫] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暴炎加热炉",
+      "Title": "暴炎加热炉",
+      "Comment": "消耗品/材料数据中的 [暴炎加热炉] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰霜钻孔车",
+      "Title": "冰霜钻孔车",
+      "Comment": "消耗品/材料数据中的 [冰霜钻孔车] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "成功预感",
+      "Title": "成功预感",
+      "Comment": "消耗品/材料数据中的 [成功预感] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "aura active",
+      "Title": "aura active（原始标签）",
+      "Comment": "消耗品/材料数据中的 [aura active] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "特斯拉线圈",
+      "Title": "特斯拉线圈",
+      "Comment": "消耗品/材料数据中的 [特斯拉线圈] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "超级苍蝇拍",
+      "Title": "超级苍蝇拍",
+      "Comment": "消耗品/材料数据中的 [超级苍蝇拍] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暗影斗篷",
+      "Title": "暗影斗篷",
+      "Comment": "消耗品/材料数据中的 [暗影斗篷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "改良魔法星弹",
+      "Title": "改良魔法星弹",
+      "Comment": "消耗品/材料数据中的 [改良魔法星弹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "弹跳旋转扫把",
+      "Title": "弹跳旋转扫把",
+      "Comment": "消耗品/材料数据中的 [弹跳旋转扫把] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "幸运棒棒糖",
+      "Title": "幸运棒棒糖",
+      "Comment": "消耗品/材料数据中的 [幸运棒棒糖] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "魔道酸雨云",
+      "Title": "魔道酸雨云",
+      "Comment": "消耗品/材料数据中的 [魔道酸雨云] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "熔岩药瓶",
+      "Title": "熔岩药瓶",
+      "Comment": "消耗品/材料数据中的 [熔岩药瓶] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "双鹰回旋",
+      "Title": "双鹰回旋",
+      "Comment": "消耗品/材料数据中的 [双鹰回旋] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "死亡印记",
+      "Title": "死亡印记",
+      "Comment": "消耗品/材料数据中的 [死亡印记] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "死亡左轮",
+      "Title": "死亡左轮",
+      "Comment": "消耗品/材料数据中的 [死亡左轮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "隐晦之刃",
+      "Title": "隐晦之刃",
+      "Comment": "消耗品/材料数据中的 [隐晦之刃] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "多重爆头",
+      "Title": "多重爆头",
+      "Comment": "消耗品/材料数据中的 [多重爆头] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "爆头一击",
+      "Title": "爆头一击",
+      "Comment": "消耗品/材料数据中的 [爆头一击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "圣拳捶击",
+      "Title": "圣拳捶击",
+      "Comment": "消耗品/材料数据中的 [圣拳捶击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "圣拳连击",
+      "Title": "圣拳连击",
+      "Comment": "消耗品/材料数据中的 [圣拳连击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "急速飓风拳",
+      "Title": "急速飓风拳",
+      "Comment": "消耗品/材料数据中的 [急速飓风拳] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "泯灭神击",
+      "Title": "泯灭神击",
+      "Comment": "消耗品/材料数据中的 [泯灭神击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "极限燃烧",
+      "Title": "极限燃烧",
+      "Comment": "消耗品/材料数据中的 [极限燃烧] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "意念驱动",
+      "Title": "意念驱动",
+      "Comment": "消耗品/材料数据中的 [意念驱动] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "after attack",
+      "Title": "之后攻击",
+      "Comment": "消耗品/材料数据中的 [after attack] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "combo",
+      "Title": "combo（原始标签）",
+      "Comment": "消耗品/材料数据中的 [combo] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "character",
+      "Title": "角色",
+      "Comment": "消耗品/材料数据中的 [character] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "speech on",
+      "Title": "speech on（原始标签）",
+      "Comment": "消耗品/材料数据中的 [speech on] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "Ex-S毒蛇炮",
+      "Title": "Ex-S毒蛇炮",
+      "Comment": "消耗品/材料数据中的 [Ex-S毒蛇炮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "Ex-S Zero毒蛇炮",
+      "Title": "Ex-S Zero毒蛇炮",
+      "Comment": "消耗品/材料数据中的 [Ex-S Zero毒蛇炮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "Ez-10反击者",
+      "Title": "Ez-10反击者",
+      "Comment": "消耗品/材料数据中的 [Ez-10反击者] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "RX-78追击者",
+      "Title": "RX-78追击者",
+      "Comment": "消耗品/材料数据中的 [RX-78追击者] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "use skill",
+      "Title": "使用技能",
+      "Comment": "消耗品/材料数据中的 [use skill] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "summon monster",
+      "Title": "summon monster（原始标签）",
+      "Comment": "消耗品/材料数据中的 [summon monster] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "拦截机工厂",
+      "Title": "拦截机工厂",
+      "Comment": "消耗品/材料数据中的 [拦截机工厂] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "空战机械 ： 狂风",
+      "Title": "空战机械 ： 狂风",
+      "Comment": "消耗品/材料数据中的 [空战机械 ： 狂风] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "空投支援",
+      "Title": "空投支援",
+      "Comment": "消耗品/材料数据中的 [空投支援] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "空战机械：狂风",
+      "Title": "空战机械：狂风",
+      "Comment": "消耗品/材料数据中的 [空战机械：狂风] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "嗜战追击者",
+      "Title": "嗜战追击者",
+      "Comment": "消耗品/材料数据中的 [嗜战追击者] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "斗志之歌",
+      "Title": "斗志之歌",
+      "Comment": "消耗品/材料数据中的 [斗志之歌] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "G系扩张",
+      "Title": "G系扩张",
+      "Comment": "消耗品/材料数据中的 [G系扩张] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "G-1科罗纳",
+      "Title": "G-1科罗纳",
+      "Comment": "消耗品/材料数据中的 [G-1科罗纳] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "改装 : G-2旋雷者",
+      "Title": "改装 : G-2旋雷者",
+      "Comment": "消耗品/材料数据中的 [改装 : G-2旋雷者] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "改装 : G-3捕食者",
+      "Title": "改装 : G-3捕食者",
+      "Comment": "消耗品/材料数据中的 [改装 : G-3捕食者] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "破极兵刃",
+      "Title": "破极兵刃",
+      "Comment": "消耗品/材料数据中的 [破极兵刃] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "physical absolute damage",
+      "Title": "物理绝对值伤害",
+      "Comment": "消耗品/材料数据中的 [physical absolute damage] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "流心：刺",
+      "Title": "流心：刺",
+      "Comment": "消耗品/材料数据中的 [流心：刺] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "流心",
+      "Title": "流心",
+      "Comment": "消耗品/材料数据中的 [流心] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "破军升龙击",
+      "Title": "破军升龙击",
+      "Comment": "消耗品/材料数据中的 [破军升龙击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "流心升",
+      "Title": "流心升",
+      "Comment": "消耗品/材料数据中的 [流心升] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "流心狂",
+      "Title": "流心狂",
+      "Comment": "消耗品/材料数据中的 [流心狂] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "流心刺",
+      "Title": "流心刺",
+      "Comment": "消耗品/材料数据中的 [流心刺] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "流心跃",
+      "Title": "流心跃",
+      "Comment": "消耗品/材料数据中的 [流心跃] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "疾影手",
+      "Title": "疾影手",
+      "Comment": "消耗品/材料数据中的 [疾影手] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "幻影剑舞",
+      "Title": "幻影剑舞",
+      "Comment": "消耗品/材料数据中的 [幻影剑舞] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "魔影剑舞",
+      "Title": "魔影剑舞",
+      "Comment": "消耗品/材料数据中的 [魔影剑舞] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "拔刀斩",
+      "Title": "拔刀斩",
+      "Comment": "消耗品/材料数据中的 [拔刀斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "破军斩龙击",
+      "Title": "破军斩龙击",
+      "Comment": "消耗品/材料数据中的 [破军斩龙击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "光剑精通",
+      "Title": "光剑精通",
+      "Comment": "消耗品/材料数据中的 [光剑精通] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "基础精通",
+      "Title": "基础精通",
+      "Comment": "消耗品/材料数据中的 [基础精通] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "猛龙断空斩",
+      "Title": "猛龙断空斩",
+      "Comment": "消耗品/材料数据中的 [猛龙断空斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "巨剑精通",
+      "Title": "巨剑精通",
+      "Comment": "消耗品/材料数据中的 [巨剑精通] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "湮烈掌",
+      "Title": "湮烈掌",
+      "Comment": "消耗品/材料数据中的 [湮烈掌] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "嗜魂之手",
+      "Title": "嗜魂之手",
+      "Comment": "消耗品/材料数据中的 [嗜魂之手] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "怒气爆发",
+      "Title": "怒气爆发",
+      "Comment": "消耗品/材料数据中的 [怒气爆发] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "血气之刃",
+      "Title": "血气之刃",
+      "Comment": "消耗品/材料数据中的 [血气之刃] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "破魂之刃",
+      "Title": "破魂之刃",
+      "Comment": "消耗品/材料数据中的 [破魂之刃] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "血气爆发",
+      "Title": "血气爆发",
+      "Comment": "消耗品/材料数据中的 [血气爆发] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "魔狱血刹",
+      "Title": "魔狱血刹",
+      "Comment": "消耗品/材料数据中的 [魔狱血刹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "鲜血之忆",
+      "Title": "鲜血之忆",
+      "Comment": "消耗品/材料数据中的 [鲜血之忆] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "嗜血",
+      "Title": "嗜血",
+      "Comment": "消耗品/材料数据中的 [嗜血] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暴走",
+      "Title": "暴走",
+      "Comment": "消耗品/材料数据中的 [暴走] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "崩山裂地斩",
+      "Title": "崩山裂地斩",
+      "Comment": "消耗品/材料数据中的 [崩山裂地斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "魔狱裂魂斩",
+      "Title": "魔狱裂魂斩",
+      "Comment": "消耗品/材料数据中的 [魔狱裂魂斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "十字斩",
+      "Title": "十字斩",
+      "Comment": "消耗品/材料数据中的 [十字斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "灭魂封魔斩",
+      "Title": "灭魂封魔斩",
+      "Comment": "消耗品/材料数据中的 [灭魂封魔斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冥魂之陨",
+      "Title": "冥魂之陨",
+      "Comment": "消耗品/材料数据中的 [冥魂之陨] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "禁魂斩",
+      "Title": "禁魂斩",
+      "Comment": "消耗品/材料数据中的 [禁魂斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "attack condition",
+      "Title": "攻击条件",
+      "Comment": "消耗品/材料数据中的 [attack condition] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "破灭斩",
+      "Title": "破灭斩",
+      "Comment": "消耗品/材料数据中的 [破灭斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "瞬影斩",
+      "Title": "瞬影斩",
+      "Comment": "消耗品/材料数据中的 [瞬影斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暗影 · 波动剑",
+      "Title": "暗影 · 波动剑",
+      "Comment": "消耗品/材料数据中的 [暗影 · 波动剑] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "邪影 · 波动剑",
+      "Title": "邪影 · 波动剑",
+      "Comment": "消耗品/材料数据中的 [邪影 · 波动剑] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冥光斩",
+      "Title": "冥光斩",
+      "Comment": "消耗品/材料数据中的 [冥光斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暗影三击剑",
+      "Title": "暗影三击剑",
+      "Comment": "消耗品/材料数据中的 [暗影三击剑] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "突刺",
+      "Title": "突刺",
+      "Comment": "消耗品/材料数据中的 [突刺] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "刀魂之卡赞",
+      "Title": "刀魂之卡赞",
+      "Comment": "消耗品/材料数据中的 [刀魂之卡赞] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "侵蚀之普戾蒙",
+      "Title": "侵蚀之普戾蒙",
+      "Comment": "消耗品/材料数据中的 [侵蚀之普戾蒙] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暗月降临",
+      "Title": "暗月降临",
+      "Comment": "消耗品/材料数据中的 [暗月降临] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "第7鬼神 : 邪神之怖拉修",
+      "Title": "第7鬼神 : 邪神之怖拉修",
+      "Comment": "消耗品/材料数据中的 [第7鬼神 : 邪神之怖拉修] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰霜之萨亚",
+      "Title": "冰霜之萨亚",
+      "Comment": "消耗品/材料数据中的 [冰霜之萨亚] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰晶之萨亚",
+      "Title": "冰晶之萨亚",
+      "Comment": "消耗品/材料数据中的 [冰晶之萨亚] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "鬼斩",
+      "Title": "鬼斩",
+      "Comment": "消耗品/材料数据中的 [鬼斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "噬灵鬼斩",
+      "Title": "噬灵鬼斩",
+      "Comment": "消耗品/材料数据中的 [噬灵鬼斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冥炎之卡洛",
+      "Title": "冥炎之卡洛",
+      "Comment": "消耗品/材料数据中的 [冥炎之卡洛] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冥炎破空斩",
+      "Title": "冥炎破空斩",
+      "Comment": "消耗品/材料数据中的 [冥炎破空斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "鬼影三击剑",
+      "Title": "鬼影三击剑",
+      "Comment": "消耗品/材料数据中的 [鬼影三击剑] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "厄运之轮",
+      "Title": "厄运之轮",
+      "Comment": "消耗品/材料数据中的 [厄运之轮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "黑暗权能",
+      "Title": "黑暗权能",
+      "Comment": "消耗品/材料数据中的 [黑暗权能] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "回旋飞镰",
+      "Title": "回旋飞镰",
+      "Comment": "消耗品/材料数据中的 [回旋飞镰] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "恶魔之力",
+      "Title": "恶魔之力",
+      "Comment": "消耗品/材料数据中的 [恶魔之力] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "化魔",
+      "Title": "化魔",
+      "Comment": "消耗品/材料数据中的 [化魔] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "黑暗之触",
+      "Title": "黑暗之触",
+      "Comment": "消耗品/材料数据中的 [黑暗之触] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "skill data up",
+      "Title": "skill data up（原始标签）",
+      "Comment": "消耗品/材料数据中的 [skill data up] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "地狱之门",
+      "Title": "地狱之门",
+      "Comment": "消耗品/材料数据中的 [地狱之门] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "魔化：末日审判者",
+      "Title": "魔化：末日审判者",
+      "Comment": "消耗品/材料数据中的 [魔化：末日审判者] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "elemental weapon",
+      "Title": "属性武器",
+      "Comment": "消耗品/材料数据中的 [elemental weapon] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "add absolute defense percent",
+      "Title": "追加绝对值防御百分比",
+      "Comment": "消耗品/材料数据中的 [add absolute defense percent] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "柔化肌肉",
+      "Title": "柔化肌肉",
+      "Comment": "消耗品/材料数据中的 [柔化肌肉] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "碎骨",
+      "Title": "碎骨",
+      "Comment": "消耗品/材料数据中的 [碎骨] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "铁山靠",
+      "Title": "铁山靠",
+      "Comment": "消耗品/材料数据中的 [铁山靠] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "升龙拳",
+      "Title": "升龙拳",
+      "Comment": "消耗品/材料数据中的 [升龙拳] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "升龙霸拳",
+      "Title": "升龙霸拳",
+      "Comment": "消耗品/材料数据中的 [升龙霸拳] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "闪电之舞",
+      "Title": "闪电之舞",
+      "Comment": "消耗品/材料数据中的 [闪电之舞] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "烈焰焚步",
+      "Title": "烈焰焚步",
+      "Comment": "消耗品/材料数据中的 [烈焰焚步] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "炽焰旋风腿",
+      "Title": "炽焰旋风腿",
+      "Comment": "消耗品/材料数据中的 [炽焰旋风腿] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "武神强踢",
+      "Title": "武神强踢",
+      "Comment": "消耗品/材料数据中的 [武神强踢] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "霸体护甲",
+      "Title": "霸体护甲",
+      "Comment": "消耗品/材料数据中的 [霸体护甲] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "set my state",
+      "Title": "set my state（原始标签）",
+      "Comment": "消耗品/材料数据中的 [set my state] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "my state",
+      "Title": "my state（原始标签）",
+      "Comment": "消耗品/材料数据中的 [my state] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "瞬影连环踢",
+      "Title": "瞬影连环踢",
+      "Comment": "消耗品/材料数据中的 [瞬影连环踢] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "寸拳",
+      "Title": "寸拳",
+      "Comment": "消耗品/材料数据中的 [寸拳] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冲膝",
+      "Title": "冲膝",
+      "Comment": "消耗品/材料数据中的 [冲膝] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "event attack success",
+      "Title": "event attack success（原始标签）",
+      "Comment": "消耗品/材料数据中的 [event attack success] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "weakness",
+      "Title": "weakness（原始标签）",
+      "Comment": "消耗品/材料数据中的 [weakness] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "砖袭",
+      "Title": "砖袭",
+      "Comment": "消耗品/材料数据中的 [砖袭] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "投网",
+      "Title": "投网",
+      "Comment": "消耗品/材料数据中的 [投网] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "裂地飞沙",
+      "Title": "裂地飞沙",
+      "Comment": "消耗品/材料数据中的 [裂地飞沙] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "砖块投掷",
+      "Title": "砖块投掷",
+      "Comment": "消耗品/材料数据中的 [砖块投掷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "罗网投掷",
+      "Title": "罗网投掷",
+      "Comment": "消耗品/材料数据中的 [罗网投掷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "螺旋滑铲",
+      "Title": "螺旋滑铲",
+      "Comment": "消耗品/材料数据中的 [螺旋滑铲] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "涂毒",
+      "Title": "涂毒",
+      "Comment": "消耗品/材料数据中的 [涂毒] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "毒影针",
+      "Title": "毒影针",
+      "Comment": "消耗品/材料数据中的 [毒影针] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "毒针投掷",
+      "Title": "毒针投掷",
+      "Comment": "消耗品/材料数据中的 [毒针投掷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "猛毒之血",
+      "Title": "猛毒之血",
+      "Comment": "消耗品/材料数据中的 [猛毒之血] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "挑衅",
+      "Title": "挑衅",
+      "Comment": "消耗品/材料数据中的 [挑衅] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "千手奥义",
+      "Title": "千手奥义",
+      "Comment": "消耗品/材料数据中的 [千手奥义] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "双重投掷",
+      "Title": "双重投掷",
+      "Comment": "消耗品/材料数据中的 [双重投掷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "爪精通",
+      "Title": "爪精通",
+      "Comment": "消耗品/材料数据中的 [爪精通] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "狂·霸王拳",
+      "Title": "狂·霸王拳",
+      "Comment": "消耗品/材料数据中的 [狂·霸王拳] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "伏虎霸王拳",
+      "Title": "伏虎霸王拳",
+      "Comment": "消耗品/材料数据中的 [伏虎霸王拳] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "毒雷引爆",
+      "Title": "毒雷引爆",
+      "Comment": "消耗品/材料数据中的 [毒雷引爆] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "男格斗",
+      "Title": "男格斗",
+      "Comment": "消耗品/材料数据中的 [男格斗] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "光子爆弹",
+      "Title": "光子爆弹",
+      "Comment": "消耗品/材料数据中的 [光子爆弹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "尼尔狙击",
+      "Title": "尼尔狙击",
+      "Comment": "消耗品/材料数据中的 [尼尔狙击] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "银弹",
+      "Title": "银弹",
+      "Comment": "消耗品/材料数据中的 [银弹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "感电手雷",
+      "Title": "感电手雷",
+      "Comment": "消耗品/材料数据中的 [感电手雷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "空中射击",
+      "Title": "空中射击",
+      "Comment": "消耗品/材料数据中的 [空中射击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "弹药强化",
+      "Title": "弹药强化",
+      "Comment": "消耗品/材料数据中的 [弹药强化] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰冻弹",
+      "Title": "冰冻弹",
+      "Comment": "消耗品/材料数据中的 [冰冻弹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "爆炎弹",
+      "Title": "爆炎弹",
+      "Comment": "消耗品/材料数据中的 [爆炎弹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "破甲弹",
+      "Title": "破甲弹",
+      "Comment": "消耗品/材料数据中的 [破甲弹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "交叉射击",
+      "Title": "交叉射击",
+      "Comment": "消耗品/材料数据中的 [交叉射击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "聚合弹",
+      "Title": "聚合弹",
+      "Comment": "消耗品/材料数据中的 [聚合弹] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "attack type",
+      "Title": "攻击类型",
+      "Comment": "消耗品/材料数据中的 [attack type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "G-14手雷",
+      "Title": "G-14手雷",
+      "Comment": "消耗品/材料数据中的 [G-14手雷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "神枪手(男)",
+      "Title": "神枪手(男)",
+      "Comment": "消耗品/材料数据中的 [神枪手(男)] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "神枪手(女)",
+      "Title": "神枪手(女)",
+      "Comment": "消耗品/材料数据中的 [神枪手(女)] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "破甲状态",
+      "Title": "破甲状态",
+      "Comment": "消耗品/材料数据中的 [破甲状态] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "闪击地雷",
+      "Title": "闪击地雷",
+      "Comment": "消耗品/材料数据中的 [闪击地雷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰冻手雷",
+      "Title": "冰冻手雷",
+      "Comment": "消耗品/材料数据中的 [冰冻手雷] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "风暴系",
+      "Title": "风暴系",
+      "Comment": "消耗品/材料数据中的 [风暴系] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "element",
+      "Title": "element（原始标签）",
+      "Comment": "消耗品/材料数据中的 [element] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "远古记忆",
+      "Title": "远古记忆",
+      "Comment": "消耗品/材料数据中的 [远古记忆] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "翔击",
+      "Title": "翔击",
+      "Comment": "消耗品/材料数据中的 [翔击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "绝杀斩",
+      "Title": "绝杀斩",
+      "Comment": "消耗品/材料数据中的 [绝杀斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "剑刃风暴",
+      "Title": "剑刃风暴",
+      "Comment": "消耗品/材料数据中的 [剑刃风暴] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "疾风乱舞",
+      "Title": "疾风乱舞",
+      "Comment": "消耗品/材料数据中的 [疾风乱舞] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "螺旋穿刺",
+      "Title": "螺旋穿刺",
+      "Comment": "消耗品/材料数据中的 [螺旋穿刺] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "弧光闪",
+      "Title": "弧光闪",
+      "Comment": "消耗品/材料数据中的 [弧光闪] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "双刃穿刺",
+      "Title": "双刃穿刺",
+      "Comment": "消耗品/材料数据中的 [双刃穿刺] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "旋刃",
+      "Title": "旋刃",
+      "Comment": "消耗品/材料数据中的 [旋刃] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "绝命瞬狱杀",
+      "Title": "绝命瞬狱杀",
+      "Comment": "消耗品/材料数据中的 [绝命瞬狱杀] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "月弧",
+      "Title": "月弧",
+      "Comment": "消耗品/材料数据中的 [月弧] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰龙旋舞",
+      "Title": "冰龙旋舞",
+      "Comment": "消耗品/材料数据中的 [冰龙旋舞] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰魄旋枪",
+      "Title": "冰魄旋枪",
+      "Comment": "消耗品/材料数据中的 [冰魄旋枪] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冰魄之弓",
+      "Title": "冰魄之弓",
+      "Comment": "消耗品/材料数据中的 [冰魄之弓] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "折颈",
+      "Title": "折颈",
+      "Comment": "消耗品/材料数据中的 [折颈] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "抛投",
+      "Title": "抛投",
+      "Comment": "消耗品/材料数据中的 [抛投] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "地狱摇篮",
+      "Title": "地狱摇篮",
+      "Comment": "消耗品/材料数据中的 [地狱摇篮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "地狱风火轮",
+      "Title": "地狱风火轮",
+      "Comment": "消耗品/材料数据中的 [地狱风火轮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "旋风碎心踢",
+      "Title": "旋风碎心踢",
+      "Comment": "消耗品/材料数据中的 [旋风碎心踢] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "裂石破天",
+      "Title": "裂石破天",
+      "Comment": "消耗品/材料数据中的 [裂石破天] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "浮云凌空踢",
+      "Title": "浮云凌空踢",
+      "Comment": "消耗品/材料数据中的 [浮云凌空踢] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "末日风暴",
+      "Title": "末日风暴",
+      "Comment": "消耗品/材料数据中的 [末日风暴] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "暴力抓取",
+      "Title": "暴力抓取",
+      "Comment": "消耗品/材料数据中的 [暴力抓取] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "霹雳肘击",
+      "Title": "霹雳肘击",
+      "Comment": "消耗品/材料数据中的 [霹雳肘击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "unable use rarity",
+      "Title": "unable use rarity（原始标签）",
+      "Comment": "消耗品/材料数据中的 [unable use rarity] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "creature",
+      "Title": "宠物",
+      "Comment": "消耗品/材料数据中的 [creature] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示宠物 ID，必须通过 creature registry 解析；静态配置不证明可获得。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "secret add item",
+      "Title": "secret add item（原始标签）",
+      "Comment": "消耗品/材料数据中的 [secret add item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "dye type",
+      "Title": "dye type（原始标签）",
+      "Comment": "消耗品/材料数据中的 [dye type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "dye info",
+      "Title": "dye info（原始标签）",
+      "Comment": "消耗品/材料数据中的 [dye info] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "creature minimum level",
+      "Title": "宠物最低等级",
+      "Comment": "消耗品/材料数据中的 [creature minimum level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "enchant random",
+      "Title": "enchant random（原始标签）",
+      "Comment": "消耗品/材料数据中的 [enchant random] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "er_grade",
+      "Title": "er_grade（原始标签）",
+      "Comment": "消耗品/材料数据中的 [er_grade] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "er_slot",
+      "Title": "er_slot（原始标签）",
+      "Comment": "消耗品/材料数据中的 [er_slot] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "er_seal",
+      "Title": "er_seal（原始标签）",
+      "Comment": "消耗品/材料数据中的 [er_seal] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "er_enchant",
+      "Title": "er_enchant（原始标签）",
+      "Comment": "消耗品/材料数据中的 [er_enchant] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "trade limit max",
+      "Title": "trade limit max（原始标签）",
+      "Comment": "消耗品/材料数据中的 [trade limit max] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "emblem",
+      "Title": "emblem（原始标签）",
+      "Comment": "消耗品/材料数据中的 [emblem] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "avatar select ability except",
+      "Title": "avatar select ability except（原始标签）",
+      "Comment": "消耗品/材料数据中的 [avatar select ability except] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "guild power war point",
+      "Title": "guild power war point（原始标签）",
+      "Comment": "消耗品/材料数据中的 [guild power war point] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "total usable count",
+      "Title": "total usable count（原始标签）",
+      "Comment": "消耗品/材料数据中的 [total usable count] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "target item id",
+      "Title": "目标物品ID",
+      "Comment": "消耗品/材料数据中的 [target item id] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "default select",
+      "Title": "默认选择",
+      "Comment": "消耗品/材料数据中的 [default select] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "recommend",
+      "Title": "recommend（原始标签）",
+      "Comment": "消耗品/材料数据中的 [recommend] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

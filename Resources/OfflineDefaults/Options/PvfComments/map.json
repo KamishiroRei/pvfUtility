@@ -611,6 +611,376 @@
       "OfficialDescription": "#### 官方示例: mapsample.map\n\n```pvf\n//加载此地图时显示的图像\n//img为800*640大小，\n//0号为正文，1号为背景构成。按1号>0号顺序绘制，\n//此时若没有1号则只绘制正文。\n[map loading image path] `sprite/map/loadingimage/samui_otoko.img`\n```",
       "Closing": false,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "ani info",
+      "Title": "动画信息",
+      "Comment": "地图数据中的 [ani info] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "order",
+      "Title": "order（原始标签）",
+      "Comment": "地图数据中的 [order] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "fix champion",
+      "Title": "fix champion（原始标签）",
+      "Comment": "地图数据中的 [fix champion] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "visible minimap",
+      "Title": "visible minimap（原始标签）",
+      "Comment": "地图数据中的 [visible minimap] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "visible town minimap",
+      "Title": "visible town minimap（原始标签）",
+      "Comment": "地图数据中的 [visible town minimap] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "monster collision group",
+      "Title": "怪物碰撞分组",
+      "Comment": "地图数据中的 [monster collision group] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "item",
+      "Title": "物品",
+      "Comment": "地图数据中的 [item] 闭合块。已见为空内容闭合块，主要以结构存在性参与解析。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "pvp channel limit npc",
+      "Title": "pvp channel limit npc（原始标签）",
+      "Comment": "地图数据中的 [pvp channel limit npc] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "customized screen edge",
+      "Title": "customized screen edge（原始标签）",
+      "Comment": "地图数据中的 [customized screen edge] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "left",
+      "Title": "left（原始标签）",
+      "Comment": "地图数据中的 [left] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "right",
+      "Title": "right（原始标签）",
+      "Comment": "地图数据中的 [right] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "top",
+      "Title": "top（原始标签）",
+      "Comment": "地图数据中的 [top] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "bottom",
+      "Title": "bottom（原始标签）",
+      "Comment": "地图数据中的 [bottom] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "apc random point",
+      "Title": "apc random point（原始标签）",
+      "Comment": "地图数据中的 [apc random point] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "quest condition",
+      "Title": "任务条件",
+      "Comment": "地图数据中的 [quest condition] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "pathgate info",
+      "Title": "pathgate info（原始标签）",
+      "Comment": "地图数据中的 [pathgate info] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "disable",
+      "Title": "禁用",
+      "Comment": "地图数据中的 [disable] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "chaos phase time",
+      "Title": "chaos phase time（原始标签）",
+      "Comment": "地图数据中的 [chaos phase time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "chaos phase max",
+      "Title": "chaos phase max（原始标签）",
+      "Comment": "地图数据中的 [chaos phase max] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "chaos gate index",
+      "Title": "chaos gate index（原始标签）",
+      "Comment": "地图数据中的 [chaos gate index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "chaos final gate index",
+      "Title": "chaos final gate index（原始标签）",
+      "Comment": "地图数据中的 [chaos final gate index] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "chaos zone",
+      "Title": "chaos zone（原始标签）",
+      "Comment": "地图数据中的 [chaos zone] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "chaos phase fp",
+      "Title": "chaos phase fp（原始标签）",
+      "Comment": "地图数据中的 [chaos phase fp] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "auto revive interval",
+      "Title": "auto revive interval（原始标签）",
+      "Comment": "地图数据中的 [auto revive interval] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "chaos gate bonus fp",
+      "Title": "chaos gate bonus fp（原始标签）",
+      "Comment": "地图数据中的 [chaos gate bonus fp] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "player 2",
+      "Title": "玩家2",
+      "Comment": "地图数据中的 [player 2] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "player 3",
+      "Title": "玩家3",
+      "Comment": "地图数据中的 [player 3] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "player 4",
+      "Title": "玩家4",
+      "Comment": "地图数据中的 [player 4] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "block use active skill",
+      "Title": "block use active skill（原始标签）",
+      "Comment": "地图数据中的 [block use active skill] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "absolute start path",
+      "Title": "absolute start path（原始标签）",
+      "Comment": "地图数据中的 [absolute start path] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "background effect",
+      "Title": "背景效果",
+      "Comment": "地图数据中的 [background effect] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "block effect",
+      "Title": "block effect（原始标签）",
+      "Comment": "地图数据中的 [block effect] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "block path",
+      "Title": "block path（原始标签）",
+      "Comment": "地图数据中的 [block path] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "tile option",
+      "Title": "tile option（原始标签）",
+      "Comment": "地图数据中的 [tile option] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "map move keep state axis pos",
+      "Title": "map move keep state axis pos（原始标签）",
+      "Comment": "地图数据中的 [map move keep state axis pos] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "limit player move area",
+      "Title": "限制玩家移动区域",
+      "Comment": "地图数据中的 [limit player move area] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "map",
+      "Section": "pathgate recognize range",
+      "Title": "pathgate recognize range（原始标签）",
+      "Comment": "地图数据中的 [pathgate recognize range] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

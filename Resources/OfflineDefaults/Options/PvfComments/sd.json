@@ -61,6 +61,26 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "sd",
+      "Section": "float",
+      "Title": "浮点键值数据块",
+      "Comment": ".sd 的浮点键值闭合块，每条通常为“字符串键、浮点值”；块可为空。键的运行含义由使用该 .sd 的系统决定，必须读取 [/float]。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "sd",
+      "Section": "string",
+      "Title": "字符串键值数据块",
+      "Comment": ".sd 的字符串数据闭合块，可为空，也可按字符串键/值形态存放参数。字段用途依赖具体数据系统，必须读取 [/string]。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
     }
   ]
 }

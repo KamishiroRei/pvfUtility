@@ -6,11 +6,191 @@
       "PvfCommentType": "Section",
       "FileType": "blu",
       "Section": "dungeon difficulty list",
-      "Title": "额外副本难度列表",
-      "Comment": "额外副本难度列表。定义地下城额外难度等级的列表，该难度比王者级低一级，用于blu文件中的地下城难度配置信息。",
+      "Title": "副本难度映射列表",
+      "Comment": "按“dungeon ID、难度控制值”重复的闭合列表。dungeon ID 必须通过 dungeon/dungeon.lst 解析；难度数值到具体名称的映射和玩法是否覆盖默认 [dungeon difficulty] 需实机确认。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "By:小小白：770141757"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "player max",
+      "Title": "最大玩家人数",
+      "Comment": "蓝色大富翁玩法允许的最大玩家人数参数。静态数值不证明组队、匹配、掉线处理或服务端最终限制。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "enter level",
+      "Title": "最低进入等级",
+      "Comment": "玩法入口的最低角色等级参数。它只提供静态门槛线索，实际可见性和服务端放行需验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "enter max level",
+      "Title": "最高进入等级",
+      "Comment": "玩法入口的最高角色等级参数。与 [enter level] 成组读取，静态配置不证明服务端最终采用。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "enter count",
+      "Title": "可进入次数",
+      "Comment": "玩法进入次数参数。计数周期、账号/角色归属、重置时间和失败是否扣次需服务端与实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "die count",
+      "Title": "允许死亡次数",
+      "Comment": "玩法中的死亡次数限制参数。是否包含复活、队友死亡或单局累计需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "dice value",
+      "Title": "骰子点数范围",
+      "Comment": "骰子最小值与最大值的双整数参数。随机分布、加成、重掷和服务端判定不由静态范围单独证明。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "dungeon difficulty",
+      "Title": "默认副本难度参数",
+      "Comment": "玩法进入副本时使用的默认难度控制值。数值到具体难度名称的映射需按同版本副本系统确认，不能跨版本硬套。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "super armor time",
+      "Title": "霸体持续时间参数",
+      "Comment": "玩法中的霸体时间参数线索。时间单位、触发条件、作用对象和 PVP/副本行为需实机确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "buff max value",
+      "Title": "Buff数值上限",
+      "Comment": "玩法 Buff 的最大数值/层级参数。具体对应属性、累计方式和客户端显示需结合玩法逻辑验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "equipment upgrade max",
+      "Title": "装备强化上限",
+      "Comment": "玩法内装备强化等级上限参数。它不等同普通装备系统的全局强化上限，实际强化、失败和结算需实机确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "gold base",
+      "Title": "金币基础倍率",
+      "Comment": "玩法金币结算的基础小数参数线索。精确公式、单位和与 [gold multi] 的组合方式需实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "gold multi",
+      "Title": "金币递增倍率",
+      "Comment": "玩法金币结算的递增/倍乘小数参数线索。不能仅凭字段名推导最终金币公式，需与 [gold base] 和运行结果验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "reward item",
+      "Title": "名次奖励道具表",
+      "Comment": "玩法奖励道具闭合表，数据按“stackable ID、数量”重复；ID 必须通过 stackable/stackable.lst 解析。源文件结束标签拼写为 [/reawrd item]，必须保留原文；静态表不证明奖励发放成功。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "dungeon list",
+      "Title": "普通副本等级映射表",
+      "Comment": "普通副本闭合列表，记录按“最低等级、最高等级、dungeon ID”重复。dungeon ID 必须通过 dungeon/dungeon.lst 解析；静态映射不证明随机选择或进图成功。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "boss dungeon list",
+      "Title": "Boss副本等级映射表",
+      "Comment": "Boss 副本闭合列表，记录按“最低等级、最高等级、dungeon ID”重复。源文件结束标签拼写为 [/boos dungeon list]，必须保留原文；副本 ID 需通过 dungeon registry 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "unique dungeon list",
+      "Title": "特殊副本等级映射表",
+      "Comment": "特殊/唯一副本闭合列表，记录按“最低等级、最高等级、dungeon ID”重复。静态登记不证明选择概率、入口或清算。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "item list",
+      "Title": "随机道具权重表",
+      "Comment": "玩法道具闭合列表，按“stackable ID、权重值”重复。ID 必须通过 stackable/stackable.lst 解析；权重刻度和实际概率需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "blu",
+      "Section": "tile pos",
+      "Title": "棋盘格坐标表",
+      "Comment": "棋盘格位置的闭合坐标列表，按 X、Y 两列重复。坐标系、缩放、格子顺序和客户端布局需验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
     }
   ]
 }

@@ -751,6 +751,166 @@
       "OfficialDescription": "#### 官方示例: questsample.qst\n\n```pvf\n[think] [set team] -1 // 变更为怪物队伍。\n```",
       "Closing": false,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "quest point",
+      "Title": "任务点数/分类值",
+      "Comment": "任务根级的单数值分类或点数参数，真实任务中可见 0、4、8、10、14、30 等值。该字段不是任务 ID；数值与任务排序、类别、引导或系统权重的精确映射尚未由静态文件闭合。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "exception quest",
+      "Title": "例外任务列表",
+      "Comment": "任务数据中的 [exception quest] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。其中数字若表示任务 ID，必须通过任务 registry 解析；静态登记不证明任务可接取或完成。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "check count",
+      "Title": "检查数量",
+      "Comment": "任务数据中的 [check count] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "limit showing msg",
+      "Title": "limit showing msg（原始标签）",
+      "Comment": "任务数据中的 [limit showing msg] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "send postal",
+      "Title": "发送邮件",
+      "Comment": "任务数据中的 [send postal] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "string data",
+      "Title": "字符串数据",
+      "Comment": "任务数据中的 [string data] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "quest piece",
+      "Title": "quest piece（原始标签）",
+      "Comment": "任务数据中的 [quest piece] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "show npc on clear",
+      "Title": "show npc on clear（原始标签）",
+      "Comment": "任务数据中的 [show npc on clear] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "show click on complete npc",
+      "Title": "show click on complete npc（原始标签）",
+      "Comment": "任务数据中的 [show click on complete npc] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "go guide",
+      "Title": "go guide（原始标签）",
+      "Comment": "任务数据中的 [go guide] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "hide npc on clear",
+      "Title": "hide npc on clear（原始标签）",
+      "Comment": "任务数据中的 [hide npc on clear] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "creature kind",
+      "Title": "宠物种类条件",
+      "Comment": "宠物相关任务条件中的种类枚举值，通常与相邻 [creature level] 一起使用。它不是 creature registry 的宠物 ID；枚举到宠物类型的映射需按任务系统版本验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "creature level",
+      "Title": "宠物等级条件",
+      "Comment": "宠物相关任务条件要求的等级数值，通常与 [creature kind] 配对。该静态条件不证明任务进度检查或宠物进化流程在服务端可用。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "expertjob level",
+      "Title": "expertjob level（原始标签）",
+      "Comment": "任务数据中的 [expertjob level] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "isNotClear LevelUp System",
+      "Title": "isNotClear LevelUp System（原始标签）",
+      "Comment": "任务数据中的 [isNotClear LevelUp System] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "qst",
+      "Section": "searching information",
+      "Title": "searching information（原始标签）",
+      "Comment": "任务数据中的 [searching information] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

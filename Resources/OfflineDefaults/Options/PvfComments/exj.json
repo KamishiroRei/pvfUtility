@@ -111,6 +111,206 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "酸辣白菜"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "clear quests",
+      "Title": "副职业解锁任务列表",
+      "Comment": "副职业解锁/清理条件的任务 ID 闭合列表。每个数字必须通过任务 registry 解析；静态登记不证明任务已完成、副职业已开放或服务端放行。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "giveup cost",
+      "Title": "放弃副职业费用表",
+      "Comment": "放弃/重置副职业使用的金币费用闭合序列。各列与副职业等级或次数的对应关系需结合同类文件和实机确认，不能把所有数值统一当单次费用。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "compound rate",
+      "Title": "副职业制作成功率表",
+      "Comment": "炼金、控偶、附魔等副职业的制作/合成率闭合参数表。数据由多组等级/区间/比率控制值组成，精确列义和概率刻度需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "skill",
+      "Title": "副职业技能引用",
+      "Comment": "副职业关联技能的闭合数字记录，已见形态为“技能引用值、等级/控制值”。数字必须按副职业技能上下文选择正确 registry，不能直接当普通物品 ID。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "potion info",
+      "Title": "炼金药剂参数表",
+      "Comment": "炼金副职业的药剂相关闭合参数表，包含多个物品 ID 与数值控制项。物品 ID 必须通过正确 item registry 解析；价格、持续、冷却或权重等列义需目标玩法验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "unseal scroll level limit info",
+      "Title": "解封卷轴等级限制表",
+      "Comment": "解封卷轴的等级段限制闭合表，数据按“类别/档位、等级上限”样式重复。档位枚举和边界是否含端点需实机确认。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "alchemist extraction info",
+      "Title": "炼金提取等级区间表",
+      "Comment": "炼金术师提取功能的闭合等级区间参数表，按“档位、等级上限”重复。档位含义和目标装备/物品范围需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "alchemist extraction result item",
+      "Title": "炼金提取结果物品表",
+      "Comment": "炼金提取的闭合结果表，包含 stackable 结果 ID、类别 token 和数值参数。物品 ID 必须通过 stackable/stackable.lst 解析；类别、权重和数量列不能脱离完整记录推断。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "doll_controller extraction info",
+      "Title": "控偶提取等级区间表",
+      "Comment": "控偶师提取功能的闭合等级区间参数表，按“档位、等级上限”重复。档位与目标物品范围需实机确认。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "doll_controller extraction result item",
+      "Title": "控偶提取结果物品表",
+      "Comment": "控偶提取的闭合结果表，已见记录按“stackable ID、最低等级、最高等级、数值参数”重复。ID 必须通过 stackable registry 解析，末列的精确刻度需验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "enchanter extraction info",
+      "Title": "附魔提取等级区间表",
+      "Comment": "附魔师提取功能的闭合等级区间参数表，按“档位、等级上限”重复。档位与目标装备/卡片范围需实机确认。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "enchanter extraction result item",
+      "Title": "附魔提取结果物品表",
+      "Comment": "附魔提取的闭合结果表，包含 stackable 结果 ID 与数值参数。ID 必须通过 stackable/stackable.lst 解析；数值是数量、权重或其他刻度需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "endurance repair cost",
+      "Title": "分解机耐久维修费用表",
+      "Comment": "分解机耐久维修的闭合费用序列，数据按数值对重复。两列与耐久区间、维修量或金币费用的精确对应尚未闭合，必须整组保留。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "upgrade cost",
+      "Title": "分解机升级费用表",
+      "Comment": "分解机等级与升级金币费用的闭合映射表，已见“等级、费用”重复记录。实际升级流程、扣费和等级上限需服务端/实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "base const",
+      "Title": "分解基础常量",
+      "Comment": "分解系统使用的基础单数值常量。字段名不足以证明具体公式、单位或乘区，必须结合 [additional const] 和分解结果表验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "additional const",
+      "Title": "分解附加常量",
+      "Comment": "分解系统使用的附加单数值常量。它与 [base const]、[additional result] 等表相邻，但精确公式和单位未由静态文件闭合。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "portable disjoint info",
+      "Title": "便携分解等级区间表",
+      "Comment": "便携分解功能的闭合等级区间参数表，按“档位、等级上限”重复。档位、适用装备和实机产出需验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "monstercard bind info",
+      "Title": "怪物卡片绑定费用/规则表",
+      "Comment": "怪物卡片绑定的闭合规则参数表，数据按三数值组重复。各列与卡片品级、费用或控制值的对应需实机确认，不能从位置直接命名。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "monstercard bind only",
+      "Title": "仅允许怪物卡片绑定标记",
+      "Comment": "无内容的闭合存在标记，用于将附魔功能限制到怪物卡片绑定语境。具体限制范围、UI 和服务端校验需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "exj",
+      "Section": "monstercard bind list",
+      "Title": "可绑定怪物卡片列表",
+      "Comment": "怪物卡片绑定的闭合候选表，记录按“stackable 卡片 ID、类别/品级控制值、费用/权重值”样式重复。卡片 ID 必须通过 stackable/stackable.lst 解析；后两列精确语义需验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
     }
   ]
 }

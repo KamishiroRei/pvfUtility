@@ -6,11 +6,71 @@
       "PvfCommentType": "Section",
       "FileType": "pos",
       "Section": "index",
-      "Title": "对应城镇.twn的区域",
-      "Comment": "对应城镇.twn的区域。城镇索引，对应Town.lst中的城镇编号。\n\n[area]\n    0-------------对应这个区域\n    `xxxxxxxx.map`\n    `[gate]`\n[/area]",
+      "Title": "UI数据项索引",
+      "Comment": "[UIDATA] 内的数据项编号，用于区分同类 UI 位置记录。它不是 town/area 索引，也不应通过 town.lst 解析；编号与具体控件的映射需结合使用该 .pos 的客户端界面验证。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Cai - 497970666"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "pos",
+      "Section": "GAP",
+      "Title": "UI数据间距",
+      "Comment": "[UIDATA] 内的双整数间距/步进参数，常与 [POS] 配套。两列对应的坐标轴和单位需结合具体 UI 客户端布局验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "pos",
+      "Section": "MAIN",
+      "Title": "位置表主配置块",
+      "Comment": ".pos 文件的主配置闭合块，包含 [TILETYPE]、[POS]、[UNITNUMBER] 等整体布局参数。必须读取 [/MAIN]，静态数字不证明最终像素位置或分辨率适配。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "pos",
+      "Section": "POS",
+      "Title": "UI位置坐标",
+      "Comment": "双整数位置坐标字段，可出现在 [MAIN] 或 [UIDATA] 中。必须按父块区分整体原点与数据项坐标，不能跨块建立单一像素语义。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "pos",
+      "Section": "TILETYPE",
+      "Title": "位置表类型",
+      "Comment": "[MAIN] 内的位置表类型 token，已见值包括 `COMMON`。token 只按本块解释，不能从名称推断所有布局算法。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "pos",
+      "Section": "UIDATA",
+      "Title": "UI数据项块",
+      "Comment": ".pos 中重复出现的 UI 数据闭合块，通常包含数据类型字符串、[INDEX]、[POS] 和可选 [GAP]。必须读取 [/UIDATA]，数据项是否被客户端使用需实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "pos",
+      "Section": "UNITNUMBER",
+      "Title": "布局单元数量",
+      "Comment": "[MAIN] 内的双整数布局单元数量线索。两列可作为横纵网格数量候选，但具体坐标换算和客户端采用需验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

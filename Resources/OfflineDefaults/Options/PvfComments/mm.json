@@ -141,6 +141,106 @@
       "OfficialDescription": "#### 官方示例: minimap.mm\n\n```pvf\n[role]\n\t\t`[item shop]`\n\t\t`[recover stamina]`\n\t\t`[sera shop]`\n\t\t`[guild]`\n\t\t`[upgrade item]`\n\t\t`[disjoint item]`\n\t\t`[product item]`\n\t\t`[mouse register]`\t\t// 吉莎添加了此项\n\t[/role]\n```",
       "Closing": true,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "area",
+      "Title": "城镇区域映射块",
+      "Comment": "小地图 [town] 内的区域闭合块，常包含 [index]、[type]、[real rect]、[project rect]、[npc] 和 [grid map]。必须读取 [/area]，区域编号和坐标都按父 town 解释。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "background",
+      "Title": "小地图背景图像",
+      "Comment": "[image] 内的小地图背景 IMG 路径与帧索引。PVF 引用不证明客户端 NPK/IMG 存在、帧号有效或渲染层级正确。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "enter",
+      "Title": "商店进入/可用标记",
+      "Comment": "[shop] 内的无值存在标记，用于商店入口或可用状态线索。它没有独立参数，具体显示、进入和服务端放行需结合父 [shop] 与客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "grid map",
+      "Title": "小地图网格显示条件块",
+      "Comment": "小地图节点的网格显示闭合块，可包含 [level]、[quest] 和 [image number]。必须读取 [/grid map]；等级、任务和图像条件只说明静态展示入口，不证明 UI 实际切换。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "level img point",
+      "Title": "等级图像点参数",
+      "Comment": "小地图节点的双整数图像点参数，常与 [point]、[grid map] 相邻。两列的精确索引/偏移语义尚未闭合，必须保留原顺序并由客户端布局验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "map",
+      "Title": "小地图主图像",
+      "Comment": "[image] 内的主地图 IMG 路径与帧索引。它与 [background] 分层存在，PVF 引用不证明资源完整或最终绘制顺序。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "quest",
+      "Title": "小地图任务条件",
+      "Comment": "[grid map] 内的任务 ID 条件线索。数字必须通过任务 registry 解析；静态条件不证明任务已接、已完成或节点实际显示。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "shop name",
+      "Title": "小地图商店名称",
+      "Comment": "[shop] 内的商店显示名称文本。名称只负责静态展示线索，不证明商店入口、商品列表、购买或本地化正常。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "town",
+      "Title": "小地图城镇容器",
+      "Comment": "区域小地图中的城镇闭合块，通常以 [index] 指向 town，并包含一个或多个 [area]。必须读取 [/town]；town 数字按 town/town.lst 解析。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mm",
+      "Section": "world",
+      "Title": "小地图世界入口容器",
+      "Comment": "区域小地图中的 worldmap 闭合块，常包含 [index]、[level]、[point] 和 [grid map]。必须读取 [/world]；[index] 按 worldmap/worldmap.lst 解释，不与 town/dungeon ID 混用。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
     }
   ]
 }

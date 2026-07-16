@@ -8,7 +8,7 @@
       "Section": "key stream",
       "Title": "按键流定义",
       "Comment": "列出可引用的 .key 按键脚本文件，每行格式：`按键名称?` `按键路径`。\n按键名称可省略（或输入空白），省略时自动从文件名去掉路径和扩展名生成。按键名称按顺序分配从0起的索引，该索引在 .ai 文件 [return] 时使用。\n如果只输入文件名而不输入路径，系统会在 aic 文件所在目录的 key 子目录下查找。",
-      "OfficialDescription": "#### 官方示例: how to edit aic\n\n```pvf\n[key stream]\ncombo combo attack.key    // 按键名称: combo, 索引: 0\nAICharacter/cuwaki/key/a.key    // 按键名称: a, 索引: 1\n`` AICharacter/cuwaki/key/s.key    // 按键名称: s, 索引: 2\n[/key stream]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit aic.rtf\n\n```pvf\n[key stream]\ncombo combo attack.key    // 按键名称: combo, 索引: 0\nAICharacter/cuwaki/key/a.key    // 按键名称: a, 索引: 1\n`` AICharacter/cuwaki/key/s.key    // 按键名称: s, 索引: 2\n[/key stream]\n```",
       "Closing": true,
       "Authors": "lostluna1"
     },
@@ -178,7 +178,7 @@
       "Section": "keep range distance with target",
       "Title": "扩展距离保持 (多档位)",
       "Comment": "扩展距离保持参数：与目的地决策方式14~18配合使用。可定义多组不同的距离保持参数（0、1、2、3、4号档位），对应 DestinationSelect.ai 返回14~18时的行为。支持在接近和远离之间动态调整与目标的距离。",
-      "OfficialDescription": "#### 官方示例: destination select\n\n```pvf\n// 目的地决策14~18为扩展版本，需要配合此参数\n// [keep range distance with target]      ← 对应14号模式\n// [keep range distance with target 1]    ← 对应15号模式\n// [keep range distance with target 2]    ← 对应16号模式\n// [keep range distance with target 3]    ← 对应17号模式\n// [keep range distance with target 4]    ← 对应18号模式\n```",
+      "OfficialDescription": "#### 官方示例: destination select.rtf\n\n```pvf\n// 目的地决策14~18为扩展版本，需要配合此参数\n// [keep range distance with target]      ← 对应14号模式\n// [keep range distance with target 1]    ← 对应15号模式\n// [keep range distance with target 2]    ← 对应16号模式\n// [keep range distance with target 3]    ← 对应17号模式\n// [keep range distance with target 4]    ← 对应18号模式\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -528,7 +528,7 @@
       "Section": "quick item",
       "Title": "快捷栏道具",
       "Comment": "快捷栏道具配置——格式：道具代码 道具数量（按槽位顺序：1号~6号）。\n左侧数字为道具的ID编号，右侧为可使用次数。\n在 .ai 文件中通过 [key stream] 中 1.key~6.key 对应的索引来触发使用。",
-      "OfficialDescription": "#### 官方示例: how to edit key\n\n```pvf\n[quick item]\n// 物品编号, 数量\n6004 100    // 1号快捷槽位\n1106 100    // 2号快捷槽位\n6001 100    // 3号快捷槽位\n1001 100    // 4号快捷槽位\n1004 100    // 5号快捷槽位\n1011 100    // 6号快捷槽位\n[/quick item]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit key.rtf\n\n```pvf\n[quick item]\n// 物品编号, 数量\n6004 100    // 1号快捷槽位\n1106 100    // 2号快捷槽位\n6001 100    // 3号快捷槽位\n1001 100    // 4号快捷槽位\n1004 100    // 5号快捷槽位\n1011 100    // 6号快捷槽位\n[/quick item]\n```",
       "Closing": true,
       "Authors": "Xiti Fox"
     },
@@ -538,7 +538,7 @@
       "Section": "party member",
       "Title": "固定队伍成员绑定",
       "Comment": "固定队伍成员绑定：格式 `成员索引(从1起) APC编号`。\n固定队伍成员不会被系统自动更改，数量无实际限制。0号默认指向自己，-1/-2/-3号按顺序自动注册。当成员死亡时索引会重新分配以填补空位。",
-      "OfficialDescription": "#### 官方示例: how to edit aic\n\n```pvf\n[party member]    // 成员索引, APC 索引\n1 20402    // 1号是白虎\n2 5004     // 2号是阿拉德的格斗家\n3 605      // 3号是骨剑士杰诺\n[/party member]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit aic.rtf\n\n```pvf\n[party member]    // 成员索引, APC 索引\n1 20402    // 1号是白虎\n2 5004     // 2号是阿拉德的格斗家\n3 605      // 3号是骨剑士杰诺\n[/party member]\n```",
       "Closing": true,
       "Authors": "lostluna1"
     },
@@ -548,7 +548,7 @@
       "Section": "set party member",
       "Title": "指定增益目标队员",
       "Comment": "在 AI 逻辑中指定增益技能目标的队伍成员索引 [set party member]。在祭司类APC中，使用增益技能前需先指定目标。\n用法：`[think] [set party member] 成员索引`。",
-      "OfficialDescription": "#### 官方示例: how to edit aic\n\n```pvf\n[think] [set party member] 2    // 指定注册在2号的队伍成员\n    [think] [party member alive]\n        [true]\n            [think] [party member hp] %> 50\n                [true] [return] a    // 对2号成员使用a槽快速治愈\n                [false] [return] -1\n            [/think]\n        [false] [return] -1\n    [/think]\n[/think]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit aic.rtf\n\n```pvf\n[think] [set party member] 2    // 指定注册在2号的队伍成员\n    [think] [party member alive]\n        [true]\n            [think] [party member hp] %> 50\n                [true] [return] a    // 对2号成员使用a槽快速治愈\n                [false] [return] -1\n            [/think]\n        [false] [return] -1\n    [/think]\n[/think]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -578,7 +578,7 @@
       "Section": "limit passiveobject",
       "Title": "被动对象生成限制列表",
       "Comment": "限制可生成的被动对象索引列表：当APC执行特定行为时，阻止生成此列表中指定的被动对象，转而生成备选对象。每行一个索引编号。",
-      "OfficialDescription": "#### 官方示例: how to edit aic\n\n```pvf\n[limit passiveobject]\n1    // 索引1——阻止生成索引为1的被动对象\n5    // 索引5\n[/limit passiveobject]\n```",
+      "OfficialDescription": "#### 官方示例: how to edit aic.rtf\n\n```pvf\n[limit passiveobject]\n1    // 索引1——阻止生成索引为1的被动对象\n5    // 索引5\n[/limit passiveobject]\n```",
       "Closing": true,
       "Authors": "lostluna1"
     },
@@ -588,9 +588,89 @@
       "Section": "check accountitem",
       "Title": "账户绑定道具检查开关",
       "Comment": "是否检查账户绑定道具：1=检查（默认），0=不检查。如果开启检查，超过70级的APC将无法使用消耗品（因为消耗品被视为账户绑定道具）。",
-      "OfficialDescription": "#### 官方示例: how to edit aic\n\n```pvf\n[check accountitem] 0    // 不检查账户绑定，允许高级APC使用消耗品\n```",
+      "OfficialDescription": "#### 官方示例: how to edit aic.rtf\n\n```pvf\n[check accountitem] 0    // 不检查账户绑定，允许高级APC使用消耗品\n```",
       "Closing": false,
       "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "aic",
+      "Section": "dash action",
+      "Title": "冲刺动作文件",
+      "Comment": "APC 冲刺状态使用的 .act 相对路径。它是动作脚本入口，不是冲刺速度数值。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "aic",
+      "Section": "waiting action",
+      "Title": "待机动作文件",
+      "Comment": "APC 等待/站立状态使用的 .act 相对路径。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "aic",
+      "Section": "sit action",
+      "Title": "坐下动作文件",
+      "Comment": "APC 坐下状态使用的 .act 相对路径。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "aic",
+      "Section": "leave body",
+      "Title": "死亡后保留尸体标记",
+      "Comment": "APC 死亡后是否保留尸体表现的单数值开关候选。已见值为 0；0/1 的精确方向和尸体消失时机需客户端实机确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "aic",
+      "Section": "intelligence",
+      "Title": "AI 智能度参数组",
+      "Comment": "APC AI 使用的三数值调节组。不同样本可见三列均发生变化，但字段名与静态文件不足以闭合各列分别对应的判断频率、反应范围或延迟；修改时必须整组三列保留并实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "aic",
+      "Section": "down action",
+      "Title": "倒地动作文件",
+      "Comment": "APC 倒地状态使用的 .act 相对路径。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "aic",
+      "Section": "damage action 1",
+      "Title": "受击动作 1 文件",
+      "Comment": "APC 第一套受击动作使用的 .act 相对路径。路径只登记动作脚本入口；动作、动画和攻击信息是否完整仍需沿目标文件读回。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "aic",
+      "Section": "damage action 2",
+      "Title": "受击动作 2 文件",
+      "Comment": "APC 第二套受击动作使用的 .act 相对路径，与 [damage action 1] 并列。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

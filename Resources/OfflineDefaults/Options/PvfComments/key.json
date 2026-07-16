@@ -131,6 +131,286 @@
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "INDEX",
+      "Title": "索引",
+      "Comment": "输入键位数据中的 [INDEX] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "PARTICLE FILENAME",
+      "Title": "粒子文件名",
+      "Comment": "输入键位数据中的 [PARTICLE FILENAME] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "LEVEL",
+      "Title": "等级",
+      "Comment": "输入键位数据中的 [LEVEL] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "POS",
+      "Title": "坐标",
+      "Comment": "输入键位数据中的 [POS] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "USE MY BASEPOS",
+      "Title": "USE MY BASEPOS（原始标签）",
+      "Comment": "输入键位数据中的 [USE MY BASEPOS] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "USE MY DIRECTION",
+      "Title": "USE MY DIRECTION（原始标签）",
+      "Comment": "输入键位数据中的 [USE MY DIRECTION] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "SUMMON MONSTER",
+      "Title": "SUMMON MONSTER（原始标签）",
+      "Comment": "输入键位数据中的 [SUMMON MONSTER] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "MAGIC CIRCLE",
+      "Title": "MAGIC CIRCLE（原始标签）",
+      "Comment": "输入键位数据中的 [MAGIC CIRCLE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "NO EFFECT",
+      "Title": "NO EFFECT（原始标签）",
+      "Comment": "输入键位数据中的 [NO EFFECT] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "delete input",
+      "Title": "delete input（原始标签）",
+      "Comment": "输入键位数据中的 [delete input] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "switch",
+      "Title": "switch（原始标签）",
+      "Comment": "输入键位数据中的 [switch] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "percent",
+      "Title": "百分比",
+      "Comment": "输入键位数据中的 [percent] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "import key",
+      "Title": "import key（原始标签）",
+      "Comment": "输入键位数据中的 [import key] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "excute action",
+      "Title": "excute action（原始标签）",
+      "Comment": "输入键位数据中的 [excute action] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "FIX DIRECTION",
+      "Title": "FIX DIRECTION（原始标签）",
+      "Comment": "输入键位数据中的 [FIX DIRECTION] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "NEUTRAL",
+      "Title": "NEUTRAL（原始标签）",
+      "Comment": "输入键位数据中的 [NEUTRAL] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "use when free",
+      "Title": "use when free（原始标签）",
+      "Comment": "输入键位数据中的 [use when free] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "or import key",
+      "Title": "or import key（原始标签）",
+      "Comment": "输入键位数据中的 [or import key] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "SUMMON TIME",
+      "Title": "SUMMON TIME（原始标签）",
+      "Comment": "输入键位数据中的 [SUMMON TIME] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "USE OBJECT ZPOS",
+      "Title": "USE OBJECT ZPOS（原始标签）",
+      "Comment": "输入键位数据中的 [USE OBJECT ZPOS] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "WARNING MARK",
+      "Title": "WARNING MARK（原始标签）",
+      "Comment": "输入键位数据中的 [WARNING MARK] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "USE NEUTRAL TEAM",
+      "Title": "USE NEUTRAL TEAM（原始标签）",
+      "Comment": "输入键位数据中的 [USE NEUTRAL TEAM] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "exit",
+      "Title": "exit（原始标签）",
+      "Comment": "输入键位数据中的 [exit] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "FOLLOWING WHICH",
+      "Title": "FOLLOWING WHICH（原始标签）",
+      "Comment": "输入键位数据中的 [FOLLOWING WHICH] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "ME",
+      "Title": "ME（原始标签）",
+      "Comment": "输入键位数据中的 [ME] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "RANDOM SELECT",
+      "Title": "随机选择",
+      "Comment": "输入键位数据中的 [RANDOM SELECT] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "TEAM",
+      "Title": "TEAM（原始标签）",
+      "Comment": "输入键位数据中的 [TEAM] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "key",
+      "Section": "NOT USE OBJECT DIRECTION",
+      "Title": "不使用对象方向",
+      "Comment": "输入键位数据中的 [NOT USE OBJECT DIRECTION] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

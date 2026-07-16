@@ -671,6 +671,696 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "is linked blast",
+      "Title": "is linked blast（原始标签）",
+      "Comment": "技能数据中的 [is linked blast] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "linked blast add point",
+      "Title": "linked blast add point（原始标签）",
+      "Comment": "技能数据中的 [linked blast add point] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "purchase gsp",
+      "Title": "purchase gsp（原始标签）",
+      "Comment": "技能数据中的 [purchase gsp] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "purchase gold",
+      "Title": "购买金币",
+      "Comment": "技能数据中的 [purchase gold] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "command customizing",
+      "Title": "command customizing（原始标签）",
+      "Comment": "技能数据中的 [command customizing] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "终结追击",
+      "Title": "终结追击",
+      "Comment": "技能数据中的 [终结追击] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "剑刃风暴",
+      "Title": "剑刃风暴",
+      "Comment": "技能数据中的 [剑刃风暴] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "linked blast dec point",
+      "Title": "linked blast dec point（原始标签）",
+      "Comment": "技能数据中的 [linked blast dec point] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "assault",
+      "Title": "突击",
+      "Comment": "技能数据中的 [assault] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "steel learning skill",
+      "Title": "steel learning skill（原始标签）",
+      "Comment": "技能数据中的 [steel learning skill] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "cooltime level info",
+      "Title": "cooltime level info（原始标签）",
+      "Comment": "技能数据中的 [cooltime level info] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "combo set",
+      "Title": "combo set（原始标签）",
+      "Comment": "技能数据中的 [combo set] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "怒气爆发",
+      "Title": "怒气爆发",
+      "Comment": "技能数据中的 [怒气爆发] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "崩山裂地斩",
+      "Title": "崩山裂地斩",
+      "Comment": "技能数据中的 [崩山裂地斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "嗜魂封魔斩",
+      "Title": "嗜魂封魔斩",
+      "Comment": "技能数据中的 [嗜魂封魔斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "嗜血",
+      "Title": "嗜血",
+      "Comment": "技能数据中的 [嗜血] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "血之狂暴",
+      "Title": "血之狂暴",
+      "Comment": "技能数据中的 [血之狂暴] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "里‧鬼剑术",
+      "Title": "里‧鬼剑术",
+      "Comment": "技能数据中的 [里‧鬼剑术] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "连突刺",
+      "Title": "连突刺",
+      "Comment": "技能数据中的 [连突刺] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "三段斩",
+      "Title": "三段斩",
+      "Comment": "技能数据中的 [三段斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "猛龙断空斩",
+      "Title": "猛龙断空斩",
+      "Comment": "技能数据中的 [猛龙断空斩] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "拔刀斩",
+      "Title": "拔刀斩",
+      "Comment": "技能数据中的 [拔刀斩] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "鬼影闪",
+      "Title": "鬼影闪",
+      "Comment": "技能数据中的 [鬼影闪] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "鬼影步",
+      "Title": "鬼影步",
+      "Comment": "技能数据中的 [鬼影步] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "太刀精通",
+      "Title": "太刀精通",
+      "Comment": "技能数据中的 [太刀精通] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "格挡",
+      "Title": "格挡",
+      "Comment": "技能数据中的 [格挡] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "银光落刃",
+      "Title": "银光落刃",
+      "Comment": "技能数据中的 [银光落刃] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "破军升龙击",
+      "Title": "破军升龙击",
+      "Comment": "技能数据中的 [破军升龙击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "job",
+      "Title": "职业",
+      "Comment": "技能数据中的 [job] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "growtype",
+      "Title": "成长类型",
+      "Comment": "技能数据中的 [growtype] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。`atgunner`、`atmage`、`atfighter` 等按独立角色/职业分支处理，不能解释为觉醒、TP 或 Ex 阶段。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "AutoSkill",
+      "Title": "AutoSkill（原始标签）",
+      "Comment": "技能数据中的 [AutoSkill] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "0为关， 1为开",
+      "Title": "0为关， 1为开",
+      "Comment": "技能数据中的 [0为关， 1为开] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "复仇者",
+      "Title": "复仇者",
+      "Comment": "技能数据中的 [复仇者] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "脉轮：烈焰",
+      "Title": "脉轮：烈焰",
+      "Comment": "技能数据中的 [脉轮：烈焰] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "脉轮：曜日",
+      "Title": "脉轮：曜日",
+      "Comment": "技能数据中的 [脉轮：曜日] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "恶魔之爪",
+      "Title": "恶魔之爪",
+      "Comment": "技能数据中的 [恶魔之爪] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "审判",
+      "Title": "审判",
+      "Comment": "技能数据中的 [审判] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "active seal enable",
+      "Title": "active seal enable（原始标签）",
+      "Comment": "技能数据中的 [active seal enable] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "苍天击",
+      "Title": "苍天击",
+      "Comment": "技能数据中的 [苍天击] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "天地碎霸",
+      "Title": "天地碎霸",
+      "Comment": "技能数据中的 [天地碎霸] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "机械引爆",
+      "Title": "机械引爆",
+      "Comment": "技能数据中的 [机械引爆] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "散弹兵罗占娜",
+      "Title": "散弹兵罗占娜",
+      "Comment": "技能数据中的 [散弹兵罗占娜] 字段。已见数据形态为未加引号的 token 或复合记录，应按父文件语法原样解释。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "突击兵阿娜卡",
+      "Title": "突击兵阿娜卡",
+      "Comment": "技能数据中的 [突击兵阿娜卡] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "突击兵欧比娅",
+      "Title": "突击兵欧比娅",
+      "Comment": "技能数据中的 [突击兵欧比娅] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "榴弹兵艾米妲",
+      "Title": "榴弹兵艾米妲",
+      "Comment": "技能数据中的 [榴弹兵艾米妲] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "反坦克炮",
+      "Title": "反坦克炮",
+      "Comment": "技能数据中的 [反坦克炮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "激光炮",
+      "Title": "激光炮",
+      "Comment": "技能数据中的 [激光炮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "野蛮冲撞",
+      "Title": "野蛮冲撞",
+      "Comment": "技能数据中的 [野蛮冲撞] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "抓轰炮",
+      "Title": "抓轰炮",
+      "Comment": "技能数据中的 [抓轰炮] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "pre teleport",
+      "Title": "pre teleport（原始标签）",
+      "Comment": "技能数据中的 [pre teleport] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "post teleport",
+      "Title": "post teleport（原始标签）",
+      "Comment": "技能数据中的 [post teleport] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "active status recovery",
+      "Title": "active status recovery（原始标签）",
+      "Comment": "技能数据中的 [active status recovery] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "buff",
+      "Title": "buff（原始标签）",
+      "Comment": "技能数据中的 [buff] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "active status buff",
+      "Title": "active status buff（原始标签）",
+      "Comment": "技能数据中的 [active status buff] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "duration",
+      "Title": "持续时间",
+      "Comment": "技能数据中的 [duration] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "active status duration",
+      "Title": "active status duration（原始标签）",
+      "Comment": "技能数据中的 [active status duration] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "probability",
+      "Title": "概率",
+      "Comment": "技能数据中的 [probability] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "reduce probability to human armor at pvp module",
+      "Title": "reduce probability to human armor at pvp module（原始标签）",
+      "Comment": "技能数据中的 [reduce probability to human armor at pvp module] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "active status buff event type",
+      "Title": "active status buff event type（原始标签）",
+      "Comment": "技能数据中的 [active status buff event type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "active status",
+      "Title": "active status（原始标签）",
+      "Comment": "技能数据中的 [active status] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "move",
+      "Title": "移动",
+      "Comment": "技能数据中的 [move] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "index",
+      "Title": "索引",
+      "Comment": "技能数据中的 [index] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。数字索引必须先确定父块所用 registry；裸数字本身不是可确认的对象事实。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "reduce probability at pvp type module",
+      "Title": "reduce probability at pvp type module（原始标签）",
+      "Comment": "技能数据中的 [reduce probability at pvp type module] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "additional animation",
+      "Title": "附加动画",
+      "Comment": "技能数据中的 [additional animation] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "duration time",
+      "Title": "持续时间时间",
+      "Comment": "技能数据中的 [duration time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "start addtional animation",
+      "Title": "start addtional animation（原始标签）",
+      "Comment": "技能数据中的 [start addtional animation] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "loop addtional animation",
+      "Title": "loop addtional animation（原始标签）",
+      "Comment": "技能数据中的 [loop addtional animation] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "end addtional animation",
+      "Title": "end addtional animation（原始标签）",
+      "Comment": "技能数据中的 [end addtional animation] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "reduce probability to human armor",
+      "Title": "reduce probability to human armor（原始标签）",
+      "Comment": "技能数据中的 [reduce probability to human armor] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

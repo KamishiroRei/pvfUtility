@@ -6631,6 +6631,746 @@
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[RESET][CONTROL]\t\t\t\t\t\t\t// 将控件重置为初始状态\n```",
       "Closing": false,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "text button",
+      "Title": "文本按钮",
+      "Comment": "动作脚本数据中的 [text button] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ON CLICK CONTROL",
+      "Title": "ON CLICK CONTROL（原始标签）",
+      "Comment": "动作脚本数据中的 [ON CLICK CONTROL] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "IS MOUSE LBCLICK",
+      "Title": "IS MOUSE LBCLICK（原始标签）",
+      "Comment": "动作脚本数据中的 [IS MOUSE LBCLICK] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET INVISIBLE",
+      "Title": "SET INVISIBLE（原始标签）",
+      "Comment": "动作脚本数据中的 [SET INVISIBLE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ENTER MOUSE",
+      "Title": "ENTER MOUSE（原始标签）",
+      "Comment": "动作脚本数据中的 [ENTER MOUSE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "CANCEL INTERPOLATION",
+      "Title": "CANCEL INTERPOLATION（原始标签）",
+      "Comment": "动作脚本数据中的 [CANCEL INTERPOLATION] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "MOVEMENT",
+      "Title": "MOVEMENT（原始标签）",
+      "Comment": "动作脚本数据中的 [MOVEMENT] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "0",
+      "Title": "0",
+      "Comment": "动作脚本数据中的 [0] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "10",
+      "Title": "10",
+      "Comment": "动作脚本数据中的 [10] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "button",
+      "Title": "按钮",
+      "Comment": "动作脚本数据中的 [button] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET SCALE",
+      "Title": "SET SCALE（原始标签）",
+      "Comment": "动作脚本数据中的 [SET SCALE] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "IS RESPAWN MONSTER",
+      "Title": "IS RESPAWN MONSTER（原始标签）",
+      "Comment": "动作脚本数据中的 [IS RESPAWN MONSTER] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "IS END MAP RANGE",
+      "Title": "IS END MAP RANGE（原始标签）",
+      "Comment": "动作脚本数据中的 [IS END MAP RANGE] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ALL DEATH",
+      "Title": "ALL DEATH（原始标签）",
+      "Comment": "动作脚本数据中的 [ALL DEATH] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "CHARCTER TEAM",
+      "Title": "CHARCTER TEAM（原始标签）",
+      "Comment": "动作脚本数据中的 [CHARCTER TEAM] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "IS BACKPOS",
+      "Title": "IS BACKPOS（原始标签）",
+      "Comment": "动作脚本数据中的 [IS BACKPOS] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "FOLLOWING TARGET AND DIRECTION",
+      "Title": "FOLLOWING TARGET AND DIRECTION（原始标签）",
+      "Comment": "动作脚本数据中的 [FOLLOWING TARGET AND DIRECTION] 存在标记。已见为无附加值的存在标记。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "magical attack bonus",
+      "Title": "魔法攻击额外奖励",
+      "Comment": "动作脚本数据中的 [magical attack bonus] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "physical absolute defense",
+      "Title": "物理绝对值防御",
+      "Comment": "动作脚本数据中的 [physical absolute defense] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "magical absolute defense",
+      "Title": "魔法绝对值防御",
+      "Comment": "动作脚本数据中的 [magical absolute defense] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "physical attack bonus",
+      "Title": "物理攻击额外奖励",
+      "Comment": "动作脚本数据中的 [physical attack bonus] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "DO BEAVIOR",
+      "Title": "DO BEAVIOR（原始标签）",
+      "Comment": "动作脚本数据中的 [DO BEAVIOR] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SLAYER",
+      "Title": "SLAYER（原始标签）",
+      "Comment": "动作脚本数据中的 [SLAYER] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ON END ACTION",
+      "Title": "ON END ACTION（原始标签）",
+      "Comment": "动作脚本数据中的 [ON END ACTION] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "DUNGEON SYMBOL COMPARE",
+      "Title": "DUNGEON SYMBOL COMPARE（原始标签）",
+      "Comment": "动作脚本数据中的 [DUNGEON SYMBOL COMPARE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "notice",
+      "Title": "notice（原始标签）",
+      "Comment": "动作脚本数据中的 [notice] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "DUNGEON SYMBOL SET",
+      "Title": "DUNGEON SYMBOL SET（原始标签）",
+      "Comment": "动作脚本数据中的 [DUNGEON SYMBOL SET] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "CHECK PARTY SYMBOL",
+      "Title": "CHECK PARTY SYMBOL（原始标签）",
+      "Comment": "动作脚本数据中的 [CHECK PARTY SYMBOL] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "LANDTYPE APPENDAGE",
+      "Title": "LANDTYPE APPENDAGE（原始标签）",
+      "Comment": "动作脚本数据中的 [LANDTYPE APPENDAGE] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET POSITION HP GAUGE",
+      "Title": "SET POSITION HP GAUGE（原始标签）",
+      "Comment": "动作脚本数据中的 [SET POSITION HP GAUGE] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "TIME VALUE",
+      "Title": "时间数值",
+      "Comment": "动作脚本数据中的 [TIME VALUE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "RGBA",
+      "Title": "RGBA（原始标签）",
+      "Comment": "动作脚本数据中的 [RGBA] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "CHECK PARTY SLOT",
+      "Title": "CHECK PARTY SLOT（原始标签）",
+      "Comment": "动作脚本数据中的 [CHECK PARTY SLOT] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "RETURN YPOS",
+      "Title": "RETURN YPOS（原始标签）",
+      "Comment": "动作脚本数据中的 [RETURN YPOS] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "COLLISION GROUP",
+      "Title": "碰撞分组",
+      "Comment": "动作脚本数据中的 [COLLISION GROUP] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "CHANGE TWIN GAUGE",
+      "Title": "CHANGE TWIN GAUGE（原始标签）",
+      "Comment": "动作脚本数据中的 [CHANGE TWIN GAUGE] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "MIRROR RANGE",
+      "Title": "MIRROR RANGE（原始标签）",
+      "Comment": "动作脚本数据中的 [MIRROR RANGE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET TARGET",
+      "Title": "SET TARGET（原始标签）",
+      "Comment": "动作脚本数据中的 [SET TARGET] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "IS IN POINT AREA",
+      "Title": "IS IN POINT AREA（原始标签）",
+      "Comment": "动作脚本数据中的 [IS IN POINT AREA] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "FOLLOWING TYPE",
+      "Title": "FOLLOWING TYPE（原始标签）",
+      "Comment": "动作脚本数据中的 [FOLLOWING TYPE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "XSPEED",
+      "Title": "XSPEED（原始标签）",
+      "Comment": "动作脚本数据中的 [XSPEED] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "NO DAMAGE MOTION",
+      "Title": "NO DAMAGE MOTION（原始标签）",
+      "Comment": "动作脚本数据中的 [NO DAMAGE MOTION] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "EASY",
+      "Title": "简单",
+      "Comment": "动作脚本数据中的 [EASY] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "CHANGE STATE SKIP",
+      "Title": "CHANGE STATE SKIP（原始标签）",
+      "Comment": "动作脚本数据中的 [CHANGE STATE SKIP] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET PARTY SYMBOL",
+      "Title": "SET PARTY SYMBOL（原始标签）",
+      "Comment": "动作脚本数据中的 [SET PARTY SYMBOL] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ON CHANGE LIFE",
+      "Title": "ON CHANGE LIFE（原始标签）",
+      "Comment": "动作脚本数据中的 [ON CHANGE LIFE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET ALPHA",
+      "Title": "SET ALPHA（原始标签）",
+      "Comment": "动作脚本数据中的 [SET ALPHA] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET UNBEATABLE",
+      "Title": "SET UNBEATABLE（原始标签）",
+      "Comment": "动作脚本数据中的 [SET UNBEATABLE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SEND DAMAGE",
+      "Title": "发送伤害",
+      "Comment": "动作脚本数据中的 [SEND DAMAGE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET CURRENT HIT OBJECT",
+      "Title": "SET CURRENT HIT OBJECT（原始标签）",
+      "Comment": "动作脚本数据中的 [SET CURRENT HIT OBJECT] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "FOCUS CAMERA",
+      "Title": "FOCUS CAMERA（原始标签）",
+      "Comment": "动作脚本数据中的 [FOCUS CAMERA] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ON REBIRTH",
+      "Title": "ON REBIRTH（原始标签）",
+      "Comment": "动作脚本数据中的 [ON REBIRTH] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "MOVING ON",
+      "Title": "MOVING ON（原始标签）",
+      "Comment": "动作脚本数据中的 [MOVING ON] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET POSITION CASTING GAUGE",
+      "Title": "SET POSITION CASTING GAUGE（原始标签）",
+      "Comment": "动作脚本数据中的 [SET POSITION CASTING GAUGE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ENABLE OFF",
+      "Title": "ENABLE OFF（原始标签）",
+      "Comment": "动作脚本数据中的 [ENABLE OFF] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "USE MaY DIRECTION",
+      "Title": "USE MaY DIRECTION（原始标签）",
+      "Comment": "动作脚本数据中的 [USE MaY DIRECTION] 存在标记。已见为无附加值的存在标记。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "DIALOG",
+      "Title": "对话",
+      "Comment": "动作脚本数据中的 [DIALOG] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "RSSET",
+      "Title": "RSSET（原始标签）",
+      "Comment": "动作脚本数据中的 [RSSET] 存在标记。已见为无附加值的存在标记。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "BOOSTER MAX VELOCITY",
+      "Title": "BOOSTER MAX VELOCITY（原始标签）",
+      "Comment": "动作脚本数据中的 [BOOSTER MAX VELOCITY] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "EVADE TIME",
+      "Title": "EVADE TIME（原始标签）",
+      "Comment": "动作脚本数据中的 [EVADE TIME] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ANI",
+      "Title": "动画",
+      "Comment": "动作脚本数据中的 [ANI] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "PATH",
+      "Title": "PATH（原始标签）",
+      "Comment": "动作脚本数据中的 [PATH] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "BOOSTING SOUND",
+      "Title": "BOOSTING SOUND（原始标签）",
+      "Comment": "动作脚本数据中的 [BOOSTING SOUND] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "FORCE JUMP TO",
+      "Title": "FORCE JUMP TO（原始标签）",
+      "Comment": "动作脚本数据中的 [FORCE JUMP TO] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET SHADOW",
+      "Title": "SET SHADOW（原始标签）",
+      "Comment": "动作脚本数据中的 [SET SHADOW] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "DRAW ONLY",
+      "Title": "DRAW ONLY（原始标签）",
+      "Comment": "动作脚本数据中的 [DRAW ONLY] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "LANDING MODE",
+      "Title": "LANDING MODE（原始标签）",
+      "Comment": "动作脚本数据中的 [LANDING MODE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "RELEASE ANI",
+      "Title": "RELEASE ANI（原始标签）",
+      "Comment": "动作脚本数据中的 [RELEASE ANI] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "CHANGE LAYER",
+      "Title": "CHANGE LAYER（原始标签）",
+      "Comment": "动作脚本数据中的 [CHANGE LAYER] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "WEAPON ELEMENT",
+      "Title": "WEAPON ELEMENT（原始标签）",
+      "Comment": "动作脚本数据中的 [WEAPON ELEMENT] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ADD APPENDAGE",
+      "Title": "追加附加状态",
+      "Comment": "动作脚本数据中的 [ADD APPENDAGE] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "RAID SET SYMBOL",
+      "Title": "RAID SET SYMBOL（原始标签）",
+      "Comment": "动作脚本数据中的 [RAID SET SYMBOL] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET SYMBOL OPTION",
+      "Title": "SET SYMBOL OPTION（原始标签）",
+      "Comment": "动作脚本数据中的 [SET SYMBOL OPTION] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "HIDE HITGAUGE",
+      "Title": "HIDE HITGAUGE（原始标签）",
+      "Comment": "动作脚本数据中的 [HIDE HITGAUGE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

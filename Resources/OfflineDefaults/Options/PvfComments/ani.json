@@ -351,6 +351,2656 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1|Lancarus"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME002",
+      "Title": "第 2 帧定义",
+      "Comment": "ANI 动画的第 2 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME003",
+      "Title": "第 3 帧定义",
+      "Comment": "ANI 动画的第 3 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME004",
+      "Title": "第 4 帧定义",
+      "Comment": "ANI 动画的第 4 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME005",
+      "Title": "第 5 帧定义",
+      "Comment": "ANI 动画的第 5 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME006",
+      "Title": "第 6 帧定义",
+      "Comment": "ANI 动画的第 6 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME007",
+      "Title": "第 7 帧定义",
+      "Comment": "ANI 动画的第 7 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME008",
+      "Title": "第 8 帧定义",
+      "Comment": "ANI 动画的第 8 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME009",
+      "Title": "第 9 帧定义",
+      "Comment": "ANI 动画的第 9 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME010",
+      "Title": "第 10 帧定义",
+      "Comment": "ANI 动画的第 10 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME011",
+      "Title": "第 11 帧定义",
+      "Comment": "ANI 动画的第 11 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME012",
+      "Title": "第 12 帧定义",
+      "Comment": "ANI 动画的第 12 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME013",
+      "Title": "第 13 帧定义",
+      "Comment": "ANI 动画的第 13 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME014",
+      "Title": "第 14 帧定义",
+      "Comment": "ANI 动画的第 14 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME015",
+      "Title": "第 15 帧定义",
+      "Comment": "ANI 动画的第 15 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME016",
+      "Title": "第 16 帧定义",
+      "Comment": "ANI 动画的第 16 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME017",
+      "Title": "第 17 帧定义",
+      "Comment": "ANI 动画的第 17 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME018",
+      "Title": "第 18 帧定义",
+      "Comment": "ANI 动画的第 18 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME019",
+      "Title": "第 19 帧定义",
+      "Comment": "ANI 动画的第 19 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME020",
+      "Title": "第 20 帧定义",
+      "Comment": "ANI 动画的第 20 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME021",
+      "Title": "第 21 帧定义",
+      "Comment": "ANI 动画的第 21 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME022",
+      "Title": "第 22 帧定义",
+      "Comment": "ANI 动画的第 22 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME023",
+      "Title": "第 23 帧定义",
+      "Comment": "ANI 动画的第 23 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME024",
+      "Title": "第 24 帧定义",
+      "Comment": "ANI 动画的第 24 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME025",
+      "Title": "第 25 帧定义",
+      "Comment": "ANI 动画的第 25 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME026",
+      "Title": "第 26 帧定义",
+      "Comment": "ANI 动画的第 26 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME027",
+      "Title": "第 27 帧定义",
+      "Comment": "ANI 动画的第 27 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME028",
+      "Title": "第 28 帧定义",
+      "Comment": "ANI 动画的第 28 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME029",
+      "Title": "第 29 帧定义",
+      "Comment": "ANI 动画的第 29 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME030",
+      "Title": "第 30 帧定义",
+      "Comment": "ANI 动画的第 30 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME031",
+      "Title": "第 31 帧定义",
+      "Comment": "ANI 动画的第 31 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME032",
+      "Title": "第 32 帧定义",
+      "Comment": "ANI 动画的第 32 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME033",
+      "Title": "第 33 帧定义",
+      "Comment": "ANI 动画的第 33 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME034",
+      "Title": "第 34 帧定义",
+      "Comment": "ANI 动画的第 34 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME035",
+      "Title": "第 35 帧定义",
+      "Comment": "ANI 动画的第 35 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME036",
+      "Title": "第 36 帧定义",
+      "Comment": "ANI 动画的第 36 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME037",
+      "Title": "第 37 帧定义",
+      "Comment": "ANI 动画的第 37 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME038",
+      "Title": "第 38 帧定义",
+      "Comment": "ANI 动画的第 38 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME039",
+      "Title": "第 39 帧定义",
+      "Comment": "ANI 动画的第 39 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME040",
+      "Title": "第 40 帧定义",
+      "Comment": "ANI 动画的第 40 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME041",
+      "Title": "第 41 帧定义",
+      "Comment": "ANI 动画的第 41 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME042",
+      "Title": "第 42 帧定义",
+      "Comment": "ANI 动画的第 42 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME043",
+      "Title": "第 43 帧定义",
+      "Comment": "ANI 动画的第 43 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME044",
+      "Title": "第 44 帧定义",
+      "Comment": "ANI 动画的第 44 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME045",
+      "Title": "第 45 帧定义",
+      "Comment": "ANI 动画的第 45 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME046",
+      "Title": "第 46 帧定义",
+      "Comment": "ANI 动画的第 46 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME047",
+      "Title": "第 47 帧定义",
+      "Comment": "ANI 动画的第 47 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME048",
+      "Title": "第 48 帧定义",
+      "Comment": "ANI 动画的第 48 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME049",
+      "Title": "第 49 帧定义",
+      "Comment": "ANI 动画的第 49 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME050",
+      "Title": "第 50 帧定义",
+      "Comment": "ANI 动画的第 50 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME051",
+      "Title": "第 51 帧定义",
+      "Comment": "ANI 动画的第 51 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME052",
+      "Title": "第 52 帧定义",
+      "Comment": "ANI 动画的第 52 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME053",
+      "Title": "第 53 帧定义",
+      "Comment": "ANI 动画的第 53 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME054",
+      "Title": "第 54 帧定义",
+      "Comment": "ANI 动画的第 54 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME055",
+      "Title": "第 55 帧定义",
+      "Comment": "ANI 动画的第 55 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME056",
+      "Title": "第 56 帧定义",
+      "Comment": "ANI 动画的第 56 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME057",
+      "Title": "第 57 帧定义",
+      "Comment": "ANI 动画的第 57 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME058",
+      "Title": "第 58 帧定义",
+      "Comment": "ANI 动画的第 58 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME059",
+      "Title": "第 59 帧定义",
+      "Comment": "ANI 动画的第 59 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME060",
+      "Title": "第 60 帧定义",
+      "Comment": "ANI 动画的第 60 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME061",
+      "Title": "第 61 帧定义",
+      "Comment": "ANI 动画的第 61 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME062",
+      "Title": "第 62 帧定义",
+      "Comment": "ANI 动画的第 62 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME063",
+      "Title": "第 63 帧定义",
+      "Comment": "ANI 动画的第 63 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME064",
+      "Title": "第 64 帧定义",
+      "Comment": "ANI 动画的第 64 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME065",
+      "Title": "第 65 帧定义",
+      "Comment": "ANI 动画的第 65 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME066",
+      "Title": "第 66 帧定义",
+      "Comment": "ANI 动画的第 66 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME067",
+      "Title": "第 67 帧定义",
+      "Comment": "ANI 动画的第 67 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME068",
+      "Title": "第 68 帧定义",
+      "Comment": "ANI 动画的第 68 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME069",
+      "Title": "第 69 帧定义",
+      "Comment": "ANI 动画的第 69 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME070",
+      "Title": "第 70 帧定义",
+      "Comment": "ANI 动画的第 70 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME071",
+      "Title": "第 71 帧定义",
+      "Comment": "ANI 动画的第 71 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME072",
+      "Title": "第 72 帧定义",
+      "Comment": "ANI 动画的第 72 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME073",
+      "Title": "第 73 帧定义",
+      "Comment": "ANI 动画的第 73 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME074",
+      "Title": "第 74 帧定义",
+      "Comment": "ANI 动画的第 74 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME075",
+      "Title": "第 75 帧定义",
+      "Comment": "ANI 动画的第 75 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME076",
+      "Title": "第 76 帧定义",
+      "Comment": "ANI 动画的第 76 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME077",
+      "Title": "第 77 帧定义",
+      "Comment": "ANI 动画的第 77 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME078",
+      "Title": "第 78 帧定义",
+      "Comment": "ANI 动画的第 78 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME079",
+      "Title": "第 79 帧定义",
+      "Comment": "ANI 动画的第 79 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME080",
+      "Title": "第 80 帧定义",
+      "Comment": "ANI 动画的第 80 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME081",
+      "Title": "第 81 帧定义",
+      "Comment": "ANI 动画的第 81 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME082",
+      "Title": "第 82 帧定义",
+      "Comment": "ANI 动画的第 82 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME083",
+      "Title": "第 83 帧定义",
+      "Comment": "ANI 动画的第 83 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME084",
+      "Title": "第 84 帧定义",
+      "Comment": "ANI 动画的第 84 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME085",
+      "Title": "第 85 帧定义",
+      "Comment": "ANI 动画的第 85 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME086",
+      "Title": "第 86 帧定义",
+      "Comment": "ANI 动画的第 86 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME087",
+      "Title": "第 87 帧定义",
+      "Comment": "ANI 动画的第 87 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME088",
+      "Title": "第 88 帧定义",
+      "Comment": "ANI 动画的第 88 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME089",
+      "Title": "第 89 帧定义",
+      "Comment": "ANI 动画的第 89 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME090",
+      "Title": "第 90 帧定义",
+      "Comment": "ANI 动画的第 90 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME091",
+      "Title": "第 91 帧定义",
+      "Comment": "ANI 动画的第 91 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME092",
+      "Title": "第 92 帧定义",
+      "Comment": "ANI 动画的第 92 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME093",
+      "Title": "第 93 帧定义",
+      "Comment": "ANI 动画的第 93 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME094",
+      "Title": "第 94 帧定义",
+      "Comment": "ANI 动画的第 94 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME095",
+      "Title": "第 95 帧定义",
+      "Comment": "ANI 动画的第 95 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME096",
+      "Title": "第 96 帧定义",
+      "Comment": "ANI 动画的第 96 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME097",
+      "Title": "第 97 帧定义",
+      "Comment": "ANI 动画的第 97 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME098",
+      "Title": "第 98 帧定义",
+      "Comment": "ANI 动画的第 98 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME099",
+      "Title": "第 99 帧定义",
+      "Comment": "ANI 动画的第 99 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME100",
+      "Title": "第 100 帧定义",
+      "Comment": "ANI 动画的第 100 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME101",
+      "Title": "第 101 帧定义",
+      "Comment": "ANI 动画的第 101 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME102",
+      "Title": "第 102 帧定义",
+      "Comment": "ANI 动画的第 102 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME103",
+      "Title": "第 103 帧定义",
+      "Comment": "ANI 动画的第 103 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME104",
+      "Title": "第 104 帧定义",
+      "Comment": "ANI 动画的第 104 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME105",
+      "Title": "第 105 帧定义",
+      "Comment": "ANI 动画的第 105 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME106",
+      "Title": "第 106 帧定义",
+      "Comment": "ANI 动画的第 106 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME107",
+      "Title": "第 107 帧定义",
+      "Comment": "ANI 动画的第 107 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME108",
+      "Title": "第 108 帧定义",
+      "Comment": "ANI 动画的第 108 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME109",
+      "Title": "第 109 帧定义",
+      "Comment": "ANI 动画的第 109 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME110",
+      "Title": "第 110 帧定义",
+      "Comment": "ANI 动画的第 110 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME111",
+      "Title": "第 111 帧定义",
+      "Comment": "ANI 动画的第 111 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME112",
+      "Title": "第 112 帧定义",
+      "Comment": "ANI 动画的第 112 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME113",
+      "Title": "第 113 帧定义",
+      "Comment": "ANI 动画的第 113 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME114",
+      "Title": "第 114 帧定义",
+      "Comment": "ANI 动画的第 114 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME115",
+      "Title": "第 115 帧定义",
+      "Comment": "ANI 动画的第 115 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME116",
+      "Title": "第 116 帧定义",
+      "Comment": "ANI 动画的第 116 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME117",
+      "Title": "第 117 帧定义",
+      "Comment": "ANI 动画的第 117 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME118",
+      "Title": "第 118 帧定义",
+      "Comment": "ANI 动画的第 118 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME119",
+      "Title": "第 119 帧定义",
+      "Comment": "ANI 动画的第 119 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME120",
+      "Title": "第 120 帧定义",
+      "Comment": "ANI 动画的第 120 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME121",
+      "Title": "第 121 帧定义",
+      "Comment": "ANI 动画的第 121 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME122",
+      "Title": "第 122 帧定义",
+      "Comment": "ANI 动画的第 122 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME123",
+      "Title": "第 123 帧定义",
+      "Comment": "ANI 动画的第 123 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME124",
+      "Title": "第 124 帧定义",
+      "Comment": "ANI 动画的第 124 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME125",
+      "Title": "第 125 帧定义",
+      "Comment": "ANI 动画的第 125 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME126",
+      "Title": "第 126 帧定义",
+      "Comment": "ANI 动画的第 126 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME127",
+      "Title": "第 127 帧定义",
+      "Comment": "ANI 动画的第 127 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME128",
+      "Title": "第 128 帧定义",
+      "Comment": "ANI 动画的第 128 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME129",
+      "Title": "第 129 帧定义",
+      "Comment": "ANI 动画的第 129 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME130",
+      "Title": "第 130 帧定义",
+      "Comment": "ANI 动画的第 130 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME131",
+      "Title": "第 131 帧定义",
+      "Comment": "ANI 动画的第 131 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME132",
+      "Title": "第 132 帧定义",
+      "Comment": "ANI 动画的第 132 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME133",
+      "Title": "第 133 帧定义",
+      "Comment": "ANI 动画的第 133 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME134",
+      "Title": "第 134 帧定义",
+      "Comment": "ANI 动画的第 134 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME135",
+      "Title": "第 135 帧定义",
+      "Comment": "ANI 动画的第 135 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME136",
+      "Title": "第 136 帧定义",
+      "Comment": "ANI 动画的第 136 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME137",
+      "Title": "第 137 帧定义",
+      "Comment": "ANI 动画的第 137 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME138",
+      "Title": "第 138 帧定义",
+      "Comment": "ANI 动画的第 138 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME139",
+      "Title": "第 139 帧定义",
+      "Comment": "ANI 动画的第 139 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME140",
+      "Title": "第 140 帧定义",
+      "Comment": "ANI 动画的第 140 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME141",
+      "Title": "第 141 帧定义",
+      "Comment": "ANI 动画的第 141 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME142",
+      "Title": "第 142 帧定义",
+      "Comment": "ANI 动画的第 142 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME143",
+      "Title": "第 143 帧定义",
+      "Comment": "ANI 动画的第 143 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME144",
+      "Title": "第 144 帧定义",
+      "Comment": "ANI 动画的第 144 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME145",
+      "Title": "第 145 帧定义",
+      "Comment": "ANI 动画的第 145 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME146",
+      "Title": "第 146 帧定义",
+      "Comment": "ANI 动画的第 146 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME147",
+      "Title": "第 147 帧定义",
+      "Comment": "ANI 动画的第 147 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME148",
+      "Title": "第 148 帧定义",
+      "Comment": "ANI 动画的第 148 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME149",
+      "Title": "第 149 帧定义",
+      "Comment": "ANI 动画的第 149 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME150",
+      "Title": "第 150 帧定义",
+      "Comment": "ANI 动画的第 150 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME151",
+      "Title": "第 151 帧定义",
+      "Comment": "ANI 动画的第 151 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME152",
+      "Title": "第 152 帧定义",
+      "Comment": "ANI 动画的第 152 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME153",
+      "Title": "第 153 帧定义",
+      "Comment": "ANI 动画的第 153 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME154",
+      "Title": "第 154 帧定义",
+      "Comment": "ANI 动画的第 154 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME155",
+      "Title": "第 155 帧定义",
+      "Comment": "ANI 动画的第 155 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME156",
+      "Title": "第 156 帧定义",
+      "Comment": "ANI 动画的第 156 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME157",
+      "Title": "第 157 帧定义",
+      "Comment": "ANI 动画的第 157 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME158",
+      "Title": "第 158 帧定义",
+      "Comment": "ANI 动画的第 158 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME159",
+      "Title": "第 159 帧定义",
+      "Comment": "ANI 动画的第 159 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME160",
+      "Title": "第 160 帧定义",
+      "Comment": "ANI 动画的第 160 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME161",
+      "Title": "第 161 帧定义",
+      "Comment": "ANI 动画的第 161 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME162",
+      "Title": "第 162 帧定义",
+      "Comment": "ANI 动画的第 162 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME163",
+      "Title": "第 163 帧定义",
+      "Comment": "ANI 动画的第 163 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME164",
+      "Title": "第 164 帧定义",
+      "Comment": "ANI 动画的第 164 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME165",
+      "Title": "第 165 帧定义",
+      "Comment": "ANI 动画的第 165 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME166",
+      "Title": "第 166 帧定义",
+      "Comment": "ANI 动画的第 166 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME167",
+      "Title": "第 167 帧定义",
+      "Comment": "ANI 动画的第 167 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME168",
+      "Title": "第 168 帧定义",
+      "Comment": "ANI 动画的第 168 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME169",
+      "Title": "第 169 帧定义",
+      "Comment": "ANI 动画的第 169 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME170",
+      "Title": "第 170 帧定义",
+      "Comment": "ANI 动画的第 170 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME171",
+      "Title": "第 171 帧定义",
+      "Comment": "ANI 动画的第 171 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME172",
+      "Title": "第 172 帧定义",
+      "Comment": "ANI 动画的第 172 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME173",
+      "Title": "第 173 帧定义",
+      "Comment": "ANI 动画的第 173 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME174",
+      "Title": "第 174 帧定义",
+      "Comment": "ANI 动画的第 174 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME175",
+      "Title": "第 175 帧定义",
+      "Comment": "ANI 动画的第 175 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME176",
+      "Title": "第 176 帧定义",
+      "Comment": "ANI 动画的第 176 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME177",
+      "Title": "第 177 帧定义",
+      "Comment": "ANI 动画的第 177 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME178",
+      "Title": "第 178 帧定义",
+      "Comment": "ANI 动画的第 178 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME179",
+      "Title": "第 179 帧定义",
+      "Comment": "ANI 动画的第 179 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME180",
+      "Title": "第 180 帧定义",
+      "Comment": "ANI 动画的第 180 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME181",
+      "Title": "第 181 帧定义",
+      "Comment": "ANI 动画的第 181 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME182",
+      "Title": "第 182 帧定义",
+      "Comment": "ANI 动画的第 182 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME183",
+      "Title": "第 183 帧定义",
+      "Comment": "ANI 动画的第 183 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME184",
+      "Title": "第 184 帧定义",
+      "Comment": "ANI 动画的第 184 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME185",
+      "Title": "第 185 帧定义",
+      "Comment": "ANI 动画的第 185 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME186",
+      "Title": "第 186 帧定义",
+      "Comment": "ANI 动画的第 186 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME187",
+      "Title": "第 187 帧定义",
+      "Comment": "ANI 动画的第 187 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME188",
+      "Title": "第 188 帧定义",
+      "Comment": "ANI 动画的第 188 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME189",
+      "Title": "第 189 帧定义",
+      "Comment": "ANI 动画的第 189 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME190",
+      "Title": "第 190 帧定义",
+      "Comment": "ANI 动画的第 190 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME191",
+      "Title": "第 191 帧定义",
+      "Comment": "ANI 动画的第 191 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME192",
+      "Title": "第 192 帧定义",
+      "Comment": "ANI 动画的第 192 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME193",
+      "Title": "第 193 帧定义",
+      "Comment": "ANI 动画的第 193 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME194",
+      "Title": "第 194 帧定义",
+      "Comment": "ANI 动画的第 194 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME195",
+      "Title": "第 195 帧定义",
+      "Comment": "ANI 动画的第 195 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME196",
+      "Title": "第 196 帧定义",
+      "Comment": "ANI 动画的第 196 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME197",
+      "Title": "第 197 帧定义",
+      "Comment": "ANI 动画的第 197 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME198",
+      "Title": "第 198 帧定义",
+      "Comment": "ANI 动画的第 198 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME199",
+      "Title": "第 199 帧定义",
+      "Comment": "ANI 动画的第 199 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME200",
+      "Title": "第 200 帧定义",
+      "Comment": "ANI 动画的第 200 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME201",
+      "Title": "第 201 帧定义",
+      "Comment": "ANI 动画的第 201 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME202",
+      "Title": "第 202 帧定义",
+      "Comment": "ANI 动画的第 202 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME203",
+      "Title": "第 203 帧定义",
+      "Comment": "ANI 动画的第 203 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME204",
+      "Title": "第 204 帧定义",
+      "Comment": "ANI 动画的第 204 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME205",
+      "Title": "第 205 帧定义",
+      "Comment": "ANI 动画的第 205 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME206",
+      "Title": "第 206 帧定义",
+      "Comment": "ANI 动画的第 206 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME207",
+      "Title": "第 207 帧定义",
+      "Comment": "ANI 动画的第 207 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME208",
+      "Title": "第 208 帧定义",
+      "Comment": "ANI 动画的第 208 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME209",
+      "Title": "第 209 帧定义",
+      "Comment": "ANI 动画的第 209 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME210",
+      "Title": "第 210 帧定义",
+      "Comment": "ANI 动画的第 210 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME211",
+      "Title": "第 211 帧定义",
+      "Comment": "ANI 动画的第 211 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME212",
+      "Title": "第 212 帧定义",
+      "Comment": "ANI 动画的第 212 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME213",
+      "Title": "第 213 帧定义",
+      "Comment": "ANI 动画的第 213 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME214",
+      "Title": "第 214 帧定义",
+      "Comment": "ANI 动画的第 214 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME215",
+      "Title": "第 215 帧定义",
+      "Comment": "ANI 动画的第 215 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME216",
+      "Title": "第 216 帧定义",
+      "Comment": "ANI 动画的第 216 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME217",
+      "Title": "第 217 帧定义",
+      "Comment": "ANI 动画的第 217 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME218",
+      "Title": "第 218 帧定义",
+      "Comment": "ANI 动画的第 218 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME219",
+      "Title": "第 219 帧定义",
+      "Comment": "ANI 动画的第 219 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME220",
+      "Title": "第 220 帧定义",
+      "Comment": "ANI 动画的第 220 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME221",
+      "Title": "第 221 帧定义",
+      "Comment": "ANI 动画的第 221 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME222",
+      "Title": "第 222 帧定义",
+      "Comment": "ANI 动画的第 222 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME223",
+      "Title": "第 223 帧定义",
+      "Comment": "ANI 动画的第 223 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME224",
+      "Title": "第 224 帧定义",
+      "Comment": "ANI 动画的第 224 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME225",
+      "Title": "第 225 帧定义",
+      "Comment": "ANI 动画的第 225 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME226",
+      "Title": "第 226 帧定义",
+      "Comment": "ANI 动画的第 226 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME227",
+      "Title": "第 227 帧定义",
+      "Comment": "ANI 动画的第 227 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME228",
+      "Title": "第 228 帧定义",
+      "Comment": "ANI 动画的第 228 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME229",
+      "Title": "第 229 帧定义",
+      "Comment": "ANI 动画的第 229 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME230",
+      "Title": "第 230 帧定义",
+      "Comment": "ANI 动画的第 230 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME231",
+      "Title": "第 231 帧定义",
+      "Comment": "ANI 动画的第 231 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME232",
+      "Title": "第 232 帧定义",
+      "Comment": "ANI 动画的第 232 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME233",
+      "Title": "第 233 帧定义",
+      "Comment": "ANI 动画的第 233 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME234",
+      "Title": "第 234 帧定义",
+      "Comment": "ANI 动画的第 234 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME235",
+      "Title": "第 235 帧定义",
+      "Comment": "ANI 动画的第 235 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME236",
+      "Title": "第 236 帧定义",
+      "Comment": "ANI 动画的第 236 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME237",
+      "Title": "第 237 帧定义",
+      "Comment": "ANI 动画的第 237 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME238",
+      "Title": "第 238 帧定义",
+      "Comment": "ANI 动画的第 238 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME239",
+      "Title": "第 239 帧定义",
+      "Comment": "ANI 动画的第 239 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME240",
+      "Title": "第 240 帧定义",
+      "Comment": "ANI 动画的第 240 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME241",
+      "Title": "第 241 帧定义",
+      "Comment": "ANI 动画的第 241 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME242",
+      "Title": "第 242 帧定义",
+      "Comment": "ANI 动画的第 242 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME243",
+      "Title": "第 243 帧定义",
+      "Comment": "ANI 动画的第 243 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME244",
+      "Title": "第 244 帧定义",
+      "Comment": "ANI 动画的第 244 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME245",
+      "Title": "第 245 帧定义",
+      "Comment": "ANI 动画的第 245 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME246",
+      "Title": "第 246 帧定义",
+      "Comment": "ANI 动画的第 246 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME247",
+      "Title": "第 247 帧定义",
+      "Comment": "ANI 动画的第 247 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME248",
+      "Title": "第 248 帧定义",
+      "Comment": "ANI 动画的第 248 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME249",
+      "Title": "第 249 帧定义",
+      "Comment": "ANI 动画的第 249 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME250",
+      "Title": "第 250 帧定义",
+      "Comment": "ANI 动画的第 250 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME251",
+      "Title": "第 251 帧定义",
+      "Comment": "ANI 动画的第 251 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME252",
+      "Title": "第 252 帧定义",
+      "Comment": "ANI 动画的第 252 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME253",
+      "Title": "第 253 帧定义",
+      "Comment": "ANI 动画的第 253 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME254",
+      "Title": "第 254 帧定义",
+      "Comment": "ANI 动画的第 254 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME255",
+      "Title": "第 255 帧定义",
+      "Comment": "ANI 动画的第 255 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME256",
+      "Title": "第 256 帧定义",
+      "Comment": "ANI 动画的第 256 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME257",
+      "Title": "第 257 帧定义",
+      "Comment": "ANI 动画的第 257 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME258",
+      "Title": "第 258 帧定义",
+      "Comment": "ANI 动画的第 258 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME259",
+      "Title": "第 259 帧定义",
+      "Comment": "ANI 动画的第 259 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME260",
+      "Title": "第 260 帧定义",
+      "Comment": "ANI 动画的第 260 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME261",
+      "Title": "第 261 帧定义",
+      "Comment": "ANI 动画的第 261 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME262",
+      "Title": "第 262 帧定义",
+      "Comment": "ANI 动画的第 262 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME263",
+      "Title": "第 263 帧定义",
+      "Comment": "ANI 动画的第 263 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME264",
+      "Title": "第 264 帧定义",
+      "Comment": "ANI 动画的第 264 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME265",
+      "Title": "第 265 帧定义",
+      "Comment": "ANI 动画的第 265 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FRAME266",
+      "Title": "第 266 帧定义",
+      "Comment": "ANI 动画的第 266 帧起始标签。该帧的图像索引、延迟、坐标、裁剪、翻转或颜色等参数由其后的帧字段给出，直到下一个 FRAME 标签开始；帧编号和缺号必须按源文件原样保留，不能自动重排。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }

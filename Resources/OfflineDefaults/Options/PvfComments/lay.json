@@ -11,6 +11,256 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "LAYER",
+      "Title": "角色动作图层",
+      "Comment": ".lay 中的单整数图层选择字段；同一文件可重复出现，每次后接一组动作模板。它不是闭合块，图层遮挡和客户端换装表现需验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "waiting motion",
+      "Title": "待机动作模板",
+      "Comment": "待机动作的相对 .ani 模板路径，通常使用 %s 作为角色/装备动画目录占位符。资源存在和实际播放需客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "move motion",
+      "Title": "移动动作模板",
+      "Comment": "移动动作的相对 .ani 模板路径，通常使用 %s 占位符。它只证明动作映射存在，不证明移动逻辑或资源完整。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "sit motion",
+      "Title": "坐下动作模板",
+      "Comment": "坐下动作的相对 .ani 模板路径。动作调用时机、职业适配和客户端资源需验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "damage motion 1",
+      "Title": "受击动作1模板",
+      "Comment": "第一受击动作的相对 .ani 模板路径。它不证明伤害判定、受击盒或硬直行为。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "damage motion 2",
+      "Title": "受击动作2模板",
+      "Comment": "第二受击动作的相对 .ani 模板路径。动作选择条件和客户端资源需验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "down motion",
+      "Title": "倒地动作模板",
+      "Comment": "倒地动作的相对 .ani 模板路径。倒地判定、持续时间和起身流程不由该路径单独证明。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "overturn motion",
+      "Title": "翻转/起身阶段动作模板",
+      "Comment": "翻转或起身阶段的相对 .ani 模板路径，精确动作阶段需结合角色动作链与客户端验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "jump motion",
+      "Title": "跳跃动作模板",
+      "Comment": "跳跃动作的相对 .ani 模板路径。跳跃高度、速度和碰撞不由该字段决定。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "jumpattack motion",
+      "Title": "跳跃攻击动作模板",
+      "Comment": "跳跃攻击动作的相对 .ani 模板路径。攻击框、伤害和取消窗口需继续读取动作/技能链并实机验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "rest motion",
+      "Title": "休息动作模板",
+      "Comment": "休息动作的相对 .ani 模板路径。触发时机和客户端资源需验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "throw motion 1-1",
+      "Title": "投掷动作1-1模板",
+      "Comment": "投掷动作组1的第一相对 .ani 模板路径。分组用途和调用顺序需结合角色动作系统验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "throw motion 1-2",
+      "Title": "投掷动作1-2模板",
+      "Comment": "投掷动作组1的第二相对 .ani 模板路径。分组用途和调用顺序需结合角色动作系统验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "throw motion 2-1",
+      "Title": "投掷动作2-1模板",
+      "Comment": "投掷/指令动作组2的第一相对 .ani 模板路径。精确用途需目标职业动作链验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "throw motion 2-2",
+      "Title": "投掷动作2-2模板",
+      "Comment": "投掷/指令动作组2的第二相对 .ani 模板路径。精确用途需目标职业动作链验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "throw motion 3-1",
+      "Title": "投掷动作3-1模板",
+      "Comment": "投掷动作组3的第一相对 .ani 模板路径。部分职业可能缺少该字段，不能按固定模板强补。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "throw motion 3-2",
+      "Title": "投掷动作3-2模板",
+      "Comment": "投掷动作组3的第二相对 .ani 模板路径。部分职业可能缺少该字段，不能按固定模板强补。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "throw motion 4-1",
+      "Title": "投掷动作4-1模板",
+      "Comment": "投掷动作组4的第一相对 .ani 模板路径，仅部分职业使用。资源和动作调用需验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "throw motion 4-2",
+      "Title": "投掷动作4-2模板",
+      "Comment": "投掷动作组4的第二相对 .ani 模板路径，仅部分职业使用。资源和动作调用需验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "dash motion",
+      "Title": "冲刺动作模板",
+      "Comment": "冲刺动作的相对 .ani 模板路径。移动速度、冲刺判定和客户端资源不由该路径单独证明。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "getitem motion",
+      "Title": "拾取物品动作模板",
+      "Comment": "拾取物品动作的相对 .ani 模板路径。拾取判定、物品获得和资源完整需分别验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "buff motion",
+      "Title": "Buff/施放动作模板",
+      "Comment": "Buff 或施放类动作的相对 .ani 模板路径。具体技能调用和客户端资源需目标职业验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "back motion",
+      "Title": "后退动作模板",
+      "Comment": "后退/向后移动动作的相对 .ani 模板路径。方向、速度和触发条件需结合角色动作系统验证。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "attack motion",
+      "Title": "普通攻击动作列表",
+      "Comment": "普通攻击动作的闭合 .ani 模板列表，列表长度随职业和动作集变化。必须读取 [/attack motion]；攻击段数、hitbox、伤害和取消窗口需另行验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "lay",
+      "Section": "etc motion",
+      "Title": "特殊动作模板列表",
+      "Comment": "职业特殊动作的闭合 .ani 模板列表，可包含大量技能/特殊动作路径。必须读取 [/etc motion]，不能删减为固定数量；技能脚本调用和资源完整需验证。",
+      "OfficialDescription": null,
+      "Closing": true,
+      "Authors": "Codex"
     }
   ]
 }

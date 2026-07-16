@@ -81,6 +81,36 @@
       "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[dungeon what must be cleared] -1\t\t\t\t\t// 为进入而必须清除的地下城索引。-1 表示无\n```",
       "Closing": false,
       "Authors": null
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "limit level",
+      "Title": "城镇进入等级限制",
+      "Comment": "城镇或入口层级的单数值等级限制线索。静态数值不证明服务端最终放行、任务条件或角色能实际到达。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "need quest",
+      "Title": "城镇进入任务条件",
+      "Comment": "城镇进入所需的任务 ID 条件线索。数字必须通过任务 registry 解析；静态配置不证明任务已接、已完成或服务端允许进入。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "only server parsing dungeon what must be cleared",
+      "Title": "服务端解析的前置副本条件",
+      "Comment": "倾向由服务端解析的前置副本清理条件。数字应通过 dungeon/dungeon.lst 复核；静态存在不能证明服务端实际执行、账号进度或入口放行。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Codex"
     }
   ]
 }
