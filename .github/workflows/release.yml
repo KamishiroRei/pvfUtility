@@ -108,20 +108,6 @@ jobs:
 
       - name: Assemble and validate clean release package
         run: |
-          function Assert-DirectoryHasFiles {
-              param(
-                  [Parameter(Mandatory)] [string] $Path,
-                  [Parameter(Mandatory)] [string] $Description
-              )
-
-              if (-not (Test-Path -LiteralPath $Path -PathType Container)) {
-                  throw "$Description directory not found: $Path"
-              }
-              if ($null -eq (Get-ChildItem -LiteralPath $Path -File -Recurse | Select-Object -First 1)) {
-                  throw "$Description directory is empty: $Path"
-              }
-          }
-
           $publishDirectory = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:PUBLISH_DIRECTORY))
           $packageParent = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:PACKAGE_DIRECTORY))
           $packageRoot = Join-Path $packageParent $env:PACKAGE_NAME
@@ -146,58 +132,7 @@ jobs:
             -Destination $optionsDirectory `
             -Recurse
 
-          $executable = Join-Path $packageRoot "pvfUtility.exe"
-          if (-not (Test-Path -LiteralPath $executable -PathType Leaf) -or (Get-Item -LiteralPath $executable).Length -le 0) {
-              throw "Published executable is missing or empty: $executable"
-          }
-
-          $executables = @(Get-ChildItem -LiteralPath $packageRoot -File -Recurse -Filter "*.exe")
-          if ($executables.Count -ne 1 -or $executables[0].FullName -ne [IO.Path]::GetFullPath($executable)) {
-              throw "The release package must contain exactly one executable at its root."
-          }
-
-          $unexpectedFiles = @(Get-ChildItem -LiteralPath $packageRoot -File -Recurse | Where-Object {
-              $_.Extension -in @(".dll", ".pdb") -or
-              $_.Name.EndsWith(".deps.json", [StringComparison]::OrdinalIgnoreCase) -or
-              $_.Name.EndsWith(".runtimeconfig.json", [StringComparison]::OrdinalIgnoreCase)
-          })
-          if ($unexpectedFiles.Count -gt 0) {
-              throw "Unexpected standalone publish files: $($unexpectedFiles.FullName -join ', ')"
-          }
-
-          foreach ($requiredFile in @(
-              "Options\AppConfig.json",
-              "Options\Bookmarks.json",
-              "Defaults\Options\AppConfig.json",
-              "Defaults\Options\Bookmarks.json",
-              "recovered-source-libraries.txt"
-          )) {
-              $requiredPath = Join-Path $packageRoot $requiredFile
-              if (-not (Test-Path -LiteralPath $requiredPath -PathType Leaf)) {
-                  throw "Required release file not found: $requiredPath"
-              }
-          }
-
-          Assert-DirectoryHasFiles -Path (Join-Path $packageRoot "Options\PvfComments") -Description "Editable PvfComments"
-          Assert-DirectoryHasFiles -Path (Join-Path $packageRoot "Defaults\Options\PvfComments") -Description "Default PvfComments"
-          Assert-DirectoryHasFiles -Path (Join-Path $packageRoot "Resources\AgentKnowledge") -Description "AI knowledge resources"
-          Assert-DirectoryHasFiles -Path (Join-Path $packageRoot "Resources\OfficialAnnotationTranslation") -Description "Official annotation resources"
-
-          $manifest = Join-Path $packageRoot "recovered-source-libraries.txt"
-          foreach ($line in Get-Content -LiteralPath $manifest) {
-              if ([string]::IsNullOrWhiteSpace($line)) {
-                  continue
-              }
-              $parts = $line -split "\|", 2
-              if ($parts.Count -ne 2 -or
-                  [string]::IsNullOrWhiteSpace($parts[0]) -or
-                  [string]::IsNullOrWhiteSpace($parts[1]) -or
-                  [IO.Path]::IsPathRooted($parts[1]) -or
-                  $parts[1] -match '[\\/]' -or
-                  [IO.Path]::GetExtension($parts[1]) -ne ".csproj") {
-                  throw "Recovered source manifest contains an invalid or machine-specific entry: $line"
-              }
-          }
+          & .\scripts\Test-GitHubReleasePackage.ps1 -OutputDirectory $packageRoot
 
           Copy-Item -LiteralPath $packageRoot -Destination $smokeRoot -Recurse
 
@@ -243,28 +178,7 @@ jobs:
           Expand-Archive -LiteralPath $env:ZIP_PATH -DestinationPath $extractDirectory
 
           $packageRoot = Join-Path $extractDirectory $env:PACKAGE_NAME
-          foreach ($requiredPath in @(
-              "pvfUtility.exe",
-              "Options\AppConfig.json",
-              "Options\Bookmarks.json",
-              "Defaults\Options\AppConfig.json",
-              "Resources\AgentKnowledge",
-              "Resources\OfficialAnnotationTranslation",
-              "recovered-source-libraries.txt"
-          )) {
-              if (-not (Test-Path -LiteralPath (Join-Path $packageRoot $requiredPath))) {
-                  throw "Archived release entry not found: $requiredPath"
-              }
-          }
-
-          $unexpectedFiles = @(Get-ChildItem -LiteralPath $packageRoot -File -Recurse | Where-Object {
-              $_.Extension -in @(".dll", ".pdb") -or
-              $_.Name.EndsWith(".deps.json", [StringComparison]::OrdinalIgnoreCase) -or
-              $_.Name.EndsWith(".runtimeconfig.json", [StringComparison]::OrdinalIgnoreCase)
-          })
-          if ($unexpectedFiles.Count -gt 0) {
-              throw "Archived release contains unexpected standalone files: $($unexpectedFiles.FullName -join ', ')"
-          }
+          & .\scripts\Test-GitHubReleasePackage.ps1 -OutputDirectory $packageRoot
 
       - name: Verify extracted single-file package
         run: |
@@ -310,6 +224,21 @@ jobs:
         run: |
           gh release view $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY *> $null
           if ($LASTEXITCODE -eq 0) {
+              $editArguments = @(
+                  "release", "edit", $env:RELEASE_TAG,
+                  "--repo", $env:GITHUB_REPOSITORY
+              )
+              if ($env:IS_PRERELEASE -eq "true") {
+                  $editArguments += "--prerelease"
+              }
+              else {
+                  $editArguments += "--prerelease=false"
+              }
+              & gh @editArguments
+              if ($LASTEXITCODE -ne 0) {
+                  throw "Failed to update release metadata for $($env:RELEASE_TAG)."
+              }
+
               gh release upload $env:RELEASE_TAG `
                 $env:ZIP_PATH `
                 $env:CHECKSUM_PATH `
@@ -330,9 +259,6 @@ jobs:
               )
               if ($env:IS_PRERELEASE -eq "true") {
                   $arguments += "--prerelease"
-              }
-              else {
-                  $arguments += "--latest"
               }
 
               & gh @arguments

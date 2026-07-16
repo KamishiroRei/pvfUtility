@@ -137,6 +137,9 @@ if (Test-Path -LiteralPath $sourceAssemblyManifest -PathType Leaf) {
         $verifiedSourceAssemblies[$assemblyName] = [IO.Path]::GetFullPath($outputAssembly)
     }
 }
+if ($SingleFile -and $verifiedSourceAssemblyCount -eq 0) {
+    throw "Recovered source assembly manifest must contain at least one project entry: $sourceAssemblyManifest"
+}
 
 $process = Start-Process `
     -FilePath $executable `

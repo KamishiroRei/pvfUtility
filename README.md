@@ -198,13 +198,17 @@ Copy-Item `
   -Recurse
 
 powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-GitHubReleasePackage.ps1 `
+  -OutputDirectory .\artifacts\publish\github-win-x64
+
+powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredStartup.ps1 `
   -Configuration Release `
   -OutputDirectory .\artifacts\publish\github-win-x64 `
   -SingleFile
 ```
 
-正式工作流还会检查包中不存在独立 DLL、PDB、deps/runtimeconfig 文件，在未启动的干净副本上生成 ZIP，并对 ZIP 解压后的目录再次运行单文件启动测试。
+正式工作流会在打包前和 ZIP 解压后分别运行同一份 `Test-GitHubReleasePackage.ps1`，检查包中不存在独立 DLL、PDB、deps/runtimeconfig 文件，再对两个独立副本运行单文件启动测试。
 
 ## 独立复制
 

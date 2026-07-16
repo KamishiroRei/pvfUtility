@@ -281,6 +281,10 @@ Copy-Item `
   -Recurse
 
 powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-GitHubReleasePackage.ps1 `
+  -OutputDirectory .\artifacts\publish\github-win-x64
+
+powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredStartup.ps1 `
   -Configuration Release
 
