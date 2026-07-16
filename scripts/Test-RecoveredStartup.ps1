@@ -8,6 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot "RecoveredSourceManifest.ps1")
 
 Add-Type -AssemblyName UIAutomationClient
 Add-Type -AssemblyName UIAutomationTypes
@@ -75,29 +76,13 @@ if ($SingleFile -and -not (Test-Path -LiteralPath $sourceAssemblyManifest -PathT
 $verifiedSourceAssemblies = @{}
 $verifiedSourceAssemblyCount = 0
 if (Test-Path -LiteralPath $sourceAssemblyManifest -PathType Leaf) {
-    foreach ($line in Get-Content -LiteralPath $sourceAssemblyManifest) {
-        if ([string]::IsNullOrWhiteSpace($line)) {
-            continue
-        }
-
-        $parts = $line -split "\|", 2
-        if ($parts.Count -ne 2) {
-            throw "Invalid recovered source assembly manifest entry: $line"
-        }
-
-        $assemblyName = $parts[0]
-        $projectFileName = $parts[1]
-        if ([string]::IsNullOrWhiteSpace($projectFileName) -or
-            [IO.Path]::IsPathRooted($projectFileName) -or
-            $projectFileName -match '[\\/]' -or
-            $projectFileName.IndexOfAny([IO.Path]::GetInvalidFileNameChars()) -ge 0 -or
-            [IO.Path]::GetExtension($projectFileName) -ne ".csproj") {
-            throw "Recovered source assembly manifest must not contain a project path: $line"
-        }
-        $projectName = [IO.Path]::GetFileNameWithoutExtension($projectFileName)
-        if ([string]::IsNullOrWhiteSpace($projectName) -or $projectName -eq "." -or $projectName -eq "..") {
-            throw "Invalid recovered source project filename: $projectFileName"
-        }
+    $manifestEntries = @(Read-RecoveredSourceManifest `
+        -Path $sourceAssemblyManifest `
+        -RequireEntries:$SingleFile)
+    foreach ($entry in $manifestEntries) {
+        $assemblyName = $entry.AssemblyName
+        $projectFileName = $entry.ProjectFileName
+        $projectName = $entry.ProjectName
 
         $sourceBuildRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot "SourceLibraries\.build"))
         $sourceBuildDirectory = [IO.Path]::GetFullPath(
@@ -136,9 +121,6 @@ if (Test-Path -LiteralPath $sourceAssemblyManifest -PathType Leaf) {
 
         $verifiedSourceAssemblies[$assemblyName] = [IO.Path]::GetFullPath($outputAssembly)
     }
-}
-if ($SingleFile -and $verifiedSourceAssemblyCount -eq 0) {
-    throw "Recovered source assembly manifest must contain at least one project entry: $sourceAssemblyManifest"
 }
 
 $process = Start-Process `

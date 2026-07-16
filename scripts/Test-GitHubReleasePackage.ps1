@@ -4,6 +4,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot "RecoveredSourceManifest.ps1")
 
 function Assert-DirectoryHasFiles {
     param(
@@ -76,28 +77,7 @@ Assert-DirectoryHasFiles `
     -Description "Official annotation resources"
 
 $manifest = Join-Path $OutputDirectory "recovered-source-libraries.txt"
-$manifestEntryCount = 0
-foreach ($line in Get-Content -LiteralPath $manifest) {
-    if ([string]::IsNullOrWhiteSpace($line)) {
-        continue
-    }
-
-    $parts = $line -split "\|", 2
-    if ($parts.Count -ne 2 -or
-        [string]::IsNullOrWhiteSpace($parts[0]) -or
-        [string]::IsNullOrWhiteSpace($parts[1]) -or
-        $line -match '([A-Za-z]:[\\/]|\\\\)' -or
-        [IO.Path]::IsPathRooted($parts[1]) -or
-        $parts[1] -match '[\\/]' -or
-        [IO.Path]::GetExtension($parts[1]) -ne ".csproj") {
-        throw "Recovered source manifest contains an invalid or machine-specific entry: $line"
-    }
-
-    $manifestEntryCount++
-}
-if ($manifestEntryCount -eq 0) {
-    throw "Recovered source manifest must contain at least one project entry: $manifest"
-}
+$manifestEntries = @(Read-RecoveredSourceManifest -Path $manifest -RequireEntries)
 
 $executableSizeMiB = [math]::Round((Get-Item -LiteralPath $executable).Length / 1MB, 2)
-Write-Output "PASS: GitHub release package verified. Executable size: $executableSizeMiB MiB; recovered source projects: $manifestEntryCount."
+Write-Output "PASS: GitHub release package verified. Executable size: $executableSizeMiB MiB; recovered source projects: $($manifestEntries.Count)."
