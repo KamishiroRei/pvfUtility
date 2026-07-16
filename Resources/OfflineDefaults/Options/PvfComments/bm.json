@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "bm",
   "Comments": [
@@ -7,7 +7,7 @@
       "FileType": "bm",
       "Section": "tile",
       "Title": "在近景图层上平铺绘制的地图基础",
-      "Comment": "\n在近景图层上平铺绘制的地图基础。\n\n地图底板",
+      "Comment": "地图瓦片。在近景图层上平铺绘制的地图基础单元，是BM文件中构成地图底板的最基本图块，用于定义地图的视觉外观。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "阿董-137735017"

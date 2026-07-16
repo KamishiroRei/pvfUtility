@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "exj",
   "Comments": [
@@ -7,7 +7,7 @@
       "FileType": "exj",
       "Section": "additional result",
       "Title": "分解得出的结果 6个一组",
-      "Comment": "分解得出的结果 6个一组",
+      "Comment": "分解得出的结果（additional result），以6个条目为一组，定义分解时额外产出的物品列表",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "一梦"
@@ -17,7 +17,7 @@
       "FileType": "exj",
       "Section": "big win result",
       "Title": "分解得出的最大值结果 6个一组",
-      "Comment": "分解得出的最大值结果 6个一组",
+      "Comment": "分解得出的最大值结果（big win / 大奖结果），以6个条目为一组，定义分解时大成功产出的物品列表",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "一梦"
@@ -27,7 +27,7 @@
       "FileType": "exj",
       "Section": "disjoint result",
       "Title": "分解结果 是否红字 0否 1是",
-      "Comment": "分解结果 是否红字 0否 1是",
+      "Comment": "分解结果配置，每行格式：物品索引 是否显示为红字（0=否 1=是），红字表示稀有/特殊产出",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "青山工作室"
@@ -37,7 +37,7 @@
       "FileType": "exj",
       "Section": "disjoint self service",
       "Title": "分解机零件",
-      "Comment": "分解机零件",
+      "Comment": "分解机零件配置，定义玩家自行使用分解机时所需的零件/消耗品索引与数量",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "青山工作室"
@@ -47,7 +47,7 @@
       "FileType": "exj",
       "Section": "endurance initial value",
       "Title": "分解商店初始耐久",
-      "Comment": "分解商店初始耐久",
+      "Comment": "分解商店初始耐久值，定义NPC分解商店在创建时的初始耐久度上限",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "青山工作室"
@@ -57,7 +57,7 @@
       "FileType": "exj",
       "Section": "endurance reduce",
       "Title": "分解商店耐久消耗",
-      "Comment": "分解商店耐久消耗",
+      "Comment": "分解商店耐久消耗量，定义每次使用NPC分解商店进行分解操作时消耗的耐久值",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "青山工作室"
@@ -67,7 +67,7 @@
       "FileType": "exj",
       "Section": "expertness exp",
       "Title": "各等级升级所需经验",
-      "Comment": "各等级升级所需经验",
+      "Comment": "各等级升级所需经验值，定义分解/副职业系统从1级升至满级每一级需要的经验量",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -77,7 +77,7 @@
       "FileType": "exj",
       "Section": "gain exp",
       "Title": "收益经验值（修改升级经验在这里）",
-      "Comment": "收益经验值（修改升级经验在这里）",
+      "Comment": "收益经验值配置，控制每次分解操作获得的经验量（修改升级所需总经验请查看 [expertness exp] 段）",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "青山工作室"
@@ -86,8 +86,8 @@
       "PvfCommentType": "Section",
       "FileType": "exj",
       "Section": "items",
-      "Title": "175 2600646 3786 11",
-      "Comment": "175\t2600646\t3786\t11\n編號 捲軸 卡片 副職業等級",
+      "Title": "副职业物品配置表",
+      "Comment": "副职业物品配置表，每行4个值分别代表：编号（副职业ID）、卷轴（scroll）、卡片（card）、副职业等级\n例：175\t2600646\t3786\t11\n// 編號 捲軸 卡片 副職業等級",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "思持c"
@@ -97,7 +97,7 @@
       "FileType": "exj",
       "Section": "limit disjoint gold",
       "Title": "分解商店价格上限",
-      "Comment": "分解商店价格上限",
+      "Comment": "分解商店收费价格上限，限制NPC分解商店单次分解操作收取金币的最高额度",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -107,7 +107,7 @@
       "FileType": "exj",
       "Section": "shop doll info",
       "Title": "人偶商店的格子",
-      "Comment": "人偶商店的格子\n[shop doll info]\n        0        3        1        6        2        9\n[/shop doll info]\n这个文件就是调整人偶商店的格子了\n\n0 3 意思是 最低级 3个  1 6 是中级6个 29 就是最高级9个 懂了么？",
+      "Comment": "人偶商店的格子配置，每对数值表示（品质等级 格子数量），例如 0 3 = 最低级3个格子，1 6 = 中级6个格子，2 9 = 最高级9个格子\n[shop doll info]\n        0        3        1        6        2        9\n[/shop doll info]",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "酸辣白菜"

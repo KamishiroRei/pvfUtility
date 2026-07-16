@@ -116,8 +116,8 @@
       "PvfCommentType": "Section",
       "FileType": "ani",
       "Section": "SPECTRUM",
-      "Title": "残影",
-      "Comment": "残影\n\n跟传承武器一样，走路有拖影\n\n代码前面三个数字就是控制颜色，打开【开始】【所有程序】【附件】【画图】【编辑颜色】左下角那三个值，你选择好自己要的颜色，把数值换到刚刚的代码写入装备即可\n\n前面三个值是颜色，至于后面那两个，应该是残影的产生间隔和残影残留时间",
+      "Title": "残影启用与参数入口",
+      "Comment": "动画残影功能入口。[SPECTRUM] 的首值为是否启用（官方示例 0=不使用、1=使用）；真实文件还可在其下配置 [SPECTRUM TERM]、[SPECTRUM LIFE TIME]、[SPECTRUM COLOR] 和 [SPECTRUM EFFECT]。不要把颜色、间隔或寿命数值直接归到 [SPECTRUM] 首值。",
       "OfficialDescription": "#### 官方示例: animation.ani\n\n```pvf\n// * 残影功能 *\n// 如果不使用，则删除下面整个语句即可。\n[SPECTRUM] 1\t\t\t// 是否使用残影功能 (0:不使用,1:使用)\n```",
       "Closing": false,
       "Authors": "By：短腿猫不吃鱼-694326115"
@@ -317,7 +317,7 @@
       "FileType": "ani",
       "Section": "SPECTRUM COLOR",
       "Title": "残影颜色",
-      "Comment": "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM COLOR] 255 0 0 155\t// 残影颜色，根据 [SPECTRUM EFFECT] 类型可能不适用。\n\t\t\t\t// 例如) NONE 类型的情况下，仅使用 alpha 值。\n```",
+      "Comment": "残影颜色参数，官方样例和真实文件均为 4 个数值，可按 R、G、B、Alpha 读取。官方说明指出不同 [SPECTRUM EFFECT] 下部分颜色分量可能不适用，例如 NONE 类型只使用 Alpha；实际渲染仍依赖客户端。",
       "OfficialDescription": "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM COLOR] 255 0 0 155\t// 残影颜色，根据 [SPECTRUM EFFECT] 类型可能不适用。\n\t\t\t\t// 例如) NONE 类型的情况下，仅使用 alpha 值。\n```",
       "Closing": false,
       "Authors": null

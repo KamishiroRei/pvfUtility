@@ -6,8 +6,8 @@
       "PvfCommentType": "Section",
       "FileType": "shp",
       "Section": "at gunner",
-      "Title": "神枪手",
-      "Comment": "神枪手",
+      "Title": "神枪手（女）",
+      "Comment": "神枪手（女）：在商店配置中引用女枪手职业时的标签。在 [usable job] 等块中用于限制商品可购买职业。注意与 `[gunner]`（男枪手）区分。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "pvfUtility"
@@ -76,8 +76,8 @@
       "PvfCommentType": "Section",
       "FileType": "shp",
       "Section": "npc",
-      "Title": "NPC",
-      "Comment": "#### 官方示例: itemshopsample.shp\n\n```pvf\n// 商店脚本文件示例\n[NPC] 1\t\t\t\t// NPC 索引\n```",
+      "Title": "NPC 索引",
+      "Comment": "NPC 索引：指定该商店所属的 NPC 编号，对应 npc.lst 中的 NPC ID。商店功能（出售物品、修理等）通过此编号关联到具体 NPC。",
       "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n// 商店脚本文件示例\n[NPC] 1\t\t\t\t// NPC 索引\n```",
       "Closing": false,
       "Authors": "preview"
@@ -86,8 +86,8 @@
       "PvfCommentType": "Section",
       "FileType": "shp",
       "Section": "type",
-      "Title": "中选择一个",
-      "Comment": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[type] `[etc shop]`\t\t// `[etc shop]` `[weapon shop]` `[disjoint shop]` 中选择一个\n```",
+      "Title": "商店类型",
+      "Comment": "商店类型：在 `[etc shop]`（杂货商店）、`[weapon shop]`（武器商店）、`[disjoint shop]`（分解商店）中选择一种。不同类型决定商店的基础功能行为。",
       "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[type] `[etc shop]`\t\t// `[etc shop]` `[weapon shop]` `[disjoint shop]` 中选择一个\n```",
       "Closing": false,
       "Authors": null
@@ -96,8 +96,8 @@
       "PvfCommentType": "Section",
       "FileType": "shp",
       "Section": "only buy",
-      "Title": "商店是否可以卖东西还是只能买东西",
-      "Comment": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[only buy] 1\t\t\t// 商店是否可以卖东西还是只能买东西。两者都可以则为 0\n```",
+      "Title": "仅限购买模式",
+      "Comment": "仅限购买模式：控制商店是否允许玩家卖出物品。1 = 只能从商店购买（不可卖东西），0 = 买卖均可。",
       "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[only buy] 1\t\t\t// 商店是否可以卖东西还是只能买东西。两者都可以则为 0\n```",
       "Closing": false,
       "Authors": null

@@ -6,8 +6,8 @@
       "PvfCommentType": "Section",
       "FileType": "twn",
       "Section": "area",
-      "Title": "城镇区域（减号代表制表符）",
-      "Comment": "城镇区域（减号代表制表符）\n-数字，意思是小区域的编号\n-xxx/xxx.map，意思是这个小区域的map文件，不能直接转到，需要复制文件名搜索文件名\n-`[minimap rect]`，这个什么用都没有，猜测是在迷你地图里鼠标右键点击可以自动寻路的一个东西，\n但台服好像不能在地图上自动寻路，即使全部删掉也能正常游戏，跟正常跑五国，不过不建议删掉\n-[dungeon gate] 表示连接到worldmap选图界面的ID 19 (worldmap/worldmap.lst)\n-[gate] 城镇内传送门\n474 234 (赛丽亚房间门)",
+      "Title": "城镇区域定义块",
+      "Comment": "城镇区域闭合块。官方样例依次给出从 0 连续编号的 area 索引、map/ 下的直接地图路径、可选 [minimap rect]（各 step 的起点/终点 X/Y），再给区域类型 token；类型可为 normal、gate、fishing place、pub、dungeon gate，后续整数按类型解释。dungeon gate 的入口数字需通过 worldmap/worldmap.lst 解析；静态配置不证明移动、传送或 UI 正常。",
       "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[area]\t\t\t\t\t\t// 区域 (AREA) 的一个信息\n0\t\t\t\t\t\t// 索引。从 0 开始并使用连续的值\n`Town/HendonMyre/Gate.map`\t\t\t// 地图脚本文件名称 (Script/Map 下的相对路径)\n`[minimap rect]`\n1000\t100\t\t2500\t500\t\t\t// 起点(x, y) 终点(x, y) step 0\n100\t\t10\t\t250\t\t50\t\t\t// 起点(x, y) 终点(x, y) step 1\n`[/minimap rect]`\n`[gate]`\t\t\t\t\t// 区域类型。在 `[normal]` `[gate]` `[fishing place]` `[pub]` `[dungeon gate]` 中选择\n273\t\t\t\t\t\t// 根据区域类型的整数数据。使用方法在最底部\n222\n[/area]\n```",
       "Closing": true,
       "Authors": "pvf"
@@ -56,8 +56,8 @@
       "PvfCommentType": "Section",
       "FileType": "twn",
       "Section": "name",
-      "Title": "名称",
-      "Comment": "#### 官方示例: townsample.twn\n\n```pvf\n[name] `亨顿迈尔`\t\t\t\t// 名称\n```",
+      "Title": "城镇名称",
+      "Comment": "城镇名称：该城镇在世界地图和游戏内显示的显示名称。通过反引号 token 引用字符串表中的文本。",
       "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[name] `亨顿迈尔`\t\t\t\t// 名称\n```",
       "Closing": false,
       "Authors": null
@@ -66,8 +66,8 @@
       "PvfCommentType": "Section",
       "FileType": "twn",
       "Section": "cutscene image",
-      "Title": "过场图像文件名称",
-      "Comment": "#### 官方示例: townsample.twn\n\n```pvf\n[cutscene image] `CutScene.img` 0\t\t\t// 过场图像文件名称，帧索引\n```",
+      "Title": "过场图像",
+      "Comment": "过场图像：进入该城镇时播放的过场画面。第一个参数为 IMG 文件名，第二个参数为帧索引。",
       "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[cutscene image] `CutScene.img` 0\t\t\t// 过场图像文件名称，帧索引\n```",
       "Closing": false,
       "Authors": null
@@ -76,8 +76,8 @@
       "PvfCommentType": "Section",
       "FileType": "twn",
       "Section": "dungeon what must be cleared",
-      "Title": "为进入而必须清除的地下城索引",
-      "Comment": "#### 官方示例: townsample.twn\n\n```pvf\n[dungeon what must be cleared] -1\t\t\t\t\t// 为进入而必须清除的地下城索引。-1 表示无\n```",
+      "Title": "前置副本要求",
+      "Comment": "前置副本要求：进入该城镇前必须通关的副本索引。值为 -1 时表示无前置副本要求，可直接进入。",
       "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[dungeon what must be cleared] -1\t\t\t\t\t// 为进入而必须清除的地下城索引。-1 表示无\n```",
       "Closing": false,
       "Authors": null

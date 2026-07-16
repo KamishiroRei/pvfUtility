@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "sd",
   "Comments": [
@@ -7,7 +7,7 @@
       "FileType": "sd",
       "Section": "g3 max angle",
       "Title": "G3角度",
-      "Comment": "G3角度",
+      "Comment": "G3最大旋转角度。G3系机械人技能中G3科罗纳的最大旋转角度限制，控制其环绕时的角度范围。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "浮浮浮"
@@ -17,7 +17,7 @@
       "FileType": "sd",
       "Section": "g3 max radius",
       "Title": "G3旋转最大半径",
-      "Comment": "G3旋转最大半径",
+      "Comment": "G3旋转最大半径。G3系机械人技能中G3科罗纳环绕的最大半径距离，控制其环绕范围的大小。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "浮浮浮"
@@ -27,7 +27,7 @@
       "FileType": "sd",
       "Section": "g3 max round time",
       "Title": "G3旋转时长",
-      "Comment": "G3旋转时长",
+      "Comment": "G3旋转时长。G3系机械人技能中G3科罗纳完成一次完整旋转所需的时间周期，单位为毫秒。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "浮浮浮"
@@ -37,7 +37,7 @@
       "FileType": "sd",
       "Section": "g3 move time",
       "Title": "G3移动时长（越小就越快）",
-      "Comment": "G3移动时长（越小就越快）",
+      "Comment": "G3移动时长。G3系机械人技能中G3科罗纳移动到目标位置所需的时间，值越小移动速度越快。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "浮浮浮"
@@ -47,7 +47,7 @@
       "FileType": "sd",
       "Section": "g3 transform time",
       "Title": "G3 变形时间",
-      "Comment": "G3 变形时间",
+      "Comment": "G3变形时间。G3系机械人技能中G3科罗纳切换形态/变形所需的时间，控制变形动画的持续时长。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "浮浮浮"
@@ -56,8 +56,8 @@
       "PvfCommentType": "Section",
       "FileType": "sd",
       "Section": "int",
-      "Title": "INT",
-      "Comment": "INT",
+      "Title": "整型数据",
+      "Comment": "整型数据字段。sd文件中定义整型键值对的数据段，用于配置技能的各种数值参数（如角度、半径、时长等）。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"

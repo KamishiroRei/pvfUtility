@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "key",
   "Comments": [
@@ -7,7 +7,7 @@
       "FileType": "key",
       "Section": "input",
       "Title": "输入块",
-      "Comment": "输入块：列出按键/指令与时间 或 通过 pass/random 条件继续",
+      "Comment": "输入块：列出按键/指令与时间，或通过 pass/random 条件继续执行下一指令",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -17,7 +17,7 @@
       "FileType": "key",
       "Section": "loop start",
       "Title": "循环开始",
-      "Comment": "循环开始：后跟次数 (与 [loop end] 配对)",
+      "Comment": "循环开始：后跟循环次数（与 [loop end] 配对使用），将内部指令重复执行指定次数",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -27,7 +27,7 @@
       "FileType": "key",
       "Section": "loop end",
       "Title": "循环结束",
-      "Comment": "循环结束",
+      "Comment": "循环结束：与 [loop start] 配对使用，标记循环体的结束位置",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -37,7 +37,7 @@
       "FileType": "key",
       "Section": "state check",
       "Title": "状态检查块",
-      "Comment": "状态检查块：内部放按键或条件 (常见 skill:XX / target current direction x)",
+      "Comment": "状态检查块：内部放置按键或条件表达式（常见用法：skill:XX / target current direction x），满足条件时执行内部指令",
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "lostluna1"
@@ -46,8 +46,8 @@
       "PvfCommentType": "Section",
       "FileType": "key",
       "Section": "state check2",
-      "Title": "状态检查",
-      "Comment": "状态检查",
+      "Title": "第二状态检查块",
+      "Comment": "第二状态检查块：内部结构与 [state check] 类似，用于扩展检查额外的状态条件（如目标距离、自身高度、动画帧等）",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -56,8 +56,8 @@
       "PvfCommentType": "Section",
       "FileType": "key",
       "Section": "time",
-      "Title": "pass 指令",
-      "Comment": "pass 指令：等待指定毫秒再进入下一 [input]",
+      "Title": "时间延迟指令",
+      "Comment": "时间延迟指令：等待指定的毫秒数后再进入下一个 [input] 块，控制指令执行的时序节奏",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -67,7 +67,7 @@
       "FileType": "key",
       "Section": "pass",
       "Title": "立即进入下一 [input]",
-      "Comment": "立即进入下一 [input]",
+      "Comment": "立即进入下一个 [input] 块，不等待任何条件，直接跳转",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -77,7 +77,7 @@
       "FileType": "key",
       "Section": "random",
       "Title": "随机概率进入下一 [input]",
-      "Comment": "随机概率进入下一 [input]：语法 `random` 概率(%) 总值(通常100)",
+      "Comment": "随机概率进入下一个 [input] 块：语法 `random` 概率值(%) 总值(通常100)，按指定概率百分比决定是否跳转",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -87,7 +87,7 @@
       "FileType": "key",
       "Section": "enemy distance",
       "Title": "距离条件",
-      "Comment": "距离条件：正数= \u003e= 距离  负数= \u003c= 距离",
+      "Comment": "距离条件：正数表示 >= 该距离时满足，负数表示 <= 该距离绝对值时满足",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -97,7 +97,7 @@
       "FileType": "key",
       "Section": "my zheight",
       "Title": "自身 Z 高度阈值",
-      "Comment": "自身 Z 高度阈值",
+      "Comment": "自身 Z 高度阈值：检测自身当前 Z 轴高度是否满足条件，用于空中/地面状态判断",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -107,7 +107,7 @@
       "FileType": "key",
       "Section": "animation frame",
       "Title": "动画帧条件",
-      "Comment": "动画帧条件",
+      "Comment": "动画帧条件：检测当前动画播放到指定帧时触发，用于精确控制动作与指令的同步",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -117,7 +117,7 @@
       "FileType": "key",
       "Section": "event",
       "Title": "事件条件 (内部实现保留)",
-      "Comment": "事件条件 (内部实现保留)",
+      "Comment": "事件条件（内部实现保留）：用于游戏内部事件系统触发，不建议手动编辑",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -126,8 +126,8 @@
       "PvfCommentType": "Section",
       "FileType": "key",
       "Section": "CREATE PASSIVEOBJECT",
-      "Title": "可嵌入的 ACT 片段 (兼容 act 语法",
-      "Comment": "可嵌入的 ACT 片段 (兼容 act 语法, 子标签见 act.json)",
+      "Title": "可嵌入的 ACT 片段 (兼容 act 语法)",
+      "Comment": "可嵌入的 ACT 片段，兼容 act 语法格式，子标签详见 act.json 定义",
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "lostluna1"

@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "rgn",
   "Comments": [
@@ -7,7 +7,7 @@
       "FileType": "rgn",
       "Section": "towns",
       "Title": "城市",
-      "Comment": "城市\n在rgn文件里,town代表此区域包含的城镇地图,数字在town.lst里定义",
+      "Comment": "城市。在rgn文件里，town代表此区域包含的城镇地图，数字在town.lst里定义。一个区域可以包含多个城镇。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "notlikeKFC"

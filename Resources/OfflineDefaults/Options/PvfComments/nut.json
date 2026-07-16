@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "nut",
   "Comments": [
@@ -7,7 +7,7 @@
       "FileType": "nut",
       "Section": "clear_vector",
       "Title": "清空储存器内容",
-      "Comment": "清空储存器内容\n需要配合getVar()使用\n例如：obj.getVar(\"fuck\").clear_vector();\n意：清除储存器fuck的内容",
+      "Comment": "清空储存器内容\n需要配合 getVar() 使用\n例如：obj.getVar(\"fuck\").clear_vector();\n含义：清除名为\"fuck\"的储存器内的全部内容",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "糖糖QQ6494667"
@@ -16,8 +16,8 @@
       "PvfCommentType": "Section",
       "FileType": "nut",
       "Section": "dofile",
-      "Title": ".挂载外部文件",
-      "Comment": "dofile.挂载外部文件",
+      "Title": "挂载外部文件",
+      "Comment": "dofile 挂载并执行外部 .nut 脚本文件，语法：dofile(\"路径/文件名.nut\")",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -27,7 +27,7 @@
       "FileType": "nut",
       "Section": "else",
       "Title": "否则",
-      "Comment": "否则",
+      "Comment": "否则分支语句，与 if 配对使用，当 if 条件不满足时执行 else 后的代码块",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -37,7 +37,7 @@
       "FileType": "nut",
       "Section": "for",
       "Title": "循环",
-      "Comment": "循环",
+      "Comment": "for 循环语句，语法：for(local i = 0; i < n; i++) { ... }，用于按次数重复执行代码",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -47,7 +47,7 @@
       "FileType": "nut",
       "Section": "function",
       "Title": "声明一个函数/方法/功能等等",
-      "Comment": "声明一个函数/方法/功能等等\n空格 xxxxx 这里xxxxx是函数名、方法名、功能名等\n(xxx,xxx,xxx) xxx是参数 传递的参数\n{\nxxxxxxx;    xxxxxxx是具体实现细节 这个函数具体干了什么\n}",
+      "Comment": "声明一个函数/方法/功能\n语法：function 函数名(参数1, 参数2, ...)\n{\n    具体实现代码;\n}",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "糖糖QQ6494667"
@@ -57,7 +57,7 @@
       "FileType": "nut",
       "Section": "get_vector",
       "Title": "获取矢量存储器的存储内容",
-      "Comment": "获取矢量存储器的存储内容\n括号内为存储器的数据位置，第几号数据的意思\n需要和obj.get_Var()配合使用\n例：\nobj.get_Var(\"aaa\").get_vector(1);",
+      "Comment": "获取矢量存储器中指定位置的数据\n括号内为存储器的数据位置索引（从0开始）\n需要配合 obj.getVar() 使用\n例：obj.getVar(\"aaa\").get_vector(1);  // 获取存储器\"aaa\"的第1号数据",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "糖糖QQ6494667"
@@ -67,7 +67,7 @@
       "FileType": "nut",
       "Section": "getCurrentSkillIndex",
       "Title": "获取释放的技能ID",
-      "Comment": "获取释放的技能ID\nobj.getCurrentSkillIndex()",
+      "Comment": "获取当前释放的技能ID\n用法：obj.getCurrentSkillIndex()\n返回当前正在释放/使用的技能索引编号",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "糖糖QQ:6494667"
@@ -77,7 +77,7 @@
       "FileType": "nut",
       "Section": "getVar",
       "Title": "获取矢量存储器",
-      "Comment": "获取矢量存储器\n括号内为存储器名字ID(唯一不可重复)",
+      "Comment": "获取矢量存储器对象\n括号内为存储器名称ID（唯一、不可重复）\n用法：obj.getVar(\"存储器名称\")",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "糖糖QQ6494667"
@@ -87,7 +87,7 @@
       "FileType": "nut",
       "Section": "pushState",
       "Title": "移动状态",
-      "Comment": "移动状态",
+      "Comment": "pushState 设置/推动对象的移动状态，控制对象进入指定的状态行为（如待机、移动、攻击等状态切换）",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "吧哥"
@@ -97,7 +97,7 @@
       "FileType": "nut",
       "Section": "sq_drawCurrentFrame",
       "Title": "创建ANI",
-      "Comment": "创建ANI",
+      "Comment": "sq_drawCurrentFrame 创建并绘制ANI动画对象，在当前帧渲染指定的动画资源",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -107,7 +107,7 @@
       "FileType": "nut",
       "Section": "sq_IsUseSkill",
       "Title": "使用技能",
-      "Comment": "使用技能",
+      "Comment": "sq_IsUseSkill 判断技能是否正在使用中，返回布尔值（true/false），用于检测技能释放状态",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "qyy8802"
@@ -116,8 +116,8 @@
       "PvfCommentType": "Section",
       "FileType": "nut",
       "Section": "sq_RunScript",
-      "Title": "sq_RunScript",
-      "Comment": "运行nut脚本文件(nut的相对sqr目录)（原翻译：松鼠_运行脚本）",
+      "Title": "运行脚本文件",
+      "Comment": "运行指定的 .nut 脚本文件（参数为 nut 文件相对于 sqr 目录的路径）\n（原文注释：松鼠_运行脚本，sq 前缀为 Squirrel 引擎函数的命名约定）",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "糖糖QQ6494667"
@@ -127,7 +127,7 @@
       "FileType": "nut",
       "Section": "sq_SetSkillSlotPos",
       "Title": "设置技能槽位置",
-      "Comment": "设置技能槽位置",
+      "Comment": "sq_SetSkillSlotPos 设置技能槽位的位置参数，控制技能图标在UI技能栏中的槽位排列",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "李云溪"
@@ -137,7 +137,7 @@
       "FileType": "nut",
       "Section": "sq_StopMove",
       "Title": "停止移动",
-      "Comment": "停止移动",
+      "Comment": "sq_StopMove 强制停止对象的当前移动，使对象立即停止位移行为",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "qyy8802"
@@ -147,7 +147,7 @@
       "FileType": "nut",
       "Section": "true",
       "Title": "真",
-      "Comment": "真",
+      "Comment": "布尔值真（true），Squirrel 语言中的逻辑真常量，用于条件判断和返回值",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -157,7 +157,7 @@
       "FileType": "nut",
       "Section": "while",
       "Title": "循环判断",
-      "Comment": "循环判断",
+      "Comment": "while 循环判断语句，语法：while(条件表达式) { ... }，当条件为真时重复执行代码块，条件为假时退出循环",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "清高"

@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "evt",
   "Comments": [
@@ -7,7 +7,7 @@
       "FileType": "evt",
       "Section": "condition reward",
       "Title": "奖励条件",
-      "Comment": "奖励条件",
+      "Comment": "奖励条件\n\n定义玩家获得奖励所需满足的条件，例如完成特定任务、达到指定等级、通关特定地下城等。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -17,7 +17,7 @@
       "FileType": "evt",
       "Section": "end",
       "Title": "结束时间",
-      "Comment": "结束时间",
+      "Comment": "结束时间\n\n活动的结束日期和时间。超过此时间后活动将自动关闭。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "释然"
@@ -27,7 +27,7 @@
       "FileType": "evt",
       "Section": "entry",
       "Title": "条目",
-      "Comment": "条目",
+      "Comment": "条目\n\n活动配置中的一个条目单元。一个活动可包含多个条目，每个条目定义不同的奖励条件、怪物配置或邮件内容。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "无名氏"
@@ -36,8 +36,8 @@
       "PvfCommentType": "Section",
       "FileType": "evt",
       "Section": "event info",
-      "Title": "活动资​​讯",
-      "Comment": "活动资​​讯",
+      "Title": "活动资讯",
+      "Comment": "活动资讯\n\n活动的整体信息配置块，包含活动名称、类型、持续时间、参与条件等基础设置。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -46,8 +46,8 @@
       "PvfCommentType": "Section",
       "FileType": "evt",
       "Section": "idx",
-      "Title": "开启活动的 ID",
-      "Comment": "开启活动的 ID",
+      "Title": "活动编号（索引）",
+      "Comment": "活动编号（索引）\n\n用于开启或引用该活动的唯一标识号（ID）。在其余配置中通过此编号来关联对应活动。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "释然"
@@ -57,7 +57,7 @@
       "FileType": "evt",
       "Section": "mail content",
       "Title": "邮件内容",
-      "Comment": "邮件内容",
+      "Comment": "邮件内容\n\n配置活动通过邮件发送给玩家的奖励内容、发件人名称和邮件正文文本。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "无名氏"
@@ -67,7 +67,7 @@
       "FileType": "evt",
       "Section": "monster id",
       "Title": "怪物ID",
-      "Comment": "怪物ID",
+      "Comment": "怪物ID\n\n活动副本或活动场景中出现的怪物的唯一标识号，对应 Monster.lst 或 mob 文件中的怪物编号。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -76,8 +76,8 @@
       "PvfCommentType": "Section",
       "FileType": "evt",
       "Section": "ON",
-      "Title": "显示什么公告",
-      "Comment": "显示什么公告\n在下面有公告ID",
+      "Title": "公告开关",
+      "Comment": "公告开关\n\n控制活动中是否在游戏内显示相关公告（如系统消息、弹窗提示等），其下通常附带公告ID来指定具体显示的公告内容。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "烟辰"
@@ -86,8 +86,8 @@
       "PvfCommentType": "Section",
       "FileType": "evt",
       "Section": "reward",
-      "Title": "完成获得获得的奖励",
-      "Comment": "完成获得获得的奖励",
+      "Title": "完成获得的奖励",
+      "Comment": "完成获得的奖励\n\n玩家达成活动条件后可获得的奖励配置，包括道具ID、数量、金币、经验值等。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "释然"
@@ -97,7 +97,7 @@
       "FileType": "evt",
       "Section": "Seria Blessing",
       "Title": "赛丽亚的祝福活动",
-      "Comment": "赛丽亚的祝福活动",
+      "Comment": "赛丽亚的祝福活动\n\n与NPC赛丽亚相关的特殊福利活动配置，通常提供每日登录奖励或新手成长支持。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
@@ -107,7 +107,7 @@
       "FileType": "evt",
       "Section": "start",
       "Title": "开始时间",
-      "Comment": "开始时间",
+      "Comment": "开始时间\n\n活动的开始日期和时间。到达此时间后活动将自动开启。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "释然"
@@ -117,7 +117,7 @@
       "FileType": "evt",
       "Section": "thief",
       "Title": "暗夜使者",
-      "Comment": "[thief]=暗夜使者",
+      "Comment": "暗夜使者\n\n在活动事件中引用暗夜使者（Thief）职业相关配置时的标签。`[thief]` 为暗夜使者的职业标识符。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -126,8 +126,8 @@
       "PvfCommentType": "Section",
       "FileType": "evt",
       "Section": "url hyperlink",
-      "Title": "URL超级链接",
-      "Comment": "URL超级链接",
+      "Title": "URL超链接",
+      "Comment": "URL超链接\n\n配置活动中指向外部网页的URL链接，可用于跳转至活动页面、充值页面或公告页面等。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"

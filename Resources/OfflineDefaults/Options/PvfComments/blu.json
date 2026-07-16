@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "blu",
   "Comments": [
@@ -6,8 +6,8 @@
       "PvfCommentType": "Section",
       "FileType": "blu",
       "Section": "dungeon difficulty list",
-      "Title": "额外副本难度比王者级低一级",
-      "Comment": "额外副本难度比王者级低一级",
+      "Title": "额外副本难度列表",
+      "Comment": "额外副本难度列表。定义地下城额外难度等级的列表，该难度比王者级低一级，用于blu文件中的地下城难度配置信息。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "By:小小白：770141757"

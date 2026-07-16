@@ -6,8 +6,8 @@
       "PvfCommentType": "Section",
       "FileType": "lay",
       "Section": "dashattack motion",
-      "Title": "大屠杀运动",
-      "Comment": "大屠杀运动",
+      "Title": "冲刺攻击动作模板",
+      "Comment": ".lay 角色 motion 模板中的冲刺攻击动画路径。当前真实样本使用 `%s/DashAttack.ani`，其中 `%s` 是由角色/装备动画目录替换的模板占位符；它不是 UI 布局或特效位置字段，也不证明具体 ANI 资源和动作播放正常。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"

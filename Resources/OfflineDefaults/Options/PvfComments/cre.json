@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "cre",
   "Comments": [
@@ -7,8 +7,8 @@
       "FileType": "cre",
       "Section": "basic motion",
       "Title": "主动画演出Ani指向",
-      "Comment": "主动画演出Ani指向",
-      "OfficialDescription": null,
+      "Comment": "主动画演出Ani指向，指定宠物的基础待机/行走/攻击等主动画ANI文件路径",
+      "OfficialDescription": "#### 官方示例: petsample.pet\n\n```pvf\n[basic motion] `Stay.ani` // 基本动作动画文件名\n```",
       "Closing": false,
       "Authors": "ZateL"
     },
@@ -16,8 +16,8 @@
       "PvfCommentType": "Section",
       "FileType": "cre",
       "Section": "learn overskill level",
-      "Title": "学习overskill水平",
-      "Comment": "学习overskill水平",
+      "Title": "学习超越技能等级",
+      "Comment": "学习超越技能等级，设定宠物可以学习超越技能（overskill）所需达到的最低等级",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -26,8 +26,8 @@
       "PvfCommentType": "Section",
       "FileType": "cre",
       "Section": "response motion",
-      "Title": "解答动作",
-      "Comment": "解答动作",
+      "Title": "响应动作",
+      "Comment": "响应动作动画配置，定义宠物受到攻击/产生反馈/进行交互时播放的响应动作ANI",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "lostluna1"
@@ -36,8 +36,8 @@
       "PvfCommentType": "Section",
       "FileType": "cre",
       "Section": "run over effect",
-      "Title": "跑步动作",
-      "Comment": "跑步动作",
+      "Title": "跑步特效",
+      "Comment": "跑步时在地面播放的跟随特效（如脚印、尘土、光影等效果），区别于跑步动作本身的动画",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "挚爱"
@@ -47,8 +47,8 @@
       "FileType": "cre",
       "Section": "skill recovery time",
       "Title": "技能恢复时间",
-      "Comment": "技能恢复时间",
-      "OfficialDescription": null,
+      "Comment": "技能恢复时间，控制宠物使用技能后再次进入攻击待机状态所需的冷却间隔（单位：毫秒）",
+      "OfficialDescription": "#### 官方示例: petsample.pet\n\n```pvf\n[recovery time] 10000 // 一次攻击后再次进入攻击待机状态所需的时间\n```",
       "Closing": false,
       "Authors": "无名氏"
     },
@@ -56,8 +56,8 @@
       "PvfCommentType": "Section",
       "FileType": "cre",
       "Section": "walk over effect",
-      "Title": "走路动作",
-      "Comment": "走路动作",
+      "Title": "走路特效",
+      "Comment": "走路时在地面播放的跟随特效（如脚印、轻微尘土等效果），区别于走路动画本身",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "挚爱"

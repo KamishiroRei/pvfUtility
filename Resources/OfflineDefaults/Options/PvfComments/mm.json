@@ -36,8 +36,8 @@
       "PvfCommentType": "Section",
       "FileType": "mm",
       "Section": "project rect",
-      "Title": "角色在地图中小头像的位置",
-      "Comment": "角色在地图中小头像的位置\n\n在region（区域）文件夹中，代表着角色在地图中小头像的位置\n第一个数值代表 长\n第二个数值代表 高\n\n在mm文件中为X/Y轴坐标。不知道怎么获取坐标的就用QQ截图游戏窗口然后就能看到坐标了。",
+      "Title": "小地图投影矩形",
+      "Comment": "区域小地图中的投影矩形，官方样例四列按起点 X/Y、终点 X/Y 读取。它用于小地图坐标映射线索，不是简单的宽/高二元值；坐标系、缩放和角色头像实际位置需结合 .mm 父块及客户端验证。",
       "OfficialDescription": "#### 官方示例: minimap.mm\n\n```pvf\n[project rect]\t1\t1\t10\t10\t\t\t// 小地图坐标 开始/结束点(x,y)\n```",
       "Closing": false,
       "Authors": "by：夜白1229998088"
@@ -87,8 +87,8 @@
       "FileType": "mm",
       "Section": "npc",
       "Title": "npc 索引",
-      "Comment": "#### 官方示例: minimap.mm\n\n- npc 索引, x, y",
-      "OfficialDescription": "#### 官方示例: minimap.mm\n\n- npc 索引, x, y",
+      "Comment": "小地图 NPC 标记记录，参数按“NPC 索引、X 坐标、Y 坐标”读取。NPC ID 必须按对应 registry 解析；坐标单位、图标和客户端显示需目标版本验证。",
+      "OfficialDescription": "#### 官方示例: minimap.mm\n\n```pvf\n- npc 索引, x, y\n```",
       "Closing": true,
       "Authors": null
     },

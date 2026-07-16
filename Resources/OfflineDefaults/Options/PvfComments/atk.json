@@ -6,8 +6,8 @@
       "PvfCommentType": "Section",
       "FileType": "atk",
       "Section": "active status",
-      "Title": "此攻击附带的异常/增益状态",
-      "Comment": "[active status]此攻击附带的异常/增益状态，异常/增益等级越高越容易施加成功\n//记得在添加异常/增益词条的时候把注释和中文去掉\n//1000 = 1秒\n———————————————————————————\n[blind]失明\n\t-1\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，减少视野(%)，减少命中(%)\n[freeze]冰冻\n\t-1\t-1\t-1// 概率(%)，等级，持续时间\n[stone]石化\n\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，石化时附加固伤\n[stun]眩晕\n\t-1\t-1\t-1// 概率(%)，等级，持续时间\n[sleep]睡眠\n\t-1\t-1\t-1// 概率(%)，等级，持续时间\n[hold]束缚\n\t-1\t-1\t-1// 概率，等级，持续时间\n[slow]减速\n\t-1\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，减少移速(%)，减少攻速(%)\n[haste]加速\n\t-1\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，增加移速(%)，增加攻速(%)\n[confuse]混乱\n\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，第4个若施加对象为职业则不添加，若施加对象为怪物则补上1，代表施加成功后令怪物攻击友方\n[poison]中毒\n\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，中毒总伤\n[bleeding]出血\n\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，出血总伤\n[burn]灼伤\n\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，灼伤总伤\n[lightning]感电\n\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，感电总伤\n[curse]诅咒\n\t-1\t-1\t-1\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，减少力量，减少体力，减少智力，减少精神\n[bless]祝福\n\t-1\t-1\t-1\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，增加力量，增加体力，增加智力，增加精神\n[weakness]虚弱\n\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，伤害减少比率（以剩余生命值计算，比如被施加虚弱的目标剩余200生命值，虚弱效果是0.3（30%），则打出的伤害减少60）\n[weapon break]武器损坏\n\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，减少武器耐久\n[armor break]防具损坏\n\t-1\t-1\t-1\t-1// 概率(%)，等级，持续时间，减少防具耐久\n[piercing]破甲\n\t-1\t-1\t-1\t？// 概率(%)，等级，持续时间，最后一个暂不清楚是怎么减少防御的\n[deelement]属性剥离\n\t-1\t-1\t-1// 概率(%)，等级，持续时间\n[deadlystrike]致命一击\n\t-1\t-1// 概率(%)，等级\n———————————————————————————\n{补充：破甲、属性剥离和致命一击的描述未经编写者测试，不一定准确}\n———————————————————————————\n你也可以在收尾部分添加[/active status]以为此攻击赋予多个异常效果，就像这样：\n\n[active status]\n[bleeding]\n\t35\t11\t15000\t500\n[/active status]\n\n[active status]\n[poison]\n\t25\t11\t15000\t500\n[/active status]\n//以上代表有35%的概率和25%的概率，同时施加均为11级的，持续时长为15秒的出血和中毒异常效果，出血和中毒效果均为500总伤\n———————————————————————————\n// 灼伤词条位于彼诺修的烈焰护盾机制时，代表：\n概率(%)，等级，持续时间，伤害，范围伤害，范围伤害选项(1表示范围伤害仅适用于敌军)、范围伤害间隔\n//1000 = 1秒\n\n// 彼诺修的烈焰护盾机制路径：\nmonster/soceress/action_keraha/proc_vinoshu.act",
+      "Title": "攻击附加异常/增益状态",
+      "Comment": ".atk 中的异常/增益状态入口，状态 token 后跟随数值列。官方样例表明常见前列与概率、等级、持续时间有关，后续列会随 blind、slow、burn、curse 等状态类型变化；真实解包也存在 3、4、5、7 列等不同形态。不得把某一状态的列义外推到全部状态，也不能仅凭静态字段断定概率、伤害、抗性或 PVP 结算。当前目标样本未观察到 [/active status] 闭合标签。",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [curse] 37 100    // 最前面是攻击附带的异常状态种类。\n                    // 从下面中选择一个\n                    // 第二个是触发概率（写了 `[none] 则随意填写）\n                    // 第三个是触发强度（写了 `[none] 则随意填写）\n```\n\n```pvf\n[active status] [blind] 100 20 3000 10 100        // 概率, 等级, 持续时间, 视野（%）, 硬直率增加（+）\n```\n\n```pvf\n[active status] [freeze] 100 20 3000            // 概率, 等级, 持续时间\n```\n\n```pvf\n[active status] [stun] 100 20 3000            // 概率, 等级, 持续时间\n```\n\n```pvf\n[active status] [slow] 100 20 10000 50 50        // 概率, 等级, 持续时间, 移速（%）, 攻速（%）\n```\n\n```pvf\n[active status] [haste] 100 20 3000 50 50        // 概率, 等级, 持续时间, 移速（%）, 攻速（%）\n```\n\n```pvf\n[active status] [stone] 100 20 3000 50        // 概率, 等级, 持续时间, 伤害值（+）\n```\n\n```pvf\n[active status] [sleep] 100 20 3000            // 概率, 等级, 持续时间\n```\n\n```pvf\n[active status] [confuse] 100 20 3000 1        // 概率, 等级, 持续时间, 为1时怪物陷入混乱，会攻击同伴。\n```\n\n```pvf\n[active status] [hold] 100 20 3000            // 概率, 等级, 持续时间\n```\n\n```pvf\n[active status] [weakness] 100 20 50            // 概率, 等级, 伤害减少比率（基于剩余 HP）\n```\n\n```pvf\n[active status] [armor break] 100 20 10000 15        // 概率, 等级, 持续时间, 耐久度消耗检查次数\n```\n\n```pvf\n[active status] [weapon break] 100 20 10000 15    // 概率, 等级, 持续时间, 耐久度消耗检查次数\n```\n\n```pvf\n[active status] [poison] 100 10 20000 1000         // 概率, 等级, 持续时间, 伤害\n```\n\n```pvf\n[active status] [lightning] 100 10 2000 100         // 概率, 等级, 持续时间, 伤害\n```\n\n```pvf\n[active status] [bleeding] 100 10 5000 10         // 概率, 等级, 持续时间, 伤害\n```\n\n```pvf\n[active status] [burn] 100 10 20000 1000 10 1 3000    // 概率, 等级, 持续时间, 伤害, 周围伤害, 周围伤害选项（为1时只对敌军造成周围伤害）, 周围伤害应用间隔（时间）\n```\n\n```pvf\n[active status] [bless] 100 10 5000 10 10 10 10    // 概率, 等级, 持续时间, 力量,体力,智力,精神\n```\n\n```pvf\n[active status] [curse] 100 10 5000 20 20 20 20    // 概率, 等级, 持续时间, 力量,体力,智力,精神\n```\n\n```pvf\n///// 攻击信息 (.atk) /////\n[active status] [curse] 100 10 5000 20 20 20 20\n- 使用方法与 equ 相同，但 `.atk` 文件中不包含 target 信息。\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
@@ -128,7 +128,7 @@
       "Section": "damage bonus",
       "Title": "伤害比率",
       "Comment": "伤害比率\n\n0 = 100%\n\n20 = 120%\n\n-10 = 90%",
-      "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[damage bonus] 10        // 伤害加成。%值\n```\n\n```pvf\n[damage bonus] -10    // 技能固有的攻击力\n```\n\n#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{exp}按照所写的百分比增加伤害(输入20则比当前伤害多造成20%的伤害){/exp}[damage bonus]\n    //mkjung 120601 int--\u003efloat 修改\n    {must1}{exp}要增加百分之多少的伤害？{/exp}{float(:)}\n```\n\n```pvf\n{exp}技能固有的攻击力{/exp}[damage bonus]\n        //mkjung 120601 int--\u003efloat 修改\n        {must1}{exp}{/exp}{float(:)}\n```",
+      "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[damage bonus] 10        // 伤害加成。%值\n```\n\n```pvf\n[damage bonus] -10    // 技能固有的攻击力\n```\n\n#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{exp}按照所写的百分比增加伤害(输入20则比当前伤害多造成20%的伤害){/exp}[damage bonus]\n    //mkjung 120601 int-->float 修改\n    {must1}{exp}要增加百分之多少的伤害？{/exp}{float(:)}\n```\n\n```pvf\n{exp}技能固有的攻击力{/exp}[damage bonus]\n        //mkjung 120601 int-->float 修改\n        {must1}{exp}{/exp}{float(:)}\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -226,8 +226,8 @@
       "PvfCommentType": "Section",
       "FileType": "atk",
       "Section": "hit info",
-      "Title": "打击类型",
-      "Comment": "[hit info]打击类型\n\n命中特效4选1：\n[cut]=切割       //参考太刀普攻击中\n[blow]=钝击    //参考钝器普攻击中\n[burn]=灼烧    //命中后不会马上掉血而是缓慢下降\n[etc]=其他       //暂不清楚\n\n出血视觉效果2选1：\n[blood]=有出血视觉效果\n[no blood]=无出血视觉效果\n\n选择完以后，在[blood]及[no blood]词条下\n编辑命中卡肉时间（1000=1秒，或改成-1同步武器卡肉时间）和命中硬直比率，如下演示：\n[hit info]\n\n[cut]\n\n[blood]\n\t150\t1.5\n//以上示例代表命中特效为切割，命中有出血视觉效果，卡肉时间0.15秒，命中硬直0.225秒\n————————————{分割线}——————————————\n[hit info]\n\n[blow]\n\n[no blood]\n\t-1\t1.2\n//以上示例代表命中特效为钝击，命中无出血视觉效果，卡肉时间跟随武器类型，命中硬直比率为1.2\n————————————{分割线}——————————————\n命中硬直比率：如果卡肉时间为0.2秒，命中硬直比率2.0，那么实际\n                         造成的硬直效果为0.4秒\n————————————{分割线}——————————————\n加斜杠的用意：\n一般用于需要赋予PVP属性时清晰划分开效果，比如如下展示\n[pvp]\n\t[hit info]\n\t[blow]\n\t[no blood]\n\t\t-1\t1.2\n[/pvp]\n\n[dungeon]\n\t[hit info]\n\t[blow]\n\t[no blood]\n\t\t100\t1.5\n[/dungeon]\n//自行理解",
+      "Title": "命中表现与受击延迟参数",
+      "Comment": ".atk 的命中表现记录。第一项为 cut、blow、burn、etc、mana burn 等打击类型；第二项为 blood/no blood；后两项分别是命中短暂停顿时间和受击延迟倍数，使用 -1 可表示跟随武器子类型。字段存在不证明血效、卡肉、硬直或客户端表现，仍需结合 ANI hitbox、动作链和实机验证。",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[hit info] [cut] [blood] 50 1.0// 第一个是打击种类。在 [cut] [blow] [burn] [etc] [mana burn] 中选择1个，跟随武器子类型请用 ``\n                //[mana burn] 时不减少 hp 而消耗 mp\n                // 第二个是是否溅血。在 [blood] [no blood] 中选择1个\n                // 第三个是命中时短暂停顿时间。跟随武器子类型请用 -1\n                // 第四个是受击延迟时间倍数。跟随武器子类型请用 -1\n```\n\n#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120601 添加\n    {exp}攻击信息{/exp}[hit info]\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
@@ -336,8 +336,8 @@
       "PvfCommentType": "Section",
       "FileType": "atk",
       "Section": "piercing",
-      "Title": "异常效果",
-      "Comment": "异常效果：破甲\n\n//暂不清楚是清空防御还是减少固定值防御还是按百分比减少防御",
+      "Title": "破甲状态 token（待目标验证）",
+      "Comment": "旧注释将 [piercing] 解释为破甲异常，但当前参考解包的 .atk 文件中未检出该 token，且没有可核验的 OfficialDescription。其参数列、减防方式和运行支持均未确认，只能作为旧版本/外部资料线索保留。",
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Xiti Fox"
@@ -378,7 +378,7 @@
       "Section": "weakness",
       "Title": "异常效果",
       "Comment": "异常效果：虚弱\n\n//以剩余生命值计算，比如被施加虚弱的目标剩余200生命值，虚弱效果是0.3（30%），则打出的伤害减少60",
-      "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n// 以下值为 1 或 0\n[weakness]    3.0 5.5        // 有 3.0% 的概率造成 HP 5.5% 的伤害。\n```\n\n```pvf\n[active status] [weakness] 100 20 50            // 概率, 等级, 伤害减少比率（基于剩余 HP）\n```\n\n#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n// 以下值为 1 或 0\n{exp}X的概率造成HP百分比值的伤害{/exp}[weakness]\n    {must1}{exp}概率{/exp}{float(:)}\n    //mkjung 120531 修改 must1--\u003e must2\n    {must2}{exp}HP百分比值{/exp}{float(:)}\n```",
+      "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n// 以下值为 1 或 0\n[weakness]    3.0 5.5        // 有 3.0% 的概率造成 HP 5.5% 的伤害。\n```\n\n```pvf\n[active status] [weakness] 100 20 50            // 概率, 等级, 伤害减少比率（基于剩余 HP）\n```\n\n#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n// 以下值为 1 或 0\n{exp}X的概率造成HP百分比值的伤害{/exp}[weakness]\n    {must1}{exp}概率{/exp}{float(:)}\n    //mkjung 120531 修改 must1--> must2\n    {must2}{exp}HP百分比值{/exp}{float(:)}\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -556,9 +556,9 @@
       "PvfCommentType": "Section",
       "FileType": "atk",
       "Section": "pvp",
-      "Title": "mkjung 120601 int--\u003efloat 修改",
-      "Comment": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{exp}pvp相关设置{/exp}[pvp]\n    {exp}技能固有的攻击力{/exp}[damage bonus]\n        //mkjung 120601 int--\u003efloat 修改\n        {must1}{exp}{/exp}{float(:)}\n    [!damage bonus]\n\n    //mkjung 120601 添加\n    {exp}攻击信息{/exp}[hit info]\n        {must1}{exp}打击特效输出{/exp}[blow]\n        {must1}{exp}斩击特效输出{/exp}[cut]\n        {must1}{exp}灼烧特效输出{/exp}[burn]\n        {must1}{exp}打击种类（不减少 hp 而消耗 mp）{/exp}[mana burn]\n        {must1}{exp}使用自定义特效（主要在代码中定义）{/exp}[etc]\n\n        {must2}{exp}是否溅血（出血）{/exp}[blood]\n        {must2}{exp}是否溅血（不出血）{/exp}[no blood]\n\n        {opt1}{exp}命中时短暂停顿时间（跟随武器子类型请用 -1）{/exp}{float(:)}\n        {opt2}{exp}受击延迟时间倍数（跟随武器子类型请用 -1）{/exp}{float(:)}\n    [!hit info]\n[/pvp]\n```",
-      "OfficialDescription": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{exp}pvp相关设置{/exp}[pvp]\n    {exp}技能固有的攻击力{/exp}[damage bonus]\n        //mkjung 120601 int--\u003efloat 修改\n        {must1}{exp}{/exp}{float(:)}\n    [!damage bonus]\n\n    //mkjung 120601 添加\n    {exp}攻击信息{/exp}[hit info]\n        {must1}{exp}打击特效输出{/exp}[blow]\n        {must1}{exp}斩击特效输出{/exp}[cut]\n        {must1}{exp}灼烧特效输出{/exp}[burn]\n        {must1}{exp}打击种类（不减少 hp 而消耗 mp）{/exp}[mana burn]\n        {must1}{exp}使用自定义特效（主要在代码中定义）{/exp}[etc]\n\n        {must2}{exp}是否溅血（出血）{/exp}[blood]\n        {must2}{exp}是否溅血（不出血）{/exp}[no blood]\n\n        {opt1}{exp}命中时短暂停顿时间（跟随武器子类型请用 -1）{/exp}{float(:)}\n        {opt2}{exp}受击延迟时间倍数（跟随武器子类型请用 -1）{/exp}{float(:)}\n    [!hit info]\n[/pvp]\n```",
+      "Title": "mkjung 120601 int-->float 修改",
+      "Comment": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{exp}pvp相关设置{/exp}[pvp]\n    {exp}技能固有的攻击力{/exp}[damage bonus]\n        //mkjung 120601 int-->float 修改\n        {must1}{exp}{/exp}{float(:)}\n    [!damage bonus]\n\n    //mkjung 120601 添加\n    {exp}攻击信息{/exp}[hit info]\n        {must1}{exp}打击特效输出{/exp}[blow]\n        {must1}{exp}斩击特效输出{/exp}[cut]\n        {must1}{exp}灼烧特效输出{/exp}[burn]\n        {must1}{exp}打击种类（不减少 hp 而消耗 mp）{/exp}[mana burn]\n        {must1}{exp}使用自定义特效（主要在代码中定义）{/exp}[etc]\n\n        {must2}{exp}是否溅血（出血）{/exp}[blood]\n        {must2}{exp}是否溅血（不出血）{/exp}[no blood]\n\n        {opt1}{exp}命中时短暂停顿时间（跟随武器子类型请用 -1）{/exp}{float(:)}\n        {opt2}{exp}受击延迟时间倍数（跟随武器子类型请用 -1）{/exp}{float(:)}\n    [!hit info]\n[/pvp]\n```",
+      "OfficialDescription": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{exp}pvp相关设置{/exp}[pvp]\n    {exp}技能固有的攻击力{/exp}[damage bonus]\n        //mkjung 120601 int-->float 修改\n        {must1}{exp}{/exp}{float(:)}\n    [!damage bonus]\n\n    //mkjung 120601 添加\n    {exp}攻击信息{/exp}[hit info]\n        {must1}{exp}打击特效输出{/exp}[blow]\n        {must1}{exp}斩击特效输出{/exp}[cut]\n        {must1}{exp}灼烧特效输出{/exp}[burn]\n        {must1}{exp}打击种类（不减少 hp 而消耗 mp）{/exp}[mana burn]\n        {must1}{exp}使用自定义特效（主要在代码中定义）{/exp}[etc]\n\n        {must2}{exp}是否溅血（出血）{/exp}[blood]\n        {must2}{exp}是否溅血（不出血）{/exp}[no blood]\n\n        {opt1}{exp}命中时短暂停顿时间（跟随武器子类型请用 -1）{/exp}{float(:)}\n        {opt2}{exp}受击延迟时间倍数（跟随武器子类型请用 -1）{/exp}{float(:)}\n    [!hit info]\n[/pvp]\n```",
       "Closing": true,
       "Authors": null
     },

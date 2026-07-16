@@ -3,16 +3,21 @@
   "FileType": "apd",
   "Comments": [
     {
+      "Id": 0,
       "PvfCommentType": "Section",
       "FileType": "apd",
       "Section": "buff",
       "Title": "Buff 标记",
-      "Comment": "控制该附加物是否被视为增益 buff：\n- 1：增益 buff，通常不可被驱散技能解除\n- 0：非增益/负面效果，可被驱散技能解除\n此标记还会影响 UI 显示行为（如是否出现在 buff 栏中）。",
-      "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ.txt\n//[buff] 1 // 1 为增益否则为 0 非增益则无法被驱散解除 // 与原功能相同",
+      "Comment": "APD 的 buff 标志，官方样例使用 1/0 区分增益与非增益。它只证明静态分类入口；能否被驱散、图标是否显示、叠加和服务端同步不能仅由该值推断。",
+      "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ.txt\n\n```pvf\n//[buff] 1 // 1 为增益否则为 0 非增益则无法被驱散解除 // 与原功能相同\n```",
       "Closing": false,
-      "Authors": "Lancarus"
+      "UserId": 0,
+      "Authors": "Lancarus",
+      "Create": "0001-01-01T00:00:00",
+      "UpdateTime": "0001-01-01T00:00:00"
     },
     {
+      "Id": 0,
       "PvfCommentType": "Section",
       "FileType": "apd",
       "Section": "duration",
@@ -20,19 +25,27 @@
       "Comment": "效果持续的时长，单位：毫秒 (ms)。注意：持续时间是否可刷新、是否受 PVP 修正、提前失效条件等均需实机验证，不能仅凭此静态字段断言。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ.txt\n\r\n```pvf\n[duration] 20000  // 持续时间 //  与原功能相同/\n```",
       "Closing": false,
-      "Authors": "Lancarus"
+      "UserId": 0,
+      "Authors": "Lancarus",
+      "Create": "0001-01-01T00:00:00",
+      "UpdateTime": "2026-07-16T12:22:01.360852+08:00"
     },
     {
+      "Id": 0,
       "PvfCommentType": "Section",
       "FileType": "apd",
       "Section": "float data",
       "Title": "浮点数数据块",
-      "Comment": "闭合块 [float data]...[/float data]。内容为多行浮点数参数。含义取决于 [type]：\n- 当 type = 'change status' 时，可能包含 change status 相关的浮点数参数（如百分比倍率等）\n- 某些 type 下不使用此块\n具体解释不能脱离 [type] 和父装备上下文。",
+      "Comment": "APD 的浮点参数闭合块，必须读取 [/float data]。各列含义完全取决于同文件 [type] 及父装备/效果上下文；change status 等类型可使用浮点参数，但不能脱离类型把数值统一命名为百分比或倍率。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ.txt\n\r\n```pvf\n[float data] //（skill data up类型未详细说明）\n```",
       "Closing": true,
-      "Authors": "Lancarus"
+      "UserId": 0,
+      "Authors": "Lancarus",
+      "Create": "0001-01-01T00:00:00",
+      "UpdateTime": "2026-07-16T12:23:50.2088033+08:00"
     },
     {
+      "Id": 0,
       "PvfCommentType": "Section",
       "FileType": "apd",
       "Section": "icon image",
@@ -41,21 +54,26 @@
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ.txt\n\r\n```pvf\n[icon image] `` 0 // 图像文件名, 索引 : 没有则不写 // 与原功能相同\n```",
       "Closing": false,
       "UserId": 0,
-      "Authors": "Lancarus"
+      "Authors": "Lancarus",
+      "Create": "0001-01-01T00:00:00",
+      "UpdateTime": "2026-07-16T12:22:33.3463454+08:00"
     },
     {
+      "Id": 0,
       "PvfCommentType": "Section",
       "FileType": "apd",
       "Section": "int data",
       "Title": "整数数据块",
-      "Comment": "闭合块 [int data]...[/int data]。内容为多行整数参数，其格式和含义完全取决于 [type] 的值：\n- 当 type = 'skill data up' 时，每行为：职业 技能索引 应用内容 参数 参数索引 数值单位 数值。其中「职业」为角色职业名（如 swordman），「技能索引」为目标技能 ID，「应用内容」指定修改的技能属性（如 cooltime 冷却时间、all 所有），「参数」为要修改的参数名，「参数索引」为参数序号，「数值单位」为 +（绝对值）或 %（百分比），「数值」为修改量\n- 当 type = 'change status' 时，存储 change status 的各项整数参数\n其他 type 下的格式可能不同，需结合具体 type 和父装备上下文解读。",
+      "Comment": "APD 的整数参数闭合块，必须读取 [/int data]。各列由 [type] 决定：skill data up 样例可包含职业 token、技能 ID、应用内容、参数 token、参数索引、单位和数值；其他类型不得套用同一列义。技能 ID 必须按职业 registry 路由。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ.txt\n\r\n```pvf\n[int data]\n    `[swordman`] 1 `[all]` `[cooltime]` 0 `+` 10000 // 与原 skill data up 功能相同\n//职业, 技能索引, 应用到的内容, 要修改的参数, 参数索引, 数值单位, 数值\n[/int data]\n```",
       "Closing": true,
+      "UserId": 0,
       "Authors": "Lancarus",
       "Create": "0001-01-01T00:00:00",
       "UpdateTime": "2026-07-16T12:23:26.7902007+08:00"
     },
     {
+      "Id": 0,
       "PvfCommentType": "Section",
       "FileType": "apd",
       "Section": "max overlap",
@@ -63,19 +81,27 @@
       "Comment": "控制同一目标身上该附加物最多可同时存在的层数：\n- 0：无限叠加\n- 正整数：最大可重叠层数\n注意：实际叠加规则（如叠加时是刷新持续时间还是独立计时）、覆盖优先级、同类型不同来源的冲突处理等均需运行时验证。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ.txt\n\r\n```pvf\n[max overlap] 1  // 最大可重叠数量 0 为无限 // 与原功能相同\n```",
       "Closing": false,
-      "Authors": "Lancarus"
+      "UserId": 0,
+      "Authors": "Lancarus",
+      "Create": "0001-01-01T00:00:00",
+      "UpdateTime": "2026-07-16T12:22:14.0459616+08:00"
     },
     {
+      "Id": 0,
       "PvfCommentType": "Section",
       "FileType": "apd",
       "Section": "string data",
       "Title": "字符串数据块",
-      "Comment": "闭合块 [string data]...[/string data]。内容为多行字符串参数。含义取决于 [type]：\n- 当 type = 'change status' 时，可能包含 change status 相关的字符串参数（如状态名称、资源路径等）\n- 某些 type 下不使用此块（如 skill data up 官方注释标注「不使用」）\n具体解释不能脱离 [type] 和父装备上下文。",
+      "Comment": "APD 的字符串参数闭合块，必须读取 [/string data]。内容需结合 [type] 解释；change status 可用它列出属性/状态名称，官方 skill data up 样例则标为不使用。不得把任意字符串统一解释为资源路径或状态名。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ.txt\n\r\n```pvf\n[string data] // 不使用（skill data up类型）\n```",
       "Closing": true,
-      "Authors": "Lancarus"
+      "UserId": 0,
+      "Authors": "Lancarus",
+      "Create": "0001-01-01T00:00:00",
+      "UpdateTime": "2026-07-16T12:22:45.8401304+08:00"
     },
     {
+      "Id": 0,
       "PvfCommentType": "Section",
       "FileType": "apd",
       "Section": "type",
@@ -83,7 +109,10 @@
       "Comment": "决定 APD 的核心行为逻辑。\n##### APD说明\nAPD 文件是「附加物/附属效果」的静态配置文件，位于 PVF 中的 appendage/**/*.apd 路径下。它定义了可附加到角色/怪物身上的 buff、状态变化、霸体等效果。APD 通过 appendage/appendage.lst 注册表索引，由装备 .equ 文件的 [appendage]、[my appendage]、[appendage unique] 块，或消耗品 .stk 文件的 [appendage group] 块引用。注意：APD 是静态数据配置，与 NUT (Squirrel) 运行时脚本体系中的 CNSquirrelAppendage 是不同的层次，二者不能混写。\n##### type说明1\n引擎根据此字段选择如何解释后续的数据块 ([int data] / [string data] / [float data])。已知类型包括：\n- super armor：霸体状态，使角色在持续期间免疫僵直和击退\n- change status：属性/状态变更，即常见的 buff/debuff 效果（如攻击速度、移动速度、施放速度、力量、智力等属性增减）\n- change weapon color：改变武器颜色外观\n- skill data up：技能数据提升，在一定时间内修改特定技能的参数（如冷却时间、攻击力等），功能类似于将装备的 skill data up 效果附加物化。\n##### type说明2\n当 APD [type] 为 'change status' 时，[int data]/[float data] 块中的数据通常对应 NUT 运行时 CHANGE_STATUS_TYPE_* 常量体系。NUT 中通过 CNSquirrelAppendage.sq_AddChangeStatusAppendageID() 在运行时动态添加属性变更，而 APD 中则是静态配置。常见 change status 属性包括：物理攻击力、魔法攻击力、攻击速度、移动速度、施放速度、物理/魔法暴击率、属性攻击（火/水/光/暗）、属性抗性、HP/MP 最大值/恢复速度等。但 APD 和 NUT 的 change status 不是一一对应关系，APD 的字段解释必须在具体 type 下进行。\n##### 说明\nAPD 在整个 PVF 系统中的引用路径：\n1. 装备 .equ 文件的 [if] 条件块中使用 [my appendage] + APD ID 检查自身是否已有某附加物\n2. 装备 .equ 文件的 [then] 效果块中使用 [appendage] + APD ID 给目标施加附加物\n3. 装备 .equ 文件的 [then] 效果块中使用 [appendage unique] + APD ID 施加唯一类附加物（同时只能存在一个）\n4. 消耗品 .stk 文件中使用 [appendage group] 引用附加物分组\n5. APD ID 通过 appendage/appendage.lst 注册表解析为具体的 .apd 文件路径\nID 的解析必须严格按 appendage registry，不能按数字外形套用 equipment、stackable 或 passiveobject registry。",
       "OfficialDescription": "#### 官方示例: equipmentsamplebytool.equ.txt\n\r\n```pvf\n[type] `skill data up` //类型名称\n```",
       "Closing": false,
-      "Authors": "Lancarus"
+      "UserId": 0,
+      "Authors": "Lancarus",
+      "Create": "0001-01-01T00:00:00",
+      "UpdateTime": "2026-07-16T12:21:50.7142904+08:00"
     }
   ]
 }
