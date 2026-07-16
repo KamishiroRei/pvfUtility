@@ -36,9 +36,11 @@
 | 主程序集原始 BAML 容器 | `Resources/pvfUtility.g.resources` |
 | 主程序运行和框架兼容代码 | `PvfCode/Compatibility/` |
 | 22 个恢复源码库及其解决方案 | `SourceLibraries/` |
+| Hybrid WPF 资源合并与审计工具 | `tools/PvfResourceMerger/` |
+| 资源合并器正式回归项目 | `tests/PvfResourceMerger.RegressionTests/` |
 | 源码库生成输出 | `SourceLibraries/.build/` |
 
-不得重新建立 `Recovered/` 来存放正式源码、资源、构建配置或生成产物。`SourceLibraries/.build/` 可以删除并由构建重新生成，其他三个正式位置不能作为临时恢复输出清理。
+不得重新建立 `Recovered/` 来存放正式源码、资源、构建配置或生成产物。`SourceLibraries/.build/` 可以删除并由构建重新生成；表中其余位置都是必须保留的源码、资源、工具或测试输入，不能作为临时恢复输出清理。
 
 ## 不可破坏的工程约束
 
@@ -90,15 +92,43 @@ rg -n "<HintPath>([A-Za-z]:|\\\\)" . `
 
 ### 3. 保留主程序原始 BAML
 
-`Resources/pvfUtility.g.resources` 是当前主程序正确加载 UI 的关键输入，其中包含 126 个原始 BAML。它不是可删除的编译产物。
+`Resources/pvfUtility.g.resources` 是主程序不可变的 WPF 恢复基线，其中包含 126 个原始 BAML 和 121 个其他资源。它不是可删除或原地重写的编译产物。
 
-主程序的可读 XAML 被 `Directory.Build.targets` 明确设置为 `None`。除非任务明确要求重建主程序 XAML 编译链，并且已经恢复连接 ID、生成字段、事件绑定和 Pack URI，否则不得：
+主程序的可读 XAML 默认被 `Directory.Build.targets` 设置为 `None`。默认 `RecoveredWpfResourceMode=Hybrid` 只会重新编译显式 `RecoveredSourceXaml` 清单中的 `app.xaml` 和 `views/viewscripteditor.xaml`，再从原始容器补齐其他资源。`Legacy` 完整使用原始 BAML；`SourceOnly` 在 126 项迁移完成前必须失败。具体协议见 `docs/SOURCE_XAML_MIGRATION.md`。
+
+除非任务明确迁移某个 XAML，并且已经恢复连接 ID、生成字段、事件绑定和 Pack URI，否则不得：
 
 - 删除或替换 `pvfUtility.g.resources`；
 - 把全部主程序 XAML 批量改为 `Page`；
 - 把 `app.xaml` 重新设为 `ApplicationDefinition`；
 - 重新生成 BAML 后直接覆盖原始资源容器；
+- 绕过 `RecoveredSourceXaml` 清单或 `PvfResourceMerger` 覆盖白名单；
+- 在合并失败时静默回退到原始 BAML；
 - 因为物理文件已改为语义名称，就同步改动 BAML 仍使用的 CLR 类型名。
+
+修改主程序 XAML/BAML 管线时至少验证：
+
+```powershell
+dotnet run --project `
+  .\tests\PvfResourceMerger.RegressionTests\PvfResourceMerger.RegressionTests.csproj `
+  -c Release
+
+dotnet build .\pvfUtility.csproj -c Release `
+  -p:RecoveredWpfResourceMode=Legacy
+
+dotnet build .\pvfUtility.csproj -c Release `
+  -p:RecoveredWpfResourceMode=Hybrid
+
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-RecoveredWpfResourceContainer.ps1 `
+  -Configuration Release
+
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-RecoveredXamlMigration.ps1 `
+  -Configuration Release
+```
+
+资源审计脚本必须针对最新的 Hybrid Release 输出运行，确认资源总数仍为 247、BAML 总数仍为 126、只有迁移清单声明的键发生变化，并验证最终程序集只包含一个与合并输出一致的 `pvfUtility.g.resources`。定向 XAML 自检必须在 Legacy 与 Hybrid 各自最新的输出上运行；它验证 `app.xaml` 的 11 个合并资源字典，以及 `ViewScriptEditor` 的控件树、属性和绑定。定向自检不能替代完整的 `Test-RecoveredStartup.ps1` 主窗口验证。
 
 原始 BAML 的类型表和延迟资源仍引用账号、云备份、商店、ChatGPT 等遗留功能的部分 CLR 类型、枚举和模板属性。这些成员首先是反序列化兼容契约；只有 ChatGPT 工具栏绑定被明确路由为新的 PVF AI 助手，不能据此推断其他遗留联网功能也应恢复。不得仅因 C# 中没有直接调用就删除；缺失成员可能直到延迟资源实例化时才以 `WpfXamlLoader.TransformNodes` 空引用的形式失败。
 
@@ -169,7 +199,7 @@ SourceLibraries\.build\
 
 根目录 `Recovered/` 既不是正式源码目录，也不是允许的生成目录，应保持不存在。不要把 `SourceLibraries/.build`、反编译器输出或运行日志移动到该名称下。
 
-`docs/` 根目录中的 10 个 Markdown/CSV 文件是保留的恢复审计记录，不属于生成文件。它们记录了 BAML 映射、连接 ID、字符串恢复、混淆名称、二进制分类和 `.NET 10` 迁移依据，不应在普通清理中删除。
+`docs/` 根目录中的 Markdown/CSV 文件是保留的恢复审计记录，不属于生成文件。它们记录了 BAML 映射、连接 ID、字符串恢复、混淆名称、二进制分类、源码 XAML 和 `.NET 10` 迁移依据，不应在普通清理中删除。
 
 旧的 ILSpy 临时参考树已经删除。以后如需重新反编译程序集，应输出到 `artifacts/decompiler/<AssemblyName>/`，完成核对后只把有效源码和资源移入正式项目路径；不要让临时反编译树重新参与 MSBuild。
 
@@ -237,61 +267,36 @@ dotnet build .\SourceLibraries\pvfUtility.SourceLibraries.sln `
 主程序运行、资源、依赖或框架相关修改必须运行：
 
 ```powershell
+.\scripts\Build-SingleFile.ps1 `
+  -Configuration Debug `
+  -RecoveredWpfResourceMode Hybrid `
+  -RecoveredSourceLibraryMode All
+
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-RecoveredStartup.ps1
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Debug `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Debug\win-x64 `
+  -SingleFile
 ```
 
-发布逻辑变化还必须发布并测试发布目录：
+普通 `dotnet build` 输出用于编译器、IDE 和非单文件启动回归，不是支持用户分发的交付物。CI 与 Release 必须保留普通目录启动检查，以验证独立恢复 DLL 的 SHA-256 和加载路径；正式发布以及所有用户交付构建必须使用仓库统一的 `Build-SingleFile.ps1` 和 `SingleFile.pubxml`，并验证单文件目录：
 
 ```powershell
-dotnet publish .\pvfUtility.csproj `
-  -c Release `
-  -r win-x64 `
-  --self-contained false `
-  -o .\artifacts\publish\win-x64
+.\scripts\Build-SingleFile.ps1 `
+  -Configuration Release `
+  -RecoveredWpfResourceMode Hybrid `
+  -RecoveredSourceLibraryMode All `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Release\win-x64
+
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File .\scripts\Test-SingleFilePackage.ps1 `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Release\win-x64 `
+  -RecoveredSourceLibraryMode All
 
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredStartup.ps1 `
   -Configuration Release `
-  -OutputDirectory .\artifacts\publish\win-x64
-```
-
-GitHub 自包含单文件发布必须使用仓库内的发布配置，并同时验证普通构建和单文件目录：
-
-```powershell
-dotnet restore .\pvfUtility.sln -r win-x64
-
-Remove-Item `
-  -LiteralPath .\artifacts\publish\github-win-x64 `
-  -Recurse `
-  -Force `
-  -ErrorAction SilentlyContinue
-
-dotnet publish .\pvfUtility.csproj `
-  -c Release `
-  -r win-x64 `
-  --self-contained true `
-  --no-restore `
-  -p:PublishProfile=GitHubRelease `
-  -o .\artifacts\publish\github-win-x64
-
-Copy-Item `
-  -LiteralPath .\artifacts\publish\github-win-x64\Defaults\Options `
-  -Destination .\artifacts\publish\github-win-x64\Options `
-  -Recurse
-
-powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-GitHubReleasePackage.ps1 `
-  -OutputDirectory .\artifacts\publish\github-win-x64
-
-powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-RecoveredStartup.ps1 `
-  -Configuration Release
-
-powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-RecoveredStartup.ps1 `
-  -Configuration Release `
-  -OutputDirectory .\artifacts\publish\github-win-x64 `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Release\win-x64 `
   -SingleFile
 ```
 
@@ -303,7 +308,7 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 | --- | --- |
 | 仅 Markdown/CSV 文档 | 检查相对链接、路径和命令；无需伪称运行了应用测试。 |
 | 主程序普通 C# | 构建主解决方案；影响启动或服务注册时运行 UI 启动检查。 |
-| 主程序 XAML、BAML、资源或类型名 | 构建主解决方案并运行 UI 启动检查；核对 BAML/XAML 映射。 |
+| 主程序 XAML、BAML、资源或类型名 | 构建 Legacy 与 Hybrid，运行 `Test-RecoveredXamlMigration.ps1` 和 UI 启动检查；核对 BAML/XAML 映射及最终资源差异。 |
 | `Directory.Build.targets`、`.csproj`、依赖或 `lib` | `restore`、完整构建、UI 启动检查；涉及发布时再验证发布目录。 |
 | 单个已接入恢复库内部实现 | 构建该项目、恢复库解决方案和主程序；默认 `All` 模式下还要按影响范围运行 UI 启动检查。 |
 | 恢复库公共 API、程序集身份或项目引用 | 构建全部 22 个源码库并核对依赖图；必要时做 API/强名称比较。 |
@@ -342,6 +347,7 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 
 - 新恢复或替换 DLL：更新 `docs/BINARY_RECOVERY.md` 和源码库 README。
 - BAML/XAML 数量或映射变化：更新 `docs/BAML_RECOVERY.md` 和 `docs/BAML_XAML_MAP.csv`。
+- 主程序源码 XAML 清单、资源合并或 WPF 构建模式变化：更新 `docs/SOURCE_XAML_MIGRATION.md`。
 - CLR/物理文件语义名称变化：更新 `docs/OBFUSCATED_NAME_MAP.md`。
 - 目标框架、运行时、DevExpress 或 deps.json 变化：更新 `docs/NET10_MIGRATION.md`。
 - 独立复制要求、构建命令或目录结构变化：更新根 `README.md` 和本文件中的正式目录边界。

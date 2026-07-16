@@ -16,6 +16,10 @@ recovered a readable XAML document for every BAML logical name.
   application documents plus 18 recovered-library documents).
 - ILSpy `Unknown connection ID` diagnostics externalized: 270 rows from 74 main
   application documents; diagnostics remaining in source XAML: 0.
+- Default Hybrid migration entries: 2 (`app.baml` and
+  `views/viewscripteditor.baml`).
+- Verified Hybrid container: 247 total entries, 126 BAML entries, 2 changed raw
+  payload hashes, and 245 entries identical to the original container.
 
 The complete resource mapping is stored in `docs/BAML_XAML_MAP.csv`. The removed
 connection-ID diagnostics are stored in `docs/BAML_CONNECTION_ID_AUDIT.csv` with
@@ -38,7 +42,7 @@ The duplicate loose `.baml` files were removed. The generated assembly contains
 one `pvfUtility.g.resources` manifest resource and no standalone `.baml` manifest
 resources.
 
-## Why XAML is not recompiled
+## Why XAML is migrated incrementally
 
 Decompiled BAML is not equivalent to the original design-time XAML. ILSpy emitted
 270 `Unknown connection ID` comments across 74 views. They were decompiler
@@ -49,19 +53,37 @@ original `InitializeComponent` and `IComponentConnector` implementations, and
 recompiling all XAML could generate different connection IDs or duplicate
 generated members, changing event handlers and named-control wiring.
 
-`Directory.Build.targets` therefore removes the recovered XAML from WPF `Page`
-and `ApplicationDefinition` items and retains it as `None`. The application loads
-the exact original BAML from `Resources/pvfUtility.g.resources`, while
-developers can inspect and edit the readable XAML source separately.
+`Directory.Build.targets` therefore removes all recovered main-program XAML from
+WPF items first and retains it as `None`. The explicit `RecoveredSourceXaml`
+allowlist then re-enables only verified documents. The first batch compiles
+`app.xaml` and `views/viewscripteditor.xaml`; `PvfResourceMerger` overlays their
+generated BAML on an intermediate resource container while preserving all other
+raw resource types and data from `Resources/pvfUtility.g.resources`.
 
-A future conversion to fully compiled source XAML should be performed one view at
-a time: reconcile `x:Class`, make the code-behind partial, remove recovered
-generated connector code, rebuild, and run the full UI regression test after each
-view.
+The build modes are:
+
+- `Legacy`: no recovered main-program XAML compilation; embed the original
+  container unchanged.
+- `Hybrid`: compile the current allowlist and supplement it from the original
+  container. This is the default.
+- `SourceOnly`: do not supplement from original BAML; fail until all 126 BAML
+  mappings have migrated.
+
+`app.xaml` remains a `Page`, not an `ApplicationDefinition`, so the recovered
+`App.Main` and startup initialization remain authoritative. `ViewScriptEditor`
+uses standard generated partial-class code in Hybrid, while its conditional
+legacy partial supplies the recovered loader only in Legacy.
+
+Every future conversion must be performed one document or dependency cluster at
+a time: reconcile the root type and `x:Class`, choose a single owner for
+`InitializeComponent`, restore connector semantics, compare the final resource
+container, and run the full UI regression test. The detailed contract and
+rollback commands are in `docs/SOURCE_XAML_MIGRATION.md`.
 
 ## Network boundaries and compatibility types
 
-Continuing to load the original BAML also preserves its serialized CLR schema.
+Continuing to retain and load unmigrated original BAML preserves its serialized
+CLR schema.
 The schema contains references to account, cloud-backup, store, and ChatGPT
 views, plus deferred properties such as `ViewMacroStoreDataTemplate`,
 `BookMarkStoreTemplate`, `ViewStoreList`, and `ChatGPT` on

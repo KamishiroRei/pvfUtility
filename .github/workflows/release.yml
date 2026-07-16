@@ -28,7 +28,7 @@ jobs:
     env:
       CONFIGURATION: Release
       RUNTIME_IDENTIFIER: win-x64
-      PUBLISH_DIRECTORY: artifacts/release/publish
+      PUBLISH_DIRECTORY: artifacts/publish/release/Hybrid/Release/win-x64
       PACKAGE_DIRECTORY: artifacts/release/package
       SMOKE_DIRECTORY: artifacts/release/smoke
       ARCHIVE_DIRECTORY: artifacts/release/archive
@@ -45,6 +45,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
+
+      - name: Verify deterministic WPF resource merger
+        run: |
+          dotnet run `
+            --project .\tests\PvfResourceMerger.RegressionTests\PvfResourceMerger.RegressionTests.csproj `
+            -c Release
 
       - name: Resolve release metadata
         id: metadata
@@ -79,32 +85,14 @@ jobs:
           "tag=$releaseTag" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
           "package_name=$packageName" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
-      - name: Restore Windows x64 dependencies
-        run: dotnet restore .\pvfUtility.sln -r $env:RUNTIME_IDENTIFIER
-
-      - name: Publish compressed self-contained executable
+      - name: Build and validate compressed self-contained executable
         run: |
-          $publishDirectory = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $env:PUBLISH_DIRECTORY))
-          if (Test-Path -LiteralPath $publishDirectory) {
-              Remove-Item -LiteralPath $publishDirectory -Recurse -Force
-          }
-
-          dotnet publish .\pvfUtility.csproj `
-            -c $env:CONFIGURATION `
-            -r $env:RUNTIME_IDENTIFIER `
-            --self-contained true `
-            --no-restore `
-            -p:PublishProfile=GitHubRelease `
-            -o $publishDirectory
-          if ($LASTEXITCODE -ne 0) {
-              throw "dotnet publish failed with exit code $LASTEXITCODE."
-          }
-
-      - name: Verify ordinary directory build
-        run: |
-          powershell -NoProfile -ExecutionPolicy Bypass `
-            -File .\scripts\Test-RecoveredStartup.ps1 `
-            -Configuration $env:CONFIGURATION
+          & .\scripts\Build-SingleFile.ps1 `
+            -Configuration $env:CONFIGURATION `
+            -RecoveredWpfResourceMode Hybrid `
+            -RecoveredSourceLibraryMode All `
+            -RuntimeIdentifier $env:RUNTIME_IDENTIFIER `
+            -OutputDirectory $env:PUBLISH_DIRECTORY
 
       - name: Assemble and validate clean release package
         run: |
@@ -123,16 +111,9 @@ jobs:
 
           Copy-Item -LiteralPath $publishDirectory -Destination $packageRoot -Recurse
 
-          $optionsDirectory = Join-Path $packageRoot "Options"
-          if (Test-Path -LiteralPath $optionsDirectory) {
-              Remove-Item -LiteralPath $optionsDirectory -Recurse -Force
-          }
-          Copy-Item `
-            -LiteralPath (Join-Path $packageRoot "Defaults\Options") `
-            -Destination $optionsDirectory `
-            -Recurse
-
-          & .\scripts\Test-GitHubReleasePackage.ps1 -OutputDirectory $packageRoot
+          & .\scripts\Test-SingleFilePackage.ps1 `
+            -OutputDirectory $packageRoot `
+            -RecoveredSourceLibraryMode All
 
           Copy-Item -LiteralPath $packageRoot -Destination $smokeRoot -Recurse
 
@@ -178,7 +159,9 @@ jobs:
           Expand-Archive -LiteralPath $env:ZIP_PATH -DestinationPath $extractDirectory
 
           $packageRoot = Join-Path $extractDirectory $env:PACKAGE_NAME
-          & .\scripts\Test-GitHubReleasePackage.ps1 -OutputDirectory $packageRoot
+          & .\scripts\Test-SingleFilePackage.ps1 `
+            -OutputDirectory $packageRoot `
+            -RecoveredSourceLibraryMode All
 
       - name: Verify extracted single-file package
         run: |

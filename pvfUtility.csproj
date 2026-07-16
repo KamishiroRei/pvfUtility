@@ -20,6 +20,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="tests\**\*.cs" />
+    <Compile Remove="tools\**\*.cs" />
     <None Remove="images\svgs\treefiletypes\ani.svg" />
     <None Remove="images\svgs\asx_checkboxclearall_grey_16x.svg" />
     <None Remove="images\svgs\edit\saveall_16x.svg" />

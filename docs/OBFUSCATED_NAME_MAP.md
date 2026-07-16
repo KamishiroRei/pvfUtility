@@ -173,8 +173,10 @@ public behavior. Completed areas include:
 - Readable-XAML cleanup replaced 13 ILSpy pseudo-`<Ctor>` nodes with valid markup
   extension/property syntax and moved 270 `Unknown connection ID` comments from
   74 documents into `docs/BAML_CONNECTION_ID_AUDIT.csv`. These edits improve the
-  audit source only: the 126 main-application XAML files remain non-compiled, and
-  the original BAML continues to define runtime type and connection identities.
+  audit source. Hybrid now source-compiles the two explicitly verified entries
+  (`app.xaml` and `views/viewscripteditor.xaml`); the other 124 documents remain
+  non-compiled and their original BAML continues to define runtime type and
+  connection identities.
 - A subsequent placeholder sweep removed all 572 remaining `//IL_xxxx` diagnostic
   comments, two unreferenced controls under the former `PvfCode.Controls.Test`
   namespace, unused `Test` properties in search and macro models, eight discarded

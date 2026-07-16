@@ -9,11 +9,12 @@
 - 主程序目标框架：`.NET 10`，即 `net10.0-windows`。
 - 目标平台：Windows x64，运行时标识为 `win-x64`。
 - 主解决方案：`pvfUtility.sln`。
-- 主解决方案包含 1 个 WPF 主程序和 22 个已恢复的源码库项目。
+- 主解决方案包含 1 个 WPF 主程序、22 个已恢复的源码库项目，以及 Hybrid 资源合并工具和对应回归测试项目。
 - 默认 `RecoveredSourceLibraryMode=All`，主程序运行时直接使用其中 20 个恢复源码项目的构建产物；`Settings` 和 `SettingsModel` 保持独立可构建，但不是主程序依赖图的一部分。
 - 22 个源码库共包含 1,394 个 C# 文件、18 个可编译 XAML 和 16 个 RESX。
 - 主程序的 126 个原始 WPF BAML 已保存在 `Resources/pvfUtility.g.resources` 中。
-- 主程序运行时继续依赖该原始 BAML；根目录中的可读 XAML 仅供审阅，不参与主程序 WPF 标记编译。
+- 默认 `RecoveredWpfResourceMode=Hybrid`：`app.xaml` 和 `views/viewscripteditor.xaml` 由源码编译，其余 124 个 BAML 及 121 个非 BAML 资源从原始容器逐字节补齐。
+- `Legacy` 模式仍可完整使用 126 个原始 BAML；`SourceOnly` 在迁移清单达到 126 项前会明确构建失败。
 - 原 `Recovered` 汇总目录已经移除；正式工程输入已分别归位到根目录 `Resources/`、`PvfCode/Compatibility/` 和 `SourceLibraries/`。
 - 项目不依赖 `pvfUtility-old`、`_analysis_extract`、原始程序目录或工作区外的绝对路径。
 - 目录归位后已重新验证 Debug 和 Release：20 个源码程序集哈希匹配，启动阶段观察到 14 个实际加载，主窗口保持 15 秒且没有错误窗口。
@@ -71,39 +72,55 @@ dotnet --version
 dotnet --list-sdks
 ```
 
-### 还原和编译
+### 本地单文件构建与运行
 
-在 `pvfUtility-recovered` 目录中执行：
+所有本地可运行、可复制和可分发的构建都使用与 CI、GitHub Release 相同的单文件入口：
+
+```powershell
+.\scripts\Build-SingleFile.ps1
+```
+
+默认生成 `Debug + Hybrid + All + win-x64` 的压缩、自包含单文件包：
+
+```text
+artifacts\publish\local\Hybrid\Debug\win-x64\
+├── pvfUtility.exe
+├── Options\
+├── Resources\
+├── Defaults\Options\
+└── recovered-source-libraries.txt
+```
+
+构建脚本会自动还原依赖、发布单文件、验证包中没有独立 DLL/PDB/deps/runtimeconfig、审计 Hybrid WPF 容器，并运行源码 XAML 自检。直接运行：
+
+```powershell
+.\artifacts\publish\local\Hybrid\Debug\win-x64\pvfUtility.exe
+```
+
+显式生成 Release 或 Legacy 回退包：
+
+```powershell
+.\scripts\Build-SingleFile.ps1 `
+  -Configuration Release `
+  -RecoveredWpfResourceMode Hybrid
+
+.\scripts\Build-SingleFile.ps1 `
+  -Configuration Debug `
+  -RecoveredWpfResourceMode Legacy
+```
+
+`SourceOnly` 是最终全源码门槛；当前只有 2/126 项完成，因此该模式会明确构建失败。
+
+### 编译器与 IDE 检查（非交付物）
+
+普通 `dotnet build` 仅用于编译器、IDE 和解决方案级回归检查：
 
 ```powershell
 dotnet restore .\pvfUtility.sln
 dotnet build .\pvfUtility.sln -c Debug --no-restore
 ```
 
-只编译可运行的主程序：
-
-```powershell
-dotnet restore .\pvfUtility.csproj
-dotnet build .\pvfUtility.csproj -c Debug --no-restore
-```
-
-编译后的程序位于：
-
-```text
-bin\Debug\net10.0-windows\win-x64\pvfUtility.exe
-```
-
-### 运行
-
-```powershell
-.\bin\Debug\net10.0-windows\win-x64\pvfUtility.exe
-```
-
-也可以通过 SDK 启动：
-
-```powershell
-dotnet run --project .\pvfUtility.csproj -c Debug
-```
+它产生的普通 `bin` 输出不是可复制或可分发的构建结果，也不是本项目支持的本地运行入口。
 
 ### 启动验证
 
@@ -111,7 +128,10 @@ dotnet run --project .\pvfUtility.csproj -c Debug
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-RecoveredStartup.ps1
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Debug `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Debug\win-x64 `
+  -SingleFile
 ```
 
 脚本会观察程序 15 秒，确认：
@@ -121,30 +141,7 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 - `BarSubItemLinksubFile`、`FilelistLayoutPanel` 和 `DocumentHost` 等关键控件存在；
 - 没有出现错误或异常窗口。
 
-### 发布
-
-生成依赖 `.NET 10 Desktop Runtime` 的 x64 发布目录：
-
-```powershell
-dotnet publish .\pvfUtility.csproj `
-  -c Release `
-  -r win-x64 `
-  --self-contained false `
-  -o .\artifacts\publish\win-x64
-```
-
-验证发布结果：
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-RecoveredStartup.ps1 `
-  -Configuration Release `
-  -OutputDirectory .\artifacts\publish\win-x64
-```
-
-目标机器运行这种发布结果时需要安装 `.NET 10 Desktop Runtime x64`。
-
-#### GitHub 单文件 Release
+### GitHub 单文件 Release
 
 仓库中的 `.github/workflows/release.yml` 会生成 Windows x64 自包含单文件版本。该版本把 .NET 10 Desktop Runtime、托管依赖和发布时原生依赖压缩进 `pvfUtility.exe`，不需要目标机器预先安装 .NET。为避免破坏 WPF BAML、DevExpress 和反射加载，Release 发布明确关闭裁剪和 ReadyToRun。
 
@@ -173,42 +170,30 @@ pvfUtility-v1.0.0-win-x64\
 - `Defaults/Options/` 是缺少配置文件时使用的原始模板。删除 `Options` 中的对应文件后，程序可在后续启动时重新复制默认值。
 - 首次运行可能在 EXE 旁生成 `7z64.dll` 和 `pvfUtility.exe.WebView2/` 等运行时文件；这些文件不属于原始 Release 包。
 
-本地复现单文件发布：
+本地复现单文件发布使用与 CI、GitHub Release 相同的构建脚本和发布配置：
 
 ```powershell
-dotnet restore .\pvfUtility.sln -r win-x64
-
-Remove-Item `
-  -LiteralPath .\artifacts\publish\github-win-x64 `
-  -Recurse `
-  -Force `
-  -ErrorAction SilentlyContinue
-
-dotnet publish .\pvfUtility.csproj `
-  -c Release `
-  -r win-x64 `
-  --self-contained true `
-  --no-restore `
-  -p:PublishProfile=GitHubRelease `
-  -o .\artifacts\publish\github-win-x64
-
-Copy-Item `
-  -LiteralPath .\artifacts\publish\github-win-x64\Defaults\Options `
-  -Destination .\artifacts\publish\github-win-x64\Options `
-  -Recurse
+.\scripts\Build-SingleFile.ps1 `
+  -Configuration Release `
+  -RecoveredWpfResourceMode Hybrid `
+  -RecoveredSourceLibraryMode All `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Release\win-x64
 
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-GitHubReleasePackage.ps1 `
-  -OutputDirectory .\artifacts\publish\github-win-x64
+  -File .\scripts\Test-SingleFilePackage.ps1 `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Release\win-x64 `
+  -RecoveredSourceLibraryMode All
 
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredStartup.ps1 `
   -Configuration Release `
-  -OutputDirectory .\artifacts\publish\github-win-x64 `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Release\win-x64 `
   -SingleFile
 ```
 
-正式工作流会在打包前和 ZIP 解压后分别运行同一份 `Test-GitHubReleasePackage.ps1`，检查包中不存在独立 DLL、PDB、deps/runtimeconfig 文件，再对两个独立副本运行单文件启动测试。
+`Properties/PublishProfiles/SingleFile.pubxml` 固定自包含、压缩、单文件、关闭裁剪与 ReadyToRun 等公共参数。`Test-GitHubReleasePackage.ps1` 现在是 `Test-SingleFilePackage.ps1` 的兼容包装。正式工作流会验证发布目录、独立冒烟副本和 ZIP 解压目录，并对单文件副本执行启动测试。
+
+`master`/PR 构建也会从干净产物复制独立冒烟目录再启动程序，随后只上传未经启动污染的原始目录；运行时释放的 `7z64.dll` 或 WebView2 数据不会进入 Actions artifact。
 
 ## 独立复制
 
@@ -228,10 +213,12 @@ SourceLibraries\.build\
 - `Resources/pvfUtility.g.resources`：主程序原始的已编译 WPF 资源。
 - `Resources/OfficialAnnotationTranslation/`：随构建和发布输出复制的官方注释只读文档。
 - `images/`、`styles/`、`themes/`、`iconfont/` 等资源目录。
+- `tools/PvfResourceMerger/`：Hybrid 构建必需的确定性 WPF 资源合并与审计工具。
+- `tests/PvfResourceMerger.RegressionTests/`：资源合并器的控制台回归测试项目。
 - `Directory.Build.targets`：负责恢复资源、BAML 间接依赖和本地运行文件的构建规则。
 - `global.json`、`pvfUtility.csproj`、`pvfUtility.sln` 和 `SourceLibraries/pvfUtility.SourceLibraries.sln`。
 
-不要只复制普通 `bin` 输出中的 `pvfUtility.exe`；普通构建仍必须与同目录 DLL、原生库和资源一起运行。只有通过 `GitHubRelease.pubxml` 生成的单文件 EXE 才能脱离这些独立 DLL，并且仍需保留发布包中的外置 `Options`、`Resources` 和 `Defaults` 目录。
+不要只复制普通 `bin` 输出中的 `pvfUtility.exe`；普通构建仍必须与同目录 DLL、原生库和资源一起运行。只有通过 `scripts/Build-SingleFile.ps1` 与 `SingleFile.pubxml` 生成的单文件 EXE 才能脱离这些独立 DLL，并且仍需保留发布包中的外置 `Options`、`Resources` 和 `Defaults` 目录。
 
 旧的 `Recovered/` 不是独立工程所需目录，不要在复制后重新建立它。`SourceLibraries/.build` 是可再生输出，首次编译源码库时会自动创建。
 
@@ -239,7 +226,7 @@ SourceLibraries\.build\
 
 | 路径 | 说明 |
 | --- | --- |
-| `pvfUtility.sln` | 推荐使用的主解决方案，包含主程序和全部 22 个源码库。 |
+| `pvfUtility.sln` | 推荐使用的主解决方案，包含主程序、全部 22 个源码库、资源合并工具和回归测试项目。 |
 | `pvfUtility.csproj` | 可运行的 WPF 主程序，目标为 `.NET 10 / Windows x64`。 |
 | `PvfCode/` | 主程序的主要恢复源码。 |
 | `controls/`、`views/`、`styles/`、`themes/` | 从主程序集恢复出的可读 XAML。 |
@@ -247,6 +234,8 @@ SourceLibraries\.build\
 | `Resources/` | 主程序集的原始编译资源容器、官方注释只读文档和 AI 知识包；其中 `pvfUtility.g.resources` 是正式构建输入。 |
 | `PvfCode/Compatibility/` | 程序集解析、DevExpress 试用初始化和 `.NET 10` WPF 兼容代码。 |
 | `SourceLibraries/` | 从 22 个托管 DLL 恢复出的独立源码项目、解决方案和目录级构建配置。 |
+| `tools/PvfResourceMerger/` | Hybrid 构建使用的无第三方依赖资源合并与程序集容器审计工具。 |
+| `tests/PvfResourceMerger.RegressionTests/` | 覆盖资源替换、失败边界、确定性和审计契约的控制台回归测试。 |
 | `scripts/` | 启动验证和字符串恢复工具。 |
 | `docs/` | BAML、连接 ID、二进制、混淆名称、字符串和 `.NET 10` 恢复审计记录。 |
 
@@ -307,16 +296,21 @@ SourceLibraries\.build\<ProjectName>\
 
 ## XAML 与 BAML
 
-主程序目录中的 126 个可读 `.xaml` 文件用于阅读、检索和继续恢复源码。它们被明确标记为 `None`，不会重新编译成 WPF Page。
+主程序目录中的 126 个可读 `.xaml` 文件用于阅读、检索和继续恢复源码。`Directory.Build.targets` 默认先把它们标记为 `None`，再只将显式 `RecoveredSourceXaml` 清单中的文件加入 WPF 编译。
 
-运行时仍加载 `Resources/pvfUtility.g.resources` 中的原始 BAML。原因是从 BAML 反编译出的 XAML 可能缺失连接 ID、生成字段和事件绑定关系，直接重编译可能导致界面能编译但运行时控件或事件失效。
+当前 Hybrid 清单包含 `app.xaml` 和 `views/viewscripteditor.xaml`。WPF 先生成这两个 BAML，`PvfResourceMerger` 再以原始 `Resources/pvfUtility.g.resources` 为不可变基线，只替换 `app.baml` 和 `views/viewscripteditor.baml`。验证后的最终容器仍有 247 个资源和 126 个 BAML，另外 245 项的原始类型与数据哈希不变。
 
-ILSpy 曾在 74 个主程序 XAML 中留下 270 条 `Unknown connection ID` 诊断注释。这些注释不是可执行标记，现已从可读 XAML 移出，并按原文件、原行号、连接 ID 和相邻上下文保存在 `docs/BAML_CONNECTION_ID_AUDIT.csv`。外置诊断不表示连接关系已经恢复，也不改变继续使用原始 BAML 的兼容边界。
+`scripts/Test-RecoveredWpfResourceContainer.ps1` 将上述数量、差异键以及最终程序集内唯一资源容器的字节一致性固化为可重复审计；GitHub 的 `master`/PR 构建和标签 Release 都会执行该检查。
+
+`Legacy` 模式不编译主程序恢复 XAML，直接嵌入原始容器；它是运行差分和紧急回退路径。`SourceOnly` 不允许原始 BAML 补齐，当前会因迁移清单只有 2 项而失败。
+
+ILSpy 曾在 74 个主程序 XAML 中留下 270 条 `Unknown connection ID` 诊断注释。这些注释不是可执行标记，现已从可读 XAML 移出，并按原文件、原行号、连接 ID 和相邻上下文保存在 `docs/BAML_CONNECTION_ID_AUDIT.csv`。外置诊断不表示连接关系已经恢复，因此后续 XAML 仍必须逐项恢复和验证，不能批量改为 `Page`。
 
 因此：
 
 - 不要删除 `pvfUtility.g.resources`；
-- 不要在未完成连接关系验证前把主程序 XAML 改回 `Page` 或 `ApplicationDefinition`；
+- 不要在未完成连接关系验证前把主程序 XAML 加入 `RecoveredSourceXaml`；
+- 不要原地覆盖原始资源容器，Hybrid 合并输出只能写入 `obj`；
 - 不要仅凭物理文件名重命名混淆后的 CLR 类型，原始 BAML 可能仍引用其完整类型名。
 - 不要删除看似未被 C# 调用、但由 BAML 类型表或延迟资源引用的兼容属性；修改后必须运行 UI 启动检查。
 
@@ -388,6 +382,7 @@ pvfUtility.sln
 - `README_RECOVERY.md`：完整英文恢复说明和恢复来源。
 - `docs/BINARY_RECOVERY.md`：托管/原生二进制分类和源码恢复清单。
 - `docs/BAML_RECOVERY.md`：BAML 到 XAML 的恢复方法与运行策略。
+- `docs/SOURCE_XAML_MIGRATION.md`：主程序渐进源码 XAML、资源合并、单文件发布与回退规则。
 - `docs/NET10_MIGRATION.md`：`.NET 10` 迁移和 DevExpress 兼容处理。
 - `docs/AI_ASSISTANT.md`：AI 助手宿主、接口、安全边界、知识来源与验证方法。
 - `docs/OBFUSCATED_NAME_MAP.md`：混淆 CLR 类型与语义文件名的映射。

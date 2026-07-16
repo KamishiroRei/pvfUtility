@@ -26,6 +26,12 @@ namespace PvfCode;
 
 public class App : Application
 {
+	private static bool IsRecoveredXamlSelfTest =>
+		string.Equals(
+			Environment.GetEnvironmentVariable("PVFUTILITY_RECOVERED_XAML_SELF_TEST"),
+			"1",
+			StringComparison.Ordinal);
+
 	private static readonly AsyncLock UnhandledExceptionLock = new AsyncLock();
 
 	private static readonly AsyncLock AppErrorLock = new AsyncLock();
@@ -46,30 +52,34 @@ public class App : Application
 	{
 		RecoveredAssemblyResolver.Register();
 		DevExpressNet10Compatibility.Apply();
-		try
-		{
-			string path = Path.Combine(AppContext.BaseDirectory, "7z64.dll");
-			if (!File.Exists(path))
-			{
-				File.WriteAllBytes(path, Resource1._7z64);
-			}
-			path = Path.Combine(AppContext.BaseDirectory, "e_sqlite3.dll");
-			if (File.Exists(path))
-			{
-				File.Delete(path);
-			}
-			path = Path.Combine(AppContext.BaseDirectory, "WebView2Loader.dll");
-			if (File.Exists(path))
-			{
-				File.Delete(path);
-			}
-		}
-		catch (Exception)
-		{
-		}
-		SplashScreenManager.Create(() => new PvfCodeSplashScreenWindow()).ShowOnStartup();
-		ServiceInjector.InjectServices();
 		Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+		if (!IsRecoveredXamlSelfTest)
+		{
+			try
+			{
+				string path = Path.Combine(AppContext.BaseDirectory, "7z64.dll");
+				if (!File.Exists(path))
+				{
+					File.WriteAllBytes(path, Resource1._7z64);
+				}
+				path = Path.Combine(AppContext.BaseDirectory, "e_sqlite3.dll");
+				if (File.Exists(path))
+				{
+					File.Delete(path);
+				}
+				path = Path.Combine(AppContext.BaseDirectory, "WebView2Loader.dll");
+				if (File.Exists(path))
+				{
+					File.Delete(path);
+				}
+			}
+			catch (Exception)
+			{
+			}
+			SplashScreenManager.Create(() => new PvfCodeSplashScreenWindow()).ShowOnStartup();
+		}
+
+		ServiceInjector.InjectServices();
 		AppCore.Logger = new LoggerViewModel();
 		ServiceContainer.Instance.AddService((Ilogger)AppCore.Logger);
 		ServiceContainer.Instance.AddService((IRes)Res.Instance);
@@ -231,10 +241,15 @@ public class App : Application
 	[GeneratedCode("PresentationBuildTasks", "10.0.1.0")]
 	[DebuggerNonUserCode]
 	[STAThread]
-	public static void Main()
+	public static int Main()
 	{
 		App app = new App();
 		app.InitializeComponent();
+		if (IsRecoveredXamlSelfTest)
+		{
+			return RecoveredXamlSelfTest.Run(app);
+		}
 		app.Run();
+		return 0;
 	}
 }

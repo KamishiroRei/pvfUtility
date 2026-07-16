@@ -1,0 +1,96 @@
+name: Build Windows single-file packages
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  single-file:
+    name: ${{ matrix.wpf_resource_mode }} single-file
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        wpf_resource_mode:
+          - Legacy
+          - Hybrid
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Verify deterministic WPF resource merger
+        run: |
+          dotnet run `
+            --project .\tests\PvfResourceMerger.RegressionTests\PvfResourceMerger.RegressionTests.csproj `
+            -c Release
+
+      - name: Restore directory build
+        run: |
+          dotnet restore .\pvfUtility.sln `
+            -r win-x64 `
+            -p:RecoveredWpfResourceMode="${{ matrix.wpf_resource_mode }}" `
+            -p:RecoveredSourceLibraryMode=All
+
+      - name: Verify incomplete SourceOnly guard
+        if: matrix.wpf_resource_mode == 'Hybrid'
+        run: |
+          $output = & dotnet build .\pvfUtility.csproj `
+            -c Release `
+            -r win-x64 `
+            --no-restore `
+            -p:RecoveredWpfResourceMode=SourceOnly `
+            -p:RecoveredSourceLibraryMode=All 2>&1
+          $exitCode = $LASTEXITCODE
+          $output | Write-Output
+          if ($exitCode -eq 0) {
+            throw "SourceOnly unexpectedly succeeded with an incomplete migration ledger."
+          }
+          if (-not ($output -match "SourceOnly requires 126 migrated XAML entries; found 2")) {
+            throw "SourceOnly failed without the expected 2/126 migration guard."
+          }
+
+      - name: Build and validate single-file package
+        run: |
+          $outputDirectory = "artifacts/publish/ci/${{ matrix.wpf_resource_mode }}/Release/win-x64"
+          & .\scripts\Build-SingleFile.ps1 `
+            -Configuration Release `
+            -RecoveredWpfResourceMode "${{ matrix.wpf_resource_mode }}" `
+            -RecoveredSourceLibraryMode All `
+            -RuntimeIdentifier win-x64 `
+            -OutputDirectory $outputDirectory
+
+      - name: Verify single-file startup
+        run: |
+          $outputDirectory = "artifacts/publish/ci/${{ matrix.wpf_resource_mode }}/Release/win-x64"
+          $smokeDirectory = "artifacts/smoke/ci/${{ matrix.wpf_resource_mode }}/Release/win-x64"
+          if (Test-Path -LiteralPath $smokeDirectory) {
+            Remove-Item -LiteralPath $smokeDirectory -Recurse -Force
+          }
+          New-Item -ItemType Directory -Path (Split-Path -Parent $smokeDirectory) -Force | Out-Null
+          Copy-Item -LiteralPath $outputDirectory -Destination $smokeDirectory -Recurse
+          & .\scripts\Test-RecoveredStartup.ps1 `
+            -Configuration Release `
+            -OutputDirectory $smokeDirectory `
+            -SingleFile
+
+      - name: Upload verified package
+        uses: actions/upload-artifact@v4
+        with:
+          name: pvfUtility-${{ matrix.wpf_resource_mode }}-win-x64
+          path: artifacts/publish/ci/${{ matrix.wpf_resource_mode }}/Release/win-x64
+          if-no-files-found: error
+          retention-days: 7

@@ -144,12 +144,16 @@ dotnet build .\pvfUtility.sln -c Debug --no-restore
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Test-RecoveredStartup.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Test-AiAssistantDocking.ps1
 
-dotnet publish .\pvfUtility.csproj -c Release -r win-x64 --self-contained false `
-  -o .\artifacts\publish\ai-assistant
+.\scripts\Build-SingleFile.ps1 `
+  -Configuration Release `
+  -RecoveredWpfResourceMode Hybrid `
+  -RecoveredSourceLibraryMode All `
+  -OutputDirectory .\artifacts\publish\ai-assistant
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-RecoveredStartup.ps1 `
   -Configuration Release `
-  -OutputDirectory .\artifacts\publish\ai-assistant
+  -OutputDirectory .\artifacts\publish\ai-assistant `
+  -SingleFile
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\scripts\Test-AiAssistantDocking.ps1 `
   -Configuration Release `

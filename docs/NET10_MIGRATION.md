@@ -114,8 +114,17 @@ dotnet restore .\pvfUtility.sln
 dotnet build .\pvfUtility.sln -c Debug --no-restore
 ```
 
-The primary solution contains the main application and all 22 recovered source
-libraries. `SourceLibraries\pvfUtility.SourceLibraries.sln` remains
+This ordinary solution build is a compiler/IDE verification step. All runnable
+and distributable local output is produced through the unified single-file
+pipeline:
+
+```powershell
+.\scripts\Build-SingleFile.ps1
+```
+
+The primary solution contains the main application, all 22 recovered source
+libraries, the Hybrid resource merger, and its regression project.
+`SourceLibraries\pvfUtility.SourceLibraries.sln` remains
 available when only the recovered library graph should be loaded or built.
 
 Clean verification with SDK 10.0.300 completes with zero errors for both the
@@ -126,21 +135,24 @@ annotations without original nullable context, obsolete APIs, platform analysis,
 unused recovered fields, and ignored/discarded async calls. No warning was
 suppressed as part of the framework migration.
 
-The executable is generated at:
+The default runnable executable is generated at:
 
 ```text
-bin\Debug\net10.0-windows\win-x64\pvfUtility.exe
+artifacts\publish\local\Hybrid\Debug\win-x64\pvfUtility.exe
 ```
 
 Run the UI regression check with:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-RecoveredStartup.ps1
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Debug `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Debug\win-x64 `
+  -SingleFile
 ```
 
 The final verification ran this check repeatedly against Debug and Release
-publish output. Each run kept the
+single-file publish output. Each run kept the
 fully populated main window available for 15 seconds, found
 `BarSubItemLinksubFile`, `FilelistLayoutPanel`, and `DocumentHost`, and observed
 no error window. When a `recovered-source-libraries.txt` manifest is present, the
@@ -157,8 +169,11 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 
 ## Remaining constraints
 
-- The main application still loads the original 126 compiled BAML documents from
-  `Resources/pvfUtility.g.resources`; see `BAML_RECOVERY.md`.
+- The main application retains all 126 original compiled BAML documents in
+  `Resources/pvfUtility.g.resources`. Default Hybrid builds source-compile two
+  documents and supplement the remaining resources from that immutable baseline;
+  Legacy builds use all 126 original BAML entries. See `BAML_RECOVERY.md` and
+  `SOURCE_XAML_MIGRATION.md`.
 - The default main runtime uses 20 recovered source assemblies. External managed
   dependencies, DevExpress commercial assemblies, native DLLs, themes, satellite
   resources, optional providers, and `Binary`-mode fallbacks remain under `lib`.

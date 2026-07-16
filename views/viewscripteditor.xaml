@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<views:ViewScriptEditor xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder;assembly=pvfUtility" FrameworkElement.Width="1000" FrameworkElement.Height="800" Control.Padding="0" xmlns:views="clr-namespace:PvfCode.Views;assembly=pvfUtility" Window.Title="{Binding Title}" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
+<dx:ThemedWindow x:Class="PvfCode.Views.ViewScriptEditor" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:appsetting="clr-namespace:PvfCode;assembly=PvfCode.Models" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:texteditorfolder="clr-namespace:PvfCode.Controls.TextEditorFolder" FrameworkElement.Width="1000" FrameworkElement.Height="800" Control.Padding="0" Window.Title="{Binding Title}" Control.FontSize="{Binding Source={x:Static appsetting:AppSetting.Instance}, Path=FontSize}">
   <Grid>
     <texteditorfolder:TextEditorBase AllowCompletion="False" AllowFolding="False" xmlns:texteditlib="clr-namespace:TextEditLib;assembly=TextEditLib" texteditlib:TextEdit.ContentMargin="10,0,0,0" p9:TextEditor.Document="{Binding Document, Mode=TwoWay}" p9:TextEditor.IsReadOnly="{Binding IsReadOnly}" xmlns:p9="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" />
   </Grid>
-</views:ViewScriptEditor>
+</dx:ThemedWindow>

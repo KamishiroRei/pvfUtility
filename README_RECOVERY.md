@@ -7,14 +7,19 @@ design-time metadata cannot be recovered exactly from the published executable.
 
 ## Project layout
 
-- `pvfUtility.sln`: primary IDE solution containing the main application
-  and all 22 recovered source-library projects. VS Code is configured to open
-  this solution instead of scanning sibling recovery and analysis directories.
+- `pvfUtility.sln`: primary IDE solution containing the main application,
+  all 22 recovered source-library projects, the Hybrid resource merger, and its
+  regression project. VS Code is configured to open this solution instead of
+  scanning sibling recovery and analysis directories.
 - `pvfUtility.csproj`: buildable WPF project targeting `.NET 10 for Windows x64`.
 - `global.json`: selects a stable .NET 10 SDK feature band without depending on
   an absolute SDK installation path.
 - `Directory.Build.targets`: recovered resource, local dependency-copy, and
   compiled-BAML dependency integration used by both build and publish.
+- `tools/PvfResourceMerger`: deterministic raw-resource merger and final
+  assembly-container auditor required by Hybrid builds.
+- `tests/PvfResourceMerger.RegressionTests`: console regression coverage for
+  merge, validation, determinism, audit, and CLI behavior.
 - `lib`: vendored external managed assemblies, native libraries, satellite
   resources, optional runtime files, and binary-mode fallbacks extracted from the
   application package. In the default source mode, DLLs supplied by recovered
@@ -25,10 +30,12 @@ design-time metadata cannot be recovered exactly from the published executable.
   SevenZipSharp assembly. Internal dependencies use
   `ProjectReference`; external binary references resolve only from local `lib`.
 - `Resources/pvfUtility.g.resources`: original compiled WPF resource
-  container. Its 126 BAML entries preserve the pack URIs used by
-  `Application.LoadComponent`.
+  container and immutable recovery baseline. Its 126 BAML entries preserve the
+  pack URIs used by `Application.LoadComponent`; Hybrid builds replace only the
+  explicitly migrated entries in an intermediate merged container.
 - `*.xaml`: 126 readable XAML files restored to their logical source paths. They
-  are retained as source/reference files rather than recompiled WPF pages.
+  remain source/reference files by default. `app.xaml` and
+  `views/viewscripteditor.xaml` are the first source-compiled Hybrid entries.
 - `images`, `styles`, `themes`, `iconfont`: recovered application resources.
 - The obsolete ILSpy scratch tree was removed after its useful source and
   resource material had been integrated into the canonical project paths.
@@ -50,6 +57,10 @@ design-time metadata cannot be recovered exactly from the published executable.
 - `docs/NET10_MIGRATION.md`: target-framework migration, runtime compatibility
   work, dependency-manifest changes, and clean verification results.
 - `scripts/Test-RecoveredStartup.ps1`: UI smoke test for the populated main window.
+- `scripts/Test-RecoveredWpfResourceContainer.ps1`: verifies the 247/126
+  resource counts, declared replacement set, and embedded assembly container.
+- `scripts/Test-RecoveredXamlMigration.ps1`: focused semantic self-test for the
+  first two source-compiled XAML documents in Legacy and Hybrid outputs.
 - `scripts/Test-AiAssistantDocking.ps1`: verifies that the AI panel starts hidden, then opens at the far right and receives input focus from the toolbar.
 - `scripts/Inline-ObfuscatedStrings.ps1`: recovery utility used to produce the
   string map from the pre-inlining assembly.
@@ -72,27 +83,35 @@ Required environment:
   references; the recovered library solution has four .NET 10 extension-package
   references for assemblies not shipped under `lib`.
 
-Build from the project directory:
+Create the local runnable package from the project directory:
+
+```powershell
+.\scripts\Build-SingleFile.ps1
+```
+
+This is the same compressed, self-contained Windows x64 single-file pipeline
+used by CI and GitHub Release. Its default output is:
+
+```text
+artifacts\publish\local\Hybrid\Debug\win-x64\pvfUtility.exe
+```
+
+Ordinary solution builds remain available for compiler and IDE checks, but their
+`bin` output is not a runnable or distributable project deliverable:
 
 ```powershell
 dotnet restore .\pvfUtility.sln
 dotnet build .\pvfUtility.sln --no-restore
 ```
 
-To build only the runnable application, replace the solution path with
-`.\pvfUtility.csproj`.
-
-The executable is generated at:
-
-```text
-bin\Debug\net10.0-windows\win-x64\pvfUtility.exe
-```
-
 Validate that the actual WPF window loads without an error dialog:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\Test-RecoveredStartup.ps1
+  -File .\scripts\Test-RecoveredStartup.ps1 `
+  -Configuration Debug `
+  -OutputDirectory .\artifacts\publish\local\Hybrid\Debug\win-x64 `
+  -SingleFile
 ```
 
 The test checks the `pvfUtility` main-window title, a populated visual tree, and
@@ -153,12 +172,15 @@ The duplicate loose BAML files and their 252 project-item declarations were
 therefore removed. The readable XAML files now occupy the original logical paths,
 including `app.xaml`, `mainwindow.xaml`, control views, styles, and themes.
 
-The recovered XAML is well-formed XML, but it is intentionally marked as `None`
-instead of `Page`/`ApplicationDefinition`. BAML decompilation loses some connection
-IDs and generated code relationships, so recompiling all XAML would risk changing
-event and named-control wiring. Runtime UI loading continues to use the exact
-original BAML inside `pvfUtility.g.resources`. See `docs/BAML_RECOVERY.md` for the
-technical details.
+The recovered XAML is well-formed XML. The main build first marks all 126 files
+as `None`, because BAML decompilation loses some connection IDs and generated
+code relationships. An explicit Hybrid allowlist currently re-enables only
+`app.xaml` and `views/viewscripteditor.xaml` as WPF `Page` items. Their generated
+BAML replaces the two matching keys in an intermediate resource container; the
+other 124 BAML and all 121 non-BAML resources retain their original raw data.
+`Legacy` remains a complete original-BAML rollback mode, while `SourceOnly`
+fails until all 126 mappings are migrated. See `docs/BAML_RECOVERY.md` and
+`docs/SOURCE_XAML_MIGRATION.md` for the technical details.
 
 ILSpy emitted 270 `Unknown connection ID` diagnostic comments across 74
 main-application XAML documents. Those non-executable comments have been removed
