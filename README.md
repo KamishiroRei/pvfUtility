@@ -13,7 +13,7 @@
 - 默认 `RecoveredSourceLibraryMode=All`，主程序运行时直接使用其中 20 个恢复源码项目的构建产物；`Settings` 和 `SettingsModel` 保持独立可构建，但不是主程序依赖图的一部分。
 - 22 个源码库共包含 1,394 个 C# 文件、18 个可编译 XAML 和 16 个 RESX。
 - 主程序的 126 个原始 WPF BAML 已保存在 `Resources/pvfUtility.g.resources` 中。
-- 默认 `RecoveredWpfResourceMode=Hybrid`：`app.xaml` 和 `views/viewscripteditor.xaml` 由源码编译，其余 124 个 BAML 及 121 个非 BAML 资源从原始容器逐字节补齐。
+- 默认 `RecoveredWpfResourceMode=Hybrid`：`app.xaml`、`themes/styles/iconsdark.xaml` 和 `views/viewscripteditor.xaml` 由源码编译，其余 123 个 BAML 及 121 个非 BAML 资源从原始容器逐字节补齐。
 - `Legacy` 模式仍可完整使用 126 个原始 BAML；`SourceOnly` 在迁移清单达到 126 项前会明确构建失败。
 - 原 `Recovered` 汇总目录已经移除；正式工程输入已分别归位到根目录 `Resources/`、`PvfCode/Compatibility/` 和 `SourceLibraries/`。
 - 项目不依赖 `pvfUtility-old`、`_analysis_extract`、原始程序目录或工作区外的绝对路径。
@@ -108,7 +108,7 @@ artifacts\publish\local\Hybrid\Debug\win-x64\
   -RecoveredWpfResourceMode Legacy
 ```
 
-`SourceOnly` 是最终全源码门槛；当前只有 2/126 项完成，因此该模式会明确构建失败。
+`SourceOnly` 是最终全源码门槛；当前只有 3/126 项完成，因此该模式会明确构建失败。
 
 ### 编译器与 IDE 检查（非交付物）
 
@@ -299,11 +299,11 @@ SourceLibraries\.build\<ProjectName>\
 
 主程序目录中的 126 个可读 `.xaml` 文件用于阅读、检索和继续恢复源码。`Directory.Build.targets` 默认先把它们标记为 `None`，再只将显式 `RecoveredSourceXaml` 清单中的文件加入 WPF 编译。
 
-当前 Hybrid 清单包含 `app.xaml` 和 `views/viewscripteditor.xaml`。WPF 先生成这两个 BAML，`PvfResourceMerger` 再以原始 `Resources/pvfUtility.g.resources` 为不可变基线，只替换 `app.baml` 和 `views/viewscripteditor.baml`。验证后的最终容器仍有 247 个资源和 126 个 BAML，另外 245 项的原始类型与数据哈希不变。
+当前 Hybrid 清单包含 `app.xaml`、`themes/styles/iconsdark.xaml` 和 `views/viewscripteditor.xaml`。WPF 先生成这三个 BAML，`PvfResourceMerger` 再以原始 `Resources/pvfUtility.g.resources` 为不可变基线，只替换 `app.baml`、`themes/styles/iconsdark.baml` 和 `views/viewscripteditor.baml`。验证后的最终容器仍有 247 个资源和 126 个 BAML，另外 244 项的原始类型与数据哈希不变。`IconsDark.xaml` 是无代码资源字典，源码版本保留 94 个唯一资源键。
 
 `scripts/Test-RecoveredWpfResourceContainer.ps1` 将上述数量、差异键以及最终程序集内唯一资源容器的字节一致性固化为可重复审计；GitHub 的 `master`/PR 构建和标签 Release 都会执行该检查。
 
-`Legacy` 模式不编译主程序恢复 XAML，直接嵌入原始容器；它是运行差分和紧急回退路径。`SourceOnly` 不允许原始 BAML 补齐，当前会因迁移清单只有 2 项而失败。
+`Legacy` 模式不编译主程序恢复 XAML，直接嵌入原始容器；它是运行差分和紧急回退路径。`SourceOnly` 不允许原始 BAML 补齐，当前会因迁移清单只有 3 项而失败。
 
 ILSpy 曾在 74 个主程序 XAML 中留下 270 条 `Unknown connection ID` 诊断注释。这些注释不是可执行标记，现已从可读 XAML 移出，并按原文件、原行号、连接 ID 和相邻上下文保存在 `docs/BAML_CONNECTION_ID_AUDIT.csv`。外置诊断不表示连接关系已经恢复，因此后续 XAML 仍必须逐项恢复和验证，不能批量改为 `Page`。
 

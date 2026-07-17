@@ -68,9 +68,10 @@ The main application still requires the immutable baseline
 `Resources/pvfUtility.g.resources`. It contains 126 BAML entries and 121
 non-BAML entries (88 SVG, 32 PNG, and 1 TTF). Every non-BAML entry has a
 byte-identical loose source asset, and every BAML entry has readable recovered
-XAML. Hybrid builds now source-compile `app.xaml` and
-`views/viewscripteditor.xaml`, replace only those two BAML keys in an intermediate
-container, and retain the other 245 entries as raw original resource data.
+XAML. Hybrid builds now source-compile `app.xaml`,
+`themes/styles/iconsdark.xaml`, and `views/viewscripteditor.xaml`, replace only
+those three BAML keys in an intermediate container, and retain the other 244
+entries as raw original resource data.
 Legacy builds continue to embed the complete original container unchanged.
 
 A full source-XAML compile probe was performed without the container:

@@ -59,8 +59,8 @@ jobs:
           if ($exitCode -eq 0) {
             throw "SourceOnly unexpectedly succeeded with an incomplete migration ledger."
           }
-          if (-not ($output -match "SourceOnly requires 126 migrated XAML entries; found 2")) {
-            throw "SourceOnly failed without the expected 2/126 migration guard."
+          if (-not ($output -match "SourceOnly requires 126 migrated XAML entries; found 3")) {
+            throw "SourceOnly failed without the expected 3/126 migration guard."
           }
 
       - name: Build and validate single-file package

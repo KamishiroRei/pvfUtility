@@ -171,7 +171,7 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 ## Remaining constraints
 
 - The main application retains all 126 original compiled BAML documents in
-  `Resources/pvfUtility.g.resources`. Default Hybrid builds source-compile two
+  `Resources/pvfUtility.g.resources`. Default Hybrid builds source-compile three
   documents and supplement the remaining resources from that immutable baseline;
   Legacy builds use all 126 original BAML entries. See `BAML_RECOVERY.md` and
   `SOURCE_XAML_MIGRATION.md`.

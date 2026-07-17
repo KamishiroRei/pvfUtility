@@ -16,10 +16,10 @@ recovered a readable XAML document for every BAML logical name.
   application documents plus 18 recovered-library documents).
 - ILSpy `Unknown connection ID` diagnostics externalized: 270 rows from 74 main
   application documents; diagnostics remaining in source XAML: 0.
-- Default Hybrid migration entries: 2 (`app.baml` and
-  `views/viewscripteditor.baml`).
-- Verified Hybrid container: 247 total entries, 126 BAML entries, 2 changed raw
-  payload hashes, and 245 entries identical to the original container.
+- Default Hybrid migration entries: 3 (`app.baml`,
+  `themes/styles/iconsdark.baml`, and `views/viewscripteditor.baml`).
+- Verified Hybrid container: 247 total entries, 126 BAML entries, 3 changed raw
+  payload hashes, and 244 entries identical to the original container.
 
 The complete resource mapping is stored in `docs/BAML_XAML_MAP.csv`. The removed
 connection-ID diagnostics are stored in `docs/BAML_CONNECTION_ID_AUDIT.csv` with
@@ -56,9 +56,10 @@ generated members, changing event handlers and named-control wiring.
 `Directory.Build.targets` therefore removes all recovered main-program XAML from
 WPF items first and retains it as `None`. The explicit `RecoveredSourceXaml`
 allowlist then re-enables only verified documents. The first batch compiles
-`app.xaml` and `views/viewscripteditor.xaml`; `PvfResourceMerger` overlays their
-generated BAML on an intermediate resource container while preserving all other
-raw resource types and data from `Resources/pvfUtility.g.resources`.
+`app.xaml`, `themes/styles/iconsdark.xaml`, and
+`views/viewscripteditor.xaml`; `PvfResourceMerger` overlays their generated BAML
+on an intermediate resource container while preserving all other raw resource
+types and data from `Resources/pvfUtility.g.resources`.
 
 The build modes are:
 
@@ -72,7 +73,12 @@ The build modes are:
 `app.xaml` remains a `Page`, not an `ApplicationDefinition`, so the recovered
 `App.Main` and startup initialization remain authoritative. `ViewScriptEditor`
 uses standard generated partial-class code in Hybrid, while its conditional
-legacy partial supplies the recovered loader only in Legacy.
+legacy partial supplies the recovered loader only in Legacy. `IconsDark.xaml`
+has no code-behind surface; its four historical connection-ID diagnostics refer
+to nested drawing object-graph wiring and are covered by the 94-key semantic
+load test. Both modes verify the key set and drawing values; Hybrid additionally
+materializes representative DevExpress SVG extensions. Legacy keeps the original
+deferred SVG records and remains covered by the full main-window rollback test.
 
 Every future conversion must be performed one document or dependency cluster at
 a time: reconcile the root type and `x:Class`, choose a single owner for

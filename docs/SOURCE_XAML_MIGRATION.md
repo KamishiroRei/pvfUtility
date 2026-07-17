@@ -6,18 +6,26 @@ The recovered main program contains 126 readable XAML documents and an immutable
 original WPF resource container at `Resources/pvfUtility.g.resources`. The
 container has 247 entries: 126 BAML documents and 121 non-BAML resources.
 
-The application now supports a staged source-XAML migration. The first verified
-batch source-compiles two documents:
+The application now supports a staged source-XAML migration. The verified
+allowlist currently source-compiles three documents:
 
 | XAML | BAML key | Hybrid behavior |
 | --- | --- | --- |
 | `app.xaml` | `app.baml` | Compiled as `Page`; `App.Main`, the startup handler, and `App.InitializeComponent` remain code-owned. |
+| `themes/styles/iconsdark.xaml` | `themes/styles/iconsdark.baml` | Compiled as a code-free `ResourceDictionary`; all 94 unique resource keys remain available. |
 | `views/viewscripteditor.xaml` | `views/viewscripteditor.baml` | Compiled with `x:Class="PvfCode.Views.ViewScriptEditor"`; WPF generates `InitializeComponent` in Hybrid. |
 
-The other 124 BAML entries and all 121 non-BAML entries still come byte-for-byte
+The other 123 BAML entries and all 121 non-BAML entries still come byte-for-byte
 from the original container. A verified Hybrid Release build contains 247 total
-entries and 126 BAML entries; only the two keys above differ from the original
+entries and 126 BAML entries; only the three keys above differ from the original
 resource payload hashes.
+
+`docs/BAML_CONNECTION_ID_AUDIT.csv` retains four historical ILSpy diagnostics
+for `iconsdark.xaml` (IDs 1-4). The recovered dictionary has no `x:Class`, named
+fields, handlers, commands, or bindings; the diagnostics occur inside its nested
+drawing object graph. Successful source compilation and the 94-key semantic load
+test establish that these connections are regenerated WPF object-graph wiring
+rather than a missing code-behind contract.
 
 This migration does not require a particular Visual Studio release. The build
 baseline remains `.NET 10`, `net10.0-windows`, and `win-x64`.
@@ -48,7 +56,7 @@ baseline remains `.NET 10`, `net10.0-windows`, and `win-x64`.
 | Mode | Behavior |
 | --- | --- |
 | `Legacy` | Compiles no recovered main-program XAML and embeds the original container unchanged. Use this for rollback and differential diagnosis. |
-| `Hybrid` | Compiles the two allowlisted XAML documents and overlays their BAML on an intermediate copy of the original resource set. This is the default. |
+| `Hybrid` | Compiles the three allowlisted XAML documents and overlays their BAML on an intermediate copy of the original resource set. This is the default. |
 | `SourceOnly` | Uses source-generated WPF resources without legacy supplementation. It intentionally fails until all 126 BAML mappings are allowlisted. |
 
 Examples:
@@ -62,20 +70,21 @@ Examples:
   -Configuration Release `
   -RecoveredWpfResourceMode Hybrid
 
-# Guard verification only; this is expected to fail at 2/126.
+# Guard verification only; this is expected to fail at 3/126.
 dotnet build .\pvfUtility.csproj -c Release `
   -p:RecoveredWpfResourceMode=SourceOnly
 ```
 
-At the current 2/126 migration state, `SourceOnly` must fail before markup
-compilation with a message reporting 126 required and 2 migrated entries.
+At the current 3/126 migration state, `SourceOnly` must fail before markup
+compilation with a message reporting 126 required and 3 migrated entries.
 
 ## Hybrid resource pipeline
 
 1. The general recovered-XAML rule classifies all 126 main-program XAML files as
    `None`.
-2. `RecoveredSourceXaml` reclassifies only `app.xaml` and
-   `views/viewscripteditor.xaml` as WPF `Page` inputs in Hybrid/SourceOnly.
+2. `RecoveredSourceXaml` reclassifies only `app.xaml`,
+   `themes/styles/iconsdark.xaml`, and `views/viewscripteditor.xaml` as WPF
+   `Page` inputs in Hybrid/SourceOnly.
 3. WPF writes the source-generated overlay to the intermediate
    `pvfUtility.g.resources`.
 4. `tools/PvfResourceMerger` reads the original and overlay containers with
@@ -108,7 +117,7 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 It invokes the merger's `audit` command against the immutable base, generated
 overlay, merged intermediate output, replacement manifest, and final application
 assembly. The audit requires 247 total resources, 126 BAML resources, exactly
-the two declared changed keys, and one embedded `pvfUtility.g.resources` whose
+the three declared changed keys, and one embedded `pvfUtility.g.resources` whose
 bytes match the audited merged container.
 
 ## Source-XAML semantic self-test
@@ -119,6 +128,9 @@ non-interactive check of the first migration batch. `App.Main` runs it only when
 The test verifies:
 
 - all 11 application merged resource dictionaries load;
+- `themes/styles/iconsdark.xaml` loads with 94 resources and representative
+  `DrawingImage` values in both modes; Hybrid/SourceOnly additionally materialize
+  representative DevExpress SVG-backed entries;
 - `ViewScriptEditor` creates its `TextEditorBase` child;
 - the recovered `AllowCompletion`, `AllowFolding`, and `ContentMargin` values;
 - the Title, FontSize, Document, and IsReadOnly bindings, including the two-way
@@ -144,6 +156,14 @@ and restores the caller's environment variables. Run it for both Legacy and
 Hybrid single-file packages so the original and source-generated BAML paths are
 checked against the same semantic contract. This focused test supplements, but
 does not replace, the full UI Automation startup test.
+
+The original Legacy BAML retains all SVG resource keys, but under the recovered
+.NET 10/DevExpress runtime some deferred SVG entries are interpreted as ordinary
+`ImageSource` URIs if a test forces them to materialize directly. The Legacy
+check therefore validates key presence and code-free drawing values, while the
+Hybrid check also resolves representative SVG entries through the source XAML's
+DevExpress markup extensions. Normal Legacy main-window startup remains a
+separate required rollback gate.
 
 ## Single-file distribution
 

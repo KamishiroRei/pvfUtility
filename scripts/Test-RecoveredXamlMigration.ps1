@@ -29,11 +29,13 @@ if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
 $resultPath = Join-Path ([IO.Path]::GetTempPath()) "pvfUtility-xaml-self-test-$([Guid]::NewGuid().ToString('N')).txt"
 $previousMode = $env:PVFUTILITY_RECOVERED_XAML_SELF_TEST
 $previousResult = $env:PVFUTILITY_RECOVERED_XAML_SELF_TEST_RESULT
+$previousResourceMode = $env:PVFUTILITY_RECOVERED_XAML_RESOURCE_MODE
 $process = $null
 
 try {
     $env:PVFUTILITY_RECOVERED_XAML_SELF_TEST = "1"
     $env:PVFUTILITY_RECOVERED_XAML_SELF_TEST_RESULT = $resultPath
+    $env:PVFUTILITY_RECOVERED_XAML_RESOURCE_MODE = $RecoveredWpfResourceMode
 
     $process = Start-Process `
         -FilePath $executable `
@@ -67,5 +69,6 @@ finally {
     }
     $env:PVFUTILITY_RECOVERED_XAML_SELF_TEST = $previousMode
     $env:PVFUTILITY_RECOVERED_XAML_SELF_TEST_RESULT = $previousResult
+    $env:PVFUTILITY_RECOVERED_XAML_RESOURCE_MODE = $previousResourceMode
     Remove-Item -LiteralPath $resultPath -Force -ErrorAction SilentlyContinue
 }

@@ -114,6 +114,10 @@
       <BamlLogicalName>views/viewscripteditor.baml</BamlLogicalName>
       <Link>views\viewscripteditor.xaml</Link>
     </RecoveredSourceXaml>
+    <RecoveredSourceXaml Include="$(MSBuildProjectDirectory)\themes\styles\iconsdark.xaml">
+      <BamlLogicalName>themes/styles/iconsdark.baml</BamlLogicalName>
+      <Link>themes\styles\iconsdark.xaml</Link>
+    </RecoveredSourceXaml>
   </ItemGroup>
 
   <ItemGroup>

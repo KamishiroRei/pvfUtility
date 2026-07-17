@@ -120,6 +120,7 @@ Copy-Item -LiteralPath $defaultOptions -Destination $editableOptions -Recurse
 & (Join-Path $PSScriptRoot "Test-RecoveredXamlMigration.ps1") `
     -Configuration $Configuration `
     -RuntimeIdentifier $RuntimeIdentifier `
+    -RecoveredWpfResourceMode $RecoveredWpfResourceMode `
     -OutputDirectory $OutputDirectory
 
 $executable = Join-Path $OutputDirectory "pvfUtility.exe"

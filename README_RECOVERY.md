@@ -35,7 +35,9 @@ design-time metadata cannot be recovered exactly from the published executable.
   explicitly migrated entries in an intermediate merged container.
 - `*.xaml`: 126 readable XAML files restored to their logical source paths. They
   remain source/reference files by default. `app.xaml` and
-  `views/viewscripteditor.xaml` are the first source-compiled Hybrid entries.
+  `views/viewscripteditor.xaml`, together with the code-free
+  `themes/styles/iconsdark.xaml` dictionary, are the first source-compiled
+  Hybrid entries.
 - `images`, `styles`, `themes`, `iconfont`: recovered application resources.
 - The obsolete ILSpy scratch tree was removed after its useful source and
   resource material had been integrated into the canonical project paths.
@@ -60,7 +62,7 @@ design-time metadata cannot be recovered exactly from the published executable.
 - `scripts/Test-RecoveredWpfResourceContainer.ps1`: verifies the 247/126
   resource counts, declared replacement set, and embedded assembly container.
 - `scripts/Test-RecoveredXamlMigration.ps1`: focused semantic self-test for the
-  first two source-compiled XAML documents in Legacy and Hybrid outputs.
+  first three source-compiled XAML documents in Legacy and Hybrid outputs.
 - `scripts/Test-AiAssistantDocking.ps1`: verifies from a disposable package copy that the AI panel starts hidden, then opens at the far right and receives input focus from the toolbar.
 - `scripts/Inline-ObfuscatedStrings.ps1`: recovery utility used to produce the
   string map from the pre-inlining assembly.
@@ -175,9 +177,10 @@ including `app.xaml`, `mainwindow.xaml`, control views, styles, and themes.
 The recovered XAML is well-formed XML. The main build first marks all 126 files
 as `None`, because BAML decompilation loses some connection IDs and generated
 code relationships. An explicit Hybrid allowlist currently re-enables only
-`app.xaml` and `views/viewscripteditor.xaml` as WPF `Page` items. Their generated
-BAML replaces the two matching keys in an intermediate resource container; the
-other 124 BAML and all 121 non-BAML resources retain their original raw data.
+`app.xaml`, `themes/styles/iconsdark.xaml`, and `views/viewscripteditor.xaml` as
+WPF `Page` items. Their generated BAML replaces the three matching keys in an
+intermediate resource container; the other 123 BAML and all 121 non-BAML
+resources retain their original raw data.
 `Legacy` remains a complete original-BAML rollback mode, while `SourceOnly`
 fails until all 126 mappings are migrated. See `docs/BAML_RECOVERY.md` and
 `docs/SOURCE_XAML_MIGRATION.md` for the technical details.

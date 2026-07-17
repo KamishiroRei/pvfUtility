@@ -94,7 +94,7 @@ rg -n "<HintPath>([A-Za-z]:|\\\\)" . `
 
 `Resources/pvfUtility.g.resources` 是主程序不可变的 WPF 恢复基线，其中包含 126 个原始 BAML 和 121 个其他资源。它不是可删除或原地重写的编译产物。
 
-主程序的可读 XAML 默认被 `Directory.Build.targets` 设置为 `None`。默认 `RecoveredWpfResourceMode=Hybrid` 只会重新编译显式 `RecoveredSourceXaml` 清单中的 `app.xaml` 和 `views/viewscripteditor.xaml`，再从原始容器补齐其他资源。`Legacy` 完整使用原始 BAML；`SourceOnly` 在 126 项迁移完成前必须失败。具体协议见 `docs/SOURCE_XAML_MIGRATION.md`。
+主程序的可读 XAML 默认被 `Directory.Build.targets` 设置为 `None`。默认 `RecoveredWpfResourceMode=Hybrid` 只会重新编译显式 `RecoveredSourceXaml` 清单中的 `app.xaml`、`themes/styles/iconsdark.xaml` 和 `views/viewscripteditor.xaml`，再从原始容器补齐其他资源。`Legacy` 完整使用原始 BAML；`SourceOnly` 在 126 项迁移完成前必须失败。具体协议见 `docs/SOURCE_XAML_MIGRATION.md`。
 
 除非任务明确迁移某个 XAML，并且已经恢复连接 ID、生成字段、事件绑定和 Pack URI，否则不得：
 
