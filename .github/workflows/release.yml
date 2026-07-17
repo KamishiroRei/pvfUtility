@@ -125,6 +125,7 @@ jobs:
           powershell -NoProfile -ExecutionPolicy Bypass `
             -File .\scripts\Test-RecoveredStartup.ps1 `
             -Configuration $env:CONFIGURATION `
+            -RecoveredWpfResourceMode Hybrid `
             -OutputDirectory $smokeRoot `
             -SingleFile
 
@@ -171,6 +172,7 @@ jobs:
           powershell -NoProfile -ExecutionPolicy Bypass `
             -File .\scripts\Test-RecoveredStartup.ps1 `
             -Configuration $env:CONFIGURATION `
+            -RecoveredWpfResourceMode Hybrid `
             -OutputDirectory $packageRoot `
             -SingleFile
 

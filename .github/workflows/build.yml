@@ -48,20 +48,11 @@ jobs:
       - name: Verify incomplete SourceOnly guard
         if: matrix.wpf_resource_mode == 'Hybrid'
         run: |
-          $output = & dotnet build .\pvfUtility.csproj `
-            -c Release `
-            -r win-x64 `
-            --no-restore `
-            -p:RecoveredWpfResourceMode=SourceOnly `
-            -p:RecoveredSourceLibraryMode=All 2>&1
-          $exitCode = $LASTEXITCODE
-          $output | Write-Output
-          if ($exitCode -eq 0) {
-            throw "SourceOnly unexpectedly succeeded with an incomplete migration ledger."
-          }
-          if (-not ($output -match "SourceOnly requires 126 migrated XAML entries; found 3")) {
-            throw "SourceOnly failed without the expected 3/126 migration guard."
-          }
+          & .\scripts\Test-IncompleteSourceOnlyGuard.ps1 `
+            -Configuration Release `
+            -RuntimeIdentifier win-x64 `
+            -ExpectedMigratedCount 3 `
+            -ExpectedTotalCount 126
 
       - name: Build and validate single-file package
         run: |
@@ -84,6 +75,7 @@ jobs:
           Copy-Item -LiteralPath $outputDirectory -Destination $smokeDirectory -Recurse
           & .\scripts\Test-RecoveredStartup.ps1 `
             -Configuration Release `
+            -RecoveredWpfResourceMode "${{ matrix.wpf_resource_mode }}" `
             -OutputDirectory $smokeDirectory `
             -SingleFile
 
