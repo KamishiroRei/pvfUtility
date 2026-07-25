@@ -221,7 +221,7 @@
                   "Children": {}
                 },
                 "道具列表": {
-                  "FilePath": "stackable/Stackable.lst",
+                  "FilePath": "stackable/stackable.lst",
                   "IsFile": true,
                   "Sort": 1,
                   "Children": {}
@@ -233,7 +233,7 @@
                   "Children": {}
                 },
                 "副本列表": {
-                  "FilePath": "Dungeon/Dungeon.lst",
+                  "FilePath": "dungeon/dungeon.lst",
                   "IsFile": true,
                   "Sort": 3,
                   "Children": {}
@@ -245,7 +245,7 @@
                   "Children": {}
                 },
                 "怪物列表": {
-                  "FilePath": "Monster/Monster.lst",
+                  "FilePath": "monster/monster.lst",
                   "IsFile": true,
                   "Sort": 5,
                   "Children": {}
@@ -506,7 +506,7 @@
                   "Children": {}
                 },
                 "道具.stk": {
-                  "FilePath": "stackable/Stackable.lst",
+                  "FilePath": "stackable/stackable.lst",
                   "IsFile": true,
                   "Sort": 1,
                   "Children": {}
@@ -518,7 +518,7 @@
                   "Children": {}
                 },
                 "副本.dgn": {
-                  "FilePath": "Dungeon/Dungeon.lst",
+                  "FilePath": "dungeon/dungeon.lst",
                   "IsFile": true,
                   "Sort": 3,
                   "Children": {}
@@ -530,7 +530,7 @@
                   "Children": {}
                 },
                 "怪物.mob": {
-                  "FilePath": "Monster/Monster.lst",
+                  "FilePath": "monster/monster.lst",
                   "IsFile": true,
                   "Sort": 5,
                   "Children": {}
@@ -677,7 +677,7 @@
                   "Children": {}
                 },
                 "道具列表": {
-                  "FilePath": "stackable/Stackable.lst",
+                  "FilePath": "stackable/stackable.lst",
                   "IsFile": true,
                   "Sort": 1,
                   "Children": {}
@@ -689,7 +689,7 @@
                   "Children": {}
                 },
                 "副本列表": {
-                  "FilePath": "Dungeon/Dungeon.lst",
+                  "FilePath": "dungeon/dungeon.lst",
                   "IsFile": true,
                   "Sort": 3,
                   "Children": {}
@@ -701,7 +701,7 @@
                   "Children": {}
                 },
                 "怪物列表": {
-                  "FilePath": "Monster/Monster.lst",
+                  "FilePath": "monster/monster.lst",
                   "IsFile": true,
                   "Sort": 5,
                   "Children": {}
@@ -1629,7 +1629,7 @@
               "IsFile": false,
               "Sort": 25,
               "Children": {
-                "套装文件 1 ": {
+                "套装文件 1": {
                   "FilePath": "equipment/character/partset/2choroset1.equ",
                   "IsFile": true,
                   "Sort": 0,
@@ -2051,67 +2051,67 @@
               "IsFile": false,
               "Sort": 33,
               "Children": {
-                "鬼剑chr": {
+                "男鬼剑士": {
                   "FilePath": "character/swordman/swordman.chr",
                   "IsFile": true,
                   "Sort": 0,
                   "Children": {}
                 },
-                "女格斗chr": {
+                "女格斗家": {
                   "FilePath": "character/fighter/fighter.chr",
                   "IsFile": true,
                   "Sort": 1,
                   "Children": {}
                 },
-                "男枪手chr": {
+                "男神枪手": {
                   "FilePath": "character/gunner/gunner.chr",
                   "IsFile": true,
                   "Sort": 2,
                   "Children": {}
                 },
-                "女法师chr": {
+                "女魔法师": {
                   "FilePath": "character/mage/mage.chr",
                   "IsFile": true,
                   "Sort": 3,
                   "Children": {}
                 },
-                "圣职者chr": {
+                "男圣职者": {
                   "FilePath": "character/priest/priest.chr",
                   "IsFile": true,
                   "Sort": 4,
                   "Children": {}
                 },
-                "女枪手chr": {
+                "女神枪手": {
                   "FilePath": "character/gunner/atgunner.chr",
                   "IsFile": true,
                   "Sort": 5,
                   "Children": {}
                 },
-                "盗贼chr": {
+                "暗夜使者": {
                   "FilePath": "character/thief/thief.chr",
                   "IsFile": true,
                   "Sort": 6,
                   "Children": {}
                 },
-                "男格斗chr": {
+                "男格斗家": {
                   "FilePath": "character/fighter/atfighter.chr",
                   "IsFile": true,
                   "Sort": 7,
                   "Children": {}
                 },
-                "男法师chr": {
+                "男魔法师": {
                   "FilePath": "character/mage/atmage.chr",
                   "IsFile": true,
                   "Sort": 8,
                   "Children": {}
                 },
-                "黑狗chr": {
+                "黑暗武士": {
                   "FilePath": "character/swordman/demonicswordman.chr",
                   "IsFile": true,
                   "Sort": 9,
                   "Children": {}
                 },
-                "缔造者chr": {
+                "缔造者": {
                   "FilePath": "character/mage/creatormage.chr",
                   "IsFile": true,
                   "Sort": 10,
@@ -2136,49 +2136,49 @@
                   "Sort": 1,
                   "Children": {}
                 },
-                "男格斗": {
+                "男格斗家": {
                   "FilePath": "skill/atfighterskill.lst",
                   "IsFile": true,
                   "Sort": 2,
                   "Children": {}
                 },
-                "女格斗": {
+                "女格斗家": {
                   "FilePath": "skill/fighterskill.lst",
                   "IsFile": true,
                   "Sort": 3,
                   "Children": {}
                 },
-                "男枪手": {
+                "男神枪手": {
                   "FilePath": "skill/gunnerskill.lst",
                   "IsFile": true,
                   "Sort": 4,
                   "Children": {}
                 },
-                "女枪手": {
+                "女神枪手": {
                   "FilePath": "skill/atgunnerskill.lst",
                   "IsFile": true,
                   "Sort": 5,
                   "Children": {}
                 },
-                "男法师": {
+                "男魔法师": {
                   "FilePath": "skill/atmageskill.lst",
                   "IsFile": true,
                   "Sort": 6,
                   "Children": {}
                 },
-                "女法师": {
+                "女魔法师": {
                   "FilePath": "skill/mageskill.lst",
                   "IsFile": true,
                   "Sort": 7,
                   "Children": {}
                 },
                 "暗夜使者": {
-                  "FilePath": "skill/skilllist.lst",
+                  "FilePath": "skill/thiefskill.lst",
                   "IsFile": true,
                   "Sort": 8,
                   "Children": {}
                 },
-                "圣职者": {
+                "男圣职者": {
                   "FilePath": "skill/priestskill.lst",
                   "IsFile": true,
                   "Sort": 9,
@@ -2203,55 +2203,55 @@
                   "Sort": 0,
                   "Children": {}
                 },
-                "女格斗": {
+                "女格斗家": {
                   "FilePath": "clientonly/skilltree/fighter_sp.co",
                   "IsFile": true,
                   "Sort": 1,
                   "Children": {}
                 },
-                "男枪手": {
+                "男神枪手": {
                   "FilePath": "clientonly/skilltree/gunner_sp.co",
                   "IsFile": true,
                   "Sort": 2,
                   "Children": {}
                 },
-                "女法师": {
+                "女魔法师": {
                   "FilePath": "clientonly/skilltree/mage_sp.co",
                   "IsFile": true,
                   "Sort": 3,
                   "Children": {}
                 },
-                "圣职者": {
+                "男圣职者": {
                   "FilePath": "clientonly/skilltree/priest_sp.co",
                   "IsFile": true,
                   "Sort": 4,
                   "Children": {}
                 },
-                "女枪手": {
+                "女神枪手": {
                   "FilePath": "clientonly/skilltree/atgunner_sp.co",
                   "IsFile": true,
                   "Sort": 5,
                   "Children": {}
                 },
-                "盗贼": {
+                "暗夜使者": {
                   "FilePath": "clientonly/skilltree/thief_sp.co",
                   "IsFile": true,
                   "Sort": 6,
                   "Children": {}
                 },
-                "男格斗": {
+                "男格斗家": {
                   "FilePath": "clientonly/skilltree/atfighter_sp.co",
                   "IsFile": true,
                   "Sort": 7,
                   "Children": {}
                 },
-                "男法师": {
+                "男魔法师": {
                   "FilePath": "clientonly/skilltree/atmage_sp.co",
                   "IsFile": true,
                   "Sort": 8,
                   "Children": {}
                 },
-                "黑狗": {
+                "黑暗武士": {
                   "FilePath": "clientonly/skilltree/demonicswordman_sp.co",
                   "IsFile": true,
                   "Sort": 9,
@@ -2264,7 +2264,7 @@
                   "Children": {}
                 },
                 "女鬼剑士": {
-                  "FilePath": "clientonly/skilltree/thief_sp.co",
+                  "FilePath": "clientonly/skilltree/atswordman_sp.co",
                   "IsFile": true,
                   "Sort": 11,
                   "Children": {}
