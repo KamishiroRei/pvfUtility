@@ -13,6 +13,9 @@ coverage.*
 
 # Local development tests
 /tests/*
+!/tests/GiftBoxPreview.RegressionTests/
+!/tests/GiftBoxPreview.RegressionTests/Program.cs
+!/tests/GiftBoxPreview.RegressionTests/GiftBoxPreview.RegressionTests.csproj
 !/tests/PvfResourceMerger.RegressionTests/
 !/tests/PvfResourceMerger.RegressionTests/Program.cs
 !/tests/PvfResourceMerger.RegressionTests/PvfResourceMerger.RegressionTests.csproj

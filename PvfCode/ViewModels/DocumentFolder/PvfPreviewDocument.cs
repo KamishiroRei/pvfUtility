@@ -1173,7 +1173,10 @@ public sealed class PvfPreviewDocument : DocumentBase
 		AddEntrySection(preview, "随机/产出内容", PvfPreviewTone.Shop, false, "random list", "booster random", "etc", "output", "result item");
 #else
 		bool isBoosterSelection = string.Equals(LabelToken(FirstText("stackable type")), "booster selection", StringComparison.OrdinalIgnoreCase);
-		if (!isBoosterSelection || !AddBoosterSelectionPreview(preview))
+		bool addedStructuredBooster = isBoosterSelection
+			? AddBoosterSelectionPreview(preview)
+			: AddBoosterPreview(preview);
+		if (!addedStructuredBooster)
 		{
 			AddEntrySection(preview, "随机/产出内容", PvfPreviewTone.Shop, false, "random list", "booster random", "etc", "output", "result item");
 		}
@@ -1203,6 +1206,62 @@ public sealed class PvfPreviewDocument : DocumentBase
 	}
 
 #if !RECOVERED_LEGACY_PVFCODE_SERVICES
+	private bool AddBoosterPreview(PvfRichPreview preview)
+	{
+		IReadOnlyList<PvfParsedBoosterGroup> groups = PvfBoosterPreviewParser.Parse(sourceTextDocument?.Text ?? string.Empty);
+		if (groups.Count == 0)
+		{
+			return false;
+		}
+
+		foreach (PvfParsedBoosterGroup group in groups)
+		{
+			PvfPreviewTag groupTag = new(group.ItemType, group.Source.LineNumber, group.Source.Offset, group.Source.Length);
+			PvfPreviewSection section = new($"随机/产出内容 - {BoosterItemTypeText(group.ItemType)}", PvfPreviewTone.Shop, groupTag)
+			{
+				ShowAllEntries = true
+			};
+			section.Fields.Add(new PvfPreviewField("抽取数量", group.GainCount.ToString(CultureInfo.InvariantCulture), groupTag, PvfPreviewTone.Shop));
+			foreach (PvfParsedBoosterItem item in group.Items)
+			{
+				PvfPreviewTag itemTag = new(group.ItemType, item.Source.LineNumber, item.Source.Offset, item.Source.Length);
+				string detail = item.Weight.HasValue
+					? $"概率权重：{item.Weight.Value.ToString(CultureInfo.InvariantCulture)}"
+					: "默认物品（无概率权重）";
+				section.Entries.Add(new PvfPreviewEntry(
+					item.Code,
+					item.Quantity,
+					BoosterItemName(item),
+					detail,
+					itemTag,
+					ResolveReferenceIcon(item.Code, null, 0, null, fallbackToItems: true)));
+			}
+			preview.Sections.Add(section);
+		}
+		return true;
+	}
+
+	private string BoosterItemName(PvfParsedBoosterItem item)
+	{
+		return item.DefaultItemName ?? ResolveItemName(item.Code);
+	}
+
+	private static string BoosterItemTypeText(string itemType)
+	{
+		return itemType switch
+		{
+			"creature" => "宠物",
+			"etc" => "其他",
+			"equipment" => "装备",
+			"cera" => "商城",
+			"special avatar" => "特殊装扮",
+			"avatar" => "装扮",
+			"stackable" => "道具",
+			"emblem" => "徽章",
+			_ => itemType
+		};
+	}
+
 	private bool AddBoosterSelectionPreview(PvfRichPreview preview)
 	{
 		try

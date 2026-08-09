@@ -9,7 +9,7 @@
 - 主程序目标框架：`.NET 10`，即 `net10.0-windows`。
 - 目标平台：Windows x64，运行时标识为 `win-x64`。
 - 主解决方案：`pvfUtility.sln`。
-- 主解决方案包含 1 个 WPF 主程序、22 个已恢复的源码库项目，以及 Hybrid 资源合并工具和对应回归测试项目。
+- 主解决方案包含 1 个 WPF 主程序、22 个已恢复的源码库项目、Hybrid 资源合并工具，以及资源合并与礼盒预览回归测试项目。
 - 默认 `RecoveredSourceLibraryMode=All`，主程序运行时直接使用其中 20 个恢复源码项目的构建产物；`Settings` 和 `SettingsModel` 保持独立可构建，但不是主程序依赖图的一部分。
 - 22 个源码库共包含 1,394 个 C# 文件、18 个可编译 XAML 和 16 个 RESX。
 - 主程序的 126 个原始 WPF BAML 已保存在 `Resources/pvfUtility.g.resources` 中。
@@ -216,6 +216,7 @@ SourceLibraries\.build\
 - `images/`、`styles/`、`themes/`、`iconfont/` 等资源目录。
 - `tools/PvfResourceMerger/`：Hybrid 构建必需的确定性 WPF 资源合并与审计工具。
 - `tests/PvfResourceMerger.RegressionTests/`：资源合并器的控制台回归测试项目。
+- `tests/GiftBoxPreview.RegressionTests/`：礼盒物品数量、概率权重和默认物品语义的控制台回归测试项目。
 - `Directory.Build.targets`：负责恢复资源、BAML 间接依赖和本地运行文件的构建规则。
 - `global.json`、`pvfUtility.csproj`、`pvfUtility.sln` 和 `SourceLibraries/pvfUtility.SourceLibraries.sln`。
 
@@ -227,7 +228,7 @@ SourceLibraries\.build\
 
 | 路径 | 说明 |
 | --- | --- |
-| `pvfUtility.sln` | 推荐使用的主解决方案，包含主程序、全部 22 个源码库、资源合并工具和回归测试项目。 |
+| `pvfUtility.sln` | 推荐使用的主解决方案，包含主程序、全部 22 个源码库、资源合并工具和两个回归测试项目。 |
 | `pvfUtility.csproj` | 可运行的 WPF 主程序，目标为 `.NET 10 / Windows x64`。 |
 | `PvfCode/` | 主程序的主要恢复源码。 |
 | `controls/`、`views/`、`styles/`、`themes/` | 从主程序集恢复出的可读 XAML。 |
@@ -237,6 +238,7 @@ SourceLibraries\.build\
 | `SourceLibraries/` | 从 22 个托管 DLL 恢复出的独立源码项目、解决方案和目录级构建配置。 |
 | `tools/PvfResourceMerger/` | Hybrid 构建使用的无第三方依赖资源合并与程序集容器审计工具。 |
 | `tests/PvfResourceMerger.RegressionTests/` | 覆盖资源替换、失败边界、确定性和审计契约的控制台回归测试。 |
+| `tests/GiftBoxPreview.RegressionTests/` | 覆盖礼盒行末数量、可选概率权重和默认物品的控制台回归测试。 |
 | `scripts/` | 启动验证和字符串恢复工具。 |
 | `docs/` | BAML、连接 ID、二进制、混淆名称、字符串和 `.NET 10` 恢复审计记录。 |
 

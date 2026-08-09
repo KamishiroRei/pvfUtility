@@ -38,6 +38,7 @@
 | 22 个恢复源码库及其解决方案 | `SourceLibraries/` |
 | Hybrid WPF 资源合并与审计工具 | `tools/PvfResourceMerger/` |
 | 资源合并器正式回归项目 | `tests/PvfResourceMerger.RegressionTests/` |
+| 礼盒预览正式回归项目 | `tests/GiftBoxPreview.RegressionTests/` |
 | 源码库生成输出 | `SourceLibraries/.build/` |
 
 不得重新建立 `Recovered/` 来存放正式源码、资源、构建配置或生成产物。`SourceLibraries/.build/` 可以删除并由构建重新生成；表中其余位置都是必须保留的源码、资源、工具或测试输入，不能作为临时恢复输出清理。

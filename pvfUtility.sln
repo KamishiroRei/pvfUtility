@@ -61,6 +61,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PvfResourceMerger.RegressionTests", "tests\PvfResourceMerger.RegressionTests\PvfResourceMerger.RegressionTests.csproj", "{BF35DCF0-BBDE-4DAB-B093-5BE4362B4760}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiftBoxPreview.RegressionTests", "tests\GiftBoxPreview.RegressionTests\GiftBoxPreview.RegressionTests.csproj", "{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -371,6 +373,18 @@ Global
 		{BF35DCF0-BBDE-4DAB-B093-5BE4362B4760}.Release|x64.Build.0 = Release|Any CPU
 		{BF35DCF0-BBDE-4DAB-B093-5BE4362B4760}.Release|x86.ActiveCfg = Release|Any CPU
 		{BF35DCF0-BBDE-4DAB-B093-5BE4362B4760}.Release|x86.Build.0 = Release|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Debug|x64.Build.0 = Debug|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Debug|x86.Build.0 = Debug|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Release|x64.ActiveCfg = Release|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Release|x64.Build.0 = Release|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Release|x86.ActiveCfg = Release|Any CPU
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -401,5 +415,6 @@ Global
 		{EB19D272-3A2C-4A88-8A22-783683CCCABC} = {62F06446-7DEF-37D4-1F52-82A46AD2F605}
 		{7B0582CF-77DB-4917-A9A6-CB1F8C312DF0} = {07C2787E-EAC7-C090-1BA3-A61EC2A24D84}
 		{BF35DCF0-BBDE-4DAB-B093-5BE4362B4760} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{4DB5CF5A-AD47-4B81-86DB-A3FF5A291757} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 	EndGlobalSection
 EndGlobal
