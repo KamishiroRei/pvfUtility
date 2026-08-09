@@ -1,0 +1,26 @@
+{
+  "SchemaVersion": 1,
+  "FileType": "vm",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "vm",
+      "Section": "material",
+      "Title": "所需材料",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "FreyaGrace"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "vm",
+      "Section": "output",
+      "Title": "4个一组",
+      "Comment": "4个一组，分别为道具ID、抽中几率（最大100W），数量，是否公告（0不公告，1公告）",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "网瘾少年"
+    }
+  ]
+}

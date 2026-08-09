@@ -591,6 +591,196 @@
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "asura",
+      "Title": "asura",
+      "Comment": "阿修罗！",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "berserker",
+      "Title": "狂战士！",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "soulbringer",
+      "Title": "鬼泣！",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "weaponmaster",
+      "Title": "剑魂！",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "elementalmaster",
+      "Title": "元素师",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "summoner",
+      "Title": "召唤师",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "battlemage",
+      "Title": "战斗法师",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "witch",
+      "Title": "魔道学者",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "nenmaster",
+      "Title": "气功师",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "striker",
+      "Title": "散打",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "streetfighter",
+      "Title": "街霸",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "grappler",
+      "Title": "柔道家",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "crusader",
+      "Title": "圣骑士",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "infighter",
+      "Title": "蓝拳圣使",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "rogue",
+      "Title": "暗夜使者转职",
+      "Comment": "暗夜使者转职：刺客",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "necromancer",
+      "Title": "暗夜使者转职",
+      "Comment": "暗夜使者转职：死灵术士",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "avenger",
+      "Title": "圣骑士转职",
+      "Comment": "圣骑士转职：复仇者\n\n台改暗夜使者转职：影舞者",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "exorcist",
+      "Title": "圣骑士转职",
+      "Comment": "圣骑士转职：驱魔师\n\n台改暗夜使者转职：忍者",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "co",
+      "Section": "none",
+      "Title": "none",
+      "Comment": "该词条位于技能树时，代表未转职职业",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
     }
   ]
 }

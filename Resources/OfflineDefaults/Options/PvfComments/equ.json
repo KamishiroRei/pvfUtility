@@ -4941,6 +4941,1106 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add fire element",
+      "Title": "add fire element",
+      "Comment": "添加消防元素",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add water element",
+      "Title": "add water element",
+      "Comment": "加水元素",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add water",
+      "Title": "add water",
+      "Comment": "加水",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "equipment separate attack",
+      "Title": "equipment separate attack",
+      "Comment": "设备单独攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add physical critical hit",
+      "Title": "add physical critical hit",
+      "Comment": "添加身体批评的命中",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "remove appendage",
+      "Title": "remove appendage",
+      "Comment": "删除附件",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add elemental damage",
+      "Title": "add elemental damage",
+      "Comment": "添加元素损坏",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add elemental attack",
+      "Title": "add elemental attack",
+      "Comment": "添加元素攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "activestatus tolerance all",
+      "Title": "activestatus tolerance all",
+      "Comment": "ActiveStatus宽容所有",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "all activestatus tolerance",
+      "Title": "all activestatus tolerance",
+      "Comment": "所有ActiveStatus耐受性",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "all equipment defense",
+      "Title": "all equipment defense",
+      "Comment": "所有设备防御",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add attack speed",
+      "Title": "add attack speed",
+      "Comment": "添加攻击速度",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add move speed",
+      "Title": "add move speed",
+      "Comment": "添加移动速度",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "event apc",
+      "Title": "event apc",
+      "Comment": "事件APC.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "start time",
+      "Title": "start time",
+      "Comment": "开始时间",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "hit success",
+      "Title": "hit success",
+      "Comment": "击中成功",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "critical hithit success",
+      "Title": "critical hithit success",
+      "Comment": "批判性忘记成功",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "critical hit success",
+      "Title": "critical hit success",
+      "Comment": "危急击中成功",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "magical hit success",
+      "Title": "magical hit success",
+      "Comment": "神奇的击中成功",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "increase",
+      "Title": "increase",
+      "Comment": "增加",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "increase magical attack",
+      "Title": "increase magical attack",
+      "Comment": "增加魔法攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "increase physical attack",
+      "Title": "increase physical attack",
+      "Comment": "增加物理攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "increase physical defense",
+      "Title": "increase physical defense",
+      "Comment": "增加身体防御",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add critical damage",
+      "Title": "add critical damage",
+      "Comment": "添加危急损坏",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "move pos",
+      "Title": "move pos",
+      "Comment": "移动pos.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "name tag img",
+      "Title": "name tag img",
+      "Comment": "名称标签img.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "passvie",
+      "Title": "passvie",
+      "Comment": "被动的",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "fier attack",
+      "Title": "fier attack",
+      "Comment": "菲尔攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "suppor裝備時， 可以使裝備時， 可以使t apply list",
+      "Title": "suppor裝備時， 可以使裝備時， 可以使t apply list",
+      "Comment": "支撑装备时，可以以装备时，可以申请申请清单",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "my attack state",
+      "Title": "my attack state",
+      "Comment": "我的攻击状态",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "skill level",
+      "Title": "skill level",
+      "Comment": "技能等级",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "passive object filter",
+      "Title": "passive object filter",
+      "Comment": "被动对象过滤器",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "magical damage",
+      "Title": "magical damage",
+      "Comment": "魔法伤害",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "magical absolute",
+      "Title": "magical absolute",
+      "Comment": "神奇的绝对",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "GM武器",
+      "Title": "GM武器",
+      "Comment": "通用汽车器",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "stat by parameter",
+      "Title": "stat by parameter",
+      "Comment": "stat参数",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "magic critical hit",
+      "Title": "magic critical hit",
+      "Comment": "魔术批评的命中",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "rebirth success",
+      "Title": "rebirth success",
+      "Comment": "重生成功",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "dark attck",
+      "Title": "dark attck",
+      "Comment": "黑暗攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "transparent",
+      "Title": "transparent",
+      "Comment": "透明",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "defense",
+      "Title": "defense",
+      "Comment": "防御",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "percent",
+      "Title": "percent",
+      "Comment": "百分",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "unique increase damage",
+      "Title": "unique increase damage",
+      "Comment": "独特增加伤害",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "appendage control",
+      "Title": "appendage control",
+      "Comment": "附属物控制",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add talisman detail explain",
+      "Title": "add talisman detail explain",
+      "Comment": "添加护身符细节解释",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add talisman basic explain",
+      "Title": "add talisman basic explain",
+      "Comment": "添加护身符基本解释",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "rune skillIndex",
+      "Title": "rune skillIndex",
+      "Comment": "符文skillindex.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "useable growtype",
+      "Title": "useable growtype",
+      "Comment": "可用的种植术",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "common unique",
+      "Title": "common unique",
+      "Comment": "普通独特",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "dungeon index check",
+      "Title": "dungeon index check",
+      "Comment": "地牢索引检查",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "reward item for use count limit",
+      "Title": "reward item for use count limit",
+      "Comment": "奖励项目计数限制",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "Force",
+      "Title": "Force",
+      "Comment": "力量",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "elemental attack",
+      "Title": "elemental attack",
+      "Comment": "元素攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "not my appendage",
+      "Title": "not my appendage",
+      "Comment": "不是我的阑尾",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "buff option",
+      "Title": "buff option",
+      "Comment": "Buff选项",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "physics attack",
+      "Title": "physics attack",
+      "Comment": "物理攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "physical attac",
+      "Title": "physical attac",
+      "Comment": "身体攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "any body equipped",
+      "Title": "any body equipped",
+      "Comment": "任何装备的身体",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "indexes",
+      "Title": "indexes",
+      "Comment": "索引",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "just dungeon clear for use count limit",
+      "Title": "just dungeon clear for use count limit",
+      "Comment": "只是Dungeon清除使用计数限制",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "self reward only for use count limit",
+      "Title": "self reward only for use count limit",
+      "Comment": "自我奖励仅供使用计数限制",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "use count limit",
+      "Title": "use count limit",
+      "Comment": "使用计数限制",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "unique avatar type",
+      "Title": "unique avatar type",
+      "Comment": "独特的头像类型",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "fire element attack",
+      "Title": "fire element attack",
+      "Comment": "消防元素攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "all elemental  attack",
+      "Title": "all elemental  attack",
+      "Comment": "所有元素攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "consu item",
+      "Title": "consu item",
+      "Comment": "涉及概要项目",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "add rate",
+      "Title": "add rate",
+      "Comment": "加入速度",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "equ",
+      "Section": "avatar ability",
+      "Title": "avatar ability",
+      "Comment": "头像能力",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "myself",
+      "Title": "自己",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "奶茶Bot QQ8002263"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "equipment/character/atfighter/weapon/boxglove/",
+      "Title": "武器外观指向文件夹路径",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "墨白"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "camoflage",
+      "Title": "伪装",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "卧底"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "superarmor",
+      "Title": "霸体",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "卧底"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "skill cool time",
+      "Title": "技能冷却的时间",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "卧底"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "solo teleport",
+      "Title": "单人传送 后面数字是时间 毫秒计算",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "一只鱼2"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "party teleport",
+      "Title": "组队传送 后面数字是时间 毫秒计算",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "一只鱼2"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "M socket",
+      "Title": "彩色槽",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "zed"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "trade",
+      "Title": "不可交易",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "诗仙"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "enemy",
+      "Title": "敌人",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "释然"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "magical attack",
+      "Title": "智力",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[magical attack] -10\t\t\t\t// 智力\n```",
+      "Closing": false,
+      "Authors": "释然|Lancarus"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "ELEMENT_TOLERANCE_FIRE",
+      "Title": "火属性抗性",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "ELEMENT_TOLERANCE_WATER",
+      "Title": "冰属性抗性",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "ELEMENT_TOLERANCE_DARK",
+      "Title": "暗属性抗性",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "ELEMENT_TOLERANCE_LIGHT",
+      "Title": "光属性抗性",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "ACTIVESTATUS_TOLERANCE_STUCK",
+      "Title": "回避率",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "INVENTORY_MAX_WEIGHT",
+      "Title": "最大负重",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "MAGICAL_ATTACK",
+      "Title": "智力",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "MAGICAL_DEFENSE",
+      "Title": "精神",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "CAST_SPEED",
+      "Title": "施放速度",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "ACTIVESTATUS_TOLERANCE_ALL",
+      "Title": "所有异常状态抗性",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "HIT_RECOVERY",
+      "Title": "硬直",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "SKILL_LEVEL",
+      "Title": "技能",
+      "Comment": "技能\n[avatar select ability]\n\t`[SKILL_LEVEL]`\n\t`[swordman]`\t38\t1\n[/avatar select ability]\n\n鬼剑士38号技能破极兵刃技能+1",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "PHYSICAL_ATTACK",
+      "Title": "力量",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "PHYSICAL_DEFENSE",
+      "Title": "体力",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "JUMP_POWER",
+      "Title": "跳跃力",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "magical absolute defense",
+      "Title": "magical absolute defense",
+      "Comment": "- 魔法伤害追加减少\n- 魔法绝对防御",
+      "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[magical absolute defense] 20.0\t\t\t// 魔法绝对防御。%值\n```",
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "physical absolute defense",
+      "Title": "physical absolute defense",
+      "Comment": "- 物理伤害追加减少\n- 物理绝对防御",
+      "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[physical absolute defense] 20.0\t\t// 物理绝对防御。%值\n```",
+      "Closing": false,
+      "Authors": "BieNao"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "mt waist",
+      "Title": "板甲腰带",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "random enemy",
+      "Title": "随机敌人",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "all enemy",
+      "Title": "all enemy",
+      "Comment": "敌单体为圆心50px半径内群攻",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": null
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "stun",
+      "Title": "异常效果",
+      "Comment": "异常效果：眩晕",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "MP_REGENRATE",
+      "Title": "每分钟恢复魔法值",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "HP_REGENRATE",
+      "Title": "每分钟恢复生命值",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "ATTACK_SPEED",
+      "Title": "攻击速度",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "demonic swordman",
+      "Title": "黑暗武士",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "HP MAX",
+      "Title": "HP 最大值",
+      "Comment": "最大生命值",
+      "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n// 变化能力值。变化量为 0 的可以不写。前面的 + 号可以省略 //\n[HP MAX] +10\t\t\t\t\t// HP 最大值\n```",
+      "Closing": false,
+      "Authors": "思持c|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "MP MAX",
+      "Title": "MP 最大值",
+      "Comment": "最大魔法值",
+      "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[MP MAX] +27\t\t\t\t\t// MP 最大值\n```",
+      "Closing": false,
+      "Authors": "beinao|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "equipment physical defense",
+      "Title": "equipment physical defense",
+      "Comment": "- 物理防御力\n- 物理防御力(地下城) 物理防御力(决斗场)\n\n装备物理防御力",
+      "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[equipment physical defense] +25 +25\t\t// 物理防御力(地下城) 物理防御力(决斗场)\n```",
+      "Closing": false,
+      "Authors": "Cai|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "equipment magical defense",
+      "Title": "equipment magical defense",
+      "Comment": "- 魔法防御力\n- 魔法防御力(地下城) 魔法防御力(决斗场)\n\n装备魔法防御力",
+      "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[equipment magical defense] +38 +38\t\t// 魔法防御力(地下城) 魔法防御力(决斗场)\n```",
+      "Closing": false,
+      "Authors": "Cai|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "disjoint",
+      "Title": "分解",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "equ",
+      "Section": "cast speed",
+      "Title": "cast speed",
+      "Comment": "- 施放速度\n- 施放速度 (0\n\n单位：0.1%",
+      "OfficialDescription": "#### 官方示例: equipmentsample.equ\n\n```pvf\n[cast speed] 30\t\t\t\t\t// 施放速度 (0.1% 单位)\n```",
+      "Closing": false,
+      "Authors": "Cai - 263007544|Xiti Fox|Lancarus"
     }
   ]
 }

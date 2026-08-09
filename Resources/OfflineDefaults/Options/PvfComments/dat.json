@@ -1,0 +1,26 @@
+{
+  "SchemaVersion": 1,
+  "FileType": "dat",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dat",
+      "Section": "ability case",
+      "Title": "ability case",
+      "Comment": "能力案例",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "dat",
+      "Section": "ability datas",
+      "Title": "ability datas",
+      "Comment": "能力数据",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    }
+  ]
+}

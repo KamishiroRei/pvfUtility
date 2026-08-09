@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "wdm",
   "Comments": [
@@ -90,7 +90,7 @@
       "Comment": "世界地图名称：该世界地图区域在游戏选图界面中的显示名称。通过反引号 token 引用字符串表中的文本。",
       "OfficialDescription": "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[name] `格兰·弗洛里斯`\t\t// 名称\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -100,7 +100,7 @@
       "Comment": "深渊任务索引：必须完成列表中指定的任务后，才能进入该区域的深渊（深渊）模式地下城。列表中的数字为任务 ID。",
       "OfficialDescription": "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[hell quest]\t\t// 深渊任务索引：必须完成该任务才能进入深渊地下城\n2601\n[/hell quest]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -110,7 +110,7 @@
       "Comment": "小地图坐标点：在 worldmap 选择界面中，各副本入口图标在小地图上的显示坐标。每行为 (x, y) 坐标对，按 step 顺序排列。",
       "OfficialDescription": "#### 官方示例: worldmapsample.wdm\n\n```pvf\n[minimap points]\n1000\t100\t\t\t// 位置(x, y)  step 0\n100\t\t10\t\t\t// 位置(x, y)  step 1\n[/minimap points]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     }
   ]
 }

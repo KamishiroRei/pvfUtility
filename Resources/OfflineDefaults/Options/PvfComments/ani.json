@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "ani",
   "Comments": [
@@ -300,7 +300,7 @@
       "Comment": "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM TERM] 100\t\t// 残影生成间隔 1/1000秒\n```",
       "OfficialDescription": "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM TERM] 100\t\t// 残影生成间隔 1/1000秒\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -310,7 +310,7 @@
       "Comment": "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM LIFE TIME] 500\t// 残影持续时间 1/1000秒\n```",
       "OfficialDescription": "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM LIFE TIME] 500\t// 残影持续时间 1/1000秒\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -320,7 +320,7 @@
       "Comment": "残影颜色参数，官方样例和真实文件均为 4 个数值，可按 R、G、B、Alpha 读取。官方说明指出不同 [SPECTRUM EFFECT] 下部分颜色分量可能不适用，例如 NONE 类型只使用 Alpha；实际渲染仍依赖客户端。",
       "OfficialDescription": "#### 官方示例: animation.ani\n\n```pvf\n[SPECTRUM COLOR] 255 0 0 155\t// 残影颜色，根据 [SPECTRUM EFFECT] 类型可能不适用。\n\t\t\t\t// 例如) NONE 类型的情况下，仅使用 alpha 值。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -330,7 +330,7 @@
       "Comment": "#### 官方示例: animation.ani\n\n```pvf\n// 例如) NONE 类型的情况下，仅使用 alpha 值。\n[SPECTRUM EFFECT] `LINEARDODGE` // 效果类型\n\t\t\t\t// `NONE`\t : 原样复制角色形象。\n\t\t\t\t// `DODGE`\n\t\t\t\t// `LINEARDODGE`\n\t\t\t\t// `DARK`\n\t\t\t\t// `XOR`\n\t\t\t\t// `MONOCHROME`\n\t\t\t\t// 其他功能会出错\n```",
       "OfficialDescription": "#### 官方示例: animation.ani\n\n```pvf\n// 例如) NONE 类型的情况下，仅使用 alpha 值。\n[SPECTRUM EFFECT] `LINEARDODGE` // 效果类型\n\t\t\t\t// `NONE`\t : 原样复制角色形象。\n\t\t\t\t// `DODGE`\n\t\t\t\t// `LINEARDODGE`\n\t\t\t\t// `DARK`\n\t\t\t\t// `XOR`\n\t\t\t\t// `MONOCHROME`\n\t\t\t\t// 其他功能会出错\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -3001,6 +3001,86 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "FLASH",
+      "Title": "FLASH",
+      "Comment": "闪光",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "IN TIME",
+      "Title": "IN TIME",
+      "Comment": "及时",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "STAY TIME",
+      "Title": "STAY TIME",
+      "Comment": "停留时间",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "OUT TIME",
+      "Title": "OUT TIME",
+      "Comment": "时差",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "MAX ALPHA",
+      "Title": "MAX ALPHA",
+      "Comment": "Max Alpha.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "RGB",
+      "Title": "RGB",
+      "Comment": "RGB.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ani",
+      "Section": "ATTACT BOX",
+      "Title": "ATTACT BOX",
+      "Comment": "攻击盒",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ani",
+      "Section": "SUPERARMOR",
+      "Title": "霸体",
+      "Comment": "霸体：超级护甲",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
     }
   ]
 }

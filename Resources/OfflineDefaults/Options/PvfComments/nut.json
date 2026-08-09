@@ -161,6 +161,1336 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "清高"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_getJob",
+      "Title": "sq_getJob",
+      "Comment": "sq_getjob.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AddAttackCancelStartFrame",
+      "Title": "sq_AddAttackCancelStartFrame",
+      "Comment": "sq_addattackcancelstartframe.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "local",
+      "Title": "local",
+      "Comment": "当地的",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetExSkillSlotVisible",
+      "Title": "sq_SetExSkillSlotVisible",
+      "Comment": "sq_setexskillslotvisible.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetSoundTagThrowItem",
+      "Title": "sq_SetSoundTagThrowItem",
+      "Comment": "sq_setsoundtagthrowitem.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetSkillSlotEnable",
+      "Title": "sq_SetSkillSlotEnable",
+      "Comment": "sq_setskillslotenable.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetSkillSlotVisible",
+      "Title": "sq_SetSkillSlotVisible",
+      "Comment": "sq_setskillslotvisible.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "pushScriptFiles",
+      "Title": "pushScriptFiles",
+      "Comment": "PushScriptFiles.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "pushPassiveObj",
+      "Title": "pushPassiveObj",
+      "Comment": "pushpassiveobj.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AddSetStatePacket",
+      "Title": "sq_AddSetStatePacket",
+      "Comment": "SQ_ADDSETSTATEPACKET.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetSoundTagLackMp",
+      "Title": "sq_SetSoundTagLackMp",
+      "Comment": "sq_setsoundtaglackmp.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetSoundTagCreatureCommand",
+      "Title": "sq_SetSoundTagCreatureCommand",
+      "Comment": "sq_setsoundtagcreaturecommand.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetSoundTagDie",
+      "Title": "sq_SetSoundTagDie",
+      "Comment": "sq_setsoundtagdie.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetSoundTagBackStepStart",
+      "Title": "sq_SetSoundTagBackStepStart",
+      "Comment": "sq_setsoundtagbackstepstart.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetSoundTagCoolTime",
+      "Title": "sq_SetSoundTagCoolTime",
+      "Comment": "sq_setsoundtagcooltime.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_JumpUpStartFrame",
+      "Title": "sq_JumpUpStartFrame",
+      "Comment": "sq_jumpupstartframe.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "q_RunScript",
+      "Title": "q_RunScript",
+      "Comment": "q_runscript.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetSkillLevel",
+      "Title": "sq_GetSkillLevel",
+      "Comment": "sq_getskilllevel.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetCNRDObjectToActiveObject",
+      "Title": "sq_GetCNRDObjectToActiveObject",
+      "Comment": "sq_getcnrdobjecttoactiveObject.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "push_vector",
+      "Title": "push_vector",
+      "Comment": "push_vector.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "set_vector",
+      "Title": "set_vector",
+      "Comment": "set_vector.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setEnableDamageBox",
+      "Title": "setEnableDamageBox",
+      "Comment": "setEnableDamageBox.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AddSetStatePacketActiveObject",
+      "Title": "sq_AddSetStatePacketActiveObject",
+      "Comment": "sq_addetstatepacketactiveObject.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetVectorData",
+      "Title": "sq_GetVectorData",
+      "Comment": "sq_getvectordata.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "var",
+      "Title": "var",
+      "Comment": "var.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setSkillCommandEnable",
+      "Title": "setSkillCommandEnable",
+      "Comment": "SetskillCommandable.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "get_timer_vector",
+      "Title": "get_timer_vector",
+      "Comment": "get_timer_vector.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "GetSquirrelAppendage",
+      "Title": "GetSquirrelAppendage",
+      "Comment": "getsquirrelappendage.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AppendAppendage",
+      "Title": "sq_AppendAppendage",
+      "Comment": "sq_appendappende.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetCNRDObjectToCharacter",
+      "Title": "sq_GetCNRDObjectToCharacter",
+      "Comment": "sq_getcnrdobjectTocharacter.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_PlaySound",
+      "Title": "sq_PlaySound",
+      "Comment": "sq_playsound.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_IntVectClear",
+      "Title": "sq_IntVectClear",
+      "Comment": "sq_intvectclear.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "clear_ct_vector",
+      "Title": "clear_ct_vector",
+      "Comment": "clear_ct_vector.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_IsAppendAppendage",
+      "Title": "sq_IsAppendAppendage",
+      "Comment": "sq_isappendappendage.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_CreateDrawOnlyObject",
+      "Title": "sq_CreateDrawOnlyObject",
+      "Comment": "sq_createdrawonlyobject.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetCurrentAttackBonusRate",
+      "Title": "sq_SetCurrentAttackBonusRate",
+      "Comment": "sq_setcurrentattattackbonusrate.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetBonusRateWithPassive",
+      "Title": "sq_GetBonusRateWithPassive",
+      "Comment": "sq_getbonusratewithpassive.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetMyShake",
+      "Title": "sq_SetMyShake",
+      "Comment": "sq_setmyshake.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_flashScreen",
+      "Title": "sq_flashScreen",
+      "Comment": "sq_flashscreen.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_RGB",
+      "Title": "sq_RGB",
+      "Comment": "SQ_RGB.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "readDword",
+      "Title": "readDword",
+      "Comment": "readdword.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setCurrentAnimationFromCutomIndex",
+      "Title": "setCurrentAnimationFromCutomIndex",
+      "Comment": "setCurrentanimationFromCutomIndex.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "break",
+      "Title": "break",
+      "Comment": "休息",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "case",
+      "Title": "case",
+      "Comment": "案件",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AddFunctionName",
+      "Title": "sq_AddFunctionName",
+      "Comment": "sq_addfunctionname.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "startSkillCoolTime",
+      "Title": "startSkillCoolTime",
+      "Comment": "startskillcooltime.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetKeyxEnable",
+      "Title": "sq_SetKeyxEnable",
+      "Comment": "SQ_SETKEYXENABLE.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_IsEnterCommand",
+      "Title": "sq_IsEnterCommand",
+      "Comment": "SQ_ISENTERCOMMAND.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "foreach",
+      "Title": "foreach",
+      "Comment": "Foreach.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_IntVectPush",
+      "Title": "sq_IntVectPush",
+      "Comment": "sq_intvectpush.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetCNRDObjectToSQRCharacter",
+      "Title": "sq_GetCNRDObjectToSQRCharacter",
+      "Comment": "sq_getcnrdobjecttosqracter",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_IsKeyDown",
+      "Title": "sq_IsKeyDown",
+      "Comment": "sq_iskeydown.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "unction",
+      "Title": "unction",
+      "Comment": "发射",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "isDebugMode",
+      "Title": "isDebugMode",
+      "Comment": "isdebugmode.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_requestBuySkill",
+      "Title": "sq_requestBuySkill",
+      "Comment": "sq_requestbuyskill.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "size_vector",
+      "Title": "size_vector",
+      "Comment": "size_vector.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "getTimer",
+      "Title": "getTimer",
+      "Comment": "GetTimer.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "Get",
+      "Title": "Get",
+      "Comment": "得到",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_getChangeStatus",
+      "Title": "sq_getChangeStatus",
+      "Comment": "sq_getchangestatus.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AddChangeStatus",
+      "Title": "sq_AddChangeStatus",
+      "Comment": "sq_addchangestatus.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "getParent",
+      "Title": "getParent",
+      "Comment": "getparent.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setSkillSubState",
+      "Title": "setSkillSubState",
+      "Comment": "setskillsubstate.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetOcularSpectrum",
+      "Title": "sq_GetOcularSpectrum",
+      "Comment": "sq_getocularspectrum.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AddOcularSpectrum",
+      "Title": "sq_AddOcularSpectrum",
+      "Comment": "sq_addocularpectrum.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "compilestring",
+      "Title": "compilestring",
+      "Comment": "Compilestring.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetAttackBoundingBoxSizeRate",
+      "Title": "sq_SetAttackBoundingBoxSizeRate",
+      "Comment": "sq_setattackboundingboxsizate.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "getWeaponSubType",
+      "Title": "getWeaponSubType",
+      "Comment": "getweaponsubtype.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "getXPos",
+      "Title": "getXPos",
+      "Comment": "getxpos.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AnimationProc",
+      "Title": "sq_AnimationProc",
+      "Comment": "sq_animationProc.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_BinaryStartWrite",
+      "Title": "sq_BinaryStartWrite",
+      "Comment": "sq_binarystartwrite.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_CreateAnimation",
+      "Title": "sq_CreateAnimation",
+      "Comment": "sq_createanmation.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setAutoLayerWorkAnimationAddSizeRate",
+      "Title": "setAutoLayerWorkAnimationAddSizeRate",
+      "Comment": "setautolayerworkanimationadddsizate.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setObjectHeight",
+      "Title": "setObjectHeight",
+      "Comment": "setobjectheight.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "print",
+      "Title": "print",
+      "Comment": "打印",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "flushSetStatePacket",
+      "Title": "flushSetStatePacket",
+      "Comment": "FlushsetStatePacket.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_RGBA",
+      "Title": "sq_RGBA",
+      "Comment": "SQ_RGBA.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetCurrentAttackInfo",
+      "Title": "sq_SetCurrentAttackInfo",
+      "Comment": "sq_setcurrentattackinfo.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_setShake",
+      "Title": "sq_setShake",
+      "Comment": "sq_setshake.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_isMyControlObject",
+      "Title": "sq_isMyControlObject",
+      "Comment": "sq_ismycontrolobject.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_LoadSkillEffectAni",
+      "Title": "sq_LoadSkillEffectAni",
+      "Comment": "SQ_LOADSKILLEFFECTANI.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetDownUpFrame",
+      "Title": "sq_SetDownUpFrame",
+      "Comment": "sq_setdownupframe.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_JumpDownStartFrame",
+      "Title": "sq_JumpDownStartFrame",
+      "Comment": "sq_jumpdownstartframe.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_JumpLandStartFrame",
+      "Title": "sq_JumpLandStartFrame",
+      "Comment": "sq_jumplandstartframe.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetDownBounceUpFrame",
+      "Title": "sq_SetDownBounceUpFrame",
+      "Comment": "sq_setdownbouspframe.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_MoveToAppendageForce",
+      "Title": "sq_MoveToAppendageForce",
+      "Comment": "sq_movetoappendageforce.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setCurrentDirection",
+      "Title": "setCurrentDirection",
+      "Comment": "setCurrentDirection.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setCurrentPos",
+      "Title": "setCurrentPos",
+      "Comment": "setcurrentpos.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sizeRate",
+      "Title": "sizeRate",
+      "Comment": "s",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetCurrentAnimation",
+      "Title": "sq_SetCurrentAnimation",
+      "Comment": "sq_setcurrentanimation.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "isMyControlObject",
+      "Title": "isMyControlObject",
+      "Comment": "ISMyControlObject.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "upForce",
+      "Title": "upForce",
+      "Comment": "丑",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SendCreatePassiveObjectPacket",
+      "Title": "sq_SendCreatePassiveObjectPacket",
+      "Comment": "sq_sendcreatepassiveObjectPacket.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "char",
+      "Title": "char",
+      "Comment": "char",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "clear_obj_vector",
+      "Title": "clear_obj_vector",
+      "Comment": "clear_obj_vector.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setCustomOutline",
+      "Title": "setCustomOutline",
+      "Comment": "setcustomoutline.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "getCollisionObjectNumber",
+      "Title": "getCollisionObjectNumber",
+      "Comment": "getcollisionObjectNumber.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_var",
+      "Title": "sq_var",
+      "Comment": "SQ_VAR.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "GetAnimationMap",
+      "Title": "GetAnimationMap",
+      "Comment": "GetAnimationMap.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetCurrentAttackInfo",
+      "Title": "sq_GetCurrentAttackInfo",
+      "Comment": "sq_getcurrentattackinfo.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setImageRateFromOriginal",
+      "Title": "setImageRateFromOriginal",
+      "Comment": "setimagitefromoriginal.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "getTopCharacter",
+      "Title": "getTopCharacter",
+      "Comment": "gettopcharacter",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SendDestroyPacketPassiveObject",
+      "Title": "sq_SendDestroyPacketPassiveObject",
+      "Comment": "sq_senddestroypacketpassiveObject.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setBool",
+      "Title": "setBool",
+      "Comment": "setbool.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "null",
+      "Title": "null",
+      "Comment": "空值",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AddDrawOnlyAniFromParent",
+      "Title": "sq_AddDrawOnlyAniFromParent",
+      "Comment": "sq_adddrawonlyanifromparent",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "switch",
+      "Title": "switch",
+      "Comment": "转变",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_IsMyCharacter",
+      "Title": "sq_IsMyCharacter",
+      "Comment": "sq_ismycharacter",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "getPassiveObjectIndex",
+      "Title": "getPassiveObjectIndex",
+      "Comment": "getPassiveObjectIndex.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_BinaryWriteWord",
+      "Title": "sq_BinaryWriteWord",
+      "Comment": "sq_binarywriteword.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SendChangeSkillEffectPacket",
+      "Title": "sq_SendChangeSkillEffectPacket",
+      "Comment": "SQ_SENDCHANGESKILLEFFECTPACKET.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "setValid",
+      "Title": "setValid",
+      "Comment": "setvalid.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetStaticSpeedInfo",
+      "Title": "sq_SetStaticSpeedInfo",
+      "Comment": "sq_setstaticspeedInfo.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetAllCommandEnable",
+      "Title": "sq_SetAllCommandEnable",
+      "Comment": "SQ_SetAllCommandable.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_PostDelayedMessage",
+      "Title": "sq_PostDelayedMessage",
+      "Comment": "SQ_POSTDELAYEDMESSAGE.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "endCreateSpectrum",
+      "Title": "endCreateSpectrum",
+      "Comment": "endcreateSpectum.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_StartWrite",
+      "Title": "sq_StartWrite",
+      "Comment": "sq_startwrite.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetPowerWithPassive",
+      "Title": "sq_GetPowerWithPassive",
+      "Comment": "sq_getpowerwithpassive.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_RemovePassiveSkillAttackBonusRate",
+      "Title": "sq_RemovePassiveSkillAttackBonusRate",
+      "Comment": "Sq_removepassiveskillattackbonusrate.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AddPassiveSkillAttackBonusRate",
+      "Title": "sq_AddPassiveSkillAttackBonusRate",
+      "Comment": "sq_addpassiveskillattactackonrate.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_IsEnterSkillLastKeyUnits",
+      "Title": "sq_IsEnterSkillLastKeyUnits",
+      "Comment": "SQ_ISENTERSKILLLASTKEYUNITS.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_AddStateLayerAnimation",
+      "Title": "sq_AddStateLayerAnimation",
+      "Comment": "sq_addstatelayeranimation.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_CreateCNRDAnimation",
+      "Title": "sq_CreateCNRDAnimation",
+      "Comment": "sq_createcnrdanimation.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "getMyPassiveObjectCount",
+      "Title": "getMyPassiveObjectCount",
+      "Comment": "getmypassiveObjectCount.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "isDead",
+      "Title": "isDead",
+      "Comment": "Isdead.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_GetSkillIndex",
+      "Title": "sq_GetSkillIndex",
+      "Comment": "sq_getskillindex.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "isEnable",
+      "Title": "isEnable",
+      "Comment": "isEnabled.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_moveWithParent",
+      "Title": "sq_moveWithParent",
+      "Comment": "SQ_MoveWithParent.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "isInCoolTime",
+      "Title": "isInCoolTime",
+      "Comment": "Isincooltime.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "isValid",
+      "Title": "isValid",
+      "Comment": "已验证",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_IsEnterSkill",
+      "Title": "sq_IsEnterSkill",
+      "Comment": "SQ_ISENTERSKILL.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "addParameter",
+      "Title": "addParameter",
+      "Comment": "addparameter.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "clearParameter",
+      "Title": "clearParameter",
+      "Comment": "ClearParameter.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "nut",
+      "Section": "sq_SetValidTime",
+      "Title": "sq_SetValidTime",
+      "Comment": "sq_setvalidtime.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
     }
   ]
 }

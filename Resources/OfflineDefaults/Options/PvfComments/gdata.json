@@ -1,0 +1,26 @@
+{
+  "SchemaVersion": 1,
+  "FileType": "gdata",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "gdata",
+      "Section": "index",
+      "Title": "对应城镇.twn的区域",
+      "Comment": "对应城镇.twn的区域：\n\n[area]\n    0-------------对应这个区域\n    `xxxxxxxx.map`\n    `[gate]`\n[/area]\n-------\n城镇索引，对应Town.lst中的城镇编号。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Cai - 497970666"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "gdata",
+      "Section": "hyperlink text",
+      "Title": "hyperlink text",
+      "Comment": "超链接文本",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    }
+  ]
+}

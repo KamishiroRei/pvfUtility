@@ -211,6 +211,36 @@
       "Authors": "Codex",
       "Create": "2026-07-16T00:00:00+08:00",
       "UpdateTime": "2026-07-16T00:00:00+08:00"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "apd",
+      "Section": "create limit count",
+      "Title": "create limit count",
+      "Comment": "创建限制计数",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "apd",
+      "Section": "renewal appendage",
+      "Title": "renewal appendage",
+      "Comment": "续订阑尾",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "apd",
+      "Section": "set except reason",
+      "Title": "set except reason",
+      "Comment": "既外原因",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
     }
   ]
 }

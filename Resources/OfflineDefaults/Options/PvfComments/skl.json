@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "skl",
   "Comments": [
@@ -1011,6 +1011,116 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "skl",
+      "Section": "tool AttackTime",
+      "Title": "tool AttackTime",
+      "Comment": "工具攻击时间",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "active",
+      "Title": "技能释放类型",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "绝"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "magical",
+      "Title": "魔法伤害",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "physical",
+      "Title": "物理伤害",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "(DOWN)",
+      "Title": "下",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "(SKILL)",
+      "Title": "Z（可以单独作为一个手搓指令）",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "(ATTACK)",
+      "Title": "普攻",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "(BUFF)",
+      "Title": "空格键（可以单独作为一个手搓指令）",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "(RIGHT)",
+      "Title": "右（同时也对应手搓指令的向前移动）",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "(LEFT)",
+      "Title": "左（同时也对应手搓指令的向后移动）",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "skl",
+      "Section": "(UP)",
+      "Title": "上",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
     }
   ]
 }

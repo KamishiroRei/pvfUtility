@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "twn",
   "Comments": [
@@ -60,7 +60,7 @@
       "Comment": "城镇名称：该城镇在世界地图和游戏内显示的显示名称。通过反引号 token 引用字符串表中的文本。",
       "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[name] `亨顿迈尔`\t\t\t\t// 名称\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -70,7 +70,7 @@
       "Comment": "过场图像：进入该城镇时播放的过场画面。第一个参数为 IMG 文件名，第二个参数为帧索引。",
       "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[cutscene image] `CutScene.img` 0\t\t\t// 过场图像文件名称，帧索引\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -80,7 +80,7 @@
       "Comment": "前置副本要求：进入该城镇前必须通关的副本索引。值为 -1 时表示无前置副本要求，可直接进入。",
       "OfficialDescription": "#### 官方示例: townsample.twn\n\n```pvf\n[dungeon what must be cleared] -1\t\t\t\t\t// 为进入而必须清除的地下城索引。-1 表示无\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -111,6 +111,36 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "twn",
+      "Section": "exceptional character",
+      "Title": "exceptional character",
+      "Comment": "特色",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "twn",
+      "Section": "dungeon gate",
+      "Title": "副本入口",
+      "Comment": "副本入口，在worldmap.lst 中被定义",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "pvf"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "twn",
+      "Section": "minimap rect",
+      "Title": "小地图上可以移动的区域",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "依旧"
     }
   ]
 }

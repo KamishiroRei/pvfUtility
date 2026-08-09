@@ -190,7 +190,7 @@
       "Comment": "通用动作。UI控件上绑定的通用动作/动画路径（请勿修改这些设置，如有需要请咨询客户端组）。",
       "OfficialDescription": "#### 官方示例: dungeonselect_uisample.ui\n\n```pvf\n[common action]  `Action/worldmap_balloon.act`    // 气泡动作路径（请勿修改！！咨询客户端组）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -681,6 +681,156 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "balloon",
+      "Title": "副本UI气泡按钮",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "zed"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "IDC_WORLDMAP_EXPAND_DIMENSION_BACKGROUND",
+      "Title": "展示的背景",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "123"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "IDC_WORLDMAP_BUTTON2",
+      "Title": "展示的背景",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "123"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "cell basic data",
+      "Title": "单元格基本数据",
+      "Comment": "单元格基本数据\nui文件中常见\n0 0 33 34\n代表 X Y坐标偏移和X Y间距",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "sum665"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "radiobutton",
+      "Title": "组合按钮",
+      "Comment": "组合按钮\nimg 对应数字\n14 2 6 7 8 9 0 0 10 11 12 13 0 0 0\n14代表总控数值\n2代表 两个按钮\n6 7 8 9代表 4个按钮状态png\n0 0代表 xy坐标偏移\n后面同理\n最后一个0 是固定值",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "sum665"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "IDC_WORLDMAP_BUTTON3",
+      "Title": "展示的背景",
+      "Comment": "展示的背景\n\n通常指的是选择副本的顺序\n\n出现相同的数字则会乱顺序\n\n按照1-9的数字排列则不会出现乱顺序",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "释然"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "IDC_WORLDMAP_BUTTON1",
+      "Title": "展示的背景",
+      "Comment": "展示的背景\n三个数字：X坐标  Y坐标  模式1（开启）",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "依旧"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "main_menu",
+      "Title": "main_menu",
+      "Comment": "待翻译，请编辑！",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "大拿"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "inventory_button",
+      "Title": "背包按钮",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "myinfo_button",
+      "Title": "个人信息按钮",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "quest_button",
+      "Title": "任务按钮",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "skill_button",
+      "Title": "技能按钮",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "auction_button",
+      "Title": "拍卖行按钮",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "cerashop_button",
+      "Title": "商城按钮",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "ui",
+      "Section": "aura_gauge_lineardodge",
+      "Title": "光环槽按钮（或许是）",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
     }
   ]
 }

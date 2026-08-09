@@ -5210,7 +5210,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[human],// CATEGORY_TRIBE_HUMAN\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[human],// CATEGORY_TRIBE_HUMAN\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5220,7 +5220,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[beast],// CATEGORY_TRIBE_BEAST\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[beast],// CATEGORY_TRIBE_BEAST\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5230,7 +5230,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[plant],// CATEGORY_TRIBE_PLANT\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[plant],// CATEGORY_TRIBE_PLANT\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5240,7 +5240,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[insect],// CATEGORY_TRIBE_INSECT\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[insect],// CATEGORY_TRIBE_INSECT\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5250,7 +5250,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[machine],// CATEGORY_TRIBE_MACHINE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[machine],// CATEGORY_TRIBE_MACHINE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5260,7 +5260,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[organic],                        // CATEGORY_TRIBE_ORGANIC\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[organic],                        // CATEGORY_TRIBE_ORGANIC\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5270,7 +5270,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[hybrid],                        // CATEGORY_TRIBE_HYBRID\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[hybrid],                        // CATEGORY_TRIBE_HYBRID\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5280,7 +5280,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[undead],                        // CATEGORY_TRIBE_UNDEAD\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[undead],                        // CATEGORY_TRIBE_UNDEAD\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5290,7 +5290,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[devil],                        // CATEGORY_TRIBE_DEVIL\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[devil],                        // CATEGORY_TRIBE_DEVIL\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5300,7 +5300,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[spirit],                        // CATEGORY_TRIBE_SPIRIT\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[spirit],                        // CATEGORY_TRIBE_SPIRIT\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5310,7 +5310,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[dragon],                        // CATEGORY_TRIBE_DRAGON\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[dragon],                        // CATEGORY_TRIBE_DRAGON\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5320,7 +5320,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[melee combat],                // CATEGORY_AI_MELEE_ATTACK\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[melee combat],                // CATEGORY_AI_MELEE_ATTACK\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5330,7 +5330,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[range combat],                // CATEGORY_AI_RANGE_ATTACK\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[range combat],                // CATEGORY_AI_RANGE_ATTACK\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5340,7 +5340,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[close-passive],                // CATEGORY_AI_NEGATIVE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[close-passive],                // CATEGORY_AI_NEGATIVE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5350,7 +5350,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[close-carefully],            // CATEGORY_AI_CAREFUL\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[close-carefully],            // CATEGORY_AI_CAREFUL\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5360,7 +5360,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[full-superarmor],            // CATEGORY_AI_FULLSUPERARMOR\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[full-superarmor],            // CATEGORY_AI_FULLSUPERARMOR\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5370,7 +5370,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[close-tough],                // CATEGORY_AI_RASH\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[close-tough],                // CATEGORY_AI_RASH\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5380,7 +5380,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[close-manace],                // CATEGORY_AI_MANACE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[close-manace],                // CATEGORY_AI_MANACE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5390,7 +5390,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[human armor],                // CATEGORY_ARMOR_HUNAN\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[human armor],                // CATEGORY_ARMOR_HUNAN\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5400,7 +5400,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[fort armor],                 // CATEGORY_ARMOR_FORT\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[fort armor],                 // CATEGORY_ARMOR_FORT\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5410,7 +5410,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[divine armor],               // CATEGORY_ARMOR_DIVINE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[divine armor],               // CATEGORY_ARMOR_DIVINE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5420,7 +5420,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[goblin],                     // CATEGORY_ETC_GOBLIN\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[goblin],                     // CATEGORY_ETC_GOBLIN\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5430,7 +5430,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[tau],                         // CATEGORY_ETC_TAU\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[tau],                         // CATEGORY_ETC_TAU\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5440,7 +5440,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[lugaru],                     // CATEGORY_ETC_LUGARU\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[lugaru],                     // CATEGORY_ETC_LUGARU\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5450,7 +5450,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[melee],                    // CATEGORY_PASSIVEOBJECT_TYPE_MELEE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[melee],                    // CATEGORY_PASSIVEOBJECT_TYPE_MELEE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5460,7 +5460,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[missile],                    // CATEGORY_PASSIVEOBJECT_TYPE_MISSILE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[missile],                    // CATEGORY_PASSIVEOBJECT_TYPE_MISSILE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5470,7 +5470,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[energy],                    // CATEGORY_PASSIVEOBJECT_TYPE_ENERGY\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[energy],                    // CATEGORY_PASSIVEOBJECT_TYPE_ENERGY\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5480,7 +5480,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[bullet],                    // CATEGORY_PASSIVEOBJECT_TYPE_BULLET\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[bullet],                    // CATEGORY_PASSIVEOBJECT_TYPE_BULLET\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5490,7 +5490,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[cannon],                    // CATEGORY_PASSIVEOBJECT_TYPE_CANON\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[cannon],                    // CATEGORY_PASSIVEOBJECT_TYPE_CANON\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5500,7 +5500,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[explosion],                    // CATEGORY_PASSIVEOBJECT_TYPE_EXPLOSION\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[explosion],                    // CATEGORY_PASSIVEOBJECT_TYPE_EXPLOSION\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5510,7 +5510,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[inflame],                    // CATEGORY_PASSIVEOBJECT_TYPE_INFLAME\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[inflame],                    // CATEGORY_PASSIVEOBJECT_TYPE_INFLAME\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5520,7 +5520,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[non inflame],                    // CATEGORY_PASSIVEOBJECT_TYPE_NONINFLAME\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[non inflame],                    // CATEGORY_PASSIVEOBJECT_TYPE_NONINFLAME\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5530,7 +5530,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[light],                    // CATEGORY_PASSIVEOBJECT_TYPE_LIGHT\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[light],                    // CATEGORY_PASSIVEOBJECT_TYPE_LIGHT\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5540,7 +5540,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[dark],                    // CATEGORY_PASSIVEOBJECT_TYPE_DARK\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[dark],                    // CATEGORY_PASSIVEOBJECT_TYPE_DARK\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5550,7 +5550,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[water],                    // CATEGORY_PASSIVEOBJECT_TYPE_WATER\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[water],                    // CATEGORY_PASSIVEOBJECT_TYPE_WATER\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5560,7 +5560,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[fire],                    // CATEGORY_PASSIVEOBJECT_TYPE_FIRE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[fire],                    // CATEGORY_PASSIVEOBJECT_TYPE_FIRE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5570,7 +5570,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[physical attack] [+] 100.0             // 力量增减方式 强度\n```\n\n```pvf\n//仅对敌人生效则用[ENEMY TEAM]\n        [physical attack] [+] 100.0             // 力量增减方式 强度\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[physical attack] [+] 100.0             // 力量增减方式 强度\n```\n\n```pvf\n//仅对敌人生效则用[ENEMY TEAM]\n        [physical attack] [+] 100.0             // 力量增减方式 强度\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5580,7 +5580,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[magical attack] [%] 100.0            // 智力\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[magical attack] [%] 100.0            // 智力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5590,7 +5590,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[physical defense] [%] 100.0            // 体力\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[physical defense] [%] 100.0            // 体力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5600,7 +5600,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[magical defense] [%] 100.0            // 精神\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[magical defense] [%] 100.0            // 精神\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5610,7 +5610,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[equipment physical attack] [%] 100.0        // 物理攻击\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[equipment physical attack] [%] 100.0        // 物理攻击\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5620,7 +5620,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[equipment physical defense] [%] 100.0        // 物理防御\n```\n\n```pvf\n[equipment physical defense] [%] 5000.0        // 物理防御\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[equipment physical defense] [%] 100.0        // 物理防御\n```\n\n```pvf\n[equipment physical defense] [%] 5000.0        // 物理防御\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5630,7 +5630,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[jump power] [%] 100.0                // 跳跃力\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[jump power] [%] 100.0                // 跳跃力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5640,7 +5640,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[attack speed] [%] 100.0            // 攻击速度\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[attack speed] [%] 100.0            // 攻击速度\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5650,7 +5650,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[move speed] [%] 100.0                // 移动速度\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[move speed] [%] 100.0                // 移动速度\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5660,7 +5660,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[cast speed] [%] 100.0                // 施法速度\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[cast speed] [%] 100.0                // 施法速度\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5670,7 +5670,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[hp regen rate] [%] 100.0            // HP恢复率\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[hp regen rate] [%] 100.0            // HP恢复率\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5680,7 +5680,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[magical critical hit rate] [%] 100.0        // 魔法攻击暴击率\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[magical critical hit rate] [%] 100.0        // 魔法攻击暴击率\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5690,7 +5690,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[physical critical hit rate] [%] 100.0        // 物理攻击暴击率\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[physical critical hit rate] [%] 100.0        // 物理攻击暴击率\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5700,7 +5700,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[physical back attack critical rate] [%] 100.0    // 物理背击暴击率\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[physical back attack critical rate] [%] 100.0    // 物理背击暴击率\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5710,7 +5710,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[magical back attack critical rate] [%] 100.0    // 魔法背击暴击率\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[magical back attack critical rate] [%] 100.0    // 魔法背击暴击率\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5720,7 +5720,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[fire element] [%] 100.0            // 火属性抗性\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[fire element] [%] 100.0            // 火属性抗性\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5730,7 +5730,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[water element] [%] 100.0            // 水属性抗性\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[water element] [%] 100.0            // 水属性抗性\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5740,7 +5740,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[dark element] [%] 100.0            // 暗属性抗性\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[dark element] [%] 100.0            // 暗属性抗性\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5750,7 +5750,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[light element] [+] 100.0            // 光属性抗性\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[light element] [+] 100.0            // 光属性抗性\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5770,7 +5770,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[good hit] [%] 100.0                // 硬直率（攻击时）\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[good hit] [%] 100.0                // 硬直率（攻击时）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5780,7 +5780,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[mp regen rate] [%] 100.0            // MP恢复率\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[mp regen rate] [%] 100.0            // MP恢复率\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5790,7 +5790,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[hit recovery] [%] 100.0            // 受击恢复\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[hit recovery] [%] 100.0            // 受击恢复\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5800,7 +5800,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[equipment magical attack] [%] 100.0        // 魔法攻击\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[equipment magical attack] [%] 100.0        // 魔法攻击\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5810,7 +5810,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[equipment magical defense] [%] 100.0        // 魔法防御\n```\n\n```pvf\n[equipment magical defense] [%] 5000.0        // 魔法防御\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[equipment magical defense] [%] 100.0        // 魔法防御\n```\n\n```pvf\n[equipment magical defense] [%] 5000.0        // 魔法防御\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5820,7 +5820,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[all active status resistance] [%] 100.0    // 所有状态异常抗性\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[all active status resistance] [%] 100.0    // 所有状态异常抗性\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5830,7 +5830,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[all element] [%] 100.0                // 所有属性抗性\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[all element] [%] 100.0                // 所有属性抗性\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5840,7 +5840,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[fire element attack]  [+] 100.0        // 火属性强化\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[fire element attack]  [+] 100.0        // 火属性强化\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5850,7 +5850,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[water element attack]  [+] 100.0        // 水属性强化\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[water element attack]  [+] 100.0        // 水属性强化\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5860,7 +5860,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[dark element attack]  [+] 100.0        // 暗属性强化\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[dark element attack]  [+] 100.0        // 暗属性强化\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5870,7 +5870,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[light element attack]  [+] 100.0        // 光属性强化\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[light element attack]  [+] 100.0        // 光属性强化\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5880,7 +5880,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[all element attack]  [+] 100.0            // 所有属性强化\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[all element attack]  [+] 100.0            // 所有属性强化\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5890,7 +5890,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[separate physical attack]  [+] 100.0    // 独立物理攻击力\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[separate physical attack]  [+] 100.0    // 独立物理攻击力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5900,7 +5900,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[separate magical attack]  [+] 100.0    // 独立魔法攻击力\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[separate magical attack]  [+] 100.0    // 独立魔法攻击力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5910,7 +5910,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[separate all attack]  [+] 100.0        // 独立所有攻击力（物理，魔法）\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[separate all attack]  [+] 100.0        // 独立所有攻击力（物理，魔法）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5920,7 +5920,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[antievil]  [+] 100.0                    // 实际抗魔力数值\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[antievil]  [+] 100.0                    // 实际抗魔力数值\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5930,7 +5930,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[physical absolute damage]  [+] 100.0    // 物理绝对伤害 or 物理无视防御伤害\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[physical absolute damage]  [+] 100.0    // 物理绝对伤害 or 物理无视防御伤害\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5940,7 +5940,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[village moving speed]  [+] 100.0        // 城镇移动速度\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[village moving speed]  [+] 100.0        // 城镇移动速度\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5950,7 +5950,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[pass only float type] // 仅浮空型可通行\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[pass only float type] // 仅浮空型可通行\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5960,7 +5960,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[do not pass] // 不可通行\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[do not pass] // 不可通行\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5970,7 +5970,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[pass only red team] // 仅红队可通行（混沌专用）\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[pass only red team] // 仅红队可通行（混沌专用）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5980,7 +5980,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n[pass only blue team] // 仅蓝队可通行（混沌专用）\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n[pass only blue team] // 仅蓝队可通行（混沌专用）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -5990,7 +5990,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [slow] 100 20 10000 50 50        // 概率, 等级, 持续时间, 移动速度（%）, 攻击速度（%）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120704\n\t\t//参考DNF Client Source结构变更。\n\t\t//ACTIVESTATUS_SLOW\n\t\t{must1}{exp}缓慢{/exp}[slow]\n\t\t\t{must1}{exp}概率{/exp}{int(0:)}\n\t\t\t{must2}{exp}等级{/exp}{int(0:)}\n\t\t\t{must3}{exp}持续时间{/exp}{int(0:)}\n\t\t\t{must4}{exp}移动速度（%）{/exp}{int(0:)}\n\t\t\t{must5}{exp}攻击速度（%）{/exp}{int(0:)}\n```\n\n```pvf\n//mkjung 120521\n\t\t//ActionScript脚本格式统一更改-->('[x]' => [x])\n\t\t//{must1}{exp}ACTIVE STATUS ID{/exp}{string}-> [tag]\n\t\t//mkjung 120704\n\t\t//参考DNF Client Source\n\t\t{must1}{exp}缓慢{/exp}[slow]\t\t//ACTIVESTATUS_SLOW\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [slow] 100 20 10000 50 50        // 概率, 等级, 持续时间, 移动速度（%）, 攻击速度（%）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120704\n\t\t//参考DNF Client Source结构变更。\n\t\t//ACTIVESTATUS_SLOW\n\t\t{must1}{exp}缓慢{/exp}[slow]\n\t\t\t{must1}{exp}概率{/exp}{int(0:)}\n\t\t\t{must2}{exp}等级{/exp}{int(0:)}\n\t\t\t{must3}{exp}持续时间{/exp}{int(0:)}\n\t\t\t{must4}{exp}移动速度（%）{/exp}{int(0:)}\n\t\t\t{must5}{exp}攻击速度（%）{/exp}{int(0:)}\n```\n\n```pvf\n//mkjung 120521\n\t\t//ActionScript脚本格式统一更改-->('[x]' => [x])\n\t\t//{must1}{exp}ACTIVE STATUS ID{/exp}{string}-> [tag]\n\t\t//mkjung 120704\n\t\t//参考DNF Client Source\n\t\t{must1}{exp}缓慢{/exp}[slow]\t\t//ACTIVESTATUS_SLOW\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6000,7 +6000,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [freeze] 100 20 3000        // 概率, 等级, 持续时间\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//ACTIVESTATUS_FREEZE\n\t\t{must1}{exp}冰冻{/exp}[freeze]\n\t\t\t{must1}{exp}概率{/exp}{int(0:)}\n\t\t\t{must2}{exp}等级{/exp}{int(0:)}\n\t\t\t{must3}{exp}持续时间{/exp}{int(0:)}\n```\n\n```pvf\n{must1}{exp}冰冻{/exp}[freeze]\t\t//ACTIVESTATUS_FREEZE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [freeze] 100 20 3000        // 概率, 等级, 持续时间\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//ACTIVESTATUS_FREEZE\n\t\t{must1}{exp}冰冻{/exp}[freeze]\n\t\t\t{must1}{exp}概率{/exp}{int(0:)}\n\t\t\t{must2}{exp}等级{/exp}{int(0:)}\n\t\t\t{must3}{exp}持续时间{/exp}{int(0:)}\n```\n\n```pvf\n{must1}{exp}冰冻{/exp}[freeze]\t\t//ACTIVESTATUS_FREEZE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6010,7 +6010,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [poison] 100 10 20000 1000         // 概率, 等级, 持续时间, 伤害\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}中毒{/exp}[poison]\t\t//ACTIVESTATUS_POISON\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [poison] 100 10 20000 1000         // 概率, 等级, 持续时间, 伤害\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}中毒{/exp}[poison]\t\t//ACTIVESTATUS_POISON\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6020,7 +6020,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [stun] 100 20 3000            // 概率, 等级, 持续时间\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}眩晕{/exp}[stun]\t\t\t//ACTIVESTATUS_STUN\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [stun] 100 20 3000            // 概率, 等级, 持续时间\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}眩晕{/exp}[stun]\t\t\t//ACTIVESTATUS_STUN\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6030,7 +6030,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [curse] 100 10 5000 20 20 20 20    // 概率, 等级, 持续时间, 力量,体力,智力,精神\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}诅咒{/exp}[curse]\t\t//ACTIVESTATUS_CURSE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [curse] 100 10 5000 20 20 20 20    // 概率, 等级, 持续时间, 力量,体力,智力,精神\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}诅咒{/exp}[curse]\t\t//ACTIVESTATUS_CURSE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6040,7 +6040,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n//状态异常\n    **[ACTIVE STATUS]** [blind] 100 20 3000 10 100        // 概率, 等级, 持续时间, 视野（%）, 硬直率增加（+）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}失明{/exp}[blind]\t\t//ACTIVESTATUS_BLIND\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n//状态异常\n    **[ACTIVE STATUS]** [blind] 100 20 3000 10 100        // 概率, 等级, 持续时间, 视野（%）, 硬直率增加（+）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}失明{/exp}[blind]\t\t//ACTIVESTATUS_BLIND\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6050,7 +6050,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [lightning] 100 10 2000 100         // 概率, 等级, 持续时间, 伤害\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}感电{/exp}[lightning]\t\t//ACTIVESTATUS_LIGHTNING\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [lightning] 100 10 2000 100         // 概率, 等级, 持续时间, 伤害\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}感电{/exp}[lightning]\t\t//ACTIVESTATUS_LIGHTNING\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6060,7 +6060,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [stone] 100 20 3000 50        // 概率, 等级, 持续时间, 伤害值（+）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}石化{/exp}[stone]\t\t//ACTIVESTATUS_STONE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [stone] 100 20 3000 50        // 概率, 等级, 持续时间, 伤害值（+）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}石化{/exp}[stone]\t\t//ACTIVESTATUS_STONE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6070,7 +6070,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [sleep] 100 20 3000        // 概率, 等级, 持续时间\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}睡眠{/exp}[sleep]\t\t//ACTIVESTATUS_SLEEP\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [sleep] 100 20 3000        // 概率, 等级, 持续时间\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}睡眠{/exp}[sleep]\t\t//ACTIVESTATUS_SLEEP\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6080,7 +6080,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [weapon break] 100 20 10000 15    // 概率, 等级, 持续时间, 耐久度消耗检查次数\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}武器破坏{/exp}[weapon break]\t//ACTIVESTATUS_WEAPON_BREAK\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [weapon break] 100 20 10000 15    // 概率, 等级, 持续时间, 耐久度消耗检查次数\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}武器破坏{/exp}[weapon break]\t//ACTIVESTATUS_WEAPON_BREAK\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6090,7 +6090,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [bleeding] 100 10 5000 10         // 概率, 等级, 持续时间, 伤害\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}出血{/exp}[bleeding]\t\t//ACTIVESTATUS_BLEEDING\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [bleeding] 100 10 5000 10         // 概率, 等级, 持续时间, 伤害\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}出血{/exp}[bleeding]\t\t//ACTIVESTATUS_BLEEDING\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6100,7 +6100,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [haste] 100 20 3000 50 50        // 概率, 等级, 持续时间, 移动速度（%）, 攻击速度（%）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}加速{/exp}[haste]\t\t//ACTIVESTATUS_HASTE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [haste] 100 20 3000 50 50        // 概率, 等级, 持续时间, 移动速度（%）, 攻击速度（%）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}加速{/exp}[haste]\t\t//ACTIVESTATUS_HASTE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6110,7 +6110,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [bless] 100 10 5000 10 10 10 10    // 概率, 等级, 持续时间, 力量,体力,智力,精神\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}祝福{/exp}[bless]\t\t//ACTIVESTATUS_BLESS\n\t\t//mkjung 120704 [weakness]-->[element] 更改\n\t\t//参考TuningProc.h确认。\n\t\t//RDARScriptAction.cpp 审核。\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [bless] 100 10 5000 10 10 10 10    // 概率, 等级, 持续时间, 力量,体力,智力,精神\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}祝福{/exp}[bless]\t\t//ACTIVESTATUS_BLESS\n\t\t//mkjung 120704 [weakness]-->[element] 更改\n\t\t//参考TuningProc.h确认。\n\t\t//RDARScriptAction.cpp 审核。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6120,7 +6120,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n//mkjung 120704 [weakness]-->[element] 变更\n    //[ACTIVE STATUS] [weakness] 100 20 50        // 概率, 等级, 伤害减少比率（基于剩余 HP）\n    **[ACTIVE STATUS]** [element] 100 20 50        // 概率, 等级, 伤害减少比率（基于剩余 HP）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120704 [weakness]-->[element] 更改\n\t\t//参考TuningProc.h确认。\n\t\t//RDARScriptAction.cpp 审核。\n\t\t{must1}{exp}属性强化{/exp}[element]\n\t\t\t{must1}{exp}概率{/exp}{int(0:)}\n\t\t\t{must2}{exp}等级{/exp}{int(0:)}\n\t\t\t{must3}{exp}持续时间{/exp}{int(0:)}\n\t\t\t{must4}{exp}伤害减少比率（以剩余HP为基准）{/exp}{int(0:)}\n```\n\n```pvf\n//mkjung 120704 [weakness]-->[element] 更改\n\t\t//参考TuningProc.h确认。\n\t\t//RDARScriptAction.cpp 审核。\n\t\t{must1}{exp}属性强化{/exp}[element]\t\t//ACTIVESTATUS_ELEMENT\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n//mkjung 120704 [weakness]-->[element] 变更\n    //[ACTIVE STATUS] [weakness] 100 20 50        // 概率, 等级, 伤害减少比率（基于剩余 HP）\n    **[ACTIVE STATUS]** [element] 100 20 50        // 概率, 等级, 伤害减少比率（基于剩余 HP）\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120704 [weakness]-->[element] 更改\n\t\t//参考TuningProc.h确认。\n\t\t//RDARScriptAction.cpp 审核。\n\t\t{must1}{exp}属性强化{/exp}[element]\n\t\t\t{must1}{exp}概率{/exp}{int(0:)}\n\t\t\t{must2}{exp}等级{/exp}{int(0:)}\n\t\t\t{must3}{exp}持续时间{/exp}{int(0:)}\n\t\t\t{must4}{exp}伤害减少比率（以剩余HP为基准）{/exp}{int(0:)}\n```\n\n```pvf\n//mkjung 120704 [weakness]-->[element] 更改\n\t\t//参考TuningProc.h确认。\n\t\t//RDARScriptAction.cpp 审核。\n\t\t{must1}{exp}属性强化{/exp}[element]\t\t//ACTIVESTATUS_ELEMENT\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6130,7 +6130,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [confuse] 100 20 3000 1        // 概率, 等级, 持续时间, 1 表示怪物混乱时攻击同伴。\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}混乱{/exp}[confuse]\t\t//ACTIVESTATUS_CONFUSE\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [confuse] 100 20 3000 1        // 概率, 等级, 持续时间, 1 表示怪物混乱时攻击同伴。\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}混乱{/exp}[confuse]\t\t//ACTIVESTATUS_CONFUSE\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6140,7 +6140,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [armor break] 100 20 10000 15    // 概率, 等级, 持续时间, 耐久度消耗检查次数\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}护甲破坏{/exp}[armor break]\t//ACTIVESTATUS_ARMOR_BREAK\n\t\t//mkjung 120704 [ALL] 添加。\n\t\t//参考TuningProc.h确认。\n\t\t//RDARScriptAction.cpp 审核。\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ACTIVE STATUS]** [armor break] 100 20 10000 15    // 概率, 等级, 持续时间, 耐久度消耗检查次数\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}护甲破坏{/exp}[armor break]\t//ACTIVESTATUS_ARMOR_BREAK\n\t\t//mkjung 120704 [ALL] 添加。\n\t\t//参考TuningProc.h确认。\n\t\t//RDARScriptAction.cpp 审核。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6150,7 +6150,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[ON ENTER MOUSE]\t\t     \t// 鼠标进入控件时触发\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[ON ENTER MOUSE]\t\t     \t// 鼠标进入控件时触发\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6160,7 +6160,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[ON LEAVE MOUSE]\t\t   \t // 鼠标进入控件后又离开时触发\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[ON LEAVE MOUSE]\t\t   \t // 鼠标进入控件后又离开时触发\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6170,7 +6170,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[MY GROUP]\t\t\t\t\t// 属于同一父控件的所有控件\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[MY GROUP]\t\t\t\t\t// 属于同一父控件的所有控件\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6180,7 +6180,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[ALL CONTROLS]\t\t\t\t// 所有控件（注意性能下降！）\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[ALL CONTROLS]\t\t\t\t// 所有控件（注意性能下降！）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6190,7 +6190,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS TYPE] [balloon]\t\t\t// 检查控件类型（与 UI 自动化中填写的控件类型字符串相同）\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS TYPE] [balloon]\t\t\t// 检查控件类型（与 UI 自动化中填写的控件类型字符串相同）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6200,7 +6200,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS MOUSE LBUP]\t\t\t\t\t// 检查目标控件是否发生左键鼠标 UP\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS MOUSE LBUP]\t\t\t\t\t// 检查目标控件是否发生左键鼠标 UP\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6210,7 +6210,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS ME]\t\t\t\t\t\t\t// 检查是否是我的控件\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS ME]\t\t\t\t\t\t\t// 检查是否是我的控件\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6220,7 +6220,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS VISIBLE]\t1\t\t\t\t// 检查是否可见 (1 : 可见则通过，0 : 不可见则通过)\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS VISIBLE]\t1\t\t\t\t// 检查是否可见 (1 : 可见则通过，0 : 不可见则通过)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6230,7 +6230,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS ENABLE]\t\t1\t\t\t\t// 检查是否激活 (1 : 激活状态则通过，0 : 非激活状态则通过)\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS ENABLE]\t\t1\t\t\t\t// 检查是否激活 (1 : 激活状态则通过，0 : 非激活状态则通过)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6240,7 +6240,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[CHECK FUNC]\t\t\t\t\t// 自定义函数检查（仅通过检查的目标才通过）\n\t\t\t1\t\t\t\t\t\t\t// 函数模式（索引）\n\t\t\t5 3 5\t\t\t\t\t\t// 自定义参数（请咨询负责客户端开发人员）\n\t\t[/CHECK FUNC]\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[CHECK FUNC]\t\t\t\t\t// 自定义函数检查（仅通过检查的目标才通过）\n\t\t\t1\t\t\t\t\t\t\t// 函数模式（索引）\n\t\t\t5 3 5\t\t\t\t\t\t// 自定义参数（请咨询负责客户端开发人员）\n\t\t[/CHECK FUNC]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6250,7 +6250,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[SET TRACKING MODE] `莱纳斯` 10 10\t\t\t\t\t// UI 位置固定模式，要固定的对象名称，x偏移，y偏移\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[SET TRACKING MODE] `莱纳斯` 10 10\t\t\t\t\t// UI 位置固定模式，要固定的对象名称，x偏移，y偏移\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6260,7 +6260,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[RETURN]\t\t\t\t\t\t\t\t\t// 结束动作。（之后所有的触发器和行为不再执行）\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[RETURN]\t\t\t\t\t\t\t\t\t// 结束动作。（之后所有的触发器和行为不再执行）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6270,7 +6270,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[SET TITLE]\t`确认`\t\t\t\t\t\t\t// 更改标题（例如：按钮）\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[SET TITLE]\t`确认`\t\t\t\t\t\t\t// 更改标题（例如：按钮）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6280,7 +6280,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[CALL FUNC]\t\t\t\t\t\t\t// 执行自定义函数\n\t\t1\t\t\t\t\t\t\t\t// 函数模式（索引）\n\t\t5 3 5\t\t\t\t\t\t\t// 自定义参数（请咨询负责客户端开发人员）\n\t[/CALL FUNC]\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[CALL FUNC]\t\t\t\t\t\t\t// 执行自定义函数\n\t\t1\t\t\t\t\t\t\t\t// 函数模式（索引）\n\t\t5 3 5\t\t\t\t\t\t\t// 自定义参数（请咨询负责客户端开发人员）\n\t[/CALL FUNC]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6290,7 +6290,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[SET TRANS CENTER] 0 0\t\t// 指定变换（旋转/缩放）中心点，默认为中心\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[SET TRANS CENTER] 0 0\t\t// 指定变换（旋转/缩放）中心点，默认为中心\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6300,7 +6300,7 @@
       "Comment": "#### 官方示例: actionlibrary/jump.act\n\n```pvf\n//[CHECK] [ME]\n\t[ZSPEED] [<] 0\n```",
       "OfficialDescription": "#### 官方示例: actionlibrary/jump.act\n\n```pvf\n//[CHECK] [ME]\n\t[ZSPEED] [<] 0\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6310,7 +6310,7 @@
       "Comment": "通过检查的目标集合：作为 [SET TRACKING MODE] 等跟踪类标签的目标参数，指向通过 [CHECKUP] 条件筛选的所有对象的集合。",
       "OfficialDescription": "#### 官方示例: actionlibrary/shootingstar.act\n\n```pvf\n[DO BEHAVIOR] [CHECKED OBJECT] 0 // 对检查到的角色施放\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6320,7 +6320,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ZPOS]** [>]([=], [<], [>=], [<=], [=>], [=<]) 0    // Z坐标检查。\n```\n\n```pvf\n**[HP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 50 [%](或 [POINT])    // HP检查。\n```\n\n```pvf\n**[MP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 100 [%](或 [POINT])    // MP检查。\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ZPOS]** [>]([=], [<], [>=], [<=], [=>], [=<]) 0    // Z坐标检查。\n```\n\n```pvf\n**[HP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 50 [%](或 [POINT])    // HP检查。\n```\n\n```pvf\n**[MP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 100 [%](或 [POINT])    // MP检查。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6330,7 +6330,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[ZPOS]** [>]([=], [<], [>=], [<=], [=>], [=<]) 0    // Z坐标检查。\n```\n\n```pvf\n**[HP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 50 [%](或 [POINT])    // HP检查。\n```\n\n```pvf\n**[MP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 100 [%](或 [POINT])    // MP检查。\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[ZPOS]** [>]([=], [<], [>=], [<=], [=>], [=<]) 0    // Z坐标检查。\n```\n\n```pvf\n**[HP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 50 [%](或 [POINT])    // HP检查。\n```\n\n```pvf\n**[MP]** [>]([=], [<], [>=], [<=], [=>], [=<]) 100 [%](或 [POINT])    // MP检查。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6340,7 +6340,7 @@
       "Comment": "#### 官方示例: actionsample.act\n\n```pvf\n**[SET PASSTYPE]**  [pass all]     // 改变通行类型。仅被动对象有效。与被动对象脚本的 [pass type] 相同。均可通行\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//{opt1}{string}\n\t\t{opt1}{exp}全部通过{/exp}[pass all]\n```",
       "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[SET PASSTYPE]**  [pass all]     // 改变通行类型。仅被动对象有效。与被动对象脚本的 [pass type] 相同。均可通行\n```\n\n#### 官方示例: actionsamplebytool.act\n\n```pvf\n//{opt1}{string}\n\t\t{opt1}{exp}全部通过{/exp}[pass all]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6350,7 +6350,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120517 添加\n\t[SUB ANI WITH XYZ]\n\t\t{exp}路径{/exp}{string}\n\t\t\t{must1}{exp}起始帧{/exp}{int(0:)}\n\t\t\t{must2}{exp}图层{/exp}{int(0:)}\n\t\t\t{must3}{exp}X坐标{/exp}{int(:)}\n\t\t\t{must4}{exp}Y坐标{/exp}{int(:)}\n\t\t\t{must5}{exp}Z坐标{/exp}{int(:)}\n\t\t{!string}\n\t[/SUB ANI WITH XYZ]\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120517 添加\n\t[SUB ANI WITH XYZ]\n\t\t{exp}路径{/exp}{string}\n\t\t\t{must1}{exp}起始帧{/exp}{int(0:)}\n\t\t\t{must2}{exp}图层{/exp}{int(0:)}\n\t\t\t{must3}{exp}X坐标{/exp}{int(:)}\n\t\t\t{must4}{exp}Y坐标{/exp}{int(:)}\n\t\t\t{must5}{exp}Z坐标{/exp}{int(:)}\n\t\t{!string}\n\t[/SUB ANI WITH XYZ]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6360,7 +6360,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120516 添加\n[AUTOEND]\n\t{must1}{int(:)}\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120516 添加\n[AUTOEND]\n\t{must1}{int(:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6370,7 +6370,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120516 添加。\n\t\t{must1}[DARKSCALP]\n\t\t//mkjung 120518 添加。\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120516 添加。\n\t\t{must1}[DARKSCALP]\n\t\t//mkjung 120518 添加。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6380,7 +6380,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120518 添加。\n\t\t{must1}[AGAMEMNON TELEKINESIS]\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120518 添加。\n\t\t{must1}[AGAMEMNON TELEKINESIS]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6390,7 +6390,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//添加。\n\t\t{must2}[/]\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//添加。\n\t\t{must2}[/]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6400,7 +6400,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//{must4}{exp}若ID大于等于后侧参数？{/exp}[>=]\n\t\t//{must4}{exp}若ID小于等于后侧参数？{/exp}[<=]\n\t\t//{must4}{exp}是否相同{/exp}[=]\n\t\t//{must5}{exp}获取当前时间（ms）{/exp}[GET TIME]\n\t\t//{must5}{exp}时间功能{/exp}{int(:)}\n\t[!IF][/IF]\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//{must4}{exp}若ID大于等于后侧参数？{/exp}[>=]\n\t\t//{must4}{exp}若ID小于等于后侧参数？{/exp}[<=]\n\t\t//{must4}{exp}是否相同{/exp}[=]\n\t\t//{must5}{exp}获取当前时间（ms）{/exp}[GET TIME]\n\t\t//{must5}{exp}时间功能{/exp}{int(:)}\n\t[!IF][/IF]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6410,7 +6410,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!PARTY TARGET][/PARTY TARGET]\n\t\t//[!PARTY TARGET]\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!PARTY TARGET][/PARTY TARGET]\n\t\t//[!PARTY TARGET]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6420,7 +6420,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n{opt41}{exp}CATEGORY_PASSIVEOBJECT_TYPE_FORT{/exp}[fort]\n\t\t\t//mkjung 120620 添加。\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n{opt41}{exp}CATEGORY_PASSIVEOBJECT_TYPE_FORT{/exp}[fort]\n\t\t\t//mkjung 120620 添加。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6430,7 +6430,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120620 添加。\n\t\t\t{opt42}{exp}无敌{/exp}[unbeatable]\n\t\t\t//mkjung 120621 添加。\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120620 添加。\n\t\t\t{opt42}{exp}无敌{/exp}[unbeatable]\n\t\t\t//mkjung 120621 添加。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6440,7 +6440,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120621 添加。\n\t\t\t{opt43}{exp}天使{/exp}[angel]\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120621 添加。\n\t\t\t{opt43}{exp}天使{/exp}[angel]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6450,7 +6450,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120516 添加。\n\t{exp}快速炮-闪电检查{/exp}[REALDUNGEON CHECKUP]\n\t\t{must1}{int(:)}\n\t\t{must2}{int(:)}\n\t\t{must3}{int(:)}\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120516 添加。\n\t{exp}快速炮-闪电检查{/exp}[REALDUNGEON CHECKUP]\n\t\t{must1}{int(:)}\n\t\t{must2}{int(:)}\n\t\t{must3}{int(:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6460,7 +6460,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!USE ANGLE]\n\t\t//mkjung 120517 添加。\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!USE ANGLE]\n\t\t//mkjung 120517 添加。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6470,7 +6470,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120517 添加。\n\t\t{opt2}{etc}[USE MY TEAM]\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120517 添加。\n\t\t{opt2}{etc}[USE MY TEAM]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6480,7 +6480,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!EFFECT BLUE START]\n\t\t//mkjung 120516 [EFFECT BLUE END] 添加。\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!EFFECT BLUE START]\n\t\t//mkjung 120516 [EFFECT BLUE END] 添加。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6490,7 +6490,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must2}{exp}[etc motion]中动画的索引值{/exp}{int(0:)}\n\t\t//mkjung 120516 X,Y坐标 int->rndint 修改。\n\t\t{must3}{exp}要附加的LAYER的X坐标{/exp}{rndint(:)}\n\t\t{must4}{exp}要附加的LAYER的Y坐标{/exp}{rndint(:)}\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must2}{exp}[etc motion]中动画的索引值{/exp}{int(0:)}\n\t\t//mkjung 120516 X,Y坐标 int->rndint 修改。\n\t\t{must3}{exp}要附加的LAYER的X坐标{/exp}{rndint(:)}\n\t\t{must4}{exp}要附加的LAYER的Y坐标{/exp}{rndint(:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6500,7 +6500,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}要更改的难度{/exp}[ULTIMATE]\n\t\t//mkjung 120518 添加\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n{must1}{exp}要更改的难度{/exp}[ULTIMATE]\n\t\t//mkjung 120518 添加\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6510,7 +6510,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!POS]\n\t\t{exp}一次移动最少移动的距离{/exp}{etc}\n\t\t//mkjung 120521 修改 etc-->line tag\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!POS]\n\t\t{exp}一次移动最少移动的距离{/exp}{etc}\n\t\t//mkjung 120521 修改 etc-->line tag\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6520,7 +6520,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!ANI FILE]\n\t\t//怎么办？\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n[!ANI FILE]\n\t\t//怎么办？\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6530,7 +6530,7 @@
       "Comment": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120516 添加。\n\t[UNLOCK QUEST]\n\t\t{must1}{int(:)}\n```",
       "OfficialDescription": "#### 官方示例: actionsamplebytool.act\n\n```pvf\n//mkjung 120516 添加。\n\t[UNLOCK QUEST]\n\t\t{must1}{int(:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6540,7 +6540,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n// 在动作开始后的时间点执行条件语句\n\t[ON TIMING][START MAP] 100 100  \t// 开始时间和结束时间相同，则仅在该时间执行一次\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n// 在动作开始后的时间点执行条件语句\n\t[ON TIMING][START MAP] 100 100  \t// 开始时间和结束时间相同，则仅在该时间执行一次\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6550,7 +6550,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS TYPE] [balloon]\t\t\t// 检查控件类型（与 UI 自动化中填写的控件类型字符串相同）\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[IS TYPE] [balloon]\t\t\t// 检查控件类型（与 UI 自动化中填写的控件类型字符串相同）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6560,7 +6560,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[DO BEHAVIOR][CHECKUP CONTROL] 1\t// 调用 BEHAVIOR，以通过检查的控件为参数\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[DO BEHAVIOR][CHECKUP CONTROL] 1\t// 调用 BEHAVIOR，以通过检查的控件为参数\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6570,7 +6570,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[DO BEHAVIOR][DROPOUT CONTROL] 0\t// 调用 BEHAVIOR，以未通过检查的控件为参数\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[DO BEHAVIOR][DROPOUT CONTROL] 0\t// 调用 BEHAVIOR，以未通过检查的控件为参数\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6580,7 +6580,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[SET GRAPHICEFFECT][NONE] ([DODGE], [LINEARDODGE])\t\t// 更改控件的图形效果\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[SET GRAPHICEFFECT][NONE] ([DODGE], [LINEARDODGE])\t\t// 更改控件的图形效果\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -6590,7 +6590,7 @@
       "Comment": "#### 官方示例: uiactionsample.act\n\n```pvf\n[RESET][CONTROL]\t\t\t\t\t\t\t// 将控件重置为初始状态\n```",
       "OfficialDescription": "#### 官方示例: uiactionsample.act\n\n```pvf\n[RESET][CONTROL]\t\t\t\t\t\t\t// 将控件重置为初始状态\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -7331,6 +7331,96 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "IS NOT BASIC ACTION",
+      "Title": "IS NOT BASIC ACTION",
+      "Comment": "不是基本行动",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "ANI PATH",
+      "Title": "ANI PATH",
+      "Comment": "ani路径",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "LENGTH RATE",
+      "Title": "LENGTH RATE",
+      "Comment": "长度率",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "SET X SPEED",
+      "Title": "SET X SPEED",
+      "Comment": "设置X速度",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "Z CLIPPING",
+      "Title": "Z CLIPPING",
+      "Comment": "z剪裁",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "比较符号",
+      "Title": "X轴速度",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[X SPEED]** [比较符号] 0    // X轴速度 ：不支持由粒子移动控制的部分\n```\n\n```pvf\n**[Y SPEED]** [比较符号] 0    // Y轴速度 ：不支持由粒子移动控制的部分\n```\n\n```pvf\n**[Z SPEED]** [比较符号] 0    // Z轴速度 ：不支持由粒子移动控制的部分\n```\n\n```pvf\n**[CHARGED TIME]** [比较符号] 0 // 蓄力时间\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "附加状态字符串ID",
+      "Title": "检查特定 ID 的附加状态（ID 请咨询负责客户端开发者）",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[CHECK SPECIFIC BUFF]**  [附加状态字符串ID]    // 检查特定 ID 的附加状态（ID 请咨询负责客户端开发者）\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "附加状态ID",
+      "Title": "ID 请咨询客户端开发者！",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n**[REMOVE APPENDAGE]**[附加状态ID]             // ID 请咨询客户端开发者！\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "act",
+      "Section": "目标",
+      "Title": "命令执行控制部分",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: actionsample.act\n\n```pvf\n// 命令执行控制部分\n    **[DO BEHAVIOR]**    [目标]    0                // 对哪个目标执行第几个行为？\n```\n\n```pvf\n// PROC 动作的命令执行控制部分\n    **[DO PROC BEHAVIOR]**    [目标]    0                // 对哪个目标执行第几个行为？\n```\n\n```pvf\n// 命令执行控制部分\n    **[DELAY DO BEHAVIOR]**    [目标]    0  1000            // 对哪个目标执行第几个行为？延迟指定时间后执行。\n                                // 两个整数参数（行为索引，延迟时间（单位：毫秒））\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
     }
   ]
 }

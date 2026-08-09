@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "atk",
   "Comments": [
@@ -410,7 +410,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[damage] 100            // 伤害。\n```\n\n```pvf\n[damage reaction] [damage]        // 受到攻击时的反应。在 [none] [damage] [down] [damage except human] 中选择1个\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[damage] 100            // 伤害。\n```\n\n```pvf\n[damage reaction] [damage]        // 受到攻击时的反应。在 [none] [damage] [down] [damage except human] 中选择1个\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -420,7 +420,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[absolute damage] 30        // 无视防御的绝对伤害\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[absolute damage] 30        // 无视防御的绝对伤害\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -430,7 +430,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n// 按攻击目标设定是否攻击。默认值可不写 //\n[attack myself] 0            // 是否攻击自己。默认值 0\n```\n\n#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n// 按攻击目标设定是否攻击。默认值可不写 //\n{exp}是否攻击自己{/exp}[attack myself]\n    {must1}{exp}默认值 0{/exp}{int(:)}\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n// 按攻击目标设定是否攻击。默认值可不写 //\n[attack myself] 0            // 是否攻击自己。默认值 0\n```\n\n#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n// 按攻击目标设定是否攻击。默认值可不写 //\n{exp}是否攻击自己{/exp}[attack myself]\n    {must1}{exp}默认值 0{/exp}{int(:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -440,7 +440,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[bounce] 1            // 是否弹起。设为 1 则弹起时应用 [lift up] 的力度。\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[bounce] 1            // 是否弹起。设为 1 则弹起时应用 [lift up] 的力度。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -450,7 +450,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[HP drain] 0        // 未实现\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[HP drain] 0        // 未实现\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -460,7 +460,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[MP drain] 1        // 未实现\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[MP drain] 1        // 未实现\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -470,7 +470,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[human damage rate] 100.0    // 对人形（对人类）攻击比率。可为小数，%值，默认 100\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[human damage rate] 100.0    // 对人形（对人类）攻击比率。可为小数，%值，默认 100\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -480,7 +480,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[fort damage rate] 100.0    // 对建筑（对建筑物）攻击比率。可为小数，%值，默认 100\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[fort damage rate] 100.0    // 对建筑（对建筑物）攻击比率。可为小数，%值，默认 100\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -490,7 +490,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[monster damage rate] 100.0    // 对怪兽（为护甲类别为0的目标设置）攻击比率。可为小数，%值，默认 100\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[monster damage rate] 100.0    // 对怪兽（为护甲类别为0的目标设置）攻击比率。可为小数，%值，默认 100\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -500,7 +500,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[critical hit] +2.7        // 暴击率变化值\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[critical hit] +2.7        // 暴击率变化值\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -510,7 +510,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[stuck prob increase] 1        // 每次攻击命中时硬直率是否增加。默认值 0\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[stuck prob increase] 1        // 每次攻击命中时硬直率是否增加。默认值 0\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -520,7 +520,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n/// 为决斗场状态修正而添加的内容。\n[human active status rate] 70.0 // 对人形护甲施加 70.0% 的较弱状态变化效果。数值的 1/10\n```\n\n#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n/// 为决斗场状态修正而添加的内容。\n{exp}对人形护甲施加 X% 的较弱状态变化效果（数值的 1/10）{/exp}[human active status rate]\n    {must2}{exp}概率{/exp}{float(:)}\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n/// 为决斗场状态修正而添加的内容。\n[human active status rate] 70.0 // 对人形护甲施加 70.0% 的较弱状态变化效果。数值的 1/10\n```\n\n#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n/// 为决斗场状态修正而添加的内容。\n{exp}对人形护甲施加 X% 的较弱状态变化效果（数值的 1/10）{/exp}[human active status rate]\n    {must2}{exp}概率{/exp}{float(:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -530,7 +530,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[is hit number increasing] 0    //1 则受击数增加，0 则不增加。\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[is hit number increasing] 0    //1 则受击数增加，0 则不增加。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -540,7 +540,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[ignore diehard] 1         //是否无视不死被动。默认值 0\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[ignore diehard] 1         //是否无视不死被动。默认值 0\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -550,7 +550,7 @@
       "Comment": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{opt1}[light element]\n    //mkjung 120531 添加\n```",
       "OfficialDescription": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{opt1}[light element]\n    //mkjung 120531 添加\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -560,7 +560,7 @@
       "Comment": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{exp}pvp相关设置{/exp}[pvp]\n    {exp}技能固有的攻击力{/exp}[damage bonus]\n        //mkjung 120601 int-->float 修改\n        {must1}{exp}{/exp}{float(:)}\n    [!damage bonus]\n\n    //mkjung 120601 添加\n    {exp}攻击信息{/exp}[hit info]\n        {must1}{exp}打击特效输出{/exp}[blow]\n        {must1}{exp}斩击特效输出{/exp}[cut]\n        {must1}{exp}灼烧特效输出{/exp}[burn]\n        {must1}{exp}打击种类（不减少 hp 而消耗 mp）{/exp}[mana burn]\n        {must1}{exp}使用自定义特效（主要在代码中定义）{/exp}[etc]\n\n        {must2}{exp}是否溅血（出血）{/exp}[blood]\n        {must2}{exp}是否溅血（不出血）{/exp}[no blood]\n\n        {opt1}{exp}命中时短暂停顿时间（跟随武器子类型请用 -1）{/exp}{float(:)}\n        {opt2}{exp}受击延迟时间倍数（跟随武器子类型请用 -1）{/exp}{float(:)}\n    [!hit info]\n[/pvp]\n```",
       "OfficialDescription": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n{exp}pvp相关设置{/exp}[pvp]\n    {exp}技能固有的攻击力{/exp}[damage bonus]\n        //mkjung 120601 int-->float 修改\n        {must1}{exp}{/exp}{float(:)}\n    [!damage bonus]\n\n    //mkjung 120601 添加\n    {exp}攻击信息{/exp}[hit info]\n        {must1}{exp}打击特效输出{/exp}[blow]\n        {must1}{exp}斩击特效输出{/exp}[cut]\n        {must1}{exp}灼烧特效输出{/exp}[burn]\n        {must1}{exp}打击种类（不减少 hp 而消耗 mp）{/exp}[mana burn]\n        {must1}{exp}使用自定义特效（主要在代码中定义）{/exp}[etc]\n\n        {must2}{exp}是否溅血（出血）{/exp}[blood]\n        {must2}{exp}是否溅血（不出血）{/exp}[no blood]\n\n        {opt1}{exp}命中时短暂停顿时间（跟随武器子类型请用 -1）{/exp}{float(:)}\n        {opt2}{exp}受击延迟时间倍数（跟随武器子类型请用 -1）{/exp}{float(:)}\n    [!hit info]\n[/pvp]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -570,7 +570,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [blind] 100 20 3000 10 100        // 概率, 等级, 持续时间, 视野（%）, 硬直率增加（+）\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [blind] 100 20 3000 10 100        // 概率, 等级, 持续时间, 视野（%）, 硬直率增加（+）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -580,7 +580,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [freeze] 100 20 3000            // 概率, 等级, 持续时间\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [freeze] 100 20 3000            // 概率, 等级, 持续时间\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -590,7 +590,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [stun] 100 20 3000            // 概率, 等级, 持续时间\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [stun] 100 20 3000            // 概率, 等级, 持续时间\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -600,7 +600,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [stone] 100 20 3000 50        // 概率, 等级, 持续时间, 伤害值（+）\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [stone] 100 20 3000 50        // 概率, 等级, 持续时间, 伤害值（+）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -610,7 +610,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [sleep] 100 20 3000            // 概率, 等级, 持续时间\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [sleep] 100 20 3000            // 概率, 等级, 持续时间\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -620,7 +620,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [confuse] 100 20 3000 1        // 概率, 等级, 持续时间, 为1时怪物陷入混乱，会攻击同伴。\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [confuse] 100 20 3000 1        // 概率, 等级, 持续时间, 为1时怪物陷入混乱，会攻击同伴。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -630,7 +630,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [hold] 100 20 3000            // 概率, 等级, 持续时间\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [hold] 100 20 3000            // 概率, 等级, 持续时间\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -640,7 +640,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [poison] 100 10 20000 1000         // 概率, 等级, 持续时间, 伤害\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [poison] 100 10 20000 1000         // 概率, 等级, 持续时间, 伤害\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -650,7 +650,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [bleeding] 100 10 5000 10         // 概率, 等级, 持续时间, 伤害\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [bleeding] 100 10 5000 10         // 概率, 等级, 持续时间, 伤害\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -660,7 +660,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [burn] 100 10 20000 1000 10 1 3000    // 概率, 等级, 持续时间, 伤害, 周围伤害, 周围伤害选项（为1时只对敌军造成周围伤害）, 周围伤害应用间隔（时间）\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n[active status] [burn] 100 10 20000 1000 10 1 3000    // 概率, 等级, 持续时间, 伤害, 周围伤害, 周围伤害选项（为1时只对敌军造成周围伤害）, 周围伤害应用间隔（时间）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -670,7 +670,7 @@
       "Comment": "#### 官方示例: attackinfosample.atk\n\n```pvf\n//mkissue 120531 添加\n[max target hit number] 1\n```",
       "OfficialDescription": "#### 官方示例: attackinfosample.atk\n\n```pvf\n//mkissue 120531 添加\n[max target hit number] 1\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -680,7 +680,7 @@
       "Comment": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120531 添加\n    {must1}[weapon]\n```",
       "OfficialDescription": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120531 添加\n    {must1}[weapon]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -690,7 +690,7 @@
       "Comment": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120531 添加\n    {opt1}[no elemental]\n```",
       "OfficialDescription": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120531 添加\n    {opt1}[no elemental]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -700,7 +700,7 @@
       "Comment": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120531 添加\n    {must1}[hit horizontal]\n```",
       "OfficialDescription": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120531 添加\n    {must1}[hit horizontal]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -710,7 +710,7 @@
       "Comment": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120531 添加\n    {must1}{exp}{/exp}[slash]\n```",
       "OfficialDescription": "#### 官方示例: attackinfosamplebytool.atk\n\n```pvf\n//mkjung 120531 添加\n    {must1}{exp}{/exp}[slash]\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1061,6 +1061,46 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "arad royal rumble",
+      "Title": "arad royal rumble",
+      "Comment": "阿拉德皇家隆隆声",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "element sound",
+      "Title": "element sound",
+      "Comment": "元素声音",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "nene",
+      "Title": "nene",
+      "Comment": "乙烯",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "atk",
+      "Section": "set hp percent damage",
+      "Title": "set hp percent damage",
+      "Comment": "设置HP损坏百分比",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
     }
   ]
 }

@@ -28,7 +28,7 @@
       "Section": "action type",
       "Title": "道具动作类型",
       "Comment": "道具使用时的功能类型（如扩音器、传送等），不仅仅是强化器\n\n常用类型：\n`[megaphone]` = 扩音器\n`[teleport]` = 传送\n参考官方示例中的各种 action type",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n// 使用具有功能的消耗品\n[action type]\n`[megaphone]`     // 功能的类型\n100           // 需要的 int 数据\n100\n[/action type]\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n// 使用具有功能的消耗品\n[action type]\n`[megaphone]`     // 功能的类型\n100           // 需要的 int 数据\n100\n[/action type]\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n// 使用具有功能的消耗品\n[action type]\n`[megaphone]`\t\t// 功能的类型\n100\t\t\t// 需要的 int 数据\n100\n[/action type]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -88,7 +88,7 @@
       "Section": "attach type",
       "Title": "绑定类型",
       "Comment": "物品的绑定/交易类型\n`[free]` = 不限制\n`[sealing]` = 封装\n`[trade]` = 不可交易\n`[account]` = 帐号绑定\n`[trade delete]` = 无法交易、删除\n`[sealing trade]` = 封装且不可交易",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[attach type] `[free]`    // 绑定类型 在 `[free]` `[trade]` `[trade delete]` `[sealing]` 中选择一个\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[attach type] `[free]`    // 绑定类型 在 `[free]` `[trade]` `[trade delete]` `[sealing]` 中选择一个\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[attach type] `[free]`\t\t\t\t// 绑定类型 在 `[free]` `[trade]` `[trade delete]` `[sealing]` 中选择一个\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[attach type] `[free]`\t\t\t\t// 绑定类型 在 `[free]` `[trade]` `[trade delete]` `[sealing]` 中选择一个\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -168,7 +168,7 @@
       "Section": "cash",
       "Title": "点券价格",
       "Comment": "购买此道具所需花费的点券（Cash/CERA）数量",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[cash] 1200    // 点券价格\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[cash] 1200    // 点券价格\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[cash] 1200\t\t\t\t// 现金价格\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[cash] 1200\t\t\t\t// 现金价格\n```",
       "Closing": false,
       "Authors": "无名氏"
     },
@@ -198,7 +198,7 @@
       "Section": "creation rate",
       "Title": "生成比率/掉落概率",
       "Comment": "物品的掉落/生成概率。注意不要使用过大的数值，建议10以下",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[creation rate] 2    // 生成比率 (注意：不要使用过大的数值。建议 10 以下)\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[creation rate] 2    // 生成比率 (注意：不要使用过大的数值。建议 10 以下)\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[creation rate] 2\t\t\t\t// 生成比率 (注意：不要使用过大的数值。建议 10 以下)\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[creation rate] 2\t\t\t\t// 生成比率 (注意：不要使用过大的数值。建议 10 以下)\n```",
       "Closing": false,
       "Authors": "Cai"
     },
@@ -328,7 +328,7 @@
       "Section": "field image",
       "Title": "掉落图标",
       "Comment": "道具掉落在地面时显示的图标\n指定 IMG 文件路径和帧索引",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[field image] `StackableField.img` 1    // 掉落在地上时的图像文件和帧索引\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[field image] `StackableField.img` 1    // 掉落在地上时的图像文件和帧索引\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[field image] `StackableField.img` 1\t// 掉落在地上时的图像文件和帧索引\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[field image] `StackableField.img` 1\t// 掉落在地上时的图像文件和帧索引\n```",
       "Closing": false,
       "Authors": "by：黑桃K"
     },
@@ -368,7 +368,7 @@
       "Section": "icon",
       "Title": "道具图标",
       "Comment": "游戏中展示的道具图标\n\n调用客户端的ImagePacks2文件夹的NPK文件里面图像，\n需借助ExtractorSharp工具查看\n格式：IMG文件名 + 帧索引",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[icon] `StackableIcon.img` 2    // 图标图像文件和帧索引\n[icon mark] `IconMark.img` 2    // 图标标记图像文件和帧索引\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[icon] `StackableIcon.img` 2    // 图标图像文件和帧索引\n[icon mark] `IconMark.img` 2    // 图标标记图像文件和帧索引\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[icon] `StackableIcon.img` 2\t\t// 图标图像文件和帧索引\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[icon] `StackableIcon.img` 2\t\t// 图标图像文件和帧索引\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -438,7 +438,7 @@
       "Section": "medal",
       "Title": "胜点/勋章价格",
       "Comment": "通过决斗场胜点（勋章）购买此道具所需的价格",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[medal] 5    // 勋章价格\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[medal] 5    // 勋章价格\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[medal] 5\t\t\t\t// 勋章价格\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[medal] 5\t\t\t\t// 勋章价格\n```",
       "Closing": false,
       "Authors": "星月-867592445"
     },
@@ -468,7 +468,7 @@
       "Section": "minimum level",
       "Title": "最低使用等级",
       "Comment": "装备、物品最低可使用的等级限制",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[minimum level] 0    // 使用所需的最低等级\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[minimum level] 0    // 使用所需的最低等级\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[minimum level] 0\t\t\t\t// 使用所需的最低等级\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[minimum level] 0\t\t\t\t// 使用所需的最低等级\n```",
       "Closing": false,
       "Authors": "Cai|Xiti Fox"
     },
@@ -508,7 +508,7 @@
       "Section": "package data",
       "Title": "礼包包含的物品",
       "Comment": "礼包/礼盒中包含的物品\n格式：物品代码-数量-物品代码-数量-...\n\n当 [stackable type] 为 `[cera package]` 或 `[package]` 时使用",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n// 如果该道具是 `[cera package]` 或 `[package]` 时\n[package data]\n整数:道具索引 整数:道具数量\n[/package data]\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n// 如果该道具是 `[cera package]` 或 `[package]` 时\n[package data]\n整数:道具索引 整数:道具数量\n[/package data]\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n// 如果该道具是 `[cera package]` 或 `[package]` 时\n[package data]\n整数:道具索引 整数:道具数量\n[/package data]\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n// 如果该道具是 `[cera package]` 或 `[package]` 时\n[package data]\n整数:道具索引 整数:道具数量\n[/package data]\n```",
       "Closing": false,
       "Authors": "无名氏"
     },
@@ -588,7 +588,7 @@
       "Section": "price",
       "Title": "金币价格",
       "Comment": "[price] 金币购买的价格\n\n//除了金币购买还可以添加如下词条：\n[value]       售出价格（实际出售价为标写的1/5）\n[cash]        点券购买\n[need material]  道具购买（左道具编号，右道具数量）",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[price] 100    // 价格。如果从价格表读取则无需填写\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[price] 100    // 价格。如果从价格表读取则无需填写\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n// `[waste]` `[material]` `[recipe]` `[throw]` `[set]` `[legacy]` `[quest]` `[etc]` `[creature]` `[feed]`\n// `[cera package]` `[package]` `[cera booster]` `[booster]`\n\t\t\t\t\t// 后面的数字是价格表索引。如果没有价格则输入0。\n\t\t\t\t\t// 即使单独输入价格，卖出/修理价格也会遵循这个索引\n[price] 100\t\t\t\t// 价格。如果从价格表读取则无需填写\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[price] 100\t\t\t\t// 价格。如果从价格表读取则无需填写\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -698,7 +698,7 @@
       "Section": "stack limit",
       "Title": "堆叠上限",
       "Comment": "道具在背包/仓库中的堆叠数量上限\n0 表示无限制",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[stack limit] 1000    // 持有数量限制 '0' 表示无限制\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[stack limit] 1000    // 持有数量限制 '0' 表示无限制\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[stack limit]\t1000\t\t\t// 持有数量限制 '0' 表示无限制\n//\n// 如果该道具是 `[cera package]` 或 `[package]` 时\n```",
       "Closing": false,
       "Authors": "Cai"
     },
@@ -718,7 +718,7 @@
       "Section": "stackable type",
       "Title": "消耗品类型",
       "Comment": "消耗品/道具的类型分类\n[recipe] = 设计图\n[upgradable legacy] = 罐子类\n[quest] = 任务物品（放在背包的任务物品栏）\n[booster random] = 随机魔盒\n[multi upgradable legacy] = 幸运礼盒\n[booster] = 礼包：使用后获得(所有/随机)物品\n[booster selection] = 礼包：可选\n[cera booster] = 礼包：自动使用\n[unlimited waste] = 重复使用\n[material] = 材料\n[usable cera package] 0 = 时装礼包开启后可自己选择属性\n[waste] = 消耗品\n[throw] = 投掷物\n[legacy] = 传承罐子\n[set] = 套装道具\n[etc] = 其它\n[creature] = 宠物\n[feed] = 宠物饲料\n[cera package] = 点券礼包\n[package] = 普通礼包\n[dye] = 染色剂\n[quest receive] = 接受任务的道具\n[global effect] = 全局效果\n[disguise] = 伪装道具\n[unlimited etc] = 无限次使用",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[stackable type] `[waste]` 14    // 消耗品的类型\n// `[waste]` `[material]` `[recipe]` `[throw]` `[set]` `[legacy]` `[quest]` `[etc]` `[creature]` `[feed]`\n// `[cera package]` `[package]` `[cera booster]` `[booster]`\n// 后面的数字是价格表索引。如果没有价格则输入0。\n// 即使单独输入价格，卖出/修理价格也会遵循这个索引\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[stackable type] `[waste]` 14    // 消耗品的类型\n// `[waste]` `[material]` `[recipe]` `[throw]` `[set]` `[legacy]` `[quest]` `[etc]` `[creature]` `[feed]`\n// `[cera package]` `[package]` `[cera booster]` `[booster]`\n// 后面的数字是价格表索引。如果没有价格则输入0。\n// 即使单独输入价格，卖出/修理价格也会遵循这个索引\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[stackable type] `[waste]` 14\t\t\t// 消耗品的类型\n// `[waste]` `[material]` `[recipe]` `[throw]` `[set]` `[legacy]` `[quest]` `[etc]` `[creature]` `[feed]`\n// `[cera package]` `[package]` `[cera booster]` `[booster]`\n\t\t\t\t\t// 后面的数字是价格表索引。如果没有价格则输入0。\n\t\t\t\t\t// 即使单独输入价格，卖出/修理价格也会遵循这个索引\n```\n\n#### 官方示例: stackablesample-legacy.stk\n\n```pvf\n[stackable type] `[legacy]` 0\t\t// 类型为 `[legacy]`\n```\n\n#### 官方示例: stackablesample-pandora.stk\n\n```pvf\n[stackable type] `[pandora box]` 0\t\t// 类型为 `[pandora box]`\n```\n\n#### 官方示例: stackablesample-recipe.stk\n\n```pvf\n[stackable type] `[recipe]` 0\t\t// 类型为 `[recipe]`\n```\n\n#### 官方示例: stackablesample-stackable_legacy.stk\n\n```pvf\n[stackable type] `[stackable legacy]` 0\t\t// 类型为 `[legacy]`\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[stackable type] `[waste]` 14\t\t\t// 消耗品的类型\n// `[waste]` `[material]` `[recipe]` `[throw]` `[set]` `[legacy]` `[quest]` `[etc]` `[creature]` `[feed]`\n// `[cera package]` `[package]`\n//`[material export job]` `[global effect]` `[disguise]` `[unlimited etc]` `[avatar jewel]`\n// `[quest receive]`\t// 接受任务的道具\n// `[dye]`\t//染色剂\n\t\t\t\t\t// 后面的数字是价格表索引。如果没有价格则输入0。\n\t\t\t\t\t// 即使单独输入价格，卖出/修理价格也会遵循这个索引\n```\n\n#### 官方示例: stackablesample-throwitem.stk\n\n```pvf\n[stackable type] `[throw]` 0\t\t\t// 类型为 `[throw]`\n```",
       "Closing": false,
       "Authors": "菱云-3204170464"
     },
@@ -758,7 +758,7 @@
       "Section": "avatar",
       "Title": "礼盒中的装扮项",
       "Comment": "礼盒/礼包中 [avatar] 子模块\n格式：id + 数量\n\n在 booster info 中格式为：id + 相对概率 + 数量 + 期限 + 属性",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[avatar]\t\t// 抽取外观\n2\t\t\t// 从外观抽取几个\n39000\t1000\t1\t0\t0\t// 道具索引\t相对概率\t数量\t期限\t属性\n39000\t1000\t1\t0\t0\n39000\t1000\t1\t0\t0\n39000\t1000\t1\t0\t0\n[/avatar]\n```",
       "Closing": false,
       "Authors": "Lancarus"
     },
@@ -778,7 +778,7 @@
       "Section": "stat change",
       "Title": "道具属性变化效果",
       "Comment": "道具效果：使用道具后的属性变化\n一般和[stat change duration]联动使用\n`———————————————————————————`\n//示例①：\n[stat change]\n\t`%` 10\n\t`physical critical hit`\n[/stat change]\n//以上为使用道具之后在已有物理暴击率的基础上增加10%的物理暴击率\n`———————————————————————————`\n//示例②：\n[stat change]\n\t`%` 10\n\t`physical critical hit`\n\t`+`\t7\n\t`physical attack bonus`\n[/stat change]\n//以上为使用道具之后增加10%的物理暴击率和7点物理攻击力\n`———————————————————————————`\n//上方：\n`+` = 固定数值\n`%` = 百分比数值\n\n//提醒：\n使用`+`时，若为暴击率、命中率、闪避率、三速，则按百分比增加，也就是说0暴击率吃了一个为`+`的暴击药，效果是10，则实际增加到10%暴击率\n\n使用`%`时，暴击率、命中率、闪避率、三速只会按当前数值增幅，比如自带50%暴击率，用`%`增加50%暴击率只会在此基础上增加一半的暴击率，也就是实际使用道具达到75%暴击率\n`———————————————————————————`\n//下方：\n`stuck` = 命中率（负数增加命中率，正数减少命中率）\n`stuck resistance` = 闪避率\n`attack speed` = 攻击速度\n`cast speed` = 施法速度\n`move speed` = 移动速度\n`physical critical hit` = 物理暴击率\n`magical critical hit` = 法术暴击率\n`physical attack bonus` = 物理攻击力\n`magical attack bonus` = 法术攻击力\n`physical defense bonus` = 物理防御力\n`magical defense bonus` = 法术防御力\n`separate attack` = 独立攻击力\n`physical attack` = 力量\n`magical attack` = 智力\n`physical defense` = 体力\n`magical defense` = 精神\n`HP MAX` = 生命值上限\n`MP MAX` = 魔法值上限\n`all elemental resistance` = 所有属性抗性\n`fire resistance` = 火属性抗性\n`light resistance` = 光属性抗性\n`water resistance` = 冰属性抗性\n`dark resistance` = 暗属性抗性\n`all elemental attack` = 所有属性强化\n`fire attack` = 火属性强化\n`light attack` = 光属性强化\n`water attack` = 冰属性强化\n`dark attack` = 暗属性强化\n`weight` = 重量\n`hit recovery` = 硬直恢复\n`jump power` = 跳跃力\n`jump speed` = 跳跃速度\n`HP regen speed` = 生命值恢复速度\n`MP regen speed` = 魔法值恢复速度\n`hold resistance` = 束缚抗性\n`slow resistance` = 减速抗性\n`burn resistance` = 灼伤抗性\n`poison resistance` = 中毒抗性\n`stun resistance` = 眩晕抗性\n`sleep resistance` = 睡眠抗性\n`stone resistance` = 石化抗性\n`blind resistance` = 失明抗性\n`disease resistance` = 疾病抗性\n`confuse resistance` = 混乱抗性\n`bleeding resistance` = 出血抗性\n`silence resistance` = 沉默抗性\n`freeze resistance` = 冰冻抗性\n`curse resistance` = 诅咒抗性\n`lightning resistance` = 感电抗性\n`weakness resistance` = 虚弱抗性\n`weapon break resistance` = 武器损坏抗性\n`armor break resistance` = 防具损坏抗性\n`piercing resistance` = 破甲抗性\n`deelement resistance` = 属性剥离抗性\n`deadlystrike resistance` = 致命一击抗性\n`———————————————————————————`\n//补充：\n搭配下方这个标签可以隐藏道具自带的介绍文本 ↓\n[use effect explain]\n\t0\n\n隐藏完之后，可以使用下方这个标签自己写一个效果介绍文本 ↓\n[explain]\n\t`（文本）`",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n// 对自身应用以下效果，持续60秒\n[stat change]\n`+` 1000 `rigidity`    // 使用消耗品时硬直度增加1000\n`+` 100 `fire attack`    // 使用消耗品时火属性攻击力增加100\n`+` 101 `water attack`    // 使用消耗品时水属性攻击力增加101\n`+` 102 `dark attack`    // 使用消耗品时暗属性攻击力增加102\n`+` 103 `light attack`    // 使用消耗品时光属性攻击力增加103\n[/stat change]\n[stat change duration] 60000 `myself`\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n// 对自身应用以下效果，持续60秒\n[stat change]\n`+` 1000 `rigidity`    // 使用消耗品时硬直度增加1000\n`+` 100 `fire attack`    // 使用消耗品时火属性攻击力增加100\n`+` 101 `water attack`    // 使用消耗品时水属性攻击力增加101\n`+` 102 `dark attack`    // 使用消耗品时暗属性攻击力增加102\n`+` 103 `light attack`    // 使用消耗品时光属性攻击力增加103\n[/stat change]\n[stat change duration] 60000 `myself`\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n// 对自身应用以下效果，持续60秒\n[stat change]\n`+` 1000 `rigidity`\t// 使用消耗品时僵直度增加 1000\n`+` 100 `fire attack`\t// 使用消耗品时火属性攻击力增加 100\n`+` 101 `water attack`\t// 使用消耗品时水属性攻击力增加 101\n`+` 102 `dark attack`\t// 使用消耗品时暗属性攻击力增加 102\n`+` 103 `light attack`\t// 使用消耗品时光属性攻击力增加 103\n[/stat change]\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -818,7 +818,7 @@
       "Section": "string data",
       "Title": "宝珠可镶嵌的部位",
       "Comment": "宝珠可镶嵌的部位和工艺类型：\n称号      `[title name]`\n武器      `[weapon]`\n上衣      `[coat]`\n下装      `[pants]`\n头肩      `[shoulder]`\n腰带      `[waist]`\n鞋子      `[shoes]`\n手镯      `[wrist]`\n项链      `[amulet]`\n戒指      `[ring]`\n魔法石  `[magic stone]`\n护石      `[support]`\n\n工艺类型：\n精工      `[craftmanship]`\n织造      `[weaving]`\n机械      `[machinary]`\n化学      `[chemistry]`\n附魔      `[enchant]`",
-      "OfficialDescription": "#### 官方示例: stackablesample-recipe.stk\n\n```pvf\n[string data]\n// 配方类型。\n// 精工 - [craftmanship]\n// 织造 - [weaving]\n// 机械 - [machinary]\n// 化学 - [chemistry]\n// 附魔 - [enchant]\n// 从以上选择\n// 注意大小写准确！！\n`[craftmanship]`\n[/string data]\n```",
+      "OfficialDescription": "#### 官方示例: stackablesample-recipe.stk\n\n```pvf\n[string data]\n// 配方类型。\n// 精工 - [craftmanship]\n// 织造 - [weaving]\n// 机械 - [machinary]\n// 化学 - [chemistry]\n// 附魔 - [enchant]\n// 从以上选择\n// 注意大小写准确！！\n`[craftmanship]`\n[/string data]\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[string data]\t\t\t\t// 用于硬编码的字符串数据\n`ASDF.ptl`\n`ASDF2.ptl`\n[/string data]\n```\n\n#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[string data]\n`Interface/MonsterCard/cut_cardimage.img`\t// 怪物卡片图像包\n`[weapon]`\t\t\t\t\t// 附魔目标 (装备部位)\n`[foil]` \t\t\t\t\t// 箔\n`[unlimited challenge]`\t\t\t\t// 事件名称\n[/string data]\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[string data]\t\t\t\t// 用于硬编码的字符串数据\n`ASDF.ptl`\n`ASDF2.ptl`\n[/string data]\n```\n\n#### 官方示例: stackablesample-throwitem.stk\n\n```pvf\n[string data]\n`PassiveObject/ThrowItem/Particle/Boomerang.ptl`\t// 指定对象路径的粒子脚本。绝对路径\n`THROW`\t\t\t\t\t\t\t// 投掷时发出的音效标签\n[/string data]\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -878,7 +878,7 @@
       "Section": "usable job",
       "Title": "可使用道具的职业",
       "Comment": "[usable job] 定义道具可使用的职业\n\n`[all]` = 所有职业\n`[creator mage]` = 缔造者\n`[swordman]` = 鬼剑士(男)\n`[at swordman]` = 鬼剑士(女)\n`[demonic swordman]` = 黑暗武士\n`[fighter]` = 格斗家(女)\n`[at fighter]` = 格斗家(男)\n`[gunner]` = 神枪手(男)\n`[at gunner]` = 神枪手(女)\n`[mage]` = 魔法师(女)\n`[at mage]` = 魔法师(男)\n`[priest]` = 圣职者(男)\n`[thief]` = 暗夜使者",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[usable job]    // 可使用角色列表的开始\n`[all]`         // 有 `[swordman]` `[fighter]` `[all]` 等选择\n[/usable job]   // 必须用这个来结束\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[usable job]    // 可使用角色列表的开始\n`[all]`         // 有 `[swordman]` `[fighter]` `[all]` 等选择\n[/usable job]   // 必须用这个来结束\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[usable job]\t\t\t// 可使用角色列表的开始\n`[all]`\t\t\t\t\t// 有 `[swordman]` `[fighter]` `[all]` 等选择\n[/usable job]\t\t\t// 必须用这个来结束\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[usable job]\t\t\t// 可使用角色列表的开始\n`[all]`\t\t\t\t\t// 有 `[swordman]` `[fighter]` `[all]` 等选择\n[/usable job]\t\t\t// 必须用这个来结束\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -928,7 +928,7 @@
       "Section": "weight",
       "Title": "重量",
       "Comment": "道具重量（单位：10g）\n此数值越高，角色或怪物被击飞后的下落速度越快\n若为装备或物品时，将减少物品栏或金库的容量",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[weight] 5    // 重量 (单位：10g)\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[weight] 5    // 重量 (单位：10g)\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[weight] 5\t\t\t\t// 重量 (单位：10g)\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[weight] 5\t\t\t\t// 重量 (单位：10g)\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -968,7 +968,7 @@
       "Section": "value",
       "Title": "商店出售价格",
       "Comment": "用户将道具出售给NPC商店时获得的金币金额\n实际售出价为其标写值",
-      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[value] 50    // 用户在商店卖出的金额\n```",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[value] 50    // 用户在商店卖出的金额\n```\n\n#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[value] 50\t\t\t\t// 用户在商店卖出的金额\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[value] 50\t\t\t\t// 用户在商店卖出的金额\n```",
       "Closing": false,
       "Authors": "preview"
     },
@@ -998,7 +998,7 @@
       "Section": "grade",
       "Title": "grade（原始标签）",
       "Comment": "消耗品/材料数据中的 [grade] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[grade] 6\t\t\t\t// 消耗品的等级\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[grade] 6                // 消耗品的品级\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[grade] 6\t\t\t\t// 消耗品的等级\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1008,7 +1008,7 @@
       "Section": "rarity",
       "Title": "rarity（原始标签）",
       "Comment": "消耗品/材料数据中的 [rarity] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[rarity] 0\t\t\t\t// 稀有度。 0:普通 1:罕见 2:稀有 3:独特 4:史诗\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[rarity] 0                // 稀有度\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[rarity] 0\t\t\t\t// 稀有度。 0:普通 1:罕见 2:稀有 3:独特 4:史诗\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1038,7 +1038,7 @@
       "Section": "cool time",
       "Title": "冷却时间",
       "Comment": "消耗品/材料数据中的 [cool time] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。时间单位不能仅凭字段名假定为毫秒或秒，需结合同文件列形和消费逻辑确认。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[cool time] 1000\t\t\t\t// 使用后禁止使用主动技能和消耗品的时间。以毫秒为单位，仅对 `[waste]` 和 `[throw]` 有效\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[cool time] 1000                // 使用后阻止主动技能和消耗品使用的时间。单位为毫秒，仅对 `[waste]` 和 `[throw]` 有效。\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[cool time] 1000\t\t\t\t// 使用后禁止使用主动技能和消耗品的时间。以毫秒为单位，仅对 `[waste]` 和 `[throw]` 有效\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1048,7 +1048,7 @@
       "Section": "move wav",
       "Title": "move wav（原始标签）",
       "Comment": "消耗品/材料数据中的 [move wav] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[move wav] `MOVE_SOUND`\t\t// 掉落在地上、移动道具时(包括装备)发出的声音\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[move wav] `MOVE_SOUND`        // 掉落在地上、移动物品时（包括装备）发出的声音\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[move wav] `MOVE_SOUND`\t\t// 掉落在地上、移动道具时(包括装备)发出的声音\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1058,7 +1058,7 @@
       "Section": "explain",
       "Title": "说明",
       "Comment": "消耗品/材料数据中的 [explain] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[explain]\t\t\t\t\t// 消耗品的说明。可以换行。\n`药水\n是临死时\n该喝的东西`\n```\n\n#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n//[name] `测试怪物卡片`\n//[name2] `Sample of monster cards`\n[explain]\n`燃烧的格拉卡拉克`\t\t\t\t\t\t\t\t\t// 怪物出没地下城\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[explain]                    // 消耗品的说明。可以换行。\n`药水\n快死了的时候\n喝的东西`\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[explain]\t\t\t\t\t// 消耗品的说明。可以换行。\n`药水\n是临死时\n该喝的东西`\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1068,7 +1068,7 @@
       "Section": "icon mark",
       "Title": "icon mark（原始标签）",
       "Comment": "消耗品/材料数据中的 [icon mark] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[icon mark] `IconMark.img` 2        // 图标标记图像文件和帧索引\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1078,7 +1078,7 @@
       "Section": "need material",
       "Title": "need material（原始标签）",
       "Comment": "消耗品/材料数据中的 [need material] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[need material] 3043  2            // 需要的材料物品索引，材料物品数量（例如，黑莲 2个）\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[need material] 3043  2\t\t\t// 所需材料道具索引，材料道具个数 (例，黑莲 2个)\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1098,7 +1098,7 @@
       "Section": "int data",
       "Title": "int data（原始标签）",
       "Comment": "消耗品/材料数据中的 [int data] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[int data]\t\t\t\t// 用于硬编码的整数数据\n3\n4\n[/int data]\n```\n\n#### 官方示例: stackablesample-legacy.stk\n\n```pvf\n[int data]\n1001\t\t\t\t\t// 什么都没抽到时出现的基本道具\n\n10001 288\t\t\t\t// 出现的道具索引和概率。概率为十万分比 (0.001%)\n2342 301\t\t\t\t// 例如) 2342号道具 0.301% 概率出现\n3222 1\t\t\t\t\t// 例如) 3222号道具 0.001% 概率出现\n4222 5000\n2222 243\n[/int data]\n```\n\n#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[int data]\n1\t\t\t\t// 怪物卡片图像索引\n3000\t\t\t// 怪物索引\n[/int data]\n```\n\n#### 官方示例: stackablesample-pandora.stk\n\n```pvf\n[int data]\n1001\t\t\t// 未获得任何物品时出现的基本物品。\n\n\t\t\t// 如果物品是装备，数量请指定为1个!!!\n\n10001 288 20\t\t// 出现物品的索引、概率和数量。概率为十万分比 (0.001%)\n2342 301 10\t\t// 例) 2342号物品 0.301% 概率出现 10 个\n3222 1 25\t\t// 例) 3222号物品 0.001% 概率出现 25 个\n4222 5000 30\n2222 243 20\n[/int data]\n```\n\n#### 官方示例: stackablesample-recipe.stk\n\n```pvf\n[int data]\n3\t\t\t\t\t// 所需物品种类数\n27 1\t\t\t\t\t// 物品索引，物品数量。(按所需物品种类重复)\n28 4\t\t\t\t\t// 例) 现在需要 27号 1个 28号 4个 29号 2个\n29 2\n\n2\t\t\t\t\t// 生成物品种类数\n10001 1\t\t\t\t\t// 物品索引，物品数量。(按生成物品种类重复)\n77 3\t\t\t\t\t// 例) 现在生成 10001号 1个，77号 3个\n\n2\t\t\t\t\t// 所需技能种类数 (如果没有则为0，与职业无关，仅按索引检查)\n140 1\t\t\t\t\t// 技能索引，最低等级 (按所需技能种类重复)\n142 7\t\t\t\t\t// 例) 现在需要 140号技能 1级，142号技能 7级以上\n\n1\t\t\t\t\t// 所需等级。0:皆可 1:高级 2:专家职业。不写则为0\n[/int data]\n```\n\n#### 官方示例: stackablesample-stackable_legacy.stk\n\n```pvf\n[int data]\n1001 1\t\t\t\t\t// 未获得任何物品时出现的基本物品。基本物品数量\n\n10001 288 1\t\t\t\t// 出现物品的索引和概率。概率为十万分比 (0.001%)，以及物品会出现多少个。\n2342 301  1\t\t\t\t// 例) 2342号物品 0.301% 概率出现\n3222 1\t  1\t\t\t\t// 例) 3222号物品 0.001% 概率出现\n4222 5000 1\n2222 243  1\n[/int data]\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n//此后有大量的 int data，这无法通过Excel操作\n//对于手动输入的标签，如果能做特定标记，以便工具运行时不被删除就好了。这是关键！！！\n[int data]\n[/int data]\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[int data]\t\t\t\t// 用于硬编码的整数数据\n3\n4\n[/int data]\n```\n\n#### 官方示例: stackablesample-throwitem.stk\n\n```pvf\n[int data]\n50001\t\t\t\t\t// 要创建的被动对象索引\n0\t\t\t\t\t// 创建被动对象时输入的参数\n0\t\t\t\t\t// 发射前延迟 (如果想在发射前长时间蓄力，则增加此变量。默认值 0)\n450\t\t\t\t\t// 发射后延迟 (如果想增加发射后的硬直时间，则增加此变量。默认值 500 左右)\n0\t\t\t\t\t// 要反映的速度类型 (0:攻击速度, 1:施法速度)\n100\t\t\t\t\t// 基本速度倍数 (%) (如果想更快地发射动作，则填写 100 以上。速度 = 要反映的速度类型 * 倍数 / 100)\n[/int data]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -1118,7 +1118,7 @@
       "Section": "mp recovery",
       "Title": "MP恢复",
       "Comment": "消耗品/材料数据中的 [mp recovery] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[mp recovery] `+` 200 1000 `myself`    //mp 恢复。200点，在1秒内对自己恢复\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1128,7 +1128,7 @@
       "Section": "hp recovery",
       "Title": "HP恢复",
       "Comment": "消耗品/材料数据中的 [hp recovery] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[hp recovery] `+` 200 1000 `myself`    //hp 恢复。200点，在1秒内对自己恢复\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1158,7 +1158,7 @@
       "Section": "booster info",
       "Title": "助推器信息",
       "Comment": "消耗品/材料数据中的 [booster info] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[booster info]\t\t// 增益道具信息\n[avatar]\t\t// 抽取外观\n2\t\t\t// 从外观抽取几个\n39000\t1000\t1\t0\t0\t// 道具索引\t相对概率\t数量\t期限\t属性\n39000\t1000\t1\t0\t0\n39000\t1000\t1\t0\t0\n39000\t1000\t1\t0\t0\n[/avatar]\n[cera]\n1\n8\t1000\t10\t\t\t// 道具索引\t相对概率\t数量\n[/cera]\n// 可能的标签\n[creature]\n1\n8\t1000\t10\n[/creature]\n1\n8\t1000\t10\n[equipment]\n1\n8\t1000\t10\n[/equipment]\n1\n8\t1000\t10\n[stackable]\n1\n8\t1000\t10\n[/stackable]\n[etc]\n1\n8\t1000\t10\n[/etc]\n[/booster info]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -1168,7 +1168,7 @@
       "Section": "summon apc",
       "Title": "summon apc（原始标签）",
       "Comment": "消耗品/材料数据中的 [summon apc] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[summon apc] 20404 -1 -1 300000 1    //召唤APC。等级为-1时，召唤与自身等级相匹配的APC\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1188,7 +1188,7 @@
       "Section": "cera",
       "Title": "cera（原始标签）",
       "Comment": "消耗品/材料数据中的 [cera] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[cera]\n1\n8\t1000\t10\t\t\t// 道具索引\t相对概率\t数量\n[/cera]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -1288,7 +1288,7 @@
       "Section": "action usable place",
       "Title": "action usable place（原始标签）",
       "Comment": "消耗品/材料数据中的 [action usable place] 闭合块。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample.stk\n\n```pvf\n// 可使用地点 (如果未指定，默认是城镇)\n[action usable place]\n`[village]`\t\t// 城镇 (普通频道)\n`[dungeon]`\t\t// 地下城\n`[pvp]`\t\t\t// 决斗场频道\n[/action usable place]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -1338,7 +1338,7 @@
       "Section": "monster summons",
       "Title": "monster summons（原始标签）",
       "Comment": "消耗品/材料数据中的 [monster summons] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[monster summons] 123 1 20 50000 2    //召唤怪物。怪物索引，最低等级，最高等级，持续时间，最大召唤数量\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1348,7 +1348,7 @@
       "Section": "sub type",
       "Title": "子类型类型",
       "Comment": "消耗品/材料数据中的 [sub type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[sub type] 1\t\t\t\t\t\t\t\t\t\t// 表示是怪物卡片！！\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n// 后面的数字是价格表索引。如果没有价格则输入0。\n                    // 即使单独输入了价格，回购/修理价格也将遵循此值。\n[sub type]    0            // 消耗品的子类型。默认为0\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n// `[waste]` `[material]` `[recipe]` `[throw]` `[set]` `[legacy]` `[quest]` `[etc]` `[creature]` `[feed]`\n// `[cera package]` `[package]`\n//`[material export job]` `[global effect]` `[disguise]` `[unlimited etc]` `[avatar jewel]`\n// `[quest receive]`\t// 接受任务的道具\n// `[dye]`\t//染色剂\n\t\t\t\t\t// 后面的数字是价格表索引。如果没有价格则输入0。\n\t\t\t\t\t// 即使单独输入价格，卖出/修理价格也会遵循这个索引\n[sub type]\t0\t\t\t// 消耗品的子类型。默认为0\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1398,7 +1398,7 @@
       "Section": "enchant",
       "Title": "enchant（原始标签）",
       "Comment": "消耗品/材料数据中的 [enchant] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[enchant]\n\t// 变化能力值。变化量为0的可以不写。 //\n\t[HP MAX] +10\t\t\t\t// 前面的+号可以省略\n\t[MP MAX] +27\n\t[physical attack] +100\n\t[physical defense] +10\n\t[magical attack] -10\n\t[magical defense] -26\n\t[equipment physical attack] 100\n\t[equipment physical defense] 25\n\t[equipment magical attack] 100\n\t[equipment magical defense] 38\n\t[physical absolute damage] 100\t\t// 物理绝对伤害\n\t[physical damage reduce] 100\t\t// 物理伤害修正\n\t[physical absolute defense] 20.0\t// 物理绝对防御。%值\n\t[magical absolute damage] 100\t\t// 魔法绝对伤害\n\t[magical damage reduce] 100\t\t// 魔法伤害修正\n\t[magical absolute defense] 20.0\t\t// 魔法绝对防御。%值\n\n\t[fire resistance] +17\n\t[water resistance] +3\n\t[dark resistance] +37\n\t[light resistance] -37\n\t[all elemental resistance] +10\n\n\t[slow resistance] 18\n\t[freeze resistance] 39\n\t[poison resistance] 11\n\t[stun resistance] 33\n\t[curse resistance] 10\n\t[blind resistance] 10\n\t[lightning resistance] 24\n\t[stone resistance] 3\n\t[sleep resistance] 33\n\t[deelement resistance] 1\n\t[deadlystrike resistance] 2\n\t[bleeding resistance] 32\n\t[confuse resistance] 33\n\t[hold resistance] -3\n\t[all activestatus resistance] +2\n\n\t[piercing resistance] 12\n\t[stuck resistance] 33 // (0.1%单位)\n\n\t[inventory limit] +30\n\t[HP regen speed] +2\n\t[MP regen speed] -2\n\t[MP regen speed rate] 0.1\t// %增加 (临时例外处理)\n\t[move speed] +1\n\t[attack speed] +2\n\t[cast speed] +3\n\t[hit recovery] +3\n\t[jump power] +10\n\t[room list move speed rate] +1.0\t// 指定在村庄中的移动速度\n\n\t// 攻击修正值：仅对武器有效。没有或0则可以不写 //\n\t[elemental property] `[dark element]`\t\t\t\t// 在 `[no element]` `[fire element]` `[water element]` `[dark element]` `[light element]` 中选择。`[no element]` 则可以不写\n\t[active status] `[curse]` 37.3 100\t// 最前面是攻击时触发的状态异常种类。\n\t\t\t\t\t// `[none]` `[slow]` `[freeze]` `[poison]` `[stun]` `[curse]` `[blind]`\n\t\t\t\t\t// `[lightning]` `[stone]` `[sleep]` `[deelement]` `[deadlystrike]` `[bleeding]`\n\t\t\t\t\t// `[haste]` `[bless]` `[element]`\n\t\t\t\t\t// 中选择 (`[none]` 则可以不写)\n\t\t\t\t\t// 第二个是触发概率 (如果写了 `[none]`，则可以任意填写)\n\t\t\t\t\t// 第三个是触发强度 (如果写了 `[none]`，则可以任意填写)\n\n\t[skill data up] `[fighter]` 12 `[static]` 2 1 200\n\t// 职业\n\t// 技能索引，\n\t// 要更改的数据类型[static data, level info]\n\t// 数据索引\n\t// 数值适用(0)，比率适用%(1)\n\t// 数值\n\n\t[push aside] +10\n\t[lift up] +27\n\t[critical hit] +5.0\t\t// 暴击命中概率上升值\n\t[stuck] -1.0\t\t\t// 卡住概率变化值\n\t[ignore defense] 1\n\t[human damage rate] +2.5\t// 对人类伤害比率变化值。%值\n\t[fort damage rate] -31.2\t// 对建筑伤害比率变化值。%值\n\t[monster damage rate] 100.0\t// 对怪兽 (针对装甲类别为0的家伙) 攻击比率。可小数，%值，100为默认\n\n\t[HP drain] 1\n\t[MP drain] 1\n\n\t[skill levelup]\t\t\t\t// 装备时提升的技能和等级列表。\n\t`[swordman]` 10 1\t\t\t\t// 职业 (`[swordman]` `[fighter]` `[common]`) 技能索引 等级\n\t`[fighter]` 1 33\n\t[/skill levelup]\n[/enchant]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -1738,7 +1738,7 @@
       "Section": "consume item",
       "Title": "consume item（原始标签）",
       "Comment": "消耗品/材料数据中的 [consume item] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[consume item]    //需要消耗的物品。物品索引，数量。可以添加多个\n3037 10\n[/consume item]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -1828,7 +1828,7 @@
       "Section": "elemental property",
       "Title": "elemental property（原始标签）",
       "Comment": "消耗品/材料数据中的 [elemental property] 字段。已见数据形态为一个或多个反引号字符串/token；字符串内容应按数据处理。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n// 攻击修正值：仅对武器有效。没有或0则可以不写 //\n\t[elemental property] `[dark element]`\t\t\t\t// 在 `[no element]` `[fire element]` `[water element]` `[dark element]` `[light element]` 中选择。`[no element]` 则可以不写\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1888,7 +1888,7 @@
       "Section": "stuck resistance",
       "Title": "stuck resistance（原始标签）",
       "Comment": "消耗品/材料数据中的 [stuck resistance] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[stuck resistance] 33 // (0.1%单位)\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1928,7 +1928,7 @@
       "Section": "HP MAX",
       "Title": "HP 上限",
       "Comment": "消耗品/材料数据中的 [HP MAX] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n// 变化能力值。变化量为0的可以不写。 //\n\t[HP MAX] +10\t\t\t\t// 前面的+号可以省略\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -2178,7 +2178,7 @@
       "Section": "skill levelup",
       "Title": "技能升级",
       "Comment": "消耗品/材料数据中的 [skill levelup] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[skill levelup]\t\t\t\t// 装备时提升的技能和等级列表。\n\t`[swordman]` 10 1\t\t\t\t// 职业 (`[swordman]` `[fighter]` `[common]`) 技能索引 等级\n\t`[fighter]` 1 33\n\t[/skill levelup]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -2248,7 +2248,7 @@
       "Section": "active status",
       "Title": "active status（原始标签）",
       "Comment": "消耗品/材料数据中的 [active status] 字段。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[active status] `[curse]` 37.3 100\t// 最前面是攻击时触发的状态异常种类。\n\t\t\t\t\t// `[none]` `[slow]` `[freeze]` `[poison]` `[stun]` `[curse]` `[blind]`\n\t\t\t\t\t// `[lightning]` `[stone]` `[sleep]` `[deelement]` `[deadlystrike]` `[bleeding]`\n\t\t\t\t\t// `[haste]` `[bless]` `[element]`\n\t\t\t\t\t// 中选择 (`[none]` 则可以不写)\n\t\t\t\t\t// 第二个是触发概率 (如果写了 `[none]`，则可以任意填写)\n\t\t\t\t\t// 第三个是触发强度 (如果写了 `[none]`，则可以任意填写)\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -2358,7 +2358,7 @@
       "Section": "finish point price",
       "Title": "完成点数价格",
       "Comment": "消耗品/材料数据中的 [finish point price] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[finish point price] 10\t\t\t// FP价格\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[finish point price] 10            // FP价格\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[finish point price] 10\t\t\t// FP价格\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -2438,7 +2438,7 @@
       "Section": "room list move speed rate",
       "Title": "room list move speed rate（原始标签）",
       "Comment": "消耗品/材料数据中的 [room list move speed rate] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[room list move speed rate] +1.0\t// 指定在村庄中的移动速度\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -2448,7 +2448,7 @@
       "Section": "MP regen speed rate",
       "Title": "MP恢复速度比率",
       "Comment": "消耗品/材料数据中的 [MP regen speed rate] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[MP regen speed rate] 0.1\t// %增加 (临时例外处理)\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -2478,7 +2478,7 @@
       "Section": "linking quest index",
       "Title": "linking quest index（原始标签）",
       "Comment": "消耗品/材料数据中的 [linking quest index] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示任务 ID，必须通过任务 registry 解析；静态登记不证明任务可接取或完成。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample.stk\n\n```pvf\n[linking quest index] 1000\t// 当 [stackable type] 为 `[quest receive]` 时，指定此标签则在使用消耗品时接受指定任务\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -2688,7 +2688,7 @@
       "Section": "physical absolute damage",
       "Title": "物理绝对值伤害",
       "Comment": "消耗品/材料数据中的 [physical absolute damage] 字段。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[physical absolute damage] 100\t\t// 物理绝对伤害\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -2708,7 +2708,7 @@
       "Section": "skill data up",
       "Title": "skill data up（原始标签）",
       "Comment": "消耗品/材料数据中的 [skill data up] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[skill data up] `[fighter]` 12 `[static]` 2 1 200\n\t// 职业\n\t// 技能索引，\n\t// 要更改的数据类型[static data, level info]\n\t// 数据索引\n\t// 数值适用(0)，比率适用%(1)\n\t// 数值\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -2808,7 +2808,7 @@
       "Section": "creature",
       "Title": "宠物",
       "Comment": "消耗品/材料数据中的 [creature] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。其中数字若表示宠物 ID，必须通过 creature registry 解析；静态配置不证明可获得。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n// 可能的标签\n[creature]\n1\n8\t1000\t10\n[/creature]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -2828,7 +2828,7 @@
       "Section": "dye type",
       "Title": "dye type（原始标签）",
       "Comment": "消耗品/材料数据中的 [dye type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample.stk\n\n```pvf\n[dye type] 0 //0:随机染色剂，1:单色，2:多色\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -2838,7 +2838,7 @@
       "Section": "dye info",
       "Title": "dye info（原始标签）",
       "Comment": "消耗品/材料数据中的 [dye info] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: stackablesample.stk\n\n```pvf\n[dye info]\n1   1000\t// 颜色索引，概率千分比 (仅用于随机，其余忽略)\n10  2000\n3   3000\n[/dye info]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -2981,6 +2981,526 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "chn random image percent",
+      "Title": "chn random image percent",
+      "Comment": "CHN随机图像百分比",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "booster catego num",
+      "Title": "booster catego num",
+      "Comment": "Booster Catego Num.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "init dimension dungeon count",
+      "Title": "init dimension dungeon count",
+      "Comment": "Init Dimension Dungeon Count",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "add fatigue",
+      "Title": "疲劳",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "zed"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "expUp",
+      "Title": "增加经验",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "挽辞"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "POTION_TOUCH",
+      "Title": "药水类",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "挽辞"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "booster random",
+      "Title": "随机魔盒",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "天盗狂人"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "teleport potion",
+      "Title": "传送药水 移动药剂",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "秋不得"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "physical attack bonus",
+      "Title": "物理攻击力",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "magical attack bonus",
+      "Title": "魔法攻击力",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "party",
+      "Title": "对身边友军也会生效",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "poison",
+      "Title": "异常效果",
+      "Comment": "异常效果：中毒",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "freeze",
+      "Title": "异常效果",
+      "Comment": "异常效果：冰冻",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "stone",
+      "Title": "异常效果",
+      "Comment": "异常效果：石化",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "blind",
+      "Title": "异常效果",
+      "Comment": "异常效果：失明",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "confuse",
+      "Title": "异常效果",
+      "Comment": "异常效果：混乱",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "bleeding",
+      "Title": "异常效果",
+      "Comment": "异常效果：出血",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "sleep",
+      "Title": "异常效果",
+      "Comment": "异常效果：睡眠",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "disease",
+      "Title": "异常效果",
+      "Comment": "异常效果：疾病",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "silence",
+      "Title": "异常效果",
+      "Comment": "异常效果：沉默",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "any",
+      "Title": "所有异常状态效果",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "magical defense bonus",
+      "Title": "魔法防御力",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "physical defense bonus",
+      "Title": "物理防御力",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "physical critical hit",
+      "Title": "物理暴击率",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "巳月-1322276685|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "magical critical hit",
+      "Title": "魔法暴击率",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "巳月-1322276685|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "amulet",
+      "Title": "装备",
+      "Comment": "装备：项链",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "wrist",
+      "Title": "装备",
+      "Comment": "装备：手环",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "ring",
+      "Title": "装备",
+      "Comment": "装备：戒指",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "title name",
+      "Title": "装备",
+      "Comment": "装备：称号",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "奶甜味儿的小颜颜|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "weapon",
+      "Title": "装备",
+      "Comment": "装备：武器",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "coat",
+      "Title": "装备",
+      "Comment": "装备：上衣",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "pants",
+      "Title": "装备",
+      "Comment": "装备：下装",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "shoulder",
+      "Title": "装备",
+      "Comment": "装备：头肩",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "waist",
+      "Title": "装备",
+      "Comment": "装备：腰带",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "shoes",
+      "Title": "装备",
+      "Comment": "装备：鞋子",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "magic stone",
+      "Title": "装备",
+      "Comment": "装备：魔法石",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "support",
+      "Title": "装备",
+      "Comment": "装备：护石",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "stk",
+      "Section": "hold",
+      "Title": "异常效果",
+      "Comment": "异常效果：束缚",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "冷却时间分组",
+      "Title": "所属的冷却时间组",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[冷却时间分组] 0                // 所属的冷却时间组。若为-1或不写，则无组，仅应用于自身。\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "applying range",
+      "Title": "applying range",
+      "Comment": "- 应用范围\n- 以像素为单位的正圆形半径",
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[applying range] 100\t\t\t\t// 应用范围\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[applying range] 100\t\t\t\t// 应用范围\n```\n\n#### 官方示例: stackablesample-throwitem.stk\n\n```pvf\n[applying range] 200 // 以像素为单位的正圆形半径，虽然不是专为投掷物品设置的标签，但常用于赋予特殊效果的物品\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "critical hit",
+      "Title": "暴击命中概率上升值",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[critical hit] +5.0\t\t// 暴击命中概率上升值\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "fort damage rate",
+      "Title": "对建筑伤害比率变化值",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[fort damage rate] -31.2\t// 对建筑伤害比率变化值。%值\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "human damage rate",
+      "Title": "对人类伤害比率变化值",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[human damage rate] +2.5\t// 对人类伤害比率变化值。%值\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "magical absolute damage",
+      "Title": "魔法绝对伤害",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[magical absolute damage] 100\t\t// 魔法绝对伤害\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "magical absolute defense",
+      "Title": "魔法绝对防御",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[magical absolute defense] 20.0\t\t// 魔法绝对防御。%值\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "magical damage reduce",
+      "Title": "魔法伤害修正",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[magical damage reduce] 100\t\t// 魔法伤害修正\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "monster damage rate",
+      "Title": "对怪兽 (针对装甲类别为0的家伙) 攻击比率",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[monster damage rate] 100.0\t// 对怪兽 (针对装甲类别为0的家伙) 攻击比率。可小数，%值，100为默认\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "packagable",
+      "Title": "packagable",
+      "Comment": "- 无法邮寄包裹\n- 不能邮寄",
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[packagable] 0\t// 无法邮寄包裹，默认值为可以邮寄，请注意\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[packagable] 0    // 不能邮寄，注意默认值为可以邮寄，因此需要特别指定\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[packagable] 0\t// 无法邮寄包裹，默认值为可以邮寄，请注意\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "party cooltime",
+      "Title": "party cooltime",
+      "Comment": "- 如果为1则应用组队冷却时间\n- 若为1",
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[party cooltime] 1\t\t\t// 如果为1则应用组队冷却时间\n```\n\n#### 官方示例: 090302stackablesample.stk\n\n```pvf\n[party cooltime] 1            // 若为1，则应用队伍冷却时间\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[party cooltime] 1\t\t\t// 如果为1则应用组队冷却时间\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "physical absolute defense",
+      "Title": "物理绝对防御",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[physical absolute defense] 20.0\t// 物理绝对防御。%值\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "physical damage reduce",
+      "Title": "物理伤害修正",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-monster_card.stk\n\n```pvf\n[physical damage reduce] 100\t\t// 物理伤害修正\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "stk",
+      "Section": "쿨타입 그룹",
+      "Title": "所属的冷却时间组",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: stackablesample-booster.stk\n\n```pvf\n[쿨타입 그룹] 0\t\t\t\t// 所属的冷却时间组。如果是-1或不写，则没有组，仅应用于自身\n```\n\n#### 官方示例: stackablesample.stk\n\n```pvf\n[쿨타입 그룹] 0\t\t\t\t// 所属的冷却时间组。如果是-1或不写，则没有组，仅应用于自身\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
     }
   ]
 }

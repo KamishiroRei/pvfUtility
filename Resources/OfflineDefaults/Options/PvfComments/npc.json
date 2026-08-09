@@ -310,7 +310,7 @@
       "Comment": "窗口中显示的小脸部图像文件名和帧索引。用于NPC信息窗口等界面中显示的NPC小头像，与popup face的弹出小头像用途不同。",
       "OfficialDescription": "#### 官方示例: npcsample.npc\n\n```pvf\n[small face] `slainer.img` 0 // 窗口中显示的小脸部图像文件名和帧索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -320,7 +320,7 @@
       "Comment": "NPC的名称。NPC在PVF数据中标识用的内部名称，与[field name]的场景显示名称不同。",
       "OfficialDescription": "#### 官方示例: npcsample.npc\n\n```pvf\n[name] `승민` // 名称。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -330,7 +330,7 @@
       "Comment": "一段对话开始。定义NPC的对话选项节点，包括对话索引、等级限制、标题（按钮文字）、内容和子对话索引。初次对话从1号索引开始。",
       "OfficialDescription": "#### 官方示例: npcsample.npc\n\n```pvf\n[speech] // 一段对话开始。\n1 // 索引。初次对话时从1号对话开始。\n3 5 // 对话显示的等级。（例如：3~5）若无等级限制则填写0 0或1 99。\n`关于NDS` // 标题（按钮上显示的文字。简短一行。）\n`NDS是最棒的！ // 内容（若无内容，只有选择项则使用 ``\n你也买一个！\n买两个！`\n3 4 // 子对话索引列表。没有则可不写。\n[/speech]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -340,7 +340,7 @@
       "Comment": "NPC区域移动限制弹出窗口字符串。当玩家不满足移动条件（如等级不足）时弹出的限制提示内容。",
       "OfficialDescription": "#### 官方示例: npcsample.npc\n\n```pvf\n[move town limit str] // NPC区域移动限制弹出窗口字符串。\n<8::marlene_arad_movetown_limit> // 弹出窗口中显示的内容。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -350,7 +350,7 @@
       "Comment": "NPC区域移动前确认弹出窗口字符串。玩家通过NPC移动城镇前显示的确认提示内容，用于二次确认。",
       "OfficialDescription": "#### 官方示例: npcsample.npc\n\n```pvf\n[move town confirm str] // NPC区域移动前确认弹出窗口字符串。\n<8::marlene_arad_movetown_confirm> // 确认窗口中显示的内容。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -360,7 +360,7 @@
       "Comment": "混乱模式中使用的NPC队伍指定。用于指定NPC在混乱/混沌模式中属于红队、蓝队还是中立队伍，影响NPC的攻击目标行为。",
       "OfficialDescription": "#### 官方示例: npcsample.npc\n\n```pvf\n[chaos team]\n`[red team]` 或 `[blue team]` 或 `[neutral team]` // 混乱模式中使用的NPC队伍指定。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -370,7 +370,7 @@
       "Comment": "NPC消息气泡随机显示。设置NPC随机弹出消息气泡的动画文件、出现概率和消息内容列表，用于增强NPC的生动性。",
       "OfficialDescription": "#### 官方示例: npcsample.npc\n\n```pvf\n// NPC消息气泡随机显示。\n[random message balloon]\n`[random message animation]` `Animation/ChristmasSanta_Random.ani` // 随机消息出现时显示的动画。\n`[random message probability]` 20 // 随机消息出现的概率。\n`[random message list]` 3 <8::random_message_1> <8::random_message_2> <8::random_message_3> // 数量 消息字符串。\n[/random message balloon]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -380,7 +380,7 @@
       "Comment": "为NPC显示点击标记的功能。根据条件（如任务进行中）在NPC头顶显示可点击的提示标记，可设置多个标记对应不同任务。",
       "OfficialDescription": "#### 官方示例: npcsample.npc\n\n```pvf\n// 为NPC显示点击标记的功能。可以设置2个以上。\n// 第一个参数是点击标记显示的条件，其余为各条件的数据。\n// 如果条件为0号，则任务进行中显示点击标记。后面跟着的数字是任务索引。\n[click mark]\n0 1016\n0 2000\n[/click mark]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -681,6 +681,106 @@
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "npc",
+      "Section": "message balloon",
+      "Title": "message balloon",
+      "Comment": "消息气球",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "npc",
+      "Section": "guild item",
+      "Title": "guild item",
+      "Comment": "公会项目",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "npc",
+      "Section": "guild storage",
+      "Title": "guild storage",
+      "Comment": "公会储存",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "npc",
+      "Section": "event reward item",
+      "Title": "event reward item",
+      "Comment": "活动奖励项目",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "npc",
+      "Section": "crane minigame",
+      "Title": "娃娃机",
+      "Comment": "娃娃机。路径/etc/craneminigameitem.etc",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "一只鱼2"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "npc",
+      "Section": "move town",
+      "Title": "移动到城镇",
+      "Comment": "移动到城镇，后面写到达的NPC编号",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "网瘾少年"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "npc",
+      "Section": "common",
+      "Title": "该词条位于导师技能商店内时",
+      "Comment": "该词条位于导师技能商店内时，代表这是全职业通用技能，比如受身蹲伏等等",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "npc",
+      "Section": "swordman",
+      "Title": "男鬼剑士",
+      "Comment": "男鬼剑士\n\n该词条位于导师技能商店内时，代表这是男鬼剑专属技能，比如里鬼剑术、血之狂暴等等",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "npc",
+      "Section": "at mage",
+      "Title": "男魔法师",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "pvfUtili|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "npc",
+      "Section": "at fighter",
+      "Title": "男格斗",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
     }
   ]
 }

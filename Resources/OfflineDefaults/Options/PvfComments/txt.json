@@ -1,0 +1,46 @@
+{
+  "SchemaVersion": 1,
+  "FileType": "txt",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "txt",
+      "Section": "jump attack",
+      "Title": "jump attack",
+      "Comment": "跳攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "txt",
+      "Section": "summon",
+      "Title": "summon",
+      "Comment": "召唤",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "txt",
+      "Section": "hold attack",
+      "Title": "hold attack",
+      "Comment": "举行攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "txt",
+      "Section": "warp attack",
+      "Title": "warp attack",
+      "Comment": "经线攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    }
+  ]
+}

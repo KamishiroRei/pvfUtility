@@ -1,0 +1,136 @@
+{
+  "SchemaVersion": 1,
+  "FileType": "ora",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "event",
+      "Title": "事件条件 (内部实现保留)",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "input",
+      "Title": "输入块",
+      "Comment": "输入块：列出按键/指令与时间 或 通过 pass/random 条件继续",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "loop start",
+      "Title": "循环开始",
+      "Comment": "循环开始：后跟次数 (与 [loop end] 配对)",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "loop end",
+      "Title": "循环结束",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "state check",
+      "Title": "状态检查块",
+      "Comment": "状态检查块：内部放按键或条件 (常见 skill:XX / target current direction x)",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "state check2",
+      "Title": "状态检查",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "time",
+      "Title": "pass 指令",
+      "Comment": "pass 指令：等待指定毫秒再进入下一 [input]",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "pass",
+      "Title": "立即进入下一 [input]",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "random",
+      "Title": "随机概率进入下一 [input]",
+      "Comment": "随机概率进入下一 [input]：语法 `random` 概率(%) 总值(通常100)",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "enemy distance",
+      "Title": "距离条件",
+      "Comment": "距离条件：正数= >= 距离  负数= <= 距离",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "my zheight",
+      "Title": "自身 Z 高度阈值",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "animation frame",
+      "Title": "动画帧条件",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "ora",
+      "Section": "CREATE PASSIVEOBJECT",
+      "Title": "可嵌入的 ACT 片段 (兼容 act 语法",
+      "Comment": "可嵌入的 ACT 片段 (兼容 act 语法, 子标签见 act.json)",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "lostluna1"
+    }
+  ]
+}

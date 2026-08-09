@@ -990,7 +990,7 @@
       "Comment": "#### 官方示例: actionlibrary/sample.mob\n\n```pvf\n[lie frame] 2 2 2 3 4 // 躺下起身帧，躺下落下帧，躺下弹起帧，躺下弹起后落下帧，躺卧帧。\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[lie frame] 2 2 2 3 4 // 躺下上升的帧，躺下下降的帧，躺下弹起的帧，躺下弹起后下落时的帧，躺下的帧。\n// 躺下状态受到攻击则从第三个参数开始重复。\n```",
       "OfficialDescription": "#### 官方示例: actionlibrary/sample.mob\n\n```pvf\n[lie frame] 2 2 2 3 4 // 躺下起身帧，躺下落下帧，躺下弹起帧，躺下弹起后落下帧，躺卧帧。\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[lie frame] 2 2 2 3 4 // 躺下上升的帧，躺下下降的帧，躺下弹起的帧，躺下弹起后下落时的帧，躺下的帧。\n// 躺下状态受到攻击则从第三个参数开始重复。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1000,7 +1000,7 @@
       "Comment": "[name] 怪物的名称\n直接写入怪物名称文本，或引用 monster.kor.str 文件内的索引",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[name] `史莱姆` // 怪物的名称\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[name] <7::name_660> // 写入 monster.kor.str 文件内的索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1010,7 +1010,7 @@
       "Comment": "[width] 怪物的碰撞检测范围\n参数1：X轴宽度（像素值）\n参数2：Y轴宽度（像素值）\n默认值 40 10\n\n在[control passive object]中可表示被动对象可移动区域的宽度",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[width] 40 10 // 依次为 X轴, Y轴 宽度 (像素值)\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[width] 40 10 // 怪物的碰撞检测范围。不写标签则默认为 40 10。\n```\n\n```pvf\n[width] 200 // 被动对象可移动区域的宽度。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1020,7 +1020,7 @@
       "Comment": "[floating height] 浮游高度\n0=地面型，1以上=浮游型（值为浮游高度）",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[floating height] 0 // 0则为地面型，1以上则为浮游型 (值 = 浮游高度)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1030,7 +1030,7 @@
       "Comment": "[layer] 绘制图层\n可选：[close] [normal] [bottom] [closeback] [middleback] [distantback]",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[layer] `[normal]` // 绘制图层。可选择 `[close]` `[normal]` `[bottom]` `[closeback]` `[middleback]` `[distantback]`\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1040,7 +1040,7 @@
       "Comment": "[ability table] 跟随的能力值表索引\n0=基本，1=召唤物，2=竞争地牢\n默认值 0",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[ability table] 0 // 跟随的能力值表索引。0为基本，1为召唤物，竞争地牢 2. 默认值 0\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[ability table] 0 // 跟随的能力值表索引。0为基本，1为召唤物，竞争地牢 2。默认值 0\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1050,7 +1050,7 @@
       "Comment": "[summon skill status up rate] 召唤技能1级时能力值上升率(%)\n共10个参数，按能力值表顺序：力、体力、智力、精神、HP、MP、物攻、物防、魔攻、魔防\n仅召唤物使用",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[summon skill status up rate] // 召唤技能 1级时能力值上升率(%)。能力值按能力值表的顺序共10个\n1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[summon skill status up rate] // 召唤技能 1级时能力值上升率(%)。能力值按能力值表的顺序共10个。仅召唤物使用。\n1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0\n```\n\n```pvf\n// 召唤技能 1级时能力值上升率(%)。能力值按能力值表的顺序共10个。\n[summon skill status up rate] 0.0 0.0 0.0 0.0 2.0 2.0 2.0 0.0 2.0 0.0 // 力,体力,智力,精神,HP,MP,物攻,物防,魔攻,魔防。\n```\n\n```pvf\n// 召唤技能 1级时能力值上升率(%)。能力值按能力值表的顺序共10个。\n[summon skill status up rate] 0.0 0.0 0.0 0.0 2.3 2.3 0.0 0.0 0.0 0.0 // 力,体力,智力,精神,HP,MP,物攻,物防,魔攻,魔防。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1060,7 +1060,7 @@
       "Comment": "[HP MAX] 怪物血量\n参数1：最小等级能力值\n参数2：最大等级能力值\n//来自newmonstersamplebytool.mob\n{exp}HP能力值{/exp}[HP MAX]\n    {must1}{exp}最小等级能力值{/exp}{int(:)}\n    {must2}{exp}最大等级能力值{/exp}{int(:)}",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[HP MAX] 1000 3000 // 前面的为最小等级的能力值，后面的为最大等级的能力值。下同。\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[HP MAX] 1000 3000 // 前面的为最小等级的能力值，后面的为最大等级的能力值。下同。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1070,7 +1070,7 @@
       "Comment": "[equipment physical attack] 怪物的装备物理攻击\n直接在脚本中写明，参数为最小等级和最大等级的能力值",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[equipment physical attack] 100 120 // 怪物的装备能力值直接在脚本中写明。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1080,7 +1080,7 @@
       "Comment": "[rigidity] 刚性度\n怪物抵抗硬直的能力值，参数为最小等级和最大等级的值",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[rigidity] 100 150 // 刚性度\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1090,7 +1090,7 @@
       "Comment": "[fire attack] 火属性攻击力\n参数为最小等级和最大等级的攻击力值",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[fire attack] 200 250 // 火属性攻击力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1100,7 +1100,7 @@
       "Comment": "[water attack] 水属性攻击力\n参数为最小等级和最大等级的攻击力值",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[water attack] 300 350 // 水属性攻击力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1110,7 +1110,7 @@
       "Comment": "[dark attack] 暗属性攻击力\n参数为最小等级和最大等级的攻击力值",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[dark attack] 400 450 // 暗属性攻击力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1120,7 +1120,7 @@
       "Comment": "[light attack] 光属性攻击力\n参数为最小等级和最大等级的攻击力值",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[light attack] 500 550 // 光属性攻击力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1130,7 +1130,7 @@
       "Comment": "[slow resistance] 缓速抗性\n参数为最小等级和最大等级的抗性值\n为0时可不写",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n// 特殊属性。为0则可不写。 //\n[slow resistance] 100 200 // 以下所有标签也接受两个整数。\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n// 特殊属性。为0则可不写。 //\n[slow resistance] 100 200 // 缓速\n```\n\n#### 官方示例: newmonstersamplebytool.mob\n\n```pvf\n// 特殊属性。为0则可不写。 //\n{exp}缓速{/exp}[slow resistance]\n    {must1}{int(:)}\n    {must2}{int(:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1140,7 +1140,7 @@
       "Comment": "[weight] 怪物重量\n参数为最小等级和最大等级的值\n单位：1g（newmonstersample）/ 10g（monstersample）\n影响击退、抓取、浮空等",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[weight] 7000 700 // (单位 : 10g)\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[weight] 7000 7000 // (单位 : 1g)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1150,7 +1150,7 @@
       "Comment": "[warlike] 好战性\n0~100的值，数值越高越好战",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[warlike] 57 // 0~100的值。越高越好战\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1160,7 +1160,7 @@
       "Comment": "[jump motion] 跳跃动画文件名\n动画文件(.ani)路径",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[jump motion] `BodyJump.ani` // 跳跃动画文件名\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1170,7 +1170,7 @@
       "Comment": "[jumpattack motion] 跳跃攻击动画文件名\n动画文件(.ani)路径",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[jumpattack motion] `BodyJumpAttack.ani` // 跳跃攻击动画文件名\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1180,7 +1180,7 @@
       "Comment": "[etc motion] 硬编码用动作动画文件名列表\n顺序重要，必须用[/etc motion]闭合",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[etc motion] // 硬编码用动作动画文件名列表 (顺序重要)\n`Magic.ani`\n`PowerUp.ani`\n[/etc motion] // 必须用此标签闭合\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1190,7 +1190,7 @@
       "Comment": "[jumpattack info] 跳跃攻击的攻击信息\n指向跳跃攻击的.atk文件",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n// 攻击信息列表。没有的可以不写。或用 `` 输入则视为没有 //\n[jumpattack info] `JumpAttack.atk` // 跳跃攻击的攻击信息\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1200,7 +1200,7 @@
       "Comment": "[etc attack info] 其他硬编码用攻击信息\n指向对应.atk文件\n必须用[/etc attack info]闭合",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[etc attack info] // 其他硬编码用攻击信息\n`Magic.atk`\n[/etc attack info] // 必须用此标签闭合\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1210,7 +1210,7 @@
       "Comment": "[int data] 硬编码中使用的整数资料集合\n各数值含义由硬编码决定\n必须用[/int data]闭合",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[int data] // 硬编码中使用的整数资料集合\n600\n234\n[/int data] // 必须用此标签闭合\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[int data]\n0 // 背后攻击时出现冰雾的概率。\n50 // 被动防御咏唱触发所需的HP条件概率 (10 = 体力剩余10%时)。\n12000 // 冷却时间（防御触发最低冷却时间）。\n60000 // 进行治疗的时间间隔。\n0 // 治疗量 (10 = 10%)。\n[/int data]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1220,7 +1220,7 @@
       "Comment": "[throw attack] 投掷攻击配置\n包含子标签：攻击索引、粒子文件、投掷坐标、音效等\n必须用[/throw attack]闭合",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[throw attack] // 投掷攻击怪物时追加的内容\n`[attack index]` 0 // 攻击索引\n`[passive object number]` 1 // 粒子文件数 需与下方[passive object filename]的文件数一致\n`[passive object filename]` `Particle/ThrowStone.ptl` // 投掷的粒子文件路径\n`[object type]` 1 // 0则为被动对象 1则为粒子\n`[passive object index]` 30001 // 投掷的对象索引\n`[power]` 0 // 魔法等级\n`[throw frame]` 2 // 决定怪物在第几帧时对象发出的标志\n`[passive object start x cood]` 20 // 投掷对象出发点 x坐标\n`[passive object start y cood]` 0 // 投掷对象出发点 y坐标\n`[passive object start z cood]` 60 // 投掷对象出发点 z坐标\n`[attack number]` 1 // 一次攻击投掷几次\n`[throw sound]` `THROW_STONE` // 投掷音效，没有时用 `` 处理\n[/throw attack]\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[throw attack] // 投掷攻击怪物时追加的内容。\n[attack index] 3 // 攻击索引。\n[passive object number] 1 // 粒子文件数，需与下方 [passive object filename] 的文件数一致。\n[passive object filename] // 投掷的粒子文件路径。\n`Particle/IceBreath1.ptl`\n[/passive object filename]\n[object type] 1 // 0则为被动对象 1则为粒子。\n[passive object index] 30413 // 投掷的对象索引。\n[power] 0 // 魔法等级。\n[throw frame] 3 // 决定怪物在第几帧时对象发出的标志。\n[passive object start x cood] 60 // 投掷对象出发点 x坐标。\n[passive object start y cood] 0 // 投掷对象出发点 y坐标。\n[passive object start z cood] 70 // 投掷对象出发点 z坐标。\n[attack number] 1 // 一次攻击投掷几次。\n[throw sound] `AMAZONES_BREATH` // 投掷音效，没有时用 `` 处理。\n[/throw attack]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1230,7 +1230,7 @@
       "Comment": "[equipment] 怪物装备相关脚本\n第一行为文件数，后续为装备图像文件(.equ)路径\n必须用[/equipment]闭合",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[equipment] // 怪物装备相关脚本\n5 // 文件数\n`Monster/Goblin/acc4-2.equ` // 怪物的装备图像文件\n`Monster/Goblin/Hcc2-2.equ`\n`Monster/Goblin/gcc1-3.equ`\n`Monster/Goblin/tcc1-2.equ`\n`Monster/Goblin/bcc1-2.equ`\n[/equipment]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1240,7 +1240,7 @@
       "Comment": "[fire element] 火属性\n在[common champion elemental property]标签内使用\n若未指定任何属性，则必为随机属性冠军",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[fire element] // 若未指定任何属性，则必为随机属性冠军\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1250,7 +1250,7 @@
       "Comment": "[water element] 冰属性\n在[common champion elemental property]标签内使用\n若只指定一种，则必为该属性冠军",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[water element] // 若只指定一种，则必为该属性冠军\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1260,7 +1260,7 @@
       "Comment": "[PHYSICAL_ATTACK] 力量\n在[ability category]标签内使用\n对应角色力量属性",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[PHYSICAL_ATTACK] // 力量\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1270,7 +1270,7 @@
       "Comment": "[PHYSICAL_DEFENSE] 体力\n在[ability category]标签内使用\n对应角色体力属性",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[PHYSICAL_DEFENSE] // 体力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1280,7 +1280,7 @@
       "Comment": "[MAGICAL_ATTACK] 智力\n在[ability category]标签内使用\n对应角色智力属性",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[MAGICAL_ATTACK] // 智力\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1290,7 +1290,7 @@
       "Comment": "[MAGICAL_DEFENSE] 精神\n在[ability category]标签内使用\n对应角色精神属性",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[MAGICAL_DEFENSE] // 精神\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1300,7 +1300,7 @@
       "Comment": "[poison resistance] 中毒抗性\n为0时可不写",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[poison resistance] // 中毒\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1310,7 +1310,7 @@
       "Comment": "[curse resistance] 诅咒抗性\n为0时可不写",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[curse resistance] // 诅咒\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1320,7 +1320,7 @@
       "Comment": "[blind resistance] 失明抗性\n为0时可不写",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[blind resistance] // 失明\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1330,7 +1330,7 @@
       "Comment": "[lightning resistance] 感电抗性\n为0时可不写",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[lightning resistance] // 感电\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1340,7 +1340,7 @@
       "Comment": "[stone resistance] 石化抗性\n为0时可不写",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[stone resistance] // 石化\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1350,7 +1350,7 @@
       "Comment": "[bleeding resistance] 出血抗性\n为0时可不写",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n//* [deelement resistance] // ??\n//* [deadlystrike resistance] // ??\n[bleeding resistance] // 出血\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1360,7 +1360,7 @@
       "Comment": "[confuse resistance] 混乱抗性\n为0时可不写",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[confuse resistance] // 混乱\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1370,7 +1370,7 @@
       "Comment": "[hold resistance] 束缚抗性\n为0时可不写",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[hold resistance] // 束缚\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1380,7 +1380,7 @@
       "Comment": "[HP regen speed] HP每秒恢复率\n参数为最小等级和最大等级的恢复速度\n100 = 每秒恢复1点",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n// 非公开信息 //\n[HP regen speed] 30 40\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n// 非公开信息\n[HP regen speed] 30 40 // 每秒恢复率。100则为每秒恢复1点。\n```\n\n#### 官方示例: newmonstersamplebytool.mob\n\n```pvf\n// 非公开信息\n{exp}HP每秒恢复率{/exp}[HP regen speed]\n    {opt1}{int(0:)}\n    {opt2}{int(0:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1390,7 +1390,7 @@
       "Comment": "[move speed] 移动速度\n1000=100%，单位：px/sec\n参数为最小等级和最大等级的速度值",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[move speed] 1000 1200 // 单位 : px/sec\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1400,7 +1400,7 @@
       "Comment": "[attack speed] 攻击速度\n1000=100%，以百分比为单位调整该动画整体的速度\n参数为最小等级和最大等级的速度值",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[attack speed] 1020 1050 // 1000为100%。以百分比为单位调整该动画整体的速度。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1410,7 +1410,7 @@
       "Comment": "[cast speed] 施放速度\n1000=100%，以百分比为单位调整该动画整体的速度\n怪物的情况除了波罗丁以外没有意义",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[cast speed] 1000 1100 // 1000为100%。以百分比为单位调整该动画整体的速度。怪物的情况除了波罗丁以外没有意义。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1420,7 +1420,7 @@
       "Comment": "[destroy count] 怪物死亡所需伤害次数\n受到指定次数的伤害后怪物死亡\n数字可更改",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[destroy count] 5 // 受到5次伤害则怪物死亡 <<示例。数字可更改\n```\n\n#### 官方示例: newmonstersamplebytool.mob\n\n```pvf\n// 怪物击杀计数。\n{exp}怪物死亡伤害计数{/exp}[destroy count]\n    {must1}{exp}?次伤害则{/exp}{int(:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1430,7 +1430,7 @@
       "Comment": "[monster title] 给怪物添加称号\n坐标调整需要通过动画完成\n无称号时可用 `` 表示",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[monster title] `` //给怪物添加称号。坐标调整需要通过动画完成。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1440,7 +1440,7 @@
       "Comment": "[keep distance with target] 在X轴上与目标保持的距离\n数值=像素距离\n在DestinationSelect.ai中返回1号值时触发",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[keep distance with target] 300 // 在X轴上与目标保持多少距离？ `DestinationSelect.ai` 中返回1号值时触发。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1450,7 +1450,7 @@
       "Comment": "[keep range distance with target] 与目标保持距离范围\n参数：X轴距离 Y轴距离 X轴随机半径 Y轴随机半径\n在DestinationSelect.ai中返回11号值时触发",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[keep range distance with target] 300 200 10 10 // 与目标保持多少距离？\n// X轴上保持的距离, Y轴上保持的距离, X轴随机半径, Y轴随机半径\n// `DestinationSelect.ai` 中返回11号值时触发。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1460,7 +1460,7 @@
       "Comment": "怪物视野/索敌范围参数。官方样例指出数值过短可能无法捕获目标；静态字段不证明单位一定是像素，实际索敌还受 AI、目标选择和地图状态影响。",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[vision] 300 // 怪物的视野距离。这个短的话可能无法抓住目标。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1470,7 +1470,7 @@
       "Comment": "[back vision] 是否将后面的对象设为目标\n通常为0，不想锁定后面的目标则设为-1",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[back vision] 0 // 用于不将后面的对象设为目标而设置的标签，通常为0。\n// 不想锁定后面的目标则设为-1。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1480,7 +1480,7 @@
       "Comment": "[drop item offset] 调整物品掉落位置\n参数1：怪物X坐标+该值\n参数2：怪物Y坐标+该值",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n// 不想锁定后面的目标则设为-1。\n[drop item offset] 100 100 // 用于调整物品掉落位置的标签。\n// 怪物X坐标 + 第一个参数值, 怪物Y坐标 + 第二个参数值。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1490,7 +1490,7 @@
       "Comment": "[fix direction] 怪物生成时是否固定面向方向\n1: 固定, 0: 不固定\n可选[left]或[right]指定固定朝向\n在[control passive object]中也用于被动对象方向固定",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[fix direction] 1 [left] // 怪物生成时是否固定面向方向 (1: 固定, 0: 不固定)\n// 选项：固定时，指定怪物总是要面对的方向（固定型怪物主要使用，左侧: [left] 右侧:[right])\n=======\n```\n\n```pvf\n[fix direction] 1 // 怪物生成时是否固定面向方向 (1: 固定, 0: 不固定)\n```\n\n```pvf\n[fix direction] `[left]` // 指定怪物总是要面对的方向（左侧: `[left]` 右侧:`[right]`)\n>>>>>>> .r15546\n```\n\n```pvf\n[fix direction] [left] // 被动对象控制时的方向固定（左侧: [left] 右侧:[right]）。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1500,7 +1500,7 @@
       "Comment": "[flying mark] 是否绘制浮游型怪物下方的标记\n1: 输出, 0: 不输出",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[flying mark] 0 // 是否绘制浮游型怪物下方的标记 (1: 输出, 0: 不输出)。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1510,7 +1510,7 @@
       "Comment": "[specific gen rate item] 怪物死亡时特殊出现的物品指定\n有此标签则无视[item]或[common champion drop item]\n第一行为基准概率，后续为物品索引+概率\n必须用[/specific gen rate item]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[specific gen rate item] // 怪物死亡时特殊出现的物品指定。有这个标签则无视 [item] 或 [common champion drop item] 等，无条件以此物品掉落。\n1000000 // 基准概率\n3049 100000 // 依次为物品索引，概率。\n3015 100000\n[/specific gen rate item]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1520,7 +1520,7 @@
       "Comment": "[death tower item] 死亡之塔的物品掉落\n万分比概率\n必须用[/death tower item]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[death tower item] // 死亡之塔的物品掉落。万分比。\n20020 500\n[/death tower item]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1530,7 +1530,7 @@
       "Comment": "[fixed height] 固定高度设置\n怪物在Y轴上的固定位置",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[fixed height] 200 // 固定高度设置。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1540,7 +1540,7 @@
       "Comment": "[come in action] 出场动作文件\n参数：动作文件路径 X轴视野半径 Y轴视野半径\n在视野范围内出现时触发\n没有则无出场演出",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[come in action] `Action/Magic.act` 300 150 // 要使用的动作文件以及开始触发的视野范围，X轴半径，Y轴半径。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1550,7 +1550,7 @@
       "Comment": "[come in action ex] 扩展出场动作文件\n参数：动作文件1 动作文件2(靠近前执行) X轴半径 Y轴半径\n第二个参数的动作会在靠近之前执行",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[come in action ex] `Action/Resurrection.act` `Action/Resurrection2.act` 200 100 // 要使用的动作文件，指定了特定动画的动作文件，X轴半径，Y轴半径。\n// 与原有 [come in action] 进行相同操作的标签，但第二个参数的动作会\n// 在靠近之前执行。因此，想在使用原有 come in action 时执行特定动画的\n// 情况，在第二个参数中放入相应的动作即可。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1560,7 +1560,7 @@
       "Comment": "[moveback action] 后退动作动作文件名\n.act动作文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[moveback action] `Action/MoveBack.act` // 后退动作动作文件名。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1570,7 +1570,7 @@
       "Comment": "[dash action] 冲刺动作（目前仅载具对象有效，可扩展）\n.act动作文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[dash action] `Dash.act` // 冲刺动作 (目前仅载具对象有效。可扩展)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1580,7 +1580,7 @@
       "Comment": "[dashattack action] 冲刺攻击动作（目前仅载具对象有效，可扩展）\n.act动作文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[dashattack action] `DashAttack.act` // 冲刺攻击动作 (目前仅载具对象有效。可扩展)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1590,7 +1590,7 @@
       "Comment": "[damage action 2] 受伤动作2动作文件名\n.act动作文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[damage action 2] `BodyDamage2.act` // 受伤动作2动作文件名。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1600,7 +1600,7 @@
       "Comment": "[down action] 倒地动作动作文件名\n.act动作文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[down action] `BodyDown.act` // 倒地动作动作文件名。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1610,7 +1610,7 @@
       "Comment": "[overturn action] 被翻转动作动作文件名\n.act动作文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[overturn action] `BodyOverturn.act` // 被翻转动作动作文件名。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1620,7 +1620,7 @@
       "Comment": "[basic action] 基本动作\n在此标签中放入动作路径，则move和stay动作都将按basic action处理\n使用[basic action]时不要同时使用[stay action]和[move action]",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[basic action] `basic.act` // 在标签中放入动作路径，则move和stay动作都将按basic action处理。\n// (使用[basic action]时，不要使用[stay action][move action])\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1630,7 +1630,7 @@
       "Comment": "[action list] 主要用作攻击的动作文件列表\n这里写明的动作在触发时若受到攻击则会进行反击检查\n必须用[/action list]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[action list] // 主要用作攻击的动作文件列表。这里写明的动作在触发时若受到攻击则会进行反击检查。\n`Attack1.act`\n`Attack2.act`\n[/action list]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1640,7 +1640,7 @@
       "Comment": "[attack action] 与[action list]意思相同\n攻击动作文件列表\n必须用[/attack action]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[attack action] // 与 [action list] 意思相同。\n`Attack1.act`\n`Attack2.act`\n[/attack action]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1650,7 +1650,7 @@
       "Comment": "[pattern] 动作列表索引模式化标签\n冷却时间使用相应动作的冷却时间\n必须用[/pattern]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[pattern] //pattern 索引 0号 // 将动作列表的索引模式化。冷却时间使用相应动作的冷却时间。\n1\n2\n3\n[/pattern]\n```\n\n```pvf\n[pattern] //pattern 索引的 1号\n2\n3\n4\n[/pattern]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1660,7 +1660,7 @@
       "Comment": "怪物 proc 动作文件路径。官方说明该动作不检查动画，并建议尽量使用 [ON DAMAGE] 等事件处理代替循环；仍需继续读取对应 .act/.ani/.atk 链，静态路径不证明动作会正常执行。",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[proc action] `proc.act` // proc动作不检查动画。\n// 尽可能推荐使用事件处理而非循环（ [ON DAMAGE] 等）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1670,7 +1670,7 @@
       "Comment": "[cooltime] 冷却时间指定\n指定action list中注册的动作将使用的冷却时间\n标签内顺序与动作列表1:1匹配\n[Pattern] 0为冷却时间模式（默认0）\n必须用[/cooltime]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[cooltime] // 指定action list中注册的动作将使用的冷却时间。标签内指定的顺序与动作列表1:1匹配。\n[Pattern] 0 // 冷却时间模式可不写！默认设置为0。\n2000\n1500\n6000\n[/cooltime]\n```\n\n#### 官方示例: newmonstersamplebytool.mob\n\n```pvf\n// action list中注册的动作将使用的冷却时间指定。标签内指定的顺序与动作列表1:1匹配。\n{exp}action list中注册的动作将使用的冷却时间指定{/exp}[cooltime]\n    {opt1}{exp}冷却时间模式可不写！默认设置为0。{/exp}[Pattern]\n        {must1}{int(0:)}\n    [!Pattern]\n    {exp}按顺序与动作列表1:1匹配{/exp}{int(0:)}\n    {!int(:)}\n[/cooltime]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1680,7 +1680,7 @@
       "Comment": "[reflection object] 对象反射\n指定特定攻击时对远程攻击进行反射\n参数：攻击索引 反射概率\n必须用[/reflection object]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[reflection object] // 指定特定攻击时对远程攻击进行反射的标签。\n0 100 // 攻击索引，导弹反射概率。\n[/reflection object]\n```\n\n```pvf\n[reflection object] // 对象反射。\n0 0 // 0 // 相应动作的索引。\n1 100 // 5 // 在要反射对象的索引处写上概率，则以该概率反射对象。\n[/reflection object]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1690,7 +1690,7 @@
       "Comment": "[etc action] 用于非攻击目的的其他动作列表\n必须用[/etc action]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[etc action] // 用于非攻击目的的其他动作列表。\n`Magic.act`\n`PowerUp.act`\n[/etc action]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1700,7 +1700,7 @@
       "Comment": "[last action] 在破坏前必须执行一次的动作文件路径\n.act文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[last action] `NeverDie.act` // 在破坏前必须执行一次的动作的文件路径。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1710,7 +1710,7 @@
       "Comment": "[non targeted] 是否不会被其他队伍的目标锁定\n1: 不被锁定, 0: 被锁定",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n// 躺下状态受到攻击则从第三个参数开始重复。\n[non targeted] 1 // 是否不会被其他队伍的目标锁定 (1: 不被锁定, 0 : 被锁定)。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1720,7 +1720,7 @@
       "Comment": "[no change target] 是否更改目标\n0: 不更改目标, 1: 更改",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[no change target] 0 // 0: 不更改目标 1: 更改。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1730,7 +1730,7 @@
       "Comment": "[mounting action] 乘坐动作（载具专用）\n.act动作文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[mounting action] `Action/in.act` // 乘坐动作 (载具专用)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1740,7 +1740,7 @@
       "Comment": "[mounted action] 乘坐后动作（载具专用）\n.act动作文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[mounted action] `Action/stay1.act` // 乘坐后动作 (载具专用)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1750,7 +1750,7 @@
       "Comment": "[unmounting action] 下车动作（载具专用）\n.act动作文件路径",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[unmounting action] `Action/out.act` // 下车动作 (载具专用)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1760,7 +1760,7 @@
       "Comment": "[control passive object] 被动对象用户控制标签（载具专用）\n包含子标签：index, x pos, y pos, width, height, velocity x, velocity y, fix direction, option\n必须用[/control passive object]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[control passive object] // 被动对象用户控制标签 (载具专用)\n[index] 10503 // 被动对象索引。\n[x pos] -100 // 被动对象可移动区域左上角的相对X坐标（以载具为基准）\n[y pos] -200 // 被动对象可移动区域左上角的相对Y坐标（以载具为基准）/ 若为convert y to z选项：相对Z坐标。\n[width] 200 // 被动对象可移动区域的宽度。\n[height] 200 // 被动对象可移动区域的高度。\n[velocity x] 200.0 // 被动对象控制时X轴移动速度。\n[velocity y] 200.0 // 被动对象控制时Y轴移动速度 / 若为convert y to z选项：Z轴移动速度。\n[fix direction] [left] // 被动对象控制时的方向固定（左侧: [left] 右侧:[right]）。\n[option] `convert y to z` // 将Y轴改为基于Z轴。\n[/control passive object]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1770,7 +1770,7 @@
       "Comment": "[index] 被动对象索引\n在[control passive object]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[index] 10503 // 被动对象索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1780,7 +1780,7 @@
       "Comment": "[x pos] 被动对象可移动区域左上角的相对X坐标\n在[control passive object]标签内使用，以载具为基准",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[x pos] -100 // 被动对象可移动区域左上角的相对X坐标（以载具为基准）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1790,7 +1790,7 @@
       "Comment": "[y pos] 被动对象可移动区域左上角的相对Y坐标\n在[control passive object]标签内使用\n若为convert y to z选项则表示为相对Z坐标",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[y pos] -200 // 被动对象可移动区域左上角的相对Y坐标（以载具为基准）/ 若为convert y to z选项：相对Z坐标。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1800,7 +1800,7 @@
       "Comment": "[height] 被动对象可移动区域的高度\n在[control passive object]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[height] 200 // 被动对象可移动区域的高度。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1810,7 +1810,7 @@
       "Comment": "[velocity x] 被动对象控制时X轴移动速度\n在[control passive object]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[velocity x] 200.0 // 被动对象控制时X轴移动速度。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1820,7 +1820,7 @@
       "Comment": "[velocity y] 被动对象控制时Y轴移动速度\n在[control passive object]标签内使用\n若为convert y to z选项则为Z轴移动速度",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[velocity y] 200.0 // 被动对象控制时Y轴移动速度 / 若为convert y to z选项：Z轴移动速度。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1830,7 +1830,7 @@
       "Comment": "[option] 选项设置\n在[control passive object]标签内使用\n使用`convert y to z`可将Y轴改为基于Z轴",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[option] `convert y to z` // 将Y轴改为基于Z轴。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1840,7 +1840,7 @@
       "Comment": "[think term] 思考间隔（毫秒）\n以毫秒为单位进行目标设定、攻击方式、移动方式的思考",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[think term] 200 // 以毫秒为单位进行决定目标设定、攻击方式、移动方式的思考。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1850,7 +1850,7 @@
       "Comment": "[destination change term] 移动位置决定间隔（毫秒）\n以毫秒为单位决定要移动的位置\n此值设得太短会导致怪物乱走",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[destination change term] 500 // 以毫秒为单位决定要移动的位置。这个短了会乱走。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1860,7 +1860,7 @@
       "Comment": "[change direction by target] 是否根据目标位置改变方向\n1: 根据目标位置改变方向, 0: 只固定一个方向",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[change direction by target] 0 // 1则根据目标位置改变方向。0则只固定一个方向。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1870,7 +1870,7 @@
       "Comment": "[is direction to move] 移动方向显示\n1: 朝移动的方向看并移动, 0: 看着目标移动（默认0）",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[is direction to move] 1 // 1则朝移动的方向看并移动，0则看着目标移动（默认是0）\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1880,7 +1880,7 @@
       "Comment": "[ai pattern] AI模式设置\n可以为副本的不同难度指定不同的AI文件\n难度子标签：[easy] [medium] [hard] [ultimate] [hero]\n或 [normal] [expert] [master] [king]\n每个难度下的AI文件按顺序为：Event.ai, DestinationSelect.ai, Action.ai, MoveMethod.ai\n必须用[/ai pattern]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n//mkjung 120619\n[ai pattern] // 可以为副本的难度指定不同的AI。如果希望无论难度都使用相同的AI，只需复制相同内容写上即可。\n[easy]\n`ai/Event.ai`\n`ai/DestinationSelect.ai`\n`ai/Action.ai`\n`ai/MoveMethod.ai`\n`ai/gather pattern.ai`\n[/easy]\n\n[medium]\n`ai/Event.ai`\n`ai/DestinationSelect.ai`\n`ai/Action.ai`\n`ai/MoveMethod.ai`\n`ai/gather pattern.ai`\n[/medium]\n\n[hard]\n`ai/Event.ai`\n`ai/DestinationSelect.ai`\n`ai/Action.ai`\n`ai/MoveMethod.ai`\n`ai/gather pattern.ai`\n[/hard]\n\n[ultimate]\n`ai/Event.ai`\n`ai/DestinationSelect.ai`\n`ai/Action.ai`\n`ai/MoveMethod.ai`\n`ai/gather pattern.ai`\n[/ultimate]\n\n[hero]\n`ai/Event.ai`\n`ai/DestinationSelect.ai`\n`ai/Action.ai`\n`ai/MoveMethod.ai`\n`ai/gather pattern.ai`\n[/hero]\n[/ai pattern]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1890,7 +1890,7 @@
       "Comment": "[on hp] 由剩余生命值触发霸体\n用于[event super on scr]标签内\n参数：触发HP百分比 持续时间 重新激活与否\n减少指定百分比最大生命值时触发",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[on hp] 10 10000 1 // [on time], [on hp], [always], [conunter], 触发条件索引, 持续时间, 重新激活与否\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1900,7 +1900,7 @@
       "Comment": "[weak] 低伤害额外承伤\n参数：伤害阈值 额外承伤百分比\n受到阈值以下伤害时额外承受指定百分比伤害，阈值以上则不受到伤害",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[weak] 2000 30 // 受到2000以下伤害时额外承受30%伤害。2000以上则不受到伤害。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1910,7 +1910,7 @@
       "Comment": "[is grabable] 是否可抓取\n1: 可抓取的怪物, 0: 不可抓取的怪物",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n////////////////////////////////////////////////////////// 其他信息\n[is grabable] 1 // 1则为可抓取的怪物，0则为不可抓取的怪物。\n```\n\n#### 官方示例: newmonstersamplebytool.mob\n\n```pvf\n////////////////////////////////////////////////////////// 其他信息\n[is grabable]\n    {must1}{exp}0: 不可抓取的怪物, 1: 可抓取的怪物{/exp}{int(0:1)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1920,7 +1920,7 @@
       "Comment": "[spawn prob] 竞争地牢生成概率\n应用于战争区域出现的怪物身上的值",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n// 生成概率\n[spawn prob] 30\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[spawn prob] 30 // 竞争地牢生成概率，应用于战争区域出现的怪物身上的值。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1930,7 +1930,7 @@
       "Comment": "[set damage check] 伤害检查间隔\n在event.ai中检查伤害的间隔\n也可以在动作中开启，但对于从创建开始就要始终检查的怪物可用此标签",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[set damage check] 3000 // event.ai 中检查伤害的间隔 // 也可以在动作中开启，但对于从创建开始就要始终检查的怪物，可以用这个标签嵌入到怪物文件中。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1940,7 +1940,7 @@
       "Comment": "[independent drop] 独立掉落系统\n参数格式：索引 普通% 专家% 大师% 王者% 次数(1人) 次数(2人) 次数(3人) 次数(4人) 最大掉落数 是否加载列表\n包含[list]子标签指定掉落物品列表\n必须用[/independent drop]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[independent drop] // 独立掉落系统。\n4332 3000 3000 3000 3000 1 1 1 1 1 0 //index1 普通% 专家% 大师% 王者% 次数(1人) 次数(2人) 次数(3人) 次数(4人) 最大掉落数 0\n// 最后写0则不加载列表。\n\n0 100000 0 0 0 1 1 1 1 1 1 // 加载列表时最后写1。 //0 普通% 专家% 大师% 王者% 次数(1人) 次数(2人) 次数(3人) 次数(4人) 最大掉落数 1\n// 索引中写0。\n[list]\n420374 1\n2637210 1\n[/list]\n0 0 100000 0 0 1 1 1 1 1 1 // 可以放入普通、专家、大师、王者概率并加载列表。\n[list]\n2643065 1\n[/list]\n[/independent drop]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1950,7 +1950,7 @@
       "Comment": "[add gravity in aerial] 空中施加重力\n参数：激活与否(0/1) 触发所需空中伤害百分比 每1%伤害所受重力修正大小",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[add gravity in aerial] 1 20.0 -300.0 // 1号索引：激活与否 1则激活 2号索引：空中伤害多少以上时触发(%) 3号索引：修正触发后每1%伤害所受重力的大小。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1960,7 +1960,7 @@
       "Comment": "[target appendage] 只锁定特定附加效果的单位\n参数为附加效果ID\n例：238 = 只锁定被黑暗纹章附加的单位",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[target appendage] 238 // 只锁定特定附加效果的单位 238(只锁定被黑暗纹章附加的单位)。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1970,7 +1970,7 @@
       "Comment": "[initial target] 设置初始目标（按顺序优先级）\n可指定[PASSIVE] [MONSTER] [CHARACTER] [MARKED]等目标类型\n必须用[/initial target]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[initial target] // 设置初始目标（按顺序优先级）。\n[PASSIVE]( 或 [MONSTER], [CHARACTER], [MARKED]) 221 // 对象索引。\n[MONSTER] 62134\n[/initial target]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1980,7 +1980,7 @@
       "Comment": "[PASSIVE] 初始目标类型：被动对象\n在[initial target]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[PASSIVE]( 或 [MONSTER], [CHARACTER], [MARKED]) 221 // 对象索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -1990,7 +1990,7 @@
       "Comment": "[normal] 普通难度\n在[level of difficulty]标签内使用\n参数：额外好战性，额外冷却时间",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n- 额外好战性，额外冷却时间。\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2000,7 +2000,7 @@
       "Comment": "[ex] 专家难度\n在[level of difficulty]标签内使用\n参数：额外好战性，额外冷却时间\n(与AI脚本相关的[intelligence]标签，怪物脚本[cooltime]标签)",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[ex] 0 0 // (与AI脚本相关的[intelligence]标签，怪物脚本[cooltime]标签)\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2010,7 +2010,7 @@
       "Comment": "[attack index] 攻击索引\n在[throw attack]、[counter attack]、[jump attack]等标签内使用\n指定对应的攻击动作索引（0为第1个攻击动作）",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[attack index] 3 // 攻击索引。\n```\n\n```pvf\n[attack index] 0 // 反击时的攻击索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2020,7 +2020,7 @@
       "Comment": "[passive object number] 粒子文件数\n在[throw attack]标签内使用\n需与下方[passive object filename]的文件数一致",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[passive object number] 1 // 粒子文件数，需与下方 [passive object filename] 的文件数一致。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2030,7 +2030,7 @@
       "Comment": "[passive object filename] 投掷的粒子文件路径\n在[throw attack]标签内使用\n必须用[/passive object filename]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[passive object filename] // 投掷的粒子文件路径。\n`Particle/IceBreath1.ptl`\n[/passive object filename]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2040,7 +2040,7 @@
       "Comment": "[object type] 投掷对象类型\n0: 被动对象, 1: 粒子\n在[throw attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[object type] 1 // 0则为被动对象 1则为粒子。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2050,7 +2050,7 @@
       "Comment": "[passive object index] 投掷的对象索引\n在[throw attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[passive object index] 30413 // 投掷的对象索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2060,7 +2060,7 @@
       "Comment": "[power] 魔法等级\n在[throw attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[power] 0 // 魔法等级。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2070,7 +2070,7 @@
       "Comment": "[throw frame] 决定怪物在第几帧时对象发出的标志\n在[throw attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[throw frame] 3 // 决定怪物在第几帧时对象发出的标志。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2080,7 +2080,7 @@
       "Comment": "[passive object start x cood] 投掷对象出发点X坐标\n在[throw attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[passive object start x cood] 60 // 投掷对象出发点 x坐标。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2090,7 +2090,7 @@
       "Comment": "[passive object start y cood] 投掷对象出发点Y坐标\n在[throw attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[passive object start y cood] 0 // 投掷对象出发点 y坐标。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2100,7 +2100,7 @@
       "Comment": "[passive object start z cood] 投掷对象出发点Z坐标\n在[throw attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[passive object start z cood] 70 // 投掷对象出发点 z坐标。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2110,7 +2110,7 @@
       "Comment": "[attack number] 一次攻击投掷次数\n在[throw attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[attack number] 1 // 一次攻击投掷几次。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2120,7 +2120,7 @@
       "Comment": "[throw sound] 投掷音效\n在[throw attack]标签内使用\n没有时用 `` 处理",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[throw sound] `AMAZONES_BREATH` // 投掷音效，没有时用 `` 处理。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2130,7 +2130,7 @@
       "Comment": "[motion index] 对应的攻击动作索引\n在[ready action]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[motion index] 1 // 对应的攻击动作索引。\n// [effect ani file & layer index] line tag -> multi tag\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2140,7 +2140,7 @@
       "Comment": "[super champion drop item] 超级冠军掉落的物品列表\n参数：物品索引 概率\n必须用[/super champion drop item]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[super champion drop item] // 超级冠军掉落的物品列表。\n3166 4000\n[/super champion drop item]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2150,7 +2150,7 @@
       "Comment": "[probability] 反击概率\n在[counter attack]标签内使用\n取值范围 0到100",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[probability] 5 // 反击概率 0到100。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2160,7 +2160,7 @@
       "Comment": "[jump direction] 跳跃方向\n在[jump attack]标签内使用\n0: 只朝面向方向跳跃\n1: 也可以向面向的反方向跳跃",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[jump direction] 0 // 0则只朝面向方向跳跃。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2170,7 +2170,7 @@
       "Comment": "[warp style] 瞬移风格\n在[warp attack]标签内使用\n0: 无条件移动到角色背后(Whisp)\n1: 以角色的方向为基准向后(妙真)",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[warp style] 1 // 0则为无条件移动到角色背后(Whisp)，1则为以角色的方向为基准向后(妙真)。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2180,7 +2180,7 @@
       "Comment": "[target offset] 与目标分离后应出现的距离\n在[warp attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[target offset] 50 // 与目标分离后应出现的距离。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2190,7 +2190,7 @@
       "Comment": "[after attack] 相位变化后要攻击的索引\n在[warp attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[after attack] 0 // 相位变化后要攻击的索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2200,7 +2200,7 @@
       "Comment": "[after appear time] 消失后要出现的时间\n在[warp attack]标签内使用\n300以下无效",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[after appear time] 800 // 消失后要出现的时间（300以下无效）。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2210,7 +2210,7 @@
       "Comment": "[cool time] 相位变化的冷却时间\n在[warp attack]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[cool time] 10000 // 相位变化的冷却时间。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2220,7 +2220,7 @@
       "Comment": "[ready action] 攻击预备动作\n包含[motion index]和[effect ani file & layer index]子标签\n指定攻击动作索引和对应的特效动画\n必须用[/ready action]闭合",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[ready action]\n`[motion index]` 0 // 对应的攻击动作索引\n`[effect ani file & layer index]`\n3 // 文件数\n`Animation_Thrower/LooseSpecialAttackEffect.ani` 100\n`Animation_Thrower/EF_AttackHeart1.ani` 200\n`Animation_Thrower/EF_AttackHeart2.ani` 300\n[/ready action]\n```\n\n```pvf\n[ready action]\n`[motion index]` 3 // 对应的攻击动作索引\n`[effect ani file & layer index]`\n1 // 文件数\n`ShavanteAnimation/AttackEffect.ani` 100\n[/ready action]\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[ready action]\n[motion index] 1 // 对应的攻击动作索引。\n// [effect ani file & layer index] line tag -> multi tag\n[effect ani file & layer index]\n1 // 文件数。\n`Animation_MountainGoblin2/Throw3_Effect.ani` 100\n[/effect ani file & layer index]\n[/ready action]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2230,7 +2230,7 @@
       "Comment": "[jump attack] 跳跃攻击设置\n包含子标签：攻击索引、起止帧、跳跃类型、高度、速度、方向等\n必须用[/jump attack]闭合",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[jump attack]\n`[attack index]` 5 // 跳跃移动\n`[start frame index]` 2\n`[end frame index]` 6\n`[jump type]` 1\n`[jump height]` 120\n`[jump speed]` 500\n`[jump direction]` 0 // 1则为也可以向面向的反方向跳跃\n`[on collision custom animation index]` 2\n`[ememy distance rate]` 1.0\n`[limited x cood]` 200\n`[limited y cood]` 200\n[/jump attack]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2240,7 +2240,7 @@
       "Comment": "[counter attack] 攻击反击\n第一行为是否启用\n包含[probability]、[attack index]、[damage type]子标签\n必须用[/counter attack]闭合",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n[counter attack]\n1\n`[probability]` 90 // 反击概率 0到100\n`[attack index]` 2 // 反击时的攻击索引\n`[damage type]` `[approach attack]`\n// 在 `[approach attack]` `[range attack]` `[all attack]` 中选择一个\n[/counter attack]\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n[counter attack]\n1\n[probability] 5 // 反击概率 0到100。\n[attack index] 0 // 反击时的攻击索引。\n[damage type] [approach attack]\n// 在 [approach attack] [range attack] [all attack] 中选择一个。\n[/counter attack]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2250,7 +2250,7 @@
       "Comment": "[targeting bonus] 锁定目标奖励指定\n需写入全部22个参数，奖励值越高越容易被设为目标\n第一个参数为-1则不更改目标\n包含状态检查和状态变化检查\n必须用[/targeting bonus]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n// 锁定目标奖励指定。若要写入，则必须22个参数全部写入。奖励值越高，被设为目标的可能性越高。\n// 必须遵守顺序。与APC相同方式。\n// 第一个参数为-1则不更改目标。\n[targeting bonus]\n50 // 距离近的奖励\n75 // 最近一次攻击我的\n90 // 攻击我最多次的\n0 // 近程攻击者\n95 // 远程攻击者\n0 // 物理攻击力低的\n0 // 物理攻击力高的\n0 // 物理防御力低的\n91 // 物理防御力高的\n0 // 魔法攻击力低的\n0 // 魔法攻击力高的\n0 // 魔法防御力低的\n0 // 魔法防御力高的\n0 // 血量低的\n0 // 血量高的\n0 // X轴距离近的奖励\n0 // Y轴距离近的奖励\n0 // 若是可抓取的敌人则奖励\n0 // 若是超级护甲状态则奖励\n0 // 浮空越高奖励越高\n100 [stand] [dash] 0\n// 处于以下特定状态的敌人的奖励 (基于 IRDActiveObject::state_ )\n// [stand], [sit], [sit forever], [damage], [down],\n// [die], [jump], [jump attack], [attack], [hold],\n// [throw], [dash], [dash attack], [get item], [buff]\n// 可以指定多个，只要满足其中1个就加分。\n//最后的无意义的0必须加上。\n\n0 0\n// 处于以下特定状态变化的敌人的奖励\n// [slow], [freeze], [poison], [stun], [curse],\n// [blind], [lightning], [stone], [sleep], [burn],\n// [weapon break], [bleeding], [haste], [bless],\n// [element], [confuse], [hold], [armor break]\n// 可以指定多个，每当满足时就加分。\n// 最后的无意义的0必须加上。\n\n\n[/targeting bonus]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2260,7 +2260,7 @@
       "Comment": "[left] 左侧方向选项\n在[fix direction]标签内使用\n固定型怪物总是看向左侧\n在[control passive object]中也用于被动对象方向固定",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[fix direction] 1 [left] // 怪物生成时是否固定面向方向 (1: 固定, 0: 不固定)\n// 选项：固定时，指定怪物总是要面对的方向（固定型怪物主要使用，左侧: [left] 右侧:[right])\n=======\n```\n\n```pvf\n[fix direction] [left] // 被动对象控制时的方向固定（左侧: [left] 右侧:[right]）。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2270,7 +2270,7 @@
       "Comment": "[physical attack besed on diff] 根据难度的物攻修正表\n按level列出不同难度(normal expert master king hero)的物攻修正值\n必须用[/physical attack besed on diff]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n// 根据难度的物攻修正表。\n[physical attack besed on diff]\n//level normal expert master kings heros\n1 32.27 32.27 32.27 32.27 32.27\n2 47.43 47.43 47.43 47.43 47.43\n3 59.34 59.34 59.34 59.34 59.34\n[/physical attack besed on diff]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2280,7 +2280,7 @@
       "Comment": "[effect ani file & layer index] 特效动画文件与层级索引\n在[ready action]标签内使用\n第一行为文件数，后续为动画文件路径和层级值\n必须用闭合标签",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n// [effect ani file & layer index] line tag -> multi tag\n[effect ani file & layer index]\n1 // 文件数。\n`Animation_MountainGoblin2/Throw3_Effect.ani` 100\n[/effect ani file & layer index]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2290,7 +2290,7 @@
       "Comment": "[attack down prob] 攻击概率列表\n在特定怪物类型中使用\n列出各种攻击方式的概率\n必须用[/attack down prob]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[attack down prob]\n100 // 棍棒攻击概率。\n100 // 移动速度增加攻击概率。\n100 // 力量粉碎攻击概率。\n100 // 石头投掷攻击概率。\n100 // 石头连续3发投掷攻击概率。\n100 // 石头5发散开投掷攻击概率。\n100 // 炸弹投掷攻击概率。\n[/attack down prob]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2300,7 +2300,7 @@
       "Comment": "[catch item] 捕获掉落物品\n参数：物品索引 数量 概率\n必须用[/catch item]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[catch item]\n3315 1 100 // 捕获掉落物品。\n[/catch item]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2310,7 +2310,7 @@
       "Comment": "[can beat index] 可攻击此怪物的怪物索引列表\n只有列表内的怪物ID攻击时才受到伤害\n必须用[/can beat index]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[can beat index]\n61270 // 输入此标签则只有65523号怪物攻击时才受到伤害。\n61283\n61284\n61285\n[/can beat index]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2330,7 +2330,7 @@
       "Comment": "[pvp] PVP专用数据块\n可包含[int data]和[summon skill status up rate]等子标签\n必须用[/pvp]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[pvp]\n[int data]\n0 // 背后攻击时出现冰雾的概率。\n50 // 被动防御咏唱触发所需的HP条件概率 (10 = 体力剩余10%时)。\n12000 // 冷却时间（防御触发最低冷却时间）。\n60000 // 进行治疗的时间间隔。\n0 // 治疗量 (10 = 10%)。\n[/int data]\n// 召唤技能 1级时能力值上升率(%)。能力值按能力值表的顺序共10个。\n[summon skill status up rate] 0.0 0.0 0.0 0.0 2.3 2.3 0.0 0.0 0.0 0.0 // 力,体力,智力,精神,HP,MP,物攻,物防,魔攻,魔防。\n[/pvp]\n```\n\n```pvf\n[pvp]\n// 召唤技能 1级时能力值上升率(%)。能力值按能力值表的顺序共10个。\n[summon skill status up rate] 0.0 0.0 0.0 0.0 2.3 2.3 0.0 0.0 0.0 0.0 // 力,体力,智力,精神,HP,MP,物攻,物防,魔攻,魔防。\n[/pvp]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2340,7 +2340,7 @@
       "Comment": "[!unmounting action] 下车动作的闭合标签\n在newmonstersamplebytool.mob中用于工具语法定义\n闭合[/unmounting action]标签块",
       "OfficialDescription": "#### 官方示例: newmonstersamplebytool.mob\n\n```pvf\n[!unmounting action]\n//////////////////////////////////////////////////////////////////////////////////////////////\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2350,7 +2350,7 @@
       "Comment": "[fire resistance] 火属性抗性\n参数为最小等级和最大等级的抗性值\n为0时可不写",
       "OfficialDescription": "#### 官方示例: monstersample.mob\n\n```pvf\n// 元素属性。为0则可不写。 //\n[fire resistance] 99 100\n```\n\n#### 官方示例: newmonstersample.mob\n\n```pvf\n// 元素属性。为0则可不写。 //\n[fire resistance] 99 100\n```\n\n#### 官方示例: newmonstersamplebytool.mob\n\n```pvf\n// 元素属性。为0则可不写。 //\n{exp}火属性{/exp}[fire resistance]\n    {must1}{int(:)}\n    {must2}{int(:)}\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2360,7 +2360,7 @@
       "Comment": "[list] 物品列表\n在[independent drop]标签内使用\n参数：物品索引 数量\n必须用[/list]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n// 索引中写0。\n[list]\n420374 1\n2637210 1\n[/list]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2370,7 +2370,7 @@
       "Comment": "[ridableskill definition] 骑乘技能定义\n包含[pattern]、[image path]、[skill]子标签\n必须用[/ridableskill definition]闭合",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n//mkjung 120621 添加\n[ridableskill definition]\n[pattern] 0\n[image path] `sprite/Monster/impossible_blackearth/icon/pincers.img`\n[skill]\n0 -1 `normal` 0 // 基本攻击。\n-1 -1 `normal` 0 // 基本跳跃，技能属性(normal:基本, super:必杀技)，取消技数，取消技索引。\n2 -1 `normal` 0 // 要放入快捷键槽的技能编号，必须输入全部8个条目。没有则填入-1。\n-1 -1 `normal` 0\n-1 -1 `normal` 0\n-1 -1 `normal` 0\n-1 -1 `normal` 0\n-1 -1 `normal` 0\n[/skill]\n[/ridableskill definition]\n```",
       "Closing": true,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2380,7 +2380,7 @@
       "Comment": "[stand] 站立状态\n在[targeting bonus]标签内使用\n当敌人处于站立状态时给予奖励分",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n100 [stand] [dash] 0\n// 处于以下特定状态的敌人的奖励 (基于 IRDActiveObject::state_ )\n// [stand], [sit], [sit forever], [damage], [down],\n// [die], [jump], [jump attack], [attack], [hold],\n// [throw], [dash], [dash attack], [get item], [buff]\n// 可以指定多个，只要满足其中1个就加分。\n//最后的无意义的0必须加上。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2390,7 +2390,7 @@
       "Comment": "[dash] 冲刺状态\n在[targeting bonus]标签内使用\n当敌人处于冲刺状态时给予奖励分",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n100 [stand] [dash] 0\n// 处于以下特定状态的敌人的奖励 (基于 IRDActiveObject::state_ )\n// [stand], [sit], [sit forever], [damage], [down],\n// [die], [jump], [jump attack], [attack], [hold],\n// [throw], [dash], [dash attack], [get item], [buff]\n// 可以指定多个，只要满足其中1个就加分。\n//最后的无意义的0必须加上。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2400,7 +2400,7 @@
       "Comment": "[MONSTER] 初始目标类型：怪物\n在[initial target]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[PASSIVE]( 或 [MONSTER], [CHARACTER], [MARKED]) 221 // 对象索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2410,7 +2410,7 @@
       "Comment": "[CHARACTER] 初始目标类型：角色\n在[initial target]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[PASSIVE]( 或 [MONSTER], [CHARACTER], [MARKED]) 221 // 对象索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2420,7 +2420,7 @@
       "Comment": "[MARKED] 初始目标类型：标记对象\n在[initial target]标签内使用",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[PASSIVE]( 或 [MONSTER], [CHARACTER], [MARKED]) 221 // 对象索引。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2430,7 +2430,7 @@
       "Comment": "[damage type] 反击伤害类型\n在[counter attack]标签内使用\n可选：[approach attack] [range attack] [all attack]",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[damage type] [approach attack]\n// 在 [approach attack] [range attack] [all attack] 中选择一个。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2440,7 +2440,7 @@
       "Comment": "[approach attack] 近战攻击类型\n在[counter attack]的[damage type]标签内使用\n反击时判定为近战攻击",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[damage type] [approach attack]\n// 在 [approach attack] [range attack] [all attack] 中选择一个。\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2450,7 +2450,7 @@
       "Comment": "[weapon break resistance] 武器破损抗性\n参数为最小等级和最大等级的抗性值",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n//mkjung 120620 添加\n[weapon break resistance] 0 1\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -2460,7 +2460,7 @@
       "Comment": "[explain] 怪物说明文本\n引用 monster.kor.str 文件内的索引\n例：[explain] <7::explain_59012>",
       "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[explain] <7::explain_59012>\n/////////////////////////////////////////////////////////////////////////////////\n* AI 接近方式\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -3091,6 +3091,366 @@
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mob",
+      "Section": "set minimum active status resistance",
+      "Title": "set minimum active status resistance",
+      "Comment": "设置最小主动状态电阻",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mob",
+      "Section": "follow move map",
+      "Title": "follow move map",
+      "Comment": "跟随移动地图",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "mob",
+      "Section": "st",
+      "Title": "st",
+      "Comment": "英石",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "on etc",
+      "Title": "特殊触发",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "on revenge",
+      "Title": "产生仇恨目标时",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "Never gonna give you up~~",
+      "Title": "（歌词翻译）永远不会抛弃你♪♪",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "Never gonna see——goodbye~~",
+      "Title": "（歌词翻译）永远不轻言再见♪♪",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "on village",
+      "Title": "处于【怪物攻城战】期间时",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "on appear",
+      "Title": "出现在自身附近时",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "hybrid",
+      "Title": "组合体",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "range combat",
+      "Title": "远程攻击",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "machine",
+      "Title": "机械",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "飞过半边天|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "close-tough",
+      "Title": "贴身",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "spirit",
+      "Title": "精灵族",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "fixture",
+      "Title": "固定位置",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "dragon",
+      "Title": "龙族",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "tau",
+      "Title": "牛头族",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "close-manace",
+      "Title": "施压",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "goblin",
+      "Title": "哥布林族",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "召唤师|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "human",
+      "Title": "人形",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "beast",
+      "Title": "野兽",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "fort armor",
+      "Title": "建筑护甲",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "close-passive",
+      "Title": "被动攻击",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "undead",
+      "Title": "不死族",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[undead]\n// 类别列表\n// 种族 : [human][beast][plant][insect][machine][organic][hybrid][undead][devil][spirit][dragon]\n// AI : [melee combat][range combat][close-passive][close-carefully][close-tough][close-manace] // * AI 接近方式 参考\n// 护甲 : [human armor][fort armor][divine armor]\n// 其他 : [goblin][tau][lugaru], [fixture], [stay] 添加 [stay] 是在原地不动\n```",
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "lugaru",
+      "Title": "猫妖族",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "plant",
+      "Title": "植物",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "insect",
+      "Title": "昆虫",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "EQUIPMENT_PHYSICAL_DEFENSE",
+      "Title": "装备物理防御",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[EQUIPMENT_PHYSICAL_DEFENSE] // 物理防御力\n```",
+      "Closing": false,
+      "Authors": "思持c|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "EQUIPMENT_MAGICAL_DEFENSE",
+      "Title": "装备魔法防御",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[EQUIPMENT_MAGICAL_DEFENSE]\n// 类别名，+ 或 *，+为加绝对值。*为按百分比相乘。若为 10 则在内部处理为 10 / 100 即 0.10\n```",
+      "Closing": false,
+      "Authors": "思持c|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "EQUIPMENT_PHYSICAL_ATTACK",
+      "Title": "装备物理攻击",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[EQUIPMENT_PHYSICAL_ATTACK] `+` 10 // 物理攻击力\n```",
+      "Closing": false,
+      "Authors": "思持c|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "EQUIPMENT_MAGICAL_ATTACK",
+      "Title": "装备魔法攻击",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[EQUIPMENT_MAGICAL_ATTACK] // 魔法攻击：项目存在但不运作 - 我们系统中根本没有魔法攻击这个项目...\n```",
+      "Closing": false,
+      "Authors": "思持c|Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "close-carefully",
+      "Title": "游击",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "breakable",
+      "Title": "霸体",
+      "Comment": "霸体：可以被破坏",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "unbreakable",
+      "Title": "霸体",
+      "Comment": "霸体：不可被破坏",
+      "OfficialDescription": "#### 官方示例: newmonstersample.mob\n\n```pvf\n[unbreakable] -1 -1 -1 -1 // 耐久度, 恢复力, 近程防御力, 远程防御力。\n```",
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "human armor",
+      "Title": "人形护甲",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "mob",
+      "Section": "divine armor",
+      "Title": "神圣护甲",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "Xiti Fox"
     }
   ]
 }

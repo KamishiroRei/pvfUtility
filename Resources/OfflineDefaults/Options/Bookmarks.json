@@ -1,2426 +1,2419 @@
-﻿{
+{
   "Trees": {
     "我的书签": {
       "FilePath": "",
       "IsFile": false,
       "Sort": 0,
       "Children": {
-        "默认书签": {
+        "所有书签均 AI 整理": {
           "FilePath": "",
           "IsFile": false,
           "Sort": 0,
           "Children": {
-            "自用": {
-              "FilePath": "",
-              "IsFile": false,
+            "商城": {
+              "FilePath": "etc/newcashshop.etc",
+              "IsFile": true,
               "Sort": 0,
-              "Children": {
-                "商城": {
-                  "FilePath": "etc/newcashshop.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "赛利亚商店": {
-                  "FilePath": "itemshop/equipmentshop7.shp",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "抽奖机": {
-                  "FilePath": "etc/pcroom4.vm",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "勇者活动奖励": {
-                  "FilePath": "event/heromissionevent.evt",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "签到活动奖励": {
-                  "FilePath": "event/attendance.evt",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "商店-直叶": {
-                  "FilePath": "itemshop/sao_suguha.shp",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "升级邮件": {
-                  "FilePath": "event/levelupreward.evt",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "简易升级邮件": {
-                  "FilePath": "etc/unlimitchallenge.etc",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "限时副本任务": {
-                  "FilePath": "etc/chn_schedule.etc",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "深渊派对": {
-                  "FilePath": "etc/hellparty.etc",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "套装属性": {
-                  "FilePath": "etc/equipmentpartset.etc",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "称号簿": {
-                  "FilePath": "etc/titlebook.etc",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "QP商店": {
-                  "FilePath": "etc/questshop.etc",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                },
-                "分解机": {
-                  "FilePath": "etc/disjoint.etc",
-                  "IsFile": true,
-                  "Sort": 13,
-                  "Children": {}
-                },
-                "强化": {
-                  "FilePath": "etc/upgrade.etc",
-                  "IsFile": true,
-                  "Sort": 14,
-                  "Children": {}
-                },
-                "锻造": {
-                  "FilePath": "etc/upgrade_separate.etc",
-                  "IsFile": true,
-                  "Sort": 15,
-                  "Children": {}
-                },
-                "装备词典": {
-                  "FilePath": "etc/itemdictionary/(r)itemdictionary.etc",
-                  "IsFile": true,
-                  "Sort": 16,
-                  "Children": {}
-                },
-                "SP技能树": {
-                  "FilePath": "clientonly/skilltree/swordman_sp.co",
-                  "IsFile": true,
-                  "Sort": 17,
-                  "Children": {}
-                },
-                "角色初始属性": {
-                  "FilePath": "character/swordman/swordman.chr",
-                  "IsFile": true,
-                  "Sort": 18,
-                  "Children": {}
-                },
-                "全局怪物属性": {
-                  "FilePath": "monster/monsterapcdifficultybonus.tbl",
-                  "IsFile": true,
-                  "Sort": 19,
-                  "Children": {}
-                },
-                "添加地狱难度": {
-                  "FilePath": "etc/ultimatedungeonlist.etc",
-                  "IsFile": true,
-                  "Sort": 20,
-                  "Children": {}
-                },
-                "自动售货机": {
-                  "FilePath": "etc/pcroom.vm",
-                  "IsFile": true,
-                  "Sort": 21,
-                  "Children": {}
-                },
-                "滚动公告": {
-                  "FilePath": "event/eventnotice.evt",
-                  "IsFile": true,
-                  "Sort": 22,
-                  "Children": {}
-                },
-                "增幅": {
-                  "FilePath": "etc/amplifyupgrade.etc",
-                  "IsFile": true,
-                  "Sort": 23,
-                  "Children": {}
-                },
-                "强化增幅保护": {
-                  "FilePath": "etc/serverparameter.etc",
-                  "IsFile": true,
-                  "Sort": 24,
-                  "Children": {}
-                },
-                "林纳斯升级给的奖励": {
-                  "FilePath": "etc/growthpowerrewardbuff.etc",
-                  "IsFile": true,
-                  "Sort": 25,
-                  "Children": {}
-                },
-                "左上角活动说明文件": {
-                  "FilePath": "event/eventlistwindow.evt",
-                  "IsFile": true,
-                  "Sort": 26,
-                  "Children": {}
-                },
-                "每日恢复门票": {
-                  "FilePath": "etc/chn_server_limititemusageinfo.etc",
-                  "IsFile": true,
-                  "Sort": 27,
-                  "Children": {}
-                },
-                "各种契约的信息": {
-                  "FilePath": "etc/premiumlist_new.etc",
-                  "IsFile": true,
-                  "Sort": 28,
-                  "Children": {}
-                },
-                "各种契约附加效果的指向": {
-                  "FilePath": "etc/premiumserviceeffect.etc",
-                  "IsFile": true,
-                  "Sort": 29,
-                  "Children": {}
-                },
-                "角色升级SP点": {
-                  "FilePath": "etc/sptable.etc",
-                  "IsFile": true,
-                  "Sort": 30,
-                  "Children": {}
-                },
-                "冒险团额外加成": {
-                  "FilePath": "etc/linksystem/characlinksystem.etc",
-                  "IsFile": true,
-                  "Sort": 31,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "lst列表": {
-              "FilePath": "",
-              "IsFile": false,
+            "赛利亚商店": {
+              "FilePath": "itemshop/equipmentshop7.shp",
+              "IsFile": true,
               "Sort": 1,
-              "Children": {
-                "任务列表": {
-                  "FilePath": "n_quest/quest.lst",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "道具列表": {
-                  "FilePath": "stackable/stackable.lst",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "装备列表": {
-                  "FilePath": "equipment/equipment.lst",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "副本列表": {
-                  "FilePath": "dungeon/dungeon.lst",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "地图列表": {
-                  "FilePath": "map/map.lst",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "怪物列表": {
-                  "FilePath": "monster/monster.lst",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "OBJ列表": {
-                  "FilePath": "passiveobject/passiveobject.lst",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "NPC列表": {
-                  "FilePath": "npc/npc.lst",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "商店列表": {
-                  "FilePath": "itemshop/itemshop.lst",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "AIC列表": {
-                  "FilePath": "aicharacter/aicharacter.lst",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "宠物列表": {
-                  "FilePath": "creature/creature.lst",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "APD列表": {
-                  "FilePath": "appendage/appendage.lst",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "城镇列表": {
-                  "FilePath": "town/town.lst",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                },
-                "副本接口列表": {
-                  "FilePath": "worldmap/worldmap.lst",
-                  "IsFile": true,
-                  "Sort": 13,
-                  "Children": {}
-                },
-                "APC列表": {
-                  "FilePath": "aicharacter/aicharacter.lst",
-                  "IsFile": true,
-                  "Sort": 14,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "掉率爆率": {
-              "FilePath": "",
-              "IsFile": false,
+            "抽奖机": {
+              "FilePath": "etc/pcroom4.vm",
+              "IsFile": true,
               "Sort": 2,
-              "Children": {
-                "世界掉落": {
-                  "FilePath": "etc/worlddrop.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "深渊掉落": {
-                  "FilePath": "etc/itemdropinfo_monster_hell.etc",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "怪物掉落+EX": {
-                  "FilePath": "etc/itemdropinfo_monseter.etc",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "翻牌掉落": {
-                  "FilePath": "etc/itemdropinfo_clearreward.etc",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "独立掉落": {
-                  "FilePath": "etc/independent_drop.etc",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "金币掉落": {
-                  "FilePath": "etc/itemdropinfo_common.etc",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "全局掉落": {
-                  "FilePath": "etc/worlddrop.etc",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "怪物掉落": {
-                  "FilePath": "etc/itemdropinfo_monseter.etc",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "外部独立掉落": {
-                  "FilePath": "etc/independentdrop.lst",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "可破坏建筑物物品掉落": {
-                  "FilePath": "etc/itemdropinfo_common.etc",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "地狱难度": {
-                  "FilePath": "etc/ultimatedungeonlist.etc",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "添加道具": {
-              "FilePath": "stackable/addition_chn/10158964.stk",
+            "勇者活动奖励": {
+              "FilePath": "event/heromissionevent.evt",
               "IsFile": true,
               "Sort": 3,
               "Children": {}
             },
-            "添加装备": {
-              "FilePath": "equipment/fangju/100050697.equ",
+            "签到活动奖励": {
+              "FilePath": "event/attendance.evt",
               "IsFile": true,
               "Sort": 4,
               "Children": {}
             },
-            "添加任务": {
-              "FilePath": "n_quest/daily_add/10103.qst",
+            "商店-直叶": {
+              "FilePath": "itemshop/sao_suguha.shp",
               "IsFile": true,
               "Sort": 5,
               "Children": {}
             },
-            "添加卡片": {
-              "FilePath": "stackable/monstercard/kapianbaozhu/3300003.stk",
+            "升级邮件": {
+              "FilePath": "event/levelupreward.evt",
               "IsFile": true,
               "Sort": 6,
               "Children": {}
             },
-            "黑骑士": {
-              "FilePath": "monster/mengtaixiao/heiqishi/sandorexpeller_mtx.mob",
+            "简易升级邮件": {
+              "FilePath": "etc/unlimitchallenge.etc",
               "IsFile": true,
               "Sort": 7,
               "Children": {}
             },
-            "教学任务": {
-              "FilePath": "n_quest/daily_add/10179.qst",
+            "限时副本任务": {
+              "FilePath": "etc/chn_schedule.etc",
               "IsFile": true,
               "Sort": 8,
               "Children": {}
             },
-            "套装文件2": {
-              "FilePath": "equipment/character/partset2/set_item_12533.equ",
+            "深渊派对": {
+              "FilePath": "etc/hellparty.etc",
               "IsFile": true,
               "Sort": 9,
               "Children": {}
             },
-            "常用etc": {
-              "FilePath": "",
-              "IsFile": false,
+            "套装属性": {
+              "FilePath": "etc/equipmentpartset.etc",
+              "IsFile": true,
               "Sort": 10,
-              "Children": {
-                "商城": {
-                  "FilePath": "etc/newcashshop.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "套装属性": {
-                  "FilePath": "etc/equipmentpartset.etc",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "增幅": {
-                  "FilePath": "etc/amplifyupgrade.etc",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "强化": {
-                  "FilePath": "etc/upgrade.etc",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "锻造": {
-                  "FilePath": "etc/upgrade_separate.etc",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "娃娃机": {
-                  "FilePath": "etc/craneminigameitem.etc",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "升级邮件": {
-                  "FilePath": "event/levelupreward.evt",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "黑钻机": {
-                  "FilePath": "etc/pcroom.vm",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "滚动公告": {
-                  "FilePath": "event/eventnotice.evt",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "每日恢复门票": {
-                  "FilePath": "etc/chn_server_limititemusageinfo.etc",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "保护券-周末疲劳加倍": {
-                  "FilePath": "etc/serverparameter.etc",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "常用列表": {
-              "FilePath": "",
-              "IsFile": false,
+            "称号簿": {
+              "FilePath": "etc/titlebook.etc",
+              "IsFile": true,
               "Sort": 11,
-              "Children": {
-                "装备.equ": {
-                  "FilePath": "equipment/equipment.lst",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "道具.stk": {
-                  "FilePath": "stackable/stackable.lst",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "商城": {
-                  "FilePath": "etc/newcashshop.etc",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "副本.dgn": {
-                  "FilePath": "dungeon/dungeon.lst",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "地图.map": {
-                  "FilePath": "map/map.lst",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "怪物.mob": {
-                  "FilePath": "monster/monster.lst",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "特效.obj": {
-                  "FilePath": "passiveobject/passiveobject.lst",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "NPC.npc": {
-                  "FilePath": "npc/npc.lst",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "任务.qst": {
-                  "FilePath": "n_quest/quest.lst",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "商店.shp": {
-                  "FilePath": "itemshop/itemshop.lst",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "宠物.cre": {
-                  "FilePath": "creature/creature.lst",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "APD.apd": {
-                  "FilePath": "appendage/appendage.lst",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "城镇.twn": {
-                  "FilePath": "town/town.lst",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                },
-                "区域.rgn": {
-                  "FilePath": "region/region.lst",
-                  "IsFile": true,
-                  "Sort": 13,
-                  "Children": {}
-                },
-                "副本接口.wdm": {
-                  "FilePath": "worldmap/worldmap.lst",
-                  "IsFile": true,
-                  "Sort": 14,
-                  "Children": {}
-                },
-                "人偶.aic": {
-                  "FilePath": "aicharacter/aicharacter.lst",
-                  "IsFile": true,
-                  "Sort": 15,
-                  "Children": {}
-                },
-                "etc分解": {
-                  "FilePath": "etc/disjoint.etc",
-                  "IsFile": true,
-                  "Sort": 16,
-                  "Children": {}
-                },
-                "技能树": {
-                  "FilePath": "clientonly/cancelskilllist.co",
-                  "IsFile": true,
-                  "Sort": 17,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "nut的定义": {
-              "FilePath": "",
-              "IsFile": false,
+            "QP商店": {
+              "FilePath": "etc/questshop.etc",
+              "IsFile": true,
               "Sort": 12,
-              "Children": {
-                "常见类型的nut": {
-                  "FilePath": "sqr/common.nut",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "DNF例举的NUT": {
-                  "FilePath": "sqr/dnf_enum_header.nut",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "初始角色的nut": {
-                  "FilePath": "sqr/init_character.nut",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "负载状态的nut": {
-                  "FilePath": "sqr/loadstate.nut",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "UI接口分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "分解机": {
+              "FilePath": "etc/disjoint.etc",
+              "IsFile": true,
               "Sort": 13,
-              "Children": {
-                "时空之门UI接口": {
-                  "FilePath": "worldmap/ui/timegate.ui",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "时空之门UI的动画": {
-                  "FilePath": "worldmap/animation/time_00.ani",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "时空之门地图接口文件": {
-                  "FilePath": "worldmap/timegate.wdm",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "各文件列表": {
-              "FilePath": "",
-              "IsFile": false,
+            "强化": {
+              "FilePath": "etc/upgrade.etc",
+              "IsFile": true,
               "Sort": 14,
-              "Children": {
-                "任务列表": {
-                  "FilePath": "n_quest/quest.lst",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "道具列表": {
-                  "FilePath": "stackable/stackable.lst",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "装备列表": {
-                  "FilePath": "equipment/equipment.lst",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "副本列表": {
-                  "FilePath": "dungeon/dungeon.lst",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "地图列表": {
-                  "FilePath": "map/map.lst",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "怪物列表": {
-                  "FilePath": "monster/monster.lst",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "OBJ列表": {
-                  "FilePath": "passiveobject/passiveobject.lst",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "NPC列表": {
-                  "FilePath": "npc/npc.lst",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "商店列表": {
-                  "FilePath": "itemshop/itemshop.lst",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "AIC列表": {
-                  "FilePath": "aicharacter/aicharacter.lst",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "宠物列表": {
-                  "FilePath": "creature/creature.lst",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "APD列表": {
-                  "FilePath": "appendage/appendage.lst",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "城镇列表": {
-                  "FilePath": "town/town.lst",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                },
-                "绝望之塔房间APC列表": {
-                  "FilePath": "aicharacter/operatingvalue.lst",
-                  "IsFile": true,
-                  "Sort": 13,
-                  "Children": {}
-                },
-                "废弃商城的列表": {
-                  "FilePath": "cashshop/cashshop.lst",
-                  "IsFile": true,
-                  "Sort": 14,
-                  "Children": {}
-                },
-                "光环列表": {
-                  "FilePath": "aura/aura.lst",
-                  "IsFile": true,
-                  "Sort": 15,
-                  "Children": {}
-                },
-                "初始角色邮件列表": {
-                  "FilePath": "character/character.jpn.lst",
-                  "IsFile": true,
-                  "Sort": 16,
-                  "Children": {}
-                },
-                "副职业列表": {
-                  "FilePath": "character/expertjob.lst",
-                  "IsFile": true,
-                  "Sort": 17,
-                  "Children": {}
-                },
-                "聊天表情列表": {
-                  "FilePath": "chatemoticon/chatemoticon.lst",
-                  "IsFile": true,
-                  "Sort": 18,
-                  "Children": {}
-                },
-                "副本邮件列表": {
-                  "FilePath": "dungeon/dungeon.jpn.lst",
-                  "IsFile": true,
-                  "Sort": 19,
-                  "Children": {}
-                },
-                "新手教程列表": {
-                  "FilePath": "etc/globaltutorialinfo/characterlist.lst",
-                  "IsFile": true,
-                  "Sort": 20,
-                  "Children": {}
-                },
-                "独立掉落外部列表": {
-                  "FilePath": "etc/independentdrop/1_magneus_normal.etc",
-                  "IsFile": true,
-                  "Sort": 21,
-                  "Children": {}
-                },
-                "显示独立掉落的装备": {
-                  "FilePath": "etc/itemdictionary/(r)independentdropinfo.etc",
-                  "IsFile": true,
-                  "Sort": 22,
-                  "Children": {}
-                },
-                "支援兵参数详细列表": {
-                  "FilePath": "etc/linksystem/strikercombo.lst",
-                  "IsFile": true,
-                  "Sort": 23,
-                  "Children": {}
-                },
-                "魔法封印封印属性的列表": {
-                  "FilePath": "etc/randomoption/randomoption.lst",
-                  "IsFile": true,
-                  "Sort": 24,
-                  "Children": {}
-                },
-                "魔法封印可增加技能的列表": {
-                  "FilePath": "etc/randomoption/randomoptionskill.lst",
-                  "IsFile": true,
-                  "Sort": 25,
-                  "Children": {}
-                },
-                "活动提升技能等级列表": {
-                  "FilePath": "event/eventcharacter/eventcharacter.lst",
-                  "IsFile": true,
-                  "Sort": 26,
-                  "Children": {}
-                },
-                "活动列表（详细）": {
-                  "FilePath": "event/ingameeventlist.evt",
-                  "IsFile": true,
-                  "Sort": 27,
-                  "Children": {}
-                },
-                "地图邮政列表": {
-                  "FilePath": "map/map.jpn.lst",
-                  "IsFile": true,
-                  "Sort": 28,
-                  "Children": {}
-                },
-                "全职业技能列表": {
-                  "FilePath": "skill/skilllist.lst",
-                  "IsFile": true,
-                  "Sort": 29,
-                  "Children": {}
-                },
-                "阶段图列表": {
-                  "FilePath": "stagemap/stagemap.lst",
-                  "IsFile": true,
-                  "Sort": 30,
-                  "Children": {}
-                },
-                "古老的特效列表": {
-                  "FilePath": "passiveobject/old passiveobject.lst",
-                  "IsFile": true,
-                  "Sort": 31,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "aic文件分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "锻造": {
+              "FilePath": "etc/upgrade_separate.etc",
+              "IsFile": true,
               "Sort": 15,
-              "Children": {
-                "所有aic默认名字喊话": {
-                  "FilePath": "aicharacter/aicharacter.kor.str",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "所有APC的列表": {
-                  "FilePath": "aicharacter/aicharacter.lst",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "每十层绝望之塔APC列表": {
-                  "FilePath": "aicharacter/operatingvalue.lst",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "AI文件描述": {
-                  "FilePath": "aicharacter/ai_tool_info.txt",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "28号人偶": {
-                  "FilePath": "aicharacter/fighter/28/28_doll.aic",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "人偶的AI文件": {
-                  "FilePath": "aicharacter/fighter/28/ai/action.ai",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "人偶移动AI的判定": {
-                  "FilePath": "aicharacter/fighter/28/ai/movemethod.ai",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "复制体aic(心魔)": {
-                  "FilePath": "aicharacter/_jojochan/atfighter/agarum_atfighter_grap/agarum_fighter_grap.aic",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "KEY文件": {
-                  "FilePath": "aicharacter/_jojochan/atfighter/agarum_atfighter_grap/key/air.key",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "支援兵系统（可改技能）": {
-                  "FilePath": "etc/linksystem/striker.etc",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "杂项参数分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "装备词典": {
+              "FilePath": "etc/itemdictionary/(r)itemdictionary.etc",
+              "IsFile": true,
               "Sort": 16,
-              "Children": {
-                "聊天时的表情列表": {
-                  "FilePath": "chatemoticon/chatemoticon.lst",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "表情的描述文件": {
-                  "FilePath": "chatemoticon/chatemoticon.kor.str",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "菜单的描述文件": {
-                  "FilePath": "clientonly/clientonly.kor.str",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "技能商店指示UI": {
-                  "FilePath": "clientonly/skillshoptextguide.co",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "时装转盘": {
-                  "FilePath": "etc/avatar_roulette/avatarfixedhiddenoptionlist.etc",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "徽章文件": {
-                  "FilePath": "etc/emblemrenewal/avatar_convert_jpn.etc",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "进入副本出现的随机指南": {
-                  "FilePath": "etc/guide/guidelist.glist",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "装备词典基准表": {
-                  "FilePath": "etc/itemdictionary/(r)baseitemdictionarytable.etc",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "装备词典": {
-                  "FilePath": "etc/itemdictionary/(r)itemdictionary.etc",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "冒险团经验金币": {
-                  "FilePath": "etc/linksystem/characlinksystem.etc",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "冒险团详细参数": {
-                  "FilePath": "etc/linksystem/charactermanage.etc",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "PKC的练习": {
-                  "FilePath": "etc/pvppracticecombo/atfighter.etc",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "PKC扣血保护机制": {
-                  "FilePath": "etc/pvprevisiontable/combodamagerevisiontable.etc",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                },
-                "PKC技能平衡": {
-                  "FilePath": "etc/pvpskilltree/atgunner.etc",
-                  "IsFile": true,
-                  "Sort": 13,
-                  "Children": {}
-                },
-                "魔法封印的基础目录": {
-                  "FilePath": "etc/randomoption/auctionrandomcategory.etc",
-                  "IsFile": true,
-                  "Sort": 14,
-                  "Children": {}
-                },
-                "魔法封印（不同种类之一）的权重": {
-                  "FilePath": "etc/randomoption/optiongrouping.etc",
-                  "IsFile": true,
-                  "Sort": 15,
-                  "Children": {}
-                },
-                "等级提高魔法封印出现3属性概率增加": {
-                  "FilePath": "etc/randomoption/regenerationrandomoption.etc",
-                  "IsFile": true,
-                  "Sort": 16,
-                  "Children": {}
-                },
-                "觉醒技能的插图": {
-                  "FilePath": "etc/ultimateskillani/thief_necro.ani",
-                  "IsFile": true,
-                  "Sort": 17,
-                  "Children": {}
-                },
-                "红字装备随机率": {
-                  "FilePath": "etc/amplifyitem.etc",
-                  "IsFile": true,
-                  "Sort": 18,
-                  "Children": {}
-                },
-                "拍卖推荐装备的等级": {
-                  "FilePath": "etc/auction_recommend_item.etc",
-                  "IsFile": true,
-                  "Sort": 19,
-                  "Children": {}
-                },
-                "时装染色": {
-                  "FilePath": "etc/avatarcolorvariation.etc",
-                  "IsFile": true,
-                  "Sort": 20,
-                  "Children": {}
-                },
-                "广告测试的数据": {
-                  "FilePath": "etc/billingtestdata.etc",
-                  "IsFile": true,
-                  "Sort": 21,
-                  "Children": {}
-                },
-                "每天重置的门票": {
-                  "FilePath": "etc/chn_server_limititemusageinfo.etc",
-                  "IsFile": true,
-                  "Sort": 22,
-                  "Children": {}
-                },
-                "心情卡片特效": {
-                  "FilePath": "etc/emotionexpressiondata.etc",
-                  "IsFile": true,
-                  "Sort": 23,
-                  "Children": {}
-                },
-                "公平PKC属性": {
-                  "FilePath": "etc/fairpvpstat.etc",
-                  "IsFile": true,
-                  "Sort": 24,
-                  "Children": {}
-                },
-                "PKC列表与描述": {
-                  "FilePath": "etc/pvpchannellist.etc",
-                  "IsFile": true,
-                  "Sort": 25,
-                  "Children": {}
-                },
-                "游戏公告": {
-                  "FilePath": "event/eventlistwindow.evt",
-                  "IsFile": true,
-                  "Sort": 26,
-                  "Children": {}
-                },
-                "npc西岚": {
-                  "FilePath": "npc/siran.npc",
-                  "IsFile": true,
-                  "Sort": 27,
-                  "Children": {}
-                },
-                "怪物卡片（阿加门龙大天使）": {
-                  "FilePath": "stackable/monstercard/mcard_dominions.stk",
-                  "IsFile": true,
-                  "Sort": 28,
-                  "Children": {}
-                },
-                "血量或左侧正中间的广告UI": {
-                  "FilePath": "ui/hud/mainmenuwindow.ui",
-                  "IsFile": true,
-                  "Sort": 29,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "地图类型分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "SP技能树": {
+              "FilePath": "clientonly/skilltree/swordman_sp.co",
+              "IsFile": true,
               "Sort": 17,
-              "Children": {
-                "废弃的商城": {
-                  "FilePath": "etc/cerashop_first.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "守护者祭坛地图（活动类）": {
-                  "FilePath": "map/advancealtar/advancealtar_stage_02_1easy.map",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "死亡之塔类型": {
-                  "FilePath": "map/deadtower/001f.map",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "远古地下城类型（王的遗迹）": {
-                  "FilePath": "map/kingsruins/n4804.map",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "异界地下城类型（蠕动之城）": {
-                  "FilePath": "map/realskycastle/realskycastle06.map",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "魂 . 远古地图类型 （魂 . 遗迹）": {
-                  "FilePath": "map/r_kingsruins/b4801.map",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "城镇描述文件": {
-                  "FilePath": "town/town.kor.str",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "城镇地区的描述": {
-                  "FilePath": "worldmap/worldmap.kor.str",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "副本类型分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "角色初始属性": {
+              "FilePath": "character/swordman/swordman.chr",
+              "IsFile": true,
               "Sort": 18,
-              "Children": {
-                "绝望之塔APC附属文件": {
-                  "FilePath": "aicharacter/towerofdespair_apc.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "PKC数据": {
-                  "FilePath": "data/extern.sd",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "普通副本（格拉卡这种）": {
-                  "FilePath": "dungeon/act1/grakkarak.dgn",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "守护者祭坛（台服活动本）": {
-                  "FilePath": "dungeon/advancealtar/advancealtar_stage_01.dgn",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "远古地下城（不含遗迹）": {
-                  "FilePath": "dungeon/ancient/noirpera.dgn",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "异界地下城": {
-                  "FilePath": "dungeon/impossible/goblinkingdom.dgn",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "任务副本地下城": {
-                  "FilePath": "dungeon/quest/deadmoon.dgn",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "魂 . 远古   副本": {
-                  "FilePath": "dungeon/riskdungeon/r_kingsruins.dgn",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "龙斗会地下城": {
-                  "FilePath": "dungeon/shonantournament/bluedragon.dgn",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "副本邮件列表": {
-                  "FilePath": "dungeon/dungeon.jpn.lst",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "副本外的描述": {
-                  "FilePath": "dungeon/dungeon.kor.str",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "守护者祭坛活动设置（详细）": {
-                  "FilePath": "etc/advancealtar/advancealtarmode.etc",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "限时开放的副本": {
-                  "FilePath": "etc/chn_schedule.etc",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                },
-                "公会系统": {
-                  "FilePath": "etc/guild.etc",
-                  "IsFile": true,
-                  "Sort": 13,
-                  "Children": {}
-                },
-                "普通副本的地图（洛兰）": {
-                  "FilePath": "map/lorien/s1.map",
-                  "IsFile": true,
-                  "Sort": 14,
-                  "Children": {}
-                },
-                "主线任务清单（GM清楚任务的数量？）": {
-                  "FilePath": "n_quest/epicquest.lst",
-                  "IsFile": true,
-                  "Sort": 15,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "怪物类型分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "全局怪物属性": {
+              "FilePath": "monster/monsterapcdifficultybonus.tbl",
+              "IsFile": true,
               "Sort": 19,
-              "Children": {
-                "普通AI怪物": {
-                  "FilePath": "monster/lotus/lotus.mob",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "英雄级AI怪物（高AI 独特技能）": {
-                  "FilePath": "monster/lotus/lotus_global_bosstower.mob",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "一体怪物atk文件（未采取act写法）": {
-                  "FilePath": "monster/soldier/attackinfo/axeexpellerattack.atk",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "玩家技能召唤的怪物（采用百分比攻防）": {
-                  "FilePath": "monster/spikeking/spikeking_quest.mob",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "新版怪物的act文件（冰龙斯卡萨）": {
-                  "FilePath": "monster/newmonsters/dragon/scasa/action/alive.act",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "怪物名称与描述（基本无用）": {
-                  "FilePath": "monster/monster.kor.str",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "怪物列表": {
-                  "FilePath": "monster/monster.lst",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "全局怪物难度（详情参考大狗王怪物笔记）": {
-                  "FilePath": "monster/monsterapcdifficultybonus.tbl",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "深渊类型分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "添加地狱难度": {
+              "FilePath": "etc/ultimatedungeonlist.etc",
+              "IsFile": true,
               "Sort": 20,
-              "Children": {
-                "深渊派对组合（详情参考大狗王的笔记）": {
-                  "FilePath": "etc/hellparty.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "深渊掉落的详细参数": {
-                  "FilePath": "etc/itemdropinfo_monster_hell.etc",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "深渊任务（可自己改写前置和更早的深渊任务）": {
-                  "FilePath": "n_quest/hell/achievement_47_hell_wild_1.qst",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "深渊房间（hell 类型的 map ）": {
-                  "FilePath": "map/aganzo/hell_aganzo.map",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "特效种类分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "自动售货机": {
+              "FilePath": "etc/pcroom.vm",
+              "IsFile": true,
               "Sort": 21,
-              "Children": {
-                "光炎剑的火球特效类型（需要ptl文件才可以运作）": {
-                  "FilePath": "passiveobject/actionobject/spc/_burnfire/body.obj",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "光炎剑火球的伤害增幅": {
-                  "FilePath": "passiveobject/actionobject/spc/_burnfire/attackinfo/attack.atk",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "光炎剑火球的运动动画": {
-                  "FilePath": "passiveobject/actionobject/spc/_burnfire/animation/body.ani",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "流光星陨刀的陨石类型（不需要ptl文件）": {
-                  "FilePath": "passiveobject/common/shootingstaritem.obj",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "特效描述文件": {
-                  "FilePath": "passiveobject/passiveobject.kor.str",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "特效列表": {
-                  "FilePath": "passiveobject/passiveobject.lst",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "古老的特效列表": {
-                  "FilePath": "passiveobject/old passiveobject.lst",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "光炎剑的ptl文件（西岚剑舞剑气移动可以参考这个）": {
-                  "FilePath": "passiveobject/mapobject/trap/particle/dragonheadenergyball.ptl",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "技能关联分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "滚动公告": {
+              "FilePath": "event/eventnotice.evt",
+              "IsFile": true,
               "Sort": 22,
-              "Children": {
-                "强制技能": {
-                  "FilePath": "clientonly/cancelskilllist.co",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "技能热键": {
-                  "FilePath": "clientonly/hotkeysystem.co",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "热键指令": {
-                  "FilePath": "clientonly/hotkeysystem.co",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "技能树目录": {
-                  "FilePath": "clientonly/skillshoptreespindex.co",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "技能商店指示": {
-                  "FilePath": "clientonly/skillshoptextguide.co",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "ex技能目录（没有外传职业）": {
-                  "FilePath": "clientonly/skillshoptreetpindex.co",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "全职业技能列表": {
-                  "FilePath": "skill/skilllist.lst",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "全职业技能描述": {
-                  "FilePath": "skill/skill.kor.str",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "公会技能的UI": {
-                  "FilePath": "ui/skill/guildskillbuywindow.ui",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "全职业觉醒插图": {
-                  "FilePath": "etc/ultimateskillcutscene.etc",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "活动参数分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "增幅": {
+              "FilePath": "etc/amplifyupgrade.etc",
+              "IsFile": true,
               "Sort": 23,
-              "Children": {
-                "活动的描述": {
-                  "FilePath": "etc/etc.kor.str",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "强化活动的活动表": {
-                  "FilePath": "etc/eventupgradejar.etc",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "NPC送礼与反礼": {
-                  "FilePath": "etc/exchangeitemnpc.etc",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "金币上限（最高可改20e）": {
-                  "FilePath": "etc/goldlimitbylevel.etc",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "游戏内的广告参数（可删）": {
-                  "FilePath": "etc/ingameadvertisementparameter.etc",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "进入副本时读条的描述": {
-                  "FilePath": "etc/loadingadvermessage.etc",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "限制账号或角色购买某物品": {
-                  "FilePath": "etc/newcashshop_restrict.etc",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "抽奖机": {
-                  "FilePath": "etc/pcroom.vm",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "活动装备奖励": {
-                  "FilePath": "event/eventreward/reward_at_gunner.evt",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "幸运角色提升技能等级": {
-                  "FilePath": "event/eventcharacter/40_event_character.evt",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "出席活动1": {
-                  "FilePath": "event/attendance.evt",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "出席活动2": {
-                  "FilePath": "event/avatardisjointrandomreward.evt",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "冰果活动": {
-                  "FilePath": "event/bingoevent.evt",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                },
-                "屏幕上方滚动公告": {
-                  "FilePath": "event/eventnotice.evt",
-                  "IsFile": true,
-                  "Sort": 13,
-                  "Children": {}
-                },
-                "出席活动3": {
-                  "FilePath": "event/exchangerandomitemreward.evt",
-                  "IsFile": true,
-                  "Sort": 14,
-                  "Children": {}
-                },
-                "夏日活动": {
-                  "FilePath": "event/heromissionevent.evt",
-                  "IsFile": true,
-                  "Sort": 15,
-                  "Children": {}
-                },
-                "升级的邮件（可从1级开始写）": {
-                  "FilePath": "event/levelupreward.evt",
-                  "IsFile": true,
-                  "Sort": 16,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "冒险团的分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "强化增幅保护": {
+              "FilePath": "etc/serverparameter.etc",
+              "IsFile": true,
               "Sort": 24,
-              "Children": {
-                "冒险团额外经验金币": {
-                  "FilePath": "etc/linksystem/characlinksystem.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "冒险团详细参数（具体参数参考大狗王的笔记）": {
-                  "FilePath": "etc/linksystem/charactermanage.etc",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "冒险团支援兵参数（详细请参考大狗王的笔记）": {
-                  "FilePath": "etc/linksystem/striker.etc",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "冒险团支援兵技能参数列表": {
-                  "FilePath": "etc/linksystem/strikercombo.lst",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "套装详细分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "林纳斯升级给的奖励": {
+              "FilePath": "etc/growthpowerrewardbuff.etc",
+              "IsFile": true,
               "Sort": 25,
-              "Children": {
-                "套装文件 1": {
-                  "FilePath": "equipment/character/partset/2choroset1.equ",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "普通时装套装属性": {
-                  "FilePath": "equipment/character/partset/eventavatarset02.equ",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "天空套套装属性": {
-                  "FilePath": "equipment/character/partset/rareset.equ",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "套装文件 2 （可自定义）": {
-                  "FilePath": "equipment/character/partset2/chn_part_set_30084.equ",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "时装版套装写法2 可加描述": {
-                  "FilePath": "etc/equipmenteffectset.etc",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "套装属性登记处": {
-                  "FilePath": "etc/equipmentpartset.etc",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "宠物文件分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "左上角活动说明文件": {
+              "FilePath": "event/eventlistwindow.evt",
+              "IsFile": true,
               "Sort": 26,
-              "Children": {
-                "宠物文件": {
-                  "FilePath": "creature/2013kids/enryu/enryu.cre",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "宠物终结技": {
-                  "FilePath": "creature/2013kids/enryu/skill/overskill.skl",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "宠物技能运行文件": {
-                  "FilePath": "creature/2013kids/enryu/particle/overskill.ptl",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "宠物atk（伤害控制）": {
-                  "FilePath": "creature/2013kids/enryu/attackinfo/skill.atk",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "宠物技能动画": {
-                  "FilePath": "creature/2013kids/enryu/animation/skill.ani",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "宠物移动动画（ani）": {
-                  "FilePath": "creature/2013kids/enryu/animation/move.ani",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "解除异常状态（宠物技能）": {
-                  "FilePath": "creature/2016summer/skill/skill.skl",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "宠物的普通技能": {
-                  "FilePath": "creature/2017newyear/skill/mage_normal.skl",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "宠物喊话（名称对应宠物）": {
-                  "FilePath": "creature/script/charp.wrd",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "宠物技能描述（可无视）": {
-                  "FilePath": "creature/creature.kor.str",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "宠物升级经验": {
-                  "FilePath": "creature/exptable.tbl",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "宠物（以装备的形式）": {
-                  "FilePath": "equipment/creature/cannonfairy_blue.equ",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "城镇文件分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "每日恢复门票": {
+              "FilePath": "etc/chn_server_limititemusageinfo.etc",
+              "IsFile": true,
               "Sort": 27,
-              "Children": {
-                "光环移动（CD需要装备改）": {
-                  "FilePath": "aura/test.ora",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "城镇地图的动画（阿法利亚地区）": {
-                  "FilePath": "town/title/alfhlyra.ani",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "城镇描述文件": {
-                  "FilePath": "town/town.kor.str",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "城镇型地图（此类地图不存在地图列表中）": {
-                  "FilePath": "map/elvengard/(f)gate.map",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "异界气息分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "各种契约的信息": {
+              "FilePath": "etc/premiumlist_new.etc",
+              "IsFile": true,
               "Sort": 28,
-              "Children": {
-                "异次元之黄色气息（可以自己写 - 强无敌）": {
-                  "FilePath": "stackable/consumption_1257.stk",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "异次元之红色气息（可以自己写 - 强无敌）": {
-                  "FilePath": "stackable/consumption_1255.stk",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "异次元之蓝色气息（可以自己写 - 强无敌）": {
-                  "FilePath": "stackable/consumption_1256.stk",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "异次元之黑色气息（可以自己写 - 强无敌）": {
-                  "FilePath": "stackable/consumption_1254.stk",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "角色职业分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "各种契约附加效果的指向": {
+              "FilePath": "etc/premiumserviceeffect.etc",
+              "IsFile": true,
               "Sort": 29,
-              "Children": {
-                "初始角色邮件列表": {
-                  "FilePath": "character/character.jpn.lst",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "未知的描述文件": {
-                  "FilePath": "character/character.jpn.str",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "角色职业名字（角色文件也要改）": {
-                  "FilePath": "character/character.kor.str",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "角色每次升级所需经验": {
-                  "FilePath": "character/exptable.tbl",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "GM特殊指令": {
-                  "FilePath": "clientonly/gmcmdmap.co",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "手柄DNF映射文件": {
-                  "FilePath": "clientonly/joypadmapping.co",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "格斗家装备模型动画": {
-                  "FilePath": "equipment/character/atfighter.lay",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "账号金库": {
-                  "FilePath": "etc/accountcargo.etc",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "活跃度": {
-                  "FilePath": "etc/actionpointsystem.etc",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "聊天表情（详细）": {
-                  "FilePath": "etc/chatsystem.etc",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "装备可穿戴插槽": {
-                  "FilePath": "etc/chn_equipmentsockettypelist.etc",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "创建角色时的游戏介绍": {
-                  "FilePath": "etc/jobexplanation.etc",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "时装按角色选定技能": {
-                  "FilePath": "etc/newbierecommendselectoption.etc",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "副职业类分析": {
-              "FilePath": "",
-              "IsFile": false,
+            "角色升级SP点": {
+              "FilePath": "etc/sptable.etc",
+              "IsFile": true,
               "Sort": 30,
-              "Children": {
-                "分解机文件（与角色等级相关）": {
-                  "FilePath": "character/expertjob.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "副职业列表": {
-                  "FilePath": "character/expertjob.lst",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "分解机详细参数": {
-                  "FilePath": "etc/disjoint.etc",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                }
-              }
+              "Children": {}
             },
-            "国服专属独特": {
-              "FilePath": "",
-              "IsFile": false,
+            "冒险团额外加成": {
+              "FilePath": "etc/linksystem/characlinksystem.etc",
+              "IsFile": true,
               "Sort": 31,
-              "Children": {
-                "司天鉴地区": {
-                  "FilePath": "town/chn_relic_secret_building.twn",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "智慧的引导": {
-                  "FilePath": "dungeon/kcontents3/hell/hell_retry.dgn",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "智慧的引导（冒险级）": {
-                  "FilePath": "dungeon/kcontents3/hell/hell_retry.dgn",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "荧光护石 - 拔刀斩": {
-                  "FilePath": "equipment/character/common/talisman/100400307.equ",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "完美的野兽勋章": {
-                  "FilePath": "equipment/character/common/flag/100380051.equ",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "魔界大战": {
-                  "FilePath": "dungeon/kcontents2/theevildomwar/5428_evildomwar_dumy.dgn",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "国服签到活动": {
-                  "FilePath": "event/researchlifepowereventscript.evt",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "德洛斯矿山 - 副本接口": {
-                  "FilePath": "worldmap/loschest.wdm",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "竞技场副本接口": {
-                  "FilePath": "worldmap/stadium.wdm",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "帝国竞技场 - 城镇地区": {
-                  "FilePath": "town/collosseumofempire.twn",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "白金徽章 - 神罚之锤": {
-                  "FilePath": "stackable/10163001/10163859.stk",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "斗气转换装置": {
-                  "FilePath": "stackable/10163001/10163994.stk",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "诺顿大师（装备改造、继承与铭刻）": {
-                  "FilePath": "npc/rothon.npc",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                },
-                "歌兰蒂斯 . 格拉西亚 （APC 超强 ）": {
-                  "FilePath": "aicharacter/kcontents3/cataclysm/rearad/darktemple/grandis_gracia/grandis_gracia.aic",
-                  "IsFile": true,
-                  "Sort": 13,
-                  "Children": {}
-                }
-              }
+              "Children": {}
+            }
+          }
+        },
+        "lst列表": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 1,
+          "Children": {
+            "任务列表": {
+              "FilePath": "n_quest/quest.lst",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
             },
-            "强化增幅锻造分析": {
-              "FilePath": "",
-              "IsFile": false,
-              "Sort": 32,
-              "Children": {
-                "增幅文件": {
-                  "FilePath": "etc/amplifyupgrade.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "保护券": {
-                  "FilePath": "etc/serverparameter.etc",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "洗红字更偏向的属性": {
-                  "FilePath": "etc/amplifyitem.etc",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "锻造文件（详细参考大狗王的笔记）": {
-                  "FilePath": "etc/upgrade_separate.etc",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "强化文件（详细参考大狗王的笔记）": {
-                  "FilePath": "etc/upgrade.etc",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                }
-              }
+            "道具列表": {
+              "FilePath": "stackable/stackable.lst",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
             },
-            "chr": {
-              "FilePath": "",
-              "IsFile": false,
-              "Sort": 33,
-              "Children": {
-                "男鬼剑士": {
-                  "FilePath": "character/swordman/swordman.chr",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "女格斗家": {
-                  "FilePath": "character/fighter/fighter.chr",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "男神枪手": {
-                  "FilePath": "character/gunner/gunner.chr",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "女魔法师": {
-                  "FilePath": "character/mage/mage.chr",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "男圣职者": {
-                  "FilePath": "character/priest/priest.chr",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "女神枪手": {
-                  "FilePath": "character/gunner/atgunner.chr",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "暗夜使者": {
-                  "FilePath": "character/thief/thief.chr",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "男格斗家": {
-                  "FilePath": "character/fighter/atfighter.chr",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "男魔法师": {
-                  "FilePath": "character/mage/atmage.chr",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "黑暗武士": {
-                  "FilePath": "character/swordman/demonicswordman.chr",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "缔造者": {
-                  "FilePath": "character/mage/creatormage.chr",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                }
-              }
+            "装备列表": {
+              "FilePath": "equipment/equipment.lst",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
             },
-            "职业技能列表.lst": {
-              "FilePath": "",
-              "IsFile": false,
-              "Sort": 34,
-              "Children": {
-                "男鬼剑士": {
-                  "FilePath": "skill/swordmanskill.lst",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "女鬼剑士": {
-                  "FilePath": "skill/atswordmanskill.lst",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "男格斗家": {
-                  "FilePath": "skill/atfighterskill.lst",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "女格斗家": {
-                  "FilePath": "skill/fighterskill.lst",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "男神枪手": {
-                  "FilePath": "skill/gunnerskill.lst",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "女神枪手": {
-                  "FilePath": "skill/atgunnerskill.lst",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "男魔法师": {
-                  "FilePath": "skill/atmageskill.lst",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "女魔法师": {
-                  "FilePath": "skill/mageskill.lst",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "暗夜使者": {
-                  "FilePath": "skill/thiefskill.lst",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "男圣职者": {
-                  "FilePath": "skill/priestskill.lst",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "黑暗武士": {
-                  "FilePath": "skill/demonicswordman.lst",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                }
-              }
+            "副本列表": {
+              "FilePath": "dungeon/dungeon.lst",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "地图列表": {
+              "FilePath": "map/map.lst",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "怪物列表": {
+              "FilePath": "monster/monster.lst",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "OBJ列表": {
+              "FilePath": "passiveobject/passiveobject.lst",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "NPC列表": {
+              "FilePath": "npc/npc.lst",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "商店列表": {
+              "FilePath": "itemshop/itemshop.lst",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "AIC列表": {
+              "FilePath": "aicharacter/aicharacter.lst",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "宠物列表": {
+              "FilePath": "creature/creature.lst",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "APD列表": {
+              "FilePath": "appendage/appendage.lst",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "城镇列表": {
+              "FilePath": "town/town.lst",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            },
+            "副本接口列表": {
+              "FilePath": "worldmap/worldmap.lst",
+              "IsFile": true,
+              "Sort": 13,
+              "Children": {}
+            },
+            "APC列表": {
+              "FilePath": "aicharacter/aicharacter.lst",
+              "IsFile": true,
+              "Sort": 14,
+              "Children": {}
+            }
+          }
+        },
+        "掉率爆率": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 2,
+          "Children": {
+            "世界掉落": {
+              "FilePath": "etc/worlddrop.etc",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "深渊掉落": {
+              "FilePath": "etc/itemdropinfo_monster_hell.etc",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "怪物掉落+EX": {
+              "FilePath": "etc/itemdropinfo_monseter.etc",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "翻牌掉落": {
+              "FilePath": "etc/itemdropinfo_clearreward.etc",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "独立掉落": {
+              "FilePath": "etc/independent_drop.etc",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "金币掉落": {
+              "FilePath": "etc/itemdropinfo_common.etc",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "全局掉落": {
+              "FilePath": "etc/worlddrop.etc",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "怪物掉落": {
+              "FilePath": "etc/itemdropinfo_monseter.etc",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "外部独立掉落": {
+              "FilePath": "etc/independentdrop.lst",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "可破坏建筑物物品掉落": {
+              "FilePath": "etc/itemdropinfo_common.etc",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "地狱难度": {
+              "FilePath": "etc/ultimatedungeonlist.etc",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            }
+          }
+        },
+        "添加道具": {
+          "FilePath": "stackable/addition_chn/10158964.stk",
+          "IsFile": true,
+          "Sort": 3,
+          "Children": {}
+        },
+        "添加装备": {
+          "FilePath": "equipment/fangju/100050697.equ",
+          "IsFile": true,
+          "Sort": 4,
+          "Children": {}
+        },
+        "添加任务": {
+          "FilePath": "n_quest/daily_add/10103.qst",
+          "IsFile": true,
+          "Sort": 5,
+          "Children": {}
+        },
+        "添加卡片": {
+          "FilePath": "stackable/monstercard/kapianbaozhu/3300003.stk",
+          "IsFile": true,
+          "Sort": 6,
+          "Children": {}
+        },
+        "黑骑士": {
+          "FilePath": "monster/mengtaixiao/heiqishi/sandorexpeller_mtx.mob",
+          "IsFile": true,
+          "Sort": 7,
+          "Children": {}
+        },
+        "教学任务": {
+          "FilePath": "n_quest/daily_add/10179.qst",
+          "IsFile": true,
+          "Sort": 8,
+          "Children": {}
+        },
+        "套装文件2": {
+          "FilePath": "equipment/character/partset2/set_item_12533.equ",
+          "IsFile": true,
+          "Sort": 9,
+          "Children": {}
+        },
+        "常用etc": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 10,
+          "Children": {
+            "商城": {
+              "FilePath": "etc/newcashshop.etc",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "套装属性": {
+              "FilePath": "etc/equipmentpartset.etc",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "增幅": {
+              "FilePath": "etc/amplifyupgrade.etc",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "强化": {
+              "FilePath": "etc/upgrade.etc",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "锻造": {
+              "FilePath": "etc/upgrade_separate.etc",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "娃娃机": {
+              "FilePath": "etc/craneminigameitem.etc",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "升级邮件": {
+              "FilePath": "event/levelupreward.evt",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "黑钻机": {
+              "FilePath": "etc/pcroom.vm",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "滚动公告": {
+              "FilePath": "event/eventnotice.evt",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "每日恢复门票": {
+              "FilePath": "etc/chn_server_limititemusageinfo.etc",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "保护券-周末疲劳加倍": {
+              "FilePath": "etc/serverparameter.etc",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            }
+          }
+        },
+        "常用列表": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 11,
+          "Children": {
+            "装备.equ": {
+              "FilePath": "equipment/equipment.lst",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "道具.stk": {
+              "FilePath": "stackable/stackable.lst",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "商城": {
+              "FilePath": "etc/newcashshop.etc",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "副本.dgn": {
+              "FilePath": "dungeon/dungeon.lst",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "地图.map": {
+              "FilePath": "map/map.lst",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "怪物.mob": {
+              "FilePath": "monster/monster.lst",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "特效.obj": {
+              "FilePath": "passiveobject/passiveobject.lst",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "NPC.npc": {
+              "FilePath": "npc/npc.lst",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "任务.qst": {
+              "FilePath": "n_quest/quest.lst",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "商店.shp": {
+              "FilePath": "itemshop/itemshop.lst",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "宠物.cre": {
+              "FilePath": "creature/creature.lst",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "APD.apd": {
+              "FilePath": "appendage/appendage.lst",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "城镇.twn": {
+              "FilePath": "town/town.lst",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            },
+            "区域.rgn": {
+              "FilePath": "region/region.lst",
+              "IsFile": true,
+              "Sort": 13,
+              "Children": {}
+            },
+            "副本接口.wdm": {
+              "FilePath": "worldmap/worldmap.lst",
+              "IsFile": true,
+              "Sort": 14,
+              "Children": {}
+            },
+            "人偶.aic": {
+              "FilePath": "aicharacter/aicharacter.lst",
+              "IsFile": true,
+              "Sort": 15,
+              "Children": {}
+            },
+            "etc分解": {
+              "FilePath": "etc/disjoint.etc",
+              "IsFile": true,
+              "Sort": 16,
+              "Children": {}
             },
             "技能树": {
-              "FilePath": "",
-              "IsFile": false,
-              "Sort": 35,
-              "Children": {
-                "鬼剑": {
-                  "FilePath": "clientonly/skilltree/swordman_sp.co",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "女格斗家": {
-                  "FilePath": "clientonly/skilltree/fighter_sp.co",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "男神枪手": {
-                  "FilePath": "clientonly/skilltree/gunner_sp.co",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "女魔法师": {
-                  "FilePath": "clientonly/skilltree/mage_sp.co",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "男圣职者": {
-                  "FilePath": "clientonly/skilltree/priest_sp.co",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "女神枪手": {
-                  "FilePath": "clientonly/skilltree/atgunner_sp.co",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "暗夜使者": {
-                  "FilePath": "clientonly/skilltree/thief_sp.co",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "男格斗家": {
-                  "FilePath": "clientonly/skilltree/atfighter_sp.co",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "男魔法师": {
-                  "FilePath": "clientonly/skilltree/atmage_sp.co",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "黑暗武士": {
-                  "FilePath": "clientonly/skilltree/demonicswordman_sp.co",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "缔造者": {
-                  "FilePath": "clientonly/skilltree/creator_sp.co",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "女鬼剑士": {
-                  "FilePath": "clientonly/skilltree/atswordman_sp.co",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "男鬼剑士": {
-                  "FilePath": "clientonly/skilltree/swordman_sp.co",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                }
-              }
+              "FilePath": "clientonly/cancelskilllist.co",
+              "IsFile": true,
+              "Sort": 17,
+              "Children": {}
+            }
+          }
+        },
+        "nut的定义": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 12,
+          "Children": {
+            "常见类型的nut": {
+              "FilePath": "sqr/common.nut",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
             },
-            "特殊": {
-              "FilePath": "",
-              "IsFile": false,
-              "Sort": 36,
-              "Children": {
-                "商   城": {
-                  "FilePath": "etc/newcashshop.etc",
-                  "IsFile": true,
-                  "Sort": 0,
-                  "Children": {}
-                },
-                "深渊派对": {
-                  "FilePath": "etc/hellparty.etc",
-                  "IsFile": true,
-                  "Sort": 1,
-                  "Children": {}
-                },
-                "对话立绘": {
-                  "FilePath": "etc/dialogwindowimageindex.etc",
-                  "IsFile": true,
-                  "Sort": 2,
-                  "Children": {}
-                },
-                "套装属性": {
-                  "FilePath": "etc/equipmentpartset.etc",
-                  "IsFile": true,
-                  "Sort": 3,
-                  "Children": {}
-                },
-                "隐藏NPC": {
-                  "FilePath": "etc/hiddennpc.etc",
-                  "IsFile": true,
-                  "Sort": 4,
-                  "Children": {}
-                },
-                "称号簿": {
-                  "FilePath": "etc/titlebook.etc",
-                  "IsFile": true,
-                  "Sort": 5,
-                  "Children": {}
-                },
-                "QP商店": {
-                  "FilePath": "etc/questshop.etc",
-                  "IsFile": true,
-                  "Sort": 6,
-                  "Children": {}
-                },
-                "增幅": {
-                  "FilePath": "etc/amplifyupgrade.etc",
-                  "IsFile": true,
-                  "Sort": 7,
-                  "Children": {}
-                },
-                "强化": {
-                  "FilePath": "etc/upgrade.etc",
-                  "IsFile": true,
-                  "Sort": 8,
-                  "Children": {}
-                },
-                "锻造": {
-                  "FilePath": "etc/upgrade_separate.etc",
-                  "IsFile": true,
-                  "Sort": 9,
-                  "Children": {}
-                },
-                "加百利商店": {
-                  "FilePath": "etc/secretshop.etc",
-                  "IsFile": true,
-                  "Sort": 10,
-                  "Children": {}
-                },
-                "技能调用ani": {
-                  "FilePath": "etc/skillpreload.etc",
-                  "IsFile": true,
-                  "Sort": 11,
-                  "Children": {}
-                },
-                "装备词典": {
-                  "FilePath": "etc/itemdictionary/(r)itemdictionary.etc",
-                  "IsFile": true,
-                  "Sort": 12,
-                  "Children": {}
-                },
-                "娃娃机": {
-                  "FilePath": "etc/craneminigameitem.etc",
-                  "IsFile": true,
-                  "Sort": 13,
-                  "Children": {}
-                },
-                "升级邮件": {
-                  "FilePath": "event/levelupreward.evt",
-                  "IsFile": true,
-                  "Sort": 14,
-                  "Children": {}
-                },
-                "自动售货机": {
-                  "FilePath": "etc/pcroom.vm",
-                  "IsFile": true,
-                  "Sort": 15,
-                  "Children": {}
-                },
-                "左上角": {
-                  "FilePath": "event/eventlistwindow.evt",
-                  "IsFile": true,
-                  "Sort": 16,
-                  "Children": {}
-                },
-                "滚动公告": {
-                  "FilePath": "event/eventnotice.evt",
-                  "IsFile": true,
-                  "Sort": 17,
-                  "Children": {}
-                },
-                "读条Tip": {
-                  "FilePath": "etc/loadingadvermessage.etc",
-                  "IsFile": true,
-                  "Sort": 18,
-                  "Children": {}
-                },
-                "基佬的信任": {
-                  "FilePath": "etc/serverparameter.etc",
-                  "IsFile": true,
-                  "Sort": 19,
-                  "Children": {}
-                },
-                "每日恢复门票": {
-                  "FilePath": "etc/chn_server_limititemusageinfo.etc",
-                  "IsFile": true,
-                  "Sort": 20,
-                  "Children": {}
-                },
-                "天空套合成控制": {
-                  "FilePath": "etc/compoundavatar_swordman.etc",
-                  "IsFile": true,
-                  "Sort": 21,
-                  "Children": {}
-                },
-                "组队活动": {
-                  "FilePath": "etc/quickparty.etc",
-                  "IsFile": true,
-                  "Sort": 22,
-                  "Children": {}
-                }
-              }
+            "DNF例举的NUT": {
+              "FilePath": "sqr/dnf_enum_header.nut",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "初始角色的nut": {
+              "FilePath": "sqr/init_character.nut",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "负载状态的nut": {
+              "FilePath": "sqr/loadstate.nut",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            }
+          }
+        },
+        "UI接口分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 13,
+          "Children": {
+            "时空之门UI接口": {
+              "FilePath": "worldmap/ui/timegate.ui",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "时空之门UI的动画": {
+              "FilePath": "worldmap/animation/time_00.ani",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "时空之门地图接口文件": {
+              "FilePath": "worldmap/timegate.wdm",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            }
+          }
+        },
+        "各文件列表": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 14,
+          "Children": {
+            "任务列表": {
+              "FilePath": "n_quest/quest.lst",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "道具列表": {
+              "FilePath": "stackable/stackable.lst",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "装备列表": {
+              "FilePath": "equipment/equipment.lst",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "副本列表": {
+              "FilePath": "dungeon/dungeon.lst",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "地图列表": {
+              "FilePath": "map/map.lst",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "怪物列表": {
+              "FilePath": "monster/monster.lst",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "OBJ列表": {
+              "FilePath": "passiveobject/passiveobject.lst",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "NPC列表": {
+              "FilePath": "npc/npc.lst",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "商店列表": {
+              "FilePath": "itemshop/itemshop.lst",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "AIC列表": {
+              "FilePath": "aicharacter/aicharacter.lst",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "宠物列表": {
+              "FilePath": "creature/creature.lst",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "APD列表": {
+              "FilePath": "appendage/appendage.lst",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "城镇列表": {
+              "FilePath": "town/town.lst",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            },
+            "绝望之塔房间APC列表": {
+              "FilePath": "aicharacter/operatingvalue.lst",
+              "IsFile": true,
+              "Sort": 13,
+              "Children": {}
+            },
+            "废弃商城的列表": {
+              "FilePath": "cashshop/cashshop.lst",
+              "IsFile": true,
+              "Sort": 14,
+              "Children": {}
+            },
+            "光环列表": {
+              "FilePath": "aura/aura.lst",
+              "IsFile": true,
+              "Sort": 15,
+              "Children": {}
+            },
+            "初始角色邮件列表": {
+              "FilePath": "character/character.jpn.lst",
+              "IsFile": true,
+              "Sort": 16,
+              "Children": {}
+            },
+            "副职业列表": {
+              "FilePath": "character/expertjob.lst",
+              "IsFile": true,
+              "Sort": 17,
+              "Children": {}
+            },
+            "聊天表情列表": {
+              "FilePath": "chatemoticon/chatemoticon.lst",
+              "IsFile": true,
+              "Sort": 18,
+              "Children": {}
+            },
+            "副本邮件列表": {
+              "FilePath": "dungeon/dungeon.jpn.lst",
+              "IsFile": true,
+              "Sort": 19,
+              "Children": {}
+            },
+            "新手教程列表": {
+              "FilePath": "etc/globaltutorialinfo/characterlist.lst",
+              "IsFile": true,
+              "Sort": 20,
+              "Children": {}
+            },
+            "独立掉落外部列表": {
+              "FilePath": "etc/independentdrop/1_magneus_normal.etc",
+              "IsFile": true,
+              "Sort": 21,
+              "Children": {}
+            },
+            "显示独立掉落的装备": {
+              "FilePath": "etc/itemdictionary/(r)independentdropinfo.etc",
+              "IsFile": true,
+              "Sort": 22,
+              "Children": {}
+            },
+            "支援兵参数详细列表": {
+              "FilePath": "etc/linksystem/strikercombo.lst",
+              "IsFile": true,
+              "Sort": 23,
+              "Children": {}
+            },
+            "魔法封印封印属性的列表": {
+              "FilePath": "etc/randomoption/randomoption.lst",
+              "IsFile": true,
+              "Sort": 24,
+              "Children": {}
+            },
+            "魔法封印可增加技能的列表": {
+              "FilePath": "etc/randomoption/randomoptionskill.lst",
+              "IsFile": true,
+              "Sort": 25,
+              "Children": {}
+            },
+            "活动提升技能等级列表": {
+              "FilePath": "event/eventcharacter/eventcharacter.lst",
+              "IsFile": true,
+              "Sort": 26,
+              "Children": {}
+            },
+            "活动列表（详细）": {
+              "FilePath": "event/ingameeventlist.evt",
+              "IsFile": true,
+              "Sort": 27,
+              "Children": {}
+            },
+            "地图邮政列表": {
+              "FilePath": "map/map.jpn.lst",
+              "IsFile": true,
+              "Sort": 28,
+              "Children": {}
+            },
+            "全职业技能列表": {
+              "FilePath": "skill/skilllist.lst",
+              "IsFile": true,
+              "Sort": 29,
+              "Children": {}
+            },
+            "阶段图列表": {
+              "FilePath": "stagemap/stagemap.lst",
+              "IsFile": true,
+              "Sort": 30,
+              "Children": {}
+            },
+            "古老的特效列表": {
+              "FilePath": "passiveobject/old passiveobject.lst",
+              "IsFile": true,
+              "Sort": 31,
+              "Children": {}
+            }
+          }
+        },
+        "aic文件分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 15,
+          "Children": {
+            "所有aic默认名字喊话": {
+              "FilePath": "aicharacter/aicharacter.kor.str",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "所有APC的列表": {
+              "FilePath": "aicharacter/aicharacter.lst",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "每十层绝望之塔APC列表": {
+              "FilePath": "aicharacter/operatingvalue.lst",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "AI文件描述": {
+              "FilePath": "aicharacter/ai_tool_info.txt",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "28号人偶": {
+              "FilePath": "aicharacter/fighter/28/28_doll.aic",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "人偶的AI文件": {
+              "FilePath": "aicharacter/fighter/28/ai/action.ai",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "人偶移动AI的判定": {
+              "FilePath": "aicharacter/fighter/28/ai/movemethod.ai",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "复制体aic(心魔)": {
+              "FilePath": "aicharacter/_jojochan/atfighter/agarum_atfighter_grap/agarum_fighter_grap.aic",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "KEY文件": {
+              "FilePath": "aicharacter/_jojochan/atfighter/agarum_atfighter_grap/key/air.key",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "支援兵系统（可改技能）": {
+              "FilePath": "etc/linksystem/striker.etc",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            }
+          }
+        },
+        "杂项参数分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 16,
+          "Children": {
+            "聊天时的表情列表": {
+              "FilePath": "chatemoticon/chatemoticon.lst",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "表情的描述文件": {
+              "FilePath": "chatemoticon/chatemoticon.kor.str",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "菜单的描述文件": {
+              "FilePath": "clientonly/clientonly.kor.str",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "技能商店指示UI": {
+              "FilePath": "clientonly/skillshoptextguide.co",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "时装转盘": {
+              "FilePath": "etc/avatar_roulette/avatarfixedhiddenoptionlist.etc",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "徽章文件": {
+              "FilePath": "etc/emblemrenewal/avatar_convert_jpn.etc",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "进入副本出现的随机指南": {
+              "FilePath": "etc/guide/guidelist.glist",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "装备词典基准表": {
+              "FilePath": "etc/itemdictionary/(r)baseitemdictionarytable.etc",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "装备词典": {
+              "FilePath": "etc/itemdictionary/(r)itemdictionary.etc",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "冒险团经验金币": {
+              "FilePath": "etc/linksystem/characlinksystem.etc",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "冒险团详细参数": {
+              "FilePath": "etc/linksystem/charactermanage.etc",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "PKC的练习": {
+              "FilePath": "etc/pvppracticecombo/atfighter.etc",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "PKC扣血保护机制": {
+              "FilePath": "etc/pvprevisiontable/combodamagerevisiontable.etc",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            },
+            "PKC技能平衡": {
+              "FilePath": "etc/pvpskilltree/atgunner.etc",
+              "IsFile": true,
+              "Sort": 13,
+              "Children": {}
+            },
+            "魔法封印的基础目录": {
+              "FilePath": "etc/randomoption/auctionrandomcategory.etc",
+              "IsFile": true,
+              "Sort": 14,
+              "Children": {}
+            },
+            "魔法封印（不同种类之一）的权重": {
+              "FilePath": "etc/randomoption/optiongrouping.etc",
+              "IsFile": true,
+              "Sort": 15,
+              "Children": {}
+            },
+            "等级提高魔法封印出现3属性概率增加": {
+              "FilePath": "etc/randomoption/regenerationrandomoption.etc",
+              "IsFile": true,
+              "Sort": 16,
+              "Children": {}
+            },
+            "觉醒技能的插图": {
+              "FilePath": "etc/ultimateskillani/thief_necro.ani",
+              "IsFile": true,
+              "Sort": 17,
+              "Children": {}
+            },
+            "红字装备随机率": {
+              "FilePath": "etc/amplifyitem.etc",
+              "IsFile": true,
+              "Sort": 18,
+              "Children": {}
+            },
+            "拍卖推荐装备的等级": {
+              "FilePath": "etc/auction_recommend_item.etc",
+              "IsFile": true,
+              "Sort": 19,
+              "Children": {}
+            },
+            "时装染色": {
+              "FilePath": "etc/avatarcolorvariation.etc",
+              "IsFile": true,
+              "Sort": 20,
+              "Children": {}
+            },
+            "广告测试的数据": {
+              "FilePath": "etc/billingtestdata.etc",
+              "IsFile": true,
+              "Sort": 21,
+              "Children": {}
+            },
+            "每天重置的门票": {
+              "FilePath": "etc/chn_server_limititemusageinfo.etc",
+              "IsFile": true,
+              "Sort": 22,
+              "Children": {}
+            },
+            "心情卡片特效": {
+              "FilePath": "etc/emotionexpressiondata.etc",
+              "IsFile": true,
+              "Sort": 23,
+              "Children": {}
+            },
+            "公平PKC属性": {
+              "FilePath": "etc/fairpvpstat.etc",
+              "IsFile": true,
+              "Sort": 24,
+              "Children": {}
+            },
+            "PKC列表与描述": {
+              "FilePath": "etc/pvpchannellist.etc",
+              "IsFile": true,
+              "Sort": 25,
+              "Children": {}
+            },
+            "游戏公告": {
+              "FilePath": "event/eventlistwindow.evt",
+              "IsFile": true,
+              "Sort": 26,
+              "Children": {}
+            },
+            "npc西岚": {
+              "FilePath": "npc/siran.npc",
+              "IsFile": true,
+              "Sort": 27,
+              "Children": {}
+            },
+            "怪物卡片（阿加门龙大天使）": {
+              "FilePath": "stackable/monstercard/mcard_dominions.stk",
+              "IsFile": true,
+              "Sort": 28,
+              "Children": {}
+            },
+            "血量或左侧正中间的广告UI": {
+              "FilePath": "ui/hud/mainmenuwindow.ui",
+              "IsFile": true,
+              "Sort": 29,
+              "Children": {}
+            }
+          }
+        },
+        "地图类型分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 17,
+          "Children": {
+            "废弃的商城": {
+              "FilePath": "etc/cerashop_first.etc",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "守护者祭坛地图（活动类）": {
+              "FilePath": "map/advancealtar/advancealtar_stage_02_1easy.map",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "死亡之塔类型": {
+              "FilePath": "map/deadtower/001f.map",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "远古地下城类型（王的遗迹）": {
+              "FilePath": "map/kingsruins/n4804.map",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "异界地下城类型（蠕动之城）": {
+              "FilePath": "map/realskycastle/realskycastle06.map",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "魂 . 远古地图类型 （魂 . 遗迹）": {
+              "FilePath": "map/r_kingsruins/b4801.map",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "城镇描述文件": {
+              "FilePath": "town/town.kor.str",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "城镇地区的描述": {
+              "FilePath": "worldmap/worldmap.kor.str",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            }
+          }
+        },
+        "副本类型分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 18,
+          "Children": {
+            "绝望之塔APC附属文件": {
+              "FilePath": "aicharacter/towerofdespair_apc.etc",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "PKC数据": {
+              "FilePath": "data/extern.sd",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "普通副本（格拉卡这种）": {
+              "FilePath": "dungeon/act1/grakkarak.dgn",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "守护者祭坛（台服活动本）": {
+              "FilePath": "dungeon/advancealtar/advancealtar_stage_01.dgn",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "远古地下城（不含遗迹）": {
+              "FilePath": "dungeon/ancient/noirpera.dgn",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "异界地下城": {
+              "FilePath": "dungeon/impossible/goblinkingdom.dgn",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "任务副本地下城": {
+              "FilePath": "dungeon/quest/deadmoon.dgn",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "魂 . 远古   副本": {
+              "FilePath": "dungeon/riskdungeon/r_kingsruins.dgn",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "龙斗会地下城": {
+              "FilePath": "dungeon/shonantournament/bluedragon.dgn",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "副本邮件列表": {
+              "FilePath": "dungeon/dungeon.jpn.lst",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "副本外的描述": {
+              "FilePath": "dungeon/dungeon.kor.str",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "守护者祭坛活动设置（详细）": {
+              "FilePath": "etc/advancealtar/advancealtarmode.etc",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "限时开放的副本": {
+              "FilePath": "etc/chn_schedule.etc",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            },
+            "公会系统": {
+              "FilePath": "etc/guild.etc",
+              "IsFile": true,
+              "Sort": 13,
+              "Children": {}
+            },
+            "普通副本的地图（洛兰）": {
+              "FilePath": "map/lorien/s1.map",
+              "IsFile": true,
+              "Sort": 14,
+              "Children": {}
+            },
+            "主线任务清单（GM清楚任务的数量？）": {
+              "FilePath": "n_quest/epicquest.lst",
+              "IsFile": true,
+              "Sort": 15,
+              "Children": {}
+            }
+          }
+        },
+        "怪物类型分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 19,
+          "Children": {
+            "普通AI怪物": {
+              "FilePath": "monster/lotus/lotus.mob",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "英雄级AI怪物（高AI 独特技能）": {
+              "FilePath": "monster/lotus/lotus_global_bosstower.mob",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "一体怪物atk文件（未采取act写法）": {
+              "FilePath": "monster/soldier/attackinfo/axeexpellerattack.atk",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "玩家技能召唤的怪物（采用百分比攻防）": {
+              "FilePath": "monster/spikeking/spikeking_quest.mob",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "新版怪物的act文件（冰龙斯卡萨）": {
+              "FilePath": "monster/newmonsters/dragon/scasa/action/alive.act",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "怪物名称与描述（基本无用）": {
+              "FilePath": "monster/monster.kor.str",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "怪物列表": {
+              "FilePath": "monster/monster.lst",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "全局怪物难度（详情参考大狗王怪物笔记）": {
+              "FilePath": "monster/monsterapcdifficultybonus.tbl",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            }
+          }
+        },
+        "深渊类型分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 20,
+          "Children": {
+            "深渊派对组合（详情参考大狗王的笔记）": {
+              "FilePath": "etc/hellparty.etc",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "深渊掉落的详细参数": {
+              "FilePath": "etc/itemdropinfo_monster_hell.etc",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "深渊任务（可自己改写前置和更早的深渊任务）": {
+              "FilePath": "n_quest/hell/achievement_47_hell_wild_1.qst",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "深渊房间（hell 类型的 map ）": {
+              "FilePath": "map/aganzo/hell_aganzo.map",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            }
+          }
+        },
+        "特效种类分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 21,
+          "Children": {
+            "光炎剑的火球特效类型（需要ptl文件才可以运作）": {
+              "FilePath": "passiveobject/actionobject/spc/_burnfire/body.obj",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "光炎剑火球的伤害增幅": {
+              "FilePath": "passiveobject/actionobject/spc/_burnfire/attackinfo/attack.atk",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "光炎剑火球的运动动画": {
+              "FilePath": "passiveobject/actionobject/spc/_burnfire/animation/body.ani",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "流光星陨刀的陨石类型（不需要ptl文件）": {
+              "FilePath": "passiveobject/common/shootingstaritem.obj",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "特效描述文件": {
+              "FilePath": "passiveobject/passiveobject.kor.str",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "特效列表": {
+              "FilePath": "passiveobject/passiveobject.lst",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "古老的特效列表": {
+              "FilePath": "passiveobject/old passiveobject.lst",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "光炎剑的ptl文件（西岚剑舞剑气移动可以参考这个）": {
+              "FilePath": "passiveobject/mapobject/trap/particle/dragonheadenergyball.ptl",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            }
+          }
+        },
+        "技能关联分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 22,
+          "Children": {
+            "强制技能": {
+              "FilePath": "clientonly/cancelskilllist.co",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "技能热键": {
+              "FilePath": "clientonly/hotkeysystem.co",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "热键指令": {
+              "FilePath": "clientonly/hotkeysystem.co",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "技能树目录": {
+              "FilePath": "clientonly/skillshoptreespindex.co",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "技能商店指示": {
+              "FilePath": "clientonly/skillshoptextguide.co",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "ex技能目录（没有外传职业）": {
+              "FilePath": "clientonly/skillshoptreetpindex.co",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "全职业技能列表": {
+              "FilePath": "skill/skilllist.lst",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "全职业技能描述": {
+              "FilePath": "skill/skill.kor.str",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "公会技能的UI": {
+              "FilePath": "ui/skill/guildskillbuywindow.ui",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "全职业觉醒插图": {
+              "FilePath": "etc/ultimateskillcutscene.etc",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            }
+          }
+        },
+        "活动参数分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 23,
+          "Children": {
+            "活动的描述": {
+              "FilePath": "etc/etc.kor.str",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "强化活动的活动表": {
+              "FilePath": "etc/eventupgradejar.etc",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "NPC送礼与反礼": {
+              "FilePath": "etc/exchangeitemnpc.etc",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "金币上限（最高可改20e）": {
+              "FilePath": "etc/goldlimitbylevel.etc",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "游戏内的广告参数（可删）": {
+              "FilePath": "etc/ingameadvertisementparameter.etc",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "进入副本时读条的描述": {
+              "FilePath": "etc/loadingadvermessage.etc",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "限制账号或角色购买某物品": {
+              "FilePath": "etc/newcashshop_restrict.etc",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "抽奖机": {
+              "FilePath": "etc/pcroom.vm",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "活动装备奖励": {
+              "FilePath": "event/eventreward/reward_at_gunner.evt",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "幸运角色提升技能等级": {
+              "FilePath": "event/eventcharacter/40_event_character.evt",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "出席活动1": {
+              "FilePath": "event/attendance.evt",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "出席活动2": {
+              "FilePath": "event/avatardisjointrandomreward.evt",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "冰果活动": {
+              "FilePath": "event/bingoevent.evt",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            },
+            "屏幕上方滚动公告": {
+              "FilePath": "event/eventnotice.evt",
+              "IsFile": true,
+              "Sort": 13,
+              "Children": {}
+            },
+            "出席活动3": {
+              "FilePath": "event/exchangerandomitemreward.evt",
+              "IsFile": true,
+              "Sort": 14,
+              "Children": {}
+            },
+            "夏日活动": {
+              "FilePath": "event/heromissionevent.evt",
+              "IsFile": true,
+              "Sort": 15,
+              "Children": {}
+            },
+            "升级的邮件（可从1级开始写）": {
+              "FilePath": "event/levelupreward.evt",
+              "IsFile": true,
+              "Sort": 16,
+              "Children": {}
+            }
+          }
+        },
+        "冒险团的分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 24,
+          "Children": {
+            "冒险团额外经验金币": {
+              "FilePath": "etc/linksystem/characlinksystem.etc",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "冒险团详细参数（具体参数参考大狗王的笔记）": {
+              "FilePath": "etc/linksystem/charactermanage.etc",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "冒险团支援兵参数（详细请参考大狗王的笔记）": {
+              "FilePath": "etc/linksystem/striker.etc",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "冒险团支援兵技能参数列表": {
+              "FilePath": "etc/linksystem/strikercombo.lst",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            }
+          }
+        },
+        "套装详细分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 25,
+          "Children": {
+            "套装文件 1": {
+              "FilePath": "equipment/character/partset/2choroset1.equ",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "普通时装套装属性": {
+              "FilePath": "equipment/character/partset/eventavatarset02.equ",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "天空套套装属性": {
+              "FilePath": "equipment/character/partset/rareset.equ",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "套装文件 2 （可自定义）": {
+              "FilePath": "equipment/character/partset2/chn_part_set_30084.equ",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "时装版套装写法2 可加描述": {
+              "FilePath": "etc/equipmenteffectset.etc",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "套装属性登记处": {
+              "FilePath": "etc/equipmentpartset.etc",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            }
+          }
+        },
+        "宠物文件分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 26,
+          "Children": {
+            "宠物文件": {
+              "FilePath": "creature/2013kids/enryu/enryu.cre",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "宠物终结技": {
+              "FilePath": "creature/2013kids/enryu/skill/overskill.skl",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "宠物技能运行文件": {
+              "FilePath": "creature/2013kids/enryu/particle/overskill.ptl",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "宠物atk（伤害控制）": {
+              "FilePath": "creature/2013kids/enryu/attackinfo/skill.atk",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "宠物技能动画": {
+              "FilePath": "creature/2013kids/enryu/animation/skill.ani",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "宠物移动动画（ani）": {
+              "FilePath": "creature/2013kids/enryu/animation/move.ani",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "解除异常状态（宠物技能）": {
+              "FilePath": "creature/2016summer/skill/skill.skl",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "宠物的普通技能": {
+              "FilePath": "creature/2017newyear/skill/mage_normal.skl",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "宠物喊话（名称对应宠物）": {
+              "FilePath": "creature/script/charp.wrd",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "宠物技能描述（可无视）": {
+              "FilePath": "creature/creature.kor.str",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "宠物升级经验": {
+              "FilePath": "creature/exptable.tbl",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "宠物（以装备的形式）": {
+              "FilePath": "equipment/creature/cannonfairy_blue.equ",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            }
+          }
+        },
+        "城镇文件分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 27,
+          "Children": {
+            "光环移动（CD需要装备改）": {
+              "FilePath": "aura/test.ora",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "城镇地图的动画（阿法利亚地区）": {
+              "FilePath": "town/title/alfhlyra.ani",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "城镇描述文件": {
+              "FilePath": "town/town.kor.str",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "城镇型地图（此类地图不存在地图列表中）": {
+              "FilePath": "map/elvengard/(f)gate.map",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            }
+          }
+        },
+        "异界气息分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 28,
+          "Children": {
+            "异次元之黄色气息（可以自己写 - 强无敌）": {
+              "FilePath": "stackable/consumption_1257.stk",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "异次元之红色气息（可以自己写 - 强无敌）": {
+              "FilePath": "stackable/consumption_1255.stk",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "异次元之蓝色气息（可以自己写 - 强无敌）": {
+              "FilePath": "stackable/consumption_1256.stk",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "异次元之黑色气息（可以自己写 - 强无敌）": {
+              "FilePath": "stackable/consumption_1254.stk",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            }
+          }
+        },
+        "角色职业分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 29,
+          "Children": {
+            "初始角色邮件列表": {
+              "FilePath": "character/character.jpn.lst",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "未知的描述文件": {
+              "FilePath": "character/character.jpn.str",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "角色职业名字（角色文件也要改）": {
+              "FilePath": "character/character.kor.str",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "角色每次升级所需经验": {
+              "FilePath": "character/exptable.tbl",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "GM特殊指令": {
+              "FilePath": "clientonly/gmcmdmap.co",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "手柄DNF映射文件": {
+              "FilePath": "clientonly/joypadmapping.co",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "格斗家装备模型动画": {
+              "FilePath": "equipment/character/atfighter.lay",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "账号金库": {
+              "FilePath": "etc/accountcargo.etc",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "活跃度": {
+              "FilePath": "etc/actionpointsystem.etc",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "聊天表情（详细）": {
+              "FilePath": "etc/chatsystem.etc",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "装备可穿戴插槽": {
+              "FilePath": "etc/chn_equipmentsockettypelist.etc",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "创建角色时的游戏介绍": {
+              "FilePath": "etc/jobexplanation.etc",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "时装按角色选定技能": {
+              "FilePath": "etc/newbierecommendselectoption.etc",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            }
+          }
+        },
+        "副职业类分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 30,
+          "Children": {
+            "分解机文件（与角色等级相关）": {
+              "FilePath": "character/expertjob.etc",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "副职业列表": {
+              "FilePath": "character/expertjob.lst",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "分解机详细参数": {
+              "FilePath": "etc/disjoint.etc",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            }
+          }
+        },
+        "国服专属独特": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 31,
+          "Children": {
+            "司天鉴地区": {
+              "FilePath": "town/chn_relic_secret_building.twn",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "智慧的引导": {
+              "FilePath": "dungeon/kcontents3/hell/hell_retry.dgn",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "智慧的引导（冒险级）": {
+              "FilePath": "dungeon/kcontents3/hell/hell_retry.dgn",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "荧光护石 - 拔刀斩": {
+              "FilePath": "equipment/character/common/talisman/100400307.equ",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "完美的野兽勋章": {
+              "FilePath": "equipment/character/common/flag/100380051.equ",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "魔界大战": {
+              "FilePath": "dungeon/kcontents2/theevildomwar/5428_evildomwar_dumy.dgn",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "国服签到活动": {
+              "FilePath": "event/researchlifepowereventscript.evt",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "德洛斯矿山 - 副本接口": {
+              "FilePath": "worldmap/loschest.wdm",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "竞技场副本接口": {
+              "FilePath": "worldmap/stadium.wdm",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "帝国竞技场 - 城镇地区": {
+              "FilePath": "town/collosseumofempire.twn",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "白金徽章 - 神罚之锤": {
+              "FilePath": "stackable/10163001/10163859.stk",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "斗气转换装置": {
+              "FilePath": "stackable/10163001/10163994.stk",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "诺顿大师（装备改造、继承与铭刻）": {
+              "FilePath": "npc/rothon.npc",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            },
+            "歌兰蒂斯 . 格拉西亚 （APC 超强 ）": {
+              "FilePath": "aicharacter/kcontents3/cataclysm/rearad/darktemple/grandis_gracia/grandis_gracia.aic",
+              "IsFile": true,
+              "Sort": 13,
+              "Children": {}
+            }
+          }
+        },
+        "强化增幅锻造分析": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 32,
+          "Children": {
+            "增幅文件": {
+              "FilePath": "etc/amplifyupgrade.etc",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "保护券": {
+              "FilePath": "etc/serverparameter.etc",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "洗红字更偏向的属性": {
+              "FilePath": "etc/amplifyitem.etc",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "锻造文件（详细参考大狗王的笔记）": {
+              "FilePath": "etc/upgrade_separate.etc",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "强化文件（详细参考大狗王的笔记）": {
+              "FilePath": "etc/upgrade.etc",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            }
+          }
+        },
+        "chr": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 33,
+          "Children": {
+            "男鬼剑士": {
+              "FilePath": "character/swordman/swordman.chr",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "女格斗家": {
+              "FilePath": "character/fighter/fighter.chr",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "男神枪手": {
+              "FilePath": "character/gunner/gunner.chr",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "女魔法师": {
+              "FilePath": "character/mage/mage.chr",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "男圣职者": {
+              "FilePath": "character/priest/priest.chr",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "女神枪手": {
+              "FilePath": "character/gunner/atgunner.chr",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "暗夜使者": {
+              "FilePath": "character/thief/thief.chr",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "男格斗家": {
+              "FilePath": "character/fighter/atfighter.chr",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "男魔法师": {
+              "FilePath": "character/mage/atmage.chr",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "黑暗武士": {
+              "FilePath": "character/swordman/demonicswordman.chr",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "缔造者": {
+              "FilePath": "character/mage/creatormage.chr",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            }
+          }
+        },
+        "职业技能列表.lst": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 34,
+          "Children": {
+            "男鬼剑士": {
+              "FilePath": "skill/swordmanskill.lst",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "女鬼剑士": {
+              "FilePath": "skill/atswordmanskill.lst",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "男格斗家": {
+              "FilePath": "skill/atfighterskill.lst",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "女格斗家": {
+              "FilePath": "skill/fighterskill.lst",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "男神枪手": {
+              "FilePath": "skill/gunnerskill.lst",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "女神枪手": {
+              "FilePath": "skill/atgunnerskill.lst",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "男魔法师": {
+              "FilePath": "skill/atmageskill.lst",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "女魔法师": {
+              "FilePath": "skill/mageskill.lst",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "暗夜使者": {
+              "FilePath": "skill/thiefskill.lst",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "男圣职者": {
+              "FilePath": "skill/priestskill.lst",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "黑暗武士": {
+              "FilePath": "skill/demonicswordman.lst",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            }
+          }
+        },
+        "技能树": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 35,
+          "Children": {
+            "鬼剑": {
+              "FilePath": "clientonly/skilltree/swordman_sp.co",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "女格斗家": {
+              "FilePath": "clientonly/skilltree/fighter_sp.co",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "男神枪手": {
+              "FilePath": "clientonly/skilltree/gunner_sp.co",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "女魔法师": {
+              "FilePath": "clientonly/skilltree/mage_sp.co",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "男圣职者": {
+              "FilePath": "clientonly/skilltree/priest_sp.co",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "女神枪手": {
+              "FilePath": "clientonly/skilltree/atgunner_sp.co",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "暗夜使者": {
+              "FilePath": "clientonly/skilltree/thief_sp.co",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "男格斗家": {
+              "FilePath": "clientonly/skilltree/atfighter_sp.co",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "男魔法师": {
+              "FilePath": "clientonly/skilltree/atmage_sp.co",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "黑暗武士": {
+              "FilePath": "clientonly/skilltree/demonicswordman_sp.co",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "缔造者": {
+              "FilePath": "clientonly/skilltree/creator_sp.co",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "女鬼剑士": {
+              "FilePath": "clientonly/skilltree/atswordman_sp.co",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "男鬼剑士": {
+              "FilePath": "clientonly/skilltree/swordman_sp.co",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            }
+          }
+        },
+        "特殊": {
+          "FilePath": "",
+          "IsFile": false,
+          "Sort": 36,
+          "Children": {
+            "商   城": {
+              "FilePath": "etc/newcashshop.etc",
+              "IsFile": true,
+              "Sort": 0,
+              "Children": {}
+            },
+            "深渊派对": {
+              "FilePath": "etc/hellparty.etc",
+              "IsFile": true,
+              "Sort": 1,
+              "Children": {}
+            },
+            "对话立绘": {
+              "FilePath": "etc/dialogwindowimageindex.etc",
+              "IsFile": true,
+              "Sort": 2,
+              "Children": {}
+            },
+            "套装属性": {
+              "FilePath": "etc/equipmentpartset.etc",
+              "IsFile": true,
+              "Sort": 3,
+              "Children": {}
+            },
+            "隐藏NPC": {
+              "FilePath": "etc/hiddennpc.etc",
+              "IsFile": true,
+              "Sort": 4,
+              "Children": {}
+            },
+            "称号簿": {
+              "FilePath": "etc/titlebook.etc",
+              "IsFile": true,
+              "Sort": 5,
+              "Children": {}
+            },
+            "QP商店": {
+              "FilePath": "etc/questshop.etc",
+              "IsFile": true,
+              "Sort": 6,
+              "Children": {}
+            },
+            "增幅": {
+              "FilePath": "etc/amplifyupgrade.etc",
+              "IsFile": true,
+              "Sort": 7,
+              "Children": {}
+            },
+            "强化": {
+              "FilePath": "etc/upgrade.etc",
+              "IsFile": true,
+              "Sort": 8,
+              "Children": {}
+            },
+            "锻造": {
+              "FilePath": "etc/upgrade_separate.etc",
+              "IsFile": true,
+              "Sort": 9,
+              "Children": {}
+            },
+            "加百利商店": {
+              "FilePath": "etc/secretshop.etc",
+              "IsFile": true,
+              "Sort": 10,
+              "Children": {}
+            },
+            "技能调用ani": {
+              "FilePath": "etc/skillpreload.etc",
+              "IsFile": true,
+              "Sort": 11,
+              "Children": {}
+            },
+            "装备词典": {
+              "FilePath": "etc/itemdictionary/(r)itemdictionary.etc",
+              "IsFile": true,
+              "Sort": 12,
+              "Children": {}
+            },
+            "娃娃机": {
+              "FilePath": "etc/craneminigameitem.etc",
+              "IsFile": true,
+              "Sort": 13,
+              "Children": {}
+            },
+            "升级邮件": {
+              "FilePath": "event/levelupreward.evt",
+              "IsFile": true,
+              "Sort": 14,
+              "Children": {}
+            },
+            "自动售货机": {
+              "FilePath": "etc/pcroom.vm",
+              "IsFile": true,
+              "Sort": 15,
+              "Children": {}
+            },
+            "左上角": {
+              "FilePath": "event/eventlistwindow.evt",
+              "IsFile": true,
+              "Sort": 16,
+              "Children": {}
+            },
+            "滚动公告": {
+              "FilePath": "event/eventnotice.evt",
+              "IsFile": true,
+              "Sort": 17,
+              "Children": {}
+            },
+            "读条Tip": {
+              "FilePath": "etc/loadingadvermessage.etc",
+              "IsFile": true,
+              "Sort": 18,
+              "Children": {}
+            },
+            "基佬的信任": {
+              "FilePath": "etc/serverparameter.etc",
+              "IsFile": true,
+              "Sort": 19,
+              "Children": {}
+            },
+            "每日恢复门票": {
+              "FilePath": "etc/chn_server_limititemusageinfo.etc",
+              "IsFile": true,
+              "Sort": 20,
+              "Children": {}
+            },
+            "天空套合成控制": {
+              "FilePath": "etc/compoundavatar_swordman.etc",
+              "IsFile": true,
+              "Sort": 21,
+              "Children": {}
+            },
+            "组队活动": {
+              "FilePath": "etc/quickparty.etc",
+              "IsFile": true,
+              "Sort": 22,
+              "Children": {}
             }
           }
         }

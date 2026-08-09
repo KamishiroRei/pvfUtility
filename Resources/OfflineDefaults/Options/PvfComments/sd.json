@@ -81,6 +81,56 @@
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "sd",
+      "Section": "g3 move time",
+      "Title": "G3移动时长（越小就越快）",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "sd",
+      "Section": "g3 transform time",
+      "Title": "G3 变形时间",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "sd",
+      "Section": "g3 max round time",
+      "Title": "G3旋转时长",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "sd",
+      "Section": "g3 max radius",
+      "Title": "G3旋转最大半径",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "sd",
+      "Section": "g3 max angle",
+      "Title": "G3角度",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "浮浮浮"
     }
   ]
 }

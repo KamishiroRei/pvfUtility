@@ -1,0 +1,26 @@
+{
+  "SchemaVersion": 1,
+  "FileType": "als",
+  "Comments": [
+    {
+      "PvfCommentType": "Section",
+      "FileType": "als",
+      "Section": "create draw only object",
+      "Title": "创建唯一的绘制对象",
+      "Comment": "创建唯一的绘制对象，该词条创建的Ani动画不会随着人物当前动作的结束，而销毁该Ani动画。",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "ZateL"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "als",
+      "Section": "LINEARDODGE",
+      "Title": "线性减淡",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "北海3092158274"
+    }
+  ]
+}

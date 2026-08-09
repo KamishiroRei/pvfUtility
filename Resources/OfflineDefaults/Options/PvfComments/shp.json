@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "shp",
   "Comments": [
@@ -90,7 +90,7 @@
       "Comment": "商店类型：在 `[etc shop]`（杂货商店）、`[weapon shop]`（武器商店）、`[disjoint shop]`（分解商店）中选择一种。不同类型决定商店的基础功能行为。",
       "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[type] `[etc shop]`\t\t// `[etc shop]` `[weapon shop]` `[disjoint shop]` 中选择一个\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -100,7 +100,7 @@
       "Comment": "仅限购买模式：控制商店是否允许玩家卖出物品。1 = 只能从商店购买（不可卖东西），0 = 买卖均可。",
       "OfficialDescription": "#### 官方示例: itemshopsample.shp\n\n```pvf\n[only buy] 1\t\t\t// 商店是否可以卖东西还是只能买东西。两者都可以则为 0\n```",
       "Closing": false,
-      "Authors": null
+      "Authors": "官方PVF"
     },
     {
       "PvfCommentType": "Section",
@@ -521,6 +521,76 @@
       "OfficialDescription": null,
       "Closing": true,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "tad name",
+      "Title": "tad name",
+      "Comment": "TAD名称",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "warehouse",
+      "Title": "warehouse",
+      "Comment": "仓库",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "guild warehouse",
+      "Title": "guild warehouse",
+      "Comment": "公会仓库",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "warehouse itme",
+      "Title": "warehouse itme",
+      "Comment": "仓库项目",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "shp",
+      "Section": "Generator",
+      "Title": "Generator",
+      "Comment": "发电机",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "shp",
+      "Section": "at gunner",
+      "Title": "神枪手",
+      "Comment": "",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "pvfUtility"
+    },
+    {
+      "PvfCommentType": "String",
+      "FileType": "shp",
+      "Section": "weapon shop",
+      "Title": "商店类型",
+      "Comment": "商店类型:武器商店,此写法开启商店修理权限",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "墨白"
     }
   ]
 }

@@ -1,4 +1,4 @@
-﻿{
+{
   "SchemaVersion": 1,
   "FileType": "etc",
   "Comments": [
@@ -128,7 +128,7 @@
       "Section": "avatar",
       "Title": "时装",
       "Comment": "时装店出售商品的列表/分类入口。商品会按子分类组织并保持配置顺序；实际商城展示、购买、价格和服务端放行需结合具体 ETC 文件、商品 registry 与实机确认。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: cashshopsample.etc\n\n```pvf\n[avatar]    // 时装店出售的商品列表。\n5        // 自动进行子分类，并保持顺序。\n300\n34\n23\n[/avatar]\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -258,7 +258,7 @@
       "Section": "cube index",
       "Title": "小晶块索引",
       "Comment": "小晶块索引\n各色小晶块（无色、红色、蓝色、白色、黑色）的物品编号索引。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: disjointsample.etc\n\n```pvf\n// 物品分解脚本示例\n[cube index]    // 小晶块的物品索引列表\n`[no element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个\n10001        // 索引列表。按低等级物品分解结果依次填写\n10002\n10003\n10004\n10005\n[/cube index]\n```\n\n```pvf\n[cube index]    // 小晶块的物品索引列表\n`[fire element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个\n10011        // 索引列表。按低等级物品分解结果依次填写\n10012\n10013\n10014\n10015\n[/cube index]\n```\n\n```pvf\n[cube index]    // 小晶块的物品索引列表\n`[water element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个\n10021        // 索引列表。按低等级物品分解结果依次填写\n10022\n10023\n10024\n10025\n[/cube index]\n```\n\n```pvf\n[cube index]    // 小晶块的物品索引列表\n`[light element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个\n10031        // 索引列表。按低等级物品分解结果依次填写\n10032\n10033\n10034\n10035\n[/cube index]\n```\n\n```pvf\n[cube index]    // 小晶块的物品索引列表\n`[dark element]`        // 指定小晶块的元素属性。在 `[no element]` `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个\n10041        // 索引列表。按低等级物品分解结果依次填写\n10042\n10043\n10044\n10045\n[/cube index]\n```",
       "Closing": false,
       "Authors": "无名氏"
     },
@@ -288,7 +288,7 @@
       "Section": "difficulty",
       "Title": "难度参数（按父文件解释）",
       "Comment": "同名 [difficulty] 在不同 ETC 文件中结构不同，不能建立全局单义映射：n_quest/questparameter.etc 为“难度 token + 数值”的闭合列表；etc/hellparty.etc 先给记录数量，再给“难度 token + 多列参数”的记录。旧注释中的掉落数量、品质权重和 S/A/B/C/M 百分比未能从当前真实列形闭合，必须按父文件、相邻块和实机分别验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: questparameter.etc\n\n```pvf\n// difficulty 奖励权重 (百分比)\n[difficulty]\n`S`\t300\n`A`\t250\n`B`\t200\n`C`\t150\n`M`\t100\n[/difficulty]\n```",
       "Closing": false,
       "Authors": "Xiti Fox"
     },
@@ -688,7 +688,7 @@
       "Section": "legacy info",
       "Title": "传承装备信息",
       "Comment": "传承装备信息\n传承(Legacy)装备的相关属性、套装数据信息配置。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: disjointsample.etc\n\n```pvf\n[legacy info]    // 抽取信息\n1        // 第一个整数数据是抽取数据的品级。从1开始。（1 = 1~10, 2=11~20...）\n        // 之后格式与抽取物品的整数数据相同。\n\n1001                    // 未抽中任何物品时的默认产出物品。\n\n10001 288                // 产出物品的索引和概率。概率为万分比（0.001%）\n2342 301                // 例：2342号物品 0.301% 概率产出\n3222 1                    // 例：3222号物品 0.001% 概率产出\n4222 5000\n2222 243\n[/legacy info]\n```\n\n```pvf\n[legacy info]    // 抽取信息\n2        // 第一个整数数据是抽取数据的品级。从1开始。\n        // 之后格式与抽取物品的整数数据相同。\n\n1001                    // 未抽中任何物品时的默认产出物品。\n\n10001 288                // 产出物品的索引和概率。概率为万分比（0.001%）\n2342 301                // 例：2342号物品 0.301% 概率产出\n3222 1                    // 例：3222号物品 0.001% 概率产出\n4222 5000\n2222 243\n[/legacy info]\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -778,7 +778,7 @@
       "Section": "material",
       "Title": "所需材料",
       "Comment": "所需材料\n指定操作/合成/升级等所需的材料物品配置。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: compoundavatarsample.etc\n\n```pvf\n// 使用的材料物品信息\n[material]\n1    // 使用的材料数量\n\n1000 1    // 索引，数量\n[/material]\n```",
       "Closing": false,
       "Authors": "雪花 2524501757"
     },
@@ -828,7 +828,7 @@
       "Section": "npc info",
       "Title": "NPC信息",
       "Comment": "NPC/商店的基本信息配置，包括各商店对应的 NPC 面部图像文件名、帧索引和说明文本。静态资源引用不证明客户端图像存在、商店可打开或服务端采用。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: cashshopsample.etc\n\n```pvf\n[npc info]\n`Npc.img` 0 `欢迎光临时装店，布拉布拉...`    // 各商店对应的 NPC 面部图像文件名，帧索引，说明\n`Npc.img` 1 `欢迎光临道具店，拿不拿不...`\n`Npc.img` 2 `欢迎光临杂货店，自家自家讲讲...`\n`Npc.img` 3 `欢迎光临宠物店，呜噜噜...`\n```",
       "Closing": false,
       "Authors": "lostluna1"
     },
@@ -1088,7 +1088,7 @@
       "Section": "skill prob",
       "Title": "技能概率",
       "Comment": "技能概率\n技能触发/使用概率配置。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: disjointsample.etc\n\n```pvf\n[skill prob] 1.0 5.0    // 技能影响的概率。%值，可为小数。\n            // 前面的值是1级时，后面的值是最大等级时。\n```",
       "Closing": false,
       "Authors": "无名氏"
     },
@@ -1688,7 +1688,7 @@
       "Section": "SKILL INDEX",
       "Title": "技能索引",
       "Comment": "系统数据中的 [SKILL INDEX] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。其中数字若表示技能 ID，必须先确定职业分支，再通过对应职业技能 registry 解析。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: ultimateskillcutscene.etc\n\n```pvf\n//鬼剑士 极·鬼剑术·暴风式\n[SKILL INDEX] \t 0 86\t\t// 职业编号，技能索引 (例如: 0 5 = 鬼剑士 鬼斩)\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1698,7 +1698,7 @@
       "Section": "FLIP TYPE",
       "Title": "FLIP TYPE（原始标签）",
       "Comment": "系统数据中的 [FLIP TYPE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: ultimateskillcutscene.etc\n\n```pvf\n[FLIP TYPE]   \t  1\t\t// 0 : 无 1 : 根据角色方向 2 : 根据角色位置\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1708,7 +1708,7 @@
       "Section": "START POSITION",
       "Title": "开始坐标",
       "Comment": "系统数据中的 [START POSITION] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。坐标原点、轴向、单位和相对/绝对基准需结合父块确认。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: ultimateskillcutscene.etc\n\n```pvf\n[START POSITION]    -400 480\t// 起始 x,y 坐标\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1718,7 +1718,7 @@
       "Section": "ANI FILE",
       "Title": "动画文件",
       "Comment": "系统数据中的 [ANI FILE] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: ultimateskillcutscene.etc\n\n```pvf\n[ANI FILE]      `etc/UltimateSkillAni/Ghost_Weapon.Ani` //要使用的动画文件\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -1728,7 +1728,7 @@
       "Section": "MOVE DIR",
       "Title": "MOVE DIR（原始标签）",
       "Comment": "系统数据中的 [MOVE DIR] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: ultimateskillcutscene.etc\n\n```pvf\n[MOVE DIR]\n  -5 480 500\t// 停止位置 x,y , 速度 (速度 = 1/10 每秒移动距离)\n   7 480 50\t// 停止位置 x,y , 速度 (速度 = 1/10 每秒移动距离)\n  -5 480 50\t// 停止位置 x,y , 速度 (速度 = 1/10 每秒移动距离)\n  -5 480 800\t// 停止，停止时间\n   7 480 50\t// 停止位置 x,y , 速度 (速度 = 1/10 每秒移动距离)\n-400 480 500\t// 停止位置 x,y , 速度\n-400 480 2000\t// 停止位置 x,y , 速度\n[/MOVE DIR]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -1748,7 +1748,7 @@
       "Section": "CHANGE ULTIMATECUTSCENE ANI FILE",
       "Title": "CHANGE ULTIMATECUTSCENE ANI FILE（原始标签）",
       "Comment": "系统数据中的 [CHANGE ULTIMATECUTSCENE ANI FILE] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。资源路径或名称只说明客户端资源引用；是否存在、能加载及表现正确需另行检查 ImagePacks2/NPK 或目标资源。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: ultimateskillcutscene.etc\n\n```pvf\n[CHANGE ULTIMATECUTSCENE ANI FILE]\n0\t\t\t\t\t// 0 : 要更改的觉醒技能过场图像类型 (要添加，请在 eTYPEULTIMATECUTSCENE 中增加类型)\n`etc/UltimateSkillAni/Thief_Rogue.Ani`\t// 要更改的觉醒技能过场动画文件路径\n[/CHANGE ULTIMATECUTSCENE ANI FILE]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -1758,7 +1758,7 @@
       "Section": "ONAIR ONLY",
       "Title": "ONAIR ONLY（原始标签）",
       "Comment": "系统数据中的 [ONAIR ONLY] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: ultimateskillcutscene.etc\n\n```pvf\n[ONAIR ONLY] \t 0\t\t// 是否仅为广播比赛专用 (0 : 否，1: 是，默认 : 0)\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -2238,7 +2238,7 @@
       "Section": "item",
       "Title": "物品",
       "Comment": "系统数据中的 [item] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。其中数字若表示物品 ID，必须先按父块区分 equipment、stackable、avatar 等 registry，不能把裸数字直接定性。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: cashshopsample.etc\n\n```pvf\n[item]    // 道具店出售的商品列表。\n343        // 同样自动进行子分类，并保持顺序。\n22\n111\n[/item]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -3538,7 +3538,7 @@
       "Section": "grade",
       "Title": "grade（原始标签）",
       "Comment": "系统数据中的 [grade] 闭合块。内部继续包含子标签，具体列义由父块和相邻记录共同决定。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: compoundavatarsample.etc\n\n```pvf\n[grade] 1    // 合成时所需物品品级\n```\n\n```pvf\n[grade] 2    // 合成时所需物品品级\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -8388,7 +8388,7 @@
       "Section": "skill info",
       "Title": "技能信息",
       "Comment": "系统数据中的 [skill info] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: disjointsample.etc\n\n```pvf\n[skill info]    // 与分解相关的技能信息\n33        // 最前面是主分解技能索引\n`[swordman]`        // 对应职业。在 `[swordman]` `[fighter]` `[gunner]` 中选择一个\n2        // 成长类型\n73        // 技能索引\n`[fire element]`        // 技能影响的小晶块属性。在 `[fire element]` `[water element]` `[light element]` `[dark element]` 中选择一个\n\n`[fighter]`    // 同上重复\n1\n11\n`[water element]`\n[/skill info]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -8688,7 +8688,7 @@
       "Section": "rare rate",
       "Title": "rare rate（原始标签）",
       "Comment": "系统数据中的 [rare rate] 闭合块。已见数据形态为反引号字符串/token 与数值的混合记录，字段顺序必须完整保留。比率或随机刻度不能自动按百分数解释，静态权重也不等于最终实机概率。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: compoundavatarsample.etc\n\n```pvf\n[rare rate]    // 出现稀有时装的概率（万分率）\n`hat` 1000    // 部位，概率\n`hair` 1000\n`face` 1000\n`neck` 1000\n`coat` 1000\n`pants` 1000\n`belt` 1000\n`shoes` 1000\n[/rare rate]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -8718,7 +8718,7 @@
       "Section": "character type",
       "Title": "角色类型",
       "Comment": "系统数据中的 [character type] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: compoundavatarsample.etc\n\n```pvf\n[character type] `[fighter]`    // 角色专用时装\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -8748,7 +8748,7 @@
       "Section": "hat avatar",
       "Title": "hat avatar（原始标签）",
       "Comment": "系统数据中的 [hat avatar] 闭合块。已见数据形态为单值或数值序列；列数、单位和取值刻度不能只凭字段名推断。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: compoundavatarsample.etc\n\n```pvf\n[hat avatar]\n4        // 稀有时装数量\n\n43022    1000    // 索引，概率（相对概率：基准 1000）\n43023    1000\n43024    1000\n43025    1000\n\n// 以下为普通时装。普通时装数量不填写。\n43026    1000    // 索引，概率（相对概率：基准 1000）\n101    1000\n[/hat avatar]\n```",
       "Closing": true,
       "Authors": "Codex"
     },
@@ -10388,7 +10388,7 @@
       "Section": "green level penalty",
       "Title": "green level penalty（原始标签）",
       "Comment": "系统数据中的 [green level penalty] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: questparameter.etc\n\n```pvf\n// 百分比（自身等级与任务等级差为 7 ~ 11 时适用）\n[green level penalty]   80\n// 百分比（自身等级与任务等级差为 12 以上）\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -10398,7 +10398,7 @@
       "Section": "grey level penalty",
       "Title": "grey level penalty（原始标签）",
       "Comment": "系统数据中的 [grey level penalty] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: questparameter.etc\n\n```pvf\n// 百分比（自身等级与任务等级差为 12 以上）\n[grey level penalty]    5\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -10408,7 +10408,7 @@
       "Section": "bal kun penalty",
       "Title": "bal kun penalty（原始标签）",
       "Comment": "系统数据中的 [bal kun penalty] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。该字段的运行时效果仍需结合消费逻辑或实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: questparameter.etc\n\n```pvf\n// 操作生疏度惩罚保护区间（操作生疏度超过此数值，则任务经验值会减少自身操作生疏度的量。）\n[bal kun penalty]\t10\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -10418,7 +10418,7 @@
       "Section": "exp reward table",
       "Title": "经验奖励表",
       "Comment": "系统数据中的 [exp reward table] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: questparameter.etc\n\n```pvf\n// 各级别经验值基本奖励\n[exp reward table]\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2783\n3214\n3674\n4161\n4675\n5218\n5789\n6387\n7013\n7667\n8349\n9059\n9796\n10561\n11355\n12176\n13024\n139901\n14806\n15738\n16698\n17686\n18702\n19745\n20817\n21916\n23043\n24198\n25381\n26592\n27860\n29096\n30390\n31712\n33062\n34440\n35845\n32278\n38739\n40228\n41745\n43290\n44862\n46462\n48090\n49746\n51430\n53141\n54881\n56648\n58113\n60266\n62117\n63995\n65901\n67836\n69798\n71787\n73805\n85851\n77924\n80025\n82454\n84311\n83493\n88708\n90948\n93217\n95513\n97836\n100188\n105867\n104975\n107410\n109873\n112364\n114882\n117429\n120003\n122605\n025235\n127893\n130578\n133292\n136033\n138802\n141599\n144424\n147276\n150157\n//....\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -10428,7 +10428,7 @@
       "Section": "gold reward table",
       "Title": "金币奖励表",
       "Comment": "系统数据中的 [gold reward table] 字段。该字段后紧邻其他标签；它是无值标记、枚举 token 还是与相邻字段共同组成记录，需按父结构确认。奖励或邮件静态配置不证明服务端必定发放，数量、期限和领取条件仍需实机验证。",
-      "OfficialDescription": null,
+      "OfficialDescription": "#### 官方示例: questparameter.etc\n\n```pvf\n// 各级别金币基本奖励\n[gold reward table]\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2500\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2500\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2500\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2500\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2500\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2500\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2500\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2500\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n2500\n300\n334\n543\n779\n1044\n1336\n1656\n2004\n2379\n//....\n```",
       "Closing": false,
       "Authors": "Codex"
     },
@@ -10441,6 +10441,86 @@
       "OfficialDescription": null,
       "Closing": false,
       "Authors": "Codex"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "etc",
+      "Section": "first bossnamed mob hunting",
+      "Title": "first bossnamed mob hunting",
+      "Comment": "第一个BOSSNMED MOB狩猎",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "etc",
+      "Section": "water element attack",
+      "Title": "water element attack",
+      "Comment": "水元素攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "etc",
+      "Section": "all element attack",
+      "Title": "all element attack",
+      "Comment": "所有元素攻击",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "etc",
+      "Section": "cargo transport stone include index",
+      "Title": "cargo transport stone include index",
+      "Comment": "货运石包括索引",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "etc",
+      "Section": "refill ticket",
+      "Title": "refill ticket",
+      "Comment": "再填票",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "etc",
+      "Section": "material_ancuebt",
+      "Title": "material_ancuebt",
+      "Comment": "Material_AnceBT.",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "etc",
+      "Section": "tax correction",
+      "Title": "tax correction",
+      "Comment": "税收纠正",
+      "OfficialDescription": null,
+      "Closing": false,
+      "Authors": "谷歌翻译"
+    },
+    {
+      "PvfCommentType": "Section",
+      "FileType": "etc",
+      "Section": "序号",
+      "Title": "教程提示脚本示例",
+      "Comment": "",
+      "OfficialDescription": "#### 官方示例: tutorialtipsample.etc\n\n```pvf\n//教程提示脚本示例\n//顺序为序号、重要性、等级、标题、内容、图片路径。\n//请按序号顺序编写，并且内容应为4行，不足4行时请用空行补足。\n[序号] 1\n```",
+      "Closing": false,
+      "Authors": "官方PVF"
     }
   ]
 }
