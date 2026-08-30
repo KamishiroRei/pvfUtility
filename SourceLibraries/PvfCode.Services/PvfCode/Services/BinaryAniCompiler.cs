@@ -922,7 +922,7 @@ public static class BinaryAniCompiler
 			int num3 = 0;
 			for (int num4 = 0; num4 < list4[0]; num4++)
 			{
-				if (list3[num4] == "" || list3[num4][0] != '[' || (list3[num4].Length > 6 && list3[num4].Substring(0, 6) == "[FRAME"))
+				if (list3[num4] == "" || list3[num4][0] != '[' || (list3[num4].Length > 6 && list3[num4].Substring(0, 6) == "[FRAME") || list3[num4] == "[IMAGE PATH]" || list3[num4] == "[/IMAGE PATH]")
 				{
 					continue;
 				}
