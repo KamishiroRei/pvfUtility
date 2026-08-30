@@ -459,8 +459,8 @@ public class PvfGroup : PvfPack
 				};
 				file.FileName = p;
 				file.WriteRawData(Array.Empty<byte>());
-				list[p] = file;
-				_entryIndex[p] = i;
+				list[file.FileName] = file;
+				_entryIndex[file.FileName] = i;
 				if ((i & 1023) == 0) progress.Report(ProgressHelper.GetProgressNum(i, count));
 			}
 
@@ -503,8 +503,8 @@ public class PvfGroup : PvfPack
 				file.FileName = p;
 				// Data 留空，后续按需加载
 				file.WriteRawData(Array.Empty<byte>());
-				list[p] = file;
-				_entryIndex[p] = i;
+				list[file.FileName] = file;
+				_entryIndex[file.FileName] = i;
 				if ((i & 1023) == 0) progress.Report(ProgressHelper.GetProgressNum(i, count));
 			}
 
