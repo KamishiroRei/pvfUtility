@@ -145,7 +145,9 @@ public static class BinaryAniCompiler
 	public static bool FileTextConvertAniFile(string text, string fileName, out AniFile anifile)
 	{
 		// 预处理：将标准 token 格式转换为 CompileBinaryAni 可识别的格式
-		// [IMAGE PATH] → 提取路径列表，[IMAGE EX] → [IMAGE] + 解析路径
+		// 1. [IMAGE PATH] → 提取路径列表
+		// 2. [IMAGE EX] → [IMAGE] + 解析路径
+		// 3. 枚举值（SUPERARMOR/NONE/DODGE 等）补反引号
 		List<string> imagePaths = new List<string>();
 		{
 			int pStart = text.IndexOf("[IMAGE PATH]");
@@ -158,23 +160,26 @@ public static class BinaryAniCompiler
 				imagePaths = block.Split(new char[] { '\r', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 			}
 		}
-		// 替换 [IMAGE EX] 为 [IMAGE] + 解析路径
-		if (imagePaths.Count > 0)
+		// 替换 [IMAGE EX] 为 [IMAGE] + 解析路径，并补反引号
+		var lines = text.Split(new char[] { '\r', '\n' }, StringSplitOptions.None).ToList();
+		for (int i = 0; i < lines.Count; i++)
 		{
-			var lines = text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-			for (int i = 0; i < lines.Count; i++)
+			string trimmed = lines[i].Trim();
+			if (trimmed == "[IMAGE EX]" && i + 2 < lines.Count)
 			{
-				if (lines[i].Trim() == "[IMAGE EX]" && i + 2 < lines.Count)
+				if (int.TryParse(lines[i + 1].Trim(), out int idx) && idx >= 0 && idx < imagePaths.Count)
 				{
-					if (int.TryParse(lines[i + 1].Trim(), out int idx) && idx >= 0 && idx < imagePaths.Count)
-					{
-						lines[i] = "[IMAGE]";
-						lines[i + 1] = imagePaths[idx];
-					}
+					lines[i] = "[IMAGE]";
+					lines[i + 1] = "`" + imagePaths[idx] + "`";
 				}
 			}
-			text = string.Join("\r\n", lines);
+			// 补反引号：对非数值、非段名、非空行，且不含反引号的值加上反引号
+			if (i > 0 && trimmed.Length > 0 && trimmed[0] != '[' && trimmed[0] != '`' && !long.TryParse(trimmed, out _) && !float.TryParse(trimmed, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out _))
+			{
+				lines[i] = "`" + trimmed + "`";
+			}
 		}
+		text = string.Join("\r\n", lines);
 		(bool, byte[], ErrorItem) tuple = CompileBinaryAni(text, fileName);
 		if (!tuple.Item1)
 		{
