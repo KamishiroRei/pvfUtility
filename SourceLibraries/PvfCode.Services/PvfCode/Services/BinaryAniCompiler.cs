@@ -144,6 +144,37 @@ public static class BinaryAniCompiler
 
 	public static bool FileTextConvertAniFile(string text, string fileName, out AniFile anifile)
 	{
+		// 预处理：将标准 token 格式转换为 CompileBinaryAni 可识别的格式
+		// [IMAGE PATH] → 提取路径列表，[IMAGE EX] → [IMAGE] + 解析路径
+		List<string> imagePaths = new List<string>();
+		{
+			int pStart = text.IndexOf("[IMAGE PATH]");
+			int pEnd = text.IndexOf("[/IMAGE PATH]");
+			if (pStart != -1 && pEnd != -1)
+			{
+				string block = text.Substring(pStart, pEnd - pStart + "[/IMAGE PATH]".Length);
+				text = text.Replace(block, "");
+				block = block.Replace("[IMAGE PATH]", "").Replace("[/IMAGE PATH]", "");
+				imagePaths = block.Split(new char[] { '\r', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+			}
+		}
+		// 替换 [IMAGE EX] 为 [IMAGE] + 解析路径
+		if (imagePaths.Count > 0)
+		{
+			var lines = text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+			for (int i = 0; i < lines.Count; i++)
+			{
+				if (lines[i].Trim() == "[IMAGE EX]" && i + 2 < lines.Count)
+				{
+					if (int.TryParse(lines[i + 1].Trim(), out int idx) && idx >= 0 && idx < imagePaths.Count)
+					{
+						lines[i] = "[IMAGE]";
+						lines[i + 1] = imagePaths[idx];
+					}
+				}
+			}
+			text = string.Join("\r\n", lines);
+		}
 		(bool, byte[], ErrorItem) tuple = CompileBinaryAni(text, fileName);
 		if (!tuple.Item1)
 		{
