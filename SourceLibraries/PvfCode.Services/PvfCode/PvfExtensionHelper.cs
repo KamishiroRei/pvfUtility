@@ -54,6 +54,11 @@ public static class PvfExtensionHelper
 		{
 			useCompatibleDecompiler = AppSetting.Instance.PvfConfig.UseCompatibleDecompiler;
 		}
+		// 懒加载：NKPI/Pvf110 模式下打开时 Data 为空，按需读取
+		if ((file.Data == null || file.Data.Length == 0) && file.Pvf110DataType > 0)
+		{
+			group.EnsureFileData(file.FileName);
+		}
 		if (file.Data == null)
 		{
 			return string.Empty;
@@ -79,7 +84,7 @@ public static class PvfExtensionHelper
 			}
 			return new ScriptFileCompilerOl(group).Decompile(file);
 		}
-		if (!file.IsBinaryAniFile)
+		if (!file.IsBinaryAniFile || file.Pvf110DataType > 0)
 		{
 			if (file.FileType == PvfFileType.str)
 			{
