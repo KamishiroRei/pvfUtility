@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using DevExpress.Mvvm;
@@ -16,6 +17,7 @@ using PvfCode.Models.Pvf.Enums;
 using PvfCode.Services;
 using PvfCode.Services.PreviewPvfFileFolder;
 using PvfCode.Services.PvfParsingNew;
+using Pvf110.Core;
 using Utools;
 using pvfUtility.WebApi.Dto;
 
@@ -28,6 +30,18 @@ public class PvfGroup : PvfPack
 	private readonly byte[] footerSignature;
 
 	private readonly AsyncLock saveLock;
+
+	/// <summary>Pvf110 模式下持有逻辑流读取器（含 name 池/group/body）。</summary>
+	private Pvf110Reader? _pvf110;
+
+	/// <summary>NKPI / ProtectedNKPI 模式下持有读取器（懒加载 body）。</summary>
+	private NkpiReader? _nkpi;
+
+	/// <summary>懒加载模式下 entry 索引：路径 → 读取器 entry 索引。</summary>
+	private Dictionary<string, int> _entryIndex = new();
+
+	/// <summary>当前打开的是 Pvf110 Builder 保护链的 Script.pvf。</summary>
+	public bool IsPvf110 => _pvf110 != null;
 
 	public PvfGroup()
 	{
@@ -49,6 +63,9 @@ public class PvfGroup : PvfPack
 		{
 			base.FileList = null;
 		}
+		_pvf110 = null;
+		_nkpi = null;
+		_entryIndex.Clear();
 		base.ListFileTable.Clear();
 		base.Strtable.Clear();
 		base.Strview.Clear();
@@ -99,6 +116,18 @@ public class PvfGroup : PvfPack
 		{
 			using (await saveLock.LockAsync())
 			{
+				// Pvf110：保留 name/hash 表，重建 body/group/file table
+				if (IsPvf110)
+				{
+					return await SavePvfPack110Core(filePath, progress);
+				}
+				// NKPI / ProtectedNKPI：使用 NkpiRepacker 重建
+				if (_nkpi != null)
+				{
+					SavePvfPackNkpiCore(filePath, progress);
+					progress?.Report(100.0);
+					return result;
+				}
 				using Stream output = File.Create(filePath);
 				if (base.Strtable.IsStringTableUpdated)
 				{
@@ -140,6 +169,95 @@ public class PvfGroup : PvfPack
 			result.Msg = ex.Message;
 		}
 		return result;
+	}
+
+	/// <summary>Pvf110 保存：FileList（type-1 解编译文本/type-3 UTF-16）→ 重编译 → 重建逻辑流 → 加密 Script.pvf + sk.dat。</summary>
+	private async Task<ResultData> SavePvfPack110Core(string filePath, IProgress<double> progress)
+	{
+		ResultData result = new ResultData();
+		try
+		{
+			Pvf110Reader reader = _pvf110!;
+			Pvf110Compiled compiled = new Pvf110Compiled(reader);
+
+			byte[] GetContent(Pvf110Entry e)
+			{
+				string p = reader.FilePath(e);
+				if (!base.FileList.TryGetValue(p, out PvfFile? file) || file.Data == null)
+					throw new InvalidOperationException("Pvf110 保存要求文件集合与原包一致，缺少文件: " + p);
+				// 懒加载：保存前确保未访问过的文件内容已加载
+				if (file.Data.Length == 0)
+				{
+					EnsureFileData(p);
+				}
+				if (e.DataType == 1)
+				{
+					try
+					{
+						return compiled.FromText(System.Text.Encoding.UTF8.GetString(file.Data));
+					}
+					catch (Exception ex)
+					{
+						throw new InvalidOperationException($"Pvf110 重编译失败 {p}: {ex.Message}", ex);
+					}
+				}
+				return file.Data; // type-3 = UTF-16LE
+			}
+
+			var (enc, sk) = Pvf110Rebuilder.Rebuild(reader, GetContent, progress);
+			string dir = Path.GetDirectoryName(filePath) ?? ".";
+			File.WriteAllBytes(filePath, enc);
+			File.WriteAllBytes(Path.Combine(dir, "sk.dat"), sk);
+			progress.Report(100.0);
+			return result;
+		}
+		catch (Exception ex)
+		{
+			result.Msg = ex.Message;
+			return result;
+		}
+	}
+
+	/// <summary>NKPI / ProtectedNKPI 保存：FileList（type-1 解编译文本）→ 重编译 → NkpiRepacker 重建。</summary>
+	private void SavePvfPackNkpiCore(string filePath, IProgress<double> progress)
+	{
+		try
+		{
+			NkpiReader reader = _nkpi!;
+			Pvf110Compiled compiled = new Pvf110Compiled(reader);
+
+			byte[] GetContent(int entryIndex)
+			{
+				NkpiEntry e = reader.Entries[entryIndex];
+				string p = reader.FilePath(e);
+				if (!base.FileList.TryGetValue(p, out PvfFile? file) || file.Data == null)
+					throw new InvalidOperationException("NKPI 保存要求文件集合与原包一致，缺少文件: " + p);
+				// 懒加载：保存前确保未访问过的文件内容已加载
+				if (file.Data.Length == 0)
+				{
+					EnsureFileData(p);
+				}
+				if (e.DataType == 1)
+				{
+					try
+					{
+						return compiled.FromText(System.Text.Encoding.UTF8.GetString(file.Data));
+					}
+					catch (Exception ex)
+					{
+						throw new InvalidOperationException($"NKPI 重编译失败 {p}: {ex.Message}", ex);
+					}
+				}
+				return file.Data; // type-3 = UTF-16LE
+			}
+
+			byte[] rebuilt = NkpiRepacker.Rebuild(reader, GetContent, progress);
+			File.WriteAllBytes(filePath, rebuilt);
+		}
+		catch (Exception ex)
+		{
+			throw new InvalidOperationException($"NKPI 保存失败: {ex.Message}", ex);
+		}
 	}
 
 	private byte[] CreateFileTreeData(IEnumerable<PvfFile> files, IProgress<double> progress)
@@ -192,7 +310,39 @@ public class PvfGroup : PvfPack
 			try
 			{
 				base.PvfPackFilePath = path;
-				using (BinaryReader binaryReader = new BinaryReader(File.OpenRead(path)))
+				byte[] fileBytes = File.ReadAllBytes(path);
+
+				// 1. Pvf110 Builder 保护链检测：同目录存在 sk.dat 且可用 Pvf110Reader 打开
+				string? skdatPath = Pvf110Support.FindSkDat(path);
+				if (skdatPath != null)
+				{
+					try
+					{
+						var probe = Pvf110Reader.Open(File.ReadAllBytes(skdatPath), fileBytes);
+						return OpenPvfPack110(probe, path, progress);
+					}
+					catch (Exception ex)
+					{
+						logger.Warning($"Pvf110 probe failed, fallback to NKPI/ProtectedNKPI: {ex.Message}");
+					}
+				}
+
+				// 2. NKPI / ProtectedNKPI 检测
+				if (NkpiReader.IsNkpi(fileBytes))
+				{
+					try
+					{
+						var reader = NkpiReader.Open(fileBytes);
+						return OpenPvfPackNkpi(reader, path, progress);
+					}
+					catch (Exception ex)
+					{
+						logger.Warning($"NKPI open failed, fallback to classic: {ex.Message}");
+					}
+				}
+
+				// 3. 经典 pvfUtility 格式回退
+				using (BinaryReader binaryReader = new BinaryReader(new MemoryStream(fileBytes)))
 				{
 					HashSet<PvfFile> duplicateFiles = new HashSet<PvfFile>();
 					bool hasFooterSignature = HasFooterSignature(binaryReader.BaseStream);
@@ -288,11 +438,151 @@ public class PvfGroup : PvfPack
 		}
 	}
 
+	/// <summary>Pvf110 Builder 保护链打开：Pvf110Reader → FileList（懒加载，body 按需读取）。</summary>
+	private Task<bool> OpenPvfPack110(Pvf110Reader reader, string path, IProgress<double> progress)
+	{
+		try
+		{
+			_pvf110 = reader;
+			int count = reader.Entries.Count;
+			_entryIndex = new Dictionary<string, int>(count);
+
+			Dictionary<string, PvfFile> list = new Dictionary<string, PvfFile>(count);
+			for (int i = 0; i < count; i++)
+			{
+				Pvf110Entry e = reader.Entries[i];
+				string p = reader.FilePath(e);
+				PvfFile file = new PvfFile
+				{
+					FileNameEncoding = System.Text.Encoding.UTF8,
+					Pvf110DataType = e.DataType,
+				};
+				file.FileName = p;
+				file.WriteRawData(Array.Empty<byte>());
+				list[p] = file;
+				_entryIndex[p] = i;
+				if ((i & 1023) == 0) progress.Report(ProgressHelper.GetProgressNum(i, count));
+			}
+
+			base.FileList = list;
+			base.Strtable.InitDefault();
+			base.Strview.InitDefault();
+			// Pvf110 也使用 UTF-8 编码
+			AppSetting.Instance.PvfConfig.DefaultEncoding = EncodingType.UTF8;
+			base.PvfIsOpen = true;
+			progress.Report(100.0);
+			return Task.FromResult(true);
+		}
+		catch (Exception ex)
+		{
+			logger.Error("Pvf110 open error: " + ex.Message);
+			return Task.FromResult(false);
+		}
+	}
+
+	/// <summary>NKPI / ProtectedNKPI 打开：NkpiReader → FileList（懒加载，body 按需读取）。</summary>
+	private Task<bool> OpenPvfPackNkpi(NkpiReader reader, string path, IProgress<double> progress)
+	{
+		try
+		{
+			_nkpi = reader;
+			int count = reader.Entries.Count;
+			_entryIndex = new Dictionary<string, int>(count);
+
+			// 只建路径索引，不读 body（懒加载）
+			Dictionary<string, PvfFile> list = new Dictionary<string, PvfFile>(count);
+			for (int i = 0; i < count; i++)
+			{
+				NkpiEntry e = reader.Entries[i];
+				string p = reader.FilePath(e);
+				PvfFile file = new PvfFile
+				{
+					FileNameEncoding = System.Text.Encoding.UTF8,
+					Pvf110DataType = e.DataType,
+				};
+				file.FileName = p;
+				// Data 留空，后续按需加载
+				file.WriteRawData(Array.Empty<byte>());
+				list[p] = file;
+				_entryIndex[p] = i;
+				if ((i & 1023) == 0) progress.Report(ProgressHelper.GetProgressNum(i, count));
+			}
+
+			base.FileList = list;
+			base.Strtable.InitDefault();
+			base.Strview.InitDefault();
+			// NKPI/ProtectedNKPI 使用 UTF-8，非 TW/Big5；直接设 DefaultEncoding 避免 DoNotify 跨线程问题
+			AppSetting.Instance.PvfConfig.DefaultEncoding = EncodingType.UTF8;
+			base.PvfIsOpen = true;
+			progress.Report(100.0);
+			return Task.FromResult(true);
+		}
+		catch (Exception ex)
+		{
+			logger.Error("NKPI open error: " + ex.Message);
+			return Task.FromResult(false);
+		}
+	}
+
+	/// <summary>
+	/// 懒加载：按路径从 Pvf110/NKPI 读取器取回文件内容并写入 PvfFile.Data。
+	/// 打开时 Data 为空，只有用户实际访问该文件时才解压+解编译。
+	/// 已在读取器里缓存 group，多次访问同一文件不会重复解压。
+	/// </summary>
+	public bool EnsureFileData(string path)
+	{
+		if (base.FileList == null) return false;
+		if (!base.FileList.TryGetValue(path, out PvfFile? file)) return false;
+		// 已有数据（空文件或已加载）则跳过
+		if (file.Data != null && file.Data.Length > 0) return true;
+		if (!_entryIndex.TryGetValue(path, out int idx)) return false;
+
+		try
+		{
+			if (_nkpi != null && idx < _nkpi.Entries.Count)
+			{
+				NkpiEntry e = _nkpi.Entries[idx];
+				byte[] content = _nkpi.ReadEntry(e);
+				byte[] data = (e.DataType == 1)
+					? System.Text.Encoding.UTF8.GetBytes(new Pvf110Compiled(_nkpi).ToText(content))
+					: content; // type-3 = UTF-16LE
+				file.WriteRawData(data);
+				return true;
+			}
+			if (_pvf110 != null && idx < _pvf110.Entries.Count)
+			{
+				Pvf110Entry e = _pvf110.Entries[idx];
+				byte[] content = _pvf110.ReadEntry(e);
+				byte[] data = (e.DataType == 1)
+					? System.Text.Encoding.UTF8.GetBytes(new Pvf110Compiled(_pvf110).ToText(content))
+					: content; // type-3 = UTF-16LE
+				file.WriteRawData(data);
+				return true;
+			}
+		}
+		catch (Exception ex)
+		{
+			logger.Error($"EnsureFileData failed for {path}: {ex.Message}");
+		}
+		return false;
+	}
+
+	/// <summary>检查文件内容是否已加载（懒加载标记）。</summary>
+	public bool IsFileDataLoaded(string path)
+	{
+		return base.FileList != null
+			&& base.FileList.TryGetValue(path, out PvfFile? file)
+			&& file.Data != null
+			&& file.Data.Length > 0;
+	}
+
 	public bool GetEquipmentpartsetInfo(PvfPack pvf, out Dictionary<int, Dictionary<string, EquipmentPartSet>> dic)
 	{
 		dic = new Dictionary<int, Dictionary<string, EquipmentPartSet>>();
+		// 懒加载：确保 equipmentpartset.etc 已加载
+		EnsureFileData("etc/equipmentpartset.etc");
 		PvfFile file = GetFile("etc/equipmentpartset.etc");
-		if (file == null || file.Data == null)
+		if (file == null || file.Data == null || file.Data.Length == 0)
 		{
 			return false;
 		}
@@ -697,6 +987,14 @@ public class PvfGroup : PvfPack
 		{
 			return true;
 		}
+		// Pvf110：Data 已是可读内容（type-1 解编译文本 UTF-8 / type-3 UTF-16），直接写出
+		if (IsPvf110 && file.Pvf110DataType != 0)
+		{
+			byte[] raw = file.Data ?? Array.Empty<byte>();
+			stream.Write(raw, 0, raw.Length);
+			stream.Seek(0L, SeekOrigin.Begin);
+			return true;
+		}
 		if (file.IsBinaryAniFile && decompileBinaryAni)
 		{
 			var (flag, s) = BinaryAniCompiler.DecompileBinaryAni(file);
@@ -786,6 +1084,12 @@ public class PvfGroup : PvfPack
 
 	public bool SaveFileAsScript(PvfFile file, string fileText)
 	{
+		// Pvf110：Data 统一保存解编译文本，包保存时（SavePvfPack110Core）再重编译
+		if (IsPvf110 && file.Pvf110DataType == 1)
+		{
+			file.WriteRawData(System.Text.Encoding.UTF8.GetBytes(fileText));
+			return true;
+		}
 		byte[] array = new ScriptFileCompilerOl(this).Compile(file, fileText);
 		if (array != null)
 		{
@@ -884,6 +1188,17 @@ public class PvfGroup : PvfPack
 	{
 		if (stream == null || stream.Length <= 0)
 		{
+			return true;
+		}
+		// Pvf110：导入内容为可读文本（type-1 解编译文本存 UTF-8；type-3 转 UTF-16），包保存时再重编译
+		if (IsPvf110 && file.Pvf110DataType != 0)
+		{
+			stream.Seek(0L, SeekOrigin.Begin);
+			byte[] raw = new byte[stream.Length];
+			stream.Read(raw, 0, raw.Length);
+			if (file.Pvf110DataType == 3)
+				raw = Encoding.Unicode.GetBytes(Encoding.UTF8.GetString(raw));
+			file.WriteRawData(raw);
 			return true;
 		}
 		byte[] array = new byte[stream.Length];
