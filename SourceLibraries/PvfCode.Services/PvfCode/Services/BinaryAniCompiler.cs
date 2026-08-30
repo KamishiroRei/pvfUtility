@@ -103,6 +103,11 @@ public static class BinaryAniCompiler
 				{
 					return resultData3;
 				}
+				// 替换 %04d 为实际帧序号（如 0000），方便预览查找 NPK 文件
+				int _frameIdx = int.TryParse(Items[1], out var _fi) ? _fi : 0;
+				string _resolvedPath = imagePaths[int.Parse(text)].Replace("%04d", _frameIdx.ToString("D4"));
+				output.Clear();
+				output.AppendLine(_resolvedPath);
 				output.AppendLine((int.TryParse(Items[1], out var result2) ? result2 : 0).ToString());
 			}
 			return resultData;

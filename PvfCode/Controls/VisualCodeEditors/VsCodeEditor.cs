@@ -51,8 +51,16 @@ public class VsCodeEditor : WebView2, IComponentConnector
 	{
 		InitializeComponent();
 		base.Visibility = Visibility.Collapsed;
-		base.Source = new Uri("about:blank");
-		base.CoreWebView2InitializationCompleted += OnCoreWebView2InitializationCompleted;
+		try
+		{
+			base.Source = new Uri("about:blank");
+			base.CoreWebView2InitializationCompleted += OnCoreWebView2InitializationCompleted;
+		}
+		catch (Exception ex)
+		{
+			// WebView2 运行时未安装，静默失败
+			System.Diagnostics.Debug.WriteLine($"VsCodeEditor WebView2 init failed: {ex.Message}");
+		}
 	}
 
 	private void OnCoreWebView2InitializationCompleted(object? sender, CoreWebView2InitializationCompletedEventArgs e)

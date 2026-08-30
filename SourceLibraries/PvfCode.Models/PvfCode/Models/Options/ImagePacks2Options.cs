@@ -6,15 +6,15 @@ namespace PvfCode.Models.Options;
 [JsonObject(MemberSerialization.OptOut)]
 public class ImagePacks2Options : ViewModelBase
 {
+	private string _imagePacks2Path = string.Empty;
+
 	public string ImagePacks2Path
 	{
-		get
-		{
-			return GetProperty(() => ImagePacks2Path);
-		}
+		get => _imagePacks2Path;
 		set
 		{
-			SetProperty<string>(() => ImagePacks2Path, value);
+			_imagePacks2Path = value;
+			RaisePropertyChanged(nameof(ImagePacks2Path));
 		}
 	}
 

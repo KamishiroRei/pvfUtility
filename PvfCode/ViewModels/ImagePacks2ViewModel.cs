@@ -81,10 +81,11 @@ public class ImagePacks2ViewModel : ViewModelBase
 	}
 
 	[Command]
-	public void OnClear()
+	public async void OnClear()
 	{
 		AppSetting.Instance.ImagePacks2Options.ImagePacks2Path = "";
 		ImagePack2Service.Instance.Clear();
+		await AppSetting.Instance.SaveSetting();
 	}
 
 	public ImagePacks2ViewModel()
