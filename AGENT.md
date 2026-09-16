@@ -27,6 +27,26 @@
 - `docs/OBFUSCATED_NAME_MAP.md`：处理混淆类型、语义文件名和名称恢复时必读。
 - `SourceLibraries/README.md`：修改恢复库项目时必读。
 
+## DNF PVF 使用边界
+
+本工程是 PVF 唯一维护主线，但入口按使用者分离：`pvfUtility.exe` 是用户 GUI，AI/自动化不得启动、点击或读取 GUI；AI 固定使用源码 `cli/Pvf110.Cli/` 的命令行版本，合同标识为 `pvfUtility-ai-cli-20260831`，标准调用为 `dotnet cli/Pvf110.Cli/bin/Release/net10.0/Pvf110.Cli.dll`。它们是 PVF 的编辑、重建和检查工具，不是 90CN 服务端的独立 PVF 数据目录。
+
+涉及 90CN 时，默认输入只有当前客户端 PVF：
+
+```text
+D:\Game\DNF\90-CNC\地下城与勇士\Script.pvf
+```
+
+`D:\Game\DNF\1031.pvf` 是旧版 PVF。`D:\Game\DNF\国服115.pvf` 是已转换为 90CN/ProtectedNKPI 容器的国服 115 内容参考 PVF，不需要 `sk.dat`；除非任务明确要求版本对比或迁移，不得将它们当作 90CN 的编辑输入。90CN 服务端不再维护或复制专门的服务端 PVF，服务端运行时由 90CN 控制器读取上述客户端 PVF。
+
+另一类合法 AI 输入是 **`Pvf110` 容器的客户端 PVF**（当前为 `D:\Game\DNF\115US\Script.pvf`，配套 `115US\sk.dat` 与 `115US\DFO.exe`）：
+
+- CLI 以同一套命令覆盖两种容器，格式在打开时探测；`PVF_SKDAT` 可省（缺省取 PVF 同目录 `sk.dat`），Pvf110 的外层包装密钥在运行时从客户端 EXE 现场派生（`PVF_CLIENT_EXE`，缺省探测同目录 `DFO.exe`/`DNF.exe`），**源码与配置中不保存任何客户端密钥**。
+- 两容器各自绑定自己的客户端与三件套身份，结论不得互推：`115US\Script.pvf` 不是 90CN 的输入，`国服115.pvf` 也不是 115US 的输入。
+- 命令能力差异、写入语义（增量组重建、HASH/name 段保留、`sk.dat` 槽位复用、`add` 的名称池与 HASH 增量）与已知边界见 `D:\Game\DNF\通用知识区\PVF\PVF操作手册.md` §12；本文件不重述。
+
+编辑 90CN PVF 时，先按 `D:\Game\DNF\通用知识区\PVF\PVF操作手册.md` 和 `D:\Game\DNF\环境\profiles\90CN.profile.json` 确认身份；修改前备份客户端 `Script.pvf`，只将核验后的结果写回该文件，重新打开并检查目标条目，然后重启 90CN BAT/服务端使其重新读取。不要把结果写入 `90CN\runtime\data\dnf\Script.pvf`，也不要手工制造服务端副本；该路径若出现只属于旧布局/历史证据。
+
 ## 正式目录边界
 
 旧的 `Recovered` 汇总目录已经完成归位并删除。以下位置现在属于正式源码工程：
@@ -42,6 +62,18 @@
 | 源码库生成输出 | `SourceLibraries/.build/` |
 
 不得重新建立 `Recovered/` 来存放正式源码、资源、构建配置或生成产物。`SourceLibraries/.build/` 可以删除并由构建重新生成；表中其余位置都是必须保留的源码、资源、工具或测试输入，不能作为临时恢复输出清理。
+
+## 唯一打包交付位置（用户锁定，强制）
+
+打包交付只有一个位置：**`D:\Game\DNF\pvfUtility\`（工具根目录，即 `D:\Game\DNF\pvfUtility\pvfUtility.exe`）**。用户直接从根目录运行 GUI，本目录已有运行所需的 `Options\`、`Resources\` 等外置数据。
+
+强制规则：
+
+1. 任何打包（`scripts/Build-SingleFile.ps1` 等）完成后，必须把交付文件（`pvfUtility.exe`、`recovered-source-libraries.txt`）**直接覆盖复制**到工具根目录；这是唯一交付动作。
+2. **不备份**：禁止创建 `pvfUtility.exe.bak`、日期后缀副本、`backup/` 归档等任何形式的旧版本留存；直接覆盖。
+3. `artifacts\publish\**` 只是构建中间输出，不是交付位置；禁止在仓库内外生成第二份交付副本。
+4. 覆盖失败（如 exe 被运行中的程序占用）必须如实报告并等待用户关闭程序后重试，不得改写其他位置、不得静默跳过。
+5. 交付配置默认 Release + Hybrid + All；其他配置仅当用户显式要求时才允许覆盖到根目录。
 
 ## 不可破坏的工程约束
 

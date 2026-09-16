@@ -46,6 +46,15 @@ baseline remains `.NET 10`, `net10.0-windows`, and `win-x64`.
   build instead of silently falling back.
 - Keep `RecoveredSourceLibraryMode` independent from the WPF resource mode. Its
   default remains `All`.
+- Adding or changing UI in one of the other 123 documents does not work by
+  editing its readable XAML. Those files are classified as `None`, and their
+  runtime payload still comes from the original BAML container, so such an edit
+  has no effect and only desynchronizes the readable file from the BAML it
+  mirrors. Build the new UI in compiled C# instead (see
+  `PvfCode/Views/PreviewAutoOpenSettingsView.cs`, which adds a settings page by
+  constructing the control tree and handing `SettingMenuItem.Data` a
+  `DataTemplate` built from `FrameworkElementFactory`), or migrate the document
+  onto the allowlist first.
 - Keep trimming and ReadyToRun disabled for WPF, DevExpress, BAML compatibility,
   and reflection-loaded dependencies.
 

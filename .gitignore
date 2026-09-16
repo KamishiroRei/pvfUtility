@@ -51,3 +51,17 @@ System.Xml.XmlWellFormedWriter
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Local delivery artifacts and runtime output (never published)
+# pvfUtility.exe / Pvf110.Cli.exe are the single-file delivery copies kept in the
+# tool root for the user; the source of both lives in this repository.
+/pvfUtility.exe
+/Pvf110.Cli.exe
+/7z64.dll
+/*.WebView2/
+/out/
+/cli/.backup/
+
+# Knowledge pack synchronized at build time from Resources/AiAssistant/KnowledgePack
+# by Directory.Build.targets; the synchronized copy is generated output.
+/Resources/AgentKnowledge/

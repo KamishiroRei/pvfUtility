@@ -19,6 +19,23 @@ bridge modules, real PVFs, local profiles, generated runtime output, deployment
 skills, or credentials. Commands mentioned by historical knowledge documents
 are reference material only and are not available as model tools in this host.
 
+There are two separate AI concepts in this project. The embedded assistant in
+the WPF GUI is a user-facing, read-only conversation panel; it does not launch
+the CLI or write PVFs. An external automation agent that must inspect or edit
+a PVF uses only the CLI contract in
+D:\Game\DNF\pvfUtility\cli\Pvf110.Cli\
+(`pvfUtility-ai-cli-20260831`), invoked through the built
+`Pvf110.Cli.dll` with `dotnet`. It must never launch
+D:\Game\DNF\pvfUtility\pvfUtility.exe
+and must not use the historical Node, Python, pvf-parser-ts, or
+通用工具区\PVF110 copies.
+
+The CLI probes `StandardNKPI` and `ProtectedNKPI` before considering Pvf110.
+Therefore `PVF_SKDAT` is not a general PVF requirement. In particular,
+D:\Game\DNF\国服115.pvf
+is a converted 90CN/ProtectedNKPI reference archive carrying 115 content;
+it is not the separate raw WeGame Pvf110 sample described by historical notes.
+
 ## Request flow
 
 1. The user enters an OpenAI-compatible base URL, model, and session API key.

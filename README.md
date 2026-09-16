@@ -6,6 +6,13 @@
 
 ## 当前状态
 
+### PVF 唯一工具与 AI 入口合同
+
+`D:\Game\DNF\pvfUtility` 是 PVF 唯一工具主线。`pvfUtility.exe` 只供用户使用的 GUI，AI/自动化不得启动、点击或读取 GUI。
+
+AI 固定使用 `cli\Pvf110.Cli\`，合同标识为 `pvfUtility-ai-cli-20260831`；标准执行方式是 `dotnet cli\Pvf110.Cli\bin\Release\net10.0\Pvf110.Cli.dll`。根目录孤立的 `Pvf110.Cli.exe` 缺少相邻程序集，不是稳定 AI 入口。
+
+90CN 的 `Script.pvf` 和本机 `国服115.pvf` 都先由 CLI 自动探测格式；只有独立的 Pvf110 归档才提供 `PVF_SKDAT`。
 - 主程序目标框架：`.NET 10`，即 `net10.0-windows`。
 - 目标平台：Windows x64，运行时标识为 `win-x64`。
 - 主解决方案：`pvfUtility.sln`。
@@ -19,6 +26,81 @@
 - 项目不依赖 `pvfUtility-old`、`_analysis_extract`、原始程序目录或工作区外的绝对路径。
 - Debug 和 Release 单文件包都会生成 `recovered-source-libraries.txt`；包验证器会核对 `All` 模式对应的 20 个源码项目集合，启动检查会让主窗口保持 15 秒并拒绝任何错误窗口。
 
+## 90CN PVF 输入边界
+
+90CN 的默认编辑输入是客户端目录中的：
+
+```text
+D:\Game\DNF\90-CNC\地下城与勇士\Script.pvf
+```
+
+`D:\Game\DNF\1031.pvf` 仅是旧版 PVF。`D:\Game\DNF\国服115.pvf` 是已经转换为 90CN/ProtectedNKPI 容器的国服 115 内容参考 PVF，不是需要 `sk.dat` 的原始 115 Pvf110 归档；只有任务明确要求比较或迁移时才打开它们。`D:\Game\DNF\90-CNC\90CN\runtime\data\dnf\Script.pvf` 是历史服务端复制位置，不是当前输入或写回位置。90CN 服务端不维护专门 PVF，而是由控制器读取客户端 `Script.pvf` 并生成服务配置。
+
+使用 GUI 或 CLI 修改 90CN 时，先备份客户端 PVF，再把提取文件放在项目工作目录中编辑，完成格式/条目校验和回读后，只写回上述客户端文件；随后重新执行 90CN 的 BAT 入口，让服务端重新读取。工具的运行选项和注释数据保存在工具自身的 `Options\`，不要把工具目录或运行选项复制进客户端/服务端运行目录。
+
+## 90CN/经典统一解析管线（GUI）
+
+GUI 对 90CN(NKPI/ProtectedNKPI) 与经典 PVF 使用**同一条解析管线**：90CN 不是平行实现，而是经 `Pvf110.Core/ClassicViewAdapter` 适配层继承旧版全部能力——富格式反编译（`ScriptFileParserNew` + CustomSectionFormat）、`[标签]`排版、名称/稀有度扫描、标签注释、IMG 链接、LST 工具与搜索全部按经典格式语义工作。
+
+- 打开 90CN 时用名称池构建虚拟串表（`Stringtable.LoadFromNamePool`），type-1 条目懒加载为经典视图 token 流（`0xD0B0` 魔数 + 经典 ScriptType + 虚拟串表 ID）；标签映射与全量普查证据见 `通用知识区\PVF\PVF操作手册.md` 第 11 节。
+- 编辑保存走经典编译器（`ScriptFileCompilerOl`），包保存时反向适配回 110 token；池外新字符串经 `NkpiNamePoolBuilder` 追加，未修改条目字节保真。
+- CLI 保持 110 扁平文本合同（`ToText/FromText` 直引名称池偏移），不受 GUI 侧适配影响；`tests/Pvf110.IntegrationTests` 是 90CN 统一管线的 headless 端到端回归（打开→富格式→名称→编辑→保存→重开比对）。
+- 已登记差异：`etc/equipmentpartset.etc` 的 90CN 版式与经典套装解析器不一致，套装表为 0（日志报错、不崩溃）；适配需另行逆向 115 版套装表版式。
+
+## AI / CLI 工作版本
+
+`cli/Pvf110.Cli/` 是 pvfUtility 的命令行版本，供脚本与 AI 会话对 PVF 做读取、解编译、搜索、提取、校验与修改重建。它直接复用主解决方案中的 `Pvf110.Core`，自动检测 **Pvf110(sk.dat)**、**Standard NKPI** 与 **Protected NKPI(90CN)** 三种格式，无需单独维护解析逻辑。
+
+> 本节命令是 AI/自动化唯一允许使用的入口；`pvfUtility.exe` 是用户 GUI，AI 不得启动。命令行有两个等价入口：AI 合同固定使用 Release `Pvf110.Cli.dll` + `dotnet`；对外交付使用自包含单文件 `Pvf110.Cli.exe`（见下方"独立单文件发布"）。
+> `D:\Game\DNF\国服115.pvf` 已转换为 90CN/ProtectedNKPI 容器，`info` 应显示 `format=ProtectedNKPI`、`requiresSkDat=False`；不要因为文件名是 115 就设置 `PVF_SKDAT`。
+> `D:\Game\DNF\115US\Script.pvf` 是**另一份** `Pvf110` 容器（美服 2.38.2.34），配套 `115US\sk.dat` 与 `115US\DFO.exe`；`PVF_SKDAT` / `PVF_CLIENT_EXE` 均可省（缺省探测 PVF 同目录）。两种容器不得互相代换。
+
+```powershell
+dotnet build .\cli\Pvf110.Cli\Pvf110.Cli.csproj -c Release --no-restore
+$env:PVF_PATH = 'D:\Game\DNF\90-CNC\地下城与勇士\Script.pvf'
+dotnet .\cli\Pvf110.Cli\bin\Release\net10.0\Pvf110.Cli.dll version
+dotnet .\cli\Pvf110.Cli\bin\Release\net10.0\Pvf110.Cli.dll info
+```
+
+```powershell
+dotnet build .\cli\Pvf110.Cli\Pvf110.Cli.csproj -c Release
+$env:PVF_PATH = 'D:\Game\DNF\90-CNC\地下城与勇士\Script.pvf'   # ProtectedNKPI，无需 PVF_SKDAT
+dotnet .\cli\Pvf110.Cli\bin\Release\net10.0\Pvf110.Cli.dll info
+dotnet .\cli\Pvf110.Cli\bin\Release\net10.0\Pvf110.Cli.dll list equipment
+dotnet .\cli\Pvf110.Cli\bin\Release\net10.0\Pvf110.Cli.dll decompile stackable/10000001/10000039.stk
+dotnet .\cli\Pvf110.Cli\bin\Release\net10.0\Pvf110.Cli.dll search "小误会"
+dotnet .\cli\Pvf110.Cli\bin\Release\net10.0\Pvf110.Cli.dll extract .\out equipment/character
+# 修改单文件内容并重建（Pvf110 输出 Script.pvf + sk.dat；NKPI 输出 Script.pvf）
+dotnet .\cli\Pvf110.Cli\bin\Release\net10.0\Pvf110.Cli.dll write stackable/10000001/10000039.stk .\new-content.txt .\out
+```
+
+- `PVF_PATH` 必填；Pvf110 的 `sk.dat` 与客户端主程序由工具**自动定位**（PVF 同目录或上溯 3 层），`PVF_SKDAT` / `PVF_CLIENT_EXE` 只在需要显式覆盖时使用；`PVF_TEXT_ENCODING` / `PVF_TEXT_CHARS` 控制非 type-1 文本块（`.str` 等）的解码与输出长度；`PVF_OUTPUT_DIR` 可选输出根目录。
+- 子命令：`version / info / list / file / decompile / batch-decompile / batch-decompile-script / batch-write / write / add / search / extract / validate / scan-all / tags / find-empty / trace / compiled-roundtrip / roundtrip / repack / rebuild-test / hash-test / nkpi-incremental-test / pvf110-incremental-test / mainline-epicdiff / tune-monster-base`（完整能力边界由 `version` 输出，Pvf110 的矩阵见 `通用知识区\PVF\PVF操作手册.md` §12）。
+- `info` 首先输出格式和 `requiresSkDat`；`ProtectedNKPI` 与 `StandardNKPI` 的值必须为 `false`。文件名含有"115"不改变格式判断。
+- 加载使用并行解压+解编译；`NkpiReader` / `Pvf110Reader` 的 group 缓存为线程安全实现。
+
+### 独立单文件发布（对外交付）
+
+`cli/Pvf110.Cli` 只依赖 `Pvf110.Core` 与 .NET 框架，因此可以发布为**单个自包含 exe**（目标机器不需要安装 .NET 运行时）。
+`Pvf110.Cli.csproj` 中的 `StripGuiDependencyInjection` 目标会剥离仓库为 GUI 注入的 `lib/` 内容复制与 DevExpress 引用，
+使构建输出从 228 个文件 / 385 MB 收敛为 8 个文件，单文件 exe 与 GUI 依赖树无关。
+
+```powershell
+dotnet publish .\cli\Pvf110.Cli\Pvf110.Cli.csproj -c Release -r win-x64 -o .\artifacts\publish\cli\Release\win-x64
+# 交付：把发布目录中的 Pvf110.Cli.exe 覆盖复制到工具根目录（唯一交付位置，随后清空发布目录即可）
+Copy-Item .\artifacts\publish\cli\Release\win-x64\Pvf110.Cli.exe .\Pvf110.Cli.exe -Force
+```
+
+发布目录只会产出 `Pvf110.Cli.exe` 一个文件；运行时不依赖同目录的 DLL、`dotnet` 或本仓库。
+自包含单文件发布属性只在指定 `RuntimeIdentifier` 时生效，因此普通 `dotnet build` 仍是无 RID 的框架依赖构建。
+
+### AI 入口禁用清单
+
+- 不启动 pvfUtility.exe，不通过 GUI 点击或读取界面状态执行 AI 任务。
+- 不调用通用工具区 PVF工具 下的 Node/Python 解析脚本。
+- 不调用通用工具区 PVF110 下的旧 CLI、pvf-parser-ts 或其他副本。
+- 根目录 `Pvf110.Cli.exe` 是自包含单文件交付件，与 Release dll 是同一份代码的两个入口；AI 合同仍以 Release dll 路径为准，不要按文件名再造第二份解析实现。
+
 ## 离线数据与联网边界
 
 账号、云备份、联网商店、共享上传、在线更新、远程起始页和异常遥测已经停用。资源树注释、书签和 PVF 标签注释改为未加密 JSON，运行后可直接维护：
@@ -29,7 +111,7 @@
 - `Options/PvfComments/<后缀>.json`：严格按 PVF 文件后缀隔离的标签注释；查询不会回退到其他后缀的同名标签。标签悬浮提示和标签翻译管理器会显示 `Title`、Markdown 格式的 `Comment`，以及 Markdown 格式的 `OfficialDescription`，并提供对应编辑与预览界面。
 - `Resources/OfficialAnnotationTranslation/`：官方样例的只读翻译文档。工具菜单中的“官方注释文档”会在主编辑区右侧打开阅读页签；标签注释中的“官方示例：文件名”可直接跳转到对应文档。
 
-新安装的初始数据来自相邻 `pvf-parser-ts` 工程，打包副本位于 `Resources/OfflineDefaults/Options/`。更新源数据后可重新生成：
+新安装的初始数据来自历史 PVF 知识数据工程的离线打包副本，位于 `Resources/OfflineDefaults/Options/`。它只提供 GUI 注释/书签初始数据，不是 PVF 解析器，也不是 AI 的 PVF 操作入口。更新源数据后可重新生成：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Import-PvfParserInitialData.ps1
@@ -72,6 +154,8 @@ dotnet --list-sdks
 ```
 
 ### 本地单文件构建与运行
+
+> **唯一打包交付位置（用户锁定，强制）**：打包完成后必须把 `pvfUtility.exe`、`recovered-source-libraries.txt` **直接覆盖复制**到工具根目录 `D:\Game\DNF\pvfUtility\`（用户从根目录运行 GUI）。**不备份、不留旧版本副本**；`artifacts\publish\**` 只是构建中间输出，不是交付位置。详见 `AGENT.md` 的"唯一打包交付位置"章节。
 
 所有本地可运行、可复制和可分发的构建都使用与 CI、GitHub Release 相同的单文件入口：
 

@@ -182,10 +182,16 @@
     <AiAssistantKnowledge Include="$(RecoveredResourceDirectory)\AiAssistant\KnowledgePack\**\*" />
 
     <Content Include="$(RecoveredDependencyDirectory)\**\*"
-             Exclude="$(RecoveredDependencyDirectory)\pvfUtility.dll;$(RecoveredDependencyDirectory)\pvfUtility.deps.json;$(RecoveredDependencyDirectory)\pvfUtility.runtimeconfig.json;$(RecoveredDependencyDirectory)\Exceptionless.dll;$(RecoveredDependencyDirectory)\Exceptionless.Wpf.dll;$(RecoveredDependencyDirectory)\AutoUpdater.NET.dll;$(RecoveredDependencyDirectory)\Whetstone.ChatGPT.dll;$(RecoveredDependencyDirectory)\Whetstone.ChatGPT.pdb">
+             Exclude="$(RecoveredDependencyDirectory)\pvfUtility.dll;$(RecoveredDependencyDirectory)\pvfUtility.deps.json;$(RecoveredDependencyDirectory)\pvfUtility.runtimeconfig.json;$(RecoveredDependencyDirectory)\Exceptionless.dll;$(RecoveredDependencyDirectory)\Exceptionless.Wpf.dll;$(RecoveredDependencyDirectory)\AutoUpdater.NET.dll;$(RecoveredDependencyDirectory)\Whetstone.ChatGPT.dll;$(RecoveredDependencyDirectory)\Whetstone.ChatGPT.pdb;$(RecoveredDependencyDirectory)\WebView2Loader.dll">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <!-- WebView2Loader.dll 改为嵌入资源（pvfUtility.csproj），启动时按 7z64.dll 同模式释放；
+         不再作为松散 Content 复制/发布（单文件包验证器禁止松散 DLL） -->
+    <EmbeddedResource Include="$(RecoveredDependencyDirectory)\WebView2Loader.dll"
+                      Condition="'$(MSBuildProjectFullPath)' == '$(MSBuildThisFileDirectory)pvfUtility.csproj'">
+      <LogicalName>PvfCode.WebView2Loader.dll</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup Condition="'$(MSBuildProjectFullPath)' == '$(MSBuildThisFileDirectory)pvfUtility.csproj' And ('$(RecoveredWpfResourceMode)' == 'Hybrid' Or '$(RecoveredWpfResourceMode)' == 'SourceOnly')">
@@ -196,7 +202,7 @@
     </ProjectReference>
   </ItemGroup>
 
-  <ItemGroup Condition="'@(RecoveredSourceProject)' != ''">
+  <ItemGroup Condition="'@(RecoveredSourceProject)' != '' And '$(MSBuildProjectName)' != 'Pvf110.Cli'">
     <Reference Remove="@(RecoveredSourceProject->'%(AssemblyName)')" />
     <Content Remove="@(RecoveredSourceProject->'$(RecoveredDependencyDirectory)\%(AssemblyName).dll')" />
     <Content Remove="$(RecoveredDependencyDirectory)\**\UnitComboLib.resources.dll"
@@ -361,6 +367,37 @@
     <RemoveDir Directories="$(PublishDir)Resources\AgentKnowledge" />
     <Copy SourceFiles="@(AiAssistantKnowledge)"
           DestinationFiles="@(AiAssistantKnowledge->'$(PublishDir)Resources\AgentKnowledge\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <!--
+    单文件发布 (IncludeAllContentForSelfExtract) 会把 None/Content 文件打包进 exe，
+    Defaults\Options（首启默认配置 + 按类型 PVF 注释库）需要作为松散文件留在发布目录，
+    供 Build-SingleFile.ps1 打包自检与首启 EnsureDefaults 复制使用。
+  -->
+  <Target Name="SynchronizeOfflineDefaultsPublish"
+          AfterTargets="Publish"
+          Condition="'$(AssemblyName)' == 'pvfUtility' And '$(PublishDir)' != ''">
+    <ItemGroup>
+      <OfflineDefaultsFile Include="$(MSBuildThisFileDirectory)Resources\OfflineDefaults\Options\**\*" />
+    </ItemGroup>
+    <RemoveDir Directories="$(PublishDir)Defaults\Options" />
+    <Copy SourceFiles="@(OfflineDefaultsFile)"
+          DestinationFiles="@(OfflineDefaultsFile->'$(PublishDir)Defaults\Options\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <!--
+    单文件发布会把 csproj 的 None/Content 打进 exe bundle；Test-SingleFilePackage 要求
+    官方注释翻译资源以松散目录存在于发布目录（与 Defaults\Options、AgentKnowledge 同理）。
+  -->
+  <Target Name="SynchronizeOfficialAnnotationPublish"
+          AfterTargets="Publish"
+          Condition="'$(AssemblyName)' == 'pvfUtility' And '$(PublishDir)' != ''">
+    <ItemGroup>
+      <OfficialAnnotationFile Include="$(MSBuildThisFileDirectory)Resources\OfficialAnnotationTranslation\**\*" />
+    </ItemGroup>
+    <RemoveDir Directories="$(PublishDir)Resources\OfficialAnnotationTranslation" />
+    <Copy SourceFiles="@(OfficialAnnotationFile)"
+          DestinationFiles="@(OfficialAnnotationFile->'$(PublishDir)Resources\OfficialAnnotationTranslation\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 
 </Project>
