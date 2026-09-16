@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Pvf110.Cli</RootNamespace>
+    <AssemblyName>Pvf110.Cli</AssemblyName>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!--
+    自包含单文件发布设置：只在指定 RuntimeIdentifier 时生效（dotnet publish -r win-x64），
+    因此普通 dotnet build 仍是无 RID 的框架依赖构建，不受影响。
+    对外交付的 exe 不要求目标机器安装 .NET 运行时。
+  -->
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' != ''">
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <!-- 发布目录只保留 exe：不带主程序与 ProjectReference 的符号文件 -->
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>None</DebugType>
+    <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SourceLibraries\Pvf110.Core\Pvf110.Core.csproj" />
+  </ItemGroup>
+
+  <!-- 清除 Directory.Build.targets 中注入的 RecoveredSourceProject 引用，避免 WPF 依赖冲突 -->
+  <ItemGroup>
+    <RecoveredSourceProject Remove="@(RecoveredSourceProject)" />
+  </ItemGroup>
+
+  <!--
+    CLI 是独立的 AI 入口：只依赖 Pvf110.Core 与 .NET 框架。
+    Directory.Build.targets 会为 GUI 全仓库注入 lib/ 的内容复制与 DevExpress 引用，
+    在 CLI 上会产出 228 个文件 / 385 MB 的无关依赖树。这里在目标求值后剥离它们，
+    使 build 与 publish 产物只剩 Pvf110.Cli(+Pvf110.Core)，
+    单文件 exe 体积与 GUI 依赖树无关。此目标只作用于本项目，不改动 GUI 构建路径。
+  -->
+  <Target Name="StripGuiDependencyInjection" BeforeTargets="AssignTargetPaths;ResolveAssemblyReferences">
+    <ItemGroup>
+      <Content Remove="$(RecoveredDependencyDirectory)\**\*" />
+      <None Remove="$(RecoveredDependencyDirectory)\**\*" />
+      <Content Remove="$(RecoveredResourceDirectory)\AiAssistant\KnowledgePack\**\*" />
+      <None Remove="$(RecoveredResourceDirectory)\AiAssistant\KnowledgePack\**\*" />
+      <Reference Remove="@(Reference)" Condition="$([System.String]::Copy('%(Filename)').StartsWith('DevExpress'))" />
+      <Reference Remove="Microsoft.Extensions.Options" />
+      <RecoveredThemeAssembly Remove="@(RecoveredThemeAssembly)" />
+      <!-- 清空后 WriteRecoveredSourceLibraryManifest 不再产出 GUI 专用清单，
+           RemoveRecoveredSourceLibraryManifest 会删掉历史残留 -->
+      <RecoveredSourceProject Remove="@(RecoveredSourceProject)" />
+      <AiAssistantKnowledge Remove="@(AiAssistantKnowledge)" />
+    </ItemGroup>
+  </Target>
+
+  <!--
+    发布目录只保留 exe：ProjectReference（Pvf110.Core）的符号文件仍会进入 ResolvedFileToPublish，
+    这里按仓库既有做法（ExcludeGitHubReleaseSymbolsFromPublish）剔除所有 .pdb。
+  -->
+  <Target Name="ExcludeCliSymbolsFromPublish"
+          AfterTargets="ComputeFilesToPublish"
+          BeforeTargets="_HandleFileConflictsForPublish">
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)"
+                             Condition="'%(ResolvedFileToPublish.Extension)' == '.pdb'" />
+    </ItemGroup>
+  </Target>
+
+</Project>
