@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using System.IO.Compression;
 using System.Text;
 
@@ -27,7 +26,7 @@ public enum NkpiFormatKind
 /// - Protected：LCG UTF-16 seed 派生（与 Pvf110 相同），无 guard，header=hEAd、group=grpi、body=bODy、name=StRa/StRw。
 /// 两者均无外层 sk.dat 保护，直接 LCG 解密逻辑流。
 /// </summary>
-public sealed class NkpiReader : IPvfNamePool
+public sealed class NkpiReader : IPvfNamePool, IDisposable
 {
     public const uint Signature = 0x69706B6Eu; // "nkpi"
     public const int HeaderSize = 0x30;
@@ -41,16 +40,22 @@ public sealed class NkpiReader : IPvfNamePool
     public NkpiFormatKind Format { get; }
     public NkpiHeader Header { get; }
     public NkpiLayout Layout { get; }
+    /// <summary>
+    /// 结构区字节:完整内存模式下是完整 PVF;流式模式(OpenFile)下是 [0, BodyOffset) 区段。
+    /// body 区字节一律通过 ReadRawBody / GroupData 获取,不得直接索引本数组。
+    /// </summary>
     public byte[] Stream { get; }
     public byte[] Utf8Pool { get; }
     public byte[] Utf16Pool { get; }
     public List<NkpiEntry> Entries { get; } = new();
     public List<(int cumulative, int original)> Groups { get; } = new();
 
-    private readonly ConcurrentDictionary<int, byte[]> _groupCache = new();
+    private readonly GroupCache _groupCache = new();
+    private readonly FileStream? _bodySource;
+    private readonly bool _ownsBodySource;
 
     private NkpiReader(NkpiFormatKind format, NkpiHeader header, NkpiLayout layout, byte[] stream,
-        byte[] utf8Pool, byte[] utf16Pool)
+        byte[] utf8Pool, byte[] utf16Pool, FileStream? bodySource = null, bool ownsBodySource = false)
     {
         Format = format;
         Header = header;
@@ -58,20 +63,87 @@ public sealed class NkpiReader : IPvfNamePool
         Stream = stream;
         Utf8Pool = utf8Pool;
         Utf16Pool = utf16Pool;
+        _bodySource = bodySource;
+        _ownsBodySource = ownsBodySource;
     }
 
-    /// <summary>自动检测并打开 NKPI / ProtectedNKPI；失败抛异常。</summary>
+    public void Dispose()
+    {
+        if (_ownsBodySource) _bodySource?.Dispose();
+    }
+
+    /// <summary>自动检测并打开 NKPI / ProtectedNKPI；失败抛异常。（完整内存模式）</summary>
     public static NkpiReader Open(byte[] pvfBytes)
     {
-        // 先试 Protected（无 guard，UTF-16 seed），再试 Standard（guard + ASCII seed）
-        NkpiHeader? header = TryDecodeHeader(ProtectedKeyWords["header"], seedMode: true, guard: false, pvfBytes);
+        (NkpiFormatKind format, NkpiHeader header) = ProbeHeader(pvfBytes, pvfBytes.Length);
+        return BuildReader(format, header, pvfBytes.Length, pvfBytes, bodySource: null, ownsBodySource: false);
+    }
+
+    /// <summary>只读文件头 0x30 字节做三段式探测判断是否 NKPI/ProtectedNKPI 容器，不整包读入。</summary>
+    public static bool IsNkpiFile(string path)
+    {
+        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return false;
+        using FileStream fs = new(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        if (fs.Length < HeaderSize) return false;
+        byte[] head = new byte[HeaderSize];
+        ReadExactlyBytes(fs, head);
+        try
+        {
+            int total = checked((int)fs.Length);
+            ProbeHeader(head, total);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// 流式打开：只读取 header/文件表/HASH/名称/组表等结构区，
+    /// body 各组在首次访问时按需从文件读取、解密并解压缓存。
+    /// 适用于单条目读取与增量写回，避免整包 110MB 级全量加载。
+    /// </summary>
+    public static NkpiReader OpenFile(string path)
+    {
+        FileStream fs = new(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        try
+        {
+            long total = fs.Length;
+            if (total < HeaderSize) throw new InvalidDataException("file too small for an NKPI header");
+            byte[] head = new byte[HeaderSize];
+            ReadExactlyBytes(fs, head);
+            (NkpiFormatKind format, NkpiHeader header) = ProbeHeader(head, checked((int)total));
+            int structLen = HeaderSize
+                + header.FileCount * FileEntrySize
+                + header.HashTableSize
+                + header.NameTableSize
+                + header.GroupCount * GroupEntrySize;
+            if (structLen > total)
+                throw new InvalidDataException("NKPI structure region exceeds file size");
+            byte[] structBytes = new byte[structLen];
+            fs.Seek(0, SeekOrigin.Begin);
+            ReadExactlyBytes(fs, structBytes);
+            return BuildReader(format, header, checked((int)total), structBytes, fs, ownsBodySource: true);
+        }
+        catch
+        {
+            fs.Dispose();
+            throw;
+        }
+    }
+
+    /// <summary>header 三段式格式探测（Protected 优先，其次 Standard guard/无 guard）。</summary>
+    private static (NkpiFormatKind format, NkpiHeader header) ProbeHeader(byte[] headSource, int totalSize)
+    {
+        NkpiHeader? header = TryDecodeHeaderCore(ProtectedKeyWords["header"], seedMode: true, guard: false, headSource, totalSize);
         NkpiFormatKind format = NkpiFormatKind.Protected;
         if (header == null)
         {
-            header = TryDecodeHeader(StandardKeyWords["header"], seedMode: false, guard: true, pvfBytes);
+            header = TryDecodeHeaderCore(StandardKeyWords["header"], seedMode: false, guard: true, headSource, totalSize);
             if (header == null)
             {
-                header = TryDecodeHeader(StandardKeyWords["header"], seedMode: false, guard: false, pvfBytes);
+                header = TryDecodeHeaderCore(StandardKeyWords["header"], seedMode: false, guard: false, headSource, totalSize);
                 format = NkpiFormatKind.Standard;
             }
             else
@@ -81,12 +153,20 @@ public sealed class NkpiReader : IPvfNamePool
         }
         if (header == null)
             throw new InvalidDataException("NKPI/ProtectedNKPI header decryption failed (unsupported format)");
+        return (format, header);
+    }
 
-        // 布局校验
-        NkpiLayout layout = ComputeLayout(header, pvfBytes.Length);
+    /// <summary>
+    /// 从结构区字节构建 reader。structBytes 在完整内存模式下是完整 PVF，
+    /// 在流式模式下是 [0, BodyOffset)；两种模式下名称表/组表/文件表解析完全一致。
+    /// </summary>
+    private static NkpiReader BuildReader(NkpiFormatKind format, NkpiHeader header, int totalSize,
+        byte[] structBytes, FileStream? bodySource, bool ownsBodySource)
+    {
+        NkpiLayout layout = ComputeLayout(header, totalSize);
 
         // name 表
-        byte[] nameRaw = Slice(pvfBytes, layout.NameOffset, layout.GroupOffset - layout.NameOffset);
+        byte[] nameRaw = Slice(structBytes, layout.NameOffset, layout.GroupOffset - layout.NameOffset);
         var (strA, strW) = format == NkpiFormatKind.Protected
             ? ParseNameTableProtected(nameRaw)
             : ParseNameTableStandard(nameRaw);
@@ -94,7 +174,7 @@ public sealed class NkpiReader : IPvfNamePool
         // group 表
         var groups = new List<(int, int)>();
         {
-            byte[] grpiRaw = Slice(pvfBytes, layout.GroupOffset, header.GroupCount * GroupEntrySize);
+            byte[] grpiRaw = Slice(structBytes, layout.GroupOffset, header.GroupCount * GroupEntrySize);
             DecryptKey(grpiRaw, "group", format);
             for (int i = 0; i < header.GroupCount; i++)
             {
@@ -102,7 +182,7 @@ public sealed class NkpiReader : IPvfNamePool
             }
         }
 
-        var reader = new NkpiReader(format, header, layout, pvfBytes, strA, strW);
+        var reader = new NkpiReader(format, header, layout, structBytes, strA, strW, bodySource, ownsBodySource);
         reader.Groups.AddRange(groups);
 
         // file table（明文）
@@ -112,12 +192,12 @@ public sealed class NkpiReader : IPvfNamePool
             reader.Entries.Add(new NkpiEntry
             {
                 Index = i,
-                NameOffset = BitConverter.ToInt32(pvfBytes, off),
-                PathOffset = BitConverter.ToInt32(pvfBytes, off + 4),
-                ChunkIndex = BitConverter.ToInt32(pvfBytes, off + 8),
-                DataOffset = BitConverter.ToInt32(pvfBytes, off + 12),
-                DataSize = BitConverter.ToInt32(pvfBytes, off + 16),
-                DataType = BitConverter.ToInt32(pvfBytes, off + 20),
+                NameOffset = BitConverter.ToInt32(structBytes, off),
+                PathOffset = BitConverter.ToInt32(structBytes, off + 4),
+                ChunkIndex = BitConverter.ToInt32(structBytes, off + 8),
+                DataOffset = BitConverter.ToInt32(structBytes, off + 12),
+                DataSize = BitConverter.ToInt32(structBytes, off + 16),
+                DataType = BitConverter.ToInt32(structBytes, off + 20),
             });
         }
         return reader;
@@ -227,9 +307,12 @@ public sealed class NkpiReader : IPvfNamePool
     // ─── Header 解密 ────────────────────────────────────────────────────
 
     private static NkpiHeader? TryDecodeHeader(string key, bool seedMode, bool guard, byte[] pvfBytes)
+        => TryDecodeHeaderCore(key, seedMode, guard, pvfBytes, pvfBytes.Length);
+
+    private static NkpiHeader? TryDecodeHeaderCore(string key, bool seedMode, bool guard, byte[] headerSource, int totalSize)
     {
         byte[] headerBytes = new byte[HeaderSize];
-        Array.Copy(pvfBytes, 0, headerBytes, 0, HeaderSize);
+        Array.Copy(headerSource, 0, headerBytes, 0, HeaderSize);
         if (guard)
             for (int i = 24; i < 28 && i < headerBytes.Length; i++) headerBytes[i] ^= 0x55;
 
@@ -264,7 +347,7 @@ public sealed class NkpiReader : IPvfNamePool
                 + h.NameTableSize
                 + h.GroupCount * GroupEntrySize
                 + h.BodySize;
-            if (expected != pvfBytes.Length) return null;
+            if (expected != totalSize) return null;
         }
         catch { return null; }
 
@@ -384,10 +467,33 @@ public sealed class NkpiReader : IPvfNamePool
             int cumulative = Groups[idx].cumulative;
             int original = Groups[idx].original;
             int prev = idx > 0 ? Groups[idx - 1].cumulative : 0;
-            byte[] enc = Slice(Stream, Layout.BodyOffset + prev, cumulative - prev);
+            byte[] enc = ReadRawBody(prev, cumulative - prev);
             DecryptKey(enc, "body", Format);
             return Inflate(enc, original, out _);
         });
+    }
+
+    /// <summary>
+    /// 读取 body 区 [offset, offset+length) 的原始（仍加密）字节，不做解密解压。
+    /// 流式模式下按需从底层文件读取；完整内存模式下从 Stream 数组切片。
+    /// </summary>
+    internal byte[] ReadRawBody(int bodyOffset, int length)
+    {
+        if (bodyOffset < 0 || length < 0 || bodyOffset + length > Header.BodySize)
+            throw new ArgumentOutOfRangeException(nameof(length),
+                $"body range [{bodyOffset}, {bodyOffset + length}) out of body size {Header.BodySize}");
+        if (length == 0) return Array.Empty<byte>();
+        if (_bodySource != null)
+        {
+            lock (_bodySource)
+            {
+                _bodySource.Seek(Layout.BodyOffset + bodyOffset, SeekOrigin.Begin);
+                byte[] enc = new byte[length];
+                ReadExactlyBytes(_bodySource, enc);
+                return enc;
+            }
+        }
+        return Slice(Stream, Layout.BodyOffset + bodyOffset, length);
     }
 
     public byte[] ReadEntry(NkpiEntry e)
@@ -420,6 +526,17 @@ public sealed class NkpiReader : IPvfNamePool
         byte[] result = new byte[length];
         Array.Copy(data, offset, result, 0, length);
         return result;
+    }
+
+    private static void ReadExactlyBytes(FileStream fs, byte[] buffer)
+    {
+        int off = 0;
+        while (off < buffer.Length)
+        {
+            int n = fs.Read(buffer, off, buffer.Length - off);
+            if (n <= 0) throw new EndOfStreamException("unexpected end of NKPI file");
+            off += n;
+        }
     }
 }
 

@@ -65,13 +65,55 @@ czWrX0+y0sX1JAU=
 -----END PRIVATE KEY-----
 """;
 
-    private sealed record Pvf110KeySet(string AesKeyHex, string BuilderPrivateKeyPem);
+    public sealed record Pvf110KeySet(string AesKeyHex, string BuilderPrivateKeyPem);
 
-    private static readonly Pvf110KeySet[] KnownKeySets =
+    /// <summary>
+    /// 旧版内置密钥集（历史版本；材料注册表里没有命中时才轮到它们）。
+    /// 客户端密钥材料现在统一由 <see cref="Pvf110KeyMaterial"/> 提供：外部材料文件优先，
+    /// 内置条目兜底，按归档 header magic 逐条验证择优。
+    /// </summary>
+    private static readonly Pvf110KeySet[] LegacyKeySets =
     {
         new(StaticAesKeyHex, BuilderPrivateKeyPem),
         new(FallbackAesKeyHex, FallbackBuilderPrivateKeyPem),
     };
+
+    /// <summary>
+    /// 运行时附加的密钥集（由客户端 EXE 现场派生，见 <see cref="Pvf110ClientKeys"/>）。
+    /// 源码与配置中不保存任何客户端密钥；这里只保存调用方在本次进程内提供的材料。
+    /// </summary>
+    private static readonly List<Pvf110KeySet> RuntimeKeySets = new();
+
+    /// <summary>最近一次成功打开所用的密钥集；重建 sk.dat 时按它加密。</summary>
+    public static Pvf110KeySet? LastOpenedKeySet { get; private set; }
+
+    public static void AddRuntimeKeySet(string aesKeyHex, string builderPrivateKeyPem)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(aesKeyHex);
+        ArgumentException.ThrowIfNullOrWhiteSpace(builderPrivateKeyPem);
+        RuntimeKeySets.Add(new Pvf110KeySet(aesKeyHex, builderPrivateKeyPem));
+    }
+
+    public static void ClearRuntimeKeySets()
+    {
+        RuntimeKeySets.Clear();
+        LastOpenedKeySet = null;
+    }
+
+    public static int RuntimeKeySetCount => RuntimeKeySets.Count;
+
+    /// <summary>材料注册表条目（已按需加载；含内置条目）。</summary>
+    private static IEnumerable<Pvf110KeySet> MaterialKeySets =>
+        Pvf110KeyMaterial.Entries.Select(e => new Pvf110KeySet(e.AesKeyHex, e.PrivateKeyPem));
+
+    private static IEnumerable<Pvf110KeySet> AllKeySets =>
+        MaterialKeySets.Concat(RuntimeKeySets).Concat(LegacyKeySets);
+
+    /// <summary>
+    /// 当前生效的密钥集：本次进程内成功打开归档所用的那一套，否则内置第一套。
+    /// 写 sk.dat 必须与读 sk.dat 使用同一套（客户端 115 归档靠 DFO.exe 现场派生）。
+    /// </summary>
+    public static Pvf110KeySet ActiveKeySet => LastOpenedKeySet ?? AllKeySets.First();
 
     private static readonly Dictionary<string, byte[]> KeyWords = new()
     {
@@ -132,9 +174,9 @@ czWrX0+y0sX1JAU=
     public static byte[] LcgDecryptName(byte[] data, string utf8Or16)
         => LcgDecrypt(data, DeriveSeed(KeyWords[utf8Or16]), NameInc);
 
-    /// <summary>sk.dat RSA PKCS#1 v1.5 私钥解包（用第一套密钥）。</summary>
+    /// <summary>sk.dat RSA PKCS#1 v1.5 私钥解包（用当前打开的密钥集，否则内置第一套）。</summary>
     public static byte[] UnwrapSkDat(byte[] encrypted)
-        => UnwrapSkDat(encrypted, KnownKeySets[0].BuilderPrivateKeyPem);
+        => UnwrapSkDat(encrypted, ActiveKeySet.BuilderPrivateKeyPem);
 
     /// <summary>sk.dat RSA PKCS#1 v1.5 私钥解包（指定 PEM）。</summary>
     public static byte[] UnwrapSkDat(byte[] encrypted, string pemKey)
@@ -175,9 +217,9 @@ czWrX0+y0sX1JAU=
         return result;
     }
 
-    /// <summary>metadata AES-256-CBC，zero IV，无 padding，只解前缀 N & ~0xFF（用第一套密钥）。</summary>
+    /// <summary>metadata AES-256-CBC，zero IV，无 padding，只解前缀 N & ~0xFF（用当前打开的密钥集）。</summary>
     public static byte[] DecryptMetadata(byte[] metadata)
-        => DecryptMetadata(metadata, KnownKeySets[0].AesKeyHex);
+        => DecryptMetadata(metadata, ActiveKeySet.AesKeyHex);
 
     public static byte[][] ExtractChunkKeys(byte[] metadata)
     {
@@ -205,11 +247,15 @@ czWrX0+y0sX1JAU=
         Array.Copy(decrypted, 0, stream, off, ChunkPrefix);
     }
 
-    /// <summary>完整重建逻辑流，自动尝试所有已知密钥集。</summary>
+    /// <summary>完整重建逻辑流，自动尝试所有已知密钥集（内置 + 运行时派生）。</summary>
     public static byte[] OpenLogicalStream(byte[] skdat, byte[] pvfBytes)
+        => OpenLogicalStream(skdat, pvfBytes, out _);
+
+    /// <summary>完整重建逻辑流，并回传本次使用的 chunk key（重建时用它保持客户端 sk.dat 不变）。</summary>
+    public static byte[] OpenLogicalStream(byte[] skdat, byte[] pvfBytes, out byte[][] chunkKeys)
     {
         var errors = new List<Exception>();
-        foreach (var ks in KnownKeySets)
+        foreach (var ks in AllKeySets)
         {
             try
             {
@@ -226,11 +272,18 @@ czWrX0+y0sX1JAU=
                 byte[] headerPlain = LcgDecryptKey(header, "header");
                 if (BitConverter.ToUInt32(headerPlain, 0) != 0x69706B6Eu) continue; // magic 不对
                 Array.Copy(headerPlain, 0, stream, 0, HeaderSize);
+                LastOpenedKeySet = ks;
+                chunkKeys = keys;
                 return stream;
             }
             catch (Exception ex) { errors.Add(ex); }
         }
-        throw new AggregateException("Pvf110: all known key sets failed to decrypt sk.dat", errors);
+        throw new AggregateException(
+            "Pvf110: all known key sets failed to decrypt sk.dat. " +
+            "Pvf110 的 sk.dat 由客户端自身的 RSA/AES 密钥加密，工具内置密钥只覆盖旧版本；" +
+            "请把 PVF_CLIENT_EXE 指向该客户端的 DFO.exe / DNF.exe（或把 PVF 放回客户端目录，默认探测同目录客户端 EXE），" +
+            "工具会在运行时从客户端派生密钥，源码与配置中不保存任何客户端密钥。",
+            errors);
     }
 
     public static Pvf110Header ParseHeader(byte[] stream)

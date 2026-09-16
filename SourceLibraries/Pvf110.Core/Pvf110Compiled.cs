@@ -88,6 +88,59 @@ public sealed class Pvf110Compiled
         return sb.ToString();
     }
 
+    /// <summary>
+    /// 经典 pvf 脚本风格文本（GUI 编辑器显示用）：
+    /// #PVF_File 头；`[标签]` 字符串独立成行；普通字符串反引号包裹独立成行；
+    /// S06 缩进字符串与 int/float 以 \t 缩进独立成值行。由 FromText 解析还原
+    /// （解析器同时兼容旧 ToText 逐行格式与多值行）。
+    /// </summary>
+    public string ToScriptText(byte[] data)
+    {
+        StringBuilder sb = new("#PVF_File\r\n");
+        bool lineOpen = false;
+        foreach (var (tag, value, _) in DecodeTokens(data))
+        {
+            switch (tag)
+            {
+                case TagS03:
+                {
+                    if (lineOpen) sb.Append("\r\n");
+                    string s = (string)value;
+                    if (s.Length > 0 && s[0] == '[')
+                        sb.Append(Escape(s)).Append("\r\n");
+                    else
+                        sb.Append('`').Append(Escape(s)).Append("`\r\n");
+                    lineOpen = false;
+                    break;
+                }
+                case TagS06:
+                case TagS08:
+                    if (lineOpen) sb.Append("\r\n");
+                    if (tag == TagS06)
+                        sb.Append('\t').Append(FmtString((string)value)).Append("\r\n");
+                    else
+                        sb.Append("\t{S08}").Append(Escape((string)value)).Append("\r\n");
+                    lineOpen = false;
+                    break;
+                case TagI32:
+                    sb.Append('\t').Append(value);
+                    lineOpen = true;
+                    break;
+                case TagF32:
+                    sb.Append('\t').Append(FormatFloat((float)value));
+                    lineOpen = true;
+                    break;
+                default:
+                    if (lineOpen) sb.Append("\r\n");
+                    sb.Append("RAW\t").Append(value).Append("\r\n");
+                    lineOpen = false;
+                    break;
+            }
+        }
+        if (lineOpen) sb.Append("\r\n");
+        return sb.ToString();
+    }
+
     /// <summary>字符串值：纯数字形式用反引号包裹，避免与 I32/F32 混淆。</summary>
     private static string FmtString(string s)
     {
@@ -102,7 +155,7 @@ public sealed class Pvf110Compiled
     private static bool IsBacktickWrapped(string s)
         => s.Length >= 2 && s[0] == '`' && s[^1] == '`';
 
-    public byte[] FromText(string text)
+    public byte[] FromText(string text, Func<string, int>? missingStringResolver = null)
     {
         if (_reader is null) throw new InvalidOperationException("need reader for pool lookup");
         BuildPoolIndex();
@@ -111,67 +164,104 @@ public sealed class Pvf110Compiled
         // 去掉文件末尾换行产生的空元素；中间的空行 = S03 空字符串 token
         int last = parts.Length;
         if (last > 0 && parts[last - 1].Length == 0) last--;
-        for (int i = 0; i < last; i++)
+        int start = 0;
+        if (last > 0 && parts[0].AsSpan().TrimEnd('\r').SequenceEqual("#PVF_File"))
+            start = 1; // 经典脚本头
+        for (int i = start; i < last; i++)
         {
             string line = parts[i];
             if (line.Length > 0 && line[^1] == '\r') line = line[..^1];
             if (line.StartsWith("RAW\t")) { outB.AddRange(Convert.FromHexString(line[4..])); continue; }
-            byte tag;
-            string content;
             if (line.Length == 0)
             {
                 // S03 空字符串
-                if (!_poolIndex!.TryGetValue("", out int off0))
+                if (!TryGetOffset("", missingStringResolver, out int off0))
                     throw new InvalidDataException("empty string not in name pool");
                 outB.Add(TagS03);
                 outB.AddRange(BitConverter.GetBytes(off0));
                 continue;
             }
-            if (line.StartsWith("\t{S08}"))
+            if (line.StartsWith('\t'))
             {
-                content = Unescape(line[6..]);
-                tag = TagS08;
+                // 值行：\t 分隔的多个值（int / float / `字符串` / {S08}...）
+                string[] segments = line.Split('\t');
+                bool any = false;
+                foreach (string raw in segments)
+                {
+                    if (raw.Length == 0) continue;
+                    any = true;
+                    if (raw.StartsWith("{S08}"))
+                    {
+                        if (!TryGetOffset(Unescape(raw[5..]), missingStringResolver, out int offS8))
+                            throw new InvalidDataException($"string not in name pool: {raw[5..]}");
+                        outB.Add(TagS08);
+                        outB.AddRange(BitConverter.GetBytes(offS8));
+                        continue;
+                    }
+                    if (IsBacktickWrapped(raw))
+                    {
+                        if (!TryGetOffset(Unescape(raw[1..^1]), missingStringResolver, out int offS6))
+                            throw new InvalidDataException($"string not in name pool: {raw[1..^1]}");
+                        outB.Add(TagS06);
+                        outB.AddRange(BitConverter.GetBytes(offS6));
+                        continue;
+                    }
+                    if (long.TryParse(raw, NumberStyles.Integer, CultureInfo.InvariantCulture, out long iv))
+                    {
+                        outB.Add(TagI32);
+                        outB.AddRange(BitConverter.GetBytes(unchecked((int)iv)));
+                        continue;
+                    }
+                    if (float.TryParse(raw, NumberStyles.Float, CultureInfo.InvariantCulture, out float fv))
+                    {
+                        outB.Add(TagF32);
+                        outB.AddRange(BitConverter.GetBytes(fv));
+                        continue;
+                    }
+                    if (!TryGetOffset(Unescape(raw), missingStringResolver, out int offV))
+                        throw new InvalidDataException($"string not in name pool: {raw}");
+                    outB.Add(TagS06);
+                    outB.AddRange(BitConverter.GetBytes(offV));
+                }
+                if (!any)
+                {
+                    // 整行只有一个 "\t"：S06 空字符串
+                    if (!TryGetOffset("", missingStringResolver, out int offE))
+                        throw new InvalidDataException("empty string not in name pool");
+                    outB.Add(TagS06);
+                    outB.AddRange(BitConverter.GetBytes(offE));
+                }
+                continue;
             }
-            else if (line.StartsWith('\t'))
+            // 字符串行：反引号包裹或原文（如 [标签]）
+            string content;
+            byte tag2;
+            if (IsBacktickWrapped(line))
             {
-                content = line[1..];
-                if (IsBacktickWrapped(content))
-                {
-                    content = Unescape(content[1..^1]);
-                    tag = TagS06;
-                }
-                else if (long.TryParse(content, NumberStyles.Integer, CultureInfo.InvariantCulture, out long iv))
-                {
-                    outB.Add(TagI32);
-                    outB.AddRange(BitConverter.GetBytes(unchecked((int)iv)));
-                    continue;
-                }
-                else if (float.TryParse(content, NumberStyles.Float, CultureInfo.InvariantCulture, out float fv))
-                {
-                    outB.Add(TagF32);
-                    outB.AddRange(BitConverter.GetBytes(fv));
-                    continue;
-                }
-                else
-                {
-                    content = Unescape(content);
-                    tag = TagS06;
-                }
+                content = Unescape(line[1..^1]);
+                tag2 = TagS03;
             }
             else
             {
-                if (IsBacktickWrapped(line))
-                    content = Unescape(line[1..^1]);
-                else
-                    content = Unescape(line);
-                tag = TagS03;
+                content = Unescape(line);
+                tag2 = TagS03;
             }
-            if (!_poolIndex!.TryGetValue(content, out int off))
+            if (!TryGetOffset(content, missingStringResolver, out int off))
                 throw new InvalidDataException($"string not in name pool: {content}");
-            outB.Add(tag);
+            outB.Add(tag2);
             outB.AddRange(BitConverter.GetBytes(off));
         }
         return outB.ToArray();
+    }
+
+    private bool TryGetOffset(string value, Func<string, int>? missingStringResolver, out int offset)
+    {
+        if (_poolIndex!.TryGetValue(value, out offset))
+            return true;
+        if (missingStringResolver == null)
+            return false;
+        offset = missingStringResolver(value);
+        return true;
     }
 
     /// <summary>转义字符串中的反斜杠/换行/回车/制表/反引号，避免破坏文本行结构。</summary>

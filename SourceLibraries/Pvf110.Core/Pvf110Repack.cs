@@ -23,8 +23,16 @@ public static class Pvf110Repack
         Array.Copy(encrypted, 0, stream, off, Pvf110Crypto.ChunkPrefix);
     }
 
-    /// <summary>用 54 个 32 字节 chunk key 构建 sk.dat（AES 前缀 + RSA PKCS#1 v1.5 分块）。</summary>
+    /// <summary>
+    /// 用 32 字节 chunk key 数组构建 sk.dat（AES 前缀 + RSA PKCS#1 v1.5 分块）。
+    /// 使用 <see cref="Pvf110Crypto.ActiveKeySet"/>：即本次成功打开归档所用的密钥集
+    /// （115 客户端为从 DFO.exe 现场派生），因此写出的 sk.dat 与原客户端同源、可被客户端解开。
+    /// </summary>
     public static byte[] BuildSkDat(byte[][] chunkKeys)
+        => BuildSkDat(chunkKeys, Pvf110Crypto.ActiveKeySet);
+
+    /// <summary>用指定密钥集构建 sk.dat（AES 前缀 + RSA PKCS#1 v1.5 分块）。</summary>
+    public static byte[] BuildSkDat(byte[][] chunkKeys, Pvf110Crypto.Pvf110KeySet keySet)
     {
         using MemoryStream metadataMs = new();
         foreach (byte[] k in chunkKeys)
@@ -35,7 +43,7 @@ public static class Pvf110Repack
         byte[] metadata = metadataMs.ToArray();
 
         using Aes aes = Aes.Create();
-        aes.Key = Convert.FromHexString("B90C9493DF1780FF03E5E3F8EE225B620260B96996114AEF5923938A2AA9B06E");
+        aes.Key = Convert.FromHexString(keySet.AesKeyHex);
         aes.IV = new byte[16];
         aes.Mode = CipherMode.CBC;
         aes.Padding = PaddingMode.None;
@@ -47,7 +55,7 @@ public static class Pvf110Repack
         Array.Copy(metadata, prefix, encryptedMetadata, prefix, metadata.Length - prefix);
 
         using RSA rsa = RSA.Create();
-        rsa.ImportFromPem(PemPrivateKey);
+        rsa.ImportFromPem(keySet.BuilderPrivateKeyPem);
         byte[] publicParameters = rsa.ExportParameters(false).Modulus!;
         using RSA pub = RSA.Create();
         pub.ImportParameters(new RSAParameters { Modulus = publicParameters, Exponent = rsa.ExportParameters(false).Exponent });

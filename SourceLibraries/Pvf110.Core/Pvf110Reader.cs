@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using System.IO.Compression;
 using System.Text;
 
@@ -13,6 +12,25 @@ public sealed class Pvf110Reader : IPvfNamePool
     public Pvf110Header Header { get; }
     public Pvf110Layout Layout { get; }
     public byte[] Stream { get; }
+
+    /// <summary>打开本归档所用的 chunk key（来自 sk.dat）。重建时复用它，客户端 sk.dat 可保持不变。</summary>
+    public byte[][] ChunkKeys { get; private set; } = Array.Empty<byte[]>();
+
+    /// <summary>打开本归档所用的 sk.dat 原始字节。重建时若 chunk key 数量足够，直接原样回写，客户端 sk.dat 无需更换。</summary>
+    public byte[] SkDatBytes { get; private set; } = Array.Empty<byte>();
+
+    /// <summary>本次打开所用 sk.dat 的来源：<c>explicit</c>/<c>file</c>/<c>embedded</c>（经 <see cref="OpenPvf"/> 打开时有效）。</summary>
+    public string SkDatSource { get; private set; } = "unknown";
+
+    /// <summary>文件版 sk.dat 路径；使用内置 sk.dat 时为 null。</summary>
+    public string? SkDatPath { get; private set; }
+
+    /// <summary>HASH 段密文（与 <see cref="Stream"/> 中同一区段同步，仍保持 LCG 加密状态）。</summary>
+    public byte[] HashEncrypted => Slice(Stream, Layout.HashOffset, Header.HashTableSize);
+
+    /// <summary>name 表密文（仍保持名称段加密状态；重建时其前 8 字节与两段压缩体需原样保留或按池重算）。</summary>
+    public byte[] NameTableBytes => Slice(Stream, Layout.NameOffset, Header.NameTableSize);
+
     public byte[] Utf8Pool { get; private set; } = Array.Empty<byte>();
     public byte[] Utf16Pool { get; private set; } = Array.Empty<byte>();
     public List<Pvf110Entry> Entries { get; } = new();
@@ -27,15 +45,60 @@ public sealed class Pvf110Reader : IPvfNamePool
 
     public static Pvf110Reader Open(byte[] skdat, byte[] pvfBytes)
     {
-        byte[] stream = Pvf110Crypto.OpenLogicalStream(skdat, pvfBytes);
+        byte[] stream = Pvf110Crypto.OpenLogicalStream(skdat, pvfBytes, out byte[][] chunkKeys);
         Pvf110Header header = Pvf110Crypto.ParseHeader(stream);
         Pvf110Layout layout = Pvf110Crypto.ComputeLayout(header, stream.Length);
-        var r = new Pvf110Reader(header, layout, stream);
+        var r = new Pvf110Reader(header, layout, stream)
+        {
+            ChunkKeys = chunkKeys,
+            SkDatBytes = (byte[])skdat.Clone(),
+        };
         r.ParseNameTable();
         r.ParseFileTable();
         r.ParseGroups();
         return r;
     }
+
+    /// <summary>
+    /// 从文件路径打开，并**自动**从配套客户端 EXE 现场派生外层包装密钥
+    /// （<see cref="Pvf110ClientKeys.EnsureRegistered"/>：PVF 同目录或上溯数层找客户端主程序）。
+    /// GUI 与 CLI 都走这一入口，调用方无需预先注册密钥，也无需设置任何环境变量。
+    /// </summary>
+    public static Pvf110Reader OpenFiles(string skdatPath, string pvfPath, string? clientExePath = null)
+    {
+        Pvf110ClientKeys.EnsureRegistered(pvfPath, clientExePath);
+        return Open(File.ReadAllBytes(skdatPath), File.ReadAllBytes(pvfPath));
+    }
+
+    /// <summary>
+    /// 打开入口（CLI 与 GUI 共用）：sk.dat 三级回退（显式路径 → 文件探测 → 内置 sk.dat），
+    /// 外层包装密钥优先用内置客户端密钥集，找不到时才从客户端 EXE 现场派生。
+    /// 因此固定版单机客户端只要给 <paramref name="pvfPath"/> 即可打开，无需任何配套文件。
+    /// </summary>
+    public static Pvf110Reader OpenPvf(string pvfPath, string? skdatPath = null, string? clientExePath = null)
+    {
+        Pvf110ClientKeys.EnsureRegistered(pvfPath, clientExePath);
+        var (bytes, source, path) = Pvf110Support.LoadSkDat(pvfPath, skdatPath);
+        try
+        {
+            Pvf110Reader reader = Open(bytes, File.ReadAllBytes(pvfPath));
+            reader.SkDatSource = source;
+            reader.SkDatPath = path;
+            return reader;
+        }
+        catch (Exception ex) when (ex is InvalidDataException or FormatException or IOException)
+        {
+            throw new InvalidDataException(
+                $"不是可识别的 Pvf110 归档（{Path.GetFileName(pvfPath)}，sk.dat 来源={source}）：{ex.Message}" +
+                (source == "embedded"
+                    ? "；内置 sk.dat 只适用于内置密钥集对应的客户端版本，其他版本请把该客户端的 sk.dat 与 DFO.exe 放到 PVF 同目录（或设 PVF_SKDAT / PVF_CLIENT_EXE）。"
+                    : ""),
+                ex);
+        }
+    }
+
+    /// <summary>name 表头部 8 字节（真机为保留/校验字段，重建时原样保留）。</summary>
+    public byte[] NameTableHead => Slice(Stream, Layout.NameOffset, 8);
 
     private void ParseNameTable()
     {
@@ -109,12 +172,38 @@ public sealed class Pvf110Reader : IPvfNamePool
 
     public string FilePath(Pvf110Entry e)
     {
+        if (PathMemoEnabled)
+        {
+            string?[] memo = _pathMemo ??= new string?[Entries.Count];
+            string? cached = memo[e.Index];
+            if (cached != null) return cached;
+            string resolved = ComposePath(e);
+            memo[e.Index] = resolved;
+            return resolved;
+        }
+        return ComposePath(e);
+    }
+
+    private string ComposePath(Pvf110Entry e)
+    {
         string folder = ResolveName(e.PathOffset).Replace('\\', '/').Trim('/');
         string name = ResolveName(e.NameOffset).Replace('\\', '/');
         return folder.Length > 0 ? $"{folder}/{name}" : name;
     }
 
-    private readonly ConcurrentDictionary<int, byte[]> _groupCache = new();
+    /// <summary>
+    /// 路径解析记忆化开关（默认关闭）。
+    /// 打开后每个条目只解析一次路径（<see cref="Entries"/> 数量 × 2 次名称池解码 → 1 次），
+    /// 供"本来就要为全部条目建索引"的调用方（GUI 打开/保存、批量写回）使用：
+    /// 这些调用方已经把路径字符串常驻在字典键里，记忆化表只额外持有引用数组
+    /// （百万级条目约 8 字节/条），却省掉每次遍历重新分配等量字符串。
+    /// 只做流式列目录/校验的调用方（CLI list/validate）保持关闭，避免常驻内存上升。
+    /// </summary>
+    public bool PathMemoEnabled { get; set; }
+
+    private string?[]? _pathMemo;
+
+    private readonly GroupCache _groupCache = new();
 
     public byte[] GroupData(int index)
     {
