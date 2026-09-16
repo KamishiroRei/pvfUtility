@@ -47,7 +47,7 @@ public class AutoTheBackupPvfOptions : ViewModelBase
 		{
 			if (!f8p6nbkyP.HasValue)
 			{
-				f8p6nbkyP = 5;
+				f8p6nbkyP = 15;
 			}
 			if (f8p6nbkyP <= 0)
 			{

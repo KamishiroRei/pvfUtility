@@ -61,7 +61,7 @@ internal class SpecialPassiveObjectSectionFormat : CustomSectionFormatBase
 				}
 				continue;
 			}
-			ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[k + 1].Item : null);
+			ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, k, section.Children.Count);
 			if (scriptItem != null)
 			{
 				k++;
@@ -138,7 +138,7 @@ internal class SpecialPassiveObjectSectionFormat : CustomSectionFormatBase
 				}
 				continue;
 			}
-			ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[i + 1].Item : null);
+			ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, i, section.Children.Count);
 			if (scriptItem != null)
 			{
 				i++;

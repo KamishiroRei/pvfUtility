@@ -45,6 +45,8 @@ public static class ServiceItemCodeTable
 		{
 			return;
 		}
+		// 懒加载兼容（统一管线）：LST 文件内容按需取回经典视图后再扫描
+		pvf.EnsureFileData(file.FileName);
 		Stringtable strtable = pvf.Strtable;
 		if (strtable == null)
 		{
@@ -135,6 +137,8 @@ public static class ServiceItemCodeTable
 		{
 			return skillLstFiles;
 		}
+		// 懒加载兼容（统一管线）：先取回经典视图再扫描
+		pvf.EnsureFileData(file.FileName);
 		int dataLen = file.DataLen;
 		if (!file.IsScriptFile || dataLen < 12)
 		{

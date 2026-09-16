@@ -53,7 +53,7 @@ public class PvfSection : SectionBase
 			SectionBase sectionBase = base.Children[i];
 			if (!(sectionBase is PvfSection))
 			{
-				if (((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? base.Children[i + 1].Item : null) != null)
+				if (ScriptLinkText.TryGetLinkedLiteral(base.Children, i, base.Children.Count) != null)
 				{
 					i++;
 				}
@@ -71,7 +71,7 @@ public class PvfSection : SectionBase
 			SectionBase sectionBase = base.Children[i];
 			if (!(sectionBase is PvfSection))
 			{
-				ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? base.Children[i + 1].Item : null);
+				ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(base.Children, i, base.Children.Count);
 				if (scriptItem != null)
 				{
 					i++;

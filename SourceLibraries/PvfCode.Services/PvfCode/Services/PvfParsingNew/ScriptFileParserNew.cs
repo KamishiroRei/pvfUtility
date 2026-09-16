@@ -52,8 +52,17 @@ public class ScriptFileParserNew
 			ScriptItem scriptItem = scriptItems[num];
 			if (scriptItem.Type == ScriptType.Section)
 			{
-				string text = GetStringTableValue(scriptItem.Data);
-				string text2 = "[/" + text.Remove(0, 1);
+				string text = GetStringTableValue(scriptItem.Data) ?? string.Empty;
+				// 空名 Section（payload 未映射到池内字符串）在旧实现里 text.Remove(0, 1) 抛
+				// ArgumentOutOfRangeException，整个文件打不开（90CN .equ 实测存在）。
+				// 这类节没有可匹配的结束标签，用不会命中字符串表的哨兵名走"无结束标签"分支；
+				// 同时告知：空名节在文本里无法表达，保存该文件时这一 token 会丢失。
+				string text2 = text.Length > 0 ? "[/" + text.Remove(0, 1) : "[/\u0000\u0000";
+				if (text.Length == 0)
+				{
+					AppSetting.Instance.GetIlogger()?.Warning(
+						$"空名 Section（payload={scriptItem.Data}）文件 {sourceFile.FileName}：无法用文本表达，保存该文件时此 token 会丢失。");
+				}
 				int num2;
 				bool hasEndTag = TryFindEndSection(scriptItems, num, text2, out num2);
 				PvfSection pvfSection = new PvfSection(text, hasEndTag, isRootSection: true);
@@ -180,7 +189,7 @@ public class ScriptFileParserNew
 			if (tableRowFormatter == null)
 			{
 				stringBuilder.Append(Environment.NewLine);
-				stringBuilder.Append(sectionBase.Item.GetItemText(pvfGroup, (sectionBase.Item.Type == ScriptType.StringLinkIndex) ? Sections[i + 1].Item : null));
+				stringBuilder.Append(sectionBase.Item.GetItemText(pvfGroup, ScriptLinkText.TryGetLinkedLiteral(Sections, i, Sections.Count)));
 				continue;
 			}
 			if (i == 0)
@@ -194,7 +203,7 @@ public class ScriptFileParserNew
 
 	public string GetItemVlaue(SectionBase item, int i)
 	{
-		return item.Item.GetItemText(pvfGroup, (item.Item.Type == ScriptType.StringLinkIndex) ? Sections[i + 1].Item : null);
+		return item.Item.GetItemText(pvfGroup, ScriptLinkText.TryGetLinkedLiteral(Sections, i, Sections.Count));
 	}
 
 	public List<WebApiFileData> WebApiGetFileData()
@@ -236,7 +245,7 @@ public class ScriptFileParserNew
 				webApiFileData.Children.Add(CreateWebApiFileData(pvfSection));
 				continue;
 			}
-			ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[i + 1].Item : null);
+			ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, i, section.Children.Count);
 			if (scriptItem != null)
 			{
 				i++;
@@ -261,12 +270,9 @@ public class ScriptFileParserNew
 		SectionBase sectionBase = sections.FirstOrDefault(item => item.GetSectionName() == sectionName);
 		if (sectionBase != null && sectionBase.Children.Count >= 2)
 		{
-			ScriptItem nextItem = null;
-			if (sectionBase.Children[1].Item.Type == ScriptType.StringLinkIndex && sectionBase.Children.Count >= 3)
-			{
-				nextItem = sectionBase.Children[2].Item;
-			}
-			val = sectionBase.Children[1].Item.GetItemTextNotChar(pvf, nextItem);
+			// 链接元数自适应：2 token 版式（经典）取后一项名称字面量；110 适配版式（1 token）取链接自身串表文本
+			ScriptItem? nextItem = ScriptLinkText.TryGetLinkedLiteral(sectionBase.Children, 1, sectionBase.Children.Count);
+			val = ScriptLinkText.Resolve(pvf, sectionBase.Children[1].Item, nextItem);
 			return true;
 		}
 		return false;

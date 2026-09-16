@@ -64,7 +64,7 @@ internal class VariableGroupSectionFormat : CustomSectionFormatBase
 				}
 				continue;
 			}
-			ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? P_2.Children[k + 1].Item : null);
+			ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(P_2.Children, k, P_2.Children.Count);
 			if (scriptItem != null)
 			{
 				k++;

@@ -14,7 +14,9 @@ public class AniImage
 		{
 			if (!string.IsNullOrEmpty(Img))
 			{
-				return "sprite/" + Img.ToLower().Replace("%04d", "0001").Replace("%02d%02", "0001")
+				// %04d 是时装/皮肤自适配模板（运行时由客户端按当前穿着填充）；
+				// GUI 预览无法得知玩家穿着，按约定默认展开为 0000 = 角色默认皮肤。
+				return "sprite/" + Img.ToLower().Replace("%04d", "0000").Replace("%02d%02", "0001")
 					.Replace("%02d%02d", "0001");
 			}
 			return string.Empty;

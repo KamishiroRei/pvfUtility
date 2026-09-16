@@ -20,11 +20,21 @@ public class PvfFile : ModelBase, ICloneable
 
 	private bool isNewFile;
 
+	/// <summary>用户实际修改过内容（保存/导入/引用重建等变更路径置位）。
+	/// 懒加载 SetLoadedContent 不置位，用于保存时跳过未修改文件的重编译与重压缩。</summary>
+	public bool IsContentModified { get; private set; }
+
 	public int? ItemCode { get; set; }
+
+	/// <summary>Pvf110 文件 dataType（1=编译二进制/解编译文本，3=UTF-16 文本）。标准格式打开时为 0。</summary>
+	public int Pvf110DataType { get; set; }
 
 	public byte[] FileNameBytes { get; set; }
 
 	public int FileNameLen => FileNameBytes.Length;
+
+	/// <summary>文件名编码。根据归档格式选择；Pvf110 路径使用 UTF-8。</summary>
+	public System.Text.Encoding FileNameEncoding { get; set; } = System.Text.Encoding.GetEncoding(949);
 
 	public byte[] Data { get; private set; }
 
@@ -53,11 +63,11 @@ public class PvfFile : ModelBase, ICloneable
 	{
 		get
 		{
-			return Encoding.GetEncoding(949).GetString(FileNameBytes).TrimEnd(new char[1]);
+			return FileNameEncoding.GetString(FileNameBytes).TrimEnd(new char[1]);
 		}
 		set
 		{
-			FileNameBytes = Encoding.GetEncoding(949).GetBytes(value.Replace('\\', '/').ToLower());
+			FileNameBytes = FileNameEncoding.GetBytes(value.Replace('\\', '/').ToLower());
 			FileNameBytesChecksum = DataHelper.GetFileNameHashCode(FileNameBytes);
 			if (DataLen > 0)
 			{
@@ -65,6 +75,14 @@ public class PvfFile : ModelBase, ICloneable
 			}
 			IsUpdated = true;
 		}
+	}
+
+	/// <summary>打开归档时装载文件名：与 FileName setter 相同的规范化，但不置 IsUpdated
+	/// （归档既有条目不是用户修改，避免文件树把整包显示为已更新）。</summary>
+	public void SetFileNameInitial(string name)
+	{
+		FileNameBytes = FileNameEncoding.GetBytes(name.Replace('\\', '/').ToLower());
+		FileNameBytesChecksum = DataHelper.GetFileNameHashCode(FileNameBytes);
 	}
 
 	public string ShortName => Path.GetFileName(FileName);
@@ -185,7 +203,32 @@ public class PvfFile : ModelBase, ICloneable
 			Buffer.BlockCopy(fileData, 0, Data, 0, DataLen);
 			Checksum = PvfAlgorithmHelper.CreateBuffKey(Data, GetBlockLength(), FileNameBytesChecksum);
 			IsUpdated = true;
+			IsContentModified = true;
 		}
+	}
+
+	/// <summary>原样写入 Data（不做 4 字节对齐，不计算旧式 checksum）。Pvf110 模式使用，避免尾部填充污染明文。</summary>
+	public void WriteRawData(byte[] fileData)
+	{
+		DataLen = fileData.Length;
+		Data = fileData;
+		IsUpdated = true;
+		IsContentModified = true;
+	}
+
+	/// <summary>懒加载/打开时装载内容：不标记为用户修改（保存时可按原始内容跳过重编译）。</summary>
+	public void SetLoadedContent(byte[] content)
+	{
+		Data = content;
+		DataLen = content.Length;
+	}
+
+	/// <summary>释放懒加载内容，回收常驻内存；用户已修改的文件不释放，避免丢失未保存编辑。</summary>
+	public void ReleaseLoadedContent()
+	{
+		if (IsContentModified) return;
+		Data = Array.Empty<byte>();
+		DataLen = 0;
 	}
 
 	public void InitFile(byte[] bytes)
@@ -398,10 +441,8 @@ public class PvfFile : ModelBase, ICloneable
 			{
 				byte[] bytes = BitConverter.GetBytes((uint)value2);
 				Buffer.BlockCopy(bytes, 0, Data, num, bytes.Length);
-				if (!IsUpdated)
-				{
-					IsUpdated = true;
-				}
+				IsUpdated = true;
+				IsContentModified = true;
 			}
 		}
 	}
@@ -551,8 +592,13 @@ public class PvfFile : ModelBase, ICloneable
 
 	public bool GetNpcId(PvfPack pvf, out int npcId)
 	{
+		return GetNpcId(pvf, Data, out npcId);
+	}
+
+	public bool GetNpcId(PvfPack pvf, byte[]? scanData, out int npcId)
+	{
 		npcId = -1;
-		if (!IsScriptFile)
+		if (scanData == null || scanData.Length < 2 || BitConverter.ToUInt16(scanData, 0) != 53424)
 		{
 			return false;
 		}
@@ -561,16 +607,17 @@ public class PvfFile : ModelBase, ICloneable
 		{
 			return false;
 		}
-		if (Data != null && DataLen >= 7)
+		int dataLen = scanData.Length;
+		if (dataLen >= 7)
 		{
-			for (int i = 2; i < DataLen - 4; i += 5)
+			for (int i = 2; i < dataLen - 4; i += 5)
 			{
-				if (Data[i] == 5)
+				if (scanData[i] == 5)
 				{
 					int num = i + 1;
-					if (BitConverter.ToInt32(Data, num) == stringTableId)
+					if (BitConverter.ToInt32(scanData, num) == stringTableId)
 					{
-						npcId = BitConverter.ToInt32(Data, num + 5);
+						npcId = BitConverter.ToInt32(scanData, num + 5);
 						return true;
 					}
 				}

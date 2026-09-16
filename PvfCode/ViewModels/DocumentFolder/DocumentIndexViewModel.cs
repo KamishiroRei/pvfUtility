@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -41,7 +42,21 @@ public class DocumentIndexViewModel : DocumentBase
 		: base(AppSetting.Instance.GetIlogger()?.GetStr("DocumentName_StartPage"))
 	{
 		base.DocumentType = PvfFileDocumentType.起始页;
-		InsertView2 = WindowsEx.CheckIsInsertMicrosoftEdgeRuntime();
+		// 运行时守卫：Edge WebView2 运行时存在且应用目录带有 WebView2Loader.dll 才启用 WebView2 视图，
+		// 否则回退内嵌 WebBrowser，避免关闭 PVF 重建起始页时弹 DllNotFoundException 错误窗
+		InsertView2 = WindowsEx.CheckIsInsertMicrosoftEdgeRuntime() && IsWebView2LoaderPresent();
+	}
+
+	private static bool IsWebView2LoaderPresent()
+	{
+		try
+		{
+			return File.Exists(Path.Combine(AppContext.BaseDirectory, "WebView2Loader.dll"));
+		}
+		catch (Exception)
+		{
+			return false;
+		}
 	}
 
 	[Command]
@@ -65,6 +80,13 @@ public class DocumentIndexViewModel : DocumentBase
 				errid++;
 				ThemeSwitcher.Instance.PvfCodeThemeChangedEvent += OnThemeChanged;
 				errid++;
+			}
+			catch (DllNotFoundException e)
+			{
+				// WebView2Loader 缺失等环境问题：降级为空起始页并记录日志，不弹错误窗
+				isWebView2Loaded = false;
+				InsertView2 = false;
+				AppCore.Logger.Error("起始页 WebView2 初始化失败（已回退）：" + e.Message);
 			}
 			catch (Exception e)
 			{

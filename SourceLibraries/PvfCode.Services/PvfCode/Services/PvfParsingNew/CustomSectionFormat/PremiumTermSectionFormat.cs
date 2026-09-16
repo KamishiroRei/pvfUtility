@@ -43,7 +43,7 @@ internal class PremiumTermSectionFormat : CustomSectionFormatBase
 				}
 				continue;
 			}
-			ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? P_2.Children[j + 1].Item : null);
+			ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(P_2.Children, j, P_2.Children.Count);
 			if (scriptItem != null)
 			{
 				j++;

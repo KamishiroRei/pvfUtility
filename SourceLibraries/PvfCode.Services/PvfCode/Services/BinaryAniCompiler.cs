@@ -173,8 +173,10 @@ public static class BinaryAniCompiler
 					lines[i + 1] = "`" + imagePaths[idx] + "`";
 				}
 			}
-			// 补反引号：对非数值、非段名、非空行，且不含反引号的值加上反引号
-			if (i > 0 && trimmed.Length > 0 && trimmed[0] != '[' && trimmed[0] != '`' && !long.TryParse(trimmed, out _) && !float.TryParse(trimmed, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out _))
+			// 补反引号：仅对不含 Tab 的单 token 值（枚举 SUPERARMOR/NONE/DODGE、声音路径等）加反引号。
+			// 含 Tab 的行是多值行（[IMAGE POS]/[DAMAGE BOX]/[ATTACK BOX]/[RGBA]/[CLIP]/[IMAGE RATE] 等），
+			// 整行包裹后编译器按 \t 切分会产生 `-24 这类坏 token，导致 int.Parse 失败，禁止包裹。
+			if (i > 0 && trimmed.Length > 0 && trimmed[0] != '[' && trimmed[0] != '`' && !trimmed.Contains('\t') && !long.TryParse(trimmed, out _) && !float.TryParse(trimmed, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out _))
 			{
 				lines[i] = "`" + trimmed + "`";
 			}

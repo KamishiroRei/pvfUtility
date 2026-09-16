@@ -270,7 +270,7 @@ public class ServiceExtractFiles
 		}
 		catch (Exception ex)
 		{
-			progress.Report(100.0);
+			progress?.Report(100.0);
 			status.Msg = ex.Message;
 			Logger.Error(string.Format(
 				AppSetting.Instance.GetIlogger()?.GetStr("mess_ExtractError"),
@@ -280,7 +280,7 @@ public class ServiceExtractFiles
 		_progressCancellation.Cancel();
 		_config.SourceFiles = null;
 		GC.Collect();
-		progress.Report(100.0);
+		progress?.Report(100.0);
 		return status;
 	}
 

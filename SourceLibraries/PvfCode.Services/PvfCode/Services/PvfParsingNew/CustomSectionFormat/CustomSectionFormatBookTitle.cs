@@ -38,7 +38,7 @@ public class CustomSectionFormatBookTitle : CustomSectionFormatBase
 				stringBuilder.Append(config.ProcessSectionText(pvf, file, sectionBase, 1, dic, ParentSectionName));
 				continue;
 			}
-			ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[k + 1].Item : null);
+			ScriptItem nextItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, k, section.Children.Count);
 			string itemText = sectionBase.Item.GetItemText(pvf, nextItem);
 			stringBuilder.Append(itemText);
 			num2++;

@@ -41,7 +41,7 @@ internal class RandomCategorySectionFormat : CustomSectionFormatBase
 				stringBuilder.Append(config.ProcessSectionText(P_0, P_1, sectionBase, 1, dic, ParentSectionName));
 				continue;
 			}
-			ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? P_2.Children[k + 1].Item : null);
+			ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(P_2.Children, k, P_2.Children.Count);
 			if (scriptItem != null)
 			{
 				k++;

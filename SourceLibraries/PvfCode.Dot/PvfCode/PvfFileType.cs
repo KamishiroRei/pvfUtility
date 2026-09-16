@@ -74,5 +74,6 @@ public enum PvfFileType
 	ani_new,
 	tlk,
 	pos,
+	xui,
 	未知
 }

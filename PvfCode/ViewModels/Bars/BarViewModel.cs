@@ -458,6 +458,12 @@ public class BarViewModel : ViewModelBase
 		AppSetting.Instance.PathConfig.AddPvfOpenLog(filePath);
 		if (isOpen)
 		{
+			// 每-PVF 记忆：该 PVF 上次使用过的 ImagePacks2 目录自动应用
+			string mappedImagePacks2 = AppSetting.Instance.ImagePacks2Options.GetImagePacks2ForPvf(filePath);
+			if (!string.IsNullOrEmpty(mappedImagePacks2))
+			{
+				AppSetting.Instance.ImagePacks2Options.ImagePacks2Path = mappedImagePacks2;
+			}
 			if (AppSetting.Instance.PvfConfig.AutoTheBackupPvfConfig.AutoTheBackupPvfIsOpen)
 			{
 				await Task.Run(() => AppCore.ViewModelBase.PVF.SavePvfPack(AppSetting.Instance.PvfConfig.AutoTheBackupPvfConfig.CreateFilePath(AppCore.ViewModelBase.PVF), isFastMode: false, null));

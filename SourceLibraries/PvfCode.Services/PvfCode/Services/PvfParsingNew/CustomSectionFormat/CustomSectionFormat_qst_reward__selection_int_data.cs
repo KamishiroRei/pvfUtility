@@ -38,7 +38,7 @@ public class CustomSectionFormat_qst_reward__selection_int_data : CustomSectionF
 				stringBuilder.Append(config.ProcessSectionText(pvf, file, sectionBase, 1, dic, ParentSectionName));
 				continue;
 			}
-			ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[k + 1].Item : null);
+			ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, k, section.Children.Count);
 			string itemText = sectionBase.Item.GetItemText(pvf, scriptItem);
 			if (scriptItem != null)
 			{

@@ -133,6 +133,39 @@ public class Stringtable
 		entries = new List<StringTableEntry>();
 	}
 
+	/// <summary>
+	/// 统一管线：90CN(NKPI/Pvf110) 无 stringtable.bin，用名称池字符串按序构建虚拟串表，
+	/// 使经典管线的 ID↔文本双向解析、名称标签注册（[name] 等）原样可用。
+	/// 文本不做传统/简体转换，与名称池原始字节保持一致；同文重复取首个，索引即虚拟 ID。
+	/// </summary>
+	public void LoadFromNamePool(IEnumerable<string> poolStrings)
+	{
+		NameLableOrSetNameLable = new HashSet<int>();
+		encoding = EncodingType.UTF8;
+		entries = new List<StringTableEntry>();
+		entriesByText = new Dictionary<string, StringTableEntry>();
+		if (poolStrings != null)
+		{
+			foreach (string text in poolStrings)
+			{
+				if (entriesByText.ContainsKey(text))
+				{
+					continue;
+				}
+				StringTableEntry entry = new StringTableEntry
+				{
+					Index = entries.Count,
+					Text = text,
+					Bytes = Encoding.UTF8.GetBytes(text)
+				};
+				entries.Add(entry);
+				entriesByText.TryAdd(entry.Text, entry);
+			}
+		}
+		IsStringTableUpdated = false;
+		InitializeNameLabels();
+	}
+
 	public int GetNameLable(PvfFileType fileType)
 	{
 		if (nameLabelByFileType.TryGetValue(fileType, out var value))

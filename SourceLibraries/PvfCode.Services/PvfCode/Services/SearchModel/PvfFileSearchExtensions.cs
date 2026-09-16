@@ -10,21 +10,24 @@ namespace PvfCode.Services.SearchModel;
 
 internal static class PvfFileSearchExtensions
 {
-	public static bool ContainsStringTableReference(this PvfFile file, HashSet<int> stringTableIndexes)
+	public static bool ContainsStringTableReference(this PvfFile file, PvfGroup group, HashSet<int> stringTableIndexes, string? keyword = null, bool isStartMatch = false)
 	{
-		if (!file.IsScriptFile)
+		// 统一管线：110/NKPI 的 GetBinaryForScan 返回经典视图，虚拟串表 ID 与经典格式同语义
+		byte[] data = group.GetBinaryForScan(file);
+		if (data.Length < 7 || BitConverter.ToUInt16(data, 0) != 53424)
 		{
 			return false;
 		}
-		for (int i = 2; i < file.DataLen - 4; i += 5)
+		int dataLen = data.Length;
+		for (int i = 2; i < dataLen - 4; i += 5)
 		{
-			if ((file.Data[i] == 5 || file.Data[i] == 7 || file.Data[i] == 10) && stringTableIndexes.Contains(BitConverter.ToInt32(file.Data, i + 1)))
+			if ((data[i] == 5 || data[i] == 7 || data[i] == 10) && stringTableIndexes.Contains(BitConverter.ToInt32(data, i + 1)))
 			{
 				return true;
 			}
-			if (i > 4 && file.Data[i] == 10 && file.Data[i - 5] == 9)
+			if (i > 4 && data[i] == 10 && data[i - 5] == 9)
 			{
-				int compositeIndex = file.Data[i - 4] * 16777216 + BitConverter.ToInt32(file.Data, i + 1);
+				int compositeIndex = data[i - 4] * 16777216 + BitConverter.ToInt32(data, i + 1);
 				if (stringTableIndexes.Contains(compositeIndex))
 				{
 					return true;
@@ -34,15 +37,17 @@ internal static class PvfFileSearchExtensions
 		return false;
 	}
 
-	public static bool ContainsIntegerValue(this PvfFile file, int value)
+	public static bool ContainsIntegerValue(this PvfFile file, PvfGroup group, int value)
 	{
-		if (!file.IsScriptFile)
+		byte[] data = group.GetBinaryForScan(file);
+		if (data.Length < 7 || BitConverter.ToUInt16(data, 0) != 53424)
 		{
 			return false;
 		}
-		for (int i = 2; i < file.DataLen - 4; i += 5)
+		int dataLen = data.Length;
+		for (int i = 2; i < dataLen - 4; i += 5)
 		{
-			if ((file.Data[i] == 2 || file.Data[i] == 4) && BitConverter.ToInt32(file.Data, i + 1) == value)
+			if ((data[i] == 2 || data[i] == 4) && BitConverter.ToInt32(data, i + 1) == value)
 			{
 				return true;
 			}
@@ -50,31 +55,33 @@ internal static class PvfFileSearchExtensions
 		return false;
 	}
 
-	public static bool ContainsBinarySequence(this PvfFile file, byte[] sequence)
+	public static bool ContainsBinarySequence(this PvfFile file, PvfGroup group, byte[] sequence)
 	{
 		int sequenceLength = sequence.Length;
-		if (!file.IsScriptFile)
+		byte[] data = group.GetBinaryForScan(file);
+		if (data.Length < 7 || BitConverter.ToUInt16(data, 0) != 53424)
 		{
 			return false;
 		}
-		if (file.DataLen < sequenceLength)
+		int dataLen = data.Length;
+		if (dataLen < sequenceLength)
 		{
 			return false;
 		}
-		for (int i = 2; i < file.DataLen; i += 5)
+		for (int i = 2; i < dataLen; i += 5)
 		{
-			if (file.Data[i] == sequence[0] && BitConverter.ToInt32(file.Data, i + 1) == BitConverter.ToInt32(sequence, 1))
+			if (data[i] == sequence[0] && BitConverter.ToInt32(data, i + 1) == BitConverter.ToInt32(sequence, 1))
 			{
 				if (sequence.Length == 5)
 				{
 					return true;
 				}
-				if (i + sequenceLength > file.DataLen)
+				if (i + sequenceLength > dataLen)
 				{
 					return false;
 				}
 				byte[] candidate = new byte[sequenceLength];
-				Buffer.BlockCopy(file.Data, i, candidate, 0, sequenceLength);
+				Buffer.BlockCopy(data, i, candidate, 0, sequenceLength);
 				if (DataHelper.BytesEquals(candidate, sequence))
 				{
 					return true;

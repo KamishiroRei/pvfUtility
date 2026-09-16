@@ -82,6 +82,10 @@ public abstract class PvfPack : ModelBase
 
 	public Dictionary<string, PvfFile> FileList { get; set; }
 
+	/// <summary>自最近一次成功写盘后是否存在未保存变更（内容/结构修改、导入、删除、重命名等）。
+	/// 自动备份据此跳过无变更周期，避免无意义的整包重建。</summary>
+	public bool HasUnsavedChanges { get; set; }
+
 	public Stringtable Strtable { get; }
 
 	public StringView Strview { get; }
@@ -100,11 +104,17 @@ public abstract class PvfPack : ModelBase
 			DoNotify(nameof(OverAllEncodingType));
 			if (PvfIsOpen && Strtable != null)
 			{
+				PvfFile stringTableFile = GetFile("stringtable.bin");
+				if (stringTableFile == null)
+				{
+					// 110/NKPI 虚拟串表由名称池生成、文本不做编码转换，无需重建
+					return;
+				}
 				if (Strtable.IsStringTableUpdated)
 				{
-					GetFile("stringtable.bin")?.WriteFileData(Strtable.CreateStringTable());
+					stringTableFile.WriteFileData(Strtable.CreateStringTable());
 				}
-				Strtable?.Loadstringtable(GetFile("stringtable.bin").Data, value, this);
+				Strtable?.Loadstringtable(stringTableFile.Data, value, this);
 				Strview?.InitStringData(GetFile("n_string.lst"), this, value);
 			}
 		}

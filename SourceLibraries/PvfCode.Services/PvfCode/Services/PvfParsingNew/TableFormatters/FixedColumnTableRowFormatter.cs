@@ -18,7 +18,7 @@ internal class FixedColumnTableRowFormatter : TableRowFormatterBase
 
 	public override void AppendItem(StringBuilder output, List<SectionBase> sections, SectionBase section, PvfGroup group, int index, out int updatedIndex)
 	{
-		ScriptItem linkedString = section.Item.Type == ScriptType.StringLinkIndex ? section.Children[index + 1].Item : null;
+		ScriptItem linkedString = section.Item.Type == ScriptType.StringLinkIndex && section.Children != null && index + 1 < section.Children.Count ? section.Children[index + 1].Item : null;
 		if (linkedString != null)
 		{
 			index++;

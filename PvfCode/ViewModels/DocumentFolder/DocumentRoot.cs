@@ -89,7 +89,21 @@ public class DocumentRoot : ViewModelBase
 
 	public void OpenPreview(PvfFileDocument sourceDocument)
 	{
+		// 编辑器工具栏按钮属于用户显式动作，不受“按后缀自动打开”设置约束。
+		OpenPreview(sourceDocument, isAutoInvoked: false);
+	}
+
+	/// <param name="isAutoInvoked">
+	/// 文档激活自动触碰时为 true，此时先按“文件预览 → 自动打开预览”里该后缀的开关判定；
+	/// 关闭的后缀既不新建预览页，也不重定向已存在的预览页。
+	/// </param>
+	public void OpenPreview(PvfFileDocument sourceDocument, bool isAutoInvoked)
+	{
 		if (sourceDocument == null || !PvfPreviewDocument.Supports(sourceDocument.File))
+		{
+			return;
+		}
+		if (isAutoInvoked && !AppSetting.Instance.PvfFilePreviewOptions.ShouldAutoOpen(sourceDocument.File))
 		{
 			return;
 		}
@@ -169,7 +183,7 @@ public class DocumentRoot : ViewModelBase
 	{
 		if (sender is PvfFileDocument sourceDocument)
 		{
-			OpenPreview(sourceDocument);
+			OpenPreview(sourceDocument, isAutoInvoked: true);
 		}
 	}
 

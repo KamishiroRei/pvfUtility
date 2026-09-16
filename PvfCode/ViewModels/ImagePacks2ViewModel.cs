@@ -38,6 +38,9 @@ public class ImagePacks2ViewModel : ViewModelBase
 		if (commonOpenFileDialog.ShowDialog(Application.Current.MainWindow) == CommonFileDialogResult.Ok)
 		{
 			AppSetting.Instance.ImagePacks2Options.ImagePacks2Path = commonOpenFileDialog.FileName;
+			// 每-PVF 记忆：当前打开的 PVF 与所选目录绑定，下次打开自动应用
+			AppSetting.Instance.ImagePacks2Options.SetImagePacks2ForPvf(
+				AppCore.ViewModelBase.PVF?.PvfPackFilePath, commonOpenFileDialog.FileName);
 			if (DiskDetectionUtils.DetectDrive(AppSetting.Instance.ImagePacks2Options.ImagePacks2Path).HardwareType != HardwareType.Ssd)
 			{
 				AppCore.Logger.Warning(AppCore.Logger.GetStrNoReplace("Mess_NotSSD"));
@@ -84,6 +87,9 @@ public class ImagePacks2ViewModel : ViewModelBase
 	public async void OnClear()
 	{
 		AppSetting.Instance.ImagePacks2Options.ImagePacks2Path = "";
+		// 同步清除当前 PVF 的记忆映射
+		AppSetting.Instance.ImagePacks2Options.SetImagePacks2ForPvf(
+			AppCore.ViewModelBase.PVF?.PvfPackFilePath, null);
 		ImagePack2Service.Instance.Clear();
 		await AppSetting.Instance.SaveSetting();
 	}

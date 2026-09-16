@@ -13,8 +13,10 @@ using PvfCode.Models.Pvf;
 using PvfCode.Models.Options.Editor.ItemCodeHoverConfigModels;
 using PvfCode.Services;
 using PvfCode.Services.PreviewPvfFileFolder.Stackable.Models;
+using PvfCode.Services.PreviewPvfFileFolder.Xui;
 using PvfCode.ViewModels.DocumentFolder.Enums;
 using PvfCode.ViewModels.DocumentFolder.PreviewControls;
+using PvfCode.ViewModels.DocumentFolder.PreviewControls.Xui;
 
 namespace PvfCode.ViewModels.DocumentFolder;
 
@@ -499,9 +501,11 @@ public sealed class PvfPreviewDocument : DocumentBase
 
 	private readonly Dictionary<string, List<PvfPreviewTag>> tagsByName = new(StringComparer.OrdinalIgnoreCase);
 	private readonly Dictionary<string, ImageSource> referenceIconCache = new(StringComparer.OrdinalIgnoreCase);
+	private readonly Dictionary<XuiControl, PvfPreviewTag> xuiControlTags = new();
 	private TextDocument sourceTextDocument;
 	private PvfFileDocument sourceDocument;
 	private TextEditorPreviewViewModelAni aniPreviewViewModel;
+	private XuiPreviewViewModel xuiPreview;
 	private PvfRichPreview richPreview;
 	private string aniPreviewStatus;
 	private PvfPreviewTag selectedTag;
@@ -533,6 +537,18 @@ public sealed class PvfPreviewDocument : DocumentBase
 	}
 
 	public bool IsAniPreview => sourceDocument?.File?.FileType == PvfFileType.ani;
+
+	public bool IsXuiPreview => sourceDocument?.File?.FileType == PvfFileType.xui;
+
+	public XuiPreviewViewModel XuiPreview
+	{
+		get => xuiPreview;
+		private set
+		{
+			xuiPreview = value;
+			RaisePropertyChanged(nameof(XuiPreview));
+		}
+	}
 
 	public string AniPreviewStatus
 	{
@@ -567,13 +583,21 @@ public sealed class PvfPreviewDocument : DocumentBase
 
 	public static bool Supports(PvfFile file)
 	{
-		if (file == null || (file.FileType != PvfFileType.ani && !file.IsScriptFile))
+		if (file == null)
+		{
+			return false;
+		}
+		if (file.FileType is PvfFileType.ani or PvfFileType.xui)
+		{
+			return true;
+		}
+		if (!file.IsScriptFile)
 		{
 			return false;
 		}
 		return file.FileType switch
 		{
-			PvfFileType.ani or PvfFileType.als or PvfFileType.equ or PvfFileType.stk or
+			PvfFileType.als or PvfFileType.equ or PvfFileType.stk or
 			PvfFileType.shp or PvfFileType.qst or PvfFileType.skl => true,
 			PvfFileType.co or PvfFileType.etc => SkillTreePathRegex.IsMatch(file.FileName.Replace('\\', '/')),
 			_ => false
@@ -599,6 +623,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 		RaisePropertyChanged(nameof(SourcePath));
 		RaisePropertyChanged(nameof(FileName));
 		RaisePropertyChanged(nameof(IsAniPreview));
+		RaisePropertyChanged(nameof(IsXuiPreview));
 		RefreshPreview();
 	}
 
@@ -621,6 +646,11 @@ public sealed class PvfPreviewDocument : DocumentBase
 		{
 			AniPreviewViewModel = null;
 			AniPreviewStatus = string.Empty;
+		}
+		if (!IsXuiPreview)
+		{
+			xuiControlTags.Clear();
+			XuiPreview = null;
 		}
 	}
 
@@ -739,6 +769,9 @@ public sealed class PvfPreviewDocument : DocumentBase
 				break;
 			case PvfFileType.ani:
 				BuildAni(preview);
+				break;
+			case PvfFileType.xui:
+				BuildXui(preview);
 				break;
 			case PvfFileType.als:
 				BuildAls(preview);
@@ -1838,6 +1871,82 @@ public sealed class PvfPreviewDocument : DocumentBase
 		return index >= 0 ? value.Substring(0, index) : value;
 	}
 
+	private void BuildXui(PvfRichPreview preview)
+	{
+		preview.Subtitle = "XUI 界面布局";
+		preview.Badges.Add("布局预览");
+		XuiLayoutDocument layout = XuiLayoutDocument.Parse(sourceTextDocument?.Text ?? string.Empty);
+		xuiControlTags.Clear();
+		foreach (XuiControl control in layout.AllControls)
+		{
+			xuiControlTags[control] = CreateXuiControlTag(control);
+		}
+		if (XuiPreview == null)
+		{
+			XuiPreview = new XuiPreviewViewModel();
+		}
+		XuiPreview.UpdateLayout(layout);
+		if (!string.IsNullOrEmpty(layout.ParseError))
+		{
+			preview.Message = layout.ParseError;
+		}
+		if (layout.TotalCount == 0)
+		{
+			return;
+		}
+		PvfPreviewSection info = AddSection(preview, "布局信息", PvfPreviewTone.Normal, null);
+		info.Fields.Add(new PvfPreviewField("控件总数", layout.TotalCount.ToString(CultureInfo.InvariantCulture)));
+		info.Fields.Add(new PvfPreviewField("图像控件", layout.ImageControlCount.ToString(CultureInfo.InvariantCulture)));
+		info.Fields.Add(new PvfPreviewField("动画控件", layout.AnimationControlCount.ToString(CultureInfo.InvariantCulture)));
+		info.Fields.Add(new PvfPreviewField("文本控件", layout.TextControlCount.ToString(CultureInfo.InvariantCulture)));
+		info.Fields.Add(new PvfPreviewField("容器", layout.ContainerCount.ToString(CultureInfo.InvariantCulture)));
+		if (layout.HiddenCount > 0)
+		{
+			info.Fields.Add(new PvfPreviewField("隐藏控件（可在画布开启显示）", layout.HiddenCount.ToString(CultureInfo.InvariantCulture), null, PvfPreviewTone.Blue));
+		}
+		if (!string.IsNullOrEmpty(layout.ScriptVersion))
+		{
+			info.Fields.Add(new PvfPreviewField("ScriptVer", layout.ScriptVersion));
+		}
+		if (layout.ImagePackReferences.Count > 0)
+		{
+			PvfPreviewSection references = new("图集引用", PvfPreviewTone.Blue, null);
+			foreach (string reference in layout.ImagePackReferences)
+			{
+				references.Lines.Add(new PvfPreviewLine(reference, null));
+			}
+			preview.Sections.Add(references);
+		}
+	}
+
+	/// <summary>把 XUI 控件的 XML 行号换算成编辑器文本偏移，用于画布点击后跳转源码。</summary>
+	private PvfPreviewTag CreateXuiControlTag(XuiControl control)
+	{
+		int offset = 0;
+		int length = 1;
+		try
+		{
+			TextDocument textDocument = sourceTextDocument;
+			if (textDocument != null && textDocument.LineCount > 0 && control.LineNumber > 0 && control.LineNumber <= textDocument.LineCount)
+			{
+				DocumentLine line = textDocument.GetLineByNumber(control.LineNumber);
+				offset = Math.Min(line.Offset + Math.Max(0, control.LinePosition), Math.Max(0, textDocument.TextLength - 1));
+				length = Math.Max(1, (control.TypeName ?? "x").Length);
+			}
+		}
+		catch
+		{
+			offset = 0;
+		}
+		string name = control.TypeName + (string.IsNullOrEmpty(control.Id) ? string.Empty : $" {control.Id}");
+		return new PvfPreviewTag(name, control.LineNumber, offset, length);
+	}
+
+	public bool TryGetXuiControlTag(XuiControl control, out PvfPreviewTag tag)
+	{
+		return xuiControlTags.TryGetValue(control, out tag);
+	}
+
 	private void BuildAni(PvfRichPreview preview)
 	{
 		preview.Badges.Add("画面预览");
@@ -2394,6 +2503,7 @@ public sealed class PvfPreviewDocument : DocumentBase
 			PvfFileType.skl => "技能",
 			PvfFileType.ani => "ANI 动画",
 			PvfFileType.als => "ALS 动画层",
+			PvfFileType.xui => "XUI 界面布局",
 			PvfFileType.co or PvfFileType.etc => "技能树",
 			_ => "结构化预览"
 		};
@@ -2446,10 +2556,12 @@ public sealed class PvfPreviewDocument : DocumentBase
 		UnsubscribeSource();
 		Tags.Clear();
 		tagsByName.Clear();
+		xuiControlTags.Clear();
 		sourceTextDocument = null;
 		sourceDocument = null;
 		RichPreview = null;
 		AniPreviewViewModel = null;
+		XuiPreview = null;
 		SelectedTag = null;
 	}
 }

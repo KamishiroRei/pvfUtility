@@ -72,10 +72,20 @@ public class App : Application
 			{
 				File.Delete(path);
 			}
+			// WebView2Loader.dll 必须保留：起始页/差异比较器的 WebView2 控件加载它，
+			// 缺失会导致关闭 PVF 重建起始页时 EnsureCoreWebView2Async 抛 DllNotFoundException 弹错误窗。
+			// 单文件包禁止松散 DLL，因此嵌入程序集、按 7z64.dll 同模式在启动时释放。
 			path = Path.Combine(AppContext.BaseDirectory, "WebView2Loader.dll");
-			if (File.Exists(path))
+			if (!File.Exists(path))
 			{
-				File.Delete(path);
+				using (System.IO.Stream? loader = typeof(App).Assembly.GetManifestResourceStream("PvfCode.WebView2Loader.dll"))
+				{
+					if (loader != null)
+					{
+						using FileStream output = File.Create(path);
+						loader.CopyTo(output);
+					}
+				}
 			}
 		}
 		catch (Exception)

@@ -40,7 +40,7 @@ internal class UpgradeEffectSectionFormat : CustomSectionFormatBase
 				stringBuilder.Append(config.ProcessSectionText(P_0, P_1, sectionBase, 1, dic, ParentSectionName));
 				continue;
 			}
-			ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? P_2.Children[k + 1].Item : null);
+			ScriptItem nextItem = ScriptLinkText.TryGetLinkedLiteral(P_2.Children, k, P_2.Children.Count);
 			string itemText = sectionBase.Item.GetItemText(P_0, nextItem);
 			num2++;
 			stringBuilder.Append(itemText);

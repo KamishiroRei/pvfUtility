@@ -44,7 +44,7 @@ public static class PvfExtensionHelper
 		return value;
 	}
 
-	public static string GetFileText(this PvfGroup group, PvfFile file, EncodingType? encoding = null, bool? useCompatibleDecompiler = null, bool showAniError = true)
+	public static string GetFileText(this PvfGroup group, PvfFile file, EncodingType? encoding = null, bool? useCompatibleDecompiler = null, bool showAniError = true, bool persistLazyData = true)
 	{
 		if (!encoding.HasValue)
 		{
@@ -54,11 +54,28 @@ public static class PvfExtensionHelper
 		{
 			useCompatibleDecompiler = AppSetting.Instance.PvfConfig.UseCompatibleDecompiler;
 		}
-		// 懒加载：NKPI/Pvf110 模式下打开时 Data 为空，按需读取
+		// 懒加载：NKPI/Pvf110 模式下打开时 Data 为空，按需读取。
+		// persistLazyData=false 时（批量只读搜索）加载的内容在读取后立即释放，不常驻内存。
+		bool loadedHere = false;
 		if ((file.Data == null || file.Data.Length == 0) && file.Pvf110DataType > 0)
 		{
-			group.EnsureFileData(file.FileName);
+			loadedHere = group.EnsureFileData(file.FileName);
 		}
+		try
+		{
+			return GetFileTextCore(group, file, encoding.Value, useCompatibleDecompiler.Value, showAniError);
+		}
+		finally
+		{
+			if (!persistLazyData && loadedHere)
+			{
+				file.ReleaseLoadedContent();
+			}
+		}
+	}
+
+	private static string GetFileTextCore(PvfGroup group, PvfFile file, EncodingType encoding, bool useCompatibleDecompiler, bool showAniError)
+	{
 		if (file.Data == null)
 		{
 			return string.Empty;
@@ -70,7 +87,7 @@ public static class PvfExtensionHelper
 				string fileName = file.FileName;
 				if (fileName == "n_quest/epicquest.lst" || fileName == "n_quest/trainingquest.lst" || fileName == "n_quest/dailyrandomquest.lst")
 				{
-					if (!useCompatibleDecompiler.Value)
+					if (!useCompatibleDecompiler)
 					{
 						return new ScriptFileParserNew(file, group).PraseText();
 					}
@@ -78,7 +95,7 @@ public static class PvfExtensionHelper
 				}
 				return new ScriptFileCompilerOl(group).Decompile(file);
 			}
-			if (!useCompatibleDecompiler.Value)
+			if (!useCompatibleDecompiler)
 			{
 				return new ScriptFileParserNew(file, group).PraseText();
 			}
@@ -88,9 +105,9 @@ public static class PvfExtensionHelper
 		{
 			if (file.FileType == PvfFileType.str)
 			{
-				return AppSetting.Instance.PvfConfig.FileTextTraditionalConvertSimplifiedAutoMethods(Encoding.GetEncoding((int)encoding.Value).GetString(file.Data).TrimEnd(new char[1]));
+				return AppSetting.Instance.PvfConfig.FileTextTraditionalConvertSimplifiedAutoMethods(Encoding.GetEncoding((int)encoding).GetString(file.Data).TrimEnd(new char[1]));
 			}
-			return Encoding.GetEncoding((int)encoding.Value).GetString(file.Data).TrimEnd(new char[1]);
+			return Encoding.GetEncoding((int)encoding).GetString(file.Data).TrimEnd(new char[1]);
 		}
 		var (flag, result) = BinaryAniCompiler.DecompileBinaryAni(file);
 		if (flag)

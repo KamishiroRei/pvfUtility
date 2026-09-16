@@ -164,8 +164,20 @@ public class WindowPublicSetting : ThemedWindow, IComponentConnector, IStyleConn
 			Data = (DataTemplate)FindResource("GameServerOptions"),
 			Children = children3
 		});
+		ObservableConcurrentDictionaryEx<string, SettingMenuItem> previewChildren = new ObservableConcurrentDictionaryEx<string, SettingMenuItem>
+		{
+			{
+				"自动打开预览",
+				new SettingMenuItem
+				{
+					Data = PreviewAutoOpenSettingsView.SettingsTemplate,
+					Parname = "文件预览"
+				}
+			}
+		};
 		treeMenu.Add("文件预览", new SettingMenuItem
 		{
+			Children = previewChildren,
 			Data = (DataTemplate)FindResource("PvfFilePreviewOptions")
 		});
 	}

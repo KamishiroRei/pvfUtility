@@ -36,7 +36,7 @@ public class CustomSectionFormatDefault : CustomSectionFormatBase
 				}
 				continue;
 			}
-			ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[j + 1].Item : null);
+			ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, j, section.Children.Count);
 			if (scriptItem != null)
 			{
 				j++;

@@ -53,8 +53,9 @@ public class PieceSetAbility
 			List<SectionBase> children = section[num].Children;
 			if (children.Count >= 2)
 			{
-				ScriptItem nextItem = ((children[1].Item.Type == ScriptType.StringLinkIndex) ? children[2].Item : null);
-				parameter_basic_explain = children[1].Item.GetItemTextNotChar(pvf, nextItem);
+				// 链接元数自适应：2 token（经典）／1 token（110 适配），与套装行解析同一判据
+				ScriptItem? nextItem = ScriptLinkText.TryGetLinkedLiteral(children, 1, children.Count);
+				parameter_basic_explain = ScriptLinkText.Resolve(pvf, children[1].Item, nextItem);
 			}
 		}
 		SectionBase sectionBase2 = section.Where((SectionBase it) => it is PvfSection && it.GetSectionName() == "[skill data up]").FirstOrDefault();

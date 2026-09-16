@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
@@ -48,7 +49,12 @@ public class SearchService
 		this.allowLog = allowLog;
 	}
 
-	public async Task<ResultData<HashSet<string>>> Search()
+	public Task<ResultData<HashSet<string>>> Search()
+	{
+		return Search(CancellationToken.None);
+	}
+
+	public async Task<ResultData<HashSet<string>>> Search(CancellationToken cancellationToken)
 	{
 		ResultData<HashSet<string>> re = new ResultData<HashSet<string>>();
 		try
@@ -133,7 +139,7 @@ public class SearchService
 				{
 					searchResults = new ConcurrentHashSet<string>(list.Select(it => it.FileName));
 				}
-				Parallel.ForEach(list, (item, parallelLoopState) =>
+				Parallel.ForEach(list, new ParallelOptions { CancellationToken = cancellationToken }, (item, parallelLoopState) =>
 				{
 					if (MatchesSearchPath(config.IsUseLikeSearchPath, item.FileName, config.SearchFolder))
 					{
@@ -143,7 +149,7 @@ public class SearchService
 			}
 			else
 			{
-				Parallel.ForEach(list, (item, parallelLoopState) =>
+				Parallel.ForEach(list, new ParallelOptions { CancellationToken = cancellationToken }, (item, parallelLoopState) =>
 				{
 					if (MatchesSearchPath(config.IsUseLikeSearchPath, item.FileName, config.SearchFolder))
 					{
@@ -223,7 +229,7 @@ public class SearchService
 		{
 			try
 			{
-				if (file.ContainsIntegerValue(searchValue))
+				if (file.ContainsIntegerValue(pvfGroup, searchValue))
 				{
 					AddSearchResult(file, pendingResults, updateDirectly);
 				}
@@ -260,7 +266,7 @@ public class SearchService
 		bool updateDirectly = config.SourceType != SearchSourceType.AllFiles;
 		return file =>
 		{
-			if (file.ContainsStringTableReference(stringTableIndexes))
+			if (file.ContainsStringTableReference(pvfGroup, stringTableIndexes, text, config.IsStartMatch))
 			{
 				AddSearchResult(file, pendingResults, updateDirectly);
 			}
@@ -308,13 +314,14 @@ public class SearchService
 		}
 		if (config.ScriptContentSearchMode == ScriptContentSearchMode.二进制)
 		{
+			// 统一管线：110/NKPI 的 GetBinaryForScan 返回经典视图，二进制序列按经典 token 编译匹配
 			(bool success, byte[] binaryPattern) = new ScriptFileCompilerOl(pvfGroup).EncryptScriptText(config.ScriptContent, readOnly: true);
 			if (success)
 			{
 				bool updateDirectly = config.SourceType != SearchSourceType.AllFiles;
 				return file =>
 				{
-					if (file.IsScriptFile && file.ContainsBinarySequence(binaryPattern))
+					if (file.ContainsBinarySequence(pvfGroup, binaryPattern))
 					{
 						AddSearchResult(file, pendingResults, updateDirectly);
 					}
@@ -323,6 +330,11 @@ public class SearchService
 			Logger.Error(AppSetting.Instance.GetIlogger()?.GetStr("mess_SearchBinaryError"));
 			return null;
 		}
+		return CreateScriptContentTextSearchAction(pendingResults);
+	}
+
+	private Action<PvfFile> CreateScriptContentTextSearchAction(ConcurrentBag<string> pendingResults)
+	{
 		bool addDirectly = config.SourceType != SearchSourceType.AllFiles;
 		return file =>
 		{
@@ -330,7 +342,8 @@ public class SearchService
 			{
 				return;
 			}
-			string fileText = pvfGroup.GetFileText(file, AppSetting.Instance.PvfConfig.DefaultEncoding);
+			// 全量文本搜索：内容不落地 Data，搜完即释放，避免把整个包物化为常驻内存
+			string fileText = pvfGroup.GetFileText(file, AppSetting.Instance.PvfConfig.DefaultEncoding, persistLazyData: false);
 			if (fileText != null && ((!config.UseRegularExpression)
 				? fileText.Length != 0 && fileText.IndexOf(config.ScriptContent, StringComparison.OrdinalIgnoreCase) != -1
 				: config.Regex.IsMatch(fileText)))
@@ -345,7 +358,7 @@ public class SearchService
 		bool updateDirectly = config.SourceType != SearchSourceType.AllFiles;
 		return file =>
 		{
-			string fileText = pvfGroup.GetFileText(file, AppSetting.Instance.PvfConfig.DefaultEncoding);
+			string fileText = pvfGroup.GetFileText(file, AppSetting.Instance.PvfConfig.DefaultEncoding, persistLazyData: false);
 			if (fileText != null && fileText.Length != 0)
 			{
 				int startIndex = fileText.IndexOf(config.ScriptContentStart, StringComparison.Ordinal);

@@ -48,6 +48,7 @@
       <HintPath>$(RecoveredBinaryDirectory)\WinCopies.Util.dll</HintPath>
     </Reference>
     <ProjectReference Include="..\SevenZipSharp\SevenZipSharp.csproj" />
+    <ProjectReference Include="..\Pvf110.Core\Pvf110.Core.csproj" />
     <Reference Include="WinCopies.Collections">
       <HintPath>$(RecoveredBinaryDirectory)\WinCopies.Collections.dll</HintPath>
     </Reference>

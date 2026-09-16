@@ -290,6 +290,11 @@ public class PvfFileDocument : DocumentBase
 			{
 				NowEncoding = AppSetting.Instance.EditConfig.NutDefaultEncodingType;
 			}
+			else if (file.FileType == PvfFileType.xui)
+			{
+				// .xui 为 UTF-16LE XML（实测首字节 3C 00 3F 00），默认 Unicode 保证编辑器显示与保存重编码对称。
+				NowEncoding = EncodingType.Unicode;
+			}
 			else
 			{
 				NowEncoding = AppSetting.Instance.PvfConfig.DefaultEncoding;

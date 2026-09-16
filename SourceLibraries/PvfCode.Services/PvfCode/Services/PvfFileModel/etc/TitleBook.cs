@@ -48,7 +48,7 @@ public class TitleBook
 		for (int i = 1; i < valueCount; i++)
 		{
 			SectionBase valueSection = section.Children[i];
-			ScriptItem nextItem = valueSection.Item.Type == ScriptType.StringLinkIndex ? section.Children[i + 1].Item : null;
+			ScriptItem nextItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, i, section.Children.Count);
 			string itemText = valueSection.Item.GetItemText(pvf, nextItem);
 			valueIndex++;
 			if (!headerParsed)

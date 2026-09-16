@@ -28,6 +28,11 @@ internal class PvfAutoBackupService : BackgroundService
 				{
 					continue;
 				}
+				// 脏检查：无未保存变更时跳过整包重建，避免周期性 CPU/内存尖峰
+				if (!pvf.HasUnsavedChanges)
+				{
+					continue;
+				}
 
 				string backupPath = AppSetting.Instance.PvfConfig.AutoTheBackupPvfConfig.CreateFilePath(pvf);
 				ResultData result = await Task.Run(() => pvf.SavePvfPack(backupPath, isFastMode: true, null));

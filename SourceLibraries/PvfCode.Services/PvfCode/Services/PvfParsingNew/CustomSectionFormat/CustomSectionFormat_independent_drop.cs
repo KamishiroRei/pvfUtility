@@ -37,7 +37,7 @@ public class CustomSectionFormat_independent_drop : CustomSectionFormatBase
 				stringBuilder.Append(config.ProcessSectionText(pvf, file, sectionBase, layer + 1, dic, sectionName));
 				continue;
 			}
-			ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[k + 1].Item : null);
+			ScriptItem nextItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, k, section.Children.Count);
 			string itemText = sectionBase.Item.GetItemText(pvf, nextItem);
 			if (k > 1 && num2 == 0)
 			{

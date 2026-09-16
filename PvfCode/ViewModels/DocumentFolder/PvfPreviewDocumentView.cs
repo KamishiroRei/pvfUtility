@@ -4,10 +4,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using PvfCode.Services.PreviewPvfFileFolder.Xui;
+using PvfCode.ViewModels.DocumentFolder.PreviewControls.Xui;
 
 namespace PvfCode.ViewModels.DocumentFolder;
 
@@ -32,6 +35,7 @@ public sealed class PvfPreviewDocumentView : UserControl
 	private readonly StackPanel previewHost;
 	private readonly TextBlock sourcePath;
 	private PvfPreviewDocument document;
+	private (XuiPreviewViewModel ViewModel, PropertyChangedEventHandler Handler)? subscribedXui;
 
 	public PvfPreviewDocumentView()
 	{
@@ -180,6 +184,10 @@ public sealed class PvfPreviewDocumentView : UserControl
 		{
 			content.Children.Add(CreateAniSurface());
 		}
+		if (document.IsXuiPreview)
+		{
+			content.Children.Add(CreateXuiSurface());
+		}
 		if (preview.SkillTreeGroups.Count > 0)
 		{
 			content.Children.Add(CreateSkillTrees(preview.SkillTreeGroups));
@@ -273,6 +281,337 @@ public sealed class PvfPreviewDocumentView : UserControl
 		status.SetBinding(TextBlock.TextProperty, new Binding(nameof(PvfPreviewDocument.AniPreviewStatus)) { Source = document });
 		grid.Children.Add(status);
 		return new Border { BorderBrush = OutlineBorderBrush, BorderThickness = new Thickness(1), Child = grid };
+	}
+
+	private FrameworkElement CreateXuiSurface()
+	{
+		XuiPreviewViewModel viewModel = document?.XuiPreview;
+		Border frame = new()
+		{
+			BorderBrush = OutlineBorderBrush,
+			BorderThickness = new Thickness(1),
+			Margin = new Thickness(0, 2, 0, 9)
+		};
+		DockPanel root = new();
+
+		StackPanel toolbar = new()
+		{
+			Orientation = Orientation.Horizontal,
+			VerticalAlignment = VerticalAlignment.Center,
+			Margin = new Thickness(8, 6, 8, 6)
+		};
+		toolbar.Children.Add(new TextBlock
+		{
+			Text = "XUI 布局预览",
+			Foreground = GoldBrush,
+			FontWeight = FontWeights.SemiBold,
+			FontSize = 12,
+			VerticalAlignment = VerticalAlignment.Center,
+			Margin = new Thickness(0, 0, 12, 0)
+		});
+		toolbar.Children.Add(new TextBlock
+		{
+			Text = "缩放",
+			Foreground = MutedTextBrush,
+			FontSize = 11,
+			VerticalAlignment = VerticalAlignment.Center,
+			Margin = new Thickness(0, 0, 5, 0)
+		});
+		Slider zoom = new()
+		{
+			Width = 92,
+			Minimum = 0.25,
+			Maximum = 2.5,
+			SmallChange = 0.05,
+			LargeChange = 0.25,
+			VerticalAlignment = VerticalAlignment.Center
+		};
+		if (viewModel != null)
+		{
+			zoom.SetBinding(RangeBase.ValueProperty, new Binding(nameof(XuiPreviewViewModel.Zoom))
+			{
+				Source = viewModel,
+				Mode = BindingMode.TwoWay
+			});
+		}
+		toolbar.Children.Add(zoom);
+		toolbar.Children.Add(CreateXuiOptionCheck(viewModel, "显示隐藏控件", nameof(XuiPreviewViewModel.ShowHidden)));
+		toolbar.Children.Add(CreateXuiOptionCheck(viewModel, "显示无 Pos 控件", nameof(XuiPreviewViewModel.ShowNoPos)));
+		toolbar.Children.Add(CreateXuiOptionCheck(viewModel, "显示容器/占位框", nameof(XuiPreviewViewModel.ShowPlaceholders)));
+		TextBlock status = new()
+		{
+			Foreground = MutedTextBrush,
+			FontSize = 10,
+			VerticalAlignment = VerticalAlignment.Center,
+			Margin = new Thickness(12, 0, 0, 0),
+			MaxWidth = 420,
+			TextTrimming = TextTrimming.CharacterEllipsis,
+			ToolTip = "NPK 帧加载状态"
+		};
+		if (viewModel != null)
+		{
+			status.SetBinding(TextBlock.TextProperty, new Binding(nameof(XuiPreviewViewModel.Status)) { Source = viewModel });
+		}
+		toolbar.Children.Add(status);
+
+		ContentControl canvasHost = new() { Focusable = false };
+		DockPanel.SetDock(toolbar, Dock.Top);
+		root.Children.Add(toolbar);
+		root.Children.Add(canvasHost);
+		frame.Child = root;
+
+		SubscribeXuiViewModel(viewModel, () => canvasHost.Content = BuildXuiCanvas(document?.XuiPreview));
+		canvasHost.Content = BuildXuiCanvas(viewModel);
+		return frame;
+	}
+
+	private static CheckBox CreateXuiOptionCheck(XuiPreviewViewModel viewModel, string content, string propertyName)
+	{
+		CheckBox checkBox = new()
+		{
+			Content = content,
+			Foreground = MutedTextBrush,
+			FontSize = 11,
+			VerticalAlignment = VerticalAlignment.Center,
+			Margin = new Thickness(12, 0, 0, 0)
+		};
+		if (viewModel != null)
+		{
+			checkBox.SetBinding(ToggleButton.IsCheckedProperty, new Binding(propertyName)
+			{
+				Source = viewModel,
+				Mode = BindingMode.TwoWay
+			});
+		}
+		return checkBox;
+	}
+
+	private void SubscribeXuiViewModel(XuiPreviewViewModel viewModel, Action rebuild)
+	{
+		if (subscribedXui.HasValue)
+		{
+			subscribedXui.Value.ViewModel.PropertyChanged -= subscribedXui.Value.Handler;
+			subscribedXui = null;
+		}
+		if (viewModel == null)
+		{
+			return;
+		}
+		PropertyChangedEventHandler handler = (_, e) =>
+		{
+			if (e.PropertyName == nameof(XuiPreviewViewModel.CanvasRevision) ||
+				e.PropertyName == nameof(XuiPreviewViewModel.ShowHidden) ||
+				e.PropertyName == nameof(XuiPreviewViewModel.ShowNoPos) ||
+				e.PropertyName == nameof(XuiPreviewViewModel.ShowPlaceholders))
+			{
+				rebuild();
+			}
+		};
+		viewModel.PropertyChanged += handler;
+		subscribedXui = (viewModel, handler);
+	}
+
+	private FrameworkElement BuildXuiCanvas(XuiPreviewViewModel viewModel)
+	{
+		Canvas canvas = new()
+		{
+			Width = XuiLayoutDocument.DefaultCanvasWidth,
+			Height = XuiLayoutDocument.DefaultCanvasHeight,
+			Background = Brush("#101216"),
+			SnapsToDevicePixels = true,
+			ClipToBounds = true
+		};
+		XuiLayoutDocument layout = viewModel?.Layout;
+		if (layout != null)
+		{
+			canvas.Children.Add(new Rectangle
+			{
+				Width = XuiLayoutDocument.DefaultCanvasWidth,
+				Height = XuiLayoutDocument.DefaultCanvasHeight,
+				Stroke = Brush("#3A4150"),
+				StrokeThickness = 1,
+				StrokeDashArray = new DoubleCollection { 4, 3 }
+			});
+			foreach (XuiControl control in layout.AllControls)
+			{
+				FrameworkElement element = CreateXuiControlElement(viewModel, control);
+				if (element == null)
+				{
+					continue;
+				}
+				Border hitBox = new()
+				{
+					Background = Brushes.Transparent,
+					Child = element,
+					ToolTip = CreateXuiToolTip(control)
+				};
+				if (!control.IsVisible)
+				{
+					hitBox.Opacity = 0.4;
+				}
+				if (!control.HasPos)
+				{
+					hitBox.Opacity = Math.Min(hitBox.Opacity, 0.55);
+				}
+				Canvas.SetLeft(hitBox, control.PosX ?? 0);
+				Canvas.SetTop(hitBox, control.PosY ?? 0);
+				hitBox.MouseLeftButtonDown += (_, _) =>
+				{
+					if (document != null && document.TryGetXuiControlTag(control, out PvfPreviewTag tag))
+					{
+						document.JumpToTag(tag);
+					}
+				};
+				canvas.Children.Add(hitBox);
+			}
+		}
+		ScaleTransform scale = new();
+		if (viewModel != null)
+		{
+			Binding zoomBinding = new(nameof(XuiPreviewViewModel.Zoom)) { Source = viewModel };
+			BindingOperations.SetBinding(scale, ScaleTransform.ScaleXProperty, zoomBinding);
+			BindingOperations.SetBinding(scale, ScaleTransform.ScaleYProperty, zoomBinding);
+		}
+		return new ScrollViewer
+		{
+			Background = Brush("#0B0D12"),
+			HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+			VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+			Content = new Border { LayoutTransform = scale, Child = canvas }
+		};
+	}
+
+	private FrameworkElement CreateXuiControlElement(XuiPreviewViewModel viewModel, XuiControl control)
+	{
+		double width = control.Width ?? 0;
+		double height = control.Height ?? 0;
+		switch (control.Kind)
+		{
+		case XuiControlKind.Image when control.ImagePack != null && control.ImageIndex.HasValue:
+			if (viewModel != null && viewModel.TryGetFrame(control.ImagePack, control.ImageIndex.Value, out ImageSource source, out Size frameSize))
+			{
+				bool hasBox = width > 0 && height > 0;
+				if (control.IsNinePatch && hasBox)
+				{
+					// 九宫格预览简化：以中心帧拉伸至目标盒并叠加虚线框标识（完整九片拼接暂不实现）。
+					Grid ninePatch = new();
+					ninePatch.Children.Add(new Image { Source = source, Width = width, Height = height, Stretch = Stretch.Fill });
+					ninePatch.Children.Add(new Rectangle
+					{
+						Stroke = BlueBrush,
+						StrokeThickness = 1,
+						StrokeDashArray = new DoubleCollection { 3, 2 }
+					});
+					return ninePatch;
+				}
+				return new Image
+				{
+					Source = source,
+					Width = hasBox ? width : frameSize.Width,
+					Height = hasBox ? height : frameSize.Height,
+					Stretch = hasBox ? Stretch.Fill : Stretch.None,
+					SnapsToDevicePixels = true
+				};
+			}
+			return new Rectangle
+			{
+				Width = Math.Max(width, 18),
+				Height = Math.Max(height, 12),
+				Fill = Brush("#14202E"),
+				Stroke = Brush("#667184"),
+				StrokeThickness = 1,
+				StrokeDashArray = new DoubleCollection { 3, 2 }
+			};
+		case XuiControlKind.Text:
+		{
+			Brush stroke = ParseXuiColor(control.TextColor) ?? MutedTextBrush;
+			Grid textBox = new();
+			textBox.Children.Add(new Rectangle
+			{
+				Width = Math.Max(width, 36),
+				Height = Math.Max(height, 12),
+				Fill = Brush("#1A1206"),
+				Stroke = stroke,
+				StrokeThickness = 1
+			});
+			textBox.Children.Add(new TextBlock
+			{
+				Text = string.IsNullOrEmpty(control.StringContent) || control.StringContent.Length > 24 ? "T" : control.StringContent,
+				Foreground = stroke,
+				FontSize = 9,
+				HorizontalAlignment = HorizontalAlignment.Center,
+				VerticalAlignment = VerticalAlignment.Center
+			});
+			return textBox;
+		}
+		case XuiControlKind.Animation:
+		{
+			Grid animationBox = new();
+			animationBox.Children.Add(new Rectangle
+			{
+				Width = Math.Max(width, 24),
+				Height = Math.Max(height, 14),
+				Fill = Brush("#241F10"),
+				Stroke = GoldBrush,
+				StrokeThickness = 1,
+				StrokeDashArray = new DoubleCollection { 3, 2 }
+			});
+			animationBox.Children.Add(new TextBlock
+			{
+				Text = "▶",
+				Foreground = GoldBrush,
+				FontSize = 10,
+				HorizontalAlignment = HorizontalAlignment.Center,
+				VerticalAlignment = VerticalAlignment.Center
+			});
+			return animationBox;
+		}
+		default:
+			if (!viewModel?.ShowPlaceholders ?? false)
+			{
+				return null;
+			}
+			return new Rectangle
+			{
+				Width = Math.Max(width, 10),
+				Height = Math.Max(height, 6),
+				Fill = Brush("#11141A"),
+				Stroke = Brush("#3A4150"),
+				StrokeThickness = 1
+			};
+		}
+	}
+
+	private static Brush ParseXuiColor(string value)
+	{
+		if (string.IsNullOrWhiteSpace(value))
+		{
+			return null;
+		}
+		string[] parts = value.Split(',');
+		if (parts.Length < 3 ||
+			!byte.TryParse(parts[0].Trim(), out byte red) ||
+			!byte.TryParse(parts[1].Trim(), out byte green) ||
+			!byte.TryParse(parts[2].Trim(), out byte blue))
+		{
+			return null;
+		}
+		SolidColorBrush brush = new(Color.FromRgb(red, green, blue));
+		brush.Freeze();
+		return brush;
+	}
+
+	private static string CreateXuiToolTip(XuiControl control)
+	{
+		string summary = control.ToolTipSummary;
+		if (control.Attributes.Count == 0)
+		{
+			return summary;
+		}
+		string attributes = string.Join("\n", control.Attributes
+			.Select(pair => $"{pair.Key} = {pair.Value}")
+			.Take(40));
+		return $"{summary}\n----\n{attributes}";
 	}
 
 	private FrameworkElement CreateSkillTrees(IReadOnlyList<PvfPreviewSkillTreeGroup> groups)

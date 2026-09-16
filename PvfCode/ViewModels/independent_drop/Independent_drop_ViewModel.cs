@@ -440,7 +440,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 			}
 			else
 			{
-				ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[i + 1].Item : null);
+				ScriptItem nextItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, i, section.Children.Count);
 				string itemText2 = sectionBase.Item.GetItemText(PVF, nextItem);
 				if (itemText2 == "[/list]")
 				{
@@ -491,7 +491,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 				resultData.Msg = string.Format(AppSetting.Instance.GetIlogger()?.GetStr("mess_IndependentdropLstDataError_ExtraTag"), string.Join("\t", row.Datas), sectionBase.GetSectionName());
 				return resultData;
 			}
-			ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[i + 1].Item : null);
+			ScriptItem nextItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, i, section.Children.Count);
 			string itemText = sectionBase.Item.GetItemText(PVF, nextItem);
 			if (!(itemText == "[/list]"))
 			{
@@ -540,7 +540,7 @@ public class Independent_drop_ViewModel : ViewModelBase, IDisposable
 					resultData.Msg = AppSetting.Instance.GetIlogger().GetStr("mess_IndependentdropLstFormatError_NoInt32_3");
 					return resultData;
 				}
-				ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[i + 1].Item : null);
+				ScriptItem nextItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, i, section.Children.Count);
 				string itemText = sectionBase.Item.GetItemText(PVF, nextItem);
 				if (!(itemText == "[/dungeon drop rate balance]"))
 				{

@@ -36,7 +36,7 @@ public class CustomSectionFormat_wdm_dungeon : CustomSectionFormatBase
 				AppendNestedSection(pvf, sectionBase, stringBuilder);
 				continue;
 			}
-			ScriptItem scriptItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[k + 1].Item : null);
+			ScriptItem scriptItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, k, section.Children.Count);
 			string itemText = sectionBase.Item.GetItemText(pvf, scriptItem);
 			stringBuilder.Append(itemText);
 			num2++;
@@ -77,7 +77,7 @@ public class CustomSectionFormat_wdm_dungeon : CustomSectionFormatBase
 		for (int i = 1; i < count; i++)
 		{
 			SectionBase sectionBase = section.Children[i];
-			ScriptItem nextItem = ((sectionBase.Item.Type == ScriptType.StringLinkIndex) ? section.Children[i + 1].Item : null);
+			ScriptItem nextItem = ScriptLinkText.TryGetLinkedLiteral(section.Children, i, section.Children.Count);
 			string itemText = sectionBase.Item.GetItemText(pvf, nextItem);
 			if (i == 2)
 			{
