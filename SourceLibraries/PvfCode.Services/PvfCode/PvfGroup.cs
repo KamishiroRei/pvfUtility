@@ -50,6 +50,73 @@ public class PvfGroup : PvfPack
 	/// <summary>当前打开的是 Pvf110 Builder 保护链的 Script.pvf。</summary>
 	public bool IsPvf110 => _pvf110 != null;
 
+	/// <summary>
+	/// Pvf110 容器 type-3（非 type-1）文本块的实际编码。
+	/// 契约与 AI CLI 完全一致：缺省 **UTF-16LE、无 BOM**；换客户端版本时用环境变量
+	/// <c>PVF_TEXT_ENCODING</c> 覆盖（cp949 / gb18030 / utf-8 / 1200 …），属数据驱动，
+	/// 不为版本分叉第二套代码。GUI 历史上把 type-3 当 <c>DefaultEncoding</c>（Pvf110 打开时
+	/// 被设为 UTF8）解码并在保存时回编码，会把 UTF-16LE 块整块改写（`.str` 实测
+	/// 3,489,056 B → 3,909,316 B），本条即该缺陷的修复点。
+	/// </summary>
+	public static readonly Encoding Pvf110TextEncoding = ResolvePvf110TextEncoding();
+
+	private static Encoding ResolvePvf110TextEncoding()
+	{
+		string? name = Environment.GetEnvironmentVariable("PVF_TEXT_ENCODING");
+		if (!string.IsNullOrWhiteSpace(name))
+		{
+			string trimmed = name.Trim();
+			string numeric = trimmed.StartsWith("cp", StringComparison.OrdinalIgnoreCase) ? trimmed[2..] : trimmed;
+			try
+			{
+				return int.TryParse(numeric, out int page)
+					? Encoding.GetEncoding(page)
+					: Encoding.GetEncoding(trimmed);
+			}
+			catch (ArgumentException)
+			{
+				// 解析失败退回缺省值：GUI 不因一个环境变量启动失败
+			}
+		}
+		return new UnicodeEncoding(bigEndian: false, byteOrderMark: false);
+	}
+
+	/// <summary>该条目是否走 Pvf110 type-3 文本契约（容器自带编码）。</summary>
+	public bool UsesPvf110TextContract(PvfFile file)
+		=> IsPvf110 && file != null && file.Pvf110DataType == 3;
+
+	/// <summary>
+	/// type-3 文本块解码：按容器实际编码解码，剥掉尾部 NUL 字符供编辑，
+	/// 并把 NUL 个数记在文件上（保存时原样补回，保证条目字节可逆）。
+	/// </summary>
+	public string DecodeType3Text(PvfFile file, byte[] bytes)
+	{
+		string raw = Pvf110TextEncoding.GetString(bytes);
+		int nuls = 0;
+		while (raw.Length > nuls && raw[raw.Length - 1 - nuls] == '\0')
+		{
+			nuls++;
+		}
+		file.TextBlockTrailingNulCount = nuls;
+		return nuls > 0 ? raw[..^nuls] : raw;
+	}
+
+	/// <summary>type-3 文本块编码：与解码同一编码，并补回记录到的尾部 NUL 字符。</summary>
+	public byte[] EncodeType3Text(PvfFile file, string text)
+	{
+		byte[] body = Pvf110TextEncoding.GetBytes(text ?? string.Empty);
+		int nuls = file.TextBlockTrailingNulCount;
+		if (nuls <= 0)
+		{
+			return body;
+		}
+		byte[] tail = Pvf110TextEncoding.GetBytes(new string('\0', nuls));
+		byte[] result = new byte[body.Length + tail.Length];
+		Buffer.BlockCopy(body, 0, result, 0, body.Length);
+		Buffer.BlockCopy(tail, 0, result, body.Length, tail.Length);
+		return result;
+	}
+
 	public PvfGroup()
 	{
 		footerSignature = new byte[41]
@@ -210,6 +277,11 @@ public class PvfGroup : PvfPack
 				string p = reader.FilePath(e);
 				if (!base.FileList.TryGetValue(p, out PvfFile? file) || file.Data == null)
 					throw new InvalidOperationException("Pvf110 保存要求文件集合与原包一致，缺少文件: " + p);
+				// 只读条目（经典视图表达不了）：按原始字节写回，绝不写入编辑器文本
+				if (file.IsRawReadOnly)
+				{
+					return file.OriginalRawContent ?? reader.ReadEntry(e);
+				}
 				// 未修改文件：直接使用原始内容，跳过懒加载与重编译
 				if (!file.IsContentModified)
 				{
@@ -292,6 +364,9 @@ public class PvfGroup : PvfPack
 			string p = reader.FilePath(e);
 			if (!base.FileList.TryGetValue(p, out PvfFile? file) || file.Data == null)
 				throw new InvalidOperationException("NKPI 保存时找不到既有文件: " + p);
+			// 只读条目（经典视图表达不了）：按原始字节写回，绝不写入编辑器文本
+			if (file.IsRawReadOnly)
+				return file.OriginalRawContent ?? reader.ReadEntry(e);
 			// 未修改文件：直接使用原始内容，跳过懒加载与重编译
 			if (!file.IsContentModified)
 				return reader.ReadEntry(e);
@@ -326,7 +401,6 @@ public class PvfGroup : PvfPack
 			NkpiEntry e = reader.Entries[entryIndex];
 			return !base.FileList.TryGetValue(reader.FilePath(e), out PvfFile? f) || f.IsContentModified;
 		}
-
 		try
 		{
 			// 新增文件：以读取器 entry 映射为准（修复旧 IsNewFile 过滤把所有既有文件误判为新增的问题）
@@ -421,8 +495,45 @@ public class PvfGroup : PvfPack
 		}
 	}
 
-	private static string CreateTempSiblingPath(string path)
+	/// <summary>
+	/// 只读条目（经典视图表达不了其 token 流）的编辑拒绝：明确告知原因与替代路径，
+	/// 不落任何字节到 Data——保存仍按原始字节写回，客户端内容不受影响。
+	/// </summary>
+	private void RejectUnrepresentableEdit(PvfFile file)
 	{
+		logger?.Error($"该条目的 token 流无法用经典视图无损表达，已置为只读，保存时按原始字节写回：{file?.FileName}；" +
+			"如需修改请改用 AI CLI（Pvf110.Cli 的 decompile/write/inject-int）按 110 原生文本处理。");
+	}
+
+	/// <summary>
+	/// 只读条目的展示文本：110 原生脚本文本（与 CLI <c>decompile</c> 同一编码器，
+	/// 经典视图无对应标签的 token 显示为 RAW 行）。只读展示，不参与回编译。
+	/// </summary>
+	public string GetNativeTokenText(PvfFile file)
+	{
+		if (file?.OriginalRawContent == null || file.OriginalRawContent.Length == 0)
+		{
+			return string.Empty;
+		}
+		try
+		{
+			if (_pvf110 != null)
+			{
+				return new Pvf110Compiled(_pvf110).ToScriptText(file.OriginalRawContent);
+			}
+			if (_nkpi != null)
+			{
+				return new Pvf110Compiled(_nkpi).ToScriptText(file.OriginalRawContent);
+			}
+		}
+		catch (Exception ex)
+		{
+			logger?.Warning($"原生文本生成失败 {file.FileName}: {ex.Message}");
+		}
+		return string.Empty;
+	}
+
+	private static string CreateTempSiblingPath(string path)	{
 		string dir = Path.GetDirectoryName(path) ?? ".";
 		return Path.Combine(dir, Path.GetFileName(path) + ".tmp-" + System.Guid.NewGuid().ToString("N").Substring(0, 8));
 	}
@@ -933,6 +1044,8 @@ public class PvfGroup : PvfPack
 	{
 		if (base.FileList == null) return false;
 		if (!base.FileList.TryGetValue(path, out PvfFile? file)) return false;
+		// 已判定为只读且无经典视图（经典无对应标签的 token）：不重复尝试转换
+		if (file.IsRawReadOnly && (file.Data == null || file.Data.Length == 0)) return true;
 		// 已有数据（空文件或已加载）则跳过
 		if (file.Data != null && file.Data.Length > 0) return true;
 		if (!_entryIndex.TryGetValue(path, out int idx)) return false;
@@ -942,22 +1055,12 @@ public class PvfGroup : PvfPack
 			if (_nkpi != null && idx < _nkpi.Entries.Count)
 			{
 				NkpiEntry e = _nkpi.Entries[idx];
-				byte[] content = _nkpi.ReadEntry(e);
-				byte[] data = (e.DataType == 1)
-					? ClassicViewAdapter.ToClassicView(content, off => AcquireVirtualIdByOffset(off))
-					: content; // type-3 = UTF-16LE
-				file.SetLoadedContent(data);
-				return true;
+				return LoadEntryContent(file, e.DataType, _nkpi.ReadEntry(e), path);
 			}
 			if (_pvf110 != null && idx < _pvf110.Entries.Count)
 			{
 				Pvf110Entry e = _pvf110.Entries[idx];
-				byte[] content = _pvf110.ReadEntry(e);
-				byte[] data = (e.DataType == 1)
-					? ClassicViewAdapter.ToClassicView(content, off => AcquireVirtualIdByOffset(off))
-					: content; // type-3 = UTF-16LE
-				file.SetLoadedContent(data);
-				return true;
+				return LoadEntryContent(file, e.DataType, _pvf110.ReadEntry(e), path);
 			}
 		}
 		catch (Exception ex)
@@ -965,6 +1068,84 @@ public class PvfGroup : PvfPack
 			logger.Error($"EnsureFileData failed for {path}: {ex.Message}");
 		}
 		return false;
+	}
+
+	/// <summary>
+	/// 单条目内容装载（110/NKPI 统一管线）：
+	/// · type-3：原始字节直接落地，文本按容器编码解码（见 <see cref="DecodeType3Text"/>）。
+	/// · type-1：转经典视图；**转换失败或经典文本往返会丢 token 时置为只读原样条目**
+	///   （<see cref="PvfFile.IsRawReadOnly"/>），保存时按原始字节写回。
+	///   这堵住的正是「GUI 打开→保存把内容改坏」的静默路径：exe 侧不得改写自己表达不了的数据。
+	/// </summary>
+	private bool LoadEntryContent(PvfFile file, int dataType, byte[] content, string path)
+	{
+		if (dataType != 1)
+		{
+			file.SetLoadedContent(content);
+			return true;
+		}
+		byte[] data;
+		try
+		{
+			data = ClassicViewAdapter.ToClassicView(content, off => AcquireVirtualIdByOffset(off));
+		}
+		catch (Exception ex)
+		{
+			// 经典视图根本不存在：只保留原始字节（Data 为空），保存按原始字节写回
+			file.SetRawReadOnly(content);
+			logger.Warning($"条目含经典视图无对应标签的 token，已置为只读、保存时按原始字节写回：{path} :: {ex.Message}");
+			return true;
+		}
+
+		file.SetLoadedContent(data);
+		if (IsClassicTextRoundTripLossless(file, data))
+		{
+			return true;
+		}
+		// 经典视图可用（保留在 Data，供套装表等解析器读取），但文本往返会丢 token：只读并原样写回
+		file.SetRawReadOnly(content, data);
+		logger.Warning($"条目经经典文本往返会丢 token，已置为只读、保存时按原始字节写回：{path}");
+		return true;
+	}
+
+	/// <summary>
+	/// 经典视图往返自检：用编辑器实际使用的「渲染文本 → 编译器回写」一对操作重放一次，
+	/// 要求 token 流逐字节一致（仅容忍编译器在尾部的 0 填充）。
+	/// 不一致即表示该条目经 GUI 编辑保存会丢内容，必须转只读而不是照写。
+	/// </summary>
+	private bool IsClassicTextRoundTripLossless(PvfFile file, byte[] classicView)
+	{
+		try
+		{
+			bool useCompatible = AppSetting.Instance.PvfConfig.UseCompatibleDecompiler;
+			string text = (useCompatible
+				? new ScriptFileCompilerOl(this).Decompile(file)
+				: new ScriptFileParserNew(file, this).PraseText()) ?? string.Empty;
+			byte[]? compiled = new ScriptFileCompilerOl(this).Compile(file, text);
+			if (compiled == null || compiled.Length < classicView.Length)
+			{
+				return false;
+			}
+			for (int i = 0; i < classicView.Length; i++)
+			{
+				if (classicView[i] != compiled[i])
+				{
+					return false;
+				}
+			}
+			for (int i = classicView.Length; i < compiled.Length; i++)
+			{
+				if (compiled[i] != 0)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
 	}
 
 	/// <summary>
@@ -1000,6 +1181,11 @@ public class PvfGroup : PvfPack
 			if (file.IsContentModified && file.Data is { Length: > 0 }) return file.Data;
 			return reader.ReadEntry(e);
 		}
+		// 只读条目：经典视图不成立，按原始 token 流参与扫描，且永不参与改写
+		if (file.IsRawReadOnly)
+		{
+			return file.OriginalRawContent ?? reader.ReadEntry(e);
+		}
 		if (file.IsContentModified)
 		{
 			// 已修改文件：Data 即经典视图（编辑器经 ScriptFileCompilerOl 写入）
@@ -1016,6 +1202,11 @@ public class PvfGroup : PvfPack
 		{
 			if (file.IsContentModified && file.Data is { Length: > 0 }) return file.Data;
 			return reader.ReadEntry(e);
+		}
+		// 只读条目：经典视图不成立，按原始 token 流参与扫描，且永不参与改写
+		if (file.IsRawReadOnly)
+		{
+			return file.OriginalRawContent ?? reader.ReadEntry(e);
 		}
 		if (file.IsContentModified)
 		{
@@ -1547,6 +1738,14 @@ public class PvfGroup : PvfPack
 
 	private bool ExtractFileCore(Stream stream, PvfFile file, bool decompileBinaryAni, bool decompileScript, bool convertConvertSimplifiedChinese, bool isOlWebApi = false, bool? useCompatibleDecompiler = null)
 	{
+		// 只读且无经典视图（经典无对应标签的 token）：导出原始条目字节，绝不导出空内容。
+		if (file.IsRawReadOnly && file.DataLen <= 0)
+		{
+			byte[] rawContent = file.OriginalRawContent ?? Array.Empty<byte>();
+			stream.Write(rawContent, 0, rawContent.Length);
+			stream.Seek(0L, SeekOrigin.Begin);
+			return true;
+		}
 		if (file.DataLen <= 0)
 		{
 			return true;
@@ -1605,6 +1804,26 @@ public class PvfGroup : PvfPack
 
 	public override bool SaveFileText(PvfFile file, string fileText, EncodingType? encoding = null)
 	{
+		if (file.IsRawReadOnly)
+		{
+			RejectUnrepresentableEdit(file);
+			return false;
+		}
+		// Pvf110 type-3 文本块：按容器实际编码（缺省 UTF-16LE）编码、原样写回（不做 4 字节对齐、
+		// 补回尾部 NUL）。历史上这里走 SaveFileAsTextFile(UTF8)，会把 UTF-16LE 块整块改写。
+		if (UsesPvf110TextContract(file))
+		{
+			byte[] block = EncodeType3Text(file, file.FileName.IndexOf(".str", StringComparison.OrdinalIgnoreCase) > 0
+				? AppSetting.Instance.PvfConfig.StrTableAndStrViewConvertStrContent(fileText)
+				: fileText);
+			file.WriteRawData(block);
+			base.HasUnsavedChanges = true;
+			if (file.FileName.IndexOf(".str", StringComparison.OrdinalIgnoreCase) > 0)
+			{
+				base.Strview.ReloadstrFile(file.FileName, fileText, this);
+			}
+			return true;
+		}
 		if (!encoding.HasValue)
 		{
 			encoding = base.OverAllEncodingType;
@@ -1649,6 +1868,11 @@ public class PvfGroup : PvfPack
 
 	public bool SaveFileAsScript(PvfFile file, string fileText)
 	{
+		if (file.IsRawReadOnly)
+		{
+			RejectUnrepresentableEdit(file);
+			return false;
+		}
 		// 统一管线：编辑文本经经典编译器生成经典视图 token 存入 Data；
 		// 110/NKPI 包保存时再由 CompileModifiedContentForSave 适配回 110 token。
 		byte[] array = new ScriptFileCompilerOl(this).Compile(file, fileText);

@@ -80,6 +80,12 @@ public static class PvfExtensionHelper
 		{
 			return string.Empty;
 		}
+		// 只读且经典视图不存在（含经典无对应标签的 token）：只读展示 110 原生脚本文本（含 RAW 行），
+		// 不参与回编译；经典视图可用时按常规渲染。
+		if (file.IsRawReadOnly && file.Data.Length == 0)
+		{
+			return group.GetNativeTokenText(file);
+		}
 		if (file.IsScriptFile)
 		{
 			if (file.FileType == PvfFileType.lst)
@@ -103,6 +109,18 @@ public static class PvfExtensionHelper
 		}
 		if (!file.IsBinaryAniFile || file.Pvf110DataType > 0)
 		{
+			// Pvf110 type-3 文本块：按容器实际编码解码（缺省 UTF-16LE，可用 PVF_TEXT_ENCODING 覆盖），
+			// 与 AI CLI 同一契约。历史实现用 DefaultEncoding（Pvf110 打开时= UTF8）解码，
+			// 显示与保存都会把 UTF-16LE 块改坏。
+			if (group.UsesPvf110TextContract(file))
+			{
+				string block = group.DecodeType3Text(file, file.Data);
+				if (file.FileType == PvfFileType.str)
+				{
+					return AppSetting.Instance.PvfConfig.FileTextTraditionalConvertSimplifiedAutoMethods(block);
+				}
+				return block;
+			}
 			if (file.FileType == PvfFileType.str)
 			{
 				return AppSetting.Instance.PvfConfig.FileTextTraditionalConvertSimplifiedAutoMethods(Encoding.GetEncoding((int)encoding).GetString(file.Data).TrimEnd(new char[1]));

@@ -19,6 +19,12 @@ coverage.*
 !/tests/PvfResourceMerger.RegressionTests/
 !/tests/PvfResourceMerger.RegressionTests/Program.cs
 !/tests/PvfResourceMerger.RegressionTests/PvfResourceMerger.RegressionTests.csproj
+# Pvf110/NKPI 服务层 headless 回归（与 GUI 同一套 PvfGroup 打开/保存链）：
+# 覆盖 type-3 容器编码、经典视图往返扫描、编辑对照三类探针，见 AGENT.md §8
+!/tests/Pvf110.IntegrationTests/
+!/tests/Pvf110.IntegrationTests/Program.cs
+!/tests/Pvf110.IntegrationTests/MockLogger.cs
+!/tests/Pvf110.IntegrationTests/Pvf110.IntegrationTests.csproj
 
 # IDE and user-specific files
 .vs/

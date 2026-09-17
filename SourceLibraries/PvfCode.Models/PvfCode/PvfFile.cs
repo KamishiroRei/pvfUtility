@@ -24,6 +24,24 @@ public class PvfFile : ModelBase, ICloneable
 	/// 懒加载 SetLoadedContent 不置位，用于保存时跳过未修改文件的重编译与重压缩。</summary>
 	public bool IsContentModified { get; private set; }
 
+	/// <summary>
+	/// 该条目为**只读原样条目**：其内容不能被经典视图无损表达（Pvf110/NKPI type-1 出现经典视图
+	/// 无对应标签的 token，如 110 tag 0x0A；或经典文本往返会丢 token），因此 GUI 不得改写它。
+	/// 置位后：编辑器保存被拒绝；整包保存按 <see cref="OriginalRawContent"/> 原样写回。
+	/// 判定与依据见 PvfGroup.EnsureFileData。经典视图可用时仍保留在 <see cref="Data"/> 中
+	/// （套装表等只读解析器依赖它），仅当经典视图根本不存在时 Data 才为空。
+	/// </summary>
+	public bool IsRawReadOnly { get; private set; }
+
+	/// <summary>置位时的原始条目字节（110/NKPI 原始 token 流或 type-3 原始块），保存时原样复用。</summary>
+	public byte[]? OriginalRawContent { get; private set; }
+
+	/// <summary>
+	/// type-3（Pvf110 文本块）解码时剥掉的尾部 NUL 字符个数；编码写回时按同数补回，
+	/// 使「打开→保存」在字节层可逆（115 的 `.str` 块尾部实为两个 NUL 码元）。
+	/// </summary>
+	public int TextBlockTrailingNulCount { get; set; }
+
 	public int? ItemCode { get; set; }
 
 	/// <summary>Pvf110 文件 dataType（1=编译二进制/解编译文本，3=UTF-16 文本）。标准格式打开时为 0。</summary>
@@ -221,6 +239,20 @@ public class PvfFile : ModelBase, ICloneable
 	{
 		Data = content;
 		DataLen = content.Length;
+	}
+
+	/// <summary>
+	/// 置为只读原样条目：保留原始字节供保存时原样写回，并解除“已修改”标记。
+	/// <paramref name="classicView"/> 非空时保留经典视图（供套装表等只读解析器使用），
+	/// 为空表示经典视图根本不存在（如出现经典无对应标签的 token）。
+	/// </summary>
+	public void SetRawReadOnly(byte[] rawContent, byte[]? classicView = null)
+	{
+		OriginalRawContent = rawContent;
+		IsRawReadOnly = true;
+		IsContentModified = false;
+		Data = classicView ?? Array.Empty<byte>();
+		DataLen = Data.Length;
 	}
 
 	/// <summary>释放懒加载内容，回收常驻内存；用户已修改的文件不释放，避免丢失未保存编辑。</summary>

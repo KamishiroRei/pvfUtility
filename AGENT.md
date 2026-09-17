@@ -59,6 +59,7 @@ D:\Game\DNF\90-CNC\地下城与勇士\Script.pvf
 | Hybrid WPF 资源合并与审计工具 | `tools/PvfResourceMerger/` |
 | 资源合并器正式回归项目 | `tests/PvfResourceMerger.RegressionTests/` |
 | 礼盒预览正式回归项目 | `tests/GiftBoxPreview.RegressionTests/` |
+| 110/NKPI 服务层回归项目（headless，与 GUI 同一套 `PvfGroup` 链） | `tests/Pvf110.IntegrationTests/`（验证口径见 §8） |
 | 源码库生成输出 | `SourceLibraries/.build/` |
 
 不得重新建立 `Recovered/` 来存放正式源码、资源、构建配置或生成产物。`SourceLibraries/.build/` 可以删除并由构建重新生成；表中其余位置都是必须保留的源码、资源、工具或测试输入，不能作为临时恢复输出清理。
@@ -227,7 +228,6 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 重命名前必须使用 `rg` 搜索源码和可读资源、检查 `Resources/pvfUtility.g.resources` 的 BAML 字节，并核对原程序集 IL 与 `docs/OBFUSCATED_NAME_MAP.md`。当前只有 `DocumentGroupService`、`DocumentPanelService` 和 `TreeFileClipboardManager` 的三个混淆 CLR 身份因 BAML 引用而保留；不要在未重写 BAML 类型记录的情况下修改它们。
 
 ### 7. 区分源文件和生成文件
-
 可以删除并重新生成：
 
 ```text
@@ -245,8 +245,38 @@ SourceLibraries\.build\
 
 旧的 ILSpy 临时参考树已经删除。以后如需重新反编译程序集，应输出到 `artifacts/decompiler/<AssemblyName>/`，完成核对后只把有效源码和资源移入正式项目路径；不要让临时反编译树重新参与 MSBuild。
 
-## 标准工作流程
+### 8. exe 侧不得改写它无法无损表达的数据（Pvf110 / NKPI 条目）
 
+GUI 走「110/NKPI token 流 ↔ 经典视图」翻译层；CLI 不走这一层（直接对 token 流读写）。该翻译层对三类数据不成立，
+历史版本会在**用户未改任何内容**的保存中静默改写归档内容（实测与数据见
+`D:\Game\DNF\通用知识区\PVF\PVF操作手册.md` §12.9）：
+
+1. Pvf110 **type-3 文本块**必须按容器编码 **UTF-16LE** 解码/回编码（`PvfGroup.Pvf110TextEncoding`，
+   环境变量 `PVF_TEXT_ENCODING` 可覆盖，与 CLI 缺省契约一致），写回用 `WriteRawData` 原样落字节、
+   并补回解码时剥掉的尾部 NUL 码元；不得用 `DefaultEncoding`（Pvf110 打开时为 UTF8）。
+2. 经典文本往返会丢 token 的 type-1 条目（实例：`etc/equipmentpartset.etc`）。
+3. 含经典视图无对应标签 token 的条目（110 tag `0x0A`，实例：大量 `.act` / `.obj`）。
+
+强制做法：110/NKPI 装载路径对 type-1 条目做经典往返自检
+（`PvfGroup.LoadEntryContent` → `IsClassicTextRoundTripLossless`），不通过或经典视图不存在的条目置为
+**只读原样条目**（`PvfFile.IsRawReadOnly` + `OriginalRawContent`，经典视图可用时保留在 `Data` 供套装表等
+只读解析器使用）；两条保存路径（`SavePvfPack110Core` / `SavePvfPackNkpiCore`）对只读条目按原始字节写回；
+编辑入口（`SaveFileText` / `SaveFileAsScript`）拒绝改写并提示改用 CLI。删除这条约束等于恢复静默改写内容的缺陷。
+
+验证（`tests/Pvf110.IntegrationTests`，headless，走与 GUI 完全相同的服务层）：
+
+```powershell
+$env:PVF_PATH="D:\Game\DNF\115US\Script.pvf"; $env:PVF_TEXT_ENCODING="utf-16le"
+$it = ".\tests\Pvf110.IntegrationTests\bin\Release\net10.0-windows\Pvf110.IntegrationTests.exe"
+& $it                                              # 全回归：打开/套装表/未修改保存 sha 一致/编辑保存/抽样
+$env:PROBE_TEXT_PATHS="string/ui.uv.str;etc/equipmentpartset.etc"; & $it   # 逐条目「打开→保存」归档级字节对比
+$env:SWEEP_RT=3000; & $it                          # 经典往返扫描（按扩展名汇总 lossy/failed/只读）
+$env:PROBE_EDIT_OLD="common_01>确定"; $env:PROBE_EDIT_NEW="common_01>确定·改"; & $it  # 编辑后要求“原条目仅此一处替换”
+```
+
+三项探针未全过的 110/NKPI 保存链改动，不得交付到工具根目录。
+
+## 标准工作流程
 ### 1. 建立基线
 
 确认当前目录和 SDK：
