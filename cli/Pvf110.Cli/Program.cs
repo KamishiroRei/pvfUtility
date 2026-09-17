@@ -712,7 +712,7 @@ internal static class Program
             string[] p = t.Split('\t');
             if (p.Length != 6) { Console.Error.WriteLine($"bad manifest line (expect 6 TSV columns): {t}"); return 1; }
             string op = p[1].Trim().ToLowerInvariant();
-            if (op is not ("set" or "insert")) { Console.Error.WriteLine($"unknown op '{op}' in line: {t}"); return 1; }
+            if (op is not ("set" or "insert" or "setn")) { Console.Error.WriteLine($"unknown op '{op}' in line: {t}"); return 1; }
             if (!int.TryParse(p[3].Trim(), out int occ) || occ < 1)
             { Console.Error.WriteLine($"bad occurrence in line: {t}"); return 1; }
             if (!int.TryParse(p[5].Trim(), out int val))
@@ -801,6 +801,27 @@ internal static class Program
                     if (tg is not (Pvf110Compiled.TagS03 or Pvf110Compiled.TagS06 or Pvf110Compiled.TagS08)) continue;
                     if (a.Compiled.Resolve(BitConverter.ToInt32(tokens[k], 1)) == anchor) matches.Add(k);
                 }
+                if (op == "setn")
+                {
+                    // setn：在**第 1 个** anchorTag 之后，取第 occ 个数字 token（I32/F32 计数）改写。
+                    // 用于 type-1 内的平铺数值序列（如 [level info] 的行宽 + 各格数据）——
+                    // 原 set 只能命中 anchor 紧邻的那一个 int，第 2+ 个不可达。
+                    if (matches.Count == 0)
+                    { Console.Error.WriteLine($"anchor token not found: {path} :: {anchor}"); return 1; }
+                    int seen = 0, ti = -1;
+                    for (int k = matches[0] + 1; k < tokens.Count; k++)
+                    {
+                        byte tg = tokens[k][0];
+                        if (tg is not (Pvf110Compiled.TagI32 or Pvf110Compiled.TagF32)) break;
+                        if (++seen == occ) { ti = k; break; }
+                    }
+                    if (ti < 0)
+                    { Console.Error.WriteLine($"numeric token #{occ} not found after anchor: {path} :: {anchor}"); return 1; }
+                    if (tokens[ti][0] != Pvf110Compiled.TagI32)
+                    { Console.Error.WriteLine($"numeric token #{occ} after anchor is not int (tag=0x{tokens[ti][0]:X2}): {path} :: {anchor}"); return 1; }
+                    sets.Add((ti, value, anchor, occ));
+                    continue;
+                }
                 if (matches.Count < occ)
                 { Console.Error.WriteLine($"anchor token not found (occurrence {occ}): {path} :: {anchor}"); return 1; }
                 int m = matches[occ - 1];
@@ -852,10 +873,18 @@ internal static class Program
                 if (tokens.Count != tokenCount)
                 { Console.Error.WriteLine($"unexpected token count: {path}"); return 1; }
                 int diffTokens = 0;
+                var declared = new HashSet<int>();
+                foreach ((int di, int _, string _, int _) in sets) declared.Add(di);
                 for (int k = 0; k < tokenCount; k++)
-                    if (!src.AsSpan(k * 5, 5).SequenceEqual(buf.AsSpan(k * 5, 5))) diffTokens++;
-                if (diffTokens != sets.Count)
-                { Console.Error.WriteLine($"minimality check failed: {path} changedTokens={diffTokens} expected={sets.Count}"); return 1; }
+                    if (!src.AsSpan(k * 5, 5).SequenceEqual(buf.AsSpan(k * 5, 5)))
+                    {
+                        diffTokens++;
+                        if (!declared.Contains(k))
+                        { Console.Error.WriteLine($"minimality check failed (token #{k} changed beyond injection): {path}"); return 1; }
+                    }
+                // 声明值本就等于旧值时不会产生字节变化，故只要求「变化的都不越界」，不要求等量
+                if (diffTokens > sets.Count)
+                { Console.Error.WriteLine($"minimality check failed: {path} changedTokens={diffTokens} expected<={sets.Count}"); return 1; }
             }
             else
             {
@@ -2590,8 +2619,10 @@ internal static class Program
         Console.WriteLine("  batch-decompile-script <pathlist> <outdir>  批量解编译为 ToScriptText 文本文件（write 兼容格式）");
         Console.WriteLine("  batch-write <manifest> [outdir]  批量写回（清单：archivePath<TAB>file[<TAB>auto|text|raw|block]；单次落盘+逐条校验）");
         Console.WriteLine("  inject-int <manifest> [outdir]  注入式字段改写：只改/插目标 token 的字节，其余 token 逐字节保留（不重编译整条条目）");
-        Console.WriteLine("      清单行 6 列 TSV：archivePath<TAB>set|insert<TAB>anchorTag<TAB>occurrence<TAB>tagText<TAB>value");
+        Console.WriteLine("      清单行 6 列 TSV：archivePath<TAB>set|setn|insert<TAB>anchorTag<TAB>occurrence<TAB>tagText<TAB>value");
         Console.WriteLine("      set=把第 N 个 anchorTag 之后的 int 原地改写；insert=在 anchorTag 的值 token 后插入 (tagText,int) 一对");
+        Console.WriteLine("      setn=在第 1 个 anchorTag 之后，取第 N 个数字 token（I32/F32 计数）原地改写");
+        Console.WriteLine("           （用于 type-1 内的平铺数值序列，如 [level info] 的行宽+各格数据；set 只能命中紧邻的那一个 int）");
         Console.WriteLine("  tags <path|--sample> [n]    诊断：token 标签分布统计（确认标签语义）");
         Console.WriteLine("  write <path> <file> [outdir]  修改指定条目内容并按增量路径写回（两格式均只重压缩所在组，附回读校验）");
         Console.WriteLine("  add <file-or-dir> <archive-path-or-prefix> [outdir]  定向新增文件/文件夹（NKPI 与 Pvf110 均可）");

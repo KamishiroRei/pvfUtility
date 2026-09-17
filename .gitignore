@@ -47,6 +47,7 @@ recovered-source-libraries.txt
 *.log
 *.tmp
 *.bak
+*.bak-*
 *.dmp
 artifacts-resource-items.json
 startup-stdout.log
