@@ -97,6 +97,10 @@ internal static class Program
             string? probePaths = Environment.GetEnvironmentVariable("PROBE_TEXT_PATHS");
             if (!string.IsNullOrEmpty(probePaths)) return RunTextEncodingProbe(group, probePaths);
 
+            // 扫描：全库 type-3（非 type-1）条目的「被 UTF-8 编解码改写」损伤签名
+            string? scanType3 = Environment.GetEnvironmentVariable("SCAN_TYPE3");
+            if (!string.IsNullOrEmpty(scanType3)) return RunType3DamageScan(group, scanType3);
+
             // 扫描：抽样统计“经典视图往返是否无损”，按扩展名汇总（GUI 编辑保存的正确性上限）。
             string? sweepRt = Environment.GetEnvironmentVariable("SWEEP_RT");
             if (!string.IsNullOrEmpty(sweepRt)) return RunClassicRoundTripSweep(group, int.Parse(sweepRt));
@@ -440,6 +444,55 @@ internal static class Program
             if (hit) return i;
         }
         return -1;
+    }
+
+    /// <summary>
+    /// 全库 type-3 损伤扫描：判据 = 字节长度为奇数（UTF-16LE 不可能）/ 出现 UTF-8 替换符三连
+    /// EF BF BD（被当作 UTF-16LE 存回）/ 按容器编码解码出现 U+FFFD。用于回答
+    /// 「在役归档是否已被历史 GUI 保存改坏」。参数为 "1" 时运行。
+    /// </summary>
+    private static int RunType3DamageScan(PvfGroup group, string mode)
+    {
+        var reader = Pvf110.Core.Pvf110Reader.OpenPvf(PvfPath);
+        int scanned = 0, suspicious = 0;
+        var byExt = new Dictionary<string, (int total, int bad)>(StringComparer.OrdinalIgnoreCase);
+        var samples = new List<string>();
+        for (int i = 0; i < reader.Entries.Count; i++)
+        {
+            Pvf110.Core.Pvf110Entry e = reader.Entries[i];
+            if (e.DataType == 1) continue;
+            byte[] data = reader.ReadEntry(e);
+            scanned++;
+            string path = reader.FilePath(e);
+            string ext = Path.GetExtension(path).TrimStart('.').ToLowerInvariant();
+            var cur = byExt.TryGetValue(ext, out var v) ? v : (total: 0, bad: 0);
+            cur.total++;
+            var reasons = new List<string>();
+            if (data.Length % 2 != 0) reasons.Add("odd-length");
+            int fffd = 0, efbfbd = 0;
+            for (int k = 0; k + 1 < data.Length; k += 2)
+            {
+                if (data[k] == 0xFF && data[k + 1] == 0xFD) fffd++;
+                if (k + 2 < data.Length && data[k] == 0xEF && data[k + 1] == 0xBF && data[k + 2] == 0xBD) efbfbd++;
+            }
+            if (fffd > 0) reasons.Add($"U+FFFD={fffd}");
+            if (efbfbd > 0) reasons.Add($"EFBFBD={efbfbd}");
+            if (reasons.Count > 0)
+            {
+                cur.bad++;
+                suspicious++;
+                if (samples.Count < 20) samples.Add($"{path} ({data.Length} B): {string.Join(", ", reasons)}");
+            }
+            byExt[ext] = cur;
+        }
+        Console.WriteLine($"\n# type-3 损伤扫描：entries={scanned} suspicious={suspicious}");
+        foreach (var kv in byExt.OrderByDescending(k => k.Value.total))
+        {
+            Console.WriteLine($"# {kv.Key,-10} total={kv.Value.total,7} bad={kv.Value.bad,7}");
+        }
+        foreach (string s in samples) Console.WriteLine("  " + s);
+        Console.WriteLine($"\nRESULT: {(suspicious == 0 ? "PASS" : "FAIL")}");
+        return suspicious == 0 ? 0 : 1;
     }
 
     /// <summary>

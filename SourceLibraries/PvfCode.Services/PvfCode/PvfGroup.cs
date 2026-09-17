@@ -506,14 +506,21 @@ public class PvfGroup : PvfPack
 	}
 
 	/// <summary>
-	/// 只读条目的展示文本：110 原生脚本文本（与 CLI <c>decompile</c> 同一编码器，
-	/// 经典视图无对应标签的 token 显示为 RAW 行）。只读展示，不参与回编译。
+	/// 只读条目的展示文本：type-1 给 110 原生脚本文本（与 CLI <c>decompile</c> 同一编码器，
+	/// 经典视图无对应标签的 token 显示为 RAW 行）；type-3 二进制块给一行说明（不做伪文本展示）。
+	/// 只读展示，不参与回编译。
 	/// </summary>
 	public string GetNativeTokenText(PvfFile file)
 	{
 		if (file?.OriginalRawContent == null || file.OriginalRawContent.Length == 0)
 		{
 			return string.Empty;
+		}
+		if (file.Pvf110DataType != 1)
+		{
+			// 二进制块：与 CLI 的取用方式一致——用 extract 取原始字节，改完再写回
+			return $"// 二进制块（{file.OriginalRawContent.Length:N0} 字节）：exe 侧不做文本改写；"
+				+ "需要修改请用 CLI 的 extract 取出原始字节、改好后按 raw 模式写回。" + Environment.NewLine;
 		}
 		try
 		{
@@ -1081,6 +1088,16 @@ public class PvfGroup : PvfPack
 	{
 		if (dataType != 1)
 		{
+			// type-3：先按容器编码做一次「解码 → 回编码」往返判定。
+			// 可逆 ⇒ 文本块，可在编辑器里改（解码同时记录尾部 NUL 个数，写回时补回）；
+			// 不可逆 ⇒ 二进制块（.lua/.ctp/.skel/.cos/.db 等），按原样只读，禁止文本路径改写。
+			string probe = DecodeType3Text(file, content);
+			if (!EncodeType3Text(file, probe).AsSpan().SequenceEqual(content))
+			{
+				file.SetRawReadOnly(content);
+				logger.Warning($"type-3 块不是按容器编码可逆的文本（二进制块），已置为只读、保存时按原始字节写回：{path}");
+				return true;
+			}
 			file.SetLoadedContent(content);
 			return true;
 		}

@@ -254,11 +254,14 @@ GUI 走「110/NKPI token 流 ↔ 经典视图」翻译层；CLI 不走这一层�
 1. Pvf110 **type-3 文本块**必须按容器编码 **UTF-16LE** 解码/回编码（`PvfGroup.Pvf110TextEncoding`，
    环境变量 `PVF_TEXT_ENCODING` 可覆盖，与 CLI 缺省契约一致），写回用 `WriteRawData` 原样落字节、
    并补回解码时剥掉的尾部 NUL 码元；不得用 `DefaultEncoding`（Pvf110 打开时为 UTF8）。
-2. 经典文本往返会丢 token 的 type-1 条目（实例：`etc/equipmentpartset.etc`）。
-3. 含经典视图无对应标签 token 的条目（110 tag `0x0A`，实例：大量 `.act` / `.obj`）。
+2. **二进制 type-3 块**（按容器编码做「解码→回编码」往返不可逆者，如 `.ctp`/`.skel`/`.cos`/`.db`）
+   一律只读原样写回，不得按文本编解码——否则替换符会直接写进载荷。
+3. 经典文本往返会丢 token 的 type-1 条目（实例：`etc/equipmentpartset.etc`）。
+4. 含经典视图无对应标签 token 的条目（110 tag `0x0A`，实例：大量 `.act` / `.obj`）。
 
-强制做法：110/NKPI 装载路径对 type-1 条目做经典往返自检
-（`PvfGroup.LoadEntryContent` → `IsClassicTextRoundTripLossless`），不通过或经典视图不存在的条目置为
+强制做法：110/NKPI 装载路径对每个条目先做「可逆性自检」——非 type-1 条目走编码往返判定
+（`PvfGroup.LoadEntryContent` → `DecodeType3Text`/`EncodeType3Text`），type-1 条目走经典往返自检
+（`IsClassicTextRoundTripLossless`，与编辑器同一对渲染/编译操作重放）；不通过者置为
 **只读原样条目**（`PvfFile.IsRawReadOnly` + `OriginalRawContent`，经典视图可用时保留在 `Data` 供套装表等
 只读解析器使用）；两条保存路径（`SavePvfPack110Core` / `SavePvfPackNkpiCore`）对只读条目按原始字节写回；
 编辑入口（`SaveFileText` / `SaveFileAsScript`）拒绝改写并提示改用 CLI。删除这条约束等于恢复静默改写内容的缺陷。
@@ -271,6 +274,7 @@ $it = ".\tests\Pvf110.IntegrationTests\bin\Release\net10.0-windows\Pvf110.Integr
 & $it                                              # 全回归：打开/套装表/未修改保存 sha 一致/编辑保存/抽样
 $env:PROBE_TEXT_PATHS="string/ui.uv.str;etc/equipmentpartset.etc"; & $it   # 逐条目「打开→保存」归档级字节对比
 $env:SWEEP_RT=3000; & $it                          # 经典往返扫描（按扩展名汇总 lossy/failed/只读）
+$env:SCAN_TYPE3=1; & $it                           # 全库非 type-1 条目的编码损伤签名扫描（在役归档体检）
 $env:PROBE_EDIT_OLD="common_01>确定"; $env:PROBE_EDIT_NEW="common_01>确定·改"; & $it  # 编辑后要求“原条目仅此一处替换”
 ```
 
