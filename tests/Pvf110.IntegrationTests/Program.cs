@@ -97,6 +97,11 @@ internal static class Program
             string? probePaths = Environment.GetEnvironmentVariable("PROBE_TEXT_PATHS");
             if (!string.IsNullOrEmpty(probePaths)) return RunTextEncodingProbe(group, probePaths);
 
+            // 归档对比：COMPARE_A / COMPARE_B 指定两份归档，逐条目报告差异（定位一次保存改了什么）
+            string? cmpA = Environment.GetEnvironmentVariable("COMPARE_A");
+            string? cmpB = Environment.GetEnvironmentVariable("COMPARE_B");
+            if (!string.IsNullOrEmpty(cmpA) && !string.IsNullOrEmpty(cmpB)) return RunArchiveCompare(cmpA, cmpB);
+
             // 扫描：全库 type-3（非 type-1）条目的「被 UTF-8 编解码改写」损伤签名
             string? scanType3 = Environment.GetEnvironmentVariable("SCAN_TYPE3");
             if (!string.IsNullOrEmpty(scanType3)) return RunType3DamageScan(group, scanType3);
@@ -316,6 +321,7 @@ internal static class Program
         }
 
         var targets = new List<(string Path, byte[] Original)>();
+        var natives = new List<(string Path, PvfFile File, string Text, byte[] Original)>();
         foreach (string raw in paths.Split(';', StringSplitOptions.RemoveEmptyEntries))
         {
             string path = raw.Trim();
@@ -327,7 +333,7 @@ internal static class Program
             bool known = sourceBytes.TryGetValue(path, out byte[]? original);
             Console.WriteLine($"  type={file.Pvf110DataType} fileType={file.FileType} " +
                               $"archiveDataLen={(known ? original!.Length : -1)} loadedDataLen={file.DataLen} " +
-                              $"loaded={loaded} readOnly={file.IsRawReadOnly}");
+                              $"loaded={loaded} native={file.UsesNativeTokenText} binary={file.IsBinaryBlock}");
             if (!known) { Console.WriteLine($"  [SKIP] not in source reader: {path}"); continue; }
 
             string text;
@@ -339,10 +345,15 @@ internal static class Program
             bool saved;
             try { saved = group.SaveFileText(file, text); }
             catch (Exception ex) { saved = false; Console.WriteLine($"  [EXC ] SaveFileText: {ex.Message}"); }
-            if (file.IsRawReadOnly)
+            if (file.IsBinaryBlock)
             {
-                // 只读保护：必须拒绝改写（保存时按原始字节写回）
-                Check($"SaveFileText refused by read-only guard ({path})", !saved);
+                // 二进制块：无文本编辑，保存必须被忽略（条目原样）
+                Check($"SaveFileText ignored for binary block ({path})", !saved);
+            }
+            else if (file.UsesNativeTokenText)
+            {
+                // 110 原生文本形态：可编辑，原样存为文本
+                Check($"SaveFileText native text ({path})", saved);
             }
             else
             {
@@ -351,7 +362,7 @@ internal static class Program
             // 可选：真实编辑（PROBE_EDIT_OLD / PROBE_EDIT_NEW 指定一处替换），验证"改完后保存"的正确性
             string? editOld = Environment.GetEnvironmentVariable("PROBE_EDIT_OLD");
             string? editNew = Environment.GetEnvironmentVariable("PROBE_EDIT_NEW");
-            if (saved && !file.IsRawReadOnly && !string.IsNullOrEmpty(editOld) && text.Contains(editOld, StringComparison.Ordinal))
+            if (saved && !file.IsBinaryBlock && !file.UsesNativeTokenText && !string.IsNullOrEmpty(editOld) && text.Contains(editOld, StringComparison.Ordinal))
             {
                 string edited = text.Replace(editOld, editNew ?? string.Empty);
                 bool editedSaved = group.SaveFileText(file, edited);
@@ -373,6 +384,10 @@ internal static class Program
                     minimal ? $"'{editOld}' -> '{editNew}'" : DescribeEntryDiff(expected, editedBytes));
                 targets.Add((path, expected));
                 continue; // 该条目按编辑后的期望值验收
+            }
+            if (file.UsesNativeTokenText)
+            {
+                natives.Add((path, file, text, original!));
             }
             targets.Add((path, original!));
         }
@@ -403,8 +418,111 @@ internal static class Program
             }
         }
 
+        // 阶段 2：原生文本形态条目的「编辑 → 保存」正确性。
+        // 断言：把一个 int 值改掉后，归档条目与原条目相比 **token 数不变、恰好一个 token 变化、
+        //       该 token 标签不变且 payload = 新值**——即编辑落在预期的那一个 token 上，其余逐字节保留。
+        string? nativeEdit = Environment.GetEnvironmentVariable("PROBE_NATIVE_EDIT_INT");
+        if (!string.IsNullOrEmpty(nativeEdit) && natives.Count > 0)
+        {
+            string[] parts = nativeEdit.Split(':');
+            string oldToken = "	" + parts[0] + "\r\n";
+            string newToken = "	" + parts[1] + "\r\n";
+            if (!natives.Any(n => n.Text.Contains(oldToken, StringComparison.Ordinal)))
+            {
+                oldToken = "	" + parts[0] + "\n";
+                newToken = "	" + parts[1] + "\n";
+            }
+            string editPvf = Path.Combine(outDir, "ScriptNativeEdit.pvf");
+            var toVerify = new List<(string Path, byte[] Original)>();
+            foreach ((string path, PvfFile file, string text, byte[] original) in natives)
+            {
+                int at = text.IndexOf(oldToken, StringComparison.Ordinal);
+                if (at < 0) { Console.WriteLine($"  [skip] native edit pattern not found: {path}"); continue; }
+                string edited = string.Concat(text.AsSpan(0, at), newToken, text.AsSpan(at + oldToken.Length));
+                bool saved = group.SaveFileText(file, edited);
+                Check($"native edited SaveFileText({path})", saved);
+                if (saved) toVerify.Add((path, original));
+            }
+            var result = group.SavePvfPack(editPvf, isFastMode: true, progress: null!, notButtonClick: true)
+                .GetAwaiter().GetResult();
+            Check("SavePvfPack (native edit)", !result.IsError, result.Msg);
+            if (!result.IsError && File.Exists(editPvf))
+            {
+                var verify = Pvf110.Core.Pvf110Reader.Open(
+                    File.ReadAllBytes(Path.Combine(outDir, "sk.dat")), File.ReadAllBytes(editPvf));
+                var outBytes = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
+                for (int i = 0; i < verify.Entries.Count; i++)
+                {
+                    Pvf110.Core.Pvf110Entry e = verify.Entries[i];
+                    outBytes[verify.FilePath(e)] = verify.ReadEntry(e);
+                }
+                foreach ((string path, byte[] original) in toVerify)
+                {
+                    if (!outBytes.TryGetValue(path, out byte[]? back)) { Check($"native edit entry present ({path})", false); continue; }
+                    if (back.Length != original.Length)
+                    {
+                        Check($"native edit keeps token count ({path})", false, DescribeEntryDiff(original, back));
+                        continue;
+                    }
+                    int diffs = 0, diffIndex = -1;
+                    for (int k = 0; k < original.Length; k += 5)
+                    {
+                        if (original.AsSpan(k, 5).SequenceEqual(back.AsSpan(k, 5))) continue;
+                        diffs++;
+                        diffIndex = k;
+                    }
+                    int newValue = int.Parse(parts[1]);
+                    bool ok = diffs == 1
+                        && back[diffIndex] == original[diffIndex]
+                        && BitConverter.ToInt32(back, diffIndex + 1) == newValue;
+                    Check($"native edit changes exactly one token to {newValue} ({path})", ok,
+                        ok ? $"rec#{diffIndex / 5} {original[diffIndex]:X2}:{BitConverter.ToInt32(original, diffIndex + 1)} -> {newValue}"
+                           : $"diffs={diffs} rec#{diffIndex / 5}");
+                }
+            }
+        }
+
         Console.WriteLine($"\nRESULT: {(_failures == 0 ? "PASS" : "FAIL")}");
         return _failures == 0 ? 0 : 1;
+    }
+
+    /// <summary>
+    /// 逐条目对比两份归档，报告条目长度变化的路径与汇总
+    /// （用于定位「某次 GUI 保存到底改了什么」）。
+    /// </summary>
+    private static int RunArchiveCompare(string pathA, string pathB)
+    {
+        var a = Pvf110.Core.Pvf110Reader.OpenPvf(pathA);
+        var b = Pvf110.Core.Pvf110Reader.OpenPvf(pathB);
+        Check("same entry count", a.Entries.Count == b.Entries.Count,
+            $"{a.Entries.Count} vs {b.Entries.Count}");
+        var bIndex = new Dictionary<string, int>(b.Entries.Count, StringComparer.OrdinalIgnoreCase);
+        for (int j = 0; j < b.Entries.Count; j++) bIndex.TryAdd(b.FilePath(b.Entries[j]), j);
+
+        int diff = 0, shrunk = 0, grown = 0;
+        long deltaTotal = 0;
+        var byExt = new Dictionary<string, (int n, long delta)>(StringComparer.OrdinalIgnoreCase);
+        for (int i = 0; i < a.Entries.Count; i++)
+        {
+            Pvf110.Core.Pvf110Entry ea = a.Entries[i];
+            string pa = a.FilePath(ea);
+            if (!bIndex.TryGetValue(pa, out int jb)) { Check($"entry present in B ({pa})", false); continue; }
+            byte[] da = a.ReadEntry(ea);
+            byte[] db = b.ReadEntry(b.Entries[jb]);
+            if (da.AsSpan().SequenceEqual(db)) continue;
+            diff++;
+            deltaTotal += db.Length - da.Length;
+            if (db.Length < da.Length) shrunk++; else grown++;
+            string ext = Path.GetExtension(pa).TrimStart('.').ToLowerInvariant();
+            var cur = byExt.TryGetValue(ext, out var v) ? v : (n: 0, delta: 0L);
+            byExt[ext] = (cur.n + 1, cur.delta + (db.Length - da.Length));
+            if (diff <= 50) Console.WriteLine($"  {pa}: {da.Length} -> {db.Length}");
+        }
+        Console.WriteLine($"\n# 差异条目={diff}（缩小 {shrunk} / 变大 {grown}）总字节变化={deltaTotal}");
+        foreach (var kv in byExt.OrderByDescending(k => Math.Abs(k.Value.delta)))
+            Console.WriteLine($"# {kv.Key,-8} n={kv.Value.n,6} delta={kv.Value.delta}");
+        Console.WriteLine($"\nRESULT: {(diff == 0 ? "PASS" : "DIFF")}");
+        return 0;
     }
 
     /// <summary>比较 110 token 流：按 5 字节记录报告长度、差异记录数与首几处 tag/payload。</summary>
@@ -454,7 +572,7 @@ internal static class Program
     private static int RunType3DamageScan(PvfGroup group, string mode)
     {
         var reader = Pvf110.Core.Pvf110Reader.OpenPvf(PvfPath);
-        int scanned = 0, suspicious = 0;
+        int scanned = 0, suspicious = 0, binaryBlocks = 0;
         var byExt = new Dictionary<string, (int total, int bad)>(StringComparer.OrdinalIgnoreCase);
         var samples = new List<string>();
         for (int i = 0; i < reader.Entries.Count; i++)
@@ -467,16 +585,33 @@ internal static class Program
             string ext = Path.GetExtension(path).TrimStart('.').ToLowerInvariant();
             var cur = byExt.TryGetValue(ext, out var v) ? v : (total: 0, bad: 0);
             cur.total++;
-            var reasons = new List<string>();
-            if (data.Length % 2 != 0) reasons.Add("odd-length");
-            int fffd = 0, efbfbd = 0;
-            for (int k = 0; k + 1 < data.Length; k += 2)
+
+            // 分类（与 GUI 同一判据）：文本块才适用"损伤签名"；二进制载荷允许任意字节（长度可为奇数）
+            var pf = group.GetFile(path);
+            bool isBinary = false;
+            if (pf != null)
             {
-                if (data[k] == 0xFF && data[k + 1] == 0xFD) fffd++;
-                if (k + 2 < data.Length && data[k] == 0xEF && data[k + 1] == 0xBF && data[k + 2] == 0xBD) efbfbd++;
+                group.EnsureFileData(pf.FileName);
+                isBinary = pf.IsBinaryBlock;
             }
-            if (fffd > 0) reasons.Add($"U+FFFD={fffd}");
-            if (efbfbd > 0) reasons.Add($"EFBFBD={efbfbd}");
+
+            var reasons = new List<string>();
+            if (!isBinary)
+            {
+                if (data.Length % 2 != 0) reasons.Add("odd-length");
+                int fffd = 0, efbfbd = 0;
+                for (int k = 0; k + 1 < data.Length; k += 2)
+                {
+                    if (data[k] == 0xFF && data[k + 1] == 0xFD) fffd++;
+                    if (k + 2 < data.Length && data[k] == 0xEF && data[k + 1] == 0xBF && data[k + 2] == 0xBD) efbfbd++;
+                }
+                if (fffd > 0) reasons.Add($"U+FFFD={fffd}");
+                if (efbfbd > 0) reasons.Add($"EFBFBD={efbfbd}");
+            }
+            else
+            {
+                binaryBlocks++;
+            }
             if (reasons.Count > 0)
             {
                 cur.bad++;
@@ -485,7 +620,7 @@ internal static class Program
             }
             byExt[ext] = cur;
         }
-        Console.WriteLine($"\n# type-3 损伤扫描：entries={scanned} suspicious={suspicious}");
+        Console.WriteLine($"\n# 非 type-1 损伤扫描：entries={scanned} 二进制载荷={binaryBlocks} suspicious(文本块)={suspicious}");
         foreach (var kv in byExt.OrderByDescending(k => k.Value.total))
         {
             Console.WriteLine($"# {kv.Key,-10} total={kv.Value.total,7} bad={kv.Value.bad,7}");
@@ -525,9 +660,9 @@ internal static class Program
                     cur.failed++;
                     if (samples.Count < 20) samples.Add($"{f.FileName}: 打开失败（经典视图不可生成）");
                 }
-                else if (f.IsRawReadOnly)
+                else if (f.UsesNativeTokenText || f.IsBinaryBlock)
                 {
-                    // 设计内的只读保护：保存按原始字节写回，不再统计为丢失
+                    // 设计内的形态分流：原生文本形态 / 二进制块不走经典富文本，不计入经典丢失
                     cur.readonlyFiles++;
                 }
                 else

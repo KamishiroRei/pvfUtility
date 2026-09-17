@@ -245,40 +245,38 @@ SourceLibraries\.build\
 
 旧的 ILSpy 临时参考树已经删除。以后如需重新反编译程序集，应输出到 `artifacts/decompiler/<AssemblyName>/`，完成核对后只把有效源码和资源移入正式项目路径；不要让临时反编译树重新参与 MSBuild。
 
-### 8. exe 侧不得改写它无法无损表达的数据（Pvf110 / NKPI 条目）
+### 8. exe 侧按形态处理条目：不改写、不降级、不输出内部诊断（Pvf110 / NKPI）
 
-GUI 走「110/NKPI token 流 ↔ 经典视图」翻译层；CLI 不走这一层（直接对 token 流读写）。该翻译层对三类数据不成立，
-历史版本会在**用户未改任何内容**的保存中静默改写归档内容（实测与数据见
-`D:\Game\DNF\通用知识区\PVF\PVF操作手册.md` §12.9）：
+GUI 走「110/NKPI token 流 ↔ 经典视图」翻译层；CLI 不走这一层（直接对 token 流读写）。经典**富文本不是无损容器**——池字符串本身长得像经典语法时（`[韩国语标题]`、`//comment`、纯数字串）会被当成结构与注释，回编译即改 token 类型；经典标签表也没有 110 `0x0A` 的位置。历史版本因此在**用户未改任何内容**的保存中静默改写归档内容（实测见 `D:\Game\DNF\通用知识区\PVF\PVF操作手册.md` §12.9）。
 
-1. Pvf110 **type-3 文本块**必须按容器编码 **UTF-16LE** 解码/回编码（`PvfGroup.Pvf110TextEncoding`，
-   环境变量 `PVF_TEXT_ENCODING` 可覆盖，与 CLI 缺省契约一致），写回用 `WriteRawData` 原样落字节、
-   并补回解码时剥掉的尾部 NUL 码元；不得用 `DefaultEncoding`（Pvf110 打开时为 UTF8）。
-2. **二进制 type-3 块**（按容器编码做「解码→回编码」往返不可逆者，如 `.ctp`/`.skel`/`.cos`/`.db`）
-   一律只读原样写回，不得按文本编解码——否则替换符会直接写进载荷。
-3. 经典文本往返会丢 token 的 type-1 条目（实例：`etc/equipmentpartset.etc`）。
-4. 含经典视图无对应标签 token 的条目（110 tag `0x0A`，实例：大量 `.act` / `.obj`）。
+强制形态分流（`PvfGroup.LoadEntryContent` 判定，`PvfFile` 记状态）：
 
-强制做法：110/NKPI 装载路径对每个条目先做「可逆性自检」——非 type-1 条目走编码往返判定
-（`PvfGroup.LoadEntryContent` → `DecodeType3Text`/`EncodeType3Text`），type-1 条目走经典往返自检
-（`IsClassicTextRoundTripLossless`，与编辑器同一对渲染/编译操作重放）；不通过者置为
-**只读原样条目**（`PvfFile.IsRawReadOnly` + `OriginalRawContent`，经典视图可用时保留在 `Data` 供套装表等
-只读解析器使用）；两条保存路径（`SavePvfPack110Core` / `SavePvfPackNkpiCore`）对只读条目按原始字节写回；
-编辑入口（`SaveFileText` / `SaveFileAsScript`）拒绝改写并提示改用 CLI。删除这条约束等于恢复静默改写内容的缺陷。
+| 形态 | 判据 | 文本面 | 保存 |
+|---|---|---|---|
+| 文本块 | 非 type-1 且容器编码「解码→回编码」可逆 | 容器编码（Pvf110 = UTF-16LE，`PVF_TEXT_ENCODING` 可覆盖）；尾部 NUL 码元记数补回 | 同编码编码后原样落字节 |
+| 二进制块（`IsBinaryBlock`） | 非 type-1 且往返不可逆（`.ctp`/`.skel`/`.db`…） | 无文本面 | 原始字节写回 |
+| 经典视图 | type-1 且经典富文本往返逐 token 无损（`IsClassicTextRoundTripLossless`） | 经典富文本 | 经典编译器回编译 |
+| 原生文本（`UsesNativeTokenText`） | type-1 且经典视图不存在或往返丢 token | 110 原生文本（`GetNativeTokenText`），**可编辑** | 文本落 `Data`，保存时经 `CompileModifiedContentForSave` 的 FromText 编译回 token |
 
-验证（`tests/Pvf110.IntegrationTests`，headless，走与 GUI 完全相同的服务层）：
+硬约束：
 
-```powershell
-$env:PVF_PATH="D:\Game\DNF\115US\Script.pvf"; $env:PVF_TEXT_ENCODING="utf-16le"
-$it = ".\tests\Pvf110.IntegrationTests\bin\Release\net10.0-windows\Pvf110.IntegrationTests.exe"
-& $it                                              # 全回归：打开/套装表/未修改保存 sha 一致/编辑保存/抽样
-$env:PROBE_TEXT_PATHS="string/ui.uv.str;etc/equipmentpartset.etc"; & $it   # 逐条目「打开→保存」归档级字节对比
-$env:SWEEP_RT=3000; & $it                          # 经典往返扫描（按扩展名汇总 lossy/failed/只读）
-$env:SCAN_TYPE3=1; & $it                           # 全库非 type-1 条目的编码损伤签名扫描（在役归档体检）
-$env:PROBE_EDIT_OLD="common_01>确定"; $env:PROBE_EDIT_NEW="common_01>确定·改"; & $it  # 编辑后要求“原条目仅此一处替换”
-```
+1. **不得把任何条目降级为只读**——表达不了的走原生文本形态，用户照旧能改。
+2. **不得向 UI 输出内部诊断**：形态判定、回退、保护一律静默（至多 `logger.Debug`），界面不出现"已置为只读""二进制块"之类的工程说明；用户看到的只能是业务信息。
+3. 两条保存路径（`SavePvfPack110Core` / `SavePvfPackNkpiCore`）对二进制块按原始字节写回；扫描/名称解析路径对原生文本形态与二进制块按原始 token 流处理，不抛错。
+4. 删除本条等于恢复「GUI 打开→保存改写内容」与「UI 弹出工程诊断」两个已修缺陷。
 
-三项探针未全过的 110/NKPI 保存链改动，不得交付到工具根目录。
+验证（`tests/Pvf110.IntegrationTests`，headless，走与 GUI 完全相同的服务层；带参数的探针见下表）：
+
+| 环境变量 | 断言 |
+|---|---|
+| （无） | 全回归：打开 → 套装表 2,943 → 未修改保存与源 sha256 一致、无 `(1).pvf` 回退 → 编辑保存 → 抽样未修改条目逐字节一致 |
+| `PROBE_TEXT_PATHS` | 逐条目「打开→不改→保存」后归档条目**逐字节不变**（含 `.str`/`.xui`/`.co`/`.db`/`.etc`/`.act`） |
+| `PROBE_NATIVE_EDIT_INT=旧:新` | 原生文本形态条目改一个 int 后：token 数不变、**恰好一个 token 变化、payload = 新值** |
+| `SWEEP_RT=3000` | 经典往返扫描：lossy 0 / failed 0 / 形态分流计数 |
+| `SCAN_TYPE3=1` | 全库非 type-1 条目损伤签名扫描（奇数长度 / `EF BF BD` / `U+FFFD`） |
+| `COMPARE_A` + `COMPARE_B` | 逐条目对比两份归档，列出差异路径与字节增减（定位"某次保存改了什么"） |
+
+带参数的探针未全过的 110/NKPI 保存链改动，不得交付到工具根目录。
 
 ## 标准工作流程
 ### 1. 建立基线

@@ -25,15 +25,19 @@ public class PvfFile : ModelBase, ICloneable
 	public bool IsContentModified { get; private set; }
 
 	/// <summary>
-	/// 该条目为**只读原样条目**：其内容不能被经典视图无损表达（Pvf110/NKPI type-1 出现经典视图
-	/// 无对应标签的 token，如 110 tag 0x0A；或经典文本往返会丢 token），因此 GUI 不得改写它。
-	/// 置位后：编辑器保存被拒绝；整包保存按 <see cref="OriginalRawContent"/> 原样写回。
-	/// 判定与依据见 PvfGroup.EnsureFileData。经典视图可用时仍保留在 <see cref="Data"/> 中
-	/// （套装表等只读解析器依赖它），仅当经典视图根本不存在时 Data 才为空。
+	/// 该条目的文本编辑/保存走 **110 原生文本编解码**（`Pvf110Compiled.ToScriptText` / `FromText`，
+	/// 与 AI CLI 同一套、逐 token 无损），而不是经典富文本。
+	/// 触发条件：经典视图不存在（出现经典无对应标签的 token，如 110 tag `0x0A`），
+	/// 或经典富文本往返会丢 token（池字符串形如经典语法时，如 `etc/equipmentpartset.etc`、
+	/// `clientonly/*.co`）。与只读的区别：这些条目**照旧可编辑**，只是文本形态为 110 原生式。
 	/// </summary>
-	public bool IsRawReadOnly { get; private set; }
+	public bool UsesNativeTokenText { get; private set; }
 
-	/// <summary>置位时的原始条目字节（110/NKPI 原始 token 流或 type-3 原始块），保存时原样复用。</summary>
+	/// <summary>二进制块（非 type-1，且按容器编码做「解码→回编码」不可逆，如 `.ctp`/`.skel`/`.db`）：
+	/// 不做文本编辑，保存按原始字节写回。</summary>
+	public bool IsBinaryBlock { get; private set; }
+
+	/// <summary>置位文本形态时的原始条目字节（110/NKPI 原始 token 流或 type-3 原始块）。</summary>
 	public byte[]? OriginalRawContent { get; private set; }
 
 	/// <summary>
@@ -242,17 +246,26 @@ public class PvfFile : ModelBase, ICloneable
 	}
 
 	/// <summary>
-	/// 置为只读原样条目：保留原始字节供保存时原样写回，并解除“已修改”标记。
-	/// <paramref name="classicView"/> 非空时保留经典视图（供套装表等只读解析器使用），
-	/// 为空表示经典视图根本不存在（如出现经典无对应标签的 token）。
+	/// 置为该条目的文本形态为 110 原生文本：保留原始字节（供展示与保存时兜底），
+	/// 经典视图可用时保留在 <see cref="Data"/>（供套装表等只读解析器读取），否则 Data 为空。
 	/// </summary>
-	public void SetRawReadOnly(byte[] rawContent, byte[]? classicView = null)
+	public void SetUsesNativeTokenText(byte[] rawContent, byte[]? classicView = null)
 	{
 		OriginalRawContent = rawContent;
-		IsRawReadOnly = true;
+		UsesNativeTokenText = true;
 		IsContentModified = false;
 		Data = classicView ?? Array.Empty<byte>();
 		DataLen = Data.Length;
+	}
+
+	/// <summary>置为二进制块：原始字节保留在 Data（导出/预览走原始字节），禁文本编辑。</summary>
+	public void SetBinaryBlock(byte[] rawContent)
+	{
+		OriginalRawContent = rawContent;
+		IsBinaryBlock = true;
+		IsContentModified = false;
+		Data = rawContent;
+		DataLen = rawContent.Length;
 	}
 
 	/// <summary>释放懒加载内容，回收常驻内存；用户已修改的文件不释放，避免丢失未保存编辑。</summary>

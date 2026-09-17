@@ -278,7 +278,7 @@ public class PvfGroup : PvfPack
 				if (!base.FileList.TryGetValue(p, out PvfFile? file) || file.Data == null)
 					throw new InvalidOperationException("Pvf110 保存要求文件集合与原包一致，缺少文件: " + p);
 				// 只读条目（经典视图表达不了）：按原始字节写回，绝不写入编辑器文本
-				if (file.IsRawReadOnly)
+				if (file.IsBinaryBlock)
 				{
 					return file.OriginalRawContent ?? reader.ReadEntry(e);
 				}
@@ -365,7 +365,7 @@ public class PvfGroup : PvfPack
 			if (!base.FileList.TryGetValue(p, out PvfFile? file) || file.Data == null)
 				throw new InvalidOperationException("NKPI 保存时找不到既有文件: " + p);
 			// 只读条目（经典视图表达不了）：按原始字节写回，绝不写入编辑器文本
-			if (file.IsRawReadOnly)
+			if (file.IsBinaryBlock)
 				return file.OriginalRawContent ?? reader.ReadEntry(e);
 			// 未修改文件：直接使用原始内容，跳过懒加载与重编译
 			if (!file.IsContentModified)
@@ -496,19 +496,9 @@ public class PvfGroup : PvfPack
 	}
 
 	/// <summary>
-	/// 只读条目（经典视图表达不了其 token 流）的编辑拒绝：明确告知原因与替代路径，
-	/// 不落任何字节到 Data——保存仍按原始字节写回，客户端内容不受影响。
-	/// </summary>
-	private void RejectUnrepresentableEdit(PvfFile file)
-	{
-		logger?.Error($"该条目的 token 流无法用经典视图无损表达，已置为只读，保存时按原始字节写回：{file?.FileName}；" +
-			"如需修改请改用 AI CLI（Pvf110.Cli 的 decompile/write/inject-int）按 110 原生文本处理。");
-	}
-
-	/// <summary>
-	/// 只读条目的展示文本：type-1 给 110 原生脚本文本（与 CLI <c>decompile</c> 同一编码器，
-	/// 经典视图无对应标签的 token 显示为 RAW 行）；type-3 二进制块给一行说明（不做伪文本展示）。
-	/// 只读展示，不参与回编译。
+	/// 110 原生文本形态条目的展示文本：与 CLI <c>decompile</c> 同一编码器
+	/// （经典视图无对应标签的 token 显示为 RAW 行）。该文本可直接编辑，
+	/// 保存时由 <see cref="CompileModifiedContentForSave"/> 的 FromText 路径编译回 token。
 	/// </summary>
 	public string GetNativeTokenText(PvfFile file)
 	{
@@ -518,9 +508,7 @@ public class PvfGroup : PvfPack
 		}
 		if (file.Pvf110DataType != 1)
 		{
-			// 二进制块：与 CLI 的取用方式一致——用 extract 取原始字节，改完再写回
-			return $"// 二进制块（{file.OriginalRawContent.Length:N0} 字节）：exe 侧不做文本改写；"
-				+ "需要修改请用 CLI 的 extract 取出原始字节、改好后按 raw 模式写回。" + Environment.NewLine;
+			return string.Empty; // 二进制块不是文本
 		}
 		try
 		{
@@ -535,7 +523,7 @@ public class PvfGroup : PvfPack
 		}
 		catch (Exception ex)
 		{
-			logger?.Warning($"原生文本生成失败 {file.FileName}: {ex.Message}");
+			logger?.Debug($"原生文本生成失败 {file.FileName}: {ex.Message}");
 		}
 		return string.Empty;
 	}
@@ -1052,7 +1040,7 @@ public class PvfGroup : PvfPack
 		if (base.FileList == null) return false;
 		if (!base.FileList.TryGetValue(path, out PvfFile? file)) return false;
 		// 已判定为只读且无经典视图（经典无对应标签的 token）：不重复尝试转换
-		if (file.IsRawReadOnly && (file.Data == null || file.Data.Length == 0)) return true;
+		if ((file.UsesNativeTokenText || file.IsBinaryBlock) && (file.Data == null || file.Data.Length == 0)) return true;
 		// 已有数据（空文件或已加载）则跳过
 		if (file.Data != null && file.Data.Length > 0) return true;
 		if (!_entryIndex.TryGetValue(path, out int idx)) return false;
@@ -1078,50 +1066,49 @@ public class PvfGroup : PvfPack
 	}
 
 	/// <summary>
-	/// 单条目内容装载（110/NKPI 统一管线）：
-	/// · type-3：原始字节直接落地，文本按容器编码解码（见 <see cref="DecodeType3Text"/>）。
-	/// · type-1：转经典视图；**转换失败或经典文本往返会丢 token 时置为只读原样条目**
-	///   （<see cref="PvfFile.IsRawReadOnly"/>），保存时按原始字节写回。
-	///   这堵住的正是「GUI 打开→保存把内容改坏」的静默路径：exe 侧不得改写自己表达不了的数据。
+	/// 单条目内容装载（110/NKPI 统一管线）。三类文本形态：
+	/// · **文本块**（非 type-1 且按容器编码「解码→回编码」可逆，如 `.str`/`.xui`/`.lua` 源码）：
+	///   原始字节落地，文本按容器编码解码；
+	/// · **二进制块**（非 type-1 且编码往返不可逆，如 `.ctp`/`.skel`/`.db`）：不做文本编辑，
+	///   原始字节留在 Data 供导出，保存按原始字节写回；
+	/// · **type-1**：能无损走经典富文本的保持经典视图；经典视图不存在（经典无对应标签的 token，
+	///   如 110 tag `0x0A`）或经典富文本往返会丢 token 的，改用 **110 原生文本**编解码
+	///   （与 CLI 同一套，逐 token 无损、照样可编辑）。
 	/// </summary>
 	private bool LoadEntryContent(PvfFile file, int dataType, byte[] content, string path)
 	{
 		if (dataType != 1)
 		{
-			// type-3：先按容器编码做一次「解码 → 回编码」往返判定。
-			// 可逆 ⇒ 文本块，可在编辑器里改（解码同时记录尾部 NUL 个数，写回时补回）；
-			// 不可逆 ⇒ 二进制块（.lua/.ctp/.skel/.cos/.db 等），按原样只读，禁止文本路径改写。
 			string probe = DecodeType3Text(file, content);
-			if (!EncodeType3Text(file, probe).AsSpan().SequenceEqual(content))
+			if (EncodeType3Text(file, probe).AsSpan().SequenceEqual(content))
 			{
-				file.SetRawReadOnly(content);
-				logger.Warning($"type-3 块不是按容器编码可逆的文本（二进制块），已置为只读、保存时按原始字节写回：{path}");
-				return true;
+				file.SetLoadedContent(content);
 			}
-			file.SetLoadedContent(content);
+			else
+			{
+				file.SetBinaryBlock(content);
+			}
 			return true;
 		}
-		byte[] data;
+
+		byte[] data = Array.Empty<byte>();
 		try
 		{
 			data = ClassicViewAdapter.ToClassicView(content, off => AcquireVirtualIdByOffset(off));
 		}
-		catch (Exception ex)
+		catch (InvalidDataException)
 		{
-			// 经典视图根本不存在：只保留原始字节（Data 为空），保存按原始字节写回
-			file.SetRawReadOnly(content);
-			logger.Warning($"条目含经典视图无对应标签的 token，已置为只读、保存时按原始字节写回：{path} :: {ex.Message}");
-			return true;
+			data = Array.Empty<byte>(); // 经典视图无对应标签：转 110 原生文本形态
 		}
-
-		file.SetLoadedContent(data);
-		if (IsClassicTextRoundTripLossless(file, data))
+		if (data.Length > 0)
 		{
-			return true;
+			file.SetLoadedContent(data);
+			if (IsClassicTextRoundTripLossless(file, data))
+			{
+				return true;
+			}
 		}
-		// 经典视图可用（保留在 Data，供套装表等解析器读取），但文本往返会丢 token：只读并原样写回
-		file.SetRawReadOnly(content, data);
-		logger.Warning($"条目经经典文本往返会丢 token，已置为只读、保存时按原始字节写回：{path}");
+		file.SetUsesNativeTokenText(content, data.Length > 0 ? data : null);
 		return true;
 	}
 
@@ -1186,7 +1173,7 @@ public class PvfGroup : PvfPack
 		}
 		catch (Exception ex)
 		{
-			logger.Error($"GetBinaryForScan failed for {file.FileName}: {ex.Message}");
+			logger.Debug($"GetBinaryForScan fallback for {file.FileName}: {ex.Message}");
 		}
 		return file.Data ?? Array.Empty<byte>();
 	}
@@ -1198,8 +1185,8 @@ public class PvfGroup : PvfPack
 			if (file.IsContentModified && file.Data is { Length: > 0 }) return file.Data;
 			return reader.ReadEntry(e);
 		}
-		// 只读条目：经典视图不成立，按原始 token 流参与扫描，且永不参与改写
-		if (file.IsRawReadOnly)
+		// 原生文本形态 / 二进制块：按原始 token 流参与扫描，不参与改写
+		if (file.IsBinaryBlock || file.UsesNativeTokenText)
 		{
 			return file.OriginalRawContent ?? reader.ReadEntry(e);
 		}
@@ -1209,8 +1196,17 @@ public class PvfGroup : PvfPack
 			if (file.Data is not { Length: > 0 }) EnsureFileData(file.FileName);
 			return file.Data ?? reader.ReadEntry(e);
 		}
-		// 未修改：即时转换经典视图（不落地 Data）
-		return ClassicViewAdapter.ToClassicView(reader.ReadEntry(e), off => AcquireVirtualIdByOffset(off));
+		// 未修改：即时转换经典视图（不落地 Data）；经典视图不存在（经典无对应标签的 token）
+		// 时回退原始 token 流，不抛错、不刷日志
+		byte[] raw = reader.ReadEntry(e);
+		try
+		{
+			return ClassicViewAdapter.ToClassicView(raw, off => AcquireVirtualIdByOffset(off));
+		}
+		catch (InvalidDataException)
+		{
+			return raw;
+		}
 	}
 
 	private byte[] GetScanBinary(Pvf110Reader reader, Pvf110Entry e, PvfFile file)
@@ -1220,8 +1216,8 @@ public class PvfGroup : PvfPack
 			if (file.IsContentModified && file.Data is { Length: > 0 }) return file.Data;
 			return reader.ReadEntry(e);
 		}
-		// 只读条目：经典视图不成立，按原始 token 流参与扫描，且永不参与改写
-		if (file.IsRawReadOnly)
+		// 原生文本形态 / 二进制块：按原始 token 流参与扫描，不参与改写
+		if (file.IsBinaryBlock || file.UsesNativeTokenText)
 		{
 			return file.OriginalRawContent ?? reader.ReadEntry(e);
 		}
@@ -1231,8 +1227,17 @@ public class PvfGroup : PvfPack
 			if (file.Data is not { Length: > 0 }) EnsureFileData(file.FileName);
 			return file.Data ?? reader.ReadEntry(e);
 		}
-		// 未修改：即时转换经典视图（不落地 Data）
-		return ClassicViewAdapter.ToClassicView(reader.ReadEntry(e), off => AcquireVirtualIdByOffset(off));
+		// 未修改：即时转换经典视图（不落地 Data）；经典视图不存在（经典无对应标签的 token）
+		// 时回退原始 token 流，不抛错、不刷日志
+		byte[] raw = reader.ReadEntry(e);
+		try
+		{
+			return ClassicViewAdapter.ToClassicView(raw, off => AcquireVirtualIdByOffset(off));
+		}
+		catch (InvalidDataException)
+		{
+			return raw;
+		}
 	}
 
 	/// <summary>检查文件内容是否已加载（懒加载标记）。</summary>
@@ -1755,11 +1760,13 @@ public class PvfGroup : PvfPack
 
 	private bool ExtractFileCore(Stream stream, PvfFile file, bool decompileBinaryAni, bool decompileScript, bool convertConvertSimplifiedChinese, bool isOlWebApi = false, bool? useCompatibleDecompiler = null)
 	{
-		// 只读且无经典视图（经典无对应标签的 token）：导出原始条目字节，绝不导出空内容。
-		if (file.IsRawReadOnly && file.DataLen <= 0)
+		// 原生文本形态且无经典视图：按需导出文本（decompileScript）或原始条目字节。
+		if (file.UsesNativeTokenText && file.DataLen <= 0)
 		{
-			byte[] rawContent = file.OriginalRawContent ?? Array.Empty<byte>();
-			stream.Write(rawContent, 0, rawContent.Length);
+			byte[] payload = decompileScript
+				? Encoding.UTF8.GetBytes(GetNativeTokenText(file) ?? string.Empty)
+				: file.OriginalRawContent ?? Array.Empty<byte>();
+			stream.Write(payload, 0, payload.Length);
 			stream.Seek(0L, SeekOrigin.Begin);
 			return true;
 		}
@@ -1821,10 +1828,18 @@ public class PvfGroup : PvfPack
 
 	public override bool SaveFileText(PvfFile file, string fileText, EncodingType? encoding = null)
 	{
-		if (file.IsRawReadOnly)
+		if (file.IsBinaryBlock)
 		{
-			RejectUnrepresentableEdit(file);
-			return false;
+			return false; // 二进制块无文本编辑
+		}
+		// 110 原生文本形态：文本原样存为 UTF-8，整包保存时由 Pvf110Compiled.FromText 编译回 token
+		// （与经典视图同一入口，见 CompileModifiedContentForSave）。适用条目：经典富文本表达不了
+		// 或有损者（含经典无对应标签的 token、池字符串形如经典语法等）。
+		if (file.UsesNativeTokenText)
+		{
+			file.WriteRawData(Encoding.UTF8.GetBytes(fileText ?? string.Empty));
+			base.HasUnsavedChanges = true;
+			return true;
 		}
 		// Pvf110 type-3 文本块：按容器实际编码（缺省 UTF-16LE）编码、原样写回（不做 4 字节对齐、
 		// 补回尾部 NUL）。历史上这里走 SaveFileAsTextFile(UTF8)，会把 UTF-16LE 块整块改写。
@@ -1885,10 +1900,10 @@ public class PvfGroup : PvfPack
 
 	public bool SaveFileAsScript(PvfFile file, string fileText)
 	{
-		if (file.IsRawReadOnly)
+		// 原生文本形态 / 二进制块不走经典编译器：前者经 SaveFileText 走 FromText 路径，后者不可文本编辑
+		if (file.UsesNativeTokenText || file.IsBinaryBlock)
 		{
-			RejectUnrepresentableEdit(file);
-			return false;
+			return SaveFileText(file, fileText);
 		}
 		// 统一管线：编辑文本经经典编译器生成经典视图 token 存入 Data；
 		// 110/NKPI 包保存时再由 CompileModifiedContentForSave 适配回 110 token。
@@ -2012,7 +2027,21 @@ public class PvfGroup : PvfPack
 			return true;
 		}
 		// Pvf110/NKPI：type-3 导入内容转 UTF-16 原样保存（包保存时原样写入）；
+		// 原生文本形态条目：导入内容即 110 原生文本，原样落地（包保存时经 FromText 编译）；
 		// type-1 掉入经典编译路径（文本 → 经典视图 token），包保存时再适配回 110 token。
+		if (file.IsBinaryBlock)
+		{
+			return false;
+		}
+		if (file.UsesNativeTokenText)
+		{
+			stream.Seek(0L, SeekOrigin.Begin);
+			byte[] native = new byte[stream.Length];
+			stream.Read(native, 0, native.Length);
+			file.WriteRawData(native);
+			base.HasUnsavedChanges = true;
+			return true;
+		}
 		if (Is110Format && file.Pvf110DataType == 3)
 		{
 			stream.Seek(0L, SeekOrigin.Begin);

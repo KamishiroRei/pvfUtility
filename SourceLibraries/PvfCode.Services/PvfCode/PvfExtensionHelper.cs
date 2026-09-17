@@ -80,9 +80,13 @@ public static class PvfExtensionHelper
 		{
 			return string.Empty;
 		}
-		// 只读且经典视图不存在（含经典无对应标签的 token）：只读展示 110 原生脚本文本（含 RAW 行），
-		// 不参与回编译；经典视图可用时按常规渲染。
-		if (file.IsRawReadOnly && file.Data.Length == 0)
+		// 二进制块不是文本：不提供文本视图（导出/预览走原始字节）
+		if (file.IsBinaryBlock)
+		{
+			return string.Empty;
+		}
+		// 110 原生文本形态（经典富文本表达不了或有损）：按原生文本展示，可直接编辑
+		if (file.UsesNativeTokenText)
 		{
 			return group.GetNativeTokenText(file);
 		}
