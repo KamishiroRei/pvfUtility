@@ -96,6 +96,7 @@ internal static class Program
                 case "batch-decompile": return BatchDecompile(args.Length > 1 ? args[1] : "");
                 case "batch-decompile-script": return BatchDecompileScript(args[1], args[2]);
                 case "batch-write": return BatchWrite(args[1], args.Length > 2 ? args[2] : Path.Combine(OutputRoot, "batch-write"));
+                case "inject-int": return InjectInt(args[1], args.Length > 2 ? args[2] : Path.Combine(OutputRoot, "inject-int"));
                 case "tags": return Tags(args.Length > 1 ? args[1] : "--sample", args.Length > 2 ? int.Parse(args[2]) : 300);
                 case "nkpi-incremental-test": return NkpiIncrementalTest(args.Length > 1 ? args[1] : Path.Combine(OutputRoot, "nkpi-incremental-test"));
                 case "pvf110-incremental-test": return Pvf110IncrementalSyntheticTest(args.Length > 1 ? args[1] : Path.Combine(OutputRoot, "pvf110-incremental-test"));
@@ -313,7 +314,7 @@ internal static class Program
         Console.WriteLine("pvf110-keysets=key-material registry (external Pvf110KeyMaterial.json, else built-in) + client-EXE derived + legacy built-ins");
         Console.WriteLine("pvf110-skdat=PVF_SKDAT, else sk.dat beside the PVF or up to 3 levels above, else key-material registry (built-in entry)");
         Console.WriteLine("capabilities.read=info,list,file,decompile,batch-decompile,batch-decompile-script,search,extract,validate,scan-all,hash-test");
-        Console.WriteLine("capabilities.write=write,batch-write,add,repack,roundtrip (NKPI/ProtectedNKPI + Pvf110)");
+        Console.WriteLine("capabilities.write=write,batch-write,add,repack,roundtrip,inject-int (NKPI/ProtectedNKPI + Pvf110)");
         Console.WriteLine("capabilities.project=mainline-epicdiff,tune-monster-base (NKPI/ProtectedNKPI)");
         Console.WriteLine("pvf110-write=incremental group rebuild; hash/name sections preserved; client sk.dat reused when key slots suffice");
         return 0;
@@ -684,8 +685,268 @@ internal static class Program
         return 0;
     }
 
-    private static int WriteFile(string path, string textFile, string outDir)
+    /// <summary>
+    /// 注入式字段改写：**只改目标 token 的字节**，其余 token 逐字节保留，不重新编译整条条目。
+    /// 清单行（TSV，`#` 开头为注释，程序行必须 6 列）：
+    ///   archivePath &lt;TAB&gt; set    &lt;TAB&gt; anchorTag &lt;TAB&gt; occurrence &lt;TAB&gt; tagText &lt;TAB&gt; value
+    ///   archivePath &lt;TAB&gt; insert &lt;TAB&gt; anchorTag &lt;TAB&gt; occurrence &lt;TAB&gt; tagText &lt;TAB&gt; value
+    ///   set    —— 把第 occurrence 个 anchorTag 之后的第一个 int token 原地改写为 value（改 4 字节）
+    ///   insert —— 在第 occurrence 个 anchorTag 的连续值 token 之后插入一对 (tagText, int value)（插 10 字节）
+    /// tagText 必须是本 PVF 字符串池里已有的字符串（先在清单自身的条目里找，找不到再全局检索）。
+    /// 产出：outDir\Script.pvf + outDir\sk.dat + outDir\inject-report.tsv；写入后逐条回读比对。
+    /// </summary>
+    private static int InjectInt(string manifestPath, string outDir)
     {
+        if (string.IsNullOrEmpty(manifestPath) || !File.Exists(manifestPath))
+        {
+            Console.Error.WriteLine("inject-int requires a manifest file with 6 TSV columns per row");
+            return 1;
+        }
+        var a = RequirePvf110(Open());
+
+        var rows = new List<(string Path, string Op, string Anchor, int Occ, string Tag, int Value)>();
+        foreach (string line in File.ReadLines(manifestPath))
+        {
+            string t = line.Trim().TrimStart('\ufeff');
+            if (t.Length == 0 || t.StartsWith('#')) continue;
+            string[] p = t.Split('\t');
+            if (p.Length != 6) { Console.Error.WriteLine($"bad manifest line (expect 6 TSV columns): {t}"); return 1; }
+            string op = p[1].Trim().ToLowerInvariant();
+            if (op is not ("set" or "insert")) { Console.Error.WriteLine($"unknown op '{op}' in line: {t}"); return 1; }
+            if (!int.TryParse(p[3].Trim(), out int occ) || occ < 1)
+            { Console.Error.WriteLine($"bad occurrence in line: {t}"); return 1; }
+            if (!int.TryParse(p[5].Trim(), out int val))
+            { Console.Error.WriteLine($"bad value in line: {t}"); return 1; }
+            rows.Add((NormalizeArchivePath(p[0]), op, p[2].Trim(), occ, p[4].Trim(), val));
+        }
+        if (rows.Count == 0) { Console.Error.WriteLine("manifest has no rows"); return 1; }
+
+        var lookup = new Dictionary<string, int>(a.Count, StringComparer.OrdinalIgnoreCase);
+        for (int i = 0; i < a.Count; i++) lookup.TryAdd(a.FilePath(i), i);
+
+        // 目标条目必须存在且为 type-1
+        var byEntry = new Dictionary<int, List<(string Op, string Anchor, int Occ, string Tag, int Value)>>();
+        foreach (var row in rows)
+        {
+            if (!lookup.TryGetValue(row.Path, out int idx))
+            { Console.Error.WriteLine($"path not found in archive: {row.Path}"); return 1; }
+            if (a.DataType(idx) != 1)
+            { Console.Error.WriteLine($"inject-int requires a type-1 entry: {row.Path} (type={a.DataType(idx)})"); return 1; }
+            if (!byEntry.TryGetValue(idx, out var list)) byEntry[idx] = list = new List<(string, string, int, string, int)>();
+            list.Add((row.Op, row.Anchor, row.Occ, row.Tag, row.Value));
+        }
+
+        // 字符串池：先扫清单自身条目，再按需全局检索（每个 tag 只找一次）
+        var tagPayload = new Dictionary<string, int>(StringComparer.Ordinal);
+        var needed = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var row in rows) { needed.Add(row.Anchor); needed.Add(row.Tag); }
+
+        int HarvestPayloads(byte[] d)
+        {
+            int found = 0;
+            for (int k = 0; k + 5 <= d.Length && needed.Count > 0; k += 5)
+            {
+                if (d[k] != Pvf110Compiled.TagS03) continue;
+                int val = BitConverter.ToInt32(d, k + 1);
+                string s = a.Compiled.Resolve(val);
+                if (needed.Contains(s))
+                {
+                    tagPayload[s] = val;
+                    needed.Remove(s);
+                    found++;
+                }
+            }
+            return found;
+        }
+
+        foreach (int idx in byEntry.Keys)
+        {
+            if (needed.Count == 0) break;
+            HarvestPayloads(a.ReadEntry(idx));
+        }
+        if (needed.Count > 0)
+        {
+            for (int i = 0; i < a.Count && needed.Count > 0; i++)
+            {
+                if (a.DataType(i) != 1) continue;
+                HarvestPayloads(a.ReadEntry(i));
+            }
+        }
+        foreach (string tag in needed)
+        { Console.Error.WriteLine($"tag text not present in name pool: {tag}"); return 1; }
+
+        // 逐条目构造新字节：token 流（每个 token 恒为 5 字节）原样保留，只改/插目标 token
+        var edits = new Dictionary<int, byte[]>();
+        var report = new List<string> { "path\top\tanchor\toccurrence\ttag\tbyteOffset\toldValue\tnewValue\tchangedBytes" };
+        int nSet = 0, nIns = 0;
+        foreach ((int idx, var ops) in byEntry)
+        {
+            string path = a.FilePath(idx);
+            byte[] src = a.ReadEntry(idx);
+            if (src.Length % 5 != 0)
+            { Console.Error.WriteLine($"entry length not a multiple of 5: {path} ({src.Length}B)"); return 1; }
+            int tokenCount = src.Length / 5;
+            var tokens = new List<byte[]>(tokenCount);
+            for (int k = 0; k < tokenCount; k++) tokens.Add(src.AsSpan(k * 5, 5).ToArray());
+
+            var sets = new List<(int Index, int Value, string Anchor, int Occ)>();
+            var inserts = new List<(int At, string Tag, int Value, string Anchor, int Occ)>();
+
+            foreach ((string op, string anchor, int occ, string tag, int value) in ops)
+            {
+                var matches = new List<int>();
+                for (int k = 0; k < tokens.Count; k++)
+                {
+                    byte tg = tokens[k][0];
+                    if (tg is not (Pvf110Compiled.TagS03 or Pvf110Compiled.TagS06 or Pvf110Compiled.TagS08)) continue;
+                    if (a.Compiled.Resolve(BitConverter.ToInt32(tokens[k], 1)) == anchor) matches.Add(k);
+                }
+                if (matches.Count < occ)
+                { Console.Error.WriteLine($"anchor token not found (occurrence {occ}): {path} :: {anchor}"); return 1; }
+                int m = matches[occ - 1];
+                if (op == "set")
+                {
+                    if (m + 1 >= tokens.Count || tokens[m + 1][0] != Pvf110Compiled.TagI32)
+                    { Console.Error.WriteLine($"no int token after anchor: {path} :: {anchor} #{occ}"); return 1; }
+                    sets.Add((m + 1, value, anchor, occ));
+                }
+                else
+                {
+                    // 跳过 anchor 的值 token：int/float 与缩进字符串（S06/S08）；S03 是标签行，不跳过
+                    int p = m + 1;
+                    while (p < tokens.Count && tokens[p][0] is Pvf110Compiled.TagI32 or Pvf110Compiled.TagF32
+                           or Pvf110Compiled.TagS06 or Pvf110Compiled.TagS08) p++;
+                    inserts.Add((p, tag, value, anchor, occ));
+                }
+            }
+
+            var changed = new List<(int TokenIndex, int OldValue, int NewValue, string Op, string Anchor, int Occ, string Tag)>();
+            foreach ((int ti, int value, string anchor, int occ) in sets)
+            {
+                int old = BitConverter.ToInt32(tokens[ti], 1);
+                BitConverter.TryWriteBytes(tokens[ti].AsSpan(1), value);
+                changed.Add((ti, old, value, "set", anchor, occ, anchor));
+                nSet++;
+            }
+            inserts.Sort((x, y) => y.At.CompareTo(x.At)); // 从后往前插，避免位移影响前面的插入点
+            foreach ((int at, string tag, int value, string anchor, int occ) in inserts)
+            {
+                var t1 = new byte[5];
+                t1[0] = Pvf110Compiled.TagS03;
+                BitConverter.TryWriteBytes(t1.AsSpan(1), tagPayload[tag]);
+                var t2 = new byte[5];
+                t2[0] = Pvf110Compiled.TagI32;
+                BitConverter.TryWriteBytes(t2.AsSpan(1), value);
+                tokens.Insert(at, t1);
+                tokens.Insert(at + 1, t2);
+                changed.Add((at, -1, value, "insert", anchor, occ, tag));
+                nIns++;
+            }
+
+            var buf = new byte[tokens.Count * 5];
+            for (int k = 0; k < tokens.Count; k++) tokens[k].CopyTo(buf, k * 5);
+
+            // 最小性自检：改 token 时只允许被指定的 int token 变化；插 token 时"去掉插入的两个 token"必须与原文逐字节相同
+            if (inserts.Count == 0)
+            {
+                if (tokens.Count != tokenCount)
+                { Console.Error.WriteLine($"unexpected token count: {path}"); return 1; }
+                int diffTokens = 0;
+                for (int k = 0; k < tokenCount; k++)
+                    if (!src.AsSpan(k * 5, 5).SequenceEqual(buf.AsSpan(k * 5, 5))) diffTokens++;
+                if (diffTokens != sets.Count)
+                { Console.Error.WriteLine($"minimality check failed: {path} changedTokens={diffTokens} expected={sets.Count}"); return 1; }
+            }
+            else
+            {
+                // 按插入点重建：把每个插入点之后插入的 2 个 token 剔除，剩下的应与原文 token 逐一对应
+                var kept = new List<byte[]>(tokenCount);
+                int pos = 0;
+                foreach (var ins in inserts.OrderBy(x => x.At))
+                {
+                    for (int k = pos; k < ins.At; k++) kept.Add(tokens[k]);
+                    pos = ins.At + 2;
+                }
+                for (int k = pos; k < tokens.Count; k++) kept.Add(tokens[k]);
+                if (kept.Count != tokenCount)
+                { Console.Error.WriteLine($"minimality check failed (token count after strip): {path} {kept.Count} vs {tokenCount}"); return 1; }
+                for (int k = 0; k < tokenCount; k++)
+                {
+                    if (!src.AsSpan(k * 5, 5).SequenceEqual(kept[k]))
+                    { Console.Error.WriteLine($"minimality check failed (token #{k} changed beyond injection): {path}"); return 1; }
+                }
+                if (sets.Count > 0)
+                {
+                    int diffTokens = 0;
+                    for (int k = 0; k < tokenCount; k++)
+                        if (!kept[k].AsSpan().SequenceEqual(src.AsSpan(k * 5, 5))) diffTokens++;
+                    if (diffTokens != sets.Count) { Console.Error.WriteLine($"minimality check failed (set count): {path}"); return 1; }
+                }
+            }
+
+            foreach ((int ti, int old, int nv, string op, string anchor, int occ, string tag) in changed)
+                report.Add($"{path}\t{op}\t{anchor}\t{occ}\t{tag}\t{(op == "insert" ? -1 : ti * 5 + 1)}\t{(op == "insert" ? "" : old.ToString())}\t{nv}\t{(op == "insert" ? 10 : 4)}");
+
+            edits[idx] = buf;
+        }
+
+        Console.WriteLine($"inject-int: entries={edits.Count} ops={rows.Count} set={nSet} insert={nIns}");
+
+        Directory.CreateDirectory(outDir);
+        string outPath = Path.Combine(outDir, "Script.pvf");
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        var r = a.Pvf110!;
+        byte[] sk;
+        using (FileStream rebuildStream = new FileStream(outPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 1 << 20))
+        {
+            (_, sk) = Pvf110Rebuilder.RebuildToStream(
+                r,
+                rebuildStream,
+                e => edits.TryGetValue(e.Index, out byte[]? c) ? c : r.ReadEntry(e),
+                new BatchProgressReporter(),
+                e => edits.ContainsKey(e.Index));
+        }
+        string skPath = Path.Combine(outDir, "sk.dat");
+        File.WriteAllBytes(skPath, sk);
+        Console.WriteLine($"sk.dat written: {skPath} ({sk.Length:N0}B, unchanged={sk.AsSpan().SequenceEqual(r.SkDatBytes)})");
+        sw.Stop();
+        Console.WriteLine($"rebuild done in {sw.Elapsed.TotalSeconds:F1}s -> {outPath}");
+
+        {
+            var verify = Pvf110Reader.Open(File.ReadAllBytes(skPath), File.ReadAllBytes(outPath));
+            if (verify.Entries.Count != r.Entries.Count || verify.Groups.Count != r.Groups.Count)
+                throw new InvalidDataException("inject-int verify: entry/group count mismatch");
+            if (verify.Header.HashTableSize != r.Header.HashTableSize
+                || verify.Header.NameTableSize != r.Header.NameTableSize)
+                throw new InvalidDataException("inject-int verify: hash/name table size changed");
+            int verified = 0;
+            foreach ((int idx, byte[] content) in edits)
+            {
+                byte[] back = verify.ReadEntry(verify.Entries[idx]);
+                if (!back.AsSpan().SequenceEqual(content))
+                    throw new InvalidDataException($"inject-int verify: content mismatch entry {idx} ({a.FilePath(idx)})");
+                verified++;
+            }
+            int sampled = 0, mismatched = 0;
+            var rnd = new Random(20260916);
+            for (int k = 0; k < 500 && verify.Entries.Count > edits.Count; k++)
+            {
+                int idx = rnd.Next(verify.Entries.Count);
+                if (edits.ContainsKey(idx)) continue;
+                sampled++;
+                if (!r.ReadEntry(r.Entries[idx]).AsSpan().SequenceEqual(verify.ReadEntry(verify.Entries[idx]))) mismatched++;
+            }
+            Console.WriteLine($"verify ok: {verified} injected entries match byte-for-byte; {sampled} sampled unedited entries byte-identical (mismatches={mismatched})");
+            if (mismatched != 0) throw new InvalidDataException("inject-int verify: unedited entries changed");
+        }
+
+        File.WriteAllText(Path.Combine(outDir, "inject-report.tsv"), string.Join("\n", report) + "\n", new UTF8Encoding(false));
+        long outLen = new FileInfo(outPath).Length;
+        Console.WriteLine($"inject-int done: {outPath} ({outLen:N0}B) entries={edits.Count}");
+        return 0;
+    }
+
+    private static int WriteFile(string path, string textFile, string outDir)    {
         var a = Open();
         string target = NormalizeArchivePath(path);
         int targetIndex = FindEntryIndex(a, target);
@@ -2328,6 +2589,9 @@ internal static class Program
         Console.WriteLine("  batch-decompile <pathlist>  批量解编译（从文件逐行读路径，高效复用会话）");
         Console.WriteLine("  batch-decompile-script <pathlist> <outdir>  批量解编译为 ToScriptText 文本文件（write 兼容格式）");
         Console.WriteLine("  batch-write <manifest> [outdir]  批量写回（清单：archivePath<TAB>file[<TAB>auto|text|raw|block]；单次落盘+逐条校验）");
+        Console.WriteLine("  inject-int <manifest> [outdir]  注入式字段改写：只改/插目标 token 的字节，其余 token 逐字节保留（不重编译整条条目）");
+        Console.WriteLine("      清单行 6 列 TSV：archivePath<TAB>set|insert<TAB>anchorTag<TAB>occurrence<TAB>tagText<TAB>value");
+        Console.WriteLine("      set=把第 N 个 anchorTag 之后的 int 原地改写；insert=在 anchorTag 的值 token 后插入 (tagText,int) 一对");
         Console.WriteLine("  tags <path|--sample> [n]    诊断：token 标签分布统计（确认标签语义）");
         Console.WriteLine("  write <path> <file> [outdir]  修改指定条目内容并按增量路径写回（两格式均只重压缩所在组，附回读校验）");
         Console.WriteLine("  add <file-or-dir> <archive-path-or-prefix> [outdir]  定向新增文件/文件夹（NKPI 与 Pvf110 均可）");
